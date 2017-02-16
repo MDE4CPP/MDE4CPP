@@ -1,0 +1,18 @@
+description 'UML meta model collection'
+
+task buildUML(dependsOn: ['model:generateUML', 'src_gen:compileUML']) {
+	group 'UML'
+	description 'generate and compile UML in debug and release'
+}
+task buildUMLDebug(dependsOn: ['model:generateUML', 'src_gen:compileUMLDebug']) {
+	group 'UML'
+	description 'generate and compile UML in debug'
+}
+task buildUMLRelease(dependsOn: ['model:generateUML', 'src_gen:compileUMLRelease']) {
+	group 'UML'
+	description 'generate and compile UML in release'
+}
+
+tasks.getByPath('src_gen:compileUML').mustRunAfter tasks.getByPath('model:generateUML')
+tasks.getByPath('src_gen:compileUMLDebug').mustRunAfter tasks.getByPath('model:generateUML')
+tasks.getByPath('src_gen:compileUMLRelease').mustRunAfter tasks.getByPath('model:generateUML')
