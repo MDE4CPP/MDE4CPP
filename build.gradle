@@ -1,0 +1,18 @@
+description 'fUML meta model collection'
+
+task buildFUML(dependsOn: ['model:generateFUML', 'src_gen:compileFUML']) {
+	group 'fUML'
+	description 'generate and compile fUML in debug and release'
+}
+task buildFUMLDebug(dependsOn: ['model:generateFUML', 'src_gen:compileFUMLDebug']) {
+	group 'fUML'
+	description 'generate and compile fUML in debug'
+}
+task buildFUMLRelease(dependsOn: ['model:generateFUML', 'src_gen:compileFUMLRelease']) {
+	group 'fUML'
+	description 'generate and compile fUML in release'
+}
+
+tasks.getByPath('src_gen:compileFUML').mustRunAfter tasks.getByPath('model:generateFUML')
+tasks.getByPath('src_gen:compileFUMLDebug').mustRunAfter tasks.getByPath('model:generateFUML')
+tasks.getByPath('src_gen:compileFUMLRelease').mustRunAfter tasks.getByPath('model:generateFUML')

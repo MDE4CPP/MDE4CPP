@@ -1,0 +1,19 @@
+description 'Generated source code of fUML meta model'
+
+task compileFUML(dependsOn: 'fUML:build') {
+	group 'fUML'
+	description 'compile fuml in debug and release'
+}
+task compileFUMLDebug(dependsOn: ['fUML:fUMLDebugSharedLibrary', 'fUML:deliverFUMLHeaders', 'fUML:deliverFUMLDebugSharedLibrary']) {
+	group 'fUML'
+	description 'compile fuml in debug'
+}
+task compileFUMLRelease(dependsOn: ['fUML:fUMLReleaseSharedLibrary', 'fUML:deliverFUMLHeaders', 'fUML:deliverFUMLReleaseSharedLibrary']) {
+	group 'fUML'
+	description 'compile fuml in release'
+}
+
+tasks.getByPath('fUML:deliverFUMLHeaders').mustRunAfter tasks.getByPath('fUML:fUMLDebugSharedLibrary')
+tasks.getByPath('fUML:deliverFUMLDebugSharedLibrary').mustRunAfter tasks.getByPath('fUML:fUMLDebugSharedLibrary')
+tasks.getByPath('fUML:deliverFUMLHeaders').mustRunAfter tasks.getByPath('fUML:fUMLReleaseSharedLibrary')
+tasks.getByPath('fUML:deliverFUMLReleaseSharedLibrary').mustRunAfter tasks.getByPath('fUML:fUMLReleaseSharedLibrary')
