@@ -1,0 +1,12 @@
+description 'C++ project of util'
+
+task deliverUtil(type: Copy) {
+	group 'util'
+	description 'deliver util header to %MDE4CPP_HOME%/application/include/util'
+	from "."
+	into System.getenv('MDE4CPP_HOME')+"/application/include/util"
+	include "**/*.hpp"
+	include "**/*.h"
+	include "**/*.cpp"
+	exclude "build", ".gradle"
+}
