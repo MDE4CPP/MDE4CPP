@@ -55,4 +55,5 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
     * `generateEcore` - generate C++ code for ecore.ecore
     * `generateEcoreDebug` - not existing
     * `compileEcoreRelease` - compile generated code of ecore.ecore in release version
+
   All binaries and header files are delivered to `${MDE4CPP_HOME}/application` using the tasks. 
