@@ -1,0 +1,1 @@
+include 'model', 'src_gen', 'src_gen:ecoreReflection', 'src_gen:primitivetypesReflection', 'src_gen:umlReflection'

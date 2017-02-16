@@ -1,0 +1,55 @@
+description 'Generated source code of common models'
+
+task compileEcoreReflection(dependsOn: 'ecoreReflection:build') {
+	group 'ecoreReflection'
+	description 'compile ecoreReflection in debug and release'
+}
+task compileEcoreReflectionDebug(dependsOn: ['ecoreReflection:ecoreReflectionDebugSharedLibrary', 'ecoreReflection:deliverEcoreReflectionHeaders', 'ecoreReflection:deliverEcoreReflectionDebugSharedLibrary']) {
+	group 'ecoreReflection'
+	description 'compile ecoreReflection in debug'
+}
+task compileEcoreReflectionRelease(dependsOn: ['ecoreReflection:ecoreReflectionReleaseSharedLibrary', 'ecoreReflection:deliverEcoreReflectionHeaders', 'ecoreReflection:deliverEcoreReflectionReleaseSharedLibrary']) {
+	group 'ecoreReflection'
+	description 'compile ecoreReflection in release'
+}
+
+task compilePrimitivetypesReflection(dependsOn: 'primitivetypesReflection:build') {
+	group 'primitivetypesReflection'
+	description 'compile primitiveTypesReflection in debug and release'
+}
+task compilePrimitivetypesReflectionDebug(dependsOn: ['primitivetypesReflection:primitivetypesReflectionDebugSharedLibrary', 'primitivetypesReflection:deliverPrimitivetypesReflectionHeaders', 'primitivetypesReflection:deliverPrimitivetypesReflectionDebugSharedLibrary']) {
+	group 'primitivetypesReflection'
+	description 'compile primitiveTypesReflection in debug'
+}
+task compilePrimitivetypesReflectionRelease(dependsOn: ['primitivetypesReflection:primitivetypesReflectionReleaseSharedLibrary', 'primitivetypesReflection:deliverPrimitivetypesReflectionHeaders', 'primitivetypesReflection:deliverPrimitivetypesReflectionReleaseSharedLibrary']) {
+	group 'primitivetypesReflection'
+	description 'compile primitiveTypesReflection in release'
+}
+
+task compileUMLReflection(dependsOn: 'umlReflection:build') {
+	group 'UMLReflection'
+	description 'compile umlReflection in debug and release'
+}
+task compileUMLReflectionDebug(dependsOn: ['umlReflection:umlReflectionDebugSharedLibrary', 'umlReflection:deliverUmlReflectionHeaders', 'umlReflection:deliverUmlReflectionDebugSharedLibrary']) {
+	group 'UMLReflection'
+	description 'compile umlReflection in debug'
+}
+task compileUMLReflectionRelease(dependsOn: ['umlReflection:umlReflectionReleaseSharedLibrary', 'umlReflection:deliverUmlReflectionHeaders', 'umlReflection:deliverUmlReflectionReleaseSharedLibrary']) {
+	group 'UMLReflection'
+	description 'compile umlReflection in release'
+}
+
+tasks.getByPath('ecoreReflection:deliverEcoreReflectionHeaders').mustRunAfter tasks.getByPath('ecoreReflection:ecoreReflectionDebugSharedLibrary')
+tasks.getByPath('ecoreReflection:deliverEcoreReflectionDebugSharedLibrary').mustRunAfter tasks.getByPath('ecoreReflection:ecoreReflectionDebugSharedLibrary')
+tasks.getByPath('ecoreReflection:deliverEcoreReflectionHeaders').mustRunAfter tasks.getByPath('ecoreReflection:ecoreReflectionReleaseSharedLibrary')
+tasks.getByPath('ecoreReflection:deliverEcoreReflectionReleaseSharedLibrary').mustRunAfter tasks.getByPath('ecoreReflection:ecoreReflectionReleaseSharedLibrary')
+
+tasks.getByPath('primitivetypesReflection:deliverPrimitivetypesReflectionHeaders').mustRunAfter tasks.getByPath('primitivetypesReflection:primitivetypesReflectionDebugSharedLibrary')
+tasks.getByPath('primitivetypesReflection:deliverPrimitivetypesReflectionDebugSharedLibrary').mustRunAfter tasks.getByPath('primitivetypesReflection:primitivetypesReflectionDebugSharedLibrary')
+tasks.getByPath('primitivetypesReflection:deliverPrimitivetypesReflectionHeaders').mustRunAfter tasks.getByPath('primitivetypesReflection:primitivetypesReflectionReleaseSharedLibrary')
+tasks.getByPath('primitivetypesReflection:deliverPrimitivetypesReflectionReleaseSharedLibrary').mustRunAfter tasks.getByPath('primitivetypesReflection:primitivetypesReflectionReleaseSharedLibrary')
+
+tasks.getByPath('umlReflection:deliverUmlReflectionHeaders').mustRunAfter tasks.getByPath('umlReflection:umlReflectionDebugSharedLibrary')
+tasks.getByPath('umlReflection:deliverUmlReflectionDebugSharedLibrary').mustRunAfter tasks.getByPath('umlReflection:umlReflectionDebugSharedLibrary')
+tasks.getByPath('umlReflection:deliverUmlReflectionHeaders').mustRunAfter tasks.getByPath('umlReflection:umlReflectionReleaseSharedLibrary')
+tasks.getByPath('umlReflection:deliverUmlReflectionReleaseSharedLibrary').mustRunAfter tasks.getByPath('umlReflection:umlReflectionReleaseSharedLibrary')
