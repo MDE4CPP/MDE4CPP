@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Acceleo fUML Generator Module Runtime Plug-in
+Bundle-SymbolicName: fUML4CPP.generator;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Activator: fUML4CPP.generator.Activator
+Bundle-Vendor: Technische Universität Ilmenau
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.xmi,
+ org.eclipse.ocl,
+ org.eclipse.ocl.ecore,
+ org.eclipse.acceleo.common;bundle-version="3.3.0",
+ org.eclipse.acceleo.model;bundle-version="3.3.0",
+ org.eclipse.acceleo.profiler;bundle-version="3.3.0",
+ org.eclipse.acceleo.engine;bundle-version="3.3.0",
+ com.google.guava,
+ org.eclipse.uml2.types;bundle-version="2.0.0",
+ org.eclipse.uml2.uml;bundle-version="5.0.2",
+ UML4CPP.generator;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Eclipse-LazyStart: true
+Export-Package: fUML4CPP.generator,
+ fUML4CPP.generator.main
+Import-Package: org.eclipse.pde.internal.core.bundle,
+ org.eclipse.swt.widgets,
+ org.eclipse.uml2.uml
+

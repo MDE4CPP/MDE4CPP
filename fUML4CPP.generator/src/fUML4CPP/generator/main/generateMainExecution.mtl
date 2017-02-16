@@ -1,0 +1,142 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateMainExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helper /]
+
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::parameterHelper /]
+
+[template public generateMain(aPackage : Package)]
+[file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
+#include <iostream>
+#include <vector>
+
+#include "FUMLFactory.hpp"
+#include "Locus.hpp"
+#include "Executor.hpp"
+#include "Parameter.hpp"
+#include "ExecutionFactoryL3.hpp"
+#include "FirstChoiceStrategy.hpp"
+#include "DispatchStrategy.hpp"
+#include "FunctionBehavior.hpp"
+#include "Activity.hpp"
+[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
+[if (aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
+#include "Reference.hpp"
+#include "[aPackage.getPackageName()/]Factory.hpp"
+[/if]
+
+[for ( par : Parameter | aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter)]
+[par.generateParameterInclude()/]
+[/for]
+[else]
+//No main activity found (place one activity as child of the module to set it as a main activity).
+[/if]
+
+#include "ParameterValue.hpp"
+
+//include Model package
+#include "[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
+
+[for (beh : OpaqueBehavior | aPackage.getOpaqueBehaviors())]
+#include "[beh.getNearestPackage().getPackageName().toUpperFirst().concat('Package')/].hpp"
+[/for]
+
+[if (aPackage.getOpaqueBehaviors()->size()>0)]
+//OpaqueBehaviourExecutions
+[aPackage.getOpaqueBehaviors().generateInclude()/]
+[/if]
+
+using namespace [aPackage.getPackageName()/];
+
+int main()
+{	
+	DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
+    fUML::FUMLFactory * fumlFac = fUML::FUMLFactory::eInstance();
+    fUML::Locus  * locus = fumlFac->createLocus();
+
+    fUML::Executor * executor = fumlFac->createExecutor();
+    executor->setLocus(locus);
+
+    fUML::ExecutionFactoryL3 * factory = fumlFac->createExecutionFactoryL3();
+    factory->setLocus(locus);
+
+    locus->setFactory(factory);
+    locus->setExecutor(executor);
+
+    locus->getFactory()->assignStrategy(fumlFac->createFirstChoiceStrategy());
+	locus->getFactory()->assignStrategy(fumlFac->createDispatchStrategy());
+
+	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
+    //Executor will execute the first Activity
+	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
+
+    [if (aPackage.getOpaqueBehaviors()->size() > 0)]
+    [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
+	[/if]
+
+    std::vector<fUML::ParameterValue *> * pList = new std::vector<fUML::ParameterValue *>();
+	[for (par : Parameter | act.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+    
+    //INput parameter [par.name/] 
+    fUML::ParameterValue * [par.name/]P = fumlFac->createParameterValue();
+    [par.name/]P->setParameter([par.packageGetter()/]);
+    [par.generateOutputParameter()/]
+	[if(par.supportedTypes())]
+    [par.name/]Value->setValue([par.default/]);
+	[else]
+	[par.name/]UmlLinker = new [par.type.name/]Execution([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name/]());
+	[par.name/]UmlLinker->setLocus(locus);
+	[par.name/]Value->setReferent([par.name/]UmlLinker);
+	[/if]
+    [par.name/]P->getValues()->push_back([par.name/]Value);
+    pList->push_back([par.name/]P);
+	[/for]
+
+    std::vector<fUML::ParameterValue *> * resultPList = locus->getExecutor()->execute([act.packageGetter()/],nullptr,pList);
+	[/let]
+
+	if(nullptr == resultPList)
+	{
+        std::cerr << "resultPList is null" << std::endl;
+        return EXIT_FAILURE;
+	}
+    if(resultPList->empty())
+    {
+        DEBUG_MESSAGE(std::cout << "The activity did not return any parameter." << std::endl;)
+    }
+    else{
+        DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
+        for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++){
+            DEBUG_MESSAGE(std::cout << "Parameter " << parIndex <<" name: "<<resultPList->at(parIndex)->getParameter()->getName() << std::endl;)
+            if(resultPList->at(parIndex)->getValues()->empty())
+            {
+                DEBUG_MESSAGE(std::cout<<"\tThe parameter is empty.";)
+            }
+            else
+            {
+                DEBUG_MESSAGE(std::cout << "\tsize: " << resultPList->at(parIndex)->getValues()->size() << std::endl;)
+                DEBUG_MESSAGE(std::cout << "\tvalue of the first element: " << resultPList->at(parIndex)->getValues()->front()->toString() << std::endl;)
+            }
+        }
+    }
+	[else]
+	//Info: no main activity found! Place one activity as a child of the Model element to mark it as a main activity.
+	[/if]
+    return EXIT_SUCCESS;
+}
+[/file]
+[/template]

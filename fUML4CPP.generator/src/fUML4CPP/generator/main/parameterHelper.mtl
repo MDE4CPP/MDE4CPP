@@ -1,0 +1,74 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module parameterHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public supportedTypes(par : Parameter) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') /]
+
+[query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not supportedTypes())->asSet()->size()>0 /]
+
+
+[comment]INPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.name.oclIsUndefined())]
+#error There is an input parameter that doesn't have a name set. Fix the model and generate the code again.
+//Here some info that might help you to find it: [par/]
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.type.name.oclIsUndefined())]
+#error Input parameter [par.name/] does not have a type set. Fix the model and generate the code again.
+//Here some additional info that might help you to find it: [par/]
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (not par.supportedTypes()) ]
+fUML::Reference * [par.name/]Value = dynamic_cast<fUML::Reference *>(inputParameters->at([index/])->getValues()->front());
+[/template]
+
+[template public generateInputParameter(par : Parameter, index:Integer) ? (par.supportedTypes())]
+fUML::[par.type.name/]Value * [par.name/]Value = dynamic_cast<fUML::[par.type.name/]Value *>(inputParameters->at([index/])->getValues()->front());
+[/template]
+
+
+[comment]OUTPUT SWITCH ----------------------------------------------------------[/comment]
+[template public generateOutputParameter(par : Parameter) ? (par.name.oclIsUndefined())]
+#error There is an output parameter that doesn't have a name set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.type.name.oclIsUndefined())]
+#error Output parameter [par.name/] doesn't have a type set. Fix the model and generate the code again.
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (par.supportedTypes())]
+fUML::[par.type.name/]Value * [par.name/]Value = fUML::FUMLFactory::eInstance()->create[par.type.name/]Value();
+[/template]
+
+[template public generateOutputParameter(par : Parameter) ? (not par.supportedTypes())]
+[if (not (par.direction = ParameterDirectionKind::inout))]
+fUML::Reference * [par.name/]Value = fUML::FUMLFactory::eInstance()->createReference();
+[/if]
+[par.type.namespace.name/]::[par.type.name/]Execution * [par.name/]UmlLinker = new [par.type.namespace.name/]::[par.type.name/]Execution();
+[/template]
+
+
+[comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
+[template public generateParameterInclude(par : Parameter) ? (not par.supportedTypes())]
+#include "[par.type.name/].hpp"
+#include "[par.type.name/]Execution.hpp"
+[/template]
+
+[template public generateParameterInclude(par : Parameter) ? (par.supportedTypes())]
+#include "[par.type.name/]Value.hpp"
+[/template]

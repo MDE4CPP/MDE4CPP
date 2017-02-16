@@ -1,0 +1,57 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOpaqueBehaviorExecution('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helper /]
+
+[query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asSet().operation.method->select(oclIsKindOf(OpaqueBehavior))->asSet(),
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
+		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
+	}->flatten()
+ /]
+
+
+[query public getOpaqueBehaviors(aActivity : Activity) : Set(OpaqueBehavior) = OrderedSet{
+		aActivity.ownedNode->filter(CallOperationAction).operation->asSet()->reject(oclIsUndefined()).method->asSet()->reject(oclIsUndefined())->select(oclIsKindOf(OpaqueBehavior))->asSet().oclAsType(OpaqueBehavior)->asSet(),
+		aActivity.ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),		
+		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
+	}->flatten()->sortedBy(name)
+/]
+[query public getCallOperationActions(aPackage : Package) : Set(CallOperationAction) = aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asOrderedSet()->sortedBy(name) /]
+
+[template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
+[if (not anOpaqueBehavior.name.oclIsUndefined())]
+fUML::OpaqueBehaviorExecution * [memberName(anOpaqueBehavior)/]Execution =  new [anOpaqueBehavior.getNearestPackage().name/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution();
+[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
+[memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus());
+factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);
+[/if]
+
+[/template]
+
+[template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
+[if (not anOpaqueBehavior.oclIsUndefined())]
+[if (not anOpaqueBehavior.name.oclIsUndefined())]
+#include "[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(anActivity : Activity)]
+[if (not anActivity.name.oclIsUndefined())]
+#include "[anActivity.name.toUpperFirst()/]Execution.hpp"
+[/if]
+[/template]

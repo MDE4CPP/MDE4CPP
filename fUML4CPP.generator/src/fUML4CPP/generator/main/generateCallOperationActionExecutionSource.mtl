@@ -1,0 +1,131 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateCallOperationActionExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
+
+[template public generateCallOperationActionExecutionSource(anCallOperationAction : CallOperationAction, aPackage :Package){ className : String = anCallOperationAction.name.toUpperFirst().concat('Execution'); }]
+[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[className/].hpp"
+#include <iostream>
+#include <cassert>
+#include "ParameterValue.hpp"
+
+[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->size()>0)]
+[let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
+[if (not cOpSet.oclIsUndefined())]
+#include "[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
+#include "[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
+[/if]
+[/let]
+[/if]
+
+[if (anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
+#include "Reference.hpp"
+[else]
+// [anCallOperationAction.operation.class.name/] <- Class name
+// [anCallOperationAction.operation.name/] <- Operation name
+// [anCallOperationAction.operation.method.name/] <- Method name
+// [anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->first().type.name/] is not a pointer
+[/if]
+[for ( par : Parameter | anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->asOrderedSet()->sortedBy(name))]
+[par.generateParameterInclude()/]
+[/for]
+
+#include "[anCallOperationAction.target.type.name/].hpp"
+#include "[anCallOperationAction.target.type.name/]Execution.hpp"
+ 
+using namespace [aPackage.name/];
+
+[className/]::[className/]()
+{
+}
+
+[className/]::~[className/]()
+{
+}
+
+
+[className/]::[className/]([className/] &obj):
+	OpaqueBehaviorExecutionImpl(obj)
+{
+}
+
+ecore::EObject* [className/]::copy()
+{
+    return new [className/](*this);
+}
+
+void [className/]::doBody(QList<fUML::ParameterValue *> *inputParameters, QList<fUML::ParameterValue *> *outputParameters)
+{
+    DEBUG_MESSAGE(std::cout<<"Printing from "<< this->getBehavior()->getName();)
+    DEBUG_MESSAGE(std::cout<<"__________________________";)
+
+	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
+    [par.type.transformType()/] [par.name/];
+	[/for]
+
+	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
+    [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->asSequence()->indexOf(par)-1)/]
+	[if (not par.type.supportedTypes())]
+	[par.name/] = dynamic_cast<[par.type.namespace.name/]::[par.type.name/]Execution*>([par.name/]Value->getReferent())->getUmlValue();
+	assert([par.name/] != nullptr);
+	[else]
+	[par.name/] = [par.name/]Value->getValue();
+	[/if]
+	[/for]
+
+	[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/] * target = dynamic_cast<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]Execution*>(this->getContext())->getUmlValue();
+    assert(target != nullptr);
+
+    //call assigned operation
+	[for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->asOrderedSet())] [par.name/] = [/for]  target->[anCallOperationAction.operation.name/]([for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
+
+	//set out/result parameter
+	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
+    [par.generateOutputParameter()/]
+	[if (not par.type.supportedTypes())]
+	[par.name/]UmlLinker->setUmlValue([par.name/]);
+    [par.name/]UmlLinker->setLocus(this->getLocus());
+    [par.name/]Value->setReferent([par.name/]UmlLinker);
+	[else]
+ 	[par.name/]Value->setValue([par.name/]);
+	[/if]
+    outputParameters->value([anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->asSequence()->indexOf(par)-1/])->getValues()->append([par.name/]Value);
+	[/for]
+	
+	//set InOut parameters
+	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select(direction = ParameterDirectionKind::inout)->sortedBy(name))]
+    [if (par.direction <> ParameterDirectionKind::inout)]
+	[par.generateOutputParameter()/]
+	[/if]
+	[if (not par.type.supportedTypes())]
+	//Pointer type
+	[par.name/]UmlLinker->setUmlValue([par.name/]);
+    [par.name/]UmlLinker->setLocus(this->getLocus());
+    [par.name/]Value->setReferent([par.name/]UmlLinker);
+	[else]
+	//Simple type
+ 	[par.name/]Value->setValue([par.name/]);
+	[/if]
+    //outputParameters->append(inputParameters->value([anCallOperationAction.operation.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1/]));
+	[/for]
+}
+[/file]
+[/template]

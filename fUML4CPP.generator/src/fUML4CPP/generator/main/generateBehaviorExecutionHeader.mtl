@@ -1,0 +1,51 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateBehaviorExecutionHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::helper /]
+
+[template public generateBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
+[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[startGuard(anOpaqueBehavior,'Execution')/]
+
+#include "impl/OpaqueBehaviorExecutionImpl.hpp"
+
+[if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
+[let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
+	[if (fb._body->asOrderedSet()->size() = 2)]
+//Included from function behavior "[fb.name/]"
+[fb._body->asOrderedSet()->at(2)/]
+	[/if]
+[/let]
+[/if]
+
+namespace [aPackage.name/] 
+{
+	class [className/] : public fUML::OpaqueBehaviorExecutionImpl 
+	{
+		public:
+		    //constructor
+		    [className/](const [className/] &obj);
+		    [className/]();
+		    //destructor
+		    virtual ~[className/]();
+		
+		    virtual void doBody(std::vector<fUML::ParameterValue * > *  inputParameters,std::vector<fUML::ParameterValue * > *  outputParameters);
+		    virtual ecore::EObject * copy() const;
+	};
+}
+[endGuard(anOpaqueBehavior,'Execution')/]
+[/file]
+[/template]
