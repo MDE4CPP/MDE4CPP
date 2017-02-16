@@ -7,3 +7,21 @@
 [submodule "generator/fUML4CPP"]
 	path = generator/fUML4CPP
 	url = https://github.com/MDE4CPP/fUML4CPP.git
+[submodule "src/common"]
+	path = src/common
+	url = https://github.com/MDE4CPP/common.git
+[submodule "src/ecore"]
+	path = src/ecore
+	url = https://github.com/MDE4CPP/ecore.git
+[submodule "src/examples"]
+	path = src/examples
+	url = https://github.com/MDE4CPP/examples.git
+[submodule "src/fuml"]
+	path = src/fuml
+	url = https://github.com/MDE4CPP/fuml.git
+[submodule "src/uml"]
+	path = src/uml
+	url = https://github.com/MDE4CPP/uml.git
+[submodule "src/util"]
+	path = src/util
+	url = https://github.com/MDE4CPP/util.git
