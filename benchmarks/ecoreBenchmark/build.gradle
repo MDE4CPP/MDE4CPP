@@ -1,0 +1,108 @@
+apply plugin: 'cpp'
+
+description 'Example project: Benchmark of UML use '
+
+File appendDebugSuffix(File binaryFile) {
+  int extensionSeparatorIndex = binaryFile.path.lastIndexOf('.')
+  return new File(binaryFile.path.substring(0, extensionSeparatorIndex) + "d" + binaryFile.path.substring(extensionSeparatorIndex))
+}
+
+task deliverApplication(dependsOn: ['deliverApplicationDebugExecutable', 'deliverApplicationReleaseExecutable']) {
+	description 'deliver debug and release executable to application folder (%MDE4CPP_HOME%/application/bin)'
+}
+
+task deliverApplicationDebugExecutable(type: Copy) {
+	description 'deliver types debug libary to %MDE4CPP_HOME%/application/bin'
+	from "build/exe/ecoreBenchmark/debug"
+	into System.getenv('MDE4CPP_HOME')+"/application/bin"
+	include "ecoreBenchmarkd.exe"
+}
+
+task deliverApplicationReleaseExecutable(type: Copy) {
+	description 'deliver types release libary to %MDE4CPP_HOME%/application/bin'
+	from "build/exe/ecoreBenchmark/release"
+	into System.getenv('MDE4CPP_HOME')+"/application/bin"
+	include "ecoreBenchmark.exe"
+}
+
+
+model {
+    toolChains {
+    	 gcc(Gcc) {
+    	 	"g++"
+    	 }
+    }
+	
+    buildTypes {
+        debug 
+        release
+    }
+	repositories {
+        libs(PrebuiltLibraries) {
+			[ "ecore", "types"].each {
+				delegate."$it" {
+					def libraryName = "${name}"
+					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
+					binaries.withType(SharedLibraryBinary) {
+						if(buildType == buildTypes.debug) {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}d.dll")
+						} else {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}.dll")						
+						}
+					}
+				}	
+			}         
+		}
+	}
+
+    components {
+        ecoreBenchmark(NativeExecutableSpec)
+        {
+        	sources {
+                cpp {
+                    source {
+                        srcDirs "src" 
+						include	"main.cpp"
+                    }
+					exportedHeaders {
+                        srcDirs ".", System.getenv('MDE4CPP_HOME')+"/application/include"
+                        include "**/*.hpp"
+                    }
+					lib library: "ecore"
+					lib library: "types"
+                }
+            }
+        }
+		
+		withType(NativeComponentSpec) {
+			binaries.withType(NativeBinarySpec) {
+				if (it instanceof NativeExecutableBinarySpec) {
+					if(buildType == buildTypes.debug) {
+						it.getExecutable().setFile(appendDebugSuffix(it.getExecutable().getFile()))						
+					}
+				}
+			}
+        }
+    }
+	    
+    binaries {
+	
+        all {
+        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-pipe'
+			if (buildType == buildTypes.debug) {
+				cppCompiler.args '-g'
+				
+			}
+			else {
+				cppCompiler.args '-O3'
+			}
+        }
+    }
+}
+build.finalizedBy(deliverApplication)
+
+
+task compileEcoreBenchmark(dependsOn: 'build') {
+	group 'Examples'
+	description 'compile ecoreBenchmark example'
+}
