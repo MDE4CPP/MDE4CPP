@@ -1,0 +1,82 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePackageInterface('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
+
+[import UML4CPP::generator::main::generateSingleton /]
+[import UML4CPP::generator::main::helper /]
+
+[template public baseClass(aPackage : Package) ? (oclIsKindOf(Profile))]
+virtual public uml::Profile
+[/template]
+
+[template public baseClass(aPackage : Package) ? (not oclIsKindOf(Profile))]
+virtual public uml::Package
+[/template]
+
+[template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
+[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'MetaModelPackage')/]
+ 
+#include "Factory.hpp"
+[if (aPackage.oclIsKindOf(Profile))]
+#include "Profile.hpp"
+[else]
+#include "Package.hpp"	
+[/if]
+
+namespace [aPackage.name/] 
+{
+[for (elements : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Activity))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	class [elements.name/];[/for]
+
+	class [packageName/];
+}
+
+namespace uml 
+{
+[for (nE : EClass | (aPackage.allOwnedElements().eClass()->asOrderedSet()->sortedBy(name))) separator ('\n')]
+	class [nE.name/];[/for]
+
+}
+
+[comment namespace /]
+namespace [aPackage.name/] 
+{
+	/*!
+	The Metamodel Package for the [aPackage.name/] metamodel. This package is used to enable the reflection of model elements. It contains all model elements
+	which were described in an ecore file.
+	*/
+	class [packageName/] : [aPackage.baseClass()/]
+	{
+		//protected default construcotr
+		protected:
+			[packageName/](){}
+
+		public:
+			//static variables
+			static const std::string eNAME;
+			static const std::string eNS_URI;
+			static const std::string eNS_PREFIX;
+
+			//getter for the ownedMember
+			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generateGetter(false)/]
+
+			//Singleton Instance and Getter
+			[generateSingletonDecl(packageName)/]
+	};
+}
+[endGuard(aPackage,'MetaModelPackage')/]
+[/file]
+[/template]

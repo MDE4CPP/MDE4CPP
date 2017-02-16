@@ -1,0 +1,156 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module helper('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateType /]
+
+[**
+ * Helper for c++ abstract function sufix
+*/]
+[query public abstractSufix(impl : Boolean) : String = if impl then '' else '= 0' endif/]
+[query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
+
+
+[**
+ * check and get key value from sourcegen eannotation
+*/]
+[query public SetterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
+[query public GetterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
+
+[**
+ * Generate a qualified name 
+ * Chain 
+*/]
+[query public myQualifiedName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then myInputPinName() else myElementQualifiedName() endif /]
+
+[query public myInputPinName (anElement : NamedElement) : String = if(oclIsKindOf(InputPin)) then 'InputPin'.concat('_').concat(anElement.myElementQualifiedName())  else myOutputPinName() endif/]
+
+[query public myOutputPinName (anElement : NamedElement) : String = if(oclIsKindOf(OutputPin)) then 'OutputPin'.concat('_').concat(anElement.myElementQualifiedName()) else myElementQualifiedName() endif/]
+
+[query public myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).qualifiedName).concat(qualifiedName) else myLiteralSpecificationName() endif /]
+
+[query public myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification) and true) then myValuSpecName().concat('_').concat(owner.mySlotName()) else myValuSpecName() endif /]
+
+[query public mySlotName(anElement : Element) : String = if (oclIsTypeOf(Slot)) then oclAsType(Slot).definingFeature.name else myOwnerName() endif /]
+
+[query public myValuSpecName (anElement : NamedElement) : String = if(oclIsKindOf(ValueSpecification)) then owner.myOwnerName().concat('_').concat(eContainingFeature().name).concat('_').concat(anElement.eClass().name) else myParameterReturnName() endif /]
+
+[query public myOwnerName (anElement : Element) : String = if(oclIsKindOf(NamedElement)) then oclAsType(NamedElement).myQualifiedName() else owner.myOwnerName() endif /]
+
+[query public myParameterReturnName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter) and (name.oclIsUndefined() or ''=name) and (oclAsType(Parameter).direction = ParameterDirectionKind::return) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_return') else myParameterName() endif /]
+
+[query public myParameterName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter)  and not((oclAsType(Parameter).direction = ParameterDirectionKind::return)) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(myName()) else myAssociationName() endif /]
+
+[query public myAssociationName(anElement : NamedElement) : String = if(oclIsKindOf(Association) and (name.oclIsUndefined() or ''=name)) then 'A_'.concat(oclAsType(Association).memberEnd->first().myPropetyName()).concat('_').concat(oclAsType(Association).memberEnd->last().myPropetyName()) else myObjectFlowName() endif/]
+
+[query public myObjectFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ObjectFlow) and (name.oclIsUndefined() or ''=name)) then 'OF_'.concat(oclAsType(ObjectFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ObjectFlow).target.myQualifiedName()) else myControlFlowName() endif/]
+[query public myControlFlowName(anElement : NamedElement) : String = if(oclIsKindOf(ControlFlow) and (name.oclIsUndefined() or ''=name)) then 'CF_'.concat(oclAsType(ControlFlow).source.myQualifiedName()).concat('_').concat(oclAsType(ControlFlow).target.myQualifiedName()) else myExtensionEndName() endif/]
+
+[query public myExtensionEndName(anElement : NamedElement) : String = if (oclIsKindOf(ExtensionEnd)) then 'ExtensionEnd'.concat('_').concat(name).concat('_').concat(oclAsType(ExtensionEnd).type.myQualifiedName()) else myAssOwnedPropName() endif /]
+
+[query public myAssOwnedPropName(anElement : NamedElement) : String = if(oclIsKindOf(Property) and (name.oclIsUndefined() or ''=name) and ( not oclAsType(Property).association.oclIsUndefined()) ) then oclAsType(Property).association.myQualifiedName().concat('_').concat(oclAsType(Property).type.name.toLowerFirst()) else myOperationName() endif /]
+
+[query public myOperationName(anElement : NamedElement) : String = if (oclIsKindOf(Operation)) then oclAsType(Operation).myName().concat('_').concat(oclAsType(Operation).genParameterTypeList()) else myRedefinedTemplateSignature() endif /]
+
+[query public myRedefinedTemplateSignature(anElement : NamedElement) : String = if (oclIsKindOf(RedefinableTemplateSignature) and (not owner.oclIsUndefined())) then owner.oclAsType(NamedElement).myQualifiedName().concat('_RedefinableTemplateSignature') else myInterfaceRelationName() endif /]
+
+[query public myInterfaceRelationName(anElement : NamedElement) : String = if (oclIsKindOf(InterfaceRealization) and (name.oclIsUndefined() or '' = name)) then 'IR_'.concat(oclAsType(InterfaceRealization).contract.myQualifiedName()).concat('_').concat(oclAsType(InterfaceRealization).client->asOrderedSet()->first().myQualifiedName()) else myDependencyName() endif /]
+
+[query public myDependencyName(anElement : NamedElement) : String = if (oclIsKindOf(Dependency)) then 'Dependency_'.concat(oclAsType(Dependency).client->asOrderedSet()->first().myQualifiedName()).concat('_').concat(oclAsType(Dependency).supplier->asOrderedSet()->first().myQualifiedName()) else myName() endif /]
+
+[query public myName(anElement : NamedElement) : String = if ((qualifiedName.oclIsUndefined() or ''=qualifiedName) and not name.oclIsUndefined()) then oclAsType(Property).type.myQualifiedName().concat('_').concat(anElement.name) else anElement.qualifiedName endif/] 
+
+[query public myPropetyName(aProperty : Property) : String = if(name.oclIsUndefined() or qualifiedName.oclIsUndefined() or '' = name or '' = qualifiedName) then type.qualifiedName.toLowerFirst() else myName() endif /]
+
+[query public memberName(anElement : NamedElement) : String = anElement.myQualifiedName().sanitize().toLowerFirst()/]
+[query public memberNameUpper(anElement : NamedElement) : String = memberName().toUpperCase() /]
+
+[query public classNumberName(aEClass : Class) : String = aEClass.name.toUpperCase() /]
+
+[query public packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if oclIsUndefined() then 'nullptr' else needMetaModelPackageGetter(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_')).concat('()') endif /]
+
+[query public packageGetter(anElement1 : NamedElement) : String = if oclIsUndefined() then 'nullptr' else MetaModelPackageGetter(anElement1).concat('get_').concat(anElement1.myQualifiedName().sanitize()).concat('()') endif /]
+[query public MetaModelPackageGetter(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
+
+[query public needMetaModelPackageGetter(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else  anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
+
+[query public getClassList(aClass : Classifier) : OrderedSet(ecore::EClass) = OrderedSet(ecore::EClass){aClass.eClass().eAllSuperTypes , aClass.eClass()} /]
+
+[query public metamodelClassTypeString(aClass : Classifier,aBaseName : String) : String = if aClass.ancestors()->filter(Package)->first().name = aClass.eClass().ePackage.name then aBaseName else aClass.eClass().ePackage.name.concat('::').concat(aBaseName) endif /]
+
+[query public metamodelClassTypeString(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().generateTypeClass() else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().generateTypeClass()) endif /]
+
+[query public ClassWithNamespace(aClass : Class, base : Class) : String = if aClass.namespace.ns() = base.namespace.ns() then base.name else base.namespace.ns().concat('::').concat(base.name) endif /]
+ 
+[query public creatorFunction(aType : Type) : String =  metaModelFactory(aType).concat('create').concat(aType.name).concat('()')/]
+[query public metaModelFactory(aType : Type) : String = aType.getNearestPackage().name.concat('::').concat(aType.getNearestPackage().name).concat('Factory::eInstance()->')/]
+
+[query public getPackageName(pack : Package) : String = if (pack.name='UML') or (pack.name='Ecore') or (pack.name = 'PrimitiveTypes') then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
+
+[query public sanitize(str : String) : String = str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') /] 
+
+[**
+ * Helper for include guard
+*/]
+[template public startGuard(namedelement : NamedElement)]
+[startGuard(namedelement,'')/]
+[/template]
+[template public startGuard(namedelement : NamedElement,sufix: String)]
+//********************************************************************
+//*    	
+//* Warning: This file was generated by MDE4CPP Generator
+//*
+//********************************************************************
+
+#ifndef [namedelement.myQualifiedName().sanitize().concat('_').concat(sufix).concat('_hpp').toUpperCase()/]
+#define [namedelement.myQualifiedName().sanitize().concat('_').concat(sufix).concat('_hpp').toUpperCase()/]
+
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+#include <iostream>
+[/template]
+
+[template public generateGetter(anElement : NamedElement,impl : Boolean)]
+virtual [metamodelClassTypeString(anElement)/] [anElement.packageGetter(anElement)/][abstractSufix(impl)/];
+
+[/template]
+
+[template public generateGetterImpl(anElement : NamedElement)]
+[metamodelClassTypeString(anElement)/] [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
+{
+	return [anElement.memberName()/];
+}
+
+[/template]
+
+[template public generatePrivatePackageMember(anElement : NamedElement)]
+[metamodelClassTypeString(anElement)/] [anElement.memberName()/] = nullptr;
+
+[/template]
+
+[template public endGuard(namedelement : NamedElement)]
+[endGuard(namedelement, '')/]
+[/template]
+
+[template public endGuard(namedelement : NamedElement,sufix: String)]
+#endif /* end of include guard: [namedelement.myQualifiedName().substituteAll('::','_').concat('_').concat(sufix).concat('_hpp').toUpperCase()/] */
+[/template]
+
+[template public genParameterTypeList(anOperation : Operation)]
+[for (sParameter : Parameter | anOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator ('_')][sParameter.type.name/][/for]
+[/template]

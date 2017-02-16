@@ -1,0 +1,102 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateInterface('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public includes(aInterface : Interface) : Set(Type) = Set(Type){aInterface.ownedAttribute.type}->flatten() /]
+
+[template public baseInterface(aInterface : Interface) ?(oclIsKindOf(Stereotype))]
+virtual public uml::Stereotype
+[/template]
+
+[template public baseInterface(aInterface : Interface) ?(not oclIsKindOf(Stereotype))]
+virtual public uml::Element
+[/template]
+
+[template public generateInterfaceCreation(anInterface : Interface)]
+[memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface();
+[memberName(anInterface)/]->setName("[anInterface.name/]");
+[memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
+[memberName(anInterface)/]->setPackage([anInterface.ancestors(Package)->first().memberName()/]);
+[anInterface.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInterface)/]);
+
+//generate Nested Activities
+[/template]
+
+[template public generateModel(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
+[file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aInterface)/]
+
+#include <boost/any.hpp>
+#include <string>
+#include <map>
+#include <vector>
+
+//*********************************
+// generated Includes
+
+//Forward Declaration for used types
+[for (element : Interface| aInterface.includes()->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+namespace [element.namespace.ns()/] 
+{
+	class [element.name/];
+}
+[/for]
+
+[if (aInterface.oclIsKindOf(Stereotype))]
+#include "Stereotype.hpp"
+[/if]
+// enum includes
+[for (elements : Enumeration| aInterface.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[elements.name.concat('.hpp')/]"[/for]
+
+//*********************************
+
+namespace [aPackage.name/] 
+{
+	class [aInterface.name/] 
+	{
+		protected:
+			[aInterface.name/](){}
+
+		public:
+			//destructor
+			virtual ~[aInterface.name/]() {}
+			
+			//*********************************
+			// Getter Setter
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeAccessorsDecl(false)/]
+			
+			//*********************************
+			// Operations
+			//*********************************
+			[aInterface.ownedOperation.generateOperationDecl(false)/]
+
+		protected:
+			//*********************************
+			// Members
+			//*********************************
+			[aInterface.ownedAttribute.generateAttributeProtectedMember()/]
+	};
+}
+[endGuard(aInterface)/]
+[/file]
+[/template]
+

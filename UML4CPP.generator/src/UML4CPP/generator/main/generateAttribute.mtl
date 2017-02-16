@@ -1,0 +1,146 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateAttribute('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateStereotype /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly/]
+
+[template public generateAttributeAccessorsDecl(aProperty : Property, impl : Boolean)]
+[aProperty.generateAttributeGetterDecleration(impl)/]
+[aProperty.generateAttributeSetterDecleration(impl)/]
+
+[/template]
+
+[**
+ * The documentation of the template generateAttribute.
+ * @param aClass
+ */]
+[template public generateAttributeProtectedMember(aProperty : Property)]
+[aProperty.generateCppType()/] m_[aProperty.name/] [if (aProperty.default->notEmpty())]=  [aProperty.genDefault()/] [else] [aProperty.genInit()/]  [/if];
+
+[/template]
+
+[template public generateAttributeDeleter(aProperty : Property) ]
+[if ((aProperty.isComposite) or not(aProperty.upper=1))]
+if(m_[aProperty.name/]!=nullptr)
+{
+[if ((aProperty.isComposite) and not(aProperty.upper=1))]
+	for(auto c :*m_[aProperty.name/])
+	{
+		delete(c);
+		c = 0;
+	}
+[elseif (aProperty.isComposite)]
+	if(m_[aProperty.name/] != nullptr)
+	{
+		delete(m_[aProperty.name/]);
+		m_[aProperty.name/] = nullptr;
+	}
+[elseif (not(aProperty.upper=1))]  
+	delete(m_[aProperty.name/]);
+ 	m_[aProperty.name/] = nullptr;
+[/if]}
+[/if]
+[/template]
+
+[template public generateAttributeGetterDecleration (aProperty : Property, impl : Boolean)]
+virtual [aProperty.generateCppType()/] [aProperty.GetterName()/]() const [abstractSufix(impl)/];
+[/template]
+
+[template public generateAttributeSetterDecleration(aProperty : Property, impl : Boolean) ? (aProperty.upper=1 )]
+virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSufix(impl)/]; 
+[/template]
+
+[***
+ * Section for the Attribute CPP Implementation
+*/]
+[template public generateAttributeGetterImplementationCpp(aProperty : Property)]
+[aProperty.generateAttributeGetterImplementationCpp(aProperty.class)/]
+[/template]
+
+[template public generateAttributeGetterImplementationCpp(aProperty : Property, aClass : Class)]
+[aProperty.generateCppType()/] [aClass.name/]Impl::[aProperty.GetterName()/]() const 
+{
+	return m_[aProperty.name/];
+}
+[/template]
+
+[template public generateAttributeSetterImplementationCpp(aProperty : Property ) ? (aProperty.upper=1 )]
+[aProperty.generateAttributeSetterImplementationCpp(aProperty.class)/]
+[/template]
+
+[template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.upper=1 )]
+void [aClass.name/]Impl::[aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])
+{
+[if ((aProperty.isComposite) and (aProperty.upper=1))]
+	if(m_[aProperty.name/] != nullptr)
+	{
+		delete(m_[aProperty.name/]);
+		m_[aProperty.name/] = nullptr;
+	}
+[/if]
+	m_[aProperty.name/] = _[aProperty.name/];
+}
+[/template]
+
+[comment MetaModel Package/]
+[template public generateAttributeCreation(aProperty : Property)]
+[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty();
+[aProperty.memberName()/]->setName("[aProperty.name/]");
+[aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
+[aProperty.memberName()/]->setLower([aProperty.lower/]);
+[aProperty.memberName()/]->setUpper([aProperty.upper/]);
+[if (not aProperty.class.oclIsUndefined())]
+[aProperty.class.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
+[aProperty.memberName()/]->setClass([aProperty.class.memberName()/]);
+[else][if (not aProperty.interface.oclIsUndefined())]
+[aProperty.interface.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
+[aProperty.memberName()/]->setInterface([aProperty.interface.memberName()/]);
+[/if][/if]
+[if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
+[aProperty.generateStereotypeApplication()/]
+
+[/template]
+
+[template public addInterfaceAttribute(aProperty : Property, aClass : Class)]
+[aClass.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
+[/template]
+
+[template public genDefault(aProperty : Property) ? (aProperty.type.name='String')]
+"[aProperty.default/]" /*defined default string*/
+[/template]
+
+[template public genDefault(aProperty : Property) ? (((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural')))]
+[aProperty.default/] /*defined default value*/
+[/template]
+
+[template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
+[aProperty.type.qualifiedName/]::[aProperty.default.toUpper()/]
+[/template]
+
+[template public genInit(aProperty : Property) ? (aProperty.type.oclIsKindOf(PrimitiveType) or aProperty.type.oclIsKindOf(Enumeration))]
+/*no initialization*/
+[/template]
+
+[template public genInit(aProperty : Property) ? ((not aProperty.type.oclIsKindOf(PrimitiveType)) and (not  aProperty.type.oclIsKindOf(Enumeration)) and (aProperty.upper = 1) )]
+= nullptr
+[/template]
+
+[template public genInit(aProperty : Property) ? (not(aProperty.upper = 1)) ]
+= new std::vector<[aProperty.type.transformType()/]>()
+[/template]

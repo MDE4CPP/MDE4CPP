@@ -1,0 +1,135 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModel('http://www.eclipse.org/uml2/5.0.0/UML')]
+ 
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type}->flatten() /]
+
+[template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
+virtual public uml::Stereotype
+[/template]
+
+[template public baseClass(aClass : Class) ?(not oclIsKindOf(Stereotype))]
+virtual public uml::Class
+[/template]
+
+[template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
+[file (aPackage.getPackageName().concat('/').concat(aClass.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aClass)/]
+
+#include <boost/any.hpp>
+#include <string>
+#include <map>
+#include <vector>
+
+[if (not aClass.owner.ownedElement->filter(Usage)->isEmpty())]
+//********************
+// usage
+[for (usages : Usage| aClass.owner.ownedElement->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[if (not (usages.supplier.name->asOrderedSet()->first() = aClass.name.toString()))]
+   #include "[usages.supplier.name/].hpp"
+[/if]
+[/for]
+[/if]
+//Forward Declaration for used types
+[for (element : Class| aClass.includes()->asOrderedSet()->filter(Class)->sortedBy(name)) separator ('\n')]
+namespace [element.namespace.ns()/] 
+{
+	class [element.name/];
+}
+[/for]
+
+[for (element : Interface | aClass.includes()->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+namespace [element.namespace.ns()/] 
+{
+	class [element.name/];
+}
+[/for]
+
+// base class includes
+[for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[elements.name.concat('.hpp')/]"[/for]
+
+[if (not aClass.interfaceRealization->isEmpty())]
+// Interface realization
+[for (realizations : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[realizations.supplier.name/].hpp"[/for]
+
+// End: Interface realization
+[/if]
+[if (aClass.superClass->isEmpty())]
+#include "Class.hpp"
+[/if]
+
+[if (aClass.oclIsKindOf(Stereotype))]
+#include "Stereotype.hpp"
+[/if]
+// enum includes
+[for (elements : Enumeration| aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[elements.name.concat('.hpp')/]"[/for]
+
+[for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(name))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 2)]
+//Included from operation "[aOperation.name/]"
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(2)/]
+[/if]
+
+[/if]
+[/for]
+//*********************************
+
+namespace [aPackage.name/]
+{
+	class [aClass.name/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->asOrderedSet()->sortedBy(name)) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
+[else][for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
+virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[/if]
+	{
+		private:    
+			[aClass.name/](const [aClass.name/]& that) = delete;
+
+		protected:
+			[aClass.name/](){}
+
+		public:
+			//destructor
+			virtual ~[aClass.name/]() {}
+
+			//*********************************
+			// Getter Setter
+			//*********************************
+			[aClass.ownedAttribute->sortedBy(name).generateAttributeAccessorsDecl(false)/]
+			
+			//*********************************
+			// Operations
+			//*********************************
+			[aClass.ownedOperation->sortedBy(name).generateOperationDecl(false)/]
+			
+		protected:
+			//*********************************
+			// Members
+			//*********************************
+			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
+	
+	};
+}
+[endGuard(aClass)/]
+[/file]
+[/template]
