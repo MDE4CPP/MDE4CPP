@@ -1,0 +1,150 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateType( 'http://www.eclipse.org/emf/2002/Ecore')]
+
+[template public generateCppType(anEDataType : EGenericType)]
+[if (anEDataType.oclIsUndefined())]
+void[else]
+[if (anEDataType.eTypeArguments->notEmpty())]
+[anEDataType.generateGenericType()/][else]
+[anEDataType.eClassifier.transformType()/][/if]
+[/if]
+[/template]
+
+[template public generateGenericType(anEDataType : EGenericType)]
+[if (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/][else]
+[anEDataType.eClassifier.transformType()/] <  [for (g : EGenericType | anEDataType.eTypeArguments) separator (',')] [g.eClassifier.generateType()/][/for] > *[/if]
+[/template]
+
+[template public generateType(anEDataType : EClassifier)]
+[if (anEDataType.oclIsUndefined())]
+boost::any[else]
+[anEDataType.transformType()/][/if]
+[/template]
+
+[template public generateTypeClass(anEDataType : EClass)]
+[anEDataType.name/]*
+[/template]
+
+[template public generateParameterType(eParameter : EParameter)]
+[if (not(eParameter.upperBound = 1))]
+std::vector<[eParameter.eGenericType.generateCppType()/]> * [else]
+[eParameter.eGenericType.generateCppType()/][/if]
+[/template]
+
+[template public generateOperationType(eOperation : EOperation)]
+[if (not (eOperation.upperBound = 1))]
+std::vector<[eOperation.eGenericType.generateCppType()/]> * [else]
+[eOperation.eGenericType.generateCppType()/][/if]
+[/template]
+
+[template public generateReferenceType(eReference : EReference)]
+[if (not(eReference.upperBound = 1))]
+std::vector<[eReference.eGenericType.generateCppType()/]> * [else]
+[eReference.eGenericType.generateCppType()/][/if]
+[/template]
+
+[template public generateAttributeType(eAttribute : EAttribute)]
+[if (not(eAttribute.upperBound = 1))]
+std::vector<[eAttribute.eGenericType.generateCppType()/]> * [else]
+[eAttribute.eGenericType.generateCppType()/][/if]
+[/template]
+
+[**
+ * Transformation Javatypes to C++
+*/]
+[template public transformType(anEClassifier : EClassifier) ? (oclIsUndefined())]
+boost::any
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EBoolean' )or (name = 'EBooleanObject' ) or (name = 'Boolean' ))]
+bool
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'UnlimitedNatural' ))]
+int
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EResource')]
+int
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EInt') or (name = 'EIntegerObject') or (name = 'EBigInteger') or (name = 'Integer'))]
+int
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EDouble')or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
+double
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'ELong')or (name = 'ELongObject') )]
+long
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByte')or (name = 'EByteObject') )]
+char
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByteArray'))]
+char
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EChar')or (name = 'ECharacterObject') )]
+char
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EFloat')or (name = 'EFloatObject') )]
+float
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EEList')]
+std::vector
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EDate')]
+int
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EMap')]
+std::map
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaObject')]
+boost::any
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'ETreeIterator')]
+std::vector
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaClass')]
+void * 
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EEnumerator')or (name = 'EDiagnosticChain'))]
+boost::any
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? ((name = 'EString') or (name = 'String'))]
+std::string
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (not oclIsKindOf(EDataType))]
+[anEClassifier.ePackage.name/]::[anEClassifier.name/] * 
+[/template]
+
+[template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
+[anEClassifier.name/]
+[/template]

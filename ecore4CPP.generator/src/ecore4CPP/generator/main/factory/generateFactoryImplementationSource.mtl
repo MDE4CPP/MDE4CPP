@@ -1,0 +1,83 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateFactoryImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+
+[template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
+[file (anEPackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[className/].hpp"
+#include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+
+[if (not(anEPackage.name = 'ecore'))]
+#include "EClass.hpp"
+[/if]
+
+[comment namespace /]
+using namespace [anEPackage.name/];
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+
+[className/]::[className/]()
+{
+}
+
+[className/]::~[className/]()
+{
+}
+
+[anEPackage.name.toUpperFirst().concat('Factory')/]* [className/]::create()
+{
+	return new [className/]();
+}
+
+//*********************************
+// creators
+//*********************************
+
+[needNamespace(anEPackage, 'EObject*')/] [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class) const
+{
+	if(_class->isAbstract())
+    {
+    	return nullptr;
+   	}
+
+	switch (_class->getClassifierID())
+	{
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+		case [anEPackage.name.toUpperFirst().concat('Package')/]::[aClass.name.toUpperCase()/] : return dynamic_cast<[needNamespace(anEPackage, 'EObject*')/]>(create[aClass.name/]());
+[/for]		
+		default:
+       		throw "Error create class '" + _class->getName();
+	}
+	return nullptr;
+}
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+[aClass.generateTypeClass()/] [className/]::create[aClass.name/] () const
+{
+	return new [aClass.name/]Impl();
+}
+[/for]
+
+[anEPackage.name.toUpperFirst().concat('Package')/] * [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
+{
+	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
+}
+[/file]
+[/template]

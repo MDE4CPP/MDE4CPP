@@ -1,0 +1,117 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateModel('http://www.eclipse.org/emf/2002/Ecore')]
+ 
+[import ecore4CPP::generator::main::generateAttribute/]
+[import ecore4CPP::generator::main::generateOperation/]
+[import ecore4CPP::generator::main::generateReference/]
+[import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::helper /]
+
+[query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
+
+[template public generateModel(aClass : EClass)]
+[file (aClass.ePackage.name.concat('/').concat(aClass.name).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aClass)/]
+
+#include <string>
+#include <map>
+#include <vector>
+#include "boost/any.hpp"
+
+//*********************************
+// generated Includes
+
+//Forward Declaration for used types
+[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+namespace [element.ePackage.name/] 
+{
+	class [element.name/];
+}
+[/for]
+
+// base class includes
+[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[elements.name.concat('.hpp')/]"
+[/for]
+
+// enum includes
+[for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[elements.name.concat('.hpp')/]"
+[/for]
+
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+#include "EObject.hpp"
+[/if]
+
+//*********************************
+[comment namespace /]
+namespace [aClass.ePackage.name/] 
+{
+	[aClass.generateDokumentation()/]
+	class [aClass.name/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
+[else]
+[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
+virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[/if]
+	{
+		public:
+ 			[aClass.name/](const [aClass.name/] &) {}
+			[aClass.name/]& operator=([aClass.name/] const&) = delete;
+	
+		protected:
+			[aClass.name/](){}
+
+		public:
+			virtual ecore::EObject* copy() const = 0;
+
+			//destructor
+			virtual ~[aClass.name/]() {}
+
+			//*********************************
+			// Operations
+			//*********************************
+			[aClass.eOperations.generateOperationDecl(false)/]
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aClass.eAttributes.generateAttributeAccessorsDecl(false)/]
+			//*********************************
+			// Reference
+			//*********************************
+			[aClass.eReferences.generateReferenceDecl(false)/]
+
+		protected:
+			//*********************************
+			// Attribute Members
+			//*********************************
+			[aClass.eAttributes.generateAttributeProtectedMember()/]
+			
+			//*********************************
+			// Reference Members
+			//*********************************
+			[aClass.eReferences.generateProtectedReference()/]
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aClass.generateUnionGetterDeclaretaion(false)/] 
+	};
+
+}
+[endGuard(aClass)/]
+[/file]
+[/template]

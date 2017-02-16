@@ -1,0 +1,101 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateAttribute /]
+[import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateReference /]
+[import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
+[import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::helper /]
+
+[template public generateImplementationHeader(aClass : EClass){ className : String = aClass.name.concat('Impl'); }]
+[file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[startGuard(className)/]
+
+//*********************************
+// generated Includes
+
+//Model includes
+#include "../[aClass.name.concat('.hpp')/]"
+
+[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "impl/[sClass.name/]Impl.hpp"[/for]
+
+[if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
+#include "impl/EObjectImpl.hpp"
+[/if]
+
+[if (aClass.hasKey('includes'))]
+[aClass.valueKey('includes')/]
+[/if]
+
+//*********************************
+[comment namespace /]
+namespace [aClass.ePackage.name/] 
+{
+	class [className/] :[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
+virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
+[if (not(aClass.name='EObject'))]virtual public ecore::EObjectImpl,[/if]
+[/if]virtual public [aClass.name/]
+	{
+		public: 
+			[className/](const [className/] & obj);
+			virtual ecore::EObject *  copy() const;
+
+		private:    
+			[className/]& operator=([className/] const&) = delete;
+
+		protected:
+			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
+			[className/]();
+
+		public:
+			//destructor
+			virtual ~[className/]();
+			
+			//*********************************
+			// Operations
+			//*********************************
+			[aClass.eOperations.generateOperationDecl(true)/]
+			
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aClass.eAttributes.generateAttributeAccessorsDecl(true)/]
+			
+			//*********************************
+			// Reference
+			//*********************************
+			[aClass.eReferences.generateReferenceDecl(true)/]				
+			
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aClass.generateUnionGetterDeclaretaion(true)/] 
+			 
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
+			
+			[aClass.generateeGetDel(true)/]
+			
+		protected:
+			virtual [needNamespace(aClass.ePackage, 'EClass*')/] eStaticClass() const;
+	};
+}
+[endGuard(className)/]
+[/file]
+[/template]

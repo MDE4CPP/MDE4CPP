@@ -1,0 +1,69 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateDatatype('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::helper /]
+
+[query public datatypeNameMember(aEDatatype : EDataType) : String = aEDatatype.name.toLowerFirst().concat(aEDatatype.eClass().name) /]
+[query public datatypeNumberName(aEDatatype : EDataType) : String = aEDatatype.name.toUpperCase() /]
+
+[template public generateEDatatype(aEDatatype : EDataType, impl : Boolean)]
+virtual [metamodelClassTypeString(aEDatatype)/] get[aEDatatype.name/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generatePrivatePackageMember(aEDatatype : EDataType)]
+[metamodelClassTypeString(aEDatatype)/] [aEDatatype.datatypeNameMember()/] = nullptr;
+
+[/template]
+
+[template public generateEDatatypeCreation(adatatype : EDataType)]
+[if (adatatype.oclIsKindOf(EEnum))]
+[adatatype.datatypeNameMember()/] = createEEnum([adatatype.datatypeNumberName()/]);
+[else]
+[adatatype.datatypeNameMember()/] = createEDataType([adatatype.datatypeNumberName()/]);
+[/if]
+[/template]
+
+[template public generateEDatatypeInitialization(adatatype : EDataType)]
+[if (adatatype.oclIsKindOf(EEnum))]
+initEEnum([adatatype.datatypeNameMember()/], nullptr, "[adatatype.name/]");
+[else]
+initEDataType([adatatype.datatypeNameMember()/], nullptr, "[adatatype.name/]", [adatatype.serializable.toString()/], true);
+[/if]
+[/template]
+
+[template public generateStaticDatatypeID(aEDatatype : EDataType)]
+static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierID()/];
+
+[/template]
+
+[template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
+[metamodelClassTypeString(aEDatatype)/] [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
+{
+	assert([aEDatatype.datatypeNameMember()/]);
+	return [aEDatatype.datatypeNameMember()/];
+}
+
+[/template]
+
+[template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
+if ([aEDatatype.datatypeNameMember()/] != nullptr)
+{
+	delete([aEDatatype.datatypeNameMember()/]);
+	[aEDatatype.datatypeNameMember()/] = nullptr;
+}
+
+[/template]

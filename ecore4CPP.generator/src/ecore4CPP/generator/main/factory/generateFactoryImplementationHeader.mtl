@@ -1,0 +1,65 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateFactoryImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::helper /]
+
+[template public generateFactoryImplHeader(anEPackage : EPackage)]
+[file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[startGuard(anEPackage,'FactoryImpl')/]
+
+#include "impl/EFactoryImpl.hpp"
+
+[comment  Generate Includes for the Factory/]
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+#include "[aClass.name.concat('Impl.hpp')/]"
+[/for]
+
+#include "[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
+
+[comment namespace /]
+namespace [anEPackage.name/] 
+{
+	class [anEPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.toUpperFirst().concat('Factory')/] 
+	{
+		private:    
+			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]([anEPackage.name.toUpperFirst().concat('FactoryImpl')/] const&) = delete;
+			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]& operator=([anEPackage.name.toUpperFirst().concat('FactoryImpl')/] const&) = delete;
+
+		protected:
+			friend class [anEPackage.name.toUpperFirst().concat('Factory')/];
+			// Constructor
+			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+
+		public:
+			virtual ~[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+			virtual [needNamespace(anEPackage, 'EObject*')/] create([needNamespace(anEPackage, 'EClass*')/] _class) const;
+
+			//Creator functions
+			[anEPackage.eAllContents(EClass).generateClassCreate(true)/]
+
+			//Package
+			virtual [anEPackage.name.toUpperFirst()/]Package* get[anEPackage.name.toUpperFirst()/]Package() const;
+
+		private:
+			static [anEPackage.name.toUpperFirst().concat('Factory')/] * create();
+			virtual void init() {}
+
+	};
+}
+[endGuard(anEPackage,'FactoryImpl')/]
+[/file]
+[/template]

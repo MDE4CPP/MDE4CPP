@@ -1,0 +1,116 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOperation('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateType /] 
+[import ecore4CPP::generator::main::helper /]
+
+[**
+ * Helper for finding hidden functions
+*/]
+[query public getSuperClassOperations(aOperation : EOperation) : Set(EOperation) = aOperation.eContainingClass.eAllOperations->select(not (aOperation.eContainingClass = eContainingClass))->flatten() /]
+[query public hasOverrideInClass(aOperation : EOperation, aClass: EClass) : Boolean = aClass.eOperations->forAll(op | op.isOverrideOf(aOperation) ) /]
+
+[query public getHiddenFunctions(aOperation : EOperation) : Set(EOperation) = getSuperClassOperations()->select(op | not aOperation.isOverrideOf(op) and (aOperation.name = op.name) and (op.hasOverrideInClass(aOperation.eContainingClass) ))->flatten() /]
+[query public getClassWithHiddenFunctions(aOperation : EOperation) : Set(EClass) = aOperation.getHiddenFunctions().eContainingClass->asOrderedSet()->flatten()->sortedBy(name)/]
+
+[query public isOverride(aOperation : EOperation) : Boolean = not aOperation.getSuperClassOperations()->forAll(op | not aOperation.isOverrideOf(op) )/]
+[query public getOverideSuffix(aOperation : EOperation) : String = if aOperation.isOverride() then 'override' else '' endif  /]
+
+
+[**
+ * The documentation of the template generateOperation.
+ * @param anEOperation
+ */]
+[template public generateOperationDecl(aOperation : EOperation, impl: Boolean)]
+[if (((impl or (not hasImplOnly())) and (not ignore())))]
+[aOperation.generateDokumentation()/] 
+virtual [aOperation.generateOperationType()/] [aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
+[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
+
+
+
+[/template]
+
+
+[template public generateOperationImplementation(aOperation : EOperation) ? (not ignore())]
+[comment[aOperation.generateDokumentation()/] 
+[aOperation.generateOperationType()/] [aOperation.eContainingClass.name/]Impl::[aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
+[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if]
+{
+[if (hasKey('body'))]
+	//generated from body annotation
+	[valueKey('body')/]
+[else]
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+[/if]
+}
+[/template]
+
+[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
+static const int [aOperation.operationNumberNameUpper()/] = [aOperation.getOperationID()/];
+
+[/template]
+
+[template public generateOperationCreation(aOperation : EOperation) ? ( not hasImplOnly()) ]
+createEOperation([aOperation.eContainingClass.classNameMember()/], [operationNumberNameUpper(aOperation)/]);
+
+[/template]
+
+[template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
+virtual [metamodelaTypedElementString(aOperation)/] get[aOperation.operationNumberName()/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->asSequence()->indexOf(aOperation)-1 /]
+
+[template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
+[metamodelaTypedElementString(aOperation)/] [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
+{
+	return dynamic_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.classNameMember()/]->getEOperations()->at([aOperation.listNumber()/]));
+}
+
+[/template]
+
+[template public generateOperationInitialization(aOperation : EOperation)? ( not hasImplOnly() )]
+op = initEOperation([aOperation.packageGetter()/],[aOperation.eType.simpleDatatypeGetter(aOperation)/], "[aOperation.name.toString()/]", [aOperation.lowerBound/], [aOperation.upperBound/], [aOperation.unique.toString()/],[aOperation.ordered.toString()/] );
+[aOperation.eParameters.generateAddParemeter()/]
+
+[/template]
+
+
+[template public generateAddParemeter(aParameter : EParameter)]
+addEParameter(op ,[aParameter.eType.simpleDatatypeGetter(aParameter.eOperation)/]  , "[aParameter.name/]",0,1, true,true);
+
+[/template]
+
+[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.name).concat('()') endif/]
+
+ 
+[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(operationNumberName()).concat('()') /]
+
+
+[query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
+
+[query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '__'.concat(aOperation.singlemultipleParameter()) else '' endif /]
+
+[query public operationNumberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.concat('___'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
+[query public operationNumberNameUpper(aOperation : EOperation) : String = aOperation.operationNumberName().toUpperCase() /]
+
+
+
+

@@ -1,0 +1,58 @@
+plugins {
+    id 'net.robyf.jarinjar' version '1.0.6'
+}
+
+apply plugin: 'java'
+
+description 'UML4CPP generator project'
+
+dependencies {
+   runtime fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		'com.google.guava_*.jar',
+		'javax.inject_*.jar',
+		'lpg.runtime.java_*.jar',
+		'org.eclipse.acceleo.common_*.jar',
+		'org.eclipse.equinox.app_*.jar',
+		'org.eclipse.equinox.common_*.jar',
+		'org.eclipse.equinox.preferences_*.jar',
+		'org.eclipse.equinox.registry_*.jar',
+		'org.eclipse.ocl.common_*.jar',
+		'org.eclipse.ocl.ecore_*.jar',
+		'org.eclipse.ocl_*.jar'
+	])
+	
+    compile fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		'org.eclipse.acceleo.engine_*.jar',
+		'org.eclipse.acceleo.model_*.jar',
+		'org.eclipse.core.runtime_*.jar',
+		'org.eclipse.emf.common_*.jar',
+		'org.eclipse.emf.ecore.xmi_*.jar',
+		'org.eclipse.emf.ecore_*.jar',
+		'org.eclipse.osgi_*.jar',
+		'org.eclipse.uml2.uml_*.jar',
+		'org.eclipse.uml2.types_*.jar'
+	])
+}
+
+sourceSets {
+	main {
+		java {
+			srcDir 'src'
+		}
+	}
+}
+
+jar.archiveName = 'ecore4CPP.jar'
+
+executableJar {
+   mainClass 'ecore4CPP.generator.main.Generate'
+}
+
+task deliverEcore4CPP(type: Copy) {
+	description 'deliver ecore4CPP.jar to %MDE4CPP_HOME%/application/generator'
+	from 'build/libs'
+	into System.getenv('MDE4CPP_HOME') + '/application/generator'
+	include jar.archiveName
+}
+
+jar.finalizedBy(deliverEcore4CPP)

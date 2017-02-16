@@ -1,0 +1,1 @@
+include 'ecore4CPP.generator', 'ecore4CPP.generator.compiler'

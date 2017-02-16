@@ -1,0 +1,78 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateClass('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+
+[query public classNameMember(aEClass : EClass) : String = aEClass.name.toLowerFirst().concat(aEClass.eClass().name) /]
+[query public classNumberName(aEClass : EClass) : String = aEClass.name.toUpperCase() /]
+
+[template public generateStaticClassID(aEClass : EClass)]
+static const int [aEClass.name.toUpperCase()/] = [aEClass.getClassifierID()/];
+static const int [aEClass.name.toUpperCase()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
+static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
+[/template]
+
+[**
+ * Class getter for EPackage
+*/]
+[template public generateClassGetter(aEClass : EClass,impl : Boolean)]
+virtual [metamodelClassTypeString(aEClass)/] get[aEClass.name/]() const [abstractSufix(impl)/];
+[/template]
+
+[**
+ * Operation to generate create operation
+*/]
+[template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
+virtual [aEClass.generateTypeClass()/] create[aEClass.name/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generateClassGetterImpl(aEClass : EClass)]
+[metamodelClassTypeString(aEClass)/] [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
+{
+	return [aEClass.classNameMember()/];
+}
+[/template]
+
+[template public initSuperTypes(aEClass : EClass)]
+[for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+[aEClass.classNameMember()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
+[/for]
+[/template]
+
+[template public generateClassCreation(aEClass : EClass)]
+[classNameMember(aEClass)/] = createEClass([classNumberName(aEClass)/]);
+[/template]
+
+[template public generateClassInit(aEClass : EClass)]
+initEClass([aEClass.classNameMember()/], nullptr, "[aEClass.name/]", [aEClass.abstract.toString()/], [aEClass.interface.toString()/], true);
+[/template]
+
+[template public generatePrivatePackageMember(aEClass : EClass)]
+[metamodelClassTypeString(aEClass)/] [aEClass.classNameMember()/] = nullptr;
+
+[/template]
+
+
+[template public generateDeletePrivatePackageMember(aEClass : EClass)]
+if ([aEClass.classNameMember()/] != nullptr)
+{
+	delete([aEClass.classNameMember()/]);
+	[aEClass.classNameMember()/] = nullptr;
+}
+
+[/template]

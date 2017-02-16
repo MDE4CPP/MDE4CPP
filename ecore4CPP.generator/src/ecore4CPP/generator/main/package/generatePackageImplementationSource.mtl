@@ -1,0 +1,139 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePackageImplementationSource('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateAttribute /]
+[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateDatatype /]
+[import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateReference /]
+[import ecore4CPP::generator::main::helper /]
+
+[query public metaModelIncludes(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents(EClass).eAllSuperTypes.ePackage,anEPackage.eAllContents(EStructuralFeature).eType.ePackage,anEPackage.eAllContents(EParameter).eType.ePackage}->flatten() /]
+
+[template public generatePackageImplSource(anEPackage : EPackage) { packageName : String = anEPackage.name.concat('PackageImpl').toUpperFirst(); }]
+[file (anEPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[packageName/].hpp"
+
+//metametamodel classes
+#include "EAttribute.hpp"
+#include "EClass.hpp"
+#include "EDataType.hpp"
+#include "EEnum.hpp"
+#include "EOperation.hpp"
+#include "EReference.hpp"
+
+//metamodel factory
+#include "[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
+
+//depending model packages
+[for (pack : EPackage | anEPackage.metaModelIncludes()->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
+#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
+[/for]
+
+using namespace [anEPackage.name/];
+
+bool [packageName/]::isInited = false;
+
+[packageName/]::[packageName/]()
+{
+	setEFactoryInstance([anEPackage.name.concat('Factory').toUpperFirst()/]::eInstance());
+}
+
+[packageName/]::~[packageName/]()
+{
+	[anEPackage.eAllContents(EClass).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EDataType).generateDeletePrivatePackageMember()/]
+}
+
+[anEPackage.name.concat('Package').toUpperFirst()/]* [packageName/]::create()
+{
+	if (isInited)
+	{
+		return [anEPackage.name.concat('Package').toUpperFirst()/]::eInstance();
+	}
+	isInited = true;
+	
+    // Obtain or create package and create package meta-data objects
+    [packageName/] * metaModelPackage = new [packageName/]();
+	metaModelPackage->createPackageContents();
+    return metaModelPackage;
+}
+
+void [packageName/]::init()
+{
+    // Initialize created meta-data
+    initializePackageContents();   
+}
+
+void [packageName/]::createPackageContents()
+{
+	if (isCreated) 
+	{
+		return;
+	}
+	isCreated = true;
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aClass.generateClassCreation()/]
+	[aClass.eAttributes->sortedBy(name).generateAttributeCreation()/]
+	[aClass.eReferences->sortedBy(name).generateReferenceCreation()/]
+	[aClass.eOperations->sortedBy(name).generateOperationCreation()/]
+[/for]
+
+	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeCreation()/]
+}
+
+void [packageName/]::initializePackageContents()
+{
+	if (isInitialized)
+	{
+		return;
+	}
+	isInitialized = true;
+
+	// Initialize package
+	setName(eNAME);
+	setNsPrefix(eNS_PREFIX);
+	setNsURI(eNS_URI);
+	
+	// Add supertypes to classes
+	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
+	[anEPackage.needNamespace('EOperation *')/]  op;
+
+ 	// Initialize classes and features; add operations and parameters
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	// Begin Class [aClass.name/]
+	[aClass.generateClassInit()/]
+	[aClass.eAttributes->sortedBy(name).generateAttributeInitialization()/]
+	[aClass.eReferences->sortedBy(name).generateReferenceInitialization()/]
+	[aClass.eOperations->sortedBy(name).generateOperationInitialization()/]
+	// End Class [aClass.name/]
+[/for]
+
+	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
+}
+
+[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+// Begin Class [aClass.name/]
+[aClass.generateClassGetterImpl()/]
+[aClass.eAttributes->sortedBy(name).generateAttributeGetterImpl()/]
+[aClass.eReferences->sortedBy(name).generateReferenceGetterImpl()/]
+[aClass.eOperations->sortedBy(name).generateOperationGetterImpl()/]
+// End Class [aClass.name/]
+[/for]
+[anEPackage.eAllContents(EDataType)->sortedBy(name).generateDatatypeGetterImpl()/]
+[/file]
+[/template]

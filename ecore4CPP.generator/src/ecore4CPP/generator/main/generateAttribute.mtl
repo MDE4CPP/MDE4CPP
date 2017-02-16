@@ -1,0 +1,100 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateAttribute('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateClass /]
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+
+[query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and not (aAttribute.upperBound = -1)/]
+[query public hasGetter(aAttribute : EAttribute) : EBoolean = true or hasKey('getterbody') /]
+
+[***###########################################################################################
+ * Section for model and class implementation of an Attribute
+ */]
+
+[template public generateAttributeAccessorsDecl(aAttribute : EAttribute, impl : Boolean)]
+[aAttribute.generateAttributeGetterDecleration(impl)/]
+[aAttribute.generateAttributeSetterDecleration(impl)/]
+[/template]
+
+[template public generateAttributeProtectedMember(aAttribute : EAttribute)]
+[aAttribute.generateDokumentation()/] 
+[if (aAttribute.upperBound=-1)]
+[aAttribute.generateAttributeType()/] m_[aAttribute.name/] = new std::vector<[aAttribute.eGenericType.generateCppType()/]>();
+[else]
+[aAttribute.generateAttributeType()/] m_[aAttribute.name/] [if (aAttribute.defaultValueLiteral->notEmpty())]= [if (aAttribute.eType.oclIsTypeOf(EEnum))][aAttribute.eType.name/]::[aAttribute.defaultValueLiteral.toUpperCase()/] [else] [aAttribute.defaultValueLiteral/][/if][/if];
+[/if]
+[/template]
+
+[template public generateAttributeGetterDecleration(aAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
+[aAttribute.generateDokumentation()/] 
+virtual [aAttribute.generateAttributeType()/] [aAttribute.GetterName()/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generateAttributeSetterDecleration(aAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
+[aAttribute.generateDokumentation()/] 
+virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])[abstractSufix(impl)/]; 
+
+
+[/template]
+
+[***
+ * Section for the Attribute cpp implementation
+*/]
+[template public generateAttributeGetterImplementationCpp(aAttribute : EAttribute)? (hasGetter())]
+[aAttribute.generateAttributeType()/] [aAttribute.eContainingClass.name/]Impl::[aAttribute.GetterName()/]() const 
+{
+	return m_[aAttribute.name/];
+}
+[/template]
+
+[template public generateAttributeSetterImplementationCpp(aAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
+void [aAttribute.eContainingClass.name/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
+{
+	m_[aAttribute.name/] = _[aAttribute.name/];
+} 
+[/template]
+
+[***###########################################################################################
+ * Section for creating the Attribute elements in the metamodel package
+*/]
+
+[template public generateAttributeInitialization(aAttribute : EAttribute)]
+initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], nullptr, [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+[/template]
+
+[template public generateStaticAttributeID(aAttribute : EAttribute)]
+static const int [aAttribute.memberNameUpper()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
+
+[/template]
+
+[template public generateAttributeGetter(aAttribute : EAttribute,impl : Boolean) ]
+virtual [metamodelaTypedElementString(aAttribute)/] get[aAttribute.memberName()/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generateAttributeGetterImpl(aAttribute : EAttribute)]
+[metamodelaTypedElementString(aAttribute)/] [aAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aAttribute.memberName()/]() const
+{
+	return dynamic_cast<[metamodelaTypedElementString(aAttribute)/]>([aAttribute.eContainingClass.classNameMember()/]->getEStructuralFeatures()->at([aAttribute.listNumber()/]));
+}
+
+[/template]
+
+[template public generateAttributeCreation(aAttribute : EAttribute)]
+createEAttribute([aAttribute.eContainingClass.classNameMember()/], [aAttribute.memberNameUpper()/]);
+[/template]
