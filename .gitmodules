@@ -1,0 +1,9 @@
+[submodule "generator/ecore4CPP"]
+	path = generator/ecore4CPP
+	url = https://github.com/MDE4CPP/ecore4CPP.git
+[submodule "generator/UML4CPP"]
+	path = generator/UML4CPP
+	url = https://github.com/MDE4CPP/UML4CPP.git
+[submodule "generator/fUML4CPP"]
+	path = generator/fUML4CPP
+	url = https://github.com/MDE4CPP/fUML4CPP.git
