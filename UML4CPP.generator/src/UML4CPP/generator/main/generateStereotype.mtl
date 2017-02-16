@@ -1,0 +1,91 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateStereotype('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[template public generateClassCreate(aStereotype : Stereotype,impl : Boolean)]
+virtual [aStereotype.generateCppType()/] create[aStereotype.name/]()[abstractSufix(impl)/];
+
+[/template]
+
+[template public generateStaticClassID(aStereotype : Stereotype)]
+static const int [aStereotype.name.toUpperCase()/] = [aStereotype._package.member->asOrderedSet()->indexOf(aStereotype)/];
+static const int [aStereotype.name.toUpperCase()/]_FEATURE_COUNT = [aStereotype.allFeatures()->size()/];
+static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotype.ownedOperation->size()/];
+[/template]
+
+[template public generateStereotypeCreation(aStereotype : Stereotype)]
+[aStereotype.memberName()/] = uml::UmlFactory::eInstance()->createStereotype();
+[aStereotype.memberName()/]->setName("[aStereotype.name/]");
+[aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
+[aStereotype.ancestors(Package)->first().memberName()/]->getOwnedStereotype()->push_back([aStereotype.memberName()/]);
+[aStereotype.memberName()/]->setPackage([aStereotype.ancestors(Package)->first().memberName()/]);
+[/template]
+
+[template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name='UML'))))]
+[for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
+//apply Stereotype	[stereo.name/]
+{
+[stereo.generateCppType()/] stereo = [stereo.creatorFunction()/];
+[for (prop : Property | stereo.allAttributes()) separator ('\n')][if(not aElement.getValue(stereo, prop.name).oclIsUndefined())][prop.generateAttributeSetting(aElement, stereo)/][/if][/for]
+[aElement.oclAsType(NamedElement).memberName()/]->applyStereotype(stereo);
+
+}
+[/for]
+[/template]
+
+[template public generateAttributeSetting(prop : Property,aElement : Element, stereo : Stereotype)]
+[if (prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(PrimitiveType) and not(prop.upper = 1))][prop.generateListAttributeSetting(aElement, stereo)/][else]stereo->[prop.SetterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
+[/template]
+
+[template public generateListAttributeSetting(prop : Property,aElement : Element, stereo : Stereotype)]
+[for (any : OclAny | aElement.getValue(stereo, prop.name)->select(oclIsKindOf(NamedElement))->asOrderedSet()->sortedBy(myQualifiedName()))]
+stereo->[prop.GetterName()/]()->push_back([any.oclAsType(NamedElement).memberName()/]);
+[/for]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (not prop.name.startsWith('base_') and prop.type.oclIsKindOf(NamedElement) and not prop.type.oclIsKindOf(PrimitiveType))]
+[aElement.getValue(stereo, prop.name).oclAsType(NamedElement).memberName()/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.name.startsWith('base_'))]
+[aElement.oclAsType(NamedElement).memberName()/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(Enumeration))]
+[prop.type.qualifiedName/]::[aElement.getValue(stereo, prop.name).oclAsType(EnumerationLiteral).name.toUpper()/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='String'))]
+"[aElement.getValue(stereo, prop.name).oclAsType(String)/]"
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='Integer') )]
+[aElement.getValue(stereo, prop.name).oclAsType(Integer)/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='Boolean') )]
+[aElement.getValue(stereo, prop.name).oclAsType(Boolean)/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='Real') )]
+[aElement.getValue(stereo, prop.name).oclAsType(Real)/]
+[/template]
+
+[template public generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='UnlimitedNatural') )]
+[aElement.getValue(stereo, prop.name).oclAsType(UnlimitedNatural)/]
+[/template]

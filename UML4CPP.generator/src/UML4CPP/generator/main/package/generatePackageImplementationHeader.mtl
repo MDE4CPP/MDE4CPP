@@ -1,0 +1,76 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePackageImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::helper /]
+
+[template public baseClass(aPackage : Package) ? (oclIsKindOf(Profile))]
+virtual public uml::ProfileImpl
+[/template]
+
+[template public baseClass(aPackage : Package) ? (not oclIsKindOf(Profile))]
+virtual public uml::PackageImpl
+[/template]
+
+[template public generatePackageImplHeader(aPackage : Package)]
+[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'MetaModelPackageImpl')/]
+
+[if ((aPackage.name='UML') or (aPackage.name='Ecore') or (aPackage.name='PrimitiveType'))]
+#include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
+[else]
+#include "[aPackage.name.concat('Package').toUpperFirst()/].hpp"
+[/if]
+[if (aPackage.oclIsKindOf(Profile))]
+#include "impl/ProfileImpl.hpp"
+[else]
+#include "impl/PackageImpl.hpp"	
+[/if]
+
+namespace [aPackage.name/]
+{
+	class [aPackage.name.toUpperFirst().concat('PackageImpl')/] : [aPackage.baseClass()/] ,virtual public [aPackage.name.toUpperFirst().concat('Package')/]
+	{
+			friend class [aPackage.name.toUpperFirst().concat('Package')/];
+			// Constructor
+			[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+
+		public:
+			// destructor
+			virtual ~[aPackage.name.toUpperFirst().concat('PackageImpl')/]();
+
+			//getter for the ownedMember
+			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generateGetter(true)/]
+
+		private:
+			//private variables for ownedMember of the metamodel package
+			[(aPackage.allOwnedElements()->filter(NamedElement))->sortedBy(myQualifiedName()).generatePrivatePackageMember()/]
+
+			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
+			static bool isInited;
+			bool isInitialized = false;
+			bool isCreated = false;
+
+			void initMetaModel();
+			virtual void init();
+
+		public:
+ 			void initializePackageContents();
+			void createPackageContents();
+	};
+} 
+[endGuard(aPackage,'MetaModelPackageImpl')/]
+[/file]
+[/template]

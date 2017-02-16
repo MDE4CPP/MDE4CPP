@@ -1,0 +1,100 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::helper /]
+
+[template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
+virtual public uml::StereotypeImpl
+[/template]
+
+[template public baseClass(aClass : Class) ?(not oclIsKindOf(Stereotype))]
+virtual public uml::ClassImpl
+[/template]
+
+[template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
+[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[startGuard(className)/]
+
+//*********************************
+// generated Includes
+
+//Model includes
+#include "../[aClass.name.concat('.hpp')/]"
+#include <functional>
+[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "impl/[sClass.name/]Impl.hpp"[/for]
+
+[if (aClass.superClass->isEmpty())]
+#include "impl/ClassImpl.hpp"
+[/if]
+[if (aClass.oclIsKindOf(Stereotype))]
+#include "impl/StereotypeImpl.hpp"
+[/if]
+#include "Property.hpp"
+#include "boost/any.hpp"
+
+//*********************************
+namespace [aPackage.name/]
+{
+	class [className/] [for (sClass : Class | aClass.superClass) before (':') separator (',')]
+virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superClass->isEmpty())]
+ : [aClass.baseClass()/][/if], virtual public [aClass.name/]
+	{
+		private:    
+			[className/]([className/] const&) = delete;
+			[className/]& operator=([className/] const&) = delete;
+
+		protected:
+			friend class [aClass.getNearestPackage().name.concat('FactoryImpl').toUpperFirst()/];
+			//constructor
+			[className/]();
+
+		public:
+			//destructor
+			virtual ~[className/]();
+
+			//*********************************
+			// Operations
+			//*********************************
+			[aClass.ownedOperation.generateOperationDecl(true)/]
+			
+			//*********************************
+			// Attributes Getter Setter
+			//*********************************
+			[aClass.ownedAttribute.generateAttributeAccessorsDecl(true)/]
+			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(name))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+			[aAttribute.generateAttributeAccessorsDecl(true)/]
+			[/if][/for][/for]
+
+		protected:
+			virtual [aClass.metamodelClassTypeString('Class *')/] getMetaClass() const;
+
+		public:
+			//*********************************
+			// Structural Feature Getter/Setter
+			//*********************************
+			[aClass.generateeGetSetDel(true)/]
+		
+		private:
+			[aClass.generateGetSetMemeberInit()/]
+	};
+}
+[endGuard(className)/]
+[/file]
+[/template]

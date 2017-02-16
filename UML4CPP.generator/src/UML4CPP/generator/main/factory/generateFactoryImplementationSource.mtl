@@ -1,0 +1,81 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.toUpperFirst().concat('FactoryImpl'); }]
+[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[className/].hpp"
+#include "[aPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "Class.hpp"
+
+using namespace [aPackage.name/];
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+[className/]::[className/]()
+{
+	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(name)) ? (aClass.isAbstract=false)]
+	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.qualifiedName/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
+	[/for]
+}
+
+[className/]::~[className/]()
+{
+}
+
+[aPackage.name.toUpperFirst().concat('Factory')/]* [className/]::create()
+{
+	return new [className/]();
+}
+
+//*********************************
+// creators
+//*********************************
+uml::Element * [className/]::create(uml::Class * _class)
+{
+	if(_class->getIsAbstract())
+    {
+    	return nullptr;
+    }
+
+	//TODO: still two times run through map
+	std::string qName = _class->getQualifiedName();
+	std::map<std::string,std::function<uml::Element *()>>::iterator iter = m_creatorMap.find(qName);
+    if(iter != m_creatorMap.end())
+    {
+		//invoke the creator function
+        return iter->second();
+    }
+
+    return nullptr;
+}
+
+[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+[aClass.generateCppType()/] [className/]::create[aClass.name/] ()
+{
+	return new [aClass.name/]Impl();
+}
+[/for]
+
+[aPackage.name.toUpperFirst().concat('Package')/] * [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()
+{
+	return [aPackage.name.toUpperFirst().concat('Package')/]::eInstance();
+}
+[/file]
+[/template]

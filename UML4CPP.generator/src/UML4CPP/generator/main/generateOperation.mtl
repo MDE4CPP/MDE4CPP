@@ -1,0 +1,109 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateOperation('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import UML4CPP::generator::main::generateParameter /]
+[import UML4CPP::generator::main::generateStereotype /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
+
+[**
+ * The documentation of the template generateOperation.
+ * @param anEOperation
+ */]
+[template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
+virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.type.generateCppType()/] [sParameter.name/][/for] ) [abstractSufix(impl)/];
+
+[/template]
+
+[template public generateOperationImplementation(aOperation : Operation)]
+[aOperation.generateCppType()/] [aOperation.class.name/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[sParameter.type.generateCppType()/] [sParameter.name/][/for])
+{
+[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+	[aOperation.generateCppType()/] [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+[/if]
+
+[comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
+[if (aOperation.method->notEmpty())]
+[if(aOperation.method->filter(Activity)->notEmpty())]
+#if defined [aOperation.method->filter(Activity).name.toUpperCase()/]
+	// Implemented as an Activity [aOperation.method->filter(Activity).name/]
+	[aOperation.method->filter(Activity).name/]Execution* execution = new [aOperation.method->filter(Activity).name/]Execution();
+	[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+	[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = [/if]
+	execution->execute([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')] [sParameter.name/][/for]);
+#endif
+[else]
+[if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
+	// Implemented as Function behaviour [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).name/]
+
+[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf('CPP') ]
+[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
+[/let]
+[/if]
+[/if]
+[else]
+	std::cout << __PRETTY_FUNCTION__ std::endl;
+	throw "UnsupportedOperationException";
+[/if]
+
+[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+	return [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+[/if]
+}
+[/template]
+
+[template public parameterNameList(aOperation : Operation)]
+[for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+"[sParameter.name/]"[/for]
+[/template]
+
+[template public parameterTypeList(aOperation : Operation)]
+[for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[sParameter.type.packageGetter(sParameter)/][/for]
+[/template]
+
+[template public generateOperationCreation(aOperation : Operation) ]
+[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation();
+[memberName(aOperation)/]->setName("[aOperation.name/]");
+[aOperation.ownedParameter.generateParameterCreation()/]
+
+[memberName(aOperation.class)/]->getOwnedOperation()->push_back([memberName(aOperation)/]); 
+
+[/template]
+
+[template public initalizeOperation(aOperation : Operation) ]
+[for (beh : Behavior | aOperation.method) separator ('\n')]
+[memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
+
+[/template]
+
+[template public generateDependencyCreation(aDependency : Dependency) ]
+[memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency();
+[memberName(aDependency)/]->setName("[aDependency.name/]");
+[aDependency.client.generateDependencyClientAdding(aDependency)/]
+[aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
+[aDependency.generateStereotypeApplication()/]
+[/template]
+
+[template public generateDependencyClientAdding(aNamedElement : NamedElement, aDependency : Dependency)]
+[memberName(aDependency)/]->getClient()->push_back([memberName(aNamedElement)/]);
+[memberName(aNamedElement)/]->getClientDependency()->push_back([memberName(aDependency)/]);
+[/template]
+
+[template public generateDependencySupplierAdding(aNamedElement : NamedElement, aDependency : Dependency)]
+[memberName(aDependency)/]->getSupplier()->push_back([memberName(aNamedElement)/]);
+[/template]

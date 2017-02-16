@@ -1,0 +1,209 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generatePackageImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
+
+[import UML4CPP::generator::main::generateActivity /]
+[import UML4CPP::generator::main::generateActivityNode /]
+[import UML4CPP::generator::main::generateActivityEdge /]
+[import UML4CPP::generator::main::generateAttribute /]
+[import UML4CPP::generator::main::generateClass /]
+[import UML4CPP::generator::main::generateEnum /]
+[import UML4CPP::generator::main::generateFunctionBehavior /]
+[import UML4CPP::generator::main::generateInstanceSpecification /]
+[import UML4CPP::generator::main::generateInterface /]
+[import UML4CPP::generator::main::generateOperation /]
+[import UML4CPP::generator::main::generatePrimitivetype /]
+[import UML4CPP::generator::main::generateStereotype /]
+[import UML4CPP::generator::main::generateValueSpecification /]
+[import UML4CPP::generator::main::helper /]
+
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage()}->flatten() /]
+
+[template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
+[file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[packageName/].hpp"
+
+//metamodel classes
+#include "Stereotype.hpp"
+#include "Generalization.hpp"
+#include "Constraint.hpp"
+#include "OpaqueExpression.hpp"
+#include "EnumerationLiteral.hpp"
+#include "PrimitiveType.hpp"
+#include "FunctionBehavior.hpp"
+
+[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[nE.name/].hpp"[/for]
+
+//metamodel factory
+[if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
+#include "[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+[/if]
+#include "UmlFactory.hpp"
+
+//depending model packages
+[for (pack : Package | aPackage.metaModelIncludes()->sortedBy(name)) ?  (not (pack=aPackage))]
+[if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
+[if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
+#include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+[else] [if (not (pack.name='StandardProfile'))]
+#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
+[/if][/if]
+[/if]
+[if (not((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='StandardProfile')))]
+#include "[pack.name.concat('Factory').toUpperFirst()/].hpp"
+[/if]
+[/for]
+
+[for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(name))]
+#include "[stereo.name/].hpp"
+[/for]
+[for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
+#include "[stereo.name/].hpp"
+[/for]
+
+using namespace [aPackage.name/];
+
+[packageName/]::[packageName/]()
+{
+}
+
+[packageName/]::~[packageName/]()
+{
+}
+
+bool [packageName/]::isInited = false;
+
+[aPackage.name.concat('Package').toUpperFirst()/]* [packageName/]::create()
+{
+	if (isInited)
+	{
+		return [aPackage.name.concat('Package').toUpperFirst()/]::eInstance();
+	}
+	isInited = true;
+	
+    // Obtain or create and register package, create package meta-data objects
+    [packageName/] * metaModelPackage = new [packageName/]();
+	metaModelPackage->initMetaModel();
+    metaModelPackage->createPackageContents();
+    return metaModelPackage;
+}
+
+void [packageName/]::init()
+{
+    // Initialize created meta-data
+    initializePackageContents();   
+}
+
+void [packageName/]::initMetaModel()
+{
+}
+
+void [packageName/]::createPackageContents()
+{
+	if (isCreated)
+	{
+		return;
+	}
+	isCreated = true;
+	
+	uml::Package * [aPackage.memberName()/] = this;
+	uml::Constraint * con = nullptr;
+	uml::OpaqueExpression * oe = nullptr;
+	
+	[aPackage.allOwnedElements()->filter(ValueSpecification)->sortedBy(myQualifiedName()).generateValueSpecificationCreation()/]
+
+[if (not (aPackage.name='UML'))]
+[for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aInterface.generateInterfaceCreation()/]
+	[aInterface.ownedAttribute.generateAttributeCreation()/]
+	[aInterface.ownedOperation.generateOperationCreation()/]
+[/for]
+[/if]
+
+[comment]Only Classes[/comment]
+[for (aClass : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Stereotype)-aPackage.ownedMember->filter(Behavior))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+	[aClass.generateClassCreation()/]
+	[aClass.ownedAttribute->sortedBy(name).generateAttributeCreation()/]
+	[aClass.ownedOperation->sortedBy(name).generateOperationCreation()/]
+	[aClass.ownedBehavior->filter(FunctionBehavior).generateFunctionBehaviorCreation()/]
+
+	[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->asOrderedSet()->sortedBy(name))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+	[aAttribute.addInterfaceAttribute(aClass)/]
+	[/if][/for][/for]
+[/for]
+
+[for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->asOrderedSet()->sortedBy(name))]
+	[anInstSpec.generateInstanceSpecificationCreation()/]
+[/for]
+
+[comment]Only Stereotypes[/comment]
+[for (aStereotype : Stereotype | aPackage.ownedMember->filter(Stereotype)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+	[aStereotype.generateStereotypeCreation()/]
+	[aStereotype.ownedAttribute->sortedBy(name)->sortedBy(name).generateAttributeCreation()/]
+	[aStereotype.ownedOperation->sortedBy(name)->sortedBy(name).generateOperationCreation()/]
+[/for]
+
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->sortedBy(name))) separator ('\n')]
+	[anActivity.generateActivityCreation()/]
+	//Node
+	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]
+	//flow
+	[anActivity.edge->asOrderedSet()->sortedBy(source.getProperty('name')).generateActivityEdgeCreation()/]
+[/for]
+
+//Dependency [comment]Only Dependency[/comment]
+[for (aDependency : Dependency | (aPackage.allOwnedElements()->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->asOrderedSet()->sortedBy(myQualifiedName())) separator('\n')]
+	[aDependency.generateDependencyCreation()/]
+	[aDependency.ownedElement->sortedBy(name).generateStereotypeApplication()/]
+[/for]
+
+	[aPackage.ownedMember->filter(PrimitiveType).generatePrimitiveTypeCreation()/]
+
+[if (aPackage.ownedMember->filter(Enumeration)->size() > 0)]
+	uml::EnumerationLiteral * lit = nullptr;
+	[aPackage.ownedMember->filter(Enumeration).generateEnumerationCreation()/]
+[/if]
+}
+
+void [packageName/]::initializePackageContents()
+{
+	if (isInitialized)
+	{
+		return;
+	}
+	isInitialized = true;
+
+	// Initialize package
+	setName(eNAME);
+	setURI(eNS_URI);
+
+	// Add supertypes to classes
+	uml::Generalization * gen = nullptr;
+	[aPackage.ownedMember->filter(Class).initSuperTypes()/]
+
+	[aPackage.ownedMember->filter(Class).ownedOperation.initalizeOperation()/]
+	
+	//initalize ActivityNodes and Edges
+	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+	[anActivity.node.initializeActivityNode()/]
+	[anActivity.edge.initializeEdge()/]
+	[/for]
+}
+
+[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generateGetterImpl()/]
+
+[/file]
+[/template]
