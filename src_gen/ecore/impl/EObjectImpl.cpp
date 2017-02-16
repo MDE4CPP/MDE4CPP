@@ -1,0 +1,168 @@
+#include "EObjectImpl.hpp"
+#include <iostream>
+#include <cassert>
+#include "EAnnotation.hpp"
+#include "EClass.hpp"
+#include "ecorePackageImpl.hpp"
+
+using namespace ecore;
+
+//*********************************
+// Constructor / Destructor
+//*********************************
+EObjectImpl::EObjectImpl()
+{
+	//*********************************
+	// Reference Members
+	//*********************************
+	
+}
+
+EObjectImpl::~EObjectImpl()
+{
+	
+}
+
+EObjectImpl::EObjectImpl(const EObjectImpl & obj)
+{
+	//create copy of all Attributes
+
+	//copy references with now containment
+	
+	m_eContainer  = obj.eContainer();
+
+
+	//clone containt lists
+}
+
+ecore::EObject *  EObjectImpl::copy() const
+{
+	return new EObjectImpl(*this);
+}
+
+EClass* EObjectImpl::eStaticClass() const
+{
+	return EcorePackageImpl::eInstance()->getEObject();
+}
+
+//*********************************
+// Attribute Setter Gettter
+//*********************************
+
+//*********************************
+// Operations
+//*********************************
+std::vector <   ecore::EObject *  > * EObjectImpl::eAllContents()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+ecore::EClass *  EObjectImpl::eClass()  const 
+{
+	//generated from body annotation
+	return this->eStaticClass();
+}
+
+ecore::EStructuralFeature *  EObjectImpl::eContainingFeature()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+ecore::EReference *  EObjectImpl::eContainmentFeature()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+std::vector <   ecore::EObject *  > * EObjectImpl::eContents()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+std::vector <   ecore::EObject *  > * EObjectImpl::eCrossReferences()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+boost::any EObjectImpl::eGet(ecore::EStructuralFeature *  feature)  const 
+{
+	//generated from body annotation
+	return this->eGet(feature,false);
+}
+
+boost::any EObjectImpl::eGet(ecore::EStructuralFeature *  feature,bool resolve)  const 
+{
+	//generated from body annotation
+	return this->eGet(feature->getFeatureID(),resolve,false);
+}
+
+boost::any EObjectImpl::eInvoke(ecore::EOperation *  operation,std::vector <   boost::any > * arguments)  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+bool EObjectImpl::eIsProxy()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+bool EObjectImpl::eIsSet(ecore::EStructuralFeature *  feature)  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+int EObjectImpl::eResource()  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void EObjectImpl::eSet(ecore::EStructuralFeature *  feature,boost::any newValue)  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+void EObjectImpl::eUnset(ecore::EStructuralFeature *  feature)  const 
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
+//*********************************
+// References
+//*********************************
+ecore::EObject *  EObjectImpl::eContainer() const
+{
+	
+	return m_eContainer;
+}
+void EObjectImpl::setContainer(ecore::EObject *  _eContainer)
+{
+	m_eContainer = _eContainer;
+}
+
+//*********************************
+// Union Getter
+//*********************************
+
+
+//*********************************
+// Structural Feature Getter/Setter
+//*********************************
+boost::any EObjectImpl::eGet(int featureID,  bool resolve, bool coreType) const
+{
+	switch(featureID)
+	{
+		case EcorePackage::EOBJECT_ECONTAINER:
+			return eContainer(); //100
+	}
+	return boost::any();
+}
