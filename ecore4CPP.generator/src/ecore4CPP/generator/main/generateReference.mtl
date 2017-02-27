@@ -41,31 +41,11 @@ virtual void [aReference.SetterName()/]([aReference.eGenericType.generateCppType
 
 [template public generateProtectedReference(aReference : EReference) ]
 [aReference.generateDokumentation()/]
-[aReference.generateReferenceType()/] m_[aReference.name/] =  nullptr ;
+[aReference.generateReferenceType()/] m_[aReference.name/];
 
 [/template]
 
 [template public generateProtectedReferenceDeleter(aReference : EReference) ]
-[if ((aReference.containment) or not(aReference.upperBound=1))]
-if(m_[aReference.name/]!=nullptr)
-{
-[if ((aReference.containment) and not(aReference.upperBound=1))]
-	for(auto c :*m_[aReference.name/])
-	{
-		delete(c);
-		c = 0;
-	}
-[elseif (aReference.containment)]
-	if(m_[aReference.name/])
-	{
-		delete(m_[aReference.name/]);
-		m_[aReference.name/] = nullptr;
-	}
-[elseif (not(aReference.upperBound=1))]  
-	delete(m_[aReference.name/]);
- 	m_[aReference.name/] = nullptr;
-[/if]}
-[/if]
 [/template]
 
 [template public generateReferenceCpp(aReference : EReference)]
@@ -74,10 +54,7 @@ if(m_[aReference.name/]!=nullptr)
 [/template]
 
 [template public generateReferenceInit(aReference : EReference)? (not(aReference.upperBound=1))]
-if( m_[aReference.name/] == nullptr)
-{
-	m_[aReference.name/] = new std::vector<[aReference.eGenericType.generateCppType()/]>();
-}
+m_[aReference.name/] = std::shared_ptr<std::vector<[aReference.eGenericType.generateCppType()/]> > (new std::vector<[aReference.eGenericType.generateCppType()/]>());
 [/template]
 
 [template public generateReferenceSetterCpp(aReference : EReference) ? (hasSetter())]
