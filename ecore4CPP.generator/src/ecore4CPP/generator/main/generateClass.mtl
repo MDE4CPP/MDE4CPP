@@ -30,19 +30,19 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.getOpe
  * Class getter for EPackage
 */]
 [template public generateClassGetter(aEClass : EClass,impl : Boolean)]
-virtual [metamodelClassTypeString(aEClass)/] get[aEClass.name/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelClassTypeString(aEClass)/]> get[aEClass.name/]() const [abstractSufix(impl)/];
 [/template]
 
 [**
  * Operation to generate create operation
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
-virtual [aEClass.generateTypeClass()/] create[aEClass.name/]() const [abstractSufix(impl)/];
+virtual [aEClass.generateTypeClass()/]* create[aEClass.name/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateClassGetterImpl(aEClass : EClass)]
-[metamodelClassTypeString(aEClass)/] [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
+std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
 {
 	return [aEClass.classNameMember()/];
 }
@@ -63,16 +63,12 @@ initEClass([aEClass.classNameMember()/], nullptr, "[aEClass.name/]", [aEClass.ab
 [/template]
 
 [template public generatePrivatePackageMember(aEClass : EClass)]
-[metamodelClassTypeString(aEClass)/] [aEClass.classNameMember()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.classNameMember()/] = nullptr;
 
 [/template]
 
 
 [template public generateDeletePrivatePackageMember(aEClass : EClass)]
-if ([aEClass.classNameMember()/] != nullptr)
-{
-	delete([aEClass.classNameMember()/]);
-	[aEClass.classNameMember()/] = nullptr;
-}
+[aEClass.classNameMember()/].reset();
 
 [/template]

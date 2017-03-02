@@ -49,7 +49,7 @@ bool [packageName/]::isInited = false;
 
 [packageName/]::[packageName/]()
 {
-	setEFactoryInstance([anEPackage.name.concat('Factory').toUpperFirst()/]::eInstance());
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( [anEPackage.name.concat('Factory').toUpperFirst()/]::eInstance()));
 }
 
 [packageName/]::~[packageName/]()
@@ -62,10 +62,10 @@ bool [packageName/]::isInited = false;
 {
 	if (isInited)
 	{
-		return [anEPackage.name.concat('Package').toUpperFirst()/]::eInstance();
+		return [anEPackage.name.concat('Package').toUpperFirst()/]::eInstance().get();
 	}
 	isInited = true;
-	
+	 
     // Obtain or create package and create package meta-data objects
     [packageName/] * metaModelPackage = new [packageName/]();
 	metaModelPackage->createPackageContents();
@@ -111,7 +111,7 @@ void [packageName/]::initializePackageContents()
 	
 	// Add supertypes to classes
 	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
-	[anEPackage.needNamespace('EOperation *')/]  op;
+	std::shared_ptr<[anEPackage.needNamespace('EOperation')/]> op;
 
  	// Initialize classes and features; add operations and parameters
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]

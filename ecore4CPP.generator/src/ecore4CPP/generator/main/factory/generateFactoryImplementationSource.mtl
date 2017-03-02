@@ -60,7 +60,7 @@ using namespace [anEPackage.name/];
 	switch (_class->getClassifierID())
 	{
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-		case [anEPackage.name.toUpperFirst().concat('Package')/]::[aClass.name.toUpperCase()/] : return dynamic_cast<[needNamespace(anEPackage, 'EObject*')/]>(create[aClass.name/]());
+		case [anEPackage.name.toUpperFirst().concat('Package')/]::[aClass.name.toUpperCase()/] : return create[aClass.name/]();
 [/for]		
 		default:
        		throw "Error create class '" + _class->getName();
@@ -69,13 +69,13 @@ using namespace [anEPackage.name/];
 }
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-[aClass.generateTypeClass()/] [className/]::create[aClass.name/] () const
+[aClass.generateTypeClass()/]* [className/]::create[aClass.name/] () const
 {
 	return new [aClass.name/]Impl();
 }
 [/for]
 
-[anEPackage.name.toUpperFirst().concat('Package')/] * [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
+std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
 {
 	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
 }

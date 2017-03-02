@@ -52,7 +52,7 @@ namespace [anEPackage.name/]
 			[anEPackage.eAllContents(EClass).generateClassCreate(true)/]
 
 			//Package
-			virtual [anEPackage.name.toUpperFirst()/]Package* get[anEPackage.name.toUpperFirst()/]Package() const;
+			virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.name.toUpperFirst()/]Package() const;
 
 		private:
 			static [anEPackage.name.toUpperFirst().concat('Factory')/] * create();

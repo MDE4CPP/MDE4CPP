@@ -35,33 +35,34 @@ boost::any[else]
 [/template]
 
 [template public generateTypeClass(anEDataType : EClass)]
-[anEDataType.name/]*
+[anEDataType.name/]
 [/template]
 
 [template public generateParameterType(eParameter : EParameter)]
 [if (not(eParameter.upperBound = 1))]
-std::shared_ptr< std::vector<[eParameter.eGenericType.generateCppType()/]> >& [else]
-[eParameter.eGenericType.generateCppType()/][/if]
+std::shared_ptr< std::vector<std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> > >& [elseif (not eParameter.eType.oclIsKindOf(EDataType))]
+std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
+[eParameter.eGenericType.generateCppType()/] [/if]
 [/template]
 
 [template public generateOperationType(eOperation : EOperation)]
 [if (not (eOperation.upperBound = 1))]
-std::shared_ptr< std::vector<[eOperation.eGenericType.generateCppType()/]> > [else]
-[eOperation.eGenericType.generateCppType()/][/if]
+std::shared_ptr< std::vector<std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> > >[elseif ((not eOperation.eType.oclIsUndefined()) and (not eOperation.eType.oclIsKindOf(EDataType)))]
+std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
+[eOperation.eGenericType.generateCppType()/] [/if]
 [/template]
 
 [template public generateReferenceType(eReference : EReference)]
 [if (not(eReference.upperBound = 1))]
-std::shared_ptr< std::vector<[eReference.eGenericType.generateCppType()/]> > [else]
-[if (eReference.lowerBound = 0)]
-std::shared_ptr< [eReference.eGenericType.generateCppType()/] > [else]
-[eReference.eGenericType.generateCppType()/][/if][/if]
+std::shared_ptr< std::vector<std::shared_ptr<[eReference.eGenericType.generateCppType()/]> > >[else]
+std::shared_ptr< [eReference.eGenericType.generateCppType()/] > [/if]
 [/template]
 
 [template public generateAttributeType(eAttribute : EAttribute)]
 [if (not(eAttribute.upperBound = 1))]
-  std::shared_ptr<std::vector<[eAttribute.eGenericType.generateCppType()/]> > [else]
-[eAttribute.eGenericType.generateCppType()/][/if]
+std::shared_ptr<std::vector<std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> > >[elseif ((not eAttribute.eType.oclIsUndefined()) and (not eAttribute.eType.oclIsKindOf(EDataType)))]
+std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [else]
+[eAttribute.eGenericType.generateCppType()/] [/if]
 [/template]
 
 [**
@@ -144,7 +145,7 @@ std::string
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (not oclIsKindOf(EDataType))]
-[anEClassifier.ePackage.name/]::[anEClassifier.name/] * 
+[anEClassifier.ePackage.name/]::[anEClassifier.name/]
 [/template]
 
 [template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]

@@ -50,7 +50,7 @@ namespace [anEPackage.name/]
 			//Creator functions
 			[anEPackage.eAllContents(EClass).generateClassCreate(false)/]
 			//Package
-			virtual [anEPackage.name.toUpperFirst().concat('Package')/]* get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
+			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
 	};
 }
 [endGuard(anEPackage,'Factory')/]

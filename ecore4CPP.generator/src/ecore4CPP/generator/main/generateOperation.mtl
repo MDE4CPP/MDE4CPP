@@ -72,16 +72,16 @@ createEOperation([aOperation.eContainingClass.classNameMember()/], [operationNum
 [/template]
 
 [template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
-virtual [metamodelaTypedElementString(aOperation)/] get[aOperation.operationNumberName()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.operationNumberName()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->asSequence()->indexOf(aOperation)-1 /]
 
 [template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
-[metamodelaTypedElementString(aOperation)/] [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
+std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
 {
-	return dynamic_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.classNameMember()/]->getEOperations()->at([aOperation.listNumber()/]));
+	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.classNameMember()/]->getEOperations()->at([aOperation.listNumber()/]));
 }
 
 [/template]

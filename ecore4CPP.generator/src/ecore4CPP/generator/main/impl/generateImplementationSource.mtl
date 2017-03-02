@@ -82,12 +82,12 @@ using namespace [aClass.ePackage.name/];
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
-		m_[ref.name/] = dynamic_cast<[ref.eType.generateType()/]>(obj.[ref.GetterName()/]()->copy());
+		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
 	}
 	[else]
-	for([ref.eType.generateType()/]	_[ref.name/] : *obj.[ref.GetterName()/]())
+	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *obj.[ref.GetterName()/]())
 	{
-		this->[ref.GetterName()/]()->push_back(dynamic_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+		this->[ref.GetterName()/]()->push_back(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
 	}
 	[/if]
 	[/for]
@@ -98,7 +98,7 @@ ecore::EObject *  [className/]::copy() const
 	return new [className/](*this);
 }
 
-[needNamespace(aClass.ePackage, 'EClass*')/] [className/]::eStaticClass() const
+std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
 	return [aClass.ePackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.name/]();
 }

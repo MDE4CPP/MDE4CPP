@@ -20,12 +20,12 @@
 [query public datatypeNumberName(aEDatatype : EDataType) : String = aEDatatype.name.toUpperCase() /]
 
 [template public generateEDatatype(aEDatatype : EDataType, impl : Boolean)]
-virtual [metamodelClassTypeString(aEDatatype)/] get[aEDatatype.name/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.name/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generatePrivatePackageMember(aEDatatype : EDataType)]
-[metamodelClassTypeString(aEDatatype)/] [aEDatatype.datatypeNameMember()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.datatypeNameMember()/] = nullptr;
 
 [/template]
 
@@ -51,7 +51,7 @@ static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierI
 [/template]
 
 [template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
-[metamodelClassTypeString(aEDatatype)/] [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
+std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
 {
 	assert([aEDatatype.datatypeNameMember()/]);
 	return [aEDatatype.datatypeNameMember()/];
@@ -60,10 +60,6 @@ static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierI
 [/template]
 
 [template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
-if ([aEDatatype.datatypeNameMember()/] != nullptr)
-{
-	delete([aEDatatype.datatypeNameMember()/]);
-	[aEDatatype.datatypeNameMember()/] = nullptr;
-}
+[aEDatatype.datatypeNameMember()/].reset();
 
 [/template]

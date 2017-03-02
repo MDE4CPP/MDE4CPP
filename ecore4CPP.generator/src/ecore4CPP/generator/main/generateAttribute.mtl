@@ -33,15 +33,17 @@
 [template public generateAttributeProtectedMember(aAttribute : EAttribute)]
 [aAttribute.generateDokumentation()/] 
 [if (aAttribute.upperBound=-1)]
-[aAttribute.generateAttributeType()/] m_[aAttribute.name/] = std::make_shared<std::vector<[aAttribute.generateAttributeType()/]> > (new std::vector<[aAttribute.eGenericType.generateCppType()/]>());
-[else]
+[aAttribute.generateAttributeType()/] m_[aAttribute.name/] = std::make_shared<std::vector<[aAttribute.generateAttributeType()/]> > (new std::vector<[aAttribute.eGenericType.generateCppType()/]>()); [else]
 [aAttribute.generateAttributeType()/] m_[aAttribute.name/] [if (aAttribute.defaultValueLiteral->notEmpty())]= [if (aAttribute.eType.oclIsTypeOf(EEnum))][aAttribute.eType.name/]::[aAttribute.defaultValueLiteral.toUpperCase()/] [else] [aAttribute.defaultValueLiteral/][/if][/if];
 [/if]
 [/template]
 
 [template public generateAttributeGetterDecleration(aAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
 [aAttribute.generateDokumentation()/] 
-virtual [aAttribute.generateAttributeType()/] [aAttribute.GetterName()/]() const [abstractSufix(impl)/];
+virtual [if (aAttribute.eType.oclIsKindOf(EDataType))]
+[aAttribute.generateAttributeType()/] [else]
+std::shared_ptr<[aAttribute.generateAttributeType()/]> [/if]
+ [aAttribute.GetterName()/]() const [abstractSufix(impl)/];
 
 [/template]
 
@@ -83,14 +85,14 @@ static const int [aAttribute.memberNameUpper()/] = [aAttribute.eContainingClass.
 [/template]
 
 [template public generateAttributeGetter(aAttribute : EAttribute,impl : Boolean) ]
-virtual [metamodelaTypedElementString(aAttribute)/] get[aAttribute.memberName()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttribute.memberName()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateAttributeGetterImpl(aAttribute : EAttribute)]
-[metamodelaTypedElementString(aAttribute)/] [aAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aAttribute.memberName()/]() const
+std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> [aAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aAttribute.memberName()/]() const
 {
-	return dynamic_cast<[metamodelaTypedElementString(aAttribute)/]>([aAttribute.eContainingClass.classNameMember()/]->getEStructuralFeatures()->at([aAttribute.listNumber()/]));
+	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aAttribute)/]>([aAttribute.eContainingClass.classNameMember()/]->getEStructuralFeatures()->at([aAttribute.listNumber()/]));
 }
 
 [/template]

@@ -42,6 +42,7 @@
 [aClass.valueKey('includes')/]
 [/if]
 
+
 //*********************************
 [comment namespace /]
 namespace [aClass.ePackage.name/] 
@@ -49,7 +50,7 @@ namespace [aClass.ePackage.name/]
 	class [className/] :[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
 [if (not(aClass.name='EObject'))]virtual public ecore::EObjectImpl,[/if]
-[/if]virtual public [aClass.name/]
+[/if]virtual public [aClass.name/] 
 	{
 		public: 
 			[className/](const [className/] & obj);
@@ -93,7 +94,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[aClass.generateeGetDel(true)/]
 			
 		protected:
-			virtual [needNamespace(aClass.ePackage, 'EClass*')/] eStaticClass() const;
+			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
 	};
 }
 [endGuard(className)/]
