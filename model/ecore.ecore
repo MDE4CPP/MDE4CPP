@@ -29,7 +29,7 @@
     </eAnnotations>
     <eOperations name="isSuperTypeOf" eType="#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::vector&lt;ecore::EClass * > * list = someClass->getEAllSuperTypes();&#xD;&#xA;bool isExisting = std::find(list->begin(), list->end(), this) != list->end();&#xD;&#xA;delete(list);&#xD;&#xA;return someClass == this || isExisting;"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; ecore::EClass > > > list = someClass->getEAllSuperTypes();&#xD;&#xA;&#xD;&#xA;    std::vector&lt;std::shared_ptr&lt; ecore::EClass > >::iterator i=list->begin();&#xD;&#xA;    std::vector&lt;std::shared_ptr&lt; ecore::EClass > >::iterator endIter=list->end();&#xD;&#xA;&#xD;&#xA;    while (i!=endIter)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if ((*i).get()==this) return true;&#xD;&#xA;&#x9;    ++i;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return someClass.get() == this;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="someClass" eType="#//EClass"/>
@@ -42,21 +42,21 @@
     </eOperations>
     <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::vector&lt;EStructuralFeature * > * eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; eAllFeat->size() ? eAllFeat->at(featureID): nullptr;"/>
+        <details key="body" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;&#xD;&#xA;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="featureID" eType="#//EInt"/>
     </eOperations>
     <eOperations name="getFeatureID" eType="#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::vector&lt;EStructuralFeature * > * eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    int index = feature->getFeatureID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        std::vector&lt;EStructuralFeature * >::iterator iter = eAllFeat->begin();&#xD;&#xA;        while (iter != eAllFeat->end())&#xD;&#xA;        {&#xD;&#xA;           if (feature == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
+        <details key="body" value="    std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EStructuralFeature > > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    int index = feature->getFeatureID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        std::vector&lt;std::shared_ptr&lt;EStructuralFeature > >::iterator iter = eAllFeat->begin();&#xD;&#xA;        while (iter != eAllFeat->end())&#xD;&#xA;        {&#xD;&#xA;           if (feature == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
     <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="for(EStructuralFeature * f: *getEAllStructuralFeatures())&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    for(std::shared_ptr&lt;EStructuralFeature> f: *getEAllStructuralFeatures())&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="featureName" eType="#//EString"/>
@@ -69,14 +69,14 @@
     </eOperations>
     <eOperations name="getEOperation" eType="#//EOperation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::vector&lt;EOperation * > * eAllOps = getEAllOperations();&#xD;&#xA;    return operationID >=0 &amp;&amp; operationID &lt; eAllOps->size() ? eAllOps->at(operationID): nullptr;"/>
+        <details key="body" value="std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;EOperation > > > eAllOps = getEAllOperations();&#xD;&#xA;    return operationID >=0 &amp;&amp; operationID &lt; (int) eAllOps->size() ? eAllOps->at(operationID): nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="operationID" eType="#//EInt"/>
     </eOperations>
     <eOperations name="getOperationID" eType="#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::vector&lt;EOperation * > * eAllOps = getEAllOperations();&#xD;&#xA;    int index = operation->getOperationID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        std::vector&lt;EOperation * >::iterator iter = eAllOps->begin();&#xD;&#xA;        while (iter != eAllOps->end())&#xD;&#xA;        {&#xD;&#xA;           if (operation == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
+        <details key="body" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > > eAllOps = getEAllOperations();&#xD;&#xA;    int index = operation->getOperationID();&#xD;&#xA;    &#xD;&#xA;    if(index != -1)&#xD;&#xA;    {&#xD;&#xA;        index = 0;&#xD;&#xA;        std::vector&lt;std::shared_ptr&lt;ecore::EOperation > >::iterator iter = eAllOps->begin();&#xD;&#xA;        while (iter != eAllOps->end())&#xD;&#xA;        {&#xD;&#xA;           if (operation == *iter)&#xD;&#xA;           {&#xD;&#xA;               return index;&#xD;&#xA;           }&#xD;&#xA;           index++;&#xD;&#xA;           iter++;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return -1;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="operation" eType="#//EOperation"/>
@@ -123,20 +123,20 @@
         eType="#//EOperation" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="auto eAllOperations = new std::vector&lt;EOperation *>();&#xD;&#xA;&#xD;&#xA;    std::vector&lt;EOperation*>* operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    for (EClass * c: *this->getESuperTypes()) {&#xD;&#xA;        std::vector&lt;EOperation*>* operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
+        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > > eAllOperations(new std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt; std::shared_ptr&lt;ecore::EOperation> > > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EOperation> > > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures"
         upperBound="-1" eType="#//EStructuralFeature" changeable="false" volatile="true"
         transient="true" derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="auto eAllStructuralFeatures = new std::vector&lt;EStructuralFeature*>();&#xD;&#xA;&#xD;&#xA;    std::vector&lt;EStructuralFeature*>* featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    for (EClass * c: *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;        std::vector&lt;EStructuralFeature*>* featureList = c->getEStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
+        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> >());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EStructuralFeature> > > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c: *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EStructuralFeature> > > featureList = c->getEStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;&#xD;&#xA;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1"
         eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="auto eAllSuperTypes = new std::vector&lt;EClass *>();&#xD;&#xA;&#xD;&#xA;    std::vector&lt;EClass*>* classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (auto c: *this->getESuperTypes()) {&#xD;&#xA;        std::vector&lt;EClass*>* classList = c->getESuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
+        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EClass> > > eAllSuperTypes(new std::vector&lt;std::shared_ptr&lt;ecore::EClass> > ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EClass> > > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass>  c: *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass> > > classList = c->getESuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
@@ -214,21 +214,21 @@
     </eAnnotations>
     <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="  for (EEnumLiteral * e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>
     </eOperations>
     <eOperations name="getEEnumLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value=" for (EEnumLiteral * e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getValue()==value)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>();&#xD;&#xA;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="value" eType="#//EInt"/>
     </eOperations>
     <eOperations name="getEEnumLiteralByLiteral" eType="#//EEnumLiteral">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="for (EEnumLiteral * e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    for (std::shared_ptr&lt;EEnumLiteral> e : *getELiterals())&#xD;&#xA;    {&#xD;&#xA;        if(e->getLiteral()==literal)&#xD;&#xA;        {&#xD;&#xA;            return e;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EEnumLiteral>  ();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="literal" eType="#//EString"/>
@@ -271,7 +271,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="EModelElement" abstract="true">
     <eOperations name="getEAnnotation" eType="#//EAnnotation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="for(EAnnotation * a : *m_eAnnotations)&#xD;&#xA;{&#xD;&#xA;&#x9;if(a->getSource()==source)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;return a;&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;return nullptr;"/>
+        <details key="body" value="    for(std::shared_ptr&lt;EAnnotation> a : *m_eAnnotations)&#xD;&#xA;    {&#xD;&#xA;&#x9;    if(a->getSource()==source)&#xD;&#xA;&#x9;    {&#xD;&#xA;&#x9;&#x9;    return a;&#xD;&#xA;&#x9;    }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EAnnotation>();"/>
       </eAnnotations>
       <eParameters name="source" eType="#//EString"/>
     </eOperations>
@@ -397,7 +397,7 @@
     </eAnnotations>
     <eOperations name="isOverrideOf" eType="#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;{&#xD;&#xA;      std::vector&lt;EParameter * > * parameters = getEParameters();&#xD;&#xA;      std::vector&lt;EParameter * > * otherParameters = someOperation->getEParameters();&#xD;&#xA;      if (parameters->size() == otherParameters->size())&#xD;&#xA;      {&#xD;&#xA;            for (std::vector&lt;EParameter *>::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;                EParameter * parameter = *i;&#xD;&#xA;                EParameter * otherParameter = *j;&#xD;&#xA;                if (!(parameter->getEType()->getInstanceTypeName() == otherParameter->getEType()->getInstanceTypeName()))&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;            &#x9;&#x9;&#x9;return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;return true;&#xD;&#xA;&#x9;}&#xD;&#xA;}&#xD;&#xA;return false;"/>
+        <details key="body" value="    if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EParameter> > > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EParameter> > > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (std::vector&lt;std::shared_ptr&lt;EParameter> >::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (!(parameter->getEType().get() == otherParameter->getEType().get()))&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;return true;&#xD;&#xA;&#x9;}"/>
         <details key="implOnly" value="false"/>
         <details key="const"/>
       </eAnnotations>
@@ -434,30 +434,33 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
       <details key="constraints" value="WellFormedNsURI WellFormedNsPrefix UniqueSubpackageNames UniqueClassifierNames UniqueNsURIs"/>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="shared_this" value="true"/>
+    </eAnnotations>
     <eOperations name="getEClassifier" eType="#//EClassifier">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="  for (EClassifier * c : *getEClassifiers())&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    for (std::shared_ptr&lt;EClassifier> c : *getEClassifiers())&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EClassifier>();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>
     </eOperations>
     <eOperations name="createEClass" eType="#//EClass">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto c =  dynamic_cast&lt;EClassImpl *>(EcoreFactory::eInstance()->createEClass());&#xD;&#xA;assert(c);&#xD;&#xA;c->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(c);&#xD;&#xA;return c;"/>
+        <details key="body" value="std::shared_ptr&lt;EClassImpl> c( dynamic_cast&lt;EClassImpl *>(EcoreFactory::eInstance()->createEClass()));&#xD;&#xA;assert(c);&#xD;&#xA;c->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(c);&#xD;&#xA;return c;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEEnum" eType="#//EEnum">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto e =  dynamic_cast&lt;EEnumImpl *>(EcoreFactory::eInstance()->createEEnum());&#xD;&#xA;assert(e);&#xD;&#xA;e->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(e);&#xD;&#xA;return e;"/>
+        <details key="body" value="std::shared_ptr&lt;EEnumImpl> e( dynamic_cast&lt;EEnumImpl *>(EcoreFactory::eInstance()->createEEnum()));&#xD;&#xA;assert(e);&#xD;&#xA;e->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(e);&#xD;&#xA;return e;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEAttribute">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto a = dynamic_cast&lt;EAttributeImpl*>(EcoreFactory::eInstance()->createEAttribute());&#xD;&#xA;assert(a);&#xD;&#xA;a->setFeatureID(id);&#xD;&#xA;a->setContainer(owner);&#xD;&#xA;owner->getEStructuralFeatures()->push_back(a);"/>
+        <details key="body" value="    std::shared_ptr&lt;EAttributeImpl> a(dynamic_cast&lt;EAttributeImpl*>(EcoreFactory::eInstance()->createEAttribute()));&#xD;&#xA;    assert(a);&#xD;&#xA;    a->setFeatureID(id);&#xD;&#xA;    a->setContainer(owner);&#xD;&#xA;    owner->getEStructuralFeatures()->push_back(a);"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
@@ -466,14 +469,14 @@
     <eOperations name="createEReference">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="implOnly" value="true"/>
-        <details key="body" value="auto r = dynamic_cast&lt;EReferenceImpl*>(EcoreFactory::eInstance()->createEReference());&#xD;&#xA;assert(r);&#xD;&#xA;r->setFeatureID(id);&#xD;&#xA;r->setContainer(owner);&#xD;&#xA;owner->getEStructuralFeatures()->push_back(r);"/>
+        <details key="body" value="std::shared_ptr&lt;EReferenceImpl> r (dynamic_cast&lt;EReferenceImpl*>(EcoreFactory::eInstance()->createEReference()));&#xD;&#xA;assert(r);&#xD;&#xA;r->setFeatureID(id);&#xD;&#xA;r->setContainer(owner);&#xD;&#xA;owner->getEStructuralFeatures()->push_back(r);"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEOperation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto o = dynamic_cast&lt;EOperationImpl*>(EcoreFactory::eInstance()->createEOperation());&#xD;&#xA;assert(o);&#xD;&#xA;o->setOperationID(id);&#xD;&#xA;owner->getEOperations()->push_back(o);"/>
+        <details key="body" value="std::shared_ptr&lt;EOperationImpl> o(dynamic_cast&lt;EOperationImpl*>(EcoreFactory::eInstance()->createEOperation()));&#xD;&#xA;assert(o);&#xD;&#xA;o->setOperationID(id);&#xD;&#xA;owner->getEOperations()->push_back(o);"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
@@ -481,7 +484,7 @@
     </eOperations>
     <eOperations name="createEDataType" eType="#//EDataType">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto d = dynamic_cast&lt;EDataTypeImpl*>(EcoreFactory::eInstance()->createEDataType());&#xD;&#xA;assert(d);&#xD;&#xA;d->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(d);&#xD;&#xA;return d;"/>
+        <details key="body" value="std::shared_ptr&lt;EDataTypeImpl> d(dynamic_cast&lt;EDataTypeImpl*>(EcoreFactory::eInstance()->createEDataType()));&#xD;&#xA;assert(d);&#xD;&#xA;d->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(d);&#xD;&#xA;return d;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
@@ -538,7 +541,7 @@
     </eOperations>
     <eOperations name="initEAttribute" eType="#//EAttribute">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="EClassifier* c = dynamic_cast&lt;EClassifier*>(a->eContainer());&#xD;&#xA;assert(c);&#xD;&#xA;initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,c->getInstanceClass(),isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,isOrdered);&#xD;&#xA;return a;"/>
+        <details key="body" value="EClassifier* c = dynamic_cast&lt;EClassifier*>(a->eContainer().get());&#xD;&#xA;assert(c);&#xD;&#xA;initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,c->getInstanceClass(),isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,isOrdered);&#xD;&#xA;return a;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="a" eType="#//EAttribute"/>
@@ -604,7 +607,7 @@
     </eOperations>
     <eOperations name="initEReference" eType="#//EReference">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="EClassifier* tmp = dynamic_cast&lt;EClassifier*>(r->eContainer());&#xD;&#xA;assert(tmp);&#xD;&#xA;    initEReference&#xD;&#xA;      (r, &#xD;&#xA;       type, &#xD;&#xA;       otherEnd, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound,&#xD;&#xA;       tmp->getInstanceClass(), &#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isContainment, &#xD;&#xA;       isResolveProxies, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique,&#xD;&#xA;       isDerived,&#xD;&#xA;       isOrdered);&#xD;&#xA;    return r;"/>
+        <details key="body" value="EClassifier* tmp = dynamic_cast&lt;EClassifier*>(r->eContainer().get());&#xD;&#xA;assert(tmp);&#xD;&#xA;    initEReference&#xD;&#xA;      (r, &#xD;&#xA;       type, &#xD;&#xA;       otherEnd, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound,&#xD;&#xA;       tmp->getInstanceClass(), &#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isContainment, &#xD;&#xA;       isResolveProxies, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique,&#xD;&#xA;       isDerived,&#xD;&#xA;       isOrdered);&#xD;&#xA;    return r;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="r" eType="#//EReference"/>
@@ -653,7 +656,7 @@
     </eOperations>
     <eOperations name="initEStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="s->setName(name);&#xD;&#xA;&#xD;&#xA;EStructuralFeatureImpl* tmp = dynamic_cast&lt;EStructuralFeatureImpl*>(s);&#xD;&#xA;if(tmp)&#xD;&#xA;{&#xD;&#xA;tmp->setContainerClass(containerClass);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;s->setTransient(isTransient);&#xD;&#xA;s->setVolatile(isVolatile);&#xD;&#xA;s->setChangeable(isChangeable);&#xD;&#xA;s->setUnsettable(isUnsettable);&#xD;&#xA;s->setUnique(isUnique);&#xD;&#xA;s->setDerived(isDerived);&#xD;&#xA;s->setOrdered(isOrdered);&#xD;&#xA;s->setLowerBound(lowerBound);&#xD;&#xA;s->setUpperBound(upperBound);&#xD;&#xA;s->setEType(type);&#xD;&#xA;if (!defaultValue.empty())&#xD;&#xA;{&#xD;&#xA;   s->setDefaultValueLiteral(defaultValue);&#xD;&#xA;}"/>
+        <details key="body" value="s->setName(name);&#xD;&#xA;&#xD;&#xA;EStructuralFeatureImpl* tmp = dynamic_cast&lt;EStructuralFeatureImpl*>(s.get());&#xD;&#xA;if(tmp)&#xD;&#xA;{&#xD;&#xA;tmp->setContainerClass(containerClass);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;s->setTransient(isTransient);&#xD;&#xA;s->setVolatile(isVolatile);&#xD;&#xA;s->setChangeable(isChangeable);&#xD;&#xA;s->setUnsettable(isUnsettable);&#xD;&#xA;s->setUnique(isUnique);&#xD;&#xA;s->setDerived(isDerived);&#xD;&#xA;s->setOrdered(isOrdered);&#xD;&#xA;s->setLowerBound(lowerBound);&#xD;&#xA;s->setUpperBound(upperBound);&#xD;&#xA;s->setEType(type);&#xD;&#xA;if (!defaultValue.empty())&#xD;&#xA;{&#xD;&#xA;   s->setDefaultValueLiteral(defaultValue);&#xD;&#xA;}"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="s" eType="#//EStructuralFeature"/>
@@ -677,7 +680,7 @@
     </eOperations>
     <eOperations name="initEClassifier">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="o->setName(name);&#xD;&#xA;o->setInstanceClass(instanceClass);&#xD;&#xA;o->setEPackage(this);"/>
+        <details key="body" value="    o->setName(name);&#xD;&#xA;    o->setInstanceClass(instanceClass);&#xD;&#xA;    struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;    o->setEPackage(std::shared_ptr&lt;EPackage>(this, null_deleter()));"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="o" eType="#//EClassifier"/>
@@ -691,7 +694,7 @@
     </eOperations>
     <eOperations name="initEClassifier">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="o->setName(name);&#xD;&#xA;o->setInstanceClass(instanceClass);&#xD;&#xA;o->setEPackage(this);&#xD;&#xA;if (isGenerated)&#xD;&#xA;{&#xD;&#xA;&#x9;setGeneratedClassName(o);&#xD;&#xA;}"/>
+        <details key="body" value="    o->setName(name);&#xD;&#xA;    o->setInstanceClass(instanceClass);&#xD;&#xA;    struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;    o->setEPackage(std::shared_ptr&lt;EPackage>(this, null_deleter()));&#xD;&#xA;    if (isGenerated)&#xD;&#xA;    {&#xD;&#xA;        setGeneratedClassName(o);&#xD;&#xA;    }"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="o" eType="#//EClassifier"/>
@@ -800,7 +803,7 @@
     </eOperations>
     <eOperations name="internalAddEParameter" eType="#//EParameter">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto p = EcoreFactory::eInstance()->createEParameter();&#xD;&#xA;p->setEType(type);&#xD;&#xA;p->setName(name);&#xD;&#xA;owner->getEParameters()->push_back(p);&#xD;&#xA;return p;"/>
+        <details key="body" value="    std::shared_ptr&lt;EParameter> p(EcoreFactory::eInstance()->createEParameter());&#xD;&#xA;    p->setEType(type);&#xD;&#xA;    p->setName(name);&#xD;&#xA;    owner->getEParameters()->push_back(p);&#xD;&#xA;    return p;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EOperation"/>
@@ -809,7 +812,7 @@
     </eOperations>
     <eOperations name="setGeneratedClassName">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="EClassifierImpl * c = dynamic_cast&lt;EClassifierImpl * >(eClassifier);&#xD;&#xA;assert(c);&#xD;&#xA;c->setGeneratedInstance(true);"/>
+        <details key="body" value="EClassifierImpl * c = dynamic_cast&lt;EClassifierImpl * >(eClassifier.get());&#xD;&#xA;assert(c);&#xD;&#xA;c->setGeneratedInstance(true);"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="eClassifier" eType="#//EClassifier"/>

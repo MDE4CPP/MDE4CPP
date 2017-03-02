@@ -19,277 +19,65 @@ bool EcorePackageImpl::isInited = false;
 
 EcorePackageImpl::EcorePackageImpl()
 {
-	setEFactoryInstance(EcoreFactory::eInstance());
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( EcoreFactory::eInstance()));
 }
 
 EcorePackageImpl::~EcorePackageImpl()
 {
-	if (eAttributeEClass != nullptr)
-	{
-		delete(eAttributeEClass);
-		eAttributeEClass = nullptr;
-	}
-	if (eAnnotationEClass != nullptr)
-	{
-		delete(eAnnotationEClass);
-		eAnnotationEClass = nullptr;
-	}
-	if (eClassEClass != nullptr)
-	{
-		delete(eClassEClass);
-		eClassEClass = nullptr;
-	}
-	if (eClassifierEClass != nullptr)
-	{
-		delete(eClassifierEClass);
-		eClassifierEClass = nullptr;
-	}
-	if (eDataTypeEClass != nullptr)
-	{
-		delete(eDataTypeEClass);
-		eDataTypeEClass = nullptr;
-	}
-	if (eEnumEClass != nullptr)
-	{
-		delete(eEnumEClass);
-		eEnumEClass = nullptr;
-	}
-	if (eEnumLiteralEClass != nullptr)
-	{
-		delete(eEnumLiteralEClass);
-		eEnumLiteralEClass = nullptr;
-	}
-	if (eFactoryEClass != nullptr)
-	{
-		delete(eFactoryEClass);
-		eFactoryEClass = nullptr;
-	}
-	if (eModelElementEClass != nullptr)
-	{
-		delete(eModelElementEClass);
-		eModelElementEClass = nullptr;
-	}
-	if (eNamedElementEClass != nullptr)
-	{
-		delete(eNamedElementEClass);
-		eNamedElementEClass = nullptr;
-	}
-	if (eObjectEClass != nullptr)
-	{
-		delete(eObjectEClass);
-		eObjectEClass = nullptr;
-	}
-	if (eOperationEClass != nullptr)
-	{
-		delete(eOperationEClass);
-		eOperationEClass = nullptr;
-	}
-	if (ePackageEClass != nullptr)
-	{
-		delete(ePackageEClass);
-		ePackageEClass = nullptr;
-	}
-	if (eParameterEClass != nullptr)
-	{
-		delete(eParameterEClass);
-		eParameterEClass = nullptr;
-	}
-	if (eReferenceEClass != nullptr)
-	{
-		delete(eReferenceEClass);
-		eReferenceEClass = nullptr;
-	}
-	if (eStructuralFeatureEClass != nullptr)
-	{
-		delete(eStructuralFeatureEClass);
-		eStructuralFeatureEClass = nullptr;
-	}
-	if (eTypedElementEClass != nullptr)
-	{
-		delete(eTypedElementEClass);
-		eTypedElementEClass = nullptr;
-	}
-	if (eStringToStringMapEntryEClass != nullptr)
-	{
-		delete(eStringToStringMapEntryEClass);
-		eStringToStringMapEntryEClass = nullptr;
-	}
-	if (eGenericTypeEClass != nullptr)
-	{
-		delete(eGenericTypeEClass);
-		eGenericTypeEClass = nullptr;
-	}
-	if (eTypeParameterEClass != nullptr)
-	{
-		delete(eTypeParameterEClass);
-		eTypeParameterEClass = nullptr;
-	}
+	eAttributeEClass.reset();
+	eAnnotationEClass.reset();
+	eClassEClass.reset();
+	eClassifierEClass.reset();
+	eDataTypeEClass.reset();
+	eEnumEClass.reset();
+	eEnumLiteralEClass.reset();
+	eFactoryEClass.reset();
+	eModelElementEClass.reset();
+	eNamedElementEClass.reset();
+	eObjectEClass.reset();
+	eOperationEClass.reset();
+	ePackageEClass.reset();
+	eParameterEClass.reset();
+	eReferenceEClass.reset();
+	eStructuralFeatureEClass.reset();
+	eTypedElementEClass.reset();
+	eStringToStringMapEntryEClass.reset();
+	eGenericTypeEClass.reset();
+	eTypeParameterEClass.reset();
 	
-	if (eBigDecimalEDataType != nullptr)
-	{
-		delete(eBigDecimalEDataType);
-		eBigDecimalEDataType = nullptr;
-	}
-	if (eBigIntegerEDataType != nullptr)
-	{
-		delete(eBigIntegerEDataType);
-		eBigIntegerEDataType = nullptr;
-	}
-	if (eBooleanEDataType != nullptr)
-	{
-		delete(eBooleanEDataType);
-		eBooleanEDataType = nullptr;
-	}
-	if (eBooleanObjectEDataType != nullptr)
-	{
-		delete(eBooleanObjectEDataType);
-		eBooleanObjectEDataType = nullptr;
-	}
-	if (eByteEDataType != nullptr)
-	{
-		delete(eByteEDataType);
-		eByteEDataType = nullptr;
-	}
-	if (eByteArrayEDataType != nullptr)
-	{
-		delete(eByteArrayEDataType);
-		eByteArrayEDataType = nullptr;
-	}
-	if (eByteObjectEDataType != nullptr)
-	{
-		delete(eByteObjectEDataType);
-		eByteObjectEDataType = nullptr;
-	}
-	if (eCharEDataType != nullptr)
-	{
-		delete(eCharEDataType);
-		eCharEDataType = nullptr;
-	}
-	if (eCharacterObjectEDataType != nullptr)
-	{
-		delete(eCharacterObjectEDataType);
-		eCharacterObjectEDataType = nullptr;
-	}
-	if (eDateEDataType != nullptr)
-	{
-		delete(eDateEDataType);
-		eDateEDataType = nullptr;
-	}
-	if (eDiagnosticChainEDataType != nullptr)
-	{
-		delete(eDiagnosticChainEDataType);
-		eDiagnosticChainEDataType = nullptr;
-	}
-	if (eDoubleEDataType != nullptr)
-	{
-		delete(eDoubleEDataType);
-		eDoubleEDataType = nullptr;
-	}
-	if (eDoubleObjectEDataType != nullptr)
-	{
-		delete(eDoubleObjectEDataType);
-		eDoubleObjectEDataType = nullptr;
-	}
-	if (eEListEDataType != nullptr)
-	{
-		delete(eEListEDataType);
-		eEListEDataType = nullptr;
-	}
-	if (eEnumeratorEDataType != nullptr)
-	{
-		delete(eEnumeratorEDataType);
-		eEnumeratorEDataType = nullptr;
-	}
-	if (eFeatureMapEDataType != nullptr)
-	{
-		delete(eFeatureMapEDataType);
-		eFeatureMapEDataType = nullptr;
-	}
-	if (eFeatureMapEntryEDataType != nullptr)
-	{
-		delete(eFeatureMapEntryEDataType);
-		eFeatureMapEntryEDataType = nullptr;
-	}
-	if (eFloatEDataType != nullptr)
-	{
-		delete(eFloatEDataType);
-		eFloatEDataType = nullptr;
-	}
-	if (eFloatObjectEDataType != nullptr)
-	{
-		delete(eFloatObjectEDataType);
-		eFloatObjectEDataType = nullptr;
-	}
-	if (eIntEDataType != nullptr)
-	{
-		delete(eIntEDataType);
-		eIntEDataType = nullptr;
-	}
-	if (eIntegerObjectEDataType != nullptr)
-	{
-		delete(eIntegerObjectEDataType);
-		eIntegerObjectEDataType = nullptr;
-	}
-	if (eJavaClassEDataType != nullptr)
-	{
-		delete(eJavaClassEDataType);
-		eJavaClassEDataType = nullptr;
-	}
-	if (eJavaObjectEDataType != nullptr)
-	{
-		delete(eJavaObjectEDataType);
-		eJavaObjectEDataType = nullptr;
-	}
-	if (eLongEDataType != nullptr)
-	{
-		delete(eLongEDataType);
-		eLongEDataType = nullptr;
-	}
-	if (eLongObjectEDataType != nullptr)
-	{
-		delete(eLongObjectEDataType);
-		eLongObjectEDataType = nullptr;
-	}
-	if (eMapEDataType != nullptr)
-	{
-		delete(eMapEDataType);
-		eMapEDataType = nullptr;
-	}
-	if (eResourceEDataType != nullptr)
-	{
-		delete(eResourceEDataType);
-		eResourceEDataType = nullptr;
-	}
-	if (eResourceSetEDataType != nullptr)
-	{
-		delete(eResourceSetEDataType);
-		eResourceSetEDataType = nullptr;
-	}
-	if (eShortEDataType != nullptr)
-	{
-		delete(eShortEDataType);
-		eShortEDataType = nullptr;
-	}
-	if (eShortObjectEDataType != nullptr)
-	{
-		delete(eShortObjectEDataType);
-		eShortObjectEDataType = nullptr;
-	}
-	if (eStringEDataType != nullptr)
-	{
-		delete(eStringEDataType);
-		eStringEDataType = nullptr;
-	}
-	if (eTreeIteratorEDataType != nullptr)
-	{
-		delete(eTreeIteratorEDataType);
-		eTreeIteratorEDataType = nullptr;
-	}
-	if (eInvocationTargetExceptionEDataType != nullptr)
-	{
-		delete(eInvocationTargetExceptionEDataType);
-		eInvocationTargetExceptionEDataType = nullptr;
-	}
+	eBigDecimalEDataType.reset();
+	eBigIntegerEDataType.reset();
+	eBooleanEDataType.reset();
+	eBooleanObjectEDataType.reset();
+	eByteEDataType.reset();
+	eByteArrayEDataType.reset();
+	eByteObjectEDataType.reset();
+	eCharEDataType.reset();
+	eCharacterObjectEDataType.reset();
+	eDateEDataType.reset();
+	eDiagnosticChainEDataType.reset();
+	eDoubleEDataType.reset();
+	eDoubleObjectEDataType.reset();
+	eEListEDataType.reset();
+	eEnumeratorEDataType.reset();
+	eFeatureMapEDataType.reset();
+	eFeatureMapEntryEDataType.reset();
+	eFloatEDataType.reset();
+	eFloatObjectEDataType.reset();
+	eIntEDataType.reset();
+	eIntegerObjectEDataType.reset();
+	eJavaClassEDataType.reset();
+	eJavaObjectEDataType.reset();
+	eLongEDataType.reset();
+	eLongObjectEDataType.reset();
+	eMapEDataType.reset();
+	eResourceEDataType.reset();
+	eResourceSetEDataType.reset();
+	eShortEDataType.reset();
+	eShortObjectEDataType.reset();
+	eStringEDataType.reset();
+	eTreeIteratorEDataType.reset();
+	eInvocationTargetExceptionEDataType.reset();
 	
 }
 
@@ -297,10 +85,10 @@ EcorePackage* EcorePackageImpl::create()
 {
 	if (isInited)
 	{
-		return EcorePackage::eInstance();
+		return EcorePackage::eInstance().get();
 	}
 	isInited = true;
-	
+	 
     // Obtain or create package and create package meta-data objects
     EcorePackageImpl * metaModelPackage = new EcorePackageImpl();
 	metaModelPackage->createPackageContents();
@@ -574,7 +362,7 @@ void EcorePackageImpl::initializePackageContents()
 	eTypeParameterEClass->getESuperTypes()->push_back(getENamedElement());
 	eTypedElementEClass->getESuperTypes()->push_back(getENamedElement());
 	
-	EOperation *  op;
+	std::shared_ptr<EOperation> op;
 
  	// Initialize classes and features; add operations and parameters
 	// Begin Class EAnnotation
@@ -903,217 +691,217 @@ void EcorePackageImpl::initializePackageContents()
 }
 
 // Begin Class EAnnotation
-ecore::EClass* EcorePackageImpl::getEAnnotation() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEAnnotation() const
 {
 	return eAnnotationEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEAnnotation_Source() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEAnnotation_Source() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eAnnotationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eAnnotationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* EcorePackageImpl::getEAnnotation_Contents() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEAnnotation_Contents() const
 {
-	return dynamic_cast<ecore::EReference*>(eAnnotationEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eAnnotationEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* EcorePackageImpl::getEAnnotation_Details() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEAnnotation_Details() const
 {
-	return dynamic_cast<ecore::EReference*>(eAnnotationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(eAnnotationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* EcorePackageImpl::getEAnnotation_EModelElement() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEAnnotation_EModelElement() const
 {
-	return dynamic_cast<ecore::EReference*>(eAnnotationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(eAnnotationEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* EcorePackageImpl::getEAnnotation_References() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEAnnotation_References() const
 {
-	return dynamic_cast<ecore::EReference*>(eAnnotationEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(eAnnotationEClass->getEStructuralFeatures()->at(4));
 }
 
 
 // End Class EAnnotation
 
 // Begin Class EAttribute
-ecore::EClass* EcorePackageImpl::getEAttribute() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEAttribute() const
 {
 	return eAttributeEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEAttribute_ID() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEAttribute_ID() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eAttributeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eAttributeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* EcorePackageImpl::getEAttribute_EAttributeType() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEAttribute_EAttributeType() const
 {
-	return dynamic_cast<ecore::EReference*>(eAttributeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(eAttributeEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class EAttribute
 
 // Begin Class EClass
-ecore::EClass* EcorePackageImpl::getEClass() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEClass() const
 {
 	return eClassEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEClass_Abstract() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClass_Abstract() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getEClass_Interface() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClass_Interface() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* EcorePackageImpl::getEClass_EAllAttributes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllContainments() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllGenericSuperTypes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(15));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllOperations() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllReferences() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllStructuralFeatures() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(10));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAllSuperTypes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(11));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EAttributes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EGenericSuperTypes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(14));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EIDAttribute() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(12));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EOperations() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EReferences() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* EcorePackageImpl::getEClass_EStructuralFeatures() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(13));
-}
-ecore::EReference* EcorePackageImpl::getEClass_ESuperTypes() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* EcorePackageImpl::getEClass___GetEOperation__EInt() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllAttributes() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetEStructuralFeature__EInt() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllContainments() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetEStructuralFeature__EString() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllGenericSuperTypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(15));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetFeatureCount() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllOperations() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetFeatureID__EStructuralFeature() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllReferences() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetFeatureType__EStructuralFeature() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllStructuralFeatures() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(10));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetOperationCount() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAllSuperTypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(11));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetOperationID__EOperation() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EAttributes() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___GetOverride__EOperation() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EGenericSuperTypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(14));
 }
-ecore::EOperation* EcorePackageImpl::getEClass___IsSuperTypeOf__EClass() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EIDAttribute() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(12));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EOperations() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(3));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EReferences() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(6));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_EStructuralFeatures() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(13));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClass_ESuperTypes() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassEClass->getEStructuralFeatures()->at(2));
+}
+
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetEOperation__EInt() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(6));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetEStructuralFeature__EInt() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetEStructuralFeature__EString() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetFeatureCount() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetFeatureID__EStructuralFeature() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetFeatureType__EStructuralFeature() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(9));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetOperationCount() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(5));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetOperationID__EOperation() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(7));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___GetOverride__EOperation() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClass___IsSuperTypeOf__EClass() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassEClass->getEOperations()->at(0));
 }
 
 // End Class EClass
 
 // Begin Class EClassifier
-ecore::EClass* EcorePackageImpl::getEClassifier() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEClassifier() const
 {
 	return eClassifierEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEClassifier_ClassifierID() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClassifier_ClassifierID() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassifierEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassifierEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EAttribute* EcorePackageImpl::getEClassifier_DefaultValue() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClassifier_DefaultValue() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassifierEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassifierEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* EcorePackageImpl::getEClassifier_InstanceClass() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClassifier_InstanceClass() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassifierEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassifierEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* EcorePackageImpl::getEClassifier_InstanceClassName() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClassifier_InstanceClassName() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassifierEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassifierEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getEClassifier_InstanceTypeName() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEClassifier_InstanceTypeName() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eClassifierEClass->getEStructuralFeatures()->at(4));
-}
-
-ecore::EReference* EcorePackageImpl::getEClassifier_EPackage() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassifierEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* EcorePackageImpl::getEClassifier_ETypeParameters() const
-{
-	return dynamic_cast<ecore::EReference*>(eClassifierEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eClassifierEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* EcorePackageImpl::getEClassifier___IsInstance__EJavaObject() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClassifier_EPackage() const
 {
-	return dynamic_cast<ecore::EOperation*>(eClassifierEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassifierEClass->getEStructuralFeatures()->at(5));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEClassifier_ETypeParameters() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(eClassifierEClass->getEStructuralFeatures()->at(6));
+}
+
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEClassifier___IsInstance__EJavaObject() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(eClassifierEClass->getEOperations()->at(0));
 }
 
 // End Class EClassifier
 
 // Begin Class EDataType
-ecore::EClass* EcorePackageImpl::getEDataType() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEDataType() const
 {
 	return eDataTypeEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEDataType_Serializable() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEDataType_Serializable() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eDataTypeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eDataTypeEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -1121,147 +909,147 @@ ecore::EAttribute* EcorePackageImpl::getEDataType_Serializable() const
 // End Class EDataType
 
 // Begin Class EEnum
-ecore::EClass* EcorePackageImpl::getEEnum() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEEnum() const
 {
 	return eEnumEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEEnum_ELiterals() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEEnum_ELiterals() const
 {
-	return dynamic_cast<ecore::EReference*>(eEnumEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eEnumEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEEnum___GetEEnumLiteral__EString() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEEnum___GetEEnumLiteral__EString() const
 {
-	return dynamic_cast<ecore::EOperation*>(eEnumEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eEnumEClass->getEOperations()->at(0));
 }
-ecore::EOperation* EcorePackageImpl::getEEnum___GetEEnumLiteral__EInt() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEEnum___GetEEnumLiteral__EInt() const
 {
-	return dynamic_cast<ecore::EOperation*>(eEnumEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eEnumEClass->getEOperations()->at(1));
 }
-ecore::EOperation* EcorePackageImpl::getEEnum___GetEEnumLiteralByLiteral__EString() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEEnum___GetEEnumLiteralByLiteral__EString() const
 {
-	return dynamic_cast<ecore::EOperation*>(eEnumEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eEnumEClass->getEOperations()->at(2));
 }
 
 // End Class EEnum
 
 // Begin Class EEnumLiteral
-ecore::EClass* EcorePackageImpl::getEEnumLiteral() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEEnumLiteral() const
 {
 	return eEnumLiteralEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEEnumLiteral_Instance() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEEnumLiteral_Instance() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eEnumLiteralEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eEnumLiteralEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* EcorePackageImpl::getEEnumLiteral_Literal() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEEnumLiteral_Literal() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eEnumLiteralEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eEnumLiteralEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* EcorePackageImpl::getEEnumLiteral_Value() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEEnumLiteral_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eEnumLiteralEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eEnumLiteralEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* EcorePackageImpl::getEEnumLiteral_EEnum() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEEnumLiteral_EEnum() const
 {
-	return dynamic_cast<ecore::EReference*>(eEnumLiteralEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eEnumLiteralEClass->getEStructuralFeatures()->at(3));
 }
 
 
 // End Class EEnumLiteral
 
 // Begin Class EFactory
-ecore::EClass* EcorePackageImpl::getEFactory() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEFactory() const
 {
 	return eFactoryEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEFactory_EPackage() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEFactory_EPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(eFactoryEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eFactoryEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEFactory___ConvertToString__EDataType_EJavaObject() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___ConvertToString__EDataType_EJavaObject() const
 {
-	return dynamic_cast<ecore::EOperation*>(eFactoryEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eFactoryEClass->getEOperations()->at(2));
 }
-ecore::EOperation* EcorePackageImpl::getEFactory___Create__EClass() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___Create__EClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(eFactoryEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eFactoryEClass->getEOperations()->at(0));
 }
-ecore::EOperation* EcorePackageImpl::getEFactory___CreateFromString__EDataType_EString() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___CreateFromString__EDataType_EString() const
 {
-	return dynamic_cast<ecore::EOperation*>(eFactoryEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eFactoryEClass->getEOperations()->at(1));
 }
 
 // End Class EFactory
 
 // Begin Class EGenericType
-ecore::EClass* EcorePackageImpl::getEGenericType() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEGenericType() const
 {
 	return eGenericTypeEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEGenericType_EClassifier() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_EClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* EcorePackageImpl::getEGenericType_ELowerBound() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_ELowerBound() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* EcorePackageImpl::getEGenericType_ERawType() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_ERawType() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* EcorePackageImpl::getEGenericType_ETypeArguments() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_ETypeArguments() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* EcorePackageImpl::getEGenericType_ETypeParameter() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_ETypeParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* EcorePackageImpl::getEGenericType_EUpperBound() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEGenericType_EUpperBound() const
 {
-	return dynamic_cast<ecore::EReference*>(eGenericTypeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eGenericTypeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEGenericType___IsInstance__EJavaObject() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEGenericType___IsInstance__EJavaObject() const
 {
-	return dynamic_cast<ecore::EOperation*>(eGenericTypeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eGenericTypeEClass->getEOperations()->at(0));
 }
 
 // End Class EGenericType
 
 // Begin Class EModelElement
-ecore::EClass* EcorePackageImpl::getEModelElement() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEModelElement() const
 {
 	return eModelElementEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEModelElement_EAnnotations() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEModelElement_EAnnotations() const
 {
-	return dynamic_cast<ecore::EReference*>(eModelElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eModelElementEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEModelElement___GetEAnnotation__EString() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEModelElement___GetEAnnotation__EString() const
 {
-	return dynamic_cast<ecore::EOperation*>(eModelElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eModelElementEClass->getEOperations()->at(0));
 }
 
 // End Class EModelElement
 
 // Begin Class ENamedElement
-ecore::EClass* EcorePackageImpl::getENamedElement() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getENamedElement() const
 {
 	return eNamedElementEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getENamedElement_Name() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getENamedElement_Name() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eNamedElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eNamedElementEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -1269,211 +1057,211 @@ ecore::EAttribute* EcorePackageImpl::getENamedElement_Name() const
 // End Class ENamedElement
 
 // Begin Class EObject
-ecore::EClass* EcorePackageImpl::getEObject() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEObject() const
 {
 	return eObjectEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEObject_EContainer() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEObject_EContainer() const
 {
-	return dynamic_cast<ecore::EReference*>(eObjectEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eObjectEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEObject___EAllContents() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EAllContents() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(6));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EClass() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(0));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EContainingFeature() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EContainingFeature() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(3));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EContainmentFeature() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EContainmentFeature() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(4));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EContents() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EContents() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(5));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___ECrossReferences() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___ECrossReferences() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(7));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EGet__EStructuralFeature() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EGet__EStructuralFeature() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(8));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EGet__EStructuralFeature_EBoolean() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EGet__EStructuralFeature_EBoolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(9));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EInvoke__EOperation_EEList() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EInvoke__EOperation_EEList() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(13));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EIsProxy() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EIsProxy() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(1));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EIsSet__EStructuralFeature() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EIsSet__EStructuralFeature() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(11));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EResource() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EResource() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(2));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___ESet__EStructuralFeature_EJavaObject() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___ESet__EStructuralFeature_EJavaObject() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(10));
 }
-ecore::EOperation* EcorePackageImpl::getEObject___EUnset__EStructuralFeature() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEObject___EUnset__EStructuralFeature() const
 {
-	return dynamic_cast<ecore::EOperation*>(eObjectEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eObjectEClass->getEOperations()->at(12));
 }
 
 // End Class EObject
 
 // Begin Class EOperation
-ecore::EClass* EcorePackageImpl::getEOperation() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEOperation() const
 {
 	return eOperationEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEOperation_OperationID() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEOperation_OperationID() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eOperationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eOperationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* EcorePackageImpl::getEOperation_EContainingClass() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_EContainingClass() const
 {
-	return dynamic_cast<ecore::EReference*>(eOperationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(eOperationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* EcorePackageImpl::getEOperation_EExceptions() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_EExceptions() const
 {
-	return dynamic_cast<ecore::EReference*>(eOperationEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(eOperationEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* EcorePackageImpl::getEOperation_EGenericExceptions() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_EGenericExceptions() const
 {
-	return dynamic_cast<ecore::EReference*>(eOperationEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(eOperationEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* EcorePackageImpl::getEOperation_EParameters() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_EParameters() const
 {
-	return dynamic_cast<ecore::EReference*>(eOperationEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eOperationEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* EcorePackageImpl::getEOperation_ETypeParameters() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEOperation_ETypeParameters() const
 {
-	return dynamic_cast<ecore::EReference*>(eOperationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(eOperationEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* EcorePackageImpl::getEOperation___IsOverrideOf__EOperation() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEOperation___IsOverrideOf__EOperation() const
 {
-	return dynamic_cast<ecore::EOperation*>(eOperationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(eOperationEClass->getEOperations()->at(0));
 }
 
 // End Class EOperation
 
 // Begin Class EPackage
-ecore::EClass* EcorePackageImpl::getEPackage() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEPackage() const
 {
 	return ePackageEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEPackage_NsPrefix() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEPackage_NsPrefix() const
 {
-	return dynamic_cast<ecore::EAttribute*>(ePackageEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(ePackageEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* EcorePackageImpl::getEPackage_NsURI() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEPackage_NsURI() const
 {
-	return dynamic_cast<ecore::EAttribute*>(ePackageEClass->getEStructuralFeatures()->at(0));
-}
-
-ecore::EReference* EcorePackageImpl::getEPackage_EClassifiers() const
-{
-	return dynamic_cast<ecore::EReference*>(ePackageEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* EcorePackageImpl::getEPackage_EFactoryInstance() const
-{
-	return dynamic_cast<ecore::EReference*>(ePackageEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* EcorePackageImpl::getEPackage_ESubpackages() const
-{
-	return dynamic_cast<ecore::EReference*>(ePackageEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* EcorePackageImpl::getEPackage_ESuperPackage() const
-{
-	return dynamic_cast<ecore::EReference*>(ePackageEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(ePackageEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* EcorePackageImpl::getEPackage___GetEClassifier__EString() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEPackage_EClassifiers() const
 {
-	return dynamic_cast<ecore::EOperation*>(ePackageEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(ePackageEClass->getEStructuralFeatures()->at(3));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEPackage_EFactoryInstance() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(ePackageEClass->getEStructuralFeatures()->at(2));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEPackage_ESubpackages() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(ePackageEClass->getEStructuralFeatures()->at(4));
+}
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEPackage_ESuperPackage() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(ePackageEClass->getEStructuralFeatures()->at(5));
+}
+
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEPackage___GetEClassifier__EString() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(ePackageEClass->getEOperations()->at(0));
 }
 
 // End Class EPackage
 
 // Begin Class EParameter
-ecore::EClass* EcorePackageImpl::getEParameter() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEParameter() const
 {
 	return eParameterEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getEParameter_EOperation() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEParameter_EOperation() const
 {
-	return dynamic_cast<ecore::EReference*>(eParameterEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eParameterEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class EParameter
 
 // Begin Class EReference
-ecore::EClass* EcorePackageImpl::getEReference() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEReference() const
 {
 	return eReferenceEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEReference_Container() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEReference_Container() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eReferenceEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eReferenceEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* EcorePackageImpl::getEReference_Containment() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEReference_Containment() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eReferenceEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eReferenceEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getEReference_ResolveProxies() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEReference_ResolveProxies() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eReferenceEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eReferenceEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EReference* EcorePackageImpl::getEReference_EKeys() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEReference_EKeys() const
 {
-	return dynamic_cast<ecore::EReference*>(eReferenceEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(eReferenceEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* EcorePackageImpl::getEReference_EOpposite() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEReference_EOpposite() const
 {
-	return dynamic_cast<ecore::EReference*>(eReferenceEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(eReferenceEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* EcorePackageImpl::getEReference_EReferenceType() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEReference_EReferenceType() const
 {
-	return dynamic_cast<ecore::EReference*>(eReferenceEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(eReferenceEClass->getEStructuralFeatures()->at(4));
 }
 
 
 // End Class EReference
 
 // Begin Class EStringToStringMapEntry
-ecore::EClass* EcorePackageImpl::getEStringToStringMapEntry() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEStringToStringMapEntry() const
 {
 	return eStringToStringMapEntryEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEStringToStringMapEntry_Key() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStringToStringMapEntry_Key() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStringToStringMapEntryEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStringToStringMapEntryEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getEStringToStringMapEntry_Value() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStringToStringMapEntry_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStringToStringMapEntryEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStringToStringMapEntryEClass->getEStructuralFeatures()->at(1));
 }
 
 
@@ -1481,271 +1269,271 @@ ecore::EAttribute* EcorePackageImpl::getEStringToStringMapEntry_Value() const
 // End Class EStringToStringMapEntry
 
 // Begin Class EStructuralFeature
-ecore::EClass* EcorePackageImpl::getEStructuralFeature() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getEStructuralFeature() const
 {
 	return eStructuralFeatureEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_Changeable() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_Changeable() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_ContainerClass() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_ContainerClass() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(8));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_DefaultValue() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_DefaultValue() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_DefaultValueLiteral() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_DefaultValueLiteral() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_Derived() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_Derived() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_FeatureID() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_FeatureID() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_Transient() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_Transient() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_Unsettable() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_Unsettable() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EAttribute* EcorePackageImpl::getEStructuralFeature_Volatile() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getEStructuralFeature_Volatile() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eStructuralFeatureEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EReference* EcorePackageImpl::getEStructuralFeature_EContainingClass() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getEStructuralFeature_EContainingClass() const
 {
-	return dynamic_cast<ecore::EReference*>(eStructuralFeatureEClass->getEStructuralFeatures()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(eStructuralFeatureEClass->getEStructuralFeatures()->at(9));
 }
 
 
 // End Class EStructuralFeature
 
 // Begin Class ETypeParameter
-ecore::EClass* EcorePackageImpl::getETypeParameter() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getETypeParameter() const
 {
 	return eTypeParameterEClass;
 }
 
-ecore::EReference* EcorePackageImpl::getETypeParameter_EBounds() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getETypeParameter_EBounds() const
 {
-	return dynamic_cast<ecore::EReference*>(eTypeParameterEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(eTypeParameterEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class ETypeParameter
 
 // Begin Class ETypedElement
-ecore::EClass* EcorePackageImpl::getETypedElement() const
+std::shared_ptr<ecore::EClass> EcorePackageImpl::getETypedElement() const
 {
 	return eTypedElementEClass;
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_LowerBound() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_LowerBound() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_Many() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_Many() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_Ordered() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_Ordered() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_Required() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_Required() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_Unique() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_Unique() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* EcorePackageImpl::getETypedElement_UpperBound() const
+std::shared_ptr<ecore::EAttribute> EcorePackageImpl::getETypedElement_UpperBound() const
 {
-	return dynamic_cast<ecore::EAttribute*>(eTypedElementEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(eTypedElementEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EReference* EcorePackageImpl::getETypedElement_EGenericType() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getETypedElement_EGenericType() const
 {
-	return dynamic_cast<ecore::EReference*>(eTypedElementEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(eTypedElementEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* EcorePackageImpl::getETypedElement_EType() const
+std::shared_ptr<ecore::EReference> EcorePackageImpl::getETypedElement_EType() const
 {
-	return dynamic_cast<ecore::EReference*>(eTypedElementEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(eTypedElementEClass->getEStructuralFeatures()->at(6));
 }
 
 
 // End Class ETypedElement
-ecore::EDataType* EcorePackageImpl::getEBigDecimal() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEBigDecimal() const
 {
 	assert(eBigDecimalEDataType);
 	return eBigDecimalEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEBigInteger() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEBigInteger() const
 {
 	assert(eBigIntegerEDataType);
 	return eBigIntegerEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEBoolean() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEBoolean() const
 {
 	assert(eBooleanEDataType);
 	return eBooleanEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEBooleanObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEBooleanObject() const
 {
 	assert(eBooleanObjectEDataType);
 	return eBooleanObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEByte() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEByte() const
 {
 	assert(eByteEDataType);
 	return eByteEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEByteArray() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEByteArray() const
 {
 	assert(eByteArrayEDataType);
 	return eByteArrayEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEByteObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEByteObject() const
 {
 	assert(eByteObjectEDataType);
 	return eByteObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEChar() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEChar() const
 {
 	assert(eCharEDataType);
 	return eCharEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getECharacterObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getECharacterObject() const
 {
 	assert(eCharacterObjectEDataType);
 	return eCharacterObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEDate() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEDate() const
 {
 	assert(eDateEDataType);
 	return eDateEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEDiagnosticChain() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEDiagnosticChain() const
 {
 	assert(eDiagnosticChainEDataType);
 	return eDiagnosticChainEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEDouble() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEDouble() const
 {
 	assert(eDoubleEDataType);
 	return eDoubleEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEDoubleObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEDoubleObject() const
 {
 	assert(eDoubleObjectEDataType);
 	return eDoubleObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEEList() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEEList() const
 {
 	assert(eEListEDataType);
 	return eEListEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEEnumerator() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEEnumerator() const
 {
 	assert(eEnumeratorEDataType);
 	return eEnumeratorEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEFeatureMap() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEFeatureMap() const
 {
 	assert(eFeatureMapEDataType);
 	return eFeatureMapEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEFeatureMapEntry() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEFeatureMapEntry() const
 {
 	assert(eFeatureMapEntryEDataType);
 	return eFeatureMapEntryEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEFloat() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEFloat() const
 {
 	assert(eFloatEDataType);
 	return eFloatEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEFloatObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEFloatObject() const
 {
 	assert(eFloatObjectEDataType);
 	return eFloatObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEInt() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEInt() const
 {
 	assert(eIntEDataType);
 	return eIntEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEIntegerObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEIntegerObject() const
 {
 	assert(eIntegerObjectEDataType);
 	return eIntegerObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEInvocationTargetException() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEInvocationTargetException() const
 {
 	assert(eInvocationTargetExceptionEDataType);
 	return eInvocationTargetExceptionEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEJavaClass() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEJavaClass() const
 {
 	assert(eJavaClassEDataType);
 	return eJavaClassEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEJavaObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEJavaObject() const
 {
 	assert(eJavaObjectEDataType);
 	return eJavaObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getELong() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getELong() const
 {
 	assert(eLongEDataType);
 	return eLongEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getELongObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getELongObject() const
 {
 	assert(eLongObjectEDataType);
 	return eLongObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEMap() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEMap() const
 {
 	assert(eMapEDataType);
 	return eMapEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEResource() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEResource() const
 {
 	assert(eResourceEDataType);
 	return eResourceEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEResourceSet() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEResourceSet() const
 {
 	assert(eResourceSetEDataType);
 	return eResourceSetEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEShort() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEShort() const
 {
 	assert(eShortEDataType);
 	return eShortEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEShortObject() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEShortObject() const
 {
 	assert(eShortObjectEDataType);
 	return eShortObjectEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getEString() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getEString() const
 {
 	assert(eStringEDataType);
 	return eStringEDataType;
 }
-ecore::EDataType* EcorePackageImpl::getETreeIterator() const
+std::shared_ptr<ecore::EDataType> EcorePackageImpl::getETreeIterator() const
 {
 	assert(eTreeIteratorEDataType);
 	return eTreeIteratorEDataType;

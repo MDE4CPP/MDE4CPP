@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -98,7 +99,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EDataType *  getEAttributeType() const = 0;
+			virtual std::shared_ptr< ecore::EDataType >  getEAttributeType() const = 0;
 			
 			
 
@@ -116,7 +117,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EDataType *  m_eAttributeType =  nullptr ;
+			std::shared_ptr< ecore::EDataType >  m_eAttributeType;
 			
 
 		public:

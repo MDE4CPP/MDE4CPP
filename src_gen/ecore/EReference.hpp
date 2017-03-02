@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -115,19 +116,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EReference *  getEOpposite() const = 0;
+			virtual std::shared_ptr< ecore::EReference >  getEOpposite() const = 0;
 			
 			/*!
 			 */
-			virtual void setEOpposite(ecore::EReference *  _eOpposite) = 0;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< ecore::EClass >  getEReferenceType() const = 0;
 			
 			/*!
 			 */
-			virtual ecore::EClass *  getEReferenceType() const = 0;
-			
-			/*!
-			 */
-			virtual std::vector<ecore::EAttribute * > *  getEKeys() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > getEKeys() const = 0;
 			
 			
 
@@ -151,13 +151,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EReference *  m_eOpposite =  nullptr ;
+			std::shared_ptr< ecore::EReference >  m_eOpposite;
 			/*!
 			 */
-			ecore::EClass *  m_eReferenceType =  nullptr ;
+			std::shared_ptr< ecore::EClass >  m_eReferenceType;
 			/*!
 			 */
-			std::vector<ecore::EAttribute * > *  m_eKeys =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > m_eKeys;
 			
 
 		public:

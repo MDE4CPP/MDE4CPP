@@ -40,7 +40,7 @@ ecore::EObject *  EObjectImpl::copy() const
 	return new EObjectImpl(*this);
 }
 
-EClass* EObjectImpl::eStaticClass() const
+std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEObject();
 }
@@ -52,55 +52,55 @@ EClass* EObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector <   ecore::EObject *  > * EObjectImpl::eAllContents()  const 
+std::vector <   ecore::EObject >  EObjectImpl::eAllContents()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-ecore::EClass *  EObjectImpl::eClass()  const 
+std::shared_ptr<ecore::EClass>  EObjectImpl::eClass()  const 
 {
 	//generated from body annotation
 	return this->eStaticClass();
 }
 
-ecore::EStructuralFeature *  EObjectImpl::eContainingFeature()  const 
+std::shared_ptr<ecore::EStructuralFeature>  EObjectImpl::eContainingFeature()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-ecore::EReference *  EObjectImpl::eContainmentFeature()  const 
+std::shared_ptr<ecore::EReference>  EObjectImpl::eContainmentFeature()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector <   ecore::EObject *  > * EObjectImpl::eContents()  const 
+std::vector <   ecore::EObject >  EObjectImpl::eContents()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector <   ecore::EObject *  > * EObjectImpl::eCrossReferences()  const 
+std::vector <   ecore::EObject >  EObjectImpl::eCrossReferences()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any EObjectImpl::eGet(ecore::EStructuralFeature *  feature)  const 
+boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	//generated from body annotation
 	return this->eGet(feature,false);
 }
 
-boost::any EObjectImpl::eGet(ecore::EStructuralFeature *  feature,bool resolve)  const 
+boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
 {
 	//generated from body annotation
 	return this->eGet(feature->getFeatureID(),resolve,false);
 }
 
-boost::any EObjectImpl::eInvoke(ecore::EOperation *  operation,std::vector <   boost::any > * arguments)  const 
+boost::any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -112,7 +112,7 @@ bool EObjectImpl::eIsProxy()  const
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsSet(ecore::EStructuralFeature *  feature)  const 
+bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -124,13 +124,13 @@ int EObjectImpl::eResource()  const
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(ecore::EStructuralFeature *  feature,boost::any newValue)  const 
+void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eUnset(ecore::EStructuralFeature *  feature)  const 
+void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -139,14 +139,14 @@ void EObjectImpl::eUnset(ecore::EStructuralFeature *  feature)  const
 //*********************************
 // References
 //*********************************
-ecore::EObject *  EObjectImpl::eContainer() const
+std::shared_ptr< ecore::EObject >  EObjectImpl::eContainer() const
 {
-	
-	return m_eContainer;
+
+    return m_eContainer;
 }
-void EObjectImpl::setContainer(ecore::EObject *  _eContainer)
+void EObjectImpl::setContainer(std::shared_ptr<ecore::EObject> _eContainer)
 {
-	m_eContainer = _eContainer;
+    m_eContainer = _eContainer;
 }
 
 //*********************************

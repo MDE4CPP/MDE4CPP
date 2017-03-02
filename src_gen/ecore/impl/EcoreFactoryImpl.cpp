@@ -34,21 +34,21 @@ EObject* EcoreFactoryImpl::create(EClass* _class) const
 
 	switch (_class->getClassifierID())
 	{
-		case EcorePackage::EANNOTATION : return dynamic_cast<EObject*>(createEAnnotation());
-		case EcorePackage::EATTRIBUTE : return dynamic_cast<EObject*>(createEAttribute());
-		case EcorePackage::ECLASS : return dynamic_cast<EObject*>(createEClass());
-		case EcorePackage::EDATATYPE : return dynamic_cast<EObject*>(createEDataType());
-		case EcorePackage::EENUM : return dynamic_cast<EObject*>(createEEnum());
-		case EcorePackage::EENUMLITERAL : return dynamic_cast<EObject*>(createEEnumLiteral());
-		case EcorePackage::EFACTORY : return dynamic_cast<EObject*>(createEFactory());
-		case EcorePackage::EGENERICTYPE : return dynamic_cast<EObject*>(createEGenericType());
-		case EcorePackage::EOBJECT : return dynamic_cast<EObject*>(createEObject());
-		case EcorePackage::EOPERATION : return dynamic_cast<EObject*>(createEOperation());
-		case EcorePackage::EPACKAGE : return dynamic_cast<EObject*>(createEPackage());
-		case EcorePackage::EPARAMETER : return dynamic_cast<EObject*>(createEParameter());
-		case EcorePackage::EREFERENCE : return dynamic_cast<EObject*>(createEReference());
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY : return dynamic_cast<EObject*>(createEStringToStringMapEntry());
-		case EcorePackage::ETYPEPARAMETER : return dynamic_cast<EObject*>(createETypeParameter());
+		case EcorePackage::EANNOTATION : return createEAnnotation();
+		case EcorePackage::EATTRIBUTE : return createEAttribute();
+		case EcorePackage::ECLASS : return createEClass();
+		case EcorePackage::EDATATYPE : return createEDataType();
+		case EcorePackage::EENUM : return createEEnum();
+		case EcorePackage::EENUMLITERAL : return createEEnumLiteral();
+		case EcorePackage::EFACTORY : return createEFactory();
+		case EcorePackage::EGENERICTYPE : return createEGenericType();
+		case EcorePackage::EOBJECT : return createEObject();
+		case EcorePackage::EOPERATION : return createEOperation();
+		case EcorePackage::EPACKAGE : return createEPackage();
+		case EcorePackage::EPARAMETER : return createEParameter();
+		case EcorePackage::EREFERENCE : return createEReference();
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY : return createEStringToStringMapEntry();
+		case EcorePackage::ETYPEPARAMETER : return createETypeParameter();
 		default:
        		throw "Error create class '" + _class->getName();
 	}
@@ -116,7 +116,7 @@ ETypeParameter* EcoreFactoryImpl::createETypeParameter () const
 	return new ETypeParameterImpl();
 }
 
-EcorePackage * EcoreFactoryImpl::getEcorePackage() const
+std::shared_ptr<EcorePackage> EcoreFactoryImpl::getEcorePackage() const
 {
 	return EcorePackage::eInstance();
 }

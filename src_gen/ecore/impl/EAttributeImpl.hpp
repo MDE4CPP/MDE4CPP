@@ -22,10 +22,11 @@
 #include "impl/EStructuralFeatureImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EAttributeImpl :virtual public EStructuralFeatureImpl, virtual public EAttribute
+	class EAttributeImpl :virtual public EStructuralFeatureImpl, virtual public EAttribute 
 	{
 		public: 
 			EAttributeImpl(const EAttributeImpl & obj);
@@ -65,7 +66,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EDataType *  getEAttributeType() const ;
+			virtual std::shared_ptr< ecore::EDataType >  getEAttributeType() const ;
 			
 							
 			
@@ -81,7 +82,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EATTRIBUTEEATTRIBUTEIMPL_HPP */

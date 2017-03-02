@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -118,15 +119,14 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EPackage *  getEPackage() const = 0;
+			virtual std::shared_ptr< ecore::EPackage >  getEPackage() const = 0;
 			
 			/*!
 			 */
-			virtual void setEPackage(ecore::EPackage *  _ePackage) = 0;
-			
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) = 0;
 			/*!
 			 */
-			virtual std::vector<ecore::ETypeParameter * > *  getETypeParameters() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > getETypeParameters() const = 0;
 			
 			
 
@@ -156,10 +156,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EPackage *  m_ePackage =  nullptr ;
+			std::shared_ptr< ecore::EPackage >  m_ePackage;
 			/*!
 			 */
-			std::vector<ecore::ETypeParameter * > *  m_eTypeParameters =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > m_eTypeParameters;
 			
 
 		public:

@@ -22,11 +22,12 @@
 
 
 
+
 //*********************************
 namespace ecore 
 {
 	class EObjectImpl :
-virtual public EObject
+virtual public EObject 
 	{
 		public: 
 			EObjectImpl(const EObjectImpl & obj);
@@ -48,7 +49,7 @@ virtual public EObject
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EClass *  eClass()  const  ;
+			virtual std::shared_ptr<ecore::EClass>  eClass()  const  ;
 			
 			/*!
 			 */ 
@@ -60,47 +61,47 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual ecore::EStructuralFeature *  eContainingFeature()  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature>  eContainingFeature()  const  ;
 			
 			/*!
 			 */ 
-			virtual ecore::EReference *  eContainmentFeature()  const  ;
+			virtual std::shared_ptr<ecore::EReference>  eContainmentFeature()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject *  > * eContents()  const  ;
+			virtual std::vector <   ecore::EObject >  eContents()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject *  > * eAllContents()  const  ;
+			virtual std::vector <   ecore::EObject >  eAllContents()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject *  > * eCrossReferences()  const  ;
+			virtual std::vector <   ecore::EObject >  eCrossReferences()  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eGet(ecore::EStructuralFeature *  feature)  const  ;
+			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eGet(ecore::EStructuralFeature *  feature,bool resolve)  const  ;
+			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  ;
 			
 			/*!
 			 */ 
-			virtual void eSet(ecore::EStructuralFeature *  feature,boost::any newValue)  const  ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  ;
 			
 			/*!
 			 */ 
-			virtual bool eIsSet(ecore::EStructuralFeature *  feature)  const  ;
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			/*!
 			 */ 
-			virtual void eUnset(ecore::EStructuralFeature *  feature)  const  ;
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eInvoke(ecore::EOperation *  operation,std::vector <   boost::any > * arguments)  const  ;
+			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  ;
 			
 			
 			
@@ -114,12 +115,11 @@ virtual public EObject
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EObject *  eContainer() const ;
+			virtual std::shared_ptr< ecore::EObject >  eContainer() const ;
 			
 			/*!
 			 */
-			virtual void setContainer(ecore::EObject *  _eContainer) ;
-			
+			virtual void setContainer(std::shared_ptr<ecore::EObject> _eContainer) ;
 							
 			
 			//*********************************
@@ -134,7 +134,7 @@ virtual public EObject
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EOBJECTEOBJECTIMPL_HPP */

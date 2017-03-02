@@ -15,22 +15,11 @@ EModelElementImpl::EModelElementImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_eAnnotations == nullptr)
-	{
-		m_eAnnotations = new std::vector<ecore::EAnnotation * >();
-	}
+	m_eAnnotations.reset(new std::vector<std::shared_ptr<ecore::EAnnotation> >());
 }
 
 EModelElementImpl::~EModelElementImpl()
 {
-	if(m_eAnnotations!=nullptr)
-	{
-		for(auto c :*m_eAnnotations)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
 	
 }
 
@@ -42,9 +31,9 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj)
 	
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -53,7 +42,7 @@ ecore::EObject *  EModelElementImpl::copy() const
 	return new EModelElementImpl(*this);
 }
 
-EClass* EModelElementImpl::eStaticClass() const
+std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEModelElement();
 }
@@ -65,26 +54,26 @@ EClass* EModelElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-ecore::EAnnotation *  EModelElementImpl::getEAnnotation(std::string source) 
+std::shared_ptr<ecore::EAnnotation>  EModelElementImpl::getEAnnotation(std::string source) 
 {
 	//generated from body annotation
-	for(EAnnotation * a : *m_eAnnotations)
-{
-	if(a->getSource()==source)
-	{
-		return a;
-	}
-}
-return nullptr;
+	    for(std::shared_ptr<EAnnotation> a : *m_eAnnotations)
+    {
+	    if(a->getSource()==source)
+	    {
+		    return a;
+	    }
+    }
+    return std::shared_ptr<ecore::EAnnotation>();
 }
 
 //*********************************
 // References
 //*********************************
-std::vector<ecore::EAnnotation * > *  EModelElementImpl::getEAnnotations() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > EModelElementImpl::getEAnnotations() const
 {
-	
-	return m_eAnnotations;
+
+    return m_eAnnotations;
 }
 
 

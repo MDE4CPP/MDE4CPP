@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -82,15 +83,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EObject *  create(ecore::EClass *  eClass)  const  = 0;
+			virtual std::shared_ptr<ecore::EObject>  create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual boost::any createFromString(ecore::EDataType *  eDataType,std::string literalValue)  const  = 0;
+			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string convertToString(ecore::EDataType *  eDataType,boost::any instanceValue)  const  = 0;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  = 0;
 			
 			
 			//*********************************
@@ -102,12 +103,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EPackage *  getEPackage() const = 0;
+			virtual std::shared_ptr< ecore::EPackage >  getEPackage() const = 0;
 			
 			/*!
 			 */
-			virtual void setEPackage(ecore::EPackage *  _ePackage) = 0;
-			
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) = 0;
 			
 
 		protected:
@@ -121,7 +121,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EPackage *  m_ePackage =  nullptr ;
+			std::shared_ptr< ecore::EPackage >  m_ePackage;
 			
 
 		public:

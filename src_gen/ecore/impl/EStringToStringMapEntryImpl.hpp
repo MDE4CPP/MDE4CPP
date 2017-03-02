@@ -22,10 +22,11 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl :virtual public EObjectImpl, virtual public EStringToStringMapEntry
+	class EStringToStringMapEntryImpl :virtual public EObjectImpl, virtual public EStringToStringMapEntry 
 	{
 		public: 
 			EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj);
@@ -85,7 +86,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_ESTRINGTOSTRINGMAPENTRYESTRINGTOSTRINGMAPENTRYIMPL_HPP */

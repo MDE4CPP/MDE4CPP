@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -77,15 +78,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EEnumLiteral *  getEEnumLiteral(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteral(std::string name)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual ecore::EEnumLiteral *  getEEnumLiteral(int value)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteral(int value)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual ecore::EEnumLiteral *  getEEnumLiteralByLiteral(std::string literal)  const  = 0;
+			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteralByLiteral(std::string literal)  const  = 0;
 			
 			
 			//*********************************
@@ -97,7 +98,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EEnumLiteral * > *  getELiterals() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > getELiterals() const = 0;
 			
 			
 
@@ -112,7 +113,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::vector<ecore::EEnumLiteral * > *  m_eLiterals =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > m_eLiterals;
 			
 
 		public:

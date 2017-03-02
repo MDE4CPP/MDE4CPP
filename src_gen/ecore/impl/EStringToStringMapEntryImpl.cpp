@@ -42,7 +42,7 @@ ecore::EObject *  EStringToStringMapEntryImpl::copy() const
 	return new EStringToStringMapEntryImpl(*this);
 }
 
-EClass* EStringToStringMapEntryImpl::eStaticClass() const
+std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEStringToStringMapEntry();
 }

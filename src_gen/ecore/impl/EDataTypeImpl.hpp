@@ -22,10 +22,11 @@
 #include "impl/EClassifierImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EDataTypeImpl :virtual public EClassifierImpl, virtual public EDataType
+	class EDataTypeImpl :virtual public EClassifierImpl, virtual public EDataType 
 	{
 		public: 
 			EDataTypeImpl(const EDataTypeImpl & obj);
@@ -77,7 +78,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EDATATYPEEDATATYPEIMPL_HPP */

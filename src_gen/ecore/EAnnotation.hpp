@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -88,23 +89,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EStringToStringMapEntry * > *  getDetails() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > getDetails() const = 0;
 			
 			/*!
 			 */
-			virtual ecore::EModelElement *  getEModelElement() const = 0;
+			virtual std::shared_ptr< ecore::EModelElement >  getEModelElement() const = 0;
 			
 			/*!
 			 */
-			virtual void setEModelElement(ecore::EModelElement *  _eModelElement) = 0;
+			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getContents() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EObject * > *  getContents() const = 0;
-			
-			/*!
-			 */
-			virtual std::vector<ecore::EObject * > *  getReferences() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getReferences() const = 0;
 			
 			
 
@@ -122,16 +122,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::vector<ecore::EStringToStringMapEntry * > *  m_details =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > m_details;
 			/*!
 			 */
-			ecore::EModelElement *  m_eModelElement =  nullptr ;
+			std::shared_ptr< ecore::EModelElement >  m_eModelElement;
 			/*!
 			 */
-			std::vector<ecore::EObject * > *  m_contents =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > m_contents;
 			/*!
 			 */
-			std::vector<ecore::EObject * > *  m_references =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > m_references;
 			
 
 		public:

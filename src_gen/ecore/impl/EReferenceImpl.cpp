@@ -15,21 +15,13 @@ EReferenceImpl::EReferenceImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_eKeys == nullptr)
-	{
-		m_eKeys = new std::vector<ecore::EAttribute * >();
-	}
+	m_eKeys.reset(new std::vector<std::shared_ptr<ecore::EAttribute> >());
 	
 	
 }
 
 EReferenceImpl::~EReferenceImpl()
 {
-	if(m_eKeys!=nullptr)
-	{
-		delete(m_eKeys);
-	 	m_eKeys = nullptr;
-	}
 	
 }
 
@@ -60,7 +52,7 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-	std::vector<ecore::EAttribute * > *  _eKeys = obj.getEKeys();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > _eKeys = obj.getEKeys();
 	this->getEKeys()->insert(this->getEKeys()->end(), _eKeys->begin(), _eKeys->end());
 
 	m_eOpposite  = obj.getEOpposite();
@@ -71,13 +63,13 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType = dynamic_cast<ecore::EGenericType * >(obj.getEGenericType()->copy());
+		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
 }
 
@@ -86,7 +78,7 @@ ecore::EObject *  EReferenceImpl::copy() const
 	return new EReferenceImpl(*this);
 }
 
-EClass* EReferenceImpl::eStaticClass() const
+std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEReference();
 }
@@ -128,27 +120,27 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
-std::vector<ecore::EAttribute * > *  EReferenceImpl::getEKeys() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > EReferenceImpl::getEKeys() const
 {
-	
-	return m_eKeys;
+
+    return m_eKeys;
 }
 
 
-ecore::EReference *  EReferenceImpl::getEOpposite() const
+std::shared_ptr< ecore::EReference >  EReferenceImpl::getEOpposite() const
 {
-	
-	return m_eOpposite;
+
+    return m_eOpposite;
 }
-void EReferenceImpl::setEOpposite(ecore::EReference *  _eOpposite)
+void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
 {
-	m_eOpposite = _eOpposite;
+    m_eOpposite = _eOpposite;
 }
 
-ecore::EClass *  EReferenceImpl::getEReferenceType() const
+std::shared_ptr< ecore::EClass >  EReferenceImpl::getEReferenceType() const
 {
-	//assert(m_eReferenceType);
-	return m_eReferenceType;
+//assert(m_eReferenceType);
+    return m_eReferenceType;
 }
 
 

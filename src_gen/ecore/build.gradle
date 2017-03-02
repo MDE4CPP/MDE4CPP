@@ -114,7 +114,7 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-pipe'
+        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

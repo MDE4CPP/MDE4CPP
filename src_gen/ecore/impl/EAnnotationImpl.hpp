@@ -22,10 +22,11 @@
 #include "impl/EModelElementImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EAnnotationImpl :virtual public EModelElementImpl, virtual public EAnnotation
+	class EAnnotationImpl :virtual public EModelElementImpl, virtual public EAnnotation 
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);
@@ -65,23 +66,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EStringToStringMapEntry * > *  getDetails() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > getDetails() const ;
 			
 			/*!
 			 */
-			virtual ecore::EModelElement *  getEModelElement() const ;
+			virtual std::shared_ptr< ecore::EModelElement >  getEModelElement() const ;
 			
 			/*!
 			 */
-			virtual void setEModelElement(ecore::EModelElement *  _eModelElement) ;
+			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
+			/*!
+			 */
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getContents() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EObject * > *  getContents() const ;
-			
-			/*!
-			 */
-			virtual std::vector<ecore::EObject * > *  getReferences() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getReferences() const ;
 			
 							
 			
@@ -97,7 +97,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EANNOTATIONEANNOTATIONIMPL_HPP */

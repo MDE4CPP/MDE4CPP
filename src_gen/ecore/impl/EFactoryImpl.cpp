@@ -33,9 +33,9 @@ EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -44,7 +44,7 @@ ecore::EObject *  EFactoryImpl::copy() const
 	return new EFactoryImpl(*this);
 }
 
-EClass* EFactoryImpl::eStaticClass() const
+std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEFactory();
 }
@@ -56,19 +56,19 @@ EClass* EFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(ecore::EDataType *  eDataType,boost::any instanceValue)  const 
+std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-ecore::EObject *  EFactoryImpl::create(ecore::EClass *  eClass)  const 
+std::shared_ptr<ecore::EObject>  EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any EFactoryImpl::createFromString(ecore::EDataType *  eDataType,std::string literalValue)  const 
+boost::any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -77,14 +77,14 @@ boost::any EFactoryImpl::createFromString(ecore::EDataType *  eDataType,std::str
 //*********************************
 // References
 //*********************************
-ecore::EPackage *  EFactoryImpl::getEPackage() const
+std::shared_ptr< ecore::EPackage >  EFactoryImpl::getEPackage() const
 {
-	//assert(m_ePackage);
-	return m_ePackage;
+//assert(m_ePackage);
+    return m_ePackage;
 }
-void EFactoryImpl::setEPackage(ecore::EPackage *  _ePackage)
+void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 {
-	m_ePackage = _ePackage;
+    m_ePackage = _ePackage;
 }
 
 //*********************************

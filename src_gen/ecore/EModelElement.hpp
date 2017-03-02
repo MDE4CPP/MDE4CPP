@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -58,7 +59,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EAnnotation *  getEAnnotation(std::string source)  = 0;
+			virtual std::shared_ptr<ecore::EAnnotation>  getEAnnotation(std::string source)  = 0;
 			
 			
 			//*********************************
@@ -70,7 +71,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EAnnotation * > *  getEAnnotations() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > getEAnnotations() const = 0;
 			
 			
 
@@ -85,7 +86,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::vector<ecore::EAnnotation * > *  m_eAnnotations =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > m_eAnnotations;
 			
 
 		public:

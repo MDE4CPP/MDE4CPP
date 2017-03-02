@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -75,7 +76,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EGenericType * > *  getEBounds() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEBounds() const = 0;
 			
 			
 
@@ -90,7 +91,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::vector<ecore::EGenericType * > *  m_eBounds =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > m_eBounds;
 			
 
 		public:

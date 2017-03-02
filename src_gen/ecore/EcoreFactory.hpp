@@ -52,9 +52,9 @@ namespace ecore
 		
 			//Singleton Instance and Getter
 		private:
-			static EcoreFactory* instance;
+			static std::shared_ptr<EcoreFactory> instance;
 		public:
-			static EcoreFactory* eInstance();
+			static std::shared_ptr<EcoreFactory> eInstance();
 		
 			//Creator functions
 			virtual EAttribute* createEAttribute() const = 0;
@@ -74,7 +74,7 @@ namespace ecore
 			virtual ETypeParameter* createETypeParameter() const = 0;
 			
 			//Package
-			virtual EcorePackage* getEcorePackage() const = 0;
+			virtual std::shared_ptr<EcorePackage> getEcorePackage() const = 0;
 	};
 }
 #endif /* end of include guard: ECOREFACTORY_HPP */

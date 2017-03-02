@@ -18,40 +18,13 @@ EGenericTypeImpl::EGenericTypeImpl()
 	
 	
 	
-	if( m_eTypeArguments == nullptr)
-	{
-		m_eTypeArguments = new std::vector<ecore::EGenericType * >();
-	}
+	m_eTypeArguments.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
 	
 	
 }
 
 EGenericTypeImpl::~EGenericTypeImpl()
 {
-	if(m_eUpperBound!=nullptr)
-	{
-		if(m_eUpperBound)
-		{
-			delete(m_eUpperBound);
-			m_eUpperBound = nullptr;
-		}
-	}
-	if(m_eTypeArguments!=nullptr)
-	{
-		for(auto c :*m_eTypeArguments)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eLowerBound!=nullptr)
-	{
-		if(m_eLowerBound)
-		{
-			delete(m_eLowerBound);
-			m_eLowerBound = nullptr;
-		}
-	}
 	
 }
 
@@ -73,15 +46,15 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj)
 	//clone containt lists
 	if(obj.getELowerBound()!=nullptr)
 	{
-		m_eLowerBound = dynamic_cast<ecore::EGenericType * >(obj.getELowerBound()->copy());
+		m_eLowerBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getELowerBound()->copy()));
 	}
-	for(ecore::EGenericType * 	_eTypeArguments : *obj.getETypeArguments())
+	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *obj.getETypeArguments())
 	{
-		this->getETypeArguments()->push_back(dynamic_cast<ecore::EGenericType * >(_eTypeArguments->copy()));
+		this->getETypeArguments()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
 	}
 	if(obj.getEUpperBound()!=nullptr)
 	{
-		m_eUpperBound = dynamic_cast<ecore::EGenericType * >(obj.getEUpperBound()->copy());
+		m_eUpperBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getEUpperBound()->copy()));
 	}
 }
 
@@ -90,7 +63,7 @@ ecore::EObject *  EGenericTypeImpl::copy() const
 	return new EGenericTypeImpl(*this);
 }
 
-EClass* EGenericTypeImpl::eStaticClass() const
+std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEGenericType();
 }
@@ -111,58 +84,58 @@ bool EGenericTypeImpl::isInstance(boost::any object)  const
 //*********************************
 // References
 //*********************************
-ecore::EClassifier *  EGenericTypeImpl::getEClassifier() const
+std::shared_ptr< ecore::EClassifier >  EGenericTypeImpl::getEClassifier() const
 {
-	
-	return m_eClassifier;
+
+    return m_eClassifier;
 }
-void EGenericTypeImpl::setEClassifier(ecore::EClassifier *  _eClassifier)
+void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier)
 {
-	m_eClassifier = _eClassifier;
+    m_eClassifier = _eClassifier;
 }
 
-ecore::EGenericType *  EGenericTypeImpl::getELowerBound() const
+std::shared_ptr< ecore::EGenericType >  EGenericTypeImpl::getELowerBound() const
 {
-	
-	return m_eLowerBound;
-}
-void EGenericTypeImpl::setELowerBound(ecore::EGenericType *  _eLowerBound)
-{
-	m_eLowerBound = _eLowerBound;
-}
 
-ecore::EClassifier *  EGenericTypeImpl::getERawType() const
+    return m_eLowerBound;
+}
+void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound)
 {
-	//assert(m_eRawType);
-	return m_eRawType;
+    m_eLowerBound = _eLowerBound;
 }
 
-
-std::vector<ecore::EGenericType * > *  EGenericTypeImpl::getETypeArguments() const
+std::shared_ptr< ecore::EClassifier >  EGenericTypeImpl::getERawType() const
 {
-	
-	return m_eTypeArguments;
+//assert(m_eRawType);
+    return m_eRawType;
 }
 
 
-ecore::ETypeParameter *  EGenericTypeImpl::getETypeParameter() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > EGenericTypeImpl::getETypeArguments() const
 {
-	
-	return m_eTypeParameter;
-}
-void EGenericTypeImpl::setETypeParameter(ecore::ETypeParameter *  _eTypeParameter)
-{
-	m_eTypeParameter = _eTypeParameter;
+
+    return m_eTypeArguments;
 }
 
-ecore::EGenericType *  EGenericTypeImpl::getEUpperBound() const
+
+std::shared_ptr< ecore::ETypeParameter >  EGenericTypeImpl::getETypeParameter() const
 {
-	
-	return m_eUpperBound;
+
+    return m_eTypeParameter;
 }
-void EGenericTypeImpl::setEUpperBound(ecore::EGenericType *  _eUpperBound)
+void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter)
 {
-	m_eUpperBound = _eUpperBound;
+    m_eTypeParameter = _eTypeParameter;
+}
+
+std::shared_ptr< ecore::EGenericType >  EGenericTypeImpl::getEUpperBound() const
+{
+
+    return m_eUpperBound;
+}
+void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound)
+{
+    m_eUpperBound = _eUpperBound;
 }
 
 //*********************************

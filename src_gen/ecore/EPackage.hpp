@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -117,7 +118,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EClassifier *  getEClassifier(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EClassifier>  getEClassifier(std::string name)  const  = 0;
 			
 			
 			
@@ -199,23 +200,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EFactory *  getEFactoryInstance() const = 0;
+			virtual std::shared_ptr< ecore::EFactory >  getEFactoryInstance() const = 0;
 			
 			/*!
 			 */
-			virtual void setEFactoryInstance(ecore::EFactory *  _eFactoryInstance) = 0;
+			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > getEClassifiers() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EClassifier * > *  getEClassifiers() const = 0;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EPackage> > > getESubpackages() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EPackage * > *  getESubpackages() const = 0;
-			
-			/*!
-			 */
-			virtual ecore::EPackage *  getESuperPackage() const = 0;
+			virtual std::shared_ptr< ecore::EPackage >  getESuperPackage() const = 0;
 			
 			
 
@@ -236,16 +236,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EFactory *  m_eFactoryInstance =  nullptr ;
+			std::shared_ptr< ecore::EFactory >  m_eFactoryInstance;
 			/*!
 			 */
-			std::vector<ecore::EClassifier * > *  m_eClassifiers =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > m_eClassifiers;
 			/*!
 			 */
-			std::vector<ecore::EPackage * > *  m_eSubpackages =  nullptr ;
+			std::shared_ptr< std::vector<std::shared_ptr<ecore::EPackage> > > m_eSubpackages;
 			/*!
 			 */
-			ecore::EPackage *  m_eSuperPackage =  nullptr ;
+			std::shared_ptr< ecore::EPackage >  m_eSuperPackage;
 			
 
 		public:

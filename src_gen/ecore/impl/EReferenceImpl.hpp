@@ -22,10 +22,11 @@
 #include "impl/EStructuralFeatureImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EReferenceImpl :virtual public EStructuralFeatureImpl, virtual public EReference
+	class EReferenceImpl :virtual public EStructuralFeatureImpl, virtual public EReference 
 	{
 		public: 
 			EReferenceImpl(const EReferenceImpl & obj);
@@ -77,19 +78,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EReference *  getEOpposite() const ;
+			virtual std::shared_ptr< ecore::EReference >  getEOpposite() const ;
 			
 			/*!
 			 */
-			virtual void setEOpposite(ecore::EReference *  _eOpposite) ;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) ;
+			/*!
+			 */
+			virtual std::shared_ptr< ecore::EClass >  getEReferenceType() const ;
 			
 			/*!
 			 */
-			virtual ecore::EClass *  getEReferenceType() const ;
-			
-			/*!
-			 */
-			virtual std::vector<ecore::EAttribute * > *  getEKeys() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > getEKeys() const ;
 			
 							
 			
@@ -105,7 +105,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EREFERENCEEREFERENCEIMPL_HPP */

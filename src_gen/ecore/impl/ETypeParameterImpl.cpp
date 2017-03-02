@@ -15,22 +15,11 @@ ETypeParameterImpl::ETypeParameterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_eBounds == nullptr)
-	{
-		m_eBounds = new std::vector<ecore::EGenericType * >();
-	}
+	m_eBounds.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
 }
 
 ETypeParameterImpl::~ETypeParameterImpl()
 {
-	if(m_eBounds!=nullptr)
-	{
-		for(auto c :*m_eBounds)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
 	
 }
 
@@ -43,13 +32,13 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj)
 	
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(ecore::EGenericType * 	_eBounds : *obj.getEBounds())
+	for(std::shared_ptr<ecore::EGenericType> _eBounds : *obj.getEBounds())
 	{
-		this->getEBounds()->push_back(dynamic_cast<ecore::EGenericType * >(_eBounds->copy()));
+		this->getEBounds()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
 	}
 }
 
@@ -58,7 +47,7 @@ ecore::EObject *  ETypeParameterImpl::copy() const
 	return new ETypeParameterImpl(*this);
 }
 
-EClass* ETypeParameterImpl::eStaticClass() const
+std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getETypeParameter();
 }
@@ -74,10 +63,10 @@ EClass* ETypeParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::vector<ecore::EGenericType * > *  ETypeParameterImpl::getEBounds() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > ETypeParameterImpl::getEBounds() const
 {
-	
-	return m_eBounds;
+
+    return m_eBounds;
 }
 
 

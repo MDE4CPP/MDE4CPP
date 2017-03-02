@@ -22,10 +22,11 @@
 #include "impl/ETypedElementImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EOperationImpl :virtual public ETypedElementImpl, virtual public EOperation
+	class EOperationImpl :virtual public ETypedElementImpl, virtual public EOperation 
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
@@ -47,7 +48,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isOverrideOf(ecore::EOperation *  someOperation)  const  ;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  ;
 			
 			
 			
@@ -69,23 +70,23 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EClass *  getEContainingClass() const ;
+			virtual std::shared_ptr< ecore::EClass >  getEContainingClass() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::ETypeParameter * > *  getETypeParameters() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > getETypeParameters() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EParameter * > *  getEParameters() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > getEParameters() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EClassifier * > *  getEExceptions() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > getEExceptions() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EGenericType * > *  getEGenericExceptions() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEGenericExceptions() const ;
 			
 							
 			
@@ -101,7 +102,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EOPERATIONEOPERATIONIMPL_HPP */

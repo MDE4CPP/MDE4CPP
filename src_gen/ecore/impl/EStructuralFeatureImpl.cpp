@@ -51,13 +51,13 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType = dynamic_cast<ecore::EGenericType * >(obj.getEGenericType()->copy());
+		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
 }
 
@@ -66,7 +66,7 @@ ecore::EObject *  EStructuralFeatureImpl::copy() const
 	return new EStructuralFeatureImpl(*this);
 }
 
-EClass* EStructuralFeatureImpl::eStaticClass() const
+std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEStructuralFeature();
 }
@@ -168,10 +168,10 @@ bool EStructuralFeatureImpl::isVolatile() const
 //*********************************
 // References
 //*********************************
-ecore::EClass *  EStructuralFeatureImpl::getEContainingClass() const
+std::shared_ptr< ecore::EClass >  EStructuralFeatureImpl::getEContainingClass() const
 {
-	
-	return m_eContainingClass;
+
+    return m_eContainingClass;
 }
 
 

@@ -16,55 +16,14 @@ EOperationImpl::EOperationImpl()
 	// Reference Members
 	//*********************************
 	
-	if( m_eExceptions == nullptr)
-	{
-		m_eExceptions = new std::vector<ecore::EClassifier * >();
-	}
-	if( m_eGenericExceptions == nullptr)
-	{
-		m_eGenericExceptions = new std::vector<ecore::EGenericType * >();
-	}
-	if( m_eParameters == nullptr)
-	{
-		m_eParameters = new std::vector<ecore::EParameter * >();
-	}
-	if( m_eTypeParameters == nullptr)
-	{
-		m_eTypeParameters = new std::vector<ecore::ETypeParameter * >();
-	}
+	m_eExceptions.reset(new std::vector<std::shared_ptr<ecore::EClassifier> >());
+	m_eGenericExceptions.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
+	m_eParameters.reset(new std::vector<std::shared_ptr<ecore::EParameter> >());
+	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter> >());
 }
 
 EOperationImpl::~EOperationImpl()
 {
-	if(m_eTypeParameters!=nullptr)
-	{
-		for(auto c :*m_eTypeParameters)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eParameters!=nullptr)
-	{
-		for(auto c :*m_eParameters)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eExceptions!=nullptr)
-	{
-		delete(m_eExceptions);
-	 	m_eExceptions = nullptr;
-	}
-	if(m_eGenericExceptions!=nullptr)
-	{
-		for(auto c :*m_eGenericExceptions)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
 	
 }
 
@@ -84,32 +43,32 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-	std::vector<ecore::EClassifier * > *  _eExceptions = obj.getEExceptions();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > _eExceptions = obj.getEExceptions();
 	this->getEExceptions()->insert(this->getEExceptions()->end(), _eExceptions->begin(), _eExceptions->end());
 
 	m_eType  = obj.getEType();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(ecore::EGenericType * 	_eGenericExceptions : *obj.getEGenericExceptions())
+	for(std::shared_ptr<ecore::EGenericType> _eGenericExceptions : *obj.getEGenericExceptions())
 	{
-		this->getEGenericExceptions()->push_back(dynamic_cast<ecore::EGenericType * >(_eGenericExceptions->copy()));
+		this->getEGenericExceptions()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericExceptions->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType = dynamic_cast<ecore::EGenericType * >(obj.getEGenericType()->copy());
+		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
-	for(ecore::EParameter * 	_eParameters : *obj.getEParameters())
+	for(std::shared_ptr<ecore::EParameter> _eParameters : *obj.getEParameters())
 	{
-		this->getEParameters()->push_back(dynamic_cast<ecore::EParameter * >(_eParameters->copy()));
+		this->getEParameters()->push_back(std::shared_ptr<ecore::EParameter>(dynamic_cast<ecore::EParameter*>(_eParameters->copy())));
 	}
-	for(ecore::ETypeParameter * 	_eTypeParameters : *obj.getETypeParameters())
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
 	{
-		this->getETypeParameters()->push_back(dynamic_cast<ecore::ETypeParameter * >(_eTypeParameters->copy()));
+		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -118,7 +77,7 @@ ecore::EObject *  EOperationImpl::copy() const
 	return new EOperationImpl(*this);
 }
 
-EClass* EOperationImpl::eStaticClass() const
+std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEOperation();
 }
@@ -139,65 +98,64 @@ int EOperationImpl::getOperationID() const
 //*********************************
 // Operations
 //*********************************
-bool EOperationImpl::isOverrideOf(ecore::EOperation *  someOperation)  const 
+bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
 {
 	//generated from body annotation
-	if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) && (someOperation->getName()==getName()))
-{
-      std::vector<EParameter * > * parameters = getEParameters();
-      std::vector<EParameter * > * otherParameters = someOperation->getEParameters();
-      if (parameters->size() == otherParameters->size())
-      {
-            for (std::vector<EParameter *>::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
+	    if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) && (someOperation->getName()==getName()))
+    {
+        std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > parameters = getEParameters();
+        std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > otherParameters = someOperation->getEParameters();
+        if (parameters->size() == otherParameters->size())
+        {
+            for (std::vector<std::shared_ptr<EParameter> >::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )
         	{
-                EParameter * parameter = *i;
-                EParameter * otherParameter = *j;
-                if (!(parameter->getEType()->getInstanceTypeName() == otherParameter->getEType()->getInstanceTypeName()))
+            	std::shared_ptr<EParameter> parameter = *i;
+            	std::shared_ptr<EParameter> otherParameter = *j;
+                if (!(parameter->getEType().get() == otherParameter->getEType().get()))
           		{
-            			return false;
+                    return false;
         		}
+        	}
 		}
 		return true;
 	}
-}
-return false;
 }
 
 //*********************************
 // References
 //*********************************
-ecore::EClass *  EOperationImpl::getEContainingClass() const
+std::shared_ptr< ecore::EClass >  EOperationImpl::getEContainingClass() const
 {
-	
-	return m_eContainingClass;
+
+    return m_eContainingClass;
 }
 
 
-std::vector<ecore::EClassifier * > *  EOperationImpl::getEExceptions() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > EOperationImpl::getEExceptions() const
 {
-	
-	return m_eExceptions;
+
+    return m_eExceptions;
 }
 
 
-std::vector<ecore::EGenericType * > *  EOperationImpl::getEGenericExceptions() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > EOperationImpl::getEGenericExceptions() const
 {
-	
-	return m_eGenericExceptions;
+
+    return m_eGenericExceptions;
 }
 
 
-std::vector<ecore::EParameter * > *  EOperationImpl::getEParameters() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > EOperationImpl::getEParameters() const
 {
-	
-	return m_eParameters;
+
+    return m_eParameters;
 }
 
 
-std::vector<ecore::ETypeParameter * > *  EOperationImpl::getETypeParameters() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > EOperationImpl::getETypeParameters() const
 {
-	
-	return m_eTypeParameters;
+
+    return m_eTypeParameters;
 }
 
 

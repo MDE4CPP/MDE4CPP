@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -120,20 +121,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EClassifier *  getEType() const = 0;
+			virtual std::shared_ptr< ecore::EClassifier >  getEType() const = 0;
 			
 			/*!
 			 */
-			virtual void setEType(ecore::EClassifier *  _eType) = 0;
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< ecore::EGenericType >  getEGenericType() const = 0;
 			
 			/*!
 			 */
-			virtual ecore::EGenericType *  getEGenericType() const = 0;
-			
-			/*!
-			 */
-			virtual void setEGenericType(ecore::EGenericType *  _eGenericType) = 0;
-			
+			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType) = 0;
 			
 
 		protected:
@@ -165,10 +164,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EClassifier *  m_eType =  nullptr ;
+			std::shared_ptr< ecore::EClassifier >  m_eType;
 			/*!
 			 */
-			ecore::EGenericType *  m_eGenericType =  nullptr ;
+			std::shared_ptr< ecore::EGenericType >  m_eGenericType;
 			
 
 		public:

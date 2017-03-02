@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -99,7 +100,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EEnum *  getEEnum() const = 0;
+			virtual std::shared_ptr< ecore::EEnum >  getEEnum() const = 0;
 			
 			
 
@@ -123,7 +124,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EEnum *  m_eEnum =  nullptr ;
+			std::shared_ptr< ecore::EEnum >  m_eEnum;
 			
 
 		public:

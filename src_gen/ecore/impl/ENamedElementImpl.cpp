@@ -32,9 +32,9 @@ ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj)
 	
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -43,7 +43,7 @@ ecore::EObject *  ENamedElementImpl::copy() const
 	return new ENamedElementImpl(*this);
 }
 
-EClass* ENamedElementImpl::eStaticClass() const
+std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getENamedElement();
 }

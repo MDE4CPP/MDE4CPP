@@ -22,10 +22,11 @@
 #include "impl/ETypedElementImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EStructuralFeatureImpl :virtual public ETypedElementImpl, virtual public EStructuralFeature
+	class EStructuralFeatureImpl :virtual public ETypedElementImpl, virtual public EStructuralFeature 
 	{
 		public: 
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
@@ -125,7 +126,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EClass *  getEContainingClass() const ;
+			virtual std::shared_ptr< ecore::EClass >  getEContainingClass() const ;
 			
 							
 			
@@ -141,7 +142,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_ESTRUCTURALFEATUREESTRUCTURALFEATUREIMPL_HPP */

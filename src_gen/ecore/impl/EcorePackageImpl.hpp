@@ -39,7 +39,6 @@
 #include "EcorePackage.hpp"
 #include "EcorePackage.hpp"
 
-
 namespace ecore
 {
 	class EcorePackageImpl : public EPackageImpl ,virtual public EcorePackage
@@ -56,81 +55,81 @@ namespace ecore
 
 			// Begin Class EAnnotation
 			//Class and Feature Getter
-			virtual ecore::EClass* getEAnnotation() const ;
-			virtual ecore::EAttribute* getEAnnotation_Source() const ;
+			virtual std::shared_ptr<ecore::EClass> getEAnnotation() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEAnnotation_Source() const ;
 			
-			virtual ecore::EReference* getEAnnotation_Contents() const ;
-			virtual ecore::EReference* getEAnnotation_Details() const ;
-			virtual ecore::EReference* getEAnnotation_EModelElement() const ;
-			virtual ecore::EReference* getEAnnotation_References() const ;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Contents() const ;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Details() const ;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_EModelElement() const ;
+			virtual std::shared_ptr<ecore::EReference> getEAnnotation_References() const ;
 			
 			
 			// End Class EAnnotation
 
 			// Begin Class EAttribute
 			//Class and Feature Getter
-			virtual ecore::EClass* getEAttribute() const ;
-			virtual ecore::EAttribute* getEAttribute_ID() const ;
+			virtual std::shared_ptr<ecore::EClass> getEAttribute() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEAttribute_ID() const ;
 			
-			virtual ecore::EReference* getEAttribute_EAttributeType() const ;
+			virtual std::shared_ptr<ecore::EReference> getEAttribute_EAttributeType() const ;
 			
 			
 			// End Class EAttribute
 
 			// Begin Class EClass
 			//Class and Feature Getter
-			virtual ecore::EClass* getEClass() const ;
-			virtual ecore::EAttribute* getEClass_Abstract() const ;
-			virtual ecore::EAttribute* getEClass_Interface() const ;
+			virtual std::shared_ptr<ecore::EClass> getEClass() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClass_Abstract() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClass_Interface() const ;
 			
-			virtual ecore::EReference* getEClass_EAllAttributes() const ;
-			virtual ecore::EReference* getEClass_EAllContainments() const ;
-			virtual ecore::EReference* getEClass_EAllGenericSuperTypes() const ;
-			virtual ecore::EReference* getEClass_EAllOperations() const ;
-			virtual ecore::EReference* getEClass_EAllReferences() const ;
-			virtual ecore::EReference* getEClass_EAllStructuralFeatures() const ;
-			virtual ecore::EReference* getEClass_EAllSuperTypes() const ;
-			virtual ecore::EReference* getEClass_EAttributes() const ;
-			virtual ecore::EReference* getEClass_EGenericSuperTypes() const ;
-			virtual ecore::EReference* getEClass_EIDAttribute() const ;
-			virtual ecore::EReference* getEClass_EOperations() const ;
-			virtual ecore::EReference* getEClass_EReferences() const ;
-			virtual ecore::EReference* getEClass_EStructuralFeatures() const ;
-			virtual ecore::EReference* getEClass_ESuperTypes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllAttributes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllContainments() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllGenericSuperTypes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllOperations() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllReferences() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllStructuralFeatures() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAllSuperTypes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EAttributes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EGenericSuperTypes() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EIDAttribute() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EOperations() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EReferences() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_EStructuralFeatures() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClass_ESuperTypes() const ;
 			
-			virtual ecore::EOperation* getEClass___GetEOperation__EInt() const ;
-			virtual ecore::EOperation* getEClass___GetEStructuralFeature__EInt() const ;
-			virtual ecore::EOperation* getEClass___GetEStructuralFeature__EString() const ;
-			virtual ecore::EOperation* getEClass___GetFeatureCount() const ;
-			virtual ecore::EOperation* getEClass___GetFeatureID__EStructuralFeature() const ;
-			virtual ecore::EOperation* getEClass___GetFeatureType__EStructuralFeature() const ;
-			virtual ecore::EOperation* getEClass___GetOperationCount() const ;
-			virtual ecore::EOperation* getEClass___GetOperationID__EOperation() const ;
-			virtual ecore::EOperation* getEClass___GetOverride__EOperation() const ;
-			virtual ecore::EOperation* getEClass___IsSuperTypeOf__EClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetEOperation__EInt() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetEStructuralFeature__EInt() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetEStructuralFeature__EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetFeatureCount() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetFeatureID__EStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetFeatureType__EStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetOperationCount() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetOperationID__EOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___GetOverride__EOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClass___IsSuperTypeOf__EClass() const ;
 			
 			// End Class EClass
 
 			// Begin Class EClassifier
 			//Class and Feature Getter
-			virtual ecore::EClass* getEClassifier() const ;
-			virtual ecore::EAttribute* getEClassifier_ClassifierID() const ;
-			virtual ecore::EAttribute* getEClassifier_DefaultValue() const ;
-			virtual ecore::EAttribute* getEClassifier_InstanceClass() const ;
-			virtual ecore::EAttribute* getEClassifier_InstanceClassName() const ;
-			virtual ecore::EAttribute* getEClassifier_InstanceTypeName() const ;
+			virtual std::shared_ptr<ecore::EClass> getEClassifier() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_ClassifierID() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_DefaultValue() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_InstanceClass() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_InstanceClassName() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEClassifier_InstanceTypeName() const ;
 			
-			virtual ecore::EReference* getEClassifier_EPackage() const ;
-			virtual ecore::EReference* getEClassifier_ETypeParameters() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClassifier_EPackage() const ;
+			virtual std::shared_ptr<ecore::EReference> getEClassifier_ETypeParameters() const ;
 			
-			virtual ecore::EOperation* getEClassifier___IsInstance__EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEClassifier___IsInstance__EJavaObject() const ;
 			
 			// End Class EClassifier
 
 			// Begin Class EDataType
 			//Class and Feature Getter
-			virtual ecore::EClass* getEDataType() const ;
-			virtual ecore::EAttribute* getEDataType_Serializable() const ;
+			virtual std::shared_ptr<ecore::EClass> getEDataType() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEDataType_Serializable() const ;
 			
 			
 			
@@ -138,69 +137,69 @@ namespace ecore
 
 			// Begin Class EEnum
 			//Class and Feature Getter
-			virtual ecore::EClass* getEEnum() const ;
+			virtual std::shared_ptr<ecore::EClass> getEEnum() const ;
 			
-			virtual ecore::EReference* getEEnum_ELiterals() const ;
+			virtual std::shared_ptr<ecore::EReference> getEEnum_ELiterals() const ;
 			
-			virtual ecore::EOperation* getEEnum___GetEEnumLiteral__EString() const ;
-			virtual ecore::EOperation* getEEnum___GetEEnumLiteral__EInt() const ;
-			virtual ecore::EOperation* getEEnum___GetEEnumLiteralByLiteral__EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum___GetEEnumLiteral__EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum___GetEEnumLiteral__EInt() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEEnum___GetEEnumLiteralByLiteral__EString() const ;
 			
 			// End Class EEnum
 
 			// Begin Class EEnumLiteral
 			//Class and Feature Getter
-			virtual ecore::EClass* getEEnumLiteral() const ;
-			virtual ecore::EAttribute* getEEnumLiteral_Instance() const ;
-			virtual ecore::EAttribute* getEEnumLiteral_Literal() const ;
-			virtual ecore::EAttribute* getEEnumLiteral_Value() const ;
+			virtual std::shared_ptr<ecore::EClass> getEEnumLiteral() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Instance() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Literal() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEEnumLiteral_Value() const ;
 			
-			virtual ecore::EReference* getEEnumLiteral_EEnum() const ;
+			virtual std::shared_ptr<ecore::EReference> getEEnumLiteral_EEnum() const ;
 			
 			
 			// End Class EEnumLiteral
 
 			// Begin Class EFactory
 			//Class and Feature Getter
-			virtual ecore::EClass* getEFactory() const ;
+			virtual std::shared_ptr<ecore::EClass> getEFactory() const ;
 			
-			virtual ecore::EReference* getEFactory_EPackage() const ;
+			virtual std::shared_ptr<ecore::EReference> getEFactory_EPackage() const ;
 			
-			virtual ecore::EOperation* getEFactory___ConvertToString__EDataType_EJavaObject() const ;
-			virtual ecore::EOperation* getEFactory___Create__EClass() const ;
-			virtual ecore::EOperation* getEFactory___CreateFromString__EDataType_EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory___ConvertToString__EDataType_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory___Create__EClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory___CreateFromString__EDataType_EString() const ;
 			
 			// End Class EFactory
 
 			// Begin Class EGenericType
 			//Class and Feature Getter
-			virtual ecore::EClass* getEGenericType() const ;
+			virtual std::shared_ptr<ecore::EClass> getEGenericType() const ;
 			
-			virtual ecore::EReference* getEGenericType_EClassifier() const ;
-			virtual ecore::EReference* getEGenericType_ELowerBound() const ;
-			virtual ecore::EReference* getEGenericType_ERawType() const ;
-			virtual ecore::EReference* getEGenericType_ETypeArguments() const ;
-			virtual ecore::EReference* getEGenericType_ETypeParameter() const ;
-			virtual ecore::EReference* getEGenericType_EUpperBound() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_EClassifier() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_ELowerBound() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_ERawType() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_ETypeArguments() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_ETypeParameter() const ;
+			virtual std::shared_ptr<ecore::EReference> getEGenericType_EUpperBound() const ;
 			
-			virtual ecore::EOperation* getEGenericType___IsInstance__EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEGenericType___IsInstance__EJavaObject() const ;
 			
 			// End Class EGenericType
 
 			// Begin Class EModelElement
 			//Class and Feature Getter
-			virtual ecore::EClass* getEModelElement() const ;
+			virtual std::shared_ptr<ecore::EClass> getEModelElement() const ;
 			
-			virtual ecore::EReference* getEModelElement_EAnnotations() const ;
+			virtual std::shared_ptr<ecore::EReference> getEModelElement_EAnnotations() const ;
 			
-			virtual ecore::EOperation* getEModelElement___GetEAnnotation__EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEModelElement___GetEAnnotation__EString() const ;
 			
 			// End Class EModelElement
 
 			// Begin Class ENamedElement
 			//Class and Feature Getter
-			virtual ecore::EClass* getENamedElement() const ;
-			virtual ecore::EAttribute* getENamedElement_Name() const ;
+			virtual std::shared_ptr<ecore::EClass> getENamedElement() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getENamedElement_Name() const ;
 			
 			
 			
@@ -208,85 +207,85 @@ namespace ecore
 
 			// Begin Class EObject
 			//Class and Feature Getter
-			virtual ecore::EClass* getEObject() const ;
+			virtual std::shared_ptr<ecore::EClass> getEObject() const ;
 			
-			virtual ecore::EReference* getEObject_EContainer() const ;
+			virtual std::shared_ptr<ecore::EReference> getEObject_EContainer() const ;
 			
-			virtual ecore::EOperation* getEObject___EAllContents() const ;
-			virtual ecore::EOperation* getEObject___EClass() const ;
-			virtual ecore::EOperation* getEObject___EContainingFeature() const ;
-			virtual ecore::EOperation* getEObject___EContainmentFeature() const ;
-			virtual ecore::EOperation* getEObject___EContents() const ;
-			virtual ecore::EOperation* getEObject___ECrossReferences() const ;
-			virtual ecore::EOperation* getEObject___EGet__EStructuralFeature() const ;
-			virtual ecore::EOperation* getEObject___EGet__EStructuralFeature_EBoolean() const ;
-			virtual ecore::EOperation* getEObject___EInvoke__EOperation_EEList() const ;
-			virtual ecore::EOperation* getEObject___EIsProxy() const ;
-			virtual ecore::EOperation* getEObject___EIsSet__EStructuralFeature() const ;
-			virtual ecore::EOperation* getEObject___EResource() const ;
-			virtual ecore::EOperation* getEObject___ESet__EStructuralFeature_EJavaObject() const ;
-			virtual ecore::EOperation* getEObject___EUnset__EStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EAllContents() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EContainingFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EContainmentFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EContents() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___ECrossReferences() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EGet__EStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EGet__EStructuralFeature_EBoolean() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EInvoke__EOperation_EEList() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EIsProxy() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EIsSet__EStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EResource() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___ESet__EStructuralFeature_EJavaObject() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEObject___EUnset__EStructuralFeature() const ;
 			
 			// End Class EObject
 
 			// Begin Class EOperation
 			//Class and Feature Getter
-			virtual ecore::EClass* getEOperation() const ;
-			virtual ecore::EAttribute* getEOperation_OperationID() const ;
+			virtual std::shared_ptr<ecore::EClass> getEOperation() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEOperation_OperationID() const ;
 			
-			virtual ecore::EReference* getEOperation_EContainingClass() const ;
-			virtual ecore::EReference* getEOperation_EExceptions() const ;
-			virtual ecore::EReference* getEOperation_EGenericExceptions() const ;
-			virtual ecore::EReference* getEOperation_EParameters() const ;
-			virtual ecore::EReference* getEOperation_ETypeParameters() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_EContainingClass() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_EExceptions() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_EGenericExceptions() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_EParameters() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOperation_ETypeParameters() const ;
 			
-			virtual ecore::EOperation* getEOperation___IsOverrideOf__EOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation___IsOverrideOf__EOperation() const ;
 			
 			// End Class EOperation
 
 			// Begin Class EPackage
 			//Class and Feature Getter
-			virtual ecore::EClass* getEPackage() const ;
-			virtual ecore::EAttribute* getEPackage_NsPrefix() const ;
-			virtual ecore::EAttribute* getEPackage_NsURI() const ;
+			virtual std::shared_ptr<ecore::EClass> getEPackage() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEPackage_NsPrefix() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEPackage_NsURI() const ;
 			
-			virtual ecore::EReference* getEPackage_EClassifiers() const ;
-			virtual ecore::EReference* getEPackage_EFactoryInstance() const ;
-			virtual ecore::EReference* getEPackage_ESubpackages() const ;
-			virtual ecore::EReference* getEPackage_ESuperPackage() const ;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_EClassifiers() const ;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_EFactoryInstance() const ;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_ESubpackages() const ;
+			virtual std::shared_ptr<ecore::EReference> getEPackage_ESuperPackage() const ;
 			
-			virtual ecore::EOperation* getEPackage___GetEClassifier__EString() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEPackage___GetEClassifier__EString() const ;
 			
 			// End Class EPackage
 
 			// Begin Class EParameter
 			//Class and Feature Getter
-			virtual ecore::EClass* getEParameter() const ;
+			virtual std::shared_ptr<ecore::EClass> getEParameter() const ;
 			
-			virtual ecore::EReference* getEParameter_EOperation() const ;
+			virtual std::shared_ptr<ecore::EReference> getEParameter_EOperation() const ;
 			
 			
 			// End Class EParameter
 
 			// Begin Class EReference
 			//Class and Feature Getter
-			virtual ecore::EClass* getEReference() const ;
-			virtual ecore::EAttribute* getEReference_Container() const ;
-			virtual ecore::EAttribute* getEReference_Containment() const ;
-			virtual ecore::EAttribute* getEReference_ResolveProxies() const ;
+			virtual std::shared_ptr<ecore::EClass> getEReference() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_Container() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_Containment() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEReference_ResolveProxies() const ;
 			
-			virtual ecore::EReference* getEReference_EKeys() const ;
-			virtual ecore::EReference* getEReference_EOpposite() const ;
-			virtual ecore::EReference* getEReference_EReferenceType() const ;
+			virtual std::shared_ptr<ecore::EReference> getEReference_EKeys() const ;
+			virtual std::shared_ptr<ecore::EReference> getEReference_EOpposite() const ;
+			virtual std::shared_ptr<ecore::EReference> getEReference_EReferenceType() const ;
 			
 			
 			// End Class EReference
 
 			// Begin Class EStringToStringMapEntry
 			//Class and Feature Getter
-			virtual ecore::EClass* getEStringToStringMapEntry() const ;
-			virtual ecore::EAttribute* getEStringToStringMapEntry_Key() const ;
-			virtual ecore::EAttribute* getEStringToStringMapEntry_Value() const ;
+			virtual std::shared_ptr<ecore::EClass> getEStringToStringMapEntry() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_Key() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStringToStringMapEntry_Value() const ;
 			
 			
 			
@@ -294,137 +293,137 @@ namespace ecore
 
 			// Begin Class EStructuralFeature
 			//Class and Feature Getter
-			virtual ecore::EClass* getEStructuralFeature() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_Changeable() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_ContainerClass() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_DefaultValue() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_DefaultValueLiteral() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_Derived() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_FeatureID() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_Transient() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_Unsettable() const ;
-			virtual ecore::EAttribute* getEStructuralFeature_Volatile() const ;
+			virtual std::shared_ptr<ecore::EClass> getEStructuralFeature() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Changeable() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_ContainerClass() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_DefaultValue() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_DefaultValueLiteral() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Derived() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_FeatureID() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Transient() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Unsettable() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEStructuralFeature_Volatile() const ;
 			
-			virtual ecore::EReference* getEStructuralFeature_EContainingClass() const ;
+			virtual std::shared_ptr<ecore::EReference> getEStructuralFeature_EContainingClass() const ;
 			
 			
 			// End Class EStructuralFeature
 
 			// Begin Class ETypeParameter
 			//Class and Feature Getter
-			virtual ecore::EClass* getETypeParameter() const ;
+			virtual std::shared_ptr<ecore::EClass> getETypeParameter() const ;
 			
-			virtual ecore::EReference* getETypeParameter_EBounds() const ;
+			virtual std::shared_ptr<ecore::EReference> getETypeParameter_EBounds() const ;
 			
 			
 			// End Class ETypeParameter
 
 			// Begin Class ETypedElement
 			//Class and Feature Getter
-			virtual ecore::EClass* getETypedElement() const ;
-			virtual ecore::EAttribute* getETypedElement_LowerBound() const ;
-			virtual ecore::EAttribute* getETypedElement_Many() const ;
-			virtual ecore::EAttribute* getETypedElement_Ordered() const ;
-			virtual ecore::EAttribute* getETypedElement_Required() const ;
-			virtual ecore::EAttribute* getETypedElement_Unique() const ;
-			virtual ecore::EAttribute* getETypedElement_UpperBound() const ;
+			virtual std::shared_ptr<ecore::EClass> getETypedElement() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_LowerBound() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Many() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Ordered() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Required() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_Unique() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getETypedElement_UpperBound() const ;
 			
-			virtual ecore::EReference* getETypedElement_EGenericType() const ;
-			virtual ecore::EReference* getETypedElement_EType() const ;
+			virtual std::shared_ptr<ecore::EReference> getETypedElement_EGenericType() const ;
+			virtual std::shared_ptr<ecore::EReference> getETypedElement_EType() const ;
 			
 			
 			// End Class ETypedElement
 
-			virtual ecore::EDataType* getEBigDecimal() const ;
-			virtual ecore::EDataType* getEBigInteger() const ;
-			virtual ecore::EDataType* getEBoolean() const ;
-			virtual ecore::EDataType* getEBooleanObject() const ;
-			virtual ecore::EDataType* getEByte() const ;
-			virtual ecore::EDataType* getEByteArray() const ;
-			virtual ecore::EDataType* getEByteObject() const ;
-			virtual ecore::EDataType* getEChar() const ;
-			virtual ecore::EDataType* getECharacterObject() const ;
-			virtual ecore::EDataType* getEDate() const ;
-			virtual ecore::EDataType* getEDiagnosticChain() const ;
-			virtual ecore::EDataType* getEDouble() const ;
-			virtual ecore::EDataType* getEDoubleObject() const ;
-			virtual ecore::EDataType* getEEList() const ;
-			virtual ecore::EDataType* getEEnumerator() const ;
-			virtual ecore::EDataType* getEFeatureMap() const ;
-			virtual ecore::EDataType* getEFeatureMapEntry() const ;
-			virtual ecore::EDataType* getEFloat() const ;
-			virtual ecore::EDataType* getEFloatObject() const ;
-			virtual ecore::EDataType* getEInt() const ;
-			virtual ecore::EDataType* getEIntegerObject() const ;
-			virtual ecore::EDataType* getEJavaClass() const ;
-			virtual ecore::EDataType* getEJavaObject() const ;
-			virtual ecore::EDataType* getELong() const ;
-			virtual ecore::EDataType* getELongObject() const ;
-			virtual ecore::EDataType* getEMap() const ;
-			virtual ecore::EDataType* getEResource() const ;
-			virtual ecore::EDataType* getEResourceSet() const ;
-			virtual ecore::EDataType* getEShort() const ;
-			virtual ecore::EDataType* getEShortObject() const ;
-			virtual ecore::EDataType* getEString() const ;
-			virtual ecore::EDataType* getETreeIterator() const ;
-			virtual ecore::EDataType* getEInvocationTargetException() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEBigDecimal() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEBigInteger() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEBoolean() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEBooleanObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEByte() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEByteArray() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEByteObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEChar() const ;
+			virtual std::shared_ptr<ecore::EDataType> getECharacterObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEDate() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEDiagnosticChain() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEDouble() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEDoubleObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEEList() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEEnumerator() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEFeatureMap() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEFeatureMapEntry() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEFloat() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEFloatObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEInt() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEIntegerObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEJavaClass() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEJavaObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getELong() const ;
+			virtual std::shared_ptr<ecore::EDataType> getELongObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEMap() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEResource() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEResourceSet() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEShort() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEShortObject() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEString() const ;
+			virtual std::shared_ptr<ecore::EDataType> getETreeIterator() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEInvocationTargetException() const ;
 			
 
 		private:
-			ecore::EClass* eAnnotationEClass = nullptr;
-			ecore::EClass* eAttributeEClass = nullptr;
-			ecore::EClass* eClassEClass = nullptr;
-			ecore::EClass* eClassifierEClass = nullptr;
-			ecore::EClass* eDataTypeEClass = nullptr;
-			ecore::EClass* eEnumEClass = nullptr;
-			ecore::EClass* eEnumLiteralEClass = nullptr;
-			ecore::EClass* eFactoryEClass = nullptr;
-			ecore::EClass* eGenericTypeEClass = nullptr;
-			ecore::EClass* eModelElementEClass = nullptr;
-			ecore::EClass* eNamedElementEClass = nullptr;
-			ecore::EClass* eObjectEClass = nullptr;
-			ecore::EClass* eOperationEClass = nullptr;
-			ecore::EClass* ePackageEClass = nullptr;
-			ecore::EClass* eParameterEClass = nullptr;
-			ecore::EClass* eReferenceEClass = nullptr;
-			ecore::EClass* eStringToStringMapEntryEClass = nullptr;
-			ecore::EClass* eStructuralFeatureEClass = nullptr;
-			ecore::EClass* eTypeParameterEClass = nullptr;
-			ecore::EClass* eTypedElementEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eAnnotationEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eAttributeEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eClassEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eClassifierEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eDataTypeEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eEnumEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eEnumLiteralEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eFactoryEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eGenericTypeEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eModelElementEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eNamedElementEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eObjectEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eOperationEClass = nullptr;
+			std::shared_ptr<ecore::EClass> ePackageEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eParameterEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eReferenceEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eStringToStringMapEntryEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eStructuralFeatureEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eTypeParameterEClass = nullptr;
+			std::shared_ptr<ecore::EClass> eTypedElementEClass = nullptr;
 			
-			ecore::EDataType* eBigDecimalEDataType = nullptr;
-			ecore::EDataType* eBigIntegerEDataType = nullptr;
-			ecore::EDataType* eBooleanEDataType = nullptr;
-			ecore::EDataType* eBooleanObjectEDataType = nullptr;
-			ecore::EDataType* eByteEDataType = nullptr;
-			ecore::EDataType* eByteArrayEDataType = nullptr;
-			ecore::EDataType* eByteObjectEDataType = nullptr;
-			ecore::EDataType* eCharEDataType = nullptr;
-			ecore::EDataType* eCharacterObjectEDataType = nullptr;
-			ecore::EDataType* eDateEDataType = nullptr;
-			ecore::EDataType* eDiagnosticChainEDataType = nullptr;
-			ecore::EDataType* eDoubleEDataType = nullptr;
-			ecore::EDataType* eDoubleObjectEDataType = nullptr;
-			ecore::EDataType* eEListEDataType = nullptr;
-			ecore::EDataType* eEnumeratorEDataType = nullptr;
-			ecore::EDataType* eFeatureMapEDataType = nullptr;
-			ecore::EDataType* eFeatureMapEntryEDataType = nullptr;
-			ecore::EDataType* eFloatEDataType = nullptr;
-			ecore::EDataType* eFloatObjectEDataType = nullptr;
-			ecore::EDataType* eIntEDataType = nullptr;
-			ecore::EDataType* eIntegerObjectEDataType = nullptr;
-			ecore::EDataType* eInvocationTargetExceptionEDataType = nullptr;
-			ecore::EDataType* eJavaClassEDataType = nullptr;
-			ecore::EDataType* eJavaObjectEDataType = nullptr;
-			ecore::EDataType* eLongEDataType = nullptr;
-			ecore::EDataType* eLongObjectEDataType = nullptr;
-			ecore::EDataType* eMapEDataType = nullptr;
-			ecore::EDataType* eResourceEDataType = nullptr;
-			ecore::EDataType* eResourceSetEDataType = nullptr;
-			ecore::EDataType* eShortEDataType = nullptr;
-			ecore::EDataType* eShortObjectEDataType = nullptr;
-			ecore::EDataType* eStringEDataType = nullptr;
-			ecore::EDataType* eTreeIteratorEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eBigDecimalEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eBigIntegerEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eBooleanEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eBooleanObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eByteEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eByteArrayEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eByteObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eCharEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eCharacterObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eDateEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eDiagnosticChainEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eDoubleEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eDoubleObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eEListEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eEnumeratorEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eFeatureMapEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eFeatureMapEntryEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eFloatEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eFloatObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eIntEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eIntegerObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eInvocationTargetExceptionEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eJavaClassEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eJavaObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eLongEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eLongObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eMapEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eResourceEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eResourceSetEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eShortEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eShortObjectEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eStringEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> eTreeIteratorEDataType = nullptr;
 			
 
 			friend class EcorePackage;

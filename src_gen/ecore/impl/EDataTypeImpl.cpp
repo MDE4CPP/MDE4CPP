@@ -40,13 +40,13 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(ecore::ETypeParameter * 	_eTypeParameters : *obj.getETypeParameters())
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
 	{
-		this->getETypeParameters()->push_back(dynamic_cast<ecore::ETypeParameter * >(_eTypeParameters->copy()));
+		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -55,7 +55,7 @@ ecore::EObject *  EDataTypeImpl::copy() const
 	return new EDataTypeImpl(*this);
 }
 
-EClass* EDataTypeImpl::eStaticClass() const
+std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEDataType();
 }

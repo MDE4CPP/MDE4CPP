@@ -74,7 +74,7 @@ namespace ecore
 			
 
 			//Package
-			virtual EcorePackage* getEcorePackage() const;
+			virtual std::shared_ptr<EcorePackage> getEcorePackage() const;
 
 		private:
 			static EcoreFactory * create();

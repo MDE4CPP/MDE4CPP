@@ -22,10 +22,11 @@
 #include "impl/ETypedElementImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EParameterImpl :virtual public ETypedElementImpl, virtual public EParameter
+	class EParameterImpl :virtual public ETypedElementImpl, virtual public EParameter 
 	{
 		public: 
 			EParameterImpl(const EParameterImpl & obj);
@@ -57,7 +58,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EOperation *  getEOperation() const ;
+			virtual std::shared_ptr< ecore::EOperation >  getEOperation() const ;
 			
 							
 			
@@ -73,7 +74,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EPARAMETEREPARAMETERIMPL_HPP */

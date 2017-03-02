@@ -15,44 +15,14 @@ EAnnotationImpl::EAnnotationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_contents == nullptr)
-	{
-		m_contents = new std::vector<ecore::EObject * >();
-	}
-	if( m_details == nullptr)
-	{
-		m_details = new std::vector<ecore::EStringToStringMapEntry * >();
-	}
+	m_contents.reset(new std::vector<std::shared_ptr<ecore::EObject> >());
+	m_details.reset(new std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> >());
 	
-	if( m_references == nullptr)
-	{
-		m_references = new std::vector<ecore::EObject * >();
-	}
+	m_references.reset(new std::vector<std::shared_ptr<ecore::EObject> >());
 }
 
 EAnnotationImpl::~EAnnotationImpl()
 {
-	if(m_details!=nullptr)
-	{
-		for(auto c :*m_details)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_contents!=nullptr)
-	{
-		for(auto c :*m_contents)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_references!=nullptr)
-	{
-		delete(m_references);
-	 	m_references = nullptr;
-	}
 	
 }
 
@@ -65,22 +35,22 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj)
 	
 	m_eModelElement  = obj.getEModelElement();
 
-	std::vector<ecore::EObject * > *  _references = obj.getReferences();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > _references = obj.getReferences();
 	this->getReferences()->insert(this->getReferences()->end(), _references->begin(), _references->end());
 
 
 	//clone containt lists
-	for(ecore::EObject * 	_contents : *obj.getContents())
+	for(std::shared_ptr<ecore::EObject> _contents : *obj.getContents())
 	{
-		this->getContents()->push_back(dynamic_cast<ecore::EObject * >(_contents->copy()));
+		this->getContents()->push_back(std::shared_ptr<ecore::EObject>(dynamic_cast<ecore::EObject*>(_contents->copy())));
 	}
-	for(ecore::EStringToStringMapEntry * 	_details : *obj.getDetails())
+	for(std::shared_ptr<ecore::EStringToStringMapEntry> _details : *obj.getDetails())
 	{
-		this->getDetails()->push_back(dynamic_cast<ecore::EStringToStringMapEntry * >(_details->copy()));
+		this->getDetails()->push_back(std::shared_ptr<ecore::EStringToStringMapEntry>(dynamic_cast<ecore::EStringToStringMapEntry*>(_details->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -89,7 +59,7 @@ ecore::EObject *  EAnnotationImpl::copy() const
 	return new EAnnotationImpl(*this);
 }
 
-EClass* EAnnotationImpl::eStaticClass() const
+std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEAnnotation();
 }
@@ -114,34 +84,34 @@ std::string EAnnotationImpl::getSource() const
 //*********************************
 // References
 //*********************************
-std::vector<ecore::EObject * > *  EAnnotationImpl::getContents() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > EAnnotationImpl::getContents() const
 {
-	
-	return m_contents;
+
+    return m_contents;
 }
 
 
-std::vector<ecore::EStringToStringMapEntry * > *  EAnnotationImpl::getDetails() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > EAnnotationImpl::getDetails() const
 {
-	
-	return m_details;
+
+    return m_details;
 }
 
 
-ecore::EModelElement *  EAnnotationImpl::getEModelElement() const
+std::shared_ptr< ecore::EModelElement >  EAnnotationImpl::getEModelElement() const
 {
-	
-	return m_eModelElement;
+
+    return m_eModelElement;
 }
-void EAnnotationImpl::setEModelElement(ecore::EModelElement *  _eModelElement)
+void EAnnotationImpl::setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement)
 {
-	m_eModelElement = _eModelElement;
+    m_eModelElement = _eModelElement;
 }
 
-std::vector<ecore::EObject * > *  EAnnotationImpl::getReferences() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > EAnnotationImpl::getReferences() const
 {
-	
-	return m_references;
+
+    return m_references;
 }
 
 

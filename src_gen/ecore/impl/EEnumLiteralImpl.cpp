@@ -37,9 +37,9 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -48,7 +48,7 @@ ecore::EObject *  EEnumLiteralImpl::copy() const
 	return new EEnumLiteralImpl(*this);
 }
 
-EClass* EEnumLiteralImpl::eStaticClass() const
+std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEEnumLiteral();
 }
@@ -93,10 +93,10 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
-ecore::EEnum *  EEnumLiteralImpl::getEEnum() const
+std::shared_ptr< ecore::EEnum >  EEnumLiteralImpl::getEEnum() const
 {
-	
-	return m_eEnum;
+
+    return m_eEnum;
 }
 
 

@@ -15,137 +15,24 @@ EClassImpl::EClassImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_eAllAttributes == nullptr)
-	{
-		m_eAllAttributes = new std::vector<ecore::EAttribute * >();
-	}
-	if( m_eAllContainments == nullptr)
-	{
-		m_eAllContainments = new std::vector<ecore::EReference * >();
-	}
-	if( m_eAllGenericSuperTypes == nullptr)
-	{
-		m_eAllGenericSuperTypes = new std::vector<ecore::EGenericType * >();
-	}
-	if( m_eAllOperations == nullptr)
-	{
-		m_eAllOperations = new std::vector<ecore::EOperation * >();
-	}
-	if( m_eAllReferences == nullptr)
-	{
-		m_eAllReferences = new std::vector<ecore::EReference * >();
-	}
-	if( m_eAllStructuralFeatures == nullptr)
-	{
-		m_eAllStructuralFeatures = new std::vector<ecore::EStructuralFeature * >();
-	}
-	if( m_eAllSuperTypes == nullptr)
-	{
-		m_eAllSuperTypes = new std::vector<ecore::EClass * >();
-	}
-	if( m_eAttributes == nullptr)
-	{
-		m_eAttributes = new std::vector<ecore::EAttribute * >();
-	}
-	if( m_eGenericSuperTypes == nullptr)
-	{
-		m_eGenericSuperTypes = new std::vector<ecore::EGenericType * >();
-	}
+	m_eAllAttributes.reset(new std::vector<std::shared_ptr<ecore::EAttribute> >());
+	m_eAllContainments.reset(new std::vector<std::shared_ptr<ecore::EReference> >());
+	m_eAllGenericSuperTypes.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
+	m_eAllOperations.reset(new std::vector<std::shared_ptr<ecore::EOperation> >());
+	m_eAllReferences.reset(new std::vector<std::shared_ptr<ecore::EReference> >());
+	m_eAllStructuralFeatures.reset(new std::vector<std::shared_ptr<ecore::EStructuralFeature> >());
+	m_eAllSuperTypes.reset(new std::vector<std::shared_ptr<ecore::EClass> >());
+	m_eAttributes.reset(new std::vector<std::shared_ptr<ecore::EAttribute> >());
+	m_eGenericSuperTypes.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
 	
-	if( m_eOperations == nullptr)
-	{
-		m_eOperations = new std::vector<ecore::EOperation * >();
-	}
-	if( m_eReferences == nullptr)
-	{
-		m_eReferences = new std::vector<ecore::EReference * >();
-	}
-	if( m_eStructuralFeatures == nullptr)
-	{
-		m_eStructuralFeatures = new std::vector<ecore::EStructuralFeature * >();
-	}
-	if( m_eSuperTypes == nullptr)
-	{
-		m_eSuperTypes = new std::vector<ecore::EClass * >();
-	}
+	m_eOperations.reset(new std::vector<std::shared_ptr<ecore::EOperation> >());
+	m_eReferences.reset(new std::vector<std::shared_ptr<ecore::EReference> >());
+	m_eStructuralFeatures.reset(new std::vector<std::shared_ptr<ecore::EStructuralFeature> >());
+	m_eSuperTypes.reset(new std::vector<std::shared_ptr<ecore::EClass> >());
 }
 
 EClassImpl::~EClassImpl()
 {
-	if(m_eSuperTypes!=nullptr)
-	{
-		delete(m_eSuperTypes);
-	 	m_eSuperTypes = nullptr;
-	}
-	if(m_eOperations!=nullptr)
-	{
-		for(auto c :*m_eOperations)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eAllAttributes!=nullptr)
-	{
-		delete(m_eAllAttributes);
-	 	m_eAllAttributes = nullptr;
-	}
-	if(m_eAllReferences!=nullptr)
-	{
-		delete(m_eAllReferences);
-	 	m_eAllReferences = nullptr;
-	}
-	if(m_eReferences!=nullptr)
-	{
-		delete(m_eReferences);
-	 	m_eReferences = nullptr;
-	}
-	if(m_eAttributes!=nullptr)
-	{
-		delete(m_eAttributes);
-	 	m_eAttributes = nullptr;
-	}
-	if(m_eAllContainments!=nullptr)
-	{
-		delete(m_eAllContainments);
-	 	m_eAllContainments = nullptr;
-	}
-	if(m_eAllOperations!=nullptr)
-	{
-		delete(m_eAllOperations);
-	 	m_eAllOperations = nullptr;
-	}
-	if(m_eAllStructuralFeatures!=nullptr)
-	{
-		delete(m_eAllStructuralFeatures);
-	 	m_eAllStructuralFeatures = nullptr;
-	}
-	if(m_eAllSuperTypes!=nullptr)
-	{
-		delete(m_eAllSuperTypes);
-	 	m_eAllSuperTypes = nullptr;
-	}
-	if(m_eStructuralFeatures!=nullptr)
-	{
-		for(auto c :*m_eStructuralFeatures)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eGenericSuperTypes!=nullptr)
-	{
-		for(auto c :*m_eGenericSuperTypes)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_eAllGenericSuperTypes!=nullptr)
-	{
-		delete(m_eAllGenericSuperTypes);
-	 	m_eAllGenericSuperTypes = nullptr;
-	}
 	
 }
 
@@ -163,61 +50,61 @@ EClassImpl::EClassImpl(const EClassImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<ecore::EAttribute * > *  _eAllAttributes = obj.getEAllAttributes();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > _eAllAttributes = obj.getEAllAttributes();
 	this->getEAllAttributes()->insert(this->getEAllAttributes()->end(), _eAllAttributes->begin(), _eAllAttributes->end());
 
-	std::vector<ecore::EReference * > *  _eAllContainments = obj.getEAllContainments();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > _eAllContainments = obj.getEAllContainments();
 	this->getEAllContainments()->insert(this->getEAllContainments()->end(), _eAllContainments->begin(), _eAllContainments->end());
 
-	std::vector<ecore::EGenericType * > *  _eAllGenericSuperTypes = obj.getEAllGenericSuperTypes();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > _eAllGenericSuperTypes = obj.getEAllGenericSuperTypes();
 	this->getEAllGenericSuperTypes()->insert(this->getEAllGenericSuperTypes()->end(), _eAllGenericSuperTypes->begin(), _eAllGenericSuperTypes->end());
 
-	std::vector<ecore::EOperation * > *  _eAllOperations = obj.getEAllOperations();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > _eAllOperations = obj.getEAllOperations();
 	this->getEAllOperations()->insert(this->getEAllOperations()->end(), _eAllOperations->begin(), _eAllOperations->end());
 
-	std::vector<ecore::EReference * > *  _eAllReferences = obj.getEAllReferences();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > _eAllReferences = obj.getEAllReferences();
 	this->getEAllReferences()->insert(this->getEAllReferences()->end(), _eAllReferences->begin(), _eAllReferences->end());
 
-	std::vector<ecore::EStructuralFeature * > *  _eAllStructuralFeatures = obj.getEAllStructuralFeatures();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > _eAllStructuralFeatures = obj.getEAllStructuralFeatures();
 	this->getEAllStructuralFeatures()->insert(this->getEAllStructuralFeatures()->end(), _eAllStructuralFeatures->begin(), _eAllStructuralFeatures->end());
 
-	std::vector<ecore::EClass * > *  _eAllSuperTypes = obj.getEAllSuperTypes();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > _eAllSuperTypes = obj.getEAllSuperTypes();
 	this->getEAllSuperTypes()->insert(this->getEAllSuperTypes()->end(), _eAllSuperTypes->begin(), _eAllSuperTypes->end());
 
-	std::vector<ecore::EAttribute * > *  _eAttributes = obj.getEAttributes();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > _eAttributes = obj.getEAttributes();
 	this->getEAttributes()->insert(this->getEAttributes()->end(), _eAttributes->begin(), _eAttributes->end());
 
 	m_eIDAttribute  = obj.getEIDAttribute();
 
 	m_ePackage  = obj.getEPackage();
 
-	std::vector<ecore::EReference * > *  _eReferences = obj.getEReferences();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > _eReferences = obj.getEReferences();
 	this->getEReferences()->insert(this->getEReferences()->end(), _eReferences->begin(), _eReferences->end());
 
-	std::vector<ecore::EClass * > *  _eSuperTypes = obj.getESuperTypes();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > _eSuperTypes = obj.getESuperTypes();
 	this->getESuperTypes()->insert(this->getESuperTypes()->end(), _eSuperTypes->begin(), _eSuperTypes->end());
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(ecore::EGenericType * 	_eGenericSuperTypes : *obj.getEGenericSuperTypes())
+	for(std::shared_ptr<ecore::EGenericType> _eGenericSuperTypes : *obj.getEGenericSuperTypes())
 	{
-		this->getEGenericSuperTypes()->push_back(dynamic_cast<ecore::EGenericType * >(_eGenericSuperTypes->copy()));
+		this->getEGenericSuperTypes()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericSuperTypes->copy())));
 	}
-	for(ecore::EOperation * 	_eOperations : *obj.getEOperations())
+	for(std::shared_ptr<ecore::EOperation> _eOperations : *obj.getEOperations())
 	{
-		this->getEOperations()->push_back(dynamic_cast<ecore::EOperation * >(_eOperations->copy()));
+		this->getEOperations()->push_back(std::shared_ptr<ecore::EOperation>(dynamic_cast<ecore::EOperation*>(_eOperations->copy())));
 	}
-	for(ecore::EStructuralFeature * 	_eStructuralFeatures : *obj.getEStructuralFeatures())
+	for(std::shared_ptr<ecore::EStructuralFeature> _eStructuralFeatures : *obj.getEStructuralFeatures())
 	{
-		this->getEStructuralFeatures()->push_back(dynamic_cast<ecore::EStructuralFeature * >(_eStructuralFeatures->copy()));
+		this->getEStructuralFeatures()->push_back(std::shared_ptr<ecore::EStructuralFeature>(dynamic_cast<ecore::EStructuralFeature*>(_eStructuralFeatures->copy())));
 	}
-	for(ecore::ETypeParameter * 	_eTypeParameters : *obj.getETypeParameters())
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
 	{
-		this->getETypeParameters()->push_back(dynamic_cast<ecore::ETypeParameter * >(_eTypeParameters->copy()));
+		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -226,7 +113,7 @@ ecore::EObject *  EClassImpl::copy() const
 	return new EClassImpl(*this);
 }
 
-EClass* EClassImpl::eStaticClass() const
+std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEClass();
 }
@@ -257,24 +144,25 @@ bool EClassImpl::isInterface() const
 //*********************************
 // Operations
 //*********************************
-ecore::EOperation *  EClassImpl::getEOperation(int operationID)  const 
+std::shared_ptr<ecore::EOperation>  EClassImpl::getEOperation(int operationID)  const 
 {
 	//generated from body annotation
-	std::vector<EOperation * > * eAllOps = getEAllOperations();
-    return operationID >=0 && operationID < eAllOps->size() ? eAllOps->at(operationID): nullptr;
+	std::shared_ptr< std::vector<std::shared_ptr<EOperation > > > eAllOps = getEAllOperations();
+    return operationID >=0 && operationID < (int) eAllOps->size() ? eAllOps->at(operationID): nullptr;
 }
 
-ecore::EStructuralFeature *  EClassImpl::getEStructuralFeature(int featureID)  const 
+std::shared_ptr<ecore::EStructuralFeature>  EClassImpl::getEStructuralFeature(int featureID)  const 
 {
 	//generated from body annotation
-	    std::vector<EStructuralFeature * > * eAllFeat = getEAllStructuralFeatures();
-    return featureID >=0 && featureID < eAllFeat->size() ? eAllFeat->at(featureID): nullptr;
+	    std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();
+    return featureID >=0 && featureID < (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;
+
 }
 
-ecore::EStructuralFeature *  EClassImpl::getEStructuralFeature(std::string featureName)  const 
+std::shared_ptr<ecore::EStructuralFeature>  EClassImpl::getEStructuralFeature(std::string featureName)  const 
 {
 	//generated from body annotation
-	for(EStructuralFeature * f: *getEAllStructuralFeatures())
+	    for(std::shared_ptr<EStructuralFeature> f: *getEAllStructuralFeatures())
     {
         if(f->getName()==featureName)
         {
@@ -291,16 +179,16 @@ int EClassImpl::getFeatureCount()  const
 	return getEAllStructuralFeatures()->size();
 }
 
-int EClassImpl::getFeatureID(ecore::EStructuralFeature *  feature)  const 
+int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	//generated from body annotation
-	    std::vector<EStructuralFeature * > * eAllFeat = getEAllStructuralFeatures();
+	    std::shared_ptr<std::vector<std::shared_ptr<EStructuralFeature > > > eAllFeat = getEAllStructuralFeatures();
     int index = feature->getFeatureID();
     
     if(index != -1)
     {
         index = 0;
-        std::vector<EStructuralFeature * >::iterator iter = eAllFeat->begin();
+        std::vector<std::shared_ptr<EStructuralFeature > >::iterator iter = eAllFeat->begin();
         while (iter != eAllFeat->end())
         {
            if (feature == *iter)
@@ -314,7 +202,7 @@ int EClassImpl::getFeatureID(ecore::EStructuralFeature *  feature)  const
     return -1;
 }
 
-ecore::EGenericType *  EClassImpl::getFeatureType(ecore::EStructuralFeature *  feature)  const 
+std::shared_ptr<ecore::EGenericType>  EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -326,16 +214,16 @@ int EClassImpl::getOperationCount()  const
 	return getEAllOperations()->size();
 }
 
-int EClassImpl::getOperationID(ecore::EOperation *  operation)  const 
+int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const 
 {
 	//generated from body annotation
-	    std::vector<EOperation * > * eAllOps = getEAllOperations();
+	    std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > eAllOps = getEAllOperations();
     int index = operation->getOperationID();
     
     if(index != -1)
     {
         index = 0;
-        std::vector<EOperation * >::iterator iter = eAllOps->begin();
+        std::vector<std::shared_ptr<ecore::EOperation > >::iterator iter = eAllOps->begin();
         while (iter != eAllOps->end())
         {
            if (operation == *iter)
@@ -349,141 +237,155 @@ int EClassImpl::getOperationID(ecore::EOperation *  operation)  const
     return -1;
 }
 
-ecore::EOperation *  EClassImpl::getOverride(ecore::EOperation *  operation)  const 
+std::shared_ptr<ecore::EOperation>  EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EClassImpl::isSuperTypeOf(ecore::EClass *  someClass)  const 
+bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const 
 {
 	//generated from body annotation
-	std::vector<ecore::EClass * > * list = someClass->getEAllSuperTypes();
-bool isExisting = std::find(list->begin(), list->end(), this) != list->end();
-delete(list);
-return someClass == this || isExisting;
+		std::shared_ptr< std::vector<std::shared_ptr< ecore::EClass > > > list = someClass->getEAllSuperTypes();
+
+    std::vector<std::shared_ptr< ecore::EClass > >::iterator i=list->begin();
+    std::vector<std::shared_ptr< ecore::EClass > >::iterator endIter=list->end();
+
+    while (i!=endIter)
+    {
+	    if ((*i).get()==this) return true;
+	    ++i;
+    }
+
+    return someClass.get() == this;
 }
 
 //*********************************
 // References
 //*********************************
-std::vector<ecore::EAttribute * > *  EClassImpl::getEAllAttributes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > EClassImpl::getEAllAttributes() const
 {
-	
-	return m_eAllAttributes;
+
+    return m_eAllAttributes;
 }
 
 
-std::vector<ecore::EReference * > *  EClassImpl::getEAllContainments() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > EClassImpl::getEAllContainments() const
 {
-	
-	return m_eAllContainments;
+
+    return m_eAllContainments;
 }
 
 
-std::vector<ecore::EGenericType * > *  EClassImpl::getEAllGenericSuperTypes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > EClassImpl::getEAllGenericSuperTypes() const
 {
-	
-	return m_eAllGenericSuperTypes;
+
+    return m_eAllGenericSuperTypes;
 }
 
 
-std::vector<ecore::EOperation * > *  EClassImpl::getEAllOperations() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > EClassImpl::getEAllOperations() const
 {
-	auto eAllOperations = new std::vector<EOperation *>();
+//generated from getterbody annotation
+    std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > eAllOperations(new std::vector<std::shared_ptr<ecore::EOperation> > () );
 
-    std::vector<EOperation*>* operationList = this->getEOperations();
+    std::shared_ptr< std::vector< std::shared_ptr<ecore::EOperation> > > operationList = this->getEOperations();
     eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());
-    for (EClass * c: *this->getESuperTypes()) {
-        std::vector<EOperation*>* operationList = c->getEAllOperations();
+    for (std::shared_ptr<EClass > c : *this->getESuperTypes())
+    {
+    	std::shared_ptr< std::vector<std::shared_ptr< EOperation> > > operationList = c->getEAllOperations();
         eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());
     }
     return eAllOperations;
 }
 
 
-std::vector<ecore::EReference * > *  EClassImpl::getEAllReferences() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > EClassImpl::getEAllReferences() const
 {
-	
-	return m_eAllReferences;
+
+    return m_eAllReferences;
 }
 
 
-std::vector<ecore::EStructuralFeature * > *  EClassImpl::getEAllStructuralFeatures() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > EClassImpl::getEAllStructuralFeatures() const
 {
-	auto eAllStructuralFeatures = new std::vector<EStructuralFeature*>();
+//generated from getterbody annotation
+    std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector<std::shared_ptr<ecore::EStructuralFeature> >());
 
-    std::vector<EStructuralFeature*>* featureList = this->getEStructuralFeatures();
+    std::shared_ptr< std::vector<std::shared_ptr< EStructuralFeature> > > featureList = this->getEStructuralFeatures();
     eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
-    for (EClass * c: *this->getESuperTypes())
+    for (std::shared_ptr<EClass> c: *this->getESuperTypes())
     {
-        std::vector<EStructuralFeature*>* featureList = c->getEStructuralFeatures();
+    	std::shared_ptr<std::vector<std::shared_ptr<EStructuralFeature> > > featureList = c->getEStructuralFeatures();
         eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
     }
     return eAllStructuralFeatures;
+
 }
 
 
-std::vector<ecore::EClass * > *  EClassImpl::getEAllSuperTypes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > EClassImpl::getEAllSuperTypes() const
 {
-	auto eAllSuperTypes = new std::vector<EClass *>();
+//generated from getterbody annotation
+    std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > eAllSuperTypes(new std::vector<std::shared_ptr<ecore::EClass> > ());
 
-    std::vector<EClass*>* classList = this->getESuperTypes();
+    std::shared_ptr< std::vector<std::shared_ptr< EClass> > > classList = this->getESuperTypes();
     eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
-    for (auto c: *this->getESuperTypes()) {
-        std::vector<EClass*>* classList = c->getESuperTypes();
+    for (std::shared_ptr<EClass>  c: *this->getESuperTypes())
+    {
+    	std::shared_ptr<std::vector<std::shared_ptr<EClass> > > classList = c->getESuperTypes();
         eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
     }
     return eAllSuperTypes;
 }
 
 
-std::vector<ecore::EAttribute * > *  EClassImpl::getEAttributes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > EClassImpl::getEAttributes() const
 {
-	
-	return m_eAttributes;
+
+    return m_eAttributes;
 }
 
 
-std::vector<ecore::EGenericType * > *  EClassImpl::getEGenericSuperTypes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > EClassImpl::getEGenericSuperTypes() const
 {
-	
-	return m_eGenericSuperTypes;
+
+    return m_eGenericSuperTypes;
 }
 
 
-ecore::EAttribute *  EClassImpl::getEIDAttribute() const
+std::shared_ptr< ecore::EAttribute >  EClassImpl::getEIDAttribute() const
 {
-	
-	return m_eIDAttribute;
+
+    return m_eIDAttribute;
 }
 
 
-std::vector<ecore::EOperation * > *  EClassImpl::getEOperations() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > EClassImpl::getEOperations() const
 {
-	
-	return m_eOperations;
+
+    return m_eOperations;
 }
 
 
-std::vector<ecore::EReference * > *  EClassImpl::getEReferences() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > EClassImpl::getEReferences() const
 {
-	
-	return m_eReferences;
+
+    return m_eReferences;
 }
 
 
-std::vector<ecore::EStructuralFeature * > *  EClassImpl::getEStructuralFeatures() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > EClassImpl::getEStructuralFeatures() const
 {
-	
-	return m_eStructuralFeatures;
+
+    return m_eStructuralFeatures;
 }
 
 
-std::vector<ecore::EClass * > *  EClassImpl::getESuperTypes() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > EClassImpl::getESuperTypes() const
 {
-	
-	return m_eSuperTypes;
+
+    return m_eSuperTypes;
 }
 
 

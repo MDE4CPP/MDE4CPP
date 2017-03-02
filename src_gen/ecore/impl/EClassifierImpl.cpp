@@ -16,22 +16,11 @@ EClassifierImpl::EClassifierImpl()
 	// Reference Members
 	//*********************************
 	
-	if( m_eTypeParameters == nullptr)
-	{
-		m_eTypeParameters = new std::vector<ecore::ETypeParameter * >();
-	}
+	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter> >());
 }
 
 EClassifierImpl::~EClassifierImpl()
 {
-	if(m_eTypeParameters!=nullptr)
-	{
-		for(auto c :*m_eTypeParameters)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
 	
 }
 
@@ -51,13 +40,13 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(ecore::ETypeParameter * 	_eTypeParameters : *obj.getETypeParameters())
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
 	{
-		this->getETypeParameters()->push_back(dynamic_cast<ecore::ETypeParameter * >(_eTypeParameters->copy()));
+		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -66,7 +55,7 @@ ecore::EObject *  EClassifierImpl::copy() const
 	return new EClassifierImpl(*this);
 }
 
-EClass* EClassifierImpl::eStaticClass() const
+std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getEClassifier();
 }
@@ -139,20 +128,20 @@ void EClassifierImpl::setGeneratedInstance(bool isGenerated)
 //*********************************
 // References
 //*********************************
-ecore::EPackage *  EClassifierImpl::getEPackage() const
+std::shared_ptr< ecore::EPackage >  EClassifierImpl::getEPackage() const
 {
-	
-	return m_ePackage;
+
+    return m_ePackage;
 }
-void EClassifierImpl::setEPackage(ecore::EPackage *  _ePackage)
+void EClassifierImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 {
-	m_ePackage = _ePackage;
+    m_ePackage = _ePackage;
 }
 
-std::vector<ecore::ETypeParameter * > *  EClassifierImpl::getETypeParameters() const
+std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > EClassifierImpl::getETypeParameters() const
 {
-	
-	return m_eTypeParameters;
+
+    return m_eTypeParameters;
 }
 
 

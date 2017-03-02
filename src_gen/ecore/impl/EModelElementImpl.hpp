@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
 	class EModelElementImpl :virtual public ecore::EObjectImpl,
-virtual public EModelElement
+virtual public EModelElement 
 	{
 		public: 
 			EModelElementImpl(const EModelElementImpl & obj);
@@ -49,7 +50,7 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */ 
-			virtual ecore::EAnnotation *  getEAnnotation(std::string source)  ;
+			virtual std::shared_ptr<ecore::EAnnotation>  getEAnnotation(std::string source)  ;
 			
 			
 			
@@ -63,7 +64,7 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<ecore::EAnnotation * > *  getEAnnotations() const ;
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > getEAnnotations() const ;
 			
 							
 			
@@ -79,7 +80,7 @@ virtual public EModelElement
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EMODELELEMENTEMODELELEMENTIMPL_HPP */

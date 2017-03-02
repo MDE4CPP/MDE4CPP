@@ -22,10 +22,11 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EGenericTypeImpl :virtual public EObjectImpl, virtual public EGenericType
+	class EGenericTypeImpl :virtual public EObjectImpl, virtual public EGenericType 
 	{
 		public: 
 			EGenericTypeImpl(const EGenericTypeImpl & obj);
@@ -61,44 +62,40 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EGenericType *  getEUpperBound() const ;
+			virtual std::shared_ptr< ecore::EGenericType >  getEUpperBound() const ;
 			
 			/*!
 			 */
-			virtual void setEUpperBound(ecore::EGenericType *  _eUpperBound) ;
+			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound) ;
+			/*!
+			 */
+			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getETypeArguments() const ;
 			
 			/*!
 			 */
-			virtual std::vector<ecore::EGenericType * > *  getETypeArguments() const ;
+			virtual std::shared_ptr< ecore::EClassifier >  getERawType() const ;
 			
 			/*!
 			 */
-			virtual ecore::EClassifier *  getERawType() const ;
+			virtual std::shared_ptr< ecore::EGenericType >  getELowerBound() const ;
 			
 			/*!
 			 */
-			virtual ecore::EGenericType *  getELowerBound() const ;
+			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound) ;
+			/*!
+			 */
+			virtual std::shared_ptr< ecore::ETypeParameter >  getETypeParameter() const ;
 			
 			/*!
 			 */
-			virtual void setELowerBound(ecore::EGenericType *  _eLowerBound) ;
+			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter) ;
+			/*!
+			 */
+			virtual std::shared_ptr< ecore::EClassifier >  getEClassifier() const ;
 			
 			/*!
 			 */
-			virtual ecore::ETypeParameter *  getETypeParameter() const ;
-			
-			/*!
-			 */
-			virtual void setETypeParameter(ecore::ETypeParameter *  _eTypeParameter) ;
-			
-			/*!
-			 */
-			virtual ecore::EClassifier *  getEClassifier() const ;
-			
-			/*!
-			 */
-			virtual void setEClassifier(ecore::EClassifier *  _eClassifier) ;
-			
+			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier) ;
 							
 			
 			//*********************************
@@ -113,7 +110,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EGENERICTYPEEGENERICTYPEIMPL_HPP */

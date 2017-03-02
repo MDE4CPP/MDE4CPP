@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -85,7 +86,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EOperation *  getEOperation() const = 0;
+			virtual std::shared_ptr< ecore::EOperation >  getEOperation() const = 0;
 			
 			
 
@@ -100,7 +101,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			ecore::EOperation *  m_eOperation =  nullptr ;
+			std::shared_ptr< ecore::EOperation >  m_eOperation;
 			
 
 		public:

@@ -22,10 +22,11 @@
 #include "impl/ENamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace ecore 
 {
-	class EEnumLiteralImpl :virtual public ENamedElementImpl, virtual public EEnumLiteral
+	class EEnumLiteralImpl :virtual public ENamedElementImpl, virtual public EEnumLiteral 
 	{
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);
@@ -81,7 +82,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual ecore::EEnum *  getEEnum() const ;
+			virtual std::shared_ptr< ecore::EEnum >  getEEnum() const ;
 			
 							
 			
@@ -97,7 +98,7 @@ namespace ecore
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual EClass* eStaticClass() const;
+			virtual std::shared_ptr<EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: ECORE_EENUMLITERALEENUMLITERALIMPL_HPP */

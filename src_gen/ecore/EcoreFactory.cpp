@@ -4,15 +4,15 @@
 using namespace ecore;
 
 //static initialisation
-EcoreFactory * EcoreFactory::instance = nullptr;
+std::shared_ptr<EcoreFactory> EcoreFactory::instance;
 
-EcoreFactory * EcoreFactory::eInstance()
+std::shared_ptr<EcoreFactory> EcoreFactory::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = EcoreFactoryImpl::create();
-		dynamic_cast<EcoreFactoryImpl * >(instance)->init();
+		instance.reset(EcoreFactoryImpl::create());
+		std::dynamic_pointer_cast<EcoreFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

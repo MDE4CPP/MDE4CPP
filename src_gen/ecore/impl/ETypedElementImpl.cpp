@@ -21,14 +21,6 @@ ETypedElementImpl::ETypedElementImpl()
 
 ETypedElementImpl::~ETypedElementImpl()
 {
-	if(m_eGenericType!=nullptr)
-	{
-		if(m_eGenericType)
-		{
-			delete(m_eGenericType);
-			m_eGenericType = nullptr;
-		}
-	}
 	
 }
 
@@ -49,13 +41,13 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType = dynamic_cast<ecore::EGenericType * >(obj.getEGenericType()->copy());
+		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
 }
 
@@ -64,7 +56,7 @@ ecore::EObject *  ETypedElementImpl::copy() const
 	return new ETypedElementImpl(*this);
 }
 
-EClass* ETypedElementImpl::eStaticClass() const
+std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
 {
 	return EcorePackageImpl::eInstance()->getETypedElement();
 }
@@ -133,24 +125,24 @@ int ETypedElementImpl::getUpperBound() const
 //*********************************
 // References
 //*********************************
-ecore::EGenericType *  ETypedElementImpl::getEGenericType() const
+std::shared_ptr< ecore::EGenericType >  ETypedElementImpl::getEGenericType() const
 {
-	
-	return m_eGenericType;
+
+    return m_eGenericType;
 }
-void ETypedElementImpl::setEGenericType(ecore::EGenericType *  _eGenericType)
+void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
 {
-	m_eGenericType = _eGenericType;
+    m_eGenericType = _eGenericType;
 }
 
-ecore::EClassifier *  ETypedElementImpl::getEType() const
+std::shared_ptr< ecore::EClassifier >  ETypedElementImpl::getEType() const
 {
-	
-	return m_eType;
+
+    return m_eType;
 }
-void ETypedElementImpl::setEType(ecore::EClassifier *  _eType)
+void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 {
-	m_eType = _eType;
+    m_eType = _eType;
 }
 
 //*********************************
