@@ -1,0 +1,35 @@
+[submodule "generator/ecore4CPP"]
+	path = generator/ecore4CPP
+	url = https://github.com/MDE4CPP/ecore4CPP.git
+	branch = remotes/origin/development
+[submodule "generator/UML4CPP"]
+	path = generator/UML4CPP
+	url = https://github.com/MDE4CPP/UML4CPP.git
+	branch = remotes/origin/development
+[submodule "generator/fUML4CPP"]
+	path = generator/fUML4CPP
+	url = https://github.com/MDE4CPP/fUML4CPP.git
+	branch = remotes/origin/development
+[submodule "src/common"]
+	path = src/common
+	url = https://github.com/MDE4CPP/common.git
+	branch = remotes/origin/development
+[submodule "src/ecore"]
+	path = src/ecore
+	url = https://github.com/MDE4CPP/ecore.git
+	branch = remotes/origin/development
+[submodule "src/examples"]
+	path = src/examples
+	url = https://github.com/MDE4CPP/examples.git
+	branch = remotes/origin/development
+[submodule "src/fuml"]
+	path = src/fuml
+	url = https://github.com/MDE4CPP/fuml.git
+[submodule "src/uml"]
+	path = src/uml
+	url = https://github.com/MDE4CPP/uml.git
+	branch = remotes/origin/development
+[submodule "src/util"]
+	path = src/util
+	url = https://github.com/MDE4CPP/util.git
+	branch = remotes/origin/development
