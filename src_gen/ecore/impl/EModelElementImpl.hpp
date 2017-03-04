@@ -64,7 +64,7 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > getEAnnotations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> getEAnnotations() const ;
 			
 							
 			

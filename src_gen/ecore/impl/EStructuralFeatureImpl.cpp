@@ -13,6 +13,18 @@ using namespace ecore;
 EStructuralFeatureImpl::EStructuralFeatureImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -168,7 +180,7 @@ bool EStructuralFeatureImpl::isVolatile() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EClass >  EStructuralFeatureImpl::getEContainingClass() const
+std::shared_ptr<ecore::EClass> EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;

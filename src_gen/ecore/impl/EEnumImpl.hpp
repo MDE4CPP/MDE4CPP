@@ -70,7 +70,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > getELiterals() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> getELiterals() const ;
 			
 							
 			

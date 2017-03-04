@@ -82,7 +82,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EEnum >  getEEnum() const ;
+			virtual std::shared_ptr<ecore::EEnum> getEEnum() const ;
 			
 							
 			

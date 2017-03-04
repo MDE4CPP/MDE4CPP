@@ -103,7 +103,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EPackage >  getEPackage() const = 0;
+			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;
 			
 			/*!
 			 */
@@ -121,7 +121,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EPackage >  m_ePackage;
+			std::shared_ptr<ecore::EPackage> m_ePackage;
 			
 
 		public:

@@ -116,18 +116,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EReference >  getEOpposite() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOpposite() const = 0;
 			
 			/*!
 			 */
 			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EClass >  getEReferenceType() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > getEKeys() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEKeys() const = 0;
 			
 			
 
@@ -151,13 +151,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EReference >  m_eOpposite;
+			std::shared_ptr<ecore::EReference> m_eOpposite;
 			/*!
 			 */
-			std::shared_ptr< ecore::EClass >  m_eReferenceType;
+			std::shared_ptr<ecore::EClass> m_eReferenceType;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > m_eKeys;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> m_eKeys;
 			
 
 		public:

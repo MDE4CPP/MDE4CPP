@@ -13,6 +13,10 @@ using namespace ecore;
 EDataTypeImpl::EDataTypeImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 

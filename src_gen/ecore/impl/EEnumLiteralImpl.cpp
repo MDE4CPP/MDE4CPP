@@ -13,6 +13,12 @@ using namespace ecore;
 EEnumLiteralImpl::EEnumLiteralImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -93,7 +99,7 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EEnum >  EEnumLiteralImpl::getEEnum() const
+std::shared_ptr<ecore::EEnum> EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;

@@ -114,59 +114,59 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > getESuperTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClass>>> getESuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > getEOperations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> getEOperations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > getEAllAttributes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEAllAttributes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > getEAllReferences() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEAllReferences() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > getEReferences() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEReferences() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAttribute> > > getEAttributes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEAttributes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EReference> > > getEAllContainments() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEAllContainments() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > getEAllOperations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> getEAllOperations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > getEAllStructuralFeatures() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> getEAllStructuralFeatures() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > getEAllSuperTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClass>>> getEAllSuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EAttribute >  getEIDAttribute() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getEIDAttribute() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > getEStructuralFeatures() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> getEStructuralFeatures() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEGenericSuperTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEGenericSuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEAllGenericSuperTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEAllGenericSuperTypes() const ;
 			
 							
 			

@@ -13,13 +13,17 @@ using namespace ecore;
 EOperationImpl::EOperationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	m_eExceptions.reset(new std::vector<std::shared_ptr<ecore::EClassifier> >());
-	m_eGenericExceptions.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
-	m_eParameters.reset(new std::vector<std::shared_ptr<ecore::EParameter> >());
-	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter> >());
+	m_eExceptions.reset(new std::vector<std::shared_ptr<ecore::EClassifier>>());
+	m_eGenericExceptions.reset(new std::vector<std::shared_ptr<ecore::EGenericType>>());
+	m_eParameters.reset(new std::vector<std::shared_ptr<ecore::EParameter>>());
+	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter>>());
 }
 
 EOperationImpl::~EOperationImpl()
@@ -43,7 +47,7 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-	std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > _eExceptions = obj.getEExceptions();
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> _eExceptions = obj.getEExceptions();
 	this->getEExceptions()->insert(this->getEExceptions()->end(), _eExceptions->begin(), _eExceptions->end());
 
 	m_eType  = obj.getEType();
@@ -124,35 +128,35 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperat
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EClass >  EOperationImpl::getEContainingClass() const
+std::shared_ptr<ecore::EClass> EOperationImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;
 }
 
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > EOperationImpl::getEExceptions() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> EOperationImpl::getEExceptions() const
 {
 
     return m_eExceptions;
 }
 
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > EOperationImpl::getEGenericExceptions() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> EOperationImpl::getEGenericExceptions() const
 {
 
     return m_eGenericExceptions;
 }
 
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > EOperationImpl::getEParameters() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EParameter>>> EOperationImpl::getEParameters() const
 {
 
     return m_eParameters;
 }
 
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > EOperationImpl::getETypeParameters() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> EOperationImpl::getETypeParameters() const
 {
 
     return m_eTypeParameters;

@@ -13,6 +13,10 @@ using namespace ecore;
 ENamedElementImpl::ENamedElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 

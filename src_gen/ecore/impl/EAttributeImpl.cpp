@@ -13,6 +13,10 @@ using namespace ecore;
 EAttributeImpl::EAttributeImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -94,7 +98,7 @@ bool EAttributeImpl::isID() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EDataType >  EAttributeImpl::getEAttributeType() const
+std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
     return m_eAttributeType;

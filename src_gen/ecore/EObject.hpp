@@ -141,7 +141,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EObject >  eContainer() const = 0;
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0;
 			
 			/*!
 			 */
@@ -159,7 +159,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EObject >  m_eContainer;
+			std::shared_ptr<ecore::EObject> m_eContainer;
 			
 
 		public:

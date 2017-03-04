@@ -13,10 +13,18 @@ using namespace ecore;
 EClassifierImpl::EClassifierImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter> >());
+	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter>>());
 }
 
 EClassifierImpl::~EClassifierImpl()
@@ -128,7 +136,7 @@ void EClassifierImpl::setGeneratedInstance(bool isGenerated)
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EPackage >  EClassifierImpl::getEPackage() const
+std::shared_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
 {
 
     return m_ePackage;
@@ -138,7 +146,7 @@ void EClassifierImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
     m_ePackage = _ePackage;
 }
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > EClassifierImpl::getETypeParameters() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> EClassifierImpl::getETypeParameters() const
 {
 
     return m_eTypeParameters;

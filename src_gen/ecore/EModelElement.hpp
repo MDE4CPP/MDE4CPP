@@ -71,7 +71,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > getEAnnotations() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> getEAnnotations() const = 0;
 			
 			
 
@@ -86,7 +86,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > m_eAnnotations;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> m_eAnnotations;
 			
 
 		public:

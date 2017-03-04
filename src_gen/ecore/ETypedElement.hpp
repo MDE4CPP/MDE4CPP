@@ -121,14 +121,14 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EClassifier >  getEType() const = 0;
+			virtual std::shared_ptr<ecore::EClassifier> getEType() const = 0;
 			
 			/*!
 			 */
 			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EGenericType >  getEGenericType() const = 0;
+			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const = 0;
 			
 			/*!
 			 */
@@ -164,10 +164,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EClassifier >  m_eType;
+			std::shared_ptr<ecore::EClassifier> m_eType;
 			/*!
 			 */
-			std::shared_ptr< ecore::EGenericType >  m_eGenericType;
+			std::shared_ptr<ecore::EGenericType> m_eGenericType;
 			
 
 		public:

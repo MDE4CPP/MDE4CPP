@@ -13,9 +13,13 @@ using namespace ecore;
 ETypeParameterImpl::ETypeParameterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	m_eBounds.reset(new std::vector<std::shared_ptr<ecore::EGenericType> >());
+	m_eBounds.reset(new std::vector<std::shared_ptr<ecore::EGenericType>>());
 }
 
 ETypeParameterImpl::~ETypeParameterImpl()
@@ -63,7 +67,7 @@ std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > ETypeParameterImpl::getEBounds() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> ETypeParameterImpl::getEBounds() const
 {
 
     return m_eBounds;

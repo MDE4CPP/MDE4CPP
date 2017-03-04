@@ -102,14 +102,14 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EPackage >  getEPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
 			
 			/*!
 			 */
 			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) ;
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > getETypeParameters() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> getETypeParameters() const ;
 			
 							
 			

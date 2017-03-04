@@ -76,7 +76,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEBounds() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEBounds() const = 0;
 			
 			
 
@@ -91,7 +91,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > m_eBounds;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> m_eBounds;
 			
 
 		public:

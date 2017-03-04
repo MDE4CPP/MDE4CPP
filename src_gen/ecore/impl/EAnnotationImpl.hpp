@@ -66,22 +66,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > getDetails() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> getDetails() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EModelElement >  getEModelElement() const ;
+			virtual std::shared_ptr<ecore::EModelElement> getEModelElement() const ;
 			
 			/*!
 			 */
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getContents() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getContents() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getReferences() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getReferences() const ;
 			
 							
 			

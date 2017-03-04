@@ -70,23 +70,23 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EClass >  getEContainingClass() const ;
+			virtual std::shared_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > getETypeParameters() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> getETypeParameters() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > getEParameters() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EParameter>>> getEParameters() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > getEExceptions() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> getEExceptions() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEGenericExceptions() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEGenericExceptions() const ;
 			
 							
 			

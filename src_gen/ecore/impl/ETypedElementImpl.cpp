@@ -13,6 +13,15 @@ using namespace ecore;
 ETypedElementImpl::ETypedElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -125,7 +134,7 @@ int ETypedElementImpl::getUpperBound() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EGenericType >  ETypedElementImpl::getEGenericType() const
+std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
 {
 
     return m_eGenericType;
@@ -135,7 +144,7 @@ void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eG
     m_eGenericType = _eGenericType;
 }
 
-std::shared_ptr< ecore::EClassifier >  ETypedElementImpl::getEType() const
+std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
 {
 
     return m_eType;

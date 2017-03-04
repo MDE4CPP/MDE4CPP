@@ -70,7 +70,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EPackage >  getEPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
 			
 			/*!
 			 */

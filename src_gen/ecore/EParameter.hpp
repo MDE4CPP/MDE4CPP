@@ -86,7 +86,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EOperation >  getEOperation() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation() const = 0;
 			
 			
 
@@ -101,7 +101,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EOperation >  m_eOperation;
+			std::shared_ptr<ecore::EOperation> m_eOperation;
 			
 
 		public:

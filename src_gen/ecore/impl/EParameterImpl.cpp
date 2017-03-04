@@ -13,6 +13,10 @@ using namespace ecore;
 EParameterImpl::EParameterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -73,7 +77,7 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EOperation >  EParameterImpl::getEOperation() const
+std::shared_ptr<ecore::EOperation> EParameterImpl::getEOperation() const
 {
 
     return m_eOperation;

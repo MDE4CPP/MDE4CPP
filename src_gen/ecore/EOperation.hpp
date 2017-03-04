@@ -109,23 +109,23 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EClass >  getEContainingClass() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEContainingClass() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > getETypeParameters() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> getETypeParameters() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > getEParameters() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EParameter>>> getEParameters() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > getEExceptions() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> getEExceptions() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > getEGenericExceptions() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEGenericExceptions() const = 0;
 			
 			
 
@@ -143,19 +143,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EClass >  m_eContainingClass;
+			std::shared_ptr<ecore::EClass> m_eContainingClass;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::ETypeParameter> > > m_eTypeParameters;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> m_eTypeParameters;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EParameter> > > m_eParameters;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EParameter>>> m_eParameters;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > m_eExceptions;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> m_eExceptions;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EGenericType> > > m_eGenericExceptions;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> m_eGenericExceptions;
 			
 
 		public:

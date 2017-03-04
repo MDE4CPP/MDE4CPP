@@ -100,7 +100,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EEnum >  getEEnum() const = 0;
+			virtual std::shared_ptr<ecore::EEnum> getEEnum() const = 0;
 			
 			
 
@@ -124,7 +124,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< ecore::EEnum >  m_eEnum;
+			std::shared_ptr<ecore::EEnum> m_eEnum;
 			
 
 		public:

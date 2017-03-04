@@ -58,7 +58,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EOperation >  getEOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation() const ;
 			
 							
 			

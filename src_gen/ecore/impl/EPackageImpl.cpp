@@ -13,11 +13,16 @@ using namespace ecore;
 EPackageImpl::EPackageImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	m_eClassifiers.reset(new std::vector<std::shared_ptr<ecore::EClassifier> >());
+	m_eClassifiers.reset(new std::vector<std::shared_ptr<ecore::EClassifier>>());
 	
-	m_eSubpackages.reset(new std::vector<std::shared_ptr<ecore::EPackage> >());
+	m_eSubpackages.reset(new std::vector<std::shared_ptr<ecore::EPackage>>());
 	
 }
 
@@ -430,14 +435,14 @@ c->setGeneratedInstance(true);
 //*********************************
 // References
 //*********************************
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > EPackageImpl::getEClassifiers() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> EPackageImpl::getEClassifiers() const
 {
 
     return m_eClassifiers;
 }
 
 
-std::shared_ptr< ecore::EFactory >  EPackageImpl::getEFactoryInstance() const
+std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 {
 //assert(m_eFactoryInstance);
     return m_eFactoryInstance;
@@ -447,14 +452,14 @@ void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactor
     m_eFactoryInstance = _eFactoryInstance;
 }
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EPackage> > > EPackageImpl::getESubpackages() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EPackage>>> EPackageImpl::getESubpackages() const
 {
 
     return m_eSubpackages;
 }
 
 
-std::shared_ptr< ecore::EPackage >  EPackageImpl::getESuperPackage() const
+std::shared_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 {
 
     return m_eSuperPackage;

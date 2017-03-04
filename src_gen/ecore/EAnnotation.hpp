@@ -89,22 +89,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > getDetails() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> getDetails() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EModelElement >  getEModelElement() const = 0;
+			virtual std::shared_ptr<ecore::EModelElement> getEModelElement() const = 0;
 			
 			/*!
 			 */
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getContents() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getContents() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > getReferences() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getReferences() const = 0;
 			
 			
 
@@ -122,16 +122,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > m_details;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> m_details;
 			/*!
 			 */
-			std::shared_ptr< ecore::EModelElement >  m_eModelElement;
+			std::shared_ptr<ecore::EModelElement> m_eModelElement;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > m_contents;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> m_contents;
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > m_references;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> m_references;
 			
 
 		public:

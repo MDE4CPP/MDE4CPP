@@ -13,6 +13,10 @@ using namespace ecore;
 EFactoryImpl::EFactoryImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -77,7 +81,7 @@ boost::any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDa
 //*********************************
 // References
 //*********************************
-std::shared_ptr< ecore::EPackage >  EFactoryImpl::getEPackage() const
+std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
 {
 //assert(m_ePackage);
     return m_ePackage;

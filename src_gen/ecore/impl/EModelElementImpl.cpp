@@ -13,9 +13,13 @@ using namespace ecore;
 EModelElementImpl::EModelElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	m_eAnnotations.reset(new std::vector<std::shared_ptr<ecore::EAnnotation> >());
+	m_eAnnotations.reset(new std::vector<std::shared_ptr<ecore::EAnnotation>>());
 }
 
 EModelElementImpl::~EModelElementImpl()
@@ -70,7 +74,7 @@ std::shared_ptr<ecore::EAnnotation>  EModelElementImpl::getEAnnotation(std::stri
 //*********************************
 // References
 //*********************************
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EAnnotation> > > EModelElementImpl::getEAnnotations() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> EModelElementImpl::getEAnnotations() const
 {
 
     return m_eAnnotations;

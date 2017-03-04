@@ -66,7 +66,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EDataType >  getEAttributeType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const ;
 			
 							
 			

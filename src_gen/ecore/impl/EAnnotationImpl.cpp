@@ -13,12 +13,16 @@ using namespace ecore;
 EAnnotationImpl::EAnnotationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	m_contents.reset(new std::vector<std::shared_ptr<ecore::EObject> >());
-	m_details.reset(new std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> >());
+	m_contents.reset(new std::vector<std::shared_ptr<ecore::EObject>>());
+	m_details.reset(new std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>());
 	
-	m_references.reset(new std::vector<std::shared_ptr<ecore::EObject> >());
+	m_references.reset(new std::vector<std::shared_ptr<ecore::EObject>>());
 }
 
 EAnnotationImpl::~EAnnotationImpl()
@@ -35,7 +39,7 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj)
 	
 	m_eModelElement  = obj.getEModelElement();
 
-	std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > _references = obj.getReferences();
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> _references = obj.getReferences();
 	this->getReferences()->insert(this->getReferences()->end(), _references->begin(), _references->end());
 
 
@@ -84,21 +88,21 @@ std::string EAnnotationImpl::getSource() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > EAnnotationImpl::getContents() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> EAnnotationImpl::getContents() const
 {
 
     return m_contents;
 }
 
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EStringToStringMapEntry> > > EAnnotationImpl::getDetails() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> EAnnotationImpl::getDetails() const
 {
 
     return m_details;
 }
 
 
-std::shared_ptr< ecore::EModelElement >  EAnnotationImpl::getEModelElement() const
+std::shared_ptr<ecore::EModelElement> EAnnotationImpl::getEModelElement() const
 {
 
     return m_eModelElement;
@@ -108,7 +112,7 @@ void EAnnotationImpl::setEModelElement(std::shared_ptr<ecore::EModelElement> _eM
     m_eModelElement = _eModelElement;
 }
 
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EObject> > > EAnnotationImpl::getReferences() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> EAnnotationImpl::getReferences() const
 {
 
     return m_references;

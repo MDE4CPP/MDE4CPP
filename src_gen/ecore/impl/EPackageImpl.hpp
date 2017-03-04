@@ -186,22 +186,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EFactory >  getEFactoryInstance() const ;
+			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const ;
 			
 			/*!
 			 */
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) ;
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EClassifier> > > getEClassifiers() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> getEClassifiers() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EPackage> > > getESubpackages() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EPackage>>> getESubpackages() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr< ecore::EPackage >  getESuperPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage> getESuperPackage() const ;
 			
 							
 			

@@ -13,6 +13,11 @@ using namespace ecore;
 EStringToStringMapEntryImpl::EStringToStringMapEntryImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 

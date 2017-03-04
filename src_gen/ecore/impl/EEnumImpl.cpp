@@ -13,9 +13,13 @@ using namespace ecore;
 EEnumImpl::EEnumImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	m_eLiterals.reset(new std::vector<std::shared_ptr<ecore::EEnumLiteral> >());
+	m_eLiterals.reset(new std::vector<std::shared_ptr<ecore::EEnumLiteral>>());
 }
 
 EEnumImpl::~EEnumImpl()
@@ -114,7 +118,7 @@ std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteralByLiteral(std::s
 //*********************************
 // References
 //*********************************
-std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > EEnumImpl::getELiterals() const
+std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> EEnumImpl::getELiterals() const
 {
 
     return m_eLiterals;

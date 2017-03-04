@@ -98,7 +98,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > getELiterals() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> getELiterals() const = 0;
 			
 			
 
@@ -113,7 +113,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< std::vector<std::shared_ptr<ecore::EEnumLiteral> > > m_eLiterals;
+			std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> m_eLiterals;
 			
 
 		public:
