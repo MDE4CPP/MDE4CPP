@@ -43,6 +43,12 @@ using namespace [aClass.ePackage.name/];
 [className/]::[className/]()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aAttribute.generateAttributeInit()/][/for]
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
@@ -70,9 +76,6 @@ using namespace [aClass.ePackage.name/];
 	[else]
 	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
 	this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
-[if (ref.isUnion())]
-	delete(_[ref.name/]);
-[/if]
 	[/if]
 
 	[/for]

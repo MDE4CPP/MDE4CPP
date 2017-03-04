@@ -155,7 +155,7 @@ model {
 			}
 			else {
 [if (aPackage.name='uml')]
-				cppCompiler.args '-O2', '-DNDEBUG'
+				cppCompiler.args '-O1', '-DNDEBUG'
 [else]
 				cppCompiler.args '-O3', '-DNDEBUG'
 [/if]

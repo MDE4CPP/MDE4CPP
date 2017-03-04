@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and not (aAttribute.upperBound = -1)/]
+[query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and (aAttribute.upperBound = 1)/]
 [query public hasGetter(aAttribute : EAttribute) : EBoolean = true or hasKey('getterbody') /]
 
 [***###########################################################################################
@@ -32,10 +32,14 @@
 
 [template public generateAttributeProtectedMember(aAttribute : EAttribute)]
 [aAttribute.generateDokumentation()/] 
-[if (aAttribute.upperBound=-1)]
-[aAttribute.generateAttributeType()/] m_[aAttribute.name/] = std::make_shared<std::vector<[aAttribute.generateAttributeType()/]> > (new std::vector<[aAttribute.eGenericType.generateCppType()/]>()); [else]
+[if (not(aAttribute.upperBound = 1))]
+[aAttribute.generateAttributeType()/] m_[aAttribute.name/]; [else]
 [aAttribute.generateAttributeType()/] m_[aAttribute.name/] [if (aAttribute.defaultValueLiteral->notEmpty())]= [if (aAttribute.eType.oclIsTypeOf(EEnum))][aAttribute.eType.name/]::[aAttribute.defaultValueLiteral.toUpperCase()/] [else] [aAttribute.defaultValueLiteral/][/if][/if];
 [/if]
+[/template]
+
+[template public generateAttributeInit(aAttribute : EAttribute) ? (not(aAttribute.upperBound = 1))]
+m_[aAttribute.name/].reset(new std::vector<[aAttribute.eGenericType.generateCppType()/]>());
 [/template]
 
 [template public generateAttributeGetterDecleration(aAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
