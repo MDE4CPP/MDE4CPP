@@ -22,10 +22,11 @@
 #include "impl/DependencyImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class AbstractionImpl :virtual public DependencyImpl, virtual public Abstraction
+	class AbstractionImpl :virtual public DependencyImpl, virtual public Abstraction 
 	{
 		public: 
 			AbstractionImpl(const AbstractionImpl & obj);
@@ -58,13 +59,12 @@ namespace uml
 			/*!
 			 An OpaqueExpression that states the abstraction relationship between the supplier(s) and the client(s). In some cases, such as derivation, it is usually formal and unidirectional; in other cases, such as trace, it is usually informal and bidirectional. The mapping expression is optional and may be omitted if the precise relationship between the Elements is not specified.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::OpaqueExpression *  getMapping() const ;
+			virtual std::shared_ptr<uml::OpaqueExpression> getMapping() const ;
 			
 			/*!
 			 An OpaqueExpression that states the abstraction relationship between the supplier(s) and the client(s). In some cases, such as derivation, it is usually formal and unidirectional; in other cases, such as trace, it is usually informal and bidirectional. The mapping expression is optional and may be omitted if the precise relationship between the Elements is not specified.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setMapping(uml::OpaqueExpression *  _mapping) ;
-			
+			virtual void setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping) ;
 							
 			
 			//*********************************
@@ -73,19 +73,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const ;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -94,7 +94,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ABSTRACTIONABSTRACTIONIMPL_HPP */

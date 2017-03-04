@@ -22,10 +22,11 @@
 #include "impl/ValueSpecificationImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class OpaqueExpressionImpl :virtual public ValueSpecificationImpl, virtual public OpaqueExpression
+	class OpaqueExpressionImpl :virtual public ValueSpecificationImpl, virtual public OpaqueExpression 
 	{
 		public: 
 			OpaqueExpressionImpl(const OpaqueExpressionImpl & obj);
@@ -48,18 +49,18 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query isIntegral() tells whether an expression is intended to produce an Integer.
@@ -98,12 +99,12 @@ namespace uml
 			/*!
 			 A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
 			<p>From package UML::Values.</p> */ 
-			virtual std::vector<std::string> *  getBody() const ;
+			virtual std::shared_ptr<std::vector<std::string>> getBody() const ;
 			
 			/*!
 			 Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p> */ 
-			virtual std::vector<std::string> *  getLanguage() const ;
+			virtual std::shared_ptr<std::vector<std::string>> getLanguage() const ;
 			
 			
 			
@@ -113,17 +114,16 @@ namespace uml
 			/*!
 			 Specifies the behavior of the OpaqueExpression as a UML Behavior.
 			<p>From package UML::Values.</p> */
-			virtual uml::Behavior *  getBehavior() const ;
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
 			
 			/*!
 			 Specifies the behavior of the OpaqueExpression as a UML Behavior.
 			<p>From package UML::Values.</p> */
-			virtual void setBehavior(uml::Behavior *  _behavior) ;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
 			/*!
 			 If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
 			<p>From package UML::Values.</p> */
-			virtual uml::Parameter *  getResult() const ;
+			virtual std::shared_ptr<uml::Parameter> getResult() const ;
 			
 							
 			
@@ -133,10 +133,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -145,7 +145,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_OPAQUEEXPRESSIONOPAQUEEXPRESSIONIMPL_HPP */

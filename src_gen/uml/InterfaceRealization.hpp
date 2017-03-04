@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -123,23 +124,21 @@ namespace uml
 			/*!
 			 References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual uml::Interface *  getContract() const = 0;
+			virtual std::shared_ptr<uml::Interface> getContract() const = 0;
 			
 			/*!
 			 References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setContract(uml::Interface *  _contract) = 0;
+			virtual void setContract(std::shared_ptr<uml::Interface> _contract) = 0;
+			/*!
+			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
+			<p>From package UML::SimpleClassifiers.</p> */
+			virtual std::shared_ptr<uml::BehavioredClassifier> getImplementingClassifier() const = 0;
 			
 			/*!
 			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual uml::BehavioredClassifier *  getImplementingClassifier() const = 0;
-			
-			/*!
-			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
-			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setImplementingClassifier(uml::BehavioredClassifier *  _implementingClassifier) = 0;
-			
+			virtual void setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier) = 0;
 			
 
 		protected:
@@ -154,11 +153,11 @@ namespace uml
 			/*!
 			 References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p> */
-			uml::Interface *  m_contract =  nullptr ;
+			std::shared_ptr<uml::Interface> m_contract;
 			/*!
 			 References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p> */
-			uml::BehavioredClassifier *  m_implementingClassifier =  nullptr ;
+			std::shared_ptr<uml::BehavioredClassifier> m_implementingClassifier;
 			
 
 		public:
@@ -168,19 +167,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

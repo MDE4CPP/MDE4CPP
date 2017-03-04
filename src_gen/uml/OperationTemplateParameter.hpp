@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace uml
 			    Sequence{1.. defaultOp.ownedParameter->size()}->forAll( ix | 
 			        let p1: Parameter = defaultOp.ownedParameter->at(ix), p2 : Parameter = parameteredElement.ownedParameter->at(ix) in
 			          p1.type = p2.type and p1.upper = p2.upper and p1.lower = p2.lower and p1.direction = p2.direction and p1.isOrdered = p2.isOrdered and p1.isUnique = p2.isUnique))) */ 
-			virtual bool match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -117,10 +118,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

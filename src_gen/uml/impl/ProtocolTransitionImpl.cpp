@@ -13,23 +13,22 @@ using namespace uml;
 ProtocolTransitionImpl::ProtocolTransitionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
 	
-	if( m_referred == nullptr)
-	{
-		m_referred = new std::vector<uml::Operation * >();
-	}
+	m_referred.reset(new std::vector<std::shared_ptr<uml::Operation>>());
 }
 
 ProtocolTransitionImpl::~ProtocolTransitionImpl()
 {
-	if(m_referred!=nullptr)
-	{
-		delete(m_referred);
-	 	m_referred = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProtocolTransition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,29 +43,26 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_container  = obj.getContainer();
 
 	m_guard  = obj.getGuard();
 
-	std::vector<uml::PackageableElement * > *  _importedMember = obj.getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _importedMember = obj.getImportedMember();
 	this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
 
-	std::vector<uml::NamedElement * > *  _member = obj.getMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member = obj.getMember();
 	this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
-	delete(_member);
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
-	std::vector<uml::NamedElement * > *  _ownedMember = obj.getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember = obj.getOwnedMember();
 	this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
-	delete(_ownedMember);
 
 	m_owner  = obj.getOwner();
 
@@ -74,17 +70,15 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 	m_preCondition  = obj.getPreCondition();
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
 	m_redefinedTransition  = obj.getRedefinedTransition();
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
-	std::vector<uml::Operation * > *  _referred = obj.getReferred();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> _referred = obj.getReferred();
 	this->getReferred()->insert(this->getReferred()->end(), _referred->begin(), _referred->end());
 
 	m_source  = obj.getSource();
@@ -93,37 +87,43 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEffect()!=nullptr)
 	{
-		m_effect = dynamic_cast<uml::Behavior * >(obj.getEffect()->copy());
+		m_effect.reset(dynamic_cast<uml::Behavior*>(obj.getEffect()->copy()));
 	}
-	for(uml::ElementImport * 	_elementImport : *obj.getElementImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> _elementImportList = obj.getElementImport();
+	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->push_back(dynamic_cast<uml::ElementImport * >(_elementImport->copy()));
+		this->getElementImport()->push_back(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Constraint * 	_ownedRule : *obj.getOwnedRule())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _ownedRuleList = obj.getOwnedRule();
+	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->push_back(dynamic_cast<uml::Constraint * >(_ownedRule->copy()));
+		this->getOwnedRule()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
 	}
-	for(uml::PackageImport * 	_packageImport : *obj.getPackageImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> _packageImportList = obj.getPackageImport();
+	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->push_back(dynamic_cast<uml::PackageImport * >(_packageImport->copy()));
+		this->getPackageImport()->push_back(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
 	}
-	for(uml::Trigger * 	_trigger : *obj.getTrigger())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> _triggerList = obj.getTrigger();
+	for(std::shared_ptr<uml::Trigger> _trigger : *_triggerList)
 	{
-		this->getTrigger()->push_back(dynamic_cast<uml::Trigger * >(_trigger->copy()));
+		this->getTrigger()->push_back(std::shared_ptr<uml::Trigger>(dynamic_cast<uml::Trigger*>(_trigger->copy())));
 	}
 }
 
@@ -132,7 +132,7 @@ ecore::EObject *  ProtocolTransitionImpl::copy() const
 	return new ProtocolTransitionImpl(*this);
 }
 
-ecore::EClass* ProtocolTransitionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getProtocolTransition();
 }
@@ -144,25 +144,25 @@ ecore::EClass* ProtocolTransitionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ProtocolTransitionImpl::associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ProtocolTransitionImpl::belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Operation * > *  ProtocolTransitionImpl::getReferreds() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> ProtocolTransitionImpl::getReferreds() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -171,71 +171,86 @@ bool ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map
 //*********************************
 // References
 //*********************************
-uml::Constraint *  ProtocolTransitionImpl::getPostCondition() const
+std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() const
 {
-	
-	return m_postCondition;
+
+    return m_postCondition;
 }
-void ProtocolTransitionImpl::setPostCondition(uml::Constraint *  _postCondition)
+void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
 {
-	m_postCondition = _postCondition;
+    m_postCondition = _postCondition;
 }
 
-uml::Constraint *  ProtocolTransitionImpl::getPreCondition() const
+std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
 {
-	
-	return m_preCondition;
+
+    return m_preCondition;
 }
-void ProtocolTransitionImpl::setPreCondition(uml::Constraint *  _preCondition)
+void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
 {
-	m_preCondition = _preCondition;
+    m_preCondition = _preCondition;
 }
 
-std::vector<uml::Operation * > *  ProtocolTransitionImpl::getReferred() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> ProtocolTransitionImpl::getReferred() const
 {
-	
-	return m_referred;
+
+    return m_referred;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::NamedElement * > *  ProtocolTransitionImpl::getOwnedMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProtocolTransitionImpl::getOwnedElement() const
 {
-	std::vector<uml::NamedElement * > *  _ownedMember =  new std::vector<uml::NamedElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::NamedElement * > *  ownedRule = (std::vector<uml::NamedElement * > * ) getOwnedRule();
-	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
+	_ownedElement->push_back(getEffect());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> elementImport = getElementImport();
+	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
+	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> packageImport = getPackageImport();
+	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> trigger = getTrigger();
+	_ownedElement->insert(_ownedElement->end(), trigger->begin(), trigger->end());
 
-
-	return _ownedMember;
+	return _ownedElement;
 }
-std::vector<uml::NamedElement * > *  ProtocolTransitionImpl::getMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ProtocolTransitionImpl::getMember() const
 {
-	std::vector<uml::NamedElement * > *  _member =  new std::vector<uml::NamedElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::vector<uml::NamedElement * > *  importedMember = (std::vector<uml::NamedElement * > * ) getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> importedMember = getImportedMember();
 	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
-
-	std::vector<uml::NamedElement * > *  ownedMember = (std::vector<uml::NamedElement * > * ) getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
 	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
 
 	return _member;
 }
-std::vector<uml::RedefinableElement * > *  ProtocolTransitionImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ProtocolTransitionImpl::getOwnedMember() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> ownedRule = getOwnedRule();
+	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
+
+	return _ownedMember;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ProtocolTransitionImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
 	_redefinedElement->push_back(getRedefinedTransition());
 
 	return _redefinedElement;
 }
-uml::Element *  ProtocolTransitionImpl::getOwner() const
+std::shared_ptr<uml::Element> ProtocolTransitionImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -244,34 +259,9 @@ uml::Element *  ProtocolTransitionImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  ProtocolTransitionImpl::getOwnedElement() const
+std::shared_ptr<uml::Namespace> ProtocolTransitionImpl::getNamespace() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getEffect());
-	std::vector<uml::Element * > *  elementImport = (std::vector<uml::Element * > * ) getElementImport();
-	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  ownedMember = (std::vector<uml::Element * > * ) getOwnedMember();
-	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
-	std::vector<uml::Element * > *  packageImport = (std::vector<uml::Element * > * ) getPackageImport();
-	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
-
-	std::vector<uml::Element * > *  trigger = (std::vector<uml::Element * > * ) getTrigger();
-	_ownedElement->insert(_ownedElement->end(), trigger->begin(), trigger->end());
-
-
-	return _ownedElement;
-}
-uml::Namespace *  ProtocolTransitionImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getContainer()!=nullptr)
 	{

@@ -13,30 +13,21 @@ using namespace uml;
 RedefinableElementImpl::RedefinableElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_redefinedElement == nullptr)
-	{
-		m_redefinedElement = new std::vector<uml::RedefinableElement * >();
-	}
-	if( m_redefinitionContext == nullptr)
-	{
-		m_redefinitionContext = new std::vector<uml::Classifier * >();
-	}
+	m_redefinedElement.reset(new std::vector<std::shared_ptr<uml::RedefinableElement>>());
+	m_redefinitionContext.reset(new std::vector<std::shared_ptr<uml::Classifier>>());
 }
 
 RedefinableElementImpl::~RedefinableElementImpl()
 {
-	if(m_redefinedElement!=nullptr)
-	{
-		delete(m_redefinedElement);
-	 	m_redefinedElement = nullptr;
-	}
-	if(m_redefinitionContext!=nullptr)
-	{
-		delete(m_redefinitionContext);
-	 	m_redefinitionContext = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RedefinableElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,38 +41,37 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -90,7 +80,7 @@ ecore::EObject *  RedefinableElementImpl::copy() const
 	return new RedefinableElementImpl(*this);
 }
 
-ecore::EClass* RedefinableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getRedefinableElement();
 }
@@ -111,31 +101,31 @@ bool RedefinableElementImpl::getIsLeaf() const
 //*********************************
 // Operations
 //*********************************
-bool RedefinableElementImpl::isConsistentWith(uml::RedefinableElement *  redefiningElement) 
+bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::isRedefinitionContextValid(uml::RedefinableElement *  redefinedElement) 
+bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool RedefinableElementImpl::non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool RedefinableElementImpl::redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -153,16 +143,19 @@ bool RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,s
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Classifier * > *  RedefinableElementImpl::getRedefinitionContext() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> RedefinableElementImpl::getOwnedElement() const
 {
-	std::vector<uml::Classifier * > *  _redefinitionContext =  new std::vector<uml::Classifier * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _redefinitionContext;
+	return _ownedElement;
 }
-uml::Element *  RedefinableElementImpl::getOwner() const
+std::shared_ptr<uml::Element> RedefinableElementImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -171,23 +164,19 @@ uml::Element *  RedefinableElementImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::RedefinableElement * > *  RedefinableElementImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> RedefinableElementImpl::getRedefinitionContext() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
+	
+
+	return _redefinitionContext;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> RedefinableElementImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
 
 	return _redefinedElement;
-}
-std::vector<uml::Element * > *  RedefinableElementImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

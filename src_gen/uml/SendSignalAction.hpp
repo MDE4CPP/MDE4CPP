@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -169,17 +170,17 @@ namespace uml
 				argument->at(i).type.conformsTo(attribute->at(i).type) and 
 				argument->at(i).isOrdered = attribute->at(i).isOrdered and
 				argument->at(i).compatibleWith(attribute->at(i))) */ 
-			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The number and order of argument InputPins must be the same as the number and order of attributes of the signal.
 			argument->size()=signal.allAttributes()->size() */ 
-			virtual bool number_order(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool number_order(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -192,23 +193,21 @@ namespace uml
 			/*!
 			 The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Signal *  getSignal() const = 0;
+			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
 			
 			/*!
 			 The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p> */
-			virtual void setSignal(uml::Signal *  _signal) = 0;
+			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) = 0;
+			/*!
+			 The InputPin that provides the target object to which the Signal instance is sent.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
 			
 			/*!
 			 The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getTarget() const = 0;
-			
-			/*!
-			 The InputPin that provides the target object to which the Signal instance is sent.
-			<p>From package UML::Actions.</p> */
-			virtual void setTarget(uml::InputPin *  _target) = 0;
-			
+			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
 			
 
 		protected:
@@ -223,11 +222,11 @@ namespace uml
 			/*!
 			 The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p> */
-			uml::Signal *  m_signal =  nullptr ;
+			std::shared_ptr<uml::Signal> m_signal;
 			/*!
 			 The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p> */
-			uml::InputPin *  m_target =  nullptr ;
+			std::shared_ptr<uml::InputPin> m_target;
 			
 
 		public:
@@ -235,21 +234,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
 	};
 
 }

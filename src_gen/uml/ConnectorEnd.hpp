@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -90,22 +91,22 @@ namespace uml
 			 If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role)) */ 
-			virtual bool role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty() */ 
-			virtual bool part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
 			self.compatibleWith(definingEnd) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port) */ 
-			virtual bool self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			
@@ -120,28 +121,26 @@ namespace uml
 			/*!
 			 A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual uml::Property *  getDefiningEnd() const = 0;
+			virtual std::shared_ptr<uml::Property> getDefiningEnd() const = 0;
 			
 			/*!
 			 Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual uml::Property *  getPartWithPort() const = 0;
+			virtual std::shared_ptr<uml::Property> getPartWithPort() const = 0;
 			
 			/*!
 			 Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setPartWithPort(uml::Property *  _partWithPort) = 0;
+			virtual void setPartWithPort(std::shared_ptr<uml::Property> _partWithPort) = 0;
+			/*!
+			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<uml::ConnectableElement> getRole() const = 0;
 			
 			/*!
 			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual uml::ConnectableElement *  getRole() const = 0;
-			
-			/*!
-			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setRole(uml::ConnectableElement *  _role) = 0;
-			
+			virtual void setRole(std::shared_ptr<uml::ConnectableElement> _role) = 0;
 			
 
 		protected:
@@ -156,15 +155,15 @@ namespace uml
 			/*!
 			 A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
 			<p>From package UML::StructuredClassifiers.</p> */
-			uml::Property *  m_definingEnd =  nullptr ;
+			std::shared_ptr<uml::Property> m_definingEnd;
 			/*!
 			 Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p> */
-			uml::Property *  m_partWithPort =  nullptr ;
+			std::shared_ptr<uml::Property> m_partWithPort;
 			/*!
 			 The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			uml::ConnectableElement *  m_role =  nullptr ;
+			std::shared_ptr<uml::ConnectableElement> m_role;
 			
 
 		public:
@@ -174,7 +173,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
 	};
 
 }

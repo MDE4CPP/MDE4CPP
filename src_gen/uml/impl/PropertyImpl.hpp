@@ -24,10 +24,11 @@
 #include "impl/StructuralFeatureImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class PropertyImpl :virtual public ConnectableElementImpl, virtual public DeploymentTargetImpl, virtual public StructuralFeatureImpl, virtual public Property
+	class PropertyImpl :virtual public ConnectableElementImpl, virtual public DeploymentTargetImpl, virtual public StructuralFeatureImpl, virtual public Property 
 	{
 		public: 
 			PropertyImpl(const PropertyImpl & obj);
@@ -53,17 +54,17 @@ namespace uml
 			  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |
 			    subsettedProperty->forAll(sp |
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c))))) */ 
-			virtual bool subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A derived union is read only.
 			isDerivedUnion implies isReadOnly */ 
-			virtual bool derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A multiplicity on the composing end of a composite aggregation must not have an upper bound greater than 1.
 			isComposite and association <> null implies opposite.upperBound() <= 1 */ 
-			virtual bool multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A redefined Property must be inherited from a more general Classifier.
@@ -72,7 +73,7 @@ namespace uml
 			      redefinedProperty->forAll(rp|
 			        ((redefinitionContext->collect(fc|
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp))) */ 
-			virtual bool redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
@@ -80,7 +81,7 @@ namespace uml
 			  self.type.conformsTo(sp.type) and
 			    ((self.upperBound()->notEmpty() and sp.upperBound()->notEmpty()) implies
 			      self.upperBound() <= sp.upperBound() )) */ 
-			virtual bool subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A binding of a PropertyTemplateParameter representing an attribute must be to an attribute.
@@ -89,36 +90,36 @@ namespace uml
 			implies (templateParameterSubstitution->forAll(ts |
 			    ts.formal.oclIsKindOf(Property)
 			    and ts.formal.oclAsType(Property).isAttribute()))) */ 
-			virtual bool binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A derived union is derived.
 			isDerivedUnion implies isDerived */ 
-			virtual bool derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self)) */ 
-			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Property may not subset a Property with the same name.
 			subsettedProperty->forAll(sp | sp.name <> name) */ 
-			virtual bool subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type */ 
-			virtual bool type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty() */ 
-			virtual bool qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves the other end of the (binary) association in which this property is a member end. */ 
-			virtual uml::Property *  getOtherEnd()  ;
+			virtual std::shared_ptr<uml::Property>  getOtherEnd()  ;
 			
 			/*!
 			 */ 
@@ -187,7 +188,7 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::vector<uml::Type * > *  subsettingContext()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> subsettingContext()  ;
 			
 			
 			
@@ -260,122 +261,114 @@ namespace uml
 			/*!
 			 The DataType that owns this Property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::DataType *  getDatatype() const ;
+			virtual std::shared_ptr<uml::DataType> getDatatype() const ;
 			
 			/*!
 			 The DataType that owns this Property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setDatatype(uml::DataType *  _datatype) ;
+			virtual void setDatatype(std::shared_ptr<uml::DataType> _datatype) ;
+			/*!
+			 The Interface that owns this Property, if any.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<uml::Interface> getInterface() const ;
 			
 			/*!
 			 The Interface that owns this Property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Interface *  getInterface() const ;
-			
+			virtual void setInterface(std::shared_ptr<uml::Interface> _interface) ;
 			/*!
-			 The Interface that owns this Property, if any.
+			 Designates the optional association end that owns a qualifier attribute.
 			<p>From package UML::Classification.</p> */
-			virtual void setInterface(uml::Interface *  _interface) ;
+			virtual std::shared_ptr<uml::Property> getAssociationEnd() const ;
 			
 			/*!
 			 Designates the optional association end that owns a qualifier attribute.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Property *  getAssociationEnd() const ;
-			
-			/*!
-			 Designates the optional association end that owns a qualifier attribute.
-			<p>From package UML::Classification.</p> */
-			virtual void setAssociationEnd(uml::Property *  _associationEnd) ;
-			
+			virtual void setAssociationEnd(std::shared_ptr<uml::Property> _associationEnd) ;
 			/*!
 			 An optional list of ordered qualifier attributes for the end.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getQualifier() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getQualifier() const ;
 			
 			/*!
 			 The Class that owns this Property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Class *  getClass() const ;
+			virtual std::shared_ptr<uml::Class> getClass() const ;
 			
 			/*!
 			 The Class that owns this Property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setClass(uml::Class *  _class) ;
+			virtual void setClass(std::shared_ptr<uml::Class> _class) ;
+			/*!
+			 A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const ;
 			
 			/*!
 			 A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.
 			<p>From package UML::Classification.</p> */
-			virtual uml::ValueSpecification *  getDefaultValue() const ;
-			
+			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue) ;
 			/*!
-			 A ValueSpecification that is evaluated to give a default value for the Property when an instance of the owning Classifier is instantiated.
+			 In the case where the Property is one end of a binary association this gives the other end.
 			<p>From package UML::Classification.</p> */
-			virtual void setDefaultValue(uml::ValueSpecification *  _defaultValue) ;
+			virtual std::shared_ptr<uml::Property> getOpposite() const ;
 			
 			/*!
 			 In the case where the Property is one end of a binary association this gives the other end.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Property *  getOpposite() const ;
-			
+			virtual void setOpposite(std::shared_ptr<uml::Property> _opposite) ;
 			/*!
-			 In the case where the Property is one end of a binary association this gives the other end.
+			 The owning association of this property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setOpposite(uml::Property *  _opposite) ;
+			virtual std::shared_ptr<uml::Association> getOwningAssociation() const ;
 			
 			/*!
 			 The owning association of this property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Association *  getOwningAssociation() const ;
-			
-			/*!
-			 The owning association of this property, if any.
-			<p>From package UML::Classification.</p> */
-			virtual void setOwningAssociation(uml::Association *  _owningAssociation) ;
-			
+			virtual void setOwningAssociation(std::shared_ptr<uml::Association> _owningAssociation) ;
 			/*!
 			 The properties that are redefined by this property, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getRedefinedProperty() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getRedefinedProperty() const ;
 			
 			/*!
 			 The properties of which this Property is constrained to be a subset, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getSubsettedProperty() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getSubsettedProperty() const ;
 			
 			/*!
 			 The Association of which this Property is a member, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Association *  getAssociation() const ;
+			virtual std::shared_ptr<uml::Association> getAssociation() const ;
 			
 			/*!
 			 The Association of which this Property is a member, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setAssociation(uml::Association *  _association) ;
-			
+			virtual void setAssociation(std::shared_ptr<uml::Association> _association) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getFeaturingClassifier() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getFeaturingClassifier() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -384,7 +377,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_PROPERTYPROPERTYIMPL_HPP */

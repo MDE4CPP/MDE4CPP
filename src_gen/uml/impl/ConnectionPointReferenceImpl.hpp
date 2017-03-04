@@ -22,10 +22,11 @@
 #include "impl/VertexImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ConnectionPointReferenceImpl :virtual public VertexImpl, virtual public ConnectionPointReference
+	class ConnectionPointReferenceImpl :virtual public VertexImpl, virtual public ConnectionPointReference 
 	{
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);
@@ -48,12 +49,12 @@ namespace uml
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -68,23 +69,22 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Pseudostate * > *  getEntry() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getEntry() const ;
 			
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Pseudostate * > *  getExit() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getExit() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::State *  getState() const ;
+			virtual std::shared_ptr<uml::State> getState() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setState(uml::State *  _state) ;
-			
+			virtual void setState(std::shared_ptr<uml::State> _state) ;
 							
 			
 			//*********************************
@@ -93,13 +93,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +108,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_CONNECTIONPOINTREFERENCECONNECTIONPOINTREFERENCEIMPL_HPP */

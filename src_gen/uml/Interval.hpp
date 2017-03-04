@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -108,23 +109,21 @@ namespace uml
 			/*!
 			 Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p> */
-			virtual uml::ValueSpecification *  getMax() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getMax() const = 0;
 			
 			/*!
 			 Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p> */
-			virtual void setMax(uml::ValueSpecification *  _max) = 0;
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) = 0;
+			/*!
+			 Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p> */
+			virtual std::shared_ptr<uml::ValueSpecification> getMin() const = 0;
 			
 			/*!
 			 Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p> */
-			virtual uml::ValueSpecification *  getMin() const = 0;
-			
-			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMin(uml::ValueSpecification *  _min) = 0;
-			
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) = 0;
 			
 
 		protected:
@@ -139,11 +138,11 @@ namespace uml
 			/*!
 			 Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p> */
-			uml::ValueSpecification *  m_max =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_max;
 			/*!
 			 Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p> */
-			uml::ValueSpecification *  m_min =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_min;
 			
 
 		public:
@@ -153,10 +152,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

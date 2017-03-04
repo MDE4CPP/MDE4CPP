@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -155,7 +156,7 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language lists must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -164,12 +165,12 @@ namespace uml
 			/*!
 			 Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<std::string> *  getBody() const = 0;
+			virtual std::shared_ptr<std::vector<std::string>> getBody() const = 0;
 			
 			/*!
 			 If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<std::string> *  getLanguage() const = 0;
+			virtual std::shared_ptr<std::vector<std::string>> getLanguage() const = 0;
 			
 			
 			//*********************************
@@ -178,12 +179,12 @@ namespace uml
 			/*!
 			 The InputPins providing inputs to the OpaqueAction.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInputValue() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInputValue() const = 0;
 			
 			/*!
 			 The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutputValue() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutputValue() const = 0;
 			
 			
 
@@ -194,12 +195,10 @@ namespace uml
 			/*!
 			 Provides a textual specification of the functionality of the Action, in one or more languages other than UML.
 			<p>From package UML::Actions.</p> */ 
-			std::vector<std::string> *  m_body = new std::vector<std::string>();
-			/*!
+			std::shared_ptr<std::vector<std::string>> m_body; /*!
 			 If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p> */ 
-			std::vector<std::string> *  m_language = new std::vector<std::string>();
-			
+			std::shared_ptr<std::vector<std::string>> m_language; 
 			
 			//*********************************
 			// Reference Members
@@ -207,11 +206,11 @@ namespace uml
 			/*!
 			 The InputPins providing inputs to the OpaqueAction.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::InputPin * > *  m_inputValue =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> m_inputValue;
 			/*!
 			 The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::OutputPin * > *  m_outputValue =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> m_outputValue;
 			
 
 		public:
@@ -219,24 +218,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
 	};
 
 }

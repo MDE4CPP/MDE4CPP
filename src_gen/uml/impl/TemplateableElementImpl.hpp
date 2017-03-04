@@ -22,10 +22,11 @@
 #include "impl/ElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class TemplateableElementImpl :virtual public ElementImpl, virtual public TemplateableElement
+	class TemplateableElementImpl :virtual public ElementImpl, virtual public TemplateableElement 
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
@@ -55,7 +56,7 @@ namespace uml
 			 The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
 			result = (self.allOwnedElements()->select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual std::vector<uml::ParameterableElement * > *  parameterableElements()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterableElement>>> parameterableElements()  ;
 			
 			
 			
@@ -70,18 +71,17 @@ namespace uml
 			/*!
 			 The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::TemplateBinding * > *  getTemplateBinding() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> getTemplateBinding() const ;
 			
 			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::TemplateSignature *  getOwnedTemplateSignature() const ;
+			virtual std::shared_ptr<uml::TemplateSignature> getOwnedTemplateSignature() const ;
 			
 			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedTemplateSignature(uml::TemplateSignature *  _ownedTemplateSignature) ;
-			
+			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature) ;
 							
 			
 			//*********************************
@@ -90,7 +90,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -99,7 +99,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_TEMPLATEABLEELEMENTTEMPLATEABLEELEMENTIMPL_HPP */

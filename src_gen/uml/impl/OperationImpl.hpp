@@ -24,10 +24,11 @@
 #include "impl/TemplateableElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class OperationImpl :virtual public BehavioralFeatureImpl, virtual public ParameterableElementImpl, virtual public TemplateableElementImpl, virtual public Operation
+	class OperationImpl :virtual public BehavioralFeatureImpl, virtual public ParameterableElementImpl, virtual public TemplateableElementImpl, virtual public Operation 
 	{
 		public: 
 			OperationImpl(const OperationImpl & obj);
@@ -50,16 +51,16 @@ namespace uml
 			/*!
 			 An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1 */ 
-			virtual bool at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
-			virtual bool only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves the (only) return result parameter for this operation. */ 
-			virtual uml::Parameter *  getReturnResult()  ;
+			virtual std::shared_ptr<uml::Parameter>  getReturnResult()  ;
 			
 			/*!
 			 */ 
@@ -75,7 +76,7 @@ namespace uml
 			
 			/*!
 			 */ 
-			virtual void setType(uml::Type *  newType)  ;
+			virtual void setType(std::shared_ptr<uml::Type>  newType)  ;
 			
 			/*!
 			 */ 
@@ -103,7 +104,7 @@ namespace uml
 			 The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
 			<p>From package UML::Classification.</p> */ 
-			virtual std::vector<uml::Parameter * > *  returnResult()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> returnResult()  ;
 			
 			
 			
@@ -156,62 +157,58 @@ namespace uml
 			/*!
 			 An optional Constraint on the result values of an invocation of this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Constraint *  getBodyCondition() const ;
+			virtual std::shared_ptr<uml::Constraint> getBodyCondition() const ;
 			
 			/*!
 			 An optional Constraint on the result values of an invocation of this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual void setBodyCondition(uml::Constraint *  _bodyCondition) ;
+			virtual void setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition) ;
+			/*!
+			 The Class that owns this operation, if any.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<uml::Class> getClass() const ;
 			
 			/*!
 			 The Class that owns this operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Class *  getClass() const ;
-			
+			virtual void setClass(std::shared_ptr<uml::Class> _class) ;
 			/*!
-			 The Class that owns this operation, if any.
+			 The DataType that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setClass(uml::Class *  _class) ;
+			virtual std::shared_ptr<uml::DataType> getDatatype() const ;
 			
 			/*!
 			 The DataType that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::DataType *  getDatatype() const ;
-			
+			virtual void setDatatype(std::shared_ptr<uml::DataType> _datatype) ;
 			/*!
-			 The DataType that owns this Operation, if any.
+			 The Interface that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual void setDatatype(uml::DataType *  _datatype) ;
+			virtual std::shared_ptr<uml::Interface> getInterface() const ;
 			
 			/*!
 			 The Interface that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Interface *  getInterface() const ;
-			
-			/*!
-			 The Interface that owns this Operation, if any.
-			<p>From package UML::Classification.</p> */
-			virtual void setInterface(uml::Interface *  _interface) ;
-			
+			virtual void setInterface(std::shared_ptr<uml::Interface> _interface) ;
 			/*!
 			 An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Constraint * > *  getPostcondition() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getPostcondition() const ;
 			
 			/*!
 			 An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Constraint * > *  getPrecondition() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getPrecondition() const ;
 			
 			/*!
 			 The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Operation * > *  getRedefinedOperation() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> getRedefinedOperation() const ;
 			
 			/*!
 			 The return type of the operation, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Type *  getType() const ;
+			virtual std::shared_ptr<uml::Type> getType() const ;
 			
 							
 			
@@ -219,30 +216,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getFeaturingClassifier() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getFeaturingClassifier() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -251,7 +248,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_OPERATIONOPERATIONIMPL_HPP */

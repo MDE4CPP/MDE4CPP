@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -135,7 +136,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool isAccessibleBy(uml::Action *  a)  = 0;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  = 0;
 			
 			
 			//*********************************
@@ -148,23 +149,21 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Activity *  getActivityScope() const = 0;
+			virtual std::shared_ptr<uml::Activity> getActivityScope() const = 0;
 			
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual void setActivityScope(uml::Activity *  _activityScope) = 0;
+			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) = 0;
+			/*!
+			 A StructuredActivityNode that owns the Variable.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::StructuredActivityNode> getScope() const = 0;
 			
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual uml::StructuredActivityNode *  getScope() const = 0;
-			
-			/*!
-			 A StructuredActivityNode that owns the Variable.
-			<p>From package UML::Activities.</p> */
-			virtual void setScope(uml::StructuredActivityNode *  _scope) = 0;
-			
+			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) = 0;
 			
 
 		protected:
@@ -179,11 +178,11 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			uml::Activity *  m_activityScope =  nullptr ;
+			std::shared_ptr<uml::Activity> m_activityScope;
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			uml::StructuredActivityNode *  m_scope =  nullptr ;
+			std::shared_ptr<uml::StructuredActivityNode> m_scope;
 			
 
 		public:
@@ -193,13 +192,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

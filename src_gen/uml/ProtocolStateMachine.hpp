@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -266,18 +267,18 @@ namespace uml
 			 ProtocolStateMachines cannot have deep or shallow history Pseudostates.
 			region->forAll (r | r.subvertex->forAll (v | v.oclIsKindOf(Pseudostate) implies
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory)))) */ 
-			virtual bool deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty()))) */ 
-			virtual bool entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition))) */ 
-			virtual bool protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -290,7 +291,7 @@ namespace uml
 			/*!
 			 Conformance between ProtocolStateMachine
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::ProtocolConformance * > *  getConformance() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ProtocolConformance>>> getConformance() const = 0;
 			
 			
 
@@ -306,7 +307,7 @@ namespace uml
 			/*!
 			 Conformance between ProtocolStateMachine
 			<p>From package UML::StateMachines.</p> */
-			std::vector<uml::ProtocolConformance * > *  m_conformance =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ProtocolConformance>>> m_conformance;
 			
 
 		public:
@@ -314,36 +315,36 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::ConnectableElement * > *  getRole() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Feature * > *  getFeature() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const = 0;/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getAttribute() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectableElement>>> getRole() const = 0;/*!
+			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const = 0; 
 	};
 
 }

@@ -13,30 +13,21 @@ using namespace uml;
 TimeExpressionImpl::TimeExpressionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_observation == nullptr)
-	{
-		m_observation = new std::vector<uml::Observation * >();
-	}
+	m_observation.reset(new std::vector<std::shared_ptr<uml::Observation>>());
 }
 
 TimeExpressionImpl::~TimeExpressionImpl()
 {
-	if(m_expr!=nullptr)
-	{
-		if(m_expr)
-		{
-			delete(m_expr);
-			m_expr = nullptr;
-		}
-	}
-	if(m_observation!=nullptr)
-	{
-		delete(m_observation);
-	 	m_observation = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TimeExpression "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -49,17 +40,16 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Observation * > *  _observation = obj.getObservation();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> _observation = obj.getObservation();
 	this->getObservation()->insert(this->getObservation()->end(), _observation->begin(), _observation->end());
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -71,21 +61,23 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getExpr()!=nullptr)
 	{
-		m_expr = dynamic_cast<uml::ValueSpecification * >(obj.getExpr()->copy());
+		m_expr.reset(dynamic_cast<uml::ValueSpecification*>(obj.getExpr()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -94,7 +86,7 @@ ecore::EObject *  TimeExpressionImpl::copy() const
 	return new TimeExpressionImpl(*this);
 }
 
-ecore::EClass* TimeExpressionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getTimeExpression();
 }
@@ -106,7 +98,7 @@ ecore::EClass* TimeExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -115,41 +107,29 @@ bool TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std
 //*********************************
 // References
 //*********************************
-uml::ValueSpecification *  TimeExpressionImpl::getExpr() const
+std::shared_ptr<uml::ValueSpecification> TimeExpressionImpl::getExpr() const
 {
-	
-	return m_expr;
+
+    return m_expr;
 }
-void TimeExpressionImpl::setExpr(uml::ValueSpecification *  _expr)
+void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
-	m_expr = _expr;
+    m_expr = _expr;
 }
 
-std::vector<uml::Observation * > *  TimeExpressionImpl::getObservation() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> TimeExpressionImpl::getObservation() const
 {
-	
-	return m_observation;
+
+    return m_observation;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  TimeExpressionImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> TimeExpressionImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getExpr());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  TimeExpressionImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -161,6 +141,17 @@ uml::Element *  TimeExpressionImpl::getOwner() const
 	}
 
 	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TimeExpressionImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getExpr());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
 }
 
 

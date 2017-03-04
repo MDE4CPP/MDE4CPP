@@ -13,6 +13,10 @@ using namespace uml;
 ExecutionSpecificationImpl::ExecutionSpecificationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl()
 
 ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,10 +40,10 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -47,9 +54,8 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -57,21 +63,24 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -80,7 +89,7 @@ ecore::EObject *  ExecutionSpecificationImpl::copy() const
 	return new ExecutionSpecificationImpl(*this);
 }
 
-ecore::EClass* ExecutionSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getExecutionSpecification();
 }
@@ -92,7 +101,7 @@ ecore::EClass* ExecutionSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExecutionSpecificationImpl::same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExecutionSpecificationImpl::same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -101,32 +110,32 @@ bool ExecutionSpecificationImpl::same_lifeline(boost::any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
-uml::OccurrenceSpecification *  ExecutionSpecificationImpl::getFinish() const
+std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
 {
-	//assert(m_finish);
-	return m_finish;
+//assert(m_finish);
+    return m_finish;
 }
-void ExecutionSpecificationImpl::setFinish(uml::OccurrenceSpecification *  _finish)
+void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
 {
-	m_finish = _finish;
+    m_finish = _finish;
 }
 
-uml::OccurrenceSpecification *  ExecutionSpecificationImpl::getStart() const
+std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
 {
-	//assert(m_start);
-	return m_start;
+//assert(m_start);
+    return m_start;
 }
-void ExecutionSpecificationImpl::setStart(uml::OccurrenceSpecification *  _start)
+void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
 {
-	m_start = _start;
+    m_start = _start;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  ExecutionSpecificationImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> ExecutionSpecificationImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -139,9 +148,21 @@ uml::Namespace *  ExecutionSpecificationImpl::getNamespace() const
 
 	return _namespace;
 }
-uml::Element *  ExecutionSpecificationImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExecutionSpecificationImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> ExecutionSpecificationImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -149,20 +170,6 @@ uml::Element *  ExecutionSpecificationImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  ExecutionSpecificationImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

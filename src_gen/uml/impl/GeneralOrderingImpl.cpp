@@ -13,6 +13,10 @@ using namespace uml;
 GeneralOrderingImpl::GeneralOrderingImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ GeneralOrderingImpl::GeneralOrderingImpl()
 
 GeneralOrderingImpl::~GeneralOrderingImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GeneralOrdering "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,30 +44,31 @@ GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj)
 
 	m_before  = obj.getBefore();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -69,7 +77,7 @@ ecore::EObject *  GeneralOrderingImpl::copy() const
 	return new GeneralOrderingImpl(*this);
 }
 
-ecore::EClass* GeneralOrderingImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getGeneralOrdering();
 }
@@ -81,7 +89,7 @@ ecore::EClass* GeneralOrderingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -90,32 +98,32 @@ bool GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,
 //*********************************
 // References
 //*********************************
-uml::OccurrenceSpecification *  GeneralOrderingImpl::getAfter() const
+std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
 {
-	//assert(m_after);
-	return m_after;
+//assert(m_after);
+    return m_after;
 }
-void GeneralOrderingImpl::setAfter(uml::OccurrenceSpecification *  _after)
+void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
 {
-	m_after = _after;
+    m_after = _after;
 }
 
-uml::OccurrenceSpecification *  GeneralOrderingImpl::getBefore() const
+std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
 {
-	//assert(m_before);
-	return m_before;
+//assert(m_before);
+    return m_before;
 }
-void GeneralOrderingImpl::setBefore(uml::OccurrenceSpecification *  _before)
+void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)
 {
-	m_before = _before;
+    m_before = _before;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  GeneralOrderingImpl::getOwner() const
+std::shared_ptr<uml::Element> GeneralOrderingImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -124,14 +132,13 @@ uml::Element *  GeneralOrderingImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  GeneralOrderingImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> GeneralOrderingImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

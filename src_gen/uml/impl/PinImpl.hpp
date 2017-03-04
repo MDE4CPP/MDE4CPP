@@ -23,10 +23,11 @@
 #include "impl/ObjectNodeImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class PinImpl :virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin
+	class PinImpl :virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin 
 	{
 		public: 
 			PinImpl(const PinImpl & obj);
@@ -49,12 +50,12 @@ namespace uml
 			/*!
 			 A control Pin has a control type.
 			isControl implies isControlType */ 
-			virtual bool control_pins(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Pin multiplicity is not unique.
 			not isUnique */ 
-			virtual bool not_unique(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -82,18 +83,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -102,7 +103,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_PINPINIMPL_HPP */

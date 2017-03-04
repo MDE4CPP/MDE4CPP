@@ -22,10 +22,11 @@
 #include "impl/ActionImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class StartClassifierBehaviorActionImpl :virtual public ActionImpl, virtual public StartClassifierBehaviorAction
+	class StartClassifierBehaviorActionImpl :virtual public ActionImpl, virtual public StartClassifierBehaviorAction 
 	{
 		public: 
 			StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj);
@@ -48,13 +49,13 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null) */ 
-			virtual bool type_has_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool type_has_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -69,34 +70,33 @@ namespace uml
 			/*!
 			 The InputPin that holds the object whose classifierBehavior is to be started.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getObject() const ;
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			
 			/*!
 			 The InputPin that holds the object whose classifierBehavior is to be started.
 			<p>From package UML::Actions.</p> */
-			virtual void setObject(uml::InputPin *  _object) ;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -105,7 +105,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_STARTCLASSIFIERBEHAVIORACTIONSTARTCLASSIFIERBEHAVIORACTIONIMPL_HPP */

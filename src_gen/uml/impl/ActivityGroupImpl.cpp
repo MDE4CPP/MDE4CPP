@@ -13,41 +13,24 @@ using namespace uml;
 ActivityGroupImpl::ActivityGroupImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_containedEdge == nullptr)
-	{
-		m_containedEdge = new std::vector<uml::ActivityEdge * >();
-	}
-	if( m_containedNode == nullptr)
-	{
-		m_containedNode = new std::vector<uml::ActivityNode * >();
-	}
+	m_containedEdge.reset(new std::vector<std::shared_ptr<uml::ActivityEdge>>());
+	m_containedNode.reset(new std::vector<std::shared_ptr<uml::ActivityNode>>());
 	
-	if( m_subgroup == nullptr)
-	{
-		m_subgroup = new std::vector<uml::ActivityGroup * >();
-	}
+	m_subgroup.reset(new std::vector<std::shared_ptr<uml::ActivityGroup>>());
 	
 }
 
 ActivityGroupImpl::~ActivityGroupImpl()
 {
-	if(m_containedEdge!=nullptr)
-	{
-		delete(m_containedEdge);
-	 	m_containedEdge = nullptr;
-	}
-	if(m_containedNode!=nullptr)
-	{
-		delete(m_containedNode);
-	 	m_containedNode = nullptr;
-	}
-	if(m_subgroup!=nullptr)
-	{
-		delete(m_subgroup);
-	 	m_subgroup = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityGroup "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -60,46 +43,44 @@ ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ActivityEdge * > *  _containedEdge = obj.getContainedEdge();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _containedEdge = obj.getContainedEdge();
 	this->getContainedEdge()->insert(this->getContainedEdge()->end(), _containedEdge->begin(), _containedEdge->end());
-	delete(_containedEdge);
 
-	std::vector<uml::ActivityNode * > *  _containedNode = obj.getContainedNode();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _containedNode = obj.getContainedNode();
 	this->getContainedNode()->insert(this->getContainedNode()->end(), _containedNode->begin(), _containedNode->end());
-	delete(_containedNode);
 
 	m_inActivity  = obj.getInActivity();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::ActivityGroup * > *  _subgroup = obj.getSubgroup();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _subgroup = obj.getSubgroup();
 	this->getSubgroup()->insert(this->getSubgroup()->end(), _subgroup->begin(), _subgroup->end());
-	delete(_subgroup);
 
 	m_superGroup  = obj.getSuperGroup();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -108,7 +89,7 @@ ecore::EObject *  ActivityGroupImpl::copy() const
 	return new ActivityGroupImpl(*this);
 }
 
-ecore::EClass* ActivityGroupImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getActivityGroup();
 }
@@ -120,13 +101,13 @@ ecore::EClass* ActivityGroupImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityGroupImpl::nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ActivityGroupImpl::nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::not_contained(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ActivityGroupImpl::not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -141,14 +122,14 @@ bool ActivityGroupImpl::not_contained(boost::any diagnostics,std::map <   boost:
 
 
 
-uml::Activity *  ActivityGroupImpl::getInActivity() const
+std::shared_ptr<uml::Activity> ActivityGroupImpl::getInActivity() const
 {
-	
-	return m_inActivity;
+
+    return m_inActivity;
 }
-void ActivityGroupImpl::setInActivity(uml::Activity *  _inActivity)
+void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity)
 {
-	m_inActivity = _inActivity;
+    m_inActivity = _inActivity;
 }
 
 
@@ -160,45 +141,16 @@ void ActivityGroupImpl::setInActivity(uml::Activity *  _inActivity)
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ActivityGroupImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> ActivityGroupImpl::getContainedEdge() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  subgroup = (std::vector<uml::Element * > * ) getSubgroup();
-	_ownedElement->insert(_ownedElement->end(), subgroup->begin(), subgroup->end());
-
-	delete(subgroup);
-
-	return _ownedElement;
-}
-uml::ActivityGroup *  ActivityGroupImpl::getSuperGroup() const
-{
-	uml::ActivityGroup *  _superGroup =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _containedEdge(new std::vector<std::shared_ptr<uml::ActivityEdge>>()) ;
 	
 
-	return _superGroup;
+	return _containedEdge;
 }
-std::vector<uml::ActivityGroup * > *  ActivityGroupImpl::getSubgroup() const
+std::shared_ptr<uml::Element> ActivityGroupImpl::getOwner() const
 {
-	std::vector<uml::ActivityGroup * > *  _subgroup =  new std::vector<uml::ActivityGroup * >() ;
-	
-
-	return _subgroup;
-}
-std::vector<uml::ActivityNode * > *  ActivityGroupImpl::getContainedNode() const
-{
-	std::vector<uml::ActivityNode * > *  _containedNode =  new std::vector<uml::ActivityNode * >() ;
-	
-
-	return _containedNode;
-}
-uml::Element *  ActivityGroupImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getInActivity()!=nullptr)
 	{
@@ -215,12 +167,38 @@ uml::Element *  ActivityGroupImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::ActivityEdge * > *  ActivityGroupImpl::getContainedEdge() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ActivityGroupImpl::getOwnedElement() const
 {
-	std::vector<uml::ActivityEdge * > *  _containedEdge =  new std::vector<uml::ActivityEdge * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> subgroup = getSubgroup();
+	_ownedElement->insert(_ownedElement->end(), subgroup->begin(), subgroup->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> ActivityGroupImpl::getSubgroup() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _subgroup(new std::vector<std::shared_ptr<uml::ActivityGroup>>()) ;
 	
 
-	return _containedEdge;
+	return _subgroup;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> ActivityGroupImpl::getContainedNode() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _containedNode(new std::vector<std::shared_ptr<uml::ActivityNode>>()) ;
+	
+
+	return _containedNode;
+}
+std::shared_ptr<uml::ActivityGroup> ActivityGroupImpl::getSuperGroup() const
+{
+	std::shared_ptr<uml::ActivityGroup> _superGroup = nullptr ;
+	
+
+	return _superGroup;
 }
 
 

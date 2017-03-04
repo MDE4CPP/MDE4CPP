@@ -22,10 +22,11 @@
 #include "impl/NamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class TriggerImpl :virtual public NamedElementImpl, virtual public Trigger
+	class TriggerImpl :virtual public NamedElementImpl, virtual public Trigger 
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);
@@ -48,7 +49,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -63,17 +64,16 @@ namespace uml
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::Event *  getEvent() const ;
+			virtual std::shared_ptr<uml::Event> getEvent() const ;
 			
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(uml::Event *  _event) ;
-			
+			virtual void setEvent(std::shared_ptr<uml::Event> _event) ;
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Port * > *  getPort() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> getPort() const ;
 			
 							
 			
@@ -83,10 +83,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -95,7 +95,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_TRIGGERTRIGGERIMPL_HPP */

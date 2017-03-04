@@ -13,24 +13,23 @@ using namespace uml;
 ExceptionHandlerImpl::ExceptionHandlerImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_exceptionType == nullptr)
-	{
-		m_exceptionType = new std::vector<uml::Classifier * >();
-	}
+	m_exceptionType.reset(new std::vector<std::shared_ptr<uml::Classifier>>());
 	
 	
 }
 
 ExceptionHandlerImpl::~ExceptionHandlerImpl()
 {
-	if(m_exceptionType!=nullptr)
-	{
-		delete(m_exceptionType);
-	 	m_exceptionType = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExceptionHandler "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -42,14 +41,13 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj)
 	
 	m_exceptionInput  = obj.getExceptionInput();
 
-	std::vector<uml::Classifier * > *  _exceptionType = obj.getExceptionType();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _exceptionType = obj.getExceptionType();
 	this->getExceptionType()->insert(this->getExceptionType()->end(), _exceptionType->begin(), _exceptionType->end());
 
 	m_handlerBody  = obj.getHandlerBody();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -57,13 +55,15 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -72,7 +72,7 @@ ecore::EObject *  ExceptionHandlerImpl::copy() const
 	return new ExceptionHandlerImpl(*this);
 }
 
-ecore::EClass* ExceptionHandlerImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getExceptionHandler();
 }
@@ -84,37 +84,37 @@ ecore::EClass* ExceptionHandlerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExceptionHandlerImpl::edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::one_input(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExceptionHandlerImpl::output_pins(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExceptionHandlerImpl::output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -123,49 +123,49 @@ bool ExceptionHandlerImpl::output_pins(boost::any diagnostics,std::map <   boost
 //*********************************
 // References
 //*********************************
-uml::ObjectNode *  ExceptionHandlerImpl::getExceptionInput() const
+std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
 {
-	//assert(m_exceptionInput);
-	return m_exceptionInput;
+//assert(m_exceptionInput);
+    return m_exceptionInput;
 }
-void ExceptionHandlerImpl::setExceptionInput(uml::ObjectNode *  _exceptionInput)
+void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
 {
-	m_exceptionInput = _exceptionInput;
-}
-
-std::vector<uml::Classifier * > *  ExceptionHandlerImpl::getExceptionType() const
-{
-	//assert(m_exceptionType);
-	return m_exceptionType;
+    m_exceptionInput = _exceptionInput;
 }
 
-
-uml::ExecutableNode *  ExceptionHandlerImpl::getHandlerBody() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ExceptionHandlerImpl::getExceptionType() const
 {
-	//assert(m_handlerBody);
-	return m_handlerBody;
-}
-void ExceptionHandlerImpl::setHandlerBody(uml::ExecutableNode *  _handlerBody)
-{
-	m_handlerBody = _handlerBody;
+//assert(m_exceptionType);
+    return m_exceptionType;
 }
 
-uml::ExecutableNode *  ExceptionHandlerImpl::getProtectedNode() const
+
+std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() const
 {
-	//assert(m_protectedNode);
-	return m_protectedNode;
+//assert(m_handlerBody);
+    return m_handlerBody;
 }
-void ExceptionHandlerImpl::setProtectedNode(uml::ExecutableNode *  _protectedNode)
+void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
 {
-	m_protectedNode = _protectedNode;
+    m_handlerBody = _handlerBody;
+}
+
+std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getProtectedNode() const
+{
+//assert(m_protectedNode);
+    return m_protectedNode;
+}
+void ExceptionHandlerImpl::setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode)
+{
+    m_protectedNode = _protectedNode;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ExceptionHandlerImpl::getOwner() const
+std::shared_ptr<uml::Element> ExceptionHandlerImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getProtectedNode()!=nullptr)
 	{
@@ -174,13 +174,12 @@ uml::Element *  ExceptionHandlerImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  ExceptionHandlerImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExceptionHandlerImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

@@ -13,31 +13,22 @@ using namespace uml;
 ConstraintImpl::ConstraintImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_constrainedElement == nullptr)
-	{
-		m_constrainedElement = new std::vector<uml::Element * >();
-	}
+	m_constrainedElement.reset(new std::vector<std::shared_ptr<uml::Element>>());
 	
 	
 }
 
 ConstraintImpl::~ConstraintImpl()
 {
-	if(m_constrainedElement!=nullptr)
-	{
-		delete(m_constrainedElement);
-	 	m_constrainedElement = nullptr;
-	}
-	if(m_specification!=nullptr)
-	{
-		if(m_specification)
-		{
-			delete(m_specification);
-			m_specification = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Constraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,19 +41,18 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Element * > *  _constrainedElement = obj.getConstrainedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _constrainedElement = obj.getConstrainedElement();
 	this->getConstrainedElement()->insert(this->getConstrainedElement()->end(), _constrainedElement->begin(), _constrainedElement->end());
 
 	m_context  = obj.getContext();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -72,21 +62,23 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification = dynamic_cast<uml::ValueSpecification * >(obj.getSpecification()->copy());
+		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
 	}
 }
 
@@ -95,7 +87,7 @@ ecore::EObject *  ConstraintImpl::copy() const
 	return new ConstraintImpl(*this);
 }
 
-ecore::EClass* ConstraintImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getConstraint();
 }
@@ -107,19 +99,19 @@ ecore::EClass* ConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConstraintImpl::boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConstraintImpl::no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -128,51 +120,50 @@ bool ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost
 //*********************************
 // References
 //*********************************
-std::vector<uml::Element * > *  ConstraintImpl::getConstrainedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConstraintImpl::getConstrainedElement() const
 {
-	
-	return m_constrainedElement;
+
+    return m_constrainedElement;
 }
 
 
-uml::Namespace *  ConstraintImpl::getContext() const
+std::shared_ptr<uml::Namespace> ConstraintImpl::getContext() const
 {
-	
-	return m_context;
+
+    return m_context;
 }
-void ConstraintImpl::setContext(uml::Namespace *  _context)
+void ConstraintImpl::setContext(std::shared_ptr<uml::Namespace> _context)
 {
-	m_context = _context;
+    m_context = _context;
 }
 
-uml::ValueSpecification *  ConstraintImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
 {
-	//assert(m_specification);
-	return m_specification;
+//assert(m_specification);
+    return m_specification;
 }
-void ConstraintImpl::setSpecification(uml::ValueSpecification *  _specification)
+void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
-	m_specification = _specification;
+    m_specification = _specification;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ConstraintImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConstraintImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getSpecification());
 
 	return _ownedElement;
 }
-uml::Element *  ConstraintImpl::getOwner() const
+std::shared_ptr<uml::Element> ConstraintImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -185,9 +176,9 @@ uml::Element *  ConstraintImpl::getOwner() const
 
 	return _owner;
 }
-uml::Namespace *  ConstraintImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> ConstraintImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getContext()!=nullptr)
 	{

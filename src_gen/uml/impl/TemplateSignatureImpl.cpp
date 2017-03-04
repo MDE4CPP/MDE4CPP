@@ -13,34 +13,22 @@ using namespace uml;
 TemplateSignatureImpl::TemplateSignatureImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_ownedParameter == nullptr)
-	{
-		m_ownedParameter = new std::vector<uml::TemplateParameter * >();
-	}
-	if( m_parameter == nullptr)
-	{
-		m_parameter = new std::vector<uml::TemplateParameter * >();
-	}
+	m_ownedParameter.reset(new std::vector<std::shared_ptr<uml::TemplateParameter>>());
+	m_parameter.reset(new std::vector<std::shared_ptr<uml::TemplateParameter>>());
 	
 }
 
 TemplateSignatureImpl::~TemplateSignatureImpl()
 {
-	if(m_parameter!=nullptr)
-	{
-		delete(m_parameter);
-	 	m_parameter = nullptr;
-	}
-	if(m_ownedParameter!=nullptr)
-	{
-		for(auto c :*m_ownedParameter)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TemplateSignature "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,30 +38,32 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::TemplateParameter * > *  _parameter = obj.getParameter();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> _parameter = obj.getParameter();
 	this->getParameter()->insert(this->getParameter()->end(), _parameter->begin(), _parameter->end());
 
 	m_template  = obj.getTemplate();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::TemplateParameter * 	_ownedParameter : *obj.getOwnedParameter())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> _ownedParameterList = obj.getOwnedParameter();
+	for(std::shared_ptr<uml::TemplateParameter> _ownedParameter : *_ownedParameterList)
 	{
-		this->getOwnedParameter()->push_back(dynamic_cast<uml::TemplateParameter * >(_ownedParameter->copy()));
+		this->getOwnedParameter()->push_back(std::shared_ptr<uml::TemplateParameter>(dynamic_cast<uml::TemplateParameter*>(_ownedParameter->copy())));
 	}
 }
 
@@ -82,7 +72,7 @@ ecore::EObject *  TemplateSignatureImpl::copy() const
 	return new TemplateSignatureImpl(*this);
 }
 
-ecore::EClass* TemplateSignatureImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getTemplateSignature();
 }
@@ -94,13 +84,13 @@ ecore::EClass* TemplateSignatureImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool TemplateSignatureImpl::own_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -109,49 +99,36 @@ bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
-std::vector<uml::TemplateParameter * > *  TemplateSignatureImpl::getOwnedParameter() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> TemplateSignatureImpl::getOwnedParameter() const
 {
-	
-	return m_ownedParameter;
+
+    return m_ownedParameter;
 }
 
 
-std::vector<uml::TemplateParameter * > *  TemplateSignatureImpl::getParameter() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> TemplateSignatureImpl::getParameter() const
 {
-	//assert(m_parameter);
-	return m_parameter;
+//assert(m_parameter);
+    return m_parameter;
 }
 
 
-uml::TemplateableElement *  TemplateSignatureImpl::getTemplate() const
+std::shared_ptr<uml::TemplateableElement> TemplateSignatureImpl::getTemplate() const
 {
-	//assert(m_template);
-	return m_template;
+//assert(m_template);
+    return m_template;
 }
-void TemplateSignatureImpl::setTemplate(uml::TemplateableElement *  _template)
+void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
 {
-	m_template = _template;
+    m_template = _template;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  TemplateSignatureImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> TemplateSignatureImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  ownedParameter = (std::vector<uml::Element * > * ) getOwnedParameter();
-	_ownedElement->insert(_ownedElement->end(), ownedParameter->begin(), ownedParameter->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  TemplateSignatureImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getTemplate()!=nullptr)
 	{
@@ -159,6 +136,17 @@ uml::Element *  TemplateSignatureImpl::getOwner() const
 	}
 
 	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateSignatureImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> ownedParameter = getOwnedParameter();
+	_ownedElement->insert(_ownedElement->end(), ownedParameter->begin(), ownedParameter->end());
+
+	return _ownedElement;
 }
 
 

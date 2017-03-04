@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -115,7 +116,7 @@ namespace uml
 			/*!
 			 The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued()) */ 
-			virtual bool selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If a lifeline is in an Interaction referred to by an InteractionUse in an enclosing Interaction,  and that lifeline is common with another lifeline in an Interaction referred to by another InteractonUse within that same enclosing Interaction, it must be common to a lifeline within that enclosing Interaction. By common Lifelines we mean Lifelines with the same selector and represents associations.
@@ -157,19 +158,19 @@ namespace uml
 			                                                )
 			                    )
 			) */ 
-			virtual bool interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context') */ 
-			virtual bool same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
 			self.selector.oclIsKindOf(LiteralInteger) or 
 			self.selector.oclIsKindOf(LiteralString) */ 
-			virtual bool selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -182,47 +183,43 @@ namespace uml
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::PartDecomposition *  getDecomposedAs() const = 0;
+			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const = 0;
 			
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
-			virtual void setDecomposedAs(uml::PartDecomposition *  _decomposedAs) = 0;
+			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs) = 0;
+			/*!
+			 References the Interaction enclosing this Lifeline.
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr<uml::Interaction> getInteraction() const = 0;
 			
 			/*!
 			 References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::Interaction *  getInteraction() const = 0;
-			
+			virtual void setInteraction(std::shared_ptr<uml::Interaction> _interaction) = 0;
 			/*!
-			 References the Interaction enclosing this Lifeline.
+			 References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual void setInteraction(uml::Interaction *  _interaction) = 0;
+			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const = 0;
 			
 			/*!
 			 References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::ConnectableElement *  getRepresents() const = 0;
-			
+			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement> _represents) = 0;
 			/*!
-			 References the ConnectableElement within the classifier that contains the enclosing interaction.
+			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
-			virtual void setRepresents(uml::ConnectableElement *  _represents) = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const = 0;
 			
 			/*!
 			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::ValueSpecification *  getSelector() const = 0;
-			
-			/*!
-			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
-			<p>From package UML::Interactions.</p> */
-			virtual void setSelector(uml::ValueSpecification *  _selector) = 0;
-			
+			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector) = 0;
 			/*!
 			 References the InteractionFragments in which this Lifeline takes part.
 			<p>From package UML::Interactions.</p> */
-			virtual std::vector<uml::InteractionFragment * > *  getCoveredBy() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> getCoveredBy() const = 0;
 			
 			
 
@@ -238,23 +235,23 @@ namespace uml
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
-			uml::PartDecomposition *  m_decomposedAs =  nullptr ;
+			std::shared_ptr<uml::PartDecomposition> m_decomposedAs;
 			/*!
 			 References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p> */
-			uml::Interaction *  m_interaction =  nullptr ;
+			std::shared_ptr<uml::Interaction> m_interaction;
 			/*!
 			 References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p> */
-			uml::ConnectableElement *  m_represents =  nullptr ;
+			std::shared_ptr<uml::ConnectableElement> m_represents;
 			/*!
 			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
-			uml::ValueSpecification *  m_selector =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_selector;
 			/*!
 			 References the InteractionFragments in which this Lifeline takes part.
 			<p>From package UML::Interactions.</p> */
-			std::vector<uml::InteractionFragment * > *  m_coveredBy =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> m_coveredBy;
 			
 
 		public:
@@ -264,13 +261,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

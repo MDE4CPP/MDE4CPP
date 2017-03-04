@@ -277,9 +277,9 @@ namespace uml
 		
 			//Singleton Instance and Getter
 		private:
-			static UmlFactory* instance;
+			static std::shared_ptr<UmlFactory> instance;
 		public:
-			static UmlFactory* eInstance();
+			static std::shared_ptr<UmlFactory> eInstance();
 		
 			//Creator functions
 			virtual Activity* createActivity() const = 0;
@@ -479,7 +479,7 @@ namespace uml
 			virtual TimeObservation* createTimeObservation() const = 0;
 			
 			//Package
-			virtual UmlPackage* getUmlPackage() const = 0;
+			virtual std::shared_ptr<UmlPackage> getUmlPackage() const = 0;
 	};
 }
 #endif /* end of include guard: UMLFACTORY_HPP */

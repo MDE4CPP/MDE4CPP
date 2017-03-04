@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -118,13 +119,12 @@ namespace uml
 			/*!
 			 The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p> */
-			virtual uml::PackageableElement *  getUtilizedElement() const = 0;
+			virtual std::shared_ptr<uml::PackageableElement> getUtilizedElement() const = 0;
 			
 			/*!
 			 The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p> */
-			virtual void setUtilizedElement(uml::PackageableElement *  _utilizedElement) = 0;
-			
+			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement) = 0;
 			
 
 		protected:
@@ -139,7 +139,7 @@ namespace uml
 			/*!
 			 The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p> */
-			uml::PackageableElement *  m_utilizedElement =  nullptr ;
+			std::shared_ptr<uml::PackageableElement> m_utilizedElement;
 			
 
 		public:
@@ -149,19 +149,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

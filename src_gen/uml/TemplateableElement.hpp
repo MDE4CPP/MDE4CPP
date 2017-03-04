@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -91,7 +92,7 @@ namespace uml
 			 The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
 			result = (self.allOwnedElements()->select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual std::vector<uml::ParameterableElement * > *  parameterableElements()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterableElement>>> parameterableElements()  = 0;
 			
 			
 			//*********************************
@@ -104,18 +105,17 @@ namespace uml
 			/*!
 			 The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::TemplateBinding * > *  getTemplateBinding() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> getTemplateBinding() const = 0;
 			
 			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::TemplateSignature *  getOwnedTemplateSignature() const = 0;
+			virtual std::shared_ptr<uml::TemplateSignature> getOwnedTemplateSignature() const = 0;
 			
 			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedTemplateSignature(uml::TemplateSignature *  _ownedTemplateSignature) = 0;
-			
+			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature) = 0;
 			
 
 		protected:
@@ -130,11 +130,11 @@ namespace uml
 			/*!
 			 The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p> */
-			std::vector<uml::TemplateBinding * > *  m_templateBinding =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> m_templateBinding;
 			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
-			uml::TemplateSignature *  m_ownedTemplateSignature =  nullptr ;
+			std::shared_ptr<uml::TemplateSignature> m_ownedTemplateSignature;
 			
 
 		public:
@@ -144,7 +144,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
 	};
 
 }

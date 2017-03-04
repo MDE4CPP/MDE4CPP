@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -123,18 +124,17 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::Classifier * > *  getRealizingClassifier() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRealizingClassifier() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual uml::Component *  getAbstraction() const = 0;
+			virtual std::shared_ptr<uml::Component> getAbstraction() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setAbstraction(uml::Component *  _abstraction) = 0;
-			
+			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction) = 0;
 			
 
 		protected:
@@ -149,11 +149,11 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::vector<uml::Classifier * > *  m_realizingClassifier =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_realizingClassifier;
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			uml::Component *  m_abstraction =  nullptr ;
+			std::shared_ptr<uml::Component> m_abstraction;
 			
 
 		public:
@@ -163,19 +163,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

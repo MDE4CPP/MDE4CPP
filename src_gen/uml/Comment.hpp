@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace uml
 			/*!
 			 References the Element(s) being commented.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getAnnotatedElement() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getAnnotatedElement() const = 0;
 			
 			
 
@@ -107,7 +108,7 @@ namespace uml
 			/*!
 			 References the Element(s) being commented.
 			<p>From package UML::CommonStructure.</p> */
-			std::vector<uml::Element * > *  m_annotatedElement =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> m_annotatedElement;
 			
 
 		public:
@@ -117,7 +118,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
 	};
 
 }

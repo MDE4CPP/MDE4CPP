@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -124,7 +125,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getClassifiers()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getClassifiers()  = 0;
 			
 			
 			
@@ -139,13 +140,12 @@ namespace uml
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual uml::Enumeration *  getEnumeration() const = 0;
+			virtual std::shared_ptr<uml::Enumeration> getEnumeration() const = 0;
 			
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setEnumeration(uml::Enumeration *  _enumeration) = 0;
-			
+			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) = 0;
 			
 
 		protected:
@@ -160,7 +160,7 @@ namespace uml
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			uml::Enumeration *  m_enumeration =  nullptr ;
+			std::shared_ptr<uml::Enumeration> m_enumeration;
 			
 
 		public:
@@ -170,13 +170,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

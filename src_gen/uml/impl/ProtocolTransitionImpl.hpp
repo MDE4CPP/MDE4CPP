@@ -22,10 +22,11 @@
 #include "impl/TransitionImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ProtocolTransitionImpl :virtual public TransitionImpl, virtual public ProtocolTransition
+	class ProtocolTransitionImpl :virtual public TransitionImpl, virtual public ProtocolTransition 
 	{
 		public: 
 			ProtocolTransitionImpl(const ProtocolTransitionImpl & obj);
@@ -50,23 +51,23 @@ namespace uml
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif */ 
-			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::vector<uml::Operation * > *  getReferreds()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> getReferreds()  ;
 			
 			
 			
@@ -81,27 +82,25 @@ namespace uml
 			/*!
 			 Specifies the post condition of the Transition which is the Condition that should be obtained once the Transition is triggered. This post condition is part of the post condition of the Operation connected to the Transition.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Constraint *  getPostCondition() const ;
+			virtual std::shared_ptr<uml::Constraint> getPostCondition() const ;
 			
 			/*!
 			 Specifies the post condition of the Transition which is the Condition that should be obtained once the Transition is triggered. This post condition is part of the post condition of the Operation connected to the Transition.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setPostCondition(uml::Constraint *  _postCondition) ;
+			virtual void setPostCondition(std::shared_ptr<uml::Constraint> _postCondition) ;
+			/*!
+			 Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
+			<p>From package UML::StateMachines.</p> */
+			virtual std::shared_ptr<uml::Constraint> getPreCondition() const ;
 			
 			/*!
 			 Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Constraint *  getPreCondition() const ;
-			
-			/*!
-			 Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setPreCondition(uml::Constraint *  _preCondition) ;
-			
+			virtual void setPreCondition(std::shared_ptr<uml::Constraint> _preCondition) ;
 			/*!
 			 This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Operation * > *  getReferred() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> getReferred() const ;
 			
 							
 			
@@ -111,22 +110,22 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -135,7 +134,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_PROTOCOLTRANSITIONPROTOCOLTRANSITIONIMPL_HPP */

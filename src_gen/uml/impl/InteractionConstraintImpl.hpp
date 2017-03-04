@@ -22,10 +22,11 @@
 #include "impl/ConstraintImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class InteractionConstraintImpl :virtual public ConstraintImpl, virtual public InteractionConstraint
+	class InteractionConstraintImpl :virtual public ConstraintImpl, virtual public InteractionConstraint 
 	{
 		public: 
 			InteractionConstraintImpl(const InteractionConstraintImpl & obj);
@@ -50,34 +51,34 @@ namespace uml
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
 			InteractionOperatorKind::loop */ 
-			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0 */ 
-			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0 */ 
-			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
-			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The constraint may contain references to global data or write-once data. */ 
-			virtual bool global_data(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() ) */ 
-			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -92,23 +93,21 @@ namespace uml
 			/*!
 			 The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual uml::ValueSpecification *  getMaxint() const ;
+			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const ;
 			
 			/*!
 			 The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual void setMaxint(uml::ValueSpecification *  _maxint) ;
+			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint) ;
+			/*!
+			 The minimum number of iterations of a loop
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const ;
 			
 			/*!
 			 The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual uml::ValueSpecification *  getMinint() const ;
-			
-			/*!
-			 The minimum number of iterations of a loop
-			<p>From package UML::Interactions.</p> */
-			virtual void setMinint(uml::ValueSpecification *  _minint) ;
-			
+			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint) ;
 							
 			
 			//*********************************
@@ -117,13 +116,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -132,7 +131,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_INTERACTIONCONSTRAINTINTERACTIONCONSTRAINTIMPL_HPP */

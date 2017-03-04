@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -128,13 +129,12 @@ namespace uml
 			/*!
 			 Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::Behavior *  getBehavior() const = 0;
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
 			
 			/*!
 			 Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual void setBehavior(uml::Behavior *  _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
 			
 
 		protected:
@@ -149,7 +149,7 @@ namespace uml
 			/*!
 			 Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			uml::Behavior *  m_behavior =  nullptr ;
+			std::shared_ptr<uml::Behavior> m_behavior;
 			
 
 		public:
@@ -159,13 +159,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

@@ -13,75 +13,26 @@ using namespace uml;
 InformationFlowImpl::InformationFlowImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_conveyed == nullptr)
-	{
-		m_conveyed = new std::vector<uml::Classifier * >();
-	}
-	if( m_informationSource == nullptr)
-	{
-		m_informationSource = new std::vector<uml::NamedElement * >();
-	}
-	if( m_informationTarget == nullptr)
-	{
-		m_informationTarget = new std::vector<uml::NamedElement * >();
-	}
-	if( m_realization == nullptr)
-	{
-		m_realization = new std::vector<uml::Relationship * >();
-	}
-	if( m_realizingActivityEdge == nullptr)
-	{
-		m_realizingActivityEdge = new std::vector<uml::ActivityEdge * >();
-	}
-	if( m_realizingConnector == nullptr)
-	{
-		m_realizingConnector = new std::vector<uml::Connector * >();
-	}
-	if( m_realizingMessage == nullptr)
-	{
-		m_realizingMessage = new std::vector<uml::Message * >();
-	}
+	m_conveyed.reset(new std::vector<std::shared_ptr<uml::Classifier>>());
+	m_informationSource.reset(new std::vector<std::shared_ptr<uml::NamedElement>>());
+	m_informationTarget.reset(new std::vector<std::shared_ptr<uml::NamedElement>>());
+	m_realization.reset(new std::vector<std::shared_ptr<uml::Relationship>>());
+	m_realizingActivityEdge.reset(new std::vector<std::shared_ptr<uml::ActivityEdge>>());
+	m_realizingConnector.reset(new std::vector<std::shared_ptr<uml::Connector>>());
+	m_realizingMessage.reset(new std::vector<std::shared_ptr<uml::Message>>());
 }
 
 InformationFlowImpl::~InformationFlowImpl()
 {
-	if(m_conveyed!=nullptr)
-	{
-		delete(m_conveyed);
-	 	m_conveyed = nullptr;
-	}
-	if(m_informationSource!=nullptr)
-	{
-		delete(m_informationSource);
-	 	m_informationSource = nullptr;
-	}
-	if(m_informationTarget!=nullptr)
-	{
-		delete(m_informationTarget);
-	 	m_informationTarget = nullptr;
-	}
-	if(m_realization!=nullptr)
-	{
-		delete(m_realization);
-	 	m_realization = nullptr;
-	}
-	if(m_realizingActivityEdge!=nullptr)
-	{
-		delete(m_realizingActivityEdge);
-	 	m_realizingActivityEdge = nullptr;
-	}
-	if(m_realizingConnector!=nullptr)
-	{
-		delete(m_realizingConnector);
-	 	m_realizingConnector = nullptr;
-	}
-	if(m_realizingMessage!=nullptr)
-	{
-		delete(m_realizingMessage);
-	 	m_realizingMessage = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InformationFlow "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -94,67 +45,65 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Classifier * > *  _conveyed = obj.getConveyed();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _conveyed = obj.getConveyed();
 	this->getConveyed()->insert(this->getConveyed()->end(), _conveyed->begin(), _conveyed->end());
 
-	std::vector<uml::NamedElement * > *  _informationSource = obj.getInformationSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _informationSource = obj.getInformationSource();
 	this->getInformationSource()->insert(this->getInformationSource()->end(), _informationSource->begin(), _informationSource->end());
 
-	std::vector<uml::NamedElement * > *  _informationTarget = obj.getInformationTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _informationTarget = obj.getInformationTarget();
 	this->getInformationTarget()->insert(this->getInformationTarget()->end(), _informationTarget->begin(), _informationTarget->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::vector<uml::Relationship * > *  _realization = obj.getRealization();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Relationship>>> _realization = obj.getRealization();
 	this->getRealization()->insert(this->getRealization()->end(), _realization->begin(), _realization->end());
 
-	std::vector<uml::ActivityEdge * > *  _realizingActivityEdge = obj.getRealizingActivityEdge();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _realizingActivityEdge = obj.getRealizingActivityEdge();
 	this->getRealizingActivityEdge()->insert(this->getRealizingActivityEdge()->end(), _realizingActivityEdge->begin(), _realizingActivityEdge->end());
 
-	std::vector<uml::Connector * > *  _realizingConnector = obj.getRealizingConnector();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Connector>>> _realizingConnector = obj.getRealizingConnector();
 	this->getRealizingConnector()->insert(this->getRealizingConnector()->end(), _realizingConnector->begin(), _realizingConnector->end());
 
-	std::vector<uml::Message * > *  _realizingMessage = obj.getRealizingMessage();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Message>>> _realizingMessage = obj.getRealizingMessage();
 	this->getRealizingMessage()->insert(this->getRealizingMessage()->end(), _realizingMessage->begin(), _realizingMessage->end());
 
-	std::vector<uml::Element * > *  _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
 	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-	delete(_relatedElement);
 
-	std::vector<uml::Element * > *  _source = obj.getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
 	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-	delete(_source);
 
-	std::vector<uml::Element * > *  _target = obj.getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
 	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
-	delete(_target);
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -163,7 +112,7 @@ ecore::EObject *  InformationFlowImpl::copy() const
 	return new InformationFlowImpl(*this);
 }
 
-ecore::EClass* InformationFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInformationFlow();
 }
@@ -175,19 +124,19 @@ ecore::EClass* InformationFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InformationFlowImpl::convey_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::must_conform(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InformationFlowImpl::must_conform(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InformationFlowImpl::sources_and_targets_kind(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -196,61 +145,61 @@ bool InformationFlowImpl::sources_and_targets_kind(boost::any diagnostics,std::m
 //*********************************
 // References
 //*********************************
-std::vector<uml::Classifier * > *  InformationFlowImpl::getConveyed() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> InformationFlowImpl::getConveyed() const
 {
-	//assert(m_conveyed);
-	return m_conveyed;
+//assert(m_conveyed);
+    return m_conveyed;
 }
 
 
-std::vector<uml::NamedElement * > *  InformationFlowImpl::getInformationSource() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> InformationFlowImpl::getInformationSource() const
 {
-	//assert(m_informationSource);
-	return m_informationSource;
+//assert(m_informationSource);
+    return m_informationSource;
 }
 
 
-std::vector<uml::NamedElement * > *  InformationFlowImpl::getInformationTarget() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> InformationFlowImpl::getInformationTarget() const
 {
-	//assert(m_informationTarget);
-	return m_informationTarget;
+//assert(m_informationTarget);
+    return m_informationTarget;
 }
 
 
-std::vector<uml::Relationship * > *  InformationFlowImpl::getRealization() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Relationship>>> InformationFlowImpl::getRealization() const
 {
-	
-	return m_realization;
+
+    return m_realization;
 }
 
 
-std::vector<uml::ActivityEdge * > *  InformationFlowImpl::getRealizingActivityEdge() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> InformationFlowImpl::getRealizingActivityEdge() const
 {
-	
-	return m_realizingActivityEdge;
+
+    return m_realizingActivityEdge;
 }
 
 
-std::vector<uml::Connector * > *  InformationFlowImpl::getRealizingConnector() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Connector>>> InformationFlowImpl::getRealizingConnector() const
 {
-	
-	return m_realizingConnector;
+
+    return m_realizingConnector;
 }
 
 
-std::vector<uml::Message * > *  InformationFlowImpl::getRealizingMessage() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Message>>> InformationFlowImpl::getRealizingMessage() const
 {
-	
-	return m_realizingMessage;
+
+    return m_realizingMessage;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  InformationFlowImpl::getOwner() const
+std::shared_ptr<uml::Element> InformationFlowImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -263,51 +212,44 @@ uml::Element *  InformationFlowImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  InformationFlowImpl::getSource() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InformationFlowImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _source =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  informationSource = (std::vector<uml::Element * > * ) getInformationSource();
-	_source->insert(_source->end(), informationSource->begin(), informationSource->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-
-	return _source;
+	return _ownedElement;
 }
-std::vector<uml::Element * > *  InformationFlowImpl::getRelatedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InformationFlowImpl::getRelatedElement() const
 {
-	std::vector<uml::Element * > *  _relatedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  source = (std::vector<uml::Element * > * ) getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
 	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-
-	delete(source);
-	std::vector<uml::Element * > *  target = (std::vector<uml::Element * > * ) getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
 	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
-
-	delete(target);
 
 	return _relatedElement;
 }
-std::vector<uml::Element * > *  InformationFlowImpl::getTarget() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InformationFlowImpl::getSource() const
 {
-	std::vector<uml::Element * > *  _target =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  informationTarget = (std::vector<uml::Element * > * ) getInformationTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> informationSource = getInformationSource();
+	_source->insert(_source->end(), informationSource->begin(), informationSource->end());
+
+	return _source;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InformationFlowImpl::getTarget() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> informationTarget = getInformationTarget();
 	_target->insert(_target->end(), informationTarget->begin(), informationTarget->end());
 
-
 	return _target;
-}
-std::vector<uml::Element * > *  InformationFlowImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

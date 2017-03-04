@@ -13,37 +13,22 @@ using namespace uml;
 BehavioredClassifierImpl::BehavioredClassifierImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_interfaceRealization == nullptr)
-	{
-		m_interfaceRealization = new std::vector<uml::InterfaceRealization * >();
-	}
-	if( m_ownedBehavior == nullptr)
-	{
-		m_ownedBehavior = new std::vector<uml::Behavior * >();
-	}
+	m_interfaceRealization.reset(new std::vector<std::shared_ptr<uml::InterfaceRealization>>());
+	m_ownedBehavior.reset(new std::vector<std::shared_ptr<uml::Behavior>>());
 }
 
 BehavioredClassifierImpl::~BehavioredClassifierImpl()
 {
-	if(m_interfaceRealization!=nullptr)
-	{
-		for(auto c :*m_interfaceRealization)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_ownedBehavior!=nullptr)
-	{
-		for(auto c :*m_ownedBehavior)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BehavioredClassifier "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -59,41 +44,36 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 
 	//copy references with now containment
 	
-	std::vector<uml::Property * > *  _attribute = obj.getAttribute();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _attribute = obj.getAttribute();
 	this->getAttribute()->insert(this->getAttribute()->end(), _attribute->begin(), _attribute->end());
-	delete(_attribute);
 
 	m_classifierBehavior  = obj.getClassifierBehavior();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Feature * > *  _feature = obj.getFeature();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> _feature = obj.getFeature();
 	this->getFeature()->insert(this->getFeature()->end(), _feature->begin(), _feature->end());
-	delete(_feature);
 
-	std::vector<uml::Classifier * > *  _general = obj.getGeneral();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _general = obj.getGeneral();
 	this->getGeneral()->insert(this->getGeneral()->end(), _general->begin(), _general->end());
 
-	std::vector<uml::PackageableElement * > *  _importedMember = obj.getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _importedMember = obj.getImportedMember();
 	this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
 
-	std::vector<uml::NamedElement * > *  _inheritedMember = obj.getInheritedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _inheritedMember = obj.getInheritedMember();
 	this->getInheritedMember()->insert(this->getInheritedMember()->end(), _inheritedMember->begin(), _inheritedMember->end());
 
-	std::vector<uml::NamedElement * > *  _member = obj.getMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member = obj.getMember();
 	this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
-	delete(_member);
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
-	std::vector<uml::NamedElement * > *  _ownedMember = obj.getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember = obj.getOwnedMember();
 	this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
-	delete(_ownedMember);
 
 	m_owner  = obj.getOwner();
 
@@ -101,84 +81,94 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 
 	m_package  = obj.getPackage();
 
-	std::vector<uml::GeneralizationSet * > *  _powertypeExtent = obj.getPowertypeExtent();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralizationSet>>> _powertypeExtent = obj.getPowertypeExtent();
 	this->getPowertypeExtent()->insert(this->getPowertypeExtent()->end(), _powertypeExtent->begin(), _powertypeExtent->end());
 
-	std::vector<uml::Classifier * > *  _redefinedClassifier = obj.getRedefinedClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinedClassifier = obj.getRedefinedClassifier();
 	this->getRedefinedClassifier()->insert(this->getRedefinedClassifier()->end(), _redefinedClassifier->begin(), _redefinedClassifier->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_representation  = obj.getRepresentation();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-	std::vector<uml::UseCase * > *  _useCase = obj.getUseCase();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::UseCase>>> _useCase = obj.getUseCase();
 	this->getUseCase()->insert(this->getUseCase()->end(), _useCase->begin(), _useCase->end());
 
 
 	//clone containt lists
-	for(uml::CollaborationUse * 	_collaborationUse : *obj.getCollaborationUse())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::CollaborationUse>>> _collaborationUseList = obj.getCollaborationUse();
+	for(std::shared_ptr<uml::CollaborationUse> _collaborationUse : *_collaborationUseList)
 	{
-		this->getCollaborationUse()->push_back(dynamic_cast<uml::CollaborationUse * >(_collaborationUse->copy()));
+		this->getCollaborationUse()->push_back(std::shared_ptr<uml::CollaborationUse>(dynamic_cast<uml::CollaborationUse*>(_collaborationUse->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::ElementImport * 	_elementImport : *obj.getElementImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> _elementImportList = obj.getElementImport();
+	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->push_back(dynamic_cast<uml::ElementImport * >(_elementImport->copy()));
+		this->getElementImport()->push_back(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
 	}
-	for(uml::Generalization * 	_generalization : *obj.getGeneralization())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Generalization>>> _generalizationList = obj.getGeneralization();
+	for(std::shared_ptr<uml::Generalization> _generalization : *_generalizationList)
 	{
-		this->getGeneralization()->push_back(dynamic_cast<uml::Generalization * >(_generalization->copy()));
+		this->getGeneralization()->push_back(std::shared_ptr<uml::Generalization>(dynamic_cast<uml::Generalization*>(_generalization->copy())));
 	}
-	for(uml::InterfaceRealization * 	_interfaceRealization : *obj.getInterfaceRealization())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::InterfaceRealization>>> _interfaceRealizationList = obj.getInterfaceRealization();
+	for(std::shared_ptr<uml::InterfaceRealization> _interfaceRealization : *_interfaceRealizationList)
 	{
-		this->getInterfaceRealization()->push_back(dynamic_cast<uml::InterfaceRealization * >(_interfaceRealization->copy()));
+		this->getInterfaceRealization()->push_back(std::shared_ptr<uml::InterfaceRealization>(dynamic_cast<uml::InterfaceRealization*>(_interfaceRealization->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Behavior * 	_ownedBehavior : *obj.getOwnedBehavior())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> _ownedBehaviorList = obj.getOwnedBehavior();
+	for(std::shared_ptr<uml::Behavior> _ownedBehavior : *_ownedBehaviorList)
 	{
-		this->getOwnedBehavior()->push_back(dynamic_cast<uml::Behavior * >(_ownedBehavior->copy()));
+		this->getOwnedBehavior()->push_back(std::shared_ptr<uml::Behavior>(dynamic_cast<uml::Behavior*>(_ownedBehavior->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Constraint * 	_ownedRule : *obj.getOwnedRule())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _ownedRuleList = obj.getOwnedRule();
+	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->push_back(dynamic_cast<uml::Constraint * >(_ownedRule->copy()));
+		this->getOwnedRule()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
 	}
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature = dynamic_cast<uml::TemplateSignature * >(obj.getOwnedTemplateSignature()->copy());
+		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
 	}
-	for(uml::UseCase * 	_ownedUseCase : *obj.getOwnedUseCase())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::UseCase>>> _ownedUseCaseList = obj.getOwnedUseCase();
+	for(std::shared_ptr<uml::UseCase> _ownedUseCase : *_ownedUseCaseList)
 	{
-		this->getOwnedUseCase()->push_back(dynamic_cast<uml::UseCase * >(_ownedUseCase->copy()));
+		this->getOwnedUseCase()->push_back(std::shared_ptr<uml::UseCase>(dynamic_cast<uml::UseCase*>(_ownedUseCase->copy())));
 	}
-	for(uml::PackageImport * 	_packageImport : *obj.getPackageImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> _packageImportList = obj.getPackageImport();
+	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->push_back(dynamic_cast<uml::PackageImport * >(_packageImport->copy()));
+		this->getPackageImport()->push_back(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
 	}
-	for(uml::Substitution * 	_substitution : *obj.getSubstitution())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Substitution>>> _substitutionList = obj.getSubstitution();
+	for(std::shared_ptr<uml::Substitution> _substitution : *_substitutionList)
 	{
-		this->getSubstitution()->push_back(dynamic_cast<uml::Substitution * >(_substitution->copy()));
+		this->getSubstitution()->push_back(std::shared_ptr<uml::Substitution>(dynamic_cast<uml::Substitution*>(_substitution->copy())));
 	}
-	for(uml::TemplateBinding * 	_templateBinding : *obj.getTemplateBinding())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> _templateBindingList = obj.getTemplateBinding();
+	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->push_back(dynamic_cast<uml::TemplateBinding * >(_templateBinding->copy()));
+		this->getTemplateBinding()->push_back(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
 	}
 }
 
@@ -187,7 +177,7 @@ ecore::EObject *  BehavioredClassifierImpl::copy() const
 	return new BehavioredClassifierImpl(*this);
 }
 
-ecore::EClass* BehavioredClassifierImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getBehavioredClassifier();
 }
@@ -199,19 +189,19 @@ ecore::EClass* BehavioredClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool BehavioredClassifierImpl::class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Interface * > *  BehavioredClassifierImpl::getAllImplementedInterfaces() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Interface>>> BehavioredClassifierImpl::getAllImplementedInterfaces() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Interface * > *  BehavioredClassifierImpl::getImplementedInterfaces() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Interface>>> BehavioredClassifierImpl::getImplementedInterfaces() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -220,105 +210,51 @@ std::vector<uml::Interface * > *  BehavioredClassifierImpl::getImplementedInterf
 //*********************************
 // References
 //*********************************
-uml::Behavior *  BehavioredClassifierImpl::getClassifierBehavior() const
+std::shared_ptr<uml::Behavior> BehavioredClassifierImpl::getClassifierBehavior() const
 {
-	
-	return m_classifierBehavior;
-}
-void BehavioredClassifierImpl::setClassifierBehavior(uml::Behavior *  _classifierBehavior)
-{
-	m_classifierBehavior = _classifierBehavior;
-}
 
-std::vector<uml::InterfaceRealization * > *  BehavioredClassifierImpl::getInterfaceRealization() const
+    return m_classifierBehavior;
+}
+void BehavioredClassifierImpl::setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior)
 {
-	
-	return m_interfaceRealization;
+    m_classifierBehavior = _classifierBehavior;
 }
 
-
-std::vector<uml::Behavior * > *  BehavioredClassifierImpl::getOwnedBehavior() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::InterfaceRealization>>> BehavioredClassifierImpl::getInterfaceRealization() const
 {
-	
-	return m_ownedBehavior;
+
+    return m_interfaceRealization;
+}
+
+
+std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> BehavioredClassifierImpl::getOwnedBehavior() const
+{
+
+    return m_ownedBehavior;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::NamedElement * > *  BehavioredClassifierImpl::getMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> BehavioredClassifierImpl::getMember() const
 {
-	std::vector<uml::NamedElement * > *  _member =  new std::vector<uml::NamedElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::vector<uml::NamedElement * > *  feature = (std::vector<uml::NamedElement * > * ) getFeature();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> feature = getFeature();
 	_member->insert(_member->end(), feature->begin(), feature->end());
-
-	delete(feature);
-	std::vector<uml::NamedElement * > *  importedMember = (std::vector<uml::NamedElement * > * ) getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> importedMember = getImportedMember();
 	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
-
-	std::vector<uml::NamedElement * > *  inheritedMember = (std::vector<uml::NamedElement * > * ) getInheritedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> inheritedMember = getInheritedMember();
 	_member->insert(_member->end(), inheritedMember->begin(), inheritedMember->end());
-
-	std::vector<uml::NamedElement * > *  ownedMember = (std::vector<uml::NamedElement * > * ) getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
 	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
 
 	return _member;
 }
-std::vector<uml::Element * > *  BehavioredClassifierImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> BehavioredClassifierImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  collaborationUse = (std::vector<uml::Element * > * ) getCollaborationUse();
-	_ownedElement->insert(_ownedElement->end(), collaborationUse->begin(), collaborationUse->end());
-
-	std::vector<uml::Element * > *  elementImport = (std::vector<uml::Element * > * ) getElementImport();
-	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
-
-	std::vector<uml::Element * > *  generalization = (std::vector<uml::Element * > * ) getGeneralization();
-	_ownedElement->insert(_ownedElement->end(), generalization->begin(), generalization->end());
-
-	std::vector<uml::Element * > *  interfaceRealization = (std::vector<uml::Element * > * ) getInterfaceRealization();
-	_ownedElement->insert(_ownedElement->end(), interfaceRealization->begin(), interfaceRealization->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  ownedMember = (std::vector<uml::Element * > * ) getOwnedMember();
-	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
-	_ownedElement->push_back(getOwnedTemplateSignature());
-	std::vector<uml::Element * > *  packageImport = (std::vector<uml::Element * > * ) getPackageImport();
-	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
-
-	std::vector<uml::Element * > *  substitution = (std::vector<uml::Element * > * ) getSubstitution();
-	_ownedElement->insert(_ownedElement->end(), substitution->begin(), substitution->end());
-
-	std::vector<uml::Element * > *  templateBinding = (std::vector<uml::Element * > * ) getTemplateBinding();
-	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
-
-
-	return _ownedElement;
-}
-std::vector<uml::Feature * > *  BehavioredClassifierImpl::getFeature() const
-{
-	std::vector<uml::Feature * > *  _feature =  new std::vector<uml::Feature * >() ;
-	
-	std::vector<uml::Feature * > *  attribute = (std::vector<uml::Feature * > * ) getAttribute();
-	_feature->insert(_feature->end(), attribute->begin(), attribute->end());
-
-	delete(attribute);
-
-	return _feature;
-}
-uml::Element *  BehavioredClassifierImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -331,19 +267,58 @@ uml::Element *  BehavioredClassifierImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::RedefinableElement * > *  BehavioredClassifierImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> BehavioredClassifierImpl::getFeature() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> _feature(new std::vector<std::shared_ptr<uml::Feature>>()) ;
 	
-	std::vector<uml::RedefinableElement * > *  redefinedClassifier = (std::vector<uml::RedefinableElement * > * ) getRedefinedClassifier();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedClassifier->begin(), redefinedClassifier->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> attribute = getAttribute();
+	_feature->insert(_feature->end(), attribute->begin(), attribute->end());
 
-
-	return _redefinedElement;
+	return _feature;
 }
-uml::Namespace *  BehavioredClassifierImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> BehavioredClassifierImpl::getOwnedMember() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> ownedBehavior = getOwnedBehavior();
+	_ownedMember->insert(_ownedMember->end(), ownedBehavior->begin(), ownedBehavior->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> ownedRule = getOwnedRule();
+	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::UseCase>>> ownedUseCase = getOwnedUseCase();
+	_ownedMember->insert(_ownedMember->end(), ownedUseCase->begin(), ownedUseCase->end());
+
+	return _ownedMember;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> BehavioredClassifierImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::CollaborationUse>>> collaborationUse = getCollaborationUse();
+	_ownedElement->insert(_ownedElement->end(), collaborationUse->begin(), collaborationUse->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> elementImport = getElementImport();
+	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Generalization>>> generalization = getGeneralization();
+	_ownedElement->insert(_ownedElement->end(), generalization->begin(), generalization->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::InterfaceRealization>>> interfaceRealization = getInterfaceRealization();
+	_ownedElement->insert(_ownedElement->end(), interfaceRealization->begin(), interfaceRealization->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
+	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
+	_ownedElement->push_back(getOwnedTemplateSignature());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> packageImport = getPackageImport();
+	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Substitution>>> substitution = getSubstitution();
+	_ownedElement->insert(_ownedElement->end(), substitution->begin(), substitution->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> templateBinding = getTemplateBinding();
+	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> BehavioredClassifierImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getPackage()!=nullptr)
 	{
@@ -352,21 +327,14 @@ uml::Namespace *  BehavioredClassifierImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::NamedElement * > *  BehavioredClassifierImpl::getOwnedMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> BehavioredClassifierImpl::getRedefinedElement() const
 {
-	std::vector<uml::NamedElement * > *  _ownedMember =  new std::vector<uml::NamedElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
-	std::vector<uml::NamedElement * > *  ownedBehavior = (std::vector<uml::NamedElement * > * ) getOwnedBehavior();
-	_ownedMember->insert(_ownedMember->end(), ownedBehavior->begin(), ownedBehavior->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> redefinedClassifier = getRedefinedClassifier();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedClassifier->begin(), redefinedClassifier->end());
 
-	std::vector<uml::NamedElement * > *  ownedRule = (std::vector<uml::NamedElement * > * ) getOwnedRule();
-	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
-
-	std::vector<uml::NamedElement * > *  ownedUseCase = (std::vector<uml::NamedElement * > * ) getOwnedUseCase();
-	_ownedMember->insert(_ownedMember->end(), ownedUseCase->begin(), ownedUseCase->end());
-
-
-	return _ownedMember;
+	return _redefinedElement;
 }
 
 

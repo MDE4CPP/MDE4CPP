@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -105,7 +106,7 @@ namespace uml
 			/*!
 			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
-			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -118,17 +119,16 @@ namespace uml
 			/*!
 			 A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p> */
-			virtual uml::ValueSpecification *  getExpr() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const = 0;
 			
 			/*!
 			 A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p> */
-			virtual void setExpr(uml::ValueSpecification *  _expr) = 0;
-			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) = 0;
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-			virtual std::vector<uml::Observation * > *  getObservation() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> getObservation() const = 0;
 			
 			
 
@@ -144,11 +144,11 @@ namespace uml
 			/*!
 			 A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p> */
-			uml::ValueSpecification *  m_expr =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_expr;
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-			std::vector<uml::Observation * > *  m_observation =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> m_observation;
 			
 
 		public:
@@ -158,10 +158,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

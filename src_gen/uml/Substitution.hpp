@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -118,23 +119,21 @@ namespace uml
 			/*!
 			 The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Classifier *  getContract() const = 0;
+			virtual std::shared_ptr<uml::Classifier> getContract() const = 0;
 			
 			/*!
 			 The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p> */
-			virtual void setContract(uml::Classifier *  _contract) = 0;
+			virtual void setContract(std::shared_ptr<uml::Classifier> _contract) = 0;
+			/*!
+			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<uml::Classifier> getSubstitutingClassifier() const = 0;
 			
 			/*!
 			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Classifier *  getSubstitutingClassifier() const = 0;
-			
-			/*!
-			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
-			<p>From package UML::Classification.</p> */
-			virtual void setSubstitutingClassifier(uml::Classifier *  _substitutingClassifier) = 0;
-			
+			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier) = 0;
 			
 
 		protected:
@@ -149,11 +148,11 @@ namespace uml
 			/*!
 			 The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p> */
-			uml::Classifier *  m_contract =  nullptr ;
+			std::shared_ptr<uml::Classifier> m_contract;
 			/*!
 			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p> */
-			uml::Classifier *  m_substitutingClassifier =  nullptr ;
+			std::shared_ptr<uml::Classifier> m_substitutingClassifier;
 			
 
 		public:
@@ -163,19 +162,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

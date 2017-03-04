@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -157,12 +158,12 @@ namespace uml
 			/*!
 			 A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type of the value ValueSpecification must conform to the type of the ValuePin.
 			value.type.conformsTo(type) */ 
-			virtual bool compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -175,13 +176,12 @@ namespace uml
 			/*!
 			 The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p> */
-			virtual uml::ValueSpecification *  getValue() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getValue() const = 0;
 			
 			/*!
 			 The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p> */
-			virtual void setValue(uml::ValueSpecification *  _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value) = 0;
 			
 
 		protected:
@@ -196,7 +196,7 @@ namespace uml
 			/*!
 			 The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p> */
-			uml::ValueSpecification *  m_value =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_value;
 			
 
 		public:
@@ -204,18 +204,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

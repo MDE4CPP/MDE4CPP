@@ -22,10 +22,11 @@
 #include "impl/CallActionImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class StartObjectBehaviorActionImpl :virtual public CallActionImpl, virtual public StartObjectBehaviorAction
+	class StartObjectBehaviorActionImpl :virtual public CallActionImpl, virtual public StartObjectBehaviorAction 
 	{
 		public: 
 			StartObjectBehaviorActionImpl(const StartObjectBehaviorActionImpl & obj);
@@ -48,17 +49,17 @@ namespace uml
 			/*!
 			 The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null */ 
-			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty() */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the type of the object InputPin is a Behavior, then that Behavior. Otherwise, if the type of the object InputPin is a BehavioredClassifier, then the classifierBehavior of that BehavioredClassifier.
@@ -71,7 +72,7 @@ namespace uml
 			endif
 			endif)
 			<p>From package UML::Actions.</p> */ 
-			virtual uml::Behavior *  behavior()  ;
+			virtual std::shared_ptr<uml::Behavior>  behavior()  ;
 			
 			
 			
@@ -86,37 +87,36 @@ namespace uml
 			/*!
 			 An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getObject() const ;
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			
 			/*!
 			 An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p> */
-			virtual void setObject(uml::InputPin *  _object) ;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const ;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -125,7 +125,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_STARTOBJECTBEHAVIORACTIONSTARTOBJECTBEHAVIORACTIONIMPL_HPP */

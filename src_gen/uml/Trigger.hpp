@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -100,7 +101,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -113,17 +114,16 @@ namespace uml
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::Event *  getEvent() const = 0;
+			virtual std::shared_ptr<uml::Event> getEvent() const = 0;
 			
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(uml::Event *  _event) = 0;
-			
+			virtual void setEvent(std::shared_ptr<uml::Event> _event) = 0;
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Port * > *  getPort() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> getPort() const = 0;
 			
 			
 
@@ -139,11 +139,11 @@ namespace uml
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			uml::Event *  m_event =  nullptr ;
+			std::shared_ptr<uml::Event> m_event;
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			std::vector<uml::Port * > *  m_port =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> m_port;
 			
 
 		public:
@@ -153,10 +153,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

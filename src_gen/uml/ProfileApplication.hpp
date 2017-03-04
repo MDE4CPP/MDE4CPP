@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -98,11 +99,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Retrieves the definition (Ecore representation) of the profile associated with this profile application. */ 
-			virtual ecore::EPackage *  getAppliedDefinition()  = 0;
+			virtual std::shared_ptr<ecore::EPackage>  getAppliedDefinition()  = 0;
 			
 			/*!
 			 Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application. */ 
-			virtual ecore::ENamedElement *  getAppliedDefinition(uml::NamedElement *  namedElement)  = 0;
+			virtual std::shared_ptr<ecore::ENamedElement>  getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  = 0;
 			
 			
 			//*********************************
@@ -125,23 +126,21 @@ namespace uml
 			/*!
 			 References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p> */
-			virtual uml::Profile *  getAppliedProfile() const = 0;
+			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const = 0;
 			
 			/*!
 			 References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p> */
-			virtual void setAppliedProfile(uml::Profile *  _appliedProfile) = 0;
+			virtual void setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile) = 0;
+			/*!
+			 The package that owns the profile application.
+			<p>From package UML::Packages.</p> */
+			virtual std::shared_ptr<uml::Package> getApplyingPackage() const = 0;
 			
 			/*!
 			 The package that owns the profile application.
 			<p>From package UML::Packages.</p> */
-			virtual uml::Package *  getApplyingPackage() const = 0;
-			
-			/*!
-			 The package that owns the profile application.
-			<p>From package UML::Packages.</p> */
-			virtual void setApplyingPackage(uml::Package *  _applyingPackage) = 0;
-			
+			virtual void setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage) = 0;
 			
 
 		protected:
@@ -160,11 +159,11 @@ namespace uml
 			/*!
 			 References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p> */
-			uml::Profile *  m_appliedProfile =  nullptr ;
+			std::shared_ptr<uml::Profile> m_appliedProfile;
 			/*!
 			 The package that owns the profile application.
 			<p>From package UML::Packages.</p> */
-			uml::Package *  m_applyingPackage =  nullptr ;
+			std::shared_ptr<uml::Package> m_applyingPackage;
 			
 
 		public:
@@ -174,19 +173,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

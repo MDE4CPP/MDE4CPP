@@ -22,10 +22,11 @@
 #include "impl/ClassifierImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class DataTypeImpl :virtual public ClassifierImpl, virtual public DataType
+	class DataTypeImpl :virtual public ClassifierImpl, virtual public DataType 
 	{
 		public: 
 			DataTypeImpl(const DataTypeImpl & obj);
@@ -47,11 +48,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this data type. */ 
-			virtual uml::Property *  createOwnedAttribute(std::string name,uml::Type *  type,int lower,int upper)  ;
+			virtual std::shared_ptr<uml::Property>  createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)  ;
 			
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this data type. */ 
-			virtual uml::Operation *  createOwnedOperation(std::string name,std::vector<std::string> *  parameterNames,std::vector<uml::Type * > *  parameterTypes,uml::Type *  returnType)  ;
+			virtual std::shared_ptr<uml::Operation>  createOwnedOperation(std::string name,std::shared_ptr<std::vector<std::shared_ptr<std::string>>>  parameterNames,std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>>  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
 			
 			
 			
@@ -66,12 +67,12 @@ namespace uml
 			/*!
 			 The attributes owned by the DataType.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::vector<uml::Property * > *  getOwnedAttribute() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getOwnedAttribute() const ;
 			
 			/*!
 			 The Operations owned by the DataType.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::vector<uml::Operation * > *  getOwnedOperation() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> getOwnedOperation() const ;
 			
 							
 			
@@ -79,30 +80,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const ;/*!
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Feature * > *  getFeature() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -111,7 +112,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_DATATYPEDATATYPEIMPL_HPP */

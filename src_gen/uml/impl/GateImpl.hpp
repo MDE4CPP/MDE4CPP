@@ -22,10 +22,11 @@
 #include "impl/MessageEndImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class GateImpl :virtual public MessageEndImpl, virtual public Gate
+	class GateImpl :virtual public MessageEndImpl, virtual public Gate 
 	{
 		public: 
 			GateImpl(const GateImpl & obj);
@@ -48,12 +49,12 @@ namespace uml
 			/*!
 			 If this Gate is an actualGate, it must have exactly one matching formalGate within the referred Interaction.
 			interactionUse->notEmpty() implies interactionUse.refersTo.formalGate->select(matches(self))->size()=1 */ 
-			virtual bool actual_gate_matched(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool actual_gate_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If this Gate is inside a CombinedFragment, it must have exactly one matching Gate which is outside of that CombinedFragment.
 			isInsideCF() implies combinedFragment.cfragmentGate->select(isOutsideCF() and matches(self))->size()=1 */ 
-			virtual bool inside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool inside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If this Gate is outside an 'alt' CombinedFragment,  for every InteractionOperator inside that CombinedFragment there must be exactly one matching Gate inside the CombindedFragment with its opposing end enclosed by that InteractionOperator. If this Gate is outside CombinedFragment with operator other than 'alt',   there must be exactly one matching Gate inside that CombinedFragment.
@@ -64,29 +65,29 @@ namespace uml
 			 oppositeEnd().enclosingFragment()->includes(self.combinedFragment) and matches(self))->size()=1)
 			 else  self.combinedFragment.cfragmentGate->select(isInsideCF() and matches(self))->size()=1
 			 endif */ 
-			virtual bool outside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool outside_cf_matched(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isFormal() implies that no other formalGate of the parent Interaction returns the same getName() as returned for self
 			isFormal() implies interaction.formalGate->select(getName() = self.getName())->size()=1 */ 
-			virtual bool formal_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool formal_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isActual() implies that no other actualGate of the parent InteractionUse returns the same getName() as returned for self
 			isActual() implies interactionUse.actualGate->select(getName() = self.getName())->size()=1 */ 
-			virtual bool actual_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool actual_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isOutsideCF() implies that no other outside cfragmentGate of the parent CombinedFragment returns the same getName() as returned for self
 			isOutsideCF() implies combinedFragment.cfragmentGate->select(getName() = self.getName())->size()=1 */ 
-			virtual bool outside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool outside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isInsideCF() implies that no other inside cfragmentGate attached to a message with its other end in the same InteractionOperator as self, returns the same getName() as returned for self
 			isInsideCF() implies
 			let selfOperand : InteractionOperand = self.getOperand() in
 			  combinedFragment.cfragmentGate->select(isInsideCF() and getName() = self.getName())->select(getOperand() = selfOperand)->size()=1 */ 
-			virtual bool inside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool inside_cf_gate_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 This query returns true if this Gate is attached to the boundary of a CombinedFragment, and its other end (if present)  is outside of the same CombinedFragment.
@@ -159,7 +160,7 @@ namespace uml
 			self.message.receiveEvent->includes(self) implies gateToMatch.message.sendEvent->includes(gateToMatch) and
 			self.message.signature = gateToMatch.message.signature)
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool matches(uml::Gate *  gateToMatch)  ;
+			virtual bool matches(std::shared_ptr<uml::Gate>  gateToMatch)  ;
 			
 			/*!
 			 If the Gate is an inside Combined Fragment Gate, this operation returns the InteractionOperand that the opposite end of this Gate is included within.
@@ -174,7 +175,7 @@ namespace uml
 			  else null
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual uml::InteractionOperand *  getOperand()  ;
+			virtual std::shared_ptr<uml::InteractionOperand>  getOperand()  ;
 			
 			
 			
@@ -194,10 +195,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -206,7 +207,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_GATEGATEIMPL_HPP */

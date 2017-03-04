@@ -13,12 +13,13 @@ using namespace uml;
 LifelineImpl::LifelineImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_coveredBy == nullptr)
-	{
-		m_coveredBy = new std::vector<uml::InteractionFragment * >();
-	}
+	m_coveredBy.reset(new std::vector<std::shared_ptr<uml::InteractionFragment>>());
 	
 	
 	
@@ -27,19 +28,9 @@ LifelineImpl::LifelineImpl()
 
 LifelineImpl::~LifelineImpl()
 {
-	if(m_selector!=nullptr)
-	{
-		if(m_selector)
-		{
-			delete(m_selector);
-			m_selector = nullptr;
-		}
-	}
-	if(m_coveredBy!=nullptr)
-	{
-		delete(m_coveredBy);
-	 	m_coveredBy = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Lifeline "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -52,10 +43,10 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::InteractionFragment * > *  _coveredBy = obj.getCoveredBy();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> _coveredBy = obj.getCoveredBy();
 	this->getCoveredBy()->insert(this->getCoveredBy()->end(), _coveredBy->begin(), _coveredBy->end());
 
 	m_decomposedAs  = obj.getDecomposedAs();
@@ -64,9 +55,8 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -74,21 +64,23 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getSelector()!=nullptr)
 	{
-		m_selector = dynamic_cast<uml::ValueSpecification * >(obj.getSelector()->copy());
+		m_selector.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSelector()->copy()));
 	}
 }
 
@@ -97,7 +89,7 @@ ecore::EObject *  LifelineImpl::copy() const
 	return new LifelineImpl(*this);
 }
 
-ecore::EClass* LifelineImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getLifeline();
 }
@@ -109,25 +101,25 @@ ecore::EClass* LifelineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LifelineImpl::interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LifelineImpl::same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LifelineImpl::selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -136,59 +128,70 @@ bool LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost:
 //*********************************
 // References
 //*********************************
-std::vector<uml::InteractionFragment * > *  LifelineImpl::getCoveredBy() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> LifelineImpl::getCoveredBy() const
 {
-	
-	return m_coveredBy;
+
+    return m_coveredBy;
 }
 
 
-uml::PartDecomposition *  LifelineImpl::getDecomposedAs() const
+std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
 {
-	
-	return m_decomposedAs;
+
+    return m_decomposedAs;
 }
-void LifelineImpl::setDecomposedAs(uml::PartDecomposition *  _decomposedAs)
+void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
 {
-	m_decomposedAs = _decomposedAs;
+    m_decomposedAs = _decomposedAs;
 }
 
-uml::Interaction *  LifelineImpl::getInteraction() const
+std::shared_ptr<uml::Interaction> LifelineImpl::getInteraction() const
 {
-	//assert(m_interaction);
-	return m_interaction;
+//assert(m_interaction);
+    return m_interaction;
 }
-void LifelineImpl::setInteraction(uml::Interaction *  _interaction)
+void LifelineImpl::setInteraction(std::shared_ptr<uml::Interaction> _interaction)
 {
-	m_interaction = _interaction;
-}
-
-uml::ConnectableElement *  LifelineImpl::getRepresents() const
-{
-	
-	return m_represents;
-}
-void LifelineImpl::setRepresents(uml::ConnectableElement *  _represents)
-{
-	m_represents = _represents;
+    m_interaction = _interaction;
 }
 
-uml::ValueSpecification *  LifelineImpl::getSelector() const
+std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
 {
-	
-	return m_selector;
+
+    return m_represents;
 }
-void LifelineImpl::setSelector(uml::ValueSpecification *  _selector)
+void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
 {
-	m_selector = _selector;
+    m_represents = _represents;
+}
+
+std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
+{
+
+    return m_selector;
+}
+void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
+{
+    m_selector = _selector;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  LifelineImpl::getNamespace() const
+std::shared_ptr<uml::Element> LifelineImpl::getOwner() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
+	
+	if(getNamespace()!=nullptr)
+	{
+		_owner = getNamespace();
+	}
+
+	return _owner;
+}
+std::shared_ptr<uml::Namespace> LifelineImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getInteraction()!=nullptr)
 	{
@@ -197,28 +200,16 @@ uml::Namespace *  LifelineImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  LifelineImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> LifelineImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getSelector());
 
 	return _ownedElement;
-}
-uml::Element *  LifelineImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
-	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-
-	return _owner;
 }
 
 

@@ -23,10 +23,11 @@
 #include "impl/TypedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ConnectableElementImpl :virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement
+	class ConnectableElementImpl :virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);
@@ -50,7 +51,7 @@ namespace uml
 			 Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::vector<uml::ConnectorEnd * > *  getEnds()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> getEnds()  ;
 			
 			
 			
@@ -65,7 +66,7 @@ namespace uml
 			/*!
 			 A set of ConnectorEnds that attach to this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::ConnectorEnd * > *  getEnd() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> getEnd() const ;
 			
 							
 			
@@ -75,10 +76,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -87,7 +88,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_CONNECTABLEELEMENTCONNECTABLEELEMENTIMPL_HPP */

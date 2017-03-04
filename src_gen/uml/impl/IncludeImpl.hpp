@@ -23,10 +23,11 @@
 #include "impl/NamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class IncludeImpl :virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include
+	class IncludeImpl :virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include 
 	{
 		public: 
 			IncludeImpl(const IncludeImpl & obj);
@@ -59,23 +60,21 @@ namespace uml
 			/*!
 			 The UseCase that is to be included.
 			<p>From package UML::UseCases.</p> */
-			virtual uml::UseCase *  getAddition() const ;
+			virtual std::shared_ptr<uml::UseCase> getAddition() const ;
 			
 			/*!
 			 The UseCase that is to be included.
 			<p>From package UML::UseCases.</p> */
-			virtual void setAddition(uml::UseCase *  _addition) ;
+			virtual void setAddition(std::shared_ptr<uml::UseCase> _addition) ;
+			/*!
+			 The UseCase which includes the addition and owns the Include relationship.
+			<p>From package UML::UseCases.</p> */
+			virtual std::shared_ptr<uml::UseCase> getIncludingCase() const ;
 			
 			/*!
 			 The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p> */
-			virtual uml::UseCase *  getIncludingCase() const ;
-			
-			/*!
-			 The UseCase which includes the addition and owns the Include relationship.
-			<p>From package UML::UseCases.</p> */
-			virtual void setIncludingCase(uml::UseCase *  _includingCase) ;
-			
+			virtual void setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase) ;
 							
 			
 			//*********************************
@@ -84,22 +83,22 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const ;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +107,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_INCLUDEINCLUDEIMPL_HPP */

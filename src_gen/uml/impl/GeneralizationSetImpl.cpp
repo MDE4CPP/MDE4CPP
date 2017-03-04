@@ -13,22 +13,22 @@ using namespace uml;
 GeneralizationSetImpl::GeneralizationSetImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_generalization == nullptr)
-	{
-		m_generalization = new std::vector<uml::Generalization * >();
-	}
+	m_generalization.reset(new std::vector<std::shared_ptr<uml::Generalization>>());
 	
 }
 
 GeneralizationSetImpl::~GeneralizationSetImpl()
 {
-	if(m_generalization!=nullptr)
-	{
-		delete(m_generalization);
-	 	m_generalization = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GeneralizationSet "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -43,17 +43,16 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Generalization * > *  _generalization = obj.getGeneralization();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Generalization>>> _generalization = obj.getGeneralization();
 	this->getGeneralization()->insert(this->getGeneralization()->end(), _generalization->begin(), _generalization->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -65,17 +64,19 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -84,7 +85,7 @@ ecore::EObject *  GeneralizationSetImpl::copy() const
 	return new GeneralizationSetImpl(*this);
 }
 
-ecore::EClass* GeneralizationSetImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getGeneralizationSet();
 }
@@ -115,13 +116,13 @@ bool GeneralizationSetImpl::getIsDisjoint() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralizationSetImpl::generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool GeneralizationSetImpl::generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -130,40 +131,39 @@ bool GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,st
 //*********************************
 // References
 //*********************************
-std::vector<uml::Generalization * > *  GeneralizationSetImpl::getGeneralization() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Generalization>>> GeneralizationSetImpl::getGeneralization() const
 {
-	
-	return m_generalization;
+
+    return m_generalization;
 }
 
 
-uml::Classifier *  GeneralizationSetImpl::getPowertype() const
+std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
 {
-	
-	return m_powertype;
+
+    return m_powertype;
 }
-void GeneralizationSetImpl::setPowertype(uml::Classifier *  _powertype)
+void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
 {
-	m_powertype = _powertype;
+    m_powertype = _powertype;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  GeneralizationSetImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> GeneralizationSetImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  GeneralizationSetImpl::getOwner() const
+std::shared_ptr<uml::Element> GeneralizationSetImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

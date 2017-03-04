@@ -13,6 +13,10 @@ using namespace uml;
 ProfileApplicationImpl::ProfileApplicationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ ProfileApplicationImpl::ProfileApplicationImpl()
 
 ProfileApplicationImpl::~ProfileApplicationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProfileApplication "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,33 +42,31 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 
 	m_applyingPackage  = obj.getApplyingPackage();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::Element * > *  _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
 	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-	delete(_relatedElement);
 
-	std::vector<uml::Element * > *  _source = obj.getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
 	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-	delete(_source);
 
-	std::vector<uml::Element * > *  _target = obj.getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
 	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
-	delete(_target);
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -70,7 +75,7 @@ ecore::EObject *  ProfileApplicationImpl::copy() const
 	return new ProfileApplicationImpl(*this);
 }
 
-ecore::EClass* ProfileApplicationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getProfileApplication();
 }
@@ -91,13 +96,13 @@ bool ProfileApplicationImpl::getIsStrict() const
 //*********************************
 // Operations
 //*********************************
-ecore::EPackage *  ProfileApplicationImpl::getAppliedDefinition() 
+std::shared_ptr<ecore::EPackage>  ProfileApplicationImpl::getAppliedDefinition() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-ecore::ENamedElement *  ProfileApplicationImpl::getAppliedDefinition(uml::NamedElement *  namedElement) 
+std::shared_ptr<ecore::ENamedElement>  ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -106,65 +111,68 @@ ecore::ENamedElement *  ProfileApplicationImpl::getAppliedDefinition(uml::NamedE
 //*********************************
 // References
 //*********************************
-uml::Profile *  ProfileApplicationImpl::getAppliedProfile() const
+std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 {
-	//assert(m_appliedProfile);
-	return m_appliedProfile;
+//assert(m_appliedProfile);
+    return m_appliedProfile;
 }
-void ProfileApplicationImpl::setAppliedProfile(uml::Profile *  _appliedProfile)
+void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
 {
-	m_appliedProfile = _appliedProfile;
+    m_appliedProfile = _appliedProfile;
 }
 
-uml::Package *  ProfileApplicationImpl::getApplyingPackage() const
+std::shared_ptr<uml::Package> ProfileApplicationImpl::getApplyingPackage() const
 {
-	//assert(m_applyingPackage);
-	return m_applyingPackage;
+//assert(m_applyingPackage);
+    return m_applyingPackage;
 }
-void ProfileApplicationImpl::setApplyingPackage(uml::Package *  _applyingPackage)
+void ProfileApplicationImpl::setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage)
 {
-	m_applyingPackage = _applyingPackage;
+    m_applyingPackage = _applyingPackage;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ProfileApplicationImpl::getTarget() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProfileApplicationImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _target =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProfileApplicationImpl::getTarget() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_target->push_back(getAppliedProfile());
 
 	return _target;
 }
-std::vector<uml::Element * > *  ProfileApplicationImpl::getRelatedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProfileApplicationImpl::getSource() const
 {
-	std::vector<uml::Element * > *  _relatedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  source = (std::vector<uml::Element * > * ) getSource();
+	_source->push_back(getApplyingPackage());
+
+	return _source;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProfileApplicationImpl::getRelatedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
 	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-
-	delete(source);
-	std::vector<uml::Element * > *  target = (std::vector<uml::Element * > * ) getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
 	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
-
-	delete(target);
 
 	return _relatedElement;
 }
-std::vector<uml::Element * > *  ProfileApplicationImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> ProfileApplicationImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  ProfileApplicationImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getApplyingPackage()!=nullptr)
 	{
@@ -172,14 +180,6 @@ uml::Element *  ProfileApplicationImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  ProfileApplicationImpl::getSource() const
-{
-	std::vector<uml::Element * > *  _source =  new std::vector<uml::Element * >() ;
-	
-	_source->push_back(getApplyingPackage());
-
-	return _source;
 }
 
 

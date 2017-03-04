@@ -13,25 +13,21 @@ using namespace uml;
 CollaborationUseImpl::CollaborationUseImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_roleBinding == nullptr)
-	{
-		m_roleBinding = new std::vector<uml::Dependency * >();
-	}
+	m_roleBinding.reset(new std::vector<std::shared_ptr<uml::Dependency>>());
 	
 }
 
 CollaborationUseImpl::~CollaborationUseImpl()
 {
-	if(m_roleBinding!=nullptr)
-	{
-		for(auto c :*m_roleBinding)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CollaborationUse "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,14 +40,13 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -59,21 +54,24 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Dependency * 	_roleBinding : *obj.getRoleBinding())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _roleBindingList = obj.getRoleBinding();
+	for(std::shared_ptr<uml::Dependency> _roleBinding : *_roleBindingList)
 	{
-		this->getRoleBinding()->push_back(dynamic_cast<uml::Dependency * >(_roleBinding->copy()));
+		this->getRoleBinding()->push_back(std::shared_ptr<uml::Dependency>(dynamic_cast<uml::Dependency*>(_roleBinding->copy())));
 	}
 }
 
@@ -82,7 +80,7 @@ ecore::EObject *  CollaborationUseImpl::copy() const
 	return new CollaborationUseImpl(*this);
 }
 
-ecore::EClass* CollaborationUseImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getCollaborationUse();
 }
@@ -94,19 +92,19 @@ ecore::EClass* CollaborationUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CollaborationUseImpl::client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::connectors(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CollaborationUseImpl::connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -115,43 +113,41 @@ bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost:
 //*********************************
 // References
 //*********************************
-std::vector<uml::Dependency * > *  CollaborationUseImpl::getRoleBinding() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> CollaborationUseImpl::getRoleBinding() const
 {
-	
-	return m_roleBinding;
+
+    return m_roleBinding;
 }
 
 
-uml::Collaboration *  CollaborationUseImpl::getType() const
+std::shared_ptr<uml::Collaboration> CollaborationUseImpl::getType() const
 {
-	//assert(m_type);
-	return m_type;
+//assert(m_type);
+    return m_type;
 }
-void CollaborationUseImpl::setType(uml::Collaboration *  _type)
+void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  CollaborationUseImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> CollaborationUseImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  roleBinding = (std::vector<uml::Element * > * ) getRoleBinding();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> roleBinding = getRoleBinding();
 	_ownedElement->insert(_ownedElement->end(), roleBinding->begin(), roleBinding->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  CollaborationUseImpl::getOwner() const
+std::shared_ptr<uml::Element> CollaborationUseImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

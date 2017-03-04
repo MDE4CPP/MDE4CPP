@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -119,23 +120,22 @@ namespace uml
 			/*!
 			 The specification of properties that parameterize the deployment and execution of one or more Artifacts.
 			<p>From package UML::Deployments.</p> */
-			virtual std::vector<uml::DeploymentSpecification * > *  getConfiguration() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::DeploymentSpecification>>> getConfiguration() const = 0;
 			
 			/*!
 			 The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p> */
-			virtual std::vector<uml::DeployedArtifact * > *  getDeployedArtifact() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::DeployedArtifact>>> getDeployedArtifact() const = 0;
 			
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */
-			virtual uml::DeploymentTarget *  getLocation() const = 0;
+			virtual std::shared_ptr<uml::DeploymentTarget> getLocation() const = 0;
 			
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */
-			virtual void setLocation(uml::DeploymentTarget *  _location) = 0;
-			
+			virtual void setLocation(std::shared_ptr<uml::DeploymentTarget> _location) = 0;
 			
 
 		protected:
@@ -150,15 +150,15 @@ namespace uml
 			/*!
 			 The specification of properties that parameterize the deployment and execution of one or more Artifacts.
 			<p>From package UML::Deployments.</p> */
-			std::vector<uml::DeploymentSpecification * > *  m_configuration =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::DeploymentSpecification>>> m_configuration;
 			/*!
 			 The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p> */
-			std::vector<uml::DeployedArtifact * > *  m_deployedArtifact =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::DeployedArtifact>>> m_deployedArtifact;
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */
-			uml::DeploymentTarget *  m_location =  nullptr ;
+			std::shared_ptr<uml::DeploymentTarget> m_location;
 			
 
 		public:
@@ -168,19 +168,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

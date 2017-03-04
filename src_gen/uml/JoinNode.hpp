@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -140,14 +141,14 @@ namespace uml
 			/*!
 			 A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1 */ 
-			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If one of the incoming ActivityEdges of a JoinNode is an ObjectFlow, then its outgoing ActivityEdge must be an ObjectFlow. Otherwise its outgoing ActivityEdge must be a ControlFlow.
 			if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))
 			else outgoing->forAll(oclIsKindOf(ControlFlow))
 			endif */ 
-			virtual bool incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -170,13 +171,12 @@ namespace uml
 			/*!
 			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p> */
-			virtual uml::ValueSpecification *  getJoinSpec() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const = 0;
 			
 			/*!
 			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p> */
-			virtual void setJoinSpec(uml::ValueSpecification *  _joinSpec) = 0;
-			
+			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec) = 0;
 			
 
 		protected:
@@ -195,7 +195,7 @@ namespace uml
 			/*!
 			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p> */
-			uml::ValueSpecification *  m_joinSpec =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_joinSpec;
 			
 
 		public:
@@ -203,18 +203,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

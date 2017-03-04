@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -168,13 +169,13 @@ namespace uml
 			 Return this Action and all Actions contained directly or indirectly in it. By default only the Action itself is returned, but the operation is overridden for StructuredActivityNodes.
 			result = (self->asSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<uml::Action * > *  allActions()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Action>>> allActions()  = 0;
 			
 			/*!
 			 Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<uml::ActivityNode * > *  allOwnedNodes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> allOwnedNodes()  = 0;
 			
 			/*!
 			 result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
@@ -184,7 +185,7 @@ namespace uml
 			endif
 			)
 			<p>From package UML::Actions.</p> */ 
-			virtual uml::Behavior *  containingBehavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior>  containingBehavior()  = 0;
 			
 			
 			//*********************************
@@ -207,18 +208,18 @@ namespace uml
 			/*!
 			 The context Classifier of the Behavior that contains this Action, or the Behavior itself if it has no context.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Classifier *  getContext() const = 0;
+			virtual std::shared_ptr<uml::Classifier> getContext() const = 0;
 			
 			
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::Constraint * > *  getLocalPostcondition() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getLocalPostcondition() const = 0;
 			
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::Constraint * > *  getLocalPrecondition() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getLocalPrecondition() const = 0;
 			
 			
 			
@@ -239,23 +240,23 @@ namespace uml
 			/*!
 			 The context Classifier of the Behavior that contains this Action, or the Behavior itself if it has no context.
 			<p>From package UML::Actions.</p> */
-			uml::Classifier *  m_context =  nullptr ;
+			std::shared_ptr<uml::Classifier> m_context;
 			/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::InputPin * > *  m_input =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> m_input;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::Constraint * > *  m_localPostcondition =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> m_localPostcondition;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::Constraint * > *  m_localPrecondition =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> m_localPrecondition;
 			/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::OutputPin * > *  m_output =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> m_output;
 			
 
 		public:
@@ -263,24 +264,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
 	};
 
 }

@@ -13,6 +13,10 @@ using namespace uml;
 PseudostateImpl::PseudostateImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ PseudostateImpl::PseudostateImpl()
 
 PseudostateImpl::~PseudostateImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Pseudostate "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,22 +41,21 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_container  = obj.getContainer();
 
-	std::vector<uml::Transition * > *  _incoming = obj.getIncoming();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _incoming = obj.getIncoming();
 	this->getIncoming()->insert(this->getIncoming()->end(), _incoming->begin(), _incoming->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Transition * > *  _outgoing = obj.getOutgoing();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _outgoing = obj.getOutgoing();
 	this->getOutgoing()->insert(this->getOutgoing()->end(), _outgoing->begin(), _outgoing->end());
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -59,17 +65,19 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -78,7 +86,7 @@ ecore::EObject *  PseudostateImpl::copy() const
 	return new PseudostateImpl(*this);
 }
 
-ecore::EClass* PseudostateImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getPseudostate();
 }
@@ -99,55 +107,55 @@ PseudostateKind PseudostateImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-bool PseudostateImpl::choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -156,43 +164,42 @@ bool PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   b
 //*********************************
 // References
 //*********************************
-uml::State *  PseudostateImpl::getState() const
+std::shared_ptr<uml::State> PseudostateImpl::getState() const
 {
-	
-	return m_state;
+
+    return m_state;
 }
-void PseudostateImpl::setState(uml::State *  _state)
+void PseudostateImpl::setState(std::shared_ptr<uml::State> _state)
 {
-	m_state = _state;
+    m_state = _state;
 }
 
-uml::StateMachine *  PseudostateImpl::getStateMachine() const
+std::shared_ptr<uml::StateMachine> PseudostateImpl::getStateMachine() const
 {
-	
-	return m_stateMachine;
+
+    return m_stateMachine;
 }
-void PseudostateImpl::setStateMachine(uml::StateMachine *  _stateMachine)
+void PseudostateImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine)
 {
-	m_stateMachine = _stateMachine;
+    m_stateMachine = _stateMachine;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  PseudostateImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PseudostateImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  PseudostateImpl::getOwner() const
+std::shared_ptr<uml::Element> PseudostateImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -201,9 +208,9 @@ uml::Element *  PseudostateImpl::getOwner() const
 
 	return _owner;
 }
-uml::Namespace *  PseudostateImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> PseudostateImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getContainer()!=nullptr)
 	{

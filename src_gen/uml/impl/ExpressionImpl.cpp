@@ -13,24 +13,20 @@ using namespace uml;
 ExpressionImpl::ExpressionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_operand == nullptr)
-	{
-		m_operand = new std::vector<uml::ValueSpecification * >();
-	}
+	m_operand.reset(new std::vector<std::shared_ptr<uml::ValueSpecification>>());
 }
 
 ExpressionImpl::~ExpressionImpl()
 {
-	if(m_operand!=nullptr)
-	{
-		for(auto c :*m_operand)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Expression "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,14 +40,13 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -63,21 +58,24 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::ValueSpecification * 	_operand : *obj.getOperand())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _operandList = obj.getOperand();
+	for(std::shared_ptr<uml::ValueSpecification> _operand : *_operandList)
 	{
-		this->getOperand()->push_back(dynamic_cast<uml::ValueSpecification * >(_operand->copy()));
+		this->getOperand()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_operand->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -86,7 +84,7 @@ ecore::EObject *  ExpressionImpl::copy() const
 	return new ExpressionImpl(*this);
 }
 
-ecore::EClass* ExpressionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getExpression();
 }
@@ -111,19 +109,31 @@ std::string ExpressionImpl::getSymbol() const
 //*********************************
 // References
 //*********************************
-std::vector<uml::ValueSpecification * > *  ExpressionImpl::getOperand() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> ExpressionImpl::getOperand() const
 {
-	
-	return m_operand;
+
+    return m_operand;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ExpressionImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExpressionImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> operand = getOperand();
+	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> ExpressionImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -135,20 +145,6 @@ uml::Element *  ExpressionImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  ExpressionImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  operand = (std::vector<uml::Element * > * ) getOperand();
-	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
-
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

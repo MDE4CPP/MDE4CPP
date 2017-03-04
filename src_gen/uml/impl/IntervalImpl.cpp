@@ -13,6 +13,10 @@ using namespace uml;
 IntervalImpl::IntervalImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ IntervalImpl::IntervalImpl()
 
 IntervalImpl::~IntervalImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Interval "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,7 +40,7 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_max  = obj.getMax();
@@ -42,9 +49,8 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -56,17 +62,19 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -75,7 +83,7 @@ ecore::EObject *  IntervalImpl::copy() const
 	return new IntervalImpl(*this);
 }
 
-ecore::EClass* IntervalImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInterval();
 }
@@ -91,43 +99,42 @@ ecore::EClass* IntervalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::ValueSpecification *  IntervalImpl::getMax() const
+std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMax() const
 {
-	//assert(m_max);
-	return m_max;
+//assert(m_max);
+    return m_max;
 }
-void IntervalImpl::setMax(uml::ValueSpecification *  _max)
+void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
 {
-	m_max = _max;
+    m_max = _max;
 }
 
-uml::ValueSpecification *  IntervalImpl::getMin() const
+std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMin() const
 {
-	//assert(m_min);
-	return m_min;
+//assert(m_min);
+    return m_min;
 }
-void IntervalImpl::setMin(uml::ValueSpecification *  _min)
+void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
 {
-	m_min = _min;
+    m_min = _min;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  IntervalImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> IntervalImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  IntervalImpl::getOwner() const
+std::shared_ptr<uml::Element> IntervalImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

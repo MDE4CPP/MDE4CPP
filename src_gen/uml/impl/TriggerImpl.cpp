@@ -13,22 +13,21 @@ using namespace uml;
 TriggerImpl::TriggerImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_port == nullptr)
-	{
-		m_port = new std::vector<uml::Port * >();
-	}
+	m_port.reset(new std::vector<std::shared_ptr<uml::Port>>());
 }
 
 TriggerImpl::~TriggerImpl()
 {
-	if(m_port!=nullptr)
-	{
-		delete(m_port);
-	 	m_port = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Trigger "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -41,35 +40,36 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_event  = obj.getEvent();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::Port * > *  _port = obj.getPort();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> _port = obj.getPort();
 	this->getPort()->insert(this->getPort()->end(), _port->begin(), _port->end());
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -78,7 +78,7 @@ ecore::EObject *  TriggerImpl::copy() const
 	return new TriggerImpl(*this);
 }
 
-ecore::EClass* TriggerImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getTrigger();
 }
@@ -90,7 +90,7 @@ ecore::EClass* TriggerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -99,40 +99,39 @@ bool TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::
 //*********************************
 // References
 //*********************************
-uml::Event *  TriggerImpl::getEvent() const
+std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
 {
-	//assert(m_event);
-	return m_event;
+//assert(m_event);
+    return m_event;
 }
-void TriggerImpl::setEvent(uml::Event *  _event)
+void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 {
-	m_event = _event;
+    m_event = _event;
 }
 
-std::vector<uml::Port * > *  TriggerImpl::getPort() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> TriggerImpl::getPort() const
 {
-	
-	return m_port;
+
+    return m_port;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  TriggerImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TriggerImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  TriggerImpl::getOwner() const
+std::shared_ptr<uml::Element> TriggerImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

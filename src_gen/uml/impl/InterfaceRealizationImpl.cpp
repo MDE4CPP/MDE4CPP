@@ -13,6 +13,10 @@ using namespace uml;
 InterfaceRealizationImpl::InterfaceRealizationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ InterfaceRealizationImpl::InterfaceRealizationImpl()
 
 InterfaceRealizationImpl::~InterfaceRealizationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InterfaceRealization "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,10 +40,10 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImp
 
 	//copy references with now containment
 	
-	std::vector<uml::NamedElement * > *  _client = obj.getClient();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _client = obj.getClient();
 	this->getClient()->insert(this->getClient()->end(), _client->begin(), _client->end());
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_contract  = obj.getContract();
@@ -45,48 +52,46 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImp
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::vector<uml::Element * > *  _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
 	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-	delete(_relatedElement);
 
-	std::vector<uml::Element * > *  _source = obj.getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
 	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-	delete(_source);
 
-	std::vector<uml::NamedElement * > *  _supplier = obj.getSupplier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _supplier = obj.getSupplier();
 	this->getSupplier()->insert(this->getSupplier()->end(), _supplier->begin(), _supplier->end());
 
-	std::vector<uml::Element * > *  _target = obj.getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
 	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
-	delete(_target);
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getMapping()!=nullptr)
 	{
-		m_mapping = dynamic_cast<uml::OpaqueExpression * >(obj.getMapping()->copy());
+		m_mapping.reset(dynamic_cast<uml::OpaqueExpression*>(obj.getMapping()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -95,7 +100,7 @@ ecore::EObject *  InterfaceRealizationImpl::copy() const
 	return new InterfaceRealizationImpl(*this);
 }
 
-ecore::EClass* InterfaceRealizationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInterfaceRealization();
 }
@@ -111,79 +116,43 @@ ecore::EClass* InterfaceRealizationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Interface *  InterfaceRealizationImpl::getContract() const
+std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
 {
-	//assert(m_contract);
-	return m_contract;
+//assert(m_contract);
+    return m_contract;
 }
-void InterfaceRealizationImpl::setContract(uml::Interface *  _contract)
+void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
 {
-	m_contract = _contract;
+    m_contract = _contract;
 }
 
-uml::BehavioredClassifier *  InterfaceRealizationImpl::getImplementingClassifier() const
+std::shared_ptr<uml::BehavioredClassifier> InterfaceRealizationImpl::getImplementingClassifier() const
 {
-	//assert(m_implementingClassifier);
-	return m_implementingClassifier;
+//assert(m_implementingClassifier);
+    return m_implementingClassifier;
 }
-void InterfaceRealizationImpl::setImplementingClassifier(uml::BehavioredClassifier *  _implementingClassifier)
+void InterfaceRealizationImpl::setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier)
 {
-	m_implementingClassifier = _implementingClassifier;
+    m_implementingClassifier = _implementingClassifier;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  InterfaceRealizationImpl::getRelatedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InterfaceRealizationImpl::getRelatedElement() const
 {
-	std::vector<uml::Element * > *  _relatedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  source = (std::vector<uml::Element * > * ) getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
 	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-
-	delete(source);
-	std::vector<uml::Element * > *  target = (std::vector<uml::Element * > * ) getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
 	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
-
-	delete(target);
 
 	return _relatedElement;
 }
-std::vector<uml::Element * > *  InterfaceRealizationImpl::getSource() const
+std::shared_ptr<uml::Element> InterfaceRealizationImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _source =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  client = (std::vector<uml::Element * > * ) getClient();
-	_source->insert(_source->end(), client->begin(), client->end());
-
-
-	return _source;
-}
-std::vector<uml::Element * > *  InterfaceRealizationImpl::getTarget() const
-{
-	std::vector<uml::Element * > *  _target =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  supplier = (std::vector<uml::Element * > * ) getSupplier();
-	_target->insert(_target->end(), supplier->begin(), supplier->end());
-
-
-	return _target;
-}
-std::vector<uml::Element * > *  InterfaceRealizationImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getMapping());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  InterfaceRealizationImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getImplementingClassifier()!=nullptr)
 	{
@@ -199,6 +168,35 @@ uml::Element *  InterfaceRealizationImpl::getOwner() const
 	}
 
 	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InterfaceRealizationImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getMapping());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InterfaceRealizationImpl::getTarget() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> supplier = getSupplier();
+	_target->insert(_target->end(), supplier->begin(), supplier->end());
+
+	return _target;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InterfaceRealizationImpl::getSource() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> client = getClient();
+	_source->insert(_source->end(), client->begin(), client->end());
+
+	return _source;
 }
 
 

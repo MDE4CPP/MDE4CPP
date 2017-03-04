@@ -23,10 +23,11 @@
 #include "impl/MultiplicityElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class VariableImpl :virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Variable
+	class VariableImpl :virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Variable 
 	{
 		public: 
 			VariableImpl(const VariableImpl & obj);
@@ -52,7 +53,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool isAccessibleBy(uml::Action *  a)  ;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
 			
 			
 			
@@ -67,23 +68,21 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Activity *  getActivityScope() const ;
+			virtual std::shared_ptr<uml::Activity> getActivityScope() const ;
 			
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual void setActivityScope(uml::Activity *  _activityScope) ;
+			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) ;
+			/*!
+			 A StructuredActivityNode that owns the Variable.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::StructuredActivityNode> getScope() const ;
 			
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual uml::StructuredActivityNode *  getScope() const ;
-			
-			/*!
-			 A StructuredActivityNode that owns the Variable.
-			<p>From package UML::Activities.</p> */
-			virtual void setScope(uml::StructuredActivityNode *  _scope) ;
-			
+			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) ;
 							
 			
 			//*********************************
@@ -92,13 +91,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -107,7 +106,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_VARIABLEVARIABLEIMPL_HPP */

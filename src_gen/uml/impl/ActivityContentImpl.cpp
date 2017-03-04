@@ -13,6 +13,10 @@ using namespace uml;
 ActivityContentImpl::ActivityContentImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ActivityContentImpl::ActivityContentImpl()
 
 ActivityContentImpl::~ActivityContentImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityContent "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  ActivityContentImpl::copy() const
 	return new ActivityContentImpl(*this);
 }
 
-ecore::EClass* ActivityContentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getActivityContent();
 }
@@ -50,7 +57,7 @@ ecore::EClass* ActivityContentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-uml::Activity *  ActivityContentImpl::containingActivity() 
+std::shared_ptr<uml::Activity>  ActivityContentImpl::containingActivity() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

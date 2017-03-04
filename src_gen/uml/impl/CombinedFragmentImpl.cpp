@@ -13,36 +13,21 @@ using namespace uml;
 CombinedFragmentImpl::CombinedFragmentImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_cfragmentGate == nullptr)
-	{
-		m_cfragmentGate = new std::vector<uml::Gate * >();
-	}
-	if( m_operand == nullptr)
-	{
-		m_operand = new std::vector<uml::InteractionOperand * >();
-	}
+	m_cfragmentGate.reset(new std::vector<std::shared_ptr<uml::Gate>>());
+	m_operand.reset(new std::vector<std::shared_ptr<uml::InteractionOperand>>());
 }
 
 CombinedFragmentImpl::~CombinedFragmentImpl()
 {
-	if(m_cfragmentGate!=nullptr)
-	{
-		for(auto c :*m_cfragmentGate)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_operand!=nullptr)
-	{
-		for(auto c :*m_operand)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CombinedFragment "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -56,10 +41,10 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -68,37 +53,41 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(uml::Gate * 	_cfragmentGate : *obj.getCfragmentGate())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> _cfragmentGateList = obj.getCfragmentGate();
+	for(std::shared_ptr<uml::Gate> _cfragmentGate : *_cfragmentGateList)
 	{
-		this->getCfragmentGate()->push_back(dynamic_cast<uml::Gate * >(_cfragmentGate->copy()));
+		this->getCfragmentGate()->push_back(std::shared_ptr<uml::Gate>(dynamic_cast<uml::Gate*>(_cfragmentGate->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::InteractionOperand * 	_operand : *obj.getOperand())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionOperand>>> _operandList = obj.getOperand();
+	for(std::shared_ptr<uml::InteractionOperand> _operand : *_operandList)
 	{
-		this->getOperand()->push_back(dynamic_cast<uml::InteractionOperand * >(_operand->copy()));
+		this->getOperand()->push_back(std::shared_ptr<uml::InteractionOperand>(dynamic_cast<uml::InteractionOperand*>(_operand->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -107,7 +96,7 @@ ecore::EObject *  CombinedFragmentImpl::copy() const
 	return new CombinedFragmentImpl(*this);
 }
 
-ecore::EClass* CombinedFragmentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getCombinedFragment();
 }
@@ -128,19 +117,19 @@ InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CombinedFragmentImpl::break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CombinedFragmentImpl::consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool CombinedFragmentImpl::opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -149,26 +138,42 @@ bool CombinedFragmentImpl::opt_loop_break_neg(boost::any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
-std::vector<uml::Gate * > *  CombinedFragmentImpl::getCfragmentGate() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> CombinedFragmentImpl::getCfragmentGate() const
 {
-	
-	return m_cfragmentGate;
+
+    return m_cfragmentGate;
 }
 
 
-std::vector<uml::InteractionOperand * > *  CombinedFragmentImpl::getOperand() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionOperand>>> CombinedFragmentImpl::getOperand() const
 {
-	//assert(m_operand);
-	return m_operand;
+//assert(m_operand);
+    return m_operand;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  CombinedFragmentImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> CombinedFragmentImpl::getOwnedElement() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> cfragmentGate = getCfragmentGate();
+	_ownedElement->insert(_ownedElement->end(), cfragmentGate->begin(), cfragmentGate->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionOperand>>> operand = getOperand();
+	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> CombinedFragmentImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -181,9 +186,9 @@ uml::Namespace *  CombinedFragmentImpl::getNamespace() const
 
 	return _namespace;
 }
-uml::Element *  CombinedFragmentImpl::getOwner() const
+std::shared_ptr<uml::Element> CombinedFragmentImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -191,26 +196,6 @@ uml::Element *  CombinedFragmentImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  CombinedFragmentImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  cfragmentGate = (std::vector<uml::Element * > * ) getCfragmentGate();
-	_ownedElement->insert(_ownedElement->end(), cfragmentGate->begin(), cfragmentGate->end());
-
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  operand = (std::vector<uml::Element * > * ) getOperand();
-	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
-
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

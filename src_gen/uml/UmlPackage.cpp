@@ -9,15 +9,15 @@ const std::string UmlPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/UML";
 const std::string UmlPackage::eNS_PREFIX ="uml";
 
 //Singleton 
-UmlPackage * UmlPackage::instance = nullptr;
+std::shared_ptr<UmlPackage> UmlPackage::instance;
 
-UmlPackage * UmlPackage::eInstance()
+std::shared_ptr<UmlPackage> UmlPackage::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = UmlPackageImpl::create();
-		dynamic_cast<UmlPackageImpl * >(instance)->init();
+		instance.reset(UmlPackageImpl::create());
+		std::dynamic_pointer_cast<UmlPackageImpl>(instance)->init();
 	}	
 	return instance;
 }

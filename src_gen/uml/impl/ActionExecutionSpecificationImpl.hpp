@@ -22,10 +22,11 @@
 #include "impl/ExecutionSpecificationImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ActionExecutionSpecificationImpl :virtual public ExecutionSpecificationImpl, virtual public ActionExecutionSpecification
+	class ActionExecutionSpecificationImpl :virtual public ExecutionSpecificationImpl, virtual public ActionExecutionSpecification 
 	{
 		public: 
 			ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj);
@@ -52,7 +53,7 @@ namespace uml
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
-			virtual bool action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -67,13 +68,12 @@ namespace uml
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::Action *  getAction() const ;
+			virtual std::shared_ptr<uml::Action> getAction() const ;
 			
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual void setAction(uml::Action *  _action) ;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
 							
 			
 			//*********************************
@@ -82,13 +82,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -97,7 +97,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ACTIONEXECUTIONSPECIFICATIONACTIONEXECUTIONSPECIFICATIONIMPL_HPP */

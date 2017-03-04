@@ -13,44 +13,31 @@ using namespace uml;
 OperationImpl::OperationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
 	
 	
 	
-	if( m_postcondition == nullptr)
-	{
-		m_postcondition = new std::vector<uml::Constraint * >();
-	}
-	if( m_precondition == nullptr)
-	{
-		m_precondition = new std::vector<uml::Constraint * >();
-	}
-	if( m_redefinedOperation == nullptr)
-	{
-		m_redefinedOperation = new std::vector<uml::Operation * >();
-	}
+	m_postcondition.reset(new std::vector<std::shared_ptr<uml::Constraint>>());
+	m_precondition.reset(new std::vector<std::shared_ptr<uml::Constraint>>());
+	m_redefinedOperation.reset(new std::vector<std::shared_ptr<uml::Operation>>());
 	
 }
 
 OperationImpl::~OperationImpl()
 {
-	if(m_postcondition!=nullptr)
-	{
-		delete(m_postcondition);
-	 	m_postcondition = nullptr;
-	}
-	if(m_precondition!=nullptr)
-	{
-		delete(m_precondition);
-	 	m_precondition = nullptr;
-	}
-	if(m_redefinedOperation!=nullptr)
-	{
-		delete(m_redefinedOperation);
-	 	m_redefinedOperation = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Operation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -76,60 +63,54 @@ OperationImpl::OperationImpl(const OperationImpl & obj)
 
 	m_class  = obj.getClass();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_datatype  = obj.getDatatype();
 
-	std::vector<uml::Classifier * > *  _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier = obj.getFeaturingClassifier();
 	this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
-	delete(_featuringClassifier);
 
-	std::vector<uml::PackageableElement * > *  _importedMember = obj.getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _importedMember = obj.getImportedMember();
 	this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
 
 	m_interface  = obj.getInterface();
 
-	std::vector<uml::NamedElement * > *  _member = obj.getMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member = obj.getMember();
 	this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
-	delete(_member);
 
-	std::vector<uml::Behavior * > *  _method = obj.getMethod();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> _method = obj.getMethod();
 	this->getMethod()->insert(this->getMethod()->end(), _method->begin(), _method->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
-	std::vector<uml::NamedElement * > *  _ownedMember = obj.getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember = obj.getOwnedMember();
 	this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
-	delete(_ownedMember);
 
 	m_owner  = obj.getOwner();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::vector<uml::Constraint * > *  _postcondition = obj.getPostcondition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _postcondition = obj.getPostcondition();
 	this->getPostcondition()->insert(this->getPostcondition()->end(), _postcondition->begin(), _postcondition->end());
 
-	std::vector<uml::Constraint * > *  _precondition = obj.getPrecondition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _precondition = obj.getPrecondition();
 	this->getPrecondition()->insert(this->getPrecondition()->end(), _precondition->begin(), _precondition->end());
 
-	std::vector<uml::Type * > *  _raisedException = obj.getRaisedException();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> _raisedException = obj.getRaisedException();
 	this->getRaisedException()->insert(this->getRaisedException()->end(), _raisedException->begin(), _raisedException->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Operation * > *  _redefinedOperation = obj.getRedefinedOperation();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> _redefinedOperation = obj.getRedefinedOperation();
 	this->getRedefinedOperation()->insert(this->getRedefinedOperation()->end(), _redefinedOperation->begin(), _redefinedOperation->end());
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -137,45 +118,53 @@ OperationImpl::OperationImpl(const OperationImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::ElementImport * 	_elementImport : *obj.getElementImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> _elementImportList = obj.getElementImport();
+	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->push_back(dynamic_cast<uml::ElementImport * >(_elementImport->copy()));
+		this->getElementImport()->push_back(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Parameter * 	_ownedParameter : *obj.getOwnedParameter())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> _ownedParameterList = obj.getOwnedParameter();
+	for(std::shared_ptr<uml::Parameter> _ownedParameter : *_ownedParameterList)
 	{
-		this->getOwnedParameter()->push_back(dynamic_cast<uml::Parameter * >(_ownedParameter->copy()));
+		this->getOwnedParameter()->push_back(std::shared_ptr<uml::Parameter>(dynamic_cast<uml::Parameter*>(_ownedParameter->copy())));
 	}
-	for(uml::ParameterSet * 	_ownedParameterSet : *obj.getOwnedParameterSet())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> _ownedParameterSetList = obj.getOwnedParameterSet();
+	for(std::shared_ptr<uml::ParameterSet> _ownedParameterSet : *_ownedParameterSetList)
 	{
-		this->getOwnedParameterSet()->push_back(dynamic_cast<uml::ParameterSet * >(_ownedParameterSet->copy()));
+		this->getOwnedParameterSet()->push_back(std::shared_ptr<uml::ParameterSet>(dynamic_cast<uml::ParameterSet*>(_ownedParameterSet->copy())));
 	}
-	for(uml::Constraint * 	_ownedRule : *obj.getOwnedRule())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _ownedRuleList = obj.getOwnedRule();
+	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->push_back(dynamic_cast<uml::Constraint * >(_ownedRule->copy()));
+		this->getOwnedRule()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
 	}
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature = dynamic_cast<uml::TemplateSignature * >(obj.getOwnedTemplateSignature()->copy());
+		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
 	}
-	for(uml::PackageImport * 	_packageImport : *obj.getPackageImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> _packageImportList = obj.getPackageImport();
+	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->push_back(dynamic_cast<uml::PackageImport * >(_packageImport->copy()));
+		this->getPackageImport()->push_back(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
 	}
-	for(uml::TemplateBinding * 	_templateBinding : *obj.getTemplateBinding())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> _templateBindingList = obj.getTemplateBinding();
+	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->push_back(dynamic_cast<uml::TemplateBinding * >(_templateBinding->copy()));
+		this->getTemplateBinding()->push_back(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
 	}
 }
 
@@ -184,7 +173,7 @@ ecore::EObject *  OperationImpl::copy() const
 	return new OperationImpl(*this);
 }
 
-ecore::EClass* OperationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getOperation();
 }
@@ -233,7 +222,7 @@ int OperationImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool OperationImpl::at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -245,7 +234,7 @@ int OperationImpl::getLower()
 	throw "UnsupportedOperationException";
 }
 
-uml::Parameter *  OperationImpl::getReturnResult() 
+std::shared_ptr<uml::Parameter>  OperationImpl::getReturnResult() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -271,13 +260,13 @@ bool OperationImpl::isUnique()
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool OperationImpl::only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Parameter * > *  OperationImpl::returnResult() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> OperationImpl::returnResult() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -301,7 +290,7 @@ void OperationImpl::setLower(int newLower)
 	throw "UnsupportedOperationException";
 }
 
-void OperationImpl::setType(uml::Type *  newType) 
+void OperationImpl::setType(std::shared_ptr<uml::Type>  newType) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -316,131 +305,91 @@ void OperationImpl::setUpper(int newUpper)
 //*********************************
 // References
 //*********************************
-uml::Constraint *  OperationImpl::getBodyCondition() const
+std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
 {
-	
-	return m_bodyCondition;
+
+    return m_bodyCondition;
 }
-void OperationImpl::setBodyCondition(uml::Constraint *  _bodyCondition)
+void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
 {
-	m_bodyCondition = _bodyCondition;
+    m_bodyCondition = _bodyCondition;
 }
 
-uml::Class *  OperationImpl::getClass() const
+std::shared_ptr<uml::Class> OperationImpl::getClass() const
 {
-	
-	return m_class;
+
+    return m_class;
 }
-void OperationImpl::setClass(uml::Class *  _class)
+void OperationImpl::setClass(std::shared_ptr<uml::Class> _class)
 {
-	m_class = _class;
+    m_class = _class;
 }
 
-uml::DataType *  OperationImpl::getDatatype() const
+std::shared_ptr<uml::DataType> OperationImpl::getDatatype() const
 {
-	
-	return m_datatype;
+
+    return m_datatype;
 }
-void OperationImpl::setDatatype(uml::DataType *  _datatype)
+void OperationImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
 {
-	m_datatype = _datatype;
+    m_datatype = _datatype;
 }
 
-uml::Interface *  OperationImpl::getInterface() const
+std::shared_ptr<uml::Interface> OperationImpl::getInterface() const
 {
-	
-	return m_interface;
-}
-void OperationImpl::setInterface(uml::Interface *  _interface)
-{
-	m_interface = _interface;
-}
 
-std::vector<uml::Constraint * > *  OperationImpl::getPostcondition() const
+    return m_interface;
+}
+void OperationImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
 {
-	
-	return m_postcondition;
+    m_interface = _interface;
 }
 
-
-std::vector<uml::Constraint * > *  OperationImpl::getPrecondition() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> OperationImpl::getPostcondition() const
 {
-	
-	return m_precondition;
+
+    return m_postcondition;
 }
 
 
-std::vector<uml::Operation * > *  OperationImpl::getRedefinedOperation() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> OperationImpl::getPrecondition() const
 {
-	
-	return m_redefinedOperation;
+
+    return m_precondition;
 }
 
 
-uml::Type *  OperationImpl::getType() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> OperationImpl::getRedefinedOperation() const
 {
-	
-	return m_type;
+
+    return m_redefinedOperation;
+}
+
+
+std::shared_ptr<uml::Type> OperationImpl::getType() const
+{
+
+    return m_type;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Classifier * > *  OperationImpl::getFeaturingClassifier() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> OperationImpl::getMember() const
 {
-	std::vector<uml::Classifier * > *  _featuringClassifier =  new std::vector<uml::Classifier * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	_featuringClassifier->push_back(getClass());
-	_featuringClassifier->push_back(getDatatype());
-	_featuringClassifier->push_back(getInterface());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> importedMember = getImportedMember();
+	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
+	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
 
-	return _featuringClassifier;
+	return _member;
 }
-std::vector<uml::NamedElement * > *  OperationImpl::getOwnedMember() const
+std::shared_ptr<uml::Namespace> OperationImpl::getNamespace() const
 {
-	std::vector<uml::NamedElement * > *  _ownedMember =  new std::vector<uml::NamedElement * >() ;
-	
-	std::vector<uml::NamedElement * > *  ownedParameter = (std::vector<uml::NamedElement * > * ) getOwnedParameter();
-	_ownedMember->insert(_ownedMember->end(), ownedParameter->begin(), ownedParameter->end());
-
-	std::vector<uml::NamedElement * > *  ownedParameterSet = (std::vector<uml::NamedElement * > * ) getOwnedParameterSet();
-	_ownedMember->insert(_ownedMember->end(), ownedParameterSet->begin(), ownedParameterSet->end());
-
-	std::vector<uml::NamedElement * > *  ownedRule = (std::vector<uml::NamedElement * > * ) getOwnedRule();
-	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
-
-
-	return _ownedMember;
-}
-uml::Element *  OperationImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
-	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
-
-	return _owner;
-}
-std::vector<uml::RedefinableElement * > *  OperationImpl::getRedefinedElement() const
-{
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
-	
-	std::vector<uml::RedefinableElement * > *  redefinedOperation = (std::vector<uml::RedefinableElement * > * ) getRedefinedOperation();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedOperation->begin(), redefinedOperation->end());
-
-
-	return _redefinedElement;
-}
-uml::Namespace *  OperationImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getClass()!=nullptr)
 	{
@@ -457,48 +406,75 @@ uml::Namespace *  OperationImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  OperationImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> OperationImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  elementImport = (std::vector<uml::Element * > * ) getElementImport();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> elementImport = getElementImport();
 	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
-
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  ownedMember = (std::vector<uml::Element * > * ) getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
 	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
 	_ownedElement->push_back(getOwnedTemplateSignature());
-	std::vector<uml::Element * > *  packageImport = (std::vector<uml::Element * > * ) getPackageImport();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> packageImport = getPackageImport();
 	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
-
-	std::vector<uml::Element * > *  templateBinding = (std::vector<uml::Element * > * ) getTemplateBinding();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> templateBinding = getTemplateBinding();
 	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
-
 
 	return _ownedElement;
 }
-std::vector<uml::NamedElement * > *  OperationImpl::getMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> OperationImpl::getOwnedMember() const
 {
-	std::vector<uml::NamedElement * > *  _member =  new std::vector<uml::NamedElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::vector<uml::NamedElement * > *  importedMember = (std::vector<uml::NamedElement * > * ) getImportedMember();
-	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> ownedParameter = getOwnedParameter();
+	_ownedMember->insert(_ownedMember->end(), ownedParameter->begin(), ownedParameter->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> ownedParameterSet = getOwnedParameterSet();
+	_ownedMember->insert(_ownedMember->end(), ownedParameterSet->begin(), ownedParameterSet->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> ownedRule = getOwnedRule();
+	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
 
-	std::vector<uml::NamedElement * > *  ownedMember = (std::vector<uml::NamedElement * > * ) getOwnedMember();
-	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
-
-	return _member;
+	return _ownedMember;
 }
-std::vector<uml::Classifier * > *  OperationImpl::getRedefinitionContext() const
+std::shared_ptr<uml::Element> OperationImpl::getOwner() const
 {
-	std::vector<uml::Classifier * > *  _redefinitionContext =  new std::vector<uml::Classifier * >() ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
+	
+	if(getNamespace()!=nullptr)
+	{
+		_owner = getNamespace();
+	}
+	if(getOwningTemplateParameter()!=nullptr)
+	{
+		_owner = getOwningTemplateParameter();
+	}
+
+	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> OperationImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> redefinedOperation = getRedefinedOperation();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedOperation->begin(), redefinedOperation->end());
+
+	return _redefinedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> OperationImpl::getFeaturingClassifier() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
+	
+	_featuringClassifier->push_back(getClass());
+	_featuringClassifier->push_back(getDatatype());
+	_featuringClassifier->push_back(getInterface());
+
+	return _featuringClassifier;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> OperationImpl::getRedefinitionContext() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
 	
 	_redefinitionContext->push_back(getClass());
 	_redefinitionContext->push_back(getDatatype());

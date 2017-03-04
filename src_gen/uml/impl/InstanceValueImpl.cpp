@@ -13,6 +13,10 @@ using namespace uml;
 InstanceValueImpl::InstanceValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ InstanceValueImpl::InstanceValueImpl()
 
 InstanceValueImpl::~InstanceValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InstanceValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -32,16 +39,15 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_instance  = obj.getInstance();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -53,17 +59,19 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -72,7 +80,7 @@ ecore::EObject *  InstanceValueImpl::copy() const
 	return new InstanceValueImpl(*this);
 }
 
-ecore::EClass* InstanceValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInstanceValue();
 }
@@ -88,22 +96,22 @@ ecore::EClass* InstanceValueImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::InstanceSpecification *  InstanceValueImpl::getInstance() const
+std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() const
 {
-	//assert(m_instance);
-	return m_instance;
+//assert(m_instance);
+    return m_instance;
 }
-void InstanceValueImpl::setInstance(uml::InstanceSpecification *  _instance)
+void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> _instance)
 {
-	m_instance = _instance;
+    m_instance = _instance;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  InstanceValueImpl::getOwner() const
+std::shared_ptr<uml::Element> InstanceValueImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -116,14 +124,13 @@ uml::Element *  InstanceValueImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  InstanceValueImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InstanceValueImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

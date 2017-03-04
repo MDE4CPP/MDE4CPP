@@ -22,10 +22,11 @@
 #include "impl/ClassImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class BehaviorImpl :virtual public ClassImpl, virtual public Behavior
+	class BehaviorImpl :virtual public ClassImpl, virtual public Behavior 
 	{
 		public: 
 			BehaviorImpl(const BehaviorImpl & obj);
@@ -48,17 +49,17 @@ namespace uml
 			/*!
 			 There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1 */ 
-			virtual bool most_one_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool most_one_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size() */ 
-			virtual bool parameters_match(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool parameters_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification) */ 
-			virtual bool feature_of_context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool feature_of_context_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -73,19 +74,19 @@ namespace uml
 			endif
 			endif
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual uml::BehavioredClassifier *  behavioredClassifier(uml::Element *  from)  ;
+			virtual std::shared_ptr<uml::BehavioredClassifier>  behavioredClassifier(std::shared_ptr<uml::Element>  from)  ;
 			
 			/*!
 			 The in and inout ownedParameters of the Behavior.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::vector<uml::Parameter * > *  inputParameters()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> inputParameters()  ;
 			
 			/*!
 			 The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::vector<uml::Parameter * > *  outputParameters()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> outputParameters()  ;
 			
 			
 			
@@ -110,42 +111,41 @@ namespace uml
 			/*!
 			 Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::BehavioralFeature *  getSpecification() const ;
+			virtual std::shared_ptr<uml::BehavioralFeature> getSpecification() const ;
 			
 			/*!
 			 Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setSpecification(uml::BehavioralFeature *  _specification) ;
-			
+			virtual void setSpecification(std::shared_ptr<uml::BehavioralFeature> _specification) ;
 			/*!
 			 The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::BehavioredClassifier *  getContext() const ;
+			virtual std::shared_ptr<uml::BehavioredClassifier> getContext() const ;
 			
 			/*!
 			 References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Parameter * > *  getOwnedParameter() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> getOwnedParameter() const ;
 			
 			/*!
 			 The ParameterSets owned by this Behavior.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::ParameterSet * > *  getOwnedParameterSet() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> getOwnedParameterSet() const ;
 			
 			/*!
 			 An optional set of Constraints specifying what is fulfilled after the execution of the Behavior is completed, if its precondition was fulfilled before its invocation.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Constraint * > *  getPostcondition() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getPostcondition() const ;
 			
 			/*!
 			 An optional set of Constraints specifying what must be fulfilled before the Behavior is invoked.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Constraint * > *  getPrecondition() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getPrecondition() const ;
 			
 			/*!
 			 References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::vector<uml::Behavior * > *  getRedefinedBehavior() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> getRedefinedBehavior() const ;
 			
 							
 			
@@ -153,36 +153,36 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const ;/*!
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::ConnectableElement * > *  getRole() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Feature * > *  getFeature() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectableElement>>> getRole() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -191,7 +191,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIORBEHAVIORIMPL_HPP */

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -94,7 +95,7 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -117,13 +118,12 @@ namespace uml
 			/*!
 			 For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getInsertAt() const = 0;
+			virtual std::shared_ptr<uml::InputPin> getInsertAt() const = 0;
 			
 			/*!
 			 For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p> */
-			virtual void setInsertAt(uml::InputPin *  _insertAt) = 0;
-			
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) = 0;
 			
 
 		protected:
@@ -142,7 +142,7 @@ namespace uml
 			/*!
 			 For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p> */
-			uml::InputPin *  m_insertAt =  nullptr ;
+			std::shared_ptr<uml::InputPin> m_insertAt;
 			
 
 		public:
@@ -152,7 +152,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
 	};
 
 }

@@ -22,10 +22,11 @@
 #include "impl/ElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class QualifierValueImpl :virtual public ElementImpl, virtual public QualifierValue
+	class QualifierValueImpl :virtual public ElementImpl, virtual public QualifierValue 
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);
@@ -48,17 +49,17 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type) */ 
-			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier) */ 
-			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -73,23 +74,21 @@ namespace uml
 			/*!
 			 The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Property *  getQualifier() const ;
+			virtual std::shared_ptr<uml::Property> getQualifier() const ;
 			
 			/*!
 			 The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p> */
-			virtual void setQualifier(uml::Property *  _qualifier) ;
+			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) ;
+			/*!
+			 The InputPin from which the specified value for the qualifier is taken.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<uml::InputPin> getValue() const ;
 			
 			/*!
 			 The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getValue() const ;
-			
-			/*!
-			 The InputPin from which the specified value for the qualifier is taken.
-			<p>From package UML::Actions.</p> */
-			virtual void setValue(uml::InputPin *  _value) ;
-			
+			virtual void setValue(std::shared_ptr<uml::InputPin> _value) ;
 							
 			
 			//*********************************
@@ -98,7 +97,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -107,7 +106,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_QUALIFIERVALUEQUALIFIERVALUEIMPL_HPP */

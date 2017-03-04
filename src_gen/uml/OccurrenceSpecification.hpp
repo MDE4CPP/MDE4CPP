@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -111,7 +112,7 @@ namespace uml
 			
 			/*!
 			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
-			virtual void setCovered(uml::Lifeline *  value)  = 0;
+			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value)  = 0;
 			
 			
 			//*********************************
@@ -124,12 +125,12 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::vector<uml::GeneralOrdering * > *  getToAfter() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getToAfter() const = 0;
 			
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::vector<uml::GeneralOrdering * > *  getToBefore() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getToBefore() const = 0;
 			
 			
 
@@ -145,11 +146,11 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::vector<uml::GeneralOrdering * > *  m_toAfter =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> m_toAfter;
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			std::vector<uml::GeneralOrdering * > *  m_toBefore =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> m_toBefore;
 			
 
 		public:
@@ -159,13 +160,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

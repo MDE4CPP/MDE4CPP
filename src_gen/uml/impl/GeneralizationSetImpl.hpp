@@ -22,10 +22,11 @@
 #include "impl/PackageableElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class GeneralizationSetImpl :virtual public PackageableElementImpl, virtual public GeneralizationSet
+	class GeneralizationSetImpl :virtual public PackageableElementImpl, virtual public GeneralizationSet 
 	{
 		public: 
 			GeneralizationSetImpl(const GeneralizationSetImpl & obj);
@@ -48,14 +49,14 @@ namespace uml
 			/*!
 			 Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
 			generalization->collect(general)->asSet()->size() <= 1 */ 
-			virtual bool generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
 			  ) */ 
-			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -90,17 +91,16 @@ namespace uml
 			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Classifier *  getPowertype() const ;
+			virtual std::shared_ptr<uml::Classifier> getPowertype() const ;
 			
 			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
-			virtual void setPowertype(uml::Classifier *  _powertype) ;
-			
+			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype) ;
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Generalization * > *  getGeneralization() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Generalization>>> getGeneralization() const ;
 			
 							
 			
@@ -110,10 +110,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -122,7 +122,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_GENERALIZATIONSETGENERALIZATIONSETIMPL_HPP */

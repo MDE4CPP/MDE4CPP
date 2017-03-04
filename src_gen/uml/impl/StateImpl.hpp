@@ -24,10 +24,11 @@
 #include "impl/VertexImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class StateImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public VertexImpl, virtual public State
+	class StateImpl :virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public VertexImpl, virtual public State 
 	{
 		public: 
 			StateImpl(const StateImpl & obj);
@@ -50,29 +51,29 @@ namespace uml
 			/*!
 			 Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( ) */ 
-			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Only composite States can have entry or exit Pseudostates defined.
 			connectionPoint->notEmpty() implies isComposite */ 
-			virtual bool composite_states(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
 			self.isSubmachineState implies (self.connection->forAll (cp |
 			  cp.entry->forAll (ps | ps.stateMachine = self.submachine) and
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine))) */ 
-			virtual bool destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A State is not allowed to have both a submachine and Regions.
 			isComposite implies not isSubmachineState */ 
-			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A composite State is a State with at least one Region.
@@ -107,7 +108,7 @@ namespace uml
 			  sm._'context'
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual uml::Classifier *  redefinitionContext()  ;
+			virtual std::shared_ptr<uml::Classifier>  redefinitionContext()  ;
 			
 			
 			
@@ -142,82 +143,76 @@ namespace uml
 			/*!
 			 The entry and exit connection points used in conjunction with this (submachine) State, i.e., as targets and sources, respectively, in the Region with the submachine State. A connection point reference references the corresponding definition of a connection point Pseudostate in the StateMachine referenced by the submachine State.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::ConnectionPointReference * > *  getConnection() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectionPointReference>>> getConnection() const ;
 			
 			/*!
 			 The entry and exit Pseudostates of a composite State. These can only be entry or exit Pseudostates, and they must have different names. They can only be defined for composite States.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Pseudostate * > *  getConnectionPoint() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getConnectionPoint() const ;
 			
 			/*!
 			 A list of Triggers that are candidates to be retained by the StateMachine if they trigger no Transitions out of the State (not consumed). A deferred Trigger is retained until the StateMachine reaches a State configuration where it is no longer deferred.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Trigger * > *  getDeferrableTrigger() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> getDeferrableTrigger() const ;
 			
 			/*!
 			 An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Behavior *  getDoActivity() const ;
+			virtual std::shared_ptr<uml::Behavior> getDoActivity() const ;
 			
 			/*!
 			 An optional Behavior that is executed while being in the State. The execution starts when this State is entered, and ceases either by itself when done, or when the State is exited, whichever comes first.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setDoActivity(uml::Behavior *  _doActivity) ;
+			virtual void setDoActivity(std::shared_ptr<uml::Behavior> _doActivity) ;
+			/*!
+			 An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.
+			<p>From package UML::StateMachines.</p> */
+			virtual std::shared_ptr<uml::Behavior> getEntry() const ;
 			
 			/*!
 			 An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Behavior *  getEntry() const ;
-			
+			virtual void setEntry(std::shared_ptr<uml::Behavior> _entry) ;
 			/*!
-			 An optional Behavior that is executed whenever this State is entered regardless of the Transition taken to reach the State. If defined, entry Behaviors are always executed to completion prior to any internal Behavior or Transitions performed within the State.
+			 An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setEntry(uml::Behavior *  _entry) ;
+			virtual std::shared_ptr<uml::Behavior> getExit() const ;
 			
 			/*!
 			 An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Behavior *  getExit() const ;
-			
+			virtual void setExit(std::shared_ptr<uml::Behavior> _exit) ;
 			/*!
-			 An optional Behavior that is executed whenever this State is exited regardless of which Transition was taken out of the State. If defined, exit Behaviors are always executed to completion only after all internal and transition Behaviors have completed execution.
+			 The State of which this State is a redefinition.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setExit(uml::Behavior *  _exit) ;
+			virtual std::shared_ptr<uml::State> getRedefinedState() const ;
 			
 			/*!
 			 The State of which this State is a redefinition.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::State *  getRedefinedState() const ;
-			
+			virtual void setRedefinedState(std::shared_ptr<uml::State> _redefinedState) ;
 			/*!
-			 The State of which this State is a redefinition.
+			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setRedefinedState(uml::State *  _redefinedState) ;
+			virtual std::shared_ptr<uml::Constraint> getStateInvariant() const ;
 			
 			/*!
 			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Constraint *  getStateInvariant() const ;
-			
+			virtual void setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant) ;
 			/*!
-			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
+			 The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setStateInvariant(uml::Constraint *  _stateInvariant) ;
+			virtual std::shared_ptr<uml::StateMachine> getSubmachine() const ;
 			
 			/*!
 			 The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::StateMachine *  getSubmachine() const ;
-			
-			/*!
-			 The StateMachine that is to be inserted in place of the (submachine) State.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setSubmachine(uml::StateMachine *  _submachine) ;
-			
+			virtual void setSubmachine(std::shared_ptr<uml::StateMachine> _submachine) ;
 			/*!
 			 The Regions owned directly by the State.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Region * > *  getRegion() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Region>>> getRegion() const ;
 			
 							
 			
@@ -227,22 +222,22 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -251,7 +246,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_STATESTATEIMPL_HPP */

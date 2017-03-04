@@ -13,24 +13,19 @@ using namespace uml;
 ActivityEdgeImpl::ActivityEdgeImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
 	
-	if( m_inGroup == nullptr)
-	{
-		m_inGroup = new std::vector<uml::ActivityGroup * >();
-	}
-	if( m_inPartition == nullptr)
-	{
-		m_inPartition = new std::vector<uml::ActivityPartition * >();
-	}
+	m_inGroup.reset(new std::vector<std::shared_ptr<uml::ActivityGroup>>());
+	m_inPartition.reset(new std::vector<std::shared_ptr<uml::ActivityPartition>>());
 	
 	
-	if( m_redefinedEdge == nullptr)
-	{
-		m_redefinedEdge = new std::vector<uml::ActivityEdge * >();
-	}
+	m_redefinedEdge.reset(new std::vector<std::shared_ptr<uml::ActivityEdge>>());
 	
 	
 	
@@ -38,37 +33,9 @@ ActivityEdgeImpl::ActivityEdgeImpl()
 
 ActivityEdgeImpl::~ActivityEdgeImpl()
 {
-	if(m_guard!=nullptr)
-	{
-		if(m_guard)
-		{
-			delete(m_guard);
-			m_guard = nullptr;
-		}
-	}
-	if(m_inPartition!=nullptr)
-	{
-		delete(m_inPartition);
-	 	m_inPartition = nullptr;
-	}
-	if(m_redefinedEdge!=nullptr)
-	{
-		delete(m_redefinedEdge);
-	 	m_redefinedEdge = nullptr;
-	}
-	if(m_weight!=nullptr)
-	{
-		if(m_weight)
-		{
-			delete(m_weight);
-			m_weight = nullptr;
-		}
-	}
-	if(m_inGroup!=nullptr)
-	{
-		delete(m_inGroup);
-	 	m_inGroup = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityEdge "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -84,14 +51,13 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj)
 	
 	m_activity  = obj.getActivity();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ActivityGroup * > *  _inGroup = obj.getInGroup();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup = obj.getInGroup();
 	this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
-	delete(_inGroup);
 
-	std::vector<uml::ActivityPartition * > *  _inPartition = obj.getInPartition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> _inPartition = obj.getInPartition();
 	this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
 
 	m_inStructuredNode  = obj.getInStructuredNode();
@@ -100,22 +66,19 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::ActivityEdge * > *  _redefinedEdge = obj.getRedefinedEdge();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _redefinedEdge = obj.getRedefinedEdge();
 	this->getRedefinedEdge()->insert(this->getRedefinedEdge()->end(), _redefinedEdge->begin(), _redefinedEdge->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_source  = obj.getSource();
 
@@ -123,25 +86,27 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getGuard()!=nullptr)
 	{
-		m_guard = dynamic_cast<uml::ValueSpecification * >(obj.getGuard()->copy());
+		m_guard.reset(dynamic_cast<uml::ValueSpecification*>(obj.getGuard()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getWeight()!=nullptr)
 	{
-		m_weight = dynamic_cast<uml::ValueSpecification * >(obj.getWeight()->copy());
+		m_weight.reset(dynamic_cast<uml::ValueSpecification*>(obj.getWeight()->copy()));
 	}
 }
 
@@ -150,7 +115,7 @@ ecore::EObject *  ActivityEdgeImpl::copy() const
 	return new ActivityEdgeImpl(*this);
 }
 
-ecore::EClass* ActivityEdgeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getActivityEdge();
 }
@@ -162,7 +127,7 @@ ecore::EClass* ActivityEdgeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ActivityEdgeImpl::source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -171,122 +136,118 @@ bool ActivityEdgeImpl::source_and_target(boost::any diagnostics,std::map <   boo
 //*********************************
 // References
 //*********************************
-uml::Activity *  ActivityEdgeImpl::getActivity() const
+std::shared_ptr<uml::Activity> ActivityEdgeImpl::getActivity() const
 {
-	
-	return m_activity;
-}
-void ActivityEdgeImpl::setActivity(uml::Activity *  _activity)
-{
-	m_activity = _activity;
-}
 
-uml::ValueSpecification *  ActivityEdgeImpl::getGuard() const
-{
-	
-	return m_guard;
+    return m_activity;
 }
-void ActivityEdgeImpl::setGuard(uml::ValueSpecification *  _guard)
+void ActivityEdgeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
-	m_guard = _guard;
+    m_activity = _activity;
 }
 
-
-
-
-std::vector<uml::ActivityPartition * > *  ActivityEdgeImpl::getInPartition() const
+std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
 {
-	
-	return m_inPartition;
+
+    return m_guard;
+}
+void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
+{
+    m_guard = _guard;
 }
 
 
-uml::StructuredActivityNode *  ActivityEdgeImpl::getInStructuredNode() const
-{
-	
-	return m_inStructuredNode;
-}
-void ActivityEdgeImpl::setInStructuredNode(uml::StructuredActivityNode *  _inStructuredNode)
-{
-	m_inStructuredNode = _inStructuredNode;
-}
 
-uml::InterruptibleActivityRegion *  ActivityEdgeImpl::getInterrupts() const
-{
-	
-	return m_interrupts;
-}
-void ActivityEdgeImpl::setInterrupts(uml::InterruptibleActivityRegion *  _interrupts)
-{
-	m_interrupts = _interrupts;
-}
 
-std::vector<uml::ActivityEdge * > *  ActivityEdgeImpl::getRedefinedEdge() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> ActivityEdgeImpl::getInPartition() const
 {
-	
-	return m_redefinedEdge;
+
+    return m_inPartition;
 }
 
 
-uml::ActivityNode *  ActivityEdgeImpl::getSource() const
+std::shared_ptr<uml::StructuredActivityNode> ActivityEdgeImpl::getInStructuredNode() const
 {
-	//assert(m_source);
-	return m_source;
+
+    return m_inStructuredNode;
 }
-void ActivityEdgeImpl::setSource(uml::ActivityNode *  _source)
+void ActivityEdgeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
-	m_source = _source;
+    m_inStructuredNode = _inStructuredNode;
 }
 
-uml::ActivityNode *  ActivityEdgeImpl::getTarget() const
+std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupts() const
 {
-	//assert(m_target);
-	return m_target;
+
+    return m_interrupts;
 }
-void ActivityEdgeImpl::setTarget(uml::ActivityNode *  _target)
+void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
 {
-	m_target = _target;
+    m_interrupts = _interrupts;
 }
 
-uml::ValueSpecification *  ActivityEdgeImpl::getWeight() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> ActivityEdgeImpl::getRedefinedEdge() const
 {
-	
-	return m_weight;
+
+    return m_redefinedEdge;
 }
-void ActivityEdgeImpl::setWeight(uml::ValueSpecification *  _weight)
+
+
+std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
 {
-	m_weight = _weight;
+//assert(m_source);
+    return m_source;
+}
+void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
+{
+    m_source = _source;
+}
+
+std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
+{
+//assert(m_target);
+    return m_target;
+}
+void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
+{
+    m_target = _target;
+}
+
+std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
+{
+
+    return m_weight;
+}
+void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
+{
+    m_weight = _weight;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::RedefinableElement * > *  ActivityEdgeImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> ActivityEdgeImpl::getInGroup() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup(new std::vector<std::shared_ptr<uml::ActivityGroup>>()) ;
 	
-	std::vector<uml::RedefinableElement * > *  redefinedEdge = (std::vector<uml::RedefinableElement * > * ) getRedefinedEdge();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> inPartition = getInPartition();
+	_inGroup->insert(_inGroup->end(), inPartition->begin(), inPartition->end());
+	_inGroup->push_back(getInStructuredNode());
 
+	return _inGroup;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ActivityEdgeImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> redefinedEdge = getRedefinedEdge();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
 
 	return _redefinedElement;
 }
-std::vector<uml::Element * > *  ActivityEdgeImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> ActivityEdgeImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getGuard());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getWeight());
-
-	return _ownedElement;
-}
-uml::Element *  ActivityEdgeImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getActivity()!=nullptr)
 	{
@@ -303,16 +264,17 @@ uml::Element *  ActivityEdgeImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::ActivityGroup * > *  ActivityEdgeImpl::getInGroup() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ActivityEdgeImpl::getOwnedElement() const
 {
-	std::vector<uml::ActivityGroup * > *  _inGroup =  new std::vector<uml::ActivityGroup * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::ActivityGroup * > *  inPartition = (std::vector<uml::ActivityGroup * > * ) getInPartition();
-	_inGroup->insert(_inGroup->end(), inPartition->begin(), inPartition->end());
+	_ownedElement->push_back(getGuard());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getWeight());
 
-	_inGroup->push_back(getInStructuredNode());
-
-	return _inGroup;
+	return _ownedElement;
 }
 
 

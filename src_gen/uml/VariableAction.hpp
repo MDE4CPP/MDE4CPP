@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -160,7 +161,7 @@ namespace uml
 			/*!
 			 The VariableAction must be in the scope of the variable.
 			variable.isAccessibleBy(self) */ 
-			virtual bool scope_of_variable(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool scope_of_variable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -173,13 +174,12 @@ namespace uml
 			/*!
 			 The Variable to be read or written.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Variable *  getVariable() const = 0;
+			virtual std::shared_ptr<uml::Variable> getVariable() const = 0;
 			
 			/*!
 			 The Variable to be read or written.
 			<p>From package UML::Actions.</p> */
-			virtual void setVariable(uml::Variable *  _variable) = 0;
-			
+			virtual void setVariable(std::shared_ptr<uml::Variable> _variable) = 0;
 			
 
 		protected:
@@ -194,7 +194,7 @@ namespace uml
 			/*!
 			 The Variable to be read or written.
 			<p>From package UML::Actions.</p> */
-			uml::Variable *  m_variable =  nullptr ;
+			std::shared_ptr<uml::Variable> m_variable;
 			
 
 		public:
@@ -202,18 +202,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

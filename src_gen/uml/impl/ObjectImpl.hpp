@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
 	class ObjectImpl :virtual public ecore::EObjectImpl,
-virtual public Object
+virtual public Object 
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
@@ -51,16 +52,16 @@ virtual public Object
 			 Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
-			virtual boost::any get(uml::Property *  property)  ;
+			virtual boost::any get(std::shared_ptr<uml::Property>  property)  ;
 			
 			/*!
 			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection. */ 
-			virtual void set(uml::Property *  property,boost::any value)  ;
+			virtual void set(std::shared_ptr<uml::Property>  property,boost::any value)  ;
 			
 			/*!
 			 */ 
-			virtual void unset(uml::Property *  property)  ;
+			virtual void unset(std::shared_ptr<uml::Property>  property)  ;
 			
 			
 			
@@ -86,7 +87,7 @@ virtual public Object
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_OBJECTOBJECTIMPL_HPP */

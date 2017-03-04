@@ -13,6 +13,10 @@ using namespace uml;
 ObjectImpl::ObjectImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ObjectImpl::ObjectImpl()
 
 ObjectImpl::~ObjectImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  ObjectImpl::copy() const
 	return new ObjectImpl(*this);
 }
 
-ecore::EClass* ObjectImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getObject();
 }
@@ -50,19 +57,19 @@ ecore::EClass* ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-boost::any ObjectImpl::get(uml::Property *  property) 
+boost::any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::set(uml::Property *  property,boost::any value) 
+void ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::unset(uml::Property *  property) 
+void ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

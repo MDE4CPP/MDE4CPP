@@ -22,10 +22,11 @@
 #include "impl/ValueSpecificationImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class DurationImpl :virtual public ValueSpecificationImpl, virtual public Duration
+	class DurationImpl :virtual public ValueSpecificationImpl, virtual public Duration 
 	{
 		public: 
 			DurationImpl(const DurationImpl & obj);
@@ -48,7 +49,7 @@ namespace uml
 			/*!
 			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
-			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -63,17 +64,16 @@ namespace uml
 			/*!
 			 A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p> */
-			virtual uml::ValueSpecification *  getExpr() const ;
+			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const ;
 			
 			/*!
 			 A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p> */
-			virtual void setExpr(uml::ValueSpecification *  _expr) ;
-			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) ;
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-			virtual std::vector<uml::Observation * > *  getObservation() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> getObservation() const ;
 			
 							
 			
@@ -83,10 +83,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -95,7 +95,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_DURATIONDURATIONIMPL_HPP */

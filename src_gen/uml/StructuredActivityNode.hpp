@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -184,32 +185,32 @@ namespace uml
 			/*!
 			 The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input) */ 
-			virtual bool output_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool output_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The edges of a StructuredActivityNode are all the ActivityEdges with source and target ActivityNodes contained directly or indirectly within the StructuredActivityNode and at least one of the source or target not contained in any more deeply nested StructuredActivityNode.
 			edge=self.sourceNodes().outgoing->intersection(self.allOwnedNodes().incoming)->
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet() */ 
-			virtual bool edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output) */ 
-			virtual bool input_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool input_pin_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
 			  union(node->select(oclIsKindOf(Action)).oclAsType(Action).output)->asSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<uml::ActivityNode * > *  sourceNodes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> sourceNodes()  = 0;
 			
 			/*!
 			 Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as targets of edges owned by the StructuredActivityNode.
 			result = (node->union(output.oclAsType(ActivityNode)->asSet())->
 			  union(node->select(oclIsKindOf(Action)).oclAsType(Action).input)->asSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::vector<uml::ActivityNode * > *  targetNodes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> targetNodes()  = 0;
 			
 			
 			//*********************************
@@ -232,27 +233,27 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::ActivityEdge * > *  getEdge() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getEdge() const = 0;
 			
 			/*!
 			 The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getStructuredNodeInput() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getStructuredNodeInput() const = 0;
 			
 			/*!
 			 The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getStructuredNodeOutput() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getStructuredNodeOutput() const = 0;
 			
 			/*!
 			 The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::Variable * > *  getVariable() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Variable>>> getVariable() const = 0;
 			
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getNode() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getNode() const = 0;
 			
 			
 
@@ -272,23 +273,23 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::ActivityEdge * > *  m_edge =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> m_edge;
 			/*!
 			 The InputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::InputPin * > *  m_structuredNodeInput =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> m_structuredNodeInput;
 			/*!
 			 The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::OutputPin * > *  m_structuredNodeOutput =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> m_structuredNodeOutput;
 			/*!
 			 The Variables defined in the scope of the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::Variable * > *  m_variable =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Variable>>> m_variable;
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::ActivityNode * > *  m_node =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> m_node;
 			
 
 		public:
@@ -296,36 +297,36 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const = 0;/*!
-			 ActivityEdges immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityEdge * > *  getContainedEdge() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const = 0;/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getContainedNode() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getContainedNode() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 ActivityEdges immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getContainedEdge() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
 	};
 
 }

@@ -22,10 +22,11 @@
 #include "impl/EventImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class TimeEventImpl :virtual public EventImpl, virtual public TimeEvent
+	class TimeEventImpl :virtual public EventImpl, virtual public TimeEvent 
 	{
 		public: 
 			TimeEventImpl(const TimeEventImpl & obj);
@@ -48,7 +49,7 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -73,13 +74,12 @@ namespace uml
 			/*!
 			 Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::TimeExpression *  getWhen() const ;
+			virtual std::shared_ptr<uml::TimeExpression> getWhen() const ;
 			
 			/*!
 			 Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setWhen(uml::TimeExpression *  _when) ;
-			
+			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when) ;
 							
 			
 			//*********************************
@@ -88,10 +88,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -100,7 +100,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_TIMEEVENTTIMEEVENTIMPL_HPP */

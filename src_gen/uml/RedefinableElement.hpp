@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -100,30 +101,30 @@ namespace uml
 			/*!
 			 A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
-			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf) */ 
-			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
-			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The query isConsistentWith() specifies, for any two RedefinableElements in a context in which redefinition is possible, whether redefinition would be logically consistent. By default, this is false; this operation must be overridden for subclasses of RedefinableElement to define the consistency conditions.
 			result = (false)
 			redefiningElement.isRedefinitionContextValid(self)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isConsistentWith(uml::RedefinableElement *  redefiningElement)  = 0;
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement)  = 0;
 			
 			/*!
 			 The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p> */ 
-			virtual bool isRedefinitionContextValid(uml::RedefinableElement *  redefinedElement)  = 0;
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement)  = 0;
 			
 			
 			//*********************************
@@ -163,11 +164,11 @@ namespace uml
 			/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			std::vector<uml::RedefinableElement * > *  m_redefinedElement =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> m_redefinedElement;
 			/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			std::vector<uml::Classifier * > *  m_redefinitionContext =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_redefinitionContext;
 			
 
 		public:
@@ -175,18 +176,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const = 0; 
 	};
 
 }

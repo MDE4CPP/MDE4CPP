@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -113,7 +114,7 @@ namespace uml
 			 let peerFragments : OrderedSet(InteractionFragment) =  enclosingOperand.fragment in 
 			   ( peerFragments->notEmpty() and 
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self))) */ 
-			virtual bool first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
@@ -141,7 +142,7 @@ namespace uml
 			 c.covered->asSet()->
 			  select(represents = cl.represents and selector = cl.selector)->asSet()->size()=1))
 			  ) */ 
-			virtual bool same_name(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
@@ -149,7 +150,7 @@ namespace uml
 			  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in 
 			    (operandLifelines->notEmpty() and 
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol))) */ 
-			virtual bool global(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool global(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -193,13 +194,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

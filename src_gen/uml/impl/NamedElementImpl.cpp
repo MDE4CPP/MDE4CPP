@@ -13,31 +13,24 @@ using namespace uml;
 NamedElementImpl::NamedElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_clientDependency == nullptr)
-	{
-		m_clientDependency = new std::vector<uml::Dependency * >();
-	}
+	m_clientDependency.reset(new std::vector<std::shared_ptr<uml::Dependency>>());
 	
 	
 }
 
 NamedElementImpl::~NamedElementImpl()
 {
-	if(m_clientDependency!=nullptr)
-	{
-		delete(m_clientDependency);
-	 	m_clientDependency = nullptr;
-	}
-	if(m_nameExpression!=nullptr)
-	{
-		if(m_nameExpression)
-		{
-			delete(m_nameExpression);
-			m_nameExpression = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete NamedElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,30 +43,31 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -82,7 +76,7 @@ ecore::EObject *  NamedElementImpl::copy() const
 	return new NamedElementImpl(*this);
 }
 
-ecore::EClass* NamedElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getNamedElement();
 }
@@ -120,51 +114,48 @@ VisibilityKind NamedElementImpl::getVisibility() const
 //*********************************
 // Operations
 //*********************************
-std::vector<uml::Namespace * > *  NamedElementImpl::allNamespaces() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Namespace>>> NamedElementImpl::allNamespaces() 
 {
 	//generated from body annotation
-	std::vector<uml::Namespace * > * allNS = new std::vector<uml::Namespace * >();
-
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Namespace>>> allNS(new std::vector<std::shared_ptr<uml::Namespace>>());
     if (getNamespace()==nullptr)
     {
         return allNS;
     }
     else
     {
-        std::vector<uml::Namespace * > * currentNSList = getNamespace()->allNamespaces();
+    	std::shared_ptr<std::vector<std::shared_ptr<uml::Namespace>>> currentNSList = getNamespace()->allNamespaces();
         allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());
-        delete(currentNSList);
         currentNSList = nullptr;
 
-        uml::Namespace * currentNS = getNamespace();
+        std::shared_ptr<uml::Namespace> currentNS = getNamespace();
         if (currentNS != nullptr)
         {
-            allNS->insert(allNS->begin(), currentNS);
-            delete(currentNS);
+            allNS->insert(allNS->end(), currentNS);
         }
         return allNS;
     }
 }
 
-std::vector<uml::Package * > *  NamedElementImpl::allOwningPackages() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Package>>> NamedElementImpl::allOwningPackages() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::Dependency *  NamedElementImpl::createDependency(uml::NamedElement *  supplier) 
+std::shared_ptr<uml::Dependency>  NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::Usage *  NamedElementImpl::createUsage(uml::NamedElement *  supplier) 
+std::shared_ptr<uml::Usage>  NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Dependency * > *  NamedElementImpl::getClientDependencies() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> NamedElementImpl::getClientDependencies() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -187,17 +178,17 @@ std::string NamedElementImpl::getLabel(bool localize)
 std::string NamedElementImpl::getQualifiedName() 
 {
 	//generated from body annotation
-	auto allNS = allNamespaces();
+	std::shared_ptr< std::vector<std::shared_ptr<uml::Namespace>>> allNS = allNamespaces();
 
-    if(!this->getName().empty() && std::none_of(allNS->cbegin(), allNS->cend(), [](Namespace * ns){ return ns->getName().empty(); }))
+    if(!this->getName().empty() && std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr<uml::Namespace> ns){ return ns->getName().empty(); }))
     {
         std::string ret;
-        for(Namespace * ns : *allNS )
+        for(std::shared_ptr<uml::Namespace> ns : *allNS )
         {
-            ret = ns->getName()+separator() +ret;
+            ret = ns->getName() + separator() + ret;
         }
-        ret +=getName();
-	return ret;
+        ret += getName();
+        return ret;
     }
     else
     {
@@ -205,19 +196,19 @@ std::string NamedElementImpl::getQualifiedName()
     }
 }
 
-bool NamedElementImpl::has_no_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamedElementImpl::has_no_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::has_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamedElementImpl::has_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::isDistinguishableFrom(uml::NamedElement *  n,uml::Namespace *  ns) 
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -229,7 +220,7 @@ std::string NamedElementImpl::separator()
 	return "::";
 }
 
-bool NamedElementImpl::visibility_needs_ownership(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamedElementImpl::visibility_needs_ownership(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -238,21 +229,21 @@ bool NamedElementImpl::visibility_needs_ownership(boost::any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
-std::vector<uml::Dependency * > *  NamedElementImpl::getClientDependency() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> NamedElementImpl::getClientDependency() const
 {
-	
-	return m_clientDependency;
+
+    return m_clientDependency;
 }
 
 
-uml::StringExpression *  NamedElementImpl::getNameExpression() const
+std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() const
 {
-	
-	return m_nameExpression;
+
+    return m_nameExpression;
 }
-void NamedElementImpl::setNameExpression(uml::StringExpression *  _nameExpression)
+void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
 {
-	m_nameExpression = _nameExpression;
+    m_nameExpression = _nameExpression;
 }
 
 
@@ -261,9 +252,26 @@ void NamedElementImpl::setNameExpression(uml::StringExpression *  _nameExpressio
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  NamedElementImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> NamedElementImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> NamedElementImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
+	
+
+	return _namespace;
+}
+std::shared_ptr<uml::Element> NamedElementImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -271,24 +279,6 @@ uml::Element *  NamedElementImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  NamedElementImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Namespace *  NamedElementImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
-	
-
-	return _namespace;
 }
 
 

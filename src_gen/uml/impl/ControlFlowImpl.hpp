@@ -22,10 +22,11 @@
 #include "impl/ActivityEdgeImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ControlFlowImpl :virtual public ActivityEdgeImpl, virtual public ControlFlow
+	class ControlFlowImpl :virtual public ActivityEdgeImpl, virtual public ControlFlow 
 	{
 		public: 
 			ControlFlowImpl(const ControlFlowImpl & obj);
@@ -49,7 +50,7 @@ namespace uml
 			 ControlFlows may not have ObjectNodes at either end, except for ObjectNodes with control type.
 			(source.oclIsKindOf(ObjectNode) implies source.oclAsType(ObjectNode).isControlType) and 
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType) */ 
-			virtual bool object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -69,16 +70,16 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -87,7 +88,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_CONTROLFLOWCONTROLFLOWIMPL_HPP */

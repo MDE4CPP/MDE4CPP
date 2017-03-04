@@ -13,21 +13,20 @@ using namespace uml;
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_constrainingClassifier == nullptr)
-	{
-		m_constrainingClassifier = new std::vector<uml::Classifier * >();
-	}
+	m_constrainingClassifier.reset(new std::vector<std::shared_ptr<uml::Classifier>>());
 }
 
 ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
 {
-	if(m_constrainingClassifier!=nullptr)
-	{
-		delete(m_constrainingClassifier);
-	 	m_constrainingClassifier = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierTemplateParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,14 +37,13 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 	//copy references with now containment
 	
-	std::vector<uml::Classifier * > *  _constrainingClassifier = obj.getConstrainingClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _constrainingClassifier = obj.getConstrainingClassifier();
 	this->getConstrainingClassifier()->insert(this->getConstrainingClassifier()->end(), _constrainingClassifier->begin(), _constrainingClassifier->end());
 
 	m_default  = obj.getDefault();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -55,21 +53,23 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getOwnedDefault()!=nullptr)
 	{
-		m_ownedDefault = dynamic_cast<uml::ParameterableElement * >(obj.getOwnedDefault()->copy());
+		m_ownedDefault.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedDefault()->copy()));
 	}
 	if(obj.getOwnedParameteredElement()!=nullptr)
 	{
-		m_ownedParameteredElement = dynamic_cast<uml::ParameterableElement * >(obj.getOwnedParameteredElement()->copy());
+		m_ownedParameteredElement.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedParameteredElement()->copy()));
 	}
 }
 
@@ -78,7 +78,7 @@ ecore::EObject *  ClassifierTemplateParameterImpl::copy() const
 	return new ClassifierTemplateParameterImpl(*this);
 }
 
-ecore::EClass* ClassifierTemplateParameterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getClassifierTemplateParameter();
 }
@@ -99,37 +99,37 @@ bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -138,31 +138,30 @@ bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any
 //*********************************
 // References
 //*********************************
-std::vector<uml::Classifier * > *  ClassifierTemplateParameterImpl::getConstrainingClassifier() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
-	
-	return m_constrainingClassifier;
+
+    return m_constrainingClassifier;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ClassifierTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ClassifierTemplateParameterImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getOwnedDefault());
 	_ownedElement->push_back(getOwnedParameteredElement());
 
 	return _ownedElement;
 }
-uml::Element *  ClassifierTemplateParameterImpl::getOwner() const
+std::shared_ptr<uml::Element> ClassifierTemplateParameterImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getSignature()!=nullptr)
 	{

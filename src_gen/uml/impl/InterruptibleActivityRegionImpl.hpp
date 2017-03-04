@@ -22,10 +22,11 @@
 #include "impl/ActivityGroupImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class InterruptibleActivityRegionImpl :virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion
+	class InterruptibleActivityRegionImpl :virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
 	{
 		public: 
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);
@@ -49,7 +50,7 @@ namespace uml
 			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
-			virtual bool interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -64,12 +65,12 @@ namespace uml
 			/*!
 			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityEdge * > *  getInterruptingEdge() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getInterruptingEdge() const ;
 			
 			/*!
 			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getNode() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getNode() const ;
 			
 							
 			
@@ -79,13 +80,13 @@ namespace uml
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getContainedNode() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getContainedNode() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -94,7 +95,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_INTERRUPTIBLEACTIVITYREGIONINTERRUPTIBLEACTIVITYREGIONIMPL_HPP */

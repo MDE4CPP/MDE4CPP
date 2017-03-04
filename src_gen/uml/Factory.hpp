@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -83,7 +84,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual uml::Element *  create(uml::Class *  metaClass)  = 0;
+			virtual std::shared_ptr<uml::Element>  create(std::shared_ptr<uml::Class>  metaClass)  = 0;
 			
 			
 			//*********************************
@@ -112,7 +113,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
 	};
 
 }

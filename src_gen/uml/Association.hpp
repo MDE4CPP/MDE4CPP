@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -187,28 +188,28 @@ namespace uml
 			/*!
 			 An Association specializing another Association has the same number of ends as the other Association.
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size()) */ 
-			virtual bool specialized_end_number(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool specialized_end_number(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
 				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type))) */ 
-			virtual bool specialized_end_types(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool specialized_end_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none)) */ 
-			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Ends of Associations with more than two ends must be owned by the Association itself.
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd) */ 
-			virtual bool association_ends(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool association_ends(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 memberEnd->forAll(type->notEmpty()) */ 
-			virtual bool ends_must_be_typed(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool ends_must_be_typed(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Determines whether this association is a binary association, i.e. whether it has exactly two member ends. */ 
@@ -218,7 +219,7 @@ namespace uml
 			 endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::vector<uml::Type * > *  getEndTypes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> getEndTypes()  = 0;
 			
 			
 			//*********************************
@@ -241,22 +242,22 @@ namespace uml
 			/*!
 			 The Classifiers that are used as types of the ends of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::Type * > *  getEndType() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> getEndType() const = 0;
 			
 			/*!
 			 Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::Property * > *  getMemberEnd() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getMemberEnd() const = 0;
 			
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::Property * > *  getOwnedEnd() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getOwnedEnd() const = 0;
 			
 			/*!
 			 The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::Property * > *  getNavigableOwnedEnd() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getNavigableOwnedEnd() const = 0;
 			
 			
 
@@ -276,19 +277,19 @@ namespace uml
 			/*!
 			 The Classifiers that are used as types of the ends of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::vector<uml::Type * > *  m_endType =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> m_endType;
 			/*!
 			 Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::vector<uml::Property * > *  m_memberEnd =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> m_memberEnd;
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::vector<uml::Property * > *  m_ownedEnd =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> m_ownedEnd;
 			/*!
 			 The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::vector<uml::Property * > *  m_navigableOwnedEnd =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> m_navigableOwnedEnd;
 			
 
 		public:
@@ -296,30 +297,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Feature * > *  getFeature() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const = 0;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0; 
 	};
 
 }

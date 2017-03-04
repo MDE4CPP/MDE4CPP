@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -123,13 +124,12 @@ namespace uml
 			/*!
 			 References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::ExecutionSpecification *  getExecution() const = 0;
+			virtual std::shared_ptr<uml::ExecutionSpecification> getExecution() const = 0;
 			
 			/*!
 			 References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p> */
-			virtual void setExecution(uml::ExecutionSpecification *  _execution) = 0;
-			
+			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution) = 0;
 			
 
 		protected:
@@ -144,7 +144,7 @@ namespace uml
 			/*!
 			 References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p> */
-			uml::ExecutionSpecification *  m_execution =  nullptr ;
+			std::shared_ptr<uml::ExecutionSpecification> m_execution;
 			
 
 		public:
@@ -154,13 +154,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

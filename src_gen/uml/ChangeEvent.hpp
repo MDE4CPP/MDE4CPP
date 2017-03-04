@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -108,13 +109,12 @@ namespace uml
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::ValueSpecification *  getChangeExpression() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const = 0;
 			
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setChangeExpression(uml::ValueSpecification *  _changeExpression) = 0;
-			
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) = 0;
 			
 
 		protected:
@@ -129,7 +129,7 @@ namespace uml
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			uml::ValueSpecification *  m_changeExpression =  nullptr ;
+			std::shared_ptr<uml::ValueSpecification> m_changeExpression;
 			
 
 		public:
@@ -139,10 +139,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

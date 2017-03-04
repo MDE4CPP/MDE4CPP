@@ -22,10 +22,11 @@
 #include "impl/NamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class MessageEndImpl :virtual public NamedElementImpl, virtual public MessageEnd
+	class MessageEndImpl :virtual public NamedElementImpl, virtual public MessageEnd 
 	{
 		public: 
 			MessageEndImpl(const MessageEndImpl & obj);
@@ -50,7 +51,7 @@ namespace uml
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::vector<uml::MessageEnd * > *  oppositeEnd()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::MessageEnd>>> oppositeEnd()  ;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a sendEvent.
@@ -98,7 +99,7 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::vector<uml::InteractionFragment * > *  enclosingFragment()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> enclosingFragment()  ;
 			
 			
 			
@@ -113,13 +114,12 @@ namespace uml
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::Message *  getMessage() const ;
+			virtual std::shared_ptr<uml::Message> getMessage() const ;
 			
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual void setMessage(uml::Message *  _message) ;
-			
+			virtual void setMessage(std::shared_ptr<uml::Message> _message) ;
 							
 			
 			//*********************************
@@ -128,10 +128,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -140,7 +140,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_MESSAGEENDMESSAGEENDIMPL_HPP */

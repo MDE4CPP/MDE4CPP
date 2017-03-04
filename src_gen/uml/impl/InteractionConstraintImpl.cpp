@@ -13,6 +13,10 @@ using namespace uml;
 InteractionConstraintImpl::InteractionConstraintImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,22 +25,9 @@ InteractionConstraintImpl::InteractionConstraintImpl()
 
 InteractionConstraintImpl::~InteractionConstraintImpl()
 {
-	if(m_maxint!=nullptr)
-	{
-		if(m_maxint)
-		{
-			delete(m_maxint);
-			m_maxint = nullptr;
-		}
-	}
-	if(m_minint!=nullptr)
-	{
-		if(m_minint)
-		{
-			delete(m_minint);
-			m_minint = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InteractionConstraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -49,19 +40,18 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Element * > *  _constrainedElement = obj.getConstrainedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _constrainedElement = obj.getConstrainedElement();
 	this->getConstrainedElement()->insert(this->getConstrainedElement()->end(), _constrainedElement->begin(), _constrainedElement->end());
 
 	m_context  = obj.getContext();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -71,29 +61,31 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getMaxint()!=nullptr)
 	{
-		m_maxint = dynamic_cast<uml::ValueSpecification * >(obj.getMaxint()->copy());
+		m_maxint.reset(dynamic_cast<uml::ValueSpecification*>(obj.getMaxint()->copy()));
 	}
 	if(obj.getMinint()!=nullptr)
 	{
-		m_minint = dynamic_cast<uml::ValueSpecification * >(obj.getMinint()->copy());
+		m_minint.reset(dynamic_cast<uml::ValueSpecification*>(obj.getMinint()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification = dynamic_cast<uml::ValueSpecification * >(obj.getSpecification()->copy());
+		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
 	}
 }
 
@@ -102,7 +94,7 @@ ecore::EObject *  InteractionConstraintImpl::copy() const
 	return new InteractionConstraintImpl(*this);
 }
 
-ecore::EClass* InteractionConstraintImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInteractionConstraint();
 }
@@ -114,37 +106,37 @@ ecore::EClass* InteractionConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionConstraintImpl::dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::global_data(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionConstraintImpl::minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -153,46 +145,32 @@ bool InteractionConstraintImpl::minint_non_negative(boost::any diagnostics,std::
 //*********************************
 // References
 //*********************************
-uml::ValueSpecification *  InteractionConstraintImpl::getMaxint() const
+std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMaxint() const
 {
-	
-	return m_maxint;
+
+    return m_maxint;
 }
-void InteractionConstraintImpl::setMaxint(uml::ValueSpecification *  _maxint)
+void InteractionConstraintImpl::setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint)
 {
-	m_maxint = _maxint;
+    m_maxint = _maxint;
 }
 
-uml::ValueSpecification *  InteractionConstraintImpl::getMinint() const
+std::shared_ptr<uml::ValueSpecification> InteractionConstraintImpl::getMinint() const
 {
-	
-	return m_minint;
+
+    return m_minint;
 }
-void InteractionConstraintImpl::setMinint(uml::ValueSpecification *  _minint)
+void InteractionConstraintImpl::setMinint(std::shared_ptr<uml::ValueSpecification> _minint)
 {
-	m_minint = _minint;
+    m_minint = _minint;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  InteractionConstraintImpl::getOwnedElement() const
+std::shared_ptr<uml::Namespace> InteractionConstraintImpl::getNamespace() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getMaxint());
-	_ownedElement->push_back(getMinint());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getSpecification());
-
-	return _ownedElement;
-}
-uml::Namespace *  InteractionConstraintImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getContext()!=nullptr)
 	{
@@ -201,9 +179,22 @@ uml::Namespace *  InteractionConstraintImpl::getNamespace() const
 
 	return _namespace;
 }
-uml::Element *  InteractionConstraintImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InteractionConstraintImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getMaxint());
+	_ownedElement->push_back(getMinint());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getSpecification());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> InteractionConstraintImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -122,12 +123,12 @@ namespace uml
 			/*!
 			 All the operands of a StringExpression must be LiteralStrings
 			operand->forAll (oclIsKindOf (LiteralString)) */ 
-			virtual bool operands(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
-			virtual bool subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -140,17 +141,16 @@ namespace uml
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			virtual uml::StringExpression *  getOwningExpression() const = 0;
+			virtual std::shared_ptr<uml::StringExpression> getOwningExpression() const = 0;
 			
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			virtual void setOwningExpression(uml::StringExpression *  _owningExpression) = 0;
-			
+			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) = 0;
 			/*!
 			 The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p> */
-			virtual std::vector<uml::StringExpression * > *  getSubExpression() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> getSubExpression() const = 0;
 			
 			
 
@@ -166,11 +166,11 @@ namespace uml
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			uml::StringExpression *  m_owningExpression =  nullptr ;
+			std::shared_ptr<uml::StringExpression> m_owningExpression;
 			/*!
 			 The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p> */
-			std::vector<uml::StringExpression * > *  m_subExpression =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> m_subExpression;
 			
 
 		public:
@@ -180,10 +180,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

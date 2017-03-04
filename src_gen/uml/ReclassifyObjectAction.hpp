@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -155,17 +156,17 @@ namespace uml
 			/*!
 			 The object InputPin has no type.
 			object.type = null */ 
-			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 None of the newClassifiers may be abstract.
 			not newClassifier->exists(isAbstract) */ 
-			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -188,22 +189,21 @@ namespace uml
 			/*!
 			 A set of Classifiers to be added to the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::Classifier * > *  getNewClassifier() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getNewClassifier() const = 0;
 			
 			/*!
 			 The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p> */
-			virtual uml::InputPin *  getObject() const = 0;
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			
 			/*!
 			 The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p> */
-			virtual void setObject(uml::InputPin *  _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
 			/*!
 			 A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::Classifier * > *  getOldClassifier() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getOldClassifier() const = 0;
 			
 			
 
@@ -223,15 +223,15 @@ namespace uml
 			/*!
 			 A set of Classifiers to be added to the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::Classifier * > *  m_newClassifier =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_newClassifier;
 			/*!
 			 The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p> */
-			uml::InputPin *  m_object =  nullptr ;
+			std::shared_ptr<uml::InputPin> m_object;
 			/*!
 			 A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			std::vector<uml::Classifier * > *  m_oldClassifier =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_oldClassifier;
 			
 
 		public:
@@ -239,21 +239,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::InputPin * > *  getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
 	};
 
 }

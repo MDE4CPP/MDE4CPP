@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -118,7 +119,7 @@ namespace uml
 			 All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 
 			containedEdge->forAll(activity = self.containingActivity()) */ 
-			virtual bool nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool nodes_and_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
@@ -126,7 +127,7 @@ namespace uml
 			superGroup->closure(superGroup).containedNode->excludesAll(containedNode) and 
 			subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and 
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge) */ 
-			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -141,13 +142,12 @@ namespace uml
 			/*!
 			 The Activity containing the ActivityGroup, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Activity *  getInActivity() const = 0;
+			virtual std::shared_ptr<uml::Activity> getInActivity() const = 0;
 			
 			/*!
 			 The Activity containing the ActivityGroup, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
-			virtual void setInActivity(uml::Activity *  _inActivity) = 0;
-			
+			virtual void setInActivity(std::shared_ptr<uml::Activity> _inActivity) = 0;
 			
 			
 			
@@ -164,23 +164,23 @@ namespace uml
 			/*!
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::vector<uml::ActivityEdge * > *  m_containedEdge =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> m_containedEdge;
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::vector<uml::ActivityNode * > *  m_containedNode =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> m_containedNode;
 			/*!
 			 The Activity containing the ActivityGroup, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
-			uml::Activity *  m_inActivity =  nullptr ;
+			std::shared_ptr<uml::Activity> m_inActivity;
 			/*!
 			 Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			std::vector<uml::ActivityGroup * > *  m_subgroup =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> m_subgroup;
 			/*!
 			 The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			uml::ActivityGroup *  m_superGroup =  nullptr ;
+			std::shared_ptr<uml::ActivityGroup> m_superGroup;
 			
 
 		public:
@@ -188,24 +188,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityEdges immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityEdge * > *  getContainedEdge() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual uml::ActivityGroup *  getSuperGroup() const = 0;/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getContainedNode() const = 0;/*!
 			 Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getSubgroup() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getSubgroup() const = 0;/*!
+			 ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getContainedNode() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityEdges immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getContainedEdge() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			 The ActivityGroup immediately containing this ActivityGroup, if it is directly owned by another ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::ActivityGroup> getSuperGroup() const = 0; 
 	};
 
 }

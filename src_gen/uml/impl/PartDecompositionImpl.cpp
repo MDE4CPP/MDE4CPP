@@ -13,6 +13,10 @@ using namespace uml;
 PartDecompositionImpl::PartDecompositionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ PartDecompositionImpl::PartDecompositionImpl()
 
 PartDecompositionImpl::~PartDecompositionImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PartDecomposition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -32,10 +39,10 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -44,9 +51,8 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -56,33 +62,38 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj)
 
 
 	//clone containt lists
-	for(uml::Gate * 	_actualGate : *obj.getActualGate())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> _actualGateList = obj.getActualGate();
+	for(std::shared_ptr<uml::Gate> _actualGate : *_actualGateList)
 	{
-		this->getActualGate()->push_back(dynamic_cast<uml::Gate * >(_actualGate->copy()));
+		this->getActualGate()->push_back(std::shared_ptr<uml::Gate>(dynamic_cast<uml::Gate*>(_actualGate->copy())));
 	}
-	for(uml::ValueSpecification * 	_argument : *obj.getArgument())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _argumentList = obj.getArgument();
+	for(std::shared_ptr<uml::ValueSpecification> _argument : *_argumentList)
 	{
-		this->getArgument()->push_back(dynamic_cast<uml::ValueSpecification * >(_argument->copy()));
+		this->getArgument()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_argument->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getReturnValue()!=nullptr)
 	{
-		m_returnValue = dynamic_cast<uml::ValueSpecification * >(obj.getReturnValue()->copy());
+		m_returnValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getReturnValue()->copy()));
 	}
 }
 
@@ -91,7 +102,7 @@ ecore::EObject *  PartDecompositionImpl::copy() const
 	return new PartDecompositionImpl(*this);
 }
 
-ecore::EClass* PartDecompositionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getPartDecomposition();
 }
@@ -103,19 +114,19 @@ ecore::EClass* PartDecompositionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PartDecompositionImpl::assume(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PartDecompositionImpl::assume(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::commutativity_of_decomposition(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PartDecompositionImpl::commutativity_of_decomposition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -128,9 +139,26 @@ bool PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  PartDecompositionImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PartDecompositionImpl::getOwnedElement() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> actualGate = getActualGate();
+	_ownedElement->insert(_ownedElement->end(), actualGate->begin(), actualGate->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> argument = getArgument();
+	_ownedElement->insert(_ownedElement->end(), argument->begin(), argument->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getReturnValue());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> PartDecompositionImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -143,30 +171,9 @@ uml::Namespace *  PartDecompositionImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  PartDecompositionImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> PartDecompositionImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  actualGate = (std::vector<uml::Element * > * ) getActualGate();
-	_ownedElement->insert(_ownedElement->end(), actualGate->begin(), actualGate->end());
-
-	std::vector<uml::Element * > *  argument = (std::vector<uml::Element * > * ) getArgument();
-	_ownedElement->insert(_ownedElement->end(), argument->begin(), argument->end());
-
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getReturnValue());
-
-	return _ownedElement;
-}
-uml::Element *  PartDecompositionImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

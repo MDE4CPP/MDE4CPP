@@ -13,16 +13,14 @@ using namespace uml;
 InteractionUseImpl::InteractionUseImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_actualGate == nullptr)
-	{
-		m_actualGate = new std::vector<uml::Gate * >();
-	}
-	if( m_argument == nullptr)
-	{
-		m_argument = new std::vector<uml::ValueSpecification * >();
-	}
+	m_actualGate.reset(new std::vector<std::shared_ptr<uml::Gate>>());
+	m_argument.reset(new std::vector<std::shared_ptr<uml::ValueSpecification>>());
 	
 	
 	
@@ -30,30 +28,9 @@ InteractionUseImpl::InteractionUseImpl()
 
 InteractionUseImpl::~InteractionUseImpl()
 {
-	if(m_actualGate!=nullptr)
-	{
-		for(auto c :*m_actualGate)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_argument!=nullptr)
-	{
-		for(auto c :*m_argument)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_returnValue!=nullptr)
-	{
-		if(m_returnValue)
-		{
-			delete(m_returnValue);
-			m_returnValue = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InteractionUse "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -66,10 +43,10 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -78,9 +55,8 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -90,33 +66,38 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj)
 
 
 	//clone containt lists
-	for(uml::Gate * 	_actualGate : *obj.getActualGate())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> _actualGateList = obj.getActualGate();
+	for(std::shared_ptr<uml::Gate> _actualGate : *_actualGateList)
 	{
-		this->getActualGate()->push_back(dynamic_cast<uml::Gate * >(_actualGate->copy()));
+		this->getActualGate()->push_back(std::shared_ptr<uml::Gate>(dynamic_cast<uml::Gate*>(_actualGate->copy())));
 	}
-	for(uml::ValueSpecification * 	_argument : *obj.getArgument())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _argumentList = obj.getArgument();
+	for(std::shared_ptr<uml::ValueSpecification> _argument : *_argumentList)
 	{
-		this->getArgument()->push_back(dynamic_cast<uml::ValueSpecification * >(_argument->copy()));
+		this->getArgument()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_argument->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getReturnValue()!=nullptr)
 	{
-		m_returnValue = dynamic_cast<uml::ValueSpecification * >(obj.getReturnValue()->copy());
+		m_returnValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getReturnValue()->copy()));
 	}
 }
 
@@ -125,7 +106,7 @@ ecore::EObject *  InteractionUseImpl::copy() const
 	return new InteractionUseImpl(*this);
 }
 
-ecore::EClass* InteractionUseImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInteractionUse();
 }
@@ -137,37 +118,37 @@ ecore::EClass* InteractionUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::all_lifelines(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_are_constants(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::arguments_are_constants(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_correspond_to_parameters(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::arguments_correspond_to_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::gates_match(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::gates_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValueRecipient_coverage(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::returnValueRecipient_coverage(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool InteractionUseImpl::returnValue_type_recipient_correspondence(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -176,77 +157,73 @@ bool InteractionUseImpl::returnValue_type_recipient_correspondence(boost::any di
 //*********************************
 // References
 //*********************************
-std::vector<uml::Gate * > *  InteractionUseImpl::getActualGate() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> InteractionUseImpl::getActualGate() const
 {
-	
-	return m_actualGate;
+
+    return m_actualGate;
 }
 
 
-std::vector<uml::ValueSpecification * > *  InteractionUseImpl::getArgument() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> InteractionUseImpl::getArgument() const
 {
-	
-	return m_argument;
+
+    return m_argument;
 }
 
 
-uml::Interaction *  InteractionUseImpl::getRefersTo() const
+std::shared_ptr<uml::Interaction> InteractionUseImpl::getRefersTo() const
 {
-	//assert(m_refersTo);
-	return m_refersTo;
+//assert(m_refersTo);
+    return m_refersTo;
 }
-void InteractionUseImpl::setRefersTo(uml::Interaction *  _refersTo)
+void InteractionUseImpl::setRefersTo(std::shared_ptr<uml::Interaction> _refersTo)
 {
-	m_refersTo = _refersTo;
-}
-
-uml::ValueSpecification *  InteractionUseImpl::getReturnValue() const
-{
-	
-	return m_returnValue;
-}
-void InteractionUseImpl::setReturnValue(uml::ValueSpecification *  _returnValue)
-{
-	m_returnValue = _returnValue;
+    m_refersTo = _refersTo;
 }
 
-uml::Property *  InteractionUseImpl::getReturnValueRecipient() const
+std::shared_ptr<uml::ValueSpecification> InteractionUseImpl::getReturnValue() const
 {
-	
-	return m_returnValueRecipient;
+
+    return m_returnValue;
 }
-void InteractionUseImpl::setReturnValueRecipient(uml::Property *  _returnValueRecipient)
+void InteractionUseImpl::setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue)
 {
-	m_returnValueRecipient = _returnValueRecipient;
+    m_returnValue = _returnValue;
+}
+
+std::shared_ptr<uml::Property> InteractionUseImpl::getReturnValueRecipient() const
+{
+
+    return m_returnValueRecipient;
+}
+void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient)
+{
+    m_returnValueRecipient = _returnValueRecipient;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  InteractionUseImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InteractionUseImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  actualGate = (std::vector<uml::Element * > * ) getActualGate();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> actualGate = getActualGate();
 	_ownedElement->insert(_ownedElement->end(), actualGate->begin(), actualGate->end());
-
-	std::vector<uml::Element * > *  argument = (std::vector<uml::Element * > * ) getArgument();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> argument = getArgument();
 	_ownedElement->insert(_ownedElement->end(), argument->begin(), argument->end());
-
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
 	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getReturnValue());
 
 	return _ownedElement;
 }
-uml::Element *  InteractionUseImpl::getOwner() const
+std::shared_ptr<uml::Element> InteractionUseImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -255,9 +232,9 @@ uml::Element *  InteractionUseImpl::getOwner() const
 
 	return _owner;
 }
-uml::Namespace *  InteractionUseImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> InteractionUseImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{

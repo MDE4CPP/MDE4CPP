@@ -13,6 +13,10 @@ using namespace uml;
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl()
 
 BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BehaviorExecutionSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,10 +41,10 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 	
 	m_behavior  = obj.getBehavior();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -48,9 +55,8 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -58,21 +64,24 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -81,7 +90,7 @@ ecore::EObject *  BehaviorExecutionSpecificationImpl::copy() const
 	return new BehaviorExecutionSpecificationImpl(*this);
 }
 
-ecore::EClass* BehaviorExecutionSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getBehaviorExecutionSpecification();
 }
@@ -97,22 +106,22 @@ ecore::EClass* BehaviorExecutionSpecificationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Behavior *  BehaviorExecutionSpecificationImpl::getBehavior() const
+std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior() const
 {
-	
-	return m_behavior;
+
+    return m_behavior;
 }
-void BehaviorExecutionSpecificationImpl::setBehavior(uml::Behavior *  _behavior)
+void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
-	m_behavior = _behavior;
+    m_behavior = _behavior;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  BehaviorExecutionSpecificationImpl::getOwner() const
+std::shared_ptr<uml::Element> BehaviorExecutionSpecificationImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -121,9 +130,9 @@ uml::Element *  BehaviorExecutionSpecificationImpl::getOwner() const
 
 	return _owner;
 }
-uml::Namespace *  BehaviorExecutionSpecificationImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> BehaviorExecutionSpecificationImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -136,17 +145,15 @@ uml::Namespace *  BehaviorExecutionSpecificationImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  BehaviorExecutionSpecificationImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> BehaviorExecutionSpecificationImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
 	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

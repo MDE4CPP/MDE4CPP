@@ -22,10 +22,11 @@
 #include "impl/ElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class FactoryImpl :virtual public ElementImpl, virtual public Factory
+	class FactoryImpl :virtual public ElementImpl, virtual public Factory 
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);
@@ -50,7 +51,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual uml::Element *  create(uml::Class *  metaClass)  ;
+			virtual std::shared_ptr<uml::Element>  create(std::shared_ptr<uml::Class>  metaClass)  ;
 			
 			
 			
@@ -69,7 +70,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -78,7 +79,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_FACTORYFACTORYIMPL_HPP */

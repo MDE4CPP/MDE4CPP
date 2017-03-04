@@ -22,10 +22,11 @@
 #include "impl/ActivityEdgeImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ObjectFlowImpl :virtual public ActivityEdgeImpl, virtual public ObjectFlow
+	class ObjectFlowImpl :virtual public ActivityEdgeImpl, virtual public ObjectFlow 
 	{
 		public: 
 			ObjectFlowImpl(const ObjectFlowImpl & obj);
@@ -51,41 +52,41 @@ namespace uml
 				selection.inputParameters()->size()=1 and
 				selection.inputParameters()->forAll(not isUnique and is(0,*)) and
 				selection.outputParameters()->size()=1 */ 
-			virtual bool input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode)) */ 
-			virtual bool no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
 				transformation.inputParameters()->size()=1 and
 				transformation.outputParameters()->size()=1 */ 
-			virtual bool transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode) */ 
-			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type. */ 
-			virtual bool compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds. */ 
-			virtual bool same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight. */ 
-			virtual bool target(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive) */ 
-			virtual bool is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -120,23 +121,21 @@ namespace uml
 			/*!
 			 A Behavior used to select tokens from a source ObjectNode.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Behavior *  getSelection() const ;
+			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
 			
 			/*!
 			 A Behavior used to select tokens from a source ObjectNode.
 			<p>From package UML::Activities.</p> */
-			virtual void setSelection(uml::Behavior *  _selection) ;
+			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) ;
+			/*!
+			 A Behavior used to change or replace object tokens flowing along the ObjectFlow.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::Behavior> getTransformation() const ;
 			
 			/*!
 			 A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Behavior *  getTransformation() const ;
-			
-			/*!
-			 A Behavior used to change or replace object tokens flowing along the ObjectFlow.
-			<p>From package UML::Activities.</p> */
-			virtual void setTransformation(uml::Behavior *  _transformation) ;
-			
+			virtual void setTransformation(std::shared_ptr<uml::Behavior> _transformation) ;
 							
 			
 			//*********************************
@@ -145,16 +144,16 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -163,7 +162,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_OBJECTFLOWOBJECTFLOWIMPL_HPP */

@@ -13,6 +13,10 @@ using namespace uml;
 StateInvariantImpl::StateInvariantImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,14 +24,9 @@ StateInvariantImpl::StateInvariantImpl()
 
 StateInvariantImpl::~StateInvariantImpl()
 {
-	if(m_invariant!=nullptr)
-	{
-		if(m_invariant)
-		{
-			delete(m_invariant);
-			m_invariant = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StateInvariant "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -40,10 +39,10 @@ StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -52,33 +51,35 @@ StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getInvariant()!=nullptr)
 	{
-		m_invariant = dynamic_cast<uml::Constraint * >(obj.getInvariant()->copy());
+		m_invariant.reset(dynamic_cast<uml::Constraint*>(obj.getInvariant()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -87,7 +88,7 @@ ecore::EObject *  StateInvariantImpl::copy() const
 	return new StateInvariantImpl(*this);
 }
 
-ecore::EClass* StateInvariantImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getStateInvariant();
 }
@@ -103,22 +104,46 @@ ecore::EClass* StateInvariantImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Constraint *  StateInvariantImpl::getInvariant() const
+std::shared_ptr<uml::Constraint> StateInvariantImpl::getInvariant() const
 {
-	//assert(m_invariant);
-	return m_invariant;
+//assert(m_invariant);
+    return m_invariant;
 }
-void StateInvariantImpl::setInvariant(uml::Constraint *  _invariant)
+void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invariant)
 {
-	m_invariant = _invariant;
+    m_invariant = _invariant;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  StateInvariantImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> StateInvariantImpl::getOwnedElement() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getInvariant());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> StateInvariantImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
+	
+	if(getNamespace()!=nullptr)
+	{
+		_owner = getNamespace();
+	}
+
+	return _owner;
+}
+std::shared_ptr<uml::Namespace> StateInvariantImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -130,32 +155,6 @@ uml::Namespace *  StateInvariantImpl::getNamespace() const
 	}
 
 	return _namespace;
-}
-std::vector<uml::Element * > *  StateInvariantImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
-	_ownedElement->push_back(getInvariant());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  StateInvariantImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
-	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-
-	return _owner;
 }
 
 

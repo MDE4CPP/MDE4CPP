@@ -22,10 +22,11 @@
 #include "impl/NamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class InteractionFragmentImpl :virtual public NamedElementImpl, virtual public InteractionFragment
+	class InteractionFragmentImpl :virtual public NamedElementImpl, virtual public InteractionFragment 
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
@@ -58,32 +59,30 @@ namespace uml
 			/*!
 			 References the Lifelines that the InteractionFragment involves.
 			<p>From package UML::Interactions.</p> */
-			virtual std::vector<uml::Lifeline * > *  getCovered() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> getCovered() const ;
 			
 			/*!
 			 The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p> */
-			virtual uml::InteractionOperand *  getEnclosingOperand() const ;
+			virtual std::shared_ptr<uml::InteractionOperand> getEnclosingOperand() const ;
 			
 			/*!
 			 The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingOperand(uml::InteractionOperand *  _enclosingOperand) ;
+			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand) ;
+			/*!
+			 The Interaction enclosing this InteractionFragment.
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr<uml::Interaction> getEnclosingInteraction() const ;
 			
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
-			virtual uml::Interaction *  getEnclosingInteraction() const ;
-			
-			/*!
-			 The Interaction enclosing this InteractionFragment.
-			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingInteraction(uml::Interaction *  _enclosingInteraction) ;
-			
+			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction) ;
 			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual std::vector<uml::GeneralOrdering * > *  getGeneralOrdering() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getGeneralOrdering() const ;
 			
 							
 			
@@ -93,13 +92,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +107,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_INTERACTIONFRAGMENTINTERACTIONFRAGMENTIMPL_HPP */

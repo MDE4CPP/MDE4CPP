@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -102,7 +103,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -111,12 +112,7 @@ namespace uml
 			/*!
 			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
 			<p>From package UML::Values.</p> */ 
-			virtual std::vector<bool> *  getFirstEvent() const = 0;
-			
-			/*!
-			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
-			<p>From package UML::Values.</p> */ 
-			virtual void setFirstEvent (std::vector<bool> *  _firstEvent)= 0; 
+			virtual std::shared_ptr<std::vector<bool>> getFirstEvent() const = 0;
 			
 			
 			//*********************************
@@ -125,7 +121,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			virtual std::vector<uml::NamedElement * > *  getEvent() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getEvent() const = 0;
 			
 			
 
@@ -136,8 +132,7 @@ namespace uml
 			/*!
 			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
 			<p>From package UML::Values.</p> */ 
-			std::vector<bool> *  m_firstEvent ;
-			
+			std::shared_ptr<std::vector<bool>> m_firstEvent; 
 			
 			//*********************************
 			// Reference Members
@@ -145,7 +140,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			std::vector<uml::NamedElement * > *  m_event =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> m_event;
 			
 
 		public:
@@ -155,10 +150,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

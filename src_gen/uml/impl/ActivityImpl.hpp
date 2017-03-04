@@ -22,10 +22,11 @@
 #include "impl/BehaviorImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ActivityImpl :virtual public BehaviorImpl, virtual public Activity
+	class ActivityImpl :virtual public BehaviorImpl, virtual public Activity 
 	{
 		public: 
 			ActivityImpl(const ActivityImpl & obj);
@@ -50,7 +51,7 @@ namespace uml
 			ownedParameter->forAll(p | 
 			   p.direction <> ParameterDirectionKind::inout implies node->select(
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1) */ 
-			virtual bool maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -62,7 +63,7 @@ namespace uml
 			  associatedNodes->select(incoming->notEmpty())->size()<=1 and
 			  associatedNodes->select(outgoing->notEmpty())->size()<=1
 			) */ 
-			virtual bool maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -96,41 +97,41 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<uml::ActivityGroup * > *  getOwnedGroup() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getOwnedGroup() const ;
 			
 			/*!
 			 ActivityEdges expressing flow between the nodes of the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityEdge * > *  getEdge() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getEdge() const ;
 			
 			/*!
 			 ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityNode * > *  getNode() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getNode() const ;
 			
 			/*!
 			 Top-level Variables defined by the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::Variable * > *  getVariable() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Variable>>> getVariable() const ;
 			
 			/*!
 			 Top-level ActivityGroups in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getGroup() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getGroup() const ;
 			
 			/*!
 			 */
-			virtual std::vector<uml::ActivityNode * > *  getOwnedNode() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getOwnedNode() const ;
 			
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityPartition * > *  getPartition() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> getPartition() const ;
 			
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::StructuredActivityNode * > *  getStructuredNode() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::StructuredActivityNode>>> getStructuredNode() const ;
 			
 							
 			
@@ -138,36 +139,36 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Property * > *  getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const ;/*!
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::vector<uml::ConnectableElement * > *  getRole() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Feature * > *  getFeature() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectableElement>>> getRole() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -176,7 +177,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYACTIVITYIMPL_HPP */

@@ -22,10 +22,11 @@
 #include "impl/PackageableElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class TypeImpl :virtual public PackageableElementImpl, virtual public Type
+	class TypeImpl :virtual public PackageableElementImpl, virtual public Type 
 	{
 		public: 
 			TypeImpl(const TypeImpl & obj);
@@ -47,17 +48,17 @@ namespace uml
 			//*********************************
 			/*!
 			 Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package. */ 
-			virtual uml::Association *  createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,uml::Type *  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  ;
+			virtual std::shared_ptr<uml::Association>  createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  ;
 			
 			/*!
 			 Retrieves the associations in which this type is involved. */ 
-			virtual std::vector<uml::Association * > *  getAssociations()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Association>>> getAssociations()  ;
 			
 			/*!
 			 The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
 			result = (false)
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool conformsTo(uml::Type *  other)  ;
+			virtual bool conformsTo(std::shared_ptr<uml::Type>  other)  ;
 			
 			
 			
@@ -72,13 +73,12 @@ namespace uml
 			/*!
 			 Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Package *  getPackage() const ;
+			virtual std::shared_ptr<uml::Package> getPackage() const ;
 			
 			/*!
 			 Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setPackage(uml::Package *  _package) ;
-			
+			virtual void setPackage(std::shared_ptr<uml::Package> _package) ;
 							
 			
 			//*********************************
@@ -87,13 +87,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -102,7 +102,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_TYPETYPEIMPL_HPP */

@@ -13,6 +13,13 @@ using namespace uml;
 MultiplicityElementImpl::MultiplicityElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,22 +28,9 @@ MultiplicityElementImpl::MultiplicityElementImpl()
 
 MultiplicityElementImpl::~MultiplicityElementImpl()
 {
-	if(m_lowerValue!=nullptr)
-	{
-		if(m_lowerValue)
-		{
-			delete(m_lowerValue);
-			m_lowerValue = nullptr;
-		}
-	}
-	if(m_upperValue!=nullptr)
-	{
-		if(m_upperValue)
-		{
-			delete(m_upperValue);
-			m_upperValue = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete MultiplicityElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,29 +44,30 @@ MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl &
 
 	//copy references with now containment
 	
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue = dynamic_cast<uml::ValueSpecification * >(obj.getLowerValue()->copy());
+		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue = dynamic_cast<uml::ValueSpecification * >(obj.getUpperValue()->copy());
+		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
 }
 
@@ -81,7 +76,7 @@ ecore::EObject *  MultiplicityElementImpl::copy() const
 	return new MultiplicityElementImpl(*this);
 }
 
-ecore::EClass* MultiplicityElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getMultiplicityElement();
 }
@@ -132,13 +127,13 @@ int MultiplicityElementImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool MultiplicityElementImpl::compatibleWith(uml::MultiplicityElement *  other) 
+bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::includesMultiplicity(uml::MultiplicityElement *  M) 
+bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -162,13 +157,13 @@ int MultiplicityElementImpl::lowerBound()
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -180,25 +175,25 @@ int MultiplicityElementImpl::upperBound()
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MultiplicityElementImpl::value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool MultiplicityElementImpl::value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -207,37 +202,36 @@ bool MultiplicityElementImpl::value_specification_no_side_effects(boost::any dia
 //*********************************
 // References
 //*********************************
-uml::ValueSpecification *  MultiplicityElementImpl::getLowerValue() const
+std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue() const
 {
-	
-	return m_lowerValue;
+
+    return m_lowerValue;
 }
-void MultiplicityElementImpl::setLowerValue(uml::ValueSpecification *  _lowerValue)
+void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
 {
-	m_lowerValue = _lowerValue;
+    m_lowerValue = _lowerValue;
 }
 
-uml::ValueSpecification *  MultiplicityElementImpl::getUpperValue() const
+std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue() const
 {
-	
-	return m_upperValue;
+
+    return m_upperValue;
 }
-void MultiplicityElementImpl::setUpperValue(uml::ValueSpecification *  _upperValue)
+void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
 {
-	m_upperValue = _upperValue;
+    m_upperValue = _upperValue;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  MultiplicityElementImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> MultiplicityElementImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getLowerValue());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getUpperValue());
 
 	return _ownedElement;

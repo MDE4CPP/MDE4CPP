@@ -13,31 +13,22 @@ using namespace uml;
 VertexImpl::VertexImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_incoming == nullptr)
-	{
-		m_incoming = new std::vector<uml::Transition * >();
-	}
-	if( m_outgoing == nullptr)
-	{
-		m_outgoing = new std::vector<uml::Transition * >();
-	}
+	m_incoming.reset(new std::vector<std::shared_ptr<uml::Transition>>());
+	m_outgoing.reset(new std::vector<std::shared_ptr<uml::Transition>>());
 }
 
 VertexImpl::~VertexImpl()
 {
-	if(m_incoming!=nullptr)
-	{
-		delete(m_incoming);
-	 	m_incoming = nullptr;
-	}
-	if(m_outgoing!=nullptr)
-	{
-		delete(m_outgoing);
-	 	m_outgoing = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Vertex "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,38 +41,39 @@ VertexImpl::VertexImpl(const VertexImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_container  = obj.getContainer();
 
-	std::vector<uml::Transition * > *  _incoming = obj.getIncoming();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _incoming = obj.getIncoming();
 	this->getIncoming()->insert(this->getIncoming()->end(), _incoming->begin(), _incoming->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Transition * > *  _outgoing = obj.getOutgoing();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _outgoing = obj.getOutgoing();
 	this->getOutgoing()->insert(this->getOutgoing()->end(), _outgoing->begin(), _outgoing->end());
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -90,7 +82,7 @@ ecore::EObject *  VertexImpl::copy() const
 	return new VertexImpl(*this);
 }
 
-ecore::EClass* VertexImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getVertex();
 }
@@ -102,31 +94,31 @@ ecore::EClass* VertexImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-uml::StateMachine *  VertexImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine>  VertexImpl::containingStateMachine() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Transition * > *  VertexImpl::getIncomings() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> VertexImpl::getIncomings() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Transition * > *  VertexImpl::getOutgoings() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> VertexImpl::getOutgoings() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInRegion(uml::Region *  r) 
+bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInState(uml::State *  s) 
+bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -135,58 +127,36 @@ bool VertexImpl::isContainedInState(uml::State *  s)
 //*********************************
 // References
 //*********************************
-uml::Region *  VertexImpl::getContainer() const
+std::shared_ptr<uml::Region> VertexImpl::getContainer() const
 {
-	
-	return m_container;
-}
-void VertexImpl::setContainer(uml::Region *  _container)
-{
-	m_container = _container;
-}
 
-std::vector<uml::Transition * > *  VertexImpl::getIncoming() const
+    return m_container;
+}
+void VertexImpl::setContainer(std::shared_ptr<uml::Region> _container)
 {
-	
-	return m_incoming;
+    m_container = _container;
 }
 
-
-std::vector<uml::Transition * > *  VertexImpl::getOutgoing() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> VertexImpl::getIncoming() const
 {
-	
-	return m_outgoing;
+
+    return m_incoming;
+}
+
+
+std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> VertexImpl::getOutgoing() const
+{
+
+    return m_outgoing;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  VertexImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> VertexImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Namespace *  VertexImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
-	
-	if(getContainer()!=nullptr)
-	{
-		_namespace = getContainer();
-	}
-
-	return _namespace;
-}
-uml::Element *  VertexImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -194,6 +164,27 @@ uml::Element *  VertexImpl::getOwner() const
 	}
 
 	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> VertexImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> VertexImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
+	
+	if(getContainer()!=nullptr)
+	{
+		_namespace = getContainer();
+	}
+
+	return _namespace;
 }
 
 

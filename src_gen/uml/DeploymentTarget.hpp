@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -101,7 +102,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::vector<uml::PackageableElement * > *  getDeployedElements()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> getDeployedElements()  = 0;
 			
 			
 			//*********************************
@@ -114,12 +115,12 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual std::vector<uml::PackageableElement * > *  getDeployedElement() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> getDeployedElement() const = 0;
 			
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual std::vector<uml::Deployment * > *  getDeployment() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> getDeployment() const = 0;
 			
 			
 
@@ -135,11 +136,11 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			std::vector<uml::PackageableElement * > *  m_deployedElement =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> m_deployedElement;
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			std::vector<uml::Deployment * > *  m_deployment =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> m_deployment;
 			
 
 		public:
@@ -149,10 +150,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

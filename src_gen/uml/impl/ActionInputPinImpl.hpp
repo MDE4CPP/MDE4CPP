@@ -22,10 +22,11 @@
 #include "impl/InputPinImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ActionInputPinImpl :virtual public InputPinImpl, virtual public ActionInputPin
+	class ActionInputPinImpl :virtual public InputPinImpl, virtual public ActionInputPin 
 	{
 		public: 
 			ActionInputPinImpl(const ActionInputPinImpl & obj);
@@ -48,19 +49,19 @@ namespace uml
 			/*!
 			 The fromAction of an ActionInputPin must only have ActionInputPins as InputPins.
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin)) */ 
-			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1 */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty() */ 
-			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -75,31 +76,30 @@ namespace uml
 			/*!
 			 The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Action *  getFromAction() const ;
+			virtual std::shared_ptr<uml::Action> getFromAction() const ;
 			
 			/*!
 			 The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p> */
-			virtual void setFromAction(uml::Action *  _fromAction) ;
-			
+			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +108,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ACTIONINPUTPINACTIONINPUTPINIMPL_HPP */

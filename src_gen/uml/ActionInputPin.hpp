@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -162,19 +163,19 @@ namespace uml
 			/*!
 			 The fromAction of an ActionInputPin must only have ActionInputPins as InputPins.
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin)) */ 
-			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1 */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty() */ 
-			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -187,13 +188,12 @@ namespace uml
 			/*!
 			 The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p> */
-			virtual uml::Action *  getFromAction() const = 0;
+			virtual std::shared_ptr<uml::Action> getFromAction() const = 0;
 			
 			/*!
 			 The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p> */
-			virtual void setFromAction(uml::Action *  _fromAction) = 0;
-			
+			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) = 0;
 			
 
 		protected:
@@ -208,7 +208,7 @@ namespace uml
 			/*!
 			 The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p> */
-			uml::Action *  m_fromAction =  nullptr ;
+			std::shared_ptr<uml::Action> m_fromAction;
 			
 
 		public:
@@ -216,18 +216,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

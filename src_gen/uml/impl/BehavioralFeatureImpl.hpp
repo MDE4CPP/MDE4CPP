@@ -23,10 +23,11 @@
 #include "impl/NamespaceImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class BehavioralFeatureImpl :virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature
+	class BehavioralFeatureImpl :virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature 
 	{
 		public: 
 			BehavioralFeatureImpl(const BehavioralFeatureImpl & obj);
@@ -49,23 +50,23 @@ namespace uml
 			/*!
 			 When isAbstract is true there are no methods.
 			isAbstract implies method->isEmpty() */ 
-			virtual bool abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Creates a return result parameter with the specified name and type. */ 
-			virtual uml::Parameter *  createReturnResult(std::string name,uml::Type *  type)  ;
+			virtual std::shared_ptr<uml::Parameter>  createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)  ;
 			
 			/*!
 			 The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::vector<uml::Parameter * > *  inputParameters()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> inputParameters()  ;
 			
 			/*!
 			 The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::vector<uml::Parameter * > *  outputParameters()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> outputParameters()  ;
 			
 			
 			
@@ -100,22 +101,22 @@ namespace uml
 			/*!
 			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Behavior * > *  getMethod() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> getMethod() const ;
 			
 			/*!
 			 The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Parameter * > *  getOwnedParameter() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> getOwnedParameter() const ;
 			
 			/*!
 			 The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::ParameterSet * > *  getOwnedParameterSet() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> getOwnedParameterSet() const ;
 			
 			/*!
 			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Type * > *  getRaisedException() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> getRaisedException() const ;
 			
 							
 			
@@ -125,16 +126,16 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -143,7 +144,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_BEHAVIORALFEATUREBEHAVIORALFEATUREIMPL_HPP */

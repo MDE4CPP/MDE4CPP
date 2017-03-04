@@ -22,10 +22,11 @@
 #include "impl/AcceptEventActionImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class AcceptCallActionImpl :virtual public AcceptEventActionImpl, virtual public AcceptCallAction
+	class AcceptCallActionImpl :virtual public AcceptEventActionImpl, virtual public AcceptCallAction 
 	{
 		public: 
 			AcceptCallActionImpl(const AcceptCallActionImpl & obj);
@@ -53,18 +54,18 @@ namespace uml
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
 				parameter->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool result_pins(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent) */ 
-			virtual bool trigger_call_event(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool trigger_call_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true */ 
-			virtual bool unmarshall(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool unmarshall(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -79,34 +80,33 @@ namespace uml
 			/*!
 			 An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p> */
-			virtual uml::OutputPin *  getReturnInformation() const ;
+			virtual std::shared_ptr<uml::OutputPin> getReturnInformation() const ;
 			
 			/*!
 			 An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p> */
-			virtual void setReturnInformation(uml::OutputPin *  _returnInformation) ;
-			
+			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ;/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -115,7 +115,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ACCEPTCALLACTIONACCEPTCALLACTIONIMPL_HPP */

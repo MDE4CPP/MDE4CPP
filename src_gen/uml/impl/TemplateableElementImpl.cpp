@@ -13,33 +13,21 @@ using namespace uml;
 TemplateableElementImpl::TemplateableElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_templateBinding == nullptr)
-	{
-		m_templateBinding = new std::vector<uml::TemplateBinding * >();
-	}
+	m_templateBinding.reset(new std::vector<std::shared_ptr<uml::TemplateBinding>>());
 }
 
 TemplateableElementImpl::~TemplateableElementImpl()
 {
-	if(m_templateBinding!=nullptr)
-	{
-		for(auto c :*m_templateBinding)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_ownedTemplateSignature!=nullptr)
-	{
-		if(m_ownedTemplateSignature)
-		{
-			delete(m_ownedTemplateSignature);
-			m_ownedTemplateSignature = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TemplateableElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -49,29 +37,31 @@ TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl &
 
 	//copy references with now containment
 	
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature = dynamic_cast<uml::TemplateSignature * >(obj.getOwnedTemplateSignature()->copy());
+		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
 	}
-	for(uml::TemplateBinding * 	_templateBinding : *obj.getTemplateBinding())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> _templateBindingList = obj.getTemplateBinding();
+	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->push_back(dynamic_cast<uml::TemplateBinding * >(_templateBinding->copy()));
+		this->getTemplateBinding()->push_back(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
 	}
 }
 
@@ -80,7 +70,7 @@ ecore::EObject *  TemplateableElementImpl::copy() const
 	return new TemplateableElementImpl(*this);
 }
 
-ecore::EClass* TemplateableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getTemplateableElement();
 }
@@ -98,7 +88,7 @@ bool TemplateableElementImpl::isTemplate()
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::ParameterableElement * > *  TemplateableElementImpl::parameterableElements() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterableElement>>> TemplateableElementImpl::parameterableElements() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -107,37 +97,35 @@ std::vector<uml::ParameterableElement * > *  TemplateableElementImpl::parametera
 //*********************************
 // References
 //*********************************
-uml::TemplateSignature *  TemplateableElementImpl::getOwnedTemplateSignature() const
+std::shared_ptr<uml::TemplateSignature> TemplateableElementImpl::getOwnedTemplateSignature() const
 {
-	
-	return m_ownedTemplateSignature;
+
+    return m_ownedTemplateSignature;
 }
-void TemplateableElementImpl::setOwnedTemplateSignature(uml::TemplateSignature *  _ownedTemplateSignature)
+void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
-	m_ownedTemplateSignature = _ownedTemplateSignature;
+    m_ownedTemplateSignature = _ownedTemplateSignature;
 }
 
-std::vector<uml::TemplateBinding * > *  TemplateableElementImpl::getTemplateBinding() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> TemplateableElementImpl::getTemplateBinding() const
 {
-	
-	return m_templateBinding;
+
+    return m_templateBinding;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  TemplateableElementImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateableElementImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getOwnedTemplateSignature());
-	std::vector<uml::Element * > *  templateBinding = (std::vector<uml::Element * > * ) getTemplateBinding();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> templateBinding = getTemplateBinding();
 	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
-
 
 	return _ownedElement;
 }

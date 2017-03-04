@@ -22,10 +22,11 @@
 #include "impl/ElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class MultiplicityElementImpl :virtual public ElementImpl, virtual public MultiplicityElement
+	class MultiplicityElementImpl :virtual public ElementImpl, virtual public MultiplicityElement 
 	{
 		public: 
 			MultiplicityElementImpl(const MultiplicityElementImpl & obj);
@@ -48,43 +49,43 @@ namespace uml
 			/*!
 			 The upper bound must be greater than or equal to the lower bound.
 			upperBound() >= lowerBound() */ 
-			virtual bool upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The lower bound must be a non-negative integer literal.
 			lowerBound() >= 0 */ 
-			virtual bool lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects. */ 
-			virtual bool value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression. */ 
-			virtual bool value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null */ 
-			virtual bool lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null */ 
-			virtual bool upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The operation compatibleWith takes another multiplicity as input. It returns true if the other multiplicity is wider than, or the same as, self.
 			result = ((other.lowerBound() <= self.lowerBound()) and ((other.upperBound() = *) or (self.upperBound() <= other.upperBound())))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool compatibleWith(uml::MultiplicityElement *  other)  ;
+			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other)  ;
 			
 			/*!
 			 The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
 			self.upperBound()->notEmpty() and self.lowerBound()->notEmpty() and M.upperBound()->notEmpty() and M.lowerBound()->notEmpty()
 			result = ((self.lowerBound() <= M.lowerBound()) and (self.upperBound() >= M.upperBound()))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool includesMultiplicity(uml::MultiplicityElement *  M)  ;
+			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M)  ;
 			
 			/*!
 			 The operation is determines if the upper and lower bound of the ranges are the ones given.
@@ -164,23 +165,21 @@ namespace uml
 			/*!
 			 The specification of the lower bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::ValueSpecification *  getLowerValue() const ;
+			virtual std::shared_ptr<uml::ValueSpecification> getLowerValue() const ;
 			
 			/*!
 			 The specification of the lower bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setLowerValue(uml::ValueSpecification *  _lowerValue) ;
+			virtual void setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue) ;
+			/*!
+			 The specification of the upper bound for this multiplicity.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::ValueSpecification> getUpperValue() const ;
 			
 			/*!
 			 The specification of the upper bound for this multiplicity.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::ValueSpecification *  getUpperValue() const ;
-			
-			/*!
-			 The specification of the upper bound for this multiplicity.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setUpperValue(uml::ValueSpecification *  _upperValue) ;
-			
+			virtual void setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue) ;
 							
 			
 			//*********************************
@@ -189,7 +188,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -198,7 +197,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_MULTIPLICITYELEMENTMULTIPLICITYELEMENTIMPL_HPP */

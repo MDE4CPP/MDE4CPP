@@ -22,1302 +22,270 @@ bool UmlPackageImpl::isInited = false;
 
 UmlPackageImpl::UmlPackageImpl()
 {
-	setEFactoryInstance(UmlFactory::eInstance());
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( UmlFactory::eInstance()));
 }
 
 UmlPackageImpl::~UmlPackageImpl()
 {
-	if (activityContentEClass != nullptr)
-	{
-		delete(activityContentEClass);
-		activityContentEClass = nullptr;
-	}
-	if (activityEClass != nullptr)
-	{
-		delete(activityEClass);
-		activityEClass = nullptr;
-	}
-	if (behaviorEClass != nullptr)
-	{
-		delete(behaviorEClass);
-		behaviorEClass = nullptr;
-	}
-	if (classEClass != nullptr)
-	{
-		delete(classEClass);
-		classEClass = nullptr;
-	}
-	if (behavioredClassifierEClass != nullptr)
-	{
-		delete(behavioredClassifierEClass);
-		behavioredClassifierEClass = nullptr;
-	}
-	if (classifierEClass != nullptr)
-	{
-		delete(classifierEClass);
-		classifierEClass = nullptr;
-	}
-	if (namespaceEClass != nullptr)
-	{
-		delete(namespaceEClass);
-		namespaceEClass = nullptr;
-	}
-	if (namedElementEClass != nullptr)
-	{
-		delete(namedElementEClass);
-		namedElementEClass = nullptr;
-	}
-	if (elementEClass != nullptr)
-	{
-		delete(elementEClass);
-		elementEClass = nullptr;
-	}
-	if (commentEClass != nullptr)
-	{
-		delete(commentEClass);
-		commentEClass = nullptr;
-	}
-	if (stereotypeEClass != nullptr)
-	{
-		delete(stereotypeEClass);
-		stereotypeEClass = nullptr;
-	}
-	if (imageEClass != nullptr)
-	{
-		delete(imageEClass);
-		imageEClass = nullptr;
-	}
-	if (profileEClass != nullptr)
-	{
-		delete(profileEClass);
-		profileEClass = nullptr;
-	}
-	if (packageEClass != nullptr)
-	{
-		delete(packageEClass);
-		packageEClass = nullptr;
-	}
-	if (packageableElementEClass != nullptr)
-	{
-		delete(packageableElementEClass);
-		packageableElementEClass = nullptr;
-	}
-	if (parameterableElementEClass != nullptr)
-	{
-		delete(parameterableElementEClass);
-		parameterableElementEClass = nullptr;
-	}
-	if (templateParameterEClass != nullptr)
-	{
-		delete(templateParameterEClass);
-		templateParameterEClass = nullptr;
-	}
-	if (templateSignatureEClass != nullptr)
-	{
-		delete(templateSignatureEClass);
-		templateSignatureEClass = nullptr;
-	}
-	if (templateableElementEClass != nullptr)
-	{
-		delete(templateableElementEClass);
-		templateableElementEClass = nullptr;
-	}
-	if (templateBindingEClass != nullptr)
-	{
-		delete(templateBindingEClass);
-		templateBindingEClass = nullptr;
-	}
-	if (directedRelationshipEClass != nullptr)
-	{
-		delete(directedRelationshipEClass);
-		directedRelationshipEClass = nullptr;
-	}
-	if (relationshipEClass != nullptr)
-	{
-		delete(relationshipEClass);
-		relationshipEClass = nullptr;
-	}
-	if (templateParameterSubstitutionEClass != nullptr)
-	{
-		delete(templateParameterSubstitutionEClass);
-		templateParameterSubstitutionEClass = nullptr;
-	}
-	if (objectEClass != nullptr)
-	{
-		delete(objectEClass);
-		objectEClass = nullptr;
-	}
-	if (factoryEClass != nullptr)
-	{
-		delete(factoryEClass);
-		factoryEClass = nullptr;
-	}
-	if (typeEClass != nullptr)
-	{
-		delete(typeEClass);
-		typeEClass = nullptr;
-	}
-	if (associationEClass != nullptr)
-	{
-		delete(associationEClass);
-		associationEClass = nullptr;
-	}
-	if (propertyEClass != nullptr)
-	{
-		delete(propertyEClass);
-		propertyEClass = nullptr;
-	}
-	if (connectableElementEClass != nullptr)
-	{
-		delete(connectableElementEClass);
-		connectableElementEClass = nullptr;
-	}
-	if (typedElementEClass != nullptr)
-	{
-		delete(typedElementEClass);
-		typedElementEClass = nullptr;
-	}
-	if (connectorEndEClass != nullptr)
-	{
-		delete(connectorEndEClass);
-		connectorEndEClass = nullptr;
-	}
-	if (multiplicityElementEClass != nullptr)
-	{
-		delete(multiplicityElementEClass);
-		multiplicityElementEClass = nullptr;
-	}
-	if (valueSpecificationEClass != nullptr)
-	{
-		delete(valueSpecificationEClass);
-		valueSpecificationEClass = nullptr;
-	}
-	if (connectableElementTemplateParameterEClass != nullptr)
-	{
-		delete(connectableElementTemplateParameterEClass);
-		connectableElementTemplateParameterEClass = nullptr;
-	}
-	if (deploymentTargetEClass != nullptr)
-	{
-		delete(deploymentTargetEClass);
-		deploymentTargetEClass = nullptr;
-	}
-	if (deploymentEClass != nullptr)
-	{
-		delete(deploymentEClass);
-		deploymentEClass = nullptr;
-	}
-	if (dependencyEClass != nullptr)
-	{
-		delete(dependencyEClass);
-		dependencyEClass = nullptr;
-	}
-	if (deploymentSpecificationEClass != nullptr)
-	{
-		delete(deploymentSpecificationEClass);
-		deploymentSpecificationEClass = nullptr;
-	}
-	if (artifactEClass != nullptr)
-	{
-		delete(artifactEClass);
-		artifactEClass = nullptr;
-	}
-	if (deployedArtifactEClass != nullptr)
-	{
-		delete(deployedArtifactEClass);
-		deployedArtifactEClass = nullptr;
-	}
-	if (manifestationEClass != nullptr)
-	{
-		delete(manifestationEClass);
-		manifestationEClass = nullptr;
-	}
-	if (abstractionEClass != nullptr)
-	{
-		delete(abstractionEClass);
-		abstractionEClass = nullptr;
-	}
-	if (opaqueExpressionEClass != nullptr)
-	{
-		delete(opaqueExpressionEClass);
-		opaqueExpressionEClass = nullptr;
-	}
-	if (parameterEClass != nullptr)
-	{
-		delete(parameterEClass);
-		parameterEClass = nullptr;
-	}
-	if (operationEClass != nullptr)
-	{
-		delete(operationEClass);
-		operationEClass = nullptr;
-	}
-	if (behavioralFeatureEClass != nullptr)
-	{
-		delete(behavioralFeatureEClass);
-		behavioralFeatureEClass = nullptr;
-	}
-	if (featureEClass != nullptr)
-	{
-		delete(featureEClass);
-		featureEClass = nullptr;
-	}
-	if (redefinableElementEClass != nullptr)
-	{
-		delete(redefinableElementEClass);
-		redefinableElementEClass = nullptr;
-	}
-	if (parameterSetEClass != nullptr)
-	{
-		delete(parameterSetEClass);
-		parameterSetEClass = nullptr;
-	}
-	if (constraintEClass != nullptr)
-	{
-		delete(constraintEClass);
-		constraintEClass = nullptr;
-	}
-	if (dataTypeEClass != nullptr)
-	{
-		delete(dataTypeEClass);
-		dataTypeEClass = nullptr;
-	}
-	if (interfaceEClass != nullptr)
-	{
-		delete(interfaceEClass);
-		interfaceEClass = nullptr;
-	}
-	if (receptionEClass != nullptr)
-	{
-		delete(receptionEClass);
-		receptionEClass = nullptr;
-	}
-	if (signalEClass != nullptr)
-	{
-		delete(signalEClass);
-		signalEClass = nullptr;
-	}
-	if (protocolStateMachineEClass != nullptr)
-	{
-		delete(protocolStateMachineEClass);
-		protocolStateMachineEClass = nullptr;
-	}
-	if (stateMachineEClass != nullptr)
-	{
-		delete(stateMachineEClass);
-		stateMachineEClass = nullptr;
-	}
-	if (pseudostateEClass != nullptr)
-	{
-		delete(pseudostateEClass);
-		pseudostateEClass = nullptr;
-	}
-	if (vertexEClass != nullptr)
-	{
-		delete(vertexEClass);
-		vertexEClass = nullptr;
-	}
-	if (regionEClass != nullptr)
-	{
-		delete(regionEClass);
-		regionEClass = nullptr;
-	}
-	if (stateEClass != nullptr)
-	{
-		delete(stateEClass);
-		stateEClass = nullptr;
-	}
-	if (connectionPointReferenceEClass != nullptr)
-	{
-		delete(connectionPointReferenceEClass);
-		connectionPointReferenceEClass = nullptr;
-	}
-	if (triggerEClass != nullptr)
-	{
-		delete(triggerEClass);
-		triggerEClass = nullptr;
-	}
-	if (eventEClass != nullptr)
-	{
-		delete(eventEClass);
-		eventEClass = nullptr;
-	}
-	if (portEClass != nullptr)
-	{
-		delete(portEClass);
-		portEClass = nullptr;
-	}
-	if (transitionEClass != nullptr)
-	{
-		delete(transitionEClass);
-		transitionEClass = nullptr;
-	}
-	if (protocolConformanceEClass != nullptr)
-	{
-		delete(protocolConformanceEClass);
-		protocolConformanceEClass = nullptr;
-	}
-	if (operationTemplateParameterEClass != nullptr)
-	{
-		delete(operationTemplateParameterEClass);
-		operationTemplateParameterEClass = nullptr;
-	}
-	if (structuralFeatureEClass != nullptr)
-	{
-		delete(structuralFeatureEClass);
-		structuralFeatureEClass = nullptr;
-	}
-	if (packageMergeEClass != nullptr)
-	{
-		delete(packageMergeEClass);
-		packageMergeEClass = nullptr;
-	}
-	if (profileApplicationEClass != nullptr)
-	{
-		delete(profileApplicationEClass);
-		profileApplicationEClass = nullptr;
-	}
-	if (enumerationEClass != nullptr)
-	{
-		delete(enumerationEClass);
-		enumerationEClass = nullptr;
-	}
-	if (enumerationLiteralEClass != nullptr)
-	{
-		delete(enumerationLiteralEClass);
-		enumerationLiteralEClass = nullptr;
-	}
-	if (instanceSpecificationEClass != nullptr)
-	{
-		delete(instanceSpecificationEClass);
-		instanceSpecificationEClass = nullptr;
-	}
-	if (slotEClass != nullptr)
-	{
-		delete(slotEClass);
-		slotEClass = nullptr;
-	}
-	if (primitiveTypeEClass != nullptr)
-	{
-		delete(primitiveTypeEClass);
-		primitiveTypeEClass = nullptr;
-	}
-	if (elementImportEClass != nullptr)
-	{
-		delete(elementImportEClass);
-		elementImportEClass = nullptr;
-	}
-	if (packageImportEClass != nullptr)
-	{
-		delete(packageImportEClass);
-		packageImportEClass = nullptr;
-	}
-	if (extensionEClass != nullptr)
-	{
-		delete(extensionEClass);
-		extensionEClass = nullptr;
-	}
-	if (extensionEndEClass != nullptr)
-	{
-		delete(extensionEndEClass);
-		extensionEndEClass = nullptr;
-	}
-	if (modelEClass != nullptr)
-	{
-		delete(modelEClass);
-		modelEClass = nullptr;
-	}
-	if (stringExpressionEClass != nullptr)
-	{
-		delete(stringExpressionEClass);
-		stringExpressionEClass = nullptr;
-	}
-	if (expressionEClass != nullptr)
-	{
-		delete(expressionEClass);
-		expressionEClass = nullptr;
-	}
-	if (usageEClass != nullptr)
-	{
-		delete(usageEClass);
-		usageEClass = nullptr;
-	}
-	if (collaborationUseEClass != nullptr)
-	{
-		delete(collaborationUseEClass);
-		collaborationUseEClass = nullptr;
-	}
-	if (collaborationEClass != nullptr)
-	{
-		delete(collaborationEClass);
-		collaborationEClass = nullptr;
-	}
-	if (structuredClassifierEClass != nullptr)
-	{
-		delete(structuredClassifierEClass);
-		structuredClassifierEClass = nullptr;
-	}
-	if (connectorEClass != nullptr)
-	{
-		delete(connectorEClass);
-		connectorEClass = nullptr;
-	}
-	if (generalizationEClass != nullptr)
-	{
-		delete(generalizationEClass);
-		generalizationEClass = nullptr;
-	}
-	if (generalizationSetEClass != nullptr)
-	{
-		delete(generalizationSetEClass);
-		generalizationSetEClass = nullptr;
-	}
-	if (redefinableTemplateSignatureEClass != nullptr)
-	{
-		delete(redefinableTemplateSignatureEClass);
-		redefinableTemplateSignatureEClass = nullptr;
-	}
-	if (useCaseEClass != nullptr)
-	{
-		delete(useCaseEClass);
-		useCaseEClass = nullptr;
-	}
-	if (extendEClass != nullptr)
-	{
-		delete(extendEClass);
-		extendEClass = nullptr;
-	}
-	if (extensionPointEClass != nullptr)
-	{
-		delete(extensionPointEClass);
-		extensionPointEClass = nullptr;
-	}
-	if (includeEClass != nullptr)
-	{
-		delete(includeEClass);
-		includeEClass = nullptr;
-	}
-	if (substitutionEClass != nullptr)
-	{
-		delete(substitutionEClass);
-		substitutionEClass = nullptr;
-	}
-	if (realizationEClass != nullptr)
-	{
-		delete(realizationEClass);
-		realizationEClass = nullptr;
-	}
-	if (classifierTemplateParameterEClass != nullptr)
-	{
-		delete(classifierTemplateParameterEClass);
-		classifierTemplateParameterEClass = nullptr;
-	}
-	if (interfaceRealizationEClass != nullptr)
-	{
-		delete(interfaceRealizationEClass);
-		interfaceRealizationEClass = nullptr;
-	}
-	if (encapsulatedClassifierEClass != nullptr)
-	{
-		delete(encapsulatedClassifierEClass);
-		encapsulatedClassifierEClass = nullptr;
-	}
-	if (activityGroupEClass != nullptr)
-	{
-		delete(activityGroupEClass);
-		activityGroupEClass = nullptr;
-	}
-	if (activityEdgeEClass != nullptr)
-	{
-		delete(activityEdgeEClass);
-		activityEdgeEClass = nullptr;
-	}
-	if (activityPartitionEClass != nullptr)
-	{
-		delete(activityPartitionEClass);
-		activityPartitionEClass = nullptr;
-	}
-	if (activityNodeEClass != nullptr)
-	{
-		delete(activityNodeEClass);
-		activityNodeEClass = nullptr;
-	}
-	if (interruptibleActivityRegionEClass != nullptr)
-	{
-		delete(interruptibleActivityRegionEClass);
-		interruptibleActivityRegionEClass = nullptr;
-	}
-	if (structuredActivityNodeEClass != nullptr)
-	{
-		delete(structuredActivityNodeEClass);
-		structuredActivityNodeEClass = nullptr;
-	}
-	if (actionEClass != nullptr)
-	{
-		delete(actionEClass);
-		actionEClass = nullptr;
-	}
-	if (executableNodeEClass != nullptr)
-	{
-		delete(executableNodeEClass);
-		executableNodeEClass = nullptr;
-	}
-	if (exceptionHandlerEClass != nullptr)
-	{
-		delete(exceptionHandlerEClass);
-		exceptionHandlerEClass = nullptr;
-	}
-	if (objectNodeEClass != nullptr)
-	{
-		delete(objectNodeEClass);
-		objectNodeEClass = nullptr;
-	}
-	if (inputPinEClass != nullptr)
-	{
-		delete(inputPinEClass);
-		inputPinEClass = nullptr;
-	}
-	if (pinEClass != nullptr)
-	{
-		delete(pinEClass);
-		pinEClass = nullptr;
-	}
-	if (outputPinEClass != nullptr)
-	{
-		delete(outputPinEClass);
-		outputPinEClass = nullptr;
-	}
-	if (variableEClass != nullptr)
-	{
-		delete(variableEClass);
-		variableEClass = nullptr;
-	}
-	if (valueSpecificationActionEClass != nullptr)
-	{
-		delete(valueSpecificationActionEClass);
-		valueSpecificationActionEClass = nullptr;
-	}
-	if (variableActionEClass != nullptr)
-	{
-		delete(variableActionEClass);
-		variableActionEClass = nullptr;
-	}
-	if (writeLinkActionEClass != nullptr)
-	{
-		delete(writeLinkActionEClass);
-		writeLinkActionEClass = nullptr;
-	}
-	if (linkActionEClass != nullptr)
-	{
-		delete(linkActionEClass);
-		linkActionEClass = nullptr;
-	}
-	if (linkEndDataEClass != nullptr)
-	{
-		delete(linkEndDataEClass);
-		linkEndDataEClass = nullptr;
-	}
-	if (qualifierValueEClass != nullptr)
-	{
-		delete(qualifierValueEClass);
-		qualifierValueEClass = nullptr;
-	}
-	if (writeStructuralFeatureActionEClass != nullptr)
-	{
-		delete(writeStructuralFeatureActionEClass);
-		writeStructuralFeatureActionEClass = nullptr;
-	}
-	if (structuralFeatureActionEClass != nullptr)
-	{
-		delete(structuralFeatureActionEClass);
-		structuralFeatureActionEClass = nullptr;
-	}
-	if (writeVariableActionEClass != nullptr)
-	{
-		delete(writeVariableActionEClass);
-		writeVariableActionEClass = nullptr;
-	}
-	if (acceptCallActionEClass != nullptr)
-	{
-		delete(acceptCallActionEClass);
-		acceptCallActionEClass = nullptr;
-	}
-	if (acceptEventActionEClass != nullptr)
-	{
-		delete(acceptEventActionEClass);
-		acceptEventActionEClass = nullptr;
-	}
-	if (actionInputPinEClass != nullptr)
-	{
-		delete(actionInputPinEClass);
-		actionInputPinEClass = nullptr;
-	}
-	if (addStructuralFeatureValueActionEClass != nullptr)
-	{
-		delete(addStructuralFeatureValueActionEClass);
-		addStructuralFeatureValueActionEClass = nullptr;
-	}
-	if (addVariableValueActionEClass != nullptr)
-	{
-		delete(addVariableValueActionEClass);
-		addVariableValueActionEClass = nullptr;
-	}
-	if (broadcastSignalActionEClass != nullptr)
-	{
-		delete(broadcastSignalActionEClass);
-		broadcastSignalActionEClass = nullptr;
-	}
-	if (invocationActionEClass != nullptr)
-	{
-		delete(invocationActionEClass);
-		invocationActionEClass = nullptr;
-	}
-	if (callActionEClass != nullptr)
-	{
-		delete(callActionEClass);
-		callActionEClass = nullptr;
-	}
-	if (callBehaviorActionEClass != nullptr)
-	{
-		delete(callBehaviorActionEClass);
-		callBehaviorActionEClass = nullptr;
-	}
-	if (callOperationActionEClass != nullptr)
-	{
-		delete(callOperationActionEClass);
-		callOperationActionEClass = nullptr;
-	}
-	if (clauseEClass != nullptr)
-	{
-		delete(clauseEClass);
-		clauseEClass = nullptr;
-	}
-	if (clearAssociationActionEClass != nullptr)
-	{
-		delete(clearAssociationActionEClass);
-		clearAssociationActionEClass = nullptr;
-	}
-	if (clearStructuralFeatureActionEClass != nullptr)
-	{
-		delete(clearStructuralFeatureActionEClass);
-		clearStructuralFeatureActionEClass = nullptr;
-	}
-	if (clearVariableActionEClass != nullptr)
-	{
-		delete(clearVariableActionEClass);
-		clearVariableActionEClass = nullptr;
-	}
-	if (conditionalNodeEClass != nullptr)
-	{
-		delete(conditionalNodeEClass);
-		conditionalNodeEClass = nullptr;
-	}
-	if (createLinkActionEClass != nullptr)
-	{
-		delete(createLinkActionEClass);
-		createLinkActionEClass = nullptr;
-	}
-	if (linkEndCreationDataEClass != nullptr)
-	{
-		delete(linkEndCreationDataEClass);
-		linkEndCreationDataEClass = nullptr;
-	}
-	if (createLinkObjectActionEClass != nullptr)
-	{
-		delete(createLinkObjectActionEClass);
-		createLinkObjectActionEClass = nullptr;
-	}
-	if (createObjectActionEClass != nullptr)
-	{
-		delete(createObjectActionEClass);
-		createObjectActionEClass = nullptr;
-	}
-	if (destroyLinkActionEClass != nullptr)
-	{
-		delete(destroyLinkActionEClass);
-		destroyLinkActionEClass = nullptr;
-	}
-	if (linkEndDestructionDataEClass != nullptr)
-	{
-		delete(linkEndDestructionDataEClass);
-		linkEndDestructionDataEClass = nullptr;
-	}
-	if (destroyObjectActionEClass != nullptr)
-	{
-		delete(destroyObjectActionEClass);
-		destroyObjectActionEClass = nullptr;
-	}
-	if (expansionNodeEClass != nullptr)
-	{
-		delete(expansionNodeEClass);
-		expansionNodeEClass = nullptr;
-	}
-	if (expansionRegionEClass != nullptr)
-	{
-		delete(expansionRegionEClass);
-		expansionRegionEClass = nullptr;
-	}
-	if (loopNodeEClass != nullptr)
-	{
-		delete(loopNodeEClass);
-		loopNodeEClass = nullptr;
-	}
-	if (opaqueActionEClass != nullptr)
-	{
-		delete(opaqueActionEClass);
-		opaqueActionEClass = nullptr;
-	}
-	if (raiseExceptionActionEClass != nullptr)
-	{
-		delete(raiseExceptionActionEClass);
-		raiseExceptionActionEClass = nullptr;
-	}
-	if (readExtentActionEClass != nullptr)
-	{
-		delete(readExtentActionEClass);
-		readExtentActionEClass = nullptr;
-	}
-	if (readIsClassifiedObjectActionEClass != nullptr)
-	{
-		delete(readIsClassifiedObjectActionEClass);
-		readIsClassifiedObjectActionEClass = nullptr;
-	}
-	if (readLinkActionEClass != nullptr)
-	{
-		delete(readLinkActionEClass);
-		readLinkActionEClass = nullptr;
-	}
-	if (readLinkObjectEndActionEClass != nullptr)
-	{
-		delete(readLinkObjectEndActionEClass);
-		readLinkObjectEndActionEClass = nullptr;
-	}
-	if (readLinkObjectEndQualifierActionEClass != nullptr)
-	{
-		delete(readLinkObjectEndQualifierActionEClass);
-		readLinkObjectEndQualifierActionEClass = nullptr;
-	}
-	if (readSelfActionEClass != nullptr)
-	{
-		delete(readSelfActionEClass);
-		readSelfActionEClass = nullptr;
-	}
-	if (readStructuralFeatureActionEClass != nullptr)
-	{
-		delete(readStructuralFeatureActionEClass);
-		readStructuralFeatureActionEClass = nullptr;
-	}
-	if (readVariableActionEClass != nullptr)
-	{
-		delete(readVariableActionEClass);
-		readVariableActionEClass = nullptr;
-	}
-	if (reclassifyObjectActionEClass != nullptr)
-	{
-		delete(reclassifyObjectActionEClass);
-		reclassifyObjectActionEClass = nullptr;
-	}
-	if (reduceActionEClass != nullptr)
-	{
-		delete(reduceActionEClass);
-		reduceActionEClass = nullptr;
-	}
-	if (removeStructuralFeatureValueActionEClass != nullptr)
-	{
-		delete(removeStructuralFeatureValueActionEClass);
-		removeStructuralFeatureValueActionEClass = nullptr;
-	}
-	if (removeVariableValueActionEClass != nullptr)
-	{
-		delete(removeVariableValueActionEClass);
-		removeVariableValueActionEClass = nullptr;
-	}
-	if (replyActionEClass != nullptr)
-	{
-		delete(replyActionEClass);
-		replyActionEClass = nullptr;
-	}
-	if (sendObjectActionEClass != nullptr)
-	{
-		delete(sendObjectActionEClass);
-		sendObjectActionEClass = nullptr;
-	}
-	if (sendSignalActionEClass != nullptr)
-	{
-		delete(sendSignalActionEClass);
-		sendSignalActionEClass = nullptr;
-	}
-	if (sequenceNodeEClass != nullptr)
-	{
-		delete(sequenceNodeEClass);
-		sequenceNodeEClass = nullptr;
-	}
-	if (startClassifierBehaviorActionEClass != nullptr)
-	{
-		delete(startClassifierBehaviorActionEClass);
-		startClassifierBehaviorActionEClass = nullptr;
-	}
-	if (startObjectBehaviorActionEClass != nullptr)
-	{
-		delete(startObjectBehaviorActionEClass);
-		startObjectBehaviorActionEClass = nullptr;
-	}
-	if (testIdentityActionEClass != nullptr)
-	{
-		delete(testIdentityActionEClass);
-		testIdentityActionEClass = nullptr;
-	}
-	if (unmarshallActionEClass != nullptr)
-	{
-		delete(unmarshallActionEClass);
-		unmarshallActionEClass = nullptr;
-	}
-	if (valuePinEClass != nullptr)
-	{
-		delete(valuePinEClass);
-		valuePinEClass = nullptr;
-	}
-	if (activityFinalNodeEClass != nullptr)
-	{
-		delete(activityFinalNodeEClass);
-		activityFinalNodeEClass = nullptr;
-	}
-	if (finalNodeEClass != nullptr)
-	{
-		delete(finalNodeEClass);
-		finalNodeEClass = nullptr;
-	}
-	if (controlNodeEClass != nullptr)
-	{
-		delete(controlNodeEClass);
-		controlNodeEClass = nullptr;
-	}
-	if (activityParameterNodeEClass != nullptr)
-	{
-		delete(activityParameterNodeEClass);
-		activityParameterNodeEClass = nullptr;
-	}
-	if (centralBufferNodeEClass != nullptr)
-	{
-		delete(centralBufferNodeEClass);
-		centralBufferNodeEClass = nullptr;
-	}
-	if (controlFlowEClass != nullptr)
-	{
-		delete(controlFlowEClass);
-		controlFlowEClass = nullptr;
-	}
-	if (dataStoreNodeEClass != nullptr)
-	{
-		delete(dataStoreNodeEClass);
-		dataStoreNodeEClass = nullptr;
-	}
-	if (decisionNodeEClass != nullptr)
-	{
-		delete(decisionNodeEClass);
-		decisionNodeEClass = nullptr;
-	}
-	if (objectFlowEClass != nullptr)
-	{
-		delete(objectFlowEClass);
-		objectFlowEClass = nullptr;
-	}
-	if (flowFinalNodeEClass != nullptr)
-	{
-		delete(flowFinalNodeEClass);
-		flowFinalNodeEClass = nullptr;
-	}
-	if (forkNodeEClass != nullptr)
-	{
-		delete(forkNodeEClass);
-		forkNodeEClass = nullptr;
-	}
-	if (initialNodeEClass != nullptr)
-	{
-		delete(initialNodeEClass);
-		initialNodeEClass = nullptr;
-	}
-	if (joinNodeEClass != nullptr)
-	{
-		delete(joinNodeEClass);
-		joinNodeEClass = nullptr;
-	}
-	if (mergeNodeEClass != nullptr)
-	{
-		delete(mergeNodeEClass);
-		mergeNodeEClass = nullptr;
-	}
-	if (instanceValueEClass != nullptr)
-	{
-		delete(instanceValueEClass);
-		instanceValueEClass = nullptr;
-	}
-	if (anyReceiveEventEClass != nullptr)
-	{
-		delete(anyReceiveEventEClass);
-		anyReceiveEventEClass = nullptr;
-	}
-	if (messageEventEClass != nullptr)
-	{
-		delete(messageEventEClass);
-		messageEventEClass = nullptr;
-	}
-	if (callEventEClass != nullptr)
-	{
-		delete(callEventEClass);
-		callEventEClass = nullptr;
-	}
-	if (changeEventEClass != nullptr)
-	{
-		delete(changeEventEClass);
-		changeEventEClass = nullptr;
-	}
-	if (functionBehaviorEClass != nullptr)
-	{
-		delete(functionBehaviorEClass);
-		functionBehaviorEClass = nullptr;
-	}
-	if (opaqueBehaviorEClass != nullptr)
-	{
-		delete(opaqueBehaviorEClass);
-		opaqueBehaviorEClass = nullptr;
-	}
-	if (signalEventEClass != nullptr)
-	{
-		delete(signalEventEClass);
-		signalEventEClass = nullptr;
-	}
-	if (timeEventEClass != nullptr)
-	{
-		delete(timeEventEClass);
-		timeEventEClass = nullptr;
-	}
-	if (timeExpressionEClass != nullptr)
-	{
-		delete(timeExpressionEClass);
-		timeExpressionEClass = nullptr;
-	}
-	if (observationEClass != nullptr)
-	{
-		delete(observationEClass);
-		observationEClass = nullptr;
-	}
-	if (communicationPathEClass != nullptr)
-	{
-		delete(communicationPathEClass);
-		communicationPathEClass = nullptr;
-	}
-	if (deviceEClass != nullptr)
-	{
-		delete(deviceEClass);
-		deviceEClass = nullptr;
-	}
-	if (nodeEClass != nullptr)
-	{
-		delete(nodeEClass);
-		nodeEClass = nullptr;
-	}
-	if (executionEnvironmentEClass != nullptr)
-	{
-		delete(executionEnvironmentEClass);
-		executionEnvironmentEClass = nullptr;
-	}
-	if (informationFlowEClass != nullptr)
-	{
-		delete(informationFlowEClass);
-		informationFlowEClass = nullptr;
-	}
-	if (messageEClass != nullptr)
-	{
-		delete(messageEClass);
-		messageEClass = nullptr;
-	}
-	if (interactionEClass != nullptr)
-	{
-		delete(interactionEClass);
-		interactionEClass = nullptr;
-	}
-	if (interactionFragmentEClass != nullptr)
-	{
-		delete(interactionFragmentEClass);
-		interactionFragmentEClass = nullptr;
-	}
-	if (lifelineEClass != nullptr)
-	{
-		delete(lifelineEClass);
-		lifelineEClass = nullptr;
-	}
-	if (partDecompositionEClass != nullptr)
-	{
-		delete(partDecompositionEClass);
-		partDecompositionEClass = nullptr;
-	}
-	if (interactionUseEClass != nullptr)
-	{
-		delete(interactionUseEClass);
-		interactionUseEClass = nullptr;
-	}
-	if (gateEClass != nullptr)
-	{
-		delete(gateEClass);
-		gateEClass = nullptr;
-	}
-	if (messageEndEClass != nullptr)
-	{
-		delete(messageEndEClass);
-		messageEndEClass = nullptr;
-	}
-	if (interactionOperandEClass != nullptr)
-	{
-		delete(interactionOperandEClass);
-		interactionOperandEClass = nullptr;
-	}
-	if (interactionConstraintEClass != nullptr)
-	{
-		delete(interactionConstraintEClass);
-		interactionConstraintEClass = nullptr;
-	}
-	if (generalOrderingEClass != nullptr)
-	{
-		delete(generalOrderingEClass);
-		generalOrderingEClass = nullptr;
-	}
-	if (occurrenceSpecificationEClass != nullptr)
-	{
-		delete(occurrenceSpecificationEClass);
-		occurrenceSpecificationEClass = nullptr;
-	}
-	if (informationItemEClass != nullptr)
-	{
-		delete(informationItemEClass);
-		informationItemEClass = nullptr;
-	}
-	if (actionExecutionSpecificationEClass != nullptr)
-	{
-		delete(actionExecutionSpecificationEClass);
-		actionExecutionSpecificationEClass = nullptr;
-	}
-	if (executionSpecificationEClass != nullptr)
-	{
-		delete(executionSpecificationEClass);
-		executionSpecificationEClass = nullptr;
-	}
-	if (behaviorExecutionSpecificationEClass != nullptr)
-	{
-		delete(behaviorExecutionSpecificationEClass);
-		behaviorExecutionSpecificationEClass = nullptr;
-	}
-	if (combinedFragmentEClass != nullptr)
-	{
-		delete(combinedFragmentEClass);
-		combinedFragmentEClass = nullptr;
-	}
-	if (considerIgnoreFragmentEClass != nullptr)
-	{
-		delete(considerIgnoreFragmentEClass);
-		considerIgnoreFragmentEClass = nullptr;
-	}
-	if (continuationEClass != nullptr)
-	{
-		delete(continuationEClass);
-		continuationEClass = nullptr;
-	}
-	if (destructionOccurrenceSpecificationEClass != nullptr)
-	{
-		delete(destructionOccurrenceSpecificationEClass);
-		destructionOccurrenceSpecificationEClass = nullptr;
-	}
-	if (messageOccurrenceSpecificationEClass != nullptr)
-	{
-		delete(messageOccurrenceSpecificationEClass);
-		messageOccurrenceSpecificationEClass = nullptr;
-	}
-	if (executionOccurrenceSpecificationEClass != nullptr)
-	{
-		delete(executionOccurrenceSpecificationEClass);
-		executionOccurrenceSpecificationEClass = nullptr;
-	}
-	if (stateInvariantEClass != nullptr)
-	{
-		delete(stateInvariantEClass);
-		stateInvariantEClass = nullptr;
-	}
-	if (finalStateEClass != nullptr)
-	{
-		delete(finalStateEClass);
-		finalStateEClass = nullptr;
-	}
-	if (protocolTransitionEClass != nullptr)
-	{
-		delete(protocolTransitionEClass);
-		protocolTransitionEClass = nullptr;
-	}
-	if (associationClassEClass != nullptr)
-	{
-		delete(associationClassEClass);
-		associationClassEClass = nullptr;
-	}
-	if (componentEClass != nullptr)
-	{
-		delete(componentEClass);
-		componentEClass = nullptr;
-	}
-	if (componentRealizationEClass != nullptr)
-	{
-		delete(componentRealizationEClass);
-		componentRealizationEClass = nullptr;
-	}
-	if (actorEClass != nullptr)
-	{
-		delete(actorEClass);
-		actorEClass = nullptr;
-	}
-	if (durationEClass != nullptr)
-	{
-		delete(durationEClass);
-		durationEClass = nullptr;
-	}
-	if (durationConstraintEClass != nullptr)
-	{
-		delete(durationConstraintEClass);
-		durationConstraintEClass = nullptr;
-	}
-	if (intervalConstraintEClass != nullptr)
-	{
-		delete(intervalConstraintEClass);
-		intervalConstraintEClass = nullptr;
-	}
-	if (intervalEClass != nullptr)
-	{
-		delete(intervalEClass);
-		intervalEClass = nullptr;
-	}
-	if (durationIntervalEClass != nullptr)
-	{
-		delete(durationIntervalEClass);
-		durationIntervalEClass = nullptr;
-	}
-	if (durationObservationEClass != nullptr)
-	{
-		delete(durationObservationEClass);
-		durationObservationEClass = nullptr;
-	}
-	if (literalBooleanEClass != nullptr)
-	{
-		delete(literalBooleanEClass);
-		literalBooleanEClass = nullptr;
-	}
-	if (literalSpecificationEClass != nullptr)
-	{
-		delete(literalSpecificationEClass);
-		literalSpecificationEClass = nullptr;
-	}
-	if (literalIntegerEClass != nullptr)
-	{
-		delete(literalIntegerEClass);
-		literalIntegerEClass = nullptr;
-	}
-	if (literalNullEClass != nullptr)
-	{
-		delete(literalNullEClass);
-		literalNullEClass = nullptr;
-	}
-	if (literalRealEClass != nullptr)
-	{
-		delete(literalRealEClass);
-		literalRealEClass = nullptr;
-	}
-	if (literalStringEClass != nullptr)
-	{
-		delete(literalStringEClass);
-		literalStringEClass = nullptr;
-	}
-	if (literalUnlimitedNaturalEClass != nullptr)
-	{
-		delete(literalUnlimitedNaturalEClass);
-		literalUnlimitedNaturalEClass = nullptr;
-	}
-	if (timeConstraintEClass != nullptr)
-	{
-		delete(timeConstraintEClass);
-		timeConstraintEClass = nullptr;
-	}
-	if (timeIntervalEClass != nullptr)
-	{
-		delete(timeIntervalEClass);
-		timeIntervalEClass = nullptr;
-	}
-	if (timeObservationEClass != nullptr)
-	{
-		delete(timeObservationEClass);
-		timeObservationEClass = nullptr;
-	}
+	activityContentEClass.reset();
+	activityEClass.reset();
+	behaviorEClass.reset();
+	classEClass.reset();
+	behavioredClassifierEClass.reset();
+	classifierEClass.reset();
+	namespaceEClass.reset();
+	namedElementEClass.reset();
+	elementEClass.reset();
+	commentEClass.reset();
+	stereotypeEClass.reset();
+	imageEClass.reset();
+	profileEClass.reset();
+	packageEClass.reset();
+	packageableElementEClass.reset();
+	parameterableElementEClass.reset();
+	templateParameterEClass.reset();
+	templateSignatureEClass.reset();
+	templateableElementEClass.reset();
+	templateBindingEClass.reset();
+	directedRelationshipEClass.reset();
+	relationshipEClass.reset();
+	templateParameterSubstitutionEClass.reset();
+	objectEClass.reset();
+	factoryEClass.reset();
+	typeEClass.reset();
+	associationEClass.reset();
+	propertyEClass.reset();
+	connectableElementEClass.reset();
+	typedElementEClass.reset();
+	connectorEndEClass.reset();
+	multiplicityElementEClass.reset();
+	valueSpecificationEClass.reset();
+	connectableElementTemplateParameterEClass.reset();
+	deploymentTargetEClass.reset();
+	deploymentEClass.reset();
+	dependencyEClass.reset();
+	deploymentSpecificationEClass.reset();
+	artifactEClass.reset();
+	deployedArtifactEClass.reset();
+	manifestationEClass.reset();
+	abstractionEClass.reset();
+	opaqueExpressionEClass.reset();
+	parameterEClass.reset();
+	operationEClass.reset();
+	behavioralFeatureEClass.reset();
+	featureEClass.reset();
+	redefinableElementEClass.reset();
+	parameterSetEClass.reset();
+	constraintEClass.reset();
+	dataTypeEClass.reset();
+	interfaceEClass.reset();
+	receptionEClass.reset();
+	signalEClass.reset();
+	protocolStateMachineEClass.reset();
+	stateMachineEClass.reset();
+	pseudostateEClass.reset();
+	vertexEClass.reset();
+	regionEClass.reset();
+	stateEClass.reset();
+	connectionPointReferenceEClass.reset();
+	triggerEClass.reset();
+	eventEClass.reset();
+	portEClass.reset();
+	transitionEClass.reset();
+	protocolConformanceEClass.reset();
+	operationTemplateParameterEClass.reset();
+	structuralFeatureEClass.reset();
+	packageMergeEClass.reset();
+	profileApplicationEClass.reset();
+	enumerationEClass.reset();
+	enumerationLiteralEClass.reset();
+	instanceSpecificationEClass.reset();
+	slotEClass.reset();
+	primitiveTypeEClass.reset();
+	elementImportEClass.reset();
+	packageImportEClass.reset();
+	extensionEClass.reset();
+	extensionEndEClass.reset();
+	modelEClass.reset();
+	stringExpressionEClass.reset();
+	expressionEClass.reset();
+	usageEClass.reset();
+	collaborationUseEClass.reset();
+	collaborationEClass.reset();
+	structuredClassifierEClass.reset();
+	connectorEClass.reset();
+	generalizationEClass.reset();
+	generalizationSetEClass.reset();
+	redefinableTemplateSignatureEClass.reset();
+	useCaseEClass.reset();
+	extendEClass.reset();
+	extensionPointEClass.reset();
+	includeEClass.reset();
+	substitutionEClass.reset();
+	realizationEClass.reset();
+	classifierTemplateParameterEClass.reset();
+	interfaceRealizationEClass.reset();
+	encapsulatedClassifierEClass.reset();
+	activityGroupEClass.reset();
+	activityEdgeEClass.reset();
+	activityPartitionEClass.reset();
+	activityNodeEClass.reset();
+	interruptibleActivityRegionEClass.reset();
+	structuredActivityNodeEClass.reset();
+	actionEClass.reset();
+	executableNodeEClass.reset();
+	exceptionHandlerEClass.reset();
+	objectNodeEClass.reset();
+	inputPinEClass.reset();
+	pinEClass.reset();
+	outputPinEClass.reset();
+	variableEClass.reset();
+	valueSpecificationActionEClass.reset();
+	variableActionEClass.reset();
+	writeLinkActionEClass.reset();
+	linkActionEClass.reset();
+	linkEndDataEClass.reset();
+	qualifierValueEClass.reset();
+	writeStructuralFeatureActionEClass.reset();
+	structuralFeatureActionEClass.reset();
+	writeVariableActionEClass.reset();
+	acceptCallActionEClass.reset();
+	acceptEventActionEClass.reset();
+	actionInputPinEClass.reset();
+	addStructuralFeatureValueActionEClass.reset();
+	addVariableValueActionEClass.reset();
+	broadcastSignalActionEClass.reset();
+	invocationActionEClass.reset();
+	callActionEClass.reset();
+	callBehaviorActionEClass.reset();
+	callOperationActionEClass.reset();
+	clauseEClass.reset();
+	clearAssociationActionEClass.reset();
+	clearStructuralFeatureActionEClass.reset();
+	clearVariableActionEClass.reset();
+	conditionalNodeEClass.reset();
+	createLinkActionEClass.reset();
+	linkEndCreationDataEClass.reset();
+	createLinkObjectActionEClass.reset();
+	createObjectActionEClass.reset();
+	destroyLinkActionEClass.reset();
+	linkEndDestructionDataEClass.reset();
+	destroyObjectActionEClass.reset();
+	expansionNodeEClass.reset();
+	expansionRegionEClass.reset();
+	loopNodeEClass.reset();
+	opaqueActionEClass.reset();
+	raiseExceptionActionEClass.reset();
+	readExtentActionEClass.reset();
+	readIsClassifiedObjectActionEClass.reset();
+	readLinkActionEClass.reset();
+	readLinkObjectEndActionEClass.reset();
+	readLinkObjectEndQualifierActionEClass.reset();
+	readSelfActionEClass.reset();
+	readStructuralFeatureActionEClass.reset();
+	readVariableActionEClass.reset();
+	reclassifyObjectActionEClass.reset();
+	reduceActionEClass.reset();
+	removeStructuralFeatureValueActionEClass.reset();
+	removeVariableValueActionEClass.reset();
+	replyActionEClass.reset();
+	sendObjectActionEClass.reset();
+	sendSignalActionEClass.reset();
+	sequenceNodeEClass.reset();
+	startClassifierBehaviorActionEClass.reset();
+	startObjectBehaviorActionEClass.reset();
+	testIdentityActionEClass.reset();
+	unmarshallActionEClass.reset();
+	valuePinEClass.reset();
+	activityFinalNodeEClass.reset();
+	finalNodeEClass.reset();
+	controlNodeEClass.reset();
+	activityParameterNodeEClass.reset();
+	centralBufferNodeEClass.reset();
+	controlFlowEClass.reset();
+	dataStoreNodeEClass.reset();
+	decisionNodeEClass.reset();
+	objectFlowEClass.reset();
+	flowFinalNodeEClass.reset();
+	forkNodeEClass.reset();
+	initialNodeEClass.reset();
+	joinNodeEClass.reset();
+	mergeNodeEClass.reset();
+	instanceValueEClass.reset();
+	anyReceiveEventEClass.reset();
+	messageEventEClass.reset();
+	callEventEClass.reset();
+	changeEventEClass.reset();
+	functionBehaviorEClass.reset();
+	opaqueBehaviorEClass.reset();
+	signalEventEClass.reset();
+	timeEventEClass.reset();
+	timeExpressionEClass.reset();
+	observationEClass.reset();
+	communicationPathEClass.reset();
+	deviceEClass.reset();
+	nodeEClass.reset();
+	executionEnvironmentEClass.reset();
+	informationFlowEClass.reset();
+	messageEClass.reset();
+	interactionEClass.reset();
+	interactionFragmentEClass.reset();
+	lifelineEClass.reset();
+	partDecompositionEClass.reset();
+	interactionUseEClass.reset();
+	gateEClass.reset();
+	messageEndEClass.reset();
+	interactionOperandEClass.reset();
+	interactionConstraintEClass.reset();
+	generalOrderingEClass.reset();
+	occurrenceSpecificationEClass.reset();
+	informationItemEClass.reset();
+	actionExecutionSpecificationEClass.reset();
+	executionSpecificationEClass.reset();
+	behaviorExecutionSpecificationEClass.reset();
+	combinedFragmentEClass.reset();
+	considerIgnoreFragmentEClass.reset();
+	continuationEClass.reset();
+	destructionOccurrenceSpecificationEClass.reset();
+	messageOccurrenceSpecificationEClass.reset();
+	executionOccurrenceSpecificationEClass.reset();
+	stateInvariantEClass.reset();
+	finalStateEClass.reset();
+	protocolTransitionEClass.reset();
+	associationClassEClass.reset();
+	componentEClass.reset();
+	componentRealizationEClass.reset();
+	actorEClass.reset();
+	durationEClass.reset();
+	durationConstraintEClass.reset();
+	intervalConstraintEClass.reset();
+	intervalEClass.reset();
+	durationIntervalEClass.reset();
+	durationObservationEClass.reset();
+	literalBooleanEClass.reset();
+	literalSpecificationEClass.reset();
+	literalIntegerEClass.reset();
+	literalNullEClass.reset();
+	literalRealEClass.reset();
+	literalStringEClass.reset();
+	literalUnlimitedNaturalEClass.reset();
+	timeConstraintEClass.reset();
+	timeIntervalEClass.reset();
+	timeObservationEClass.reset();
 	
-	if (visibilityKindEEnum != nullptr)
-	{
-		delete(visibilityKindEEnum);
-		visibilityKindEEnum = nullptr;
-	}
-	if (parameterDirectionKindEEnum != nullptr)
-	{
-		delete(parameterDirectionKindEEnum);
-		parameterDirectionKindEEnum = nullptr;
-	}
-	if (parameterEffectKindEEnum != nullptr)
-	{
-		delete(parameterEffectKindEEnum);
-		parameterEffectKindEEnum = nullptr;
-	}
-	if (callConcurrencyKindEEnum != nullptr)
-	{
-		delete(callConcurrencyKindEEnum);
-		callConcurrencyKindEEnum = nullptr;
-	}
-	if (transitionKindEEnum != nullptr)
-	{
-		delete(transitionKindEEnum);
-		transitionKindEEnum = nullptr;
-	}
-	if (pseudostateKindEEnum != nullptr)
-	{
-		delete(pseudostateKindEEnum);
-		pseudostateKindEEnum = nullptr;
-	}
-	if (aggregationKindEEnum != nullptr)
-	{
-		delete(aggregationKindEEnum);
-		aggregationKindEEnum = nullptr;
-	}
-	if (connectorKindEEnum != nullptr)
-	{
-		delete(connectorKindEEnum);
-		connectorKindEEnum = nullptr;
-	}
-	if (objectNodeOrderingKindEEnum != nullptr)
-	{
-		delete(objectNodeOrderingKindEEnum);
-		objectNodeOrderingKindEEnum = nullptr;
-	}
-	if (expansionKindEEnum != nullptr)
-	{
-		delete(expansionKindEEnum);
-		expansionKindEEnum = nullptr;
-	}
-	if (messageKindEEnum != nullptr)
-	{
-		delete(messageKindEEnum);
-		messageKindEEnum = nullptr;
-	}
-	if (messageSortEEnum != nullptr)
-	{
-		delete(messageSortEEnum);
-		messageSortEEnum = nullptr;
-	}
-	if (interactionOperatorKindEEnum != nullptr)
-	{
-		delete(interactionOperatorKindEEnum);
-		interactionOperatorKindEEnum = nullptr;
-	}
+	visibilityKindEEnum.reset();
+	parameterDirectionKindEEnum.reset();
+	parameterEffectKindEEnum.reset();
+	callConcurrencyKindEEnum.reset();
+	transitionKindEEnum.reset();
+	pseudostateKindEEnum.reset();
+	aggregationKindEEnum.reset();
+	connectorKindEEnum.reset();
+	objectNodeOrderingKindEEnum.reset();
+	expansionKindEEnum.reset();
+	messageKindEEnum.reset();
+	messageSortEEnum.reset();
+	interactionOperatorKindEEnum.reset();
 	
 }
 
@@ -1325,10 +293,10 @@ UmlPackage* UmlPackageImpl::create()
 {
 	if (isInited)
 	{
-		return UmlPackage::eInstance();
+		return UmlPackage::eInstance().get();
 	}
 	isInited = true;
-	
+	 
     // Obtain or create package and create package meta-data objects
     UmlPackageImpl * metaModelPackage = new UmlPackageImpl();
 	metaModelPackage->createPackageContents();
@@ -4111,7 +3079,7 @@ void UmlPackageImpl::initializePackageContents()
 	writeStructuralFeatureActionEClass->getESuperTypes()->push_back(getStructuralFeatureAction());
 	writeVariableActionEClass->getESuperTypes()->push_back(getVariableAction());
 	
-	ecore::EOperation *  op;
+	std::shared_ptr<ecore::EOperation> op;
 
  	// Initialize classes and features; add operations and parameters
 	// Begin Class Abstraction
@@ -8877,309 +7845,309 @@ void UmlPackageImpl::initializePackageContents()
 }
 
 // Begin Class Abstraction
-ecore::EClass* UmlPackageImpl::getAbstraction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAbstraction() const
 {
 	return abstractionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getAbstraction_Mapping() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAbstraction_Mapping() const
 {
-	return dynamic_cast<ecore::EReference*>(abstractionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(abstractionEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class Abstraction
 
 // Begin Class AcceptCallAction
-ecore::EClass* UmlPackageImpl::getAcceptCallAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAcceptCallAction() const
 {
 	return acceptCallActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getAcceptCallAction_ReturnInformation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAcceptCallAction_ReturnInformation() const
 {
-	return dynamic_cast<ecore::EReference*>(acceptCallActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(acceptCallActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getAcceptCallAction___Result_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptCallAction___Result_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptCallActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptCallActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptCallAction___Trigger_call_event__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptCallAction___Trigger_call_event__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptCallActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptCallActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptCallAction___Unmarshall__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptCallAction___Unmarshall__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptCallActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptCallActionEClass->getEOperations()->at(2));
 }
 
 // End Class AcceptCallAction
 
 // Begin Class AcceptEventAction
-ecore::EClass* UmlPackageImpl::getAcceptEventAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAcceptEventAction() const
 {
 	return acceptEventActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getAcceptEventAction_IsUnmarshall() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getAcceptEventAction_IsUnmarshall() const
 {
-	return dynamic_cast<ecore::EAttribute*>(acceptEventActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(acceptEventActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getAcceptEventAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAcceptEventAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(acceptEventActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(acceptEventActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getAcceptEventAction_Trigger() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAcceptEventAction_Trigger() const
 {
-	return dynamic_cast<ecore::EReference*>(acceptEventActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(acceptEventActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getAcceptEventAction___Conforming_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptEventAction___Conforming_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptEventActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptEventActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptEventAction___No_input_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptEventAction___No_input_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptEventActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptEventActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptEventAction___No_output_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptEventAction___No_output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptEventActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptEventActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptEventAction___One_output_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptEventAction___One_output_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptEventActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptEventActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getAcceptEventAction___Unmarshall_signal_events__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAcceptEventAction___Unmarshall_signal_events__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(acceptEventActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(acceptEventActionEClass->getEOperations()->at(3));
 }
 
 // End Class AcceptEventAction
 
 // Begin Class Action
-ecore::EClass* UmlPackageImpl::getAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAction() const
 {
 	return actionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getAction_IsLocallyReentrant() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getAction_IsLocallyReentrant() const
 {
-	return dynamic_cast<ecore::EAttribute*>(actionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(actionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getAction_Context() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAction_Context() const
 {
-	return dynamic_cast<ecore::EReference*>(actionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getAction_Input() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAction_Input() const
 {
-	return dynamic_cast<ecore::EReference*>(actionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getAction_LocalPostcondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAction_LocalPostcondition() const
 {
-	return dynamic_cast<ecore::EReference*>(actionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getAction_LocalPrecondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAction_LocalPrecondition() const
 {
-	return dynamic_cast<ecore::EReference*>(actionEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getAction_Output() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAction_Output() const
 {
-	return dynamic_cast<ecore::EReference*>(actionEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionEClass->getEStructuralFeatures()->at(5));
 }
 
-ecore::EOperation* UmlPackageImpl::getAction___AllActions() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAction___AllActions() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getAction___AllOwnedNodes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAction___AllOwnedNodes() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getAction___ContainingBehavior() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAction___ContainingBehavior() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getAction___GetContext() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAction___GetContext() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionEClass->getEOperations()->at(0));
 }
 
 // End Class Action
 
 // Begin Class ActionExecutionSpecification
-ecore::EClass* UmlPackageImpl::getActionExecutionSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActionExecutionSpecification() const
 {
 	return actionExecutionSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActionExecutionSpecification_Action() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActionExecutionSpecification_Action() const
 {
-	return dynamic_cast<ecore::EReference*>(actionExecutionSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionExecutionSpecificationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getActionExecutionSpecification___Action_referenced__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActionExecutionSpecification___Action_referenced__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionExecutionSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionExecutionSpecificationEClass->getEOperations()->at(0));
 }
 
 // End Class ActionExecutionSpecification
 
 // Begin Class ActionInputPin
-ecore::EClass* UmlPackageImpl::getActionInputPin() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActionInputPin() const
 {
 	return actionInputPinEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActionInputPin_FromAction() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActionInputPin_FromAction() const
 {
-	return dynamic_cast<ecore::EReference*>(actionInputPinEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(actionInputPinEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getActionInputPin___Input_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActionInputPin___Input_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionInputPinEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionInputPinEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getActionInputPin___No_control_or_object_flow__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActionInputPin___No_control_or_object_flow__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionInputPinEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionInputPinEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getActionInputPin___One_output_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActionInputPin___One_output_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actionInputPinEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actionInputPinEClass->getEOperations()->at(1));
 }
 
 // End Class ActionInputPin
 
 // Begin Class Activity
-ecore::EClass* UmlPackageImpl::getActivity() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivity() const
 {
 	return activityEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getActivity_IsReadOnly() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getActivity_IsReadOnly() const
 {
-	return dynamic_cast<ecore::EAttribute*>(activityEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(activityEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getActivity_IsSingleExecution() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getActivity_IsSingleExecution() const
 {
-	return dynamic_cast<ecore::EAttribute*>(activityEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getActivity_Edge() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getActivity_Group() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getActivity_Node() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getActivity_OwnedGroup() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getActivity_OwnedNode() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* UmlPackageImpl::getActivity_Partition() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* UmlPackageImpl::getActivity_StructuredNode() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* UmlPackageImpl::getActivity_Variable() const
-{
-	return dynamic_cast<ecore::EReference*>(activityEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(activityEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getActivity___Maximum_one_parameter_node__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_Edge() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getActivity___Maximum_two_parameter_nodes__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_Group() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(6));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_Node() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(4));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_OwnedGroup() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(2));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_OwnedNode() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(7));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_Partition() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(8));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_StructuredNode() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(9));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivity_Variable() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEClass->getEStructuralFeatures()->at(5));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivity___Maximum_one_parameter_node__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivity___Maximum_two_parameter_nodes__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityEClass->getEOperations()->at(1));
 }
 
 // End Class Activity
 
 // Begin Class ActivityContent
-ecore::EClass* UmlPackageImpl::getActivityContent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityContent() const
 {
 	return activityContentEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getActivityContent___ContainingActivity() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityContent___ContainingActivity() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityContentEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityContentEClass->getEOperations()->at(0));
 }
 
 // End Class ActivityContent
 
 // Begin Class ActivityEdge
-ecore::EClass* UmlPackageImpl::getActivityEdge() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityEdge() const
 {
 	return activityEdgeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActivityEdge_Activity() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Activity() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_Guard() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Guard() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_InGroup() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_InGroup() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_InPartition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_InPartition() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_InStructuredNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_InStructuredNode() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_Interrupts() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Interrupts() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_RedefinedEdge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_RedefinedEdge() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_Source() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Source() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getActivityEdge_Weight() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityEdge_Weight() const
 {
-	return dynamic_cast<ecore::EReference*>(activityEdgeEClass->getEStructuralFeatures()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityEdgeEClass->getEStructuralFeatures()->at(8));
 }
 
-ecore::EOperation* UmlPackageImpl::getActivityEdge___Source_and_target__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityEdge___Source_and_target__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityEdgeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityEdgeEClass->getEOperations()->at(0));
 }
 
 // End Class ActivityEdge
 
 // Begin Class ActivityFinalNode
-ecore::EClass* UmlPackageImpl::getActivityFinalNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityFinalNode() const
 {
 	return activityFinalNodeEClass;
 }
@@ -9189,245 +8157,245 @@ ecore::EClass* UmlPackageImpl::getActivityFinalNode() const
 // End Class ActivityFinalNode
 
 // Begin Class ActivityGroup
-ecore::EClass* UmlPackageImpl::getActivityGroup() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityGroup() const
 {
 	return activityGroupEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActivityGroup_ContainedEdge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_ContainedEdge() const
 {
-	return dynamic_cast<ecore::EReference*>(activityGroupEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityGroupEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getActivityGroup_ContainedNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_ContainedNode() const
 {
-	return dynamic_cast<ecore::EReference*>(activityGroupEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityGroupEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getActivityGroup_InActivity() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_InActivity() const
 {
-	return dynamic_cast<ecore::EReference*>(activityGroupEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityGroupEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getActivityGroup_Subgroup() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_Subgroup() const
 {
-	return dynamic_cast<ecore::EReference*>(activityGroupEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityGroupEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getActivityGroup_SuperGroup() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_SuperGroup() const
 {
-	return dynamic_cast<ecore::EReference*>(activityGroupEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityGroupEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getActivityGroup___Nodes_and_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityGroup___Nodes_and_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityGroupEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityGroupEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getActivityGroup___Not_contained__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityGroup___Not_contained__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityGroupEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityGroupEClass->getEOperations()->at(1));
 }
 
 // End Class ActivityGroup
 
 // Begin Class ActivityNode
-ecore::EClass* UmlPackageImpl::getActivityNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityNode() const
 {
 	return activityNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActivityNode_Activity() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_Activity() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_InGroup() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_InGroup() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_InInterruptibleRegion() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_InInterruptibleRegion() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_InPartition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_InPartition() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_InStructuredNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_InStructuredNode() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_Incoming() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_Incoming() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_Outgoing() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_Outgoing() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getActivityNode_RedefinedNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_RedefinedNode() const
 {
-	return dynamic_cast<ecore::EReference*>(activityNodeEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityNodeEClass->getEStructuralFeatures()->at(6));
 }
 
 
 // End Class ActivityNode
 
 // Begin Class ActivityParameterNode
-ecore::EClass* UmlPackageImpl::getActivityParameterNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityParameterNode() const
 {
 	return activityParameterNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getActivityParameterNode_Parameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityParameterNode_Parameter() const
 {
-	return dynamic_cast<ecore::EReference*>(activityParameterNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityParameterNodeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getActivityParameterNode___Has_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityParameterNode___Has_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityParameterNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityParameterNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getActivityParameterNode___No_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityParameterNode___No_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityParameterNodeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityParameterNodeEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getActivityParameterNode___No_incoming_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityParameterNode___No_incoming_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityParameterNodeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityParameterNodeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getActivityParameterNode___No_outgoing_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityParameterNode___No_outgoing_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityParameterNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityParameterNodeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getActivityParameterNode___Same_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityParameterNode___Same_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityParameterNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityParameterNodeEClass->getEOperations()->at(2));
 }
 
 // End Class ActivityParameterNode
 
 // Begin Class ActivityPartition
-ecore::EClass* UmlPackageImpl::getActivityPartition() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityPartition() const
 {
 	return activityPartitionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getActivityPartition_IsDimension() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getActivityPartition_IsDimension() const
 {
-	return dynamic_cast<ecore::EAttribute*>(activityPartitionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(activityPartitionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getActivityPartition_IsExternal() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getActivityPartition_IsExternal() const
 {
-	return dynamic_cast<ecore::EAttribute*>(activityPartitionEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getActivityPartition_Edge() const
-{
-	return dynamic_cast<ecore::EReference*>(activityPartitionEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getActivityPartition_Node() const
-{
-	return dynamic_cast<ecore::EReference*>(activityPartitionEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getActivityPartition_Represents() const
-{
-	return dynamic_cast<ecore::EReference*>(activityPartitionEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getActivityPartition_Subpartition() const
-{
-	return dynamic_cast<ecore::EReference*>(activityPartitionEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getActivityPartition_SuperPartition() const
-{
-	return dynamic_cast<ecore::EReference*>(activityPartitionEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(activityPartitionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getActivityPartition___Dimension_not_contained__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityPartition_Edge() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityPartitionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityPartitionEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getActivityPartition___Represents_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityPartition_Node() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityPartitionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityPartitionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getActivityPartition___Represents_property__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityPartition_Represents() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityPartitionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityPartitionEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getActivityPartition___Represents_property_and_is_contained__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityPartition_Subpartition() const
 {
-	return dynamic_cast<ecore::EOperation*>(activityPartitionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(activityPartitionEClass->getEStructuralFeatures()->at(4));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityPartition_SuperPartition() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(activityPartitionEClass->getEStructuralFeatures()->at(5));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityPartition___Dimension_not_contained__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityPartitionEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityPartition___Represents_classifier__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityPartitionEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityPartition___Represents_property__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityPartitionEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityPartition___Represents_property_and_is_contained__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(activityPartitionEClass->getEOperations()->at(1));
 }
 
 // End Class ActivityPartition
 
 // Begin Class Actor
-ecore::EClass* UmlPackageImpl::getActor() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getActor() const
 {
 	return actorEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getActor___Associations__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActor___Associations__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actorEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actorEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getActor___Must_have_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActor___Must_have_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(actorEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(actorEClass->getEOperations()->at(1));
 }
 
 // End Class Actor
 
 // Begin Class AddStructuralFeatureValueAction
-ecore::EClass* UmlPackageImpl::getAddStructuralFeatureValueAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAddStructuralFeatureValueAction() const
 {
 	return addStructuralFeatureValueActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getAddStructuralFeatureValueAction_IsReplaceAll() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getAddStructuralFeatureValueAction_IsReplaceAll() const
 {
-	return dynamic_cast<ecore::EAttribute*>(addStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(addStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getAddStructuralFeatureValueAction_InsertAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAddStructuralFeatureValueAction_InsertAt() const
 {
-	return dynamic_cast<ecore::EReference*>(addStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(addStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getAddStructuralFeatureValueAction___InsertAt_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAddStructuralFeatureValueAction___InsertAt_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(addStructuralFeatureValueActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(addStructuralFeatureValueActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getAddStructuralFeatureValueAction___Required_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAddStructuralFeatureValueAction___Required_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(addStructuralFeatureValueActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(addStructuralFeatureValueActionEClass->getEOperations()->at(0));
 }
 
 // End Class AddStructuralFeatureValueAction
 
 // Begin Class AddVariableValueAction
-ecore::EClass* UmlPackageImpl::getAddVariableValueAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAddVariableValueAction() const
 {
 	return addVariableValueActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getAddVariableValueAction_IsReplaceAll() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getAddVariableValueAction_IsReplaceAll() const
 {
-	return dynamic_cast<ecore::EAttribute*>(addVariableValueActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(addVariableValueActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getAddVariableValueAction_InsertAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAddVariableValueAction_InsertAt() const
 {
-	return dynamic_cast<ecore::EReference*>(addVariableValueActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(addVariableValueActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getAddVariableValueAction___InsertAt_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAddVariableValueAction___InsertAt_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(addVariableValueActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(addVariableValueActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getAddVariableValueAction___Required_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAddVariableValueAction___Required_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(addVariableValueActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(addVariableValueActionEClass->getEOperations()->at(0));
 }
 
 // End Class AddVariableValueAction
 
 // Begin Class AnyReceiveEvent
-ecore::EClass* UmlPackageImpl::getAnyReceiveEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAnyReceiveEvent() const
 {
 	return anyReceiveEventEClass;
 }
@@ -9437,407 +8405,407 @@ ecore::EClass* UmlPackageImpl::getAnyReceiveEvent() const
 // End Class AnyReceiveEvent
 
 // Begin Class Artifact
-ecore::EClass* UmlPackageImpl::getArtifact() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getArtifact() const
 {
 	return artifactEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getArtifact_FileName() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getArtifact_FileName() const
 {
-	return dynamic_cast<ecore::EAttribute*>(artifactEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(artifactEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getArtifact_Manifestation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getArtifact_Manifestation() const
 {
-	return dynamic_cast<ecore::EReference*>(artifactEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(artifactEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getArtifact_NestedArtifact() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getArtifact_NestedArtifact() const
 {
-	return dynamic_cast<ecore::EReference*>(artifactEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(artifactEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getArtifact_OwnedAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getArtifact_OwnedAttribute() const
 {
-	return dynamic_cast<ecore::EReference*>(artifactEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(artifactEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getArtifact_OwnedOperation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getArtifact_OwnedOperation() const
 {
-	return dynamic_cast<ecore::EReference*>(artifactEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(artifactEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getArtifact___CreateOwnedAttribute__String_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getArtifact___CreateOwnedAttribute__String_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(artifactEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(artifactEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getArtifact___CreateOwnedOperation__String_Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getArtifact___CreateOwnedOperation__String_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(artifactEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(artifactEClass->getEOperations()->at(1));
 }
 
 // End Class Artifact
 
 // Begin Class Association
-ecore::EClass* UmlPackageImpl::getAssociation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAssociation() const
 {
 	return associationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getAssociation_IsDerived() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getAssociation_IsDerived() const
 {
-	return dynamic_cast<ecore::EAttribute*>(associationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(associationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getAssociation_EndType() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAssociation_EndType() const
 {
-	return dynamic_cast<ecore::EReference*>(associationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(associationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getAssociation_MemberEnd() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAssociation_MemberEnd() const
 {
-	return dynamic_cast<ecore::EReference*>(associationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(associationEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getAssociation_NavigableOwnedEnd() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAssociation_NavigableOwnedEnd() const
 {
-	return dynamic_cast<ecore::EReference*>(associationEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(associationEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getAssociation_OwnedEnd() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getAssociation_OwnedEnd() const
 {
-	return dynamic_cast<ecore::EReference*>(associationEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(associationEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getAssociation___Association_ends__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___Association_ends__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___Binary_associations__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___Binary_associations__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___Ends_must_be_typed__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___Ends_must_be_typed__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___GetEndTypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___GetEndTypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___IsBinary() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___IsBinary() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___Specialized_end_number__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___Specialized_end_number__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getAssociation___Specialized_end_types__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociation___Specialized_end_types__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationEClass->getEOperations()->at(1));
 }
 
 // End Class Association
 
 // Begin Class AssociationClass
-ecore::EClass* UmlPackageImpl::getAssociationClass() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getAssociationClass() const
 {
 	return associationClassEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getAssociationClass___Cannot_be_defined__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociationClass___Cannot_be_defined__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationClassEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationClassEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getAssociationClass___Disjoint_attributes_ends__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getAssociationClass___Disjoint_attributes_ends__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(associationClassEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(associationClassEClass->getEOperations()->at(1));
 }
 
 // End Class AssociationClass
 
 // Begin Class Behavior
-ecore::EClass* UmlPackageImpl::getBehavior() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getBehavior() const
 {
 	return behaviorEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getBehavior_IsReentrant() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getBehavior_IsReentrant() const
 {
-	return dynamic_cast<ecore::EAttribute*>(behaviorEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(behaviorEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getBehavior_Context() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Context() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_OwnedParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_OwnedParameterSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameterSet() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_Postcondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Postcondition() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_Precondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Precondition() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_RedefinedBehavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_RedefinedBehavior() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* UmlPackageImpl::getBehavior_Specification() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Specification() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getBehavior___BehavioredClassifier__Element() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___BehavioredClassifier__Element() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___Feature_of_context_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___Feature_of_context_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___GetContext() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___GetContext() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___InputParameters() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___InputParameters() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___Most_one_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___Most_one_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___OutputParameters() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___OutputParameters() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getBehavior___Parameters_match__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___Parameters_match__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(behaviorEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behaviorEClass->getEOperations()->at(1));
 }
 
 // End Class Behavior
 
 // Begin Class BehaviorExecutionSpecification
-ecore::EClass* UmlPackageImpl::getBehaviorExecutionSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getBehaviorExecutionSpecification() const
 {
 	return behaviorExecutionSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getBehaviorExecutionSpecification_Behavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehaviorExecutionSpecification_Behavior() const
 {
-	return dynamic_cast<ecore::EReference*>(behaviorExecutionSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorExecutionSpecificationEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class BehaviorExecutionSpecification
 
 // Begin Class BehavioralFeature
-ecore::EClass* UmlPackageImpl::getBehavioralFeature() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getBehavioralFeature() const
 {
 	return behavioralFeatureEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getBehavioralFeature_Concurrency() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getBehavioralFeature_Concurrency() const
 {
-	return dynamic_cast<ecore::EAttribute*>(behavioralFeatureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(behavioralFeatureEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getBehavioralFeature_IsAbstract() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getBehavioralFeature_IsAbstract() const
 {
-	return dynamic_cast<ecore::EAttribute*>(behavioralFeatureEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getBehavioralFeature_Method() const
-{
-	return dynamic_cast<ecore::EReference*>(behavioralFeatureEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getBehavioralFeature_OwnedParameter() const
-{
-	return dynamic_cast<ecore::EReference*>(behavioralFeatureEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getBehavioralFeature_OwnedParameterSet() const
-{
-	return dynamic_cast<ecore::EReference*>(behavioralFeatureEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getBehavioralFeature_RaisedException() const
-{
-	return dynamic_cast<ecore::EReference*>(behavioralFeatureEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(behavioralFeatureEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getBehavioralFeature___Abstract_no_method__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioralFeature_Method() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioralFeatureEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioralFeatureEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getBehavioralFeature___CreateReturnResult__String_Type() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioralFeature_OwnedParameter() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioralFeatureEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioralFeatureEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getBehavioralFeature___InputParameters() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioralFeature_OwnedParameterSet() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioralFeatureEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioralFeatureEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getBehavioralFeature___OutputParameters() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioralFeature_RaisedException() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioralFeatureEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioralFeatureEClass->getEStructuralFeatures()->at(5));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioralFeature___Abstract_no_method__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioralFeatureEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioralFeature___CreateReturnResult__String_Type() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioralFeatureEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioralFeature___InputParameters() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioralFeatureEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioralFeature___OutputParameters() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioralFeatureEClass->getEOperations()->at(3));
 }
 
 // End Class BehavioralFeature
 
 // Begin Class BehavioredClassifier
-ecore::EClass* UmlPackageImpl::getBehavioredClassifier() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getBehavioredClassifier() const
 {
 	return behavioredClassifierEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getBehavioredClassifier_ClassifierBehavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioredClassifier_ClassifierBehavior() const
 {
-	return dynamic_cast<ecore::EReference*>(behavioredClassifierEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioredClassifierEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getBehavioredClassifier_InterfaceRealization() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioredClassifier_InterfaceRealization() const
 {
-	return dynamic_cast<ecore::EReference*>(behavioredClassifierEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioredClassifierEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getBehavioredClassifier_OwnedBehavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavioredClassifier_OwnedBehavior() const
 {
-	return dynamic_cast<ecore::EReference*>(behavioredClassifierEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(behavioredClassifierEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getBehavioredClassifier___Class_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioredClassifier___Class_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioredClassifierEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioredClassifierEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getBehavioredClassifier___GetAllImplementedInterfaces() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioredClassifier___GetAllImplementedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioredClassifierEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioredClassifierEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getBehavioredClassifier___GetImplementedInterfaces() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavioredClassifier___GetImplementedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(behavioredClassifierEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(behavioredClassifierEClass->getEOperations()->at(2));
 }
 
 // End Class BehavioredClassifier
 
 // Begin Class BroadcastSignalAction
-ecore::EClass* UmlPackageImpl::getBroadcastSignalAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getBroadcastSignalAction() const
 {
 	return broadcastSignalActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getBroadcastSignalAction_Signal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBroadcastSignalAction_Signal() const
 {
-	return dynamic_cast<ecore::EReference*>(broadcastSignalActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(broadcastSignalActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getBroadcastSignalAction___No_onport__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBroadcastSignalAction___No_onport__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(broadcastSignalActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(broadcastSignalActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getBroadcastSignalAction___Number_of_arguments__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBroadcastSignalAction___Number_of_arguments__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(broadcastSignalActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(broadcastSignalActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getBroadcastSignalAction___Type_ordering_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBroadcastSignalAction___Type_ordering_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(broadcastSignalActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(broadcastSignalActionEClass->getEOperations()->at(1));
 }
 
 // End Class BroadcastSignalAction
 
 // Begin Class CallAction
-ecore::EClass* UmlPackageImpl::getCallAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCallAction() const
 {
 	return callActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getCallAction_IsSynchronous() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getCallAction_IsSynchronous() const
 {
-	return dynamic_cast<ecore::EAttribute*>(callActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(callActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getCallAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCallAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(callActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(callActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getCallAction___Argument_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallAction___Argument_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(callActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getCallAction___InputParameters() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallAction___InputParameters() const
 {
-	return dynamic_cast<ecore::EOperation*>(callActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getCallAction___OutputParameters() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallAction___OutputParameters() const
 {
-	return dynamic_cast<ecore::EOperation*>(callActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getCallAction___Result_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallAction___Result_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(callActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getCallAction___Synchronous_call__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallAction___Synchronous_call__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(callActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callActionEClass->getEOperations()->at(2));
 }
 
 // End Class CallAction
 
 // Begin Class CallBehaviorAction
-ecore::EClass* UmlPackageImpl::getCallBehaviorAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCallBehaviorAction() const
 {
 	return callBehaviorActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCallBehaviorAction_Behavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCallBehaviorAction_Behavior() const
 {
-	return dynamic_cast<ecore::EReference*>(callBehaviorActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(callBehaviorActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getCallBehaviorAction___No_onport__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallBehaviorAction___No_onport__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(callBehaviorActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callBehaviorActionEClass->getEOperations()->at(0));
 }
 
 // End Class CallBehaviorAction
 
 // Begin Class CallEvent
-ecore::EClass* UmlPackageImpl::getCallEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCallEvent() const
 {
 	return callEventEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCallEvent_Operation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCallEvent_Operation() const
 {
-	return dynamic_cast<ecore::EReference*>(callEventEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(callEventEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class CallEvent
 
 // Begin Class CallOperationAction
-ecore::EClass* UmlPackageImpl::getCallOperationAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCallOperationAction() const
 {
 	return callOperationActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCallOperationAction_Operation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCallOperationAction_Operation() const
 {
-	return dynamic_cast<ecore::EReference*>(callOperationActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(callOperationActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getCallOperationAction_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCallOperationAction_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(callOperationActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(callOperationActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getCallOperationAction___Type_target_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCallOperationAction___Type_target_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(callOperationActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(callOperationActionEClass->getEOperations()->at(0));
 }
 
 // End Class CallOperationAction
 
 // Begin Class CentralBufferNode
-ecore::EClass* UmlPackageImpl::getCentralBufferNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCentralBufferNode() const
 {
 	return centralBufferNodeEClass;
 }
@@ -9847,385 +8815,385 @@ ecore::EClass* UmlPackageImpl::getCentralBufferNode() const
 // End Class CentralBufferNode
 
 // Begin Class ChangeEvent
-ecore::EClass* UmlPackageImpl::getChangeEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getChangeEvent() const
 {
 	return changeEventEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getChangeEvent_ChangeExpression() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getChangeEvent_ChangeExpression() const
 {
-	return dynamic_cast<ecore::EReference*>(changeEventEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(changeEventEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class ChangeEvent
 
 // Begin Class Class
-ecore::EClass* UmlPackageImpl::getClass() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClass() const
 {
 	return classEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getClass_IsActive() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getClass_IsActive() const
 {
-	return dynamic_cast<ecore::EAttribute*>(classEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(classEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getClass_Extension() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClass_Extension() const
 {
-	return dynamic_cast<ecore::EReference*>(classEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(classEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getClass_NestedClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClass_NestedClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(classEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(classEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getClass_OwnedOperation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClass_OwnedOperation() const
 {
-	return dynamic_cast<ecore::EReference*>(classEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(classEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getClass_OwnedReception() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClass_OwnedReception() const
 {
-	return dynamic_cast<ecore::EReference*>(classEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(classEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getClass_SuperClass() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClass_SuperClass() const
 {
-	return dynamic_cast<ecore::EReference*>(classEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(classEClass->getEStructuralFeatures()->at(5));
 }
 
-ecore::EOperation* UmlPackageImpl::getClass___CreateOwnedOperation__String_Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass___CreateOwnedOperation__String_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(classEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getClass___GetExtensions() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass___GetExtensions() const
 {
-	return dynamic_cast<ecore::EOperation*>(classEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getClass___GetSuperClasses() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass___GetSuperClasses() const
 {
-	return dynamic_cast<ecore::EOperation*>(classEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getClass___IsMetaclass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass___IsMetaclass() const
 {
-	return dynamic_cast<ecore::EOperation*>(classEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getClass___Passive_class__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClass___Passive_class__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classEClass->getEOperations()->at(0));
 }
 
 // End Class Class
 
 // Begin Class Classifier
-ecore::EClass* UmlPackageImpl::getClassifier() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClassifier() const
 {
 	return classifierEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getClassifier_IsAbstract() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getClassifier_IsAbstract() const
 {
-	return dynamic_cast<ecore::EAttribute*>(classifierEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(classifierEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getClassifier_IsFinalSpecialization() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getClassifier_IsFinalSpecialization() const
 {
-	return dynamic_cast<ecore::EAttribute*>(classifierEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getClassifier_Attribute() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_CollaborationUse() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_Feature() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_General() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_Generalization() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_InheritedMember() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_OwnedUseCase() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_PowertypeExtent() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_RedefinedClassifier() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(11));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_Representation() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(12));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_Substitution() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(13));
-}
-ecore::EReference* UmlPackageImpl::getClassifier_UseCase() const
-{
-	return dynamic_cast<ecore::EReference*>(classifierEClass->getEStructuralFeatures()->at(10));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(classifierEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getClassifier___AllAttributes() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_Attribute() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(25));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___AllFeatures() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_CollaborationUse() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___AllParents() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_Feature() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___AllRealizedInterfaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_General() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(22));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___AllSlottableFeatures() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_Generalization() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(26));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___AllUsedInterfaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_InheritedMember() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(23));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___DirectlyRealizedInterfaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_OwnedUseCase() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(20));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___DirectlyUsedInterfaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_PowertypeExtent() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(21));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetAllAttributes() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_RedefinedClassifier() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetAllOperations() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_Representation() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetAllUsedInterfaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_Substitution() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetGenerals() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifier_UseCase() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierEClass->getEStructuralFeatures()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetInheritedMembers() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllAttributes() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(17));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(25));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetOperation__String_Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllFeatures() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetOperation__String_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllParents() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetOperations() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllRealizedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(22));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___GetUsedInterfaces() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllSlottableFeatures() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(26));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___HasVisibilityOf__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___AllUsedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(14));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(23));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___Inherit__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___DirectlyRealizedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(15));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(20));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___InheritableMembers__Classifier() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___DirectlyUsedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(16));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(21));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___IsSubstitutableFor__Classifier() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetAllAttributes() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(24));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___Maps_to_generalization_set__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetAllOperations() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___MaySpecializeType__Classifier() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetAllUsedInterfaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(18));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___No_cycles_in_generalization__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetGenerals() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___Non_final_parents__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetInheritedMembers() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(17));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___Parents() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetOperation__String_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(19));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getClassifier___Specialize_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetOperation__String_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetOperations() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(9));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___GetUsedInterfaces() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(10));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___HasVisibilityOf__NamedElement() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(14));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___Inherit__NamedElement() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(15));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___InheritableMembers__Classifier() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(16));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___IsSubstitutableFor__Classifier() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(24));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___Maps_to_generalization_set__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___MaySpecializeType__Classifier() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(18));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___No_cycles_in_generalization__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___Non_final_parents__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___Parents() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(19));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifier___Specialize_type__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierEClass->getEOperations()->at(0));
 }
 
 // End Class Classifier
 
 // Begin Class ClassifierTemplateParameter
-ecore::EClass* UmlPackageImpl::getClassifierTemplateParameter() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClassifierTemplateParameter() const
 {
 	return classifierTemplateParameterEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getClassifierTemplateParameter_AllowSubstitutable() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getClassifierTemplateParameter_AllowSubstitutable() const
 {
-	return dynamic_cast<ecore::EAttribute*>(classifierTemplateParameterEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(classifierTemplateParameterEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getClassifierTemplateParameter_ConstrainingClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClassifierTemplateParameter_ConstrainingClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(classifierTemplateParameterEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(classifierTemplateParameterEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Actual_is_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Actual_is_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Constraining_classifiers_constrain_args__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Constraining_classifiers_constrain_args__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Constraining_classifiers_constrain_parametered_element__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Constraining_classifiers_constrain_parametered_element__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Has_constraining_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Has_constraining_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Matching_abstract__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Matching_abstract__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getClassifierTemplateParameter___Parametered_element_no_features__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClassifierTemplateParameter___Parametered_element_no_features__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(classifierTemplateParameterEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(classifierTemplateParameterEClass->getEOperations()->at(1));
 }
 
 // End Class ClassifierTemplateParameter
 
 // Begin Class Clause
-ecore::EClass* UmlPackageImpl::getClause() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClause() const
 {
 	return clauseEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getClause_Body() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_Body() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getClause_BodyOutput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_BodyOutput() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getClause_Decider() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_Decider() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getClause_PredecessorClause() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_PredecessorClause() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getClause_SuccessorClause() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_SuccessorClause() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getClause_Test() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClause_Test() const
 {
-	return dynamic_cast<ecore::EReference*>(clauseEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(clauseEClass->getEStructuralFeatures()->at(5));
 }
 
-ecore::EOperation* UmlPackageImpl::getClause___Body_output_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClause___Body_output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clauseEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clauseEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getClause___Decider_output__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClause___Decider_output__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clauseEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clauseEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getClause___Test_and_body__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClause___Test_and_body__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clauseEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clauseEClass->getEOperations()->at(2));
 }
 
 // End Class Clause
 
 // Begin Class ClearAssociationAction
-ecore::EClass* UmlPackageImpl::getClearAssociationAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClearAssociationAction() const
 {
 	return clearAssociationActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getClearAssociationAction_Association() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClearAssociationAction_Association() const
 {
-	return dynamic_cast<ecore::EReference*>(clearAssociationActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(clearAssociationActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getClearAssociationAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClearAssociationAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(clearAssociationActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(clearAssociationActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getClearAssociationAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClearAssociationAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clearAssociationActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clearAssociationActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getClearAssociationAction___Same_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClearAssociationAction___Same_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clearAssociationActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clearAssociationActionEClass->getEOperations()->at(1));
 }
 
 // End Class ClearAssociationAction
 
 // Begin Class ClearStructuralFeatureAction
-ecore::EClass* UmlPackageImpl::getClearStructuralFeatureAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClearStructuralFeatureAction() const
 {
 	return clearStructuralFeatureActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getClearStructuralFeatureAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getClearStructuralFeatureAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(clearStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(clearStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getClearStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClearStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clearStructuralFeatureActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clearStructuralFeatureActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getClearStructuralFeatureAction___Type_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getClearStructuralFeatureAction___Type_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(clearStructuralFeatureActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(clearStructuralFeatureActionEClass->getEOperations()->at(0));
 }
 
 // End Class ClearStructuralFeatureAction
 
 // Begin Class ClearVariableAction
-ecore::EClass* UmlPackageImpl::getClearVariableAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getClearVariableAction() const
 {
 	return clearVariableActionEClass;
 }
@@ -10235,103 +9203,103 @@ ecore::EClass* UmlPackageImpl::getClearVariableAction() const
 // End Class ClearVariableAction
 
 // Begin Class Collaboration
-ecore::EClass* UmlPackageImpl::getCollaboration() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCollaboration() const
 {
 	return collaborationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCollaboration_CollaborationRole() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCollaboration_CollaborationRole() const
 {
-	return dynamic_cast<ecore::EReference*>(collaborationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(collaborationEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class Collaboration
 
 // Begin Class CollaborationUse
-ecore::EClass* UmlPackageImpl::getCollaborationUse() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCollaborationUse() const
 {
 	return collaborationUseEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCollaborationUse_RoleBinding() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCollaborationUse_RoleBinding() const
 {
-	return dynamic_cast<ecore::EReference*>(collaborationUseEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(collaborationUseEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getCollaborationUse_Type() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCollaborationUse_Type() const
 {
-	return dynamic_cast<ecore::EReference*>(collaborationUseEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(collaborationUseEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getCollaborationUse___Client_elements__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCollaborationUse___Client_elements__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(collaborationUseEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(collaborationUseEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getCollaborationUse___Connectors__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCollaborationUse___Connectors__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(collaborationUseEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(collaborationUseEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getCollaborationUse___Every_role__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCollaborationUse___Every_role__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(collaborationUseEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(collaborationUseEClass->getEOperations()->at(1));
 }
 
 // End Class CollaborationUse
 
 // Begin Class CombinedFragment
-ecore::EClass* UmlPackageImpl::getCombinedFragment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCombinedFragment() const
 {
 	return combinedFragmentEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getCombinedFragment_InteractionOperator() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getCombinedFragment_InteractionOperator() const
 {
-	return dynamic_cast<ecore::EAttribute*>(combinedFragmentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(combinedFragmentEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getCombinedFragment_CfragmentGate() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCombinedFragment_CfragmentGate() const
 {
-	return dynamic_cast<ecore::EReference*>(combinedFragmentEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(combinedFragmentEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getCombinedFragment_Operand() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCombinedFragment_Operand() const
 {
-	return dynamic_cast<ecore::EReference*>(combinedFragmentEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(combinedFragmentEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getCombinedFragment___Break___EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCombinedFragment___Break___EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(combinedFragmentEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(combinedFragmentEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getCombinedFragment___Consider_and_ignore__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCombinedFragment___Consider_and_ignore__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(combinedFragmentEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(combinedFragmentEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getCombinedFragment___Opt_loop_break_neg__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCombinedFragment___Opt_loop_break_neg__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(combinedFragmentEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(combinedFragmentEClass->getEOperations()->at(2));
 }
 
 // End Class CombinedFragment
 
 // Begin Class Comment
-ecore::EClass* UmlPackageImpl::getComment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getComment() const
 {
 	return commentEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getComment_Body() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getComment_Body() const
 {
-	return dynamic_cast<ecore::EAttribute*>(commentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(commentEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getComment_AnnotatedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComment_AnnotatedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(commentEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(commentEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Comment
 
 // Begin Class CommunicationPath
-ecore::EClass* UmlPackageImpl::getCommunicationPath() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCommunicationPath() const
 {
 	return communicationPathEClass;
 }
@@ -10341,155 +9309,155 @@ ecore::EClass* UmlPackageImpl::getCommunicationPath() const
 // End Class CommunicationPath
 
 // Begin Class Component
-ecore::EClass* UmlPackageImpl::getComponent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getComponent() const
 {
 	return componentEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getComponent_IsIndirectlyInstantiated() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getComponent_IsIndirectlyInstantiated() const
 {
-	return dynamic_cast<ecore::EAttribute*>(componentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(componentEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getComponent_PackagedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponent_PackagedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(componentEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getComponent_Provided() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponent_Provided() const
 {
-	return dynamic_cast<ecore::EReference*>(componentEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getComponent_Realization() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponent_Realization() const
 {
-	return dynamic_cast<ecore::EReference*>(componentEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getComponent_Required() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponent_Required() const
 {
-	return dynamic_cast<ecore::EReference*>(componentEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getComponent___CreateOwnedClass__String_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___CreateOwnedClass__String_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___CreateOwnedEnumeration__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___CreateOwnedEnumeration__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___CreateOwnedInterface__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___CreateOwnedInterface__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___CreateOwnedPrimitiveType__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___CreateOwnedPrimitiveType__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___GetProvideds() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___GetProvideds() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___GetRequireds() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___GetRequireds() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___No_nested_classifiers__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___No_nested_classifiers__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getComponent___No_packaged_elements__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getComponent___No_packaged_elements__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(componentEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(componentEClass->getEOperations()->at(1));
 }
 
 // End Class Component
 
 // Begin Class ComponentRealization
-ecore::EClass* UmlPackageImpl::getComponentRealization() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getComponentRealization() const
 {
 	return componentRealizationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getComponentRealization_Abstraction() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponentRealization_Abstraction() const
 {
-	return dynamic_cast<ecore::EReference*>(componentRealizationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentRealizationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getComponentRealization_RealizingClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getComponentRealization_RealizingClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(componentRealizationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(componentRealizationEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class ComponentRealization
 
 // Begin Class ConditionalNode
-ecore::EClass* UmlPackageImpl::getConditionalNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConditionalNode() const
 {
 	return conditionalNodeEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getConditionalNode_IsAssured() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getConditionalNode_IsAssured() const
 {
-	return dynamic_cast<ecore::EAttribute*>(conditionalNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(conditionalNodeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getConditionalNode_IsDeterminate() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getConditionalNode_IsDeterminate() const
 {
-	return dynamic_cast<ecore::EAttribute*>(conditionalNodeEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getConditionalNode_Clause() const
-{
-	return dynamic_cast<ecore::EReference*>(conditionalNodeEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getConditionalNode_Result() const
-{
-	return dynamic_cast<ecore::EReference*>(conditionalNodeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(conditionalNodeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getConditionalNode___Clause_no_predecessor__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConditionalNode_Clause() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(conditionalNodeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getConditionalNode___Executable_nodes__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConditionalNode_Result() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(conditionalNodeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getConditionalNode___Matching_output_pins__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___Clause_no_predecessor__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getConditionalNode___No_input_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___Executable_nodes__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getConditionalNode___One_clause_with_executable_node__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___Matching_output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getConditionalNode___Result_no_incoming__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___No_input_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(conditionalNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___One_clause_with_executable_node__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConditionalNode___Result_no_incoming__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(conditionalNodeEClass->getEOperations()->at(0));
 }
 
 // End Class ConditionalNode
 
 // Begin Class ConnectableElement
-ecore::EClass* UmlPackageImpl::getConnectableElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectableElement() const
 {
 	return connectableElementEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getConnectableElement_End() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectableElement_End() const
 {
-	return dynamic_cast<ecore::EReference*>(connectableElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectableElementEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getConnectableElement___GetEnds() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectableElement___GetEnds() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectableElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectableElementEClass->getEOperations()->at(0));
 }
 
 // End Class ConnectableElement
 
 // Begin Class ConnectableElementTemplateParameter
-ecore::EClass* UmlPackageImpl::getConnectableElementTemplateParameter() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectableElementTemplateParameter() const
 {
 	return connectableElementTemplateParameterEClass;
 }
@@ -10499,217 +9467,217 @@ ecore::EClass* UmlPackageImpl::getConnectableElementTemplateParameter() const
 // End Class ConnectableElementTemplateParameter
 
 // Begin Class ConnectionPointReference
-ecore::EClass* UmlPackageImpl::getConnectionPointReference() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectionPointReference() const
 {
 	return connectionPointReferenceEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getConnectionPointReference_Entry() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectionPointReference_Entry() const
 {
-	return dynamic_cast<ecore::EReference*>(connectionPointReferenceEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectionPointReferenceEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getConnectionPointReference_Exit() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectionPointReference_Exit() const
 {
-	return dynamic_cast<ecore::EReference*>(connectionPointReferenceEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectionPointReferenceEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getConnectionPointReference_State() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectionPointReference_State() const
 {
-	return dynamic_cast<ecore::EReference*>(connectionPointReferenceEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectionPointReferenceEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getConnectionPointReference___Entry_pseudostates__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectionPointReference___Entry_pseudostates__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectionPointReferenceEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectionPointReferenceEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getConnectionPointReference___Exit_pseudostates__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectionPointReference___Exit_pseudostates__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectionPointReferenceEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectionPointReferenceEClass->getEOperations()->at(0));
 }
 
 // End Class ConnectionPointReference
 
 // Begin Class Connector
-ecore::EClass* UmlPackageImpl::getConnector() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnector() const
 {
 	return connectorEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getConnector_Kind() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getConnector_Kind() const
 {
-	return dynamic_cast<ecore::EAttribute*>(connectorEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(connectorEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getConnector_Contract() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Contract() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getConnector_End() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_End() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getConnector_RedefinedConnector() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_RedefinedConnector() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getConnector_Type() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnector_Type() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getConnector___GetKind() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnector___GetKind() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getConnector___Roles__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnector___Roles__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getConnector___Types__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnector___Types__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEClass->getEOperations()->at(0));
 }
 
 // End Class Connector
 
 // Begin Class ConnectorEnd
-ecore::EClass* UmlPackageImpl::getConnectorEnd() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConnectorEnd() const
 {
 	return connectorEndEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getConnectorEnd_DefiningEnd() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_DefiningEnd() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEndEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEndEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getConnectorEnd_PartWithPort() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_PartWithPort() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEndEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEndEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getConnectorEnd_Role() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConnectorEnd_Role() const
 {
-	return dynamic_cast<ecore::EReference*>(connectorEndEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(connectorEndEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getConnectorEnd___GetDefiningEnd() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectorEnd___GetDefiningEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEndEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEndEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getConnectorEnd___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectorEnd___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEndEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEndEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getConnectorEnd___Part_with_port_empty__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectorEnd___Part_with_port_empty__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEndEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEndEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getConnectorEnd___Role_and_part_with_port__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectorEnd___Role_and_part_with_port__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEndEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEndEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getConnectorEnd___Self_part_with_port__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConnectorEnd___Self_part_with_port__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(connectorEndEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(connectorEndEClass->getEOperations()->at(3));
 }
 
 // End Class ConnectorEnd
 
 // Begin Class ConsiderIgnoreFragment
-ecore::EClass* UmlPackageImpl::getConsiderIgnoreFragment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConsiderIgnoreFragment() const
 {
 	return considerIgnoreFragmentEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getConsiderIgnoreFragment_Message() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConsiderIgnoreFragment_Message() const
 {
-	return dynamic_cast<ecore::EReference*>(considerIgnoreFragmentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(considerIgnoreFragmentEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getConsiderIgnoreFragment___Consider_or_ignore__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConsiderIgnoreFragment___Consider_or_ignore__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(considerIgnoreFragmentEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(considerIgnoreFragmentEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getConsiderIgnoreFragment___Type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConsiderIgnoreFragment___Type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(considerIgnoreFragmentEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(considerIgnoreFragmentEClass->getEOperations()->at(1));
 }
 
 // End Class ConsiderIgnoreFragment
 
 // Begin Class Constraint
-ecore::EClass* UmlPackageImpl::getConstraint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getConstraint() const
 {
 	return constraintEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getConstraint_ConstrainedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConstraint_ConstrainedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(constraintEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(constraintEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getConstraint_Context() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConstraint_Context() const
 {
-	return dynamic_cast<ecore::EReference*>(constraintEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(constraintEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getConstraint_Specification() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getConstraint_Specification() const
 {
-	return dynamic_cast<ecore::EReference*>(constraintEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(constraintEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getConstraint___Boolean_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConstraint___Boolean_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(constraintEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(constraintEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getConstraint___No_side_effects__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConstraint___No_side_effects__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(constraintEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(constraintEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getConstraint___Not_apply_to_self__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getConstraint___Not_apply_to_self__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(constraintEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(constraintEClass->getEOperations()->at(2));
 }
 
 // End Class Constraint
 
 // Begin Class Continuation
-ecore::EClass* UmlPackageImpl::getContinuation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getContinuation() const
 {
 	return continuationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getContinuation_Setting() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getContinuation_Setting() const
 {
-	return dynamic_cast<ecore::EAttribute*>(continuationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(continuationEClass->getEStructuralFeatures()->at(0));
 }
 
 
-ecore::EOperation* UmlPackageImpl::getContinuation___First_or_last_interaction_fragment__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getContinuation___First_or_last_interaction_fragment__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(continuationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(continuationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getContinuation___Global__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getContinuation___Global__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(continuationEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(continuationEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getContinuation___Same_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getContinuation___Same_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(continuationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(continuationEClass->getEOperations()->at(1));
 }
 
 // End Class Continuation
 
 // Begin Class ControlFlow
-ecore::EClass* UmlPackageImpl::getControlFlow() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getControlFlow() const
 {
 	return controlFlowEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getControlFlow___Object_nodes__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getControlFlow___Object_nodes__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(controlFlowEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(controlFlowEClass->getEOperations()->at(0));
 }
 
 // End Class ControlFlow
 
 // Begin Class ControlNode
-ecore::EClass* UmlPackageImpl::getControlNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getControlNode() const
 {
 	return controlNodeEClass;
 }
@@ -10719,81 +9687,81 @@ ecore::EClass* UmlPackageImpl::getControlNode() const
 // End Class ControlNode
 
 // Begin Class CreateLinkAction
-ecore::EClass* UmlPackageImpl::getCreateLinkAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCreateLinkAction() const
 {
 	return createLinkActionEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getCreateLinkAction___Association_not_abstract__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateLinkAction___Association_not_abstract__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createLinkActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createLinkActionEClass->getEOperations()->at(0));
 }
 
 // End Class CreateLinkAction
 
 // Begin Class CreateLinkObjectAction
-ecore::EClass* UmlPackageImpl::getCreateLinkObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCreateLinkObjectAction() const
 {
 	return createLinkObjectActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCreateLinkObjectAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCreateLinkObjectAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(createLinkObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(createLinkObjectActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getCreateLinkObjectAction___Association_class__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateLinkObjectAction___Association_class__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createLinkObjectActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createLinkObjectActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getCreateLinkObjectAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateLinkObjectAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createLinkObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createLinkObjectActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getCreateLinkObjectAction___Type_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateLinkObjectAction___Type_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createLinkObjectActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createLinkObjectActionEClass->getEOperations()->at(1));
 }
 
 // End Class CreateLinkObjectAction
 
 // Begin Class CreateObjectAction
-ecore::EClass* UmlPackageImpl::getCreateObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getCreateObjectAction() const
 {
 	return createObjectActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getCreateObjectAction_Classifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCreateObjectAction_Classifier() const
 {
-	return dynamic_cast<ecore::EReference*>(createObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(createObjectActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getCreateObjectAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getCreateObjectAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(createObjectActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(createObjectActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getCreateObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createObjectActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getCreateObjectAction___Classifier_not_association_class__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateObjectAction___Classifier_not_association_class__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createObjectActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createObjectActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getCreateObjectAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateObjectAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createObjectActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createObjectActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getCreateObjectAction___Same_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getCreateObjectAction___Same_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(createObjectActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(createObjectActionEClass->getEOperations()->at(3));
 }
 
 // End Class CreateObjectAction
 
 // Begin Class DataStoreNode
-ecore::EClass* UmlPackageImpl::getDataStoreNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDataStoreNode() const
 {
 	return dataStoreNodeEClass;
 }
@@ -10803,101 +9771,101 @@ ecore::EClass* UmlPackageImpl::getDataStoreNode() const
 // End Class DataStoreNode
 
 // Begin Class DataType
-ecore::EClass* UmlPackageImpl::getDataType() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDataType() const
 {
 	return dataTypeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDataType_OwnedAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDataType_OwnedAttribute() const
 {
-	return dynamic_cast<ecore::EReference*>(dataTypeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(dataTypeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDataType_OwnedOperation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDataType_OwnedOperation() const
 {
-	return dynamic_cast<ecore::EReference*>(dataTypeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(dataTypeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDataType___CreateOwnedAttribute__String_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDataType___CreateOwnedAttribute__String_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(dataTypeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(dataTypeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getDataType___CreateOwnedOperation__String_Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDataType___CreateOwnedOperation__String_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(dataTypeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(dataTypeEClass->getEOperations()->at(1));
 }
 
 // End Class DataType
 
 // Begin Class DecisionNode
-ecore::EClass* UmlPackageImpl::getDecisionNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDecisionNode() const
 {
 	return decisionNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDecisionNode_DecisionInput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDecisionNode_DecisionInput() const
 {
-	return dynamic_cast<ecore::EReference*>(decisionNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(decisionNodeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDecisionNode_DecisionInputFlow() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDecisionNode_DecisionInputFlow() const
 {
-	return dynamic_cast<ecore::EReference*>(decisionNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(decisionNodeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Decision_input_flow_incoming__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Decision_input_flow_incoming__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Incoming_control_one_input_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Incoming_control_one_input_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Incoming_object_one_input_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Incoming_object_one_input_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Incoming_outgoing_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Incoming_outgoing_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Two_input_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Two_input_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getDecisionNode___Zero_input_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDecisionNode___Zero_input_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(decisionNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(decisionNodeEClass->getEOperations()->at(0));
 }
 
 // End Class DecisionNode
 
 // Begin Class Dependency
-ecore::EClass* UmlPackageImpl::getDependency() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDependency() const
 {
 	return dependencyEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDependency_Client() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDependency_Client() const
 {
-	return dynamic_cast<ecore::EReference*>(dependencyEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(dependencyEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDependency_Supplier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDependency_Supplier() const
 {
-	return dynamic_cast<ecore::EReference*>(dependencyEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(dependencyEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Dependency
 
 // Begin Class DeployedArtifact
-ecore::EClass* UmlPackageImpl::getDeployedArtifact() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDeployedArtifact() const
 {
 	return deployedArtifactEClass;
 }
@@ -10907,81 +9875,81 @@ ecore::EClass* UmlPackageImpl::getDeployedArtifact() const
 // End Class DeployedArtifact
 
 // Begin Class Deployment
-ecore::EClass* UmlPackageImpl::getDeployment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDeployment() const
 {
 	return deploymentEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDeployment_Configuration() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeployment_Configuration() const
 {
-	return dynamic_cast<ecore::EReference*>(deploymentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDeployment_DeployedArtifact() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeployment_DeployedArtifact() const
 {
-	return dynamic_cast<ecore::EReference*>(deploymentEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getDeployment_Location() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeployment_Location() const
 {
-	return dynamic_cast<ecore::EReference*>(deploymentEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentEClass->getEStructuralFeatures()->at(2));
 }
 
 
 // End Class Deployment
 
 // Begin Class DeploymentSpecification
-ecore::EClass* UmlPackageImpl::getDeploymentSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDeploymentSpecification() const
 {
 	return deploymentSpecificationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getDeploymentSpecification_DeploymentLocation() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDeploymentSpecification_DeploymentLocation() const
 {
-	return dynamic_cast<ecore::EAttribute*>(deploymentSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(deploymentSpecificationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getDeploymentSpecification_ExecutionLocation() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDeploymentSpecification_ExecutionLocation() const
 {
-	return dynamic_cast<ecore::EAttribute*>(deploymentSpecificationEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getDeploymentSpecification_Deployment() const
-{
-	return dynamic_cast<ecore::EReference*>(deploymentSpecificationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(deploymentSpecificationEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDeploymentSpecification___Deployed_elements__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeploymentSpecification_Deployment() const
 {
-	return dynamic_cast<ecore::EOperation*>(deploymentSpecificationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentSpecificationEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getDeploymentSpecification___Deployment_target__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDeploymentSpecification___Deployed_elements__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(deploymentSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(deploymentSpecificationEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDeploymentSpecification___Deployment_target__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(deploymentSpecificationEClass->getEOperations()->at(0));
 }
 
 // End Class DeploymentSpecification
 
 // Begin Class DeploymentTarget
-ecore::EClass* UmlPackageImpl::getDeploymentTarget() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDeploymentTarget() const
 {
 	return deploymentTargetEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDeploymentTarget_DeployedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeploymentTarget_DeployedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(deploymentTargetEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentTargetEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDeploymentTarget_Deployment() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDeploymentTarget_Deployment() const
 {
-	return dynamic_cast<ecore::EReference*>(deploymentTargetEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(deploymentTargetEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDeploymentTarget___GetDeployedElements() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDeploymentTarget___GetDeployedElements() const
 {
-	return dynamic_cast<ecore::EOperation*>(deploymentTargetEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(deploymentTargetEClass->getEOperations()->at(0));
 }
 
 // End Class DeploymentTarget
 
 // Begin Class DestroyLinkAction
-ecore::EClass* UmlPackageImpl::getDestroyLinkAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDestroyLinkAction() const
 {
 	return destroyLinkActionEClass;
 }
@@ -10991,51 +9959,51 @@ ecore::EClass* UmlPackageImpl::getDestroyLinkAction() const
 // End Class DestroyLinkAction
 
 // Begin Class DestroyObjectAction
-ecore::EClass* UmlPackageImpl::getDestroyObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDestroyObjectAction() const
 {
 	return destroyObjectActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getDestroyObjectAction_IsDestroyLinks() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDestroyObjectAction_IsDestroyLinks() const
 {
-	return dynamic_cast<ecore::EAttribute*>(destroyObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(destroyObjectActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getDestroyObjectAction_IsDestroyOwnedObjects() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDestroyObjectAction_IsDestroyOwnedObjects() const
 {
-	return dynamic_cast<ecore::EAttribute*>(destroyObjectActionEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getDestroyObjectAction_Target() const
-{
-	return dynamic_cast<ecore::EReference*>(destroyObjectActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(destroyObjectActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDestroyObjectAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDestroyObjectAction_Target() const
 {
-	return dynamic_cast<ecore::EOperation*>(destroyObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(destroyObjectActionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getDestroyObjectAction___No_type__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDestroyObjectAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(destroyObjectActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(destroyObjectActionEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDestroyObjectAction___No_type__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(destroyObjectActionEClass->getEOperations()->at(1));
 }
 
 // End Class DestroyObjectAction
 
 // Begin Class DestructionOccurrenceSpecification
-ecore::EClass* UmlPackageImpl::getDestructionOccurrenceSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDestructionOccurrenceSpecification() const
 {
 	return destructionOccurrenceSpecificationEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getDestructionOccurrenceSpecification___No_occurrence_specifications_below__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDestructionOccurrenceSpecification___No_occurrence_specifications_below__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(destructionOccurrenceSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(destructionOccurrenceSpecificationEClass->getEOperations()->at(0));
 }
 
 // End Class DestructionOccurrenceSpecification
 
 // Begin Class Device
-ecore::EClass* UmlPackageImpl::getDevice() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDevice() const
 {
 	return deviceEClass;
 }
@@ -11045,69 +10013,69 @@ ecore::EClass* UmlPackageImpl::getDevice() const
 // End Class Device
 
 // Begin Class DirectedRelationship
-ecore::EClass* UmlPackageImpl::getDirectedRelationship() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDirectedRelationship() const
 {
 	return directedRelationshipEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDirectedRelationship_Source() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDirectedRelationship_Source() const
 {
-	return dynamic_cast<ecore::EReference*>(directedRelationshipEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(directedRelationshipEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDirectedRelationship_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDirectedRelationship_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(directedRelationshipEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(directedRelationshipEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class DirectedRelationship
 
 // Begin Class Duration
-ecore::EClass* UmlPackageImpl::getDuration() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDuration() const
 {
 	return durationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getDuration_Expr() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDuration_Expr() const
 {
-	return dynamic_cast<ecore::EReference*>(durationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(durationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getDuration_Observation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDuration_Observation() const
 {
-	return dynamic_cast<ecore::EReference*>(durationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(durationEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDuration___No_expr_requires_observation__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDuration___No_expr_requires_observation__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(durationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(durationEClass->getEOperations()->at(0));
 }
 
 // End Class Duration
 
 // Begin Class DurationConstraint
-ecore::EClass* UmlPackageImpl::getDurationConstraint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDurationConstraint() const
 {
 	return durationConstraintEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getDurationConstraint_FirstEvent() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDurationConstraint_FirstEvent() const
 {
-	return dynamic_cast<ecore::EAttribute*>(durationConstraintEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(durationConstraintEClass->getEStructuralFeatures()->at(0));
 }
 
 
-ecore::EOperation* UmlPackageImpl::getDurationConstraint___First_event_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDurationConstraint___First_event_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(durationConstraintEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(durationConstraintEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getDurationConstraint___Has_one_or_two_constrainedElements__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDurationConstraint___Has_one_or_two_constrainedElements__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(durationConstraintEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(durationConstraintEClass->getEOperations()->at(1));
 }
 
 // End Class DurationConstraint
 
 // Begin Class DurationInterval
-ecore::EClass* UmlPackageImpl::getDurationInterval() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDurationInterval() const
 {
 	return durationIntervalEClass;
 }
@@ -11117,299 +10085,299 @@ ecore::EClass* UmlPackageImpl::getDurationInterval() const
 // End Class DurationInterval
 
 // Begin Class DurationObservation
-ecore::EClass* UmlPackageImpl::getDurationObservation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getDurationObservation() const
 {
 	return durationObservationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getDurationObservation_FirstEvent() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getDurationObservation_FirstEvent() const
 {
-	return dynamic_cast<ecore::EAttribute*>(durationObservationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(durationObservationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getDurationObservation_Event() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getDurationObservation_Event() const
 {
-	return dynamic_cast<ecore::EReference*>(durationObservationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(durationObservationEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getDurationObservation___First_event_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getDurationObservation___First_event_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(durationObservationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(durationObservationEClass->getEOperations()->at(0));
 }
 
 // End Class DurationObservation
 
 // Begin Class Element
-ecore::EClass* UmlPackageImpl::getElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getElement() const
 {
 	return elementEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getElement_OwnedComment() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getElement_OwnedComment() const
 {
-	return dynamic_cast<ecore::EReference*>(elementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(elementEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getElement_OwnedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getElement_OwnedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(elementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(elementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getElement_Owner() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getElement_Owner() const
 {
-	return dynamic_cast<ecore::EReference*>(elementEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(elementEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getElement___AddKeyword__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___AddKeyword__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getElement___AllOwnedElements() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___AllOwnedElements() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(34));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(34));
 }
-ecore::EOperation* UmlPackageImpl::getElement___ApplyStereotype__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___ApplyStereotype__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getElement___Container() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___Container() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(37));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(37));
 }
-ecore::EOperation* UmlPackageImpl::getElement___CreateEAnnotation__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___CreateEAnnotation__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getElement___Destroy() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___Destroy() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetApplicableStereotype__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetApplicableStereotype__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetApplicableStereotypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetApplicableStereotypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetAppliedStereotype__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetAppliedStereotype__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetAppliedStereotypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetAppliedStereotypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetAppliedSubstereotype__Stereotype_String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetAppliedSubstereotype__Stereotype_String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetAppliedSubstereotypes__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetAppliedSubstereotypes__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetKeywords() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetKeywords() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetMetaClass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetMetaClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(36));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(36));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetModel() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetModel() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetNearestPackage() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetNearestPackage() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(14));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(14));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetRelationships() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetRelationships() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(15));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(15));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetRelationships__EClass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetRelationships__EClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(16));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(16));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetRequiredStereotype__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetRequiredStereotype__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(17));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(17));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetRequiredStereotypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetRequiredStereotypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(18));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(18));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetSourceDirectedRelationships() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetSourceDirectedRelationships() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(19));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(19));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetSourceDirectedRelationships__EClass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetSourceDirectedRelationships__EClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(20));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(20));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetStereotypeApplication__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetStereotypeApplication__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(21));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(21));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetStereotypeApplications() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetStereotypeApplications() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(22));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(22));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetTargetDirectedRelationships() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetTargetDirectedRelationships() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(23));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(23));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetTargetDirectedRelationships__EClass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetTargetDirectedRelationships__EClass() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(24));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(24));
 }
-ecore::EOperation* UmlPackageImpl::getElement___GetValue__Stereotype_String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___GetValue__Stereotype_String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(25));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(25));
 }
-ecore::EOperation* UmlPackageImpl::getElement___HasKeyword__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___HasKeyword__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(26));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(26));
 }
-ecore::EOperation* UmlPackageImpl::getElement___HasValue__Stereotype_String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___HasValue__Stereotype_String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(27));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(27));
 }
-ecore::EOperation* UmlPackageImpl::getElement___Has_owner__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___Has_owner__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getElement___IsStereotypeApplicable__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___IsStereotypeApplicable__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(28));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(28));
 }
-ecore::EOperation* UmlPackageImpl::getElement___IsStereotypeApplied__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___IsStereotypeApplied__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(29));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(29));
 }
-ecore::EOperation* UmlPackageImpl::getElement___IsStereotypeRequired__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___IsStereotypeRequired__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(30));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(30));
 }
-ecore::EOperation* UmlPackageImpl::getElement___MustBeOwned() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___MustBeOwned() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(35));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(35));
 }
-ecore::EOperation* UmlPackageImpl::getElement___Not_own_self__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___Not_own_self__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getElement___RemoveKeyword__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___RemoveKeyword__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(31));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(31));
 }
-ecore::EOperation* UmlPackageImpl::getElement___SetValue__Stereotype_EJavaObject() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___SetValue__Stereotype_EJavaObject() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(32));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(32));
 }
-ecore::EOperation* UmlPackageImpl::getElement___UnapplyStereotype__Stereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElement___UnapplyStereotype__Stereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementEClass->getEOperations()->at(33));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementEClass->getEOperations()->at(33));
 }
 
 // End Class Element
 
 // Begin Class ElementImport
-ecore::EClass* UmlPackageImpl::getElementImport() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getElementImport() const
 {
 	return elementImportEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getElementImport_Alias() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getElementImport_Alias() const
 {
-	return dynamic_cast<ecore::EAttribute*>(elementImportEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(elementImportEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getElementImport_Visibility() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getElementImport_Visibility() const
 {
-	return dynamic_cast<ecore::EAttribute*>(elementImportEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getElementImport_ImportedElement() const
-{
-	return dynamic_cast<ecore::EReference*>(elementImportEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getElementImport_ImportingNamespace() const
-{
-	return dynamic_cast<ecore::EReference*>(elementImportEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(elementImportEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getElementImport___GetName() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getElementImport_ImportedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementImportEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(elementImportEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getElementImport___Imported_element_is_public__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getElementImport_ImportingNamespace() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementImportEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(elementImportEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getElementImport___Visibility_public_or_private__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElementImport___GetName() const
 {
-	return dynamic_cast<ecore::EOperation*>(elementImportEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementImportEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElementImport___Imported_element_is_public__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementImportEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getElementImport___Visibility_public_or_private__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(elementImportEClass->getEOperations()->at(1));
 }
 
 // End Class ElementImport
 
 // Begin Class EncapsulatedClassifier
-ecore::EClass* UmlPackageImpl::getEncapsulatedClassifier() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getEncapsulatedClassifier() const
 {
 	return encapsulatedClassifierEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getEncapsulatedClassifier_OwnedPort() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getEncapsulatedClassifier_OwnedPort() const
 {
-	return dynamic_cast<ecore::EReference*>(encapsulatedClassifierEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(encapsulatedClassifierEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getEncapsulatedClassifier___GetOwnedPorts() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getEncapsulatedClassifier___GetOwnedPorts() const
 {
-	return dynamic_cast<ecore::EOperation*>(encapsulatedClassifierEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(encapsulatedClassifierEClass->getEOperations()->at(0));
 }
 
 // End Class EncapsulatedClassifier
 
 // Begin Class Enumeration
-ecore::EClass* UmlPackageImpl::getEnumeration() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getEnumeration() const
 {
 	return enumerationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getEnumeration_OwnedLiteral() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getEnumeration_OwnedLiteral() const
 {
-	return dynamic_cast<ecore::EReference*>(enumerationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(enumerationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getEnumeration___Immutable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getEnumeration___Immutable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(enumerationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(enumerationEClass->getEOperations()->at(0));
 }
 
 // End Class Enumeration
 
 // Begin Class EnumerationLiteral
-ecore::EClass* UmlPackageImpl::getEnumerationLiteral() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getEnumerationLiteral() const
 {
 	return enumerationLiteralEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getEnumerationLiteral_Enumeration() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getEnumerationLiteral_Enumeration() const
 {
-	return dynamic_cast<ecore::EReference*>(enumerationLiteralEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(enumerationLiteralEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getEnumerationLiteral___GetClassifier() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getEnumerationLiteral___GetClassifier() const
 {
-	return dynamic_cast<ecore::EOperation*>(enumerationLiteralEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(enumerationLiteralEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getEnumerationLiteral___GetClassifiers() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getEnumerationLiteral___GetClassifiers() const
 {
-	return dynamic_cast<ecore::EOperation*>(enumerationLiteralEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(enumerationLiteralEClass->getEOperations()->at(0));
 }
 
 // End Class EnumerationLiteral
 
 // Begin Class Event
-ecore::EClass* UmlPackageImpl::getEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getEvent() const
 {
 	return eventEClass;
 }
@@ -11419,71 +10387,71 @@ ecore::EClass* UmlPackageImpl::getEvent() const
 // End Class Event
 
 // Begin Class ExceptionHandler
-ecore::EClass* UmlPackageImpl::getExceptionHandler() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExceptionHandler() const
 {
 	return exceptionHandlerEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExceptionHandler_ExceptionInput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExceptionHandler_ExceptionInput() const
 {
-	return dynamic_cast<ecore::EReference*>(exceptionHandlerEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(exceptionHandlerEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getExceptionHandler_ExceptionType() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExceptionHandler_ExceptionType() const
 {
-	return dynamic_cast<ecore::EReference*>(exceptionHandlerEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(exceptionHandlerEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getExceptionHandler_HandlerBody() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExceptionHandler_HandlerBody() const
 {
-	return dynamic_cast<ecore::EReference*>(exceptionHandlerEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(exceptionHandlerEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getExceptionHandler_ProtectedNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExceptionHandler_ProtectedNode() const
 {
-	return dynamic_cast<ecore::EReference*>(exceptionHandlerEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(exceptionHandlerEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___Edge_source_target__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___Edge_source_target__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___Exception_input_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___Exception_input_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___Handler_body_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___Handler_body_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___Handler_body_owner__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___Handler_body_owner__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___One_input__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___One_input__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getExceptionHandler___Output_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExceptionHandler___Output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(exceptionHandlerEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(exceptionHandlerEClass->getEOperations()->at(1));
 }
 
 // End Class ExceptionHandler
 
 // Begin Class ExecutableNode
-ecore::EClass* UmlPackageImpl::getExecutableNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExecutableNode() const
 {
 	return executableNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExecutableNode_Handler() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExecutableNode_Handler() const
 {
-	return dynamic_cast<ecore::EReference*>(executableNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(executableNodeEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class ExecutableNode
 
 // Begin Class ExecutionEnvironment
-ecore::EClass* UmlPackageImpl::getExecutionEnvironment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExecutionEnvironment() const
 {
 	return executionEnvironmentEClass;
 }
@@ -11493,297 +10461,297 @@ ecore::EClass* UmlPackageImpl::getExecutionEnvironment() const
 // End Class ExecutionEnvironment
 
 // Begin Class ExecutionOccurrenceSpecification
-ecore::EClass* UmlPackageImpl::getExecutionOccurrenceSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExecutionOccurrenceSpecification() const
 {
 	return executionOccurrenceSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExecutionOccurrenceSpecification_Execution() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExecutionOccurrenceSpecification_Execution() const
 {
-	return dynamic_cast<ecore::EReference*>(executionOccurrenceSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(executionOccurrenceSpecificationEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class ExecutionOccurrenceSpecification
 
 // Begin Class ExecutionSpecification
-ecore::EClass* UmlPackageImpl::getExecutionSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExecutionSpecification() const
 {
 	return executionSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExecutionSpecification_Finish() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExecutionSpecification_Finish() const
 {
-	return dynamic_cast<ecore::EReference*>(executionSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(executionSpecificationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getExecutionSpecification_Start() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExecutionSpecification_Start() const
 {
-	return dynamic_cast<ecore::EReference*>(executionSpecificationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(executionSpecificationEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getExecutionSpecification___Same_lifeline__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExecutionSpecification___Same_lifeline__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(executionSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(executionSpecificationEClass->getEOperations()->at(0));
 }
 
 // End Class ExecutionSpecification
 
 // Begin Class ExpansionNode
-ecore::EClass* UmlPackageImpl::getExpansionNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExpansionNode() const
 {
 	return expansionNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExpansionNode_RegionAsInput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExpansionNode_RegionAsInput() const
 {
-	return dynamic_cast<ecore::EReference*>(expansionNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(expansionNodeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getExpansionNode_RegionAsOutput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExpansionNode_RegionAsOutput() const
 {
-	return dynamic_cast<ecore::EReference*>(expansionNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(expansionNodeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getExpansionNode___Region_as_input_or_output__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExpansionNode___Region_as_input_or_output__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(expansionNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(expansionNodeEClass->getEOperations()->at(0));
 }
 
 // End Class ExpansionNode
 
 // Begin Class ExpansionRegion
-ecore::EClass* UmlPackageImpl::getExpansionRegion() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExpansionRegion() const
 {
 	return expansionRegionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getExpansionRegion_Mode() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getExpansionRegion_Mode() const
 {
-	return dynamic_cast<ecore::EAttribute*>(expansionRegionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(expansionRegionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getExpansionRegion_InputElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExpansionRegion_InputElement() const
 {
-	return dynamic_cast<ecore::EReference*>(expansionRegionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(expansionRegionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getExpansionRegion_OutputElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExpansionRegion_OutputElement() const
 {
-	return dynamic_cast<ecore::EReference*>(expansionRegionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(expansionRegionEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class ExpansionRegion
 
 // Begin Class Expression
-ecore::EClass* UmlPackageImpl::getExpression() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExpression() const
 {
 	return expressionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getExpression_Symbol() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getExpression_Symbol() const
 {
-	return dynamic_cast<ecore::EAttribute*>(expressionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(expressionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getExpression_Operand() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExpression_Operand() const
 {
-	return dynamic_cast<ecore::EReference*>(expressionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(expressionEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Expression
 
 // Begin Class Extend
-ecore::EClass* UmlPackageImpl::getExtend() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExtend() const
 {
 	return extendEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExtend_Condition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtend_Condition() const
 {
-	return dynamic_cast<ecore::EReference*>(extendEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(extendEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getExtend_ExtendedCase() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtend_ExtendedCase() const
 {
-	return dynamic_cast<ecore::EReference*>(extendEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(extendEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getExtend_Extension() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtend_Extension() const
 {
-	return dynamic_cast<ecore::EReference*>(extendEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(extendEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getExtend_ExtensionLocation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtend_ExtensionLocation() const
 {
-	return dynamic_cast<ecore::EReference*>(extendEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(extendEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getExtend___Extension_points__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtend___Extension_points__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extendEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extendEClass->getEOperations()->at(0));
 }
 
 // End Class Extend
 
 // Begin Class Extension
-ecore::EClass* UmlPackageImpl::getExtension() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExtension() const
 {
 	return extensionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getExtension_IsRequired() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getExtension_IsRequired() const
 {
-	return dynamic_cast<ecore::EAttribute*>(extensionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(extensionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getExtension_Metaclass() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtension_Metaclass() const
 {
-	return dynamic_cast<ecore::EReference*>(extensionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(extensionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getExtension___GetMetaclass() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___GetMetaclass() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___GetStereotype() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___GetStereotype() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___GetStereotypeEnd() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___GetStereotypeEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___IsRequired() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___IsRequired() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___Is_binary__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___Is_binary__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___MetaclassEnd() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___MetaclassEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getExtension___Non_owned_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtension___Non_owned_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEClass->getEOperations()->at(0));
 }
 
 // End Class Extension
 
 // Begin Class ExtensionEnd
-ecore::EClass* UmlPackageImpl::getExtensionEnd() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExtensionEnd() const
 {
 	return extensionEndEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getExtensionEnd___Aggregation__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtensionEnd___Aggregation__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEndEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEndEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getExtensionEnd___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtensionEnd___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionEndEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionEndEClass->getEOperations()->at(0));
 }
 
 // End Class ExtensionEnd
 
 // Begin Class ExtensionPoint
-ecore::EClass* UmlPackageImpl::getExtensionPoint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getExtensionPoint() const
 {
 	return extensionPointEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getExtensionPoint_UseCase() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getExtensionPoint_UseCase() const
 {
-	return dynamic_cast<ecore::EReference*>(extensionPointEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(extensionPointEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getExtensionPoint___Must_have_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getExtensionPoint___Must_have_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(extensionPointEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(extensionPointEClass->getEOperations()->at(0));
 }
 
 // End Class ExtensionPoint
 
 // Begin Class Factory
-ecore::EClass* UmlPackageImpl::getFactory() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFactory() const
 {
 	return factoryEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getFactory___Create__Class() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFactory___Create__Class() const
 {
-	return dynamic_cast<ecore::EOperation*>(factoryEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(factoryEClass->getEOperations()->at(0));
 }
 
 // End Class Factory
 
 // Begin Class Feature
-ecore::EClass* UmlPackageImpl::getFeature() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFeature() const
 {
 	return featureEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getFeature_IsStatic() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getFeature_IsStatic() const
 {
-	return dynamic_cast<ecore::EAttribute*>(featureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(featureEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getFeature_FeaturingClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getFeature_FeaturingClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(featureEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(featureEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Feature
 
 // Begin Class FinalNode
-ecore::EClass* UmlPackageImpl::getFinalNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFinalNode() const
 {
 	return finalNodeEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getFinalNode___No_outgoing_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalNode___No_outgoing_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalNodeEClass->getEOperations()->at(0));
 }
 
 // End Class FinalNode
 
 // Begin Class FinalState
-ecore::EClass* UmlPackageImpl::getFinalState() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFinalState() const
 {
 	return finalStateEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getFinalState___Cannot_reference_submachine__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___Cannot_reference_submachine__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getFinalState___No_entry_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___No_entry_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getFinalState___No_exit_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___No_exit_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getFinalState___No_outgoing_transitions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___No_outgoing_transitions__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getFinalState___No_regions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___No_regions__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getFinalState___No_state_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFinalState___No_state_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(finalStateEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(finalStateEClass->getEOperations()->at(5));
 }
 
 // End Class FinalState
 
 // Begin Class FlowFinalNode
-ecore::EClass* UmlPackageImpl::getFlowFinalNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFlowFinalNode() const
 {
 	return flowFinalNodeEClass;
 }
@@ -11793,209 +10761,209 @@ ecore::EClass* UmlPackageImpl::getFlowFinalNode() const
 // End Class FlowFinalNode
 
 // Begin Class ForkNode
-ecore::EClass* UmlPackageImpl::getForkNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getForkNode() const
 {
 	return forkNodeEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getForkNode___Edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getForkNode___Edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(forkNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(forkNodeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getForkNode___One_incoming_edge__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getForkNode___One_incoming_edge__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(forkNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(forkNodeEClass->getEOperations()->at(1));
 }
 
 // End Class ForkNode
 
 // Begin Class FunctionBehavior
-ecore::EClass* UmlPackageImpl::getFunctionBehavior() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getFunctionBehavior() const
 {
 	return functionBehaviorEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getFunctionBehavior___HasAllDataTypeAttributes__DataType() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFunctionBehavior___HasAllDataTypeAttributes__DataType() const
 {
-	return dynamic_cast<ecore::EOperation*>(functionBehaviorEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(functionBehaviorEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getFunctionBehavior___One_output_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFunctionBehavior___One_output_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(functionBehaviorEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(functionBehaviorEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getFunctionBehavior___Types_of_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getFunctionBehavior___Types_of_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(functionBehaviorEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(functionBehaviorEClass->getEOperations()->at(1));
 }
 
 // End Class FunctionBehavior
 
 // Begin Class Gate
-ecore::EClass* UmlPackageImpl::getGate() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getGate() const
 {
 	return gateEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getGate___Actual_gate_distinguishable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Actual_gate_distinguishable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Actual_gate_matched__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Actual_gate_matched__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Formal_gate_distinguishable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Formal_gate_distinguishable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getGate___GetName() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___GetName() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getGate___GetOperand() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___GetOperand() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Inside_cf_gate_distinguishable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Inside_cf_gate_distinguishable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Inside_cf_matched__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Inside_cf_matched__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getGate___IsActual() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___IsActual() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getGate___IsFormal() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___IsFormal() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getGate___IsInsideCF() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___IsInsideCF() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getGate___IsOutsideCF() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___IsOutsideCF() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Matches__Gate() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Matches__Gate() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Outside_cf_gate_distinguishable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Outside_cf_gate_distinguishable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getGate___Outside_cf_matched__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGate___Outside_cf_matched__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(gateEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(gateEClass->getEOperations()->at(2));
 }
 
 // End Class Gate
 
 // Begin Class GeneralOrdering
-ecore::EClass* UmlPackageImpl::getGeneralOrdering() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getGeneralOrdering() const
 {
 	return generalOrderingEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getGeneralOrdering_After() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralOrdering_After() const
 {
-	return dynamic_cast<ecore::EReference*>(generalOrderingEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalOrderingEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getGeneralOrdering_Before() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralOrdering_Before() const
 {
-	return dynamic_cast<ecore::EReference*>(generalOrderingEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalOrderingEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getGeneralOrdering___Irreflexive_transitive_closure__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGeneralOrdering___Irreflexive_transitive_closure__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(generalOrderingEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(generalOrderingEClass->getEOperations()->at(0));
 }
 
 // End Class GeneralOrdering
 
 // Begin Class Generalization
-ecore::EClass* UmlPackageImpl::getGeneralization() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getGeneralization() const
 {
 	return generalizationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getGeneralization_IsSubstitutable() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getGeneralization_IsSubstitutable() const
 {
-	return dynamic_cast<ecore::EAttribute*>(generalizationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(generalizationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getGeneralization_General() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralization_General() const
 {
-	return dynamic_cast<ecore::EReference*>(generalizationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalizationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getGeneralization_GeneralizationSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralization_GeneralizationSet() const
 {
-	return dynamic_cast<ecore::EReference*>(generalizationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalizationEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getGeneralization_Specific() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralization_Specific() const
 {
-	return dynamic_cast<ecore::EReference*>(generalizationEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalizationEClass->getEStructuralFeatures()->at(3));
 }
 
 
 // End Class Generalization
 
 // Begin Class GeneralizationSet
-ecore::EClass* UmlPackageImpl::getGeneralizationSet() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getGeneralizationSet() const
 {
 	return generalizationSetEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getGeneralizationSet_IsCovering() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getGeneralizationSet_IsCovering() const
 {
-	return dynamic_cast<ecore::EAttribute*>(generalizationSetEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(generalizationSetEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getGeneralizationSet_IsDisjoint() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getGeneralizationSet_IsDisjoint() const
 {
-	return dynamic_cast<ecore::EAttribute*>(generalizationSetEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getGeneralizationSet_Generalization() const
-{
-	return dynamic_cast<ecore::EReference*>(generalizationSetEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getGeneralizationSet_Powertype() const
-{
-	return dynamic_cast<ecore::EReference*>(generalizationSetEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(generalizationSetEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getGeneralizationSet___Generalization_same_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralizationSet_Generalization() const
 {
-	return dynamic_cast<ecore::EOperation*>(generalizationSetEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalizationSetEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getGeneralizationSet___Maps_to_generalization_set__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getGeneralizationSet_Powertype() const
 {
-	return dynamic_cast<ecore::EOperation*>(generalizationSetEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(generalizationSetEClass->getEStructuralFeatures()->at(2));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGeneralizationSet___Generalization_same_classifier__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(generalizationSetEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getGeneralizationSet___Maps_to_generalization_set__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(generalizationSetEClass->getEOperations()->at(1));
 }
 
 // End Class GeneralizationSet
 
 // Begin Class Image
-ecore::EClass* UmlPackageImpl::getImage() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getImage() const
 {
 	return imageEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getImage_Content() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getImage_Content() const
 {
-	return dynamic_cast<ecore::EAttribute*>(imageEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(imageEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getImage_Format() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getImage_Format() const
 {
-	return dynamic_cast<ecore::EAttribute*>(imageEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(imageEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getImage_Location() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getImage_Location() const
 {
-	return dynamic_cast<ecore::EAttribute*>(imageEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(imageEClass->getEStructuralFeatures()->at(2));
 }
 
 
@@ -12003,471 +10971,471 @@ ecore::EAttribute* UmlPackageImpl::getImage_Location() const
 // End Class Image
 
 // Begin Class Include
-ecore::EClass* UmlPackageImpl::getInclude() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInclude() const
 {
 	return includeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInclude_Addition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInclude_Addition() const
 {
-	return dynamic_cast<ecore::EReference*>(includeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(includeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInclude_IncludingCase() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInclude_IncludingCase() const
 {
-	return dynamic_cast<ecore::EReference*>(includeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(includeEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Include
 
 // Begin Class InformationFlow
-ecore::EClass* UmlPackageImpl::getInformationFlow() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInformationFlow() const
 {
 	return informationFlowEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInformationFlow_Conveyed() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_Conveyed() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_InformationSource() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_InformationSource() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_InformationTarget() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_InformationTarget() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_Realization() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_Realization() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_RealizingActivityEdge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_RealizingActivityEdge() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_RealizingConnector() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_RealizingConnector() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getInformationFlow_RealizingMessage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationFlow_RealizingMessage() const
 {
-	return dynamic_cast<ecore::EReference*>(informationFlowEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationFlowEClass->getEStructuralFeatures()->at(6));
 }
 
-ecore::EOperation* UmlPackageImpl::getInformationFlow___Convey_classifiers__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationFlow___Convey_classifiers__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationFlowEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationFlowEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInformationFlow___Must_conform__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationFlow___Must_conform__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationFlowEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationFlowEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getInformationFlow___Sources_and_targets_kind__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationFlow___Sources_and_targets_kind__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationFlowEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationFlowEClass->getEOperations()->at(1));
 }
 
 // End Class InformationFlow
 
 // Begin Class InformationItem
-ecore::EClass* UmlPackageImpl::getInformationItem() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInformationItem() const
 {
 	return informationItemEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInformationItem_Represented() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInformationItem_Represented() const
 {
-	return dynamic_cast<ecore::EReference*>(informationItemEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(informationItemEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getInformationItem___Has_no__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationItem___Has_no__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationItemEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationItemEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getInformationItem___Not_instantiable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationItem___Not_instantiable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationItemEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationItemEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInformationItem___Sources_and_targets__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInformationItem___Sources_and_targets__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(informationItemEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(informationItemEClass->getEOperations()->at(0));
 }
 
 // End Class InformationItem
 
 // Begin Class InitialNode
-ecore::EClass* UmlPackageImpl::getInitialNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInitialNode() const
 {
 	return initialNodeEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getInitialNode___Control_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInitialNode___Control_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(initialNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(initialNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getInitialNode___No_incoming_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInitialNode___No_incoming_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(initialNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(initialNodeEClass->getEOperations()->at(0));
 }
 
 // End Class InitialNode
 
 // Begin Class InputPin
-ecore::EClass* UmlPackageImpl::getInputPin() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInputPin() const
 {
 	return inputPinEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(inputPinEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(inputPinEClass->getEOperations()->at(0));
 }
 
 // End Class InputPin
 
 // Begin Class InstanceSpecification
-ecore::EClass* UmlPackageImpl::getInstanceSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInstanceSpecification() const
 {
 	return instanceSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInstanceSpecification_Classifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInstanceSpecification_Classifier() const
 {
-	return dynamic_cast<ecore::EReference*>(instanceSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(instanceSpecificationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInstanceSpecification_Slot() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInstanceSpecification_Slot() const
 {
-	return dynamic_cast<ecore::EReference*>(instanceSpecificationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(instanceSpecificationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInstanceSpecification_Specification() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInstanceSpecification_Specification() const
 {
-	return dynamic_cast<ecore::EReference*>(instanceSpecificationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(instanceSpecificationEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getInstanceSpecification___Defining_feature__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInstanceSpecification___Defining_feature__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(instanceSpecificationEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(instanceSpecificationEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInstanceSpecification___Deployment_artifact__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInstanceSpecification___Deployment_artifact__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(instanceSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(instanceSpecificationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getInstanceSpecification___Deployment_target__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInstanceSpecification___Deployment_target__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(instanceSpecificationEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(instanceSpecificationEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getInstanceSpecification___Structural_feature__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInstanceSpecification___Structural_feature__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(instanceSpecificationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(instanceSpecificationEClass->getEOperations()->at(1));
 }
 
 // End Class InstanceSpecification
 
 // Begin Class InstanceValue
-ecore::EClass* UmlPackageImpl::getInstanceValue() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInstanceValue() const
 {
 	return instanceValueEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInstanceValue_Instance() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInstanceValue_Instance() const
 {
-	return dynamic_cast<ecore::EReference*>(instanceValueEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(instanceValueEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class InstanceValue
 
 // Begin Class Interaction
-ecore::EClass* UmlPackageImpl::getInteraction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInteraction() const
 {
 	return interactionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInteraction_Action() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteraction_Action() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getInteraction_FormalGate() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteraction_FormalGate() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getInteraction_Fragment() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteraction_Fragment() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInteraction_Lifeline() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteraction_Lifeline() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInteraction_Message() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteraction_Message() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getInteraction___Not_contained__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteraction___Not_contained__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionEClass->getEOperations()->at(0));
 }
 
 // End Class Interaction
 
 // Begin Class InteractionConstraint
-ecore::EClass* UmlPackageImpl::getInteractionConstraint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInteractionConstraint() const
 {
 	return interactionConstraintEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInteractionConstraint_Maxint() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionConstraint_Maxint() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionConstraintEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionConstraintEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInteractionConstraint_Minint() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionConstraint_Minint() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionConstraintEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionConstraintEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Dynamic_variables__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Dynamic_variables__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Global_data__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Global_data__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Maxint_greater_equal_minint__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Maxint_greater_equal_minint__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Maxint_positive__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Maxint_positive__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Minint_maxint__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Minint_maxint__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionConstraint___Minint_non_negative__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionConstraint___Minint_non_negative__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionConstraintEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionConstraintEClass->getEOperations()->at(1));
 }
 
 // End Class InteractionConstraint
 
 // Begin Class InteractionFragment
-ecore::EClass* UmlPackageImpl::getInteractionFragment() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInteractionFragment() const
 {
 	return interactionFragmentEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInteractionFragment_Covered() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionFragment_Covered() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionFragmentEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionFragmentEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInteractionFragment_EnclosingInteraction() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionFragment_EnclosingInteraction() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionFragmentEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionFragmentEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getInteractionFragment_EnclosingOperand() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionFragment_EnclosingOperand() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionFragmentEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionFragmentEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInteractionFragment_GeneralOrdering() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionFragment_GeneralOrdering() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionFragmentEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionFragmentEClass->getEStructuralFeatures()->at(3));
 }
 
 
 // End Class InteractionFragment
 
 // Begin Class InteractionOperand
-ecore::EClass* UmlPackageImpl::getInteractionOperand() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInteractionOperand() const
 {
 	return interactionOperandEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInteractionOperand_Fragment() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionOperand_Fragment() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionOperandEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionOperandEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInteractionOperand_Guard() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionOperand_Guard() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionOperandEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionOperandEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getInteractionOperand___Guard_contain_references__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionOperand___Guard_contain_references__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionOperandEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionOperandEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionOperand___Guard_directly_prior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionOperand___Guard_directly_prior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionOperandEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionOperandEClass->getEOperations()->at(1));
 }
 
 // End Class InteractionOperand
 
 // Begin Class InteractionUse
-ecore::EClass* UmlPackageImpl::getInteractionUse() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInteractionUse() const
 {
 	return interactionUseEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInteractionUse_ActualGate() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionUse_ActualGate() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionUseEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionUseEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInteractionUse_Argument() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionUse_Argument() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionUseEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionUseEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInteractionUse_RefersTo() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionUse_RefersTo() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionUseEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionUseEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getInteractionUse_ReturnValue() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionUse_ReturnValue() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionUseEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionUseEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getInteractionUse_ReturnValueRecipient() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInteractionUse_ReturnValueRecipient() const
 {
-	return dynamic_cast<ecore::EReference*>(interactionUseEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(interactionUseEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getInteractionUse___All_lifelines__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___All_lifelines__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionUse___Arguments_are_constants__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___Arguments_are_constants__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionUse___Arguments_correspond_to_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___Arguments_correspond_to_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionUse___Gates_match__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___Gates_match__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionUse___ReturnValueRecipient_coverage__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___ReturnValueRecipient_coverage__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInteractionUse___ReturnValue_type_recipient_correspondence__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInteractionUse___ReturnValue_type_recipient_correspondence__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interactionUseEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interactionUseEClass->getEOperations()->at(4));
 }
 
 // End Class InteractionUse
 
 // Begin Class Interface
-ecore::EClass* UmlPackageImpl::getInterface() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInterface() const
 {
 	return interfaceEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInterface_NestedClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_NestedClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInterface_OwnedAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_OwnedAttribute() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getInterface_OwnedOperation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_OwnedOperation() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getInterface_OwnedReception() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_OwnedReception() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getInterface_Protocol() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_Protocol() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getInterface_RedefinedInterface() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterface_RedefinedInterface() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getInterface___CreateOwnedAttribute__String_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInterface___CreateOwnedAttribute__String_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(interfaceEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interfaceEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getInterface___CreateOwnedOperation__String_Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInterface___CreateOwnedOperation__String_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(interfaceEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interfaceEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getInterface___Visibility__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInterface___Visibility__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interfaceEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interfaceEClass->getEOperations()->at(0));
 }
 
 // End Class Interface
 
 // Begin Class InterfaceRealization
-ecore::EClass* UmlPackageImpl::getInterfaceRealization() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInterfaceRealization() const
 {
 	return interfaceRealizationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInterfaceRealization_Contract() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterfaceRealization_Contract() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceRealizationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceRealizationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInterfaceRealization_ImplementingClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterfaceRealization_ImplementingClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(interfaceRealizationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interfaceRealizationEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class InterfaceRealization
 
 // Begin Class InterruptibleActivityRegion
-ecore::EClass* UmlPackageImpl::getInterruptibleActivityRegion() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInterruptibleActivityRegion() const
 {
 	return interruptibleActivityRegionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInterruptibleActivityRegion_InterruptingEdge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterruptibleActivityRegion_InterruptingEdge() const
 {
-	return dynamic_cast<ecore::EReference*>(interruptibleActivityRegionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(interruptibleActivityRegionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInterruptibleActivityRegion_Node() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterruptibleActivityRegion_Node() const
 {
-	return dynamic_cast<ecore::EReference*>(interruptibleActivityRegionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(interruptibleActivityRegionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getInterruptibleActivityRegion___Interrupting_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInterruptibleActivityRegion___Interrupting_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(interruptibleActivityRegionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(interruptibleActivityRegionEClass->getEOperations()->at(0));
 }
 
 // End Class InterruptibleActivityRegion
 
 // Begin Class Interval
-ecore::EClass* UmlPackageImpl::getInterval() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInterval() const
 {
 	return intervalEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInterval_Max() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterval_Max() const
 {
-	return dynamic_cast<ecore::EReference*>(intervalEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(intervalEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInterval_Min() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInterval_Min() const
 {
-	return dynamic_cast<ecore::EReference*>(intervalEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(intervalEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Interval
 
 // Begin Class IntervalConstraint
-ecore::EClass* UmlPackageImpl::getIntervalConstraint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getIntervalConstraint() const
 {
 	return intervalConstraintEClass;
 }
@@ -12477,227 +11445,227 @@ ecore::EClass* UmlPackageImpl::getIntervalConstraint() const
 // End Class IntervalConstraint
 
 // Begin Class InvocationAction
-ecore::EClass* UmlPackageImpl::getInvocationAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getInvocationAction() const
 {
 	return invocationActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getInvocationAction_Argument() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInvocationAction_Argument() const
 {
-	return dynamic_cast<ecore::EReference*>(invocationActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(invocationActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getInvocationAction_OnPort() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInvocationAction_OnPort() const
 {
-	return dynamic_cast<ecore::EReference*>(invocationActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(invocationActionEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class InvocationAction
 
 // Begin Class JoinNode
-ecore::EClass* UmlPackageImpl::getJoinNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getJoinNode() const
 {
 	return joinNodeEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getJoinNode_IsCombineDuplicate() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getJoinNode_IsCombineDuplicate() const
 {
-	return dynamic_cast<ecore::EAttribute*>(joinNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(joinNodeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getJoinNode_JoinSpec() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getJoinNode_JoinSpec() const
 {
-	return dynamic_cast<ecore::EReference*>(joinNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(joinNodeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getJoinNode___Incoming_object_flow__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getJoinNode___Incoming_object_flow__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(joinNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(joinNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getJoinNode___One_outgoing_edge__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getJoinNode___One_outgoing_edge__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(joinNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(joinNodeEClass->getEOperations()->at(0));
 }
 
 // End Class JoinNode
 
 // Begin Class Lifeline
-ecore::EClass* UmlPackageImpl::getLifeline() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLifeline() const
 {
 	return lifelineEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getLifeline_CoveredBy() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLifeline_CoveredBy() const
 {
-	return dynamic_cast<ecore::EReference*>(lifelineEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(lifelineEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getLifeline_DecomposedAs() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLifeline_DecomposedAs() const
 {
-	return dynamic_cast<ecore::EReference*>(lifelineEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(lifelineEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getLifeline_Interaction() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLifeline_Interaction() const
 {
-	return dynamic_cast<ecore::EReference*>(lifelineEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(lifelineEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getLifeline_Represents() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLifeline_Represents() const
 {
-	return dynamic_cast<ecore::EReference*>(lifelineEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(lifelineEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getLifeline_Selector() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLifeline_Selector() const
 {
-	return dynamic_cast<ecore::EReference*>(lifelineEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(lifelineEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getLifeline___Interaction_uses_share_lifeline__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLifeline___Interaction_uses_share_lifeline__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(lifelineEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(lifelineEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getLifeline___Same_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLifeline___Same_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(lifelineEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(lifelineEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getLifeline___Selector_int_or_string__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLifeline___Selector_int_or_string__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(lifelineEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(lifelineEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getLifeline___Selector_specified__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLifeline___Selector_specified__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(lifelineEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(lifelineEClass->getEOperations()->at(0));
 }
 
 // End Class Lifeline
 
 // Begin Class LinkAction
-ecore::EClass* UmlPackageImpl::getLinkAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLinkAction() const
 {
 	return linkActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getLinkAction_EndData() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkAction_EndData() const
 {
-	return dynamic_cast<ecore::EReference*>(linkActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getLinkAction_InputValue() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkAction_InputValue() const
 {
-	return dynamic_cast<ecore::EReference*>(linkActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getLinkAction___Association() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkAction___Association() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getLinkAction___Not_static__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkAction___Not_static__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getLinkAction___Same_association__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkAction___Same_association__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getLinkAction___Same_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkAction___Same_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkActionEClass->getEOperations()->at(0));
 }
 
 // End Class LinkAction
 
 // Begin Class LinkEndCreationData
-ecore::EClass* UmlPackageImpl::getLinkEndCreationData() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLinkEndCreationData() const
 {
 	return linkEndCreationDataEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLinkEndCreationData_IsReplaceAll() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLinkEndCreationData_IsReplaceAll() const
 {
-	return dynamic_cast<ecore::EAttribute*>(linkEndCreationDataEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(linkEndCreationDataEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getLinkEndCreationData_InsertAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkEndCreationData_InsertAt() const
 {
-	return dynamic_cast<ecore::EReference*>(linkEndCreationDataEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkEndCreationDataEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getLinkEndCreationData___InsertAt_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndCreationData___InsertAt_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndCreationDataEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndCreationDataEClass->getEOperations()->at(0));
 }
 
 // End Class LinkEndCreationData
 
 // Begin Class LinkEndData
-ecore::EClass* UmlPackageImpl::getLinkEndData() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLinkEndData() const
 {
 	return linkEndDataEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getLinkEndData_End() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkEndData_End() const
 {
-	return dynamic_cast<ecore::EReference*>(linkEndDataEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkEndDataEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getLinkEndData_Qualifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkEndData_Qualifier() const
 {
-	return dynamic_cast<ecore::EReference*>(linkEndDataEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkEndDataEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getLinkEndData_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkEndData_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(linkEndDataEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkEndDataEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getLinkEndData___AllPins() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___AllPins() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getLinkEndData___End_object_input_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___End_object_input_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getLinkEndData___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getLinkEndData___Property_is_association_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___Property_is_association_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getLinkEndData___Qualifiers__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___Qualifiers__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getLinkEndData___Same_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndData___Same_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDataEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDataEClass->getEOperations()->at(0));
 }
 
 // End Class LinkEndData
 
 // Begin Class LinkEndDestructionData
-ecore::EClass* UmlPackageImpl::getLinkEndDestructionData() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLinkEndDestructionData() const
 {
 	return linkEndDestructionDataEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLinkEndDestructionData_IsDestroyDuplicates() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLinkEndDestructionData_IsDestroyDuplicates() const
 {
-	return dynamic_cast<ecore::EAttribute*>(linkEndDestructionDataEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(linkEndDestructionDataEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getLinkEndDestructionData_DestroyAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLinkEndDestructionData_DestroyAt() const
 {
-	return dynamic_cast<ecore::EReference*>(linkEndDestructionDataEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(linkEndDestructionDataEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getLinkEndDestructionData___DestroyAt_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLinkEndDestructionData___DestroyAt_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(linkEndDestructionDataEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(linkEndDestructionDataEClass->getEOperations()->at(0));
 }
 
 // End Class LinkEndDestructionData
 
 // Begin Class LiteralBoolean
-ecore::EClass* UmlPackageImpl::getLiteralBoolean() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralBoolean() const
 {
 	return literalBooleanEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLiteralBoolean_Value() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralBoolean_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(literalBooleanEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(literalBooleanEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -12705,13 +11673,13 @@ ecore::EAttribute* UmlPackageImpl::getLiteralBoolean_Value() const
 // End Class LiteralBoolean
 
 // Begin Class LiteralInteger
-ecore::EClass* UmlPackageImpl::getLiteralInteger() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralInteger() const
 {
 	return literalIntegerEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLiteralInteger_Value() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralInteger_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(literalIntegerEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(literalIntegerEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -12719,7 +11687,7 @@ ecore::EAttribute* UmlPackageImpl::getLiteralInteger_Value() const
 // End Class LiteralInteger
 
 // Begin Class LiteralNull
-ecore::EClass* UmlPackageImpl::getLiteralNull() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralNull() const
 {
 	return literalNullEClass;
 }
@@ -12729,13 +11697,13 @@ ecore::EClass* UmlPackageImpl::getLiteralNull() const
 // End Class LiteralNull
 
 // Begin Class LiteralReal
-ecore::EClass* UmlPackageImpl::getLiteralReal() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralReal() const
 {
 	return literalRealEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLiteralReal_Value() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralReal_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(literalRealEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(literalRealEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -12743,7 +11711,7 @@ ecore::EAttribute* UmlPackageImpl::getLiteralReal_Value() const
 // End Class LiteralReal
 
 // Begin Class LiteralSpecification
-ecore::EClass* UmlPackageImpl::getLiteralSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralSpecification() const
 {
 	return literalSpecificationEClass;
 }
@@ -12753,13 +11721,13 @@ ecore::EClass* UmlPackageImpl::getLiteralSpecification() const
 // End Class LiteralSpecification
 
 // Begin Class LiteralString
-ecore::EClass* UmlPackageImpl::getLiteralString() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralString() const
 {
 	return literalStringEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLiteralString_Value() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralString_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(literalStringEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(literalStringEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -12767,13 +11735,13 @@ ecore::EAttribute* UmlPackageImpl::getLiteralString_Value() const
 // End Class LiteralString
 
 // Begin Class LiteralUnlimitedNatural
-ecore::EClass* UmlPackageImpl::getLiteralUnlimitedNatural() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLiteralUnlimitedNatural() const
 {
 	return literalUnlimitedNaturalEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLiteralUnlimitedNatural_Value() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLiteralUnlimitedNatural_Value() const
 {
-	return dynamic_cast<ecore::EAttribute*>(literalUnlimitedNaturalEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(literalUnlimitedNaturalEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -12781,229 +11749,229 @@ ecore::EAttribute* UmlPackageImpl::getLiteralUnlimitedNatural_Value() const
 // End Class LiteralUnlimitedNatural
 
 // Begin Class LoopNode
-ecore::EClass* UmlPackageImpl::getLoopNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getLoopNode() const
 {
 	return loopNodeEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getLoopNode_IsTestedFirst() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getLoopNode_IsTestedFirst() const
 {
-	return dynamic_cast<ecore::EAttribute*>(loopNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(loopNodeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getLoopNode_BodyOutput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_BodyOutput() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_BodyPart() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_BodyPart() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_Decider() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_Decider() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_LoopVariable() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_LoopVariable() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_LoopVariableInput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_LoopVariableInput() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_SetupPart() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_SetupPart() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* UmlPackageImpl::getLoopNode_Test() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getLoopNode_Test() const
 {
-	return dynamic_cast<ecore::EReference*>(loopNodeEClass->getEStructuralFeatures()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(loopNodeEClass->getEStructuralFeatures()->at(8));
 }
 
-ecore::EOperation* UmlPackageImpl::getLoopNode___Body_output_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Body_output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Executable_nodes__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Executable_nodes__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Input_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Input_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Loop_variable_outgoing__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Loop_variable_outgoing__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Matching_loop_variables__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Matching_loop_variables__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Matching_output_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Matching_output_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Matching_result_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Matching_result_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Result_no_incoming__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Result_no_incoming__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getLoopNode___Setup_test_and_body__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getLoopNode___Setup_test_and_body__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(loopNodeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(loopNodeEClass->getEOperations()->at(4));
 }
 
 // End Class LoopNode
 
 // Begin Class Manifestation
-ecore::EClass* UmlPackageImpl::getManifestation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getManifestation() const
 {
 	return manifestationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getManifestation_UtilizedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getManifestation_UtilizedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(manifestationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(manifestationEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class Manifestation
 
 // Begin Class MergeNode
-ecore::EClass* UmlPackageImpl::getMergeNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMergeNode() const
 {
 	return mergeNodeEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getMergeNode___Edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMergeNode___Edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(mergeNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(mergeNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getMergeNode___One_outgoing_edge__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMergeNode___One_outgoing_edge__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(mergeNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(mergeNodeEClass->getEOperations()->at(0));
 }
 
 // End Class MergeNode
 
 // Begin Class Message
-ecore::EClass* UmlPackageImpl::getMessage() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMessage() const
 {
 	return messageEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getMessage_MessageKind() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMessage_MessageKind() const
 {
-	return dynamic_cast<ecore::EAttribute*>(messageEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(messageEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getMessage_MessageSort() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMessage_MessageSort() const
 {
-	return dynamic_cast<ecore::EAttribute*>(messageEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getMessage_Argument() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getMessage_Connector() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getMessage_Interaction() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getMessage_ReceiveEvent() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getMessage_SendEvent() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getMessage_Signature() const
-{
-	return dynamic_cast<ecore::EReference*>(messageEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(messageEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getMessage___Arguments__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_Argument() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Cannot_cross_boundaries__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_Connector() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___GetMessageKind() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_Interaction() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Occurrence_specifications__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_ReceiveEvent() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Sending_receiving_message_event__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_SendEvent() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Signature_is_operation_reply__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessage_Signature() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Signature_is_operation_request__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Arguments__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Signature_is_signal__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Cannot_cross_boundaries__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getMessage___Signature_refer_to__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___GetMessageKind() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Occurrence_specifications__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Sending_receiving_message_event__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Signature_is_operation_reply__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(7));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Signature_is_operation_request__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(6));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Signature_is_signal__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessage___Signature_refer_to__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEClass->getEOperations()->at(5));
 }
 
 // End Class Message
 
 // Begin Class MessageEnd
-ecore::EClass* UmlPackageImpl::getMessageEnd() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMessageEnd() const
 {
 	return messageEndEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getMessageEnd_Message() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMessageEnd_Message() const
 {
-	return dynamic_cast<ecore::EReference*>(messageEndEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(messageEndEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getMessageEnd___EnclosingFragment() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessageEnd___EnclosingFragment() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEndEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEndEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getMessageEnd___IsReceive() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessageEnd___IsReceive() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEndEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEndEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getMessageEnd___IsSend() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessageEnd___IsSend() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEndEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEndEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getMessageEnd___OppositeEnd() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMessageEnd___OppositeEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(messageEndEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(messageEndEClass->getEOperations()->at(0));
 }
 
 // End Class MessageEnd
 
 // Begin Class MessageEvent
-ecore::EClass* UmlPackageImpl::getMessageEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMessageEvent() const
 {
 	return messageEventEClass;
 }
@@ -13013,7 +11981,7 @@ ecore::EClass* UmlPackageImpl::getMessageEvent() const
 // End Class MessageEvent
 
 // Begin Class MessageOccurrenceSpecification
-ecore::EClass* UmlPackageImpl::getMessageOccurrenceSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMessageOccurrenceSpecification() const
 {
 	return messageOccurrenceSpecificationEClass;
 }
@@ -13023,431 +11991,431 @@ ecore::EClass* UmlPackageImpl::getMessageOccurrenceSpecification() const
 // End Class MessageOccurrenceSpecification
 
 // Begin Class Model
-ecore::EClass* UmlPackageImpl::getModel() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getModel() const
 {
 	return modelEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getModel_Viewpoint() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getModel_Viewpoint() const
 {
-	return dynamic_cast<ecore::EAttribute*>(modelEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(modelEClass->getEStructuralFeatures()->at(0));
 }
 
 
-ecore::EOperation* UmlPackageImpl::getModel___IsMetamodel() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getModel___IsMetamodel() const
 {
-	return dynamic_cast<ecore::EOperation*>(modelEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(modelEClass->getEOperations()->at(0));
 }
 
 // End Class Model
 
 // Begin Class MultiplicityElement
-ecore::EClass* UmlPackageImpl::getMultiplicityElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getMultiplicityElement() const
 {
 	return multiplicityElementEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getMultiplicityElement_IsOrdered() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMultiplicityElement_IsOrdered() const
 {
-	return dynamic_cast<ecore::EAttribute*>(multiplicityElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(multiplicityElementEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getMultiplicityElement_IsUnique() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMultiplicityElement_IsUnique() const
 {
-	return dynamic_cast<ecore::EAttribute*>(multiplicityElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(multiplicityElementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getMultiplicityElement_Lower() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMultiplicityElement_Lower() const
 {
-	return dynamic_cast<ecore::EAttribute*>(multiplicityElementEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(multiplicityElementEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* UmlPackageImpl::getMultiplicityElement_Upper() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getMultiplicityElement_Upper() const
 {
-	return dynamic_cast<ecore::EAttribute*>(multiplicityElementEClass->getEStructuralFeatures()->at(3));
-}
-
-ecore::EReference* UmlPackageImpl::getMultiplicityElement_LowerValue() const
-{
-	return dynamic_cast<ecore::EReference*>(multiplicityElementEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getMultiplicityElement_UpperValue() const
-{
-	return dynamic_cast<ecore::EReference*>(multiplicityElementEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(multiplicityElementEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___CompatibleWith__MultiplicityElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMultiplicityElement_LowerValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(multiplicityElementEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___IncludesMultiplicity__MultiplicityElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getMultiplicityElement_UpperValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(multiplicityElementEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Is__Integer_UnlimitedNatural() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___CompatibleWith__MultiplicityElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___IsMultivalued() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___IncludesMultiplicity__MultiplicityElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___LowerBound() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Is__Integer_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Lower_ge_0__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___IsMultivalued() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Lower_is_integer__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___LowerBound() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___UpperBound() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Lower_ge_0__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Upper_ge_lower__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Lower_is_integer__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Upper_is_unlimitedNatural__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___UpperBound() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Value_specification_constant__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Upper_ge_lower__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getMultiplicityElement___Value_specification_no_side_effects__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Upper_is_unlimitedNatural__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(multiplicityElementEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(5));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Value_specification_constant__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getMultiplicityElement___Value_specification_no_side_effects__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(multiplicityElementEClass->getEOperations()->at(2));
 }
 
 // End Class MultiplicityElement
 
 // Begin Class NamedElement
-ecore::EClass* UmlPackageImpl::getNamedElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getNamedElement() const
 {
 	return namedElementEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getNamedElement_Name() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getNamedElement_Name() const
 {
-	return dynamic_cast<ecore::EAttribute*>(namedElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(namedElementEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getNamedElement_QualifiedName() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getNamedElement_QualifiedName() const
 {
-	return dynamic_cast<ecore::EAttribute*>(namedElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(namedElementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getNamedElement_Visibility() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getNamedElement_Visibility() const
 {
-	return dynamic_cast<ecore::EAttribute*>(namedElementEClass->getEStructuralFeatures()->at(2));
-}
-
-ecore::EReference* UmlPackageImpl::getNamedElement_ClientDependency() const
-{
-	return dynamic_cast<ecore::EReference*>(namedElementEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getNamedElement_NameExpression() const
-{
-	return dynamic_cast<ecore::EReference*>(namedElementEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getNamedElement_Namespace() const
-{
-	return dynamic_cast<ecore::EReference*>(namedElementEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(namedElementEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getNamedElement___AllNamespaces() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamedElement_ClientDependency() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(namedElementEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___AllOwningPackages() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamedElement_NameExpression() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(namedElementEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___CreateDependency__NamedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamedElement_Namespace() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(namedElementEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___CreateUsage__NamedElement() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___AllNamespaces() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___GetClientDependencies() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___AllOwningPackages() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___GetLabel() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___CreateDependency__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___GetLabel__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___CreateUsage__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___GetNamespace() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___GetClientDependencies() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___GetQualifiedName() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___GetLabel() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___Has_no_qualified_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___GetLabel__Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___Has_qualified_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___GetNamespace() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___IsDistinguishableFrom__NamedElement_Namespace() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___GetQualifiedName() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___Separator() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___Has_no_qualified_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getNamedElement___Visibility_needs_ownership__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___Has_qualified_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(namedElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___IsDistinguishableFrom__NamedElement_Namespace() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(10));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___Separator() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(12));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamedElement___Visibility_needs_ownership__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(namedElementEClass->getEOperations()->at(0));
 }
 
 // End Class NamedElement
 
 // Begin Class Namespace
-ecore::EClass* UmlPackageImpl::getNamespace() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getNamespace() const
 {
 	return namespaceEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getNamespace_ElementImport() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_ElementImport() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getNamespace_ImportedMember() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_ImportedMember() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getNamespace_Member() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_Member() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getNamespace_OwnedMember() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_OwnedMember() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getNamespace_OwnedRule() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_OwnedRule() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getNamespace_PackageImport() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNamespace_PackageImport() const
 {
-	return dynamic_cast<ecore::EReference*>(namespaceEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(namespaceEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getNamespace___Cannot_import_ownedMembers__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___Cannot_import_ownedMembers__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___Cannot_import_self__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___Cannot_import_self__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___CreateElementImport__PackageableElement_VisibilityKind() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___CreateElementImport__PackageableElement_VisibilityKind() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___CreatePackageImport__Package_VisibilityKind() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___CreatePackageImport__Package_VisibilityKind() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___ExcludeCollisions__PackageableElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___ExcludeCollisions__PackageableElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___GetImportedElements() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___GetImportedElements() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___GetImportedMembers() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___GetImportedMembers() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___GetImportedPackages() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___GetImportedPackages() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___GetNamesOfMember__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___GetNamesOfMember__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___GetOwnedMembers() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___GetOwnedMembers() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___ImportMembers__PackageableElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___ImportMembers__PackageableElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___MembersAreDistinguishable() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___MembersAreDistinguishable() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getNamespace___Members_distinguishable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNamespace___Members_distinguishable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(namespaceEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(namespaceEClass->getEOperations()->at(0));
 }
 
 // End Class Namespace
 
 // Begin Class Node
-ecore::EClass* UmlPackageImpl::getNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getNode() const
 {
 	return nodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getNode_NestedNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getNode_NestedNode() const
 {
-	return dynamic_cast<ecore::EReference*>(nodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(nodeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getNode___CreateCommunicationPath__Boolean_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNode___CreateCommunicationPath__Boolean_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(nodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(nodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getNode___GetCommunicationPaths() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNode___GetCommunicationPaths() const
 {
-	return dynamic_cast<ecore::EOperation*>(nodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(nodeEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getNode___Internal_structure__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getNode___Internal_structure__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(nodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(nodeEClass->getEOperations()->at(0));
 }
 
 // End Class Node
 
 // Begin Class Object
-ecore::EClass* UmlPackageImpl::getObject() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getObject() const
 {
 	return objectEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getObject___Get__Property() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject___Get__Property() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getObject___Set__Property_EJavaObject() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject___Set__Property_EJavaObject() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getObject___Unset__Property() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObject___Unset__Property() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectEClass->getEOperations()->at(2));
 }
 
 // End Class Object
 
 // Begin Class ObjectFlow
-ecore::EClass* UmlPackageImpl::getObjectFlow() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getObjectFlow() const
 {
 	return objectFlowEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getObjectFlow_IsMulticast() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getObjectFlow_IsMulticast() const
 {
-	return dynamic_cast<ecore::EAttribute*>(objectFlowEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(objectFlowEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getObjectFlow_IsMultireceive() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getObjectFlow_IsMultireceive() const
 {
-	return dynamic_cast<ecore::EAttribute*>(objectFlowEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getObjectFlow_Selection() const
-{
-	return dynamic_cast<ecore::EReference*>(objectFlowEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getObjectFlow_Transformation() const
-{
-	return dynamic_cast<ecore::EReference*>(objectFlowEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(objectFlowEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Compatible_types__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getObjectFlow_Selection() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(objectFlowEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Input_and_output_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getObjectFlow_Transformation() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(objectFlowEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Is_multicast_or_is_multireceive__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Compatible_types__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___No_executable_nodes__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Input_and_output_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Same_upper_bounds__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Is_multicast_or_is_multireceive__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Selection_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___No_executable_nodes__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Target__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Same_upper_bounds__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getObjectFlow___Transformation_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Selection_behavior__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectFlowEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Target__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(6));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectFlow___Transformation_behavior__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectFlowEClass->getEOperations()->at(2));
 }
 
 // End Class ObjectFlow
 
 // Begin Class ObjectNode
-ecore::EClass* UmlPackageImpl::getObjectNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getObjectNode() const
 {
 	return objectNodeEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getObjectNode_IsControlType() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getObjectNode_IsControlType() const
 {
-	return dynamic_cast<ecore::EAttribute*>(objectNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(objectNodeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getObjectNode_Ordering() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getObjectNode_Ordering() const
 {
-	return dynamic_cast<ecore::EAttribute*>(objectNodeEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getObjectNode_InState() const
-{
-	return dynamic_cast<ecore::EReference*>(objectNodeEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getObjectNode_Selection() const
-{
-	return dynamic_cast<ecore::EReference*>(objectNodeEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getObjectNode_UpperBound() const
-{
-	return dynamic_cast<ecore::EReference*>(objectNodeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(objectNodeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getObjectNode___Input_output_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getObjectNode_InState() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(objectNodeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getObjectNode___Object_flow_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getObjectNode_Selection() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(objectNodeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getObjectNode___Selection_behavior__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getObjectNode_UpperBound() const
 {
-	return dynamic_cast<ecore::EOperation*>(objectNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(objectNodeEClass->getEStructuralFeatures()->at(4));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectNode___Input_output_parameter__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectNodeEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectNode___Object_flow_edges__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectNodeEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getObjectNode___Selection_behavior__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(objectNodeEClass->getEOperations()->at(1));
 }
 
 // End Class ObjectNode
 
 // Begin Class Observation
-ecore::EClass* UmlPackageImpl::getObservation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getObservation() const
 {
 	return observationEClass;
 }
@@ -13457,73 +12425,73 @@ ecore::EClass* UmlPackageImpl::getObservation() const
 // End Class Observation
 
 // Begin Class OccurrenceSpecification
-ecore::EClass* UmlPackageImpl::getOccurrenceSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOccurrenceSpecification() const
 {
 	return occurrenceSpecificationEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getOccurrenceSpecification_ToAfter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOccurrenceSpecification_ToAfter() const
 {
-	return dynamic_cast<ecore::EReference*>(occurrenceSpecificationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(occurrenceSpecificationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getOccurrenceSpecification_ToBefore() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOccurrenceSpecification_ToBefore() const
 {
-	return dynamic_cast<ecore::EReference*>(occurrenceSpecificationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(occurrenceSpecificationEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getOccurrenceSpecification___GetCovered() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOccurrenceSpecification___GetCovered() const
 {
-	return dynamic_cast<ecore::EOperation*>(occurrenceSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(occurrenceSpecificationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getOccurrenceSpecification___SetCovered__Lifeline() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOccurrenceSpecification___SetCovered__Lifeline() const
 {
-	return dynamic_cast<ecore::EOperation*>(occurrenceSpecificationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(occurrenceSpecificationEClass->getEOperations()->at(1));
 }
 
 // End Class OccurrenceSpecification
 
 // Begin Class OpaqueAction
-ecore::EClass* UmlPackageImpl::getOpaqueAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOpaqueAction() const
 {
 	return opaqueActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueAction_Body() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueAction_Body() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueAction_Language() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueAction_Language() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueActionEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getOpaqueAction_InputValue() const
-{
-	return dynamic_cast<ecore::EReference*>(opaqueActionEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getOpaqueAction_OutputValue() const
-{
-	return dynamic_cast<ecore::EReference*>(opaqueActionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getOpaqueAction___Language_body_size__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOpaqueAction_InputValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(opaqueActionEClass->getEStructuralFeatures()->at(2));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOpaqueAction_OutputValue() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(opaqueActionEClass->getEStructuralFeatures()->at(3));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueAction___Language_body_size__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueActionEClass->getEOperations()->at(0));
 }
 
 // End Class OpaqueAction
 
 // Begin Class OpaqueBehavior
-ecore::EClass* UmlPackageImpl::getOpaqueBehavior() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOpaqueBehavior() const
 {
 	return opaqueBehaviorEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueBehavior_Body() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueBehavior_Body() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueBehaviorEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueBehaviorEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueBehavior_Language() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueBehavior_Language() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueBehaviorEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueBehaviorEClass->getEStructuralFeatures()->at(1));
 }
 
 
@@ -13531,671 +12499,671 @@ ecore::EAttribute* UmlPackageImpl::getOpaqueBehavior_Language() const
 // End Class OpaqueBehavior
 
 // Begin Class OpaqueExpression
-ecore::EClass* UmlPackageImpl::getOpaqueExpression() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOpaqueExpression() const
 {
 	return opaqueExpressionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueExpression_Body() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueExpression_Body() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueExpressionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueExpressionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getOpaqueExpression_Language() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOpaqueExpression_Language() const
 {
-	return dynamic_cast<ecore::EAttribute*>(opaqueExpressionEClass->getEStructuralFeatures()->at(1));
-}
-
-ecore::EReference* UmlPackageImpl::getOpaqueExpression_Behavior() const
-{
-	return dynamic_cast<ecore::EReference*>(opaqueExpressionEClass->getEStructuralFeatures()->at(2));
-}
-ecore::EReference* UmlPackageImpl::getOpaqueExpression_Result() const
-{
-	return dynamic_cast<ecore::EReference*>(opaqueExpressionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(opaqueExpressionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___GetResult() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOpaqueExpression_Behavior() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(opaqueExpressionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___IsIntegral() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOpaqueExpression_Result() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(opaqueExpressionEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___IsNonNegative() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___GetResult() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___IsPositive() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___IsIntegral() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___Language_body_size__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___IsNonNegative() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___One_return_result_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___IsPositive() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___Only_return_result_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___Language_body_size__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getOpaqueExpression___Value() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___One_return_result_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(opaqueExpressionEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___Only_return_result_parameters__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOpaqueExpression___Value() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(opaqueExpressionEClass->getEOperations()->at(7));
 }
 
 // End Class OpaqueExpression
 
 // Begin Class Operation
-ecore::EClass* UmlPackageImpl::getOperation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOperation() const
 {
 	return operationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getOperation_IsOrdered() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOperation_IsOrdered() const
 {
-	return dynamic_cast<ecore::EAttribute*>(operationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(operationEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getOperation_IsQuery() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOperation_IsQuery() const
 {
-	return dynamic_cast<ecore::EAttribute*>(operationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(operationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getOperation_IsUnique() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOperation_IsUnique() const
 {
-	return dynamic_cast<ecore::EAttribute*>(operationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(operationEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* UmlPackageImpl::getOperation_Lower() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOperation_Lower() const
 {
-	return dynamic_cast<ecore::EAttribute*>(operationEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(operationEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EAttribute* UmlPackageImpl::getOperation_Upper() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getOperation_Upper() const
 {
-	return dynamic_cast<ecore::EAttribute*>(operationEClass->getEStructuralFeatures()->at(4));
-}
-
-ecore::EReference* UmlPackageImpl::getOperation_BodyCondition() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Class() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Datatype() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Interface() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Postcondition() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Precondition() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(10));
-}
-ecore::EReference* UmlPackageImpl::getOperation_RedefinedOperation() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(11));
-}
-ecore::EReference* UmlPackageImpl::getOperation_Type() const
-{
-	return dynamic_cast<ecore::EReference*>(operationEClass->getEStructuralFeatures()->at(12));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(operationEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getOperation___At_most_one_return__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_BodyCondition() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___GetLower() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Class() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___GetReturnResult() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Datatype() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___GetType() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Interface() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___GetUpper() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Postcondition() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___IsOrdered() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Precondition() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___IsUnique() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_RedefinedOperation() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___Only_body_for_query__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOperation_Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(operationEClass->getEStructuralFeatures()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___ReturnResult() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___At_most_one_return__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___SetIsOrdered__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___GetLower() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___SetIsUnique__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___GetReturnResult() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___SetLower__Integer() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___GetType() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___SetType__Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___GetUpper() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getOperation___SetUpper__UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___IsOrdered() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___IsUnique() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(9));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___Only_body_for_query__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___ReturnResult() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(11));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___SetIsOrdered__Boolean() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___SetIsUnique__Boolean() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___SetLower__Integer() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(5));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___SetType__Type() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(6));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperation___SetUpper__UnlimitedNatural() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationEClass->getEOperations()->at(7));
 }
 
 // End Class Operation
 
 // Begin Class OperationTemplateParameter
-ecore::EClass* UmlPackageImpl::getOperationTemplateParameter() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOperationTemplateParameter() const
 {
 	return operationTemplateParameterEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getOperationTemplateParameter___Match_default_signature__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOperationTemplateParameter___Match_default_signature__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(operationTemplateParameterEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(operationTemplateParameterEClass->getEOperations()->at(0));
 }
 
 // End Class OperationTemplateParameter
 
 // Begin Class OutputPin
-ecore::EClass* UmlPackageImpl::getOutputPin() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getOutputPin() const
 {
 	return outputPinEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(outputPinEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(outputPinEClass->getEOperations()->at(0));
 }
 
 // End Class OutputPin
 
 // Begin Class Package
-ecore::EClass* UmlPackageImpl::getPackage() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackage() const
 {
 	return packageEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getPackage_URI() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPackage_URI() const
 {
-	return dynamic_cast<ecore::EAttribute*>(packageEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(packageEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getPackage_NestedPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_NestedPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getPackage_NestingPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_NestingPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getPackage_OwnedStereotype() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_OwnedStereotype() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getPackage_OwnedType() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_OwnedType() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getPackage_PackageMerge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_PackageMerge() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getPackage_PackagedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_PackagedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EReference* UmlPackageImpl::getPackage_ProfileApplication() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackage_ProfileApplication() const
 {
-	return dynamic_cast<ecore::EReference*>(packageEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageEClass->getEStructuralFeatures()->at(7));
 }
 
-ecore::EOperation* UmlPackageImpl::getPackage___AllApplicableStereotypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___AllApplicableStereotypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(17));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(17));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___ApplyProfile__Profile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___ApplyProfile__Profile() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___ContainingProfile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___ContainingProfile() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(18));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(18));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___CreateOwnedClass__String_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___CreateOwnedClass__String_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___CreateOwnedEnumeration__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___CreateOwnedEnumeration__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___CreateOwnedInterface__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___CreateOwnedInterface__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___CreateOwnedPrimitiveType__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___CreateOwnedPrimitiveType__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___CreateOwnedStereotype__String_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___CreateOwnedStereotype__String_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___Elements_public_or_private__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___Elements_public_or_private__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetAllAppliedProfiles() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetAllAppliedProfiles() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetAllProfileApplications() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetAllProfileApplications() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetAppliedProfile__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetAppliedProfile__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetAppliedProfile__String_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetAppliedProfile__String_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetAppliedProfiles() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetAppliedProfiles() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetNestedPackages() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetNestedPackages() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(20));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(20));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetOwnedStereotypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetOwnedStereotypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(21));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(21));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetOwnedTypes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetOwnedTypes() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(22));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(22));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetProfileApplication__Profile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetProfileApplication__Profile() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___GetProfileApplication__Profile_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___GetProfileApplication__Profile_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___IsModelLibrary() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___IsModelLibrary() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(14));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(14));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___IsProfileApplied__Profile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___IsProfileApplied__Profile() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(15));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(15));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___MakesVisible__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___MakesVisible__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(19));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(19));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___UnapplyProfile__Profile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___UnapplyProfile__Profile() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(16));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(16));
 }
-ecore::EOperation* UmlPackageImpl::getPackage___VisibleMembers() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackage___VisibleMembers() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageEClass->getEOperations()->at(23));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageEClass->getEOperations()->at(23));
 }
 
 // End Class Package
 
 // Begin Class PackageImport
-ecore::EClass* UmlPackageImpl::getPackageImport() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackageImport() const
 {
 	return packageImportEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getPackageImport_Visibility() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPackageImport_Visibility() const
 {
-	return dynamic_cast<ecore::EAttribute*>(packageImportEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(packageImportEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getPackageImport_ImportedPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageImport_ImportedPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(packageImportEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageImportEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getPackageImport_ImportingNamespace() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageImport_ImportingNamespace() const
 {
-	return dynamic_cast<ecore::EReference*>(packageImportEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageImportEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getPackageImport___Public_or_private__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackageImport___Public_or_private__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageImportEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageImportEClass->getEOperations()->at(0));
 }
 
 // End Class PackageImport
 
 // Begin Class PackageMerge
-ecore::EClass* UmlPackageImpl::getPackageMerge() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackageMerge() const
 {
 	return packageMergeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getPackageMerge_MergedPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageMerge_MergedPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(packageMergeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageMergeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getPackageMerge_ReceivingPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageMerge_ReceivingPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(packageMergeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(packageMergeEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class PackageMerge
 
 // Begin Class PackageableElement
-ecore::EClass* UmlPackageImpl::getPackageableElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackageableElement() const
 {
 	return packageableElementEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(packageableElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(packageableElementEClass->getEOperations()->at(0));
 }
 
 // End Class PackageableElement
 
 // Begin Class Parameter
-ecore::EClass* UmlPackageImpl::getParameter() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getParameter() const
 {
 	return parameterEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getParameter_Default() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_Default() const
 {
-	return dynamic_cast<ecore::EAttribute*>(parameterEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getParameter_Direction() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_Direction() const
 {
-	return dynamic_cast<ecore::EAttribute*>(parameterEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getParameter_Effect() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_Effect() const
 {
-	return dynamic_cast<ecore::EAttribute*>(parameterEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* UmlPackageImpl::getParameter_IsException() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_IsException() const
 {
-	return dynamic_cast<ecore::EAttribute*>(parameterEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EAttribute* UmlPackageImpl::getParameter_IsStream() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_IsStream() const
 {
-	return dynamic_cast<ecore::EAttribute*>(parameterEClass->getEStructuralFeatures()->at(4));
-}
-
-ecore::EReference* UmlPackageImpl::getParameter_DefaultValue() const
-{
-	return dynamic_cast<ecore::EReference*>(parameterEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getParameter_Operation() const
-{
-	return dynamic_cast<ecore::EReference*>(parameterEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getParameter_ParameterSet() const
-{
-	return dynamic_cast<ecore::EReference*>(parameterEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getParameter___Connector_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_DefaultValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___In_and_out__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Operation() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___IsSetDefault() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_ParameterSet() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___Not_exception__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Connector_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___Object_effect__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___In_and_out__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___Reentrant_behaviors__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___IsSetDefault() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetBooleanDefaultValue__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Not_exception__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetIntegerDefaultValue__Integer() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Object_effect__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetNullDefaultValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Reentrant_behaviors__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetRealDefaultValue__Real() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetBooleanDefaultValue__Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetStringDefaultValue__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetIntegerDefaultValue__Integer() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___SetUnlimitedNaturalDefaultValue__UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetNullDefaultValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___Stream_and_exception__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetRealDefaultValue__Real() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getParameter___UnsetDefault() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetStringDefaultValue__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(11));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___SetUnlimitedNaturalDefaultValue__UnlimitedNatural() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(12));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Stream_and_exception__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___UnsetDefault() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterEClass->getEOperations()->at(13));
 }
 
 // End Class Parameter
 
 // Begin Class ParameterSet
-ecore::EClass* UmlPackageImpl::getParameterSet() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getParameterSet() const
 {
 	return parameterSetEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getParameterSet_Condition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameterSet_Condition() const
 {
-	return dynamic_cast<ecore::EReference*>(parameterSetEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterSetEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getParameterSet_Parameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameterSet_Parameter() const
 {
-	return dynamic_cast<ecore::EReference*>(parameterSetEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterSetEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getParameterSet___Input__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameterSet___Input__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterSetEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterSetEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getParameterSet___Same_parameterized_entity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameterSet___Same_parameterized_entity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterSetEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterSetEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getParameterSet___Two_parameter_sets__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameterSet___Two_parameter_sets__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterSetEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterSetEClass->getEOperations()->at(2));
 }
 
 // End Class ParameterSet
 
 // Begin Class ParameterableElement
-ecore::EClass* UmlPackageImpl::getParameterableElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getParameterableElement() const
 {
 	return parameterableElementEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getParameterableElement_OwningTemplateParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameterableElement_OwningTemplateParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(parameterableElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterableElementEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getParameterableElement_TemplateParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameterableElement_TemplateParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(parameterableElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterableElementEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getParameterableElement___IsCompatibleWith__ParameterableElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameterableElement___IsCompatibleWith__ParameterableElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterableElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterableElementEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getParameterableElement___IsTemplateParameter() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameterableElement___IsTemplateParameter() const
 {
-	return dynamic_cast<ecore::EOperation*>(parameterableElementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(parameterableElementEClass->getEOperations()->at(1));
 }
 
 // End Class ParameterableElement
 
 // Begin Class PartDecomposition
-ecore::EClass* UmlPackageImpl::getPartDecomposition() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPartDecomposition() const
 {
 	return partDecompositionEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getPartDecomposition___Assume__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPartDecomposition___Assume__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(partDecompositionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(partDecompositionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getPartDecomposition___Commutativity_of_decomposition__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPartDecomposition___Commutativity_of_decomposition__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(partDecompositionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(partDecompositionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getPartDecomposition___Parts_of_internal_structures__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPartDecomposition___Parts_of_internal_structures__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(partDecompositionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(partDecompositionEClass->getEOperations()->at(2));
 }
 
 // End Class PartDecomposition
 
 // Begin Class Pin
-ecore::EClass* UmlPackageImpl::getPin() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPin() const
 {
 	return pinEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getPin_IsControl() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPin_IsControl() const
 {
-	return dynamic_cast<ecore::EAttribute*>(pinEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(pinEClass->getEStructuralFeatures()->at(0));
 }
 
 
-ecore::EOperation* UmlPackageImpl::getPin___Control_pins__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPin___Control_pins__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pinEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pinEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getPin___Not_unique__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPin___Not_unique__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pinEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pinEClass->getEOperations()->at(1));
 }
 
 // End Class Pin
 
 // Begin Class Port
-ecore::EClass* UmlPackageImpl::getPort() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPort() const
 {
 	return portEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getPort_IsBehavior() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPort_IsBehavior() const
 {
-	return dynamic_cast<ecore::EAttribute*>(portEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(portEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getPort_IsConjugated() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPort_IsConjugated() const
 {
-	return dynamic_cast<ecore::EAttribute*>(portEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(portEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getPort_IsService() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPort_IsService() const
 {
-	return dynamic_cast<ecore::EAttribute*>(portEClass->getEStructuralFeatures()->at(2));
-}
-
-ecore::EReference* UmlPackageImpl::getPort_Protocol() const
-{
-	return dynamic_cast<ecore::EReference*>(portEClass->getEStructuralFeatures()->at(3));
-}
-ecore::EReference* UmlPackageImpl::getPort_Provided() const
-{
-	return dynamic_cast<ecore::EReference*>(portEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getPort_RedefinedPort() const
-{
-	return dynamic_cast<ecore::EReference*>(portEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getPort_Required() const
-{
-	return dynamic_cast<ecore::EReference*>(portEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(portEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getPort___BasicProvided() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPort_Protocol() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(portEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getPort___BasicRequired() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPort_Provided() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(portEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getPort___Default_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPort_RedefinedPort() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(portEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getPort___Encapsulated_owner__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPort_Required() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(portEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getPort___GetProvideds() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___BasicProvided() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getPort___GetRequireds() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___BasicRequired() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getPort___Port_aggregation__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___Default_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(portEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(1));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___Encapsulated_owner__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___GetProvideds() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___GetRequireds() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPort___Port_aggregation__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(portEClass->getEOperations()->at(0));
 }
 
 // End Class Port
 
 // Begin Class PrimitiveType
-ecore::EClass* UmlPackageImpl::getPrimitiveType() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPrimitiveType() const
 {
 	return primitiveTypeEClass;
 }
@@ -14205,745 +13173,745 @@ ecore::EClass* UmlPackageImpl::getPrimitiveType() const
 // End Class PrimitiveType
 
 // Begin Class Profile
-ecore::EClass* UmlPackageImpl::getProfile() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProfile() const
 {
 	return profileEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getProfile_MetaclassReference() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProfile_MetaclassReference() const
 {
-	return dynamic_cast<ecore::EReference*>(profileEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(profileEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getProfile_MetamodelReference() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProfile_MetamodelReference() const
 {
-	return dynamic_cast<ecore::EReference*>(profileEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(profileEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getProfile___Create__Classifier() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___Create__Classifier() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___Define() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___Define() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___Define__EMap_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___Define__EMap_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___GetDefinition() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___GetDefinition() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___GetDefinition__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___GetDefinition__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___GetOwnedExtensions__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___GetOwnedExtensions__Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___GetReferencedMetaclasses() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___GetReferencedMetaclasses() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___GetReferencedMetamodels() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___GetReferencedMetamodels() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___IsDefined() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___IsDefined() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___Metaclass_reference_not_specialized__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___Metaclass_reference_not_specialized__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getProfile___References_same_metamodel__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfile___References_same_metamodel__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileEClass->getEOperations()->at(1));
 }
 
 // End Class Profile
 
 // Begin Class ProfileApplication
-ecore::EClass* UmlPackageImpl::getProfileApplication() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProfileApplication() const
 {
 	return profileApplicationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getProfileApplication_IsStrict() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProfileApplication_IsStrict() const
 {
-	return dynamic_cast<ecore::EAttribute*>(profileApplicationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(profileApplicationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getProfileApplication_AppliedProfile() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProfileApplication_AppliedProfile() const
 {
-	return dynamic_cast<ecore::EReference*>(profileApplicationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(profileApplicationEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getProfileApplication_ApplyingPackage() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProfileApplication_ApplyingPackage() const
 {
-	return dynamic_cast<ecore::EReference*>(profileApplicationEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(profileApplicationEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getProfileApplication___GetAppliedDefinition() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfileApplication___GetAppliedDefinition() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileApplicationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileApplicationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getProfileApplication___GetAppliedDefinition__NamedElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProfileApplication___GetAppliedDefinition__NamedElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(profileApplicationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(profileApplicationEClass->getEOperations()->at(1));
 }
 
 // End Class ProfileApplication
 
 // Begin Class Property
-ecore::EClass* UmlPackageImpl::getProperty() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProperty() const
 {
 	return propertyEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_Aggregation() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_Aggregation() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_Default() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_Default() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_IsComposite() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_IsComposite() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_IsDerived() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_IsDerived() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_IsDerivedUnion() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_IsDerivedUnion() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EAttribute* UmlPackageImpl::getProperty_IsID() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getProperty_IsID() const
 {
-	return dynamic_cast<ecore::EAttribute*>(propertyEClass->getEStructuralFeatures()->at(5));
-}
-
-ecore::EReference* UmlPackageImpl::getProperty_Association() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(16));
-}
-ecore::EReference* UmlPackageImpl::getProperty_AssociationEnd() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* UmlPackageImpl::getProperty_Class() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(10));
-}
-ecore::EReference* UmlPackageImpl::getProperty_Datatype() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getProperty_DefaultValue() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(11));
-}
-ecore::EReference* UmlPackageImpl::getProperty_Interface() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* UmlPackageImpl::getProperty_Opposite() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(12));
-}
-ecore::EReference* UmlPackageImpl::getProperty_OwningAssociation() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(13));
-}
-ecore::EReference* UmlPackageImpl::getProperty_Qualifier() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* UmlPackageImpl::getProperty_RedefinedProperty() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(14));
-}
-ecore::EReference* UmlPackageImpl::getProperty_SubsettedProperty() const
-{
-	return dynamic_cast<ecore::EReference*>(propertyEClass->getEStructuralFeatures()->at(15));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(propertyEClass->getEStructuralFeatures()->at(5));
 }
 
-ecore::EOperation* UmlPackageImpl::getProperty___Binding_to_attribute__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Association() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(16));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Deployment_target__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_AssociationEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Derived_union_is_derived__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Class() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Derived_union_is_read_only__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Datatype() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___GetOpposite() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_DefaultValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(24));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___GetOtherEnd() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Interface() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___IsAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Opposite() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(21));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___IsComposite() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_OwningAssociation() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(22));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___IsNavigable() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_Qualifier() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(23));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___IsSetDefault() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_RedefinedProperty() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(14));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Multiplicity_of_composite__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProperty_SubsettedProperty() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(propertyEClass->getEStructuralFeatures()->at(15));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Qualified_is_association_end__EDiagnosticChain_EMap() const
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Binding_to_attribute__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Redefined_property_inherited__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Deployment_target__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetBooleanDefaultValue__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Derived_union_is_derived__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetIntegerDefaultValue__Integer() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Derived_union_is_read_only__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(14));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetIsNavigable__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___GetOpposite() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(15));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(24));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetNullDefaultValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___GetOtherEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(16));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetRealDefaultValue__Real() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___IsAttribute() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(17));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(21));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetStringDefaultValue__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___IsComposite() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(18));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(22));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SetUnlimitedNaturalDefaultValue__UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___IsNavigable() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(19));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(23));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Subsetted_property_names__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___IsSetDefault() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___SubsettingContext() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Multiplicity_of_composite__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(25));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Subsetting_context_conforms__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Qualified_is_association_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Subsetting_rules__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Redefined_property_inherited__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___Type_of_opposite_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetBooleanDefaultValue__Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getProperty___UnsetDefault() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetIntegerDefaultValue__Integer() const
 {
-	return dynamic_cast<ecore::EOperation*>(propertyEClass->getEOperations()->at(20));
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(14));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetIsNavigable__Boolean() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(15));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetNullDefaultValue() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(16));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetRealDefaultValue__Real() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(17));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetStringDefaultValue__String() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(18));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SetUnlimitedNaturalDefaultValue__UnlimitedNatural() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(19));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Subsetted_property_names__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___SubsettingContext() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(25));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Subsetting_context_conforms__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Subsetting_rules__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___Type_of_opposite_end__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(9));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProperty___UnsetDefault() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(propertyEClass->getEOperations()->at(20));
 }
 
 // End Class Property
 
 // Begin Class ProtocolConformance
-ecore::EClass* UmlPackageImpl::getProtocolConformance() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProtocolConformance() const
 {
 	return protocolConformanceEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getProtocolConformance_GeneralMachine() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolConformance_GeneralMachine() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolConformanceEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolConformanceEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getProtocolConformance_SpecificMachine() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolConformance_SpecificMachine() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolConformanceEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolConformanceEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class ProtocolConformance
 
 // Begin Class ProtocolStateMachine
-ecore::EClass* UmlPackageImpl::getProtocolStateMachine() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProtocolStateMachine() const
 {
 	return protocolStateMachineEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getProtocolStateMachine_Conformance() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolStateMachine_Conformance() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolStateMachineEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolStateMachineEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getProtocolStateMachine___Deep_or_shallow_history__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolStateMachine___Deep_or_shallow_history__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolStateMachineEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolStateMachineEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getProtocolStateMachine___Entry_exit_do__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolStateMachine___Entry_exit_do__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolStateMachineEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolStateMachineEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getProtocolStateMachine___Protocol_transitions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolStateMachine___Protocol_transitions__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolStateMachineEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolStateMachineEClass->getEOperations()->at(2));
 }
 
 // End Class ProtocolStateMachine
 
 // Begin Class ProtocolTransition
-ecore::EClass* UmlPackageImpl::getProtocolTransition() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getProtocolTransition() const
 {
 	return protocolTransitionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getProtocolTransition_PostCondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolTransition_PostCondition() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolTransitionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolTransitionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getProtocolTransition_PreCondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolTransition_PreCondition() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolTransitionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolTransitionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getProtocolTransition_Referred() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getProtocolTransition_Referred() const
 {
-	return dynamic_cast<ecore::EReference*>(protocolTransitionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(protocolTransitionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getProtocolTransition___Associated_actions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolTransition___Associated_actions__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolTransitionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolTransitionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getProtocolTransition___Belongs_to_psm__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolTransition___Belongs_to_psm__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolTransitionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolTransitionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getProtocolTransition___GetReferreds() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolTransition___GetReferreds() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolTransitionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolTransitionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getProtocolTransition___Refers_to_operation__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getProtocolTransition___Refers_to_operation__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(protocolTransitionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(protocolTransitionEClass->getEOperations()->at(0));
 }
 
 // End Class ProtocolTransition
 
 // Begin Class Pseudostate
-ecore::EClass* UmlPackageImpl::getPseudostate() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getPseudostate() const
 {
 	return pseudostateEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getPseudostate_Kind() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getPseudostate_Kind() const
 {
-	return dynamic_cast<ecore::EAttribute*>(pseudostateEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(pseudostateEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getPseudostate_State() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPseudostate_State() const
 {
-	return dynamic_cast<ecore::EReference*>(pseudostateEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(pseudostateEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getPseudostate_StateMachine() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPseudostate_StateMachine() const
 {
-	return dynamic_cast<ecore::EReference*>(pseudostateEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(pseudostateEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getPseudostate___Choice_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Choice_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Fork_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Fork_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___History_vertices__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___History_vertices__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Initial_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Initial_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Join_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Join_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Junction_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Junction_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Outgoing_from_initial__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Outgoing_from_initial__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Transitions_incoming__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Transitions_incoming__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getPseudostate___Transitions_outgoing__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPseudostate___Transitions_outgoing__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(pseudostateEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(pseudostateEClass->getEOperations()->at(0));
 }
 
 // End Class Pseudostate
 
 // Begin Class QualifierValue
-ecore::EClass* UmlPackageImpl::getQualifierValue() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getQualifierValue() const
 {
 	return qualifierValueEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getQualifierValue_Qualifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getQualifierValue_Qualifier() const
 {
-	return dynamic_cast<ecore::EReference*>(qualifierValueEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(qualifierValueEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getQualifierValue_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getQualifierValue_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(qualifierValueEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(qualifierValueEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getQualifierValue___Multiplicity_of_qualifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getQualifierValue___Multiplicity_of_qualifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(qualifierValueEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(qualifierValueEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getQualifierValue___Qualifier_attribute__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getQualifierValue___Qualifier_attribute__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(qualifierValueEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(qualifierValueEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getQualifierValue___Type_of_qualifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getQualifierValue___Type_of_qualifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(qualifierValueEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(qualifierValueEClass->getEOperations()->at(1));
 }
 
 // End Class QualifierValue
 
 // Begin Class RaiseExceptionAction
-ecore::EClass* UmlPackageImpl::getRaiseExceptionAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRaiseExceptionAction() const
 {
 	return raiseExceptionActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getRaiseExceptionAction_Exception() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRaiseExceptionAction_Exception() const
 {
-	return dynamic_cast<ecore::EReference*>(raiseExceptionActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(raiseExceptionActionEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class RaiseExceptionAction
 
 // Begin Class ReadExtentAction
-ecore::EClass* UmlPackageImpl::getReadExtentAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadExtentAction() const
 {
 	return readExtentActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadExtentAction_Classifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadExtentAction_Classifier() const
 {
-	return dynamic_cast<ecore::EReference*>(readExtentActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readExtentActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getReadExtentAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadExtentAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readExtentActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(readExtentActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadExtentAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadExtentAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readExtentActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readExtentActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadExtentAction___Type_is_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadExtentAction___Type_is_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readExtentActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readExtentActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReadExtentAction
 
 // Begin Class ReadIsClassifiedObjectAction
-ecore::EClass* UmlPackageImpl::getReadIsClassifiedObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadIsClassifiedObjectAction() const
 {
 	return readIsClassifiedObjectActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getReadIsClassifiedObjectAction_IsDirect() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getReadIsClassifiedObjectAction_IsDirect() const
 {
-	return dynamic_cast<ecore::EAttribute*>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getReadIsClassifiedObjectAction_Classifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadIsClassifiedObjectAction_Classifier() const
 {
-	return dynamic_cast<ecore::EReference*>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReadIsClassifiedObjectAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadIsClassifiedObjectAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getReadIsClassifiedObjectAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadIsClassifiedObjectAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(readIsClassifiedObjectActionEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadIsClassifiedObjectAction___Boolean_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadIsClassifiedObjectAction___Boolean_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readIsClassifiedObjectActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readIsClassifiedObjectActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getReadIsClassifiedObjectAction___Multiplicity_of_input__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadIsClassifiedObjectAction___Multiplicity_of_input__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readIsClassifiedObjectActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readIsClassifiedObjectActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getReadIsClassifiedObjectAction___Multiplicity_of_output__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadIsClassifiedObjectAction___Multiplicity_of_output__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readIsClassifiedObjectActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readIsClassifiedObjectActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadIsClassifiedObjectAction___No_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadIsClassifiedObjectAction___No_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readIsClassifiedObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readIsClassifiedObjectActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReadIsClassifiedObjectAction
 
 // Begin Class ReadLinkAction
-ecore::EClass* UmlPackageImpl::getReadLinkAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadLinkAction() const
 {
 	return readLinkActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadLinkAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___Compatible_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___Compatible_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___Navigable_open_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___Navigable_open_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___One_open_end__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___One_open_end__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___OpenEnd() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___OpenEnd() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___Type_and_ordering__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___Type_and_ordering__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkAction___Visibility__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkAction___Visibility__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkActionEClass->getEOperations()->at(2));
 }
 
 // End Class ReadLinkAction
 
 // Begin Class ReadLinkObjectEndAction
-ecore::EClass* UmlPackageImpl::getReadLinkObjectEndAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadLinkObjectEndAction() const
 {
 	return readLinkObjectEndActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndAction_End() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndAction_End() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Association_of_association__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Association_of_association__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Ends_of_association__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Ends_of_association__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Property__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Property__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Type_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Type_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndAction___Type_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndAction___Type_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndActionEClass->getEOperations()->at(3));
 }
 
 // End Class ReadLinkObjectEndAction
 
 // Begin Class ReadLinkObjectEndQualifierAction
-ecore::EClass* UmlPackageImpl::getReadLinkObjectEndQualifierAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadLinkObjectEndQualifierAction() const
 {
 	return readLinkObjectEndQualifierActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndQualifierAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndQualifierAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndQualifierAction_Qualifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndQualifierAction_Qualifier() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReadLinkObjectEndQualifierAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadLinkObjectEndQualifierAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(readLinkObjectEndQualifierActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Association_of_association__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Association_of_association__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Ends_of_association__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Ends_of_association__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_qualifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_qualifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Qualifier_attribute__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Qualifier_attribute__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Same_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Same_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getReadLinkObjectEndQualifierAction___Type_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadLinkObjectEndQualifierAction___Type_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readLinkObjectEndQualifierActionEClass->getEOperations()->at(1));
 }
 
 // End Class ReadLinkObjectEndQualifierAction
 
 // Begin Class ReadSelfAction
-ecore::EClass* UmlPackageImpl::getReadSelfAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadSelfAction() const
 {
 	return readSelfActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadSelfAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadSelfAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readSelfActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readSelfActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadSelfAction___Contained__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadSelfAction___Contained__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readSelfActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readSelfActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReadSelfAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadSelfAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readSelfActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readSelfActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadSelfAction___Not_static__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadSelfAction___Not_static__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readSelfActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readSelfActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getReadSelfAction___Type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadSelfAction___Type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readSelfActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readSelfActionEClass->getEOperations()->at(3));
 }
 
 // End Class ReadSelfAction
 
 // Begin Class ReadStructuralFeatureAction
-ecore::EClass* UmlPackageImpl::getReadStructuralFeatureAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadStructuralFeatureAction() const
 {
 	return readStructuralFeatureActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadStructuralFeatureAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadStructuralFeatureAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadStructuralFeatureAction___Type_and_ordering__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadStructuralFeatureAction___Type_and_ordering__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readStructuralFeatureActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readStructuralFeatureActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReadStructuralFeatureAction
 
 // Begin Class ReadVariableAction
-ecore::EClass* UmlPackageImpl::getReadVariableAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReadVariableAction() const
 {
 	return readVariableActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReadVariableAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReadVariableAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(readVariableActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(readVariableActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getReadVariableAction___Compatible_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadVariableAction___Compatible_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readVariableActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readVariableActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReadVariableAction___Type_and_ordering__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReadVariableAction___Type_and_ordering__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(readVariableActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(readVariableActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReadVariableAction
 
 // Begin Class Realization
-ecore::EClass* UmlPackageImpl::getRealization() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRealization() const
 {
 	return realizationEClass;
 }
@@ -14953,787 +13921,787 @@ ecore::EClass* UmlPackageImpl::getRealization() const
 // End Class Realization
 
 // Begin Class Reception
-ecore::EClass* UmlPackageImpl::getReception() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReception() const
 {
 	return receptionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReception_Signal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReception_Signal() const
 {
-	return dynamic_cast<ecore::EReference*>(receptionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(receptionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getReception___Same_name_as_signal__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReception___Same_name_as_signal__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(receptionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(receptionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReception___Same_structure_as_signal__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReception___Same_structure_as_signal__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(receptionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(receptionEClass->getEOperations()->at(1));
 }
 
 // End Class Reception
 
 // Begin Class ReclassifyObjectAction
-ecore::EClass* UmlPackageImpl::getReclassifyObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReclassifyObjectAction() const
 {
 	return reclassifyObjectActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getReclassifyObjectAction_IsReplaceAll() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getReclassifyObjectAction_IsReplaceAll() const
 {
-	return dynamic_cast<ecore::EAttribute*>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getReclassifyObjectAction_NewClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReclassifyObjectAction_NewClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReclassifyObjectAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReclassifyObjectAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getReclassifyObjectAction_OldClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReclassifyObjectAction_OldClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(reclassifyObjectActionEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getReclassifyObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReclassifyObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reclassifyObjectActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reclassifyObjectActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReclassifyObjectAction___Input_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReclassifyObjectAction___Input_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reclassifyObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reclassifyObjectActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getReclassifyObjectAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReclassifyObjectAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reclassifyObjectActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reclassifyObjectActionEClass->getEOperations()->at(2));
 }
 
 // End Class ReclassifyObjectAction
 
 // Begin Class RedefinableElement
-ecore::EClass* UmlPackageImpl::getRedefinableElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRedefinableElement() const
 {
 	return redefinableElementEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getRedefinableElement_IsLeaf() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getRedefinableElement_IsLeaf() const
 {
-	return dynamic_cast<ecore::EAttribute*>(redefinableElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(redefinableElementEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getRedefinableElement_RedefinedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRedefinableElement_RedefinedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(redefinableElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(redefinableElementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getRedefinableElement_RedefinitionContext() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRedefinableElement_RedefinitionContext() const
 {
-	return dynamic_cast<ecore::EReference*>(redefinableElementEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(redefinableElementEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getRedefinableElement___IsConsistentWith__RedefinableElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableElement___IsConsistentWith__RedefinableElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableElementEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableElementEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getRedefinableElement___IsRedefinitionContextValid__RedefinableElement() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableElement___IsRedefinitionContextValid__RedefinableElement() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableElementEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableElementEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getRedefinableElement___Non_leaf_redefinition__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableElement___Non_leaf_redefinition__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableElementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableElementEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getRedefinableElement___Redefinition_consistent__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableElement___Redefinition_consistent__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableElementEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getRedefinableElement___Redefinition_context_valid__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableElement___Redefinition_context_valid__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableElementEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableElementEClass->getEOperations()->at(2));
 }
 
 // End Class RedefinableElement
 
 // Begin Class RedefinableTemplateSignature
-ecore::EClass* UmlPackageImpl::getRedefinableTemplateSignature() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRedefinableTemplateSignature() const
 {
 	return redefinableTemplateSignatureEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getRedefinableTemplateSignature_Classifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRedefinableTemplateSignature_Classifier() const
 {
-	return dynamic_cast<ecore::EReference*>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getRedefinableTemplateSignature_ExtendedSignature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRedefinableTemplateSignature_ExtendedSignature() const
 {
-	return dynamic_cast<ecore::EReference*>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getRedefinableTemplateSignature_InheritedParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRedefinableTemplateSignature_InheritedParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(redefinableTemplateSignatureEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getRedefinableTemplateSignature___GetInheritedParameters() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableTemplateSignature___GetInheritedParameters() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableTemplateSignatureEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableTemplateSignatureEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getRedefinableTemplateSignature___Redefines_parents__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRedefinableTemplateSignature___Redefines_parents__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(redefinableTemplateSignatureEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(redefinableTemplateSignatureEClass->getEOperations()->at(0));
 }
 
 // End Class RedefinableTemplateSignature
 
 // Begin Class ReduceAction
-ecore::EClass* UmlPackageImpl::getReduceAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReduceAction() const
 {
 	return reduceActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getReduceAction_IsOrdered() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getReduceAction_IsOrdered() const
 {
-	return dynamic_cast<ecore::EAttribute*>(reduceActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(reduceActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getReduceAction_Collection() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReduceAction_Collection() const
 {
-	return dynamic_cast<ecore::EReference*>(reduceActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(reduceActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReduceAction_Reducer() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReduceAction_Reducer() const
 {
-	return dynamic_cast<ecore::EReference*>(reduceActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(reduceActionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getReduceAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReduceAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(reduceActionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(reduceActionEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getReduceAction___Input_type_is_collection__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReduceAction___Input_type_is_collection__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reduceActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reduceActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReduceAction___Output_types_are_compatible__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReduceAction___Output_types_are_compatible__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reduceActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reduceActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getReduceAction___Reducer_inputs_output__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReduceAction___Reducer_inputs_output__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(reduceActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(reduceActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReduceAction
 
 // Begin Class Region
-ecore::EClass* UmlPackageImpl::getRegion() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRegion() const
 {
 	return regionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getRegion_ExtendedRegion() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRegion_ExtendedRegion() const
 {
-	return dynamic_cast<ecore::EReference*>(regionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(regionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getRegion_State() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRegion_State() const
 {
-	return dynamic_cast<ecore::EReference*>(regionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(regionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getRegion_StateMachine() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRegion_StateMachine() const
 {
-	return dynamic_cast<ecore::EReference*>(regionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(regionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getRegion_Subvertex() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRegion_Subvertex() const
 {
-	return dynamic_cast<ecore::EReference*>(regionEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(regionEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getRegion_Transition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRegion_Transition() const
 {
-	return dynamic_cast<ecore::EReference*>(regionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(regionEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getRegion___BelongsToPSM() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___BelongsToPSM() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___ContainingStateMachine() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___ContainingStateMachine() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___Deep_history_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___Deep_history_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___Initial_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___Initial_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___Owned__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___Owned__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___RedefinitionContext() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___RedefinitionContext() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getRegion___Shallow_history_vertex__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRegion___Shallow_history_vertex__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(regionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(regionEClass->getEOperations()->at(1));
 }
 
 // End Class Region
 
 // Begin Class Relationship
-ecore::EClass* UmlPackageImpl::getRelationship() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRelationship() const
 {
 	return relationshipEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getRelationship_RelatedElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRelationship_RelatedElement() const
 {
-	return dynamic_cast<ecore::EReference*>(relationshipEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(relationshipEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class Relationship
 
 // Begin Class RemoveStructuralFeatureValueAction
-ecore::EClass* UmlPackageImpl::getRemoveStructuralFeatureValueAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRemoveStructuralFeatureValueAction() const
 {
 	return removeStructuralFeatureValueActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getRemoveStructuralFeatureValueAction_IsRemoveDuplicates() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getRemoveStructuralFeatureValueAction_IsRemoveDuplicates() const
 {
-	return dynamic_cast<ecore::EAttribute*>(removeStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(removeStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getRemoveStructuralFeatureValueAction_RemoveAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRemoveStructuralFeatureValueAction_RemoveAt() const
 {
-	return dynamic_cast<ecore::EReference*>(removeStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(removeStructuralFeatureValueActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getRemoveStructuralFeatureValueAction___RemoveAt_and_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRemoveStructuralFeatureValueAction___RemoveAt_and_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(removeStructuralFeatureValueActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(removeStructuralFeatureValueActionEClass->getEOperations()->at(0));
 }
 
 // End Class RemoveStructuralFeatureValueAction
 
 // Begin Class RemoveVariableValueAction
-ecore::EClass* UmlPackageImpl::getRemoveVariableValueAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getRemoveVariableValueAction() const
 {
 	return removeVariableValueActionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getRemoveVariableValueAction_IsRemoveDuplicates() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getRemoveVariableValueAction_IsRemoveDuplicates() const
 {
-	return dynamic_cast<ecore::EAttribute*>(removeVariableValueActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(removeVariableValueActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getRemoveVariableValueAction_RemoveAt() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getRemoveVariableValueAction_RemoveAt() const
 {
-	return dynamic_cast<ecore::EReference*>(removeVariableValueActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(removeVariableValueActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getRemoveVariableValueAction___RemoveAt_and_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getRemoveVariableValueAction___RemoveAt_and_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(removeVariableValueActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(removeVariableValueActionEClass->getEOperations()->at(0));
 }
 
 // End Class RemoveVariableValueAction
 
 // Begin Class ReplyAction
-ecore::EClass* UmlPackageImpl::getReplyAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getReplyAction() const
 {
 	return replyActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getReplyAction_ReplyToCall() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReplyAction_ReplyToCall() const
 {
-	return dynamic_cast<ecore::EReference*>(replyActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(replyActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getReplyAction_ReplyValue() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReplyAction_ReplyValue() const
 {
-	return dynamic_cast<ecore::EReference*>(replyActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(replyActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getReplyAction_ReturnInformation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getReplyAction_ReturnInformation() const
 {
-	return dynamic_cast<ecore::EReference*>(replyActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(replyActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getReplyAction___Event_on_reply_to_call_trigger__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReplyAction___Event_on_reply_to_call_trigger__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(replyActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(replyActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getReplyAction___Pins_match_parameter__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getReplyAction___Pins_match_parameter__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(replyActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(replyActionEClass->getEOperations()->at(0));
 }
 
 // End Class ReplyAction
 
 // Begin Class SendObjectAction
-ecore::EClass* UmlPackageImpl::getSendObjectAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSendObjectAction() const
 {
 	return sendObjectActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSendObjectAction_Request() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSendObjectAction_Request() const
 {
-	return dynamic_cast<ecore::EReference*>(sendObjectActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(sendObjectActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getSendObjectAction_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSendObjectAction_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(sendObjectActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(sendObjectActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getSendObjectAction___Type_target_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getSendObjectAction___Type_target_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(sendObjectActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(sendObjectActionEClass->getEOperations()->at(0));
 }
 
 // End Class SendObjectAction
 
 // Begin Class SendSignalAction
-ecore::EClass* UmlPackageImpl::getSendSignalAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSendSignalAction() const
 {
 	return sendSignalActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSendSignalAction_Signal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSendSignalAction_Signal() const
 {
-	return dynamic_cast<ecore::EReference*>(sendSignalActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(sendSignalActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getSendSignalAction_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSendSignalAction_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(sendSignalActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(sendSignalActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getSendSignalAction___Number_order__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getSendSignalAction___Number_order__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(sendSignalActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(sendSignalActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getSendSignalAction___Type_ordering_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getSendSignalAction___Type_ordering_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(sendSignalActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(sendSignalActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getSendSignalAction___Type_target_pin__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getSendSignalAction___Type_target_pin__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(sendSignalActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(sendSignalActionEClass->getEOperations()->at(2));
 }
 
 // End Class SendSignalAction
 
 // Begin Class SequenceNode
-ecore::EClass* UmlPackageImpl::getSequenceNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSequenceNode() const
 {
 	return sequenceNodeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSequenceNode_ExecutableNode() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSequenceNode_ExecutableNode() const
 {
-	return dynamic_cast<ecore::EReference*>(sequenceNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(sequenceNodeEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class SequenceNode
 
 // Begin Class Signal
-ecore::EClass* UmlPackageImpl::getSignal() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSignal() const
 {
 	return signalEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSignal_OwnedAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSignal_OwnedAttribute() const
 {
-	return dynamic_cast<ecore::EReference*>(signalEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(signalEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getSignal___CreateOwnedAttribute__String_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getSignal___CreateOwnedAttribute__String_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(signalEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(signalEClass->getEOperations()->at(0));
 }
 
 // End Class Signal
 
 // Begin Class SignalEvent
-ecore::EClass* UmlPackageImpl::getSignalEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSignalEvent() const
 {
 	return signalEventEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSignalEvent_Signal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSignalEvent_Signal() const
 {
-	return dynamic_cast<ecore::EReference*>(signalEventEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(signalEventEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class SignalEvent
 
 // Begin Class Slot
-ecore::EClass* UmlPackageImpl::getSlot() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSlot() const
 {
 	return slotEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSlot_DefiningFeature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSlot_DefiningFeature() const
 {
-	return dynamic_cast<ecore::EReference*>(slotEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(slotEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getSlot_OwningInstance() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSlot_OwningInstance() const
 {
-	return dynamic_cast<ecore::EReference*>(slotEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(slotEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getSlot_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSlot_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(slotEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(slotEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Slot
 
 // Begin Class StartClassifierBehaviorAction
-ecore::EClass* UmlPackageImpl::getStartClassifierBehaviorAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStartClassifierBehaviorAction() const
 {
 	return startClassifierBehaviorActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStartClassifierBehaviorAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStartClassifierBehaviorAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(startClassifierBehaviorActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(startClassifierBehaviorActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getStartClassifierBehaviorAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartClassifierBehaviorAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(startClassifierBehaviorActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startClassifierBehaviorActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStartClassifierBehaviorAction___Type_has_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartClassifierBehaviorAction___Type_has_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(startClassifierBehaviorActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startClassifierBehaviorActionEClass->getEOperations()->at(1));
 }
 
 // End Class StartClassifierBehaviorAction
 
 // Begin Class StartObjectBehaviorAction
-ecore::EClass* UmlPackageImpl::getStartObjectBehaviorAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStartObjectBehaviorAction() const
 {
 	return startObjectBehaviorActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStartObjectBehaviorAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStartObjectBehaviorAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(startObjectBehaviorActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(startObjectBehaviorActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getStartObjectBehaviorAction___Behavior() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartObjectBehaviorAction___Behavior() const
 {
-	return dynamic_cast<ecore::EOperation*>(startObjectBehaviorActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startObjectBehaviorActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getStartObjectBehaviorAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartObjectBehaviorAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(startObjectBehaviorActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startObjectBehaviorActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStartObjectBehaviorAction___No_onport__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartObjectBehaviorAction___No_onport__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(startObjectBehaviorActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startObjectBehaviorActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getStartObjectBehaviorAction___Type_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStartObjectBehaviorAction___Type_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(startObjectBehaviorActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(startObjectBehaviorActionEClass->getEOperations()->at(1));
 }
 
 // End Class StartObjectBehaviorAction
 
 // Begin Class State
-ecore::EClass* UmlPackageImpl::getState() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getState() const
 {
 	return stateEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getState_IsComposite() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getState_IsComposite() const
 {
-	return dynamic_cast<ecore::EAttribute*>(stateEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(stateEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EAttribute* UmlPackageImpl::getState_IsOrthogonal() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getState_IsOrthogonal() const
 {
-	return dynamic_cast<ecore::EAttribute*>(stateEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(stateEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EAttribute* UmlPackageImpl::getState_IsSimple() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getState_IsSimple() const
 {
-	return dynamic_cast<ecore::EAttribute*>(stateEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(stateEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EAttribute* UmlPackageImpl::getState_IsSubmachineState() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getState_IsSubmachineState() const
 {
-	return dynamic_cast<ecore::EAttribute*>(stateEClass->getEStructuralFeatures()->at(3));
-}
-
-ecore::EReference* UmlPackageImpl::getState_Connection() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(4));
-}
-ecore::EReference* UmlPackageImpl::getState_ConnectionPoint() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(5));
-}
-ecore::EReference* UmlPackageImpl::getState_DeferrableTrigger() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(6));
-}
-ecore::EReference* UmlPackageImpl::getState_DoActivity() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(7));
-}
-ecore::EReference* UmlPackageImpl::getState_Entry() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(8));
-}
-ecore::EReference* UmlPackageImpl::getState_Exit() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(9));
-}
-ecore::EReference* UmlPackageImpl::getState_RedefinedState() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(10));
-}
-ecore::EReference* UmlPackageImpl::getState_Region() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(13));
-}
-ecore::EReference* UmlPackageImpl::getState_StateInvariant() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(11));
-}
-ecore::EReference* UmlPackageImpl::getState_Submachine() const
-{
-	return dynamic_cast<ecore::EReference*>(stateEClass->getEStructuralFeatures()->at(12));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(stateEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getState___Composite_states__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_Connection() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getState___Destinations_or_sources_of_transitions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_ConnectionPoint() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getState___Entry_or_exit__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_DeferrableTrigger() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getState___IsComposite() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_DoActivity() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getState___IsOrthogonal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_Entry() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getState___IsSimple() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_Exit() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getState___IsSubmachineState() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_RedefinedState() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getState___RedefinitionContext() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_Region() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getState___Submachine_or_regions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_StateInvariant() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getState___Submachine_states__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getState_Submachine() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateEClass->getEStructuralFeatures()->at(12));
+}
+
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___Composite_states__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(2));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___Destinations_or_sources_of_transitions__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(3));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___Entry_or_exit__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(0));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___IsComposite() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(5));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___IsOrthogonal() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(6));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___IsSimple() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(7));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___IsSubmachineState() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(8));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___RedefinitionContext() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(9));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___Submachine_or_regions__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(4));
+}
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getState___Submachine_states__EDiagnosticChain_EMap() const
+{
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateEClass->getEOperations()->at(1));
 }
 
 // End Class State
 
 // Begin Class StateInvariant
-ecore::EClass* UmlPackageImpl::getStateInvariant() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStateInvariant() const
 {
 	return stateInvariantEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStateInvariant_Invariant() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStateInvariant_Invariant() const
 {
-	return dynamic_cast<ecore::EReference*>(stateInvariantEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateInvariantEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class StateInvariant
 
 // Begin Class StateMachine
-ecore::EClass* UmlPackageImpl::getStateMachine() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStateMachine() const
 {
 	return stateMachineEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStateMachine_ConnectionPoint() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStateMachine_ConnectionPoint() const
 {
-	return dynamic_cast<ecore::EReference*>(stateMachineEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateMachineEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getStateMachine_ExtendedStateMachine() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStateMachine_ExtendedStateMachine() const
 {
-	return dynamic_cast<ecore::EReference*>(stateMachineEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateMachineEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getStateMachine_Region() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStateMachine_Region() const
 {
-	return dynamic_cast<ecore::EReference*>(stateMachineEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateMachineEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getStateMachine_SubmachineState() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStateMachine_SubmachineState() const
 {
-	return dynamic_cast<ecore::EReference*>(stateMachineEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(stateMachineEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getStateMachine___LCA__Vertex_Vertex() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___LCA__Vertex_Vertex() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___LCAState__Vertex_Vertex() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___LCAState__Vertex_Vertex() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___Ancestor__Vertex_Vertex() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___Ancestor__Vertex_Vertex() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___Classifier_context__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___Classifier_context__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___Connection_points__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___Connection_points__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___Context_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___Context_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getStateMachine___Method__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStateMachine___Method__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stateMachineEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stateMachineEClass->getEOperations()->at(2));
 }
 
 // End Class StateMachine
 
 // Begin Class Stereotype
-ecore::EClass* UmlPackageImpl::getStereotype() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStereotype() const
 {
 	return stereotypeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStereotype_Icon() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStereotype_Icon() const
 {
-	return dynamic_cast<ecore::EReference*>(stereotypeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(stereotypeEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getStereotype_Profile() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStereotype_Profile() const
 {
-	return dynamic_cast<ecore::EReference*>(stereotypeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(stereotypeEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getStereotype___AssociationEndOwnership__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___AssociationEndOwnership__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___Base_property_multiplicity_multiple_extension__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___Base_property_multiplicity_multiple_extension__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(6));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___Base_property_multiplicity_single_extension__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___Base_property_multiplicity_single_extension__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___Base_property_upper_bound__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___Base_property_upper_bound__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___BinaryAssociationsOnly__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___BinaryAssociationsOnly__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___ContainingProfile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___ContainingProfile() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(15));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(15));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___CreateExtension__Class_Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___CreateExtension__Class_Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___CreateIcon__String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___CreateIcon__String() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___CreateIcon__String_String() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___CreateIcon__String_String() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___Generalize__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___Generalize__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetAllExtendedMetaclasses() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetAllExtendedMetaclasses() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetDefinition() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetDefinition() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(11));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(11));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetExtendedMetaclasses() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetExtendedMetaclasses() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(12));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(12));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetKeyword() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetKeyword() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(13));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(13));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetKeyword__Boolean() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetKeyword__Boolean() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(14));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(14));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___GetProfile() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___GetProfile() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(16));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(16));
 }
-ecore::EOperation* UmlPackageImpl::getStereotype___Name_not_clash__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStereotype___Name_not_clash__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stereotypeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stereotypeEClass->getEOperations()->at(2));
 }
 
 // End Class Stereotype
 
 // Begin Class StringExpression
-ecore::EClass* UmlPackageImpl::getStringExpression() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStringExpression() const
 {
 	return stringExpressionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStringExpression_OwningExpression() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStringExpression_OwningExpression() const
 {
-	return dynamic_cast<ecore::EReference*>(stringExpressionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(stringExpressionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getStringExpression_SubExpression() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStringExpression_SubExpression() const
 {
-	return dynamic_cast<ecore::EReference*>(stringExpressionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(stringExpressionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getStringExpression___Operands__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStringExpression___Operands__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stringExpressionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stringExpressionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStringExpression___Subexpressions__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStringExpression___Subexpressions__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(stringExpressionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(stringExpressionEClass->getEOperations()->at(1));
 }
 
 // End Class StringExpression
 
 // Begin Class StructuralFeature
-ecore::EClass* UmlPackageImpl::getStructuralFeature() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStructuralFeature() const
 {
 	return structuralFeatureEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getStructuralFeature_IsReadOnly() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getStructuralFeature_IsReadOnly() const
 {
-	return dynamic_cast<ecore::EAttribute*>(structuralFeatureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(structuralFeatureEClass->getEStructuralFeatures()->at(0));
 }
 
 
@@ -15741,401 +14709,401 @@ ecore::EAttribute* UmlPackageImpl::getStructuralFeature_IsReadOnly() const
 // End Class StructuralFeature
 
 // Begin Class StructuralFeatureAction
-ecore::EClass* UmlPackageImpl::getStructuralFeatureAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStructuralFeatureAction() const
 {
 	return structuralFeatureActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStructuralFeatureAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuralFeatureAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(structuralFeatureActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuralFeatureActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getStructuralFeatureAction_StructuralFeature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuralFeatureAction_StructuralFeature() const
 {
-	return dynamic_cast<ecore::EReference*>(structuralFeatureActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuralFeatureActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getStructuralFeatureAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuralFeatureAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuralFeatureActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuralFeatureActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStructuralFeatureAction___Not_static__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuralFeatureAction___Not_static__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuralFeatureActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuralFeatureActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getStructuralFeatureAction___Object_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuralFeatureAction___Object_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuralFeatureActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuralFeatureActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getStructuralFeatureAction___One_featuring_classifier__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuralFeatureAction___One_featuring_classifier__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuralFeatureActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuralFeatureActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getStructuralFeatureAction___Visibility__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuralFeatureAction___Visibility__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuralFeatureActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuralFeatureActionEClass->getEOperations()->at(2));
 }
 
 // End Class StructuralFeatureAction
 
 // Begin Class StructuredActivityNode
-ecore::EClass* UmlPackageImpl::getStructuredActivityNode() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStructuredActivityNode() const
 {
 	return structuredActivityNodeEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getStructuredActivityNode_MustIsolate() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getStructuredActivityNode_MustIsolate() const
 {
-	return dynamic_cast<ecore::EAttribute*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(structuredActivityNodeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getStructuredActivityNode_Edge() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredActivityNode_Edge() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredActivityNodeEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getStructuredActivityNode_Node() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredActivityNode_Node() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredActivityNodeEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getStructuredActivityNode_StructuredNodeInput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredActivityNode_StructuredNodeInput() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredActivityNodeEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getStructuredActivityNode_StructuredNodeOutput() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredActivityNode_StructuredNodeOutput() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredActivityNodeEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getStructuredActivityNode_Variable() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredActivityNode_Variable() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredActivityNodeEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredActivityNodeEClass->getEStructuralFeatures()->at(4));
 }
 
-ecore::EOperation* UmlPackageImpl::getStructuredActivityNode___Edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredActivityNode___Edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredActivityNodeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredActivityNodeEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredActivityNode___Input_pin_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredActivityNode___Input_pin_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredActivityNodeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredActivityNodeEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredActivityNode___Output_pin_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredActivityNode___Output_pin_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredActivityNodeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredActivityNodeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredActivityNode___SourceNodes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredActivityNode___SourceNodes() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredActivityNodeEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredActivityNodeEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredActivityNode___TargetNodes() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredActivityNode___TargetNodes() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredActivityNodeEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredActivityNodeEClass->getEOperations()->at(4));
 }
 
 // End Class StructuredActivityNode
 
 // Begin Class StructuredClassifier
-ecore::EClass* UmlPackageImpl::getStructuredClassifier() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getStructuredClassifier() const
 {
 	return structuredClassifierEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getStructuredClassifier_OwnedAttribute() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredClassifier_OwnedAttribute() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredClassifierEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredClassifierEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getStructuredClassifier_OwnedConnector() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredClassifier_OwnedConnector() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredClassifierEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredClassifierEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getStructuredClassifier_Part() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredClassifier_Part() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredClassifierEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredClassifierEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getStructuredClassifier_Role() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getStructuredClassifier_Role() const
 {
-	return dynamic_cast<ecore::EReference*>(structuredClassifierEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(structuredClassifierEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getStructuredClassifier___AllRoles() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredClassifier___AllRoles() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredClassifierEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredClassifierEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredClassifier___CreateOwnedAttribute__String_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredClassifier___CreateOwnedAttribute__String_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredClassifierEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredClassifierEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getStructuredClassifier___GetParts() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getStructuredClassifier___GetParts() const
 {
-	return dynamic_cast<ecore::EOperation*>(structuredClassifierEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(structuredClassifierEClass->getEOperations()->at(1));
 }
 
 // End Class StructuredClassifier
 
 // Begin Class Substitution
-ecore::EClass* UmlPackageImpl::getSubstitution() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getSubstitution() const
 {
 	return substitutionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getSubstitution_Contract() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSubstitution_Contract() const
 {
-	return dynamic_cast<ecore::EReference*>(substitutionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(substitutionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getSubstitution_SubstitutingClassifier() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getSubstitution_SubstitutingClassifier() const
 {
-	return dynamic_cast<ecore::EReference*>(substitutionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(substitutionEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class Substitution
 
 // Begin Class TemplateBinding
-ecore::EClass* UmlPackageImpl::getTemplateBinding() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTemplateBinding() const
 {
 	return templateBindingEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTemplateBinding_BoundElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateBinding_BoundElement() const
 {
-	return dynamic_cast<ecore::EReference*>(templateBindingEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateBindingEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getTemplateBinding_ParameterSubstitution() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateBinding_ParameterSubstitution() const
 {
-	return dynamic_cast<ecore::EReference*>(templateBindingEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateBindingEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTemplateBinding_Signature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateBinding_Signature() const
 {
-	return dynamic_cast<ecore::EReference*>(templateBindingEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateBindingEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getTemplateBinding___One_parameter_substitution__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateBinding___One_parameter_substitution__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateBindingEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateBindingEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getTemplateBinding___Parameter_substitution_formal__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateBinding___Parameter_substitution_formal__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateBindingEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateBindingEClass->getEOperations()->at(0));
 }
 
 // End Class TemplateBinding
 
 // Begin Class TemplateParameter
-ecore::EClass* UmlPackageImpl::getTemplateParameter() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTemplateParameter() const
 {
 	return templateParameterEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTemplateParameter_Default() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameter_Default() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameter_OwnedDefault() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameter_OwnedDefault() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameter_OwnedParameteredElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameter_OwnedParameteredElement() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameter_ParameteredElement() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameter_ParameteredElement() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameter_Signature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameter_Signature() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getTemplateParameter___Must_be_compatible__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateParameter___Must_be_compatible__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateParameterEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateParameterEClass->getEOperations()->at(0));
 }
 
 // End Class TemplateParameter
 
 // Begin Class TemplateParameterSubstitution
-ecore::EClass* UmlPackageImpl::getTemplateParameterSubstitution() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTemplateParameterSubstitution() const
 {
 	return templateParameterSubstitutionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTemplateParameterSubstitution_Actual() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameterSubstitution_Actual() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameterSubstitution_Formal() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameterSubstitution_Formal() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameterSubstitution_OwnedActual() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameterSubstitution_OwnedActual() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getTemplateParameterSubstitution_TemplateBinding() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateParameterSubstitution_TemplateBinding() const
 {
-	return dynamic_cast<ecore::EReference*>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateParameterSubstitutionEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getTemplateParameterSubstitution___Must_be_compatible__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateParameterSubstitution___Must_be_compatible__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateParameterSubstitutionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateParameterSubstitutionEClass->getEOperations()->at(0));
 }
 
 // End Class TemplateParameterSubstitution
 
 // Begin Class TemplateSignature
-ecore::EClass* UmlPackageImpl::getTemplateSignature() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTemplateSignature() const
 {
 	return templateSignatureEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTemplateSignature_OwnedParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateSignature_OwnedParameter() const
 {
-	return dynamic_cast<ecore::EReference*>(templateSignatureEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateSignatureEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getTemplateSignature_Parameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateSignature_Parameter() const
 {
-	return dynamic_cast<ecore::EReference*>(templateSignatureEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateSignatureEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTemplateSignature_Template() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateSignature_Template() const
 {
-	return dynamic_cast<ecore::EReference*>(templateSignatureEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateSignatureEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getTemplateSignature___Own_elements__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateSignature___Own_elements__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateSignatureEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateSignatureEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getTemplateSignature___Unique_parameters__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateSignature___Unique_parameters__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateSignatureEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateSignatureEClass->getEOperations()->at(1));
 }
 
 // End Class TemplateSignature
 
 // Begin Class TemplateableElement
-ecore::EClass* UmlPackageImpl::getTemplateableElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTemplateableElement() const
 {
 	return templateableElementEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTemplateableElement_OwnedTemplateSignature() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateableElement_OwnedTemplateSignature() const
 {
-	return dynamic_cast<ecore::EReference*>(templateableElementEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateableElementEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getTemplateableElement_TemplateBinding() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTemplateableElement_TemplateBinding() const
 {
-	return dynamic_cast<ecore::EReference*>(templateableElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(templateableElementEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getTemplateableElement___IsTemplate() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateableElement___IsTemplate() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateableElementEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateableElementEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getTemplateableElement___ParameterableElements() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTemplateableElement___ParameterableElements() const
 {
-	return dynamic_cast<ecore::EOperation*>(templateableElementEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(templateableElementEClass->getEOperations()->at(1));
 }
 
 // End Class TemplateableElement
 
 // Begin Class TestIdentityAction
-ecore::EClass* UmlPackageImpl::getTestIdentityAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTestIdentityAction() const
 {
 	return testIdentityActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTestIdentityAction_First() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTestIdentityAction_First() const
 {
-	return dynamic_cast<ecore::EReference*>(testIdentityActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(testIdentityActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTestIdentityAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTestIdentityAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(testIdentityActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(testIdentityActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getTestIdentityAction_Second() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTestIdentityAction_Second() const
 {
-	return dynamic_cast<ecore::EReference*>(testIdentityActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(testIdentityActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getTestIdentityAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTestIdentityAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(testIdentityActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(testIdentityActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getTestIdentityAction___No_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTestIdentityAction___No_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(testIdentityActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(testIdentityActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getTestIdentityAction___Result_is_boolean__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTestIdentityAction___Result_is_boolean__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(testIdentityActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(testIdentityActionEClass->getEOperations()->at(2));
 }
 
 // End Class TestIdentityAction
 
 // Begin Class TimeConstraint
-ecore::EClass* UmlPackageImpl::getTimeConstraint() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTimeConstraint() const
 {
 	return timeConstraintEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getTimeConstraint_FirstEvent() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getTimeConstraint_FirstEvent() const
 {
-	return dynamic_cast<ecore::EAttribute*>(timeConstraintEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(timeConstraintEClass->getEStructuralFeatures()->at(0));
 }
 
 
-ecore::EOperation* UmlPackageImpl::getTimeConstraint___Has_one_constrainedElement__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTimeConstraint___Has_one_constrainedElement__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(timeConstraintEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(timeConstraintEClass->getEOperations()->at(0));
 }
 
 // End Class TimeConstraint
 
 // Begin Class TimeEvent
-ecore::EClass* UmlPackageImpl::getTimeEvent() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTimeEvent() const
 {
 	return timeEventEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getTimeEvent_IsRelative() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getTimeEvent_IsRelative() const
 {
-	return dynamic_cast<ecore::EAttribute*>(timeEventEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(timeEventEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getTimeEvent_When() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTimeEvent_When() const
 {
-	return dynamic_cast<ecore::EReference*>(timeEventEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(timeEventEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getTimeEvent___When_non_negative__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTimeEvent___When_non_negative__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(timeEventEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(timeEventEClass->getEOperations()->at(0));
 }
 
 // End Class TimeEvent
 
 // Begin Class TimeExpression
-ecore::EClass* UmlPackageImpl::getTimeExpression() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTimeExpression() const
 {
 	return timeExpressionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTimeExpression_Expr() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTimeExpression_Expr() const
 {
-	return dynamic_cast<ecore::EReference*>(timeExpressionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(timeExpressionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTimeExpression_Observation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTimeExpression_Observation() const
 {
-	return dynamic_cast<ecore::EReference*>(timeExpressionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(timeExpressionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getTimeExpression___No_expr_requires_observation__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTimeExpression___No_expr_requires_observation__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(timeExpressionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(timeExpressionEClass->getEOperations()->at(0));
 }
 
 // End Class TimeExpression
 
 // Begin Class TimeInterval
-ecore::EClass* UmlPackageImpl::getTimeInterval() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTimeInterval() const
 {
 	return timeIntervalEClass;
 }
@@ -16145,215 +15113,215 @@ ecore::EClass* UmlPackageImpl::getTimeInterval() const
 // End Class TimeInterval
 
 // Begin Class TimeObservation
-ecore::EClass* UmlPackageImpl::getTimeObservation() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTimeObservation() const
 {
 	return timeObservationEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getTimeObservation_FirstEvent() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getTimeObservation_FirstEvent() const
 {
-	return dynamic_cast<ecore::EAttribute*>(timeObservationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(timeObservationEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getTimeObservation_Event() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTimeObservation_Event() const
 {
-	return dynamic_cast<ecore::EReference*>(timeObservationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(timeObservationEClass->getEStructuralFeatures()->at(1));
 }
 
 
 // End Class TimeObservation
 
 // Begin Class Transition
-ecore::EClass* UmlPackageImpl::getTransition() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTransition() const
 {
 	return transitionEClass;
 }
-ecore::EAttribute* UmlPackageImpl::getTransition_Kind() const
+std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getTransition_Kind() const
 {
-	return dynamic_cast<ecore::EAttribute*>(transitionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EAttribute>(transitionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EReference* UmlPackageImpl::getTransition_Container() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Container() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(7));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(7));
 }
-ecore::EReference* UmlPackageImpl::getTransition_Effect() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Effect() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getTransition_Guard() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Guard() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getTransition_RedefinedTransition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_RedefinedTransition() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(3));
 }
-ecore::EReference* UmlPackageImpl::getTransition_Source() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Source() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(4));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(4));
 }
-ecore::EReference* UmlPackageImpl::getTransition_Target() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Target() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(5));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(5));
 }
-ecore::EReference* UmlPackageImpl::getTransition_Trigger() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTransition_Trigger() const
 {
-	return dynamic_cast<ecore::EReference*>(transitionEClass->getEStructuralFeatures()->at(6));
+	return std::dynamic_pointer_cast<ecore::EReference>(transitionEClass->getEStructuralFeatures()->at(6));
 }
 
-ecore::EOperation* UmlPackageImpl::getTransition___ContainingStateMachine() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___ContainingStateMachine() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(9));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(9));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Fork_segment_guards__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Fork_segment_guards__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(8));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(8));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Fork_segment_state__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Fork_segment_state__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Initial_transition__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Initial_transition__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(7));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(7));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Join_segment_guards__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Join_segment_guards__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Join_segment_state__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Join_segment_state__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___Outgoing_pseudostates__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___Outgoing_pseudostates__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___RedefinitionContext() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___RedefinitionContext() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(10));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(10));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___State_is_external__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___State_is_external__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___State_is_internal__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___State_is_internal__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getTransition___State_is_local__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTransition___State_is_local__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(transitionEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(transitionEClass->getEOperations()->at(6));
 }
 
 // End Class Transition
 
 // Begin Class Trigger
-ecore::EClass* UmlPackageImpl::getTrigger() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTrigger() const
 {
 	return triggerEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTrigger_Event() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTrigger_Event() const
 {
-	return dynamic_cast<ecore::EReference*>(triggerEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(triggerEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getTrigger_Port() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTrigger_Port() const
 {
-	return dynamic_cast<ecore::EReference*>(triggerEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(triggerEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getTrigger___Trigger_with_ports__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getTrigger___Trigger_with_ports__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(triggerEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(triggerEClass->getEOperations()->at(0));
 }
 
 // End Class Trigger
 
 // Begin Class Type
-ecore::EClass* UmlPackageImpl::getType() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getType() const
 {
 	return typeEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getType_Package() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getType_Package() const
 {
-	return dynamic_cast<ecore::EReference*>(typeEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(typeEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getType___ConformsTo__Type() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getType___ConformsTo__Type() const
 {
-	return dynamic_cast<ecore::EOperation*>(typeEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(typeEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getType___CreateAssociation__Boolean_UnlimitedNatural() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getType___CreateAssociation__Boolean_UnlimitedNatural() const
 {
-	return dynamic_cast<ecore::EOperation*>(typeEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(typeEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getType___GetAssociations() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getType___GetAssociations() const
 {
-	return dynamic_cast<ecore::EOperation*>(typeEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(typeEClass->getEOperations()->at(1));
 }
 
 // End Class Type
 
 // Begin Class TypedElement
-ecore::EClass* UmlPackageImpl::getTypedElement() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getTypedElement() const
 {
 	return typedElementEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getTypedElement_Type() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getTypedElement_Type() const
 {
-	return dynamic_cast<ecore::EReference*>(typedElementEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(typedElementEClass->getEStructuralFeatures()->at(0));
 }
 
 
 // End Class TypedElement
 
 // Begin Class UnmarshallAction
-ecore::EClass* UmlPackageImpl::getUnmarshallAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getUnmarshallAction() const
 {
 	return unmarshallActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getUnmarshallAction_Object() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUnmarshallAction_Object() const
 {
-	return dynamic_cast<ecore::EReference*>(unmarshallActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(unmarshallActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getUnmarshallAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUnmarshallAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(unmarshallActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(unmarshallActionEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getUnmarshallAction_UnmarshallType() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUnmarshallAction_UnmarshallType() const
 {
-	return dynamic_cast<ecore::EReference*>(unmarshallActionEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(unmarshallActionEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getUnmarshallAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUnmarshallAction___Multiplicity_of_object__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(unmarshallActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(unmarshallActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getUnmarshallAction___Number_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUnmarshallAction___Number_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(unmarshallActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(unmarshallActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getUnmarshallAction___Object_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUnmarshallAction___Object_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(unmarshallActionEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(unmarshallActionEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getUnmarshallAction___Structural_feature__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUnmarshallAction___Structural_feature__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(unmarshallActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(unmarshallActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getUnmarshallAction___Type_ordering_and_multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUnmarshallAction___Type_ordering_and_multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(unmarshallActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(unmarshallActionEClass->getEOperations()->at(2));
 }
 
 // End Class UnmarshallAction
 
 // Begin Class Usage
-ecore::EClass* UmlPackageImpl::getUsage() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getUsage() const
 {
 	return usageEClass;
 }
@@ -16363,349 +15331,349 @@ ecore::EClass* UmlPackageImpl::getUsage() const
 // End Class Usage
 
 // Begin Class UseCase
-ecore::EClass* UmlPackageImpl::getUseCase() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getUseCase() const
 {
 	return useCaseEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getUseCase_Extend() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUseCase_Extend() const
 {
-	return dynamic_cast<ecore::EReference*>(useCaseEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(useCaseEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getUseCase_ExtensionPoint() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUseCase_ExtensionPoint() const
 {
-	return dynamic_cast<ecore::EReference*>(useCaseEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(useCaseEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getUseCase_Include() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUseCase_Include() const
 {
-	return dynamic_cast<ecore::EReference*>(useCaseEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(useCaseEClass->getEStructuralFeatures()->at(2));
 }
-ecore::EReference* UmlPackageImpl::getUseCase_Subject() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getUseCase_Subject() const
 {
-	return dynamic_cast<ecore::EReference*>(useCaseEClass->getEStructuralFeatures()->at(3));
+	return std::dynamic_pointer_cast<ecore::EReference>(useCaseEClass->getEStructuralFeatures()->at(3));
 }
 
-ecore::EOperation* UmlPackageImpl::getUseCase___AllIncludedUseCases() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUseCase___AllIncludedUseCases() const
 {
-	return dynamic_cast<ecore::EOperation*>(useCaseEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(useCaseEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getUseCase___Binary_associations__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUseCase___Binary_associations__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(useCaseEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(useCaseEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getUseCase___Cannot_include_self__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUseCase___Cannot_include_self__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(useCaseEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(useCaseEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getUseCase___Must_have_name__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUseCase___Must_have_name__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(useCaseEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(useCaseEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getUseCase___No_association_to_use_case__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getUseCase___No_association_to_use_case__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(useCaseEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(useCaseEClass->getEOperations()->at(1));
 }
 
 // End Class UseCase
 
 // Begin Class ValuePin
-ecore::EClass* UmlPackageImpl::getValuePin() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getValuePin() const
 {
 	return valuePinEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getValuePin_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValuePin_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(valuePinEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(valuePinEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getValuePin___Compatible_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValuePin___Compatible_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(valuePinEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valuePinEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getValuePin___No_incoming_edges__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValuePin___No_incoming_edges__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(valuePinEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valuePinEClass->getEOperations()->at(0));
 }
 
 // End Class ValuePin
 
 // Begin Class ValueSpecification
-ecore::EClass* UmlPackageImpl::getValueSpecification() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getValueSpecification() const
 {
 	return valueSpecificationEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getValueSpecification___BooleanValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___BooleanValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___IntegerValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___IntegerValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___IsComputable() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___IsComputable() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___IsNull() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___IsNull() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___RealValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___RealValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___StringValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___StringValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(5));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecification___UnlimitedValue() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___UnlimitedValue() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationEClass->getEOperations()->at(6));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationEClass->getEOperations()->at(6));
 }
 
 // End Class ValueSpecification
 
 // Begin Class ValueSpecificationAction
-ecore::EClass* UmlPackageImpl::getValueSpecificationAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getValueSpecificationAction() const
 {
 	return valueSpecificationActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getValueSpecificationAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecificationAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(valueSpecificationActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(valueSpecificationActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getValueSpecificationAction_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecificationAction_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(valueSpecificationActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(valueSpecificationActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getValueSpecificationAction___Compatible_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecificationAction___Compatible_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getValueSpecificationAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecificationAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(valueSpecificationActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(valueSpecificationActionEClass->getEOperations()->at(0));
 }
 
 // End Class ValueSpecificationAction
 
 // Begin Class Variable
-ecore::EClass* UmlPackageImpl::getVariable() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getVariable() const
 {
 	return variableEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getVariable_ActivityScope() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVariable_ActivityScope() const
 {
-	return dynamic_cast<ecore::EReference*>(variableEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(variableEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getVariable_Scope() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVariable_Scope() const
 {
-	return dynamic_cast<ecore::EReference*>(variableEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(variableEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getVariable___IsAccessibleBy__Action() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVariable___IsAccessibleBy__Action() const
 {
-	return dynamic_cast<ecore::EOperation*>(variableEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(variableEClass->getEOperations()->at(0));
 }
 
 // End Class Variable
 
 // Begin Class VariableAction
-ecore::EClass* UmlPackageImpl::getVariableAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getVariableAction() const
 {
 	return variableActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getVariableAction_Variable() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVariableAction_Variable() const
 {
-	return dynamic_cast<ecore::EReference*>(variableActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(variableActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getVariableAction___Scope_of_variable__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVariableAction___Scope_of_variable__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(variableActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(variableActionEClass->getEOperations()->at(0));
 }
 
 // End Class VariableAction
 
 // Begin Class Vertex
-ecore::EClass* UmlPackageImpl::getVertex() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getVertex() const
 {
 	return vertexEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getVertex_Container() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVertex_Container() const
 {
-	return dynamic_cast<ecore::EReference*>(vertexEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(vertexEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getVertex_Incoming() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVertex_Incoming() const
 {
-	return dynamic_cast<ecore::EReference*>(vertexEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(vertexEClass->getEStructuralFeatures()->at(1));
 }
-ecore::EReference* UmlPackageImpl::getVertex_Outgoing() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getVertex_Outgoing() const
 {
-	return dynamic_cast<ecore::EReference*>(vertexEClass->getEStructuralFeatures()->at(2));
+	return std::dynamic_pointer_cast<ecore::EReference>(vertexEClass->getEStructuralFeatures()->at(2));
 }
 
-ecore::EOperation* UmlPackageImpl::getVertex___ContainingStateMachine() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVertex___ContainingStateMachine() const
 {
-	return dynamic_cast<ecore::EOperation*>(vertexEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(vertexEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getVertex___GetIncomings() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVertex___GetIncomings() const
 {
-	return dynamic_cast<ecore::EOperation*>(vertexEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(vertexEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getVertex___GetOutgoings() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVertex___GetOutgoings() const
 {
-	return dynamic_cast<ecore::EOperation*>(vertexEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(vertexEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getVertex___IsContainedInRegion__Region() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVertex___IsContainedInRegion__Region() const
 {
-	return dynamic_cast<ecore::EOperation*>(vertexEClass->getEOperations()->at(4));
+	return std::dynamic_pointer_cast<ecore::EOperation>(vertexEClass->getEOperations()->at(4));
 }
-ecore::EOperation* UmlPackageImpl::getVertex___IsContainedInState__State() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getVertex___IsContainedInState__State() const
 {
-	return dynamic_cast<ecore::EOperation*>(vertexEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(vertexEClass->getEOperations()->at(3));
 }
 
 // End Class Vertex
 
 // Begin Class WriteLinkAction
-ecore::EClass* UmlPackageImpl::getWriteLinkAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getWriteLinkAction() const
 {
 	return writeLinkActionEClass;
 }
 
 
-ecore::EOperation* UmlPackageImpl::getWriteLinkAction___Allow_access__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteLinkAction___Allow_access__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeLinkActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeLinkActionEClass->getEOperations()->at(0));
 }
 
 // End Class WriteLinkAction
 
 // Begin Class WriteStructuralFeatureAction
-ecore::EClass* UmlPackageImpl::getWriteStructuralFeatureAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getWriteStructuralFeatureAction() const
 {
 	return writeStructuralFeatureActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getWriteStructuralFeatureAction_Result() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getWriteStructuralFeatureAction_Result() const
 {
-	return dynamic_cast<ecore::EReference*>(writeStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(writeStructuralFeatureActionEClass->getEStructuralFeatures()->at(0));
 }
-ecore::EReference* UmlPackageImpl::getWriteStructuralFeatureAction_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getWriteStructuralFeatureAction_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(writeStructuralFeatureActionEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EReference>(writeStructuralFeatureActionEClass->getEStructuralFeatures()->at(1));
 }
 
-ecore::EOperation* UmlPackageImpl::getWriteStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeStructuralFeatureActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeStructuralFeatureActionEClass->getEOperations()->at(0));
 }
-ecore::EOperation* UmlPackageImpl::getWriteStructuralFeatureAction___Multiplicity_of_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteStructuralFeatureAction___Multiplicity_of_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeStructuralFeatureActionEClass->getEOperations()->at(2));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeStructuralFeatureActionEClass->getEOperations()->at(2));
 }
-ecore::EOperation* UmlPackageImpl::getWriteStructuralFeatureAction___Type_of_result__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteStructuralFeatureAction___Type_of_result__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeStructuralFeatureActionEClass->getEOperations()->at(3));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeStructuralFeatureActionEClass->getEOperations()->at(3));
 }
-ecore::EOperation* UmlPackageImpl::getWriteStructuralFeatureAction___Type_of_value__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteStructuralFeatureAction___Type_of_value__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeStructuralFeatureActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeStructuralFeatureActionEClass->getEOperations()->at(1));
 }
 
 // End Class WriteStructuralFeatureAction
 
 // Begin Class WriteVariableAction
-ecore::EClass* UmlPackageImpl::getWriteVariableAction() const
+std::shared_ptr<ecore::EClass> UmlPackageImpl::getWriteVariableAction() const
 {
 	return writeVariableActionEClass;
 }
 
-ecore::EReference* UmlPackageImpl::getWriteVariableAction_Value() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getWriteVariableAction_Value() const
 {
-	return dynamic_cast<ecore::EReference*>(writeVariableActionEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(writeVariableActionEClass->getEStructuralFeatures()->at(0));
 }
 
-ecore::EOperation* UmlPackageImpl::getWriteVariableAction___Multiplicity__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteVariableAction___Multiplicity__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeVariableActionEClass->getEOperations()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeVariableActionEClass->getEOperations()->at(1));
 }
-ecore::EOperation* UmlPackageImpl::getWriteVariableAction___Value_type__EDiagnosticChain_EMap() const
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getWriteVariableAction___Value_type__EDiagnosticChain_EMap() const
 {
-	return dynamic_cast<ecore::EOperation*>(writeVariableActionEClass->getEOperations()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(writeVariableActionEClass->getEOperations()->at(0));
 }
 
 // End Class WriteVariableAction
-ecore::EEnum* UmlPackageImpl::getAggregationKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getAggregationKind() const
 {
 	assert(aggregationKindEEnum);
 	return aggregationKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getCallConcurrencyKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getCallConcurrencyKind() const
 {
 	assert(callConcurrencyKindEEnum);
 	return callConcurrencyKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getConnectorKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getConnectorKind() const
 {
 	assert(connectorKindEEnum);
 	return connectorKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getExpansionKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getExpansionKind() const
 {
 	assert(expansionKindEEnum);
 	return expansionKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getInteractionOperatorKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getInteractionOperatorKind() const
 {
 	assert(interactionOperatorKindEEnum);
 	return interactionOperatorKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getMessageKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getMessageKind() const
 {
 	assert(messageKindEEnum);
 	return messageKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getMessageSort() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getMessageSort() const
 {
 	assert(messageSortEEnum);
 	return messageSortEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getObjectNodeOrderingKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getObjectNodeOrderingKind() const
 {
 	assert(objectNodeOrderingKindEEnum);
 	return objectNodeOrderingKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getParameterDirectionKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getParameterDirectionKind() const
 {
 	assert(parameterDirectionKindEEnum);
 	return parameterDirectionKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getParameterEffectKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getParameterEffectKind() const
 {
 	assert(parameterEffectKindEEnum);
 	return parameterEffectKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getPseudostateKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getPseudostateKind() const
 {
 	assert(pseudostateKindEEnum);
 	return pseudostateKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getTransitionKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getTransitionKind() const
 {
 	assert(transitionKindEEnum);
 	return transitionKindEEnum;
 }
-ecore::EEnum* UmlPackageImpl::getVisibilityKind() const
+std::shared_ptr<ecore::EEnum> UmlPackageImpl::getVisibilityKind() const
 {
 	assert(visibilityKindEEnum);
 	return visibilityKindEEnum;

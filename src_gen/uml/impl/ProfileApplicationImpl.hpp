@@ -22,10 +22,11 @@
 #include "impl/DirectedRelationshipImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ProfileApplicationImpl :virtual public DirectedRelationshipImpl, virtual public ProfileApplication
+	class ProfileApplicationImpl :virtual public DirectedRelationshipImpl, virtual public ProfileApplication 
 	{
 		public: 
 			ProfileApplicationImpl(const ProfileApplicationImpl & obj);
@@ -47,11 +48,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Retrieves the definition (Ecore representation) of the profile associated with this profile application. */ 
-			virtual ecore::EPackage *  getAppliedDefinition()  ;
+			virtual std::shared_ptr<ecore::EPackage>  getAppliedDefinition()  ;
 			
 			/*!
 			 Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application. */ 
-			virtual ecore::ENamedElement *  getAppliedDefinition(uml::NamedElement *  namedElement)  ;
+			virtual std::shared_ptr<ecore::ENamedElement>  getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  ;
 			
 			
 			
@@ -76,23 +77,21 @@ namespace uml
 			/*!
 			 References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p> */
-			virtual uml::Profile *  getAppliedProfile() const ;
+			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const ;
 			
 			/*!
 			 References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p> */
-			virtual void setAppliedProfile(uml::Profile *  _appliedProfile) ;
+			virtual void setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile) ;
+			/*!
+			 The package that owns the profile application.
+			<p>From package UML::Packages.</p> */
+			virtual std::shared_ptr<uml::Package> getApplyingPackage() const ;
 			
 			/*!
 			 The package that owns the profile application.
 			<p>From package UML::Packages.</p> */
-			virtual uml::Package *  getApplyingPackage() const ;
-			
-			/*!
-			 The package that owns the profile application.
-			<p>From package UML::Packages.</p> */
-			virtual void setApplyingPackage(uml::Package *  _applyingPackage) ;
-			
+			virtual void setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage) ;
 							
 			
 			//*********************************
@@ -101,19 +100,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const ;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -122,7 +121,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_PROFILEAPPLICATIONPROFILEAPPLICATIONIMPL_HPP */

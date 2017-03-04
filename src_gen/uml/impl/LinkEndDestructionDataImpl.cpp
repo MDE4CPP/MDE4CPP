@@ -13,6 +13,10 @@ using namespace uml;
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl()
 
 LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndDestructionData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,9 +41,8 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 
 	m_end  = obj.getEnd();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -44,17 +50,20 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::QualifierValue * 	_qualifier : *obj.getQualifier())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::QualifierValue>>> _qualifierList = obj.getQualifier();
+	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->push_back(dynamic_cast<uml::QualifierValue * >(_qualifier->copy()));
+		this->getQualifier()->push_back(std::shared_ptr<uml::QualifierValue>(dynamic_cast<uml::QualifierValue*>(_qualifier->copy())));
 	}
 }
 
@@ -63,7 +72,7 @@ ecore::EObject *  LinkEndDestructionDataImpl::copy() const
 	return new LinkEndDestructionDataImpl(*this);
 }
 
-ecore::EClass* LinkEndDestructionDataImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getLinkEndDestructionData();
 }
@@ -84,7 +93,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -93,29 +102,27 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
-uml::InputPin *  LinkEndDestructionDataImpl::getDestroyAt() const
+std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 {
-	
-	return m_destroyAt;
+
+    return m_destroyAt;
 }
-void LinkEndDestructionDataImpl::setDestroyAt(uml::InputPin *  _destroyAt)
+void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
-	m_destroyAt = _destroyAt;
+    m_destroyAt = _destroyAt;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  LinkEndDestructionDataImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> LinkEndDestructionDataImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  qualifier = (std::vector<uml::Element * > * ) getQualifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::QualifierValue>>> qualifier = getQualifier();
 	_ownedElement->insert(_ownedElement->end(), qualifier->begin(), qualifier->end());
-
 
 	return _ownedElement;
 }

@@ -13,6 +13,10 @@ using namespace uml;
 PackageMergeImpl::PackageMergeImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ PackageMergeImpl::PackageMergeImpl()
 
 PackageMergeImpl::~PackageMergeImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PackageMerge "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -32,35 +39,33 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj)
 	
 	m_mergedPackage  = obj.getMergedPackage();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 	m_receivingPackage  = obj.getReceivingPackage();
 
-	std::vector<uml::Element * > *  _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
 	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-	delete(_relatedElement);
 
-	std::vector<uml::Element * > *  _source = obj.getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
 	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-	delete(_source);
 
-	std::vector<uml::Element * > *  _target = obj.getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
 	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
-	delete(_target);
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -69,7 +74,7 @@ ecore::EObject *  PackageMergeImpl::copy() const
 	return new PackageMergeImpl(*this);
 }
 
-ecore::EClass* PackageMergeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getPackageMerge();
 }
@@ -85,65 +90,68 @@ ecore::EClass* PackageMergeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Package *  PackageMergeImpl::getMergedPackage() const
+std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 {
-	//assert(m_mergedPackage);
-	return m_mergedPackage;
+//assert(m_mergedPackage);
+    return m_mergedPackage;
 }
-void PackageMergeImpl::setMergedPackage(uml::Package *  _mergedPackage)
+void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
-	m_mergedPackage = _mergedPackage;
+    m_mergedPackage = _mergedPackage;
 }
 
-uml::Package *  PackageMergeImpl::getReceivingPackage() const
+std::shared_ptr<uml::Package> PackageMergeImpl::getReceivingPackage() const
 {
-	//assert(m_receivingPackage);
-	return m_receivingPackage;
+//assert(m_receivingPackage);
+    return m_receivingPackage;
 }
-void PackageMergeImpl::setReceivingPackage(uml::Package *  _receivingPackage)
+void PackageMergeImpl::setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage)
 {
-	m_receivingPackage = _receivingPackage;
+    m_receivingPackage = _receivingPackage;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  PackageMergeImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PackageMergeImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-std::vector<uml::Element * > *  PackageMergeImpl::getTarget() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PackageMergeImpl::getSource() const
 {
-	std::vector<uml::Element * > *  _target =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_source->push_back(getReceivingPackage());
+
+	return _source;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PackageMergeImpl::getTarget() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_target->push_back(getMergedPackage());
 
 	return _target;
 }
-std::vector<uml::Element * > *  PackageMergeImpl::getRelatedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PackageMergeImpl::getRelatedElement() const
 {
-	std::vector<uml::Element * > *  _relatedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  source = (std::vector<uml::Element * > * ) getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
 	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-
-	delete(source);
-	std::vector<uml::Element * > *  target = (std::vector<uml::Element * > * ) getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
 	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
-
-	delete(target);
 
 	return _relatedElement;
 }
-uml::Element *  PackageMergeImpl::getOwner() const
+std::shared_ptr<uml::Element> PackageMergeImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getReceivingPackage()!=nullptr)
 	{
@@ -151,14 +159,6 @@ uml::Element *  PackageMergeImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  PackageMergeImpl::getSource() const
-{
-	std::vector<uml::Element * > *  _source =  new std::vector<uml::Element * >() ;
-	
-	_source->push_back(getReceivingPackage());
-
-	return _source;
 }
 
 

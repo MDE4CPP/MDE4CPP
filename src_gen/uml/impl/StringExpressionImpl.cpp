@@ -13,25 +13,21 @@ using namespace uml;
 StringExpressionImpl::StringExpressionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_subExpression == nullptr)
-	{
-		m_subExpression = new std::vector<uml::StringExpression * >();
-	}
+	m_subExpression.reset(new std::vector<std::shared_ptr<uml::StringExpression>>());
 }
 
 StringExpressionImpl::~StringExpressionImpl()
 {
-	if(m_subExpression!=nullptr)
-	{
-		for(auto c :*m_subExpression)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StringExpression "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -45,14 +41,13 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -66,33 +61,38 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::ValueSpecification * 	_operand : *obj.getOperand())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _operandList = obj.getOperand();
+	for(std::shared_ptr<uml::ValueSpecification> _operand : *_operandList)
 	{
-		this->getOperand()->push_back(dynamic_cast<uml::ValueSpecification * >(_operand->copy()));
+		this->getOperand()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_operand->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature = dynamic_cast<uml::TemplateSignature * >(obj.getOwnedTemplateSignature()->copy());
+		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
 	}
-	for(uml::StringExpression * 	_subExpression : *obj.getSubExpression())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> _subExpressionList = obj.getSubExpression();
+	for(std::shared_ptr<uml::StringExpression> _subExpression : *_subExpressionList)
 	{
-		this->getSubExpression()->push_back(dynamic_cast<uml::StringExpression * >(_subExpression->copy()));
+		this->getSubExpression()->push_back(std::shared_ptr<uml::StringExpression>(dynamic_cast<uml::StringExpression*>(_subExpression->copy())));
 	}
-	for(uml::TemplateBinding * 	_templateBinding : *obj.getTemplateBinding())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> _templateBindingList = obj.getTemplateBinding();
+	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->push_back(dynamic_cast<uml::TemplateBinding * >(_templateBinding->copy()));
+		this->getTemplateBinding()->push_back(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
 	}
 }
 
@@ -101,7 +101,7 @@ ecore::EObject *  StringExpressionImpl::copy() const
 	return new StringExpressionImpl(*this);
 }
 
-ecore::EClass* StringExpressionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getStringExpression();
 }
@@ -113,13 +113,13 @@ ecore::EClass* StringExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StringExpressionImpl::operands(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool StringExpressionImpl::operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -128,29 +128,46 @@ bool StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   bo
 //*********************************
 // References
 //*********************************
-uml::StringExpression *  StringExpressionImpl::getOwningExpression() const
+std::shared_ptr<uml::StringExpression> StringExpressionImpl::getOwningExpression() const
 {
-	
-	return m_owningExpression;
+
+    return m_owningExpression;
 }
-void StringExpressionImpl::setOwningExpression(uml::StringExpression *  _owningExpression)
+void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression)
 {
-	m_owningExpression = _owningExpression;
+    m_owningExpression = _owningExpression;
 }
 
-std::vector<uml::StringExpression * > *  StringExpressionImpl::getSubExpression() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> StringExpressionImpl::getSubExpression() const
 {
-	
-	return m_subExpression;
+
+    return m_subExpression;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  StringExpressionImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> StringExpressionImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> operand = getOperand();
+	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getOwnedTemplateSignature());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> subExpression = getSubExpression();
+	_ownedElement->insert(_ownedElement->end(), subExpression->begin(), subExpression->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> templateBinding = getTemplateBinding();
+	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> StringExpressionImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -166,27 +183,6 @@ uml::Element *  StringExpressionImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  StringExpressionImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  operand = (std::vector<uml::Element * > * ) getOperand();
-	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
-
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getOwnedTemplateSignature());
-	std::vector<uml::Element * > *  subExpression = (std::vector<uml::Element * > * ) getSubExpression();
-	_ownedElement->insert(_ownedElement->end(), subExpression->begin(), subExpression->end());
-
-	std::vector<uml::Element * > *  templateBinding = (std::vector<uml::Element * > * ) getTemplateBinding();
-	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
-
-
-	return _ownedElement;
 }
 
 

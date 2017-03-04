@@ -13,21 +13,20 @@ using namespace uml;
 ConnectableElementImpl::ConnectableElementImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_end == nullptr)
-	{
-		m_end = new std::vector<uml::ConnectorEnd * >();
-	}
+	m_end.reset(new std::vector<std::shared_ptr<uml::ConnectorEnd>>());
 }
 
 ConnectableElementImpl::~ConnectableElementImpl()
 {
-	if(m_end!=nullptr)
-	{
-		delete(m_end);
-	 	m_end = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConnectableElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -40,17 +39,16 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ConnectorEnd * > *  _end = obj.getEnd();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _end = obj.getEnd();
 	this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -62,17 +60,19 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -81,7 +81,7 @@ ecore::EObject *  ConnectableElementImpl::copy() const
 	return new ConnectableElementImpl(*this);
 }
 
-ecore::EClass* ConnectableElementImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getConnectableElement();
 }
@@ -93,7 +93,7 @@ ecore::EClass* ConnectableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector<uml::ConnectorEnd * > *  ConnectableElementImpl::getEnds() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> ConnectableElementImpl::getEnds() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -102,30 +102,29 @@ std::vector<uml::ConnectorEnd * > *  ConnectableElementImpl::getEnds()
 //*********************************
 // References
 //*********************************
-std::vector<uml::ConnectorEnd * > *  ConnectableElementImpl::getEnd() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> ConnectableElementImpl::getEnd() const
 {
-	
-	return m_end;
+
+    return m_end;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ConnectableElementImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConnectableElementImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  ConnectableElementImpl::getOwner() const
+std::shared_ptr<uml::Element> ConnectableElementImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

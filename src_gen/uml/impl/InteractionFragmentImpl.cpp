@@ -13,35 +13,23 @@ using namespace uml;
 InteractionFragmentImpl::InteractionFragmentImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_covered == nullptr)
-	{
-		m_covered = new std::vector<uml::Lifeline * >();
-	}
+	m_covered.reset(new std::vector<std::shared_ptr<uml::Lifeline>>());
 	
 	
-	if( m_generalOrdering == nullptr)
-	{
-		m_generalOrdering = new std::vector<uml::GeneralOrdering * >();
-	}
+	m_generalOrdering.reset(new std::vector<std::shared_ptr<uml::GeneralOrdering>>());
 }
 
 InteractionFragmentImpl::~InteractionFragmentImpl()
 {
-	if(m_covered!=nullptr)
-	{
-		delete(m_covered);
-	 	m_covered = nullptr;
-	}
-	if(m_generalOrdering!=nullptr)
-	{
-		for(auto c :*m_generalOrdering)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InteractionFragment "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -54,10 +42,10 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -66,29 +54,31 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -97,7 +87,7 @@ ecore::EObject *  InteractionFragmentImpl::copy() const
 	return new InteractionFragmentImpl(*this);
 }
 
-ecore::EClass* InteractionFragmentImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInteractionFragment();
 }
@@ -113,46 +103,58 @@ ecore::EClass* InteractionFragmentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::vector<uml::Lifeline * > *  InteractionFragmentImpl::getCovered() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> InteractionFragmentImpl::getCovered() const
 {
-	
-	return m_covered;
+
+    return m_covered;
 }
 
 
-uml::Interaction *  InteractionFragmentImpl::getEnclosingInteraction() const
+std::shared_ptr<uml::Interaction> InteractionFragmentImpl::getEnclosingInteraction() const
 {
-	
-	return m_enclosingInteraction;
+
+    return m_enclosingInteraction;
 }
-void InteractionFragmentImpl::setEnclosingInteraction(uml::Interaction *  _enclosingInteraction)
+void InteractionFragmentImpl::setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction)
 {
-	m_enclosingInteraction = _enclosingInteraction;
+    m_enclosingInteraction = _enclosingInteraction;
 }
 
-uml::InteractionOperand *  InteractionFragmentImpl::getEnclosingOperand() const
+std::shared_ptr<uml::InteractionOperand> InteractionFragmentImpl::getEnclosingOperand() const
 {
-	
-	return m_enclosingOperand;
+
+    return m_enclosingOperand;
 }
-void InteractionFragmentImpl::setEnclosingOperand(uml::InteractionOperand *  _enclosingOperand)
+void InteractionFragmentImpl::setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand)
 {
-	m_enclosingOperand = _enclosingOperand;
+    m_enclosingOperand = _enclosingOperand;
 }
 
-std::vector<uml::GeneralOrdering * > *  InteractionFragmentImpl::getGeneralOrdering() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> InteractionFragmentImpl::getGeneralOrdering() const
 {
-	
-	return m_generalOrdering;
+
+    return m_generalOrdering;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  InteractionFragmentImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InteractionFragmentImpl::getOwnedElement() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Namespace> InteractionFragmentImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -165,23 +167,9 @@ uml::Namespace *  InteractionFragmentImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  InteractionFragmentImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> InteractionFragmentImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
-}
-uml::Element *  InteractionFragmentImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{

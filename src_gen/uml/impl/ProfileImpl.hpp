@@ -22,10 +22,11 @@
 #include "impl/PackageImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ProfileImpl :virtual public PackageImpl, virtual public Profile
+	class ProfileImpl :virtual public PackageImpl, virtual public Profile 
 	{
 		public: 
 			ProfileImpl(const ProfileImpl & obj);
@@ -54,45 +55,45 @@ namespace uml
 			packagedElement->
 			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile. */ 
-			virtual ecore::EObject *  create(uml::Classifier *  classifier)  ;
+			virtual std::shared_ptr<ecore::EObject>  create(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents. */ 
-			virtual ecore::EPackage *  define()  ;
+			virtual std::shared_ptr<ecore::EPackage>  define()  ;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context. */ 
-			virtual ecore::EPackage *  define(std::map <   std::string, std::string > * options,boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual std::shared_ptr<ecore::EPackage>  define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this profile. */ 
-			virtual ecore::EPackage *  getDefinition()  ;
+			virtual std::shared_ptr<ecore::EPackage>  getDefinition()  ;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of the specified named element in this profile. */ 
-			virtual ecore::ENamedElement *  getDefinition(uml::NamedElement *  namedElement)  ;
+			virtual std::shared_ptr<ecore::ENamedElement>  getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  ;
 			
 			/*!
 			 Retrieves the extensions owned by this profile, excluding non-required extensions if indicated. */ 
-			virtual std::vector<uml::Extension * > *  getOwnedExtensions(bool requiredOnly)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Extension>>> getOwnedExtensions(bool requiredOnly)  ;
 			
 			/*!
 			 Retrieves the metaclasses referenced by this profile. */ 
-			virtual std::vector<uml::Class * > *  getReferencedMetaclasses()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>> getReferencedMetaclasses()  ;
 			
 			/*!
 			 Retrieves the metamodels referenced by this profile. */ 
-			virtual std::vector<uml::Model * > *  getReferencedMetamodels()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Model>>> getReferencedMetamodels()  ;
 			
 			/*!
 			 Determines whether this profile is defined. */ 
@@ -111,12 +112,12 @@ namespace uml
 			/*!
 			 References a metaclass that may be extended.
 			<p>From package UML::Packages.</p> */
-			virtual std::vector<uml::ElementImport * > *  getMetaclassReference() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> getMetaclassReference() const ;
 			
 			/*!
 			 References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p> */
-			virtual std::vector<uml::PackageImport * > *  getMetamodelReference() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> getMetamodelReference() const ;
 			
 							
 			
@@ -126,19 +127,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getMember() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::NamedElement * > *  getOwnedMember() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -147,7 +148,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_PROFILEPROFILEIMPL_HPP */

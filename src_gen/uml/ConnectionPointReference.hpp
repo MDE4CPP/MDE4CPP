@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -110,12 +111,12 @@ namespace uml
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -128,23 +129,22 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Pseudostate * > *  getEntry() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getEntry() const = 0;
 			
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Pseudostate * > *  getExit() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getExit() const = 0;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::State *  getState() const = 0;
+			virtual std::shared_ptr<uml::State> getState() const = 0;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setState(uml::State *  _state) = 0;
-			
+			virtual void setState(std::shared_ptr<uml::State> _state) = 0;
 			
 
 		protected:
@@ -159,15 +159,15 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			std::vector<uml::Pseudostate * > *  m_entry =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> m_entry;
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			std::vector<uml::Pseudostate * > *  m_exit =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> m_exit;
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			uml::State *  m_state =  nullptr ;
+			std::shared_ptr<uml::State> m_state;
 			
 
 		public:
@@ -177,13 +177,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const = 0; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

@@ -22,10 +22,11 @@
 #include "impl/EventImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ChangeEventImpl :virtual public EventImpl, virtual public ChangeEvent
+	class ChangeEventImpl :virtual public EventImpl, virtual public ChangeEvent 
 	{
 		public: 
 			ChangeEventImpl(const ChangeEventImpl & obj);
@@ -58,13 +59,12 @@ namespace uml
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual uml::ValueSpecification *  getChangeExpression() const ;
+			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const ;
 			
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setChangeExpression(uml::ValueSpecification *  _changeExpression) ;
-			
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) ;
 							
 			
 			//*********************************
@@ -73,10 +73,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -85,7 +85,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_CHANGEEVENTCHANGEEVENTIMPL_HPP */

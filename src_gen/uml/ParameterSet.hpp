@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -100,7 +101,7 @@ namespace uml
 			/*!
 			 The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
 			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction) */ 
-			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If a parameterized entity has input Parameters that are in a ParameterSet, then any inputs that are not in a ParameterSet must be streaming. Same for output Parameters.
@@ -109,12 +110,12 @@ namespace uml
 			    and
 			((parameter->exists(direction = ParameterDirectionKind::out)) implies 
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream)) */ 
-			virtual bool input(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Two ParameterSets cannot have exactly the same set of Parameters.
 			parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p)))) */ 
-			virtual bool two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -127,12 +128,12 @@ namespace uml
 			/*!
 			 A constraint that should be satisfied for the owner of the Parameters in an input ParameterSet to start execution using the values provided for those Parameters, or the owner of the Parameters in an output ParameterSet to end execution providing the values for those Parameters, if all preconditions and conditions on input ParameterSets were satisfied.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Constraint * > *  getCondition() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> getCondition() const = 0;
 			
 			/*!
 			 Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Parameter * > *  getParameter() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> getParameter() const = 0;
 			
 			
 
@@ -148,11 +149,11 @@ namespace uml
 			/*!
 			 A constraint that should be satisfied for the owner of the Parameters in an input ParameterSet to start execution using the values provided for those Parameters, or the owner of the Parameters in an output ParameterSet to end execution providing the values for those Parameters, if all preconditions and conditions on input ParameterSets were satisfied.
 			<p>From package UML::Classification.</p> */
-			std::vector<uml::Constraint * > *  m_condition =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> m_condition;
 			/*!
 			 Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p> */
-			std::vector<uml::Parameter * > *  m_parameter =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> m_parameter;
 			
 
 		public:
@@ -162,10 +163,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

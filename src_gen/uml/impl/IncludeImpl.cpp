@@ -13,6 +13,10 @@ using namespace uml;
 IncludeImpl::IncludeImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ IncludeImpl::IncludeImpl()
 
 IncludeImpl::~IncludeImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Include "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,44 +42,42 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj)
 	
 	m_addition  = obj.getAddition();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_includingCase  = obj.getIncludingCase();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::Element * > *  _relatedElement = obj.getRelatedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
 	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-	delete(_relatedElement);
 
-	std::vector<uml::Element * > *  _source = obj.getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
 	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-	delete(_source);
 
-	std::vector<uml::Element * > *  _target = obj.getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
 	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
-	delete(_target);
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -81,7 +86,7 @@ ecore::EObject *  IncludeImpl::copy() const
 	return new IncludeImpl(*this);
 }
 
-ecore::EClass* IncludeImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getInclude();
 }
@@ -97,47 +102,59 @@ ecore::EClass* IncludeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::UseCase *  IncludeImpl::getAddition() const
+std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 {
-	//assert(m_addition);
-	return m_addition;
+//assert(m_addition);
+    return m_addition;
 }
-void IncludeImpl::setAddition(uml::UseCase *  _addition)
+void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
-	m_addition = _addition;
+    m_addition = _addition;
 }
 
-uml::UseCase *  IncludeImpl::getIncludingCase() const
+std::shared_ptr<uml::UseCase> IncludeImpl::getIncludingCase() const
 {
-	//assert(m_includingCase);
-	return m_includingCase;
+//assert(m_includingCase);
+    return m_includingCase;
 }
-void IncludeImpl::setIncludingCase(uml::UseCase *  _includingCase)
+void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
 {
-	m_includingCase = _includingCase;
+    m_includingCase = _includingCase;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  IncludeImpl::getRelatedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> IncludeImpl::getRelatedElement() const
 {
-	std::vector<uml::Element * > *  _relatedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  source = (std::vector<uml::Element * > * ) getSource();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
 	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-
-	delete(source);
-	std::vector<uml::Element * > *  target = (std::vector<uml::Element * > * ) getTarget();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
 	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
-
-	delete(target);
 
 	return _relatedElement;
 }
-uml::Namespace *  IncludeImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> IncludeImpl::getSource() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_source->push_back(getIncludingCase());
+
+	return _source;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> IncludeImpl::getTarget() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_target->push_back(getAddition());
+
+	return _target;
+}
+std::shared_ptr<uml::Namespace> IncludeImpl::getNamespace() const
+{
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getIncludingCase()!=nullptr)
 	{
@@ -146,28 +163,19 @@ uml::Namespace *  IncludeImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  IncludeImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> IncludeImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }
-std::vector<uml::Element * > *  IncludeImpl::getTarget() const
+std::shared_ptr<uml::Element> IncludeImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _target =  new std::vector<uml::Element * >() ;
-	
-	_target->push_back(getAddition());
-
-	return _target;
-}
-uml::Element *  IncludeImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -175,14 +183,6 @@ uml::Element *  IncludeImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  IncludeImpl::getSource() const
-{
-	std::vector<uml::Element * > *  _source =  new std::vector<uml::Element * >() ;
-	
-	_source->push_back(getIncludingCase());
-
-	return _source;
 }
 
 

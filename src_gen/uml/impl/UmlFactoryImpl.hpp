@@ -479,7 +479,7 @@ namespace uml
 			
 
 			//Package
-			virtual UmlPackage* getUmlPackage() const;
+			virtual std::shared_ptr<UmlPackage> getUmlPackage() const;
 
 		private:
 			static UmlFactory * create();

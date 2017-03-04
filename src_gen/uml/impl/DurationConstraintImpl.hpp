@@ -22,10 +22,11 @@
 #include "impl/IntervalConstraintImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class DurationConstraintImpl :virtual public IntervalConstraintImpl, virtual public DurationConstraint
+	class DurationConstraintImpl :virtual public IntervalConstraintImpl, virtual public DurationConstraint 
 	{
 		public: 
 			DurationConstraintImpl(const DurationConstraintImpl & obj);
@@ -50,12 +51,12 @@ namespace uml
 			if (constrainedElement->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
 			endif */ 
-			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2 */ 
-			virtual bool has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -65,12 +66,7 @@ namespace uml
 			/*!
 			 The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].
 			<p>From package UML::Values.</p> */ 
-			virtual std::vector<bool> *  getFirstEvent() const ;
-			
-			/*!
-			 The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].
-			<p>From package UML::Values.</p> */ 
-			virtual void setFirstEvent (std::vector<bool> *  _firstEvent); 
+			virtual std::shared_ptr<std::vector<bool>> getFirstEvent() const ;
 			
 			
 			
@@ -85,13 +81,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -100,7 +96,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_DURATIONCONSTRAINTDURATIONCONSTRAINTIMPL_HPP */

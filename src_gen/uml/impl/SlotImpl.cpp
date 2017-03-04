@@ -13,26 +13,22 @@ using namespace uml;
 SlotImpl::SlotImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
 	
-	if( m_value == nullptr)
-	{
-		m_value = new std::vector<uml::ValueSpecification * >();
-	}
+	m_value.reset(new std::vector<std::shared_ptr<uml::ValueSpecification>>());
 }
 
 SlotImpl::~SlotImpl()
 {
-	if(m_value!=nullptr)
-	{
-		for(auto c :*m_value)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Slot "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,9 +40,8 @@ SlotImpl::SlotImpl(const SlotImpl & obj)
 	
 	m_definingFeature  = obj.getDefiningFeature();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -54,17 +49,20 @@ SlotImpl::SlotImpl(const SlotImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::ValueSpecification * 	_value : *obj.getValue())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _valueList = obj.getValue();
+	for(std::shared_ptr<uml::ValueSpecification> _value : *_valueList)
 	{
-		this->getValue()->push_back(dynamic_cast<uml::ValueSpecification * >(_value->copy()));
+		this->getValue()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_value->copy())));
 	}
 }
 
@@ -73,7 +71,7 @@ ecore::EObject *  SlotImpl::copy() const
 	return new SlotImpl(*this);
 }
 
-ecore::EClass* SlotImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getSlot();
 }
@@ -89,39 +87,50 @@ ecore::EClass* SlotImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::StructuralFeature *  SlotImpl::getDefiningFeature() const
+std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
 {
-	//assert(m_definingFeature);
-	return m_definingFeature;
+//assert(m_definingFeature);
+    return m_definingFeature;
 }
-void SlotImpl::setDefiningFeature(uml::StructuralFeature *  _definingFeature)
+void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
-	m_definingFeature = _definingFeature;
-}
-
-uml::InstanceSpecification *  SlotImpl::getOwningInstance() const
-{
-	//assert(m_owningInstance);
-	return m_owningInstance;
-}
-void SlotImpl::setOwningInstance(uml::InstanceSpecification *  _owningInstance)
-{
-	m_owningInstance = _owningInstance;
+    m_definingFeature = _definingFeature;
 }
 
-std::vector<uml::ValueSpecification * > *  SlotImpl::getValue() const
+std::shared_ptr<uml::InstanceSpecification> SlotImpl::getOwningInstance() const
 {
-	
-	return m_value;
+//assert(m_owningInstance);
+    return m_owningInstance;
+}
+void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance)
+{
+    m_owningInstance = _owningInstance;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> SlotImpl::getValue() const
+{
+
+    return m_value;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  SlotImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> SlotImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> value = getValue();
+	_ownedElement->insert(_ownedElement->end(), value->begin(), value->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> SlotImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getOwningInstance()!=nullptr)
 	{
@@ -129,19 +138,6 @@ uml::Element *  SlotImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::Element * > *  SlotImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  value = (std::vector<uml::Element * > * ) getValue();
-	_ownedElement->insert(_ownedElement->end(), value->begin(), value->end());
-
-
-	return _ownedElement;
 }
 
 

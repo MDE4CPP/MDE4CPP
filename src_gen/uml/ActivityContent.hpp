@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -58,7 +59,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::Activity *  containingActivity()  = 0;
+			virtual std::shared_ptr<uml::Activity>  containingActivity()  = 0;
 			
 			
 			//*********************************

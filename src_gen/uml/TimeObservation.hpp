@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -118,13 +119,12 @@ namespace uml
 			/*!
 			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p> */
-			virtual uml::NamedElement *  getEvent() const = 0;
+			virtual std::shared_ptr<uml::NamedElement> getEvent() const = 0;
 			
 			/*!
 			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p> */
-			virtual void setEvent(uml::NamedElement *  _event) = 0;
-			
+			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event) = 0;
 			
 
 		protected:
@@ -143,7 +143,7 @@ namespace uml
 			/*!
 			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p> */
-			uml::NamedElement *  m_event =  nullptr ;
+			std::shared_ptr<uml::NamedElement> m_event;
 			
 
 		public:
@@ -153,10 +153,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

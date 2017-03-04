@@ -13,6 +13,10 @@ using namespace uml;
 ExtensionEndImpl::ExtensionEndImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ExtensionEndImpl::ExtensionEndImpl()
 
 ExtensionEndImpl::~ExtensionEndImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionEnd "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -51,20 +58,19 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj)
 
 	m_class  = obj.getClass();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_datatype  = obj.getDatatype();
 
-	std::vector<uml::PackageableElement * > *  _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _deployedElement = obj.getDeployedElement();
 	this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
 
-	std::vector<uml::ConnectorEnd * > *  _end = obj.getEnd();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _end = obj.getEnd();
 	this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
 
-	std::vector<uml::Classifier * > *  _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier = obj.getFeaturingClassifier();
 	this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
-	delete(_featuringClassifier);
 
 	m_interface  = obj.getInterface();
 
@@ -72,9 +78,8 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj)
 
 	m_opposite  = obj.getOpposite();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -82,18 +87,16 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj)
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Property * > *  _redefinedProperty = obj.getRedefinedProperty();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _redefinedProperty = obj.getRedefinedProperty();
 	this->getRedefinedProperty()->insert(this->getRedefinedProperty()->end(), _redefinedProperty->begin(), _redefinedProperty->end());
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
-	std::vector<uml::Property * > *  _subsettedProperty = obj.getSubsettedProperty();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _subsettedProperty = obj.getSubsettedProperty();
 	this->getSubsettedProperty()->insert(this->getSubsettedProperty()->end(), _subsettedProperty->begin(), _subsettedProperty->end());
 
 	m_templateParameter  = obj.getTemplateParameter();
@@ -104,35 +107,39 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj)
 	//clone containt lists
 	if(obj.getDefaultValue()!=nullptr)
 	{
-		m_defaultValue = dynamic_cast<uml::ValueSpecification * >(obj.getDefaultValue()->copy());
+		m_defaultValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getDefaultValue()->copy()));
 	}
-	for(uml::Deployment * 	_deployment : *obj.getDeployment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> _deploymentList = obj.getDeployment();
+	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->push_back(dynamic_cast<uml::Deployment * >(_deployment->copy()));
+		this->getDeployment()->push_back(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue = dynamic_cast<uml::ValueSpecification * >(obj.getLowerValue()->copy());
+		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Property * 	_qualifier : *obj.getQualifier())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _qualifierList = obj.getQualifier();
+	for(std::shared_ptr<uml::Property> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->push_back(dynamic_cast<uml::Property * >(_qualifier->copy()));
+		this->getQualifier()->push_back(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_qualifier->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue = dynamic_cast<uml::ValueSpecification * >(obj.getUpperValue()->copy());
+		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
 }
 
@@ -141,7 +148,7 @@ ecore::EObject *  ExtensionEndImpl::copy() const
 	return new ExtensionEndImpl(*this);
 }
 
-ecore::EClass* ExtensionEndImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getExtensionEnd();
 }
@@ -153,13 +160,13 @@ ecore::EClass* ExtensionEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionEndImpl::aggregation(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExtensionEndImpl::aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExtensionEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -172,9 +179,9 @@ bool ExtensionEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::a
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Classifier * > *  ExtensionEndImpl::getFeaturingClassifier() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ExtensionEndImpl::getFeaturingClassifier() const
 {
-	std::vector<uml::Classifier * > *  _featuringClassifier =  new std::vector<uml::Classifier * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
 	
 	_featuringClassifier->push_back(getClass());
 	_featuringClassifier->push_back(getDatatype());
@@ -183,40 +190,9 @@ std::vector<uml::Classifier * > *  ExtensionEndImpl::getFeaturingClassifier() co
 
 	return _featuringClassifier;
 }
-std::vector<uml::Element * > *  ExtensionEndImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> ExtensionEndImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	_ownedElement->push_back(getDefaultValue());
-	std::vector<uml::Element * > *  deployment = (std::vector<uml::Element * > * ) getDeployment();
-	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
-
-	_ownedElement->push_back(getLowerValue());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  qualifier = (std::vector<uml::Element * > * ) getQualifier();
-	_ownedElement->insert(_ownedElement->end(), qualifier->begin(), qualifier->end());
-
-	_ownedElement->push_back(getUpperValue());
-
-	return _ownedElement;
-}
-std::vector<uml::Classifier * > *  ExtensionEndImpl::getRedefinitionContext() const
-{
-	std::vector<uml::Classifier * > *  _redefinitionContext =  new std::vector<uml::Classifier * >() ;
-	
-	_redefinitionContext->push_back(getClass());
-	_redefinitionContext->push_back(getDatatype());
-	_redefinitionContext->push_back(getInterface());
-	_redefinitionContext->push_back(getOwningAssociation());
-
-	return _redefinitionContext;
-}
-uml::Element *  ExtensionEndImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getAssociationEnd()!=nullptr)
 	{
@@ -233,19 +209,20 @@ uml::Element *  ExtensionEndImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::RedefinableElement * > *  ExtensionEndImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ExtensionEndImpl::getRedefinitionContext() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
 	
-	std::vector<uml::RedefinableElement * > *  redefinedProperty = (std::vector<uml::RedefinableElement * > * ) getRedefinedProperty();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedProperty->begin(), redefinedProperty->end());
+	_redefinitionContext->push_back(getClass());
+	_redefinitionContext->push_back(getDatatype());
+	_redefinitionContext->push_back(getInterface());
+	_redefinitionContext->push_back(getOwningAssociation());
 
-
-	return _redefinedElement;
+	return _redefinitionContext;
 }
-uml::Namespace *  ExtensionEndImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> ExtensionEndImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getClass()!=nullptr)
 	{
@@ -265,6 +242,32 @@ uml::Namespace *  ExtensionEndImpl::getNamespace() const
 	}
 
 	return _namespace;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ExtensionEndImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> redefinedProperty = getRedefinedProperty();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedProperty->begin(), redefinedProperty->end());
+
+	return _redefinedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtensionEndImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getDefaultValue());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> deployment = getDeployment();
+	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
+	_ownedElement->push_back(getLowerValue());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> qualifier = getQualifier();
+	_ownedElement->insert(_ownedElement->end(), qualifier->begin(), qualifier->end());
+	_ownedElement->push_back(getUpperValue());
+
+	return _ownedElement;
 }
 
 

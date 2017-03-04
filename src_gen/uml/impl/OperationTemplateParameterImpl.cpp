@@ -13,6 +13,10 @@ using namespace uml;
 OperationTemplateParameterImpl::OperationTemplateParameterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl()
 
 OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OperationTemplateParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -31,9 +38,8 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 	
 	m_default  = obj.getDefault();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -43,21 +49,23 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getOwnedDefault()!=nullptr)
 	{
-		m_ownedDefault = dynamic_cast<uml::ParameterableElement * >(obj.getOwnedDefault()->copy());
+		m_ownedDefault.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedDefault()->copy()));
 	}
 	if(obj.getOwnedParameteredElement()!=nullptr)
 	{
-		m_ownedParameteredElement = dynamic_cast<uml::ParameterableElement * >(obj.getOwnedParameteredElement()->copy());
+		m_ownedParameteredElement.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedParameteredElement()->copy()));
 	}
 }
 
@@ -66,7 +74,7 @@ ecore::EObject *  OperationTemplateParameterImpl::copy() const
 	return new OperationTemplateParameterImpl(*this);
 }
 
-ecore::EClass* OperationTemplateParameterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getOperationTemplateParameter();
 }
@@ -78,7 +86,7 @@ ecore::EClass* OperationTemplateParameterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -91,21 +99,9 @@ bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnost
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  OperationTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> OperationTemplateParameterImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getOwnedDefault());
-	_ownedElement->push_back(getOwnedParameteredElement());
-
-	return _ownedElement;
-}
-uml::Element *  OperationTemplateParameterImpl::getOwner() const
-{
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getSignature()!=nullptr)
 	{
@@ -113,6 +109,17 @@ uml::Element *  OperationTemplateParameterImpl::getOwner() const
 	}
 
 	return _owner;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> OperationTemplateParameterImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getOwnedDefault());
+	_ownedElement->push_back(getOwnedParameteredElement());
+
+	return _ownedElement;
 }
 
 

@@ -13,6 +13,10 @@ using namespace uml;
 QualifierValueImpl::QualifierValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ QualifierValueImpl::QualifierValueImpl()
 
 QualifierValueImpl::~QualifierValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete QualifierValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -30,9 +37,8 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -42,13 +48,15 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -57,7 +65,7 @@ ecore::EObject *  QualifierValueImpl::copy() const
 	return new QualifierValueImpl(*this);
 }
 
-ecore::EClass* QualifierValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getQualifierValue();
 }
@@ -69,19 +77,19 @@ ecore::EClass* QualifierValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool QualifierValueImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool QualifierValueImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -90,36 +98,35 @@ bool QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   b
 //*********************************
 // References
 //*********************************
-uml::Property *  QualifierValueImpl::getQualifier() const
+std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
 {
-	//assert(m_qualifier);
-	return m_qualifier;
+//assert(m_qualifier);
+    return m_qualifier;
 }
-void QualifierValueImpl::setQualifier(uml::Property *  _qualifier)
+void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 {
-	m_qualifier = _qualifier;
+    m_qualifier = _qualifier;
 }
 
-uml::InputPin *  QualifierValueImpl::getValue() const
+std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
 {
-	//assert(m_value);
-	return m_value;
+//assert(m_value);
+    return m_value;
 }
-void QualifierValueImpl::setValue(uml::InputPin *  _value)
+void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
-	m_value = _value;
+    m_value = _value;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  QualifierValueImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> QualifierValueImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

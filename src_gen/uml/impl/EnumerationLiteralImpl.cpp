@@ -13,6 +13,10 @@ using namespace uml;
 EnumerationLiteralImpl::EnumerationLiteralImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ EnumerationLiteralImpl::EnumerationLiteralImpl()
 
 EnumerationLiteralImpl::~EnumerationLiteralImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationLiteral "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -32,22 +39,21 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 	//copy references with now containment
 	
-	std::vector<uml::Classifier * > *  _classifier = obj.getClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _classifier = obj.getClassifier();
 	this->getClassifier()->insert(this->getClassifier()->end(), _classifier->begin(), _classifier->end());
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::PackageableElement * > *  _deployedElement = obj.getDeployedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _deployedElement = obj.getDeployedElement();
 	this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
 
 	m_enumeration  = obj.getEnumeration();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -57,29 +63,33 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 
 	//clone containt lists
-	for(uml::Deployment * 	_deployment : *obj.getDeployment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> _deploymentList = obj.getDeployment();
+	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->push_back(dynamic_cast<uml::Deployment * >(_deployment->copy()));
+		this->getDeployment()->push_back(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Slot * 	_slot : *obj.getSlot())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> _slotList = obj.getSlot();
+	for(std::shared_ptr<uml::Slot> _slot : *_slotList)
 	{
-		this->getSlot()->push_back(dynamic_cast<uml::Slot * >(_slot->copy()));
+		this->getSlot()->push_back(std::shared_ptr<uml::Slot>(dynamic_cast<uml::Slot*>(_slot->copy())));
 	}
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification = dynamic_cast<uml::ValueSpecification * >(obj.getSpecification()->copy());
+		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
 	}
 }
 
@@ -88,7 +98,7 @@ ecore::EObject *  EnumerationLiteralImpl::copy() const
 	return new EnumerationLiteralImpl(*this);
 }
 
-ecore::EClass* EnumerationLiteralImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getEnumerationLiteral();
 }
@@ -102,7 +112,7 @@ ecore::EClass* EnumerationLiteralImpl::eStaticClass() const
 //*********************************
 
 
-std::vector<uml::Classifier * > *  EnumerationLiteralImpl::getClassifiers() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> EnumerationLiteralImpl::getClassifiers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -111,40 +121,48 @@ std::vector<uml::Classifier * > *  EnumerationLiteralImpl::getClassifiers()
 //*********************************
 // References
 //*********************************
-uml::Enumeration *  EnumerationLiteralImpl::getEnumeration() const
+std::shared_ptr<uml::Enumeration> EnumerationLiteralImpl::getEnumeration() const
 {
-	//assert(m_enumeration);
-	return m_enumeration;
+//assert(m_enumeration);
+    return m_enumeration;
 }
-void EnumerationLiteralImpl::setEnumeration(uml::Enumeration *  _enumeration)
+void EnumerationLiteralImpl::setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration)
 {
-	m_enumeration = _enumeration;
+    m_enumeration = _enumeration;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  EnumerationLiteralImpl::getOwnedElement() const
+std::shared_ptr<uml::Namespace> EnumerationLiteralImpl::getNamespace() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	std::vector<uml::Element * > *  deployment = (std::vector<uml::Element * > * ) getDeployment();
+	if(getEnumeration()!=nullptr)
+	{
+		_namespace = getEnumeration();
+	}
+
+	return _namespace;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> EnumerationLiteralImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> deployment = getDeployment();
 	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
-
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  slot = (std::vector<uml::Element * > * ) getSlot();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> slot = getSlot();
 	_ownedElement->insert(_ownedElement->end(), slot->begin(), slot->end());
-
 	_ownedElement->push_back(getSpecification());
 
 	return _ownedElement;
 }
-uml::Element *  EnumerationLiteralImpl::getOwner() const
+std::shared_ptr<uml::Element> EnumerationLiteralImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -156,17 +174,6 @@ uml::Element *  EnumerationLiteralImpl::getOwner() const
 	}
 
 	return _owner;
-}
-uml::Namespace *  EnumerationLiteralImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
-	
-	if(getEnumeration()!=nullptr)
-	{
-		_namespace = getEnumeration();
-	}
-
-	return _namespace;
 }
 
 

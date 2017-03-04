@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -165,29 +166,29 @@ namespace uml
 				(parameter.direction = ParameterDirectionKind::out or 
 				 parameter.direction = ParameterDirectionKind::inout or 
 				 parameter.direction = ParameterDirectionKind::return) */ 
-			virtual bool no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The parameter of an ActivityParameterNode must be from the containing Activity.
 			activity.ownedParameter->includes(parameter) */ 
-			virtual bool has_parameters(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool has_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type of an ActivityParameterNode is the same as the type of its parameter.
 			type = parameter.type */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
 			(outgoing->notEmpty() and incoming->isEmpty()) implies 
 				(parameter.direction = ParameterDirectionKind::_'in' or 
 				 parameter.direction = ParameterDirectionKind::inout) */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
 			incoming->isEmpty() or outgoing->isEmpty() */ 
-			virtual bool no_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool no_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -200,13 +201,12 @@ namespace uml
 			/*!
 			 The Parameter for which the ActivityParameterNode will be accepting or providing values.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Parameter *  getParameter() const = 0;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
 			
 			/*!
 			 The Parameter for which the ActivityParameterNode will be accepting or providing values.
 			<p>From package UML::Activities.</p> */
-			virtual void setParameter(uml::Parameter *  _parameter) = 0;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
 			
 
 		protected:
@@ -221,7 +221,7 @@ namespace uml
 			/*!
 			 The Parameter for which the ActivityParameterNode will be accepting or providing values.
 			<p>From package UML::Activities.</p> */
-			uml::Parameter *  m_parameter =  nullptr ;
+			std::shared_ptr<uml::Parameter> m_parameter;
 			
 
 		public:
@@ -229,18 +229,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

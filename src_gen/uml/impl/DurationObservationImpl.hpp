@@ -22,10 +22,11 @@
 #include "impl/ObservationImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class DurationObservationImpl :virtual public ObservationImpl, virtual public DurationObservation
+	class DurationObservationImpl :virtual public ObservationImpl, virtual public DurationObservation 
 	{
 		public: 
 			DurationObservationImpl(const DurationObservationImpl & obj);
@@ -50,7 +51,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -60,12 +61,7 @@ namespace uml
 			/*!
 			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
 			<p>From package UML::Values.</p> */ 
-			virtual std::vector<bool> *  getFirstEvent() const ;
-			
-			/*!
-			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
-			<p>From package UML::Values.</p> */ 
-			virtual void setFirstEvent (std::vector<bool> *  _firstEvent); 
+			virtual std::shared_ptr<std::vector<bool>> getFirstEvent() const ;
 			
 			
 			
@@ -75,7 +71,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			virtual std::vector<uml::NamedElement * > *  getEvent() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getEvent() const ;
 			
 							
 			
@@ -85,10 +81,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -97,7 +93,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_DURATIONOBSERVATIONDURATIONOBSERVATIONIMPL_HPP */

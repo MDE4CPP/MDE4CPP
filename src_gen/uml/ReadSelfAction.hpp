@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -155,23 +156,23 @@ namespace uml
 			/*!
 			 A ReadSelfAction must have a context Classifier.
 			_'context' <> null */ 
-			virtual bool contained(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type of the result OutputPin is the context Classifier.
 			result.type = _'context' */ 
-			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -184,13 +185,12 @@ namespace uml
 			/*!
 			 The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p> */
-			virtual uml::OutputPin *  getResult() const = 0;
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			
 			/*!
 			 The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p> */
-			virtual void setResult(uml::OutputPin *  _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
 			
 
 		protected:
@@ -205,7 +205,7 @@ namespace uml
 			/*!
 			 The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p> */
-			uml::OutputPin *  m_result =  nullptr ;
+			std::shared_ptr<uml::OutputPin> m_result;
 			
 
 		public:
@@ -213,21 +213,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::vector<uml::OutputPin * > *  getOutput() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

@@ -4,15 +4,15 @@
 using namespace uml;
 
 //static initialisation
-UmlFactory * UmlFactory::instance = nullptr;
+std::shared_ptr<UmlFactory> UmlFactory::instance;
 
-UmlFactory * UmlFactory::eInstance()
+std::shared_ptr<UmlFactory> UmlFactory::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = UmlFactoryImpl::create();
-		dynamic_cast<UmlFactoryImpl * >(instance)->init();
+		instance.reset(UmlFactoryImpl::create());
+		std::dynamic_pointer_cast<UmlFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

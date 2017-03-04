@@ -23,10 +23,11 @@
 #include "impl/TypedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ObjectNodeImpl :virtual public ActivityNodeImpl, virtual public TypedElementImpl, virtual public ObjectNode
+	class ObjectNodeImpl :virtual public ActivityNodeImpl, virtual public TypedElementImpl, virtual public ObjectNode 
 	{
 		public: 
 			ObjectNodeImpl(const ObjectNodeImpl & obj);
@@ -53,17 +54,17 @@ namespace uml
 				selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and
 				selection.outputParameters()->size()=1 and
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type)) */ 
-			virtual bool input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered) */ 
-			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -98,46 +99,44 @@ namespace uml
 			/*!
 			 The States required to be associated with the values held by tokens on this ObjectNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::State * > *  getInState() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::State>>> getInState() const ;
 			
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */
-			virtual uml::Behavior *  getSelection() const ;
+			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
 			
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */
-			virtual void setSelection(uml::Behavior *  _selection) ;
+			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) ;
+			/*!
+			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const ;
 			
 			/*!
 			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p> */
-			virtual uml::ValueSpecification *  getUpperBound() const ;
-			
-			/*!
-			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
-			<p>From package UML::Activities.</p> */
-			virtual void setUpperBound(uml::ValueSpecification *  _upperBound) ;
-			
+			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -146,7 +145,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_OBJECTNODEOBJECTNODEIMPL_HPP */

@@ -13,6 +13,10 @@ using namespace uml;
 ControlFlowImpl::ControlFlowImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ControlFlowImpl::ControlFlowImpl()
 
 ControlFlowImpl::~ControlFlowImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlFlow "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,14 +42,13 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj)
 	
 	m_activity  = obj.getActivity();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ActivityGroup * > *  _inGroup = obj.getInGroup();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup = obj.getInGroup();
 	this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
-	delete(_inGroup);
 
-	std::vector<uml::ActivityPartition * > *  _inPartition = obj.getInPartition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> _inPartition = obj.getInPartition();
 	this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
 
 	m_inStructuredNode  = obj.getInStructuredNode();
@@ -51,22 +57,19 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::ActivityEdge * > *  _redefinedEdge = obj.getRedefinedEdge();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _redefinedEdge = obj.getRedefinedEdge();
 	this->getRedefinedEdge()->insert(this->getRedefinedEdge()->end(), _redefinedEdge->begin(), _redefinedEdge->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_source  = obj.getSource();
 
@@ -74,25 +77,27 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getGuard()!=nullptr)
 	{
-		m_guard = dynamic_cast<uml::ValueSpecification * >(obj.getGuard()->copy());
+		m_guard.reset(dynamic_cast<uml::ValueSpecification*>(obj.getGuard()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getWeight()!=nullptr)
 	{
-		m_weight = dynamic_cast<uml::ValueSpecification * >(obj.getWeight()->copy());
+		m_weight.reset(dynamic_cast<uml::ValueSpecification*>(obj.getWeight()->copy()));
 	}
 }
 
@@ -101,7 +106,7 @@ ecore::EObject *  ControlFlowImpl::copy() const
 	return new ControlFlowImpl(*this);
 }
 
-ecore::EClass* ControlFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getControlFlow();
 }
@@ -113,7 +118,7 @@ ecore::EClass* ControlFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -126,9 +131,30 @@ bool ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::an
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ControlFlowImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ControlFlowImpl::getRedefinedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> redefinedEdge = getRedefinedEdge();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
+
+	return _redefinedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ControlFlowImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	_ownedElement->push_back(getGuard());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getWeight());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> ControlFlowImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getActivity()!=nullptr)
 	{
@@ -145,36 +171,12 @@ uml::Element *  ControlFlowImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  ControlFlowImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> ControlFlowImpl::getInGroup() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup(new std::vector<std::shared_ptr<uml::ActivityGroup>>()) ;
 	
-	_ownedElement->push_back(getGuard());
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	_ownedElement->push_back(getWeight());
-
-	return _ownedElement;
-}
-std::vector<uml::RedefinableElement * > *  ControlFlowImpl::getRedefinedElement() const
-{
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
-	
-	std::vector<uml::RedefinableElement * > *  redefinedEdge = (std::vector<uml::RedefinableElement * > * ) getRedefinedEdge();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
-
-
-	return _redefinedElement;
-}
-std::vector<uml::ActivityGroup * > *  ControlFlowImpl::getInGroup() const
-{
-	std::vector<uml::ActivityGroup * > *  _inGroup =  new std::vector<uml::ActivityGroup * >() ;
-	
-	std::vector<uml::ActivityGroup * > *  inPartition = (std::vector<uml::ActivityGroup * > * ) getInPartition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> inPartition = getInPartition();
 	_inGroup->insert(_inGroup->end(), inPartition->begin(), inPartition->end());
-
 	_inGroup->push_back(getInStructuredNode());
 
 	return _inGroup;

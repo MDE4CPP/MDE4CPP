@@ -13,26 +13,22 @@ using namespace uml;
 LinkEndDataImpl::LinkEndDataImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_qualifier == nullptr)
-	{
-		m_qualifier = new std::vector<uml::QualifierValue * >();
-	}
+	m_qualifier.reset(new std::vector<std::shared_ptr<uml::QualifierValue>>());
 	
 }
 
 LinkEndDataImpl::~LinkEndDataImpl()
 {
-	if(m_qualifier!=nullptr)
-	{
-		for(auto c :*m_qualifier)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,9 +40,8 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj)
 	
 	m_end  = obj.getEnd();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -54,17 +49,20 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::QualifierValue * 	_qualifier : *obj.getQualifier())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::QualifierValue>>> _qualifierList = obj.getQualifier();
+	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->push_back(dynamic_cast<uml::QualifierValue * >(_qualifier->copy()));
+		this->getQualifier()->push_back(std::shared_ptr<uml::QualifierValue>(dynamic_cast<uml::QualifierValue*>(_qualifier->copy())));
 	}
 }
 
@@ -73,7 +71,7 @@ ecore::EObject *  LinkEndDataImpl::copy() const
 	return new LinkEndDataImpl(*this);
 }
 
-ecore::EClass* LinkEndDataImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getLinkEndData();
 }
@@ -85,37 +83,37 @@ ecore::EClass* LinkEndDataImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector<uml::InputPin * > *  LinkEndDataImpl::allPins() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> LinkEndDataImpl::allPins() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -124,46 +122,44 @@ bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, 
 //*********************************
 // References
 //*********************************
-uml::Property *  LinkEndDataImpl::getEnd() const
+std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
 {
-	//assert(m_end);
-	return m_end;
+//assert(m_end);
+    return m_end;
 }
-void LinkEndDataImpl::setEnd(uml::Property *  _end)
+void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
-	m_end = _end;
-}
-
-std::vector<uml::QualifierValue * > *  LinkEndDataImpl::getQualifier() const
-{
-	
-	return m_qualifier;
+    m_end = _end;
 }
 
+std::shared_ptr<std::vector<std::shared_ptr<uml::QualifierValue>>> LinkEndDataImpl::getQualifier() const
+{
 
-uml::InputPin *  LinkEndDataImpl::getValue() const
-{
-	
-	return m_value;
+    return m_qualifier;
 }
-void LinkEndDataImpl::setValue(uml::InputPin *  _value)
+
+
+std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
 {
-	m_value = _value;
+
+    return m_value;
+}
+void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
+{
+    m_value = _value;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  LinkEndDataImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> LinkEndDataImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  qualifier = (std::vector<uml::Element * > * ) getQualifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::QualifierValue>>> qualifier = getQualifier();
 	_ownedElement->insert(_ownedElement->end(), qualifier->begin(), qualifier->end());
-
 
 	return _ownedElement;
 }

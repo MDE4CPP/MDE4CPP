@@ -13,6 +13,10 @@ using namespace uml;
 ExtensionPointImpl::ExtensionPointImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ ExtensionPointImpl::ExtensionPointImpl()
 
 ExtensionPointImpl::~ExtensionPointImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionPoint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,40 +40,39 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_useCase  = obj.getUseCase();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -75,7 +81,7 @@ ecore::EObject *  ExtensionPointImpl::copy() const
 	return new ExtensionPointImpl(*this);
 }
 
-ecore::EClass* ExtensionPointImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getExtensionPoint();
 }
@@ -87,7 +93,7 @@ ecore::EClass* ExtensionPointImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -96,22 +102,22 @@ bool ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boos
 //*********************************
 // References
 //*********************************
-uml::UseCase *  ExtensionPointImpl::getUseCase() const
+std::shared_ptr<uml::UseCase> ExtensionPointImpl::getUseCase() const
 {
-	//assert(m_useCase);
-	return m_useCase;
+//assert(m_useCase);
+    return m_useCase;
 }
-void ExtensionPointImpl::setUseCase(uml::UseCase *  _useCase)
+void ExtensionPointImpl::setUseCase(std::shared_ptr<uml::UseCase> _useCase)
 {
-	m_useCase = _useCase;
+    m_useCase = _useCase;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  ExtensionPointImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> ExtensionPointImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getUseCase()!=nullptr)
 	{
@@ -120,9 +126,9 @@ uml::Namespace *  ExtensionPointImpl::getNamespace() const
 
 	return _namespace;
 }
-uml::Element *  ExtensionPointImpl::getOwner() const
+std::shared_ptr<uml::Element> ExtensionPointImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -131,14 +137,13 @@ uml::Element *  ExtensionPointImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  ExtensionPointImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtensionPointImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

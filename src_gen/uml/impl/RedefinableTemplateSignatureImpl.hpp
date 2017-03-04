@@ -23,10 +23,11 @@
 #include "impl/TemplateSignatureImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class RedefinableTemplateSignatureImpl :virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature
+	class RedefinableTemplateSignatureImpl :virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature 
 	{
 		public: 
 			RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj);
@@ -49,13 +50,13 @@ namespace uml
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Derivation for RedefinableTemplateSignature::/inheritedParameter
 			result = (if extendedSignature->isEmpty() then Set{} else extendedSignature.parameter->asSet() endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::vector<uml::TemplateParameter * > *  getInheritedParameters()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> getInheritedParameters()  ;
 			
 			
 			
@@ -70,17 +71,17 @@ namespace uml
 			/*!
 			 The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableTemplateSignature * > *  getExtendedSignature() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableTemplateSignature>>> getExtendedSignature() const ;
 			
 			/*!
 			 The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::TemplateParameter * > *  getInheritedParameter() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameter>>> getInheritedParameter() const ;
 			
 			/*!
 			 The Classifier that owns this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p> */
-			virtual uml::Classifier *  getClassifier() const ;
+			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
 			
 							
 			
@@ -90,16 +91,16 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +109,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_REDEFINABLETEMPLATESIGNATUREREDEFINABLETEMPLATESIGNATUREIMPL_HPP */

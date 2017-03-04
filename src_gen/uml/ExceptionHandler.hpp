@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -84,7 +85,7 @@ namespace uml
 			/*!
 			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
-			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -99,32 +100,32 @@ namespace uml
 			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
 			) */ 
-			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
 			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
 			inputs->size()=1 and inputs->first()=exceptionInput */ 
-			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
 			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
 			nodes.outgoing->forAll(nodes->includes(target)) and
 			nodes.incoming->forAll(nodes->includes(source)) */ 
-			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner */ 
-			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
-			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  = 0;
+			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -137,38 +138,35 @@ namespace uml
 			/*!
 			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
 			<p>From package UML::Activities.</p> */
-			virtual uml::ObjectNode *  getExceptionInput() const = 0;
+			virtual std::shared_ptr<uml::ObjectNode> getExceptionInput() const = 0;
 			
 			/*!
 			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
 			<p>From package UML::Activities.</p> */
-			virtual void setExceptionInput(uml::ObjectNode *  _exceptionInput) = 0;
-			
+			virtual void setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput) = 0;
 			/*!
 			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::Classifier * > *  getExceptionType() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getExceptionType() const = 0;
 			
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p> */
-			virtual uml::ExecutableNode *  getHandlerBody() const = 0;
+			virtual std::shared_ptr<uml::ExecutableNode> getHandlerBody() const = 0;
 			
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p> */
-			virtual void setHandlerBody(uml::ExecutableNode *  _handlerBody) = 0;
+			virtual void setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody) = 0;
+			/*!
+			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<uml::ExecutableNode> getProtectedNode() const = 0;
 			
 			/*!
 			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p> */
-			virtual uml::ExecutableNode *  getProtectedNode() const = 0;
-			
-			/*!
-			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
-			<p>From package UML::Activities.</p> */
-			virtual void setProtectedNode(uml::ExecutableNode *  _protectedNode) = 0;
-			
+			virtual void setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode) = 0;
 			
 
 		protected:
@@ -183,19 +181,19 @@ namespace uml
 			/*!
 			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
 			<p>From package UML::Activities.</p> */
-			uml::ObjectNode *  m_exceptionInput =  nullptr ;
+			std::shared_ptr<uml::ObjectNode> m_exceptionInput;
 			/*!
 			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p> */
-			std::vector<uml::Classifier * > *  m_exceptionType =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_exceptionType;
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p> */
-			uml::ExecutableNode *  m_handlerBody =  nullptr ;
+			std::shared_ptr<uml::ExecutableNode> m_handlerBody;
 			/*!
 			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p> */
-			uml::ExecutableNode *  m_protectedNode =  nullptr ;
+			std::shared_ptr<uml::ExecutableNode> m_protectedNode;
 			
 
 		public:
@@ -205,10 +203,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
 	};
 
 }

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,23 +88,21 @@ namespace uml
 			/*!
 			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::ProtocolStateMachine *  getGeneralMachine() const = 0;
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const = 0;
 			
 			/*!
 			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setGeneralMachine(uml::ProtocolStateMachine *  _generalMachine) = 0;
+			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine) = 0;
+			/*!
+			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
+			<p>From package UML::StateMachines.</p> */
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getSpecificMachine() const = 0;
 			
 			/*!
 			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::ProtocolStateMachine *  getSpecificMachine() const = 0;
-			
-			/*!
-			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setSpecificMachine(uml::ProtocolStateMachine *  _specificMachine) = 0;
-			
+			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine) = 0;
 			
 
 		protected:
@@ -118,11 +117,11 @@ namespace uml
 			/*!
 			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p> */
-			uml::ProtocolStateMachine *  m_generalMachine =  nullptr ;
+			std::shared_ptr<uml::ProtocolStateMachine> m_generalMachine;
 			/*!
 			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p> */
-			uml::ProtocolStateMachine *  m_specificMachine =  nullptr ;
+			std::shared_ptr<uml::ProtocolStateMachine> m_specificMachine;
 			
 
 		public:
@@ -132,19 +131,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const = 0;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getSource() const = 0;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getRelatedElement() const = 0; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
 	};
 
 }

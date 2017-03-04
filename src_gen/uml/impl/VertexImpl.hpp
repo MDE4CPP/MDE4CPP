@@ -22,10 +22,11 @@
 #include "impl/NamedElementImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class VertexImpl :virtual public NamedElementImpl, virtual public Vertex
+	class VertexImpl :virtual public NamedElementImpl, virtual public Vertex 
 	{
 		public: 
 			VertexImpl(const VertexImpl & obj);
@@ -64,19 +65,19 @@ namespace uml
 			endif
 			)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual uml::StateMachine *  containingStateMachine()  ;
+			virtual std::shared_ptr<uml::StateMachine>  containingStateMachine()  ;
 			
 			/*!
 			 Derivation for Vertex::/incoming.
 			result = (Transition.allInstances()->select(target=self))
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::vector<uml::Transition * > *  getIncomings()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> getIncomings()  ;
 			
 			/*!
 			 Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::vector<uml::Transition * > *  getOutgoings()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> getOutgoings()  ;
 			
 			/*!
 			 This utility operation returns true if the Vertex is contained in the State s (input argument).
@@ -90,7 +91,7 @@ namespace uml
 				endif
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInState(uml::State *  s)  ;
+			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  ;
 			
 			/*!
 			 This utility query returns true if the Vertex is contained in the Region r (input argument).
@@ -104,7 +105,7 @@ namespace uml
 				endif
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInRegion(uml::Region *  r)  ;
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r)  ;
 			
 			
 			
@@ -119,22 +120,21 @@ namespace uml
 			/*!
 			 The Region that contains this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			virtual uml::Region *  getContainer() const ;
+			virtual std::shared_ptr<uml::Region> getContainer() const ;
 			
 			/*!
 			 The Region that contains this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setContainer(uml::Region *  _container) ;
-			
+			virtual void setContainer(std::shared_ptr<uml::Region> _container) ;
 			/*!
 			 Specifies the Transitions entering this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Transition * > *  getIncoming() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> getIncoming() const ;
 			
 			/*!
 			 Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::vector<uml::Transition * > *  getOutgoing() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> getOutgoing() const ;
 			
 							
 			
@@ -144,13 +144,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -159,7 +159,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_VERTEXVERTEXIMPL_HPP */

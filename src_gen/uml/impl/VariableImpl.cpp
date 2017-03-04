@@ -13,6 +13,10 @@ using namespace uml;
 VariableImpl::VariableImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ VariableImpl::VariableImpl()
 
 VariableImpl::~VariableImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Variable "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -39,17 +46,16 @@ VariableImpl::VariableImpl(const VariableImpl & obj)
 	
 	m_activityScope  = obj.getActivityScope();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ConnectorEnd * > *  _end = obj.getEnd();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _end = obj.getEnd();
 	this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -63,25 +69,27 @@ VariableImpl::VariableImpl(const VariableImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue = dynamic_cast<uml::ValueSpecification * >(obj.getLowerValue()->copy());
+		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue = dynamic_cast<uml::ValueSpecification * >(obj.getUpperValue()->copy());
+		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
 }
 
@@ -90,7 +98,7 @@ ecore::EObject *  VariableImpl::copy() const
 	return new VariableImpl(*this);
 }
 
-ecore::EClass* VariableImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getVariable();
 }
@@ -102,7 +110,7 @@ ecore::EClass* VariableImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableImpl::isAccessibleBy(uml::Action *  a) 
+bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -111,47 +119,32 @@ bool VariableImpl::isAccessibleBy(uml::Action *  a)
 //*********************************
 // References
 //*********************************
-uml::Activity *  VariableImpl::getActivityScope() const
+std::shared_ptr<uml::Activity> VariableImpl::getActivityScope() const
 {
-	
-	return m_activityScope;
+
+    return m_activityScope;
 }
-void VariableImpl::setActivityScope(uml::Activity *  _activityScope)
+void VariableImpl::setActivityScope(std::shared_ptr<uml::Activity> _activityScope)
 {
-	m_activityScope = _activityScope;
+    m_activityScope = _activityScope;
 }
 
-uml::StructuredActivityNode *  VariableImpl::getScope() const
+std::shared_ptr<uml::StructuredActivityNode> VariableImpl::getScope() const
 {
-	
-	return m_scope;
+
+    return m_scope;
 }
-void VariableImpl::setScope(uml::StructuredActivityNode *  _scope)
+void VariableImpl::setScope(std::shared_ptr<uml::StructuredActivityNode> _scope)
 {
-	m_scope = _scope;
+    m_scope = _scope;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  VariableImpl::getOwner() const
+std::shared_ptr<uml::Namespace> VariableImpl::getNamespace() const
 {
-	uml::Element *  _owner =   nullptr ;
-	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
-
-	return _owner;
-}
-uml::Namespace *  VariableImpl::getNamespace() const
-{
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getActivityScope()!=nullptr)
 	{
@@ -164,18 +157,32 @@ uml::Namespace *  VariableImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  VariableImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> VariableImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getLowerValue());
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getUpperValue());
 
 	return _ownedElement;
+}
+std::shared_ptr<uml::Element> VariableImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
+	
+	if(getNamespace()!=nullptr)
+	{
+		_owner = getNamespace();
+	}
+	if(getOwningTemplateParameter()!=nullptr)
+	{
+		_owner = getOwningTemplateParameter();
+	}
+
+	return _owner;
 }
 
 

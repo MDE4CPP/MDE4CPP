@@ -22,10 +22,11 @@
 #include "impl/ObjectNodeImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ExpansionNodeImpl :virtual public ObjectNodeImpl, virtual public ExpansionNode
+	class ExpansionNodeImpl :virtual public ObjectNodeImpl, virtual public ExpansionNode 
 	{
 		public: 
 			ExpansionNodeImpl(const ExpansionNodeImpl & obj);
@@ -48,7 +49,7 @@ namespace uml
 			/*!
 			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
-			virtual bool region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -63,41 +64,39 @@ namespace uml
 			/*!
 			 The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p> */
-			virtual uml::ExpansionRegion *  getRegionAsInput() const ;
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const ;
 			
 			/*!
 			 The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsInput(uml::ExpansionRegion *  _regionAsInput) ;
+			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput) ;
+			/*!
+			 The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const ;
 			
 			/*!
 			 The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p> */
-			virtual uml::ExpansionRegion *  getRegionAsOutput() const ;
-			
-			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsOutput(uml::ExpansionRegion *  _regionAsOutput) ;
-			
+			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::vector<uml::ActivityGroup * > *  getInGroup() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -106,7 +105,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_EXPANSIONNODEEXPANSIONNODEIMPL_HPP */

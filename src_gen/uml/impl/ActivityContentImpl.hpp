@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
 	class ActivityContentImpl :virtual public ecore::EObjectImpl,
-virtual public ActivityContent
+virtual public ActivityContent 
 	{
 		public: 
 			ActivityContentImpl(const ActivityContentImpl & obj);
@@ -49,7 +50,7 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::Activity *  containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity>  containingActivity()  ;
 			
 			
 			
@@ -75,7 +76,7 @@ virtual public ActivityContent
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_ACTIVITYCONTENTACTIVITYCONTENTIMPL_HPP */

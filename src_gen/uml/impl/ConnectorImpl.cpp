@@ -13,43 +13,23 @@ using namespace uml;
 ConnectorImpl::ConnectorImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_contract == nullptr)
-	{
-		m_contract = new std::vector<uml::Behavior * >();
-	}
-	if( m_end == nullptr)
-	{
-		m_end = new std::vector<uml::ConnectorEnd * >();
-	}
-	if( m_redefinedConnector == nullptr)
-	{
-		m_redefinedConnector = new std::vector<uml::Connector * >();
-	}
+	m_contract.reset(new std::vector<std::shared_ptr<uml::Behavior>>());
+	m_end.reset(new std::vector<std::shared_ptr<uml::ConnectorEnd>>());
+	m_redefinedConnector.reset(new std::vector<std::shared_ptr<uml::Connector>>());
 	
 }
 
 ConnectorImpl::~ConnectorImpl()
 {
-	if(m_contract!=nullptr)
-	{
-		delete(m_contract);
-	 	m_contract = nullptr;
-	}
-	if(m_end!=nullptr)
-	{
-		for(auto c :*m_end)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_redefinedConnector!=nullptr)
-	{
-		delete(m_redefinedConnector);
-	 	m_redefinedConnector = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Connector "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -65,54 +45,53 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Behavior * > *  _contract = obj.getContract();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> _contract = obj.getContract();
 	this->getContract()->insert(this->getContract()->end(), _contract->begin(), _contract->end());
 
-	std::vector<uml::Classifier * > *  _featuringClassifier = obj.getFeaturingClassifier();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier = obj.getFeaturingClassifier();
 	this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
-	delete(_featuringClassifier);
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::Connector * > *  _redefinedConnector = obj.getRedefinedConnector();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Connector>>> _redefinedConnector = obj.getRedefinedConnector();
 	this->getRedefinedConnector()->insert(this->getRedefinedConnector()->end(), _redefinedConnector->begin(), _redefinedConnector->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_type  = obj.getType();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::ConnectorEnd * 	_end : *obj.getEnd())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _endList = obj.getEnd();
+	for(std::shared_ptr<uml::ConnectorEnd> _end : *_endList)
 	{
-		this->getEnd()->push_back(dynamic_cast<uml::ConnectorEnd * >(_end->copy()));
+		this->getEnd()->push_back(std::shared_ptr<uml::ConnectorEnd>(dynamic_cast<uml::ConnectorEnd*>(_end->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -121,7 +100,7 @@ ecore::EObject *  ConnectorImpl::copy() const
 	return new ConnectorImpl(*this);
 }
 
-ecore::EClass* ConnectorImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getConnector();
 }
@@ -145,13 +124,13 @@ ConnectorKind ConnectorImpl::getKind()
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::roles(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorImpl::roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -160,43 +139,55 @@ bool ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost:
 //*********************************
 // References
 //*********************************
-std::vector<uml::Behavior * > *  ConnectorImpl::getContract() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> ConnectorImpl::getContract() const
 {
-	
-	return m_contract;
+
+    return m_contract;
 }
 
 
-std::vector<uml::ConnectorEnd * > *  ConnectorImpl::getEnd() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> ConnectorImpl::getEnd() const
 {
-	//assert(m_end);
-	return m_end;
+//assert(m_end);
+    return m_end;
 }
 
 
-std::vector<uml::Connector * > *  ConnectorImpl::getRedefinedConnector() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Connector>>> ConnectorImpl::getRedefinedConnector() const
 {
-	
-	return m_redefinedConnector;
+
+    return m_redefinedConnector;
 }
 
 
-uml::Association *  ConnectorImpl::getType() const
+std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 {
-	
-	return m_type;
+
+    return m_type;
 }
-void ConnectorImpl::setType(uml::Association *  _type)
+void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ConnectorImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConnectorImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> end = getEnd();
+	_ownedElement->insert(_ownedElement->end(), end->begin(), end->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+
+	return _ownedElement;
+}
+std::shared_ptr<uml::Element> ConnectorImpl::getOwner() const
+{
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -205,29 +196,14 @@ uml::Element *  ConnectorImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::RedefinableElement * > *  ConnectorImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ConnectorImpl::getRedefinedElement() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
-	std::vector<uml::RedefinableElement * > *  redefinedConnector = (std::vector<uml::RedefinableElement * > * ) getRedefinedConnector();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Connector>>> redefinedConnector = getRedefinedConnector();
 	_redefinedElement->insert(_redefinedElement->end(), redefinedConnector->begin(), redefinedConnector->end());
 
-
 	return _redefinedElement;
-}
-std::vector<uml::Element * > *  ConnectorImpl::getOwnedElement() const
-{
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
-	
-	std::vector<uml::Element * > *  end = (std::vector<uml::Element * > * ) getEnd();
-	_ownedElement->insert(_ownedElement->end(), end->begin(), end->end());
-
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
 }
 
 

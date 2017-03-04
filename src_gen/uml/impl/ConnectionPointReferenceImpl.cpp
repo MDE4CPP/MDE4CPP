@@ -13,31 +13,22 @@ using namespace uml;
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_entry == nullptr)
-	{
-		m_entry = new std::vector<uml::Pseudostate * >();
-	}
-	if( m_exit == nullptr)
-	{
-		m_exit = new std::vector<uml::Pseudostate * >();
-	}
+	m_entry.reset(new std::vector<std::shared_ptr<uml::Pseudostate>>());
+	m_exit.reset(new std::vector<std::shared_ptr<uml::Pseudostate>>());
 	
 }
 
 ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 {
-	if(m_entry!=nullptr)
-	{
-		delete(m_entry);
-	 	m_entry = nullptr;
-	}
-	if(m_exit!=nullptr)
-	{
-		delete(m_exit);
-	 	m_exit = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConnectionPointReference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,28 +41,27 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_container  = obj.getContainer();
 
-	std::vector<uml::Pseudostate * > *  _entry = obj.getEntry();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> _entry = obj.getEntry();
 	this->getEntry()->insert(this->getEntry()->end(), _entry->begin(), _entry->end());
 
-	std::vector<uml::Pseudostate * > *  _exit = obj.getExit();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> _exit = obj.getExit();
 	this->getExit()->insert(this->getExit()->end(), _exit->begin(), _exit->end());
 
-	std::vector<uml::Transition * > *  _incoming = obj.getIncoming();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _incoming = obj.getIncoming();
 	this->getIncoming()->insert(this->getIncoming()->end(), _incoming->begin(), _incoming->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Transition * > *  _outgoing = obj.getOutgoing();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Transition>>> _outgoing = obj.getOutgoing();
 	this->getOutgoing()->insert(this->getOutgoing()->end(), _outgoing->begin(), _outgoing->end());
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -79,17 +69,19 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -98,7 +90,7 @@ ecore::EObject *  ConnectionPointReferenceImpl::copy() const
 	return new ConnectionPointReferenceImpl(*this);
 }
 
-ecore::EClass* ConnectionPointReferenceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getConnectionPointReference();
 }
@@ -110,13 +102,13 @@ ecore::EClass* ConnectionPointReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectionPointReferenceImpl::entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectionPointReferenceImpl::exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -125,36 +117,36 @@ bool ConnectionPointReferenceImpl::exit_pseudostates(boost::any diagnostics,std:
 //*********************************
 // References
 //*********************************
-std::vector<uml::Pseudostate * > *  ConnectionPointReferenceImpl::getEntry() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> ConnectionPointReferenceImpl::getEntry() const
 {
-	
-	return m_entry;
+
+    return m_entry;
 }
 
 
-std::vector<uml::Pseudostate * > *  ConnectionPointReferenceImpl::getExit() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> ConnectionPointReferenceImpl::getExit() const
 {
-	
-	return m_exit;
+
+    return m_exit;
 }
 
 
-uml::State *  ConnectionPointReferenceImpl::getState() const
+std::shared_ptr<uml::State> ConnectionPointReferenceImpl::getState() const
 {
-	
-	return m_state;
+
+    return m_state;
 }
-void ConnectionPointReferenceImpl::setState(uml::State *  _state)
+void ConnectionPointReferenceImpl::setState(std::shared_ptr<uml::State> _state)
 {
-	m_state = _state;
+    m_state = _state;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ConnectionPointReferenceImpl::getOwner() const
+std::shared_ptr<uml::Element> ConnectionPointReferenceImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -163,9 +155,9 @@ uml::Element *  ConnectionPointReferenceImpl::getOwner() const
 
 	return _owner;
 }
-uml::Namespace *  ConnectionPointReferenceImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> ConnectionPointReferenceImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getContainer()!=nullptr)
 	{
@@ -178,14 +170,13 @@ uml::Namespace *  ConnectionPointReferenceImpl::getNamespace() const
 
 	return _namespace;
 }
-std::vector<uml::Element * > *  ConnectionPointReferenceImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConnectionPointReferenceImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 
 	return _ownedElement;
 }

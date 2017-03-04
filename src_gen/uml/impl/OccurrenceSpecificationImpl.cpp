@@ -13,30 +13,21 @@ using namespace uml;
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_toAfter == nullptr)
-	{
-		m_toAfter = new std::vector<uml::GeneralOrdering * >();
-	}
-	if( m_toBefore == nullptr)
-	{
-		m_toBefore = new std::vector<uml::GeneralOrdering * >();
-	}
+	m_toAfter.reset(new std::vector<std::shared_ptr<uml::GeneralOrdering>>());
+	m_toBefore.reset(new std::vector<std::shared_ptr<uml::GeneralOrdering>>());
 }
 
 OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
 {
-	if(m_toAfter!=nullptr)
-	{
-		delete(m_toAfter);
-	 	m_toAfter = nullptr;
-	}
-	if(m_toBefore!=nullptr)
-	{
-		delete(m_toBefore);
-	 	m_toBefore = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete OccurrenceSpecification "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -49,10 +40,10 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Lifeline * > *  _covered = obj.getCovered();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
 	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
@@ -61,35 +52,37 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::GeneralOrdering * > *  _toAfter = obj.getToAfter();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _toAfter = obj.getToAfter();
 	this->getToAfter()->insert(this->getToAfter()->end(), _toAfter->begin(), _toAfter->end());
 
-	std::vector<uml::GeneralOrdering * > *  _toBefore = obj.getToBefore();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _toBefore = obj.getToBefore();
 	this->getToBefore()->insert(this->getToBefore()->end(), _toBefore->begin(), _toBefore->end());
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::GeneralOrdering * 	_generalOrdering : *obj.getGeneralOrdering())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(dynamic_cast<uml::GeneralOrdering * >(_generalOrdering->copy()));
+		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -98,7 +91,7 @@ ecore::EObject *  OccurrenceSpecificationImpl::copy() const
 	return new OccurrenceSpecificationImpl(*this);
 }
 
-ecore::EClass* OccurrenceSpecificationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getOccurrenceSpecification();
 }
@@ -112,7 +105,7 @@ ecore::EClass* OccurrenceSpecificationImpl::eStaticClass() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(uml::Lifeline *  value) 
+void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -121,40 +114,37 @@ void OccurrenceSpecificationImpl::setCovered(uml::Lifeline *  value)
 //*********************************
 // References
 //*********************************
-std::vector<uml::GeneralOrdering * > *  OccurrenceSpecificationImpl::getToAfter() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> OccurrenceSpecificationImpl::getToAfter() const
 {
-	
-	return m_toAfter;
+
+    return m_toAfter;
 }
 
 
-std::vector<uml::GeneralOrdering * > *  OccurrenceSpecificationImpl::getToBefore() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> OccurrenceSpecificationImpl::getToBefore() const
 {
-	
-	return m_toBefore;
+
+    return m_toBefore;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  OccurrenceSpecificationImpl::getOwnedElement() const
+std::shared_ptr<uml::Element> OccurrenceSpecificationImpl::getOwner() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	std::vector<uml::Element * > *  generalOrdering = (std::vector<uml::Element * > * ) getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	if(getNamespace()!=nullptr)
+	{
+		_owner = getNamespace();
+	}
 
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-
-	return _ownedElement;
+	return _owner;
 }
-uml::Namespace *  OccurrenceSpecificationImpl::getNamespace() const
+std::shared_ptr<uml::Namespace> OccurrenceSpecificationImpl::getNamespace() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
 	if(getEnclosingInteraction()!=nullptr)
 	{
@@ -167,16 +157,17 @@ uml::Namespace *  OccurrenceSpecificationImpl::getNamespace() const
 
 	return _namespace;
 }
-uml::Element *  OccurrenceSpecificationImpl::getOwner() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> OccurrenceSpecificationImpl::getOwnedElement() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
+	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
+	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _owner;
+	return _ownedElement;
 }
 
 

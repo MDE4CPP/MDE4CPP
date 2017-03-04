@@ -13,6 +13,10 @@ using namespace uml;
 TimeConstraintImpl::TimeConstraintImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ TimeConstraintImpl::TimeConstraintImpl()
 
 TimeConstraintImpl::~TimeConstraintImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TimeConstraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,19 +40,18 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::Element * > *  _constrainedElement = obj.getConstrainedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _constrainedElement = obj.getConstrainedElement();
 	this->getConstrainedElement()->insert(this->getConstrainedElement()->end(), _constrainedElement->begin(), _constrainedElement->end());
 
 	m_context  = obj.getContext();
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -55,21 +61,23 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification = dynamic_cast<uml::ValueSpecification * >(obj.getSpecification()->copy());
+		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
 	}
 }
 
@@ -78,7 +86,7 @@ ecore::EObject *  TimeConstraintImpl::copy() const
 	return new TimeConstraintImpl(*this);
 }
 
-ecore::EClass* TimeConstraintImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getTimeConstraint();
 }
@@ -99,7 +107,7 @@ bool TimeConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -112,20 +120,20 @@ bool TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::
 //*********************************
 // Union Getter
 //*********************************
-uml::Namespace *  TimeConstraintImpl::getNamespace() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TimeConstraintImpl::getOwnedElement() const
 {
-	uml::Namespace *  _namespace =   nullptr ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	if(getContext()!=nullptr)
-	{
-		_namespace = getContext();
-	}
+	_ownedElement->push_back(getNameExpression());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
+	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	_ownedElement->push_back(getSpecification());
 
-	return _namespace;
+	return _ownedElement;
 }
-uml::Element *  TimeConstraintImpl::getOwner() const
+std::shared_ptr<uml::Element> TimeConstraintImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -138,17 +146,16 @@ uml::Element *  TimeConstraintImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::Element * > *  TimeConstraintImpl::getOwnedElement() const
+std::shared_ptr<uml::Namespace> TimeConstraintImpl::getNamespace() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
+	if(getContext()!=nullptr)
+	{
+		_namespace = getContext();
+	}
 
-	_ownedElement->push_back(getSpecification());
-
-	return _ownedElement;
+	return _namespace;
 }
 
 

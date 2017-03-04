@@ -13,75 +13,25 @@ using namespace uml;
 NamespaceImpl::NamespaceImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_elementImport == nullptr)
-	{
-		m_elementImport = new std::vector<uml::ElementImport * >();
-	}
-	if( m_importedMember == nullptr)
-	{
-		m_importedMember = new std::vector<uml::PackageableElement * >();
-	}
-	if( m_member == nullptr)
-	{
-		m_member = new std::vector<uml::NamedElement * >();
-	}
-	if( m_ownedMember == nullptr)
-	{
-		m_ownedMember = new std::vector<uml::NamedElement * >();
-	}
-	if( m_ownedRule == nullptr)
-	{
-		m_ownedRule = new std::vector<uml::Constraint * >();
-	}
-	if( m_packageImport == nullptr)
-	{
-		m_packageImport = new std::vector<uml::PackageImport * >();
-	}
+	m_elementImport.reset(new std::vector<std::shared_ptr<uml::ElementImport>>());
+	m_importedMember.reset(new std::vector<std::shared_ptr<uml::PackageableElement>>());
+	m_member.reset(new std::vector<std::shared_ptr<uml::NamedElement>>());
+	m_ownedMember.reset(new std::vector<std::shared_ptr<uml::NamedElement>>());
+	m_ownedRule.reset(new std::vector<std::shared_ptr<uml::Constraint>>());
+	m_packageImport.reset(new std::vector<std::shared_ptr<uml::PackageImport>>());
 }
 
 NamespaceImpl::~NamespaceImpl()
 {
-	if(m_ownedRule!=nullptr)
-	{
-		for(auto c :*m_ownedRule)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_elementImport!=nullptr)
-	{
-		for(auto c :*m_elementImport)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_packageImport!=nullptr)
-	{
-		for(auto c :*m_packageImport)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_ownedMember!=nullptr)
-	{
-		delete(m_ownedMember);
-	 	m_ownedMember = nullptr;
-	}
-	if(m_importedMember!=nullptr)
-	{
-		delete(m_importedMember);
-	 	m_importedMember = nullptr;
-	}
-	if(m_member!=nullptr)
-	{
-		delete(m_member);
-	 	m_member = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Namespace "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -94,53 +44,55 @@ NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::PackageableElement * > *  _importedMember = obj.getImportedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _importedMember = obj.getImportedMember();
 	this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
 
-	std::vector<uml::NamedElement * > *  _member = obj.getMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member = obj.getMember();
 	this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
-	delete(_member);
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
-	std::vector<uml::NamedElement * > *  _ownedMember = obj.getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember = obj.getOwnedMember();
 	this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
-	delete(_ownedMember);
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(uml::ElementImport * 	_elementImport : *obj.getElementImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> _elementImportList = obj.getElementImport();
+	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->push_back(dynamic_cast<uml::ElementImport * >(_elementImport->copy()));
+		this->getElementImport()->push_back(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	for(uml::Constraint * 	_ownedRule : *obj.getOwnedRule())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _ownedRuleList = obj.getOwnedRule();
+	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->push_back(dynamic_cast<uml::Constraint * >(_ownedRule->copy()));
+		this->getOwnedRule()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
 	}
-	for(uml::PackageImport * 	_packageImport : *obj.getPackageImport())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> _packageImportList = obj.getPackageImport();
+	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->push_back(dynamic_cast<uml::PackageImport * >(_packageImport->copy()));
+		this->getPackageImport()->push_back(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
 	}
 }
 
@@ -149,7 +101,7 @@ ecore::EObject *  NamespaceImpl::copy() const
 	return new NamespaceImpl(*this);
 }
 
-ecore::EClass* NamespaceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getNamespace();
 }
@@ -161,67 +113,67 @@ ecore::EClass* NamespaceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamespaceImpl::cannot_import_ownedMembers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::cannot_import_self(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamespaceImpl::cannot_import_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::ElementImport *  NamespaceImpl::createElementImport(uml::PackageableElement *  element,VisibilityKind visibility) 
+std::shared_ptr<uml::ElementImport>  NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement>  element,VisibilityKind visibility) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::PackageImport *  NamespaceImpl::createPackageImport(uml::Package *  package_,VisibilityKind visibility) 
+std::shared_ptr<uml::PackageImport>  NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package>  package_,VisibilityKind visibility) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::PackageableElement * > *  NamespaceImpl::excludeCollisions(std::vector<uml::PackageableElement * > *  imps) 
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> NamespaceImpl::excludeCollisions(std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>>  imps) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::PackageableElement * > *  NamespaceImpl::getImportedElements() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> NamespaceImpl::getImportedElements() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::PackageableElement * > *  NamespaceImpl::getImportedMembers() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> NamespaceImpl::getImportedMembers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Package * > *  NamespaceImpl::getImportedPackages() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Package>>> NamespaceImpl::getImportedPackages() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<std::string> *  NamespaceImpl::getNamesOfMember(uml::NamedElement *  element) 
+std::shared_ptr<std::vector<std::shared_ptr<std::string>>> NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement>  element) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::NamedElement * > *  NamespaceImpl::getOwnedMembers() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> NamespaceImpl::getOwnedMembers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::PackageableElement * > *  NamespaceImpl::importMembers(std::vector<uml::PackageableElement * > *  imps) 
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> NamespaceImpl::importMembers(std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>>  imps) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -233,7 +185,7 @@ bool NamespaceImpl::membersAreDistinguishable()
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::members_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool NamespaceImpl::members_distinguishable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -242,17 +194,17 @@ bool NamespaceImpl::members_distinguishable(boost::any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
-std::vector<uml::ElementImport * > *  NamespaceImpl::getElementImport() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> NamespaceImpl::getElementImport() const
 {
-	
-	return m_elementImport;
+
+    return m_elementImport;
 }
 
 
-std::vector<uml::PackageableElement * > *  NamespaceImpl::getImportedMember() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> NamespaceImpl::getImportedMember() const
 {
-	
-	return m_importedMember;
+
+    return m_importedMember;
 }
 
 
@@ -262,47 +214,62 @@ std::vector<uml::PackageableElement * > *  NamespaceImpl::getImportedMember() co
 
 
 
-std::vector<uml::Constraint * > *  NamespaceImpl::getOwnedRule() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> NamespaceImpl::getOwnedRule() const
 {
-	
-	return m_ownedRule;
+
+    return m_ownedRule;
 }
 
 
-std::vector<uml::PackageImport * > *  NamespaceImpl::getPackageImport() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> NamespaceImpl::getPackageImport() const
 {
-	
-	return m_packageImport;
+
+    return m_packageImport;
 }
 
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  NamespaceImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> NamespaceImpl::getOwnedMember() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::vector<uml::Element * > *  elementImport = (std::vector<uml::Element * > * ) getElementImport();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> ownedRule = getOwnedRule();
+	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
+
+	return _ownedMember;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> NamespaceImpl::getMember() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> importedMember = getImportedMember();
+	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
+	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
+
+	return _member;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> NamespaceImpl::getOwnedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> elementImport = getElementImport();
 	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
-
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
-	std::vector<uml::Element * > *  ownedMember = (std::vector<uml::Element * > * ) getOwnedMember();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
 	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
-	std::vector<uml::Element * > *  packageImport = (std::vector<uml::Element * > * ) getPackageImport();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> packageImport = getPackageImport();
 	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
-
 
 	return _ownedElement;
 }
-uml::Element *  NamespaceImpl::getOwner() const
+std::shared_ptr<uml::Element> NamespaceImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getNamespace()!=nullptr)
 	{
@@ -310,30 +277,6 @@ uml::Element *  NamespaceImpl::getOwner() const
 	}
 
 	return _owner;
-}
-std::vector<uml::NamedElement * > *  NamespaceImpl::getOwnedMember() const
-{
-	std::vector<uml::NamedElement * > *  _ownedMember =  new std::vector<uml::NamedElement * >() ;
-	
-	std::vector<uml::NamedElement * > *  ownedRule = (std::vector<uml::NamedElement * > * ) getOwnedRule();
-	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
-
-
-	return _ownedMember;
-}
-std::vector<uml::NamedElement * > *  NamespaceImpl::getMember() const
-{
-	std::vector<uml::NamedElement * > *  _member =  new std::vector<uml::NamedElement * >() ;
-	
-	std::vector<uml::NamedElement * > *  importedMember = (std::vector<uml::NamedElement * > * ) getImportedMember();
-	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
-
-	std::vector<uml::NamedElement * > *  ownedMember = (std::vector<uml::NamedElement * > * ) getOwnedMember();
-	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
-
-	delete(ownedMember);
-
-	return _member;
 }
 
 

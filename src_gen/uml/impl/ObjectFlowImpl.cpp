@@ -13,6 +13,11 @@ using namespace uml;
 ObjectFlowImpl::ObjectFlowImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +26,9 @@ ObjectFlowImpl::ObjectFlowImpl()
 
 ObjectFlowImpl::~ObjectFlowImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectFlow "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,14 +46,13 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj)
 	
 	m_activity  = obj.getActivity();
 
-	std::vector<uml::Dependency * > *  _clientDependency = obj.getClientDependency();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
 	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::vector<uml::ActivityGroup * > *  _inGroup = obj.getInGroup();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup = obj.getInGroup();
 	this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
-	delete(_inGroup);
 
-	std::vector<uml::ActivityPartition * > *  _inPartition = obj.getInPartition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> _inPartition = obj.getInPartition();
 	this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
 
 	m_inStructuredNode  = obj.getInStructuredNode();
@@ -54,22 +61,19 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
-	std::vector<uml::ActivityEdge * > *  _redefinedEdge = obj.getRedefinedEdge();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _redefinedEdge = obj.getRedefinedEdge();
 	this->getRedefinedEdge()->insert(this->getRedefinedEdge()->end(), _redefinedEdge->begin(), _redefinedEdge->end());
 
-	std::vector<uml::RedefinableElement * > *  _redefinedElement = obj.getRedefinedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
 	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-	delete(_redefinedElement);
 
-	std::vector<uml::Classifier * > *  _redefinitionContext = obj.getRedefinitionContext();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
 	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
-	delete(_redefinitionContext);
 
 	m_selection  = obj.getSelection();
 
@@ -81,25 +85,27 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getGuard()!=nullptr)
 	{
-		m_guard = dynamic_cast<uml::ValueSpecification * >(obj.getGuard()->copy());
+		m_guard.reset(dynamic_cast<uml::ValueSpecification*>(obj.getGuard()->copy()));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression = dynamic_cast<uml::StringExpression * >(obj.getNameExpression()->copy());
+		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getWeight()!=nullptr)
 	{
-		m_weight = dynamic_cast<uml::ValueSpecification * >(obj.getWeight()->copy());
+		m_weight.reset(dynamic_cast<uml::ValueSpecification*>(obj.getWeight()->copy()));
 	}
 }
 
@@ -108,7 +114,7 @@ ecore::EObject *  ObjectFlowImpl::copy() const
 	return new ObjectFlowImpl(*this);
 }
 
-ecore::EClass* ObjectFlowImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getObjectFlow();
 }
@@ -139,49 +145,49 @@ bool ObjectFlowImpl::getIsMultireceive() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::target(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ObjectFlowImpl::transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -190,32 +196,32 @@ bool ObjectFlowImpl::transformation_behavior(boost::any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
-uml::Behavior *  ObjectFlowImpl::getSelection() const
+std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
 {
-	
-	return m_selection;
+
+    return m_selection;
 }
-void ObjectFlowImpl::setSelection(uml::Behavior *  _selection)
+void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
-	m_selection = _selection;
+    m_selection = _selection;
 }
 
-uml::Behavior *  ObjectFlowImpl::getTransformation() const
+std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
 {
-	
-	return m_transformation;
+
+    return m_transformation;
 }
-void ObjectFlowImpl::setTransformation(uml::Behavior *  _transformation)
+void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)
 {
-	m_transformation = _transformation;
+    m_transformation = _transformation;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-uml::Element *  ObjectFlowImpl::getOwner() const
+std::shared_ptr<uml::Element> ObjectFlowImpl::getOwner() const
 {
-	uml::Element *  _owner =   nullptr ;
+	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
 	if(getActivity()!=nullptr)
 	{
@@ -232,39 +238,36 @@ uml::Element *  ObjectFlowImpl::getOwner() const
 
 	return _owner;
 }
-std::vector<uml::RedefinableElement * > *  ObjectFlowImpl::getRedefinedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> ObjectFlowImpl::getInGroup() const
 {
-	std::vector<uml::RedefinableElement * > *  _redefinedElement =  new std::vector<uml::RedefinableElement * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup(new std::vector<std::shared_ptr<uml::ActivityGroup>>()) ;
 	
-	std::vector<uml::RedefinableElement * > *  redefinedEdge = (std::vector<uml::RedefinableElement * > * ) getRedefinedEdge();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
-
-
-	return _redefinedElement;
-}
-std::vector<uml::ActivityGroup * > *  ObjectFlowImpl::getInGroup() const
-{
-	std::vector<uml::ActivityGroup * > *  _inGroup =  new std::vector<uml::ActivityGroup * >() ;
-	
-	std::vector<uml::ActivityGroup * > *  inPartition = (std::vector<uml::ActivityGroup * > * ) getInPartition();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> inPartition = getInPartition();
 	_inGroup->insert(_inGroup->end(), inPartition->begin(), inPartition->end());
-
 	_inGroup->push_back(getInStructuredNode());
 
 	return _inGroup;
 }
-std::vector<uml::Element * > *  ObjectFlowImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ObjectFlowImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getGuard());
 	_ownedElement->push_back(getNameExpression());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getWeight());
 
 	return _ownedElement;
+}
+std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> ObjectFlowImpl::getRedefinedElement() const
+{
+	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
+	
+	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> redefinedEdge = getRedefinedEdge();
+	_redefinedElement->insert(_redefinedElement->end(), redefinedEdge->begin(), redefinedEdge->end());
+
+	return _redefinedElement;
 }
 
 

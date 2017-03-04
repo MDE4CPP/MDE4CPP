@@ -22,10 +22,11 @@
 #include "impl/PropertyImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class ExtensionEndImpl :virtual public PropertyImpl, virtual public ExtensionEnd
+	class ExtensionEndImpl :virtual public PropertyImpl, virtual public ExtensionEnd 
 	{
 		public: 
 			ExtensionEndImpl(const ExtensionEndImpl & obj);
@@ -48,12 +49,12 @@ namespace uml
 			/*!
 			 The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The aggregation of an ExtensionEnd is composite.
 			self.aggregation = AggregationKind::composite */ 
-			virtual bool aggregation(boost::any diagnostics,std::map <   boost::any, boost::any > * context)  ;
+			virtual bool aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -71,24 +72,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getRedefinitionContext() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::Classifier * > *  getFeaturingClassifier() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getFeaturingClassifier() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ;/*!
+			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Namespace *  getNamespace() const ;/*!
+			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::vector<uml::RedefinableElement * > *  getRedefinedElement() const ; 
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -97,7 +98,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_EXTENSIONENDEXTENSIONENDIMPL_HPP */

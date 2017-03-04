@@ -13,6 +13,10 @@ using namespace uml;
 ConnectorEndImpl::ConnectorEndImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -22,6 +26,9 @@ ConnectorEndImpl::ConnectorEndImpl()
 
 ConnectorEndImpl::~ConnectorEndImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConnectorEnd "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,9 +44,8 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj)
 	
 	m_definingEnd  = obj.getDefiningEnd();
 
-	std::vector<uml::Element * > *  _ownedElement = obj.getOwnedElement();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
 	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
-	delete(_ownedElement);
 
 	m_owner  = obj.getOwner();
 
@@ -49,21 +55,23 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj)
 
 
 	//clone containt lists
-	for(ecore::EAnnotation * 	_eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(dynamic_cast<ecore::EAnnotation * >(_eAnnotations->copy()));
+		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue = dynamic_cast<uml::ValueSpecification * >(obj.getLowerValue()->copy());
+		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
-	for(uml::Comment * 	_ownedComment : *obj.getOwnedComment())
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(dynamic_cast<uml::Comment * >(_ownedComment->copy()));
+		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue = dynamic_cast<uml::ValueSpecification * >(obj.getUpperValue()->copy());
+		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
 }
 
@@ -72,7 +80,7 @@ ecore::EObject *  ConnectorEndImpl::copy() const
 	return new ConnectorEndImpl(*this);
 }
 
-ecore::EClass* ConnectorEndImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 {
 	return UmlPackageImpl::eInstance()->getConnectorEnd();
 }
@@ -86,25 +94,25 @@ ecore::EClass* ConnectorEndImpl::eStaticClass() const
 //*********************************
 
 
-bool ConnectorEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorEndImpl::part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorEndImpl::role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any > * context) 
+bool ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -113,44 +121,43 @@ bool ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   b
 //*********************************
 // References
 //*********************************
-uml::Property *  ConnectorEndImpl::getDefiningEnd() const
+std::shared_ptr<uml::Property> ConnectorEndImpl::getDefiningEnd() const
 {
-	
-	return m_definingEnd;
+
+    return m_definingEnd;
 }
 
 
-uml::Property *  ConnectorEndImpl::getPartWithPort() const
+std::shared_ptr<uml::Property> ConnectorEndImpl::getPartWithPort() const
 {
-	
-	return m_partWithPort;
+
+    return m_partWithPort;
 }
-void ConnectorEndImpl::setPartWithPort(uml::Property *  _partWithPort)
+void ConnectorEndImpl::setPartWithPort(std::shared_ptr<uml::Property> _partWithPort)
 {
-	m_partWithPort = _partWithPort;
+    m_partWithPort = _partWithPort;
 }
 
-uml::ConnectableElement *  ConnectorEndImpl::getRole() const
+std::shared_ptr<uml::ConnectableElement> ConnectorEndImpl::getRole() const
 {
-	//assert(m_role);
-	return m_role;
+//assert(m_role);
+    return m_role;
 }
-void ConnectorEndImpl::setRole(uml::ConnectableElement *  _role)
+void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 {
-	m_role = _role;
+    m_role = _role;
 }
 
 //*********************************
 // Union Getter
 //*********************************
-std::vector<uml::Element * > *  ConnectorEndImpl::getOwnedElement() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConnectorEndImpl::getOwnedElement() const
 {
-	std::vector<uml::Element * > *  _ownedElement =  new std::vector<uml::Element * >() ;
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
 	_ownedElement->push_back(getLowerValue());
-	std::vector<uml::Element * > *  ownedComment = (std::vector<uml::Element * > * ) getOwnedComment();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
 	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-
 	_ownedElement->push_back(getUpperValue());
 
 	return _ownedElement;

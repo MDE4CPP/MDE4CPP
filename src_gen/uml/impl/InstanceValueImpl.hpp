@@ -22,10 +22,11 @@
 #include "impl/ValueSpecificationImpl.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
-	class InstanceValueImpl :virtual public ValueSpecificationImpl, virtual public InstanceValue
+	class InstanceValueImpl :virtual public ValueSpecificationImpl, virtual public InstanceValue 
 	{
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);
@@ -58,13 +59,12 @@ namespace uml
 			/*!
 			 The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p> */
-			virtual uml::InstanceSpecification *  getInstance() const ;
+			virtual std::shared_ptr<uml::InstanceSpecification> getInstance() const ;
 			
 			/*!
 			 The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p> */
-			virtual void setInstance(uml::InstanceSpecification *  _instance) ;
-			
+			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance) ;
 							
 			
 			//*********************************
@@ -73,10 +73,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::vector<uml::Element * > *  getOwnedElement() const ;/*!
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual uml::Element *  getOwner() const ; 
+			virtual std::shared_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -85,7 +85,7 @@ namespace uml
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: UML_INSTANCEVALUEINSTANCEVALUEIMPL_HPP */
