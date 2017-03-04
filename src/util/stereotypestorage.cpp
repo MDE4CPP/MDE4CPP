@@ -20,39 +20,41 @@ StereotypeStorage * StereotypeStorage::eInstance()
     return m_instance;
 }
 
-void StereotypeStorage::applyStereotype(uml::Element *_element, uml::Stereotype *_stereotype)
+void StereotypeStorage::applyStereotype(uml::Element *_element, std::shared_ptr<uml::Stereotype> _stereotype)
 {
-       if(isStereotypeApplied(_element,_stereotype))
-       {
-           return;
-       }
+	if(isStereotypeApplied(_element,_stereotype))
+	{
+		return;
+	}
+   
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> propList = _stereotype->getOwnedAttribute();
+	
+	//set the base property of the stereotype to this
+	for(std::shared_ptr<uml::Property> prop : *propList)
+	{
+		if (prop != nullptr)
+		{
+			//check if it is an extension association
+			if(prop->getAssociation()->eClass()==uml::UmlPackage::eInstance()->getExtension())
+			{
+				//check type of the property
+				if(_element->eClass()->getName()==prop->getType()->getName())
+				{
+					std::cout <<"Set Base Property "<< prop->getQualifiedName() << std::endl;
+					//set Base
+					_stereotype->set(prop,this);
+				}
+			}
+		}
+	}
 
-       auto propList = _stereotype->getOwnedAttribute();
-
-       //set the base property of the stereotype to this
-       for(uml::Property * prop : *propList)
-       {
-           //check if it is an extension association
-           if(prop->getAssociation()->eClass()==uml::UmlPackage::eInstance()->getExtension())
-           {
-               //check type of the property
-               if(_element->eClass()->getName()==prop->getType()->getName())
-               {
-                   std::cout <<"Set Base Property "<< prop->getQualifiedName() << std::endl;
-                   //set Base
-                  _stereotype->set(prop,this);
-               }
-           }
-       }
-
-
-       m_stereotypeApplicationMap.insert(std::pair<uml::Element *,uml::Stereotype *>(_element,_stereotype));
-       std::cout<< "Stereotype applyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;
+	m_stereotypeApplicationMap.insert(std::pair<uml::Element *,std::shared_ptr<uml::Stereotype>>(_element,_stereotype));
+	std::cout<< "Stereotype applyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;
 }
 
-uml::Stereotype *StereotypeStorage::getAppliedStereotype(uml::Element * _element, std::string qualifiedName)
+std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(uml::Element * _element, std::string qualifiedName)
 {
-    for( uml::Stereotype * s : getAppliedStereotypes(_element) )
+    for( std::shared_ptr<uml::Stereotype> s : *getAppliedStereotypes(_element) )
     {
         if(s->getMetaClass()->getQualifiedName()==qualifiedName)
         {
@@ -63,22 +65,22 @@ uml::Stereotype *StereotypeStorage::getAppliedStereotype(uml::Element * _element
     return nullptr;
 }
 
-std::vector<uml::Stereotype *> StereotypeStorage::getAppliedStereotypes(uml::Element * _element)
+std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> StereotypeStorage::getAppliedStereotypes(uml::Element * _element)
 {
-    std::vector<uml::Stereotype *> vector;
-    std::map<uml::Element *,uml::Stereotype *>::iterator it = m_stereotypeApplicationMap.find(_element);
+    std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> vector(new std::vector<std::shared_ptr<uml::Stereotype>>());
+    std::map<uml::Element *, std::shared_ptr<uml::Stereotype>>::iterator it = m_stereotypeApplicationMap.find(_element);
     while (it != m_stereotypeApplicationMap.end())
     {
-        vector.push_back(it->second);
+        vector->push_back(it->second);
     }
     return vector;
 }
 
-bool StereotypeStorage::isStereotypeApplied(uml::Element * _element,uml::Stereotype *_stereotype)
+bool StereotypeStorage::isStereotypeApplied(uml::Element * _element, std::shared_ptr<uml::Stereotype> _stereotype)
 {
-    for(uml::Stereotype * s : getAppliedStereotypes(_element))
+    for(std::shared_ptr<uml::Stereotype> s : *getAppliedStereotypes(_element))
     {
-        if(s->getMetaClass()==_stereotype)
+        if(s->getMetaClass() == _stereotype)
         {
             //an stereotype instance exists for this element
             return true;
@@ -88,7 +90,7 @@ bool StereotypeStorage::isStereotypeApplied(uml::Element * _element,uml::Stereot
     return false;
 }
 
-void StereotypeStorage::unapplyStereotype(uml::Element *_element, uml::Stereotype *_stereotype)
+void StereotypeStorage::unapplyStereotype(uml::Element *_element, std::shared_ptr<uml::Stereotype> _stereotype)
 {
     if(isStereotypeApplied(_element,_stereotype))
     {
@@ -98,9 +100,6 @@ void StereotypeStorage::unapplyStereotype(uml::Element *_element, uml::Stereotyp
 
 }
 
-
 StereotypeStorage::StereotypeStorage()
 {
-
-
 }

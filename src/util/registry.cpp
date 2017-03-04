@@ -19,12 +19,12 @@ Registry* Registry::eInstance()
     return m_instance;
 }
 
- ecore::EPackage* Registry::getEPackage(std::string nsURI)
+std::shared_ptr<ecore::EPackage> Registry::getEPackage(std::string nsURI)
 {
     return m_packageMap[nsURI];
 }
 
- ecore::EFactory* Registry::getEFactory(std::string nsURI)
+std::shared_ptr<ecore::EFactory> Registry::getEFactory(std::string nsURI)
 {
     if(m_packageMap[nsURI])
     {
@@ -33,7 +33,7 @@ Registry* Registry::eInstance()
     return nullptr;
 }
 
-void Registry::put(std::string nsURI,  ecore::EPackage * package)
+void Registry::put(std::string nsURI,  std::shared_ptr<ecore::EPackage> package)
 {
-    m_packageMap.insert(std::pair<std::string, ecore::EPackage *>(nsURI,package));
+    m_packageMap.insert(std::pair<std::string, std::shared_ptr<ecore::EPackage>>(nsURI,package));
 }
