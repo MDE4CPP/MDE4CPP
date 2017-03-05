@@ -42,7 +42,7 @@ ecore::EObject* TypesFactoryImpl::create(ecore::EClass* _class) const
 }
 
 
-TypesPackage * TypesFactoryImpl::getTypesPackage() const
+std::shared_ptr<TypesPackage> TypesFactoryImpl::getTypesPackage() const
 {
 	return TypesPackage::eInstance();
 }

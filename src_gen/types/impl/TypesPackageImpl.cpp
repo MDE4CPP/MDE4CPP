@@ -19,37 +19,17 @@ bool TypesPackageImpl::isInited = false;
 
 TypesPackageImpl::TypesPackageImpl()
 {
-	setEFactoryInstance(TypesFactory::eInstance());
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( TypesFactory::eInstance()));
 }
 
 TypesPackageImpl::~TypesPackageImpl()
 {
 	
-	if (booleanEDataType != nullptr)
-	{
-		delete(booleanEDataType);
-		booleanEDataType = nullptr;
-	}
-	if (integerEDataType != nullptr)
-	{
-		delete(integerEDataType);
-		integerEDataType = nullptr;
-	}
-	if (realEDataType != nullptr)
-	{
-		delete(realEDataType);
-		realEDataType = nullptr;
-	}
-	if (stringEDataType != nullptr)
-	{
-		delete(stringEDataType);
-		stringEDataType = nullptr;
-	}
-	if (unlimitedNaturalEDataType != nullptr)
-	{
-		delete(unlimitedNaturalEDataType);
-		unlimitedNaturalEDataType = nullptr;
-	}
+	booleanEDataType.reset();
+	integerEDataType.reset();
+	realEDataType.reset();
+	stringEDataType.reset();
+	unlimitedNaturalEDataType.reset();
 	
 }
 
@@ -57,10 +37,10 @@ TypesPackage* TypesPackageImpl::create()
 {
 	if (isInited)
 	{
-		return TypesPackage::eInstance();
+		return TypesPackage::eInstance().get();
 	}
 	isInited = true;
-	
+	 
     // Obtain or create package and create package meta-data objects
     TypesPackageImpl * metaModelPackage = new TypesPackageImpl();
 	metaModelPackage->createPackageContents();
@@ -105,7 +85,7 @@ void TypesPackageImpl::initializePackageContents()
 	
 	// Add supertypes to classes
 	
-	ecore::EOperation *  op;
+	std::shared_ptr<ecore::EOperation> op;
 
  	// Initialize classes and features; add operations and parameters
 
@@ -117,27 +97,27 @@ void TypesPackageImpl::initializePackageContents()
 	
 }
 
-ecore::EDataType* TypesPackageImpl::getBoolean() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getBoolean() const
 {
 	assert(booleanEDataType);
 	return booleanEDataType;
 }
-ecore::EDataType* TypesPackageImpl::getInteger() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getInteger() const
 {
 	assert(integerEDataType);
 	return integerEDataType;
 }
-ecore::EDataType* TypesPackageImpl::getReal() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getReal() const
 {
 	assert(realEDataType);
 	return realEDataType;
 }
-ecore::EDataType* TypesPackageImpl::getString() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getString() const
 {
 	assert(stringEDataType);
 	return stringEDataType;
 }
-ecore::EDataType* TypesPackageImpl::getUnlimitedNatural() const
+std::shared_ptr<ecore::EDataType> TypesPackageImpl::getUnlimitedNatural() const
 {
 	assert(unlimitedNaturalEDataType);
 	return unlimitedNaturalEDataType;

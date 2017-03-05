@@ -9,15 +9,15 @@ const std::string TypesPackage::eNS_URI ="http://www.eclipse.org/uml2/5.0.0/Type
 const std::string TypesPackage::eNS_PREFIX ="types";
 
 //Singleton 
-TypesPackage * TypesPackage::instance = nullptr;
+std::shared_ptr<TypesPackage> TypesPackage::instance;
 
-TypesPackage * TypesPackage::eInstance()
+std::shared_ptr<TypesPackage> TypesPackage::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = TypesPackageImpl::create();
-		dynamic_cast<TypesPackageImpl * >(instance)->init();
+		instance.reset(TypesPackageImpl::create());
+		std::dynamic_pointer_cast<TypesPackageImpl>(instance)->init();
 	}	
 	return instance;
 }

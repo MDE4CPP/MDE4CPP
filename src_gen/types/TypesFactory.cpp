@@ -4,15 +4,15 @@
 using namespace types;
 
 //static initialisation
-TypesFactory * TypesFactory::instance = nullptr;
+std::shared_ptr<TypesFactory> TypesFactory::instance;
 
-TypesFactory * TypesFactory::eInstance()
+std::shared_ptr<TypesFactory> TypesFactory::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = TypesFactoryImpl::create();
-		dynamic_cast<TypesFactoryImpl * >(instance)->init();
+		instance.reset(TypesFactoryImpl::create());
+		std::dynamic_pointer_cast<TypesFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

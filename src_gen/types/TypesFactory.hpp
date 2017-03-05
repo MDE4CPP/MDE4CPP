@@ -33,14 +33,14 @@ namespace types
 		
 			//Singleton Instance and Getter
 		private:
-			static TypesFactory* instance;
+			static std::shared_ptr<TypesFactory> instance;
 		public:
-			static TypesFactory* eInstance();
+			static std::shared_ptr<TypesFactory> eInstance();
 		
 			//Creator functions
 			
 			//Package
-			virtual TypesPackage* getTypesPackage() const = 0;
+			virtual std::shared_ptr<TypesPackage> getTypesPackage() const = 0;
 	};
 }
 #endif /* end of include guard: TYPESFACTORY_HPP */

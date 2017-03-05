@@ -39,7 +39,7 @@ namespace types
 			
 
 			//Package
-			virtual TypesPackage* getTypesPackage() const;
+			virtual std::shared_ptr<TypesPackage> getTypesPackage() const;
 
 		private:
 			static TypesFactory * create();

@@ -50,18 +50,18 @@ namespace types
 			static const int STRING = 3;
 			static const int UNLIMITEDNATURAL = 4;
 			
-			virtual ecore::EDataType* getBoolean() const = 0;
-			virtual ecore::EDataType* getInteger() const = 0;
-			virtual ecore::EDataType* getReal() const = 0;
-			virtual ecore::EDataType* getString() const = 0;
-			virtual ecore::EDataType* getUnlimitedNatural() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getBoolean() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getInteger() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getReal() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getString() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural() const = 0;
 			
 
 			//Singleton Instance and Getter
 			private:
-				static TypesPackage* instance;
+				static std::shared_ptr<TypesPackage> instance;
 			public:
-				static TypesPackage* eInstance();
+				static std::shared_ptr<TypesPackage> eInstance();
 	};
 }
 #endif /* end of include guard: TYPESPACKAGE_HPP */

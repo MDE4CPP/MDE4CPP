@@ -18,7 +18,6 @@
 
 #include "TypesPackage.hpp"
 #include "EcorePackage.hpp"
-
 #include "impl/EPackageImpl.hpp"
 
 namespace types
@@ -36,20 +35,20 @@ namespace types
 			virtual ~TypesPackageImpl();
 
 
-			virtual ecore::EDataType* getBoolean() const ;
-			virtual ecore::EDataType* getInteger() const ;
-			virtual ecore::EDataType* getReal() const ;
-			virtual ecore::EDataType* getString() const ;
-			virtual ecore::EDataType* getUnlimitedNatural() const ;
+			virtual std::shared_ptr<ecore::EDataType> getBoolean() const ;
+			virtual std::shared_ptr<ecore::EDataType> getInteger() const ;
+			virtual std::shared_ptr<ecore::EDataType> getReal() const ;
+			virtual std::shared_ptr<ecore::EDataType> getString() const ;
+			virtual std::shared_ptr<ecore::EDataType> getUnlimitedNatural() const ;
 			
 
 		private:
 			
-			ecore::EDataType* booleanEDataType = nullptr;
-			ecore::EDataType* integerEDataType = nullptr;
-			ecore::EDataType* realEDataType = nullptr;
-			ecore::EDataType* stringEDataType = nullptr;
-			ecore::EDataType* unlimitedNaturalEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> booleanEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> integerEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> realEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> stringEDataType = nullptr;
+			std::shared_ptr<ecore::EDataType> unlimitedNaturalEDataType = nullptr;
 			
 
 			friend class TypesPackage;
