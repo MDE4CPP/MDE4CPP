@@ -1,0 +1,50 @@
+description 'Models and generated source code collection'
+
+task buildEcoreModels(dependsOn: ['ecore:buildEcore', 'ecore:buildTypes', 'uml:buildUML', 'fuml:buildFUML', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all ecore models in debug and release'
+}
+tasks.getByPath('ecore:buildTypes').mustRunAfter tasks.getByPath('ecore:buildEcore')
+tasks.getByPath('uml:buildUML').mustRunAfter tasks.getByPath('ecore:buildTypes')
+tasks.getByPath('uml:buildUML').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
+tasks.getByPath('fuml:buildFUML').mustRunAfter tasks.getByPath('uml:buildUML')
+
+task buildEcoreModelsDebug(dependsOn: ['ecore:buildEcoreDebug', 'ecore:buildTypesDebug', 'uml:buildUMLDebug', 'fuml:buildFUMLDebug', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all ecore models in debug'
+}
+tasks.getByPath('ecore:buildTypesDebug').mustRunAfter tasks.getByPath('ecore:buildEcoreDebug')
+tasks.getByPath('uml:buildUMLDebug').mustRunAfter tasks.getByPath('ecore:buildTypesDebug')
+tasks.getByPath('uml:buildUMLDebug').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
+tasks.getByPath('fuml:buildFUMLDebug').mustRunAfter tasks.getByPath('uml:buildUMLDebug')
+
+task buildEcoreModelsRelease(dependsOn: ['ecore:buildEcoreRelease', 'ecore:buildTypesRelease', 'uml:buildUMLRelease', 'fuml:buildFUMLRelease', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all ecore models in release'
+}
+tasks.getByPath('ecore:buildTypesRelease').mustRunAfter tasks.getByPath('ecore:buildEcoreRelease')
+tasks.getByPath('uml:buildUMLRelease').mustRunAfter tasks.getByPath('ecore:buildTypesRelease')
+tasks.getByPath('uml:buildUMLRelease').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
+tasks.getByPath('fuml:buildFUMLRelease').mustRunAfter tasks.getByPath('uml:buildUMLRelease')
+
+
+task buildReflectionModels(dependsOn: ['common:buildPrimitivetypesReflection', 'common:buildEcoreReflection', 'common:buildUMLReflection', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all reflection models in debug and release'
+}
+tasks.getByPath('common:buildUMLReflection').mustRunAfter tasks.getByPath('common:buildPrimitivetypesReflection')
+tasks.getByPath('common:buildUMLReflection').mustRunAfter tasks.getByPath('common:buildEcoreReflection')
+
+task buildReflectionModelsDebug(dependsOn: ['common:buildPrimitivetypesReflectionDebug', 'common:buildEcoreReflectionDebug', 'common:buildUMLReflectionDebug', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all reflection models in debug'
+}
+tasks.getByPath('common:buildUMLReflectionDebug').mustRunAfter tasks.getByPath('common:buildPrimitivetypesReflectionDebug')
+tasks.getByPath('common:buildUMLReflectionDebug').mustRunAfter tasks.getByPath('common:buildEcoreReflectionDebug')
+
+task buildReflectionModelsRelease(dependsOn: ['common:buildPrimitivetypesReflectionRelease', 'common:buildEcoreReflectionRelease', 'common:buildUMLReflectionRelease', 'util:src:util:deliverUtil']) {
+	group 'Source'
+	description 'generate and compile all reflection models in release'
+}
+tasks.getByPath('common:buildUMLReflectionRelease').mustRunAfter tasks.getByPath('common:buildPrimitivetypesReflectionRelease')
+tasks.getByPath('common:buildUMLReflectionRelease').mustRunAfter tasks.getByPath('common:buildEcoreReflectionRelease')

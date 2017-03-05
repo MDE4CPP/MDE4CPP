@@ -1,0 +1,6 @@
+description 'Generator collection'
+
+task createAllGenerators (dependsOn: ['ecore4CPP:createEcore4CPP', 'UML4CPP:createUML4CPP', 'fUML4CPP:createFUML4CPP']) {
+	group 'Generators'
+	description 'create executable jars for all generators'
+}
