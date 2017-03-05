@@ -22,10 +22,11 @@
 #include "impl/SemanticStrategyImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class GetNextEventStrategyImpl :virtual public SemanticStrategyImpl, virtual public GetNextEventStrategy
+	class GetNextEventStrategyImpl :virtual public SemanticStrategyImpl, virtual public GetNextEventStrategy 
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
@@ -47,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::SignalInstance *  retrieveNextEvent(fUML::ObjectActivation *  objectActivation)  ;
+			virtual std::shared_ptr<fUML::SignalInstance>  retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  ;
 			
 			
 			
@@ -73,7 +74,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_GETNEXTEVENTSTRATEGYGETNEXTEVENTSTRATEGYIMPL_HPP */

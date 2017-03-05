@@ -13,6 +13,10 @@ using namespace fUML;
 FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl()
 
 FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FIFOGetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  FIFOGetNextEventStrategyImpl::copy() const
 	return new FIFOGetNextEventStrategyImpl(*this);
 }
 
-ecore::EClass* FIFOGetNextEventStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getFIFOGetNextEventStrategy();
 }

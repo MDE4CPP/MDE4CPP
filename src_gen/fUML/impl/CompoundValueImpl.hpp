@@ -27,10 +27,11 @@
 
 #include "StructuralFeature.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class CompoundValueImpl :virtual public StructuredValueImpl, virtual public CompoundValue
+	class CompoundValueImpl :virtual public StructuredValueImpl, virtual public CompoundValue 
 	{
 		public: 
 			CompoundValueImpl(const CompoundValueImpl & obj);
@@ -52,11 +53,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void removeFeatureValues(uml::Classifier *  classifier)  ;
+			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
@@ -64,15 +65,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::FeatureValue *  retrieveFeatureValue(uml::StructuralFeature *  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  retrieveFeatureValues()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  ;
 			
 			
 			
@@ -86,7 +87,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::FeatureValue * > *  getFeatureValues() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> getFeatureValues() const ;
 			
 							
 			
@@ -102,7 +103,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_COMPOUNDVALUECOMPOUNDVALUEIMPL_HPP */

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -68,7 +69,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool hasEqualValues(fUML::FeatureValue *  other)  = 0;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  = 0;
 			
 			
 			//*********************************
@@ -88,16 +89,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Value * > *  getValues() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const = 0;
 			
 			/*!
 			 */
-			virtual uml::StructuralFeature *  getFeature() const = 0;
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const = 0;
 			
 			/*!
 			 */
-			virtual void setFeature(uml::StructuralFeature *  _feature) = 0;
-			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) = 0;
 			
 
 		protected:
@@ -114,10 +114,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::Value * > *  m_values =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> m_values;
 			/*!
 			 */
-			uml::StructuralFeature *  m_feature =  nullptr ;
+			std::shared_ptr<uml::StructuralFeature> m_feature;
 			
 
 		public:

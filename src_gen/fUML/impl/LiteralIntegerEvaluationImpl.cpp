@@ -15,6 +15,10 @@ using namespace fUML;
 LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl()
 
 LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralIntegerEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  LiteralIntegerEvaluationImpl::copy() const
 	return new LiteralIntegerEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralIntegerEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralIntegerEvaluation();
 }
@@ -56,11 +63,11 @@ ecore::EClass* LiteralIntegerEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralIntegerEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralIntegerEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-	    uml::LiteralInteger * literal = dynamic_cast<uml::LiteralInteger*>(getSpecification());
-    IntegerValue * integerValue = FUMLFactory::eInstance()->createIntegerValue();
+	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
+	std::shared_ptr<IntegerValue> integerValue(FUMLFactory::eInstance()->createIntegerValue());
     integerValue ->setType(this->getType("Integer"));
     integerValue ->setValue(literal->getValue());
 

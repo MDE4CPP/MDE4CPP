@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -124,35 +125,35 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void addPinActivation(fUML::PinActivation *  pinActivation)  = 0;
+			virtual void addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::PinActivation *  retrievePinActivation(uml::Pin *  pin)  = 0;
+			virtual std::shared_ptr<fUML::PinActivation>  retrievePinActivation(std::shared_ptr<uml::Pin>  pin)  = 0;
 			
 			/*!
 			 */ 
-			virtual void putToken(uml::OutputPin *  pin,fUML::Value *  value)  = 0;
+			virtual void putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual void putTokens(uml::OutputPin *  pin,std::vector<fUML::Value * > *  values)  = 0;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getTokens(uml::InputPin *  pin)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getTokens(std::shared_ptr<uml::InputPin>  pin)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  takeTokens(uml::InputPin *  pin)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> takeTokens(std::shared_ptr<uml::InputPin>  pin)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool valueParticipatesInLink(fUML::Value *  value,fUML::Link *  link)  = 0;
+			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::BooleanValue *  makeBooleanValue(bool value)  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue>  makeBooleanValue(bool value)  = 0;
 			
 			/*!
 			 */ 
@@ -160,11 +161,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
@@ -176,7 +177,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  completeAction()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> completeAction()  = 0;
 			
 			/*!
 			 */ 
@@ -184,11 +185,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void addOutgoingEdge(fUML::ActivityEdgeInstance *  edge)  = 0;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(fUML::ActivityEdgeInstance *  edgeInstance)  = 0;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  = 0;
 			
 			
 			//*********************************
@@ -208,7 +209,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::PinActivation * > *  getPinActivation() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> getPinActivation() const = 0;
 			
 			
 
@@ -226,7 +227,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::PinActivation * > *  m_pinActivation =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> m_pinActivation;
 			
 
 		public:

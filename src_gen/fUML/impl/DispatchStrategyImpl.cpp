@@ -13,6 +13,10 @@ using namespace fUML;
 DispatchStrategyImpl::DispatchStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ DispatchStrategyImpl::DispatchStrategyImpl()
 
 DispatchStrategyImpl::~DispatchStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  DispatchStrategyImpl::copy() const
 	return new DispatchStrategyImpl(*this);
 }
 
-ecore::EClass* DispatchStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getDispatchStrategy();
 }
@@ -50,13 +57,13 @@ ecore::EClass* DispatchStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Execution *  DispatchStrategyImpl::dispatch(fUML::Object *  object,uml::Operation *  operation) 
+std::shared_ptr<fUML::Execution>  DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	    return object->getLocus()->getFactory()->createExecution(this->retrieveMethod(object,operation),object);
 }
 
-uml::Behavior *  DispatchStrategyImpl::retrieveMethod(fUML::Object *  object,uml::Operation *  operation) 
+std::shared_ptr<uml::Behavior>  DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	    return operation->getMethod()->front();

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -77,11 +78,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void removeFeatureValues(uml::Classifier *  classifier)  = 0;
+			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 
@@ -89,15 +90,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::FeatureValue *  retrieveFeatureValue(uml::StructuralFeature *  feature)  = 0;
+			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  = 0;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position)  = 0;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  retrieveFeatureValues()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  = 0;
 			
 			
 			//*********************************
@@ -109,7 +110,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::FeatureValue * > *  getFeatureValues() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> getFeatureValues() const = 0;
 			
 			
 
@@ -124,7 +125,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::FeatureValue * > *  m_featureValues =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> m_featureValues;
 			
 
 		public:

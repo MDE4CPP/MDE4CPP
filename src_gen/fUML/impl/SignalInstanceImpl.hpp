@@ -22,10 +22,11 @@
 #include "impl/CompoundValueImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class SignalInstanceImpl :virtual public CompoundValueImpl, virtual public SignalInstance
+	class SignalInstanceImpl :virtual public CompoundValueImpl, virtual public SignalInstance 
 	{
 		public: 
 			SignalInstanceImpl(const SignalInstanceImpl & obj);
@@ -57,12 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Signal *  getType() const ;
+			virtual std::shared_ptr<uml::Signal> getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(uml::Signal *  _type) ;
-			
+			virtual void setType(std::shared_ptr<uml::Signal> _type) ;
 							
 			
 			//*********************************
@@ -77,7 +77,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_SIGNALINSTANCESIGNALINSTANCEIMPL_HPP */

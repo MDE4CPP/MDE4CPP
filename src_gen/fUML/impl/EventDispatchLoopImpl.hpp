@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class EventDispatchLoopImpl :virtual public ecore::EObjectImpl,
-virtual public EventDispatchLoop
+virtual public EventDispatchLoop 
 	{
 		public: 
 			EventDispatchLoopImpl(const EventDispatchLoopImpl & obj);
@@ -71,7 +72,7 @@ virtual public EventDispatchLoop
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EVENTDISPATCHLOOPEVENTDISPATCHLOOPIMPL_HPP */

@@ -25,10 +25,11 @@
     #include "FUMLFactory.hpp"
     #include "Class.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ReferenceImpl :virtual public StructuredValueImpl, virtual public Reference
+	class ReferenceImpl :virtual public StructuredValueImpl, virtual public Reference 
 	{
 		public: 
 			ReferenceImpl(const ReferenceImpl & obj);
@@ -50,15 +51,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Execution *  dispatch(uml::Operation *  operation)  ;
+			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual void send(fUML::SignalInstance *  signalInstance)  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
@@ -66,27 +67,27 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
 			
 			/*!
 			 */ 
-			virtual fUML::FeatureValue *  retrieveFeatureValue(uml::StructuralFeature *  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  retrieveFeatureValues()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
@@ -104,12 +105,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Object *  getReferent() const ;
+			virtual std::shared_ptr<fUML::Object> getReferent() const ;
 			
 			/*!
 			 */
-			virtual void setReferent(fUML::Object *  _referent) ;
-			
+			virtual void setReferent(std::shared_ptr<fUML::Object> _referent) ;
 							
 			
 			//*********************************
@@ -124,7 +124,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_REFERENCEREFERENCEIMPL_HPP */

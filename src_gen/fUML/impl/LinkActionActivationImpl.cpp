@@ -13,6 +13,10 @@ using namespace fUML;
 LinkActionActivationImpl::LinkActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ LinkActionActivationImpl::LinkActionActivationImpl()
 
 LinkActionActivationImpl::~LinkActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,22 +40,23 @@ LinkActionActivationImpl::LinkActionActivationImpl(const LinkActionActivationImp
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -57,7 +65,7 @@ ecore::EObject *  LinkActionActivationImpl::copy() const
 	return new LinkActionActivationImpl(*this);
 }
 
-ecore::EClass* LinkActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLinkActionActivation();
 }
@@ -69,19 +77,19 @@ ecore::EClass* LinkActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(fUML::Link *  link,uml::LinkEndData *  endData) 
+bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::Association *  LinkActionActivationImpl::getAssociation() 
+std::shared_ptr<uml::Association>  LinkActionActivationImpl::getAssociation() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(fUML::Link *  link,std::vector<uml::LinkEndData * > *  endDataList) 
+bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>>  endDataList) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

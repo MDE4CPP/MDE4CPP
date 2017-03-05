@@ -25,10 +25,11 @@
 #include "ActivityParameterNode.hpp"
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ActivityParameterNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public ActivityParameterNodeActivation
+	class ActivityParameterNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public ActivityParameterNodeActivation 
 	{
 		public: 
 			ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj);
@@ -50,7 +51,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
@@ -80,7 +81,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYPARAMETERNODEACTIVATIONACTIVITYPARAMETERNODEACTIVATIONIMPL_HPP */

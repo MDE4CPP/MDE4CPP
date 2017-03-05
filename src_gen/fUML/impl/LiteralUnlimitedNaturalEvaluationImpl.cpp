@@ -15,6 +15,10 @@ using namespace fUML;
 LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl()
 
 LiteralUnlimitedNaturalEvaluationImpl::~LiteralUnlimitedNaturalEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralUnlimitedNaturalEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  LiteralUnlimitedNaturalEvaluationImpl::copy() const
 	return new LiteralUnlimitedNaturalEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralUnlimitedNaturalEvaluation();
 }
@@ -56,15 +63,14 @@ ecore::EClass* LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-	    uml::LiteralUnlimitedNatural * literal = dynamic_cast<uml::LiteralUnlimitedNatural*>(getSpecification());
-    UnlimitedNaturalValue * unlimitedNaturalValue = FUMLFactory::eInstance()->createUnlimitedNaturalValue();
-    unlimitedNaturalValue ->setType(this->getType("UnlimitedNatural"));
-    unlimitedNaturalValue ->setValue(literal->getValue());
-
-    return unlimitedNaturalValue  ;
+	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(getSpecification());
+	std::shared_ptr<UnlimitedNaturalValue> unlimitedNaturalValue(FUMLFactory::eInstance()->createUnlimitedNaturalValue());
+    unlimitedNaturalValue->setType(this->getType("UnlimitedNatural"));
+    unlimitedNaturalValue->setValue(literal->getValue());
+    return unlimitedNaturalValue;
 }
 
 //*********************************

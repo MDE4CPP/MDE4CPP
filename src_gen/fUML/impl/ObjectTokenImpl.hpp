@@ -23,10 +23,11 @@
 
  #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ObjectTokenImpl :virtual public TokenImpl, virtual public ObjectToken
+	class ObjectTokenImpl :virtual public TokenImpl, virtual public ObjectToken 
 	{
 		public: 
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
@@ -48,7 +49,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(fUML::Token *  other)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
 			
 			/*!
 			 */ 
@@ -66,12 +67,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Value *  getValue() const ;
+			virtual std::shared_ptr<fUML::Value> getValue() const ;
 			
 			/*!
 			 */
-			virtual void setValue(fUML::Value *  _value) ;
-			
+			virtual void setValue(std::shared_ptr<fUML::Value> _value) ;
 							
 			
 			//*********************************
@@ -86,7 +86,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OBJECTTOKENOBJECTTOKENIMPL_HPP */

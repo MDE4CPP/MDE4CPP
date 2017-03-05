@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -112,27 +113,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Execution *  dispatch(uml::Operation *  operation)  = 0;
+			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			/*!
 			 */ 
-			virtual void send(fUML::SignalInstance *  signalInstance)  = 0;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
-			virtual void _register(fUML::EventAccepter *  accepter)  = 0;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			/*!
 			 */ 
-			virtual void unregister(fUML::EventAccepter *  accepter)  = 0;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  = 0;
+			virtual std::shared_ptr<fUML::Value>  new_()  = 0;
 			
 			/*!
 			 */ 
@@ -148,16 +149,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<uml::Classifier * > *  getTypes() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes() const = 0;
 			
 			/*!
 			 */
-			virtual fUML::ObjectActivation *  getObjectActivation() const = 0;
+			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const = 0;
 			
 			/*!
 			 */
-			virtual void setObjectActivation(fUML::ObjectActivation *  _objectActivation) = 0;
-			
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) = 0;
 			
 
 		protected:
@@ -171,10 +171,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<uml::Classifier * > *  m_types =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_types;
 			/*!
 			 */
-			fUML::ObjectActivation *  m_objectActivation =  nullptr ;
+			std::shared_ptr<fUML::ObjectActivation> m_objectActivation;
 			
 
 		public:

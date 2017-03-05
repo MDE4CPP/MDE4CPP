@@ -18,6 +18,10 @@ using namespace fUML;
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -25,6 +29,9 @@ UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl()
 
 UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete UnlimitedNaturalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,7 +53,7 @@ ecore::EObject *  UnlimitedNaturalValueImpl::copy() const
 	return new UnlimitedNaturalValueImpl(*this);
 }
 
-ecore::EClass* UnlimitedNaturalValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getUnlimitedNaturalValue();
 }
@@ -67,26 +74,25 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool UnlimitedNaturalValueImpl::equals(fUML::Value *  otherValue) 
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    bool isEqual = false;
-    if(dynamic_cast<UnlimitedNaturalValue * >(otherValue) != nullptr)
+	bool isEqual = false;
+	std::shared_ptr<fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<UnlimitedNaturalValue>(otherValue);
+    if(unValue != nullptr)
     {
-        isEqual = (dynamic_cast<UnlimitedNaturalValue * >(otherValue))->getValue() == this->getValue();
+        isEqual = (unValue->getValue() == this->getValue());
     }
 
     return isEqual;
 }
 
-uml::ValueSpecification *  UnlimitedNaturalValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  UnlimitedNaturalValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::LiteralUnlimitedNatural* literal = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural();
-
+	std::shared_ptr<uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());
     literal->setType(this->getType());
     literal->setValue(this->getValue());
-
     return literal;
 }
 

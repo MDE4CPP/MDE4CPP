@@ -13,6 +13,10 @@ using namespace fUML;
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -22,6 +26,9 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl()
 
 ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,7 +53,7 @@ ecore::EObject *  ClassifierBehaviorExecutionImpl::copy() const
 	return new ClassifierBehaviorExecutionImpl(*this);
 }
 
-ecore::EClass* ClassifierBehaviorExecutionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution();
 }
@@ -64,7 +71,7 @@ void ClassifierBehaviorExecutionImpl::_startObjectBehavior()
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::execute(std::vector<uml::Class * > *  classifier,std::vector<fUML::ParameterValue * > *  inputs) 
+void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -79,34 +86,34 @@ void ClassifierBehaviorExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
-uml::Class *  ClassifierBehaviorExecutionImpl::getClassifier() const
+std::shared_ptr<uml::Class> ClassifierBehaviorExecutionImpl::getClassifier() const
 {
-	//assert(m_classifier);
-	return m_classifier;
+//assert(m_classifier);
+    return m_classifier;
 }
-void ClassifierBehaviorExecutionImpl::setClassifier(uml::Class *  _classifier)
+void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
 {
-	m_classifier = _classifier;
-}
-
-fUML::Execution *  ClassifierBehaviorExecutionImpl::getExecution() const
-{
-	//assert(m_execution);
-	return m_execution;
-}
-void ClassifierBehaviorExecutionImpl::setExecution(fUML::Execution *  _execution)
-{
-	m_execution = _execution;
+    m_classifier = _classifier;
 }
 
-fUML::ObjectActivation *  ClassifierBehaviorExecutionImpl::getObjectActivation() const
+std::shared_ptr<fUML::Execution> ClassifierBehaviorExecutionImpl::getExecution() const
 {
-	
-	return m_objectActivation;
+//assert(m_execution);
+    return m_execution;
 }
-void ClassifierBehaviorExecutionImpl::setObjectActivation(fUML::ObjectActivation *  _objectActivation)
+void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Execution> _execution)
 {
-	m_objectActivation = _objectActivation;
+    m_execution = _execution;
+}
+
+std::shared_ptr<fUML::ObjectActivation> ClassifierBehaviorExecutionImpl::getObjectActivation() const
+{
+
+    return m_objectActivation;
+}
+void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation)
+{
+    m_objectActivation = _objectActivation;
 }
 
 //*********************************

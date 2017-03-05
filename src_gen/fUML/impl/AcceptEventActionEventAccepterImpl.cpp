@@ -13,6 +13,10 @@ using namespace fUML;
 AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl()
 
 AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptEventActionEventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -40,7 +47,7 @@ ecore::EObject *  AcceptEventActionEventAccepterImpl::copy() const
 	return new AcceptEventActionEventAccepterImpl(*this);
 }
 
-ecore::EClass* AcceptEventActionEventAccepterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getAcceptEventActionEventAccepter();
 }
@@ -56,14 +63,14 @@ ecore::EClass* AcceptEventActionEventAccepterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-fUML::AcceptEventActionActivation *  AcceptEventActionEventAccepterImpl::getActionActivation() const
+std::shared_ptr<fUML::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
-	//assert(m_actionActivation);
-	return m_actionActivation;
+//assert(m_actionActivation);
+    return m_actionActivation;
 }
-void AcceptEventActionEventAccepterImpl::setActionActivation(fUML::AcceptEventActionActivation *  _actionActivation)
+void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation)
 {
-	m_actionActivation = _actionActivation;
+    m_actionActivation = _actionActivation;
 }
 
 //*********************************

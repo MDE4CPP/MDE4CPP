@@ -27,10 +27,11 @@
 #include "Type.hpp"
 #include "PrimitiveType.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class StringValueImpl :virtual public PrimitiveValueImpl, virtual public StringValue
+	class StringValueImpl :virtual public PrimitiveValueImpl, virtual public StringValue 
 	{
 		public: 
 			StringValueImpl(const StringValueImpl & obj);
@@ -52,11 +53,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
@@ -94,7 +95,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_STRINGVALUESTRINGVALUEIMPL_HPP */

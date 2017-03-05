@@ -23,42 +23,22 @@ using namespace fUML;
 LocusImpl::LocusImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_extensionalValues == nullptr)
-	{
-		m_extensionalValues = new std::vector<fUML::ExtensionalValue * >();
-	}
+	m_extensionalValues.reset(new std::vector<std::shared_ptr<fUML::ExtensionalValue>>());
 	
 }
 
 LocusImpl::~LocusImpl()
 {
-	if(m_executor!=nullptr)
-	{
-		if(m_executor)
-		{
-			delete(m_executor);
-			m_executor = nullptr;
-		}
-	}
-	if(m_factory!=nullptr)
-	{
-		if(m_factory)
-		{
-			delete(m_factory);
-			m_factory = nullptr;
-		}
-	}
-	if(m_extensionalValues!=nullptr)
-	{
-		for(auto c :*m_extensionalValues)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -72,15 +52,16 @@ LocusImpl::LocusImpl(const LocusImpl & obj)
 	//clone containt lists
 	if(obj.getExecutor()!=nullptr)
 	{
-		m_executor = dynamic_cast<fUML::Executor * >(obj.getExecutor()->copy());
+		m_executor.reset(dynamic_cast<fUML::Executor*>(obj.getExecutor()->copy()));
 	}
-	for(fUML::ExtensionalValue * 	_extensionalValues : *obj.getExtensionalValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> _extensionalValuesList = obj.getExtensionalValues();
+	for(std::shared_ptr<fUML::ExtensionalValue> _extensionalValues : *_extensionalValuesList)
 	{
-		this->getExtensionalValues()->push_back(dynamic_cast<fUML::ExtensionalValue * >(_extensionalValues->copy()));
+		this->getExtensionalValues()->push_back(std::shared_ptr<fUML::ExtensionalValue>(dynamic_cast<fUML::ExtensionalValue*>(_extensionalValues->copy())));
 	}
 	if(obj.getFactory()!=nullptr)
 	{
-		m_factory = dynamic_cast<fUML::ExecutionFactory * >(obj.getFactory()->copy());
+		m_factory.reset(dynamic_cast<fUML::ExecutionFactory*>(obj.getFactory()->copy()));
 	}
 }
 
@@ -89,7 +70,7 @@ ecore::EObject *  LocusImpl::copy() const
 	return new LocusImpl(*this);
 }
 
-ecore::EClass* LocusImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLocus();
 }
@@ -101,41 +82,41 @@ ecore::EClass* LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(fUML::ExtensionalValue *  value) 
+void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value) 
 {
 	//generated from body annotation
-	value->setLocus(this);
-this->getExtensionalValues()->push_back(value);
-
+	struct null_deleter{void operator()(void const *) const { } };
+	value->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
+	this->getExtensionalValues()->push_back(value);
 }
 
-void LocusImpl::assignExecutor(fUML::Executor *  executor) 
+void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor) 
 {
 	//generated from body annotation
 	this->setExecutor(executor);
-this->getExecutor()->setLocus(this);
-
+	struct null_deleter{void operator()(void const *) const { } };
+	this->getExecutor()->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
 }
 
-void LocusImpl::assignFactory(fUML::ExecutionFactory *  factory) 
+void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory) 
 {
 	//generated from body annotation
 	this->setFactory(factory);
-this->getFactory()->setLocus(this);
-
+	struct null_deleter{void operator()(void const *) const { } };
+	this->getFactory()->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
 }
 
-bool LocusImpl::conforms(uml::Classifier *  type,uml::Classifier *  classifier) 
+bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
-	    bool doesConform = false;
+	bool doesConform = false;
     if(type == classifier)
     {
         doesConform = true;
     }
     else
     {
-        int i = 1;
+        unsigned int i = 1;
         while(!doesConform && (i <= type->getGeneral()->size()))
         {
             doesConform = this->conforms(type->getGeneral()->at(i - 1), classifier);
@@ -145,18 +126,19 @@ bool LocusImpl::conforms(uml::Classifier *  type,uml::Classifier *  classifier)
     return doesConform;
 }
 
-fUML::Object *  LocusImpl::instantiate(uml::Class *  type) 
+std::shared_ptr<fUML::Object>  LocusImpl::instantiate(std::shared_ptr<uml::Class>  type) 
 {
 	//generated from body annotation
-	    fUML::Object* object = nullptr;
-    
-    if(dynamic_cast<uml::Behavior*>(type) != nullptr)
+	std::shared_ptr<fUML::Object> object = nullptr;
+	std::shared_ptr<uml::Behavior> behavior = std::dynamic_pointer_cast<uml::Behavior>(type);
+    if(behavior != nullptr)
     {
-        object = this->getFactory()->createExecution((dynamic_cast<uml::Behavior*> (type)),nullptr);
+    	std::shared_ptr<fUML::Object>  context = nullptr;
+        object = std::dynamic_pointer_cast<Object>(this->getFactory()->createExecution(behavior, nullptr));
     }
     else
     {
-        object = FUMLFactory::eInstance()->createObject();
+        object.reset(FUMLFactory::eInstance()->createObject());
         object->getTypes()->push_back(type);
         object->createFeatureValues();
         this->add(object);
@@ -165,67 +147,66 @@ fUML::Object *  LocusImpl::instantiate(uml::Class *  type)
     return object;
 }
 
-void LocusImpl::remove(fUML::ExtensionalValue *  value) 
+void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value) 
 {
 	//generated from body annotation
 	value->setLocus(nullptr);
 std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->end(),value);
 }
 
-std::vector<fUML::ExtensionalValue * > *  LocusImpl::retrieveExtent(uml::Classifier *  classifier) 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
-	std::vector<fUML::ExtensionalValue *> * extent =this->getExtensionalValues();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> extent =this->getExtensionalValues();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> extensionalValues = this->getExtensionalValues();
 
-std::vector<fUML::ExtensionalValue *> * extensionalValues = this->getExtensionalValues();
-
-for (unsigned int i=0; i < extensionalValues->size();i++)
-{
-    fUML::ExtensionalValue * value = extensionalValues->at(i);
-            std::vector<uml::Classifier *> * types = value->getTypes();
-            bool conforms = false;
-            unsigned int j = 1;
-            while(!conforms && j <= types->size())
-                {
-                conforms = this->conforms(types->at(j - 1), classifier);
-                j = j + 1;
-                }
-            if(conforms)
-                {
-                extent->push_back(value);
-                }
-}
-return extent;
+	for (unsigned int i=0; i < extensionalValues->size();i++)
+	{
+		std::shared_ptr<fUML::ExtensionalValue> value = extensionalValues->at(i);
+		std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = value->getTypes();
+		bool conforms = false;
+		unsigned int j = 1;
+		while(!conforms && j <= types->size())
+		{
+			conforms = this->conforms(types->at(j - 1), classifier);
+			j = j + 1;
+		}
+		if(conforms)
+		{
+			extent->push_back(value);
+		}
+	}
+	return extent;
 }
 
 //*********************************
 // References
 //*********************************
-fUML::Executor *  LocusImpl::getExecutor() const
+std::shared_ptr<fUML::Executor> LocusImpl::getExecutor() const
 {
-	
-	return m_executor;
+
+    return m_executor;
 }
-void LocusImpl::setExecutor(fUML::Executor *  _executor)
+void LocusImpl::setExecutor(std::shared_ptr<fUML::Executor> _executor)
 {
-	m_executor = _executor;
+    m_executor = _executor;
 }
 
-std::vector<fUML::ExtensionalValue * > *  LocusImpl::getExtensionalValues() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> LocusImpl::getExtensionalValues() const
 {
-	
-	return m_extensionalValues;
+
+    return m_extensionalValues;
 }
 
 
-fUML::ExecutionFactory *  LocusImpl::getFactory() const
+std::shared_ptr<fUML::ExecutionFactory> LocusImpl::getFactory() const
 {
-	//assert(m_factory);
-	return m_factory;
+//assert(m_factory);
+    return m_factory;
 }
-void LocusImpl::setFactory(fUML::ExecutionFactory *  _factory)
+void LocusImpl::setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory)
 {
-	m_factory = _factory;
+    m_factory = _factory;
 }
 
 //*********************************

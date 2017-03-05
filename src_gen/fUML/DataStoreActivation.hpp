@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -91,7 +92,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			
 			//*********************************
@@ -103,15 +104,14 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getCurrentExecution() const = 0;
+			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const = 0;
 			
 			/*!
 			 */
-			virtual void setCurrentExecution(fUML::Execution *  _currentExecution) = 0;
-			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) = 0;
 			/*!
 			 */
-			virtual std::vector<fUML::Token * > *  getStoredTokens() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getStoredTokens() const = 0;
 			
 			
 
@@ -126,10 +126,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Execution *  m_currentExecution =  nullptr ;
+			std::shared_ptr<fUML::Execution> m_currentExecution;
 			/*!
 			 */
-			std::vector<fUML::Token * > *  m_storedTokens =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> m_storedTokens;
 			
 
 		public:

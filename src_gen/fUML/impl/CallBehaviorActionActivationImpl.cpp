@@ -15,6 +15,10 @@ using namespace fUML;
 CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl()
 
 CallBehaviorActionActivationImpl::~CallBehaviorActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallBehaviorActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,26 +42,28 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBeh
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Execution * 	_callExecutions : *obj.getCallExecutions())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> _callExecutionsList = obj.getCallExecutions();
+	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->push_back(dynamic_cast<fUML::Execution * >(_callExecutions->copy()));
+		this->getCallExecutions()->push_back(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
 	}
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -63,7 +72,7 @@ ecore::EObject *  CallBehaviorActionActivationImpl::copy() const
 	return new CallBehaviorActionActivationImpl(*this);
 }
 
-ecore::EClass* CallBehaviorActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getCallBehaviorActionActivation();
 }
@@ -75,18 +84,19 @@ ecore::EClass* CallBehaviorActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Execution *  CallBehaviorActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution>  CallBehaviorActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
-	uml::CallBehaviorAction * callBehaviorAction = dynamic_cast<uml::CallBehaviorAction*> (this->getNode());
+	std::shared_ptr<uml::CallBehaviorAction> callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction> (this->getNode());
     if(callBehaviorAction != nullptr)
     {
-        uml::Behavior * behavior = callBehaviorAction->getBehavior();
+    	std::shared_ptr<uml::Behavior> behavior = callBehaviorAction->getBehavior();
+    	std::shared_ptr<fUML::Object> context = nullptr;
 
-        fUML::Object * context = nullptr;
-
-        if(behavior!=nullptr){
-            if (behavior->getContext()!= nullptr) {
+        if(behavior!=nullptr)
+        {
+            if (behavior->getContext()!= nullptr) 
+            {
                 DEBUG_MESSAGE(std::cout<<"[getCallExecution] behavior context = " << behavior->getContext()->getName()<<std::endl;)
                 context = this->getExecutionContext();
             }

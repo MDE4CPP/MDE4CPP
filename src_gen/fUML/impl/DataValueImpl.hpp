@@ -28,10 +28,11 @@
 #include "DataType.hpp"
 #include "Classifier.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class DataValueImpl :virtual public CompoundValueImpl, virtual public DataValue
+	class DataValueImpl :virtual public CompoundValueImpl, virtual public DataValue 
 	{
 		public: 
 			DataValueImpl(const DataValueImpl & obj);
@@ -53,11 +54,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
 			
 			
 			
@@ -71,12 +72,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::DataType *  getType() const ;
+			virtual std::shared_ptr<uml::DataType> getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(uml::DataType *  _type) ;
-			
+			virtual void setType(std::shared_ptr<uml::DataType> _type) ;
 							
 			
 			//*********************************
@@ -91,7 +91,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_DATAVALUEDATAVALUEIMPL_HPP */

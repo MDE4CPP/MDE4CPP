@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -97,15 +98,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(fUML::Link *  link,std::vector<uml::LinkEndData * > *  endDataList)  = 0;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>>  endDataList)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool endMatchesEndData(fUML::Link *  link,uml::LinkEndData *  endData)  = 0;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  = 0;
 			
 			/*!
 			 */ 
-			virtual uml::Association *  getAssociation()  = 0;
+			virtual std::shared_ptr<uml::Association>  getAssociation()  = 0;
 			
 			
 			//*********************************

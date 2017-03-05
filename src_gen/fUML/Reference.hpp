@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -107,15 +108,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Execution *  dispatch(uml::Operation *  operation)  = 0;
+			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			/*!
 			 */ 
-			virtual void send(fUML::SignalInstance *  signalInstance)  = 0;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
@@ -123,27 +124,27 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  = 0;
+			virtual std::shared_ptr<fUML::Value>  new_()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::FeatureValue *  retrieveFeatureValue(uml::StructuralFeature *  feature)  = 0;
+			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  = 0;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position)  = 0;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  retrieveFeatureValues()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  = 0;
 			
 			/*!
 			 */ 
@@ -159,12 +160,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Object *  getReferent() const = 0;
+			virtual std::shared_ptr<fUML::Object> getReferent() const = 0;
 			
 			/*!
 			 */
-			virtual void setReferent(fUML::Object *  _referent) = 0;
-			
+			virtual void setReferent(std::shared_ptr<fUML::Object> _referent) = 0;
 			
 
 		protected:
@@ -178,7 +178,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Object *  m_referent =  nullptr ;
+			std::shared_ptr<fUML::Object> m_referent;
 			
 
 		public:

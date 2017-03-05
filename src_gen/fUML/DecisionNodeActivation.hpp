@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -92,27 +93,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getDecisionValues(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getDecisionValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  executeDecisionInputBehavior(fUML::Value *  inputValue,fUML::Value *  decisionInputValue)  = 0;
+			virtual std::shared_ptr<fUML::Value>  executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  getDecisionInputFlowValue()  = 0;
+			virtual std::shared_ptr<fUML::Value>  getDecisionInputFlowValue()  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityEdgeInstance *  getDecisionInputFlowInstance()  = 0;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance>  getDecisionInputFlowInstance()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool test(uml::ValueSpecification *  gaurd,fUML::Value *  value)  = 0;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  removeJoinedControlTokens(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removeJoinedControlTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
@@ -120,11 +121,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
@@ -144,12 +145,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getDecisionInputExecution() const = 0;
+			virtual std::shared_ptr<fUML::Execution> getDecisionInputExecution() const = 0;
 			
 			/*!
 			 */
-			virtual void setDecisionInputExecution(fUML::Execution *  _decisionInputExecution) = 0;
-			
+			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution) = 0;
 			
 
 		protected:
@@ -163,7 +163,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Execution *  m_decisionInputExecution =  nullptr ;
+			std::shared_ptr<fUML::Execution> m_decisionInputExecution;
 			
 
 		public:

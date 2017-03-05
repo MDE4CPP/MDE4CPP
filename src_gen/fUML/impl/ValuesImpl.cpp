@@ -13,21 +13,20 @@ using namespace fUML;
 ValuesImpl::ValuesImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_values == nullptr)
-	{
-		m_values = new std::vector<fUML::Value * >();
-	}
+	m_values.reset(new std::vector<std::shared_ptr<fUML::Value>>());
 }
 
 ValuesImpl::~ValuesImpl()
 {
-	if(m_values!=nullptr)
-	{
-		delete(m_values);
-	 	m_values = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Values "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,7 +36,7 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<fUML::Value * > *  _values = obj.getValues();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> _values = obj.getValues();
 	this->getValues()->insert(this->getValues()->end(), _values->begin(), _values->end());
 
 
@@ -49,7 +48,7 @@ ecore::EObject *  ValuesImpl::copy() const
 	return new ValuesImpl(*this);
 }
 
-ecore::EClass* ValuesImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getValues();
 }
@@ -65,10 +64,10 @@ ecore::EClass* ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::vector<fUML::Value * > *  ValuesImpl::getValues() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> ValuesImpl::getValues() const
 {
-	
-	return m_values;
+
+    return m_values;
 }
 
 

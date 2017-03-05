@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -92,15 +93,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::ClauseActivation *  getClauseActivation(uml::Clause *  clause)  = 0;
+			virtual std::shared_ptr<fUML::ClauseActivation>  getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void runTest(uml::Clause *  clause)  = 0;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void selectBody(uml::Clause *  clause)  = 0;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			
 			//*********************************
@@ -112,11 +113,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::ClauseActivation * > *  getClauseActivations() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getClauseActivations() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<uml::Clause * > *  getSelectedClauses() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> getSelectedClauses() const = 0;
 			
 			
 
@@ -131,10 +132,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::ClauseActivation * > *  m_clauseActivations =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> m_clauseActivations;
 			/*!
 			 */
-			std::vector<uml::Clause * > *  m_selectedClauses =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> m_selectedClauses;
 			
 
 		public:

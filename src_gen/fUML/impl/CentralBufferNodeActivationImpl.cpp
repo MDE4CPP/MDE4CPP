@@ -13,6 +13,10 @@ using namespace fUML;
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
 
 CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CentralBufferNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,19 +40,20 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBu
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -54,7 +62,7 @@ ecore::EObject *  CentralBufferNodeActivationImpl::copy() const
 	return new CentralBufferNodeActivationImpl(*this);
 }
 
-ecore::EClass* CentralBufferNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getCentralBufferNodeActivation();
 }
@@ -66,7 +74,7 @@ ecore::EClass* CentralBufferNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int CentralBufferNodeActivationImpl::removeToken(fUML::Token *  token) 
+int CentralBufferNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[DataStore] not removing the token"<<std::endl;)

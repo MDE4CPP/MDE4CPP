@@ -14,6 +14,10 @@ using namespace fUML;
 ValueImpl::ValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -21,6 +25,9 @@ ValueImpl::ValueImpl()
 
 ValueImpl::~ValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -39,7 +46,7 @@ ecore::EObject *  ValueImpl::copy() const
 	return new ValueImpl(*this);
 }
 
-ecore::EClass* ValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getValue();
 }
@@ -51,11 +58,11 @@ ecore::EClass* ValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValueImpl::equals(fUML::Value *  otherValue) 
+bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    std::vector<uml::Classifier*>  * myTypes = this->getTypes();
-    std::vector<uml::Classifier*>  * otherTypes = otherValue->getTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> myTypes = this->getTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> otherTypes = otherValue->getTypes();
 
     DEBUG_MESSAGE(std::cout<<"in Value"<<std::endl;)
     bool isEqual = true;
@@ -63,11 +70,10 @@ bool ValueImpl::equals(fUML::Value *  otherValue)
     if(myTypes->size() != otherTypes->size())
     {
         isEqual = false;
-
     }
     else
     {
-        int i = 1;
+        unsigned int i = 1;
         while(isEqual && i <= myTypes->size())
         {
             bool matched = false;
@@ -86,19 +92,19 @@ bool ValueImpl::equals(fUML::Value *  otherValue)
     return isEqual;
 }
 
-std::vector<uml::Classifier * > *  ValueImpl::getTypes()  const 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ValueImpl::getTypes()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::hasTypes(uml::Classifier *  type) 
+bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
 	//generated from body annotation
-	    std::vector<uml::Classifier*>  * types = this->getTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getTypes();
 
     bool found = false;
-    int i = 1;
+    unsigned int i = 1;
     while(!found && i <= types->size())
     {
         found = (types->at(i - 1) == type);
@@ -115,7 +121,7 @@ std::string ValueImpl::objectId()
 
 }
 
-uml::ValueSpecification *  ValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  ValueImpl::specify() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

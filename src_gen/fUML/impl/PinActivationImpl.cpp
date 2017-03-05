@@ -15,6 +15,10 @@ using namespace fUML;
 PinActivationImpl::PinActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -22,6 +26,9 @@ PinActivationImpl::PinActivationImpl()
 
 PinActivationImpl::~PinActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PinActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,19 +44,20 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj)
 
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -58,7 +66,7 @@ ecore::EObject *  PinActivationImpl::copy() const
 	return new PinActivationImpl(*this);
 }
 
-ecore::EClass* PinActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getPinActivation();
 }
@@ -70,7 +78,7 @@ ecore::EClass* PinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void PinActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens) 
+void PinActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[fire] Pin " << (this->getNode() == nullptr ? "" : this->getNode()->getName() + "...")<<std::endl;)
@@ -78,35 +86,42 @@ void PinActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens)
     this->addTokens(incomingTokens);
 }
 
-std::vector<fUML::Token * > *  PinActivationImpl::takeOfferedTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> PinActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
-	    int count = this->countUnofferedTokens();
+	int count = this->countUnofferedTokens();
     int upper = -1;
 
     //Note: A pin activation used in an expansion activation group will have this.node == null
-    if (this->getNode() != nullptr) {
-        uml::Pin * pin = dynamic_cast<uml::Pin*>(this->getNode());
+    if (this->getNode() != nullptr) 
+    {
+    	std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin>(this->getNode());
         upper = pin->getUpper();
     }
 
-    std::vector<Token *>* tokens = new std::vector<Token *>();
+    std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
 
-    if (upper < 0 || count < upper) {
-        std::vector<ActivityEdgeInstance*>* incomingEdges = this->getIncomingEdges();
-        for (unsigned int i = 0; i < incomingEdges->size(); i++) {
-            ActivityEdgeInstance * edge = incomingEdges->at(i);
+    if (upper < 0 || count < upper) 
+    {
+    	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> incomingEdges = this->getIncomingEdges();
+        for (unsigned int i = 0; i < incomingEdges->size(); i++) 
+        {
+        	std::shared_ptr<ActivityEdgeInstance> edge = incomingEdges->at(i);
             int incomingCount = edge->countOfferedValue();
-            std::vector<Token *>* incomingTokens = new std::vector<Token *>();
-            if (upper < 0 || incomingCount < upper - count) {
+            std::shared_ptr<std::vector<std::shared_ptr<Token>>> incomingTokens(new std::vector<std::shared_ptr<Token>>());
+            if (upper < 0 || incomingCount < upper - count) 
+            {
                 incomingTokens = edge->takeOfferedTokens();
                 count = count + incomingCount;
-            } else if (count < upper) {
+            }
+            else if (count < upper) 
+            {
                 incomingTokens = edge->takeOfferedTokens(upper - count);
                 count = upper;
             }
-            for (unsigned int j = 0; j < incomingTokens->size(); j++) {
-                Token * token = incomingTokens->at(j);
+            for (unsigned int j = 0; j < incomingTokens->size(); j++) 
+            {
+            	std::shared_ptr<Token> token = incomingTokens->at(j);
                 tokens->push_back(token);
             }
         }
@@ -118,14 +133,14 @@ std::vector<fUML::Token * > *  PinActivationImpl::takeOfferedTokens()
 //*********************************
 // References
 //*********************************
-fUML::ActionActivation *  PinActivationImpl::getActionActivation() const
+std::shared_ptr<fUML::ActionActivation> PinActivationImpl::getActionActivation() const
 {
-	//assert(m_actionActivation);
-	return m_actionActivation;
+//assert(m_actionActivation);
+    return m_actionActivation;
 }
-void PinActivationImpl::setActionActivation(fUML::ActionActivation *  _actionActivation)
+void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation)
 {
-	m_actionActivation = _actionActivation;
+    m_actionActivation = _actionActivation;
 }
 
 //*********************************

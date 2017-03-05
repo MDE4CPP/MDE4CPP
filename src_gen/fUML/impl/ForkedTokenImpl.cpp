@@ -14,6 +14,11 @@ using namespace fUML;
 ForkedTokenImpl::ForkedTokenImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +26,9 @@ ForkedTokenImpl::ForkedTokenImpl()
 
 ForkedTokenImpl::~ForkedTokenImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ForkedToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -45,7 +53,7 @@ ecore::EObject *  ForkedTokenImpl::copy() const
 	return new ForkedTokenImpl(*this);
 }
 
-ecore::EClass* ForkedTokenImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getForkedToken();
 }
@@ -76,13 +84,13 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
-bool ForkedTokenImpl::equals(fUML::Token *  otherToken) 
+bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
 {
 	//generated from body annotation
-	return this == otherToken;
+	return (this == otherToken.get());
 }
 
-fUML::Value *  ForkedTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value>  ForkedTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return this->getBaseToken()->getValue();
@@ -114,14 +122,14 @@ void ForkedTokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
-fUML::Token *  ForkedTokenImpl::getBaseToken() const
+std::shared_ptr<fUML::Token> ForkedTokenImpl::getBaseToken() const
 {
-	
-	return m_baseToken;
+
+    return m_baseToken;
 }
-void ForkedTokenImpl::setBaseToken(fUML::Token *  _baseToken)
+void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Token> _baseToken)
 {
-	m_baseToken = _baseToken;
+    m_baseToken = _baseToken;
 }
 
 //*********************************

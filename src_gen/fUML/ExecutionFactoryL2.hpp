@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::SemanticVisitor *  instantiateVisitor(uml::Element *  element)  = 0;
+			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  = 0;
 			
 			
 			//*********************************

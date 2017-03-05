@@ -146,9 +146,9 @@ namespace fUML
 		
 			//Singleton Instance and Getter
 		private:
-			static FUMLFactory* instance;
+			static std::shared_ptr<FUMLFactory> instance;
 		public:
-			static FUMLFactory* eInstance();
+			static std::shared_ptr<FUMLFactory> eInstance();
 		
 			//Creator functions
 			virtual Locus* createLocus() const = 0;
@@ -240,7 +240,7 @@ namespace fUML
 			virtual DataStoreActivation* createDataStoreActivation() const = 0;
 			
 			//Package
-			virtual FUMLPackage* getFUMLPackage() const = 0;
+			virtual std::shared_ptr<FUMLPackage> getFUMLPackage() const = 0;
 	};
 }
 #endif /* end of include guard: FUMLFACTORY_HPP */

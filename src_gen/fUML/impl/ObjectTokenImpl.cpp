@@ -14,6 +14,10 @@ using namespace fUML;
 ObjectTokenImpl::ObjectTokenImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,14 +25,9 @@ ObjectTokenImpl::ObjectTokenImpl()
 
 ObjectTokenImpl::~ObjectTokenImpl()
 {
-	if(m_value!=nullptr)
-	{
-		if(m_value)
-		{
-			delete(m_value);
-			m_value = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +43,7 @@ ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj)
 	//clone containt lists
 	if(obj.getValue()!=nullptr)
 	{
-		m_value = dynamic_cast<fUML::Value * >(obj.getValue()->copy());
+		m_value.reset(dynamic_cast<fUML::Value*>(obj.getValue()->copy()));
 	}
 }
 
@@ -53,7 +52,7 @@ ecore::EObject *  ObjectTokenImpl::copy() const
 	return new ObjectTokenImpl(*this);
 }
 
-ecore::EClass* ObjectTokenImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getObjectToken();
 }
@@ -65,10 +64,10 @@ ecore::EClass* ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectTokenImpl::equals(fUML::Token *  other) 
+bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	//generated from body annotation
-	return this == other;
+	return (this == other.get());
 }
 
 bool ObjectTokenImpl::isControl() 
@@ -80,14 +79,14 @@ bool ObjectTokenImpl::isControl()
 //*********************************
 // References
 //*********************************
-fUML::Value *  ObjectTokenImpl::getValue() const
+std::shared_ptr<fUML::Value> ObjectTokenImpl::getValue() const
 {
-	
-	return m_value;
+
+    return m_value;
 }
-void ObjectTokenImpl::setValue(fUML::Value *  _value)
+void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Value> _value)
 {
-	m_value = _value;
+    m_value = _value;
 }
 
 //*********************************

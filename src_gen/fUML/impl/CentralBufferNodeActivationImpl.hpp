@@ -22,10 +22,11 @@
 #include "impl/ObjectNodeActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class CentralBufferNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation
+	class CentralBufferNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
 	{
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);
@@ -47,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int removeToken(fUML::Token *  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			
 			
@@ -73,7 +74,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CENTRALBUFFERNODEACTIVATIONCENTRALBUFFERNODEACTIVATIONIMPL_HPP */

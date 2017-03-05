@@ -14,25 +14,21 @@ using namespace fUML;
 ParameterValueImpl::ParameterValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_values == nullptr)
-	{
-		m_values = new std::vector<fUML::Value * >();
-	}
+	m_values.reset(new std::vector<std::shared_ptr<fUML::Value>>());
 }
 
 ParameterValueImpl::~ParameterValueImpl()
 {
-	if(m_values!=nullptr)
-	{
-		for(auto c :*m_values)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ParameterValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,9 +42,10 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj)
 
 
 	//clone containt lists
-	for(fUML::Value * 	_values : *obj.getValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> _valuesList = obj.getValues();
+	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
-		this->getValues()->push_back(dynamic_cast<fUML::Value * >(_values->copy()));
+		this->getValues()->push_back(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
 	}
 }
 
@@ -57,7 +54,7 @@ ecore::EObject *  ParameterValueImpl::copy() const
 	return new ParameterValueImpl(*this);
 }
 
-ecore::EClass* ParameterValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getParameterValue();
 }
@@ -73,20 +70,20 @@ ecore::EClass* ParameterValueImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Parameter *  ParameterValueImpl::getParameter() const
+std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
 {
-	//assert(m_parameter);
-	return m_parameter;
+//assert(m_parameter);
+    return m_parameter;
 }
-void ParameterValueImpl::setParameter(uml::Parameter *  _parameter)
+void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
 {
-	m_parameter = _parameter;
+    m_parameter = _parameter;
 }
 
-std::vector<fUML::Value * > *  ParameterValueImpl::getValues() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> ParameterValueImpl::getValues() const
 {
-	
-	return m_values;
+
+    return m_values;
 }
 
 

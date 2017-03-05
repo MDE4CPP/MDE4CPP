@@ -27,6 +27,10 @@ using namespace fUML;
 ExecutionFactoryL3Impl::ExecutionFactoryL3Impl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -34,6 +38,9 @@ ExecutionFactoryL3Impl::ExecutionFactoryL3Impl()
 
 ExecutionFactoryL3Impl::~ExecutionFactoryL3Impl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExecutionFactoryL3 "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -43,15 +50,15 @@ ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & ob
 
 	//copy references with now containment
 	
-	std::vector<uml::PrimitiveType * > *  _builtInTypes = obj.getBuiltInTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> _builtInTypes = obj.getBuiltInTypes();
 	this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
 
 	m_locus  = obj.getLocus();
 
-	std::vector<fUML::OpaqueBehaviorExecution * > *  _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
 	this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
 
-	std::vector<fUML::SemanticStrategy * > *  _strategies = obj.getStrategies();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> _strategies = obj.getStrategies();
 	this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
 
 
@@ -63,7 +70,7 @@ ecore::EObject *  ExecutionFactoryL3Impl::copy() const
 	return new ExecutionFactoryL3Impl(*this);
 }
 
-ecore::EClass* ExecutionFactoryL3Impl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionFactoryL3Impl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getExecutionFactoryL3();
 }
@@ -75,73 +82,62 @@ ecore::EClass* ExecutionFactoryL3Impl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::SemanticVisitor *  ExecutionFactoryL3Impl::instantiateVisitor(uml::Element *  element) 
+std::shared_ptr<fUML::SemanticVisitor>  ExecutionFactoryL3Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
-	    SemanticVisitor  * visitor = nullptr;
+	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
     
-    if(dynamic_cast<uml:: ConditionalNode * >(element) != nullptr)
+    if(std::dynamic_pointer_cast<uml:: ConditionalNode>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createConditionalNodeActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());
     }
-    
-    else if(dynamic_cast<uml:: LoopNode * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: LoopNode>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createLoopNodeActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
     }
-    
-    else if(dynamic_cast<uml:: ExpansionRegion * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ExpansionRegion>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createExpansionRegionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());
     }
-    
-    else if(dynamic_cast<uml:: StructuredActivityNode * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: StructuredActivityNode>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createStructuredActivityNodeActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
     }
-    
-    else if(dynamic_cast<uml:: ExpansionNode * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ExpansionNode>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createExpansionNodeActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());
     }
-    
-    else if(dynamic_cast<uml:: ReadExtentAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ReadExtentAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createReadExtentActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: ReadIsClassifiedObjectAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ReadIsClassifiedObjectAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: ReclassifyObjectAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ReclassifyObjectAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createReclassifyObjectActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: StartObjectBehaviorAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: StartObjectBehaviorAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: StartClassifierBehaviorAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: StartClassifierBehaviorAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: AcceptEventAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: AcceptEventAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createAcceptEventActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());
     }
-    
-    else if(dynamic_cast<uml:: ReduceAction * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml:: ReduceAction>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createReduceActionActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());
     }
-    else if(dynamic_cast<uml::DataStoreNode * >(element) != nullptr)
+    else if(std::dynamic_pointer_cast<uml::DataStoreNode>(element) != nullptr)
     {
-        visitor = FUMLFactory::eInstance()->createDataStoreActivation();
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreActivation());
     }
     else
     {

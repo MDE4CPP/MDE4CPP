@@ -15,6 +15,10 @@ using namespace fUML;
 ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl()
 
 ActivityFinalNodeActivationImpl::~ActivityFinalNodeActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityFinalNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,19 +41,20 @@ ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityF
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -55,7 +63,7 @@ ecore::EObject *  ActivityFinalNodeActivationImpl::copy() const
 	return new ActivityFinalNodeActivationImpl(*this);
 }
 
-ecore::EClass* ActivityFinalNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getActivityFinalNodeActivation();
 }
@@ -67,19 +75,29 @@ ecore::EClass* ActivityFinalNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ActivityFinalNodeActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens) 
+void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
-	    DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
+	DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
 
-    if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) {
-        if (this->getGroup()->getActivityExecution() != nullptr) {
+    if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
+    {
+        if (this->getGroup()->getActivityExecution() != nullptr) 
+        {
             this->getGroup()->getActivityExecution()->terminate();
-        } else if (this->getGroup()->getContainingNodeActivation() != nullptr) {
+        }
+        else if (this->getGroup()->getContainingNodeActivation() != nullptr) 
+        {
             this->getGroup()->getContainingNodeActivation()->terminateAll();
-        } else if (dynamic_cast<ExpansionActivationGroup*>(this->getGroup())!=nullptr) {
-            (dynamic_cast<ExpansionActivationGroup*>(this->getGroup()))->getRegionActivation()->terminate();
-
+        }
+        else 
+        {
+        	std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this->getGroup());
+        	if (group != nullptr) 
+        	{
+        		group->getRegionActivation()->terminate();
+        	}
+        	        
         }
     }
 }

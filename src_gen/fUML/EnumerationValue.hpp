@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -77,15 +78,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  = 0;
+			virtual std::shared_ptr<fUML::Value>  new_()  = 0;
 			
 			/*!
 			 */ 
@@ -93,7 +94,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  = 0;
 			
 			
 			//*********************************
@@ -105,20 +106,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::EnumerationLiteral *  getLiteral() const = 0;
+			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const = 0;
 			
 			/*!
 			 */
-			virtual void setLiteral(uml::EnumerationLiteral *  _literal) = 0;
+			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::Enumeration> getType() const = 0;
 			
 			/*!
 			 */
-			virtual uml::Enumeration *  getType() const = 0;
-			
-			/*!
-			 */
-			virtual void setType(uml::Enumeration *  _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Enumeration> _type) = 0;
 			
 
 		protected:
@@ -132,10 +131,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::EnumerationLiteral *  m_literal =  nullptr ;
+			std::shared_ptr<uml::EnumerationLiteral> m_literal;
 			/*!
 			 */
-			uml::Enumeration *  m_type =  nullptr ;
+			std::shared_ptr<uml::Enumeration> m_type;
 			
 
 		public:

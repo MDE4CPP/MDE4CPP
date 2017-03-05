@@ -33,11 +33,12 @@
 #include "Execution.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class LocusImpl :virtual public ecore::EObjectImpl,
-virtual public Locus
+virtual public Locus 
 	{
 		public: 
 			LocusImpl(const LocusImpl & obj);
@@ -59,31 +60,31 @@ virtual public Locus
 			//*********************************
 			/*!
 			 */ 
-			virtual bool conforms(uml::Classifier *  type,uml::Classifier *  classifier)  ;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual void assignExecutor(fUML::Executor *  executor)  ;
+			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFactory(fUML::ExecutionFactory *  factory)  ;
+			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ExtensionalValue * > *  retrieveExtent(uml::Classifier *  classifier)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual void add(fUML::ExtensionalValue *  value)  ;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
-			virtual void remove(fUML::ExtensionalValue *  value)  ;
+			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Object *  instantiate(uml::Class *  type)  ;
+			virtual std::shared_ptr<fUML::Object>  instantiate(std::shared_ptr<uml::Class>  type)  ;
 			
 			
 			
@@ -97,23 +98,21 @@ virtual public Locus
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Executor *  getExecutor() const ;
+			virtual std::shared_ptr<fUML::Executor> getExecutor() const ;
 			
 			/*!
 			 */
-			virtual void setExecutor(fUML::Executor *  _executor) ;
+			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::ExecutionFactory> getFactory() const ;
 			
 			/*!
 			 */
-			virtual fUML::ExecutionFactory *  getFactory() const ;
-			
+			virtual void setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory) ;
 			/*!
 			 */
-			virtual void setFactory(fUML::ExecutionFactory *  _factory) ;
-			
-			/*!
-			 */
-			virtual std::vector<fUML::ExtensionalValue * > *  getExtensionalValues() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>> getExtensionalValues() const ;
 			
 							
 			
@@ -129,7 +128,7 @@ virtual public Locus
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LOCUSLOCUSIMPL_HPP */

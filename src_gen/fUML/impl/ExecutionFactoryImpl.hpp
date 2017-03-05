@@ -30,11 +30,12 @@
 #include "Element.hpp"
 #include "ValueSpecification.hpp"
 
+
 //*********************************
 namespace fUML 
 {
 	class ExecutionFactoryImpl :virtual public ecore::EObjectImpl,
-virtual public ExecutionFactory
+virtual public ExecutionFactory 
 	{
 		public: 
 			ExecutionFactoryImpl(const ExecutionFactoryImpl & obj);
@@ -56,39 +57,39 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Execution *  createExecution(uml::Behavior *  behavior,fUML::Object *  context)  ;
+			virtual std::shared_ptr<fUML::Execution>  createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Evaluation *  createEvaluation(uml::ValueSpecification *  specification)  ;
+			virtual std::shared_ptr<fUML::Evaluation>  createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::SemanticVisitor *  instantiateVisitor(uml::Element *  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::OpaqueBehaviorExecution *  instantiateOpaqueBehaviorExecution(uml::OpaqueBehavior *  behavior)  ;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution>  instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
 			
 			/*!
 			 */ 
-			virtual void addPrimitiveBehaviorPrototype(fUML::OpaqueBehaviorExecution *  execution)  ;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
 			
 			/*!
 			 */ 
-			virtual void addBuiltInType(uml::PrimitiveType *  type)  ;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
 			
 			/*!
 			 */ 
-			virtual uml::PrimitiveType *  getBuiltInType(std::string name)  ;
+			virtual std::shared_ptr<uml::PrimitiveType>  getBuiltInType(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual void assignStrategy(fUML::SemanticStrategy *  strategy)  ;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::SemanticStrategy *  getStrategy(std::string name)  ;
+			virtual std::shared_ptr<fUML::SemanticStrategy>  getStrategy(std::string name)  ;
 			
 			/*!
 			 */ 
@@ -106,23 +107,22 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Locus *  getLocus() const ;
+			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(fUML::Locus *  _locus) ;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
+			/*!
+			 */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> getStrategies() const ;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::SemanticStrategy * > *  getStrategies() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> getPrimitiveBehaviorPrototypes() const ;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::OpaqueBehaviorExecution * > *  getPrimitiveBehaviorPrototypes() const ;
-			
-			/*!
-			 */
-			virtual std::vector<uml::PrimitiveType * > *  getBuiltInTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> getBuiltInTypes() const ;
 			
 							
 			
@@ -138,7 +138,7 @@ virtual public ExecutionFactory
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYEXECUTIONFACTORYIMPL_HPP */

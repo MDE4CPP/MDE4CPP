@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -107,15 +108,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::Association *  getAssociation(uml::StructuralFeature *  feature)  = 0;
+			virtual std::shared_ptr<uml::Association>  getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Link * > *  getMatchingLinks(uml::Association *  association,uml::StructuralFeature *  end,fUML::Value *  oppositeValue)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Link>>> getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual uml::Property *  getOppositeEnd(uml::Association *  association,uml::StructuralFeature *  end)  = 0;
+			virtual std::shared_ptr<uml::Property>  getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  = 0;
 			
 			
 			//*********************************

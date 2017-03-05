@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class TokenSetImpl :virtual public ecore::EObjectImpl,
-virtual public TokenSet
+virtual public TokenSet 
 	{
 		public: 
 			TokenSetImpl(const TokenSetImpl & obj);
@@ -59,7 +60,7 @@ virtual public TokenSet
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Token * > *  getTokens() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getTokens() const ;
 			
 							
 			
@@ -75,7 +76,7 @@ virtual public TokenSet
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_TOKENSETTOKENSETIMPL_HPP */

@@ -15,6 +15,10 @@ using namespace fUML;
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
 
 LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralBooleanEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  LiteralBooleanEvaluationImpl::copy() const
 	return new LiteralBooleanEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralBooleanEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralBooleanEvaluation();
 }
@@ -56,14 +63,13 @@ ecore::EClass* LiteralBooleanEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralBooleanEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralBooleanEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-	    uml::LiteralBoolean * literal = dynamic_cast<uml::LiteralBoolean*>(getSpecification());
-    BooleanValue * booleanValue = FUMLFactory::eInstance()->createBooleanValue();
+	std::shared_ptr<uml::LiteralBoolean> literal = std::dynamic_pointer_cast<uml::LiteralBoolean>(getSpecification());
+	std::shared_ptr<BooleanValue> booleanValue(FUMLFactory::eInstance()->createBooleanValue());
     booleanValue->setType(this->getType("Boolean"));
     booleanValue->setValue(literal->getValue());
-
     return booleanValue;
 }
 

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -113,39 +114,39 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Execution *  createExecution(uml::Behavior *  behavior,fUML::Object *  context)  = 0;
+			virtual std::shared_ptr<fUML::Execution>  createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Evaluation *  createEvaluation(uml::ValueSpecification *  specification)  = 0;
+			virtual std::shared_ptr<fUML::Evaluation>  createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::SemanticVisitor *  instantiateVisitor(uml::Element *  element)  = 0;
+			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::OpaqueBehaviorExecution *  instantiateOpaqueBehaviorExecution(uml::OpaqueBehavior *  behavior)  = 0;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution>  instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  = 0;
 			
 			/*!
 			 */ 
-			virtual void addPrimitiveBehaviorPrototype(fUML::OpaqueBehaviorExecution *  execution)  = 0;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  = 0;
 			
 			/*!
 			 */ 
-			virtual void addBuiltInType(uml::PrimitiveType *  type)  = 0;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  = 0;
 			
 			/*!
 			 */ 
-			virtual uml::PrimitiveType *  getBuiltInType(std::string name)  = 0;
+			virtual std::shared_ptr<uml::PrimitiveType>  getBuiltInType(std::string name)  = 0;
 			
 			/*!
 			 */ 
-			virtual void assignStrategy(fUML::SemanticStrategy *  strategy)  = 0;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::SemanticStrategy *  getStrategy(std::string name)  = 0;
+			virtual std::shared_ptr<fUML::SemanticStrategy>  getStrategy(std::string name)  = 0;
 			
 			/*!
 			 */ 
@@ -161,23 +162,22 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Locus *  getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Locus> getLocus() const = 0;
 			
 			/*!
 			 */
-			virtual void setLocus(fUML::Locus *  _locus) = 0;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> getStrategies() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::SemanticStrategy * > *  getStrategies() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> getPrimitiveBehaviorPrototypes() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::OpaqueBehaviorExecution * > *  getPrimitiveBehaviorPrototypes() const = 0;
-			
-			/*!
-			 */
-			virtual std::vector<uml::PrimitiveType * > *  getBuiltInTypes() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> getBuiltInTypes() const = 0;
 			
 			
 
@@ -192,16 +192,16 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Locus *  m_locus =  nullptr ;
+			std::shared_ptr<fUML::Locus> m_locus;
 			/*!
 			 */
-			std::vector<fUML::SemanticStrategy * > *  m_strategies =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> m_strategies;
 			/*!
 			 */
-			std::vector<fUML::OpaqueBehaviorExecution * > *  m_primitiveBehaviorPrototypes =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> m_primitiveBehaviorPrototypes;
 			/*!
 			 */
-			std::vector<uml::PrimitiveType * > *  m_builtInTypes =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> m_builtInTypes;
 			
 
 		public:

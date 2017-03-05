@@ -13,22 +13,21 @@ using namespace fUML;
 DataStoreActivationImpl::DataStoreActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_storedTokens == nullptr)
-	{
-		m_storedTokens = new std::vector<fUML::Token * >();
-	}
+	m_storedTokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
 }
 
 DataStoreActivationImpl::~DataStoreActivationImpl()
 {
-	if(m_storedTokens!=nullptr)
-	{
-		delete(m_storedTokens);
-	 	m_storedTokens = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataStoreActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,25 +43,26 @@ DataStoreActivationImpl::DataStoreActivationImpl(const DataStoreActivationImpl &
 
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
-	std::vector<fUML::Token * > *  _storedTokens = obj.getStoredTokens();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _storedTokens = obj.getStoredTokens();
 	this->getStoredTokens()->insert(this->getStoredTokens()->end(), _storedTokens->begin(), _storedTokens->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -71,7 +71,7 @@ ecore::EObject *  DataStoreActivationImpl::copy() const
 	return new DataStoreActivationImpl(*this);
 }
 
-ecore::EClass* DataStoreActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataStoreActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getDataStoreActivation();
 }
@@ -83,7 +83,7 @@ ecore::EClass* DataStoreActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens) 
+void DataStoreActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
 	    m_storedTokens = incomingTokens;
@@ -103,13 +103,15 @@ void DataStoreActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens
 void DataStoreActivationImpl::sendOffers() 
 {
 	//generated from body annotation
-	    if (!this->getOutgoingEdges()->empty()) {
+	if (!this->getOutgoingEdges()->empty())
+	{
+		std::shared_ptr<std::vector<std::shared_ptr<Token>>> offeredTokens(new std::vector<std::shared_ptr<Token>>());
 
-        std::vector<Token *>* offeredTokens = new std::vector<Token *>();
-
-        for(ActivityEdgeInstance * incomingEdge : *this->getIncomingEdges() )
+    	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> incomingEdgeList = this->getIncomingEdges();
+        for(std::shared_ptr<ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
         {
-            for(Token * token: *incomingEdge->takeOfferedTokens())
+        	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokenList = incomingEdge->takeOfferedTokens();
+            for(std::shared_ptr<Token> token: *tokenList)
             {
                 //token->withdraw();
                 offeredTokens->push_back(token);
@@ -120,27 +122,28 @@ void DataStoreActivationImpl::sendOffers()
         this->getOutgoingEdges()->front()->sendOffer(offeredTokens);
     }
 
-    fUML::ActivityExecution* act = dynamic_cast<fUML::ActivityExecution*> (this->getExecutionContext());
-    act->getActivationGroup()->addNodeActivation(this);
+	std::shared_ptr<fUML::ActivityExecution> act = std::dynamic_pointer_cast<fUML::ActivityExecution>(this->getExecutionContext());
+	struct null_deleter{void operator()(void const *) const { } };
+    act->getActivationGroup()->addNodeActivation(std::shared_ptr<DataStoreActivation>(this, null_deleter()));
 }
 
 //*********************************
 // References
 //*********************************
-fUML::Execution *  DataStoreActivationImpl::getCurrentExecution() const
+std::shared_ptr<fUML::Execution> DataStoreActivationImpl::getCurrentExecution() const
 {
-	//assert(m_currentExecution);
-	return m_currentExecution;
+//assert(m_currentExecution);
+    return m_currentExecution;
 }
-void DataStoreActivationImpl::setCurrentExecution(fUML::Execution *  _currentExecution)
+void DataStoreActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution)
 {
-	m_currentExecution = _currentExecution;
+    m_currentExecution = _currentExecution;
 }
 
-std::vector<fUML::Token * > *  DataStoreActivationImpl::getStoredTokens() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> DataStoreActivationImpl::getStoredTokens() const
 {
-	
-	return m_storedTokens;
+
+    return m_storedTokens;
 }
 
 

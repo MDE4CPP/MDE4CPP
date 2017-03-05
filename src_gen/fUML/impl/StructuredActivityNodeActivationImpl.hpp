@@ -28,10 +28,11 @@
 #include "InputPin.hpp"
 #include "OutputPin.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class StructuredActivityNodeActivationImpl :virtual public ActionActivationImpl, virtual public StructuredActivityNodeActivation
+	class StructuredActivityNodeActivationImpl :virtual public ActionActivationImpl, virtual public StructuredActivityNodeActivation 
 	{
 		public: 
 			StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj);
@@ -57,15 +58,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::ActivityNode * > *  makeActivityNodeList(std::vector<uml::ExecutableNode * > *  nodes)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> makeActivityNodeList(std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>>  nodes)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getPinValues(uml::OutputPin *  pin)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void putPinValues(uml::OutputPin *  pin,std::vector<fUML::Value * > *  values)  ;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values)  ;
 			
 			/*!
 			 */ 
@@ -77,7 +78,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityNodeActivation *  getNodeActivation(uml::ActivityNode *  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation>  getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
@@ -93,7 +94,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(fUML::ActivityEdgeInstance *  edgeInstance)  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			/*!
 			 */ 
@@ -101,7 +102,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  completeAction()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> completeAction()  ;
 			
 			/*!
 			 */ 
@@ -119,12 +120,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActivityNodeActivationGroup *  getActivationGroup() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const ;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(fUML::ActivityNodeActivationGroup *  _activationGroup) ;
-			
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) ;
 							
 			
 			//*********************************
@@ -139,7 +139,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_STRUCTUREDACTIVITYNODEACTIVATIONSTRUCTUREDACTIVITYNODEACTIVATIONIMPL_HPP */

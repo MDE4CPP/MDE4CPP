@@ -19,6 +19,10 @@ using namespace fUML;
 IntegerValueImpl::IntegerValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -26,6 +30,9 @@ IntegerValueImpl::IntegerValueImpl()
 
 IntegerValueImpl::~IntegerValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -47,7 +54,7 @@ ecore::EObject *  IntegerValueImpl::copy() const
 	return new IntegerValueImpl(*this);
 }
 
-ecore::EClass* IntegerValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getIntegerValue();
 }
@@ -68,25 +75,24 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool IntegerValueImpl::equals(fUML::Value *  otherValue) 
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
 
-    IntegerValue * otherIntegerValue = dynamic_cast<IntegerValue * >(otherValue);
-
+	std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
     if(otherIntegerValue != nullptr)
     {
-        isEqual = otherIntegerValue->getValue() == this->getValue();
+        isEqual = (otherIntegerValue->getValue() == this->getValue());
     }
 
     return isEqual;
 }
 
-uml::ValueSpecification *  IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  IntegerValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::LiteralInteger * literal = uml::UmlFactory::eInstance()->createLiteralInteger();
+	std::shared_ptr<uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());
 
     literal->setType(this->getType());
     literal->setValue(this->getValue());

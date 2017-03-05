@@ -24,10 +24,11 @@
 #include "ActivityNode.hpp"
 #include "Pin.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class PinActivationImpl :virtual public ObjectNodeActivationImpl, virtual public PinActivation
+	class PinActivationImpl :virtual public ObjectNodeActivationImpl, virtual public PinActivation 
 	{
 		public: 
 			PinActivationImpl(const PinActivationImpl & obj);
@@ -49,11 +50,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
 			
 			
 			
@@ -67,12 +68,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActionActivation *  getActionActivation() const ;
+			virtual std::shared_ptr<fUML::ActionActivation> getActionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setActionActivation(fUML::ActionActivation *  _actionActivation) ;
-			
+			virtual void setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation) ;
 							
 			
 			//*********************************
@@ -87,7 +87,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_PINACTIVATIONPINACTIVATIONIMPL_HPP */

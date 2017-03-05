@@ -13,6 +13,10 @@ using namespace fUML;
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
 
 LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralNullEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -42,7 +49,7 @@ ecore::EObject *  LiteralNullEvaluationImpl::copy() const
 	return new LiteralNullEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralNullEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralNullEvaluation();
 }
@@ -54,7 +61,7 @@ ecore::EClass* LiteralNullEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralNullEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralNullEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	return nullptr;

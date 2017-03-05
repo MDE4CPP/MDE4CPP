@@ -35,11 +35,12 @@
 #include "ActivityParameterNodeActivation.hpp"
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
 	class ActivityNodeActivationGroupImpl :virtual public ecore::EObjectImpl,
-virtual public ActivityNodeActivationGroup
+virtual public ActivityNodeActivationGroup 
 	{
 		public: 
 			ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj);
@@ -61,19 +62,19 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */ 
-			virtual void run(std::vector<fUML::ActivityNodeActivation * > *  activations)  ;
+			virtual void run(std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>>  activations)  ;
 			
 			/*!
 			 */ 
-			virtual bool checkIncomingEdges(std::vector<fUML::ActivityEdgeInstance * > *  incomingEdges,std::vector<fUML::ActivityNodeActivation * > *  activations)  ;
+			virtual bool checkIncomingEdges(std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>>  incomingEdges,std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>>  activations)  ;
 			
 			/*!
 			 */ 
-			virtual void activate(std::vector<uml::ActivityNode * > *  nodes,std::vector<uml::ActivityEdge * > *  edges)  ;
+			virtual void activate(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes,std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>>  edges)  ;
 			
 			/*!
 			 */ 
-			virtual void runNodes(std::vector<uml::ActivityNode * > *  nodes)  ;
+			virtual void runNodes(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes)  ;
 			
 			/*!
 			 */ 
@@ -81,43 +82,43 @@ virtual public ActivityNodeActivationGroup
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations(std::vector<uml::ActivityNode * > *  nodes)  ;
+			virtual void createNodeActivations(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityNodeActivation *  createNodeActivation(uml::ActivityNode *  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation>  createNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual void addNodeActivation(fUML::ActivityNodeActivation *  activation)  ;
+			virtual void addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityNodeActivation *  getNodeActivation(uml::ActivityNode *  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation>  getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual void createEdgeInstance(std::vector<uml::ActivityEdge * > *  edges)  ;
+			virtual void createEdgeInstance(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>>  edges)  ;
 			
 			/*!
 			 */ 
-			virtual void addEdgeInstance(fUML::ActivityEdgeInstance *  instance)  ;
+			virtual void addEdgeInstance(std::shared_ptr<fUML::ActivityEdgeInstance>  instance)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityExecution *  retrieveActivityExecution()  ;
+			virtual std::shared_ptr<fUML::ActivityExecution>  retrieveActivityExecution()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ActivityParameterNodeActivation * > *  getOutputParameterNodeActivations()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityParameterNodeActivation>>> getOutputParameterNodeActivations()  ;
 			
 			/*!
 			 */ 
-			virtual void resume(fUML::ActivityNodeActivation *  activation)  ;
+			virtual void resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
 			
 			/*!
 			 */ 
-			virtual void suspend(fUML::ActivityNodeActivation *  activation)  ;
+			virtual void suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
 			
 			/*!
 			 */ 
@@ -125,7 +126,7 @@ virtual public ActivityNodeActivationGroup
 			
 			/*!
 			 */ 
-			virtual bool hasSourceFor(fUML::ActivityEdgeInstance *  edgeInstance)  ;
+			virtual bool hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			
 			
@@ -139,31 +140,29 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::ActivityEdgeInstance * > *  getEdgeInstances() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> getEdgeInstances() const ;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::ActivityNodeActivation * > *  getNodeActivations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> getNodeActivations() const ;
 			
 			/*!
 			 */
-			virtual fUML::ActivityExecution *  getActivityExecution() const ;
+			virtual std::shared_ptr<fUML::ActivityExecution> getActivityExecution() const ;
 			
 			/*!
 			 */
-			virtual void setActivityExecution(fUML::ActivityExecution *  _activityExecution) ;
+			virtual void setActivityExecution(std::shared_ptr<fUML::ActivityExecution> _activityExecution) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::StructuredActivityNodeActivation> getContainingNodeActivation() const ;
 			
 			/*!
 			 */
-			virtual fUML::StructuredActivityNodeActivation *  getContainingNodeActivation() const ;
-			
+			virtual void setContainingNodeActivation(std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation) ;
 			/*!
 			 */
-			virtual void setContainingNodeActivation(fUML::StructuredActivityNodeActivation *  _containingNodeActivation) ;
-			
-			/*!
-			 */
-			virtual std::vector<fUML::ActivityNodeActivation * > *  getSuspendedActivations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> getSuspendedActivations() const ;
 			
 							
 			
@@ -179,7 +178,7 @@ virtual public ActivityNodeActivationGroup
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYNODEACTIVATIONGROUPACTIVITYNODEACTIVATIONGROUPIMPL_HPP */

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -73,7 +74,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute(std::vector<uml::Class * > *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  = 0;
+			virtual void execute(std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
 			
 			/*!
 			 */ 
@@ -93,28 +94,25 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getExecution() const = 0;
+			virtual std::shared_ptr<fUML::Execution> getExecution() const = 0;
 			
 			/*!
 			 */
-			virtual void setExecution(fUML::Execution *  _execution) = 0;
+			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::Class> getClassifier() const = 0;
 			
 			/*!
 			 */
-			virtual uml::Class *  getClassifier() const = 0;
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const = 0;
 			
 			/*!
 			 */
-			virtual void setClassifier(uml::Class *  _classifier) = 0;
-			
-			/*!
-			 */
-			virtual fUML::ObjectActivation *  getObjectActivation() const = 0;
-			
-			/*!
-			 */
-			virtual void setObjectActivation(fUML::ObjectActivation *  _objectActivation) = 0;
-			
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) = 0;
 			
 
 		protected:
@@ -128,13 +126,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Execution *  m_execution =  nullptr ;
+			std::shared_ptr<fUML::Execution> m_execution;
 			/*!
 			 */
-			uml::Class *  m_classifier =  nullptr ;
+			std::shared_ptr<uml::Class> m_classifier;
 			/*!
 			 */
-			fUML::ObjectActivation *  m_objectActivation =  nullptr ;
+			std::shared_ptr<fUML::ObjectActivation> m_objectActivation;
 			
 
 		public:

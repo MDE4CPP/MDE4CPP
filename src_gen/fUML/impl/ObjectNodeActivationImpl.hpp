@@ -24,10 +24,11 @@
 #include "Token.hpp"
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ObjectNodeActivationImpl :virtual public ActivityNodeActivationImpl, virtual public ObjectNodeActivation
+	class ObjectNodeActivationImpl :virtual public ActivityNodeActivationImpl, virtual public ObjectNodeActivation 
 	{
 		public: 
 			ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj);
@@ -61,11 +62,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  getUnofferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getUnofferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeUnofferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeUnofferedTokens()  ;
 			
 			/*!
 			 */ 
@@ -73,7 +74,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void sendOffers(std::vector<fUML::Token * > *  tokens)  ;
+			virtual void sendOffers(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens)  ;
 			
 			/*!
 			 */ 
@@ -81,11 +82,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void addToken(fUML::Token *  token)  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual int removeToken(fUML::Token *  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
@@ -123,7 +124,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OBJECTNODEACTIVATIONOBJECTNODEACTIVATIONIMPL_HPP */

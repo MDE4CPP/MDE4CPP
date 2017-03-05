@@ -51,10 +51,11 @@
 #include <DestroyLinkAction.hpp>
 #include "FlowFinalNode.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ExecutionFactoryL2Impl :virtual public ExecutionFactoryL1Impl, virtual public ExecutionFactoryL2
+	class ExecutionFactoryL2Impl :virtual public ExecutionFactoryL1Impl, virtual public ExecutionFactoryL2 
 	{
 		public: 
 			ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & obj);
@@ -76,7 +77,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::SemanticVisitor *  instantiateVisitor(uml::Element *  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			
 			
@@ -102,7 +103,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONFACTORYL2EXECUTIONFACTORYL2IMPL_HPP */

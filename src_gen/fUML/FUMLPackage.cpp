@@ -9,15 +9,15 @@ const std::string FUMLPackage::eNS_URI ="http://www.eclipse.org/emf/2002/fUML";
 const std::string FUMLPackage::eNS_PREFIX ="fUML";
 
 //Singleton 
-FUMLPackage * FUMLPackage::instance = nullptr;
+std::shared_ptr<FUMLPackage> FUMLPackage::instance;
 
-FUMLPackage * FUMLPackage::eInstance()
+std::shared_ptr<FUMLPackage> FUMLPackage::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = FUMLPackageImpl::create();
-		dynamic_cast<FUMLPackageImpl * >(instance)->init();
+		instance.reset(FUMLPackageImpl::create());
+		std::dynamic_pointer_cast<FUMLPackageImpl>(instance)->init();
 	}	
 	return instance;
 }

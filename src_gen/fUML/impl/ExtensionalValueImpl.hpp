@@ -23,10 +23,11 @@
 
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ExtensionalValueImpl :virtual public CompoundValueImpl, virtual public ExtensionalValue
+	class ExtensionalValueImpl :virtual public CompoundValueImpl, virtual public ExtensionalValue 
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
@@ -62,12 +63,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Locus *  getLocus() const ;
+			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(fUML::Locus *  _locus) ;
-			
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
 							
 			
 			//*********************************
@@ -82,7 +82,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXTENSIONALVALUEEXTENSIONALVALUEIMPL_HPP */

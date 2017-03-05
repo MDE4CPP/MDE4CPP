@@ -27,6 +27,10 @@ using namespace fUML;
 InstanceValueEvaluationImpl::InstanceValueEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -34,6 +38,9 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl()
 
 InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InstanceValueEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -56,7 +63,7 @@ ecore::EObject *  InstanceValueEvaluationImpl::copy() const
 	return new InstanceValueEvaluationImpl(*this);
 }
 
-ecore::EClass* InstanceValueEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getInstanceValueEvaluation();
 }
@@ -68,72 +75,74 @@ ecore::EClass* InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  InstanceValueEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-	    uml::InstanceSpecification * instance = (dynamic_cast<uml::InstanceValue * >(this->getSpecification()))->getInstance();
-    std::vector< uml::Classifier *>* types = instance->getClassifier();
-    uml::Classifier * myType = types->at(0);
+	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = instance->getClassifier();
+	std::shared_ptr<uml::Classifier> myType = types->at(0);
 
     DEBUG_MESSAGE(std::cout<<("[evaluate] type = " + myType->getName())<<std::endl;)
 
-    Value * value;
-    if(dynamic_cast<uml::EnumerationLiteral * >(instance) != nullptr)
+	std::shared_ptr<Value> value;
+    std::shared_ptr<uml::EnumerationLiteral> literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(instance);
+    if(literal != nullptr)
     {
-        EnumerationValue * enumerationValue = FUMLFactory::eInstance()->createEnumerationValue();
-        enumerationValue->setType(dynamic_cast<uml::Enumeration  * >(myType));
-        enumerationValue->setLiteral(dynamic_cast<uml::EnumerationLiteral * >(instance));
+    	std::shared_ptr<EnumerationValue> enumerationValue(FUMLFactory::eInstance()->createEnumerationValue());
+        enumerationValue->setType(std::dynamic_pointer_cast<uml::Enumeration>(myType));
+        enumerationValue->setLiteral(literal);
         value = enumerationValue;
     }
     else
     {
-        StructuredValue * structuredValue = nullptr;
-
-        if(dynamic_cast<uml::DataType * >(myType) != nullptr)
+    	std::shared_ptr<StructuredValue> structuredValue = nullptr;
+    	std::shared_ptr<uml::DataType> type = std::dynamic_pointer_cast<uml::DataType>(myType);
+        if(type != nullptr)
         {
             // Debug.println("[evaluate] Type is a data type.");
-            DataValue * dataValue = FUMLFactory::eInstance()->createDataValue();
-            dataValue->setType(dynamic_cast<uml::DataType * >(myType));
+        	std::shared_ptr<DataValue> dataValue(FUMLFactory::eInstance()->createDataValue());
+            dataValue->setType(type);
             structuredValue = dataValue;
         }
         else
         {
-            Object *object = nullptr;
-            if(dynamic_cast<uml::Behavior * >(myType) != nullptr)
+        	std::shared_ptr<Object> object = nullptr;
+        	std::shared_ptr<uml::Behavior> behavior = std::dynamic_pointer_cast<uml::Behavior>(myType);
+            if(behavior != nullptr)
             {
                 // Debug.println("[evaluate] Type is a behavior.");
-                object = this->getLocus()->getFactory()->createExecution(dynamic_cast<uml::Behavior*>(myType), nullptr);
+                object = this->getLocus()->getFactory()->createExecution(behavior, nullptr);
             }
             else
             {
                 // Debug.println("[evaluate] Type is a class.");
-                object = FUMLFactory::eInstance()->createObject();
+                object.reset(FUMLFactory::eInstance()->createObject());
                 for(unsigned int i = 0; i < types->size(); i++)
                 {
-                    uml::Classifier * type = types->at(i);
-                    object->getTypes()->push_back(dynamic_cast<uml::Class * >(type));
+                	std::shared_ptr<uml::Classifier> type = types->at(i);
+                    object->getTypes()->push_back(std::dynamic_pointer_cast<uml::Class>(type));
                 }
             }
 
             this->getLocus()->add(object);
 
-            Reference * reference = FUMLFactory::eInstance()->createReference();
+            std::shared_ptr<Reference> reference(FUMLFactory::eInstance()->createReference());
             reference->setReferent(object);
             structuredValue = reference;
         }
 
         structuredValue->createFeatureValues();
 
-        std::vector<uml::Slot * > * instanceSlots = instance->getSlot();
+        std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> instanceSlots = instance->getSlot();
         for(unsigned int i = 0; i < instanceSlots->size(); i++)
         {
-            uml::Slot * slot = instanceSlots->at(i);
-            std::vector<Value *> * values = new std::vector<Value *>();
+        	std::shared_ptr<uml::Slot> slot = instanceSlots->at(i);
+        	std::shared_ptr<std::vector<std::shared_ptr<Value>>> values(new std::vector<std::shared_ptr<Value>>());
 
-            std::vector<uml::ValueSpecification * > * slotValues = slot->getValue();
+        	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> slotValues = slot->getValue();
             for(unsigned int j = 0; j < slotValues->size(); j++)
             {
-                uml::ValueSpecification * slotValue = slotValues->at(j);
+            	std::shared_ptr<uml::ValueSpecification> slotValue = slotValues->at(j);
                 values->push_back(this->getLocus()->getExecutor()->evaluate(slotValue));
             }
             structuredValue->assignFeatureValue(slot->getDefiningFeature(), values, 0);

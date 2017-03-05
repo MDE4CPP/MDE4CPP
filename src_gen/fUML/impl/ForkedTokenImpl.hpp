@@ -23,10 +23,11 @@
 
  
 
+
 //*********************************
 namespace fUML 
 {
-	class ForkedTokenImpl :virtual public TokenImpl, virtual public ForkedToken
+	class ForkedTokenImpl :virtual public TokenImpl, virtual public ForkedToken 
 	{
 		public: 
 			ForkedTokenImpl(const ForkedTokenImpl & obj);
@@ -48,7 +49,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(fUML::Token *  otherToken)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken)  ;
 			
 			/*!
 			 */ 
@@ -60,7 +61,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value>  getValue()  const  ;
 			
 			
 			
@@ -90,12 +91,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Token *  getBaseToken() const ;
+			virtual std::shared_ptr<fUML::Token> getBaseToken() const ;
 			
 			/*!
 			 */
-			virtual void setBaseToken(fUML::Token *  _baseToken) ;
-			
+			virtual void setBaseToken(std::shared_ptr<fUML::Token> _baseToken) ;
 							
 			
 			//*********************************
@@ -110,7 +110,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_FORKEDTOKENFORKEDTOKENIMPL_HPP */

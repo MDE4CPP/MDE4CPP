@@ -13,6 +13,10 @@ using namespace fUML;
 EvaluationImpl::EvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ EvaluationImpl::EvaluationImpl()
 
 EvaluationImpl::~EvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Evaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -43,7 +50,7 @@ ecore::EObject *  EvaluationImpl::copy() const
 	return new EvaluationImpl(*this);
 }
 
-ecore::EClass* EvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getEvaluation();
 }
@@ -55,7 +62,7 @@ ecore::EClass* EvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  EvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  EvaluationImpl::evaluate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -64,24 +71,24 @@ fUML::Value *  EvaluationImpl::evaluate()
 //*********************************
 // References
 //*********************************
-fUML::Locus *  EvaluationImpl::getLocus() const
+std::shared_ptr<fUML::Locus> EvaluationImpl::getLocus() const
 {
-	//assert(m_locus);
-	return m_locus;
+//assert(m_locus);
+    return m_locus;
 }
-void EvaluationImpl::setLocus(fUML::Locus *  _locus)
+void EvaluationImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 {
-	m_locus = _locus;
+    m_locus = _locus;
 }
 
-uml::ValueSpecification *  EvaluationImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() const
 {
-	//assert(m_specification);
-	return m_specification;
+//assert(m_specification);
+    return m_specification;
 }
-void EvaluationImpl::setSpecification(uml::ValueSpecification *  _specification)
+void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
-	m_specification = _specification;
+    m_specification = _specification;
 }
 
 //*********************************

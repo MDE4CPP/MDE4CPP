@@ -13,33 +13,21 @@ using namespace fUML;
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_clauseActivations == nullptr)
-	{
-		m_clauseActivations = new std::vector<fUML::ClauseActivation * >();
-	}
-	if( m_selectedClauses == nullptr)
-	{
-		m_selectedClauses = new std::vector<uml::Clause * >();
-	}
+	m_clauseActivations.reset(new std::vector<std::shared_ptr<fUML::ClauseActivation>>());
+	m_selectedClauses.reset(new std::vector<std::shared_ptr<uml::Clause>>());
 }
 
 ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
 {
-	if(m_clauseActivations!=nullptr)
-	{
-		for(auto c :*m_clauseActivations)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_selectedClauses!=nullptr)
-	{
-		delete(m_selectedClauses);
-	 	m_selectedClauses = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ConditionalNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -53,33 +41,35 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
-	std::vector<uml::Clause * > *  _selectedClauses = obj.getSelectedClauses();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> _selectedClauses = obj.getSelectedClauses();
 	this->getSelectedClauses()->insert(this->getSelectedClauses()->end(), _selectedClauses->begin(), _selectedClauses->end());
 
 
 	//clone containt lists
 	if(obj.getActivationGroup()!=nullptr)
 	{
-		m_activationGroup = dynamic_cast<fUML::ActivityNodeActivationGroup * >(obj.getActivationGroup()->copy());
+		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
 	}
-	for(fUML::ClauseActivation * 	_clauseActivations : *obj.getClauseActivations())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> _clauseActivationsList = obj.getClauseActivations();
+	for(std::shared_ptr<fUML::ClauseActivation> _clauseActivations : *_clauseActivationsList)
 	{
-		this->getClauseActivations()->push_back(dynamic_cast<fUML::ClauseActivation * >(_clauseActivations->copy()));
+		this->getClauseActivations()->push_back(std::shared_ptr<fUML::ClauseActivation>(dynamic_cast<fUML::ClauseActivation*>(_clauseActivations->copy())));
 	}
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -88,7 +78,7 @@ ecore::EObject *  ConditionalNodeActivationImpl::copy() const
 	return new ConditionalNodeActivationImpl(*this);
 }
 
-ecore::EClass* ConditionalNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getConditionalNodeActivation();
 }
@@ -100,19 +90,19 @@ ecore::EClass* ConditionalNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::ClauseActivation *  ConditionalNodeActivationImpl::getClauseActivation(uml::Clause *  clause) 
+std::shared_ptr<fUML::ClauseActivation>  ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::runTest(uml::Clause *  clause) 
+void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::selectBody(uml::Clause *  clause) 
+void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -121,17 +111,17 @@ void ConditionalNodeActivationImpl::selectBody(uml::Clause *  clause)
 //*********************************
 // References
 //*********************************
-std::vector<fUML::ClauseActivation * > *  ConditionalNodeActivationImpl::getClauseActivations() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> ConditionalNodeActivationImpl::getClauseActivations() const
 {
-	
-	return m_clauseActivations;
+
+    return m_clauseActivations;
 }
 
 
-std::vector<uml::Clause * > *  ConditionalNodeActivationImpl::getSelectedClauses() const
+std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> ConditionalNodeActivationImpl::getSelectedClauses() const
 {
-	
-	return m_selectedClauses;
+
+    return m_selectedClauses;
 }
 
 

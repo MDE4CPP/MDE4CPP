@@ -25,10 +25,11 @@
 #include "PrimitiveType.hpp"
 #include "Type.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class LiteralEvaluationImpl :virtual public EvaluationImpl, virtual public LiteralEvaluation
+	class LiteralEvaluationImpl :virtual public EvaluationImpl, virtual public LiteralEvaluation 
 	{
 		public: 
 			LiteralEvaluationImpl(const LiteralEvaluationImpl & obj);
@@ -50,7 +51,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::PrimitiveType *  getType(std::string builtInTypeName)  ;
+			virtual std::shared_ptr<uml::PrimitiveType>  getType(std::string builtInTypeName)  ;
 			
 			
 			
@@ -76,7 +77,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LITERALEVALUATIONLITERALEVALUATIONIMPL_HPP */

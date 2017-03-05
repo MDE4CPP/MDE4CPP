@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -89,15 +90,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::BooleanValue *  getDecision()  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue>  getDecision()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ClauseActivation * > *  getPredecessors()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getPredecessors()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ClauseActivation * > *  getSuccessors()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getSuccessors()  = 0;
 			
 			
 			//*********************************
@@ -109,20 +110,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Clause *  getClause() const = 0;
+			virtual std::shared_ptr<uml::Clause> getClause() const = 0;
 			
 			/*!
 			 */
-			virtual void setClause(uml::Clause *  _clause) = 0;
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::ConditionalNodeActivation> getConditionalNodeActivation() const = 0;
 			
 			/*!
 			 */
-			virtual fUML::ConditionalNodeActivation *  getConditionalNodeActivation() const = 0;
-			
-			/*!
-			 */
-			virtual void setConditionalNodeActivation(fUML::ConditionalNodeActivation *  _conditionalNodeActivation) = 0;
-			
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation) = 0;
 			
 
 		protected:
@@ -136,10 +135,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::Clause *  m_clause =  nullptr ;
+			std::shared_ptr<uml::Clause> m_clause;
 			/*!
 			 */
-			fUML::ConditionalNodeActivation *  m_conditionalNodeActivation =  nullptr ;
+			std::shared_ptr<fUML::ConditionalNodeActivation> m_conditionalNodeActivation;
 			
 
 		public:

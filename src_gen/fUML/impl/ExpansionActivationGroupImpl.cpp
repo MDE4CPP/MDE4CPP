@@ -13,6 +13,10 @@ using namespace fUML;
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl()
 
 ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExpansionActivationGroup "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,18 +42,20 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 	m_regionActivation  = obj.getRegionActivation();
 
-	std::vector<fUML::ActivityNodeActivation * > *  _suspendedActivations = obj.getSuspendedActivations();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> _suspendedActivations = obj.getSuspendedActivations();
 	this->getSuspendedActivations()->insert(this->getSuspendedActivations()->end(), _suspendedActivations->begin(), _suspendedActivations->end());
 
 
 	//clone containt lists
-	for(fUML::ActivityEdgeInstance * 	_edgeInstances : *obj.getEdgeInstances())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _edgeInstancesList = obj.getEdgeInstances();
+	for(std::shared_ptr<fUML::ActivityEdgeInstance> _edgeInstances : *_edgeInstancesList)
 	{
-		this->getEdgeInstances()->push_back(dynamic_cast<fUML::ActivityEdgeInstance * >(_edgeInstances->copy()));
+		this->getEdgeInstances()->push_back(std::shared_ptr<fUML::ActivityEdgeInstance>(dynamic_cast<fUML::ActivityEdgeInstance*>(_edgeInstances->copy())));
 	}
-	for(fUML::ActivityNodeActivation * 	_nodeActivations : *obj.getNodeActivations())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> _nodeActivationsList = obj.getNodeActivations();
+	for(std::shared_ptr<fUML::ActivityNodeActivation> _nodeActivations : *_nodeActivationsList)
 	{
-		this->getNodeActivations()->push_back(dynamic_cast<fUML::ActivityNodeActivation * >(_nodeActivations->copy()));
+		this->getNodeActivations()->push_back(std::shared_ptr<fUML::ActivityNodeActivation>(dynamic_cast<fUML::ActivityNodeActivation*>(_nodeActivations->copy())));
 	}
 }
 
@@ -55,7 +64,7 @@ ecore::EObject *  ExpansionActivationGroupImpl::copy() const
 	return new ExpansionActivationGroupImpl(*this);
 }
 
-ecore::EClass* ExpansionActivationGroupImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getExpansionActivationGroup();
 }
@@ -71,14 +80,14 @@ ecore::EClass* ExpansionActivationGroupImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-fUML::ExpansionRegionActivation *  ExpansionActivationGroupImpl::getRegionActivation() const
+std::shared_ptr<fUML::ExpansionRegionActivation> ExpansionActivationGroupImpl::getRegionActivation() const
 {
-	//assert(m_regionActivation);
-	return m_regionActivation;
+//assert(m_regionActivation);
+    return m_regionActivation;
 }
-void ExpansionActivationGroupImpl::setRegionActivation(fUML::ExpansionRegionActivation *  _regionActivation)
+void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation)
 {
-	m_regionActivation = _regionActivation;
+    m_regionActivation = _regionActivation;
 }
 
 //*********************************

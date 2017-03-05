@@ -37,10 +37,11 @@
 
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ActionActivationImpl :virtual public ActivityNodeActivationImpl, virtual public ActionActivation
+	class ActionActivationImpl :virtual public ActivityNodeActivationImpl, virtual public ActionActivation 
 	{
 		public: 
 			ActionActivationImpl(const ActionActivationImpl & obj);
@@ -74,35 +75,35 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void addPinActivation(fUML::PinActivation *  pinActivation)  ;
+			virtual void addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::PinActivation *  retrievePinActivation(uml::Pin *  pin)  ;
+			virtual std::shared_ptr<fUML::PinActivation>  retrievePinActivation(std::shared_ptr<uml::Pin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void putToken(uml::OutputPin *  pin,fUML::Value *  value)  ;
+			virtual void putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)  ;
 			
 			/*!
 			 */ 
-			virtual void putTokens(uml::OutputPin *  pin,std::vector<fUML::Value * > *  values)  ;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getTokens(uml::InputPin *  pin)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getTokens(std::shared_ptr<uml::InputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  takeTokens(uml::InputPin *  pin)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> takeTokens(std::shared_ptr<uml::InputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual bool valueParticipatesInLink(fUML::Value *  value,fUML::Link *  link)  ;
+			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::BooleanValue *  makeBooleanValue(bool value)  ;
+			virtual std::shared_ptr<fUML::BooleanValue>  makeBooleanValue(bool value)  ;
 			
 			/*!
 			 */ 
@@ -110,11 +111,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
@@ -126,7 +127,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  completeAction()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> completeAction()  ;
 			
 			/*!
 			 */ 
@@ -134,11 +135,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void addOutgoingEdge(fUML::ActivityEdgeInstance *  edge)  ;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(fUML::ActivityEdgeInstance *  edgeInstance)  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			
 			
@@ -160,7 +161,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::PinActivation * > *  getPinActivation() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> getPinActivation() const ;
 			
 							
 			
@@ -176,7 +177,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ACTIONACTIVATIONACTIONACTIVATIONIMPL_HPP */

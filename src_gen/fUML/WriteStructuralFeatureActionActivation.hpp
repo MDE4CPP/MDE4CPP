@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int position(fUML::Value *  value,std::vector<fUML::Value * > *  list,int startAt)  = 0;
+			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  list,int startAt)  = 0;
 			
 			
 			//*********************************

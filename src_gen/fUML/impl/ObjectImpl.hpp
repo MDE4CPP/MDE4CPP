@@ -26,10 +26,11 @@
 #include "Class.hpp"
 #include "Classifier.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ObjectImpl :virtual public ExtensionalValueImpl, virtual public Object
+	class ObjectImpl :virtual public ExtensionalValueImpl, virtual public Object 
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
@@ -51,27 +52,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Execution *  dispatch(uml::Operation *  operation)  ;
+			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual void send(fUML::SignalInstance *  signalInstance)  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void _register(fUML::EventAccepter *  accepter)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual void unregister(fUML::EventAccepter *  accepter)  ;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			/*!
 			 */ 
@@ -89,16 +90,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<uml::Classifier * > *  getTypes() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes() const ;
 			
 			/*!
 			 */
-			virtual fUML::ObjectActivation *  getObjectActivation() const ;
+			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const ;
 			
 			/*!
 			 */
-			virtual void setObjectActivation(fUML::ObjectActivation *  _objectActivation) ;
-			
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) ;
 							
 			
 			//*********************************
@@ -113,7 +113,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OBJECTOBJECTIMPL_HPP */

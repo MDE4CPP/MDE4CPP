@@ -29,10 +29,11 @@
 #include "EnumerationLiteral.hpp"
 #include "Enumeration.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class EnumerationValueImpl :virtual public ValueImpl, virtual public EnumerationValue
+	class EnumerationValueImpl :virtual public ValueImpl, virtual public EnumerationValue 
 	{
 		public: 
 			EnumerationValueImpl(const EnumerationValueImpl & obj);
@@ -54,15 +55,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			/*!
 			 */ 
@@ -70,7 +71,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
 			
 			
 			
@@ -84,20 +85,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::EnumerationLiteral *  getLiteral() const ;
+			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const ;
 			
 			/*!
 			 */
-			virtual void setLiteral(uml::EnumerationLiteral *  _literal) ;
+			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) ;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::Enumeration> getType() const ;
 			
 			/*!
 			 */
-			virtual uml::Enumeration *  getType() const ;
-			
-			/*!
-			 */
-			virtual void setType(uml::Enumeration *  _type) ;
-			
+			virtual void setType(std::shared_ptr<uml::Enumeration> _type) ;
 							
 			
 			//*********************************
@@ -112,7 +111,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ENUMERATIONVALUEENUMERATIONVALUEIMPL_HPP */

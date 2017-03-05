@@ -13,6 +13,10 @@ using namespace fUML;
 FirstChoiceStrategyImpl::FirstChoiceStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ FirstChoiceStrategyImpl::FirstChoiceStrategyImpl()
 
 FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FirstChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  FirstChoiceStrategyImpl::copy() const
 	return new FirstChoiceStrategyImpl(*this);
 }
 
-ecore::EClass* FirstChoiceStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getFirstChoiceStrategy();
 }

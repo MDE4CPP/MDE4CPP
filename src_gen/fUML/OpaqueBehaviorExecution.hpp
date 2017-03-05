@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::vector<fUML::ParameterValue * > *  inputParameters,std::vector<fUML::ParameterValue * > *  outputParameters)  = 0;
+			virtual void doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputParameters,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  outputParameters)  = 0;
 			
 			/*!
 			 */ 

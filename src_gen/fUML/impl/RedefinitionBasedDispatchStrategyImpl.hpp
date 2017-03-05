@@ -26,10 +26,11 @@
 #include "Operation.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class RedefinitionBasedDispatchStrategyImpl :virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy
+	class RedefinitionBasedDispatchStrategyImpl :virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy 
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);
@@ -51,11 +52,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool operationsMatch(uml::Operation *  ownedOperation,uml::Operation *  baseOperation)  ;
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
 			
 			/*!
 			 */ 
-			virtual uml::Behavior *  retrieveMethod(fUML::Object *  object,uml::Operation *  operation)  ;
+			virtual std::shared_ptr<uml::Behavior>  retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
 			
 			
 			
@@ -81,7 +82,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_REDEFINITIONBASEDDISPATCHSTRATEGYREDEFINITIONBASEDDISPATCHSTRATEGYIMPL_HPP */

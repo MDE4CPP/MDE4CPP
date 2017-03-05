@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class ValuesImpl :virtual public ecore::EObjectImpl,
-virtual public Values
+virtual public Values 
 	{
 		public: 
 			ValuesImpl(const ValuesImpl & obj);
@@ -59,7 +60,7 @@ virtual public Values
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Value * > *  getValues() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const ;
 			
 							
 			
@@ -75,7 +76,7 @@ virtual public Values
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_VALUESVALUESIMPL_HPP */

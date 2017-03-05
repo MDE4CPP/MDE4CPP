@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -106,11 +107,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void runGroup(fUML::ExpansionActivationGroup *  activationGroup)  = 0;
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::ExpansionNodeActivation *  getExpansionNodeActivation(uml::ExpansionNode *  node)  = 0;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation>  getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  = 0;
 			
 			/*!
 			 */ 
@@ -126,15 +127,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::TokenSet * > *  getInputTokens() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputTokens() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::TokenSet * > *  getInputExpansionTokens() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputExpansionTokens() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::ExpansionActivationGroup * > *  getActivationGroups() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ExpansionActivationGroup>>> getActivationGroups() const = 0;
 			
 			
 
@@ -149,13 +150,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::TokenSet * > *  m_inputTokens =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> m_inputTokens;
 			/*!
 			 */
-			std::vector<fUML::TokenSet * > *  m_inputExpansionTokens =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> m_inputExpansionTokens;
 			/*!
 			 */
-			std::vector<fUML::ExpansionActivationGroup * > *  m_activationGroups =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::ExpansionActivationGroup>>> m_activationGroups;
 			
 
 		public:

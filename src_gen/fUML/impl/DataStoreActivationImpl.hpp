@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class DataStoreActivationImpl :virtual public ActionActivationImpl, virtual public DataStoreActivation
+	class DataStoreActivationImpl :virtual public ActionActivationImpl, virtual public DataStoreActivation 
 	{
 		public: 
 			DataStoreActivationImpl(const DataStoreActivationImpl & obj);
@@ -51,7 +52,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			
 			
@@ -65,15 +66,14 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getCurrentExecution() const ;
+			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const ;
 			
 			/*!
 			 */
-			virtual void setCurrentExecution(fUML::Execution *  _currentExecution) ;
-			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) ;
 			/*!
 			 */
-			virtual std::vector<fUML::Token * > *  getStoredTokens() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getStoredTokens() const ;
 			
 							
 			
@@ -89,7 +89,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_DATASTOREACTIVATIONDATASTOREACTIVATIONIMPL_HPP */

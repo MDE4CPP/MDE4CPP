@@ -13,6 +13,10 @@ using namespace fUML;
 ClauseActivationImpl::ClauseActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ ClauseActivationImpl::ClauseActivationImpl()
 
 ClauseActivationImpl::~ClauseActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClauseActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -43,7 +50,7 @@ ecore::EObject *  ClauseActivationImpl::copy() const
 	return new ClauseActivationImpl(*this);
 }
 
-ecore::EClass* ClauseActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getClauseActivation();
 }
@@ -55,19 +62,19 @@ ecore::EClass* ClauseActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::BooleanValue *  ClauseActivationImpl::getDecision() 
+std::shared_ptr<fUML::BooleanValue>  ClauseActivationImpl::getDecision() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<fUML::ClauseActivation * > *  ClauseActivationImpl::getPredecessors() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> ClauseActivationImpl::getPredecessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<fUML::ClauseActivation * > *  ClauseActivationImpl::getSuccessors() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> ClauseActivationImpl::getSuccessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -100,24 +107,24 @@ void ClauseActivationImpl::selectBody()
 //*********************************
 // References
 //*********************************
-uml::Clause *  ClauseActivationImpl::getClause() const
+std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
 {
-	//assert(m_clause);
-	return m_clause;
+//assert(m_clause);
+    return m_clause;
 }
-void ClauseActivationImpl::setClause(uml::Clause *  _clause)
+void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
 {
-	m_clause = _clause;
+    m_clause = _clause;
 }
 
-fUML::ConditionalNodeActivation *  ClauseActivationImpl::getConditionalNodeActivation() const
+std::shared_ptr<fUML::ConditionalNodeActivation> ClauseActivationImpl::getConditionalNodeActivation() const
 {
-	//assert(m_conditionalNodeActivation);
-	return m_conditionalNodeActivation;
+//assert(m_conditionalNodeActivation);
+    return m_conditionalNodeActivation;
 }
-void ClauseActivationImpl::setConditionalNodeActivation(fUML::ConditionalNodeActivation *  _conditionalNodeActivation)
+void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation)
 {
-	m_conditionalNodeActivation = _conditionalNodeActivation;
+    m_conditionalNodeActivation = _conditionalNodeActivation;
 }
 
 //*********************************

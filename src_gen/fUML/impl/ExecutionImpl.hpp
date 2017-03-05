@@ -31,10 +31,11 @@
 #include "../fUML/impl/ObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ExecutionImpl :virtual public ObjectImpl, virtual public Execution
+	class ExecutionImpl :virtual public ObjectImpl, virtual public Execution 
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
@@ -64,23 +65,23 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void setParameterValue(fUML::ParameterValue *  parameterValue)  ;
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ParameterValue *  getParameterValue(uml::Parameter *  parameter)  ;
+			virtual std::shared_ptr<fUML::ParameterValue>  getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ParameterValue * > *  getOutputParameterValues()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getOutputParameterValues()  ;
 			
 			/*!
 			 */ 
-			virtual uml::Behavior *  getBehavior()  ;
+			virtual std::shared_ptr<uml::Behavior>  getBehavior()  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			
 			
@@ -94,15 +95,14 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Object *  getContext() const ;
+			virtual std::shared_ptr<fUML::Object> getContext() const ;
 			
 			/*!
 			 */
-			virtual void setContext(fUML::Object *  _context) ;
-			
+			virtual void setContext(std::shared_ptr<fUML::Object> _context) ;
 			/*!
 			 */
-			virtual std::vector<fUML::ParameterValue * > *  getParameterValues() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getParameterValues() const ;
 			
 							
 			
@@ -118,7 +118,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXECUTIONEXECUTIONIMPL_HPP */

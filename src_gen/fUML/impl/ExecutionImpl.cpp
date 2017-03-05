@@ -22,25 +22,21 @@ using namespace fUML;
 ExecutionImpl::ExecutionImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_parameterValues == nullptr)
-	{
-		m_parameterValues = new std::vector<fUML::ParameterValue * >();
-	}
+	m_parameterValues.reset(new std::vector<std::shared_ptr<fUML::ParameterValue>>());
 }
 
 ExecutionImpl::~ExecutionImpl()
 {
-	if(m_parameterValues!=nullptr)
-	{
-		for(auto c :*m_parameterValues)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Execution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -54,22 +50,24 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj)
 
 	m_locus  = obj.getLocus();
 
-	std::vector<uml::Classifier * > *  _types = obj.getTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _types = obj.getTypes();
 	this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation = dynamic_cast<fUML::ObjectActivation * >(obj.getObjectActivation()->copy());
+		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
 	}
-	for(fUML::ParameterValue * 	_parameterValues : *obj.getParameterValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> _parameterValuesList = obj.getParameterValues();
+	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->push_back(dynamic_cast<fUML::ParameterValue * >(_parameterValues->copy()));
+		this->getParameterValues()->push_back(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
 	}
 }
 
@@ -78,7 +76,7 @@ ecore::EObject *  ExecutionImpl::copy() const
 	return new ExecutionImpl(*this);
 }
 
-ecore::EClass* ExecutionImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getExecution();
 }
@@ -96,21 +94,21 @@ void ExecutionImpl::execute()
 	
 }
 
-uml::Behavior *  ExecutionImpl::getBehavior() 
+std::shared_ptr<uml::Behavior>  ExecutionImpl::getBehavior() 
 {
 	//generated from body annotation
-	return dynamic_cast<uml::Behavior * >(this->getTypes()->front());
+	return std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
 }
 
-std::vector<fUML::ParameterValue * > *  ExecutionImpl::getOutputParameterValues() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutionImpl::getOutputParameterValues() 
 {
 	//generated from body annotation
-	 std::vector<ParameterValue* > * outputs = new std::vector<ParameterValue* >();
+	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputs(new std::vector<std::shared_ptr<ParameterValue>>());
 
-    for (ParameterValue* parameterValue : * this->getParameterValues() )
+	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputParameterValueList = this->getParameterValues();
+    for (std::shared_ptr<ParameterValue> parameterValue : *outputParameterValueList)
     {
-
-        uml::Parameter * parameter = parameterValue->getParameter();
+    	std::shared_ptr<uml::Parameter> parameter = parameterValue->getParameter();
         if((parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::OUT)
                 || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN))
@@ -122,13 +120,13 @@ std::vector<fUML::ParameterValue * > *  ExecutionImpl::getOutputParameterValues(
     return outputs;
 }
 
-fUML::ParameterValue *  ExecutionImpl::getParameterValue(uml::Parameter *  parameter) 
+std::shared_ptr<fUML::ParameterValue>  ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
 {
 	//generated from body annotation
-	    ParameterValue * parameterValue = nullptr;
+	std::shared_ptr<ParameterValue> parameterValue = nullptr;
 
-    std::vector<fUML::ParameterValue*>* list = this->getParameterValues();
-    std::vector<fUML::ParameterValue *>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (ParameterValue * p) { return p->getParameter() == parameter; } );
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> list = this->getParameterValues();
+	std::vector<std::shared_ptr<fUML::ParameterValue>>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (std::shared_ptr<ParameterValue> p) { return p->getParameter() == parameter; } );
     if(it!= this->getParameterValues()->end() )
     {
         parameterValue  = *it;
@@ -136,30 +134,27 @@ fUML::ParameterValue *  ExecutionImpl::getParameterValue(uml::Parameter *  param
     return parameterValue;
 }
 
-fUML::Value *  ExecutionImpl::new_() 
+std::shared_ptr<fUML::Value>  ExecutionImpl::new_() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExecutionImpl::setParameterValue(fUML::ParameterValue *  parameterValue) 
+void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
 {
 	//generated from body annotation
-	ParameterValue * existingParameterValue = this->getParameterValue(parameterValue->getParameter());
+	std::shared_ptr<ParameterValue> existingParameterValue = this->getParameterValue(parameterValue->getParameter());
 
-if (existingParameterValue == nullptr)
-{
-	this->getParameterValues()->push_back(parameterValue);
-}
-else
-{
-    for ( auto p : *existingParameterValue->getValues()){
-        delete p;
-    }
-    //existingParameterValue->getValues()->clear(); // memory Leak
- auto vec = parameterValue->getValues();
-    existingParameterValue->getValues()->insert(existingParameterValue->getValues()->end(),vec->begin(),vec->end());
-}
+	if (existingParameterValue == nullptr)
+	{
+		this->getParameterValues()->push_back(parameterValue);
+	}
+	else
+	{
+		existingParameterValue->getValues()->clear(); // memory Leak
+		auto vec = parameterValue->getValues();
+		existingParameterValue->getValues()->insert(existingParameterValue->getValues()->end(),vec->begin(),vec->end());
+	}
 }
 
 void ExecutionImpl::terminate() 
@@ -171,20 +166,20 @@ void ExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
-fUML::Object *  ExecutionImpl::getContext() const
+std::shared_ptr<fUML::Object> ExecutionImpl::getContext() const
 {
-	//assert(m_context);
-	return m_context;
+//assert(m_context);
+    return m_context;
 }
-void ExecutionImpl::setContext(fUML::Object *  _context)
+void ExecutionImpl::setContext(std::shared_ptr<fUML::Object> _context)
 {
-	m_context = _context;
+    m_context = _context;
 }
 
-std::vector<fUML::ParameterValue * > *  ExecutionImpl::getParameterValues() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutionImpl::getParameterValues() const
 {
-	
-	return m_parameterValues;
+
+    return m_parameterValues;
 }
 
 

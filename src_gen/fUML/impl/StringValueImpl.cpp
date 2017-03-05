@@ -18,6 +18,10 @@ using namespace fUML;
 StringValueImpl::StringValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -25,6 +29,9 @@ StringValueImpl::StringValueImpl()
 
 StringValueImpl::~StringValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StringValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,7 +53,7 @@ ecore::EObject *  StringValueImpl::copy() const
 	return new StringValueImpl(*this);
 }
 
-ecore::EClass* StringValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getStringValue();
 }
@@ -67,13 +74,12 @@ std::string StringValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool StringValueImpl::equals(fUML::Value *  otherValue) 
+bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    bool isEqual = false;
+	bool isEqual = false;
     
-    StringValue * otherStringValue = dynamic_cast<StringValue * >(otherValue);
-    
+	std::shared_ptr<StringValue> otherStringValue = std::dynamic_pointer_cast<StringValue>(otherValue);
     if(otherStringValue != nullptr)
     {
         isEqual = otherStringValue->getValue() == this->getValue();
@@ -82,14 +88,12 @@ bool StringValueImpl::equals(fUML::Value *  otherValue)
     return isEqual;
 }
 
-uml::ValueSpecification *  StringValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  StringValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::LiteralString * literal = uml::UmlFactory::eInstance()->createLiteralString();
-
-     literal->setType(this->getType());
+	std::shared_ptr<uml::LiteralString> literal(uml::UmlFactory::eInstance()->createLiteralString());
+	literal->setType(this->getType());
     literal->setValue(this->getValue());
-
     return literal;
 }
 

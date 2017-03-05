@@ -18,6 +18,10 @@ using namespace fUML;
 BooleanValueImpl::BooleanValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -25,6 +29,9 @@ BooleanValueImpl::BooleanValueImpl()
 
 BooleanValueImpl::~BooleanValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BooleanValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,7 +53,7 @@ ecore::EObject *  BooleanValueImpl::copy() const
 	return new BooleanValueImpl(*this);
 }
 
-ecore::EClass* BooleanValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getBooleanValue();
 }
@@ -67,29 +74,26 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 // Operations
 //*********************************
-bool BooleanValueImpl::equals(fUML::Value *  otherValue) 
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    bool isEqual = false;
+	bool isEqual = false;
 
-    BooleanValue * otherBooleanValue = dynamic_cast<BooleanValue * >(otherValue);
-
+	std::shared_ptr<BooleanValue> otherBooleanValue = std::dynamic_pointer_cast<BooleanValue>(otherValue);
     if(otherBooleanValue != nullptr)
     {
-	isEqual = otherBooleanValue->isValue() == this->isValue();
+    	isEqual = otherBooleanValue->isValue() == this->isValue();
     }
 
     return isEqual;
 }
 
-uml::ValueSpecification *  BooleanValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  BooleanValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::LiteralBoolean * literal = uml::UmlFactory::eInstance()->createLiteralBoolean();
-    
+	std::shared_ptr<uml::LiteralBoolean> literal(uml::UmlFactory::eInstance()->createLiteralBoolean());    
     literal->setType(this->getType());
     literal->setValue(this->isValue());
-    
     return literal;
 }
 

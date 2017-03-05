@@ -13,6 +13,10 @@ using namespace fUML;
 SemanticStrategyImpl::SemanticStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ SemanticStrategyImpl::SemanticStrategyImpl()
 
 SemanticStrategyImpl::~SemanticStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  SemanticStrategyImpl::copy() const
 	return new SemanticStrategyImpl(*this);
 }
 
-ecore::EClass* SemanticStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getSemanticStrategy();
 }

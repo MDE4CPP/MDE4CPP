@@ -27,10 +27,11 @@
 #include "ParameterDirectionKind.hpp"
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class OpaqueBehaviorExecutionImpl :virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution
+	class OpaqueBehaviorExecutionImpl :virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
@@ -52,7 +53,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::vector<fUML::ParameterValue * > *  inputParameters,std::vector<fUML::ParameterValue * > *  outputParameters)  ;
+			virtual void doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputParameters,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  outputParameters)  ;
 			
 			/*!
 			 */ 
@@ -82,7 +83,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OPAQUEBEHAVIOREXECUTIONOPAQUEBEHAVIOREXECUTIONIMPL_HPP */

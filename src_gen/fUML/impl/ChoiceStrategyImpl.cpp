@@ -13,6 +13,10 @@ using namespace fUML;
 ChoiceStrategyImpl::ChoiceStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ChoiceStrategyImpl::ChoiceStrategyImpl()
 
 ChoiceStrategyImpl::~ChoiceStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  ChoiceStrategyImpl::copy() const
 	return new ChoiceStrategyImpl(*this);
 }
 
-ecore::EClass* ChoiceStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getChoiceStrategy();
 }

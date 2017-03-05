@@ -15,6 +15,10 @@ using namespace fUML;
 LiteralStringEvaluationImpl::LiteralStringEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ LiteralStringEvaluationImpl::LiteralStringEvaluationImpl()
 
 LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralStringEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  LiteralStringEvaluationImpl::copy() const
 	return new LiteralStringEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralStringEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralStringEvaluation();
 }
@@ -56,14 +63,13 @@ ecore::EClass* LiteralStringEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralStringEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralStringEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-	    uml::LiteralString * literal = dynamic_cast<uml::LiteralString*>(getSpecification());
-    StringValue * stringValue = FUMLFactory::eInstance()->createStringValue();
+	std::shared_ptr<uml::LiteralString> literal = std::dynamic_pointer_cast<uml::LiteralString>(getSpecification());
+	std::shared_ptr<StringValue> stringValue(FUMLFactory::eInstance()->createStringValue());
     stringValue->setType(this->getType("String"));
     stringValue->setValue(literal->getValue());
-
     return stringValue ;
 }
 

@@ -18,24 +18,20 @@ using namespace fUML;
 CompoundValueImpl::CompoundValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_featureValues == nullptr)
-	{
-		m_featureValues = new std::vector<fUML::FeatureValue * >();
-	}
+	m_featureValues.reset(new std::vector<std::shared_ptr<fUML::FeatureValue>>());
 }
 
 CompoundValueImpl::~CompoundValueImpl()
 {
-	if(m_featureValues!=nullptr)
-	{
-		for(auto c :*m_featureValues)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -47,9 +43,10 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj)
 	
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -58,7 +55,7 @@ ecore::EObject *  CompoundValueImpl::copy() const
 	return new CompoundValueImpl(*this);
 }
 
-ecore::EClass* CompoundValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getCompoundValue();
 }
@@ -70,45 +67,46 @@ ecore::EClass* CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void CompoundValueImpl::assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position) 
+void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position) 
 {
 	//generated from body annotation
-	    fUML::FeatureValue * featureValue = this->retrieveFeatureValue(feature);
-
+	std::shared_ptr<fUML::FeatureValue> featureValue = this->retrieveFeatureValue(feature);
     if(featureValue == nullptr)
     {
-        featureValue = FUMLFactory::eInstance()->createFeatureValue();
+        featureValue.reset(FUMLFactory::eInstance()->createFeatureValue());
         this->getFeatureValues()->push_back(featureValue);
     }
-
     featureValue->setFeature(feature);
-    std::vector<fUML::Value*>::iterator i;
+    std::vector<std::shared_ptr<fUML::Value>>::iterator i;
     for(i=values->begin();i!=values->end();++i)
-    {featureValue->getValues()->push_back(*i);}
+    {
+    	featureValue->getValues()->push_back(*i);
+    }
     featureValue->setPosition(position);
 }
 
-bool CompoundValueImpl::equals(fUML::Value *  otherValue) 
+bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    bool isEqual = (dynamic_cast<CompoundValue*>(otherValue )!=nullptr);
-
-    if (isEqual) {
-
-        CompoundValue* otherCompoundValue = dynamic_cast<CompoundValue*>(otherValue );
-
+	std::shared_ptr<CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<CompoundValue>(otherValue);
+	bool isEqual = (otherCompoundValue != nullptr);
+    if (isEqual)
+    {
         isEqual = StructuredValueImpl::equals(otherValue)
                 && otherCompoundValue->getFeatureValues()->size() == this->getFeatureValues()->size();
 
         unsigned int i = 1;
-        while (isEqual && i <= this->getFeatureValues()->size()) {
-            FeatureValue * thisFeatureValue = this->getFeatureValues()->at(i - 1);
+        while (isEqual && i <= this->getFeatureValues()->size())
+        {
+        	std::shared_ptr<FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i - 1);
 
             bool matched = false;
             unsigned int j = 1;
-            while (!matched && j <= otherCompoundValue->getFeatureValues()->size()) {
-                FeatureValue * otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j - 1);
-                if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature()) {
+            while (!matched && j <= otherCompoundValue->getFeatureValues()->size())
+            {
+            	std::shared_ptr<FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j - 1);
+                if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature())
+                {
                     matched = thisFeatureValue->hasEqualValues(otherFeatureValue);
                 }
                 j = j + 1;
@@ -122,16 +120,16 @@ bool CompoundValueImpl::equals(fUML::Value *  otherValue)
     return isEqual;
 }
 
-void CompoundValueImpl::removeFeatureValues(uml::Classifier *  classifier) 
+void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
-	std::remove_if(this->getFeatureValues()->begin(),this->getFeatureValues()->end(),[classifier](FeatureValue * featureValue){return featureValue->getFeature()->getType()==classifier;});
+	std::remove_if(this->getFeatureValues()->begin(),this->getFeatureValues()->end(),[classifier](std::shared_ptr<FeatureValue> featureValue){return featureValue->getFeature()->getType()==classifier;});
 }
 
-fUML::FeatureValue *  CompoundValueImpl::retrieveFeatureValue(uml::StructuralFeature *  feature) 
+std::shared_ptr<fUML::FeatureValue>  CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	//generated from body annotation
-	    fUML::FeatureValue * featureValue = nullptr;
+	std::shared_ptr<fUML::FeatureValue> featureValue = nullptr;
     unsigned int i = 1;
     while(featureValue == nullptr && i <= this->getFeatureValues()->size())
     {
@@ -141,11 +139,10 @@ fUML::FeatureValue *  CompoundValueImpl::retrieveFeatureValue(uml::StructuralFea
         }
         i = i + 1;
     }
-
     return featureValue;
 }
 
-std::vector<fUML::FeatureValue * > *  CompoundValueImpl::retrieveFeatureValues() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> CompoundValueImpl::retrieveFeatureValues() 
 {
 	//generated from body annotation
 	 return this->getFeatureValues();
@@ -154,9 +151,9 @@ std::vector<fUML::FeatureValue * > *  CompoundValueImpl::retrieveFeatureValues()
 std::string CompoundValueImpl::toString() 
 {
 	//generated from body annotation
-	    std::string buffer = "(" + this->objectId() + ":";
+	std::string buffer = "(" + this->objectId() + ":";
 
-    std::vector<uml::Classifier *>* types = this->getTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getTypes();
 
     unsigned int i = 1;
     while(i <= types->size())
@@ -168,9 +165,9 @@ std::string CompoundValueImpl::toString()
     unsigned int k = 1;
     while(k <= this->getFeatureValues()->size())
     {
-        FeatureValue * featureValue = this->getFeatureValues()->at(k - 1);
+    	std::shared_ptr<FeatureValue> featureValue = this->getFeatureValues()->at(k - 1);
         char buf [11];
-        std::sprintf(buf, "%d", featureValue->getPosition(), buf, 10);
+        std::sprintf(buf, "%d", featureValue->getPosition());
         buffer = buffer + "\n\t\t" + featureValue->getFeature()->getName() + "[" + std::string(buf) + "]  =";
 
         unsigned int j = 1;
@@ -189,10 +186,10 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
-std::vector<fUML::FeatureValue * > *  CompoundValueImpl::getFeatureValues() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> CompoundValueImpl::getFeatureValues() const
 {
-	
-	return m_featureValues;
+
+    return m_featureValues;
 }
 
 

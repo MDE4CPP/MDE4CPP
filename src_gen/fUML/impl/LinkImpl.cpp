@@ -15,6 +15,10 @@ using namespace fUML;
 LinkImpl::LinkImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -22,6 +26,9 @@ LinkImpl::LinkImpl()
 
 LinkImpl::~LinkImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Link "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,9 +44,10 @@ LinkImpl::LinkImpl(const LinkImpl & obj)
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -48,7 +56,7 @@ ecore::EObject *  LinkImpl::copy() const
 	return new LinkImpl(*this);
 }
 
-ecore::EClass* LinkImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLink();
 }
@@ -60,61 +68,63 @@ ecore::EClass* LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LinkImpl::addTo(fUML::Locus *  locus) 
+void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<fUML::FeatureValue * > *  LinkImpl::getOtherFeatureValues(std::vector<fUML::ExtensionalValue * > *  extent,uml::Property *  end) 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> LinkImpl::getOtherFeatureValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>>  extent,std::shared_ptr<uml::Property>  end) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<uml::Classifier * > *  LinkImpl::getTypes() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> LinkImpl::getTypes() 
 {
 	//generated from body annotation
-	std::vector< uml::Classifier * > * types = new std::vector< uml::Classifier * >();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
 
-if( this->getType() != nullptr){
-	types->push_back(dynamic_cast<uml::Classifier * >(this->getType()));
-}
+	if( this->getType() != nullptr)
+	{
+		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
+	}
     return types;
 }
 
-bool LinkImpl::isMatchingLink(fUML::ExtensionalValue *  link,uml::Property *  end) 
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
 	//generated from body annotation
-			std::vector<uml::Property * > * ends = this->getType()->getMemberEnd();
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> ends = this->getType()->getMemberEnd();
 
-		bool matches = true;
-		unsigned int i = 1;
-		while (matches && i <= ends->size()) {
-			uml::Property* otherEnd = ends->at(i - 1);
-			if (otherEnd != end
-					&& !this->retrieveFeatureValue(otherEnd)->getValues()->at(0)
-							->equals(
-									link->retrieveFeatureValue(otherEnd)->getValues()->at(0))) {
-				matches = false;
-			}
-			i = i + 1;
+	bool matches = true;
+	unsigned int i = 1;
+	while (matches && i <= ends->size()) 
+	{
+		std::shared_ptr<uml::Property> otherEnd = ends->at(i - 1);
+		if (otherEnd != end
+				&& !this->retrieveFeatureValue(otherEnd)->getValues()->at(0)
+						->equals(
+								link->retrieveFeatureValue(otherEnd)->getValues()->at(0))) {
+			matches = false;
 		}
+		i = i + 1;
+	}
 
-		return matches;
+	return matches;
 }
 
 //*********************************
 // References
 //*********************************
-uml::Association *  LinkImpl::getType() const
+std::shared_ptr<uml::Association> LinkImpl::getType() const
 {
-	
-	return m_type;
+
+    return m_type;
 }
-void LinkImpl::setType(uml::Association *  _type)
+void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************

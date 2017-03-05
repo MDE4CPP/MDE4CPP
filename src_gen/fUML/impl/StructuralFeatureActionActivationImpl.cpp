@@ -13,6 +13,10 @@ using namespace fUML;
 StructuralFeatureActionActivationImpl::StructuralFeatureActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ StructuralFeatureActionActivationImpl::StructuralFeatureActionActivationImpl()
 
 StructuralFeatureActionActivationImpl::~StructuralFeatureActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuralFeatureActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,22 +40,23 @@ StructuralFeatureActionActivationImpl::StructuralFeatureActionActivationImpl(con
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -57,7 +65,7 @@ ecore::EObject *  StructuralFeatureActionActivationImpl::copy() const
 	return new StructuralFeatureActionActivationImpl(*this);
 }
 
-ecore::EClass* StructuralFeatureActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getStructuralFeatureActionActivation();
 }
@@ -69,19 +77,19 @@ ecore::EClass* StructuralFeatureActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-uml::Association *  StructuralFeatureActionActivationImpl::getAssociation(uml::StructuralFeature *  feature) 
+std::shared_ptr<uml::Association>  StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector<fUML::Link * > *  StructuralFeatureActionActivationImpl::getMatchingLinks(uml::Association *  association,uml::StructuralFeature *  end,fUML::Value *  oppositeValue) 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Link>>> StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-uml::Property *  StructuralFeatureActionActivationImpl::getOppositeEnd(uml::Association *  association,uml::StructuralFeature *  end) 
+std::shared_ptr<uml::Property>  StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

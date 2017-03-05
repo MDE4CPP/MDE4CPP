@@ -19,6 +19,10 @@ using namespace fUML;
 RealValueImpl::RealValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -26,6 +30,9 @@ RealValueImpl::RealValueImpl()
 
 RealValueImpl::~RealValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RealValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -47,7 +54,7 @@ ecore::EObject *  RealValueImpl::copy() const
 	return new RealValueImpl(*this);
 }
 
-ecore::EClass* RealValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getRealValue();
 }
@@ -68,29 +75,27 @@ float RealValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool RealValueImpl::equals(fUML::Value *  otherValue) 
+bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
 
-    RealValue * otherRealValue = dynamic_cast<RealValue * >(otherValue);
+	std::shared_ptr<RealValue> otherRealValue = std::dynamic_pointer_cast<RealValue>(otherValue);
 
     if(otherRealValue != nullptr)
     {
-        isEqual = otherRealValue->getValue() == this->getValue();
+        isEqual = (otherRealValue->getValue() == this->getValue());
     }
 
     return isEqual;
 }
 
-uml::ValueSpecification *  RealValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  RealValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::LiteralReal * literal = uml::UmlFactory::eInstance()->createLiteralReal();
-
-     literal->setType(this->getType());
+	std::shared_ptr<uml::LiteralReal> literal(uml::UmlFactory::eInstance()->createLiteralReal());
+	literal->setType(this->getType());
     literal->setValue(this->getValue());
-
     return literal;
 }
 

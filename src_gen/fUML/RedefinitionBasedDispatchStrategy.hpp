@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -72,11 +73,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool operationsMatch(uml::Operation *  ownedOperation,uml::Operation *  baseOperation)  = 0;
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  = 0;
 			
 			/*!
 			 */ 
-			virtual uml::Behavior *  retrieveMethod(fUML::Object *  object,uml::Operation *  operation)  = 0;
+			virtual std::shared_ptr<uml::Behavior>  retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			
 			//*********************************

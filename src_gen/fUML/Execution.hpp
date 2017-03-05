@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -105,23 +106,23 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void setParameterValue(fUML::ParameterValue *  parameterValue)  = 0;
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::ParameterValue *  getParameterValue(uml::Parameter *  parameter)  = 0;
+			virtual std::shared_ptr<fUML::ParameterValue>  getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ParameterValue * > *  getOutputParameterValues()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getOutputParameterValues()  = 0;
 			
 			/*!
 			 */ 
-			virtual uml::Behavior *  getBehavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior>  getBehavior()  = 0;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  = 0;
+			virtual std::shared_ptr<fUML::Value>  new_()  = 0;
 			
 			
 			//*********************************
@@ -133,15 +134,14 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Object *  getContext() const = 0;
+			virtual std::shared_ptr<fUML::Object> getContext() const = 0;
 			
 			/*!
 			 */
-			virtual void setContext(fUML::Object *  _context) = 0;
-			
+			virtual void setContext(std::shared_ptr<fUML::Object> _context) = 0;
 			/*!
 			 */
-			virtual std::vector<fUML::ParameterValue * > *  getParameterValues() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getParameterValues() const = 0;
 			
 			
 
@@ -156,10 +156,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Object *  m_context =  nullptr ;
+			std::shared_ptr<fUML::Object> m_context;
 			/*!
 			 */
-			std::vector<fUML::ParameterValue * > *  m_parameterValues =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> m_parameterValues;
 			
 
 		public:

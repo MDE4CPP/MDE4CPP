@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -82,7 +83,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::ExpansionRegionActivation *  getExpansionRegionActivation()  = 0;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation>  getExpansionRegionActivation()  = 0;
 			
 			
 			//*********************************

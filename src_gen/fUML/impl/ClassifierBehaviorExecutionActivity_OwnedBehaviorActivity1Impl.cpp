@@ -13,6 +13,10 @@ using namespace fUML;
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehavi
 
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl
 	return new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this);
 }
 
-ecore::EClass* ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1();
 }

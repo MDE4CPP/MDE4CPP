@@ -16,6 +16,10 @@ using namespace fUML;
 LiteralEvaluationImpl::LiteralEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -23,6 +27,9 @@ LiteralEvaluationImpl::LiteralEvaluationImpl()
 
 LiteralEvaluationImpl::~LiteralEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -45,7 +52,7 @@ ecore::EObject *  LiteralEvaluationImpl::copy() const
 	return new LiteralEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralEvaluation();
 }
@@ -57,10 +64,10 @@ ecore::EClass* LiteralEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-uml::PrimitiveType *  LiteralEvaluationImpl::getType(std::string builtInTypeName) 
+std::shared_ptr<uml::PrimitiveType>  LiteralEvaluationImpl::getType(std::string builtInTypeName) 
 {
 	//generated from body annotation
-	    uml::PrimitiveType * type = dynamic_cast<uml::PrimitiveType* >(this->getSpecification()->getType());
+	std::shared_ptr<uml::PrimitiveType> type = std::dynamic_pointer_cast<uml::PrimitiveType>(this->getSpecification()->getType());
 
     if(type == nullptr)
     {

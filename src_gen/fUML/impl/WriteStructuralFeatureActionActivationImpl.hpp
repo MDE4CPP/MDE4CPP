@@ -22,10 +22,11 @@
 #include "impl/StructuralFeatureActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class WriteStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation
+	class WriteStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation 
 	{
 		public: 
 			WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj);
@@ -47,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int position(fUML::Value *  value,std::vector<fUML::Value * > *  list,int startAt)  ;
+			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  list,int startAt)  ;
 			
 			
 			
@@ -73,7 +74,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_WRITESTRUCTURALFEATUREACTIONACTIVATIONWRITESTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

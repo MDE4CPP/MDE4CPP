@@ -22,10 +22,11 @@
 #include "impl/EventAccepterImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class AcceptEventActionEventAccepterImpl :virtual public EventAccepterImpl, virtual public AcceptEventActionEventAccepter
+	class AcceptEventActionEventAccepterImpl :virtual public EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
 	{
 		public: 
 			AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj);
@@ -57,12 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::AcceptEventActionActivation *  getActionActivation() const ;
+			virtual std::shared_ptr<fUML::AcceptEventActionActivation> getActionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setActionActivation(fUML::AcceptEventActionActivation *  _actionActivation) ;
-			
+			virtual void setActionActivation(std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation) ;
 							
 			
 			//*********************************
@@ -77,7 +77,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ACCEPTEVENTACTIONEVENTACCEPTERACCEPTEVENTACTIONEVENTACCEPTERIMPL_HPP */

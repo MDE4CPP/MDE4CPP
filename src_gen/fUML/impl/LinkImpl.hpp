@@ -24,10 +24,11 @@
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class LinkImpl :virtual public ExtensionalValueImpl, virtual public Link
+	class LinkImpl :virtual public ExtensionalValueImpl, virtual public Link 
 	{
 		public: 
 			LinkImpl(const LinkImpl & obj);
@@ -49,19 +50,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(fUML::ExtensionalValue *  link,uml::Property *  end)  ;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  ;
 			
 			/*!
 			 */ 
-			virtual void addTo(fUML::Locus *  locus)  ;
+			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  getOtherFeatureValues(std::vector<fUML::ExtensionalValue * > *  extent,uml::Property *  end)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> getOtherFeatureValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>>  extent,std::shared_ptr<uml::Property>  end)  ;
 			
 			
 			
@@ -75,12 +76,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Association *  getType() const ;
+			virtual std::shared_ptr<uml::Association> getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(uml::Association *  _type) ;
-			
+			virtual void setType(std::shared_ptr<uml::Association> _type) ;
 							
 			
 			//*********************************
@@ -95,7 +95,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LINKLINKIMPL_HPP */

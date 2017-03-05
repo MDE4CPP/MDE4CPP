@@ -14,6 +14,10 @@ using namespace fUML;
 ExtensionalValueImpl::ExtensionalValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -21,6 +25,9 @@ ExtensionalValueImpl::ExtensionalValueImpl()
 
 ExtensionalValueImpl::~ExtensionalValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,9 +41,10 @@ ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj)
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -45,7 +53,7 @@ ecore::EObject *  ExtensionalValueImpl::copy() const
 	return new ExtensionalValueImpl(*this);
 }
 
-ecore::EClass* ExtensionalValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getExtensionalValue();
 }
@@ -60,23 +68,24 @@ ecore::EClass* ExtensionalValueImpl::eStaticClass() const
 void ExtensionalValueImpl::destroy() 
 {
 	//generated from body annotation
-	    if(this->getLocus() != nullptr)
+	if(this->getLocus() != nullptr)
     {
-        this->getLocus()->remove(this);
+		struct null_deleter{void operator()(void const *) const { } };
+        this->getLocus()->remove(std::shared_ptr<ExtensionalValue>(this, null_deleter()));
     }
 }
 
 //*********************************
 // References
 //*********************************
-fUML::Locus *  ExtensionalValueImpl::getLocus() const
+std::shared_ptr<fUML::Locus> ExtensionalValueImpl::getLocus() const
 {
-	
-	return m_locus;
+
+    return m_locus;
 }
-void ExtensionalValueImpl::setLocus(fUML::Locus *  _locus)
+void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 {
-	m_locus = _locus;
+    m_locus = _locus;
 }
 
 //*********************************

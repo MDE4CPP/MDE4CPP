@@ -13,6 +13,10 @@ using namespace fUML;
 ExtensionalValueListImpl::ExtensionalValueListImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ ExtensionalValueListImpl::ExtensionalValueListImpl()
 
 ExtensionalValueListImpl::~ExtensionalValueListImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValueList "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,9 +40,10 @@ ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImp
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -44,7 +52,7 @@ ecore::EObject *  ExtensionalValueListImpl::copy() const
 	return new ExtensionalValueListImpl(*this);
 }
 
-ecore::EClass* ExtensionalValueListImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getExtensionalValueList();
 }
@@ -56,19 +64,19 @@ ecore::EClass* ExtensionalValueListImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionalValueListImpl::addValue(fUML::ExtensionalValue *  value) 
+bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::ExtensionalValue>  value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExtensionalValueListImpl::addValue(fUML::ExtensionalValue *  value,int i) 
+void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-fUML::ExtensionalValue *  ExtensionalValueListImpl::getValue() 
+std::shared_ptr<fUML::ExtensionalValue>  ExtensionalValueListImpl::getValue() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -80,7 +88,7 @@ std::string ExtensionalValueListImpl::removeValue(int i)
 	throw "UnsupportedOperationException";
 }
 
-fUML::Value *  ExtensionalValueListImpl::setValue(fUML::ExtensionalValue *  value,int i) 
+std::shared_ptr<fUML::Value>  ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -22,10 +22,11 @@
 #include "impl/SemanticStrategyImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class DispatchStrategyImpl :virtual public SemanticStrategyImpl, virtual public DispatchStrategy
+	class DispatchStrategyImpl :virtual public SemanticStrategyImpl, virtual public DispatchStrategy 
 	{
 		public: 
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);
@@ -47,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Execution *  dispatch(fUML::Object *  object,uml::Operation *  operation)  ;
+			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual uml::Behavior *  retrieveMethod(fUML::Object *  object,uml::Operation *  operation)  ;
+			virtual std::shared_ptr<uml::Behavior>  retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
@@ -81,7 +82,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_DISPATCHSTRATEGYDISPATCHSTRATEGYIMPL_HPP */

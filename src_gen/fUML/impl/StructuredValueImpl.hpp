@@ -32,10 +32,11 @@
 #include "StructuralFeature.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class StructuredValueImpl :virtual public ValueImpl, virtual public StructuredValue
+	class StructuredValueImpl :virtual public ValueImpl, virtual public StructuredValue 
 	{
 		public: 
 			StructuredValueImpl(const StructuredValueImpl & obj);
@@ -57,15 +58,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::FeatureValue *  retrieveFeatureValue(uml::StructuralFeature *  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(uml::StructuralFeature *  feature,std::vector<fUML::Value * > *  values,int position)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  retrieveFeatureValues()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
@@ -73,7 +74,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
 			
 			
 			
@@ -99,7 +100,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_STRUCTUREDVALUESTRUCTUREDVALUEIMPL_HPP */

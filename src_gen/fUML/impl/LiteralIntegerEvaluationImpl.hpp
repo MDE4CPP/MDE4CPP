@@ -24,10 +24,11 @@
 #include "FUMLFactory.hpp"
 #include "LiteralInteger.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class LiteralIntegerEvaluationImpl :virtual public LiteralEvaluationImpl, virtual public LiteralIntegerEvaluation
+	class LiteralIntegerEvaluationImpl :virtual public LiteralEvaluationImpl, virtual public LiteralIntegerEvaluation 
 	{
 		public: 
 			LiteralIntegerEvaluationImpl(const LiteralIntegerEvaluationImpl & obj);
@@ -49,7 +50,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Value *  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
 			
 			
 			
@@ -75,7 +76,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LITERALINTEGEREVALUATIONLITERALINTEGEREVALUATIONIMPL_HPP */

@@ -240,7 +240,7 @@ namespace fUML
 			
 
 			//Package
-			virtual FUMLPackage* getFUMLPackage() const;
+			virtual std::shared_ptr<FUMLPackage> getFUMLPackage() const;
 
 		private:
 			static FUMLFactory * create();

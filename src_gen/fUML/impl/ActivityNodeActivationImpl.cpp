@@ -19,44 +19,24 @@ using namespace fUML;
 ActivityNodeActivationImpl::ActivityNodeActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
-	if( m_heldTokens == nullptr)
-	{
-		m_heldTokens = new std::vector<fUML::Token * >();
-	}
-	if( m_incomingEdges == nullptr)
-	{
-		m_incomingEdges = new std::vector<fUML::ActivityEdgeInstance * >();
-	}
+	m_heldTokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
+	m_incomingEdges.reset(new std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>());
 	
-	if( m_outgoingEdges == nullptr)
-	{
-		m_outgoingEdges = new std::vector<fUML::ActivityEdgeInstance * >();
-	}
+	m_outgoingEdges.reset(new std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>());
 }
 
 ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
 {
-	if(m_outgoingEdges!=nullptr)
-	{
-		delete(m_outgoingEdges);
-	 	m_outgoingEdges = nullptr;
-	}
-	if(m_incomingEdges!=nullptr)
-	{
-		delete(m_incomingEdges);
-	 	m_incomingEdges = nullptr;
-	}
-	if(m_heldTokens!=nullptr)
-	{
-		for(auto c :*m_heldTokens)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -69,19 +49,20 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -90,7 +71,7 @@ ecore::EObject *  ActivityNodeActivationImpl::copy() const
 	return new ActivityNodeActivationImpl(*this);
 }
 
-ecore::EClass* ActivityNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getActivityNodeActivation();
 }
@@ -111,38 +92,57 @@ bool ActivityNodeActivationImpl::isRunning() const
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationImpl::addIncomingEdge(fUML::ActivityEdgeInstance *  edge) 
+void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
 {
 	//generated from body annotation
-	    edge->setTarget(this);
+	struct null_deleter{void operator()(void const *) const { } };
+	edge->setTarget(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
     this->getIncomingEdges()->push_back(edge);
 }
 
-void ActivityNodeActivationImpl::addOutgoingEdge(fUML::ActivityEdgeInstance *  edge) 
+void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
 {
 	//generated from body annotation
-	    edge->setSource(this);
+	 if (edge->getSource().get() != this)
+    {
+		struct null_deleter{void operator()(void const *) const { } };
+    	edge->setSource(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+    }
     this->getOutgoingEdges()->push_back(edge);
 }
 
-void ActivityNodeActivationImpl::addToken(fUML::Token *  token) 
+void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
-	    if (this->getNode()== nullptr) {
-        DEBUG_MESSAGE(std::cout<<"[addToken] ..."<<std::endl;)
-    } else {
-        DEBUG_MESSAGE(std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;)
-    }
+	DEBUG_MESSAGE(
+		if (this->getNode()== nullptr)
+		{
+			std::cout<<"[addToken] ..."<<std::endl;
+		}
+		else
+		{
+			std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
+		}
+	)
 
-    Token * transferredToken = token->transfer(this);
-    DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<transferredToken->getValue()<<std::endl;)
-    this->getHeldTokens()->push_back(transferredToken);
+	if (token->getHolder() != nullptr)
+	{
+		token->withdraw();
+		token = std::shared_ptr<fUML::Token>(dynamic_cast<Token*>(token->copy()));
+		std::cout << "ActivityNodeActivationImpl::addToken - no copy created - maybe error";
+	}
+	struct null_deleter{void operator()(void const *) const { } };
+	token->setHolder(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+
+	DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<token->getValue()<<std::endl;)
+   
+    this->getHeldTokens()->push_back(token);
 }
 
-void ActivityNodeActivationImpl::addTokens(std::vector<fUML::Token * > *  tokens) 
+void ActivityNodeActivationImpl::addTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens) 
 {
 	//generated from body annotation
-	 for(Token * token: *tokens)
+	for(std::shared_ptr<Token> token: *tokens)
     {
         this->addToken(token);
     }
@@ -168,36 +168,38 @@ void ActivityNodeActivationImpl::createNodeActivations()
 	return;
 }
 
-void ActivityNodeActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens) 
+void ActivityNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-fUML::ActivityExecution *  ActivityNodeActivationImpl::getActivityExecution() 
+std::shared_ptr<fUML::ActivityExecution>  ActivityNodeActivationImpl::getActivityExecution() 
 {
 	//generated from body annotation
 	return this->getGroup()->retrieveActivityExecution();
 }
 
-fUML::Object *  ActivityNodeActivationImpl::getExecutionContext() 
+std::shared_ptr<fUML::Object>  ActivityNodeActivationImpl::getExecutionContext() 
 {
 	//generated from body annotation
 	return this->getActivityExecution()->getContext();
 }
 
-fUML::Locus *  ActivityNodeActivationImpl::getExecutionLocus() 
+std::shared_ptr<fUML::Locus>  ActivityNodeActivationImpl::getExecutionLocus() 
 {
 	//generated from body annotation
 	return this->getActivityExecution()->getLocus();
 }
 
-fUML::ActivityNodeActivation *  ActivityNodeActivationImpl::getNodeActivation(uml::ActivityNode *  node) 
+std::shared_ptr<fUML::ActivityNodeActivation>  ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
 	//generated from body annotation
-	    ActivityNodeActivation * activation = nullptr;
-    if (node == this->getNode()) {
-        activation = this;
+	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
+    if (node == this->getNode()) 
+    {
+        struct null_deleter{void operator()(void const *) const { } };
+        activation = std::shared_ptr<ActivityNodeActivation>(this, null_deleter());
     }
 
     return activation;
@@ -209,13 +211,14 @@ bool ActivityNodeActivationImpl::getRunning()
 	return this->isRunning();
 }
 
-std::vector<fUML::Token * > *  ActivityNodeActivationImpl::getTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityNodeActivationImpl::getTokens() 
 {
 	//generated from body annotation
-	    std::vector< Token* > * tokens = new std::vector< Token* >();
-    std::vector< Token* > * heldTokens = this->getHeldTokens();
-    for (unsigned int i = 0; i < heldTokens->size(); i++) {
-        Token * heldToken = heldTokens->at(i);
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> heldTokens = this->getHeldTokens();
+    for (unsigned int i = 0; i < heldTokens->size(); i++) 
+    {
+    	std::shared_ptr<Token> heldToken = heldTokens->at(i);
         tokens->push_back(heldToken);
     }
 
@@ -228,31 +231,33 @@ bool ActivityNodeActivationImpl::isReady()
 	return this->getRunning();
 }
 
-bool ActivityNodeActivationImpl::isSourceFor(fUML::ActivityEdgeInstance *  edgeInstances) 
+bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances) 
 {
 	//generated from body annotation
-	    return (edgeInstances->getSource() ==this);
+	return (edgeInstances->getSource().get() ==this);
 }
 
 void ActivityNodeActivationImpl::recieveOffer() 
 {
 	//generated from body annotation
-	    DEBUG_MESSAGE(std::cout<<"[receiveOffer] "
+	DEBUG_MESSAGE(std::cout<<"[receiveOffer] "
  << (this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<std::endl;)
 
     _beginIsolation();
 
     bool ready = this->isReady();
 
-    std::vector< Token *>*tokens = new std::vector< Token *>();
-    if (ready) {
+    std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+    if (ready) 
+    {
         DEBUG_MESSAGE(std::cout<<"[receiveOffer] Firing."<<std::endl;)
         tokens = this->takeOfferedTokens();
     }
 
     _endIsolation();
 
-    if (ready) {
+    if (ready) 
+    {
         DEBUG_MESSAGE(std::cout<< "Firing "<<tokens->size()<<" token(s)"<<std::endl;)
         this->fire(tokens);
     }
@@ -262,38 +267,44 @@ void ActivityNodeActivationImpl::recieveOffer()
     }
 }
 
-int ActivityNodeActivationImpl::removeToken(fUML::Token *  token) 
+int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
-	    bool notFound = true;
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> heldTokenList = this->getHeldTokens();
+	std::vector<std::shared_ptr<fUML::Token>>::iterator iter = heldTokenList->begin();
+	std::vector<std::shared_ptr<fUML::Token>>::iterator end = heldTokenList->end();
 
-    unsigned int i = 0;
-    while (notFound && i < this->getHeldTokens()->size())
-    {
-        if (this->getHeldTokens()->at(i) == token)
-        {
-            if (this->getNode() == nullptr) {
-            DEBUG_MESSAGE(std::cout<<"[removeToken] ..."<<std::endl;)
-            } else {
-            DEBUG_MESSAGE(std::cout<<"[removeToken] node = " + this->getNode()->getName()<<std::endl;)
-            }
-            this->getHeldTokens()->erase(this->getHeldTokens()->begin()+i);
-            notFound = false;
-        }
-        i++;
-    }
+	int i = 0;
+	while (iter != end)
+	{
+		i++;
+		std::cout << (*iter) << "==" << token << std::endl;
+		if (*iter == token)
+		{
+			DEBUG_MESSAGE(
+				if (this->getNode() == nullptr)
+				{
+					std::cout<<"[removeToken] ..."<<std::endl;
+				} else
+				{
+					std::cout<<"[removeToken] node = " + this->getNode()->getName()<<std::endl;
+				}
+			)
+			this->getHeldTokens()->erase(iter);
+			return i;
+		}
 
-    if (notFound) {
-    i = 0;
-    }
+		iter++;
+	}
 
-    return i;
+	return 0;
 }
 
 void ActivityNodeActivationImpl::resume() 
 {
 	//generated from body annotation
-	this->getGroup()->resume(this);
+	struct null_deleter{void operator()(void const *) const { } };
+	this->getGroup()->resume(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
 }
 
 void ActivityNodeActivationImpl::run() 
@@ -308,13 +319,14 @@ void ActivityNodeActivationImpl::run()
     this->setRunning(true);
 }
 
-void ActivityNodeActivationImpl::sendOffers(std::vector<fUML::Token * > *  tokens) 
+void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens) 
 {
 	//generated from body annotation
-	    if (tokens->size() > 0) {
-
+	if (tokens->size() > 0) 
+	{
         // *** Send all outgoing offers concurrently. ***
-        for(ActivityEdgeInstance* outgoingEdge : * this->getOutgoingEdges())
+		std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> outgoingEdgeList = this->getOutgoingEdges();
+        for(std::shared_ptr<ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
         {
             DEBUG_MESSAGE(std::cout<<"[sendOffers] Sending offer to " << outgoingEdge->getTarget()->getNode()->getName() << "."<<std::endl;)
             outgoingEdge->sendOffer(tokens);
@@ -325,26 +337,27 @@ void ActivityNodeActivationImpl::sendOffers(std::vector<fUML::Token * > *  token
 void ActivityNodeActivationImpl::suspend() 
 {
 	//generated from body annotation
-	this->getGroup()->suspend(this);
+	struct null_deleter{void operator()(void const *) const { } };
+	this->getGroup()->suspend(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
 }
 
-std::vector<fUML::Token * > *  ActivityNodeActivationImpl::takeOfferedTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityNodeActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
-	std::vector< Token *>* allTokens = new std::vector< Token *>();
-
-for(ActivityEdgeInstance * incomingEdge : *this->getIncomingEdges())
-{
-auto vec = incomingEdge->takeOfferedTokens();
-       allTokens->insert(allTokens->end(), vec->begin(), vec->end());
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> allTokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> incomingEdgeList = this->getIncomingEdges();
+	for(std::shared_ptr<ActivityEdgeInstance> incomingEdge : *incomingEdgeList)
+	{
+		auto vec = incomingEdge->takeOfferedTokens();
+		allTokens->insert(allTokens->end(), vec->begin(), vec->end());
+	}
+	return allTokens;
 }
-return allTokens;
-}
 
-std::vector<fUML::Token * > *  ActivityNodeActivationImpl::takeTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityNodeActivationImpl::takeTokens() 
 {
 	//generated from body annotation
-	    std::vector< Token*>* tokens = this->getTokens();
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens = this->getTokens();
     this->clearTokens();
 
     return tokens;
@@ -367,44 +380,44 @@ void ActivityNodeActivationImpl::terminate()
 //*********************************
 // References
 //*********************************
-fUML::ActivityNodeActivationGroup *  ActivityNodeActivationImpl::getGroup() const
+std::shared_ptr<fUML::ActivityNodeActivationGroup> ActivityNodeActivationImpl::getGroup() const
 {
-	//assert(m_group);
-	return m_group;
+//assert(m_group);
+    return m_group;
 }
-void ActivityNodeActivationImpl::setGroup(fUML::ActivityNodeActivationGroup *  _group)
+void ActivityNodeActivationImpl::setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group)
 {
-	m_group = _group;
-}
-
-std::vector<fUML::Token * > *  ActivityNodeActivationImpl::getHeldTokens() const
-{
-	
-	return m_heldTokens;
+    m_group = _group;
 }
 
-
-std::vector<fUML::ActivityEdgeInstance * > *  ActivityNodeActivationImpl::getIncomingEdges() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityNodeActivationImpl::getHeldTokens() const
 {
-	
-	return m_incomingEdges;
+
+    return m_heldTokens;
 }
 
 
-uml::ActivityNode *  ActivityNodeActivationImpl::getNode() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> ActivityNodeActivationImpl::getIncomingEdges() const
 {
-	
-	return m_node;
-}
-void ActivityNodeActivationImpl::setNode(uml::ActivityNode *  _node)
-{
-	m_node = _node;
+
+    return m_incomingEdges;
 }
 
-std::vector<fUML::ActivityEdgeInstance * > *  ActivityNodeActivationImpl::getOutgoingEdges() const
+
+std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
 {
-	
-	return m_outgoingEdges;
+
+    return m_node;
+}
+void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+    m_node = _node;
+}
+
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> ActivityNodeActivationImpl::getOutgoingEdges() const
+{
+
+    return m_outgoingEdges;
 }
 
 

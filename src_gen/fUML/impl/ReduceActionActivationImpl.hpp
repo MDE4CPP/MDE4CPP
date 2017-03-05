@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ReduceActionActivationImpl :virtual public ActionActivationImpl, virtual public ReduceActionActivation
+	class ReduceActionActivationImpl :virtual public ActionActivationImpl, virtual public ReduceActionActivation 
 	{
 		public: 
 			ReduceActionActivationImpl(const ReduceActionActivationImpl & obj);
@@ -57,12 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getCurrentExecution() const ;
+			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const ;
 			
 			/*!
 			 */
-			virtual void setCurrentExecution(fUML::Execution *  _currentExecution) ;
-			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) ;
 							
 			
 			//*********************************
@@ -77,7 +77,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_REDUCEACTIONACTIVATIONREDUCEACTIONACTIVATIONIMPL_HPP */

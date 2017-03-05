@@ -17,6 +17,10 @@ using namespace fUML;
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -24,6 +28,9 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
 
 RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RedefinitionBasedDispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -42,7 +49,7 @@ ecore::EObject *  RedefinitionBasedDispatchStrategyImpl::copy() const
 	return new RedefinitionBasedDispatchStrategyImpl(*this);
 }
 
-ecore::EClass* RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getRedefinitionBasedDispatchStrategy();
 }
@@ -54,59 +61,57 @@ ecore::EClass* RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(uml::Operation *  ownedOperation,uml::Operation *  baseOperation) 
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
 {
 	//generated from body annotation
 	//#include "NamedElement.hpp"
-//#include "Class.hpp"
-//#include "Operation.hpp"
-//
-bool matches = false;
-if(ownedOperation == baseOperation)
+	//#include "Class.hpp"
+	//#include "Operation.hpp"
+	//
+	bool matches = false;
+	if(ownedOperation == baseOperation)
+	{
+		matches = true;
+	}
+	else
     {
-    matches = true;
-    }
-else
-    {
-    int i = 1;
-    while(!matches && i <= ownedOperation->getRedefinedOperation()->size())
+		unsigned int i = 1;
+		while(!matches && i <= ownedOperation->getRedefinedOperation()->size())
         {
-        matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i - 1), baseOperation);
-        i = i + 1;
+			matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i - 1), baseOperation);
+			i = i + 1;
         }
     }
-
-return matches;
-
+	return matches;
 }
 
-uml::Behavior *  RedefinitionBasedDispatchStrategyImpl::retrieveMethod(fUML::Object *  object,uml::Operation *  operation) 
+std::shared_ptr<uml::Behavior>  RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
-	uml::Behavior * method = nullptr;
-        int i = 1;
-        while(method == nullptr && (i <= object->getTypes()->size()))
-            {
-            uml::Class * type = dynamic_cast <uml::Class * > (object->getTypes()->at(i - 1));
-            std::vector<uml::NamedElement *> * members = type->getMember();
-            int j = 1;
-            while(method == nullptr && (j <= members->size()))
-                {
-                uml::NamedElement * member = members->at(j - 1);
-                if(dynamic_cast<uml::Operation * >(member) != nullptr)
-                    {
-                    uml::Operation * memberOperation = dynamic_cast<uml::Operation *>(member);
-                    if(this->operationsMatch(memberOperation, operation))
-                        {
-                        method = memberOperation->getMethod()->at(0);
-                        }
-                    }
-                j = j + 1;
-                }
-            i = i + 1;
-            }
+	std::shared_ptr<uml::Behavior> method = nullptr;
+	unsigned int i = 1;
+	while(method == nullptr && (i <= object->getTypes()->size()))
+	{
+		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i - 1));
+		std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> members = type->getMember();
+		unsigned int j = 1;
+		while(method == nullptr && (j <= members->size()))
+		{
+			std::shared_ptr<uml::NamedElement> member = members->at(j - 1);
+			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
+			if(memberOperation != nullptr)
+			{	
+				if(this->operationsMatch(memberOperation, operation))
+				{
+					method = memberOperation->getMethod()->at(0);
+				}
+			}
+			j = j + 1;
+		}
+		i = i + 1;
+	}
 
-        return method;
+	return method;
 }
 
 //*********************************

@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class StructuralFeatureActionActivationImpl :virtual public ActionActivationImpl, virtual public StructuralFeatureActionActivation
+	class StructuralFeatureActionActivationImpl :virtual public ActionActivationImpl, virtual public StructuralFeatureActionActivation 
 	{
 		public: 
 			StructuralFeatureActionActivationImpl(const StructuralFeatureActionActivationImpl & obj);
@@ -47,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::Association *  getAssociation(uml::StructuralFeature *  feature)  ;
+			virtual std::shared_ptr<uml::Association>  getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Link * > *  getMatchingLinks(uml::Association *  association,uml::StructuralFeature *  end,fUML::Value *  oppositeValue)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Link>>> getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  ;
 			
 			/*!
 			 */ 
-			virtual uml::Property *  getOppositeEnd(uml::Association *  association,uml::StructuralFeature *  end)  ;
+			virtual std::shared_ptr<uml::Property>  getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  ;
 			
 			
 			
@@ -81,7 +82,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_STRUCTURALFEATUREACTIONACTIVATIONSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

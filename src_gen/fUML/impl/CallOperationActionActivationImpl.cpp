@@ -14,6 +14,10 @@ using namespace fUML;
 CallOperationActionActivationImpl::CallOperationActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -21,6 +25,9 @@ CallOperationActionActivationImpl::CallOperationActionActivationImpl()
 
 CallOperationActionActivationImpl::~CallOperationActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallOperationActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -34,26 +41,28 @@ CallOperationActionActivationImpl::CallOperationActionActivationImpl(const CallO
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Execution * 	_callExecutions : *obj.getCallExecutions())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> _callExecutionsList = obj.getCallExecutions();
+	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->push_back(dynamic_cast<fUML::Execution * >(_callExecutions->copy()));
+		this->getCallExecutions()->push_back(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
 	}
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -62,7 +71,7 @@ ecore::EObject *  CallOperationActionActivationImpl::copy() const
 	return new CallOperationActionActivationImpl(*this);
 }
 
-ecore::EClass* CallOperationActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallOperationActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getCallOperationActionActivation();
 }
@@ -74,16 +83,15 @@ ecore::EClass* CallOperationActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Execution *  CallOperationActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution>  CallOperationActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
-	   fUML::Execution* execution = nullptr;
-    uml::CallOperationAction * action = dynamic_cast<uml::CallOperationAction*> (this->getNode());
+	std::shared_ptr<fUML::Execution> execution = nullptr;
+	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction> (this->getNode());
     if(action != nullptr)
     {
-        fUML::Value* target  = this->retrievePinActivation(action->getTarget())->getUnofferedTokens()->front()->getValue();
-
-        fUML::Reference* ref = dynamic_cast<fUML::Reference*>(target);
+    	std::shared_ptr<fUML::Value> target  = this->retrievePinActivation(action->getTarget())->getUnofferedTokens()->front()->getValue();
+    	std::shared_ptr<fUML::Reference> ref = std::dynamic_pointer_cast<fUML::Reference>(target);
         if(nullptr != ref)
         {
             execution = ref->dispatch(action->getOperation());

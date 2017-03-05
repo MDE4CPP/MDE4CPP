@@ -22,10 +22,11 @@
 #include "impl/InvocationActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class StartObjectBehaviorActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public StartObjectBehaviorActionActivation
+	class StartObjectBehaviorActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public StartObjectBehaviorActionActivation 
 	{
 		public: 
 			StartObjectBehaviorActionActivationImpl(const StartObjectBehaviorActionActivationImpl & obj);
@@ -69,7 +70,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_STARTOBJECTBEHAVIORACTIONACTIVATIONSTARTOBJECTBEHAVIORACTIONACTIVATIONIMPL_HPP */

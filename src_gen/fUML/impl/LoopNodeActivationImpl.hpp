@@ -22,10 +22,11 @@
 #include "impl/StructuredActivityNodeActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class LoopNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation
+	class LoopNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation 
 	{
 		public: 
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);
@@ -59,7 +60,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual uml::ActivityNode *  makeLoopVariableList()  ;
+			virtual std::shared_ptr<uml::ActivityNode>  makeLoopVariableList()  ;
 			
 			
 			
@@ -73,7 +74,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Values * > *  getBodyOutputLists() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> getBodyOutputLists() const ;
 			
 							
 			
@@ -89,7 +90,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LOOPNODEACTIVATIONLOOPNODEACTIVATIONIMPL_HPP */

@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class ClassifierBehaviorExecutionImpl :virtual public ecore::EObjectImpl,
-virtual public ClassifierBehaviorExecution
+virtual public ClassifierBehaviorExecution 
 	{
 		public: 
 			ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj);
@@ -49,7 +50,7 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute(std::vector<uml::Class * > *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  ;
+			virtual void execute(std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
 			
 			/*!
 			 */ 
@@ -71,28 +72,25 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getExecution() const ;
+			virtual std::shared_ptr<fUML::Execution> getExecution() const ;
 			
 			/*!
 			 */
-			virtual void setExecution(fUML::Execution *  _execution) ;
+			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution) ;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::Class> getClassifier() const ;
 			
 			/*!
 			 */
-			virtual uml::Class *  getClassifier() const ;
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const ;
 			
 			/*!
 			 */
-			virtual void setClassifier(uml::Class *  _classifier) ;
-			
-			/*!
-			 */
-			virtual fUML::ObjectActivation *  getObjectActivation() const ;
-			
-			/*!
-			 */
-			virtual void setObjectActivation(fUML::ObjectActivation *  _objectActivation) ;
-			
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) ;
 							
 			
 			//*********************************
@@ -107,7 +105,7 @@ virtual public ClassifierBehaviorExecution
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CLASSIFIERBEHAVIOREXECUTIONCLASSIFIERBEHAVIOREXECUTIONIMPL_HPP */

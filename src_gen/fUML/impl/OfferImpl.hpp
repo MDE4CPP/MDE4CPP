@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class OfferImpl :virtual public ecore::EObjectImpl,
-virtual public Offer
+virtual public Offer 
 	{
 		public: 
 			OfferImpl(const OfferImpl & obj);
@@ -53,7 +54,7 @@ virtual public Offer
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  retrieveOfferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> retrieveOfferedTokens()  ;
 			
 			/*!
 			 */ 
@@ -79,7 +80,7 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Token * > *  getOfferedTokens() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getOfferedTokens() const ;
 			
 							
 			
@@ -95,7 +96,7 @@ virtual public Offer
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OFFEROFFERIMPL_HPP */

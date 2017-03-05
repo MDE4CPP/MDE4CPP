@@ -13,21 +13,20 @@ using namespace fUML;
 OfferImpl::OfferImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_offeredTokens == nullptr)
-	{
-		m_offeredTokens = new std::vector<fUML::Token * >();
-	}
+	m_offeredTokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
 }
 
 OfferImpl::~OfferImpl()
 {
-	if(m_offeredTokens!=nullptr)
-	{
-		delete(m_offeredTokens);
-	 	m_offeredTokens = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Offer "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,7 +36,7 @@ OfferImpl::OfferImpl(const OfferImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<fUML::Token * > *  _offeredTokens = obj.getOfferedTokens();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _offeredTokens = obj.getOfferedTokens();
 	this->getOfferedTokens()->insert(this->getOfferedTokens()->end(), _offeredTokens->begin(), _offeredTokens->end());
 
 
@@ -49,7 +48,7 @@ ecore::EObject *  OfferImpl::copy() const
 	return new OfferImpl(*this);
 }
 
-ecore::EClass* OfferImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getOffer();
 }
@@ -111,15 +110,16 @@ void OfferImpl::removeWithdrawnTokens()
     }
 }
 
-std::vector<fUML::Token * > *  OfferImpl::retrieveOfferedTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> OfferImpl::retrieveOfferedTokens() 
 {
 	//generated from body annotation
-	    this->removeWithdrawnTokens();
+	this->removeWithdrawnTokens();
 
-    std::vector<Token*>* tokens = new std::vector<Token*>();
-    std::vector<Token*>* offeredTokens = this->getOfferedTokens();
-    for (unsigned int i = 0; i < this->getOfferedTokens()->size(); i++) {
-        Token * offeredToken = offeredTokens->at(i);
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<std::vector<std::shared_ptr<Token>>> offeredTokens = this->getOfferedTokens();
+    for (unsigned int i = 0; i < this->getOfferedTokens()->size(); i++)
+    {
+    	std::shared_ptr<Token> offeredToken = offeredTokens->at(i);
         tokens->push_back(offeredToken);
     }
 
@@ -129,10 +129,10 @@ std::vector<fUML::Token * > *  OfferImpl::retrieveOfferedTokens()
 //*********************************
 // References
 //*********************************
-std::vector<fUML::Token * > *  OfferImpl::getOfferedTokens() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> OfferImpl::getOfferedTokens() const
 {
-	
-	return m_offeredTokens;
+
+    return m_offeredTokens;
 }
 
 

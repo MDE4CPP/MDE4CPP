@@ -34,10 +34,11 @@
 #include "ValueSpecification.hpp"
 #include "ObjectToken.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class DecisionNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public DecisionNodeActivation
+	class DecisionNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public DecisionNodeActivation 
 	{
 		public: 
 			DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj);
@@ -59,27 +60,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getDecisionValues(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getDecisionValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  executeDecisionInputBehavior(fUML::Value *  inputValue,fUML::Value *  decisionInputValue)  ;
+			virtual std::shared_ptr<fUML::Value>  executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  getDecisionInputFlowValue()  ;
+			virtual std::shared_ptr<fUML::Value>  getDecisionInputFlowValue()  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityEdgeInstance *  getDecisionInputFlowInstance()  ;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance>  getDecisionInputFlowInstance()  ;
 			
 			/*!
 			 */ 
-			virtual bool test(uml::ValueSpecification *  gaurd,fUML::Value *  value)  ;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  removeJoinedControlTokens(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removeJoinedControlTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
@@ -87,11 +88,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
 			
 			/*!
 			 */ 
@@ -113,12 +114,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Execution *  getDecisionInputExecution() const ;
+			virtual std::shared_ptr<fUML::Execution> getDecisionInputExecution() const ;
 			
 			/*!
 			 */
-			virtual void setDecisionInputExecution(fUML::Execution *  _decisionInputExecution) ;
-			
+			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution) ;
 							
 			
 			//*********************************
@@ -133,7 +133,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_DECISIONNODEACTIVATIONDECISIONNODEACTIVATIONIMPL_HPP */

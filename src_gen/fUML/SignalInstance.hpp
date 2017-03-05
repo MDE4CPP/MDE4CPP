@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -75,12 +76,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Signal *  getType() const = 0;
+			virtual std::shared_ptr<uml::Signal> getType() const = 0;
 			
 			/*!
 			 */
-			virtual void setType(uml::Signal *  _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
 			
 
 		protected:
@@ -94,7 +94,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::Signal *  m_type =  nullptr ;
+			std::shared_ptr<uml::Signal> m_type;
 			
 
 		public:

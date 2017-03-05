@@ -22,10 +22,11 @@
 #include "impl/StructuredActivityNodeActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ConditionalNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public ConditionalNodeActivation
+	class ConditionalNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public ConditionalNodeActivation 
 	{
 		public: 
 			ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj);
@@ -47,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::ClauseActivation *  getClauseActivation(uml::Clause *  clause)  ;
+			virtual std::shared_ptr<fUML::ClauseActivation>  getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void runTest(uml::Clause *  clause)  ;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void selectBody(uml::Clause *  clause)  ;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			
 			
@@ -69,11 +70,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::ClauseActivation * > *  getClauseActivations() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getClauseActivations() const ;
 			
 			/*!
 			 */
-			virtual std::vector<uml::Clause * > *  getSelectedClauses() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> getSelectedClauses() const ;
 			
 							
 			
@@ -89,7 +90,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CONDITIONALNODEACTIVATIONCONDITIONALNODEACTIVATIONIMPL_HPP */

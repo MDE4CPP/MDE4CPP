@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl :virtual public ecore::EObjectImpl,
-virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
+virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 
 	{
 		public: 
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj);
@@ -71,7 +72,7 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1IMPL_HPP */

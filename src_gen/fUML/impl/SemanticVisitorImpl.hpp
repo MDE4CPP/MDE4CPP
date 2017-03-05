@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class SemanticVisitorImpl :virtual public ecore::EObjectImpl,
-virtual public SemanticVisitor
+virtual public SemanticVisitor 
 	{
 		public: 
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
@@ -79,7 +80,7 @@ virtual public SemanticVisitor
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICVISITORSEMANTICVISITORIMPL_HPP */

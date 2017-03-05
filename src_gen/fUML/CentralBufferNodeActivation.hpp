@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -77,7 +78,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int removeToken(fUML::Token *  token)  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			
 			//*********************************

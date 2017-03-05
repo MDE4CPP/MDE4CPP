@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,7 +88,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool checkAllParents(uml::Classifier *  type,uml::Classifier *  classifier)  = 0;
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			
 			//*********************************

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -105,7 +106,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  = 0;
+			virtual std::shared_ptr<fUML::Value>  new_()  = 0;
 			
 			
 			//*********************************
@@ -117,12 +118,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActivityNodeActivationGroup *  getActivationGroup() const = 0;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const = 0;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(fUML::ActivityNodeActivationGroup *  _activationGroup) = 0;
-			
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) = 0;
 			
 
 		protected:
@@ -136,7 +136,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::ActivityNodeActivationGroup *  m_activationGroup =  nullptr ;
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> m_activationGroup;
 			
 
 		public:

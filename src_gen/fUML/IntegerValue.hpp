@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -72,11 +73,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 

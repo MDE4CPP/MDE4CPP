@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -99,7 +100,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual uml::ActivityNode *  makeLoopVariableList()  = 0;
+			virtual std::shared_ptr<uml::ActivityNode>  makeLoopVariableList()  = 0;
 			
 			
 			//*********************************
@@ -111,7 +112,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Values * > *  getBodyOutputLists() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> getBodyOutputLists() const = 0;
 			
 			
 
@@ -126,7 +127,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::Values * > *  m_bodyOutputLists =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> m_bodyOutputLists;
 			
 
 		public:

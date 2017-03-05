@@ -31,10 +31,11 @@
 #include "FUMLFactory.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class CallActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public CallActionActivation
+	class CallActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public CallActionActivation 
 	{
 		public: 
 			CallActionActivationImpl(const CallActionActivationImpl & obj);
@@ -56,11 +57,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Execution *  getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution>  getCallExecution()  ;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(fUML::Execution *  execution)  ;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
 			
 			/*!
 			 */ 
@@ -82,7 +83,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Execution * > *  getCallExecutions() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> getCallExecutions() const ;
 			
 							
 			
@@ -98,7 +99,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CALLACTIONACTIVATIONCALLACTIONACTIVATIONIMPL_HPP */

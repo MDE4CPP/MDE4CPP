@@ -33,10 +33,11 @@
 #include "Activity.hpp"
 #include "ActivityParameterNode.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class ActivityExecutionImpl :virtual public ExecutionImpl, virtual public ActivityExecution
+	class ActivityExecutionImpl :virtual public ExecutionImpl, virtual public ActivityExecution 
 	{
 		public: 
 			ActivityExecutionImpl(const ActivityExecutionImpl & obj);
@@ -66,7 +67,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  new_()  ;
+			virtual std::shared_ptr<fUML::Value>  new_()  ;
 			
 			
 			
@@ -80,12 +81,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActivityNodeActivationGroup *  getActivationGroup() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const ;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(fUML::ActivityNodeActivationGroup *  _activationGroup) ;
-			
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) ;
 							
 			
 			//*********************************
@@ -100,7 +100,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_ACTIVITYEXECUTIONACTIVITYEXECUTIONIMPL_HPP */

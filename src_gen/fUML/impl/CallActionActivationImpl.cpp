@@ -22,24 +22,20 @@ using namespace fUML;
 CallActionActivationImpl::CallActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_callExecutions == nullptr)
-	{
-		m_callExecutions = new std::vector<fUML::Execution * >();
-	}
+	m_callExecutions.reset(new std::vector<std::shared_ptr<fUML::Execution>>());
 }
 
 CallActionActivationImpl::~CallActionActivationImpl()
 {
-	if(m_callExecutions!=nullptr)
-	{
-		for(auto c :*m_callExecutions)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -53,26 +49,28 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Execution * 	_callExecutions : *obj.getCallExecutions())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> _callExecutionsList = obj.getCallExecutions();
+	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->push_back(dynamic_cast<fUML::Execution * >(_callExecutions->copy()));
+		this->getCallExecutions()->push_back(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
 	}
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -81,7 +79,7 @@ ecore::EObject *  CallActionActivationImpl::copy() const
 	return new CallActionActivationImpl(*this);
 }
 
-ecore::EClass* CallActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getCallActionActivation();
 }
@@ -96,51 +94,53 @@ ecore::EClass* CallActionActivationImpl::eStaticClass() const
 void CallActionActivationImpl::doAction() 
 {
 	//generated from body annotation
-	Execution* callExecution = this->getCallExecution();
+	std::shared_ptr<Execution> callExecution = this->getCallExecution();
 
-    if (callExecution != nullptr) {
+    if (callExecution != nullptr)
+    {
         this->getCallExecutions()->push_back(callExecution);
 
-        uml::CallAction * callAction = dynamic_cast<uml::CallAction*> (this->getNode());
-        std::vector<uml::InputPin*>* argumentPins = callAction->getArgument();
-        std::vector<uml::OutputPin*>* resultPins = callAction->getResult();
+        std::shared_ptr<uml::CallAction> callAction = std::dynamic_pointer_cast<uml::CallAction> (this->getNode());
+        std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> argumentPins = callAction->getArgument();
+        std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> resultPins = callAction->getResult();
 
         int pinNumber = 0;
-        uml::Behavior* beh = callExecution->getBehavior();
-        std::vector<uml::Parameter*> parameterList = *beh->getOwnedParameter();
-        for (uml::Parameter* parameter : parameterList)
+        std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
+        std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> parameterList = beh->getOwnedParameter();
+        for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
         {
             if (parameter->getDirection() == uml::ParameterDirectionKind::IN
-                    || parameter->getDirection() == uml::ParameterDirectionKind::INOUT) {
-                ParameterValue * parameterValue = fUML::FUMLFactory::eInstance()->createParameterValue();
+                    || parameter->getDirection() == uml::ParameterDirectionKind::INOUT) 
+            {
+            	std::shared_ptr<ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
 
                 //copy tokenlist
-		  auto tl = this->takeTokens(argumentPins->at(pinNumber));
+                auto tl = this->takeTokens(argumentPins->at(pinNumber));
                 parameterValue->getValues()->insert(std::end(*parameterValue->getValues()), tl->begin(), tl->end());
                 callExecution->setParameterValue(parameterValue);
                 pinNumber++;
             }
         }
 
-
         callExecution->execute();
 
-        std::vector<ParameterValue*>* outputParameterValues = callExecution->getOutputParameterValues();
-
+        std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputParameterValues = callExecution->getOutputParameterValues();
         pinNumber = 0;
-        for (uml::Parameter* parameter : *callExecution->getBehavior()->getOwnedParameter())
+        parameterList = callExecution->getBehavior()->getOwnedParameter();
+        for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
         {
             if ((parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
                     || (parameter->getDirection() == uml::ParameterDirectionKind::OUT)
-                    || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN)) {
-                for (ParameterValue * outputParameterValue : *outputParameterValues)
+                    || (parameter->getDirection() == uml::ParameterDirectionKind::RETURN)) 
+            {
+                for (std::shared_ptr<ParameterValue> outputParameterValue : *outputParameterValues)
                 {
                     if (outputParameterValue->getParameter() == parameter)
                     {
-                        uml::OutputPin * resultPin = resultPins->at(pinNumber);
-
-                        this->putTokens(resultPin, outputParameterValue->getValues());
+                    	std::shared_ptr<uml::OutputPin> resultPin = resultPins->at(pinNumber);
+                    	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> values = outputParameterValue->getValues();
+                        this->putTokens(resultPin, values);
                     }
                 }
                 pinNumber = pinNumber + 1;
@@ -152,14 +152,14 @@ void CallActionActivationImpl::doAction()
     }
 }
 
-fUML::Execution *  CallActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution>  CallActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
 	    //TODO verify!
     return this->m_callExecutions->front();
 }
 
-void CallActionActivationImpl::removeCallExecution(fUML::Execution *  execution) 
+void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
 {
 	//generated from body annotation
 	 bool notFound = true;
@@ -175,7 +175,8 @@ void CallActionActivationImpl::removeCallExecution(fUML::Execution *  execution)
 void CallActionActivationImpl::terminate() 
 {
 	//generated from body annotation
-	    for ( Execution*  execution: *this->getCallExecutions() )
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> executionList = this->getCallExecutions();
+	for (std::shared_ptr<Execution>  execution: *executionList)
     {
         execution->terminate();
     }
@@ -186,10 +187,10 @@ void CallActionActivationImpl::terminate()
 //*********************************
 // References
 //*********************************
-std::vector<fUML::Execution * > *  CallActionActivationImpl::getCallExecutions() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> CallActionActivationImpl::getCallExecutions() const
 {
-	
-	return m_callExecutions;
+
+    return m_callExecutions;
 }
 
 

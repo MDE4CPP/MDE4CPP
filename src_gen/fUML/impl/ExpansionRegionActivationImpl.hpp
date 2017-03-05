@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ExpansionRegionActivationImpl :virtual public ActionActivationImpl, virtual public ExpansionRegionActivation
+	class ExpansionRegionActivationImpl :virtual public ActionActivationImpl, virtual public ExpansionRegionActivation 
 	{
 		public: 
 			ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj);
@@ -51,11 +52,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void runGroup(fUML::ExpansionActivationGroup *  activationGroup)  ;
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
 			
 			/*!
 			 */ 
-			virtual fUML::ExpansionNodeActivation *  getExpansionNodeActivation(uml::ExpansionNode *  node)  ;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation>  getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  ;
 			
 			/*!
 			 */ 
@@ -73,15 +74,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::TokenSet * > *  getInputTokens() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputTokens() const ;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::TokenSet * > *  getInputExpansionTokens() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputExpansionTokens() const ;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::ExpansionActivationGroup * > *  getActivationGroups() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ExpansionActivationGroup>>> getActivationGroups() const ;
 			
 							
 			
@@ -97,7 +98,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXPANSIONREGIONACTIVATIONEXPANSIONREGIONACTIVATIONIMPL_HPP */

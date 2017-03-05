@@ -22,10 +22,11 @@
 #include "impl/ControlNodeActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class JoinNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public JoinNodeActivation
+	class JoinNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public JoinNodeActivation 
 	{
 		public: 
 			JoinNodeActivationImpl(const JoinNodeActivationImpl & obj);
@@ -73,7 +74,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_JOINNODEACTIVATIONJOINNODEACTIVATIONIMPL_HPP */

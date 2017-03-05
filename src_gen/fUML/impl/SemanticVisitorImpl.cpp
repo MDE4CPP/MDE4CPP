@@ -13,6 +13,10 @@ using namespace fUML;
 SemanticVisitorImpl::SemanticVisitorImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ SemanticVisitorImpl::SemanticVisitorImpl()
 
 SemanticVisitorImpl::~SemanticVisitorImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticVisitor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  SemanticVisitorImpl::copy() const
 	return new SemanticVisitorImpl(*this);
 }
 
-ecore::EClass* SemanticVisitorImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getSemanticVisitor();
 }

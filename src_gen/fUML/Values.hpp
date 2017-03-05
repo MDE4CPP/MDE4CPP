@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -66,7 +67,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Value * > *  getValues() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const = 0;
 			
 			
 
@@ -81,7 +82,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::Value * > *  m_values =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> m_values;
 			
 
 		public:

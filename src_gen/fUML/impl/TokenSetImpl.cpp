@@ -13,21 +13,20 @@ using namespace fUML;
 TokenSetImpl::TokenSetImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_tokens == nullptr)
-	{
-		m_tokens = new std::vector<fUML::Token * >();
-	}
+	m_tokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
 }
 
 TokenSetImpl::~TokenSetImpl()
 {
-	if(m_tokens!=nullptr)
-	{
-		delete(m_tokens);
-	 	m_tokens = nullptr;
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TokenSet "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -37,7 +36,7 @@ TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj)
 
 	//copy references with now containment
 	
-	std::vector<fUML::Token * > *  _tokens = obj.getTokens();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _tokens = obj.getTokens();
 	this->getTokens()->insert(this->getTokens()->end(), _tokens->begin(), _tokens->end());
 
 
@@ -49,7 +48,7 @@ ecore::EObject *  TokenSetImpl::copy() const
 	return new TokenSetImpl(*this);
 }
 
-ecore::EClass* TokenSetImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getTokenSet();
 }
@@ -65,10 +64,10 @@ ecore::EClass* TokenSetImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::vector<fUML::Token * > *  TokenSetImpl::getTokens() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> TokenSetImpl::getTokens() const
 {
-	
-	return m_tokens;
+
+    return m_tokens;
 }
 
 

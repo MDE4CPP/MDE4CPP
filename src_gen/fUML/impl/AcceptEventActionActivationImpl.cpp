@@ -13,6 +13,10 @@ using namespace fUML;
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+	
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl()
 
 AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptEventActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -36,22 +43,23 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -60,7 +68,7 @@ ecore::EObject *  AcceptEventActionActivationImpl::copy() const
 	return new AcceptEventActionActivationImpl(*this);
 }
 
-ecore::EClass* AcceptEventActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getAcceptEventActionActivation();
 }
@@ -81,13 +89,13 @@ bool AcceptEventActionActivationImpl::isWaiting() const
 //*********************************
 // Operations
 //*********************************
-void AcceptEventActionActivationImpl::accept(fUML::SignalInstance *  signalInstance) 
+void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionActivationImpl::match(fUML::SignalInstance *  signalInstance) 
+bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -96,14 +104,14 @@ bool AcceptEventActionActivationImpl::match(fUML::SignalInstance *  signalInstan
 //*********************************
 // References
 //*********************************
-fUML::AcceptEventActionEventAccepter *  AcceptEventActionActivationImpl::getEventAccepter() const
+std::shared_ptr<fUML::AcceptEventActionEventAccepter> AcceptEventActionActivationImpl::getEventAccepter() const
 {
-	
-	return m_eventAccepter;
+
+    return m_eventAccepter;
 }
-void AcceptEventActionActivationImpl::setEventAccepter(fUML::AcceptEventActionEventAccepter *  _eventAccepter)
+void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter)
 {
-	m_eventAccepter = _eventAccepter;
+    m_eventAccepter = _eventAccepter;
 }
 
 //*********************************

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -82,11 +83,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::vector<fUML::Token * > *  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  = 0;
 			
 			
 			//*********************************
@@ -98,12 +99,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActionActivation *  getActionActivation() const = 0;
+			virtual std::shared_ptr<fUML::ActionActivation> getActionActivation() const = 0;
 			
 			/*!
 			 */
-			virtual void setActionActivation(fUML::ActionActivation *  _actionActivation) = 0;
-			
+			virtual void setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation) = 0;
 			
 
 		protected:
@@ -117,7 +117,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::ActionActivation *  m_actionActivation =  nullptr ;
+			std::shared_ptr<fUML::ActionActivation> m_actionActivation;
 			
 
 		public:

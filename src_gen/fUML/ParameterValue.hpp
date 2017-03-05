@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -71,15 +72,14 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Parameter *  getParameter() const = 0;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
 			
 			/*!
 			 */
-			virtual void setParameter(uml::Parameter *  _parameter) = 0;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
 			/*!
 			 */
-			virtual std::vector<fUML::Value * > *  getValues() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const = 0;
 			
 			
 
@@ -94,10 +94,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::Parameter *  m_parameter =  nullptr ;
+			std::shared_ptr<uml::Parameter> m_parameter;
 			/*!
 			 */
-			std::vector<fUML::Value * > *  m_values =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> m_values;
 			
 
 		public:

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -106,15 +107,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::ActivityNode * > *  makeActivityNodeList(std::vector<uml::ExecutableNode * > *  nodes)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> makeActivityNodeList(std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>>  nodes)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Value * > *  getPinValues(uml::OutputPin *  pin)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getPinValues(std::shared_ptr<uml::OutputPin>  pin)  = 0;
 			
 			/*!
 			 */ 
-			virtual void putPinValues(uml::OutputPin *  pin,std::vector<fUML::Value * > *  values)  = 0;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values)  = 0;
 			
 			/*!
 			 */ 
@@ -126,7 +127,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::ActivityNodeActivation *  getNodeActivation(uml::ActivityNode *  node)  = 0;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation>  getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  = 0;
 			
 			/*!
 			 */ 
@@ -142,7 +143,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(fUML::ActivityEdgeInstance *  edgeInstance)  = 0;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  = 0;
 			
 			/*!
 			 */ 
@@ -150,7 +151,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::Token * > *  completeAction()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> completeAction()  = 0;
 			
 			/*!
 			 */ 
@@ -166,12 +167,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActivityNodeActivationGroup *  getActivationGroup() const = 0;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const = 0;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(fUML::ActivityNodeActivationGroup *  _activationGroup) = 0;
-			
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) = 0;
 			
 
 		protected:
@@ -185,7 +185,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::ActivityNodeActivationGroup *  m_activationGroup =  nullptr ;
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> m_activationGroup;
 			
 
 		public:

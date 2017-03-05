@@ -25,6 +25,10 @@ using namespace fUML;
 DecisionNodeActivationImpl::DecisionNodeActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -32,14 +36,9 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl()
 
 DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
 {
-	if(m_decisionInputExecution!=nullptr)
-	{
-		if(m_decisionInputExecution)
-		{
-			delete(m_decisionInputExecution);
-			m_decisionInputExecution = nullptr;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DecisionNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -52,23 +51,24 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
 	if(obj.getDecisionInputExecution()!=nullptr)
 	{
-		m_decisionInputExecution = dynamic_cast<fUML::Execution * >(obj.getDecisionInputExecution()->copy());
+		m_decisionInputExecution.reset(dynamic_cast<fUML::Execution*>(obj.getDecisionInputExecution()->copy()));
 	}
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -77,7 +77,7 @@ ecore::EObject *  DecisionNodeActivationImpl::copy() const
 	return new DecisionNodeActivationImpl(*this);
 }
 
-ecore::EClass* DecisionNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getDecisionNodeActivation();
 }
@@ -89,91 +89,101 @@ ecore::EClass* DecisionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  DecisionNodeActivationImpl::executeDecisionInputBehavior(fUML::Value *  inputValue,fUML::Value *  decisionInputValue) 
+std::shared_ptr<fUML::Value>  DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
 {
 	//generated from body annotation
-	    uml::DecisionNode * decisionNode = dynamic_cast<uml::DecisionNode*> (this->getNode());
-    uml::Behavior* decisionInputBehavior = nullptr;
+	std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
+	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
     {
         decisionInputBehavior = decisionNode->getDecisionInput();
     }
 
-    Value * decisionInputResult = nullptr;
+    std::shared_ptr<Value> decisionInputResult = nullptr;
 
-    if (decisionInputBehavior == nullptr) {
-
-        if (decisionInputValue != nullptr) {
+    if (decisionInputBehavior == nullptr)
+    {
+        if (decisionInputValue != nullptr)
+        {
             decisionInputResult = decisionInputValue;
-        } else {
+        }
+        else
+        {
             decisionInputResult = inputValue;
         }
-
-    } else {
-
+    }
+    else
+    {
         this->setDecisionInputExecution(this->getExecutionLocus()->getFactory()->createExecution(decisionInputBehavior,this->getExecutionContext()));
 
         unsigned int i = 1;
         int j = 0;
         while (((j == 0) || ((j == 1) && (decisionInputValue != nullptr)))
-               && (i <= decisionInputBehavior->getOwnedParameter()->size())) {
-            uml::Parameter * parameter = decisionInputBehavior->getOwnedParameter()->at(i - 1);
+               && (i <= decisionInputBehavior->getOwnedParameter()->size()))
+        {
+        	std::shared_ptr<uml::Parameter> parameter = decisionInputBehavior->getOwnedParameter()->at(i - 1);
             if (parameter->getDirection() == uml::ParameterDirectionKind::IN
-                    || parameter->getDirection() == uml::ParameterDirectionKind::INOUT) {
-                ParameterValue * inputParameterValue = fUML::FUMLFactory::eInstance()->createParameterValue();
+                    || parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
+            {
+            	std::shared_ptr<ParameterValue> inputParameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
                 inputParameterValue->setParameter(parameter);
 
                 j = j + 1;
-                if (j == 1 && inputValue != nullptr) {
+                if (j == 1 && inputValue != nullptr)
+                {
                     inputParameterValue->getValues()->push_back(inputValue);
-                } else {
+                }
+                else
+                {
                     inputParameterValue->getValues()->push_back(decisionInputValue);
                 }
 
                 this->getDecisionInputExecution()->setParameterValue(inputParameterValue);
-
             }
             i = i + 1;
         }
         this->getDecisionInputExecution()->execute();
 
-        std::vector<ParameterValue*>* outputParameterValues = this->getDecisionInputExecution()->getOutputParameterValues();
+        std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputParameterValues = this->getDecisionInputExecution()->getOutputParameterValues();
         this->getDecisionInputExecution()->destroy();
 
         decisionInputResult = outputParameterValues->at(0)->getValues()->at(0);
-
     }
 
     return decisionInputResult;
 }
 
-void DecisionNodeActivationImpl::fire(std::vector<fUML::Token * > *  incomingTokens) 
+void DecisionNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
-	    DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
+	DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
 
-    std::vector<fUML::Token * > * removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
-    std::vector<fUML::Value * > * decisionValues = this->getDecisionValues(incomingTokens);
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removedControlTokens = this->removeJoinedControlTokens(incomingTokens);
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> decisionValues = this->getDecisionValues(incomingTokens);
+	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> outgoingEdges = this->getOutgoingEdges();
 
-    std::vector<ActivityEdgeInstance*>* outgoingEdges = this->getOutgoingEdges();
+    for (unsigned int i = 0; i < outgoingEdges->size(); i++) 
+    {
+    	std::shared_ptr<ActivityEdgeInstance> edgeInstance = outgoingEdges->at(i);
+    	std::shared_ptr<uml::ValueSpecification> guard = edgeInstance->getEdge()->getGuard();
 
-    for (unsigned int i = 0; i < outgoingEdges->size(); i++) {
-        ActivityEdgeInstance * edgeInstance = outgoingEdges->at(i);
-        uml::ValueSpecification * guard = edgeInstance->getEdge()->getGuard();
-
-        std::vector<fUML::Token * > * offeredTokens = new std::vector<fUML::Token * > ();
-        for (unsigned int j = 0; j < incomingTokens->size(); j++) {
-            Token * incomingToken = incomingTokens->at(j);
-            Value * decisionValue = decisionValues->at(j);
-            if (this->test(guard, decisionValue)) {
+    	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> offeredTokens(new std::vector<std::shared_ptr<fUML::Token>>());
+        for (unsigned int j = 0; j < incomingTokens->size(); j++) 
+        {
+        	std::shared_ptr<Token> incomingToken = incomingTokens->at(j);
+        	std::shared_ptr<Value> decisionValue = decisionValues->at(j);
+            if (this->test(guard, decisionValue)) 
+            {
                 offeredTokens->push_back(incomingToken);
             }
         }
 
-        if (offeredTokens->size() > 0) {
-            for (unsigned int j = 0; j < removedControlTokens->size(); j++) {
-                Token * removedControlToken = removedControlTokens->at(j);
+        if (offeredTokens->size() > 0) 
+        {
+            for (unsigned int j = 0; j < removedControlTokens->size(); j++) 
+            {
+            	std::shared_ptr<Token> removedControlToken = removedControlTokens->at(j);
                 offeredTokens->push_back(removedControlToken);
             }
             edgeInstance->sendOffer(offeredTokens);
@@ -181,37 +191,40 @@ void DecisionNodeActivationImpl::fire(std::vector<fUML::Token * > *  incomingTok
     }
 }
 
-fUML::ActivityEdgeInstance *  DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
+std::shared_ptr<fUML::ActivityEdgeInstance>  DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
 {
 	//generated from body annotation
-	    uml::ActivityEdge*  decisionInputFlow = (dynamic_cast<uml::DecisionNode*> (this->getNode()))->getDecisionInputFlow();
+	std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
-    ActivityEdgeInstance * edgeInstance = nullptr;
-    if (decisionInputFlow != nullptr) {
+	std::shared_ptr<ActivityEdgeInstance> edgeInstance = nullptr;
+    if (decisionInputFlow != nullptr) 
+    {
         unsigned int i = 1;
-        while ((edgeInstance == nullptr) && (i <= this->getIncomingEdges()->size())) {
-            ActivityEdgeInstance * incomingEdge = this->getIncomingEdges()->at(i - 1);
-            if (incomingEdge->getEdge() == decisionInputFlow) {
+        while ((edgeInstance == nullptr) && (i <= this->getIncomingEdges()->size())) 
+        {
+        	std::shared_ptr<ActivityEdgeInstance> incomingEdge = this->getIncomingEdges()->at(i - 1);
+            if (incomingEdge->getEdge() == decisionInputFlow) 
+            {
                 edgeInstance = incomingEdge;
             }
             i = i + 1;
         }
     }
 
-
     return edgeInstance;
 }
 
-fUML::Value *  DecisionNodeActivationImpl::getDecisionInputFlowValue() 
+std::shared_ptr<fUML::Value>  DecisionNodeActivationImpl::getDecisionInputFlowValue() 
 {
 	//generated from body annotation
-	    ActivityEdgeInstance * decisionInputFlowInstance = this->getDecisionInputFlowInstance();
+	std::shared_ptr<ActivityEdgeInstance> decisionInputFlowInstance = this->getDecisionInputFlowInstance();
 
-    Value * value = nullptr;
-    if (decisionInputFlowInstance != nullptr) {
-        std::vector<Token*>* tokens = decisionInputFlowInstance->takeOfferedTokens();
-
-        if (tokens->size() > 0) {
+	std::shared_ptr<Value> value = nullptr;
+    if (decisionInputFlowInstance != nullptr) 
+    {
+    	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens = decisionInputFlowInstance->takeOfferedTokens();
+        if (tokens->size() > 0) 
+        {
             value = tokens->at(0)->getValue();
         }
     }
@@ -219,26 +232,35 @@ fUML::Value *  DecisionNodeActivationImpl::getDecisionInputFlowValue()
     return value;
 }
 
-std::vector<fUML::Value * > *  DecisionNodeActivationImpl::getDecisionValues(std::vector<fUML::Token * > *  incomingTokens) 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
-	Value * decisionInputValue = this->getDecisionInputFlowValue();
+	std::shared_ptr<Value> decisionInputValue = this->getDecisionInputFlowValue();
 
-    std::vector<fUML::Value * > * decisionValues = new std::vector<fUML::Value * >();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> decisionValues(new std::vector<std::shared_ptr<fUML::Value>>());
 
-    for (unsigned int i = 0; i < incomingTokens->size(); i++) {
-        Token * incomingToken = incomingTokens->at(i);
-
-
-        Value * value = this->executeDecisionInputBehavior(incomingToken->getValue(), decisionInputValue);
+    for (unsigned int i = 0; i < incomingTokens->size(); i++) 
+    {
+    	std::shared_ptr<Token> incomingToken = incomingTokens->at(i);
+    	std::shared_ptr<Value> value = this->executeDecisionInputBehavior(incomingToken->getValue(), decisionInputValue);
         decisionValues->push_back(value);
     }
 
-    for (unsigned int i = 0; i < decisionValues->size(); i++) {
-        Value * decisionValue = decisionValues->at(i);
-        DEBUG_MESSAGE(std::cout<<"[getDecisionValues] decisionValues[" << i << "] = "
-               << decisionValue->toString()<<std::endl;)
-    }
+    DEBUG_MESSAGE(
+		for (unsigned int i = 0; i < decisionValues->size(); i++)
+		{
+			std::shared_ptr<Value> decisionValue = decisionValues->at(i);
+			if (decisionValue)
+			{
+				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = "
+				   << decisionValue->toString()<<std::endl;
+			}
+			else
+			{
+				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr";
+			}
+		}
+    )
 
     return decisionValues;
 }
@@ -246,13 +268,14 @@ std::vector<fUML::Value * > *  DecisionNodeActivationImpl::getDecisionValues(std
 bool DecisionNodeActivationImpl::hasObjectFlowInput() 
 {
 	//generated from body annotation
-	    uml::ActivityEdge * decisionInputFlow = (dynamic_cast<uml::DecisionNode*> (this->getNode()))->getDecisionInputFlow();
+	std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
     bool isObjectFlow = false;
     unsigned int i = 1;
-    while (!isObjectFlow && i <= this->getIncomingEdges()->size()) {
-        uml::ActivityEdge * edge = this->getIncomingEdges()->at(i - 1)->getEdge();
-        isObjectFlow = (edge != decisionInputFlow) && (dynamic_cast<uml::ObjectFlow*>(edge) != nullptr);
+    while (!isObjectFlow && i <= this->getIncomingEdges()->size()) 
+    {
+    	std::shared_ptr<uml::ActivityEdge> edge = this->getIncomingEdges()->at(i - 1)->getEdge();
+        isObjectFlow = (edge != decisionInputFlow) && (std::dynamic_pointer_cast<uml::ObjectFlow>(edge) != nullptr);
         i = i + 1;
     }
     return isObjectFlow;
@@ -261,7 +284,7 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 bool DecisionNodeActivationImpl::isReady() 
 {
 	//generated from body annotation
-	    int i = 1;
+	unsigned int i = 1;
     bool ready = true;
     DEBUG_MESSAGE(std::cout<< "INCOMING EDGE SIZE:"<< this->getIncomingEdges()->size()<<std::endl;)
     while (ready && (i <= this->getIncomingEdges()->size())) {
@@ -272,16 +295,19 @@ bool DecisionNodeActivationImpl::isReady()
     return ready;
 }
 
-std::vector<fUML::Token * > *  DecisionNodeActivationImpl::removeJoinedControlTokens(std::vector<fUML::Token * > *  incomingTokens) 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
 {
 	//generated from body annotation
-	    std::vector<fUML::Token * > * removedControlTokens = new std::vector<fUML::Token * >();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removedControlTokens(new std::vector<std::shared_ptr<fUML::Token>>());
 
-    if (this->hasObjectFlowInput()) {
+    if (this->hasObjectFlowInput()) 
+    {
         unsigned int i = 1;
-        while (i <= incomingTokens->size()) {
-            Token * token = incomingTokens->at(i - 1);
-            if (token->isControl()) {
+        while (i <= incomingTokens->size()) 
+        {
+        	std::shared_ptr<Token> token = incomingTokens->at(i - 1);
+            if (token->isControl()) 
+            {
                 removedControlTokens->push_back(token);
                 incomingTokens->erase(incomingTokens->begin()+i - 1);
                 i = i - 1;
@@ -293,18 +319,21 @@ std::vector<fUML::Token * > *  DecisionNodeActivationImpl::removeJoinedControlTo
     return removedControlTokens;
 }
 
-std::vector<fUML::Token * > *  DecisionNodeActivationImpl::takeOfferedTokens() 
+std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> DecisionNodeActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
-	    uml::ObjectFlow * decisionInputFlow = (dynamic_cast<uml::DecisionNode*> (this->getNode()))->getDecisionInputFlow();
+	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
-    std::vector<fUML::Token * > * allTokens = new std::vector<fUML::Token * >();
-    std::vector<ActivityEdgeInstance*>* incomingEdges = this->getIncomingEdges();
-    for (unsigned int i = 0; i < incomingEdges->size(); i++) {
-        ActivityEdgeInstance * edgeInstance = incomingEdges->at(i);
-        if (edgeInstance->getEdge() != decisionInputFlow) {
-            std::vector<fUML::Token * > * tokens = edgeInstance->takeOfferedTokens();
-            for (unsigned int j = 0; j < tokens->size(); j++) {
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> allTokens(new std::vector<std::shared_ptr<fUML::Token>>());
+	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> incomingEdges = this->getIncomingEdges();
+    for (unsigned int i = 0; i < incomingEdges->size(); i++) 
+    {
+    	std::shared_ptr<ActivityEdgeInstance> edgeInstance = incomingEdges->at(i);
+        if (edgeInstance->getEdge() != decisionInputFlow) 
+        {
+        	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> tokens = edgeInstance->takeOfferedTokens();
+            for (unsigned int j = 0; j < tokens->size(); j++)
+            {
                 allTokens->push_back(tokens->at(j));
             }
         }
@@ -323,14 +352,14 @@ void DecisionNodeActivationImpl::terminate()
     ControlNodeActivationImpl::terminate();
 }
 
-bool DecisionNodeActivationImpl::test(uml::ValueSpecification *  gaurd,fUML::Value *  value) 
+bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) 
 {
 	//generated from body annotation
-	    bool guardResult = true;
-    if (gaurd != nullptr) {
-        Value * guardValue = this->getExecutionLocus()->getExecutor()->evaluate(gaurd);
+	bool guardResult = true;
+    if (gaurd != nullptr) 
+    {
+    	std::shared_ptr<Value> guardValue = this->getExecutionLocus()->getExecutor()->evaluate(gaurd);
         guardResult = guardValue->equals(value);
-
     }
     return guardResult;
 }
@@ -338,14 +367,14 @@ bool DecisionNodeActivationImpl::test(uml::ValueSpecification *  gaurd,fUML::Val
 //*********************************
 // References
 //*********************************
-fUML::Execution *  DecisionNodeActivationImpl::getDecisionInputExecution() const
+std::shared_ptr<fUML::Execution> DecisionNodeActivationImpl::getDecisionInputExecution() const
 {
-	//assert(m_decisionInputExecution);
-	return m_decisionInputExecution;
+//assert(m_decisionInputExecution);
+    return m_decisionInputExecution;
 }
-void DecisionNodeActivationImpl::setDecisionInputExecution(fUML::Execution *  _decisionInputExecution)
+void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution)
 {
-	m_decisionInputExecution = _decisionInputExecution;
+    m_decisionInputExecution = _decisionInputExecution;
 }
 
 //*********************************

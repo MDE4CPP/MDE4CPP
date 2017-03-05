@@ -19,6 +19,10 @@ using namespace fUML;
 DataValueImpl::DataValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -26,6 +30,9 @@ DataValueImpl::DataValueImpl()
 
 DataValueImpl::~DataValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -39,9 +46,10 @@ DataValueImpl::DataValueImpl(const DataValueImpl & obj)
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -50,7 +58,7 @@ ecore::EObject *  DataValueImpl::copy() const
 	return new DataValueImpl(*this);
 }
 
-ecore::EClass* DataValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getDataValue();
 }
@@ -62,32 +70,31 @@ ecore::EClass* DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector<uml::Classifier * > *  DataValueImpl::getTypes() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> DataValueImpl::getTypes() 
 {
 	//generated from body annotation
-	    std::vector<uml::Classifier * > * types = new std::vector<uml::Classifier * >();
-    types->push_back(dynamic_cast<uml::Classifier * >(this->getType()));
-
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+    types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
 }
 
-fUML::Value *  DataValueImpl::new_() 
+std::shared_ptr<fUML::Value>  DataValueImpl::new_() 
 {
 	//generated from body annotation
-	    return FUMLFactory::eInstance()->createDataValue();
+	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createDataValue());
 }
 
 //*********************************
 // References
 //*********************************
-uml::DataType *  DataValueImpl::getType() const
+std::shared_ptr<uml::DataType> DataValueImpl::getType() const
 {
-	//assert(m_type);
-	return m_type;
+//assert(m_type);
+    return m_type;
 }
-void DataValueImpl::setType(uml::DataType *  _type)
+void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************

@@ -13,6 +13,10 @@ using namespace fUML;
 GetNextEventStrategyImpl::GetNextEventStrategyImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl()
 
 GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  GetNextEventStrategyImpl::copy() const
 	return new GetNextEventStrategyImpl(*this);
 }
 
-ecore::EClass* GetNextEventStrategyImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy();
 }
@@ -50,7 +57,7 @@ ecore::EClass* GetNextEventStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::SignalInstance *  GetNextEventStrategyImpl::retrieveNextEvent(fUML::ObjectActivation *  objectActivation) 
+std::shared_ptr<fUML::SignalInstance>  GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

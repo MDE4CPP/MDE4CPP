@@ -22,10 +22,11 @@
 #include "impl/ActivityNodeActivationGroupImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ExpansionActivationGroupImpl :virtual public ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup
+	class ExpansionActivationGroupImpl :virtual public ActivityNodeActivationGroupImpl, virtual public ExpansionActivationGroup 
 	{
 		public: 
 			ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj);
@@ -57,12 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ExpansionRegionActivation *  getRegionActivation() const ;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getRegionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setRegionActivation(fUML::ExpansionRegionActivation *  _regionActivation) ;
-			
+			virtual void setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation) ;
 							
 			
 			//*********************************
@@ -77,7 +77,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EXPANSIONACTIVATIONGROUPEXPANSIONACTIVATIONGROUPIMPL_HPP */

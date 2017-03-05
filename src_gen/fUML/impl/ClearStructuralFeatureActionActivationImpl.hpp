@@ -22,10 +22,11 @@
 #include "impl/StructuralFeatureActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ClearStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public ClearStructuralFeatureActionActivation
+	class ClearStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public ClearStructuralFeatureActionActivation 
 	{
 		public: 
 			ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj);
@@ -69,7 +70,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CLEARSTRUCTURALFEATUREACTIONACTIVATIONCLEARSTRUCTURALFEATUREACTIONACTIVATIONIMPL_HPP */

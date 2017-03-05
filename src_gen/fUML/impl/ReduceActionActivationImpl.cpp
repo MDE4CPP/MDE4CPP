@@ -13,6 +13,10 @@ using namespace fUML;
 ReduceActionActivationImpl::ReduceActionActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ ReduceActionActivationImpl::ReduceActionActivationImpl()
 
 ReduceActionActivationImpl::~ReduceActionActivationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ReduceActionActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,22 +42,23 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 
 	m_group  = obj.getGroup();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _incomingEdges = obj.getIncomingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
 	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::vector<fUML::ActivityEdgeInstance * > *  _outgoingEdges = obj.getOutgoingEdges();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
 	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::vector<fUML::PinActivation * > *  _pinActivation = obj.getPinActivation();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
 	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	for(fUML::Token * 	_heldTokens : *obj.getHeldTokens())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(dynamic_cast<fUML::Token * >(_heldTokens->copy()));
+		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -59,7 +67,7 @@ ecore::EObject *  ReduceActionActivationImpl::copy() const
 	return new ReduceActionActivationImpl(*this);
 }
 
-ecore::EClass* ReduceActionActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getReduceActionActivation();
 }
@@ -75,14 +83,14 @@ ecore::EClass* ReduceActionActivationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-fUML::Execution *  ReduceActionActivationImpl::getCurrentExecution() const
+std::shared_ptr<fUML::Execution> ReduceActionActivationImpl::getCurrentExecution() const
 {
-	
-	return m_currentExecution;
+
+    return m_currentExecution;
 }
-void ReduceActionActivationImpl::setCurrentExecution(fUML::Execution *  _currentExecution)
+void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution)
 {
-	m_currentExecution = _currentExecution;
+    m_currentExecution = _currentExecution;
 }
 
 //*********************************

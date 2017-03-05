@@ -22,10 +22,11 @@
 #include "impl/SemanticVisitorImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class EvaluationImpl :virtual public SemanticVisitorImpl, virtual public Evaluation
+	class EvaluationImpl :virtual public SemanticVisitorImpl, virtual public Evaluation 
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);
@@ -47,7 +48,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Value *  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
 			
 			
 			
@@ -61,20 +62,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::ValueSpecification *  getSpecification() const ;
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
 			
 			/*!
 			 */
-			virtual void setSpecification(uml::ValueSpecification *  _specification) ;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
 			
 			/*!
 			 */
-			virtual fUML::Locus *  getLocus() const ;
-			
-			/*!
-			 */
-			virtual void setLocus(fUML::Locus *  _locus) ;
-			
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
 							
 			
 			//*********************************
@@ -89,7 +88,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EVALUATIONEVALUATIONIMPL_HPP */

@@ -22,10 +22,11 @@
 #include "impl/PinActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class OutputPinActivationImpl :virtual public PinActivationImpl, virtual public OutputPinActivation
+	class OutputPinActivationImpl :virtual public PinActivationImpl, virtual public OutputPinActivation 
 	{
 		public: 
 			OutputPinActivationImpl(const OutputPinActivationImpl & obj);
@@ -69,7 +70,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_OUTPUTPINACTIVATIONOUTPUTPINACTIVATIONIMPL_HPP */

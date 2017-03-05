@@ -17,46 +17,23 @@ using namespace fUML;
 ObjectActivationImpl::ObjectActivationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
-	if( m_classifierBehaviorExecutions == nullptr)
-	{
-		m_classifierBehaviorExecutions = new std::vector<fUML::ClassifierBehaviorExecution * >();
-	}
-	if( m_eventPool == nullptr)
-	{
-		m_eventPool = new std::vector<fUML::SignalInstance * >();
-	}
+	m_classifierBehaviorExecutions.reset(new std::vector<std::shared_ptr<fUML::ClassifierBehaviorExecution>>());
+	m_eventPool.reset(new std::vector<std::shared_ptr<fUML::SignalInstance>>());
 	
-	if( m_waitingEventAccepters == nullptr)
-	{
-		m_waitingEventAccepters = new std::vector<fUML::EventAccepter * >();
-	}
+	m_waitingEventAccepters.reset(new std::vector<std::shared_ptr<fUML::EventAccepter>>());
 }
 
 ObjectActivationImpl::~ObjectActivationImpl()
 {
-	if(m_waitingEventAccepters!=nullptr)
-	{
-		delete(m_waitingEventAccepters);
-	 	m_waitingEventAccepters = nullptr;
-	}
-	if(m_eventPool!=nullptr)
-	{
-		for(auto c :*m_eventPool)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
-	if(m_classifierBehaviorExecutions!=nullptr)
-	{
-		for(auto c :*m_classifierBehaviorExecutions)
-		{
-			delete(c);
-			c = 0;
-		}
-	}
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -68,18 +45,20 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj)
 	
 	m_object  = obj.getObject();
 
-	std::vector<fUML::EventAccepter * > *  _waitingEventAccepters = obj.getWaitingEventAccepters();
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::EventAccepter>>> _waitingEventAccepters = obj.getWaitingEventAccepters();
 	this->getWaitingEventAccepters()->insert(this->getWaitingEventAccepters()->end(), _waitingEventAccepters->begin(), _waitingEventAccepters->end());
 
 
 	//clone containt lists
-	for(fUML::ClassifierBehaviorExecution * 	_classifierBehaviorExecutions : *obj.getClassifierBehaviorExecutions())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ClassifierBehaviorExecution>>> _classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
+	for(std::shared_ptr<fUML::ClassifierBehaviorExecution> _classifierBehaviorExecutions : *_classifierBehaviorExecutionsList)
 	{
-		this->getClassifierBehaviorExecutions()->push_back(dynamic_cast<fUML::ClassifierBehaviorExecution * >(_classifierBehaviorExecutions->copy()));
+		this->getClassifierBehaviorExecutions()->push_back(std::shared_ptr<fUML::ClassifierBehaviorExecution>(dynamic_cast<fUML::ClassifierBehaviorExecution*>(_classifierBehaviorExecutions->copy())));
 	}
-	for(fUML::SignalInstance * 	_eventPool : *obj.getEventPool())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::SignalInstance>>> _eventPoolList = obj.getEventPool();
+	for(std::shared_ptr<fUML::SignalInstance> _eventPool : *_eventPoolList)
 	{
-		this->getEventPool()->push_back(dynamic_cast<fUML::SignalInstance * >(_eventPool->copy()));
+		this->getEventPool()->push_back(std::shared_ptr<fUML::SignalInstance>(dynamic_cast<fUML::SignalInstance*>(_eventPool->copy())));
 	}
 }
 
@@ -88,7 +67,7 @@ ecore::EObject *  ObjectActivationImpl::copy() const
 	return new ObjectActivationImpl(*this);
 }
 
-ecore::EClass* ObjectActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getObjectActivation();
 }
@@ -100,7 +79,7 @@ ecore::EClass* ObjectActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ObjectActivationImpl::_register(fUML::EventAccepter *  accepter) 
+void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[register] object = " << this->getObject()<<std::endl;)
@@ -127,50 +106,58 @@ void ObjectActivationImpl::dispatchNextEvent()
 	
 }
 
-fUML::SignalInstance *  ObjectActivationImpl::retrieveNextEvent() 
+std::shared_ptr<fUML::SignalInstance>  ObjectActivationImpl::retrieveNextEvent() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectActivationImpl::send(fUML::SignalInstance *  signalInstance) 
+void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	//generated from body annotation
-	    this->getEventPool()->push_back(dynamic_cast<fUML::SignalInstance*> (signalInstance->copy()));
+	this->getEventPool()->push_back(std::shared_ptr<fUML::SignalInstance>(dynamic_cast<fUML::SignalInstance*>(signalInstance->copy())));
     //_send(new ArrivalSignal());
 }
 
-void ObjectActivationImpl::startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs) 
+void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
 {
 	//generated from body annotation
-	    this->_startObjectBehavior();
+	this->_startObjectBehavior();
 
-    if (classifier == nullptr) {
+    if (classifier == nullptr) 
+    {
         DEBUG_MESSAGE(std::cout<<"[startBehavior] Starting behavior for all classifiers..."<<std::endl;)
         // *** Start all classifier behaviors concurrently. ***
-        std::vector<uml::Classifier*>* types = this->getObject()->getTypes();
-        std::vector<uml::Classifier*>::iterator i;
-        for (i = types->begin(); i!=types->end(); ++i) {
-            uml::Class* type = dynamic_cast<uml::Class*> (*i);
-            if ((dynamic_cast<uml::Behavior*>(type)!=nullptr) || (type->getClassifierBehavior() != nullptr)) {
-                std::vector<fUML::ParameterValue*>* parameterValue = new std::vector<fUML::ParameterValue*>();
+		std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getObject()->getTypes();
+        std::vector<std::shared_ptr<uml::Classifier>>::iterator i;
+        for (i = types->begin(); i!=types->end(); ++i) 
+        {
+        	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class> (*i);
+            if ((std::dynamic_pointer_cast<uml::Behavior>(type) != nullptr) || (type->getClassifierBehavior() != nullptr))
+            {
+            	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> parameterValue(new std::vector<std::shared_ptr<fUML::ParameterValue>>());
                 this->startBehavior(type, parameterValue);
             }
         }
-    } else {
+    } 
+    else 
+    {
         DEBUG_MESSAGE(std::cout<<"[startBehavior] Starting behavior for "<< classifier->getName() << "..."<<std::endl;)
 
         bool notYetStarted = true;
         unsigned int i = 1;
         while (notYetStarted
-               && i <= this->getClassifierBehaviorExecutions()->size()) {
+               && i <= this->getClassifierBehaviorExecutions()->size()) 
+        {
             notYetStarted = (this->getClassifierBehaviorExecutions()->at(i - 1)->getClassifier() != classifier);
             i = i + 1;
         }
 
-        if (notYetStarted) {
-            ClassifierBehaviorExecution * newExecution = fUML::FUMLFactory::eInstance()->createClassifierBehaviorExecution();
-            newExecution->setObjectActivation(this);
+        if (notYetStarted)
+        {
+        	std::shared_ptr<ClassifierBehaviorExecution> newExecution(fUML::FUMLFactory::eInstance()->createClassifierBehaviorExecution());
+        	struct null_deleter{void operator()(void const *) const { } };
+        	newExecution->setObjectActivation(std::shared_ptr<ObjectActivation>(this, null_deleter()));
             this->getClassifierBehaviorExecutions()->push_back(newExecution);
             //newExecution->execute(classifier, inputs);
         }
@@ -180,21 +167,22 @@ void ObjectActivationImpl::startBehavior(uml::Class *  classifier,std::vector<fU
 void ObjectActivationImpl::stop() 
 {
 	//generated from body annotation
-	    std::vector<ClassifierBehaviorExecution *>* classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
-    for (unsigned int i = 0; i < classifierBehaviorExecutions->size(); i++) {
-        ClassifierBehaviorExecution * classifierBehaviorExecution = classifierBehaviorExecutions->at(i);
+	std::shared_ptr<std::vector<std::shared_ptr<ClassifierBehaviorExecution>>> classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
+    for (unsigned int i = 0; i < classifierBehaviorExecutions->size(); i++) 
+    {
+    	std::shared_ptr<ClassifierBehaviorExecution> classifierBehaviorExecution = classifierBehaviorExecutions->at(i);
         classifierBehaviorExecution->terminate();
     }
 }
 
-void ObjectActivationImpl::unregister(fUML::EventAccepter *  accepter) 
+void ObjectActivationImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
 	//generated from body annotation
-	    DEBUG_MESSAGE(std::cout<<"[unregister] object = " << this->getObject()<<std::endl;)
+	DEBUG_MESSAGE(std::cout<<"[unregister] object = " << this->getObject()<<std::endl;)
     DEBUG_MESSAGE(std::cout<<"[unregister] accepter = " << accepter<<std::endl;)
 
     bool notFound = true;
-    int i = 1;
+    unsigned int i = 1;
     while (notFound && i <= this->getWaitingEventAccepters()->size()) {
         if (this->getWaitingEventAccepters()->at(i - 1) == accepter) {
             this->getWaitingEventAccepters()->erase(this->getWaitingEventAccepters()->begin() + i - 1);
@@ -207,34 +195,34 @@ void ObjectActivationImpl::unregister(fUML::EventAccepter *  accepter)
 //*********************************
 // References
 //*********************************
-std::vector<fUML::ClassifierBehaviorExecution * > *  ObjectActivationImpl::getClassifierBehaviorExecutions() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::ClassifierBehaviorExecution>>> ObjectActivationImpl::getClassifierBehaviorExecutions() const
 {
-	
-	return m_classifierBehaviorExecutions;
+
+    return m_classifierBehaviorExecutions;
 }
 
 
-std::vector<fUML::SignalInstance * > *  ObjectActivationImpl::getEventPool() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::SignalInstance>>> ObjectActivationImpl::getEventPool() const
 {
-	
-	return m_eventPool;
+
+    return m_eventPool;
 }
 
 
-fUML::Object *  ObjectActivationImpl::getObject() const
+std::shared_ptr<fUML::Object> ObjectActivationImpl::getObject() const
 {
-	//assert(m_object);
-	return m_object;
+//assert(m_object);
+    return m_object;
 }
-void ObjectActivationImpl::setObject(fUML::Object *  _object)
+void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Object> _object)
 {
-	m_object = _object;
+    m_object = _object;
 }
 
-std::vector<fUML::EventAccepter * > *  ObjectActivationImpl::getWaitingEventAccepters() const
+std::shared_ptr<std::vector<std::shared_ptr<fUML::EventAccepter>>> ObjectActivationImpl::getWaitingEventAccepters() const
 {
-	
-	return m_waitingEventAccepters;
+
+    return m_waitingEventAccepters;
 }
 
 

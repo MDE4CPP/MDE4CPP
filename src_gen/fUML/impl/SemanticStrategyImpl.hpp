@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class SemanticStrategyImpl :virtual public ecore::EObjectImpl,
-virtual public SemanticStrategy
+virtual public SemanticStrategy 
 	{
 		public: 
 			SemanticStrategyImpl(const SemanticStrategyImpl & obj);
@@ -75,7 +76,7 @@ virtual public SemanticStrategy
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_SEMANTICSTRATEGYSEMANTICSTRATEGYIMPL_HPP */

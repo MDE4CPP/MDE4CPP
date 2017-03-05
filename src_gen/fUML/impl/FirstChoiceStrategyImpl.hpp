@@ -22,10 +22,11 @@
 #include "impl/ChoiceStrategyImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class FirstChoiceStrategyImpl :virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy
+	class FirstChoiceStrategyImpl :virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
@@ -73,7 +74,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_FIRSTCHOICESTRATEGYFIRSTCHOICESTRATEGYIMPL_HPP */

@@ -20,6 +20,10 @@ using namespace fUML;
 EnumerationValueImpl::EnumerationValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -28,6 +32,9 @@ EnumerationValueImpl::EnumerationValueImpl()
 
 EnumerationValueImpl::~EnumerationValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -50,7 +57,7 @@ ecore::EObject *  EnumerationValueImpl::copy() const
 	return new EnumerationValueImpl(*this);
 }
 
-ecore::EClass* EnumerationValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getEnumerationValue();
 }
@@ -62,38 +69,36 @@ ecore::EClass* EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationValueImpl::equals(fUML::Value *  otherValue) 
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	    bool isEqual = false;
-    fUML::EnumerationValue * value = dynamic_cast<fUML::EnumerationValue * >  (otherValue);
-    if( value != nullptr)
+	bool isEqual = false;
+	std::shared_ptr<fUML::EnumerationValue> value = std::dynamic_pointer_cast<fUML::EnumerationValue>(otherValue);
+    if(value != nullptr)
     {
         isEqual = (value->getLiteral() == this->getLiteral());
     }
-
     return isEqual;
 }
 
-std::vector<uml::Classifier * > *  EnumerationValueImpl::getTypes() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> EnumerationValueImpl::getTypes() 
 {
 	//generated from body annotation
-	    std::vector<uml::Classifier * > * types = new std::vector<uml::Classifier * > ();
-    types->push_back(dynamic_cast<uml::Classifier * > (this->getType()));
-
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+    types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
 }
 
-fUML::Value *  EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value>  EnumerationValueImpl::new_() 
 {
 	//generated from body annotation
-	    return FUMLFactory::eInstance()->createEnumerationValue();
+	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
 }
 
-uml::ValueSpecification *  EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification>  EnumerationValueImpl::specify() 
 {
 	//generated from body annotation
-	    uml::InstanceValue * instanceValue =  uml::UmlFactory::eInstance()->createInstanceValue();
+	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
     //Remark: instance is so defined in the specification, but even there is not used.
     //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification();
 
@@ -112,24 +117,24 @@ std::string EnumerationValueImpl::toString()
 //*********************************
 // References
 //*********************************
-uml::EnumerationLiteral *  EnumerationValueImpl::getLiteral() const
+std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
 {
-	//assert(m_literal);
-	return m_literal;
+//assert(m_literal);
+    return m_literal;
 }
-void EnumerationValueImpl::setLiteral(uml::EnumerationLiteral *  _literal)
+void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
 {
-	m_literal = _literal;
+    m_literal = _literal;
 }
 
-uml::Enumeration *  EnumerationValueImpl::getType() const
+std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
 {
-	//assert(m_type);
-	return m_type;
+//assert(m_type);
+    return m_type;
 }
-void EnumerationValueImpl::setType(uml::Enumeration *  _type)
+void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************

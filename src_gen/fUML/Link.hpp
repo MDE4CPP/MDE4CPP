@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -82,19 +83,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(fUML::ExtensionalValue *  link,uml::Property *  end)  = 0;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
 			
 			/*!
 			 */ 
-			virtual void addTo(fUML::Locus *  locus)  = 0;
+			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::FeatureValue * > *  getOtherFeatureValues(std::vector<fUML::ExtensionalValue * > *  extent,uml::Property *  end)  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> getOtherFeatureValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>>  extent,std::shared_ptr<uml::Property>  end)  = 0;
 			
 			
 			//*********************************
@@ -106,12 +107,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::Association *  getType() const = 0;
+			virtual std::shared_ptr<uml::Association> getType() const = 0;
 			
 			/*!
 			 */
-			virtual void setType(uml::Association *  _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Association> _type) = 0;
 			
 
 		protected:
@@ -125,7 +125,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::Association *  m_type =  nullptr ;
+			std::shared_ptr<uml::Association> m_type;
 			
 
 		public:

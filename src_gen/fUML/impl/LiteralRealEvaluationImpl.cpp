@@ -15,6 +15,10 @@ using namespace fUML;
 LiteralRealEvaluationImpl::LiteralRealEvaluationImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -22,6 +26,9 @@ LiteralRealEvaluationImpl::LiteralRealEvaluationImpl()
 
 LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralRealEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  LiteralRealEvaluationImpl::copy() const
 	return new LiteralRealEvaluationImpl(*this);
 }
 
-ecore::EClass* LiteralRealEvaluationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> LiteralRealEvaluationImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getLiteralRealEvaluation();
 }
@@ -56,14 +63,14 @@ ecore::EClass* LiteralRealEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-fUML::Value *  LiteralRealEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value>  LiteralRealEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
-			uml::LiteralReal * literal = dynamic_cast<uml::LiteralReal*> (this->getSpecification());
-		RealValue * realValue = fUML::FUMLFactory::eInstance()->createRealValue();
-		realValue->setType(this->getType("Real"));
-		realValue->setValue(literal->getValue());
-		return realValue;
+	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
+	std::shared_ptr<RealValue> realValue(fUML::FUMLFactory::eInstance()->createRealValue());
+	realValue->setType(this->getType("Real"));
+	realValue->setValue(literal->getValue());
+	return realValue;
 }
 
 //*********************************

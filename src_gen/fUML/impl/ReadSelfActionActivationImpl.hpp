@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class ReadSelfActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadSelfActionActivation
+	class ReadSelfActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadSelfActionActivation 
 	{
 		public: 
 			ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj);
@@ -69,7 +70,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_READSELFACTIONACTIVATIONREADSELFACTIONACTIVATIONIMPL_HPP */

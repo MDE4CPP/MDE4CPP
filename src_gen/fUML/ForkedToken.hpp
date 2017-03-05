@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -67,7 +68,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(fUML::Token *  otherToken)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken)  = 0;
 			
 			/*!
 			 */ 
@@ -79,7 +80,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  getValue()  const  = 0;
+			virtual std::shared_ptr<fUML::Value>  getValue()  const  = 0;
 			
 			
 			//*********************************
@@ -107,12 +108,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::Token *  getBaseToken() const = 0;
+			virtual std::shared_ptr<fUML::Token> getBaseToken() const = 0;
 			
 			/*!
 			 */
-			virtual void setBaseToken(fUML::Token *  _baseToken) = 0;
-			
+			virtual void setBaseToken(std::shared_ptr<fUML::Token> _baseToken) = 0;
 			
 
 		protected:
@@ -132,7 +132,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::Token *  m_baseToken =  nullptr ;
+			std::shared_ptr<fUML::Token> m_baseToken;
 			
 
 		public:

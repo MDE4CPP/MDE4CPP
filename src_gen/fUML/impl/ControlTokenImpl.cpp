@@ -14,6 +14,10 @@ using namespace fUML;
 ControlTokenImpl::ControlTokenImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -21,6 +25,9 @@ ControlTokenImpl::ControlTokenImpl()
 
 ControlTokenImpl::~ControlTokenImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -41,7 +48,7 @@ ecore::EObject *  ControlTokenImpl::copy() const
 	return new ControlTokenImpl(*this);
 }
 
-ecore::EClass* ControlTokenImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getControlToken();
 }
@@ -53,13 +60,13 @@ ecore::EClass* ControlTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ControlTokenImpl::equals(fUML::Token *  other) 
+bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	//generated from body annotation
-	    return (dynamic_cast<ControlToken*>(other)!=nullptr);
+	return (std::dynamic_pointer_cast<ControlToken>(other) != nullptr);
 }
 
-fUML::Value *  ControlTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value>  ControlTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return nullptr;

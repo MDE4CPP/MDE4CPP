@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class ClauseActivationImpl :virtual public ecore::EObjectImpl,
-virtual public ClauseActivation
+virtual public ClauseActivation 
 	{
 		public: 
 			ClauseActivationImpl(const ClauseActivationImpl & obj);
@@ -65,15 +66,15 @@ virtual public ClauseActivation
 			
 			/*!
 			 */ 
-			virtual fUML::BooleanValue *  getDecision()  ;
+			virtual std::shared_ptr<fUML::BooleanValue>  getDecision()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ClauseActivation * > *  getPredecessors()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getPredecessors()  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<fUML::ClauseActivation * > *  getSuccessors()  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getSuccessors()  ;
 			
 			
 			
@@ -87,20 +88,18 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */
-			virtual uml::Clause *  getClause() const ;
+			virtual std::shared_ptr<uml::Clause> getClause() const ;
 			
 			/*!
 			 */
-			virtual void setClause(uml::Clause *  _clause) ;
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::ConditionalNodeActivation> getConditionalNodeActivation() const ;
 			
 			/*!
 			 */
-			virtual fUML::ConditionalNodeActivation *  getConditionalNodeActivation() const ;
-			
-			/*!
-			 */
-			virtual void setConditionalNodeActivation(fUML::ConditionalNodeActivation *  _conditionalNodeActivation) ;
-			
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation) ;
 							
 			
 			//*********************************
@@ -115,7 +114,7 @@ virtual public ClauseActivation
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_CLAUSEACTIVATIONCLAUSEACTIVATIONIMPL_HPP */

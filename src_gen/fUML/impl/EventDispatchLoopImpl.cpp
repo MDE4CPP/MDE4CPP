@@ -13,6 +13,10 @@ using namespace fUML;
 EventDispatchLoopImpl::EventDispatchLoopImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ EventDispatchLoopImpl::EventDispatchLoopImpl()
 
 EventDispatchLoopImpl::~EventDispatchLoopImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventDispatchLoop "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  EventDispatchLoopImpl::copy() const
 	return new EventDispatchLoopImpl(*this);
 }
 
-ecore::EClass* EventDispatchLoopImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getEventDispatchLoop();
 }

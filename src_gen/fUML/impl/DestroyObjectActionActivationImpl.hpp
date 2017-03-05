@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class DestroyObjectActionActivationImpl :virtual public ActionActivationImpl, virtual public DestroyObjectActionActivation
+	class DestroyObjectActionActivationImpl :virtual public ActionActivationImpl, virtual public DestroyObjectActionActivation 
 	{
 		public: 
 			DestroyObjectActionActivationImpl(const DestroyObjectActionActivationImpl & obj);
@@ -47,11 +48,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroyObject(fUML::Value *  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
+			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
 			
 			/*!
 			 */ 
-			virtual bool objectIsComposite(fUML::Reference *  reference,fUML::Link *  link)  ;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
 			
 			
 			
@@ -77,7 +78,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_DESTROYOBJECTACTIONACTIVATIONDESTROYOBJECTACTIONACTIVATIONIMPL_HPP */

@@ -4,15 +4,15 @@
 using namespace fUML;
 
 //static initialisation
-FUMLFactory * FUMLFactory::instance = nullptr;
+std::shared_ptr<FUMLFactory> FUMLFactory::instance;
 
-FUMLFactory * FUMLFactory::eInstance()
+std::shared_ptr<FUMLFactory> FUMLFactory::eInstance()
 {
-	if(instance==nullptr)
+	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance = FUMLFactoryImpl::create();
-		dynamic_cast<FUMLFactoryImpl * >(instance)->init();
+		instance.reset(FUMLFactoryImpl::create());
+		std::dynamic_pointer_cast<FUMLFactoryImpl>(instance)->init();
 	}	
 	return instance;
 }

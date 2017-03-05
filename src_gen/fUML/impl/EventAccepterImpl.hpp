@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class EventAccepterImpl :virtual public ecore::EObjectImpl,
-virtual public EventAccepter
+virtual public EventAccepter 
 	{
 		public: 
 			EventAccepterImpl(const EventAccepterImpl & obj);
@@ -49,11 +50,11 @@ virtual public EventAccepter
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(fUML::SignalInstance *  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool match(fUML::SignalInstance *  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			
 			
@@ -79,7 +80,7 @@ virtual public EventAccepter
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_EVENTACCEPTEREVENTACCEPTERIMPL_HPP */

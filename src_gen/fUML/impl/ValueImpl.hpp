@@ -23,10 +23,11 @@
 
 #include <Classifier.hpp>
 
+
 //*********************************
 namespace fUML 
 {
-	class ValueImpl :virtual public SemanticVisitorImpl, virtual public Value
+	class ValueImpl :virtual public SemanticVisitorImpl, virtual public Value 
 	{
 		public: 
 			ValueImpl(const ValueImpl & obj);
@@ -48,19 +49,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual uml::ValueSpecification *  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Value *  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  const  ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  const  ;
 			
 			/*!
 			 */ 
-			virtual bool hasTypes(uml::Classifier *  type)  ;
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
 			
 			/*!
 			 */ 
@@ -94,7 +95,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_VALUEVALUEIMPL_HPP */

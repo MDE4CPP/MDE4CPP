@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -92,11 +93,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(fUML::SignalInstance *  signalInstance)  = 0;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool match(fUML::SignalInstance *  signalInstance)  = 0;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			
 			//*********************************
@@ -116,12 +117,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual fUML::AcceptEventActionEventAccepter *  getEventAccepter() const = 0;
+			virtual std::shared_ptr<fUML::AcceptEventActionEventAccepter> getEventAccepter() const = 0;
 			
 			/*!
 			 */
-			virtual void setEventAccepter(fUML::AcceptEventActionEventAccepter *  _eventAccepter) = 0;
-			
+			virtual void setEventAccepter(std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter) = 0;
 			
 
 		protected:
@@ -138,7 +138,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			fUML::AcceptEventActionEventAccepter *  m_eventAccepter =  nullptr ;
+			std::shared_ptr<fUML::AcceptEventActionEventAccepter> m_eventAccepter;
 			
 
 		public:

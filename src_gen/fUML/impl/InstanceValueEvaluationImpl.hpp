@@ -36,10 +36,11 @@
 #include "Behavior.hpp"
 #include "Class.hpp"
 
+
 //*********************************
 namespace fUML 
 {
-	class InstanceValueEvaluationImpl :virtual public EvaluationImpl, virtual public InstanceValueEvaluation
+	class InstanceValueEvaluationImpl :virtual public EvaluationImpl, virtual public InstanceValueEvaluation 
 	{
 		public: 
 			InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj);
@@ -61,7 +62,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Value *  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
 			
 			
 			
@@ -87,7 +88,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_INSTANCEVALUEEVALUATIONINSTANCEVALUEEVALUATIONIMPL_HPP */

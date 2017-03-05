@@ -22,10 +22,11 @@
 #include "impl/ActionActivationImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
-	class LinkActionActivationImpl :virtual public ActionActivationImpl, virtual public LinkActionActivation
+	class LinkActionActivationImpl :virtual public ActionActivationImpl, virtual public LinkActionActivation 
 	{
 		public: 
 			LinkActionActivationImpl(const LinkActionActivationImpl & obj);
@@ -47,15 +48,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(fUML::Link *  link,std::vector<uml::LinkEndData * > *  endDataList)  ;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>>  endDataList)  ;
 			
 			/*!
 			 */ 
-			virtual bool endMatchesEndData(fUML::Link *  link,uml::LinkEndData *  endData)  ;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
 			
 			/*!
 			 */ 
-			virtual uml::Association *  getAssociation()  ;
+			virtual std::shared_ptr<uml::Association>  getAssociation()  ;
 			
 			
 			
@@ -81,7 +82,7 @@ namespace fUML
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_LINKACTIONACTIVATIONLINKACTIONACTIVATIONIMPL_HPP */

@@ -13,6 +13,10 @@ using namespace fUML;
 TokenImpl::TokenImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ TokenImpl::TokenImpl()
 
 TokenImpl::~TokenImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Token "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -40,7 +47,7 @@ ecore::EObject *  TokenImpl::copy() const
 	return new TokenImpl(*this);
 }
 
-ecore::EClass* TokenImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getToken();
 }
@@ -52,13 +59,13 @@ ecore::EClass* TokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TokenImpl::equals(fUML::Token *  other) 
+bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-fUML::Value *  TokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value>  TokenImpl::getValue()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -76,25 +83,28 @@ bool TokenImpl::isWithdrawn()
 	    return (this->getHolder()==nullptr);
 }
 
-fUML::Token *  TokenImpl::transfer(fUML::ActivityNodeActivation *  holder) 
+std::shared_ptr<fUML::Token>  TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) 
 {
 	//generated from body annotation
-	 fUML::Token * token = this;
-    if (this->getHolder() != nullptr) {
+	struct null_deleter{void operator()(void const *) const { } };
+	std::shared_ptr<fUML::Token> token = std::shared_ptr<Token>(this, null_deleter());
+    if (this->getHolder() != nullptr) 
+    {
         this->withdraw();
-        token = dynamic_cast<fUML::Token *>(this->copy());
+        token = std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(this->copy()));
     }
 
     token->setHolder(holder);
     return token;
-
 }
 
 void TokenImpl::withdraw() 
 {
 	//generated from body annotation
-	    if (!this->isWithdrawn()) {
-        this->getHolder()->removeToken(this);
+	if (!this->isWithdrawn()) 
+	{
+		struct null_deleter{void operator()(void const *) const { } };
+        this->getHolder()->removeToken(std::shared_ptr<Token>(this, null_deleter()));
         this->setHolder(nullptr);
     }
 }
@@ -102,14 +112,14 @@ void TokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
-fUML::ActivityNodeActivation *  TokenImpl::getHolder() const
+std::shared_ptr<fUML::ActivityNodeActivation> TokenImpl::getHolder() const
 {
-	
-	return m_holder;
+
+    return m_holder;
 }
-void TokenImpl::setHolder(fUML::ActivityNodeActivation *  _holder)
+void TokenImpl::setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder)
 {
-	m_holder = _holder;
+    m_holder = _holder;
 }
 
 //*********************************

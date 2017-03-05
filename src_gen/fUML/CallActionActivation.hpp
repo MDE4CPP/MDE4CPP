@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -87,11 +88,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Execution *  getCallExecution()  = 0;
+			virtual std::shared_ptr<fUML::Execution>  getCallExecution()  = 0;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(fUML::Execution *  execution)  = 0;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  = 0;
 			
 			/*!
 			 */ 
@@ -111,7 +112,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::Execution * > *  getCallExecutions() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> getCallExecutions() const = 0;
 			
 			
 
@@ -126,7 +127,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::Execution * > *  m_callExecutions =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> m_callExecutions;
 			
 
 		public:

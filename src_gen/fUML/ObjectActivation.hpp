@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -83,7 +84,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(uml::Class *  classifier,std::vector<fUML::ParameterValue * > *  inputs)  = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
 			
 			/*!
 			 */ 
@@ -91,15 +92,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void _register(fUML::EventAccepter *  accepter)  = 0;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			/*!
 			 */ 
-			virtual void unregister(fUML::EventAccepter *  accepter)  = 0;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			/*!
 			 */ 
-			virtual void send(fUML::SignalInstance *  signalInstance)  = 0;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
@@ -107,7 +108,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual fUML::SignalInstance *  retrieveNextEvent()  = 0;
+			virtual std::shared_ptr<fUML::SignalInstance>  retrieveNextEvent()  = 0;
 			
 			/*!
 			 */ 
@@ -127,23 +128,22 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::vector<fUML::EventAccepter * > *  getWaitingEventAccepters() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::EventAccepter>>> getWaitingEventAccepters() const = 0;
 			
 			/*!
 			 */
-			virtual std::vector<fUML::SignalInstance * > *  getEventPool() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::SignalInstance>>> getEventPool() const = 0;
 			
 			/*!
 			 */
-			virtual fUML::Object *  getObject() const = 0;
+			virtual std::shared_ptr<fUML::Object> getObject() const = 0;
 			
 			/*!
 			 */
-			virtual void setObject(fUML::Object *  _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<fUML::Object> _object) = 0;
 			/*!
 			 */
-			virtual std::vector<fUML::ClassifierBehaviorExecution * > *  getClassifierBehaviorExecutions() const = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClassifierBehaviorExecution>>> getClassifierBehaviorExecutions() const = 0;
 			
 			
 
@@ -158,16 +158,16 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::vector<fUML::EventAccepter * > *  m_waitingEventAccepters =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::EventAccepter>>> m_waitingEventAccepters;
 			/*!
 			 */
-			std::vector<fUML::SignalInstance * > *  m_eventPool =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::SignalInstance>>> m_eventPool;
 			/*!
 			 */
-			fUML::Object *  m_object =  nullptr ;
+			std::shared_ptr<fUML::Object> m_object;
 			/*!
 			 */
-			std::vector<fUML::ClassifierBehaviorExecution * > *  m_classifierBehaviorExecutions =  nullptr ;
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::ClassifierBehaviorExecution>>> m_classifierBehaviorExecutions;
 			
 
 		public:

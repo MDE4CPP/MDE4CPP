@@ -24,11 +24,12 @@
 
 #include "FUMLFactory.hpp"
 
+
 //*********************************
 namespace fUML 
 {
 	class ParameterValueImpl :virtual public ecore::EObjectImpl,
-virtual public ParameterValue
+virtual public ParameterValue 
 	{
 		public: 
 			ParameterValueImpl(const ParameterValueImpl & obj);
@@ -60,15 +61,14 @@ virtual public ParameterValue
 			//*********************************
 			/*!
 			 */
-			virtual uml::Parameter *  getParameter() const ;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
 			
 			/*!
 			 */
-			virtual void setParameter(uml::Parameter *  _parameter) ;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
 			/*!
 			 */
-			virtual std::vector<fUML::Value * > *  getValues() const ;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const ;
 			
 							
 			
@@ -84,7 +84,7 @@ virtual public ParameterValue
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_PARAMETERVALUEPARAMETERVALUEIMPL_HPP */

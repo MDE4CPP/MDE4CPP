@@ -23,11 +23,12 @@
 #include "impl/EObjectImpl.hpp"
 
 
+
 //*********************************
 namespace fUML 
 {
 	class TokenImpl :virtual public ecore::EObjectImpl,
-virtual public Token
+virtual public Token 
 	{
 		public: 
 			TokenImpl(const TokenImpl & obj);
@@ -49,7 +50,7 @@ virtual public Token
 			//*********************************
 			/*!
 			 */ 
-			virtual fUML::Token *  transfer(fUML::ActivityNodeActivation *  holder)  ;
+			virtual std::shared_ptr<fUML::Token>  transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
 			
 			/*!
 			 */ 
@@ -57,7 +58,7 @@ virtual public Token
 			
 			/*!
 			 */ 
-			virtual bool equals(fUML::Token *  other)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
 			
 			/*!
 			 */ 
@@ -69,7 +70,7 @@ virtual public Token
 			
 			/*!
 			 */ 
-			virtual fUML::Value *  getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value>  getValue()  const  ;
 			
 			
 			
@@ -83,12 +84,11 @@ virtual public Token
 			//*********************************
 			/*!
 			 */
-			virtual fUML::ActivityNodeActivation *  getHolder() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getHolder() const ;
 			
 			/*!
 			 */
-			virtual void setHolder(fUML::ActivityNodeActivation *  _holder) ;
-			
+			virtual void setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder) ;
 							
 			
 			//*********************************
@@ -103,7 +103,7 @@ virtual public Token
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
 			
 		protected:
-			virtual ecore::EClass* eStaticClass() const;
+			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
 	};
 }
 #endif /* end of include guard: FUML_TOKENTOKENIMPL_HPP */

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
 //*********************************
@@ -67,7 +68,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::vector<uml::Classifier * > *  getTypes()  = 0;
+			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  = 0;
 			
 			
 			//*********************************
@@ -79,12 +80,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual uml::PrimitiveType *  getType() const = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> getType() const = 0;
 			
 			/*!
 			 */
-			virtual void setType(uml::PrimitiveType *  _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) = 0;
 			
 
 		protected:
@@ -98,7 +98,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			uml::PrimitiveType *  m_type =  nullptr ;
+			std::shared_ptr<uml::PrimitiveType> m_type;
 			
 
 		public:

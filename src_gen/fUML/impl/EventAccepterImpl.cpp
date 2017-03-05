@@ -13,6 +13,10 @@ using namespace fUML;
 EventAccepterImpl::EventAccepterImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 
@@ -20,6 +24,9 @@ EventAccepterImpl::EventAccepterImpl()
 
 EventAccepterImpl::~EventAccepterImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventAccepter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -38,7 +45,7 @@ ecore::EObject *  EventAccepterImpl::copy() const
 	return new EventAccepterImpl(*this);
 }
 
-ecore::EClass* EventAccepterImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getEventAccepter();
 }
@@ -50,13 +57,13 @@ ecore::EClass* EventAccepterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(fUML::SignalInstance *  signalInstance) 
+void EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventAccepterImpl::match(fUML::SignalInstance *  signalInstance) 
+bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

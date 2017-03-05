@@ -17,6 +17,10 @@ using namespace fUML;
 PrimitiveValueImpl::PrimitiveValueImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -24,6 +28,9 @@ PrimitiveValueImpl::PrimitiveValueImpl()
 
 PrimitiveValueImpl::~PrimitiveValueImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PrimitiveValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,7 +51,7 @@ ecore::EObject *  PrimitiveValueImpl::copy() const
 	return new PrimitiveValueImpl(*this);
 }
 
-ecore::EClass* PrimitiveValueImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getPrimitiveValue();
 }
@@ -56,29 +63,29 @@ ecore::EClass* PrimitiveValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector<uml::Classifier * > *  PrimitiveValueImpl::getTypes() 
+std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> PrimitiveValueImpl::getTypes() 
 {
 	//generated from body annotation
-	    std::vector< uml::Classifier * > * types = new std::vector< uml::Classifier * >();
-    		 uml::PrimitiveType * type = this->getType();
-		 if (type != nullptr)
-		 {
-			 types->push_back(dynamic_cast<uml::Classifier * >(type));
-		 }
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+	std::shared_ptr<uml::PrimitiveType> type = this->getType();
+	if (type != nullptr)
+	{
+		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(type));
+	}
     return types;
 }
 
 //*********************************
 // References
 //*********************************
-uml::PrimitiveType *  PrimitiveValueImpl::getType() const
+std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
 {
-	//assert(m_type);
-	return m_type;
+//assert(m_type);
+    return m_type;
 }
-void PrimitiveValueImpl::setType(uml::PrimitiveType *  _type)
+void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************

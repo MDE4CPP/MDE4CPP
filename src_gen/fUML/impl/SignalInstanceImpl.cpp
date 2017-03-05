@@ -13,6 +13,10 @@ using namespace fUML;
 SignalInstanceImpl::SignalInstanceImpl()
 {
 	//*********************************
+	// Attribute Members
+	//*********************************
+
+	//*********************************
 	// Reference Members
 	//*********************************
 	
@@ -20,6 +24,9 @@ SignalInstanceImpl::SignalInstanceImpl()
 
 SignalInstanceImpl::~SignalInstanceImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SignalInstance "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -33,9 +40,10 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj)
 
 
 	//clone containt lists
-	for(fUML::FeatureValue * 	_featureValues : *obj.getFeatureValues())
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(dynamic_cast<fUML::FeatureValue * >(_featureValues->copy()));
+		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -44,7 +52,7 @@ ecore::EObject *  SignalInstanceImpl::copy() const
 	return new SignalInstanceImpl(*this);
 }
 
-ecore::EClass* SignalInstanceImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 {
 	return FUMLPackageImpl::eInstance()->getSignalInstance();
 }
@@ -60,14 +68,14 @@ ecore::EClass* SignalInstanceImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-uml::Signal *  SignalInstanceImpl::getType() const
+std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
 {
-	//assert(m_type);
-	return m_type;
+//assert(m_type);
+    return m_type;
 }
-void SignalInstanceImpl::setType(uml::Signal *  _type)
+void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 {
-	m_type = _type;
+    m_type = _type;
 }
 
 //*********************************
