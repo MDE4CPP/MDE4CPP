@@ -1,0 +1,3 @@
+.gradle/
+/application/*
+!/application/include/boost
