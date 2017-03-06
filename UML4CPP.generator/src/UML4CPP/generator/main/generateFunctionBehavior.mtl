@@ -22,7 +22,7 @@
  * @param aFunctionBehavior
  */]
 [template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[memberName(aFunctionBehavior)/] = uml::UmlFactory::eInstance()->createFunctionBehavior();
+[memberName(aFunctionBehavior)/].reset(uml::UmlFactory::eInstance()->createFunctionBehavior());
 [memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
 [memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]->getOwnedBehavior()->push_back([memberName(aFunctionBehavior)/]);
 

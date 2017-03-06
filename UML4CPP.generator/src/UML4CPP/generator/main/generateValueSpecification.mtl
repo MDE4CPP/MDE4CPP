@@ -17,7 +17,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
-[aValueSpecification.memberName()/] =  uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]();
+[aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]());
 [if (aValueSpecification.oclIsKindOf(LiteralSpecification))]
 [aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [/if]

@@ -126,12 +126,12 @@
 [/template]
 
 [template public generateGetter(anElement : NamedElement,impl : Boolean)]
-virtual [metamodelClassTypeString(anElement)/] [anElement.packageGetter(anElement)/][abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.packageGetter(anElement)/][abstractSufix(impl)/];
 
 [/template]
 
 [template public generateGetterImpl(anElement : NamedElement)]
-[metamodelClassTypeString(anElement)/] [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
+std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.packageGetter(anElement)/]
 {
 	return [anElement.memberName()/];
 }
@@ -139,7 +139,7 @@ virtual [metamodelClassTypeString(anElement)/] [anElement.packageGetter(anElemen
 [/template]
 
 [template public generatePrivatePackageMember(anElement : NamedElement)]
-[metamodelClassTypeString(anElement)/] [anElement.memberName()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(anElement)/]> [anElement.memberName()/] = nullptr;
 
 [/template]
 

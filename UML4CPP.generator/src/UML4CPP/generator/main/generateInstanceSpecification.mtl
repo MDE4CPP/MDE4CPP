@@ -18,7 +18,7 @@
 
 [template public generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
 {
-	uml::Slot* slot = uml::UmlFactory::eInstance()->createSlot();
+	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot());
 	slot->setDefiningFeature([memberName(aSlot.definingFeature)/]);
 	[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]slot->getValue()->push_back([aValueSpec.memberName()/]);[/for]
 	[memberName(anInstSpec)/]->getSlot()->push_back(slot);
@@ -26,7 +26,7 @@
 [/template]
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification();
+[memberName(anInstSpec)/].reset(uml::UmlFactory::eInstance()->createInstanceSpecification());
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(name))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);

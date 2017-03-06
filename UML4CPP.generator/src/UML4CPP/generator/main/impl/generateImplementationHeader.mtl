@@ -83,7 +83,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			[/if][/for][/for]
 
 		protected:
-			virtual [aClass.metamodelClassTypeString('Class *')/] getMetaClass() const;
+			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass() const;
 
 		public:
 			//*********************************

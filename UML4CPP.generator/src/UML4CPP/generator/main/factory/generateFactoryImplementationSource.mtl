@@ -47,7 +47,7 @@ using namespace [aPackage.name/];
 //*********************************
 // creators
 //*********************************
-uml::Element * [className/]::create(uml::Class * _class)
+std::shared_ptr<uml::Element> [className/]::create(std::shared_ptr<uml::Class> _class)
 {
 	if(_class->getIsAbstract())
     {
@@ -60,20 +60,20 @@ uml::Element * [className/]::create(uml::Class * _class)
     if(iter != m_creatorMap.end())
     {
 		//invoke the creator function
-        return iter->second();
+        return std::shared_ptr<uml::Element>(iter->second());
     }
 
     return nullptr;
 }
 
 [for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
-[aClass.generateCppType()/] [className/]::create[aClass.name/] ()
+[aClass.generateCppType(true)/]* [className/]::create[aClass.name/] ()
 {
 	return new [aClass.name/]Impl();
 }
 [/for]
 
-[aPackage.name.toUpperFirst().concat('Package')/] * [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()
+std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()
 {
 	return [aPackage.name.toUpperFirst().concat('Package')/]::eInstance();
 }

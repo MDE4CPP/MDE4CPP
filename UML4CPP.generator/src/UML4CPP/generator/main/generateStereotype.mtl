@@ -29,7 +29,7 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [/template]
 
 [template public generateStereotypeCreation(aStereotype : Stereotype)]
-[aStereotype.memberName()/] = uml::UmlFactory::eInstance()->createStereotype();
+[aStereotype.memberName()/].reset(uml::UmlFactory::eInstance()->createStereotype());
 [aStereotype.memberName()/]->setName("[aStereotype.name/]");
 [aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
 [aStereotype.ancestors(Package)->first().memberName()/]->getOwnedStereotype()->push_back([aStereotype.memberName()/]);

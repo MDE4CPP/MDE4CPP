@@ -22,9 +22,9 @@
 [query public hasSetter(aFeature : StructuralFeature) : Boolean = not (( not (aFeature.upper = 1) ) and (not aFeature.oclAsType(Property).isReadOnly)) /]
 
 [template public generateeGetSetDel(aClass : Class,impl : Boolean)]
-virtual boost::any get(uml::Property * _property) const [abstractSufix(impl)/];
-virtual void set(uml::Property *  _property,boost::any value) [abstractSufix(impl)/];
-virtual void unset(uml::Property *  _property) [abstractSufix(impl)/];
+virtual boost::any get(std::shared_ptr<uml::Property> _property) const [abstractSufix(impl)/];
+virtual void set(std::shared_ptr<uml::Property> _property,boost::any value) [abstractSufix(impl)/];
+virtual void unset(std::shared_ptr<uml::Property> _property) [abstractSufix(impl)/];
 [/template]
 
 [template public generateGetSetMemeberInit(aClass : Class)]
@@ -39,28 +39,28 @@ std::map<std::string,std::function<void()>> m_unsetterMap;
 [if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
 m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return this->[prop.GetterName()/]();}));
 [else][if (prop.upper=1)]
-m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){return dynamic_cast<uml::Element*>(this->[prop.GetterName()/]());}));
+m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){return this->[prop.GetterName()/]();}));
 [else]
-m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return (std::vector<uml::Element*>*)this->[prop.GetterName()/]();}));
+m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return this->[prop.GetterName()/]();}));
 [/if]
 [/if]
 [/for]
 
 [for (aFeature : StructuralFeature | aClass.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
-m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[aFeature.type.generateCppType()/]>(object));}));
+m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[if (aFeature.upper<>1)]std::shared_ptr<std::vector<[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>>[/if]>(object));}));
 [/for]
 
 [for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(name)) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 [if (prop.upper=1)]
-m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/][prop.genInit()/];}));
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = nullptr;}));
 [else]
-m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){delete(m_[prop.name/]);  m_[prop.name/][prop.genInit()/];}));
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]
 [/for]
 [/template]
 
 [template public generateeGetSetImpl(aClass : Class)]
-boost::any [aClass.name.concat('Impl')/]::get(uml::Property * _property) const
+boost::any [aClass.name.concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();
@@ -73,7 +73,7 @@ boost::any [aClass.name.concat('Impl')/]::get(uml::Property * _property) const
 	return boost::any();
 }
 
-void [aClass.name.concat('Impl')/]::set(uml::Property *  _property,boost::any value)
+void [aClass.name.concat('Impl')/]::set(std::shared_ptr<uml::Property> _property,boost::any value)
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();
@@ -85,7 +85,7 @@ void [aClass.name.concat('Impl')/]::set(uml::Property *  _property,boost::any va
     }
 }
 
-void [aClass.name.concat('Impl')/]::unset(uml::Property *  _property)
+void [aClass.name.concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();

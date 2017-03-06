@@ -77,7 +77,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/template]
 
 [template public generateOperationCreation(aOperation : Operation) ]
-[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation();
+[memberName(aOperation)/].reset(uml::UmlFactory::eInstance()->createOperation());
 [memberName(aOperation)/]->setName("[aOperation.name/]");
 [aOperation.ownedParameter.generateParameterCreation()/]
 
@@ -92,7 +92,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/template]
 
 [template public generateDependencyCreation(aDependency : Dependency) ]
-[memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency();
+[memberName(aDependency)/].reset(uml::UmlFactory::eInstance()->createDependency());
 [memberName(aDependency)/]->setName("[aDependency.name/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]

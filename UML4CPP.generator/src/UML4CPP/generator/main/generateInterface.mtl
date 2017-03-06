@@ -30,7 +30,7 @@ virtual public uml::Element
 [/template]
 
 [template public generateInterfaceCreation(anInterface : Interface)]
-[memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface();
+[memberName(anInterface)/].reset(uml::UmlFactory::eInstance()->createInterface());
 [memberName(anInterface)/]->setName("[anInterface.name/]");
 [memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
 [memberName(anInterface)/]->setPackage([anInterface.ancestors(Package)->first().memberName()/]);

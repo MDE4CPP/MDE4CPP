@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateClassCreate(aEClass : Class,impl : Boolean) ? (aEClass.isAbstract=false)]
-virtual [aEClass.generateCppType()/] create[aEClass.name/]()[abstractSufix(impl)/];
+virtual [aEClass.generateCppType(true)/]* create[aEClass.name/]()[abstractSufix(impl)/];
 
 [/template]
 
@@ -31,7 +31,7 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 [/template]
 
 [template public generateClassCreation(aEClass : Class)]
-[memberName(aEClass)/] = uml::UmlFactory::eInstance()->createClass();
+[memberName(aEClass)/].reset(uml::UmlFactory::eInstance()->createClass());
 [memberName(aEClass)/]->setName("[aEClass.name/]");
 [memberName(aEClass)/]->setIsAbstract([aEClass.isAbstract/]);
 [memberName(aEClass)/]->setPackage([aEClass.ancestors(Package)->first().memberName()/]);
@@ -44,7 +44,7 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 
 [template public initSuperTypes(aClass : Class)]
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
-gen = uml::UmlFactory::eInstance()->createGeneralization();
+gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 gen->setGeneral([superClass.packageGetter(aClass)/]);
 gen->setSpecific([aClass.packageGetter(aClass)/]);
 [aClass.memberName()/]->getGeneralization()->push_back(gen);

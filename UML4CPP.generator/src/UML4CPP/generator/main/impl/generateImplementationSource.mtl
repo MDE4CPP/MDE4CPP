@@ -42,14 +42,18 @@ using boost::any_cast;
 	//***********************************
 	// init Get Set
 	[aClass.generateGetSetInit()/] 
+
+	// init properties without default
+	[for (aProperty : Property | aClass.ownedAttribute)]
+	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
+	[/for]
 }
 
 [className/]::~[className/]()
 {
-	[aClass.ownedAttribute->sortedBy(name).generateAttributeDeleter()/]
 }
 
-[aClass.metamodelClassTypeString('Class *')/] [className/]::getMetaClass() const
+std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass() const
 {
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.packageGetter(aClass)/];
 }
