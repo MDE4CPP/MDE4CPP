@@ -49,20 +49,19 @@ namespace PrimitiveTypes
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Boolean()= 0;
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Integer()= 0;
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Real()= 0;
-			virtual uml::PrimitiveType* get_PrimitiveTypes_String()= 0;
-			virtual uml::PrimitiveType* get_PrimitiveTypes_UnlimitedNatural()= 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean()= 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer()= 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real()= 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String()= 0;
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural()= 0;
 			
 
 			//Singleton Instance and Getter
 			
 			private:
-				static PrimitiveTypesPackage* instance;
-			
+				static std::shared_ptr<PrimitiveTypesPackage> instance;
 			public:
-				static PrimitiveTypesPackage* eInstance();
+				static std::shared_ptr<PrimitiveTypesPackage> eInstance();
 	};
 }
 #endif /* end of include guard: PRIMITIVETYPES_METAMODELPACKAGE_HPP */

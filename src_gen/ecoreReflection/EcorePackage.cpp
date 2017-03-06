@@ -9,15 +9,15 @@ const std::string EcorePackage::eNS_URI ="http://www.eclipse.org/emf/2002/Ecore"
 const std::string EcorePackage::eNS_PREFIX ="invalid";
 
 //Singleton 
-EcorePackage * EcorePackage::instance = nullptr;
+std::shared_ptr<EcorePackage> EcorePackage::instance;
 
-EcorePackage * EcorePackage::eInstance()
+std::shared_ptr<EcorePackage> EcorePackage::eInstance()
 {
 	if(instance==nullptr)
 	{
 		//create a new Singelton Instance
-		instance = EcorePackageImpl::create();
-		dynamic_cast<EcorePackageImpl * >(instance)->init();
+		instance.reset(EcorePackageImpl::create());
+		std::dynamic_pointer_cast<EcorePackageImpl>(instance)->init();
 	}	
 	return instance;
 }

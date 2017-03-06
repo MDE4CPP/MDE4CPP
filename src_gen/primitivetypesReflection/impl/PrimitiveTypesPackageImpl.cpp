@@ -18,6 +18,7 @@
 //depending model packages
 
 
+
 using namespace PrimitiveTypes;
 
 PrimitiveTypesPackageImpl::PrimitiveTypesPackageImpl()
@@ -34,7 +35,7 @@ PrimitiveTypesPackage* PrimitiveTypesPackageImpl::create()
 {
 	if (isInited)
 	{
-		return PrimitiveTypesPackage::eInstance();
+		return PrimitiveTypesPackage::eInstance().get();
 	}
 	isInited = true;
 	
@@ -62,10 +63,11 @@ void PrimitiveTypesPackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
-	
-	uml::Package * primitiveTypes = this;
-	uml::Constraint * con = nullptr;
-	uml::OpaqueExpression * oe = nullptr;
+
+	struct null_deleter{void operator()(void const *) const {} };
+	std::shared_ptr<PrimitiveTypesPackageImpl> primitiveTypes = std::shared_ptr<PrimitiveTypesPackageImpl>(this, null_deleter());
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 	
 	
 
@@ -76,26 +78,26 @@ void PrimitiveTypesPackageImpl::createPackageContents()
 
 //Dependency 
 
-	primitiveTypes_Real =  uml::UmlFactory::eInstance()->createPrimitiveType();
-	primitiveTypes_Real->setName("Real");
-	primitiveTypes_Real->setPackage(this);
-	this->getOwnedType()->push_back(primitiveTypes_Real);
-	primitiveTypes_String =  uml::UmlFactory::eInstance()->createPrimitiveType();
-	primitiveTypes_String->setName("String");
-	primitiveTypes_String->setPackage(this);
-	this->getOwnedType()->push_back(primitiveTypes_String);
-	primitiveTypes_UnlimitedNatural =  uml::UmlFactory::eInstance()->createPrimitiveType();
-	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
-	primitiveTypes_UnlimitedNatural->setPackage(this);
-	this->getOwnedType()->push_back(primitiveTypes_UnlimitedNatural);
-	primitiveTypes_Boolean =  uml::UmlFactory::eInstance()->createPrimitiveType();
-	primitiveTypes_Boolean->setName("Boolean");
-	primitiveTypes_Boolean->setPackage(this);
-	this->getOwnedType()->push_back(primitiveTypes_Boolean);
-	primitiveTypes_Integer =  uml::UmlFactory::eInstance()->createPrimitiveType();
+	primitiveTypes_Integer.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	primitiveTypes_Integer->setName("Integer");
-	primitiveTypes_Integer->setPackage(this);
+	primitiveTypes_Integer->setPackage(primitiveTypes);
 	this->getOwnedType()->push_back(primitiveTypes_Integer);
+	primitiveTypes_String.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_String->setName("String");
+	primitiveTypes_String->setPackage(primitiveTypes);
+	this->getOwnedType()->push_back(primitiveTypes_String);
+	primitiveTypes_Boolean.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_Boolean->setName("Boolean");
+	primitiveTypes_Boolean->setPackage(primitiveTypes);
+	this->getOwnedType()->push_back(primitiveTypes_Boolean);
+	primitiveTypes_UnlimitedNatural.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
+	primitiveTypes_UnlimitedNatural->setPackage(primitiveTypes);
+	this->getOwnedType()->push_back(primitiveTypes_UnlimitedNatural);
+	primitiveTypes_Real.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_Real->setName("Real");
+	primitiveTypes_Real->setPackage(primitiveTypes);
+	this->getOwnedType()->push_back(primitiveTypes_Real);
 	
 
 }
@@ -113,7 +115,9 @@ void PrimitiveTypesPackageImpl::initializePackageContents()
 	setURI(eNS_URI);
 
 	// Add supertypes to classes
-	uml::Generalization * gen = nullptr;
+	struct null_deleter{void operator()(void const *) const {} };
+	std::shared_ptr<PrimitiveTypesPackageImpl> primitiveTypes = std::shared_ptr<PrimitiveTypesPackageImpl>(this, null_deleter());
+	std::shared_ptr<uml::Generalization> gen = nullptr;
 	
 
 	
@@ -121,23 +125,23 @@ void PrimitiveTypesPackageImpl::initializePackageContents()
 	//initalize ActivityNodes and Edges
 }
 
-uml::PrimitiveType* PrimitiveTypesPackageImpl::get_PrimitiveTypes_Boolean()
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Boolean()
 {
 	return primitiveTypes_Boolean;
 }
-uml::PrimitiveType* PrimitiveTypesPackageImpl::get_PrimitiveTypes_Integer()
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Integer()
 {
 	return primitiveTypes_Integer;
 }
-uml::PrimitiveType* PrimitiveTypesPackageImpl::get_PrimitiveTypes_Real()
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Real()
 {
 	return primitiveTypes_Real;
 }
-uml::PrimitiveType* PrimitiveTypesPackageImpl::get_PrimitiveTypes_String()
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_String()
 {
 	return primitiveTypes_String;
 }
-uml::PrimitiveType* PrimitiveTypesPackageImpl::get_PrimitiveTypes_UnlimitedNatural()
+std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_UnlimitedNatural()
 {
 	return primitiveTypes_UnlimitedNatural;
 }

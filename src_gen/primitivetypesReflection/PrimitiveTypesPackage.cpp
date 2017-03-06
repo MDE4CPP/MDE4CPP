@@ -9,15 +9,15 @@ const std::string PrimitiveTypesPackage::eNS_URI ="http://www.omg.org/spec/Primi
 const std::string PrimitiveTypesPackage::eNS_PREFIX ="invalid";
 
 //Singleton 
-PrimitiveTypesPackage * PrimitiveTypesPackage::instance = nullptr;
+std::shared_ptr<PrimitiveTypesPackage> PrimitiveTypesPackage::instance;
 
-PrimitiveTypesPackage * PrimitiveTypesPackage::eInstance()
+std::shared_ptr<PrimitiveTypesPackage> PrimitiveTypesPackage::eInstance()
 {
 	if(instance==nullptr)
 	{
 		//create a new Singelton Instance
-		instance = PrimitiveTypesPackageImpl::create();
-		dynamic_cast<PrimitiveTypesPackageImpl * >(instance)->init();
+		instance.reset(PrimitiveTypesPackageImpl::create());
+		std::dynamic_pointer_cast<PrimitiveTypesPackageImpl>(instance)->init();
 	}	
 	return instance;
 }

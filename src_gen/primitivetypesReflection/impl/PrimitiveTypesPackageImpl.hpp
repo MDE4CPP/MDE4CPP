@@ -30,20 +30,20 @@ namespace PrimitiveTypes
 			virtual ~PrimitiveTypesPackageImpl();
 
 			//getter for the ownedMember
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Boolean();
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Integer();
-			virtual uml::PrimitiveType* get_PrimitiveTypes_Real();
-			virtual uml::PrimitiveType* get_PrimitiveTypes_String();
-			virtual uml::PrimitiveType* get_PrimitiveTypes_UnlimitedNatural();
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Boolean();
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Integer();
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_Real();
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_String();
+			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural();
 			
 
 		private:
 			//private variables for ownedMember of the metamodel package
-			uml::PrimitiveType* primitiveTypes_Boolean = nullptr;
-			uml::PrimitiveType* primitiveTypes_Integer = nullptr;
-			uml::PrimitiveType* primitiveTypes_Real = nullptr;
-			uml::PrimitiveType* primitiveTypes_String = nullptr;
-			uml::PrimitiveType* primitiveTypes_UnlimitedNatural = nullptr;
+			std::shared_ptr<uml::PrimitiveType> primitiveTypes_Boolean = nullptr;
+			std::shared_ptr<uml::PrimitiveType> primitiveTypes_Integer = nullptr;
+			std::shared_ptr<uml::PrimitiveType> primitiveTypes_Real = nullptr;
+			std::shared_ptr<uml::PrimitiveType> primitiveTypes_String = nullptr;
+			std::shared_ptr<uml::PrimitiveType> primitiveTypes_UnlimitedNatural = nullptr;
 			
 
 			static PrimitiveTypesPackage* create();

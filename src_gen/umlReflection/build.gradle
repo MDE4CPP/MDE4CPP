@@ -146,8 +146,9 @@ model {
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}
+
 			else {
-				cppCompiler.args '-O1'
+				cppCompiler.args '-DNDEBUG'
 			}
         }
     }
