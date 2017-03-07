@@ -58,6 +58,9 @@ using namespace [aClass.ePackage.name/];
 
 [className/]::~[className/]()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [aClass.name/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	[aClass.eReferences.generateProtectedReferenceDeleter()/]
 }
 
