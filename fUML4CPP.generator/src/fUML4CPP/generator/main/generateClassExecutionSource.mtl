@@ -30,7 +30,7 @@ pointerName : String = aClass.name.toUpperFirst();
 
 using namespace [aPackage.name/];
 
-[className/]::[className/]([pointerName/]* _element):
+[className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 	m_umlValue(_element)
 {
 }
@@ -53,12 +53,12 @@ ecore::EObject* [className/]::copy()
     return new [className/](*this);
 }
 
-[pointerName/]* [className/]::getUmlValue() const
+std::shared_ptr<[pointerName/]> [className/]::getUmlValue() const
 {
 	return m_umlValue;
 }
 
-void [className/]::setUmlValue([pointerName/]* _element)
+void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
 {
 	m_umlValue = _element;
 }

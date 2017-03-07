@@ -34,11 +34,11 @@
 [/template]
 
 [template public generateInputParameter(par : Parameter, index:Integer) ? (not par.supportedTypes()) ]
-fUML::Reference * [par.name/]Value = dynamic_cast<fUML::Reference *>(inputParameters->at([index/])->getValues()->front());
+std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(inputParameters->at([index/])->getValues()->front());
 [/template]
 
 [template public generateInputParameter(par : Parameter, index:Integer) ? (par.supportedTypes())]
-fUML::[par.type.name/]Value * [par.name/]Value = dynamic_cast<fUML::[par.type.name/]Value *>(inputParameters->at([index/])->getValues()->front());
+std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(inputParameters->at([index/])->getValues()->front());
 [/template]
 
 
@@ -52,14 +52,14 @@ fUML::[par.type.name/]Value * [par.name/]Value = dynamic_cast<fUML::[par.type.na
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (par.supportedTypes())]
-fUML::[par.type.name/]Value * [par.name/]Value = fUML::FUMLFactory::eInstance()->create[par.type.name/]Value();
+std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory::eInstance()->create[par.type.name/]Value());
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (not par.supportedTypes())]
 [if (not (par.direction = ParameterDirectionKind::inout))]
-fUML::Reference * [par.name/]Value = fUML::FUMLFactory::eInstance()->createReference();
+std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
-[par.type.namespace.name/]::[par.type.name/]Execution * [par.name/]UmlLinker = new [par.type.namespace.name/]::[par.type.name/]Execution();
+std::shared_ptr<[par.type.namespace.name/]::[par.type.name/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name/]Execution());
 [/template]
 
 

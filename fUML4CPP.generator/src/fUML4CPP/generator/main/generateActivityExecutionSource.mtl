@@ -88,8 +88,8 @@ void [className/]::execute()
 {
 	// Execute the activity for this execution by creating an activity node activation group and activating all the activity nodes in the activity.
 	// When this is complete, copy the values on the tokens offered by output parameter nodes to the corresponding output parameters.
-	uml::Activity* activity = dynamic_cast<uml::Activity*>(this->getTypes()->front());
-	assert(activity != nullptr);	
+	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity*>(this->getTypes()->front());
+	assert(activity != nullptr);
 
 	DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] Activity " << activity->getName() << "..." << std::endl;)
 	
@@ -98,12 +98,13 @@ void [className/]::execute()
 	}
 
 	this->setActivationGroup(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup());
-	this->getActivationGroup()->setActivityExecution(this);
+	struct null_deleter{void operator()(void const *) const { } };
+	this->getActivationGroup()->setActivityExecution(std::shared_ptr<[className/]>(this, null_deleter()));
 	this->getActivationGroup()->activate(activity->getNode(), activity->getEdge());
 
 	DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] Getting output parameter node activations..." << std::endl;)
 
-	std::vector<fUML::ActivityParameterNodeActivation * > * outputActivations =
+	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityParameterNodeActivation>>> outputActivations =
 	this->getActivationGroup()->getOutputParameterNodeActivations();
 
     assert(outputActivations != nullptr);
@@ -112,19 +113,20 @@ void [className/]::execute()
 	
     for (unsigned int i = 0; i < outputActivations->size(); i++) 
 	{
- 		fUML::ActivityParameterNodeActivation * outputActivation = outputActivations->at(i);
- 		fUML::ParameterValue * parameterValue = fUML::FUMLFactory::eInstance()->createParameterValue();
+ 		std::shared_ptr<fUML::ActivityParameterNodeActivation> outputActivation = outputActivations->at(i);
+ 		std::shared_ptr<fUML::ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
  		parameterValue->setParameter((dynamic_cast<uml::ActivityParameterNode*>(outputActivation->getNode()))->getParameter());
- 		std::vector<fUML::Token * > * tokens = outputActivation->getTokens();
+ 		std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> tokens = outputActivation->getTokens();
  		for (unsigned int j = 0; j < tokens->size(); j++) 
 		{
-            fUML::Token * token = tokens->at(j);
-            fUML::Value * value = dynamic_cast<fUML::ObjectToken *>(token)->getValue();
- 			if (nullptr != value) {
+            std::shared_ptr<fUML::Token> token = tokens->at(j);
+            std::shared_ptr<fUML::Value> value = std::dynamic_pointer_cast<fUML::ObjectToken>(token)->getValue();
+ 			if (nullptr != value) 
+			{
                 parameterValue->getValues()->push_back(value);
  			}
  		}
- 	this->setParameterValue(parameterValue);
+	 	this->setParameterValue(parameterValue);
 	}
 
 	DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] Activity " << activity->getName() << " completed." << std::endl;)
@@ -136,39 +138,38 @@ void [className/]::execute()
 {
 	DEBUG_MESSAGE(std::cout << "Activity [aActivity.name/] is executing" << std::endl;)
     fUML::FUMLFactory * fumlFac = fUML::FUMLFactory::eInstance();
-    fUML::Locus  * locus = fumlFac->createLocus();
+    std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
 
-    fUML::Executor * executor = fumlFac->createExecutor();
+    std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
     executor->setLocus(locus);
 
-    fUML::ExecutionFactoryL3 * factory = fumlFac->createExecutionFactoryL3();
+    std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3());
     factory->setLocus(locus);
 
     locus->setFactory(factory);
     locus->setExecutor(executor);
 
-    locus->getFactory()->assignStrategy(fumlFac->createFirstChoiceStrategy());
-	locus->getFactory()->assignStrategy(fumlFac->createDispatchStrategy());
+    locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
+	locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
 
     [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
 
 
-    std::vector<fUML::ParameterValue *> * pList = new std::vector<fUML::ParameterValue *>();
+    std::shared_ptr<std::vector<fUML::ParameterValue>>> pList(new std::vector<std::shared_ptr<fUML::ParameterValue>>>());
 
 	[for (par : Parameter | aActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
     
     //INput parameter [par.name/] 
 	
-    fUML::ParameterValue * [par.name/]P = fumlFac->createParameterValue();
+    std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
     [par.name/]P->setParameter([par.packageGetter()/]);
     
 	[if(par.supportedTypes())]
-	fUML::[par.type.name/]Value * [par.name/]Value = fUML::FUMLFactory::eInstance()->create[par.type.name/]Value();
+	std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory::eInstance()->create[par.type.name/]Value());
     [par.name/]Value->setValue([par.default/]);
 	[else]
-	fUML::Reference * [par.name/]Value = fUML::FUMLFactory::eInstance()->createReference();
-	[par.type.namespace.name/]::[par.type.name/]Execution * [par.name/]UmlLinker = new [par.type.namespace.name/]::[par.type.name/]Execution();
-	//[par.name/]UmlLinker = new [par.type.name/]Execution([par.name/]);
+	std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
+	std::shared_ptr<[par.type.namespace.name/]::[par.type.name/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name/]Execution());
 	[par.name/]UmlLinker->setLocus(locus);
 	[par.name/]UmlLinker->setUmlValue([par.name/]);
 	[par.name/]Value->setReferent([par.name/]UmlLinker);
@@ -177,7 +178,7 @@ void [className/]::execute()
     pList->push_back([par.name/]P);
 	[/for]
 
-    std::vector<fUML::ParameterValue *> * resultPList = locus->getExecutor()->execute([aActivity.packageGetter()/],nullptr,pList);
+    std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> resultPList = locus->getExecutor()->execute([aActivity.packageGetter()/],nullptr,pList);
 
 	// TODO set result parameter (pointers not to set?)
 	[if (op.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
@@ -185,7 +186,7 @@ void [className/]::execute()
 	assert(resultPList->front());
 	[let p:Parameter = op.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
 	[if(p.supportedTypes())]
- 	fUML::[p.type.name/]Value* ret = dynamic_cast<fUML::[p.type.name/]Value*>(resultPList->front()->getValues()->front());
+ 	std::shared_ptr<fUML::[p.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[p.type.name/]Value>(resultPList->front()->getValues()->front());
     assert(ret != nullptr);
     return ret->getValue();
 	[else]
