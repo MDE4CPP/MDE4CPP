@@ -91,7 +91,8 @@ using namespace [aClass.ePackage.name/];
 		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
 	}
 	[else]
-	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *obj.[ref.GetterName()/]())
+	std::shared_ptr<std::vector<std::shared_ptr<[ref.eType.generateType()/]>>> _[ref.name/]List = obj.[ref.GetterName()/]();
+	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *_[ref.name/]List)
 	{
 		this->[ref.GetterName()/]()->push_back(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
 	}
