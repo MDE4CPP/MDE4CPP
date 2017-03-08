@@ -28,6 +28,9 @@ EOperationImpl::EOperationImpl()
 
 EOperationImpl::~EOperationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EOperation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -54,11 +57,13 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj)
 
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(std::shared_ptr<ecore::EGenericType> _eGenericExceptions : *obj.getEGenericExceptions())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eGenericExceptionsList = obj.getEGenericExceptions();
+	for(std::shared_ptr<ecore::EGenericType> _eGenericExceptions : *_eGenericExceptionsList)
 	{
 		this->getEGenericExceptions()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericExceptions->copy())));
 	}
@@ -66,11 +71,13 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj)
 	{
 		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
-	for(std::shared_ptr<ecore::EParameter> _eParameters : *obj.getEParameters())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EParameter>>> _eParametersList = obj.getEParameters();
+	for(std::shared_ptr<ecore::EParameter> _eParameters : *_eParametersList)
 	{
 		this->getEParameters()->push_back(std::shared_ptr<ecore::EParameter>(dynamic_cast<ecore::EParameter*>(_eParameters->copy())));
 	}
-	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> _eTypeParametersList = obj.getETypeParameters();
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
 		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}

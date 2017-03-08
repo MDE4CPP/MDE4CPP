@@ -28,6 +28,9 @@ EPackageImpl::EPackageImpl()
 
 EPackageImpl::~EPackageImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EPackage "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -46,15 +49,18 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj)
 
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(std::shared_ptr<ecore::EClassifier> _eClassifiers : *obj.getEClassifiers())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> _eClassifiersList = obj.getEClassifiers();
+	for(std::shared_ptr<ecore::EClassifier> _eClassifiers : *_eClassifiersList)
 	{
 		this->getEClassifiers()->push_back(std::shared_ptr<ecore::EClassifier>(dynamic_cast<ecore::EClassifier*>(_eClassifiers->copy())));
 	}
-	for(std::shared_ptr<ecore::EPackage> _eSubpackages : *obj.getESubpackages())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EPackage>>> _eSubpackagesList = obj.getESubpackages();
+	for(std::shared_ptr<ecore::EPackage> _eSubpackages : *_eSubpackagesList)
 	{
 		this->getESubpackages()->push_back(std::shared_ptr<ecore::EPackage>(dynamic_cast<ecore::EPackage*>(_eSubpackages->copy())));
 	}
@@ -183,7 +189,8 @@ owner->getEStructuralFeatures()->push_back(r);
 std::shared_ptr<ecore::EClassifier>  EPackageImpl::getEClassifier(std::string name)  const 
 {
 	//generated from body annotation
-	    for (std::shared_ptr<EClassifier> c : *getEClassifiers())
+	std::shared_ptr<std::vector<std::shared_ptr<EClassifier>>> classifierList = getEClassifiers();
+    for (std::shared_ptr<EClassifier> c : *classifierList)
     {
         if(c->getName()==name)
         {

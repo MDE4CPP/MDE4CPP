@@ -24,6 +24,9 @@ EModelElementImpl::EModelElementImpl()
 
 EModelElementImpl::~EModelElementImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EModelElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -35,7 +38,8 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj)
 	
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}

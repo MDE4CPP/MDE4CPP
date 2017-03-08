@@ -42,7 +42,7 @@
     </eOperations>
     <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;&#xD;&#xA;"/>
+        <details key="body" value="std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    return featureID >=0 &amp;&amp; featureID &lt; (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="featureID" eType="#//EInt"/>
@@ -123,20 +123,20 @@
         eType="#//EOperation" changeable="false" volatile="true" transient="true"
         derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > > eAllOperations(new std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt; std::shared_ptr&lt;ecore::EOperation> > > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EOperation> > > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
+        <details key="getterbody" value="std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > > eAllOperations(new std::vector&lt;std::shared_ptr&lt;ecore::EOperation> > () );&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt; std::shared_ptr&lt;ecore::EOperation> > > operationList = this->getEOperations();&#xD;&#xA;    eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass>>> classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EOperation> > > operationList = c->getEAllOperations();&#xD;&#xA;        eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllOperations;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllStructuralFeatures"
         upperBound="-1" eType="#//EStructuralFeature" changeable="false" volatile="true"
         transient="true" derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> >());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EStructuralFeature> > > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass> c: *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EStructuralFeature> > > featureList = c->getEStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;&#xD;&#xA;"/>
+        <details key="getterbody" value="std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector&lt;std::shared_ptr&lt;ecore::EStructuralFeature> >());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EStructuralFeature> > > featureList = this->getEStructuralFeatures();&#xD;&#xA;    eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass>>> classList = this->getESuperTypes();&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EStructuralFeature> > > featureList = c->getEStructuralFeatures();&#xD;&#xA;        eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllStructuralFeatures;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllSuperTypes" upperBound="-1"
         eType="#//EClass" changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="getterbody" value="    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EClass> > > eAllSuperTypes(new std::vector&lt;std::shared_ptr&lt;ecore::EClass> > ());&#xD;&#xA;&#xD;&#xA;    std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt; EClass> > > classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass>  c: *this->getESuperTypes())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass> > > classList = c->getESuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
+        <details key="getterbody" value="std::shared_ptr&lt; std::vector&lt;std::shared_ptr&lt;ecore::EClass> > > eAllSuperTypes(new std::vector&lt;std::shared_ptr&lt;ecore::EClass> > ());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass>>> classList = this->getESuperTypes();&#xD;&#xA;    eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    for (std::shared_ptr&lt;EClass > c : *classList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClass> > > classList = c->getESuperTypes();&#xD;&#xA;        eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());&#xD;&#xA;    }&#xD;&#xA;    return eAllSuperTypes;"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
@@ -439,7 +439,7 @@
     </eAnnotations>
     <eOperations name="getEClassifier" eType="#//EClassifier">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    for (std::shared_ptr&lt;EClassifier> c : *getEClassifiers())&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EClassifier>();"/>
+        <details key="body" value="std::shared_ptr&lt;std::vector&lt;std::shared_ptr&lt;EClassifier>>> classifierList = getEClassifiers();&#xD;&#xA;    for (std::shared_ptr&lt;EClassifier> c : *classifierList)&#xD;&#xA;    {&#xD;&#xA;        if(c->getName()==name)&#xD;&#xA;        {&#xD;&#xA;            return c;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;    return std::shared_ptr&lt;ecore::EClassifier>();"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>

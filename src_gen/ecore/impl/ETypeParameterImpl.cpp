@@ -24,6 +24,9 @@ ETypeParameterImpl::ETypeParameterImpl()
 
 ETypeParameterImpl::~ETypeParameterImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ETypeParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -36,11 +39,13 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj)
 	
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(std::shared_ptr<ecore::EGenericType> _eBounds : *obj.getEBounds())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eBoundsList = obj.getEBounds();
+	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
 	{
 		this->getEBounds()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
 	}

@@ -25,6 +25,9 @@ EStringToStringMapEntryImpl::EStringToStringMapEntryImpl()
 
 EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EStringToStringMapEntry "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 

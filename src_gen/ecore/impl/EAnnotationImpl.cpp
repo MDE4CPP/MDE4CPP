@@ -27,6 +27,9 @@ EAnnotationImpl::EAnnotationImpl()
 
 EAnnotationImpl::~EAnnotationImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EAnnotation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -44,15 +47,18 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj)
 
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EObject> _contents : *obj.getContents())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> _contentsList = obj.getContents();
+	for(std::shared_ptr<ecore::EObject> _contents : *_contentsList)
 	{
 		this->getContents()->push_back(std::shared_ptr<ecore::EObject>(dynamic_cast<ecore::EObject*>(_contents->copy())));
 	}
-	for(std::shared_ptr<ecore::EStringToStringMapEntry> _details : *obj.getDetails())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> _detailsList = obj.getDetails();
+	for(std::shared_ptr<ecore::EStringToStringMapEntry> _details : *_detailsList)
 	{
 		this->getDetails()->push_back(std::shared_ptr<ecore::EStringToStringMapEntry>(dynamic_cast<ecore::EStringToStringMapEntry*>(_details->copy())));
 	}
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}

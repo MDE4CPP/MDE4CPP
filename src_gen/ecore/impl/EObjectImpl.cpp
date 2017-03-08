@@ -24,6 +24,9 @@ EObjectImpl::EObjectImpl()
 
 EObjectImpl::~EObjectImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EObject "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 

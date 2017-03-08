@@ -29,6 +29,9 @@ EGenericTypeImpl::EGenericTypeImpl()
 
 EGenericTypeImpl::~EGenericTypeImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EGenericType "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -52,7 +55,8 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj)
 	{
 		m_eLowerBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getELowerBound()->copy()));
 	}
-	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *obj.getETypeArguments())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eTypeArgumentsList = obj.getETypeArguments();
+	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *_eTypeArgumentsList)
 	{
 		this->getETypeArguments()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
 	}

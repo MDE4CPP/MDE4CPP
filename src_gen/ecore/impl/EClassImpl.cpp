@@ -38,6 +38,9 @@ EClassImpl::EClassImpl()
 
 EClassImpl::~EClassImpl()
 {
+#ifdef SHOW_DELETION
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EClass "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+#endif
 	
 }
 
@@ -91,23 +94,28 @@ EClassImpl::EClassImpl(const EClassImpl & obj)
 
 
 	//clone containt lists
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *obj.getEAnnotations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	for(std::shared_ptr<ecore::EGenericType> _eGenericSuperTypes : *obj.getEGenericSuperTypes())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eGenericSuperTypesList = obj.getEGenericSuperTypes();
+	for(std::shared_ptr<ecore::EGenericType> _eGenericSuperTypes : *_eGenericSuperTypesList)
 	{
 		this->getEGenericSuperTypes()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericSuperTypes->copy())));
 	}
-	for(std::shared_ptr<ecore::EOperation> _eOperations : *obj.getEOperations())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> _eOperationsList = obj.getEOperations();
+	for(std::shared_ptr<ecore::EOperation> _eOperations : *_eOperationsList)
 	{
 		this->getEOperations()->push_back(std::shared_ptr<ecore::EOperation>(dynamic_cast<ecore::EOperation*>(_eOperations->copy())));
 	}
-	for(std::shared_ptr<ecore::EStructuralFeature> _eStructuralFeatures : *obj.getEStructuralFeatures())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> _eStructuralFeaturesList = obj.getEStructuralFeatures();
+	for(std::shared_ptr<ecore::EStructuralFeature> _eStructuralFeatures : *_eStructuralFeaturesList)
 	{
 		this->getEStructuralFeatures()->push_back(std::shared_ptr<ecore::EStructuralFeature>(dynamic_cast<ecore::EStructuralFeature*>(_eStructuralFeatures->copy())));
 	}
-	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *obj.getETypeParameters())
+	std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> _eTypeParametersList = obj.getETypeParameters();
+	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
 		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
@@ -159,9 +167,8 @@ std::shared_ptr<ecore::EOperation>  EClassImpl::getEOperation(int operationID)  
 std::shared_ptr<ecore::EStructuralFeature>  EClassImpl::getEStructuralFeature(int featureID)  const 
 {
 	//generated from body annotation
-	    std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();
+	std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllFeat = getEAllStructuralFeatures();
     return featureID >=0 && featureID < (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;
-
 }
 
 std::shared_ptr<ecore::EStructuralFeature>  EClassImpl::getEStructuralFeature(std::string featureName)  const 
@@ -292,11 +299,12 @@ std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> EClassImpl::g
 std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> EClassImpl::getEAllOperations() const
 {
 //generated from getterbody annotation
-    std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > eAllOperations(new std::vector<std::shared_ptr<ecore::EOperation> > () );
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EOperation> > > eAllOperations(new std::vector<std::shared_ptr<ecore::EOperation> > () );
 
     std::shared_ptr< std::vector< std::shared_ptr<ecore::EOperation> > > operationList = this->getEOperations();
     eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());
-    for (std::shared_ptr<EClass > c : *this->getESuperTypes())
+    std::shared_ptr<std::vector<std::shared_ptr<EClass>>> classList = this->getESuperTypes();
+    for (std::shared_ptr<EClass > c : *classList)
     {
     	std::shared_ptr< std::vector<std::shared_ptr< EOperation> > > operationList = c->getEAllOperations();
         eAllOperations->insert(eAllOperations->end(), operationList->begin(), operationList->end());
@@ -315,28 +323,28 @@ std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> EClassImpl::get
 std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> EClassImpl::getEAllStructuralFeatures() const
 {
 //generated from getterbody annotation
-    std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector<std::shared_ptr<ecore::EStructuralFeature> >());
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EStructuralFeature> > > eAllStructuralFeatures( new std::vector<std::shared_ptr<ecore::EStructuralFeature> >());
 
     std::shared_ptr< std::vector<std::shared_ptr< EStructuralFeature> > > featureList = this->getEStructuralFeatures();
     eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
-    for (std::shared_ptr<EClass> c: *this->getESuperTypes())
+    std::shared_ptr<std::vector<std::shared_ptr<EClass>>> classList = this->getESuperTypes();
+    for (std::shared_ptr<EClass > c : *classList)
     {
     	std::shared_ptr<std::vector<std::shared_ptr<EStructuralFeature> > > featureList = c->getEStructuralFeatures();
         eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
     }
     return eAllStructuralFeatures;
-
 }
 
 
 std::shared_ptr<std::vector<std::shared_ptr<ecore::EClass>>> EClassImpl::getEAllSuperTypes() const
 {
 //generated from getterbody annotation
-    std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > eAllSuperTypes(new std::vector<std::shared_ptr<ecore::EClass> > ());
+std::shared_ptr< std::vector<std::shared_ptr<ecore::EClass> > > eAllSuperTypes(new std::vector<std::shared_ptr<ecore::EClass> > ());
 
-    std::shared_ptr< std::vector<std::shared_ptr< EClass> > > classList = this->getESuperTypes();
+	std::shared_ptr<std::vector<std::shared_ptr<EClass>>> classList = this->getESuperTypes();
     eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
-    for (std::shared_ptr<EClass>  c: *this->getESuperTypes())
+    for (std::shared_ptr<EClass > c : *classList)
     {
     	std::shared_ptr<std::vector<std::shared_ptr<EClass> > > classList = c->getESuperTypes();
         eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
