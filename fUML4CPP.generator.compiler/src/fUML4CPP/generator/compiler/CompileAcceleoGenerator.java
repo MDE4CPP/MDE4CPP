@@ -199,6 +199,10 @@ public class CompileAcceleoGenerator
 
             	// generate emtl file of fUML4CPP
 		        compiler.setSourceFolder(dependency + File.separator + "UML4CPP.generator" + File.separator +"src");
+		        compiler.setOutputFolder(dependency + File.separator + "UML4CPP.generator" + File.separator + "bin");
+		        compiler.setBinaryResource(false);
+		        compiler.execute();
+		        
 		        compiler.setOutputFolder(targetFolder);
 		        compiler.setBinaryResource(false);
 		        compiler.execute();
