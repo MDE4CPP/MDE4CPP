@@ -1,0 +1,17 @@
+description 'todo'
+
+task generateCalculator(type: JavaExec) {
+	group 'fUMLGeneratedModels'
+	description 'generate C++ code of primitivetypesReflection.uml model'
+	main = "-jar"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "my.uml", "../src_gen"
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
+			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
+		}
+	}
+}
