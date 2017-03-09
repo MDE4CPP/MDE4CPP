@@ -72,26 +72,26 @@ ecore::EObject* [className/]::copy()
     return new [className/](*this);
 }
 
-void [className/]::doBody(QList<fUML::ParameterValue *> *inputParameters, QList<fUML::ParameterValue *> *outputParameters)
+void [className/]::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> inputParameters, std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> outputParameters)
 {
     DEBUG_MESSAGE(std::cout<<"Printing from "<< this->getBehavior()->getName();)
     DEBUG_MESSAGE(std::cout<<"__________________________";)
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-    [par.type.transformType()/] [par.name/];
+   	[par.type.generateCppType()/] [par.name/];
 	[/for]
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->asSequence()->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
-	[par.name/] = dynamic_cast<[par.type.namespace.name/]::[par.type.name/]Execution*>([par.name/]Value->getReferent())->getUmlValue();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.namespace.name/]::[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 	[/for]
 
-	[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/] * target = dynamic_cast<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]Execution*>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]Execution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation

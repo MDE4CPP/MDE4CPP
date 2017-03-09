@@ -34,7 +34,7 @@
 
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-fUML::OpaqueBehaviorExecution * [memberName(anOpaqueBehavior)/]Execution =  new [anOpaqueBehavior.getNearestPackage().name/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution();
+std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().name/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
 [memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
 [memberName(anOpaqueBehavior)/]Execution->setLocus(factory->getLocus());
 factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution);

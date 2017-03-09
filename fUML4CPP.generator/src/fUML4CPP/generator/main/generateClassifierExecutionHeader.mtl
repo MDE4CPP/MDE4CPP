@@ -32,18 +32,18 @@ namespace [aPackage.name/]
 		public:
 		    //constructors
 		    [className/]([className/] &obj);
-		    [className/]([pointerName/]*);
+		    [className/](std::shared_ptr<[pointerName/]>);
 		 	[className/]();
 		    //destructor
 		    virtual ~[className/]();
 		
 		    virtual ecore::EObject* copy();
 			
-			[pointerName/]* getUmlValue() const;
-			void setUmlValue([pointerName/]*);
+			std::shared_ptr<[pointerName/]> getUmlValue() const;
+			void setUmlValue(std::shared_ptr<[pointerName/]>);
 		
 		protected:
-			[pointerName/]* m_umlValue = nullptr;
+			std::shared_ptr<[pointerName/]> m_umlValue;
 	};
 }
 [endGuard(aClassifier,'Execution')/]

@@ -62,20 +62,20 @@ ecore::EObject* [className/]::copy() const
     return new [className/](*this);
 }
 
-void [className/]::doBody(std::vector<fUML::ParameterValue *> *inputParameters, std::vector<fUML::ParameterValue *> *outputParameters)
+void [className/]::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> inputParameters, std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> outputParameters)
 {
     DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
-    [par.type.transformType()/] [par.name/];
+    [par.type.generateCppType()/] [par.name/];
 	[/for]
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
     [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1)/]
 
 	[if (not par.supportedTypes())]
-	[par.name/] = dynamic_cast<[par.type.namespace.name/]::[par.type.name/]Execution*>([par.name/]Value->getReferent())->getUmlValue();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.namespace.name/]::[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
@@ -86,7 +86,7 @@ void [className/]::doBody(std::vector<fUML::ParameterValue *> *inputParameters, 
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
-	[cOpSet.target.type.namespace.name/]::[cOpSet.target.type.name/] * target = dynamic_cast<[cOpSet.target.type.namespace.name/]::[cOpSet.target.type.name/]Execution*>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.target.type.namespace.name/]::[cOpSet.target.type.name/]>target = std::dynamic_pointer_cast<[cOpSet.target.type.namespace.name/]::[cOpSet.target.type.name/]Execution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 	[/for]
 	[/if]

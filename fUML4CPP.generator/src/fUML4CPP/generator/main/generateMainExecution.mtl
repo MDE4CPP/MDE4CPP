@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import UML4CPP::generator::main::generateType /]
 [import fUML4CPP::generator::main::parameterHelper /]
 
 [template public generateMain(aPackage : Package)]
@@ -65,20 +66,20 @@ using namespace [aPackage.getPackageName()/];
 int main()
 {	
 	DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
-    fUML::FUMLFactory * fumlFac = fUML::FUMLFactory::eInstance();
-    fUML::Locus  * locus = fumlFac->createLocus();
+    std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
+    std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
 
-    fUML::Executor * executor = fumlFac->createExecutor();
+    std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
     executor->setLocus(locus);
 
-    fUML::ExecutionFactoryL3 * factory = fumlFac->createExecutionFactoryL3();
+    std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3());
     factory->setLocus(locus);
 
     locus->setFactory(factory);
     locus->setExecutor(executor);
 
-    locus->getFactory()->assignStrategy(fumlFac->createFirstChoiceStrategy());
-	locus->getFactory()->assignStrategy(fumlFac->createDispatchStrategy());
+    locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
+	locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
 
 	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
@@ -88,17 +89,17 @@ int main()
     [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
 	[/if]
 
-    std::vector<fUML::ParameterValue *> * pList = new std::vector<fUML::ParameterValue *>();
+    std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> pList(new std::vector<std::shared_ptr<fUML::ParameterValue>>());
 	[for (par : Parameter | act.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
     
     //INput parameter [par.name/] 
-    fUML::ParameterValue * [par.name/]P = fumlFac->createParameterValue();
+    std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
     [par.name/]P->setParameter([par.packageGetter()/]);
     [par.generateOutputParameter()/]
 	[if(par.supportedTypes())]
     [par.name/]Value->setValue([par.default/]);
 	[else]
-	[par.name/]UmlLinker = new [par.type.name/]Execution([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name/]());
+	[par.name/]UmlLinker.reset(new [par.type.name/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name/]())));	
 	[par.name/]UmlLinker->setLocus(locus);
 	[par.name/]Value->setReferent([par.name/]UmlLinker);
 	[/if]
@@ -106,7 +107,7 @@ int main()
     pList->push_back([par.name/]P);
 	[/for]
 
-    std::vector<fUML::ParameterValue *> * resultPList = locus->getExecutor()->execute([act.packageGetter()/],nullptr,pList);
+    std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> resultPList = locus->getExecutor()->execute([act.packageGetter()/],nullptr,pList);
 	[/let]
 
 	if(nullptr == resultPList)
@@ -120,7 +121,8 @@ int main()
     }
     else{
         DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
-        for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++){
+        for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++)
+{
             DEBUG_MESSAGE(std::cout << "Parameter " << parIndex <<" name: "<<resultPList->at(parIndex)->getParameter()->getName() << std::endl;)
             if(resultPList->at(parIndex)->getValues()->empty())
             {
