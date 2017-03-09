@@ -17,7 +17,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateParameterCreation(aParameter : Parameter)]
-[memberName(aParameter)/] = uml::UmlFactory::eInstance()->create[aParameter.eClass().name/]();
+[memberName(aParameter)/].reset(uml::UmlFactory::eInstance()->create[aParameter.eClass().name/]());
 [memberName(aParameter)/]->setName("[aParameter.name/]");
 [memberName(aParameter)/]->setType([aParameter.type.packageGetter(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);

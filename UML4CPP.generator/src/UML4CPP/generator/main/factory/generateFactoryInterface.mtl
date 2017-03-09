@@ -49,7 +49,7 @@ namespace [aPackage.name/]
 			[(aPackage.ownedMember->selectByKind(Class))->sortedBy(name).generateClassCreate(false)/]
 
 			//Package
-			virtual [aPackage.name.toUpperFirst().concat('Package')/]* get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
+			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
 	};
 }
 [endGuard(aPackage,'Factory')/]

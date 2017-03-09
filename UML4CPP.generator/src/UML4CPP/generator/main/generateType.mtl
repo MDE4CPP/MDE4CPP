@@ -14,20 +14,28 @@
  */]
 [module generateType('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') /]
+
+
 [template public generateCppType(aProperty : Property)]
-[if (not(aProperty.upper=1))]
-std::vector<[aProperty.type.transformType()/]> *[else]
-[aProperty.type.transformType()/][/if]
+[if (not aProperty.type.oclIsUndefined() and not aProperty.type.isPrimitive())]
+[if (aProperty.upper <> 1)]std::shared_ptr<std::vector<[/if]std::shared_ptr<[aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>>[/if][else]
+[if (aProperty.upper <> 1)]std::shared_ptr<std::vector<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>>[/if][/if]
 [/template]
 
 [template public generateCppType(aOperation : Operation)]
 [if (not(aOperation.upper=1))]
-std::vector<[aOperation.type.transformType()/]> *[else]
+std::shared_ptr<std::vector<[if (not aOperation.type.isPrimitive())]std::shared_ptr<[/if][aOperation.type.transformType()/][if (not aOperation.type.isPrimitive())]>[/if]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
+std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [aOperation.type.transformType()/][/if]
 [/template]
 
 [template public generateCppType(aType : Type)]
-[aType.transformType()/]
+[aType.generateCppType(false)/]
+[/template]
+
+[template public generateCppType(aType : Type, noShared : Boolean)]
+[if (not (aType.isPrimitive() or noShared))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared))]>[/if]
 [/template]
 
 [template public generateType(aType : Type)]
@@ -37,7 +45,7 @@ QVariant[else]
 [/template]
 
 [template public generateTypeClass(anEDataType : ecore::EClass)]
-[anEDataType.name/]*
+[anEDataType.name/]
 [/template]
 
 [**
@@ -72,7 +80,7 @@ std::string
 [/template]
 
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
-[aType.namespace.ns()/]::[aType.name/] *
+[aType.namespace.ns()/]::[aType.name/]
 [/template]
 
 [template public ns(ns : Namespace)]

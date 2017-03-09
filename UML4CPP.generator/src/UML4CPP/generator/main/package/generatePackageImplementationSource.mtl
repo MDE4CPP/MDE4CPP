@@ -74,6 +74,7 @@
 #include "[stereo.name/].hpp"
 [/for]
 
+
 using namespace [aPackage.name/];
 
 [packageName/]::[packageName/]()
@@ -90,7 +91,7 @@ bool [packageName/]::isInited = false;
 {
 	if (isInited)
 	{
-		return [aPackage.name.concat('Package').toUpperFirst()/]::eInstance();
+		return [aPackage.name.concat('Package').toUpperFirst()/]::eInstance().get();
 	}
 	isInited = true;
 	
@@ -118,10 +119,11 @@ void [packageName/]::createPackageContents()
 		return;
 	}
 	isCreated = true;
-	
-	uml::Package * [aPackage.memberName()/] = this;
-	uml::Constraint * con = nullptr;
-	uml::OpaqueExpression * oe = nullptr;
+
+	struct null_deleter{void operator()(void const *) const {} };
+	std::shared_ptr<[packageName/]> [aPackage.memberName()/] = std::shared_ptr<[packageName/]>(this, null_deleter());
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 	
 	[aPackage.allOwnedElements()->filter(ValueSpecification)->sortedBy(myQualifiedName()).generateValueSpecificationCreation()/]
 
@@ -173,7 +175,7 @@ void [packageName/]::createPackageContents()
 	[aPackage.ownedMember->filter(PrimitiveType).generatePrimitiveTypeCreation()/]
 
 [if (aPackage.ownedMember->filter(Enumeration)->size() > 0)]
-	uml::EnumerationLiteral * lit = nullptr;
+	std::shared_ptr<uml::EnumerationLiteral> lit = nullptr;
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationCreation()/]
 [/if]
 }
@@ -191,7 +193,9 @@ void [packageName/]::initializePackageContents()
 	setURI(eNS_URI);
 
 	// Add supertypes to classes
-	uml::Generalization * gen = nullptr;
+	struct null_deleter{void operator()(void const *) const {} };
+	std::shared_ptr<[packageName/]> [aPackage.memberName()/] = std::shared_ptr<[packageName/]>(this, null_deleter());
+	std::shared_ptr<uml::Generalization> gen = nullptr;
 	[aPackage.ownedMember->filter(Class).initSuperTypes()/]
 
 	[aPackage.ownedMember->filter(Class).ownedOperation.initalizeOperation()/]

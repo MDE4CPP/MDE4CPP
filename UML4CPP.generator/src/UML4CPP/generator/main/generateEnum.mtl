@@ -33,11 +33,11 @@ namespace [anEEnum._package.name/]
 [/template]
 
 [template public generateEnumerationCreation(aEnum : Enumeration)]
-	[aEnum.memberName()/] = uml::UmlFactory::eInstance()->createEnumeration();
+	[aEnum.memberName()/].reset(uml::UmlFactory::eInstance()->createEnumeration());
 	[aEnum.memberName()/]->setName("[aEnum.name/]");
 
 	[for (lit : EnumerationLiteral | aEnum.ownedLiteral->asOrderedSet()->sortedBy(name)) ]
-		lit = uml::UmlFactory::eInstance()->createEnumerationLiteral();
+		lit = std::shared_ptr<uml::EnumerationLiteral>(uml::UmlFactory::eInstance()->createEnumerationLiteral());
 		lit->setName("[lit.name/]");
 		[aEnum.memberName()/]->getOwnedLiteral()->push_back(lit);
 		lit->setEnumeration([aEnum.memberName()/]);

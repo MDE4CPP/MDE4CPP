@@ -18,14 +18,14 @@
 [import UML4CPP::generator::main::helper /]
  
 [template public generateConstraintCreation(aConstraint : Constraint)]
-con = uml::UmlFactory::eInstance()->createConstraint();
+con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 
 con->setName("[aConstraint.name/]");
 [for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(name))]
 con->getConstrainedElement()->push_back([elem.appendTypeRes()/]);
 [/for]
 
-oe = uml::UmlFactory::eInstance()->createOpaqueExpression();
+oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 [for (it : String | aConstraint.specification.oclAsType(OpaqueExpression).language)]
 oe->getLanguage()->push_back("[it/]");
 [/for][for (it : String | aConstraint.specification.oclAsType(OpaqueExpression)._body)]

@@ -213,12 +213,9 @@ model {
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}
+
 			else {
-[if (aPackage.name='UML')]
-				cppCompiler.args '-O1'
-[else]
-				cppCompiler.args '-O3', '-DNDEBUG'
-[/if]
+				cppCompiler.args [if (not (aPackage.name='UML'))]'-O3', [/if]'-DNDEBUG'
 			}
         }
     }

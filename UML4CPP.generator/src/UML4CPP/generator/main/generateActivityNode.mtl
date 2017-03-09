@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
-[memberName(anActivityNode)/] = uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]();
+[memberName(anActivityNode)/].reset(uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]());
 [memberName(anActivityNode)/]->setName("[anActivityNode.name/]");
 [memberName(anActivityNode)/]->setActivity([anActivityNode.activity.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
@@ -42,13 +42,13 @@
 [/template]
 
 [template public generatePin(pin : Pin)]
-[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]();
+[memberName(pin)/].reset(uml::UmlFactory::eInstance()->create[pin.eClass().name/]());
 [memberName(pin)/]->setName("[pin.name/]");
 
 [/template]
 
 [template public generateOperation(operation : Operation)]
-[memberName(operation)/] = uml::UmlFactory::eInstance()->createOperation();
+[memberName(operation)/].reset(uml::UmlFactory::eInstance()->createOperation());
 [memberName(operation)/]->setName("[operation.name/]");
 
 [/template]
