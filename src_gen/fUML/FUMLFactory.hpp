@@ -44,7 +44,7 @@ namespace fUML
 	class ControlToken;
 	class CreateLinkActionActivation;
 	class CreateObjectActionActivation;
-	class DataStoreActivation;
+	class DataStoreNodeActivation;
 	class DataValue;
 	class DecisionNodeActivation;
 	class DestroyLinkActionActivation;
@@ -237,7 +237,7 @@ namespace fUML
 			virtual StartObjectBehaviorActionActivation* createStartObjectBehaviorActionActivation() const = 0;
 			virtual AcceptEventActionEventAccepter* createAcceptEventActionEventAccepter() const = 0;
 			virtual CentralBufferNodeActivation* createCentralBufferNodeActivation() const = 0;
-			virtual DataStoreActivation* createDataStoreActivation() const = 0;
+			virtual DataStoreNodeActivation* createDataStoreNodeActivation() const = 0;
 			
 			//Package
 			virtual std::shared_ptr<FUMLPackage> getFUMLPackage() const = 0;

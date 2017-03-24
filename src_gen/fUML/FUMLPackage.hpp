@@ -45,7 +45,7 @@ namespace fUML
 	class ControlToken;
 	class CreateLinkActionActivation;
 	class CreateObjectActionActivation;
-	class DataStoreActivation;
+	class DataStoreNodeActivation;
 	class DataValue;
 	class DecisionNodeActivation;
 	class DestroyLinkActionActivation;
@@ -606,13 +606,13 @@ namespace fUML
 			static const int CENTRALBUFFERNODEACTIVATION_OPERATION_COUNT = 39;
 			
 			
-			static const int CENTRALBUFFERNODEACTIVATION___REMOVETOKEN__TOKEN = 38;
+			static const int CENTRALBUFFERNODEACTIVATION___FIRE__TOKEN = 38;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation() const = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation___RemoveToken__Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation___Fire__Token() const = 0;
 			
 			// End Class CentralBufferNodeActivation
 
@@ -891,28 +891,24 @@ namespace fUML
 			// End Class CreateObjectActionActivation
 
 
-			// Begin Class DataStoreActivation
+			// Begin Class DataStoreNodeActivation
 			//Class and Feature IDs 
-			static const int DATASTOREACTIVATION = 113;
-			static const int DATASTOREACTIVATION_FEATURE_COUNT = 10;
-			static const int DATASTOREACTIVATION_OPERATION_COUNT = 49;
+			static const int DATASTORENODEACTIVATION = 113;
+			static const int DATASTORENODEACTIVATION_FEATURE_COUNT = 7;
+			static const int DATASTORENODEACTIVATION_OPERATION_COUNT = 41;
 			
-			static const int DATASTOREACTIVATION_CURRENTEXECUTION = 1138;
-			static const int DATASTOREACTIVATION_STOREDTOKENS = 1139;
 			
-			static const int DATASTOREACTIVATION___FIRE__TOKEN = 48;
-			static const int DATASTOREACTIVATION___SENDOFFERS = 47;
+			static const int DATASTORENODEACTIVATION___ADDTOKEN__TOKEN = 40;
+			static const int DATASTORENODEACTIVATION___REMOVETOKEN__TOKEN = 39;
 			
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataStoreActivation() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation() const = 0;
 			
-			virtual std::shared_ptr<ecore::EReference> getDataStoreActivation_CurrentExecution() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getDataStoreActivation_StoredTokens() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreActivation___Fire__Token() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreActivation___SendOffers() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___AddToken__Token() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___RemoveToken__Token() const = 0;
 			
-			// End Class DataStoreActivation
+			// End Class DataStoreNodeActivation
 
 
 			// Begin Class DataValue

@@ -57,7 +57,7 @@ ecore::EObject* FUMLFactoryImpl::create(ecore::EClass* _class) const
 		case FUMLPackage::CONTROLTOKEN : return createControlToken();
 		case FUMLPackage::CREATELINKACTIONACTIVATION : return createCreateLinkActionActivation();
 		case FUMLPackage::CREATEOBJECTACTIONACTIVATION : return createCreateObjectActionActivation();
-		case FUMLPackage::DATASTOREACTIVATION : return createDataStoreActivation();
+		case FUMLPackage::DATASTORENODEACTIVATION : return createDataStoreNodeActivation();
 		case FUMLPackage::DATAVALUE : return createDataValue();
 		case FUMLPackage::DECISIONNODEACTIVATION : return createDecisionNodeActivation();
 		case FUMLPackage::DESTROYLINKACTIONACTIVATION : return createDestroyLinkActionActivation();
@@ -216,9 +216,9 @@ CreateObjectActionActivation* FUMLFactoryImpl::createCreateObjectActionActivatio
 {
 	return new CreateObjectActionActivationImpl();
 }
-DataStoreActivation* FUMLFactoryImpl::createDataStoreActivation () const
+DataStoreNodeActivation* FUMLFactoryImpl::createDataStoreNodeActivation () const
 {
-	return new DataStoreActivationImpl();
+	return new DataStoreNodeActivationImpl();
 }
 DataValue* FUMLFactoryImpl::createDataValue () const
 {

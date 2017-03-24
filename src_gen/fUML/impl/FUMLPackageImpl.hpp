@@ -43,7 +43,7 @@
 #include "ControlTokenImpl.hpp"
 #include "CreateLinkActionActivationImpl.hpp"
 #include "CreateObjectActionActivationImpl.hpp"
-#include "DataStoreActivationImpl.hpp"
+#include "DataStoreNodeActivationImpl.hpp"
 #include "DataValueImpl.hpp"
 #include "DecisionNodeActivationImpl.hpp"
 #include "DestroyLinkActionActivationImpl.hpp"
@@ -374,7 +374,7 @@ namespace fUML
 			virtual std::shared_ptr<ecore::EClass> getCentralBufferNodeActivation() const ;
 			
 			
-			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation___RemoveToken__Token() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCentralBufferNodeActivation___Fire__Token() const ;
 			
 			// End Class CentralBufferNodeActivation
 
@@ -515,17 +515,15 @@ namespace fUML
 			
 			// End Class CreateObjectActionActivation
 
-			// Begin Class DataStoreActivation
+			// Begin Class DataStoreNodeActivation
 			//Class and Feature Getter
-			virtual std::shared_ptr<ecore::EClass> getDataStoreActivation() const ;
+			virtual std::shared_ptr<ecore::EClass> getDataStoreNodeActivation() const ;
 			
-			virtual std::shared_ptr<ecore::EReference> getDataStoreActivation_CurrentExecution() const ;
-			virtual std::shared_ptr<ecore::EReference> getDataStoreActivation_StoredTokens() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreActivation___Fire__Token() const ;
-			virtual std::shared_ptr<ecore::EOperation> getDataStoreActivation___SendOffers() const ;
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___AddToken__Token() const ;
+			virtual std::shared_ptr<ecore::EOperation> getDataStoreNodeActivation___RemoveToken__Token() const ;
 			
-			// End Class DataStoreActivation
+			// End Class DataStoreNodeActivation
 
 			// Begin Class DataValue
 			//Class and Feature Getter
@@ -1494,7 +1492,7 @@ namespace fUML
 			std::shared_ptr<ecore::EClass> controlTokenEClass = nullptr;
 			std::shared_ptr<ecore::EClass> createLinkActionActivationEClass = nullptr;
 			std::shared_ptr<ecore::EClass> createObjectActionActivationEClass = nullptr;
-			std::shared_ptr<ecore::EClass> dataStoreActivationEClass = nullptr;
+			std::shared_ptr<ecore::EClass> dataStoreNodeActivationEClass = nullptr;
 			std::shared_ptr<ecore::EClass> dataValueEClass = nullptr;
 			std::shared_ptr<ecore::EClass> decisionNodeActivationEClass = nullptr;
 			std::shared_ptr<ecore::EClass> destroyLinkActionActivationEClass = nullptr;

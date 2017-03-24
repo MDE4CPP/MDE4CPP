@@ -43,7 +43,7 @@
 #include "ControlTokenImpl.hpp"
 #include "CreateLinkActionActivationImpl.hpp"
 #include "CreateObjectActionActivationImpl.hpp"
-#include "DataStoreActivationImpl.hpp"
+#include "DataStoreNodeActivationImpl.hpp"
 #include "DataValueImpl.hpp"
 #include "DecisionNodeActivationImpl.hpp"
 #include "DestroyLinkActionActivationImpl.hpp"
@@ -236,7 +236,7 @@ namespace fUML
 			virtual StartObjectBehaviorActionActivation* createStartObjectBehaviorActionActivation() const ;
 			virtual AcceptEventActionEventAccepter* createAcceptEventActionEventAccepter() const ;
 			virtual CentralBufferNodeActivation* createCentralBufferNodeActivation() const ;
-			virtual DataStoreActivation* createDataStoreActivation() const ;
+			virtual DataStoreNodeActivation* createDataStoreNodeActivation() const ;
 			
 
 			//Package
