@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateClassCreate(aEClass : Class,impl : Boolean) ? (aEClass.isAbstract=false)]
-virtual [aEClass.generateCppType(true)/]* create[aEClass.name/]()[abstractSufix(impl)/];
+virtual [aEClass.generateCppType(true)/]* create[aEClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
 
 [/template]
 

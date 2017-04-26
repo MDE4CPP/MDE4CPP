@@ -31,7 +31,7 @@ using namespace [aPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(name)) ? (aClass.isAbstract=false)]
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.qualifiedName/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.namespace.name/]::[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
 	[/for]
 }
 
@@ -67,9 +67,9 @@ std::shared_ptr<uml::Element> [className/]::create(std::shared_ptr<uml::Class> _
 }
 
 [for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
-[aClass.generateCppType(true)/]* [className/]::create[aClass.name/] ()
+[aClass.generateCppType(true)/]* [className/]::create[aClass.name.toUpperFirst()/] ()
 {
-	return new [aClass.name/]Impl();
+	return new [aClass.name.toUpperFirst()/]Impl();
 }
 [/for]
 

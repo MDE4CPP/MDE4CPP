@@ -76,11 +76,11 @@ std::string
 [/template]
 
 [template public transformType(aType : Type) ? (oclIsKindOf(Enumeration))]
-[aType.namespace.ns()/]::[aType.name/]
+[aType.namespace.ns()/]::[aType.name.toUpperFirst()/]
 [/template]
 
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
-[aType.namespace.ns()/]::[aType.name/]
+[aType.namespace.ns()/]::[aType.name.toUpperFirst()/]
 [/template]
 
 [template public ns(ns : Namespace)]
