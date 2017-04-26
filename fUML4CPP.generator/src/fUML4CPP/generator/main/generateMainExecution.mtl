@@ -23,6 +23,7 @@
 [template public generateMain(aPackage : Package)]
 [file (aPackage.getPackageName().concat('Exec/').concat('main.cpp'), false, 'UTF-8')]
 #include <iostream>
+#include <memory>
 #include <vector>
 
 #include "FUMLFactory.hpp"
@@ -99,7 +100,7 @@ int main()
 	[if(par.supportedTypes())]
     [par.name/]Value->setValue([par.default/]);
 	[else]
-	[par.name/]UmlLinker.reset(new [par.type.name/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name/]())));	
+	[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]())));	
 	[par.name/]UmlLinker->setLocus(locus);
 	[par.name/]Value->setReferent([par.name/]UmlLinker);
 	[/if]

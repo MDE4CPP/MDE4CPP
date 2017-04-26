@@ -21,12 +21,13 @@
 
 [template public generateActivityExecutionSource(aActivity : Activity)
 {aPackage:Package = aActivity.ancestors()->filter(Package)->first(); 
-className : String = aActivity.name.concat('Execution');
+className : String = aActivity.name.toUpperFirst().concat('Execution');
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[className/].hpp"
 
 #include <iostream>
+#include <memory>
 #include <cassert>
 #include <vector>
 
@@ -88,7 +89,7 @@ void [className/]::execute()
 {
 	// Execute the activity for this execution by creating an activity node activation group and activating all the activity nodes in the activity.
 	// When this is complete, copy the values on the tokens offered by output parameter nodes to the corresponding output parameters.
-	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity*>(this->getTypes()->front());
+	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity>(this->getTypes()->front());
 	assert(activity != nullptr);
 
 	DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] Activity " << activity->getName() << "..." << std::endl;)
@@ -97,7 +98,7 @@ void [className/]::execute()
 		DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] context = " << this->getContext()->objectId() << std::endl;)
 	}
 
-	this->setActivationGroup(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup());
+	this->setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
 	struct null_deleter{void operator()(void const *) const { } };
 	this->getActivationGroup()->setActivityExecution(std::shared_ptr<[className/]>(this, null_deleter()));
 	this->getActivationGroup()->activate(activity->getNode(), activity->getEdge());
@@ -115,7 +116,7 @@ void [className/]::execute()
 	{
  		std::shared_ptr<fUML::ActivityParameterNodeActivation> outputActivation = outputActivations->at(i);
  		std::shared_ptr<fUML::ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
- 		parameterValue->setParameter((dynamic_cast<uml::ActivityParameterNode*>(outputActivation->getNode()))->getParameter());
+ 		parameterValue->setParameter((std::dynamic_pointer_cast<uml::ActivityParameterNode>(outputActivation->getNode()))->getParameter());
  		std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> tokens = outputActivation->getTokens();
  		for (unsigned int j = 0; j < tokens->size(); j++) 
 		{
@@ -132,6 +133,7 @@ void [className/]::execute()
 	DEBUG_MESSAGE(std::cout << "[ '[' /]execute[ ']' /] Activity " << activity->getName() << " completed." << std::endl;)
 }
 
+/*
 [let op : Operation = aActivity.specification.oclAsType(Operation)]
 [op.generateCppType()/] [className/]::execute([for (sParameter : Parameter | op.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
 [sParameter.type.generateCppType()/] [sParameter.name/][/for])
@@ -169,7 +171,7 @@ void [className/]::execute()
     [par.name/]Value->setValue([par.default/]);
 	[else]
 	std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
-	std::shared_ptr<[par.type.namespace.name/]::[par.type.name/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name/]Execution());
+	std::shared_ptr<[par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution());
 	[par.name/]UmlLinker->setLocus(locus);
 	[par.name/]UmlLinker->setUmlValue([par.name/]);
 	[par.name/]Value->setReferent([par.name/]UmlLinker);
@@ -196,6 +198,6 @@ void [className/]::execute()
 	[/if]
 }
 [/let]
-
+*/
 [/file]
 [/template]
