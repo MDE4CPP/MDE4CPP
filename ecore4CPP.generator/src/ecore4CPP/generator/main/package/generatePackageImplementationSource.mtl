@@ -115,24 +115,24 @@ void [packageName/]::initializePackageContents()
 
  	// Initialize classes and features; add operations and parameters
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	// Begin Class [aClass.name/]
+	// Begin Class [aClass.name.toUpperFirst()/]
 	[aClass.generateClassInit()/]
 	[aClass.eAttributes->sortedBy(name).generateAttributeInitialization()/]
 	[aClass.eReferences->sortedBy(name).generateReferenceInitialization()/]
 	[aClass.eOperations->sortedBy(name).generateOperationInitialization()/]
-	// End Class [aClass.name/]
+	// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
 	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatypeInitialization()/]
 }
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-// Begin Class [aClass.name/]
+// Begin Class [aClass.name.toUpperFirst()/]
 [aClass.generateClassGetterImpl()/]
 [aClass.eAttributes->sortedBy(name).generateAttributeGetterImpl()/]
 [aClass.eReferences->sortedBy(name).generateReferenceGetterImpl()/]
 [aClass.eOperations->sortedBy(name).generateOperationGetterImpl()/]
-// End Class [aClass.name/]
+// End Class [aClass.name.toUpperFirst()/]
 [/for]
 [anEPackage.eAllContents(EDataType)->sortedBy(name).generateDatatypeGetterImpl()/]
 [/file]

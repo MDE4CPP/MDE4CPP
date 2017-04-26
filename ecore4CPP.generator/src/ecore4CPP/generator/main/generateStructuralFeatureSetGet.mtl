@@ -24,7 +24,7 @@ virtual boost::any eGet(int featureID, bool resolve, bool coreType) const [abstr
 [/template]
 
 [template public generateeGetImpl(aClass : EClass)]
-boost::any [aClass.name.concat('Impl')/]::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID,  bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{

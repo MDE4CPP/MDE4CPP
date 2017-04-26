@@ -22,7 +22,7 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.concat('Impl'); }]
+[template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
 [file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[className.concat('.hpp')/]"
 #include <iostream>
@@ -59,7 +59,7 @@ using namespace [aClass.ePackage.name/];
 [className/]::~[className/]()
 {
 #ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [aClass.name/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [aClass.name.toUpperFirst()/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 	[aClass.eReferences.generateProtectedReferenceDeleter()/]
 }
@@ -107,7 +107,7 @@ ecore::EObject *  [className/]::copy() const
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.ePackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.name/]();
+	return [aClass.ePackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.name.toUpperFirst()/]();
 }
 
 //*********************************

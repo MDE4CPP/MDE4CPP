@@ -99,7 +99,7 @@ model {
                     source {
                         srcDirs "." [if (aPackage.name='uml')], System.getenv('MDE4CPP_HOME')+"/application/include/util"[/if]
 [for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-						include "impl/[aClass.name/]Impl.cpp"
+						include "impl/[aClass.name.toUpperFirst()/]Impl.cpp"
 [/for]
 						include	"impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp"
 						include	"[aPackage.name.toUpperFirst()/]Factory.cpp"

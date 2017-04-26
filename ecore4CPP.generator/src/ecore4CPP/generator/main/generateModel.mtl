@@ -23,7 +23,7 @@
 [query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
 
 [template public generateModel(aClass : EClass)]
-[file (aClass.ePackage.name.concat('/').concat(aClass.name).concat('.hpp'), false, 'UTF-8')]
+[file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
 #include <string>
@@ -62,24 +62,24 @@ namespace [element.ePackage.name/]
 namespace [aClass.ePackage.name/] 
 {
 	[aClass.generateDokumentation()/]
-	class [aClass.name/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
+	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 [/if]
 	{
 		public:
- 			[aClass.name/](const [aClass.name/] &) {}
-			[aClass.name/]& operator=([aClass.name/] const&) = delete;
+ 			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
+			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
 	
 		protected:
-			[aClass.name/](){}
+			[aClass.name.toUpperFirst()/](){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
 
 			//destructor
-			virtual ~[aClass.name/]() {}
+			virtual ~[aClass.name.toUpperFirst()/]() {}
 
 			//*********************************
 			// Operations

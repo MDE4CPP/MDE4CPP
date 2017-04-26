@@ -60,7 +60,7 @@ namespace [anEPackage.name/]
 			static const std::string eNS_PREFIX;
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-			// Begin Class [aClass.name/]
+			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature IDs 
 			[aClass.generateStaticClassID()/]
 			[aClass.eAttributes->sortedBy(name).generateStaticAttributeID()/]
@@ -71,7 +71,7 @@ namespace [anEPackage.name/]
 			[aClass.eAttributes->sortedBy(name).generateAttributeGetter(false)/]
 			[aClass.eReferences->sortedBy(name).generateReferenceGetter(false)/]
 			[aClass.eOperations->sortedBy(name).generateOperationGetter(false)/]
-			// End Class [aClass.name/]
+			// End Class [aClass.name.toUpperFirst()/]
 
 [/for]
 			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateStaticDatatypeID()/]

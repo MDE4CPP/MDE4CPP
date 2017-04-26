@@ -27,7 +27,7 @@
 [/template]
 
 [template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
-[aReference.generateReferenceType()/] [aClass.name/]Impl::[aReference.GetterName()/]() const
+[aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
 	[aReference.generateReferenceType()/] _[aReference.name/][if (aReference.upperBound=1)] = nullptr [else](new std::vector<std::shared_ptr<[aReference.eGenericType.generateCppType()/]>>()) [/if];
 	

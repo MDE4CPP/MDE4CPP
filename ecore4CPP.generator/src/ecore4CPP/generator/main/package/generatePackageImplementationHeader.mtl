@@ -29,7 +29,7 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-#include "[aClass.name.concat('Impl.hpp')/]"
+#include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
 #include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
@@ -53,13 +53,13 @@ namespace [anEPackage.name/]
 			virtual ~[anEPackage.name.toUpperFirst().concat('PackageImpl')/]();
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-			// Begin Class [aClass.name/]
+			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature Getter
 			[aClass.generateClassGetter(true)/]
 			[aClass.eAttributes->sortedBy(name).generateAttributeGetter(true)/]
 			[aClass.eReferences->sortedBy(name).generateReferenceGetter(true)/]
 			[aClass.eOperations->sortedBy(name).generateOperationGetter(true)/]
-			// End Class [aClass.name/]
+			// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
 			[anEPackage.eAllContents(EDataType).generateEDatatype(true)/]

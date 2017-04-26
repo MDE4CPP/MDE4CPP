@@ -48,7 +48,7 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([for (sParamete
 
 [template public generateOperationImplementation(aOperation : EOperation) ? (not ignore())]
 [comment[aOperation.generateDokumentation()/] 
-[aOperation.generateOperationType()/] [aOperation.eContainingClass.name/]Impl::[aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
+[aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
 [sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if]
 {
 [if (hasKey('body'))]
@@ -108,7 +108,7 @@ addEParameter(op ,[aParameter.eType.simpleDatatypeGetter(aParameter.eOperation)/
 
 [query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '__'.concat(aOperation.singlemultipleParameter()) else '' endif /]
 
-[query public operationNumberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.concat('___'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
+[query public operationNumberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toUpperFirst().concat('___'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
 [query public operationNumberNameUpper(aOperation : EOperation) : String = aOperation.operationNumberName().toUpperCase() /]
 
 

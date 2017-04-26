@@ -62,14 +62,14 @@ virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _
  * Section for the Attribute cpp implementation
 */]
 [template public generateAttributeGetterImplementationCpp(aAttribute : EAttribute)? (hasGetter())]
-[aAttribute.generateAttributeType()/] [aAttribute.eContainingClass.name/]Impl::[aAttribute.GetterName()/]() const 
+[aAttribute.generateAttributeType()/] [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.GetterName()/]() const 
 {
 	return m_[aAttribute.name/];
 }
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
-void [aAttribute.eContainingClass.name/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
+void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
 {
 	m_[aAttribute.name/] = _[aAttribute.name/];
 } 

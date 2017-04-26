@@ -60,7 +60,7 @@ m_[aReference.name/].reset(new std::vector<std::shared_ptr<[aReference.eGenericT
 [/template]
 
 [template public generateReferenceSetterCpp(aReference : EReference) ? (hasSetter())]
-void [aReference.eContainingClass.name/]Impl::[aReference.SetterName()/](std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/])
+void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterName()/](std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/])
 {
 [if (hasKey('setterbody'))]
 //generated from setterbody annotation
@@ -72,7 +72,7 @@ void [aReference.eContainingClass.name/]Impl::[aReference.SetterName()/](std::sh
 [/template]
 
 [template public generateReferenceGetterCpp(aReference : EReference) ? (hasGetter()and (not isUnion()))]
-[aReference.generateReferenceType()/] [aReference.eContainingClass.name/]Impl::[aReference.GetterName()/]() const
+[aReference.generateReferenceType()/] [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
 [if (hasKey('getterbody'))]
 //generated from getterbody annotation
