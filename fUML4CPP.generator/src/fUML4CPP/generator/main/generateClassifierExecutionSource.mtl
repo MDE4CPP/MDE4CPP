@@ -25,6 +25,7 @@ pointerName : String = if (aPackage.name = aClassifier.namespace.name) then aCla
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[className/].hpp"
 #include <iostream>
+#include <memory>
 
 using namespace [aPackage.name/];
 
