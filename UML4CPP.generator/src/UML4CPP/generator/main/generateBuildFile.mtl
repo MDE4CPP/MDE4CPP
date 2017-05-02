@@ -18,8 +18,8 @@
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage()}->flatten() /]
 [query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
-[query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject(((self = aPackage) or (self.name = 'PrimitiveTypes') or (self.name = 'UML')or (self.name = 'Ecore')))/]
-[query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (self = aPackage) or (self.name = 'PrimitiveTypes') or (self.name = 'UML')or (self.name = 'Ecore')))/]
+[query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
+[query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
 
 [template public generateReflectionLibraryNames(aPackage : Package)]
 [if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())]'ecoreReflection'
@@ -27,7 +27,7 @@
 [/template]
 
 [template public generateLibraryNamesWithoutReflection(aPackage : Package)]
-[if (aPackage.includeEcorePackages())]'ecore', 'uml'[if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())], 'primitiveTypesReflection'[/if][else] [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (', ') after (',')][pack.name/][/for]'ecore', 'uml', 'primitiveTypesReflection'[/if]
+[if (aPackage.includeEcorePackages())]'ecore', 'uml'[if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())], 'primitiveTypesReflection'[/if][else] [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (', ') after (',')]'[pack.name/]'[/for]'ecore', 'uml', 'primitiveTypesReflection'[/if]
 [/template]
 
 
@@ -47,6 +47,8 @@
 					lib library: "umlReflection"
 [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (',')]
 					lib library: "[pack.name/]"
+[/for]
+
 [/for]
 [/if]
 [/template]
