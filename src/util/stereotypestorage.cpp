@@ -69,16 +69,19 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> StereotypeStorage
 {
     std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> vector(new std::vector<std::shared_ptr<uml::Stereotype>>());
     std::map<uml::Element *, std::shared_ptr<uml::Stereotype>>::iterator it = m_stereotypeApplicationMap.find(_element);
+	
     while (it != m_stereotypeApplicationMap.end())
     {
         vector->push_back(it->second);
+		it++;
     }
     return vector;
 }
 
 bool StereotypeStorage::isStereotypeApplied(uml::Element * _element, std::shared_ptr<uml::Stereotype> _stereotype)
 {
-    for(std::shared_ptr<uml::Stereotype> s : *getAppliedStereotypes(_element))
+	std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> list = getAppliedStereotypes(_element);
+    for(std::shared_ptr<uml::Stereotype> s : *list)
     {
         if(s->getMetaClass() == _stereotype)
         {
