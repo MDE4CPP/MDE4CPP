@@ -23,7 +23,7 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(name))]
-#include "[aClass.name.concat('Impl.hpp')/]"
+#include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
 #include "impl/FactoryImpl.hpp"

@@ -39,7 +39,7 @@ virtual public uml::Package
 namespace [aPackage.name/] 
 {
 [for (elements : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Activity))->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	class [elements.name/];[/for]
+	class [elements.name.toUpperFirst()/];[/for]
 
 	class [packageName/];
 }

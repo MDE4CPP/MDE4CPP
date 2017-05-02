@@ -60,7 +60,7 @@ m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifi
 [/template]
 
 [template public generateeGetSetImpl(aClass : Class)]
-boost::any [aClass.name.concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
+boost::any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Property> _property) const
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();
@@ -73,7 +73,7 @@ boost::any [aClass.name.concat('Impl')/]::get(std::shared_ptr<uml::Property> _pr
 	return boost::any();
 }
 
-void [aClass.name.concat('Impl')/]::set(std::shared_ptr<uml::Property> _property,boost::any value)
+void [aClass.name.toUpperFirst().concat('Impl')/]::set(std::shared_ptr<uml::Property> _property,boost::any value)
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();
@@ -85,7 +85,7 @@ void [aClass.name.concat('Impl')/]::set(std::shared_ptr<uml::Property> _property
     }
 }
 
-void [aClass.name.concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
+void [aClass.name.toUpperFirst().concat('Impl')/]::unset(std::shared_ptr<uml::Property> _property)
 {
 	//TODO: still two times run through map (contains and [ '[' /][ ']' /])
 	std::string qName = _property->getQualifiedName();

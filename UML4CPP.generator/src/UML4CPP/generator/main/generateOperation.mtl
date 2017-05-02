@@ -29,7 +29,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/template]
 
 [template public generateOperationImplementation(aOperation : Operation)]
-[aOperation.generateCppType()/] [aOperation.class.name/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
+[aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
 [sParameter.type.generateCppType()/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
@@ -56,7 +56,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/if]
 [/if]
 [else]
-	std::cout << __PRETTY_FUNCTION__ std::endl;
+	std::cout << __PRETTY_FUNCTION__ << std::endl;
 	throw "UnsupportedOperationException";
 [/if]
 

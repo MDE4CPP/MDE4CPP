@@ -27,7 +27,7 @@ virtual public uml::StereotypeImpl
 virtual public uml::ClassImpl
 [/template]
 
-[template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
+[template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
@@ -35,10 +35,10 @@ virtual public uml::ClassImpl
 // generated Includes
 
 //Model includes
-#include "../[aClass.name.concat('.hpp')/]"
+#include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 #include <functional>
 [for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "impl/[sClass.name/]Impl.hpp"[/for]
+#include "impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (aClass.superClass->isEmpty())]
 #include "impl/ClassImpl.hpp"
@@ -54,7 +54,7 @@ namespace [aPackage.name/]
 {
 	class [className/] [for (sClass : Class | aClass.superClass) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superClass->isEmpty())]
- : [aClass.baseClass()/][/if], virtual public [aClass.name/]
+ : [aClass.baseClass()/][/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		private:    
 			[className/]([className/] const&) = delete;

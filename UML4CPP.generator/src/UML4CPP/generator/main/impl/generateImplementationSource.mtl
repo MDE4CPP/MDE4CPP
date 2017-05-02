@@ -21,7 +21,7 @@
 
 [query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type}->flatten() /]
 
-[template public generateImplementationSource(aClass : Class) { className : String = aClass.name.concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
+[template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 
 #include "[className.concat('.hpp')/]"

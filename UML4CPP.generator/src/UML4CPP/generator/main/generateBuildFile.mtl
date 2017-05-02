@@ -162,7 +162,7 @@ model {
 
 [if (not packOnly)]
 [for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not e.oclIsKindOf(FunctionBehavior))->sortedBy(myQualifiedName()))]
-						include "impl/[aClass.name/]Impl.cpp"
+						include "impl/[aClass.name.toUpperFirst()/]Impl.cpp"
 [/for]
 						include	"impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp"
 						include	"[aPackage.name.toUpperFirst()/]Factory.cpp"

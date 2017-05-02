@@ -30,7 +30,7 @@ virtual public uml::Class
 [/template]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
-[file (aPackage.getPackageName().concat('/').concat(aClass.name).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
 #include <boost/any.hpp>
@@ -98,20 +98,20 @@ namespace [element.namespace.ns()/]
 
 namespace [aPackage.name/]
 {
-	class [aClass.name/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
+	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
 [else][for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 [/if]
 	{
 		private:    
-			[aClass.name/](const [aClass.name/]& that) = delete;
+			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/]& that) = delete;
 
 		protected:
-			[aClass.name/](){}
+			[aClass.name.toUpperFirst()/](){}
 
 		public:
 			//destructor
-			virtual ~[aClass.name/]() {}
+			virtual ~[aClass.name.toUpperFirst()/]() {}
 
 			//*********************************
 			// Getter Setter
