@@ -34,6 +34,7 @@ virtual public uml::Class
 [startGuard(aClass)/]
 
 #include <boost/any.hpp>
+#include "boost/shared_ptr.hpp"
 #include <string>
 #include <map>
 #include <vector>
@@ -68,8 +69,8 @@ namespace [element.namespace.ns()/]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
-[for (realizations : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[realizations.supplier.name/].hpp"[/for]
+[for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+#include "[anInterfaceRealization.supplier.name/].hpp"[/for]
 
 // End: Interface realization
 [/if]
@@ -97,7 +98,7 @@ namespace [element.namespace.ns()/]
 
 namespace [aPackage.name/]
 {
-	class [aClass.name/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->asOrderedSet()->sortedBy(name)) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
+	class [aClass.name/] [if (aClass.superClass->isEmpty())] : [aClass.baseClass()/] [for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) before(',') separator (',')] public [if (interfaceR.namespace.oclIsInvalid())] [interfaceR.supplier.name/] [else] [interfaceR.supplier.namespace.ns()/]::[interfaceR.supplier.name/][/if][/for]
 [else][for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
 virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 [/if]

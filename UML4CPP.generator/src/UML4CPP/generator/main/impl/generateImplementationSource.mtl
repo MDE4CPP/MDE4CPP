@@ -53,7 +53,7 @@ using boost::any_cast;
 {
 }
 
-std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass() const
+std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMetaClass()
 {
 	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.packageGetter(aClass)/];
 }
@@ -65,7 +65,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 [aAttribute.generateAttributeSetterImplementationCpp()/]
 [aAttribute.generateAttributeGetterImplementationCpp()/]
 [/for]
-[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(name))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 [aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
 [aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
 [/if][/for][/for]

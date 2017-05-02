@@ -78,12 +78,12 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			// Attributes Getter Setter
 			//*********************************
 			[aClass.ownedAttribute.generateAttributeAccessorsDecl(true)/]
-			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(name))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+			[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 			[aAttribute.generateAttributeAccessorsDecl(true)/]
 			[/if][/for][/for]
 
 		protected:
-			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass() const;
+			virtual std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> getMetaClass();
 
 		public:
 			//*********************************
