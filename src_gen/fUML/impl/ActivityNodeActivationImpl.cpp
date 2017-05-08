@@ -129,7 +129,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	{
 		token->withdraw();
 		token = std::shared_ptr<fUML::Token>(dynamic_cast<Token*>(token->copy()));
-		std::cout << "ActivityNodeActivationImpl::addToken - no copy created - maybe error";
+		DEBUG_MESSAGE(std::cout << "ActivityNodeActivationImpl::addToken - no copy created - maybe error";)
 	}
 	struct null_deleter{void operator()(void const *) const { } };
 	token->setHolder(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
@@ -278,7 +278,6 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 	while (iter != end)
 	{
 		i++;
-		std::cout << (*iter) << "==" << token << std::endl;
 		if (*iter == token)
 		{
 			DEBUG_MESSAGE(

@@ -78,7 +78,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
 			
 			
 			//*********************************

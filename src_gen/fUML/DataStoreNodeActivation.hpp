@@ -4,8 +4,8 @@
 //*
 //********************************************************************
 
-#ifndef FUML_DATASTOREACTIVATION_HPP
-#define FUML_DATASTOREACTIVATION_HPP
+#ifndef FUML_DATASTORENODEACTIVATION_HPP
+#define FUML_DATASTORENODEACTIVATION_HPP
 
 #ifdef NDEBUG
     #define DEBUG_MESSAGE(a) /**/
@@ -25,11 +25,6 @@
 //Forward Declaration for used types
 namespace fUML 
 {
-	class ActionActivation;
-}
-
-namespace fUML 
-{
 	class ActivityEdgeInstance;
 }
 
@@ -45,12 +40,7 @@ namespace fUML
 
 namespace fUML 
 {
-	class Execution;
-}
-
-namespace fUML 
-{
-	class PinActivation;
+	class CentralBufferNodeActivation;
 }
 
 namespace fUML 
@@ -59,7 +49,7 @@ namespace fUML
 }
 
 // base class includes
-#include "ActionActivation.hpp"
+#include "CentralBufferNodeActivation.hpp"
 
 // enum includes
 
@@ -69,30 +59,30 @@ namespace fUML
 {
 	/*!
 	 */
-	class DataStoreActivation:virtual public ActionActivation	{
+	class DataStoreNodeActivation:virtual public CentralBufferNodeActivation	{
 		public:
- 			DataStoreActivation(const DataStoreActivation &) {}
-			DataStoreActivation& operator=(DataStoreActivation const&) = delete;
+ 			DataStoreNodeActivation(const DataStoreNodeActivation &) {}
+			DataStoreNodeActivation& operator=(DataStoreNodeActivation const&) = delete;
 	
 		protected:
-			DataStoreActivation(){}
+			DataStoreNodeActivation(){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
 
 			//destructor
-			virtual ~DataStoreActivation() {}
+			virtual ~DataStoreNodeActivation() {}
 
 			//*********************************
 			// Operations
 			//*********************************
 			/*!
 			 */ 
-			virtual void sendOffers()  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			
 			//*********************************
@@ -102,17 +92,6 @@ namespace fUML
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
-			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const = 0;
-			
-			/*!
-			 */
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) = 0;
-			/*!
-			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getStoredTokens() const = 0;
-			
 			
 
 		protected:
@@ -124,12 +103,6 @@ namespace fUML
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Execution> m_currentExecution;
-			/*!
-			 */
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> m_storedTokens;
 			
 
 		public:
@@ -140,5 +113,5 @@ namespace fUML
 	};
 
 }
-#endif /* end of include guard: FUML_DATASTOREACTIVATION_HPP */
+#endif /* end of include guard: FUML_DATASTORENODEACTIVATION_HPP */
 

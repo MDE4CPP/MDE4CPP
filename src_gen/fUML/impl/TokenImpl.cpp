@@ -104,8 +104,12 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		struct null_deleter{void operator()(void const *) const { } };
-        this->getHolder()->removeToken(std::shared_ptr<Token>(this, null_deleter()));
+		std::shared_ptr<fUML::ActivityNodeActivation> holder = this->getHolder();
         this->setHolder(nullptr);
+		if (holder)
+		{
+			holder->removeToken(std::shared_ptr<Token>(this, null_deleter()));
+		}
     }
 }
 

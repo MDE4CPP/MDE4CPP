@@ -104,7 +104,7 @@ model {
 						include "impl/ControlTokenImpl.cpp"
 						include "impl/CreateLinkActionActivationImpl.cpp"
 						include "impl/CreateObjectActionActivationImpl.cpp"
-						include "impl/DataStoreActivationImpl.cpp"
+						include "impl/DataStoreNodeActivationImpl.cpp"
 						include "impl/DataValueImpl.cpp"
 						include "impl/DecisionNodeActivationImpl.cpp"
 						include "impl/DestroyLinkActionActivationImpl.cpp"

@@ -1,4 +1,4 @@
-#include "CentralBufferNodeActivationImpl.hpp"
+#include "DataStoreNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
 #include "EAnnotation.hpp"
@@ -10,7 +10,7 @@ using namespace fUML;
 //*********************************
 // Constructor / Destructor
 //*********************************
-CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
+DataStoreNodeActivationImpl::DataStoreNodeActivationImpl()
 {
 	//*********************************
 	// Attribute Members
@@ -22,15 +22,15 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
 
 }
 
-CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
+DataStoreNodeActivationImpl::~DataStoreNodeActivationImpl()
 {
 #ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CentralBufferNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataStoreNodeActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 	
 }
 
-CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj)
+DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	m_offeredTokenCount = obj.getOfferedTokenCount();
@@ -57,14 +57,14 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBu
 	}
 }
 
-ecore::EObject *  CentralBufferNodeActivationImpl::copy() const
+ecore::EObject *  DataStoreNodeActivationImpl::copy() const
 {
-	return new CentralBufferNodeActivationImpl(*this);
+	return new DataStoreNodeActivationImpl(*this);
 }
 
-std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const
+std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCentralBufferNodeActivation();
+	return FUMLPackageImpl::eInstance()->getDataStoreNodeActivation();
 }
 
 //*********************************
@@ -74,15 +74,37 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void CentralBufferNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
-			//DEBUG_MESSAGE(std::cout << "[fire] " << this->getNode()->getClass()->getName() << " " << this->getNode()->getName();)
+	std::shared_ptr<fUML::Value>value = token->getValue();
+		
+		bool isUnique = true;
+		if (value != nullptr) {
+			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token> > > heldTokens = this->getTokens();
+			unsigned int i = 0;
+			while (isUnique && i < heldTokens->size()) {
+				isUnique = !(heldTokens->at(i)->getValue()->equals(value));
+				i++;
+			}
+		}
+		
+		if (isUnique) {
+			ObjectNodeActivationImpl::addToken(token);
+		}
+}
 
-		DEBUG_MESSAGE(std::cout << "Central Buffer Node Activation" << std::endl;)
-
-		this->addTokens(incomingTokens);
-		this->sendUnofferedTokens();
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+{
+	//generated from body annotation
+	int i = ObjectNodeActivationImpl::removeToken(token);
+		
+		if (this->isRunning()) {
+			std::shared_ptr<Token> copied_token(dynamic_cast<Token*>(token->copy()));
+			ObjectNodeActivationImpl::addToken(copied_token);
+			this->sendUnofferedTokens();
+		}
+		return i;
 }
 
 //*********************************
@@ -97,24 +119,24 @@ void CentralBufferNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shar
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CentralBufferNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DataStoreNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
-			return getGroup(); //1123
+			return getGroup(); //1133
 		case FUMLPackage::ACTIVITYNODEACTIVATION_HELDTOKENS:
-			return getHeldTokens(); //1122
+			return getHeldTokens(); //1132
 		case FUMLPackage::ACTIVITYNODEACTIVATION_INCOMINGEDGES:
-			return getIncomingEdges(); //1121
+			return getIncomingEdges(); //1131
 		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
-			return getNode(); //1124
+			return getNode(); //1134
 		case FUMLPackage::OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT:
-			return getOfferedTokenCount(); //1126
+			return getOfferedTokenCount(); //1136
 		case FUMLPackage::ACTIVITYNODEACTIVATION_OUTGOINGEDGES:
-			return getOutgoingEdges(); //1120
+			return getOutgoingEdges(); //1130
 		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
-			return isRunning(); //1125
+			return isRunning(); //1135
 	}
 	return boost::any();
 }

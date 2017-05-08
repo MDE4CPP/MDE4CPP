@@ -16,7 +16,7 @@
 #include <AcceptEventAction.hpp>
 #include <ReduceAction.hpp>
 #include <DataStoreNode.hpp>
-#include <DataStoreActivation.hpp>
+#include <DataStoreNodeActivation.hpp>
 #include "ExpansionNode.hpp"
 
 using namespace fUML;
@@ -137,7 +137,7 @@ std::shared_ptr<fUML::SemanticVisitor>  ExecutionFactoryL3Impl::instantiateVisit
     }
     else if(std::dynamic_pointer_cast<uml::DataStoreNode>(element) != nullptr)
     {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreActivation());
+        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());
     }
     else
     {

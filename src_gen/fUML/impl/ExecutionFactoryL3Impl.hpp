@@ -33,7 +33,7 @@
 #include <AcceptEventAction.hpp>
 #include <ReduceAction.hpp>
 #include <DataStoreNode.hpp>
-#include <DataStoreActivation.hpp>
+#include <DataStoreNodeActivation.hpp>
 #include "ExpansionNode.hpp"
 
 

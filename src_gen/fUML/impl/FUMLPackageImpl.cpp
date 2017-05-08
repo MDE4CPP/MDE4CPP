@@ -140,7 +140,7 @@ FUMLPackageImpl::~FUMLPackageImpl()
 	startObjectBehaviorActionActivationEClass.reset();
 	acceptEventActionEventAccepterEClass.reset();
 	centralBufferNodeActivationEClass.reset();
-	dataStoreActivationEClass.reset();
+	dataStoreNodeActivationEClass.reset();
 	
 	
 }
@@ -351,7 +351,7 @@ void FUMLPackageImpl::createPackageContents()
 	centralBufferNodeActivationEClass = createEClass(CENTRALBUFFERNODEACTIVATION);
 	
 	
-	createEOperation(centralBufferNodeActivationEClass, CENTRALBUFFERNODEACTIVATION___REMOVETOKEN__TOKEN);
+	createEOperation(centralBufferNodeActivationEClass, CENTRALBUFFERNODEACTIVATION___FIRE__TOKEN);
 	
 
 	choiceStrategyEClass = createEClass(CHOICESTRATEGY);
@@ -452,13 +452,11 @@ void FUMLPackageImpl::createPackageContents()
 	
 	
 
-	dataStoreActivationEClass = createEClass(DATASTOREACTIVATION);
+	dataStoreNodeActivationEClass = createEClass(DATASTORENODEACTIVATION);
 	
-	createEReference(dataStoreActivationEClass, DATASTOREACTIVATION_CURRENTEXECUTION);
-	createEReference(dataStoreActivationEClass, DATASTOREACTIVATION_STOREDTOKENS);
 	
-	createEOperation(dataStoreActivationEClass, DATASTOREACTIVATION___FIRE__TOKEN);
-	createEOperation(dataStoreActivationEClass, DATASTOREACTIVATION___SENDOFFERS);
+	createEOperation(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___ADDTOKEN__TOKEN);
+	createEOperation(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___REMOVETOKEN__TOKEN);
 	
 
 	dataValueEClass = createEClass(DATAVALUE);
@@ -1173,7 +1171,7 @@ void FUMLPackageImpl::initializePackageContents()
 	controlTokenEClass->getESuperTypes()->push_back(getToken());
 	createLinkActionActivationEClass->getESuperTypes()->push_back(getWriteLinkActionActivation());
 	createObjectActionActivationEClass->getESuperTypes()->push_back(getActionActivation());
-	dataStoreActivationEClass->getESuperTypes()->push_back(getActionActivation());
+	dataStoreNodeActivationEClass->getESuperTypes()->push_back(getCentralBufferNodeActivation());
 	dataValueEClass->getESuperTypes()->push_back(getCompoundValue());
 	decisionNodeActivationEClass->getESuperTypes()->push_back(getControlNodeActivation());
 	destroyLinkActionActivationEClass->getESuperTypes()->push_back(getWriteLinkActionActivation());
@@ -1587,8 +1585,8 @@ void FUMLPackageImpl::initializePackageContents()
 	initEClass(centralBufferNodeActivationEClass, nullptr, "CentralBufferNodeActivation", false, false, true);
 	
 	
-	op = initEOperation(getCentralBufferNodeActivation___RemoveToken__Token(),ecore::EcorePackage::eInstance()->getEInt(), "removeToken", 1, 1, true,true );
-	addEParameter(op ,getToken()  , "token",0,1, true,true);
+	op = initEOperation(getCentralBufferNodeActivation___Fire__Token(),nullptr, "fire", 1, 1, true,false );
+	addEParameter(op ,nullptr  , "incomingTokens",0,1, true,true);
 	
 	
 	// End Class CentralBufferNodeActivation
@@ -1756,19 +1754,18 @@ void FUMLPackageImpl::initializePackageContents()
 	
 	// End Class CreateObjectActionActivation
 
-	// Begin Class DataStoreActivation
-	initEClass(dataStoreActivationEClass, nullptr, "DataStoreActivation", false, false, true);
-	
-	initEReference(getDataStoreActivation_CurrentExecution(),getExecution(),nullptr,"currentExecution","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getDataStoreActivation_StoredTokens(),getToken(),nullptr,"storedTokens","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	
-	op = initEOperation(getDataStoreActivation___Fire__Token(),nullptr, "fire", 1, 1, true,false );
-	addEParameter(op ,nullptr  , "incomingTokens",0,1, true,true);
-	
-	op = initEOperation(getDataStoreActivation___SendOffers(),nullptr, "sendOffers", 1, 1, true,false );
+	// Begin Class DataStoreNodeActivation
+	initEClass(dataStoreNodeActivationEClass, nullptr, "DataStoreNodeActivation", false, false, true);
 	
 	
-	// End Class DataStoreActivation
+	op = initEOperation(getDataStoreNodeActivation___AddToken__Token(),nullptr, "addToken", 1, 1, true,false );
+	addEParameter(op ,nullptr  , "token",0,1, true,true);
+	
+	op = initEOperation(getDataStoreNodeActivation___RemoveToken__Token(),ecore::EcorePackage::eInstance()->getEInt(), "removeToken", 1, 1, true,false );
+	addEParameter(op ,getToken()  , "token",0,1, true,true);
+	
+	
+	// End Class DataStoreNodeActivation
 
 	// Begin Class DataValue
 	initEClass(dataValueEClass, nullptr, "DataValue", false, false, true);
@@ -3537,7 +3534,7 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCentralBufferNodeActivation()
 }
 
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCentralBufferNodeActivation___RemoveToken__Token() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getCentralBufferNodeActivation___Fire__Token() const
 {
 	return std::dynamic_pointer_cast<ecore::EOperation>(centralBufferNodeActivationEClass->getEOperations()->at(0));
 }
@@ -3806,31 +3803,23 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getCreateObjectActionActivation(
 
 // End Class CreateObjectActionActivation
 
-// Begin Class DataStoreActivation
-std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataStoreActivation() const
+// Begin Class DataStoreNodeActivation
+std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataStoreNodeActivation() const
 {
-	return dataStoreActivationEClass;
+	return dataStoreNodeActivationEClass;
 }
 
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDataStoreActivation_CurrentExecution() const
+
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation___AddToken__Token() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(dataStoreActivationEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EOperation>(dataStoreNodeActivationEClass->getEOperations()->at(1));
 }
-std::shared_ptr<ecore::EReference> FUMLPackageImpl::getDataStoreActivation_StoredTokens() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreNodeActivation___RemoveToken__Token() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(dataStoreActivationEClass->getEStructuralFeatures()->at(1));
+	return std::dynamic_pointer_cast<ecore::EOperation>(dataStoreNodeActivationEClass->getEOperations()->at(0));
 }
 
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreActivation___Fire__Token() const
-{
-	return std::dynamic_pointer_cast<ecore::EOperation>(dataStoreActivationEClass->getEOperations()->at(1));
-}
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getDataStoreActivation___SendOffers() const
-{
-	return std::dynamic_pointer_cast<ecore::EOperation>(dataStoreActivationEClass->getEOperations()->at(0));
-}
-
-// End Class DataStoreActivation
+// End Class DataStoreNodeActivation
 
 // Begin Class DataValue
 std::shared_ptr<ecore::EClass> FUMLPackageImpl::getDataValue() const
