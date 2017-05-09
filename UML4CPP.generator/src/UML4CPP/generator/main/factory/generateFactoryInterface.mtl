@@ -46,6 +46,9 @@ namespace [aPackage.name/]
 			[generateSingletonDecl(packageName)/]
 
 			//Creator functions
+			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
+
+
 			[(aPackage.ownedMember->selectByKind(Class))->sortedBy(name).generateClassCreate(false)/]
 
 			//Package
