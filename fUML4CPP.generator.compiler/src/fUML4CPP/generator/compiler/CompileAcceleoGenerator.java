@@ -198,6 +198,11 @@ public class CompileAcceleoGenerator
             	}
 
             	// generate emtl file of fUML4CPP
+            	File binFolder = new File(dependency + File.separator + "UML4CPP.generator" + File.separator + "bin");
+            	if (binFolder.isDirectory())
+            	{
+            		compiler.deleteExistingEmtlFiles(binFolder);
+            	}
 		        compiler.setSourceFolder(dependency + File.separator + "UML4CPP.generator" + File.separator +"src");
 		        compiler.setOutputFolder(dependency + File.separator + "UML4CPP.generator" + File.separator + "bin");
 		        compiler.setBinaryResource(false);
