@@ -49,7 +49,6 @@
 					lib library: "[pack.name/]"
 [/for]
 
-[/for]
 [/if]
 [/template]
 [template public generateBuildFile(aPackage : Package)]
