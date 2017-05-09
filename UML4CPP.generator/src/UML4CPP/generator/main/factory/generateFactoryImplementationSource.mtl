@@ -31,7 +31,7 @@ using namespace [aPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(name)) ? (aClass.isAbstract=false)]
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.namespace.name/]::[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
 	[/for]
 }
 
