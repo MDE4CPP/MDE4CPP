@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include "fUML/impl/ObjectImpl.hpp"
 #include "CheckIfPrime.hpp"

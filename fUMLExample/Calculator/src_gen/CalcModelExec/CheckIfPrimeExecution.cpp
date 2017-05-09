@@ -1,5 +1,6 @@
 #include "CheckIfPrimeExecution.hpp"
 #include <iostream>
+#include <memory>
 
 using namespace CalcModel;
 

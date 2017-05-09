@@ -1,5 +1,6 @@
 #include "CoaNextExecution.hpp"
 #include <iostream>
+#include <memory>
 #include <cassert>
 #include "ParameterValue.hpp"
 

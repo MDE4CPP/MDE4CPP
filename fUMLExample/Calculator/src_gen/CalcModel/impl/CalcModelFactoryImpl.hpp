@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include "CheckIfPrimeImpl.hpp"
 #include "PrimeCheckerImpl.hpp"
@@ -33,6 +34,7 @@ namespace CalcModel
 		public:
 			virtual ~CalcModelFactoryImpl();
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> _class);
+			virtual std::shared_ptr<uml::Element> create(std::string _className);
 
 			//Creator functions
 			virtual CalcModel::CheckIfPrime* createCheckIfPrime();

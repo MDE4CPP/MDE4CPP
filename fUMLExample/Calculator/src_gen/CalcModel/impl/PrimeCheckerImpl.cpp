@@ -31,7 +31,7 @@ PrimeCheckerImpl::~PrimeCheckerImpl()
 {
 }
 
-std::shared_ptr<uml::Class> PrimeCheckerImpl::getMetaClass() const
+std::shared_ptr<uml::Class> PrimeCheckerImpl::getMetaClass()
 {
 	return CalcModelPackageImpl::eInstance()->get_CalcModel_PrimeChecker();
 }

@@ -26,7 +26,7 @@ CheckIfPrimeImpl::~CheckIfPrimeImpl()
 {
 }
 
-std::shared_ptr<uml::Class> CheckIfPrimeImpl::getMetaClass() const
+std::shared_ptr<uml::Class> CheckIfPrimeImpl::getMetaClass()
 {
 	return CalcModelPackageImpl::eInstance()->get_CalcModel_CheckIfPrime();
 }

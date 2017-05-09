@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
  
 #include "Factory.hpp"
 #include "Package.hpp"	

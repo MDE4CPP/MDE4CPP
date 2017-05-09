@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include "CalcModelPackage.hpp"
 #include "impl/PackageImpl.hpp"	

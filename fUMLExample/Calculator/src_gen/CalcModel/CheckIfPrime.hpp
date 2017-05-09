@@ -13,8 +13,10 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include <boost/any.hpp>
+#include "boost/shared_ptr.hpp"
 #include <string>
 #include <map>
 #include <vector>

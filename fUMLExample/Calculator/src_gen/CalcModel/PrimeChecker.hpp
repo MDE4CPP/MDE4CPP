@@ -13,8 +13,10 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include <boost/any.hpp>
+#include "boost/shared_ptr.hpp"
 #include <string>
 #include <map>
 #include <vector>
@@ -79,7 +81,7 @@ namespace CalcModel
 			// Members
 			//*********************************
 			int m_divider= 3 /*defined default value*/;
-			int m_number= 11 /*defined default value*/;
+			int m_number= 8191 /*defined default value*/;
 			
 	
 	};

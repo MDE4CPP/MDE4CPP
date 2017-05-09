@@ -1,5 +1,6 @@
 #include "PrimeCheckerExecution.hpp"
 #include <iostream>
+#include <memory>
 
 using namespace CalcModel;
 

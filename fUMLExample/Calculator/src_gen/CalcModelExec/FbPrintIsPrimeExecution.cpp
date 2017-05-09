@@ -1,5 +1,6 @@
 #include "FbPrintIsPrimeExecution.hpp"
 #include <iostream>
+#include <memory>
 #include <cassert>
 #include "ParameterValue.hpp"
 

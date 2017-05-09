@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 //*********************************
 // generated Includes
@@ -54,7 +55,7 @@ namespace CalcModel
 			
 
 		protected:
-			virtual std::shared_ptr<uml::Class> getMetaClass() const;
+			virtual std::shared_ptr<uml::Class> getMetaClass();
 
 		public:
 			//*********************************

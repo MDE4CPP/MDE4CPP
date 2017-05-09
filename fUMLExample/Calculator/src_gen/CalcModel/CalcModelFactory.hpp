@@ -13,6 +13,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 #include <iostream>
+#include <memory>
 
 #include "Factory.hpp"
 
@@ -40,6 +41,9 @@ namespace CalcModel
 				static std::shared_ptr<CalcModelFactory> eInstance();
 
 			//Creator functions
+			virtual std::shared_ptr<uml::Element> create(std::string _className) = 0;
+
+
 			virtual CalcModel::CheckIfPrime* createCheckIfPrime()= 0;
 			virtual CalcModel::PrimeChecker* createPrimeChecker()= 0;
 			

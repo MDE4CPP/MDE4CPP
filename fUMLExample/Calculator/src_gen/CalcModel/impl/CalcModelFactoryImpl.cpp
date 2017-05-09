@@ -33,8 +33,13 @@ std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::shared_ptr<uml::
     }
 
 	//TODO: still two times run through map
-	std::string qName = _class->getQualifiedName();
-	std::map<std::string,std::function<uml::Element *()>>::iterator iter = m_creatorMap.find(qName);
+	std::string _className = _class->getQualifiedName();
+	return create(_className);
+}
+
+std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::string _className)
+{
+	std::map<std::string,std::function<uml::Element *()>>::iterator iter = m_creatorMap.find(_className);
     if(iter != m_creatorMap.end())
     {
 		//invoke the creator function
