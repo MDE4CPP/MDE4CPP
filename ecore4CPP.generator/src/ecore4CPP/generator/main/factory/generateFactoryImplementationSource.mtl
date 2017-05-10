@@ -64,7 +64,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([n
 	return create(_className);
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'std::string')/] _className) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
 {
 	//TODO: still two times run through map
 	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
