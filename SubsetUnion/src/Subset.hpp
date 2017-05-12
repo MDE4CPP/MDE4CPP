@@ -16,7 +16,6 @@
 template<class T, class ...U> class Subset: virtual public Bag<T>
 {
 protected:
-	std::tuple<U...> m_v;
 	std::tuple<std::shared_ptr<Union<U> > ...> tuple_;
 
 public:
@@ -38,7 +37,6 @@ public:
 
 	}
 
-
 	virtual void erase(std::shared_ptr<T> el)
 	{
 		Bag<T>::erase(el);
@@ -47,6 +45,12 @@ public:
 
 	virtual ~Subset()
 	{
+		unsigned int i = 0;
+		unsigned int size = this->m_bag.size();
+		for (i = 0; i < size; i++)
+		{
+			erase(this->m_bag[i]);
+		}
 	}
 
 protected:
@@ -78,7 +82,7 @@ protected:
 	void deleteEll(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj, std::shared_ptr<Union<RestU>> ... rest)
 	{
 		deleteEll(el, rest...);
-		obj->add(el);
+		obj->erase(el);
 	}
 
 	template<class FirstU, class ...RestU>

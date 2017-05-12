@@ -27,7 +27,11 @@ public:
 
 	virtual ~Bag()
 	{
-		std::cout << "Union ~~~~~~~~~~" << std::endl;
+		clear();
+	}
+
+	void clear()
+	{
 		unsigned size = m_bag.size();
 #pragma omp parallel for
 		for (unsigned int i = 0; i < size; i++)
@@ -59,31 +63,54 @@ public:
 
 	virtual void erase(std::shared_ptr<T> el)
 	{
-		unsigned size = m_bag.size();
-
-		//TODO: better parallelization without for (break all loops after erase), or remove parallel
-		volatile bool continueLoop=true;
-		unsigned int i =0;
-#pragma omp parallel for private(i)
-		for (i=0; i < size; i++)
+		int res = find(el);
+		if (res < 0)
 		{
-			if(continueLoop){
-				continue;
-			}
-			if (m_bag[i] == el)
+			std::cout << "Element not found" << std::endl;
+			return;
+		}
+		m_bag.erase(m_bag.begin() + res);
+	}
+
+	int find(std::shared_ptr<T> el)
+	{
+		int size = m_bag.size();
+		volatile bool found = false;
+		int first_index = -1;
+		int iteration = 0;
+
+#pragma omp parallel //if(size >=40)
+		{
+			int my_index = -1;
+			int i;
+
+			do
 			{
-#pragma omp critical
+#pragma omp critical(iteration)
+				{
+					i = iteration++;
+				}
+
+				if (i < size && m_bag[i] == el)
+				{
+					found = true;
+					my_index = i;
+				}
+			} while (!found && i < size);
+
+#pragma omp critical(reduction)
+			if (my_index != -1)
 			{
-				std::cout << "Bag: ERASE position" << i << std::endl;
-				m_bag.erase(m_bag.begin() + i);
-				continueLoop=false;
-			}
+				if (first_index == -1 || my_index < first_index)
+					first_index = my_index;
 			}
 		}
+		return first_index;
 	}
+
 	template<class U> Bag(Bag<U> const & u)
 	{
-		this->m_bag = std::dynamic_pointer_cast<std::vector<std::shared_ptr<T> > >(u.m_bag);
+		this->m_bag = u.m_bag;
 	}
 
 	typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;

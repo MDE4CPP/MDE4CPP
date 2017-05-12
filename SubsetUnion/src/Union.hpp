@@ -27,19 +27,8 @@ public:
 
 	virtual ~Union()
 	{
-		std::cout << "Union ~~~~~~~~~~" << std::endl;
 	}
 
-	virtual void add(std::shared_ptr<T> el)
-	{
-		Bag<T>::add(el);
-	}
-
-	virtual void erase(std::shared_ptr<T> el)
-	{
-		Bag<T>::erase(el);
-	}
 };
-
 
 #endif /* UNION_HPP_ */

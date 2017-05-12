@@ -32,7 +32,6 @@
 #include "Subset.hpp"
 #include "SubsetUnion.hpp"
 
-
 using namespace std;
 
 class Element
@@ -213,7 +212,7 @@ public:
 	}
 	virtual ~K1()
 	{
-		cout << "K1: ~~~~~~~~~~~~~~~~~" << endl;
+		std::cout << "K1: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
 	}
 };
 
@@ -227,11 +226,11 @@ public:
 	}
 	void print()
 	{
-		cout << "K2: Value is " << attribute << endl;
+		std::cout << "K2: Value is " << attribute << std::endl;
 	}
 	virtual ~K2()
 	{
-		cout << "K2: ~~~~~~~~~~~~~~~~~" << endl;
+		std::cout << "K2: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
 	}
 };
 
@@ -282,122 +281,79 @@ public:
 	virtual ~K3()
 	{
 		cout << "K3: Start ~~~~~~~~~~~~~~~~~" << endl;
-		if(!subK2K1.unique())
+		if (!subK2K1.unique())
 		{
 			std::cout << "SubK2K1 is not unique!" << std::endl;
 		}
 		subK2K1.reset();
+		cout << "K3: subK2K1 reset(ted)" << endl;
 		print();
 		unionK1.reset();
+		cout << "K3: unionK1 reset(ted)" << endl;
 		subK4K1.reset();
 		cout << "K3: End ~~~~~~~~~~~~~~~~~" << endl;
 	}
 };
 
-
 int main()
 
 {
-
-	std::shared_ptr<Namespace> ns1 = std::shared_ptr<Namespace>(new Namespace());
-
-	ns1->setName("Ns1");
-
-	std::shared_ptr<Namespace> ns2 = std::shared_ptr<Namespace>(new Namespace());
-
-	ns2->setName("Ns2");
-
-	std::shared_ptr<PackageableElement> pe = std::shared_ptr<PackageableElement>(new PackageableElement);
-
-	pe->setName("pe");
-
-	ns1->importedMember->add(pe);
-
-	ns1->ownedMember->add(ns2);
-
-	for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->ownedMember->begin(); it != ns1->ownedMember->end(); ++it)
-
+	omp_set_num_threads(omp_get_num_procs());
+	cout << "Number of threads: " << omp_get_num_procs() << std::endl;
 	{
-
-		std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
-
-		if (ne)
-
+		std::shared_ptr<Namespace> ns1 = std::shared_ptr<Namespace>(new Namespace());
+		ns1->setName("Ns1");
+		std::shared_ptr<Namespace> ns2 = std::shared_ptr<Namespace>(new Namespace());
+		ns2->setName("Ns2");
+		std::shared_ptr<PackageableElement> pe = std::shared_ptr<PackageableElement>(new PackageableElement);
+		pe->setName("pe");
+		ns1->importedMember->add(pe);
+		ns1->ownedMember->add(ns2);
+		for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->ownedMember->begin(); it != ns1->ownedMember->end(); ++it)
 		{
+			std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
+			if (ne)
+			{
+				std::cout << "Named element is: ";
+				ne->print();
+				std::cout << std::endl;
+			}
+			else
+			{
+				std::cout << "No named element" << std::endl;
+			}
+		}
+		std::cout << "Owned Elements:" << std::endl;
+		std::shared_ptr<Union<Element> > oe = ns1->ownedElement;
+		std::vector<std::shared_ptr<Element> >::const_iterator ite = oe->begin();
+		for (typename std::vector<std::shared_ptr<Element> >::const_iterator it = oe->begin(); it != oe->end(); ++it)
+		{
+			std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
+			if (ne)
+			{
+				std::cout << "Named element is: ";
+				ne->print();
+				std::cout << std::endl;
+			}
+			else
+			{
+				std::cout << "No named element" << std::endl;
+			}
+		}
 
+		std::cout << "Members:" << std::endl;
+		for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->member->begin(); it != ns1->member->end(); ++it)
+		{
 			std::cout << "Named element is: ";
-
-			ne->print();
-
+			(*it)->print();
 			std::cout << std::endl;
-
 		}
-
-		else
-
-		{
-
-			std::cout << "No named element" << std::endl;
-
-		}
-
-	}
-
-	std::cout << "Owned Elements:" << std::endl;
-
-	std::shared_ptr<Union<Element> > oe = ns1->ownedElement;
-
-	std::vector<std::shared_ptr<Element> >::const_iterator ite = oe->begin();
-
-	for (typename std::vector<std::shared_ptr<Element> >::const_iterator it = oe->begin(); it != oe->end(); ++it)
-
-	{
-
-		std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
-
-		if (ne)
-
-		{
-
-			std::cout << "Named element is: ";
-
-			ne->print();
-
-			std::cout << std::endl;
-
-		}
-
-		else
-
-		{
-
-			std::cout << "No named element" << std::endl;
-
-		}
-
-	}
-
-	std::cout << "Members:" << std::endl;
-
-	for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->member->begin(); it != ns1->member->end(); ++it)
-
-	{
-
-		std::cout << "Named element is: ";
-
-		(*it)->print();
-
-		std::cout << std::endl;
-
 	}
 
 	std::cout << "Alles gut" << std::endl;
-
 	K3* k3 = new K3();
-		k3->print();
-		delete k3;
-
-
+	k3->print();
+	delete k3;
 	std::cout << "Alles gut K3" << std::endl;
 
 	return 0;
