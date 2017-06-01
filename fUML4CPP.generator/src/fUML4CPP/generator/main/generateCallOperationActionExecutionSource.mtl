@@ -40,7 +40,7 @@
 [if (anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
 #include "Reference.hpp"
 [else]
-// [anCallOperationAction.operation.class.name/] <- Class name
+// [anCallOperationAction.operation.class.name.toUpperFirst()/] <- Class name
 // [anCallOperationAction.operation.name/] <- Operation name
 // [anCallOperationAction.operation.method.name/] <- Method name
 // [anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->first().type.name/] is not a pointer
@@ -97,7 +97,14 @@ void [className/]::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::Para
 
     //call assigned operation
 	[for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->asOrderedSet())] [par.name/] = [/for]  target->[anCallOperationAction.operation.name/]([for (par : Parameter | anCallOperationAction.operation.ownedParameter->select(param : Parameter | not (param.direction = ParameterDirectionKind::return))) separator (',')] [par.name/][/for]);
-
+	
+	[if(anCallOperationAction.target.name.toLower().contains('self_'))]
+		//Target pin name starts with self_
+		//Attribute name: [anCallOperationAction.target.name.substitute('self_', '')/]
+	[elseif(anCallOperationAction.target.name.size() = 0)]
+		//Target pin name is empty
+	[/if]
+	
 	//set out/result parameter
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
     [par.generateOutputParameter()/]
