@@ -63,6 +63,13 @@ namespace [element.namespace.ns()/]
 }
 [/for]
 
+[for (element : Type | aClass.ownedOperation.ownedParameter.type->asOrderedSet()->sortedBy(name)) separator ('\n')]
+namespace [element.namespace.ns()/] 
+{
+	class [element.name/];
+}
+[/for]
+
 // base class includes
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[elements.name.concat('.hpp')/]"[/for]
