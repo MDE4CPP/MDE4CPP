@@ -47,6 +47,10 @@
 [aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface).generateClassifierExecutionHeader(aPackage)/]
 [aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface).generateClassifierExecutionSource(aPackage)/]
 
+
+[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class).generateClassifierExecutionHeader(aPackage)/]
+[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class).generateClassifierExecutionSource(aPackage)/]
+
 //generate activityExecution 
 [comment Generate activities than implement an operation/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity))]
