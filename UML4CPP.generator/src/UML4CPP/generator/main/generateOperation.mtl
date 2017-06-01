@@ -81,7 +81,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [memberName(aOperation)/]->setName("[aOperation.name/]");
 [aOperation.ownedParameter.generateParameterCreation()/]
 
-[memberName(aOperation.class)/]->getOwnedOperation()->push_back([memberName(aOperation)/]); 
+[if (not aOperation.class.oclIsUndefined())][memberName(aOperation.class)/][else][if (not aOperation.interface.oclIsUndefined())][memberName(aOperation.interface)/][/if][/if]->getOwnedOperation()->push_back([memberName(aOperation)/]); 
 
 [/template]
 
