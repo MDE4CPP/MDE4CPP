@@ -37,7 +37,9 @@
 //CallOperationAction [anActivityNode.name /]
 [anActivityNode.oclAsType(CallOperationAction).input.generatePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.generatePin()/]
+[if (anActivityNode.getNearestPackage() = anActivityNode.oclAsType(CallOperationAction).operation.getNearestPackage())]
 [anActivityNode.oclAsType(CallOperationAction).operation.generateOperation()/]
+[/if]
 
 [/template]
 
