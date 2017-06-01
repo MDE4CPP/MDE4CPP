@@ -43,6 +43,8 @@
 #include "EnumerationLiteral.hpp"
 #include "PrimitiveType.hpp"
 #include "FunctionBehavior.hpp"
+#include "Interface.hpp"
+#include "Operation.hpp"
 
 [for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[nE.name/].hpp"[/for]
