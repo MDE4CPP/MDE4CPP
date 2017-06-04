@@ -14,6 +14,7 @@
  */]
 [module parameterHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
  
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
@@ -21,6 +22,11 @@
 
 [query public parametersArePointers(parameters : Set(Parameter)) : Boolean = parameters->select(not supportedTypes())->asSet()->size()>0 /]
 
+[query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.ownedElement->filter(Class), 
+				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface), 
+				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class)	
+			}->flatten()/]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer) ? (par.name.oclIsUndefined())]
@@ -59,7 +65,7 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory:
 [if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
-std::shared_ptr<[par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution());
+std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Execution());
 [/template]
 
 
