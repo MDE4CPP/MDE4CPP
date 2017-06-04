@@ -29,6 +29,11 @@
 [import fUML4CPP::generator::main::generateProjectFiles /]
 [import fUML4CPP::generator::main::parameterHelper /]
  
+[query public hasConfiguredBuildMode(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->notEmpty() /]
+[query public getBuildMode(aPackage : Package) : ecore::EAnnotation = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->first() /]
+[query public hasBuildTypeConfiguration(aPackage : Package) : Boolean = if (hasConfiguredBuildMode()) then getBuildMode().details->select(key = 'type')->notEmpty() else false endif /]
+[query public buildLibrary(aPackage : Package) : Boolean = if (hasBuildTypeConfiguration()) then (aPackage.getBuildMode().details->select(key = 'type')->first().value = 'library') else false endif /]
+
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
 
@@ -53,10 +58,12 @@
 [act.generateActivityExecutionSource()/]
 [/for]
 
+[if (buildLibrary())]
 //generate main
 [aPackage.generateMain()/]
+[/if]
 
-//generate build file
-[aPackage.generateBuildFile()/]
+//generate project files
+[aPackage.generateBuildFile(buildLibrary())/]
 [aPackage.generateProjectsFiles()/]
 [/template]
