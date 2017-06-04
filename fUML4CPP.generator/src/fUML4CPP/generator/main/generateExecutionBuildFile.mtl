@@ -21,10 +21,10 @@
 [query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
-[query public getBinaryTypeName(execMode : Boolean) : String = if (execMode) then 'Executable' else 'SharedLibrary' endif/]
-[query public getBinaryTypeExtension(execMode : Boolean) : String = if (execMode) then 'exe' else 'dll' endif/]
-[query public getBinaryTypeFolder(execMode : Boolean) : String = if (execMode) then 'exe' else 'libs' endif/]
-[query public getBuildTask(execMode : Boolean) : String = if (execMode) then 'NativeExecutableSpec' else 'NativeLibrarySpec' endif/]
+[query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
+[query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
+[query public getBinaryTypeFolder(buildLibrary : Boolean) : String = if (buildLibrary) then 'libs' else 'exe' endif/]
+[query public getBuildTask(buildLibrary : Boolean) : String = if (buildLibrary) then 'NativeLibrarySpec' else 'NativeExecutableSpec' endif/]
 
 [template public generateReflectionLibraryNames(aPackage : Package)]
 [if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())]'ecoreReflection'
@@ -59,10 +59,10 @@
 [/template]
 
 [template public generateBuildFile(aPackage : Package)]
-[generateBuildFile(aPackage, true)/]
+[generateBuildFile(aPackage, false)/]
 [/template]
 
-[template public generateBuildFile(aPackage : Package, execMode : Boolean) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
+[template public generateBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
 [file (aPackage.name.concat('Exec/').concat('build.gradle'), false, 'UTF-8')]
 /*-------------------------------------------------
 *
@@ -79,7 +79,8 @@ File appendDebugSuffix(File binaryFile) {
   int extensionSeparatorIndex = binaryFile.path.lastIndexOf('.')
   return new File(binaryFile.path.substring(0, extensionSeparatorIndex) + "d" + binaryFile.path.substring(extensionSeparatorIndex))
 }
-[if (not (execMode))]
+
+[if (buildLibrary)]
 task deliver[execPackageName/]Headers(type: Copy) {
 	description 'deliver [execPackageName/] header to %MDE4CPP_HOME%/application/include/[execPackageName/]'
 	from "."
@@ -88,18 +89,18 @@ task deliver[execPackageName/]Headers(type: Copy) {
 	exclude "build", ".gradle"
 }[/if]
 
-task deliver[execPackageName/]Debug[getBinaryTypeName(execMode)/](type: Copy) {
+task deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/](type: Copy) {
 	description 'deliver [execPackageName/] debug binary to %MDE4CPP_HOME%/application/bin'
-	from "build/[getBinaryTypeFolder(execMode)/]/[execPackageName/]/debug"
+	from "build/[getBinaryTypeFolder(buildLibrary)/]/[execPackageName/]/[if (buildLibrary)]shared/[/if]debug"
 	into System.getenv('MDE4CPP_HOME')+"/application/bin"
-	include "[execPackageName/]d.[getBinaryTypeExtension(execMode)/]"
+	include "[execPackageName/]d.[getBinaryTypeExtension(buildLibrary)/]"
 }
 
-task deliver[execPackageName/]Release[getBinaryTypeName(execMode)/](type: Copy) {
+task deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/](type: Copy) {
 	description 'deliver [execPackageName/] release binary to %MDE4CPP_HOME%/application/bin/release'
-	from "build/[getBinaryTypeFolder(execMode)/]/[execPackageName/]/release"
+	from "build/[getBinaryTypeFolder(buildLibrary)/]/[execPackageName/]/[if (buildLibrary)]shared/[/if]release"
 	into System.getenv('MDE4CPP_HOME')+"/application/bin"
-	include "[execPackageName/].[getBinaryTypeExtension(execMode)/]"
+	include "[execPackageName/].[getBinaryTypeExtension(buildLibrary)/]"
 }
 
 
@@ -153,7 +154,7 @@ model {
 	}
 
     components {
-        [execPackageName/]([getBuildTask(execMode)/])
+        [execPackageName/]([getBuildTask(buildLibrary)/])
         {
         	sources {
                 cpp {
@@ -171,7 +172,7 @@ model {
 [for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity)->sortedBy(name))]
 						include "[act.name.toUpperFirst()/]Execution.cpp"
 [/for]
-[if (execMode)]
+[if (not (buildLibrary))]
 						include "main.cpp"
 [/if]
 [if (aPackage.name='uml')]
@@ -189,7 +190,7 @@ model {
                     }
 [aPackage.generateLibraryIncludes()/]
                 }
-[if (not (execMode))]
+[if (buildLibrary)]
 			binaries.withType(StaticLibraryBinarySpec) {
 				buildable = false
 			}
@@ -200,13 +201,13 @@ model {
 		withType(NativeComponentSpec) {
 			binaries.withType(NativeBinarySpec) {
 				if(buildType == buildTypes.debug) {
-[if (execMode)]
-					if (it instanceof NativeExecutableBinarySpec) {
-						it.getExecutable().setFile(appendDebugSuffix(it.getExecutable().getFile()))							
-[else]
+[if (buildLibrary)]
 					if (it instanceof SharedLibraryBinarySpec) {
 						sharedLibraryFile = appendDebugSuffix(sharedLibraryFile)
-						sharedLibraryLinkFile = appendDebugSuffix(sharedLibraryLinkFile)
+						sharedLibraryLinkFile = appendDebugSuffix(sharedLibraryLinkFile)						
+[else]
+					if (it instanceof NativeExecutableBinarySpec) {
+						it.getExecutable().setFile(appendDebugSuffix(it.getExecutable().getFile()))	
 [/if]
 					} else if (it instanceof StaticLibraryBinarySpec) {
 						staticLibraryFile = appendDebugSuffix(staticLibraryFile)
@@ -230,19 +231,19 @@ model {
         }
     }
 }
-[if (not (execMode))]tasks.withType(Link[getBinaryTypeName(execMode)/]) { compileTask -> deliver[execPackageName/]Headers.mustRunAfter compileTask }[/if]
-tasks.withType(Link[getBinaryTypeName(execMode)/]) { compileTask -> deliver[execPackageName/]Debug[getBinaryTypeName(execMode)/].mustRunAfter compileTask }
-tasks.withType(Link[getBinaryTypeName(execMode)/]) { compileTask -> deliver[execPackageName/]Release[getBinaryTypeName(execMode)/].mustRunAfter compileTask }
+[if (buildLibrary)]tasks.withType(Link[getBinaryTypeName(buildLibrary)/]) { compileTask -> deliver[execPackageName/]Headers.mustRunAfter compileTask }[/if]
+tasks.withType(Link[getBinaryTypeName(buildLibrary)/]) { compileTask -> deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/].mustRunAfter compileTask }
+tasks.withType(Link[getBinaryTypeName(buildLibrary)/]) { compileTask -> deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/].mustRunAfter compileTask }
 
-task compile[execPackageName/](dependsOn: ['['/]'build', 'deliver[execPackageName/]Headers'[if (not (execMode))], 'deliver[execPackageName/]Debug[getBinaryTypeName(execMode)/]'[/if], 'deliver[execPackageName/]Release[getBinaryTypeName(execMode)/]'[']'/]){
+task compile[execPackageName/](dependsOn: ['['/]'build', 'deliver[execPackageName/]Headers'[if (buildLibrary)], 'deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/]'[/if], 'deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/]'[']'/]){
 	group '[packageName/]'
 	description 'compile [execPackageName/] in debug and release'
 }
-task compile[execPackageName/]Debug(dependsOn: ['['/]'[execPackageName/]Debug[getBinaryTypeName(execMode)/]'[if (not (execMode))], 'deliver[execPackageName/]Headers'[/if], 'deliver[execPackageName/]Debug[getBinaryTypeName(execMode)/]'[']'/]) {
+task compile[execPackageName/]Debug(dependsOn: ['['/]'[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/]'[if (buildLibrary)], 'deliver[execPackageName/]Headers'[/if], 'deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/]'[']'/]) {
 	group '[packageName/]'
 	description 'compile [execPackageName/] in debug'
 }
-task compile[execPackageName/]Release(dependsOn: ['['/]'[execPackageName/]Release[getBinaryTypeName(execMode)/]'[if (not (execMode))], 'deliver[execPackageName/]Headers'[/if], 'deliver[execPackageName/]Release[getBinaryTypeName(execMode)/]'[']'/]) {
+task compile[execPackageName/]Release(dependsOn: ['['/]'[execPackageName/]Release[getBinaryTypeName(buildLibrary)/]'[if (buildLibrary)], 'deliver[execPackageName/]Headers'[/if], 'deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/]'[']'/]) {
 	group '[packageName/]'
 	description 'compile [execPackageName/] in release'
 }
