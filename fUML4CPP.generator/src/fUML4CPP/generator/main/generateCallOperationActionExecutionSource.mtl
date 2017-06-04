@@ -28,6 +28,7 @@
 #include <cassert>
 #include "ParameterValue.hpp"
 
+[if (not (operation.method->asOrderedSet()->first().oclIsUndefined()))]
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
@@ -35,17 +36,21 @@
 #include "[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
 [/if]
 [/let]
-[/if]
+[/if][/if]
 
-[if (anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
+[if (anCallOperationAction.operation.ownedParameter->asSet()->parametersArePointers())]
 #include "Reference.hpp"
 [else]
 // [anCallOperationAction.operation.class.name.toUpperFirst()/] <- Class name
 // [anCallOperationAction.operation.name/] <- Operation name
+[if (anCallOperationAction.operation.method->size() = 0)]
+// no method set
+[else]
 // [anCallOperationAction.operation.method.name/] <- Method name
-// [anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->first().type.name/] is not a pointer
 [/if]
-[for ( par : Parameter | anCallOperationAction.operation.method->asOrderedSet()->first().ownedParameter->asOrderedSet()->sortedBy(name))]
+// [anCallOperationAction.operation.ownedParameter->first().type.name/] is not a pointer
+[/if]
+[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
 [par.generateParameterInclude()/]
 [/for]
 
@@ -85,14 +90,14 @@ void [className/]::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::Para
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->asSequence()->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
-	[par.name/] = std::dynamic_pointer_cast<[par.type.namespace.name/]::[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 	[/for]
 
-	std::shared_ptr<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.namespace.name/]::[anCallOperationAction.target.type.name/]Execution>(this->getContext())->getUmlValue();
+	std::shared_ptr<[anCallOperationAction.target.type.namespace.ns()/]::[anCallOperationAction.target.type.name/]> target = std::dynamic_pointer_cast<[anCallOperationAction.target.type.name/]Execution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation
@@ -115,7 +120,7 @@ void [className/]::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::Para
 	[else]
  	[par.name/]Value->setValue([par.name/]);
 	[/if]
-    outputParameters->value([anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->asSequence()->indexOf(par)-1/])->getValues()->append([par.name/]Value);
+    outputParameters->at([anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->asSequence()->indexOf(par)-1/])->getValues()->push_back([par.name/]Value);
 	[/for]
 	
 	//set InOut parameters
