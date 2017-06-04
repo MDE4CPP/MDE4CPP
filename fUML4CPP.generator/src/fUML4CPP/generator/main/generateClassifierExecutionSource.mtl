@@ -15,12 +15,13 @@
 [module generateClassifierExecutionSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::generateType /]
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 
 [template public generateClassifierExecutionSource(aClassifier : Classifier, aPackage:Package){ 
 className : String = aClassifier.name.toUpperFirst().concat('Execution'); 
-pointerName : String = if (aPackage.name = aClassifier.namespace.name) then aClassifier.name.toUpperFirst() else aClassifier.namespace.name.concat('::').concat(aClassifier.name.toUpperFirst()) endif;
+pointerName : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif;
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[className/].hpp"

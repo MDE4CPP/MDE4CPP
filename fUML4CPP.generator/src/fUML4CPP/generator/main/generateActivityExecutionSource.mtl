@@ -171,7 +171,7 @@ void [className/]::execute()
     [par.name/]Value->setValue([par.default/]);
 	[else]
 	std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
-	std::shared_ptr<[par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.namespace.name/]::[par.type.name.toUpperFirst()/]Execution());
+	std::shared_ptr<[par.type.namespace.ns()/]::[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.namespace.ns()/]::[par.type.name.toUpperFirst()/]Execution());
 	[par.name/]UmlLinker->setLocus(locus);
 	[par.name/]UmlLinker->setUmlValue([par.name/]);
 	[par.name/]Value->setReferent([par.name/]UmlLinker);
