@@ -17,6 +17,7 @@
 
 [import UML4CPP::generator::main::factory::generateMetamodelFactory /]
 [import UML4CPP::generator::main::generateBuildFile /]
+[import UML4CPP::generator::main::generateProjectFiles /]
 [import UML4CPP::generator::main::generateEnum /]
 [import UML4CPP::generator::main::generateInterface /]
 [import UML4CPP::generator::main::generateModel /]
@@ -27,8 +28,8 @@
 [comment @main/]
 
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->notEmpty())]
-	[aPackage.generateBuildFile(true)/] 
-[else]
+	[aPackage.generateBuildFile(true)/]  
+[else] 
 	[aPackage.generateBuildFile()/]
 	[aPackage.generateFactoryImpl()/]
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not e.oclIsKindOf(FunctionBehavior)).oclAsType(uml::Class).generateElement()/]
@@ -38,6 +39,7 @@
 [/if]
 
 [aPackage.generatePackageImpl()/]
+[aPackage.generateProjectsFiles()/]
 [/template]
 
 [template public generateElement(aClass : Class)]
