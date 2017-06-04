@@ -26,6 +26,7 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::generateProjectFiles /]
 [import fUML4CPP::generator::main::parameterHelper /]
  
 [template public generateFUML(aPackage : uml::Package)]
@@ -57,4 +58,5 @@
 
 //generate build file
 [aPackage.generateBuildFile()/]
+[aPackage.generateProjectsFiles()/]
 [/template]
