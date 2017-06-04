@@ -26,6 +26,7 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::parameterHelper /]
  
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -39,17 +40,10 @@
 //generate executionactivation for 
 [aPackage.getCallOperationActions().generateCallOperationActionExecutionHeader(aPackage)/]
 [aPackage.getCallOperationActions().generateCallOperationActionExecutionSource(aPackage)/]
-//generate classes executions
-[aPackage.ownedElement->filter(Class).generateClassifierExecutionHeader(aPackage)/]
-[aPackage.ownedElement->filter(Class).generateClassifierExecutionSource(aPackage)/]
 
-//generate interface executions
-[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface).generateClassifierExecutionHeader(aPackage)/]
-[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface).generateClassifierExecutionSource(aPackage)/]
-
-
-[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class).generateClassifierExecutionHeader(aPackage)/]
-[aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class).generateClassifierExecutionSource(aPackage)/]
+//generate execution classes
+[getClassiferExecutions().generateClassifierExecutionHeader(aPackage)/]
+[getClassiferExecutions().generateClassifierExecutionSource(aPackage)/]
 
 //generate activityExecution 
 [comment Generate activities than implement an operation/]
