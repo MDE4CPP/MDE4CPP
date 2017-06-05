@@ -235,7 +235,7 @@ model {
 tasks.withType(Link[getBinaryTypeName(buildLibrary)/]) { compileTask -> deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/].mustRunAfter compileTask }
 tasks.withType(Link[getBinaryTypeName(buildLibrary)/]) { compileTask -> deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/].mustRunAfter compileTask }
 
-task compile[execPackageName/](dependsOn: ['['/]'build', 'deliver[execPackageName/]Headers'[if (buildLibrary)], 'deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/]'[/if], 'deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/]'[']'/]){
+task compile[execPackageName/](dependsOn: ['['/]'build'[if (buildLibrary)], 'deliver[execPackageName/]Headers'[/if], 'deliver[execPackageName/]Debug[getBinaryTypeName(buildLibrary)/]', 'deliver[execPackageName/]Release[getBinaryTypeName(buildLibrary)/]'[']'/]){
 	group '[packageName/]'
 	description 'compile [execPackageName/] in debug and release'
 }
