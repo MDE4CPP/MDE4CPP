@@ -48,6 +48,8 @@ namespace [anEPackage.name/]
 		[generateSingletonDecl(packageName)/]
 		
 			//Creator functions
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className) const = 0;
+
 			[anEPackage.eAllContents(EClass).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
