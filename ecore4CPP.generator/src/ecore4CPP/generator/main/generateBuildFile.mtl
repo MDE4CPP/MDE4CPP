@@ -97,7 +97,7 @@ model {
         	sources {
                 cpp {
                     source {
-                        srcDirs "." [if (aPackage.name='uml')], System.getenv('MDE4CPP_HOME')+"/application/include/util"[/if]
+                        srcDirs ".", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataStructures",  [if (aPackage.name='uml')], System.getenv('MDE4CPP_HOME')+"/application/include/util", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"[/if]
 [for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
 						include "impl/[aClass.name.toUpperFirst()/]Impl.cpp"
 [/for]

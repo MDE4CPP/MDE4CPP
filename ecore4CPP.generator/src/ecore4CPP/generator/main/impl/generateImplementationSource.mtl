@@ -29,6 +29,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
+#include "SubsetUnion.hpp"
 #include "[aClass.ePackage.name.concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
