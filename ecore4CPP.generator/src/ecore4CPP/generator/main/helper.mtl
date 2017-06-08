@@ -43,8 +43,8 @@
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(memberName()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(memberName()).concat('()') /]
 
-[query public listNumber(aAttribute : EAttribute) : Integer = eContainingClass.eAttributes->asSequence()->indexOf(aAttribute)-1 /]
-[query public listNumber(aReference : EReference) : Integer = eContainingClass.eReferences->asSequence()->indexOf(aReference) +eContainingClass.eAttributes->size()-1/]
+[query public listNumber(aAttribute : EAttribute) : Integer = eContainingClass.eAttributes->sortedBy(name)->indexOf(aAttribute)-1 /]
+[query public listNumber(aReference : EReference) : Integer = eContainingClass.eReferences->sortedBy(name)->indexOf(aReference) +eContainingClass.eAttributes->size()-1/]
 
 [query public memberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toUpperFirst().concat('_'.concat(aStructural.name.toUpperFirst())) /]
 [query public memberNameUpper(aStructural : EStructuralFeature) : String = memberName().toUpperCase() /]
