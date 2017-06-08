@@ -10,38 +10,40 @@
 
 #include <memory>
 #include <vector>
+#include <iostream>
 #include "Union.hpp"
 #include "Subset.hpp"
 
-template<class T, class ...U> class SubsetUnion: public Subset<T, U...>, public Union<T>
+template<class T, class ...U>
+class SubsetUnion : public Subset<T, U...>, public Union<T>
 {
 public:
 
-	SubsetUnion(std::shared_ptr<Union<U> > ...u) :
-			Subset<T, U...>(u...), Union<T>()
-	{
-	}
+    SubsetUnion(std::shared_ptr<Union<U> > ...u) :
+            Subset<T, U...>(u...), Union<T>()
+    {
+    }
 
-	SubsetUnion()
-	{
-	}
+    SubsetUnion()
+    {
+    }
 
-	virtual ~SubsetUnion()
-	{
-		std::cout << "SubsetUnion: ~~~~~~~~~~~~~~~~~" << std::endl;
-	}
+    virtual ~SubsetUnion()
+    {
+        std::cout << "SubsetUnion: ~~~~~~~~~~~~~~~~~" << std::endl;
+    }
 
-	virtual void add(std::shared_ptr<T> el)
-	{
+    virtual void add(std::shared_ptr<T> el)
+    {
 
-		Subset<T, U...>::add(el);
+        Subset<T, U...>::add(el);
 
-	}
+    }
 
-	virtual void erase(std::shared_ptr<T> el)
-	{
-		Subset<T, U...>::erase(el);
-	}
+    virtual void erase(std::shared_ptr<T> el)
+    {
+        Subset<T, U...>::erase(el);
+    }
 
 };
 

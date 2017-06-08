@@ -23,9 +23,6 @@
 #include <iostream>
 #include <iterator>
 #include <memory>
-#include <string>
-#include <tuple>
-#include <vector>
 
 #include "Bag.hpp"
 #include "Union.hpp"
@@ -35,107 +32,90 @@
 using namespace std;
 
 class Element
-
 {
 
 public:
 
-	std::shared_ptr<Union<Element> > ownedElement;
+    std::shared_ptr<Union<Element>> ownedElement;
 
-	Element()
+    Element()
+    {
+        ownedElement.reset(new Union<Element>());
+    }
 
-	{
+    virtual ~Element()
+    {
 
-		ownedElement.reset(new Union<Element>());
-
-	}
-
-	virtual ~Element()
-
-	{
-
-	}
+    }
 
 };
 
-class NamedElement: public Element
-
+class NamedElement : public Element
 {
 
 private:
 
-	string m_name = "_";
+    string m_name = "_";
 
 public:
 
-	NamedElement()
+    NamedElement()
+    {
 
-	{
+    }
 
-	}
+    virtual ~NamedElement()
+    {
 
-	virtual ~NamedElement()
+    }
 
-	{
+    void setName(const string &name)
+    {
+        m_name = move(name);
+    }
 
-	}
-
-	void setName(const string& name)
-
-	{
-
-		m_name = move(name);
-
-	}
-
-	void print()
-
-	{
-
-		std::cout << "Named Element: " << m_name;
-
-	}
+    void print()
+    {
+        std::cout << "Named Element: " << m_name;
+    }
 
 };
 
-class PackageableElement: public NamedElement
-
+class PackageableElement : public NamedElement
 {
 
 public:
 
-	PackageableElement()
+    PackageableElement()
+    {
 
-	{
-
-	}
+    }
 
 };
 
-class Namespace: public NamedElement
-
+class Namespace : public NamedElement
 {
 
 public:
 
 //	std::shared_ptr<SubsetUnion<NamedElement, NamedElement> > ownedMemberTest;
-	//std::shared_ptr<SubsetUnion<NamedElement, NamedElement, NamedElement>  > ownedMemberTest2;
+    //std::shared_ptr<SubsetUnion<NamedElement, NamedElement, NamedElement>  > ownedMemberTest2;
 
-	std::shared_ptr<SubsetUnion<NamedElement, Element, NamedElement> > ownedMember;
+    std::shared_ptr<SubsetUnion<NamedElement, Element, NamedElement>> ownedMember;
 
-	std::shared_ptr<Union<NamedElement> > member;
+    std::shared_ptr<Union<NamedElement>> member;
 
-	std::shared_ptr<Union<Element> > elUnion;
+    std::shared_ptr<Union<Element>> elUnion;
 
-	std::shared_ptr<Subset<PackageableElement, NamedElement, Element, NamedElement> > importedMember;
+    std::shared_ptr<Subset<PackageableElement, NamedElement, Element, NamedElement>> importedMember;
 
-	Namespace()
+    Namespace()
+    {
 
-	{
-
-		member = std::shared_ptr<Union<NamedElement> >(new Union<NamedElement>());
-		elUnion = std::shared_ptr<Union<Element> >(new Union<Element>());
-		importedMember.reset(new Subset<PackageableElement, NamedElement, Element, NamedElement>(member, elUnion, member));
+        member = std::shared_ptr<Union<NamedElement> >(new Union<NamedElement>());
+        elUnion = std::shared_ptr<Union<Element> >(new Union<Element>());
+        importedMember.reset(
+                new Subset<PackageableElement, NamedElement, Element, NamedElement>(member, elUnion, member));
 
 //                         importedMember.reset();
 
@@ -151,9 +131,9 @@ public:
 
 //		ownedMemberTest.reset(	new SubsetUnion<NamedElement, NamedElement>(elUnion));
 
-		//ownedMemberTest2.reset(new SubsetUnion<NamedElement, NamedElement, NamedElement>(elUnion, elUnion));
+        //ownedMemberTest2.reset(new SubsetUnion<NamedElement, NamedElement, NamedElement>(elUnion, elUnion));
 
-		ownedMember.reset(new SubsetUnion<NamedElement, Element, NamedElement>(ownedElement, member));
+        ownedMember.reset(new SubsetUnion<NamedElement, Element, NamedElement>(ownedElement, member));
 
 //                         ownedMember.reset(subUn);
 
@@ -171,29 +151,26 @@ public:
 
 //                         ownedMember->registerUnion(ele);
 
-	}
+    }
 
 };
 
-class Package: public Namespace, public PackageableElement
-
+class Package : public Namespace, public PackageableElement
 {
 
 public:
 
-	std::shared_ptr<Subset<PackageableElement, NamedElement> > packagedElement;
+    std::shared_ptr<Subset<PackageableElement, NamedElement>> packagedElement;
 
-	Package()
+    Package()
+    {
 
-	{
+    }
 
-	}
+    virtual ~Package()
+    {
 
-	virtual ~Package()
-
-	{
-
-	}
+    }
 
 };
 
@@ -202,161 +179,175 @@ class K1
 private:
 
 public:
-	K1()
-	{
+    K1()
+    {
 
-	}
-	virtual void print()
-	{
-		cout << "K1!" << endl;
-	}
-	virtual ~K1()
-	{
-		std::cout << "K1: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
-	}
+    }
+
+    virtual void print()
+    {
+        cout << "K1!" << endl;
+    }
+
+    virtual ~K1()
+    {
+        std::cout << "K1: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
+    }
 };
 
-class K2: public K1
+class K2 : public K1
 {
-	int attribute;
+    int attribute;
 public:
-	explicit K2(int val)
-	{
-		attribute = val;
-	}
-	void print()
-	{
-		std::cout << "K2: Value is " << attribute << std::endl;
-	}
-	virtual ~K2()
-	{
-		std::cout << "K2: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
-	}
+    explicit K2(int val)
+    {
+        attribute = val;
+    }
+
+    void print()
+    {
+        std::cout << "K2: Value is " << attribute << std::endl;
+    }
+
+    virtual ~K2()
+    {
+        std::cout << "K2: ~~~~~~~~~~~~~~~~~" << std::endl << std::flush;
+    }
 };
 
-class K4: public K1
+class K4 : public K1
 {
-	int attribute;
+    int attribute;
 public:
-	explicit K4(int val)
-	{
-		attribute = val;
-	}
-	void print()
-	{
-		cout << "K4: Value is " << attribute << endl;
-	}
-	virtual ~K4()
-	{
-		cout << "K4: ~~~~~~~~~~~~~~~~~" << endl;
-	}
+    explicit K4(int val)
+    {
+        attribute = val;
+    }
+
+    void print()
+    {
+        cout << "K4: Value is " << attribute << endl;
+    }
+
+    virtual ~K4()
+    {
+        cout << "K4: ~~~~~~~~~~~~~~~~~" << endl;
+    }
 };
 
 class K3
 {
 private:
-	shared_ptr<Union<K1> > unionK1;
-	shared_ptr<SubsetUnion<K2, K1> > cl;
-	shared_ptr<Subset<K2, K1> > subK2K1;
-	shared_ptr<Subset<K4, K1> > subK4K1;
+    shared_ptr<Union<K1>> unionK1;
+    shared_ptr<SubsetUnion<K2, K1>> cl;
+    shared_ptr<Subset<K2, K1>> subK2K1;
+    shared_ptr<Subset<K4, K1>> subK4K1;
 public:
-	K3()
-	{
-		unionK1.reset(new Union<K1>());
-		subK2K1.reset(new Subset<K2, K1>(unionK1));
-		subK4K1.reset(new Subset<K4, K1>(unionK1));
-		subK2K1->add(shared_ptr<K2>(new K2(2)));
-		subK4K1->add(shared_ptr<K4>(new K4(4)));
-	}
-	void print()
-	{
-		for (std::vector<std::shared_ptr<K1> >::const_iterator it = unionK1->begin(); it != unionK1->end(); ++it)
-		{
-			cout << "K3: Value is ";
-			(*it)->print();
-			cout << endl;
-		}
+    K3()
+    {
+        unionK1.reset(new Union<K1>());
+        subK2K1.reset(new Subset<K2, K1>(unionK1));
+        subK4K1.reset(new Subset<K4, K1>(unionK1));
+        subK2K1->add(shared_ptr<K2>(new K2(2)));
+        subK4K1->add(shared_ptr<K4>(new K4(4)));
+    }
 
-	}
-	virtual ~K3()
-	{
-		cout << "K3: Start ~~~~~~~~~~~~~~~~~" << endl;
-		if (!subK2K1.unique())
-		{
-			std::cout << "SubK2K1 is not unique!" << std::endl;
-		}
-		subK2K1.reset();
-		cout << "K3: subK2K1 reset(ted)" << endl;
-		print();
-		unionK1.reset();
-		cout << "K3: unionK1 reset(ted)" << endl;
-		subK4K1.reset();
-		cout << "K3: End ~~~~~~~~~~~~~~~~~" << endl;
-	}
+    void print()
+    {
+        for (std::vector<std::shared_ptr<K1> >::const_iterator it = unionK1->begin(); it != unionK1->end();
+             ++it)
+        {
+            cout << "K3: Value is ";
+            (*it)->print();
+            cout << endl;
+        }
+
+    }
+
+    virtual ~K3()
+    {
+        cout << "K3: Start ~~~~~~~~~~~~~~~~~" << endl;
+        if(!subK2K1.unique())
+        {
+            std::cout << "SubK2K1 is not unique!" << std::endl;
+        }
+        subK2K1.reset();
+        cout << "K3: subK2K1 reset(ted)" << endl;
+        print();
+        unionK1.reset();
+        cout << "K3: unionK1 reset(ted)" << endl;
+        subK4K1.reset();
+        cout << "K3: End ~~~~~~~~~~~~~~~~~" << endl;
+    }
 };
 
 int main()
-
 {
-	omp_set_num_threads(omp_get_num_procs());
-	cout << "Number of threads: " << omp_get_num_procs() << std::endl;
-	{
-		std::shared_ptr<Namespace> ns1 = std::shared_ptr<Namespace>(new Namespace());
-		ns1->setName("Ns1");
-		std::shared_ptr<Namespace> ns2 = std::shared_ptr<Namespace>(new Namespace());
-		ns2->setName("Ns2");
-		std::shared_ptr<PackageableElement> pe = std::shared_ptr<PackageableElement>(new PackageableElement);
-		pe->setName("pe");
-		ns1->importedMember->add(pe);
-		ns1->ownedMember->add(ns2);
-		for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->ownedMember->begin(); it != ns1->ownedMember->end(); ++it)
-		{
-			std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
-			if (ne)
-			{
-				std::cout << "Named element is: ";
-				ne->print();
-				std::cout << std::endl;
-			}
-			else
-			{
-				std::cout << "No named element" << std::endl;
-			}
-		}
-		std::cout << "Owned Elements:" << std::endl;
-		std::shared_ptr<Union<Element> > oe = ns1->ownedElement;
-		std::vector<std::shared_ptr<Element> >::const_iterator ite = oe->begin();
-		for (typename std::vector<std::shared_ptr<Element> >::const_iterator it = oe->begin(); it != oe->end(); ++it)
-		{
-			std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
-			if (ne)
-			{
-				std::cout << "Named element is: ";
-				ne->print();
-				std::cout << std::endl;
-			}
-			else
-			{
-				std::cout << "No named element" << std::endl;
-			}
-		}
+    omp_set_num_threads(omp_get_num_procs());
+    cout << "Number of threads: " << omp_get_num_procs() << std::endl;
+    {
+        std::shared_ptr<Namespace> ns1 = std::shared_ptr<Namespace>(new Namespace());
+        ns1->setName("Ns1");
+        std::shared_ptr<Namespace> ns2 = std::shared_ptr<Namespace>(new Namespace());
+        ns2->setName("Ns2");
+        std::shared_ptr<PackageableElement> pe = std::shared_ptr<PackageableElement>(new PackageableElement);
+        pe->setName("pe");
+        ns1->importedMember->add(pe);
+        ns1->ownedMember->add(ns2);
+        for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->ownedMember->begin();
+             it != ns1->ownedMember->end();
+             ++it)
+        {
+            std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
+            if(ne)
+            {
+                std::cout << "Named element is: ";
+                ne->print();
+                std::cout << std::endl;
+            }
+            else
+            {
+                std::cout << "No named element" << std::endl;
+            }
+        }
+        std::cout << "Owned Elements:" << std::endl;
+        std::shared_ptr<Union<Element>> oe = ns1->ownedElement;
+        std::vector<std::shared_ptr<Element> >::const_iterator
+                ite = oe->begin();
+        for (typename std::vector<std::shared_ptr<Element> >::const_iterator it = oe->begin(); it != oe->end();
+             ++it)
+        {
+            std::shared_ptr<NamedElement> ne = dynamic_pointer_cast<NamedElement>(*it);
+            if(ne)
+            {
+                std::cout << "Named element is: ";
+                ne->print();
+                std::cout << std::endl;
+            }
+            else
+            {
+                std::cout << "No named element" << std::endl;
+            }
+        }
 
-		std::cout << "Members:" << std::endl;
-		for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->member->begin(); it != ns1->member->end(); ++it)
-		{
-			std::cout << "Named element is: ";
-			(*it)->print();
-			std::cout << std::endl;
-		}
-	}
+        std::cout << "Members:" << std::endl;
+        for (typename std::vector<std::shared_ptr<NamedElement> >::const_iterator it = ns1->member->begin(); it !=
+                                                                                                             ns1->member->end();
+             ++it)
+        {
+            std::cout << "Named element is: ";
+            (*it)->print();
+            std::cout << std::endl;
+        }
+    }
 
-	std::cout << "Alles gut" << std::endl;
-	K3* k3 = new K3();
-	k3->print();
-	delete k3;
-	std::cout << "Alles gut K3" << std::endl;
+    std::cout << "Alles gut" << std::endl;
+    K3 *k3 = new K3();
+    k3->print();
+    delete k3;
+    std::cout << "Alles gut K3" << std::endl;
 
-	return 0;
+    return 0;
 
 }
 
