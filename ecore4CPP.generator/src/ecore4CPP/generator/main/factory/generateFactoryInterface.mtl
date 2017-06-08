@@ -23,6 +23,7 @@
 [startGuard(anEPackage,'Factory')/]
 
 #include "EFactory.hpp"
+#include <memory>
 
 [comment  Generate Includes for the Factory/]
 namespace [anEPackage.name/] 

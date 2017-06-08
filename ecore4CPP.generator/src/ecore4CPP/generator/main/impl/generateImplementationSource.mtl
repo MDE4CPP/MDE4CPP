@@ -29,7 +29,6 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "SubsetUnion.hpp"
 #include "[aClass.ePackage.name.concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
@@ -79,7 +78,7 @@ using namespace [aClass.ePackage.name/];
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
 	[else]
 	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
 	[/if]
 
 	[/for]
@@ -92,10 +91,10 @@ using namespace [aClass.ePackage.name/];
 		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
 	}
 	[else]
-	std::shared_ptr<std::vector<std::shared_ptr<[ref.eType.generateType()/]>>> _[ref.name/]List = obj.[ref.GetterName()/]();
+	std::shared_ptr<Bag<[ref.eType.generateType()/]>> _[ref.name/]List = obj.[ref.GetterName()/]();
 	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *_[ref.name/]List)
 	{
-		this->[ref.GetterName()/]()->push_back(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
+		this->[ref.GetterName()/]()->add(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
 	}
 	[/if]
 	[/for]

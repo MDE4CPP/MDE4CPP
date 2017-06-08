@@ -56,7 +56,7 @@ _[aReference.name/]) [abstractSufix(impl)/];
 [/template]
 
 [template public generateReferenceInit(aReference : EReference)? (not(aReference.upperBound=1))]
-m_[aReference.name/].reset(new std::vector<std::shared_ptr<[aReference.eGenericType.generateCppType()/]>>());
+m_[aReference.name/].reset(new Bag<[aReference.eGenericType.generateCppType()/]>());
 [/template]
 
 [template public generateReferenceSetterCpp(aReference : EReference) ? (hasSetter())]

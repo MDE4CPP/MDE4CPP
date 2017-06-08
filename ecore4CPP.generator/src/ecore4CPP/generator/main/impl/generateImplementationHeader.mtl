@@ -38,6 +38,8 @@
 #include "impl/EObjectImpl.hpp"
 [/if]
 
+#include "SubsetUnion.hpp"
+
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
