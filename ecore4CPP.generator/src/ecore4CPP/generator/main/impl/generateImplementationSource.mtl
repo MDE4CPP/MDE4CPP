@@ -88,7 +88,11 @@ using namespace [aClass.ePackage.name/];
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
+		[if(ref.upperBound=1)]
 		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
+		[else]
+		m_[ref.name/].reset(dynamic_cast<Bag<[ref.eType.generateType()/]>* >(obj.[ref.GetterName()/]()->copy()));
+		[/if]
 	}
 	[else]
 	std::shared_ptr<Bag<[ref.eType.generateType()/]>> _[ref.name/]List = obj.[ref.GetterName()/]();

@@ -24,7 +24,7 @@ public:
 [template public generateSingletonImpl(packageName : String)]
 std::shared_ptr<[packageName/]> [packageName/]::instance;
 
-std::shared_ptr<[packageName/]> [packageName/]::eInstance()
+std::shared_ptr<[packageName/]>[packageName/]::eInstance()
 {
 	if(!instance)
 	{

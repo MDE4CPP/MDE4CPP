@@ -49,7 +49,7 @@ bool [packageName/]::isInited = false;
 
 [packageName/]::[packageName/]()
 {
-	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( [anEPackage.name.concat('Factory').toUpperFirst()/]::eInstance()));
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory >( [anEPackage.name.concat('Factory').toUpperFirst()/]::eInstance()));
 }
 
 [packageName/]::~[packageName/]()

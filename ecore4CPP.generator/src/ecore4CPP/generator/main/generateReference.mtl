@@ -35,7 +35,7 @@ virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const
 [template public generateReferenceSetterDeclaretaion(aReference : EReference, impl : EBoolean) ? ( hasSetter() )]
 [aReference.generateDokumentation()/]
 virtual void [aReference.SetterName()/]([if (not aReference.eGenericType.oclIsKindOf(EDataType))]
-std::shared_ptr<[aReference.eGenericType.generateCppType()/]> [else]
+[generateReferenceParameter(aReference)/][else]
 [aReference.eGenericType.generateCppType()/][/if]
 _[aReference.name/]) [abstractSufix(impl)/];
 
@@ -55,12 +55,26 @@ _[aReference.name/]) [abstractSufix(impl)/];
 [aReference.generateReferenceSetterCpp()/]
 [/template]
 
-[template public generateReferenceInit(aReference : EReference)? (not(aReference.upperBound=1))]
-m_[aReference.name/].reset(new Bag<[aReference.eGenericType.generateCppType()/]>());
+[template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
+[if(eReference.oclAsType(EModelElement).hasSubset())]
+	/*Subset*/
+	m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType()/], [eReference.oclAsType(EModelElement).Subset()->asOrderedSet()->first().oclAsType(EReference).eGenericType.generateCppType()/] >(m_[eReference.oclAsType(EModelElement).Subset()->asOrderedSet()->first().oclAsType(EReference).name/]));
+	[elseif(eReference.oclAsType(EModelElement).isUnion())]
+	/*Union*/
+	m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType()/]>());[else]
+	m_[eReference.name/].reset(new Bag<[eReference.eGenericType.generateCppType()/]>());
+[/if]
+
+[/template]
+
+[template public generateReferenceParameter(aReference : EReference)]
+[if(aReference.upperBound = 1)]
+std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/][else]
+std::shared_ptr<Bag<[aReference.eGenericType.generateCppType()/]> > _[aReference.name/][/if]
 [/template]
 
 [template public generateReferenceSetterCpp(aReference : EReference) ? (hasSetter())]
-void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterName()/](std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/])
+void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterName()/]([generateReferenceParameter(aReference)/])
 {
 [if (hasKey('setterbody'))]
 //generated from setterbody annotation

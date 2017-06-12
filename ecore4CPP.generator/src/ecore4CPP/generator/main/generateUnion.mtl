@@ -65,5 +65,5 @@ virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const
 
 [template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
 [aReference.generateDokumentation()/]
-virtual [aReference.generateReferenceTypeBag()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
+virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
