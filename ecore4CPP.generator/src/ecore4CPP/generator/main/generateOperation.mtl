@@ -76,7 +76,7 @@ virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperat
 
 [/template]
 
-[query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->sortedBy(name)->indexOf(aOperation)-1 /]
+[query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
 [template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
 std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
