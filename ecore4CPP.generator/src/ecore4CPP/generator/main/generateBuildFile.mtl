@@ -150,7 +150,7 @@ model {
     binaries {
         all {
 			linker.args '-fopenmp'
-        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe', '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe', '-fmax-errors=5', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}
