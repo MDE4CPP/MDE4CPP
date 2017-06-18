@@ -1,0 +1,17 @@
+description 'Common models'
+
+task generateUmlReflection(type: JavaExec) {
+	group 'UMLReflection'
+	description 'generate C++ code of umlReflection.uml model'
+	main = "-jar"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar",  "umlReflection.uml", "../src_gen"
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}

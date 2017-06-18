@@ -1,51 +1,23 @@
 description 'Common collection'
 
-task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'src_gen:compileEcoreReflection']) {
-	group 'ecoreReflection'
-	description 'generate and compile ecoreReflection in debug and release'
+task buildReflectionModels(dependsOn: ['ecoreReflection:buildEcoreReflection', 'primitiveTypesReflection:buildPrimitivetypesReflection', 'umlReflection:buildUmlReflection']) {
+	group 'reflection models'
+	description 'generate and compile reflection models in debug and release'
 }
-task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'src_gen:compileEcoreReflectionDebug']) {
-	group 'ecoreReflection'
-	description 'generate and compile ecoreReflection in debug'
+task buildReflectionModelsDebug(dependsOn: ['ecoreReflection:buildEcoreReflectionDebug', 'primitiveTypesReflection:buildPrimitivetypesReflectionDebug', 'umlReflection:buildUmlReflectionDebug']) {
+	group 'reflection models'
+	description 'generate and compile reflection models in debug'
 }
-task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'src_gen:compileEcoreReflectionRelease']) {
-	group 'ecoreReflection'
-	description 'generate and compile ecoreReflection in release'
-}
-
-task buildPrimitivetypesReflection(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen:compilePrimitivetypesReflection']) {
-	group 'PrimitivetypesReflection'
-	description 'generate and compile primitiveTypesReflection in debug and release'
-}
-task buildPrimitivetypesReflectionDebug(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen:compilePrimitivetypesReflectionDebug']) {
-	group 'PrimitivetypesReflection'
-	description 'generate and compile primitiveTypesReflection in debug'
-}
-task buildPrimitivetypesReflectionRelease(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen:compilePrimitivetypesReflectionRelease']) {
-	group 'PrimitivetypesReflection'
-	description 'generate and compile primitiveTypesReflection in release'
+task buildReflectionModelsRelease(dependsOn: ['ecoreReflection:buildEcoreReflectionRelease', 'primitiveTypesReflection:buildPrimitivetypesReflectionRelease', 'umlReflection:buildUmlReflectionRelease']) {
+	group 'reflection models'
+	description 'generate and compile reflection models in release'
 }
 
-task buildUMLReflection(dependsOn: ['model:generateUMLReflection', 'src_gen:compileUMLReflection']) {
-	group 'UMLReflection'
-	description 'generate and compile types in debug and release'
-}
+tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflection')
+tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflection')
 
-task buildUMLReflectionDebug(dependsOn: ['model:generateUMLReflection', 'src_gen:compileUMLReflectionDebug']) {
-	group 'UMLReflection'
-	description 'generate and compile types in debug'
-}
-task buildUMLReflectionRelease(dependsOn: ['model:generateUMLReflection', 'src_gen:compileUMLReflectionRelease']) {
-	group 'UMLReflection'
-	description 'generate and compile types in release'
-}
+tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionDebug')
+tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionDebug')
 
-tasks.getByPath('src_gen:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:compileEcoreReflectionDebug').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:compileEcoreReflectionRelease').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:compilePrimitivetypesReflection').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
-tasks.getByPath('src_gen:compilePrimitivetypesReflectionDebug').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
-tasks.getByPath('src_gen:compilePrimitivetypesReflectionRelease').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
-tasks.getByPath('src_gen:compileUMLReflection').mustRunAfter tasks.getByPath('model:generateUMLReflection')
-tasks.getByPath('src_gen:compileUMLReflectionDebug').mustRunAfter tasks.getByPath('model:generateUMLReflection')
-tasks.getByPath('src_gen:compileUMLReflectionRelease').mustRunAfter tasks.getByPath('model:generateUMLReflection')
+tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionRelease')
+tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionRelease')

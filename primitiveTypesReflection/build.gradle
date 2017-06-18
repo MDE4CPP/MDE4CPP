@@ -1,0 +1,18 @@
+description 'Build tasks for project: PrimitivetypesReflection'
+
+task buildPrimitivetypesReflection(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen:PrimitivetypesReflection:compilePrimitivetypesReflection']) {
+	group 'PrimitivetypesReflection'
+	description 'build PrimitivetypesReflection in debug and release'
+}
+task buildPrimitivetypesReflectionDebug(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen::PrimitivetypesReflection:compilePrimitivetypesReflectionDebug']) {
+	group 'PrimitivetypesReflection'
+	description 'build PrimitivetypesReflection in debug'
+}
+task buildPrimitivetypesReflectionRelease(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen::PrimitivetypesReflection:compilePrimitivetypesReflectionRelease']) {
+	group 'PrimitivetypesReflection'
+	description 'build PrimitivetypesReflection in release'
+}
+
+tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflection').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
+tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflectionDebug').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
+tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflectionRelease').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')

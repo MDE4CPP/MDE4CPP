@@ -1,0 +1,18 @@
+description 'Build tasks for project: UmlReflection'
+
+task buildUmlReflection(dependsOn: ['model:generateUmlReflection', 'src_gen:UmlReflection:compileUmlReflection']) {
+	group 'UmlReflection'
+	description 'build UmlReflection in debug and release'
+}
+task buildUmlReflectionDebug(dependsOn: ['model:generateUmlReflection', 'src_gen::UmlReflection:compileUmlReflectionDebug']) {
+	group 'UmlReflection'
+	description 'build UmlReflection in debug'
+}
+task buildUmlReflectionRelease(dependsOn: ['model:generateUmlReflection', 'src_gen::UmlReflection:compileUmlReflectionRelease']) {
+	group 'UmlReflection'
+	description 'build UmlReflection in release'
+}
+
+tasks.getByPath('src_gen:UmlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')
+tasks.getByPath('src_gen:UmlReflection:compileUmlReflectionDebug').mustRunAfter tasks.getByPath('model:generateUmlReflection')
+tasks.getByPath('src_gen:UmlReflection:compileUmlReflectionRelease').mustRunAfter tasks.getByPath('model:generateUmlReflection')

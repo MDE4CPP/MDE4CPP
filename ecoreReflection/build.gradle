@@ -1,0 +1,18 @@
+description 'Build tasks for project: EcoreReflection'
+
+task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'src_gen:EcoreReflection:compileEcoreReflection']) {
+	group 'EcoreReflection'
+	description 'build EcoreReflection in debug and release'
+}
+task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionDebug']) {
+	group 'EcoreReflection'
+	description 'build EcoreReflection in debug'
+}
+task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionRelease']) {
+	group 'EcoreReflection'
+	description 'build EcoreReflection in release'
+}
+
+tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionDebug').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionRelease').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
