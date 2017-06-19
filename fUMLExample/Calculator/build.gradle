@@ -1,20 +1,18 @@
-description 'todo'
+description 'Build tasks for project: CalcModel'
 
-task buildCalculator(dependsOn: ['model:generateCalculator', 'src_gen:compileCalcModelAll']) {
-	group 'fUMLGeneratedModels'
-	description 'build fUMLGeneratedModels in debug and release'
+task buildCalcModel(dependsOn: ['model:generateCalcModel', 'src_gen:compileCalcModelAll']) {
+	group 'CalcModel'
+	description 'build CalcModel in debug and release'
 }
-task buildCalculatorDebug(dependsOn: ['model:generateCalculator', 'src_gen:compileCalcModelDebug', 'src_gen:compileCalcModelExecDebug']) {
-	group 'fUMLGeneratedModels'
-	description 'build fUMLGeneratedModels in debug'
+task buildCalcModelDebug(dependsOn: ['model:generateCalcModel', 'src_gen:compileCalcModelAllDebug']) {
+	group 'CalcModel'
+	description 'build CalcModel in debug'
 }
-task buildCalculatorRelease(dependsOn: ['model:generateCalculator', 'src_gen:compileCalcModelRelease', 'src_gen:compileCalcModelExecRelease']) {
-	group 'fUMLGeneratedModels'
-	description 'build fUMLGeneratedModels in release'
+task buildCalcModelRelease(dependsOn: ['model:generateCalcModel', 'src_gen:compileCalcModelAllRelease']) {
+	group 'CalcModel'
+	description 'build CalcModel in release'
 }
 
-tasks.getByPath('src_gen:compileCalcModelAll').mustRunAfter tasks.getByPath('model:generateCalculator')
-tasks.getByPath('src_gen:compileCalcModelDebug').mustRunAfter tasks.getByPath('model:generateCalculator')
-tasks.getByPath('src_gen:compileCalcModelExecDebug').mustRunAfter tasks.getByPath('model:generateCalculator')
-tasks.getByPath('src_gen:compileCalcModelRelease').mustRunAfter tasks.getByPath('model:generateCalculator')
-tasks.getByPath('src_gen:compileCalcModelExecRelease').mustRunAfter tasks.getByPath('model:generateCalculator')
+tasks.getByPath('src_gen:compileCalcModelAll').mustRunAfter tasks.getByPath('model:generateCalcModel')
+tasks.getByPath('src_gen:compileCalcModelAllDebug').mustRunAfter tasks.getByPath('model:generateCalcModel')
+tasks.getByPath('src_gen:compileCalcModelAllRelease').mustRunAfter tasks.getByPath('model:generateCalcModel')

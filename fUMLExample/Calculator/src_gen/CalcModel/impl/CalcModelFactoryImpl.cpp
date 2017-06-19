@@ -9,8 +9,8 @@ using namespace CalcModel;
 //*********************************
 CalcModelFactoryImpl::CalcModelFactoryImpl()
 {
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("CalcModel::CheckIfPrime",[this](){return this->createCheckIfPrime();}));
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("CalcModel::PrimeChecker",[this](){return this->createPrimeChecker();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("CheckIfPrime",[this](){return this->createCheckIfPrime();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("PrimeChecker",[this](){return this->createPrimeChecker();}));
 }
 
 CalcModelFactoryImpl::~CalcModelFactoryImpl()

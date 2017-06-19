@@ -24,6 +24,11 @@
 //Forward Declaration for used types
 
 
+namespace PrimitiveTypes 
+{
+	class Boolean;
+}
+
 // base class includes
 
 #include "Class.hpp"

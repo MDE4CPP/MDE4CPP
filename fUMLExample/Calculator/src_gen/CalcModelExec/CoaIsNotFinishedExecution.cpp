@@ -43,16 +43,17 @@ void CoaIsNotFinishedExecution::doBody(std::shared_ptr<std::vector<std::shared_p
    	bool isNotFinished;
 
 
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<CalcModel::PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation
 	 isNotFinished =   target->isNotFinished();
-
+	
+	
 	//set out/result parameter
     std::shared_ptr<fUML::BooleanValue> isNotFinishedValue(fUML::FUMLFactory::eInstance()->createBooleanValue());
  	isNotFinishedValue->setValue(isNotFinished);
-    outputParameters->value(0)->getValues()->append(isNotFinishedValue);
+    outputParameters->at(0)->getValues()->push_back(isNotFinishedValue);
 	
 	//set InOut parameters
 }

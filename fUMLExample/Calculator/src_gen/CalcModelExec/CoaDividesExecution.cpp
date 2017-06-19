@@ -43,16 +43,17 @@ void CoaDividesExecution::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUM
    	bool isDivisible;
 
 
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<CalcModel::PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation
 	 isDivisible =   target->divides();
-
+	
+	
 	//set out/result parameter
     std::shared_ptr<fUML::BooleanValue> isDivisibleValue(fUML::FUMLFactory::eInstance()->createBooleanValue());
  	isDivisibleValue->setValue(isDivisible);
-    outputParameters->value(0)->getValues()->append(isDivisibleValue);
+    outputParameters->at(0)->getValues()->push_back(isDivisibleValue);
 	
 	//set InOut parameters
 }

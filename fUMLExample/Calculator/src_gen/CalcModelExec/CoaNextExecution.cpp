@@ -41,12 +41,13 @@ void CoaNextExecution::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::
 
 
 
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<CalcModel::PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation
 	  target->next();
-
+	
+	
 	//set out/result parameter
 	
 	//set InOut parameters

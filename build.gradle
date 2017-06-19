@@ -1,6 +1,6 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['benchmarks:UMLBenchmark:compileUMLBenchmark', 'benchmarks:ecoreBenchmark:compileEcoreBenchmark', 'fumlExample:Calculator:buildCalculator']) {
+task buildAllExamples(dependsOn: ['benchmarks:UMLBenchmark:compileUMLBenchmark', 'benchmarks:ecoreBenchmark:compileEcoreBenchmark', 'fumlExample:Calculator:buildCalcModel']) {
 	group 'Examples'
 	description 'build all example applications'	
 }
