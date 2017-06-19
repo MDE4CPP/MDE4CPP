@@ -1,2 +1,5 @@
 .gradle/
 build/
+SubsetUnion/Debug/
+
+SubsetUnion/cmake-build-debug/
