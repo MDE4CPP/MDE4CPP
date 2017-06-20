@@ -100,7 +100,7 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/] ([aProperty.ge
 [/template]
 
 [template public addInterfaceAttribute(aProperty : Property, aClass : Class)]
-[aClass.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
+[aClass.memberName()/]->getOwnedAttribute()->push_back([if (aClass.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.packageGetter()/][/if]);
 [/template]
 
 [template public genDefault(aProperty : Property) ? (aProperty.type.name='String')]
