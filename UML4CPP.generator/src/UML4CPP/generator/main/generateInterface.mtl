@@ -57,7 +57,14 @@ namespace [element.namespace.ns()/]
 }
 [/for]
 
-[for (element : Type| aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+namespace [element.namespace.ns()/] 
+{
+	class [element.name/];
+}
+[/for]
+
+[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(name)) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
 	class [element.name/];
