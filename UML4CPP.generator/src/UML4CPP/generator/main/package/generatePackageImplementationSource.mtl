@@ -29,7 +29,7 @@
 [import UML4CPP::generator::main::generateValueSpecification /]
 [import UML4CPP::generator::main::helper /]
 
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage()}->flatten() /]
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),aPackage.member->filter(Element).getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage()}->flatten() /]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
