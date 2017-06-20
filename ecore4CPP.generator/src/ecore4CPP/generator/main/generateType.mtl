@@ -19,6 +19,7 @@
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
 [query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
 
+[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors()->first().eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
 
 [template public generateCppType(anEDataType : EGenericType)]
 [if (anEDataType.oclIsUndefined())]
@@ -69,11 +70,19 @@ std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
 [/template]
 
 
-[template public generateSubsetType(eReference : EReference)]
+[template public generateSubsetType(eReference : EReference) post(trim())]
 [let subsets : OrderedSet(EModelElement) = eReference.oclAsType(EModelElement).Subset()->asOrderedSet()]
 [for (m : EModelElement | subsets) separator(',')]
-[m.oclAsType(EReference).eGenericType.generateCppType()/][/for][/let]
+[if(m.isUnion())]
+[m.oclAsType(EReference).eGenericType.generateCppType()/]
+[else]
+[m.oclAsType(EReference).eGenericType.generateCppType()/] /*Subset does not reference a union*/[comment][m.oclAsType(EReference).eReferenceType.eReferences->at(0).eGenericType.generateCppType()/][/comment]
+[/if]
+[/for]
+[/let]
 [/template]
+
+
 
 [template public generateSubsetElements(eReference : EReference)]
 [let subsets : OrderedSet(EModelElement) = eReference.oclAsType(EModelElement).Subset()->asOrderedSet()]
@@ -84,7 +93,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 [template public generateReferenceType(eReference : EReference, pointer : Boolean)]
 [if (eReference.upperBound = 1)]
 [if(pointer)]std::shared_ptr<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if][else]
-[if(eReference.oclAsType(EModelElement).isSubsetUnion())]
+[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
 		[if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] > [if(pointer)]>[/if]
 [elseif(eReference.oclAsType(EModelElement).hasSubset())]
 		[if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] > [if(pointer)]>[/if]

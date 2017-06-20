@@ -56,7 +56,7 @@ _[aReference.name/]) [abstractSufix(impl)/];
 [/template]
 
 [template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
-[if(eReference.oclAsType(EModelElement).isSubsetUnion())]
+[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
 	/*SubsetUnion*/
 	m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/]));// [eReference.oclAsType(EModelElement).Subset()->asOrderedSet()->first().oclAsType(EReference).name/]));
 [elseif(eReference.oclAsType(EModelElement).hasSubset())]
