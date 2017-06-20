@@ -256,6 +256,6 @@ tasks.getByPath('src_gen:[packageName/]:compile[packageName/]Release').mustRunAf
 [/file]
 
 [file ('../settings.gradle', false, 'UTF-8')]
-include 'model', 'src_gen', 'src_gen:[packageName/]'
+include 'model', 'src_gen:[packageName/]'
 [/file]
 [/template]
