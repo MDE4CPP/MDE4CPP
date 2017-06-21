@@ -39,7 +39,7 @@
 [/template]
 
 [template public generateAttributeInit(aAttribute : EAttribute) ? (not(aAttribute.upperBound = 1))]
-m_[aAttribute.name/].reset(new std::vector<[aAttribute.eGenericType.generateCppType()/]>());
+m_[aAttribute.name/].reset(new Bag<[aAttribute.eGenericType.generateCppType()/]>());
 [/template]
 
 [template public generateAttributeGetterDecleration(aAttribute : EAttribute, impl : Boolean) ? (hasGetter())]

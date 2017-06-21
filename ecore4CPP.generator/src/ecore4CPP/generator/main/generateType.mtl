@@ -19,7 +19,7 @@
 [query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
 [query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
 
-[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors()->first().eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
 
 [template public generateCppType(anEDataType : EGenericType)]
 [if (anEDataType.oclIsUndefined())]
