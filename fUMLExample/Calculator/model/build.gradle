@@ -1,6 +1,6 @@
 description 'todo'
 
-task generateCalculator(type: JavaExec) {
+task generateCalcModel(type: JavaExec) {
 	group 'fUMLGeneratedModels'
 	description 'generate C++ code of primitivetypesReflection.uml model'
 	main = "-jar"

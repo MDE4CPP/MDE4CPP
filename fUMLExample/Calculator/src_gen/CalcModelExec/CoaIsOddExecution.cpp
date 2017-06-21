@@ -43,16 +43,17 @@ void CoaIsOddExecution::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML:
    	bool isOdd;
 
 
-	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<CalcModel::PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //call assigned operation
 	 isOdd =   target->isOdd();
-
+	
+	
 	//set out/result parameter
     std::shared_ptr<fUML::BooleanValue> isOddValue(fUML::FUMLFactory::eInstance()->createBooleanValue());
  	isOddValue->setValue(isOdd);
-    outputParameters->value(0)->getValues()->append(isOddValue);
+    outputParameters->at(0)->getValues()->push_back(isOddValue);
 	
 	//set InOut parameters
 }

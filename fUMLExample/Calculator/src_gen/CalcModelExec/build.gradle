@@ -14,19 +14,16 @@ File appendDebugSuffix(File binaryFile) {
   return new File(binaryFile.path.substring(0, extensionSeparatorIndex) + "d" + binaryFile.path.substring(extensionSeparatorIndex))
 }
 
-task deliverCalcModelExec(dependsOn: ['deliverCalcModelExecDebugExecutable', 'deliverCalcModelExecReleaseExecutable']) {
-	description 'deliver CalcModelExec header, debug and release executable to application folder (%MDE4CPP_HOME%/application)'
-}
 
 task deliverCalcModelExecDebugExecutable(type: Copy) {
-	description 'deliver CalcModelExec debug executable to %MDE4CPP_HOME%/application/bin'
+	description 'deliver CalcModelExec debug binary to %MDE4CPP_HOME%/application/bin'
 	from "build/exe/CalcModelExec/debug"
 	into System.getenv('MDE4CPP_HOME')+"/application/bin"
 	include "CalcModelExecd.exe"
 }
 
 task deliverCalcModelExecReleaseExecutable(type: Copy) {
-	description 'deliver CalcModelExec release executable to %MDE4CPP_HOME%/application/bin/release'
+	description 'deliver CalcModelExec release binary to %MDE4CPP_HOME%/application/bin/release'
 	from "build/exe/CalcModelExec/release"
 	into System.getenv('MDE4CPP_HOME')+"/application/bin"
 	include "CalcModelExec.exe"
@@ -87,41 +84,46 @@ model {
                 cpp {
                     source {
                         srcDirs "." 
-						include "CheckIfPrimeExecution.cpp"
-						include "PrimeCheckerExecution.cpp"
 						include "FbDividesExecution.cpp"
+						include "FbIsNotFinishedExecution.cpp"
+						include "FbIsOddExecution.cpp"
 						include "FbNextExecution.cpp"
 						include "FbPrintIsPrimeExecution.cpp"
-						include "FbIsOddExecution.cpp"
 						include "FbPrintNotPrimeExecution.cpp"
-						include "FbIsNotFinishedExecution.cpp"
+						include "CoaDividesExecution.cpp"
+						include "CoaIsNotFinishedExecution.cpp"
+						include "CoaIsOddExecution.cpp"
+						include "CoaNextExecution.cpp"
+						include "Next_callExecution.cpp"
+						include "CheckIfPrimeExecution.cpp"
+						include "PrimeCheckerExecution.cpp"
 						include "main.cpp"
-						include	"impl/CalcModelFactoryImpl.cpp"
-						include	"CalcModelFactory.cpp"
-						include	"impl/CalcModelPackageImpl.cpp"
-						include	"CalcModelPackage.cpp"
                     }
 					exportedHeaders {
                         srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/Util"
                         include "**/*.hpp"
                     }
-									lib library: "uml"
-									lib library: "ecore"
-									lib library: "fuml"
-									lib library: "CalcModel"
-									lib library: "primitiveTypesReflection"
-									lib library: "ecoreReflection"
-									lib library: "umlReflection"
-				
+					lib library: "uml"
+					lib library: "ecore"
+					lib library: "fuml"
+					lib library: "CalcModel"
+					lib library: "primitiveTypesReflection"
+					lib library: "ecoreReflection"
+					lib library: "umlReflection"
+
                 }
             }
         }
 		
 		withType(NativeComponentSpec) {
 			binaries.withType(NativeBinarySpec) {
-				if (it instanceof NativeExecutableBinarySpec) {
-					if(buildType == buildTypes.debug) {
-						it.getExecutable().setFile(appendDebugSuffix(it.getExecutable().getFile()))						
+				if(buildType == buildTypes.debug) {
+					if (it instanceof NativeExecutableBinarySpec) {
+						it.getExecutable().setFile(appendDebugSuffix(it.getExecutable().getFile()))	
+					} else if (it instanceof StaticLibraryBinarySpec) {
+						staticLibraryFile = appendDebugSuffix(staticLibraryFile)
+					} else {
+						throw new GradleException("Unknown native library binary")
 					}
 				}
 			}
@@ -141,4 +143,18 @@ model {
     }
 }
 
-build.finalizedBy(deliverCalcModelExec)
+tasks.withType(LinkExecutable) { compileTask -> deliverCalcModelExecDebugExecutable.mustRunAfter compileTask }
+tasks.withType(LinkExecutable) { compileTask -> deliverCalcModelExecReleaseExecutable.mustRunAfter compileTask }
+
+task compileCalcModelExec(dependsOn: ['build', 'deliverCalcModelExecDebugExecutable', 'deliverCalcModelExecReleaseExecutable']){
+	group 'CalcModel'
+	description 'compile CalcModelExec in debug and release'
+}
+task compileCalcModelExecDebug(dependsOn: ['CalcModelExecDebugExecutable', 'deliverCalcModelExecDebugExecutable']) {
+	group 'CalcModel'
+	description 'compile CalcModelExec in debug'
+}
+task compileCalcModelExecRelease(dependsOn: ['CalcModelExecReleaseExecutable', 'deliverCalcModelExecReleaseExecutable']) {
+	group 'CalcModel'
+	description 'compile CalcModelExec in release'
+}
