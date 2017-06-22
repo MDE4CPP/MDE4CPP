@@ -39,13 +39,28 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
 [if (aOperation.method->notEmpty())]
 [if(aOperation.method->filter(Activity)->notEmpty())]
-#if defined [aOperation.method->filter(Activity).name.toUpperCase()/]
-	// Implemented as an Activity [aOperation.method->filter(Activity).name/]
-	[aOperation.method->filter(Activity).name/]Execution* execution = new [aOperation.method->filter(Activity).name/]Execution();
-	[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = [/if]
-	execution->execute([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')] [sParameter.name/][/for]);
-#endif
+	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	std::string pluginName = "[aOperation.getNearestPackage().getPackageName()/]Exec";
+	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	if (plugin)
+	{
+		std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;
+
+		std::shared_ptr<FUMLPlugin> fumlplugin = std::dynamic_pointer_cast<FUMLPlugin>(plugin);
+		if (fumlplugin)
+		{
+			std::cout << "JIHA fumlplugin " << fumlplugin->eNAME() << " is accessable" << std::endl;
+		}
+		else
+		{
+			std::cout << "plugin " << pluginName << " is not a fuml based plugin" << std::endl;
+		}
+	}
+	else
+	{ 
+		std::cout << "plugin" << plugin->eNAME() << " not found" << std::endl;
+	}
+	std::cout << "DONE2" << std::endl;
 [else]
 [if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
 	// Implemented as Function behaviour [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).name/]

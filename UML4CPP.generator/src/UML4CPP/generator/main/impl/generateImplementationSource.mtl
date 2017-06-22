@@ -30,6 +30,11 @@
 [for (cl : Type | aClass.includes()->sortedBy(name)) ? ( oclIsKindOf(Class))]
 #include "[cl.name/].hpp"
 [/for]
+[if (aClass.ownedOperation.method->notEmpty())]
+[if(ownedOperation.method->filter(Activity)->notEmpty())]
+#include "PluginFramework.hpp"
+#include "FUMLPlugin.hpp"
+[/if][/if]
 
 using namespace [aPackage.name/];
 using boost::any_cast;
