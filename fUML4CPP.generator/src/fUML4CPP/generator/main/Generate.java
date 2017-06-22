@@ -511,6 +511,8 @@ public class Generate extends AbstractAcceleoGenerator {
 				String emptyString = "";
 				String patternUMLFactory = "generateFactory";
 				String patternUMLPackage = "generatePackage";
+				String patternFUMLPlugin = "generateFUMLPlugin";
+				String patternUMLPlugin = "generateUMLPlugin";
 				String patternUMLImpl = "generateImpl";
 				String patternRsrc = "rsrc%3A";
 				String patternFUMLExecution = "Execution";
@@ -520,6 +522,8 @@ public class Generate extends AbstractAcceleoGenerator {
 				String prefixUML = rsrc + "UML4CPP/generator/main/";
 				String prefixUMLPathFactory = prefixUML + "factory/";
 				String prefixUMLPathPackage = prefixUML + "package/";
+				String prefixFUMLPathPlugin = prefixFUML + "plugin/";
+				String prefixUMLPathPlugin = prefixUML + "plugin/";
 				String prefixUMLPathImpl = prefixUML + "impl/";
 				
 				Map<URI, Resource> resourceMap = new HashMap<URI, Resource>();
@@ -563,9 +567,21 @@ public class Generate extends AbstractAcceleoGenerator {
     						{
     							uriString = prefixUMLPathPackage + uriString;
     						}
+    						else if (uriString.startsWith(patternFUMLPlugin))
+    						{
+    							uriString = prefixFUMLPathPlugin + uriString;
+    						}
+    						else if (uriString.startsWith(patternUMLPlugin))
+    						{
+    							uriString = prefixUMLPathPlugin + uriString;
+    						}
     						else if (uriString.startsWith(patternUMLImpl))
     						{
     							uriString = prefixUMLPathImpl + uriString;
+    						}
+    						else if (uriString.contains(patternFUMLPlugin))
+    						{
+    							uriString = prefixFUML + uriString;
     						}
     						else
     						{

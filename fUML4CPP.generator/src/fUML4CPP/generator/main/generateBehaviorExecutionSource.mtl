@@ -27,7 +27,7 @@
 #include <cassert>
 #include "ParameterValue.hpp"
 
-[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
+[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 #include "[cOpSet.target.type.name/].hpp"
@@ -76,14 +76,14 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1)/]
 
 	[if (not par.supportedTypes())]
-	[par.name/] = std::dynamic_pointer_cast<[par.type.namespace.ns()/]::[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
 	[/if]
 	[/for]
 
-	[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
+	[if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
@@ -94,7 +94,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 
     //Body of the Opaquebehavior
     //Start ---------------------------
-	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
+	[if(not aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->isEmpty())]
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
 	
 	//Calling the associated operation.

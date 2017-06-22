@@ -46,12 +46,10 @@ namespace [aPackage.name/]
 			virtual void terminate();
 		    virtual void execute();
 		    virtual ecore::EObject* copy() const;
-			
-/*
+
 			[let op : Operation = aActivity.specification.oclAsType(Operation)]		
 			virtual [op.generateCppType()/] execute( [for (sParameter : Parameter | op.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.type.generateCppType()/] [sParameter.name/][/for]);
 			[/let]
-*/
 	};
 }
 [endGuard(aActivity,'Execution')/]
