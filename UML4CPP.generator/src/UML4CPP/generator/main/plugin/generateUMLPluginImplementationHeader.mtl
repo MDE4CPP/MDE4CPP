@@ -12,24 +12,33 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generatePackageInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateUMLPluginImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateSingleton /]
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+[template public generateUMLPluginImplHeader(aPackage : Package)]
+[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'PluginImpl')/]
 
-using namespace [aPackage.name/];
+#include "[aPackage.name.toUpperFirst()/]Plugin.hpp"
 
-//static initialisation
-const std::string [packageName/]::eNAME ="[aPackage.name/]";
-const std::string [packageName/]::eNS_URI ="[aPackage.URI/]";
-const std::string [packageName/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
-
-//Singleton 
-[generateSingletonImpl(packageName)/]
+namespace [aPackage.name/] 
+{
+	class [aPackage.name.toUpperFirst().concat('PluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('Plugin')/] 
+	{
+		public:
+			[aPackage.name.toUpperFirst()/]PluginImpl();
+			virtual ~[aPackage.name.toUpperFirst()/]PluginImpl();
+		
+			virtual std::string eNAME();
+			virtual std::string eNS_URI();
+			virtual std::string eNS_PREFIX();
+		
+			virtual std::shared_ptr<uml::Factory> getFactory();
+			virtual std::shared_ptr<uml::Package> getPackage();
+	};
+}
+[endGuard(aPackage,'PluginImpl')/]
 [/file]
 [/template]

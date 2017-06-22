@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::generateModel /]
 [import UML4CPP::generator::main::impl::generateImplementation /]
 [import UML4CPP::generator::main::package::generateMetamodelPackage /]
+[import UML4CPP::generator::main::plugin::generateUMLPlugin /]
 
 [template public generateUML(aPackage : Package)]
 [comment @main/]
@@ -39,6 +40,7 @@
 [/if]
 
 [aPackage.generatePackageImpl()/]
+[aPackage.generateUMLPlugin()/]
 [aPackage.generateProjectsFiles()/]
 [/template]
 

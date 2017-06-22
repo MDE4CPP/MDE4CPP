@@ -12,24 +12,38 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generatePackageInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateUMLPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateSingleton /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+[template public generateUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Plugin');}]
+[file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'Plugin')/]
 
-using namespace [aPackage.name/];
+#include "UMLPlugin.hpp"
 
-//static initialisation
-const std::string [packageName/]::eNAME ="[aPackage.name/]";
-const std::string [packageName/]::eNS_URI ="[aPackage.URI/]";
-const std::string [packageName/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
-
-//Singleton 
-[generateSingletonImpl(packageName)/]
+namespace [aPackage.name/]
+{
+	class [packageName/] : virtual public UMLPlugin
+	{
+		public:
+			static std::shared_ptr<MDE4CPPPlugin> eInstance();
+	
+			virtual std::string eNAME() = 0;
+			virtual std::string eNS_URI() = 0;
+			virtual std::string eNS_PREFIX() = 0;
+	
+			virtual std::shared_ptr<uml::Factory> getFactory() = 0;
+			virtual std::shared_ptr<uml::Package> getPackage() = 0;
+	
+		protected:
+			[packageName/](){};
+			virtual ~[packageName/](){};
+	
+		private:
+			static std::shared_ptr<MDE4CPPPlugin> instance;
+	};
+}
+[endGuard(aPackage,'Plugin')/]
 [/file]
 [/template]

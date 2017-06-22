@@ -47,7 +47,6 @@
 [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (',')]
 					lib library: "[pack.name/]"
 [/for]
-
 [/if]
 [/template]
 
@@ -159,6 +158,8 @@ model {
 [/for]
 						include	"impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp"
 						include	"[aPackage.name.toUpperFirst()/]Factory.cpp"
+						include	"impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp"
+						include	"[aPackage.name.toUpperFirst()/]Plugin.cpp"
 [/if]
 						include	"impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp"
 						include	"[aPackage.name.toUpperFirst()/]Package.cpp"
@@ -174,6 +175,7 @@ model {
 [/if]
                         srcDirs "../" 
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include"
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
                         include "**/*.hpp"
                     }

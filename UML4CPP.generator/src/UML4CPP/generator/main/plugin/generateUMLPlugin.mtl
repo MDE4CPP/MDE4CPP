@@ -12,24 +12,24 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generatePackageInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateUMLPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateSingleton /]
-[import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::plugin::generateUMLPluginInterfaceHeader /]
+[import UML4CPP::generator::main::plugin::generateUMLPluginInterfaceSource /]
+[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationHeader /]
+[import UML4CPP::generator::main::plugin::generateUMLPluginImplementationSource /]
 
-[template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
-
-using namespace [aPackage.name/];
-
-//static initialisation
-const std::string [packageName/]::eNAME ="[aPackage.name/]";
-const std::string [packageName/]::eNS_URI ="[aPackage.URI/]";
-const std::string [packageName/]::eNS_PREFIX ="[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
-
-//Singleton 
-[generateSingletonImpl(packageName)/]
-[/file]
+[template public generateUMLPlugin(aPackage : Package)]
+[aPackage.generateUMLPluginInterfaceHeader()/]
+[aPackage.generateUMLPluginInterfaceSource()/]
+[aPackage.generateUMLPluginImplHeader()/]
+[aPackage.generateUMLPluginImplSource()/]
 [/template]
+
+
+
+
+
+
+
+
