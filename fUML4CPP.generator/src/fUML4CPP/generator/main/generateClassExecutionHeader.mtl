@@ -22,6 +22,7 @@
 [startGuard(aClass,'Execution')/]
 
 #include "fUML/impl/ObjectImpl.hpp"
+#include "SubsetUnion.hpp"
 #include "[pointerName/].hpp"
 
 namespace [aPackage.name/] 

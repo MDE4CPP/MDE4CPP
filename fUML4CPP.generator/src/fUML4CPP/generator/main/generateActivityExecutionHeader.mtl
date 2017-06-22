@@ -30,6 +30,7 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 [for ( par : Parameter | aActivity.ownedParameter)]
 [par.generateParameterInclude()/]
 [/for]
+#include "SubsetUnion.hpp"
 
 namespace [aPackage.name/] 
 {

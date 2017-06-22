@@ -22,6 +22,7 @@
 [startGuard(anCallOperationAction,'Execution')/]
 
 #include "impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "SubsetUnion.hpp"
 
 namespace [aPackage.name/] 
 {
@@ -34,7 +35,7 @@ namespace [aPackage.name/]
 		    //destructor
 		    virtual ~[className/]();
 		
-		    virtual void doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> inputParameters, std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> outputParameters);
+		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<<fUML::ParameterValue> > outputParameters);
 		    virtual ecore::EObject* copy();
 		};
 }

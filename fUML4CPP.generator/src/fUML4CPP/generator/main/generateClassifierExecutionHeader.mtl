@@ -24,6 +24,7 @@
 [startGuard(aClassifier,'Execution')/]
 
 #include "fUML/impl/ObjectImpl.hpp"
+#include "SubsetUnion.hpp"
 #include "[aClassifier.name.toUpperFirst()/].hpp"
 
 namespace [aPackage.name/] 

@@ -35,6 +35,7 @@
 #include "DispatchStrategy.hpp"
 #include "FunctionBehavior.hpp"
 #include "Activity.hpp"
+#include "SubsetUnion.hpp"
 [if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
 [if (aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
 #include "Reference.hpp"
@@ -90,7 +91,7 @@ int main()
     [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
 	[/if]
 
-    std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> pList(new std::vector<std::shared_ptr<fUML::ParameterValue>>());
+    std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
 	[for (par : Parameter | act.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
     
     //INput parameter [par.name/] 
@@ -108,7 +109,7 @@ int main()
     pList->push_back([par.name/]P);
 	[/for]
 
-    std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> resultPList = locus->getExecutor()->execute([act.packageGetter()/],nullptr,pList);
+    std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute([act.packageGetter()/], nullptr, pList);
 	[/let]
 
 	if(nullptr == resultPList)
