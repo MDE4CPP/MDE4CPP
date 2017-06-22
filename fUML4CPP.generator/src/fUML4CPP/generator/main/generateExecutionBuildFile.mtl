@@ -16,6 +16,7 @@
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import UML4CPP::generator::main::helper /]
 
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage()}->flatten() /]
 [query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
@@ -172,6 +173,8 @@ model {
 [for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity)->sortedBy(name))]
 						include "[act.name.toUpperFirst()/]Execution.cpp"
 [/for]
+						include "[packageName.concat('ExecPlugin.cpp')/]"
+						include "['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]"
 [if (not (buildLibrary))]
 						include "main.cpp"
 [/if]
@@ -186,6 +189,7 @@ model {
 [if (aPackage.name='uml')]
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
 [/if]
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
                         include "**/*.hpp"
                     }
 [aPackage.generateLibraryIncludes()/]
