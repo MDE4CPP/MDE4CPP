@@ -47,7 +47,7 @@ m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qua
 [/for]
 
 [for (aFeature : StructuralFeature | aClass.allFeatures()->filter(StructuralFeature)->asOrderedSet()->sortedBy(myQualifiedName())) ? (aFeature.hasSetter())]
-m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[if (aFeature.upper<>1)]std::shared_ptr<std::vector<[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>>[/if]>(object));}));
+m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>[/if]>(object));}));
 [/for]
 
 [for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(name)) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]

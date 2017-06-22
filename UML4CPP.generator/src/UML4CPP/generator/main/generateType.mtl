@@ -19,13 +19,13 @@
 
 [template public generateCppType(aProperty : Property)]
 [if (not aProperty.type.oclIsUndefined() and not aProperty.type.isPrimitive())]
-[if (aProperty.upper <> 1)]std::shared_ptr<std::vector<[/if]std::shared_ptr<[aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>>[/if][else]
-[if (aProperty.upper <> 1)]std::shared_ptr<std::vector<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>>[/if][/if]
+[if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>[/if][else]
+[if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>[/if][/if]
 [/template]
 
 [template public generateCppType(aOperation : Operation)]
 [if (not(aOperation.upper=1))]
-std::shared_ptr<std::vector<[if (not aOperation.type.isPrimitive())]std::shared_ptr<[/if][aOperation.type.transformType()/][if (not aOperation.type.isPrimitive())]>[/if]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
+std::shared_ptr<Bag<[if (not aOperation.type.isPrimitive())]std::shared_ptr<[/if][aOperation.type.transformType()/][if (not aOperation.type.isPrimitive())]>[/if]>>[elseif ((not aOperation.type.oclIsUndefined()) and (not aOperation.type.isPrimitive()))]
 std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [aOperation.type.transformType()/][/if]
 [/template]

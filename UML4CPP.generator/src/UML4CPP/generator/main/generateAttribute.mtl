@@ -36,7 +36,7 @@
 [/template]
 
 [template public initAttributeProtectedMember(aProperty : Property)]
-m_[aProperty.name/].reset(new std::vector<std::shared_ptr<[aProperty.type.transformType()/]>>());
+m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 
 [/template]
 
