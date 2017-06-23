@@ -8,7 +8,7 @@ task createUML4CPP(dependsOn: ['checkDependencies', 'executeCompiler', 'UML4CPP.
 task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies','UML4CPP.generator.compiler:jar']) {
 	description 'generate emtl files for UML4CPP generator'
 	main = "-jar"
-	args "UML4CPP.generator.compiler/build/libs/UML4CPP.generator.compiler.jar", "UML4CPP.generator/src", "UML4CPP.generator/build/classes/main"
+	args "UML4CPP.generator.compiler/build/libs/UML4CPP.generator.compiler.jar", "UML4CPP.generator/src", "UML4CPP.generator/build/classes/java/main"
 }
 tasks.getByPath('UML4CPP.generator:jar').mustRunAfter(executeCompiler)
 
