@@ -17,6 +17,7 @@
 #include <boost/config.hpp>
 
 #include <boost/fiber/algo/algorithm.hpp>
+#include <boost/fiber/detail/context_spinlock_queue.hpp>
 #include <boost/fiber/detail/context_spmc_queue.hpp>
 #include <boost/fiber/context.hpp>
 #include <boost/fiber/detail/config.hpp>
@@ -32,45 +33,46 @@ namespace algo {
 
 class work_stealing : public algorithm {
 private:
-    typedef scheduler::ready_queue_t lqueue_t;
+    static std::vector< work_stealing * >                   schedulers_;
 
-    static std::vector< work_stealing * >        schedulers_;
-
-    std::size_t                                     idx_;
-    std::size_t                                     max_idx_;
-    detail::context_spmc_queue                      rqueue_{};
-    lqueue_t                                        lqueue_{};
-    std::mutex                                      mtx_{};
-    std::condition_variable                         cnd_{};
-    bool                                            flag_{ false };
-    bool                                            suspend_;
+    std::size_t                                             idx_;
+    std::size_t                                             max_idx_;
+#ifdef BOOST_FIBERS_USE_SPMC_QUEUE
+    alignas(cache_alignment) detail::context_spmc_queue     rqueue_{};
+#else
+    alignas(cache_alignment) detail::context_spinlock_queue rqueue_{};
+#endif
+    std::mutex                                              mtx_{};
+    std::condition_variable                                 cnd_{};
+    bool                                                    flag_{ false };
+    bool                                                    suspend_;
 
     static void init_( std::size_t max_idx);
 
 public:
     work_stealing( std::size_t max_idx, std::size_t idx, bool suspend = false);
 
-	work_stealing( work_stealing const&) = delete;
-	work_stealing( work_stealing &&) = delete;
+    work_stealing( work_stealing const&) = delete;
+    work_stealing( work_stealing &&) = delete;
 
-	work_stealing & operator=( work_stealing const&) = delete;
-	work_stealing & operator=( work_stealing &&) = delete;
+    work_stealing & operator=( work_stealing const&) = delete;
+    work_stealing & operator=( work_stealing &&) = delete;
 
     void awakened( context * ctx) noexcept;
 
     context * pick_next() noexcept;
 
     context * steal() noexcept {
-        return rqueue_.pop();
+        return rqueue_.steal();
     }
 
     bool has_ready_fibers() const noexcept {
-        return ! rqueue_.empty() || ! lqueue_.empty();
+        return ! rqueue_.empty();
     }
 
-	void suspend_until( std::chrono::steady_clock::time_point const& time_point) noexcept;
+    void suspend_until( std::chrono::steady_clock::time_point const& time_point) noexcept;
 
-	void notify() noexcept;
+    void notify() noexcept;
 };
 
 }}}

@@ -25,10 +25,7 @@ namespace detail {
 
 class spinlock_ttas_futex {
 private:
-    // align shared variable 'value_' at cache line to prevent false sharing
-    alignas(cache_alignment) std::atomic< std::int32_t >    value_{ 0 };
-    // padding to avoid other data one the cacheline of shared variable 'value_'
-    char                                                    pad_[cacheline_length];
+    std::atomic< std::int32_t > value_{ 0 };
 
 public:
     spinlock_ttas_futex() noexcept = default;
@@ -57,6 +54,7 @@ public:
                 // delays the next instruction's execution for a finite period of time (depends on processor family)
                 // the CPU is not under demand, parts of the pipeline are no longer being used
                 // -> reduces the power consumed by the CPU
+                // -> prevent pipeline stalls
                 cpu_relax();
 #else
                 // std::this_thread::yield() allows this_thread to give up the remaining part of its time slice,
@@ -69,10 +67,12 @@ public:
                 // utilize 'Binary Exponential Backoff' algorithm
                 // linear_congruential_engine is a random number engine based on Linear congruential generator (LCG)
                 static thread_local std::minstd_rand generator;
-                const std::int32_t z = std::uniform_int_distribution< std::int32_t >{
-                    0, static_cast< std::int32_t >( 1) << collisions }( generator);
+                static std::uniform_int_distribution< std::int32_t > distribution{ 0, static_cast< std::int32_t >( 1) << collisions };
+                const std::int32_t z = distribution( generator);
                 ++collisions;
                 for ( std::int32_t i = 0; i < z; ++i) {
+                    // -> reduces the power consumed by the CPU
+                    // -> prevent pipeline stalls
                     cpu_relax();
                 }
             } else {
