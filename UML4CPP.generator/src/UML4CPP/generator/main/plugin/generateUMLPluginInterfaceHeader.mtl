@@ -17,7 +17,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Plugin');}]
-[file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
 #include "UMLPlugin.hpp"
