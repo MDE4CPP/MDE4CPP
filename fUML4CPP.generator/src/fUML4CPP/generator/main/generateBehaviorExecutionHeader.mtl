@@ -21,7 +21,7 @@
 [startGuard(anOpaqueBehavior,'Execution')/]
 
 #include "impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "SubsetUnion.hpp"
+#include "SubsetUnion.hpp" 
 
 [if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
 [let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]
@@ -49,3 +49,4 @@ namespace [aPackage.name/]
 }
 [endGuard(anOpaqueBehavior,'Execution')/]
 [/file]
+[/template]
