@@ -21,6 +21,8 @@
 
 #include "impl/InteractionFragmentImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Constraint> getInvariant() const ;
+			virtual std::shared_ptr<uml::Constraint > getInvariant() const ;
 			
 			/*!
 			 A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p> */
-			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant) ;
+			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant_invariant) ;
 							
 			
 			//*********************************
@@ -73,13 +75,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

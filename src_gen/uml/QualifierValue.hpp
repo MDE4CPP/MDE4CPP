@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -80,17 +81,20 @@ namespace uml
 			/*!
 			 The multiplicity of the value InputPin is 1..1.
 			value.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type) */ 
-			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier) */ 
-			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -103,21 +107,21 @@ namespace uml
 			/*!
 			 The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::Property> getQualifier() const = 0;
+			virtual std::shared_ptr<uml::Property > getQualifier() const = 0;
 			
 			/*!
 			 The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p> */
-			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) = 0;
+			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier_qualifier) = 0;
 			/*!
 			 The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
+			virtual std::shared_ptr<uml::InputPin > getValue() const = 0;
 			
 			/*!
 			 The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p> */
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) = 0;
+			virtual void setValue(std::shared_ptr<uml::InputPin> _value_value) = 0;
 			
 
 		protected:
@@ -132,11 +136,11 @@ namespace uml
 			/*!
 			 The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Property> m_qualifier;
+			std::shared_ptr<uml::Property > m_qualifier;
 			/*!
 			 The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin> m_value;
+			std::shared_ptr<uml::InputPin > m_value;
 			
 
 		public:
@@ -146,7 +150,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

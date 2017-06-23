@@ -21,6 +21,8 @@
 
 #include "impl/NamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,7 +51,8 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -64,21 +67,21 @@ namespace uml
 			/*!
 			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const ;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getAfter() const ;
 			
 			/*!
 			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p> */
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after) ;
+			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after_after) ;
 			/*!
 			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const ;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getBefore() const ;
 			
 			/*!
 			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p> */
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before) ;
+			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before_before) ;
 							
 			
 			//*********************************
@@ -87,10 +90,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

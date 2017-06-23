@@ -21,6 +21,8 @@
 
 #include "impl/OccurrenceSpecificationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::ExecutionSpecification> getExecution() const ;
+			virtual std::shared_ptr<uml::ExecutionSpecification > getExecution() const ;
 			
 			/*!
 			 References the execution specification describing the execution that is started or finished at this execution event.
 			<p>From package UML::Interactions.</p> */
-			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution) ;
+			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution_execution) ;
 							
 			
 			//*********************************
@@ -73,13 +75,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -22,6 +22,8 @@
 #include "impl/BehavioredClassifierImpl.hpp"
 #include "impl/EncapsulatedClassifierImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,15 +52,18 @@ namespace uml
 			/*!
 			 Only an active Class may own Receptions and have a classifierBehavior.
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null) */ 
-			virtual bool passive_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 passive_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class. */ 
-			virtual std::shared_ptr<uml::Operation>  createOwnedOperation(std::string name,std::shared_ptr<std::vector<std::shared_ptr<std::string>>>  parameterNames,std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>>  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
+			virtual std::shared_ptr<uml::Operation> 
+			 createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)  ;
 			
 			/*!
 			 Determines whether this class is a metaclass. */ 
-			virtual bool isMetaclass()  ;
+			virtual bool
+			 isMetaclass()  ;
 			
 			/*!
 			 Derivation for Class::/extension : Extension
@@ -66,13 +71,15 @@ namespace uml
 			  let endTypes : Sequence(Classifier) = ext.memberEnd->collect(type.oclAsType(Classifier)) in
 			  endTypes->includes(self) or endTypes.allParents()->includes(self) ))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Extension>>> getExtensions()  ;
+			virtual std::shared_ptr<Bag<uml::Extension> >
+			 getExtensions()  ;
 			
 			/*!
 			 Derivation for Class::/superClass : Class
 			result = (self.general()->select(oclIsKindOf(Class))->collect(oclAsType(Class))->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>> getSuperClasses()  ;
+			virtual std::shared_ptr<Bag<uml::Class> >
+			 getSuperClasses()  ;
 			
 			
 			
@@ -97,27 +104,34 @@ namespace uml
 			/*!
 			 The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Operation>>> getOwnedOperation() const ;
+			virtual 		std::shared_ptr<Subset<uml::Operation, uml::Feature
+					,uml::NamedElement > >
+			 getOwnedOperation() const ;
 			
 			/*!
 			 This property is used when the Class is acting as a metaclass. It references the Extensions that specify additional properties of the metaclass. The property is derived from the Extensions whose memberEnds are typed by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Extension>>> getExtension() const ;
+			virtual 	std::shared_ptr< Bag<uml::Extension> >
+			 getExtension() const ;
 			
 			/*!
 			 The Classifiers owned by the Class that are not ownedBehaviors.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getNestedClassifier() const ;
+			virtual 		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement > >
+			 getNestedClassifier() const ;
 			
 			/*!
 			 The Receptions owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Reception>>> getOwnedReception() const ;
+			virtual 		std::shared_ptr<Subset<uml::Reception, uml::Feature
+					,uml::NamedElement > >
+			 getOwnedReception() const ;
 			
 			/*!
 			 The superclasses of a Class, derived from its Generalizations.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>> getSuperClass() const ;
+			virtual 	std::shared_ptr< Bag<uml::Class> >
+			 getSuperClass() const ;
 			
 							
 			
@@ -127,31 +141,36 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
+			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
+			 getAttribute() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const ;/*!
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+					,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
+			 getFeature() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The roles that instances may play in this StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectableElement>>> getRole() const ; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
+			 getRole() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

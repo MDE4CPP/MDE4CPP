@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -101,7 +102,8 @@ namespace uml
 			/*!
 			 An ExtensionPoint must have a name.
 			name->notEmpty () */ 
-			virtual bool must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -114,12 +116,12 @@ namespace uml
 			/*!
 			 The UseCase that owns this ExtensionPoint.
 			<p>From package UML::UseCases.</p> */
-			virtual std::shared_ptr<uml::UseCase> getUseCase() const = 0;
+			virtual std::shared_ptr<uml::UseCase > getUseCase() const = 0;
 			
 			/*!
 			 The UseCase that owns this ExtensionPoint.
 			<p>From package UML::UseCases.</p> */
-			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase) = 0;
+			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase_useCase) = 0;
 			
 
 		protected:
@@ -134,7 +136,7 @@ namespace uml
 			/*!
 			 The UseCase that owns this ExtensionPoint.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<uml::UseCase> m_useCase;
+			std::shared_ptr<uml::UseCase > m_useCase;
 			
 
 		public:
@@ -142,15 +144,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

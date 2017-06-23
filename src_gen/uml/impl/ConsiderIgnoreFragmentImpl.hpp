@@ -21,6 +21,8 @@
 
 #include "impl/CombinedFragmentImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,12 +51,14 @@ namespace uml
 			/*!
 			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
-			virtual bool consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
-			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -69,7 +73,8 @@ namespace uml
 			/*!
 			 The set of messages that apply to this fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMessage() const ;
+			virtual 	std::shared_ptr< Bag<uml::NamedElement> >
+			 getMessage() const ;
 			
 							
 			
@@ -79,13 +84,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

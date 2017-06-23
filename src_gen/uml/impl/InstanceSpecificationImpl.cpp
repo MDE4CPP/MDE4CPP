@@ -19,8 +19,13 @@ InstanceSpecificationImpl::InstanceSpecificationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_classifier.reset(new std::vector<std::shared_ptr<uml::Classifier>>());
-	m_slot.reset(new std::vector<std::shared_ptr<uml::Slot>>());
+		m_classifier.reset(new Bag<uml::Classifier>());
+	
+	
+		/*Subset*/
+		m_slot.reset(new Subset<uml::Slot, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 	
 }
 
@@ -41,19 +46,25 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _classifier = obj.getClassifier();
-	this->getClassifier()->insert(this->getClassifier()->end(), _classifier->begin(), _classifier->end());
+		std::shared_ptr< Bag<uml::Classifier> >
+	 _classifier = obj.getClassifier();
+	m_classifier.reset(new 	 Bag<uml::Classifier> 
+	(*(obj.getClassifier().get())));// this->getClassifier()->insert(this->getClassifier()->end(), _classifier->begin(), _classifier->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _deployedElement = obj.getDeployedElement();
-	this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
+		std::shared_ptr< Bag<uml::PackageableElement> >
+	 _deployedElement = obj.getDeployedElement();
+	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
+	(*(obj.getDeployedElement().get())));// this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -63,29 +74,29 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> _deploymentList = obj.getDeployment();
+	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->push_back(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
+		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> _slotList = obj.getSlot();
+	std::shared_ptr<Bag<uml::Slot>> _slotList = obj.getSlot();
 	for(std::shared_ptr<uml::Slot> _slot : *_slotList)
 	{
-		this->getSlot()->push_back(std::shared_ptr<uml::Slot>(dynamic_cast<uml::Slot*>(_slot->copy())));
+		this->getSlot()->add(std::shared_ptr<uml::Slot>(dynamic_cast<uml::Slot*>(_slot->copy())));
 	}
 	if(obj.getSpecification()!=nullptr)
 	{
@@ -110,25 +121,29 @@ std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ InstanceSpecificationImpl::defining_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ InstanceSpecificationImpl::deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ InstanceSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ InstanceSpecificationImpl::structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -137,21 +152,23 @@ bool InstanceSpecificationImpl::structural_feature(boost::any diagnostics,std::m
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> InstanceSpecificationImpl::getClassifier() const
+	std::shared_ptr< Bag<uml::Classifier> >
+ InstanceSpecificationImpl::getClassifier() const
 {
 
     return m_classifier;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> InstanceSpecificationImpl::getSlot() const
+		std::shared_ptr<Subset<uml::Slot, uml::Element > >
+ InstanceSpecificationImpl::getSlot() const
 {
 
     return m_slot;
 }
 
 
-std::shared_ptr<uml::ValueSpecification> InstanceSpecificationImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification > InstanceSpecificationImpl::getSpecification() const
 {
 
     return m_specification;
@@ -164,35 +181,17 @@ void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpeci
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> InstanceSpecificationImpl::getOwner() const
+		std::shared_ptr<Union<uml::Element> > InstanceSpecificationImpl::getOwnedElement() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InstanceSpecificationImpl::getOwnedElement() const
+std::shared_ptr<uml::Element > InstanceSpecificationImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> deployment = getDeployment();
-	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> slot = getSlot();
-	_ownedElement->insert(_ownedElement->end(), slot->begin(), slot->end());
-	_ownedElement->push_back(getSpecification());
 
-	return _ownedElement;
+	return m_owner;
 }
 
 

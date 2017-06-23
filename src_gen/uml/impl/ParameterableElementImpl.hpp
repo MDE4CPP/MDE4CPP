@@ -21,6 +21,8 @@
 
 #include "impl/ElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,13 +52,15 @@ namespace uml
 			 The query isCompatibleWith() determines if this ParameterableElement is compatible with the specified ParameterableElement. By default, this ParameterableElement is compatible with another ParameterableElement p if the kind of this ParameterableElement is the same as or a subtype of the kind of p. Subclasses of ParameterableElement should override this operation to specify different compatibility constraints.
 			result = (self.oclIsKindOf(p.oclType()))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)  ;
+			virtual bool
+			 isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)  ;
 			
 			/*!
 			 The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isTemplateParameter()  ;
+			virtual bool
+			 isTemplateParameter()  ;
 			
 			
 			
@@ -71,21 +75,21 @@ namespace uml
 			/*!
 			 The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateParameter> getOwningTemplateParameter() const ;
+			virtual std::shared_ptr<uml::TemplateParameter > getOwningTemplateParameter() const ;
 			
 			/*!
 			 The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter) ;
+			virtual void setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter_owningTemplateParameter) ;
 			/*!
 			 The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const ;
+			virtual std::shared_ptr<uml::TemplateParameter > getTemplateParameter() const ;
 			
 			/*!
 			 The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter) ;
+			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter_templateParameter) ;
 							
 			
 			//*********************************
@@ -94,10 +98,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

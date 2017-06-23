@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -119,30 +120,32 @@ namespace uml
 			/*!
 			 References the Lifelines that the InteractionFragment involves.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> getCovered() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::Lifeline> >
+			 getCovered() const = 0;
 			
 			/*!
 			 The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::InteractionOperand> getEnclosingOperand() const = 0;
+			virtual std::shared_ptr<uml::InteractionOperand > getEnclosingOperand() const = 0;
 			
 			/*!
 			 The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand) = 0;
+			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) = 0;
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Interaction> getEnclosingInteraction() const = 0;
+			virtual std::shared_ptr<uml::Interaction > getEnclosingInteraction() const = 0;
 			
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction) = 0;
+			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction_enclosingInteraction) = 0;
 			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getGeneralOrdering() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > >
+			 getGeneralOrdering() const = 0;
 			
 			
 
@@ -158,19 +161,21 @@ namespace uml
 			/*!
 			 References the Lifelines that the InteractionFragment involves.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> m_covered;
+				std::shared_ptr< Bag<uml::Lifeline> >
+			 m_covered;
 			/*!
 			 The operand enclosing this InteractionFragment (they may nest recursively).
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::InteractionOperand> m_enclosingOperand;
+			std::shared_ptr<uml::InteractionOperand > m_enclosingOperand;
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Interaction> m_enclosingInteraction;
+			std::shared_ptr<uml::Interaction > m_enclosingInteraction;
 			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> m_generalOrdering;
+					std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > >
+			 m_generalOrdering;
 			
 
 		public:
@@ -178,15 +183,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

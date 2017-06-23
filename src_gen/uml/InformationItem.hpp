@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -180,17 +181,20 @@ namespace uml
 			    p.conveyingFlow.target->forAll(q | self.conveyingFlow.target->includes(q)))) and
 			      (self.represented->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface) or
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))) */ 
-			virtual bool sources_and_targets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 sources_and_targets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An informationItem has no feature, no generalization, and no associations.
 			self.generalization->isEmpty() and self.feature->isEmpty() */ 
-			virtual bool has_no(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 has_no(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 It is not instantiable.
 			isAbstract */ 
-			virtual bool not_instantiable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 not_instantiable(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -203,7 +207,8 @@ namespace uml
 			/*!
 			 Determines the classifiers that will specify the structure and nature of the information. An information item represents all its represented classifiers.
 			<p>From package UML::InformationFlows.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRepresented() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::Classifier> >
+			 getRepresented() const = 0;
 			
 			
 
@@ -219,7 +224,8 @@ namespace uml
 			/*!
 			 Determines the classifiers that will specify the structure and nature of the information. An information item represents all its represented classifiers.
 			<p>From package UML::InformationFlows.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_represented;
+				std::shared_ptr< Bag<uml::Classifier> >
+			 m_represented;
 			
 
 		public:
@@ -227,27 +233,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+					,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0; 
+			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
+			 getFeature() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

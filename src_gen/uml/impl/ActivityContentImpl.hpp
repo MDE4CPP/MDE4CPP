@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity>  containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity> 
+			 containingActivity()  ;
 			
 			
 			

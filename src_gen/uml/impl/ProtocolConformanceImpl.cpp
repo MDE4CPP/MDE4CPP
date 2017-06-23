@@ -39,33 +39,37 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 	
 	m_generalMachine  = obj.getGeneralMachine();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
-	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
+			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
-	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _source = obj.getSource();
+	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
 
 	m_specificMachine  = obj.getSpecificMachine();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
-	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _target = obj.getTarget();
+	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -90,7 +94,7 @@ std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMachine() const
+std::shared_ptr<uml::ProtocolStateMachine > ProtocolConformanceImpl::getGeneralMachine() const
 {
 //assert(m_generalMachine);
     return m_generalMachine;
@@ -100,7 +104,7 @@ void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolSta
     m_generalMachine = _generalMachine;
 }
 
-std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getSpecificMachine() const
+std::shared_ptr<uml::ProtocolStateMachine > ProtocolConformanceImpl::getSpecificMachine() const
 {
 //assert(m_specificMachine);
     return m_specificMachine;
@@ -113,52 +117,37 @@ void ProtocolConformanceImpl::setSpecificMachine(std::shared_ptr<uml::ProtocolSt
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> ProtocolConformanceImpl::getOwner() const
+		std::shared_ptr<Union<uml::Element> > ProtocolConformanceImpl::getRelatedElement() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getSpecificMachine()!=nullptr)
-	{
-		_owner = getSpecificMachine();
-	}
 
-	return _owner;
+	return m_relatedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProtocolConformanceImpl::getSource() const
+std::shared_ptr<uml::Element > ProtocolConformanceImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_source->push_back(getSpecificMachine());
 
-	return _source;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProtocolConformanceImpl::getTarget() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ ProtocolConformanceImpl::getTarget() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_target->push_back(getGeneralMachine());
 
-	return _target;
+	return m_target;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProtocolConformanceImpl::getOwnedElement() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ ProtocolConformanceImpl::getSource() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_source;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ProtocolConformanceImpl::getRelatedElement() const
+		std::shared_ptr<Union<uml::Element> > ProtocolConformanceImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
-	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
-	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
 
-	return _relatedElement;
+	return m_ownedElement;
 }
 
 

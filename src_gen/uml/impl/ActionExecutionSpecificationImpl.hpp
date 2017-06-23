@@ -21,6 +21,8 @@
 
 #include "impl/ExecutionSpecificationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -53,7 +55,8 @@ namespace uml
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
-			virtual bool action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -68,12 +71,12 @@ namespace uml
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Action> getAction() const ;
+			virtual std::shared_ptr<uml::Action > getAction() const ;
 			
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<uml::Action> _action_action) ;
 							
 			
 			//*********************************
@@ -82,13 +85,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

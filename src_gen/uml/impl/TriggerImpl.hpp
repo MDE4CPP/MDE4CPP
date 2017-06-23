@@ -21,6 +21,8 @@
 
 #include "impl/NamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,7 +51,8 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -64,16 +67,17 @@ namespace uml
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::Event> getEvent() const ;
+			virtual std::shared_ptr<uml::Event > getEvent() const ;
 			
 			/*!
 			 The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(std::shared_ptr<uml::Event> _event) ;
+			virtual void setEvent(std::shared_ptr<uml::Event> _event_event) ;
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Port>>> getPort() const ;
+			virtual 	std::shared_ptr< Bag<uml::Port> >
+			 getPort() const ;
 			
 							
 			
@@ -83,10 +87,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

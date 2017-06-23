@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -245,12 +246,12 @@ namespace uml
 			/*!
 			 Specifies the behavior in one or more languages.
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::shared_ptr<std::vector<std::string>> getBody() const = 0;
+			virtual std::shared_ptr<Bag<std::string> > getBody() const = 0;
 			
 			/*!
 			 Languages the body strings use in the same order as the body strings.
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual std::shared_ptr<std::vector<std::string>> getLanguage() const = 0;
+			virtual std::shared_ptr<Bag<std::string> > getLanguage() const = 0;
 			
 			
 			//*********************************
@@ -265,10 +266,10 @@ namespace uml
 			/*!
 			 Specifies the behavior in one or more languages.
 			<p>From package UML::CommonBehavior.</p> */ 
-			std::shared_ptr<std::vector<std::string>> m_body; /*!
+			std::shared_ptr<Bag<std::string> > m_body; /*!
 			 Languages the body strings use in the same order as the body strings.
 			<p>From package UML::CommonBehavior.</p> */ 
-			std::shared_ptr<std::vector<std::string>> m_language; 
+			std::shared_ptr<Bag<std::string> > m_language; 
 			
 			//*********************************
 			// Reference Members
@@ -280,36 +281,41 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectableElement>>> getRole() const = 0;/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> getAttribute() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+					,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
+			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
+			 getAttribute() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0;/*!
+			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The contexts that this element may be redefined from.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRedefinitionContext() const = 0; 
+			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
+			 getFeature() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
+			 getRole() const = 0; 
 	};
 
 }

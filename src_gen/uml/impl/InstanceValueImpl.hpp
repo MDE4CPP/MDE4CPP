@@ -21,6 +21,8 @@
 
 #include "impl/ValueSpecificationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::InstanceSpecification> getInstance() const ;
+			virtual std::shared_ptr<uml::InstanceSpecification > getInstance() const ;
 			
 			/*!
 			 The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p> */
-			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance) ;
+			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance_instance) ;
 							
 			
 			//*********************************
@@ -73,10 +75,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

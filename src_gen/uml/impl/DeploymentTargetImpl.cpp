@@ -19,8 +19,13 @@ DeploymentTargetImpl::DeploymentTargetImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_deployedElement.reset(new std::vector<std::shared_ptr<uml::PackageableElement>>());
-	m_deployment.reset(new std::vector<std::shared_ptr<uml::Deployment>>());
+		m_deployedElement.reset(new Bag<uml::PackageableElement>());
+	
+	
+		/*Subset*/
+		m_deployment.reset(new Subset<uml::Deployment, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 }
 
 DeploymentTargetImpl::~DeploymentTargetImpl()
@@ -40,39 +45,43 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _deployedElement = obj.getDeployedElement();
-	this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
+		std::shared_ptr< Bag<uml::PackageableElement> >
+	 _deployedElement = obj.getDeployedElement();
+	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
+	(*(obj.getDeployedElement().get())));// this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> _deploymentList = obj.getDeployment();
+	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->push_back(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
+		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -93,7 +102,8 @@ std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> DeploymentTargetImpl::getDeployedElements() 
+std::shared_ptr<Bag<uml::PackageableElement> >
+ DeploymentTargetImpl::getDeployedElements() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -102,14 +112,16 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> Deploymen
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> DeploymentTargetImpl::getDeployedElement() const
+	std::shared_ptr< Bag<uml::PackageableElement> >
+ DeploymentTargetImpl::getDeployedElement() const
 {
 
     return m_deployedElement;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> DeploymentTargetImpl::getDeployment() const
+		std::shared_ptr<Subset<uml::Deployment, uml::Element > >
+ DeploymentTargetImpl::getDeployment() const
 {
 
     return m_deployment;
@@ -119,28 +131,17 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> DeploymentTargetI
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> DeploymentTargetImpl::getOwner() const
+std::shared_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
 
-	return _owner;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> DeploymentTargetImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > DeploymentTargetImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> deployment = getDeployment();
-	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
 
 

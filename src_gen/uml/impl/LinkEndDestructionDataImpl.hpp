@@ -21,6 +21,8 @@
 
 #include "impl/LinkEndDataImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -54,7 +56,8 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -79,12 +82,12 @@ namespace uml
 			/*!
 			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const ;
+			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const ;
 			
 			/*!
 			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p> */
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) ;
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt_destroyAt) ;
 							
 			
 			//*********************************
@@ -93,7 +96,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

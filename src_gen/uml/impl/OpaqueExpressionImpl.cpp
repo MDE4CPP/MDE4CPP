@@ -15,8 +15,8 @@ OpaqueExpressionImpl::OpaqueExpressionImpl()
 	//*********************************
 	// Attribute Members
 	//*********************************
-	m_body.reset(new std::vector<std::string>());
-	m_language.reset(new std::vector<std::string>());
+	m_body.reset(new Bag<std::string>());
+	m_language.reset(new Bag<std::string>());
 	//*********************************
 	// Reference Members
 	//*********************************
@@ -45,13 +45,15 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj)
 	
 	m_behavior  = obj.getBehavior();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -65,19 +67,19 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -96,14 +98,14 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<std::vector<std::string>> OpaqueExpressionImpl::getBody() const 
+std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const 
 {
 	return m_body;
 }
 
 
 
-std::shared_ptr<std::vector<std::string>> OpaqueExpressionImpl::getLanguage() const 
+std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const 
 {
 	return m_language;
 }
@@ -113,43 +115,50 @@ std::shared_ptr<std::vector<std::string>> OpaqueExpressionImpl::getLanguage() co
 //*********************************
 
 
-bool OpaqueExpressionImpl::isIntegral() 
+bool
+ OpaqueExpressionImpl::isIntegral() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::isNonNegative() 
+bool
+ OpaqueExpressionImpl::isNonNegative() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::isPositive() 
+bool
+ OpaqueExpressionImpl::isPositive() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ OpaqueExpressionImpl::language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ OpaqueExpressionImpl::one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ OpaqueExpressionImpl::only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int OpaqueExpressionImpl::value() 
+int
+ OpaqueExpressionImpl::value() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,7 +167,7 @@ int OpaqueExpressionImpl::value()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Behavior> OpaqueExpressionImpl::getBehavior() const
+std::shared_ptr<uml::Behavior > OpaqueExpressionImpl::getBehavior() const
 {
 
     return m_behavior;
@@ -168,7 +177,7 @@ void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
     m_behavior = _behavior;
 }
 
-std::shared_ptr<uml::Parameter> OpaqueExpressionImpl::getResult() const
+std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
 {
 
     return m_result;
@@ -178,30 +187,17 @@ std::shared_ptr<uml::Parameter> OpaqueExpressionImpl::getResult() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> OpaqueExpressionImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > OpaqueExpressionImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element> OpaqueExpressionImpl::getOwner() const
+std::shared_ptr<uml::Element > OpaqueExpressionImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_owner;
 }
 
 

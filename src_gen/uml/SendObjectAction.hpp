@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -161,7 +162,8 @@ namespace uml
 			/*!
 			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
-			virtual bool type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 type_target_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -174,21 +176,21 @@ namespace uml
 			/*!
 			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getRequest() const = 0;
+			virtual std::shared_ptr<uml::InputPin > getRequest() const = 0;
 			
 			/*!
 			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p> */
-			virtual void setRequest(std::shared_ptr<uml::InputPin> _request) = 0;
+			virtual void setRequest(std::shared_ptr<uml::InputPin> _request_request) = 0;
 			/*!
 			 The target object to which the object is sent.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
+			virtual std::shared_ptr<uml::InputPin > getTarget() const = 0;
 			
 			/*!
 			 The target object to which the object is sent.
 			<p>From package UML::Actions.</p> */
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
+			virtual void setTarget(std::shared_ptr<uml::InputPin> _target_target) = 0;
 			
 
 		protected:
@@ -203,11 +205,11 @@ namespace uml
 			/*!
 			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin> m_request;
+			std::shared_ptr<uml::InputPin > m_request;
 			/*!
 			 The target object to which the object is sent.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin> m_target;
+			std::shared_ptr<uml::InputPin > m_target;
 			
 
 		public:
@@ -215,21 +217,22 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+			 getInput() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

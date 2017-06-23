@@ -14,6 +14,7 @@
 #endif
 
 #include "EFactory.hpp"
+#include <memory>
 
 namespace uml 
 {	class Abstraction;
@@ -282,6 +283,8 @@ namespace uml
 			static std::shared_ptr<UmlFactory> eInstance();
 		
 			//Creator functions
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const = 0;
+
 			virtual Activity* createActivity() const = 0;
 			virtual Class* createClass() const = 0;
 			virtual Comment* createComment() const = 0;

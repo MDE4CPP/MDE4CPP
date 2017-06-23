@@ -57,7 +57,8 @@ std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Activity>  ActivityContentImpl::containingActivity() 
+std::shared_ptr<uml::Activity> 
+ ActivityContentImpl::containingActivity() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

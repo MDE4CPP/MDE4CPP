@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -124,12 +125,12 @@ namespace uml
 			/*!
 			 A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Constraint> getInvariant() const = 0;
+			virtual std::shared_ptr<uml::Constraint > getInvariant() const = 0;
 			
 			/*!
 			 A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p> */
-			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant) = 0;
+			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant_invariant) = 0;
 			
 
 		protected:
@@ -144,7 +145,7 @@ namespace uml
 			/*!
 			 A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Constraint> m_invariant;
+			std::shared_ptr<uml::Constraint > m_invariant;
 			
 
 		public:
@@ -152,15 +153,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

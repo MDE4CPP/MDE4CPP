@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -164,17 +165,20 @@ namespace uml
 				selection.inputParameters()->forAll(p | not p.isUnique and p.is(0,*) and self.type.conformsTo(p.type)) and
 				selection.outputParameters()->size()=1 and
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type)) */ 
-			virtual bool input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered) */ 
-			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow)) */ 
-			virtual bool object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -207,26 +211,27 @@ namespace uml
 			/*!
 			 The States required to be associated with the values held by tokens on this ObjectNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::State>>> getInState() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::State> >
+			 getInState() const = 0;
 			
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Behavior> getSelection() const = 0;
+			virtual std::shared_ptr<uml::Behavior > getSelection() const = 0;
 			
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */
-			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) = 0;
+			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection_selection) = 0;
 			/*!
 			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getUpperBound() const = 0;
 			
 			/*!
 			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p> */
-			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound) = 0;
+			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound_upperBound) = 0;
 			
 
 		protected:
@@ -249,15 +254,16 @@ namespace uml
 			/*!
 			 The States required to be associated with the values held by tokens on this ObjectNode.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::State>>> m_inState;
+				std::shared_ptr< Bag<uml::State> >
+			 m_inState;
 			/*!
 			 A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::Behavior> m_selection;
+			std::shared_ptr<uml::Behavior > m_selection;
 			/*!
 			 The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ValueSpecification> m_upperBound;
+			std::shared_ptr<uml::ValueSpecification > m_upperBound;
 			
 
 		public:
@@ -265,18 +271,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

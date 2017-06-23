@@ -21,6 +21,8 @@
 
 #include "impl/DirectedRelationshipImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,21 +61,21 @@ namespace uml
 			/*!
 			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const ;
+			virtual std::shared_ptr<uml::ProtocolStateMachine > getGeneralMachine() const ;
 			
 			/*!
 			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine) ;
+			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine_generalMachine) ;
 			/*!
 			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<uml::ProtocolStateMachine> getSpecificMachine() const ;
+			virtual std::shared_ptr<uml::ProtocolStateMachine > getSpecificMachine() const ;
 			
 			/*!
 			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine) ;
+			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine_specificMachine) ;
 							
 			
 			//*********************************
@@ -82,19 +84,21 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const ;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

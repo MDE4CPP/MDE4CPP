@@ -19,7 +19,9 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_message.reset(new std::vector<std::shared_ptr<uml::NamedElement>>());
+		m_message.reset(new Bag<uml::NamedElement>());
+	
+	
 }
 
 ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
@@ -40,56 +42,62 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragm
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Lifeline>>> _covered = obj.getCovered();
-	this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
+		std::shared_ptr< Bag<uml::Lifeline> >
+	 _covered = obj.getCovered();
+	m_covered.reset(new 	 Bag<uml::Lifeline> 
+	(*(obj.getCovered().get())));// this->getCovered()->insert(this->getCovered()->end(), _covered->begin(), _covered->end());
 
 	m_enclosingInteraction  = obj.getEnclosingInteraction();
 
 	m_enclosingOperand  = obj.getEnclosingOperand();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _message = obj.getMessage();
-	this->getMessage()->insert(this->getMessage()->end(), _message->begin(), _message->end());
+		std::shared_ptr< Bag<uml::NamedElement> >
+	 _message = obj.getMessage();
+	m_message.reset(new 	 Bag<uml::NamedElement> 
+	(*(obj.getMessage().get())));// this->getMessage()->insert(this->getMessage()->end(), _message->begin(), _message->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> _cfragmentGateList = obj.getCfragmentGate();
+	std::shared_ptr<Bag<uml::Gate>> _cfragmentGateList = obj.getCfragmentGate();
 	for(std::shared_ptr<uml::Gate> _cfragmentGate : *_cfragmentGateList)
 	{
-		this->getCfragmentGate()->push_back(std::shared_ptr<uml::Gate>(dynamic_cast<uml::Gate*>(_cfragmentGate->copy())));
+		this->getCfragmentGate()->add(std::shared_ptr<uml::Gate>(dynamic_cast<uml::Gate*>(_cfragmentGate->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> _generalOrderingList = obj.getGeneralOrdering();
+	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->push_back(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
+		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionOperand>>> _operandList = obj.getOperand();
+	std::shared_ptr<Bag<uml::InteractionOperand>> _operandList = obj.getOperand();
 	for(std::shared_ptr<uml::InteractionOperand> _operand : *_operandList)
 	{
-		this->getOperand()->push_back(std::shared_ptr<uml::InteractionOperand>(dynamic_cast<uml::InteractionOperand*>(_operand->copy())));
+		this->getOperand()->add(std::shared_ptr<uml::InteractionOperand>(dynamic_cast<uml::InteractionOperand*>(_operand->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -110,13 +118,15 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ConsiderIgnoreFragmentImpl::consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConsiderIgnoreFragmentImpl::type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ConsiderIgnoreFragmentImpl::type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -125,7 +135,8 @@ bool ConsiderIgnoreFragmentImpl::type(boost::any diagnostics,std::map <   boost:
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ConsiderIgnoreFragmentImpl::getMessage() const
+	std::shared_ptr< Bag<uml::NamedElement> >
+ ConsiderIgnoreFragmentImpl::getMessage() const
 {
 
     return m_message;
@@ -135,47 +146,23 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ConsiderIgnoreF
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace> ConsiderIgnoreFragmentImpl::getNamespace() const
+		std::shared_ptr<Union<uml::Element> > ConsiderIgnoreFragmentImpl::getOwnedElement() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getEnclosingInteraction()!=nullptr)
-	{
-		_namespace = getEnclosingInteraction();
-	}
-	if(getEnclosingOperand()!=nullptr)
-	{
-		_namespace = getEnclosingOperand();
-	}
 
-	return _namespace;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element> ConsiderIgnoreFragmentImpl::getOwner() const
+std::shared_ptr<uml::Element > ConsiderIgnoreFragmentImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
 
-	return _owner;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ConsiderIgnoreFragmentImpl::getOwnedElement() const
+std::shared_ptr<uml::Namespace > ConsiderIgnoreFragmentImpl::getNamespace() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Gate>>> cfragmentGate = getCfragmentGate();
-	_ownedElement->insert(_ownedElement->end(), cfragmentGate->begin(), cfragmentGate->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> generalOrdering = getGeneralOrdering();
-	_ownedElement->insert(_ownedElement->end(), generalOrdering->begin(), generalOrdering->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionOperand>>> operand = getOperand();
-	_ownedElement->insert(_ownedElement->end(), operand->begin(), operand->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_namespace;
 }
 
 

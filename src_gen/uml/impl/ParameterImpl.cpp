@@ -25,7 +25,9 @@ ParameterImpl::ParameterImpl()
 	//*********************************
 	
 	
-	m_parameterSet.reset(new std::vector<std::shared_ptr<uml::ParameterSet>>());
+		m_parameterSet.reset(new Bag<uml::ParameterSet>());
+	
+	
 }
 
 ParameterImpl::~ParameterImpl()
@@ -54,25 +56,31 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _end = obj.getEnd();
-	this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
+		std::shared_ptr< Bag<uml::ConnectorEnd> >
+	 _end = obj.getEnd();
+	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
+	(*(obj.getEnd().get())));// this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
 
 	m_namespace  = obj.getNamespace();
 
 	m_operation  = obj.getOperation();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> _parameterSet = obj.getParameterSet();
-	this->getParameterSet()->insert(this->getParameterSet()->end(), _parameterSet->begin(), _parameterSet->end());
+		std::shared_ptr< Bag<uml::ParameterSet> >
+	 _parameterSet = obj.getParameterSet();
+	m_parameterSet.reset(new 	 Bag<uml::ParameterSet> 
+	(*(obj.getParameterSet().get())));// this->getParameterSet()->insert(this->getParameterSet()->end(), _parameterSet->begin(), _parameterSet->end());
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -84,10 +92,10 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj)
 	{
 		m_defaultValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getDefaultValue()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
@@ -97,10 +105,10 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
@@ -174,85 +182,99 @@ bool ParameterImpl::getIsStream() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::isSetDefault() 
+bool
+ ParameterImpl::isSetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setBooleanDefaultValue(bool value) 
+void
+ ParameterImpl::setBooleanDefaultValue(bool value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setIntegerDefaultValue(int value) 
+void
+ ParameterImpl::setIntegerDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setNullDefaultValue() 
+void
+ ParameterImpl::setNullDefaultValue() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setRealDefaultValue(double value) 
+void
+ ParameterImpl::setRealDefaultValue(double value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setStringDefaultValue(std::string value) 
+void
+ ParameterImpl::setStringDefaultValue(std::string value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
+void
+ ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ParameterImpl::stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ParameterImpl::unsetDefault() 
+void
+ ParameterImpl::unsetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -261,7 +283,7 @@ void ParameterImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::ValueSpecification> ParameterImpl::getDefaultValue() const
+std::shared_ptr<uml::ValueSpecification > ParameterImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
@@ -271,14 +293,15 @@ void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _de
     m_defaultValue = _defaultValue;
 }
 
-std::shared_ptr<uml::Operation> ParameterImpl::getOperation() const
+std::shared_ptr<uml::Operation > ParameterImpl::getOperation() const
 {
 
     return m_operation;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> ParameterImpl::getParameterSet() const
+	std::shared_ptr< Bag<uml::ParameterSet> >
+ ParameterImpl::getParameterSet() const
 {
 
     return m_parameterSet;
@@ -288,44 +311,23 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> ParameterImpl::
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ParameterImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > ParameterImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getDefaultValue());
-	_ownedElement->push_back(getLowerValue());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	_ownedElement->push_back(getUpperValue());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Namespace> ParameterImpl::getNamespace() const
+std::shared_ptr<uml::Namespace > ParameterImpl::getNamespace() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getOperation()!=nullptr)
-	{
-		_namespace = getOperation();
-	}
 
-	return _namespace;
+	return m_namespace;
 }
-std::shared_ptr<uml::Element> ParameterImpl::getOwner() const
+std::shared_ptr<uml::Element > ParameterImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_owner;
 }
 
 

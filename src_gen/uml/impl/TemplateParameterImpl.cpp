@@ -42,8 +42,8 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj)
 	
 	m_default  = obj.getDefault();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -53,15 +53,15 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 	if(obj.getOwnedDefault()!=nullptr)
 	{
@@ -90,7 +90,8 @@ std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ TemplateParameterImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -99,7 +100,7 @@ bool TemplateParameterImpl::must_be_compatible(boost::any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getDefault() const
 {
 
     return m_default;
@@ -109,7 +110,7 @@ void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement
     m_default = _default;
 }
 
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefault() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedDefault() const
 {
 
     return m_ownedDefault;
@@ -119,7 +120,7 @@ void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableEl
     m_ownedDefault = _ownedDefault;
 }
 
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParameteredElement() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedParameteredElement() const
 {
 
     return m_ownedParameteredElement;
@@ -129,7 +130,7 @@ void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::Para
     m_ownedParameteredElement = _ownedParameteredElement;
 }
 
-std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getParameteredElement() const
 {
 //assert(m_parameteredElement);
     return m_parameteredElement;
@@ -139,7 +140,7 @@ void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::Parameter
     m_parameteredElement = _parameteredElement;
 }
 
-std::shared_ptr<uml::TemplateSignature> TemplateParameterImpl::getSignature() const
+std::shared_ptr<uml::TemplateSignature > TemplateParameterImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
@@ -152,27 +153,17 @@ void TemplateParameterImpl::setSignature(std::shared_ptr<uml::TemplateSignature>
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateParameterImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > TemplateParameterImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	_ownedElement->push_back(getOwnedDefault());
-	_ownedElement->push_back(getOwnedParameteredElement());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element> TemplateParameterImpl::getOwner() const
+std::shared_ptr<uml::Element > TemplateParameterImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getSignature()!=nullptr)
-	{
-		_owner = getSignature();
-	}
 
-	return _owner;
+	return m_owner;
 }
 
 

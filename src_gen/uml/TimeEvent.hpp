@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -101,7 +102,8 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -124,12 +126,12 @@ namespace uml
 			/*!
 			 Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::TimeExpression> getWhen() const = 0;
+			virtual std::shared_ptr<uml::TimeExpression > getWhen() const = 0;
 			
 			/*!
 			 Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when) = 0;
+			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when_when) = 0;
 			
 
 		protected:
@@ -148,7 +150,7 @@ namespace uml
 			/*!
 			 Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<uml::TimeExpression> m_when;
+			std::shared_ptr<uml::TimeExpression > m_when;
 			
 
 		public:
@@ -156,12 +158,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

@@ -21,6 +21,8 @@
 
 #include "impl/NamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> getDeployedElements()  ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> >
+			 getDeployedElements()  ;
 			
 			
 			
@@ -65,12 +68,14 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> getDeployedElement() const ;
+			virtual 	std::shared_ptr< Bag<uml::PackageableElement> >
+			 getDeployedElement() const ;
 			
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> getDeployment() const ;
+			virtual 		std::shared_ptr<Subset<uml::Deployment, uml::Element > >
+			 getDeployment() const ;
 			
 							
 			
@@ -80,10 +85,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

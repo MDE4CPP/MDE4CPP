@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -166,12 +167,14 @@ namespace uml
 				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
 				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
 				replyValue->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The event of the replyToCall Trigger must be a CallEvent.
 			replyToCall.event.oclIsKindOf(CallEvent) */ 
-			virtual bool event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -184,26 +187,27 @@ namespace uml
 			/*!
 			 The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::Trigger> getReplyToCall() const = 0;
+			virtual std::shared_ptr<uml::Trigger > getReplyToCall() const = 0;
 			
 			/*!
 			 The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p> */
-			virtual void setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall) = 0;
+			virtual void setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall_replyToCall) = 0;
 			/*!
 			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getReplyValue() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
+			 getReplyValue() const = 0;
 			
 			/*!
 			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getReturnInformation() const = 0;
+			virtual std::shared_ptr<uml::InputPin > getReturnInformation() const = 0;
 			
 			/*!
 			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p> */
-			virtual void setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation) = 0;
+			virtual void setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation_returnInformation) = 0;
 			
 
 		protected:
@@ -218,15 +222,16 @@ namespace uml
 			/*!
 			 The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Trigger> m_replyToCall;
+			std::shared_ptr<uml::Trigger > m_replyToCall;
 			/*!
 			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> m_replyValue;
+					std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
+			 m_replyValue;
 			/*!
 			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin> m_returnInformation;
+			std::shared_ptr<uml::InputPin > m_returnInformation;
 			
 
 		public:
@@ -234,21 +239,22 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+			 getInput() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

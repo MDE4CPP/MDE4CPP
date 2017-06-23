@@ -21,6 +21,8 @@
 
 #include "impl/LinkEndDataImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -54,7 +56,8 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -79,12 +82,12 @@ namespace uml
 			/*!
 			 For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getInsertAt() const ;
+			virtual std::shared_ptr<uml::InputPin > getInsertAt() const ;
 			
 			/*!
 			 For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p> */
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) ;
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt_insertAt) ;
 							
 			
 			//*********************************
@@ -93,7 +96,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

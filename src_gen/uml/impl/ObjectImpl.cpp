@@ -57,19 +57,22 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-boost::any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
+boost::any
+ ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
+void
+ ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
+void
+ ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

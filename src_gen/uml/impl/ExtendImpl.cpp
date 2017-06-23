@@ -22,7 +22,9 @@ ExtendImpl::ExtendImpl()
 	
 	
 	
-	m_extensionLocation.reset(new std::vector<std::shared_ptr<uml::ExtensionPoint>>());
+		m_extensionLocation.reset(new Bag<uml::ExtensionPoint>());
+	
+	
 }
 
 ExtendImpl::~ExtendImpl()
@@ -42,31 +44,39 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_extendedCase  = obj.getExtendedCase();
 
 	m_extension  = obj.getExtension();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ExtensionPoint>>> _extensionLocation = obj.getExtensionLocation();
-	this->getExtensionLocation()->insert(this->getExtensionLocation()->end(), _extensionLocation->begin(), _extensionLocation->end());
+		std::shared_ptr< Bag<uml::ExtensionPoint> >
+	 _extensionLocation = obj.getExtensionLocation();
+	m_extensionLocation.reset(new 	 Bag<uml::ExtensionPoint> 
+	(*(obj.getExtensionLocation().get())));// this->getExtensionLocation()->insert(this->getExtensionLocation()->end(), _extensionLocation->begin(), _extensionLocation->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
-	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
+			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
-	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _source = obj.getSource();
+	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
-	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _target = obj.getTarget();
+	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
 
 
 	//clone containt lists
@@ -74,19 +84,19 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj)
 	{
 		m_condition.reset(dynamic_cast<uml::Constraint*>(obj.getCondition()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -107,7 +117,8 @@ std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ExtendImpl::extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -116,7 +127,7 @@ bool ExtendImpl::extension_points(boost::any diagnostics,std::map <   boost::any
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
+std::shared_ptr<uml::Constraint > ExtendImpl::getCondition() const
 {
 
     return m_condition;
@@ -126,7 +137,7 @@ void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
     m_condition = _condition;
 }
 
-std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
+std::shared_ptr<uml::UseCase > ExtendImpl::getExtendedCase() const
 {
 //assert(m_extendedCase);
     return m_extendedCase;
@@ -136,7 +147,7 @@ void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
     m_extendedCase = _extendedCase;
 }
 
-std::shared_ptr<uml::UseCase> ExtendImpl::getExtension() const
+std::shared_ptr<uml::UseCase > ExtendImpl::getExtension() const
 {
 //assert(m_extension);
     return m_extension;
@@ -146,7 +157,8 @@ void ExtendImpl::setExtension(std::shared_ptr<uml::UseCase> _extension)
     m_extension = _extension;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ExtensionPoint>>> ExtendImpl::getExtensionLocation() const
+	std::shared_ptr< Bag<uml::ExtensionPoint> >
+ ExtendImpl::getExtensionLocation() const
 {
 //assert(m_extensionLocation);
     return m_extensionLocation;
@@ -156,65 +168,43 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::ExtensionPoint>>> ExtendImpl::g
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtendImpl::getRelatedElement() const
+		std::shared_ptr<Union<uml::Element> > ExtendImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
-	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
-	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
 
-	return _relatedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtendImpl::getOwnedElement() const
+std::shared_ptr<uml::Element > ExtendImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getCondition());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtendImpl::getSource() const
+std::shared_ptr<uml::Namespace > ExtendImpl::getNamespace() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_source->push_back(getExtension());
 
-	return _source;
+	return m_namespace;
 }
-std::shared_ptr<uml::Namespace> ExtendImpl::getNamespace() const
+		std::shared_ptr<Union<uml::Element> > ExtendImpl::getRelatedElement() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getExtension()!=nullptr)
-	{
-		_namespace = getExtension();
-	}
 
-	return _namespace;
+	return m_relatedElement;
 }
-std::shared_ptr<uml::Element> ExtendImpl::getOwner() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ ExtendImpl::getSource() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
 
-	return _owner;
+	return m_source;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ExtendImpl::getTarget() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ ExtendImpl::getTarget() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_target->push_back(getExtendedCase());
 
-	return _target;
+	return m_target;
 }
 
 

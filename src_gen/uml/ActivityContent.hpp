@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -59,7 +60,8 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity>  containingActivity()  = 0;
+			virtual std::shared_ptr<uml::Activity> 
+			 containingActivity()  = 0;
 			
 			
 			//*********************************

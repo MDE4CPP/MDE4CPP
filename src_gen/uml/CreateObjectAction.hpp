@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -156,22 +157,26 @@ namespace uml
 			/*!
 			 The classifier cannot be abstract.
 			not classifier.isAbstract */ 
-			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass) */ 
-			virtual bool classifier_not_association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 classifier_not_association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -184,21 +189,21 @@ namespace uml
 			/*!
 			 The Classifier to be instantiated.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::Classifier> getClassifier() const = 0;
+			virtual std::shared_ptr<uml::Classifier > getClassifier() const = 0;
 			
 			/*!
 			 The Classifier to be instantiated.
 			<p>From package UML::Actions.</p> */
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) = 0;
+			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier_classifier) = 0;
 			/*!
 			 The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
+			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
 			
 			/*!
 			 The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) = 0;
 			
 
 		protected:
@@ -213,11 +218,11 @@ namespace uml
 			/*!
 			 The Classifier to be instantiated.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Classifier> m_classifier;
+			std::shared_ptr<uml::Classifier > m_classifier;
 			/*!
 			 The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::OutputPin> m_result;
+			std::shared_ptr<uml::OutputPin > m_result;
 			
 
 		public:
@@ -225,21 +230,22 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+			 getOutput() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

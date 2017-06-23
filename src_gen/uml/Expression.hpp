@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -119,7 +120,8 @@ namespace uml
 			/*!
 			 Specifies a sequence of operand ValueSpecifications.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> getOperand() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
+			 getOperand() const = 0;
 			
 			
 
@@ -139,7 +141,8 @@ namespace uml
 			/*!
 			 Specifies a sequence of operand ValueSpecifications.
 			<p>From package UML::Values.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> m_operand;
+					std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
+			 m_operand;
 			
 
 		public:
@@ -147,12 +150,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

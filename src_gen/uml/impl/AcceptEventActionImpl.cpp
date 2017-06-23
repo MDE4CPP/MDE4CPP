@@ -19,8 +19,14 @@ AcceptEventActionImpl::AcceptEventActionImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_result.reset(new std::vector<std::shared_ptr<uml::OutputPin>>());
-	m_trigger.reset(new std::vector<std::shared_ptr<uml::Trigger>>());
+		/*Subset*/
+		m_result.reset(new Subset<uml::OutputPin, uml::OutputPin >(m_output));//(m_output));
+	
+	
+		/*Subset*/
+		m_trigger.reset(new Subset<uml::Trigger, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 }
 
 AcceptEventActionImpl::~AcceptEventActionImpl()
@@ -45,90 +51,106 @@ AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj)
 	
 	m_activity  = obj.getActivity();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_context  = obj.getContext();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup = obj.getInGroup();
-	this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
+			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));// this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InterruptibleActivityRegion>>> _inInterruptibleRegion = obj.getInInterruptibleRegion();
-	this->getInInterruptibleRegion()->insert(this->getInInterruptibleRegion()->end(), _inInterruptibleRegion->begin(), _inInterruptibleRegion->end());
+			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup > >
+	 _inInterruptibleRegion = obj.getInInterruptibleRegion();
+	m_inInterruptibleRegion.reset(new 		Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup > 
+	(*(obj.getInInterruptibleRegion().get())));// this->getInInterruptibleRegion()->insert(this->getInInterruptibleRegion()->end(), _inInterruptibleRegion->begin(), _inInterruptibleRegion->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> _inPartition = obj.getInPartition();
-	this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > >
+	 _inPartition = obj.getInPartition();
+	m_inPartition.reset(new 		Subset<uml::ActivityPartition, uml::ActivityGroup > 
+	(*(obj.getInPartition().get())));// this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
 
 	m_inStructuredNode  = obj.getInStructuredNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _incoming = obj.getIncoming();
-	this->getIncoming()->insert(this->getIncoming()->end(), _incoming->begin(), _incoming->end());
+		std::shared_ptr< Bag<uml::ActivityEdge> >
+	 _incoming = obj.getIncoming();
+	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
+	(*(obj.getIncoming().get())));// this->getIncoming()->insert(this->getIncoming()->end(), _incoming->begin(), _incoming->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> _input = obj.getInput();
-	this->getInput()->insert(this->getInput()->end(), _input->begin(), _input->end());
+			std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+	 _input = obj.getInput();
+	m_input.reset(new 		SubsetUnion<uml::InputPin, uml::Element > 
+	(*(obj.getInput().get())));// this->getInput()->insert(this->getInput()->end(), _input->begin(), _input->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _outgoing = obj.getOutgoing();
-	this->getOutgoing()->insert(this->getOutgoing()->end(), _outgoing->begin(), _outgoing->end());
+		std::shared_ptr< Bag<uml::ActivityEdge> >
+	 _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
+	(*(obj.getOutgoing().get())));// this->getOutgoing()->insert(this->getOutgoing()->end(), _outgoing->begin(), _outgoing->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> _output = obj.getOutput();
-	this->getOutput()->insert(this->getOutput()->end(), _output->begin(), _output->end());
+			std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+	 _output = obj.getOutput();
+	m_output.reset(new 		SubsetUnion<uml::OutputPin, uml::Element > 
+	(*(obj.getOutput().get())));// this->getOutput()->insert(this->getOutput()->end(), _output->begin(), _output->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
-	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
+			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));// this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _redefinedNode = obj.getRedefinedNode();
-	this->getRedefinedNode()->insert(this->getRedefinedNode()->end(), _redefinedNode->begin(), _redefinedNode->end());
+			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement > >
+	 _redefinedNode = obj.getRedefinedNode();
+	m_redefinedNode.reset(new 		Subset<uml::ActivityNode, uml::RedefinableElement > 
+	(*(obj.getRedefinedNode().get())));// this->getRedefinedNode()->insert(this->getRedefinedNode()->end(), _redefinedNode->begin(), _redefinedNode->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
-	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
+			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));// this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ExceptionHandler>>> _handlerList = obj.getHandler();
+	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
 	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
 	{
-		this->getHandler()->push_back(std::shared_ptr<uml::ExceptionHandler>(dynamic_cast<uml::ExceptionHandler*>(_handler->copy())));
+		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(dynamic_cast<uml::ExceptionHandler*>(_handler->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _localPostconditionList = obj.getLocalPostcondition();
+	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
 	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
 	{
-		this->getLocalPostcondition()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_localPostcondition->copy())));
+		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_localPostcondition->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _localPreconditionList = obj.getLocalPrecondition();
+	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
 	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
 	{
-		this->getLocalPrecondition()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_localPrecondition->copy())));
+		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_localPrecondition->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> _resultList = obj.getResult();
+	std::shared_ptr<Bag<uml::OutputPin>> _resultList = obj.getResult();
 	for(std::shared_ptr<uml::OutputPin> _result : *_resultList)
 	{
-		this->getResult()->push_back(std::shared_ptr<uml::OutputPin>(dynamic_cast<uml::OutputPin*>(_result->copy())));
+		this->getResult()->add(std::shared_ptr<uml::OutputPin>(dynamic_cast<uml::OutputPin*>(_result->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> _triggerList = obj.getTrigger();
+	std::shared_ptr<Bag<uml::Trigger>> _triggerList = obj.getTrigger();
 	for(std::shared_ptr<uml::Trigger> _trigger : *_triggerList)
 	{
-		this->getTrigger()->push_back(std::shared_ptr<uml::Trigger>(dynamic_cast<uml::Trigger*>(_trigger->copy())));
+		this->getTrigger()->add(std::shared_ptr<uml::Trigger>(dynamic_cast<uml::Trigger*>(_trigger->copy())));
 	}
 }
 
@@ -158,31 +180,36 @@ bool AcceptEventActionImpl::getIsUnmarshall() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptEventActionImpl::conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ AcceptEventActionImpl::conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ AcceptEventActionImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ AcceptEventActionImpl::no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ AcceptEventActionImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -191,14 +218,16 @@ bool AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std:
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> AcceptEventActionImpl::getResult() const
+		std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > >
+ AcceptEventActionImpl::getResult() const
 {
 
     return m_result;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> AcceptEventActionImpl::getTrigger() const
+		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
+ AcceptEventActionImpl::getTrigger() const
 {
 //assert(m_trigger);
     return m_trigger;
@@ -208,76 +237,36 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> AcceptEventActionImp
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> AcceptEventActionImpl::getOwner() const
+		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+ AcceptEventActionImpl::getOutput() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getActivity()!=nullptr)
-	{
-		_owner = getActivity();
-	}
-	if(getInStructuredNode()!=nullptr)
-	{
-		_owner = getInStructuredNode();
-	}
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
 
-	return _owner;
+	return m_output;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> AcceptEventActionImpl::getInGroup() const
+		std::shared_ptr<Union<uml::Element> > AcceptEventActionImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _inGroup(new std::vector<std::shared_ptr<uml::ActivityGroup>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InterruptibleActivityRegion>>> inInterruptibleRegion = getInInterruptibleRegion();
-	_inGroup->insert(_inGroup->end(), inInterruptibleRegion->begin(), inInterruptibleRegion->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityPartition>>> inPartition = getInPartition();
-	_inGroup->insert(_inGroup->end(), inPartition->begin(), inPartition->end());
-	_inGroup->push_back(getInStructuredNode());
 
-	return _inGroup;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> AcceptEventActionImpl::getOutput() const
+		std::shared_ptr<Union<uml::RedefinableElement> > AcceptEventActionImpl::getRedefinedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> _output(new std::vector<std::shared_ptr<uml::OutputPin>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> result = getResult();
-	_output->insert(_output->end(), result->begin(), result->end());
 
-	return _output;
+	return m_redefinedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> AcceptEventActionImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::ActivityGroup> > AcceptEventActionImpl::getInGroup() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ExceptionHandler>>> handler = getHandler();
-	_ownedElement->insert(_ownedElement->end(), handler->begin(), handler->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> input = getInput();
-	_ownedElement->insert(_ownedElement->end(), input->begin(), input->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> localPostcondition = getLocalPostcondition();
-	_ownedElement->insert(_ownedElement->end(), localPostcondition->begin(), localPostcondition->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> localPrecondition = getLocalPrecondition();
-	_ownedElement->insert(_ownedElement->end(), localPrecondition->begin(), localPrecondition->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> output = getOutput();
-	_ownedElement->insert(_ownedElement->end(), output->begin(), output->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> trigger = getTrigger();
-	_ownedElement->insert(_ownedElement->end(), trigger->begin(), trigger->end());
 
-	return _ownedElement;
+	return m_inGroup;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> AcceptEventActionImpl::getRedefinedElement() const
+std::shared_ptr<uml::Element > AcceptEventActionImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> redefinedNode = getRedefinedNode();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedNode->begin(), redefinedNode->end());
 
-	return _redefinedElement;
+	return m_owner;
 }
 
 

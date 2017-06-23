@@ -22,6 +22,8 @@
 #include "impl/ExpressionImpl.hpp"
 #include "impl/TemplateableElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,12 +52,14 @@ namespace uml
 			/*!
 			 All the operands of a StringExpression must be LiteralStrings
 			operand->forAll (oclIsKindOf (LiteralString)) */ 
-			virtual bool operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
-			virtual bool subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -70,16 +74,17 @@ namespace uml
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<uml::StringExpression> getOwningExpression() const ;
+			virtual std::shared_ptr<uml::StringExpression > getOwningExpression() const ;
 			
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) ;
+			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression_owningExpression) ;
 			/*!
 			 The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::StringExpression>>> getSubExpression() const ;
+			virtual 		std::shared_ptr<Subset<uml::StringExpression, uml::Element > >
+			 getSubExpression() const ;
 			
 							
 			
@@ -89,10 +94,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

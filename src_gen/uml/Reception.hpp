@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -153,7 +154,8 @@ namespace uml
 			/*!
 			 A Reception has the same name as its signal
 			name = signal.name */ 
-			virtual bool same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -165,7 +167,8 @@ namespace uml
 			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
 			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
 			) */ 
-			virtual bool same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -178,12 +181,12 @@ namespace uml
 			/*!
 			 The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
+			virtual std::shared_ptr<uml::Signal > getSignal() const = 0;
 			
 			/*!
 			 The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) = 0;
+			virtual void setSignal(std::shared_ptr<uml::Signal> _signal_signal) = 0;
 			
 
 		protected:
@@ -198,7 +201,7 @@ namespace uml
 			/*!
 			 The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<uml::Signal> m_signal;
+			std::shared_ptr<uml::Signal > m_signal;
 			
 
 		public:
@@ -206,18 +209,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+					,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const = 0; 
+			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

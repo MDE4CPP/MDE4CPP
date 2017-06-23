@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -108,21 +109,24 @@ namespace uml
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::MessageEnd>>> oppositeEnd()  = 0;
+			virtual std::shared_ptr<Bag<uml::MessageEnd> >
+			 oppositeEnd()  = 0;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isSend()  = 0;
+			virtual bool
+			 isSend()  = 0;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isReceive()  = 0;
+			virtual bool
+			 isReceive()  = 0;
 			
 			/*!
 			 This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
@@ -156,7 +160,8 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> enclosingFragment()  = 0;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> >
+			 enclosingFragment()  = 0;
 			
 			
 			//*********************************
@@ -169,12 +174,12 @@ namespace uml
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Message> getMessage() const = 0;
+			virtual std::shared_ptr<uml::Message > getMessage() const = 0;
 			
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual void setMessage(std::shared_ptr<uml::Message> _message) = 0;
+			virtual void setMessage(std::shared_ptr<uml::Message> _message_message) = 0;
 			
 
 		protected:
@@ -189,7 +194,7 @@ namespace uml
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Message> m_message;
+			std::shared_ptr<uml::Message > m_message;
 			
 
 		public:
@@ -197,12 +202,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

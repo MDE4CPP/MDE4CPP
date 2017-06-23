@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -124,17 +125,18 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getRealizingClassifier() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > >
+			 getRealizingClassifier() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<uml::Component> getAbstraction() const = 0;
+			virtual std::shared_ptr<uml::Component > getAbstraction() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction) = 0;
+			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction_abstraction) = 0;
 			
 
 		protected:
@@ -149,11 +151,12 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> m_realizingClassifier;
+					std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > >
+			 m_realizingClassifier;
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<uml::Component> m_abstraction;
+			std::shared_ptr<uml::Component > m_abstraction;
 			
 
 		public:
@@ -161,21 +164,23 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

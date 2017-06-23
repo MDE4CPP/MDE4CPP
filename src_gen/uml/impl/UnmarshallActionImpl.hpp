@@ -21,6 +21,8 @@
 
 #include "impl/ActionImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,12 +51,14 @@ namespace uml
 			/*!
 			 The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1 */ 
-			virtual bool structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size() */ 
-			virtual bool number_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 number_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
@@ -63,17 +67,20 @@ namespace uml
 				attribute->at(i).type.conformsTo(result->at(i).type) and
 				attribute->at(i).isOrdered=result->at(i).isOrdered and
 				attribute->at(i).compatibleWith(result->at(i))) */ 
-			virtual bool type_ordering_and_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 type_ordering_and_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1
 			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType) */ 
-			virtual bool object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 object_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -88,26 +95,27 @@ namespace uml
 			/*!
 			 The InputPin that gives the object to be unmarshalled.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getObject() const ;
+			virtual std::shared_ptr<uml::InputPin > getObject() const ;
 			
 			/*!
 			 The InputPin that gives the object to be unmarshalled.
 			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) ;
 			/*!
 			 The OutputPins on which are placed the values of the StructuralFeatures of the input object.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getResult() const ;
+			virtual 		std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > >
+			 getResult() const ;
 			
 			/*!
 			 The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::Classifier> getUnmarshallType() const ;
+			virtual std::shared_ptr<uml::Classifier > getUnmarshallType() const ;
 			
 			/*!
 			 The type of the object to be unmarshalled.
 			<p>From package UML::Actions.</p> */
-			virtual void setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType) ;
+			virtual void setUnmarshallType(std::shared_ptr<uml::Classifier> _unmarshallType_unmarshallType) ;
 							
 			
 			//*********************************
@@ -116,22 +124,24 @@ namespace uml
 			/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const ;/*!
+			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+			 getInput() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+			 getOutput() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

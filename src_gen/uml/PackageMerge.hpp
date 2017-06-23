@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -88,21 +89,21 @@ namespace uml
 			/*!
 			 References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<uml::Package> getMergedPackage() const = 0;
+			virtual std::shared_ptr<uml::Package > getMergedPackage() const = 0;
 			
 			/*!
 			 References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage) = 0;
+			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage_mergedPackage) = 0;
 			/*!
 			 References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<uml::Package> getReceivingPackage() const = 0;
+			virtual std::shared_ptr<uml::Package > getReceivingPackage() const = 0;
 			
 			/*!
 			 References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage) = 0;
+			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage_receivingPackage) = 0;
 			
 
 		protected:
@@ -117,11 +118,11 @@ namespace uml
 			/*!
 			 References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<uml::Package> m_mergedPackage;
+			std::shared_ptr<uml::Package > m_mergedPackage;
 			/*!
 			 References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<uml::Package> m_receivingPackage;
+			std::shared_ptr<uml::Package > m_receivingPackage;
 			
 
 		public:
@@ -129,21 +130,23 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

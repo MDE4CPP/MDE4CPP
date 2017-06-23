@@ -21,6 +21,8 @@
 
 #include "impl/VertexImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,12 +51,14 @@ namespace uml
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -69,22 +73,24 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getEntry() const ;
+			virtual 	std::shared_ptr< Bag<uml::Pseudostate> >
+			 getEntry() const ;
 			
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Pseudostate>>> getExit() const ;
+			virtual 	std::shared_ptr< Bag<uml::Pseudostate> >
+			 getExit() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<uml::State> getState() const ;
+			virtual std::shared_ptr<uml::State > getState() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual void setState(std::shared_ptr<uml::State> _state) ;
+			virtual void setState(std::shared_ptr<uml::State> _state_state) ;
 							
 			
 			//*********************************
@@ -93,13 +99,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

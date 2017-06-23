@@ -20,7 +20,10 @@ MessageImpl::MessageImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_argument.reset(new std::vector<std::shared_ptr<uml::ValueSpecification>>());
+		/*Subset*/
+		m_argument.reset(new Subset<uml::ValueSpecification, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 	
 	
 	
@@ -47,8 +50,10 @@ MessageImpl::MessageImpl(const MessageImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_connector  = obj.getConnector();
 
@@ -56,8 +61,8 @@ MessageImpl::MessageImpl(const MessageImpl & obj)
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -69,24 +74,24 @@ MessageImpl::MessageImpl(const MessageImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> _argumentList = obj.getArgument();
+	std::shared_ptr<Bag<uml::ValueSpecification>> _argumentList = obj.getArgument();
 	for(std::shared_ptr<uml::ValueSpecification> _argument : *_argumentList)
 	{
-		this->getArgument()->push_back(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_argument->copy())));
+		this->getArgument()->add(std::shared_ptr<uml::ValueSpecification>(dynamic_cast<uml::ValueSpecification*>(_argument->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -123,55 +128,64 @@ MessageSort MessageImpl::getMessageSort() const
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-MessageKind MessageImpl::getMessageKind() 
+MessageKind
+ MessageImpl::getMessageKind() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -180,14 +194,15 @@ bool MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> MessageImpl::getArgument() const
+		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
+ MessageImpl::getArgument() const
 {
 
     return m_argument;
 }
 
 
-std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
+std::shared_ptr<uml::Connector > MessageImpl::getConnector() const
 {
 
     return m_connector;
@@ -197,7 +212,7 @@ void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
     m_connector = _connector;
 }
 
-std::shared_ptr<uml::Interaction> MessageImpl::getInteraction() const
+std::shared_ptr<uml::Interaction > MessageImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
@@ -207,7 +222,7 @@ void MessageImpl::setInteraction(std::shared_ptr<uml::Interaction> _interaction)
     m_interaction = _interaction;
 }
 
-std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
+std::shared_ptr<uml::MessageEnd > MessageImpl::getReceiveEvent() const
 {
 
     return m_receiveEvent;
@@ -217,7 +232,7 @@ void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent
     m_receiveEvent = _receiveEvent;
 }
 
-std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
+std::shared_ptr<uml::MessageEnd > MessageImpl::getSendEvent() const
 {
 
     return m_sendEvent;
@@ -227,7 +242,7 @@ void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
     m_sendEvent = _sendEvent;
 }
 
-std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
+std::shared_ptr<uml::NamedElement > MessageImpl::getSignature() const
 {
 
     return m_signature;
@@ -240,39 +255,23 @@ void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> MessageImpl::getOwner() const
+std::shared_ptr<uml::Namespace > MessageImpl::getNamespace() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
 
-	return _owner;
+	return m_namespace;
 }
-std::shared_ptr<uml::Namespace> MessageImpl::getNamespace() const
+std::shared_ptr<uml::Element > MessageImpl::getOwner() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getInteraction()!=nullptr)
-	{
-		_namespace = getInteraction();
-	}
 
-	return _namespace;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> MessageImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > MessageImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> argument = getArgument();
-	_ownedElement->insert(_ownedElement->end(), argument->begin(), argument->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
 
 

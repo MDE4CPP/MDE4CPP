@@ -21,6 +21,8 @@
 
 #include "impl/RealizationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,21 +61,21 @@ namespace uml
 			/*!
 			 The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier> getContract() const ;
+			virtual std::shared_ptr<uml::Classifier > getContract() const ;
 			
 			/*!
 			 The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p> */
-			virtual void setContract(std::shared_ptr<uml::Classifier> _contract) ;
+			virtual void setContract(std::shared_ptr<uml::Classifier> _contract_contract) ;
 			/*!
 			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier> getSubstitutingClassifier() const ;
+			virtual std::shared_ptr<uml::Classifier > getSubstitutingClassifier() const ;
 			
 			/*!
 			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p> */
-			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier) ;
+			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier_substitutingClassifier) ;
 							
 			
 			//*********************************
@@ -82,19 +84,21 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const ;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

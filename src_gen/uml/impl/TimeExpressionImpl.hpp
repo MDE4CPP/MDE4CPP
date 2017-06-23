@@ -21,6 +21,8 @@
 
 #include "impl/ValueSpecificationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,7 +51,8 @@ namespace uml
 			/*!
 			 If a TimeExpression has no expr, then it must have a single observation that is a TimeObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation))) */ 
-			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -64,16 +67,17 @@ namespace uml
 			/*!
 			 A ValueSpecification that evaluates to the value of the TimeExpression.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const ;
+			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const ;
 			
 			/*!
 			 A ValueSpecification that evaluates to the value of the TimeExpression.
 			<p>From package UML::Values.</p> */
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) ;
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr_expr) ;
 			/*!
 			 Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Observation>>> getObservation() const ;
+			virtual 	std::shared_ptr< Bag<uml::Observation> >
+			 getObservation() const ;
 			
 							
 			
@@ -83,10 +87,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

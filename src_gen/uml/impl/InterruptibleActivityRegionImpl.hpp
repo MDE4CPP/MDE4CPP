@@ -21,6 +21,8 @@
 
 #include "impl/ActivityGroupImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ namespace uml
 			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
-			virtual bool interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -65,12 +68,14 @@ namespace uml
 			/*!
 			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> getInterruptingEdge() const ;
+			virtual 	std::shared_ptr< Bag<uml::ActivityEdge> >
+			 getInterruptingEdge() const ;
 			
 			/*!
 			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getNode() const ;
+			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
+			 getNode() const ;
 			
 							
 			
@@ -80,13 +85,13 @@ namespace uml
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> getContainedNode() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

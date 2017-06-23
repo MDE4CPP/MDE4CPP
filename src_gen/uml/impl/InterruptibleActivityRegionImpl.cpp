@@ -19,8 +19,13 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_interruptingEdge.reset(new std::vector<std::shared_ptr<uml::ActivityEdge>>());
-	m_node.reset(new std::vector<std::shared_ptr<uml::ActivityNode>>());
+		m_interruptingEdge.reset(new Bag<uml::ActivityEdge>());
+	
+	
+		/*Subset*/
+		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode >(m_containedNode));//(m_containedNode));
+	
+	
 }
 
 InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
@@ -40,50 +45,58 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _containedEdge = obj.getContainedEdge();
-	this->getContainedEdge()->insert(this->getContainedEdge()->end(), _containedEdge->begin(), _containedEdge->end());
+			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));// this->getContainedEdge()->insert(this->getContainedEdge()->end(), _containedEdge->begin(), _containedEdge->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _containedNode = obj.getContainedNode();
-	this->getContainedNode()->insert(this->getContainedNode()->end(), _containedNode->begin(), _containedNode->end());
+			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));// this->getContainedNode()->insert(this->getContainedNode()->end(), _containedNode->begin(), _containedNode->end());
 
 	m_inActivity  = obj.getInActivity();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> _interruptingEdge = obj.getInterruptingEdge();
-	this->getInterruptingEdge()->insert(this->getInterruptingEdge()->end(), _interruptingEdge->begin(), _interruptingEdge->end());
+		std::shared_ptr< Bag<uml::ActivityEdge> >
+	 _interruptingEdge = obj.getInterruptingEdge();
+	m_interruptingEdge.reset(new 	 Bag<uml::ActivityEdge> 
+	(*(obj.getInterruptingEdge().get())));// this->getInterruptingEdge()->insert(this->getInterruptingEdge()->end(), _interruptingEdge->begin(), _interruptingEdge->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _node = obj.getNode();
-	this->getNode()->insert(this->getNode()->end(), _node->begin(), _node->end());
+			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
+	 _node = obj.getNode();
+	m_node.reset(new 		Subset<uml::ActivityNode, uml::ActivityNode > 
+	(*(obj.getNode().get())));// this->getNode()->insert(this->getNode()->end(), _node->begin(), _node->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> _subgroup = obj.getSubgroup();
-	this->getSubgroup()->insert(this->getSubgroup()->end(), _subgroup->begin(), _subgroup->end());
+			std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > >
+	 _subgroup = obj.getSubgroup();
+	m_subgroup.reset(new 		SubsetUnion<uml::ActivityGroup, uml::Element > 
+	(*(obj.getSubgroup().get())));// this->getSubgroup()->insert(this->getSubgroup()->end(), _subgroup->begin(), _subgroup->end());
 
 	m_superGroup  = obj.getSuperGroup();
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -104,7 +117,8 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -113,14 +127,16 @@ bool InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> InterruptibleActivityRegionImpl::getInterruptingEdge() const
+	std::shared_ptr< Bag<uml::ActivityEdge> >
+ InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 
     return m_interruptingEdge;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> InterruptibleActivityRegionImpl::getNode() const
+		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
+ InterruptibleActivityRegionImpl::getNode() const
 {
 
     return m_node;
@@ -130,45 +146,23 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> InterruptibleAc
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> InterruptibleActivityRegionImpl::getContainedNode() const
+		std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> _containedNode(new std::vector<std::shared_ptr<uml::ActivityNode>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> node = getNode();
-	_containedNode->insert(_containedNode->end(), node->begin(), node->end());
 
-	return _containedNode;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> InterruptibleActivityRegionImpl::getOwnedElement() const
+std::shared_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> subgroup = getSubgroup();
-	_ownedElement->insert(_ownedElement->end(), subgroup->begin(), subgroup->end());
 
-	return _ownedElement;
+	return m_owner;
 }
-std::shared_ptr<uml::Element> InterruptibleActivityRegionImpl::getOwner() const
+		std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getInActivity()!=nullptr)
-	{
-		_owner = getInActivity();
-	}
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getSuperGroup()!=nullptr)
-	{
-		_owner = getSuperGroup();
-	}
 
-	return _owner;
+	return m_containedNode;
 }
 
 

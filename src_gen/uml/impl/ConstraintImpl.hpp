@@ -21,6 +21,8 @@
 
 #include "impl/PackageableElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,16 +50,19 @@ namespace uml
 			//*********************************
 			/*!
 			 The ValueSpecification for a Constraint must evaluate to a Boolean value. */ 
-			virtual bool boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Evaluating the ValueSpecification for a Constraint must not have side effects. */ 
-			virtual bool no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self) */ 
-			virtual bool not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -72,26 +77,27 @@ namespace uml
 			/*!
 			 The ordered set of Elements referenced by this Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getConstrainedElement() const ;
+			virtual 	std::shared_ptr< Bag<uml::Element> >
+			 getConstrainedElement() const ;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getContext() const ;
+			virtual std::shared_ptr<uml::Namespace > getContext() const ;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setContext(std::shared_ptr<uml::Namespace> _context) ;
+			virtual void setContext(std::shared_ptr<uml::Namespace> _context_context) ;
 			/*!
 			 A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
 			
 			/*!
 			 A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) ;
 							
 			
 			//*********************************
@@ -100,13 +106,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -19,7 +19,9 @@ CommentImpl::CommentImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_annotatedElement.reset(new std::vector<std::shared_ptr<uml::Element>>());
+		m_annotatedElement.reset(new Bag<uml::Element>());
+	
+	
 }
 
 CommentImpl::~CommentImpl()
@@ -37,25 +39,27 @@ CommentImpl::CommentImpl(const CommentImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _annotatedElement = obj.getAnnotatedElement();
-	this->getAnnotatedElement()->insert(this->getAnnotatedElement()->end(), _annotatedElement->begin(), _annotatedElement->end());
+		std::shared_ptr< Bag<uml::Element> >
+	 _annotatedElement = obj.getAnnotatedElement();
+	m_annotatedElement.reset(new 	 Bag<uml::Element> 
+	(*(obj.getAnnotatedElement().get())));// this->getAnnotatedElement()->insert(this->getAnnotatedElement()->end(), _annotatedElement->begin(), _annotatedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -89,7 +93,8 @@ std::string CommentImpl::getBody() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> CommentImpl::getAnnotatedElement() const
+	std::shared_ptr< Bag<uml::Element> >
+ CommentImpl::getAnnotatedElement() const
 {
 
     return m_annotatedElement;
@@ -99,14 +104,11 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> CommentImpl::getAnno
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> CommentImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > CommentImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
 
 

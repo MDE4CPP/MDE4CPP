@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -86,7 +87,8 @@ namespace uml
 			/*!
 			 The visibility of a PackageImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -109,21 +111,21 @@ namespace uml
 			/*!
 			 Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Package> getImportedPackage() const = 0;
+			virtual std::shared_ptr<uml::Package > getImportedPackage() const = 0;
 			
 			/*!
 			 Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setImportedPackage(std::shared_ptr<uml::Package> _importedPackage) = 0;
+			virtual void setImportedPackage(std::shared_ptr<uml::Package> _importedPackage_importedPackage) = 0;
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getImportingNamespace() const = 0;
+			virtual std::shared_ptr<uml::Namespace > getImportingNamespace() const = 0;
 			
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace) = 0;
+			virtual void setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace_importingNamespace) = 0;
 			
 
 		protected:
@@ -142,11 +144,11 @@ namespace uml
 			/*!
 			 Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Package> m_importedPackage;
+			std::shared_ptr<uml::Package > m_importedPackage;
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Namespace> m_importingNamespace;
+			std::shared_ptr<uml::Namespace > m_importingNamespace;
 			
 
 		public:
@@ -154,21 +156,23 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

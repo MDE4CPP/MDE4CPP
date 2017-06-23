@@ -21,6 +21,8 @@
 
 #include "impl/ClassifierImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,15 +51,18 @@ namespace uml
 			/*!
 			 If a behavior is classifier behavior, it does not have a specification.
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty() */ 
-			virtual bool class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 class_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency. */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Interface>>> getAllImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> >
+			 getAllImplementedInterfaces()  ;
 			
 			/*!
 			 Retrieves the interfaces on which this behaviored classifier has an interface realization dependency. */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Interface>>> getImplementedInterfaces()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> >
+			 getImplementedInterfaces()  ;
 			
 			
 			
@@ -72,21 +77,23 @@ namespace uml
 			/*!
 			 A Behavior that specifies the behavior of the BehavioredClassifier itself.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<uml::Behavior> getClassifierBehavior() const ;
+			virtual std::shared_ptr<uml::Behavior > getClassifierBehavior() const ;
 			
 			/*!
 			 A Behavior that specifies the behavior of the BehavioredClassifier itself.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior) ;
+			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior_classifierBehavior) ;
 			/*!
 			 The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InterfaceRealization>>> getInterfaceRealization() const ;
+			virtual 		std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element > >
+			 getInterfaceRealization() const ;
 			
 			/*!
 			 Behaviors owned by a BehavioredClassifier.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Behavior>>> getOwnedBehavior() const ;
+			virtual 		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement > >
+			 getOwnedBehavior() const ;
 			
 							
 			
@@ -94,27 +101,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getOwnedMember() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Feature>>> getFeature() const ;/*!
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+					,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> getMember() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
+			 getFeature() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

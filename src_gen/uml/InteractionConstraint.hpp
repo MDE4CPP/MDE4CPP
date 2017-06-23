@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -103,34 +104,40 @@ namespace uml
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
 			InteractionOperatorKind::loop */ 
-			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0 */ 
-			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0 */ 
-			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
-			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The constraint may contain references to global data or write-once data. */ 
-			virtual bool global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() ) */ 
-			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -143,21 +150,21 @@ namespace uml
 			/*!
 			 The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getMaxint() const = 0;
 			
 			/*!
 			 The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint) = 0;
+			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint_maxint) = 0;
 			/*!
 			 The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getMinint() const = 0;
 			
 			/*!
 			 The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint) = 0;
+			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint_minint) = 0;
 			
 
 		protected:
@@ -172,11 +179,11 @@ namespace uml
 			/*!
 			 The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::ValueSpecification> m_maxint;
+			std::shared_ptr<uml::ValueSpecification > m_maxint;
 			/*!
 			 The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::ValueSpecification> m_minint;
+			std::shared_ptr<uml::ValueSpecification > m_minint;
 			
 
 		public:
@@ -184,15 +191,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

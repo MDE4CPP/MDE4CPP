@@ -19,12 +19,22 @@ ClauseImpl::ClauseImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_body.reset(new std::vector<std::shared_ptr<uml::ExecutableNode>>());
-	m_bodyOutput.reset(new std::vector<std::shared_ptr<uml::OutputPin>>());
+		m_body.reset(new Bag<uml::ExecutableNode>());
 	
-	m_predecessorClause.reset(new std::vector<std::shared_ptr<uml::Clause>>());
-	m_successorClause.reset(new std::vector<std::shared_ptr<uml::Clause>>());
-	m_test.reset(new std::vector<std::shared_ptr<uml::ExecutableNode>>());
+	
+		m_bodyOutput.reset(new Bag<uml::OutputPin>());
+	
+	
+	
+		m_predecessorClause.reset(new Bag<uml::Clause>());
+	
+	
+		m_successorClause.reset(new Bag<uml::Clause>());
+	
+	
+		m_test.reset(new Bag<uml::ExecutableNode>());
+	
+	
 }
 
 ClauseImpl::~ClauseImpl()
@@ -41,39 +51,49 @@ ClauseImpl::ClauseImpl(const ClauseImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>> _body = obj.getBody();
-	this->getBody()->insert(this->getBody()->end(), _body->begin(), _body->end());
+		std::shared_ptr< Bag<uml::ExecutableNode> >
+	 _body = obj.getBody();
+	m_body.reset(new 	 Bag<uml::ExecutableNode> 
+	(*(obj.getBody().get())));// this->getBody()->insert(this->getBody()->end(), _body->begin(), _body->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> _bodyOutput = obj.getBodyOutput();
-	this->getBodyOutput()->insert(this->getBodyOutput()->end(), _bodyOutput->begin(), _bodyOutput->end());
+		std::shared_ptr< Bag<uml::OutputPin> >
+	 _bodyOutput = obj.getBodyOutput();
+	m_bodyOutput.reset(new 	 Bag<uml::OutputPin> 
+	(*(obj.getBodyOutput().get())));// this->getBodyOutput()->insert(this->getBodyOutput()->end(), _bodyOutput->begin(), _bodyOutput->end());
 
 	m_decider  = obj.getDecider();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> _predecessorClause = obj.getPredecessorClause();
-	this->getPredecessorClause()->insert(this->getPredecessorClause()->end(), _predecessorClause->begin(), _predecessorClause->end());
+		std::shared_ptr< Bag<uml::Clause> >
+	 _predecessorClause = obj.getPredecessorClause();
+	m_predecessorClause.reset(new 	 Bag<uml::Clause> 
+	(*(obj.getPredecessorClause().get())));// this->getPredecessorClause()->insert(this->getPredecessorClause()->end(), _predecessorClause->begin(), _predecessorClause->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> _successorClause = obj.getSuccessorClause();
-	this->getSuccessorClause()->insert(this->getSuccessorClause()->end(), _successorClause->begin(), _successorClause->end());
+		std::shared_ptr< Bag<uml::Clause> >
+	 _successorClause = obj.getSuccessorClause();
+	m_successorClause.reset(new 	 Bag<uml::Clause> 
+	(*(obj.getSuccessorClause().get())));// this->getSuccessorClause()->insert(this->getSuccessorClause()->end(), _successorClause->begin(), _successorClause->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>> _test = obj.getTest();
-	this->getTest()->insert(this->getTest()->end(), _test->begin(), _test->end());
+		std::shared_ptr< Bag<uml::ExecutableNode> >
+	 _test = obj.getTest();
+	m_test.reset(new 	 Bag<uml::ExecutableNode> 
+	(*(obj.getTest().get())));// this->getTest()->insert(this->getTest()->end(), _test->begin(), _test->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -94,19 +114,22 @@ std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ClauseImpl::body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ClauseImpl::decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ ClauseImpl::test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -115,21 +138,23 @@ bool ClauseImpl::test_and_body(boost::any diagnostics,std::map <   boost::any, b
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>> ClauseImpl::getBody() const
+	std::shared_ptr< Bag<uml::ExecutableNode> >
+ ClauseImpl::getBody() const
 {
 
     return m_body;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> ClauseImpl::getBodyOutput() const
+	std::shared_ptr< Bag<uml::OutputPin> >
+ ClauseImpl::getBodyOutput() const
 {
 
     return m_bodyOutput;
 }
 
 
-std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
+std::shared_ptr<uml::OutputPin > ClauseImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
@@ -139,21 +164,24 @@ void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
     m_decider = _decider;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> ClauseImpl::getPredecessorClause() const
+	std::shared_ptr< Bag<uml::Clause> >
+ ClauseImpl::getPredecessorClause() const
 {
 
     return m_predecessorClause;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> ClauseImpl::getSuccessorClause() const
+	std::shared_ptr< Bag<uml::Clause> >
+ ClauseImpl::getSuccessorClause() const
 {
 
     return m_successorClause;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>> ClauseImpl::getTest() const
+	std::shared_ptr< Bag<uml::ExecutableNode> >
+ ClauseImpl::getTest() const
 {
 //assert(m_test);
     return m_test;
@@ -163,14 +191,11 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>> ClauseImpl::g
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> ClauseImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > ClauseImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
 
 

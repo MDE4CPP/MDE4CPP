@@ -43,8 +43,8 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 
 	m_formal  = obj.getFormal();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -52,19 +52,19 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getOwnedActual()!=nullptr)
 	{
 		m_ownedActual.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedActual()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -85,7 +85,8 @@ std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterSubstitutionImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ TemplateParameterSubstitutionImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -94,7 +95,7 @@ bool TemplateParameterSubstitutionImpl::must_be_compatible(boost::any diagnostic
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getActual() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getActual() const
 {
 //assert(m_actual);
     return m_actual;
@@ -104,7 +105,7 @@ void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::Parameter
     m_actual = _actual;
 }
 
-std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFormal() const
+std::shared_ptr<uml::TemplateParameter > TemplateParameterSubstitutionImpl::getFormal() const
 {
 //assert(m_formal);
     return m_formal;
@@ -114,7 +115,7 @@ void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateP
     m_formal = _formal;
 }
 
-std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getOwnedActual() const
+std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
 
     return m_ownedActual;
@@ -124,7 +125,7 @@ void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::Para
     m_ownedActual = _ownedActual;
 }
 
-std::shared_ptr<uml::TemplateBinding> TemplateParameterSubstitutionImpl::getTemplateBinding() const
+std::shared_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
 //assert(m_templateBinding);
     return m_templateBinding;
@@ -137,26 +138,17 @@ void TemplateParameterSubstitutionImpl::setTemplateBinding(std::shared_ptr<uml::
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateParameterSubstitutionImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Element> > TemplateParameterSubstitutionImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getOwnedActual());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element> TemplateParameterSubstitutionImpl::getOwner() const
+std::shared_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getTemplateBinding()!=nullptr)
-	{
-		_owner = getTemplateBinding();
-	}
 
-	return _owner;
+	return m_owner;
 }
 
 

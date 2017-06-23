@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -104,12 +105,12 @@ namespace uml
 			/*!
 			 The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Type> getType() const = 0;
+			virtual std::shared_ptr<uml::Type > getType() const = 0;
 			
 			/*!
 			 The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual void setType(std::shared_ptr<uml::Type> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::Type> _type_type) = 0;
 			
 
 		protected:
@@ -124,7 +125,7 @@ namespace uml
 			/*!
 			 The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Type> m_type;
+			std::shared_ptr<uml::Type > m_type;
 			
 
 		public:
@@ -132,12 +133,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

@@ -21,6 +21,8 @@
 
 #include "impl/ActionImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,12 +52,14 @@ namespace uml
 			 If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1) */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 AcceptEventActions may have no input pins.
 			input->size() = 0 */ 
-			virtual bool no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
@@ -63,7 +67,8 @@ namespace uml
 			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
 			                             event.oclIsKindOf(CallEvent))))
 			implies output->size() = 0 */ 
-			virtual bool no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
@@ -76,7 +81,8 @@ namespace uml
 					result->at(i).type = attribute->at(i).type and 
 					result->at(i).isOrdered = attribute->at(i).isOrdered and
 					result->at(i).includesMultiplicity(attribute->at(i))) */ 
-			virtual bool unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If isUnmarshall=false and all the triggers are for SignalEvents, then the type of the single result OutputPin must either be null or all the signals must conform to it.
@@ -86,7 +92,8 @@ namespace uml
 				type=null or 
 					(trigger->forAll(event.oclIsKindOf(SignalEvent)) and 
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type))) */ 
-			virtual bool conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -111,12 +118,14 @@ namespace uml
 			/*!
 			 OutputPins holding the values received from an Event occurrence.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getResult() const ;
+			virtual 		std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > >
+			 getResult() const ;
 			
 			/*!
 			 The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Trigger>>> getTrigger() const ;
+			virtual 		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
+			 getTrigger() const ;
 			
 							
 			
@@ -124,21 +133,22 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+			 getOutput() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

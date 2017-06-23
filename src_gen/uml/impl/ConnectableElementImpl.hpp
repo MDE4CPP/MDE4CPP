@@ -22,6 +22,8 @@
 #include "impl/ParameterableElementImpl.hpp"
 #include "impl/TypedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -51,7 +53,8 @@ namespace uml
 			 Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> getEnds()  ;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd> >
+			 getEnds()  ;
 			
 			
 			
@@ -66,7 +69,8 @@ namespace uml
 			/*!
 			 A set of ConnectorEnds that attach to this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> getEnd() const ;
+			virtual 	std::shared_ptr< Bag<uml::ConnectorEnd> >
+			 getEnd() const ;
 			
 							
 			
@@ -76,10 +80,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

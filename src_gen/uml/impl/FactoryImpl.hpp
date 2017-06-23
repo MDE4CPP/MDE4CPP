@@ -21,6 +21,8 @@
 
 #include "impl/ElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -51,7 +53,8 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element>  create(std::shared_ptr<uml::Class>  metaClass)  ;
+			virtual std::shared_ptr<uml::Element> 
+			 create(std::shared_ptr<uml::Class>  metaClass)  ;
 			
 			
 			
@@ -70,7 +73,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

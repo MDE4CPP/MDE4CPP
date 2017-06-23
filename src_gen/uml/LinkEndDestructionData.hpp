@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -95,7 +96,8 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -118,12 +120,12 @@ namespace uml
 			/*!
 			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const = 0;
+			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const = 0;
 			
 			/*!
 			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p> */
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) = 0;
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt_destroyAt) = 0;
 			
 
 		protected:
@@ -142,7 +144,7 @@ namespace uml
 			/*!
 			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin> m_destroyAt;
+			std::shared_ptr<uml::InputPin > m_destroyAt;
 			
 
 		public:
@@ -152,7 +154,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0; 
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

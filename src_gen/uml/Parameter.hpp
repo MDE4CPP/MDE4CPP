@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -134,64 +135,78 @@ namespace uml
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return)) */ 
-			virtual bool in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
-			virtual bool not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
 			end->notEmpty() implies collaboration->notEmpty() */ 
-			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant */ 
-			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Parameter cannot be a stream and exception at the same time.
 			not (isException and isStream) */ 
-			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null) */ 
-			virtual bool object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isSetDefault()  = 0;
+			virtual bool
+			 isSetDefault()  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified Boolean value. */ 
-			virtual void setBooleanDefaultValue(bool value)  = 0;
+			virtual void
+			 setBooleanDefaultValue(bool value)  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified integer value. */ 
-			virtual void setIntegerDefaultValue(int value)  = 0;
+			virtual void
+			 setIntegerDefaultValue(int value)  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the null value. */ 
-			virtual void setNullDefaultValue()  = 0;
+			virtual void
+			 setNullDefaultValue()  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified real value. */ 
-			virtual void setRealDefaultValue(double value)  = 0;
+			virtual void
+			 setRealDefaultValue(double value)  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified string value. */ 
-			virtual void setStringDefaultValue(std::string value)  = 0;
+			virtual void
+			 setStringDefaultValue(std::string value)  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
-			virtual void setUnlimitedNaturalDefaultValue(int value)  = 0;
+			virtual void
+			 setUnlimitedNaturalDefaultValue(int value)  = 0;
 			
 			/*!
 			 */ 
-			virtual void unsetDefault()  = 0;
+			virtual void
+			 unsetDefault()  = 0;
 			
 			
 			//*********************************
@@ -254,21 +269,22 @@ namespace uml
 			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getDefaultValue() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getDefaultValue() const = 0;
 			
 			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue) = 0;
+			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue_defaultValue) = 0;
 			/*!
 			 The Operation owning this parameter.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Operation> getOperation() const = 0;
+			virtual std::shared_ptr<uml::Operation > getOperation() const = 0;
 			
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> getParameterSet() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::ParameterSet> >
+			 getParameterSet() const = 0;
 			
 			
 
@@ -304,15 +320,16 @@ namespace uml
 			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::ValueSpecification> m_defaultValue;
+			std::shared_ptr<uml::ValueSpecification > m_defaultValue;
 			/*!
 			 The Operation owning this parameter.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Operation> m_operation;
+			std::shared_ptr<uml::Operation > m_operation;
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::ParameterSet>>> m_parameterSet;
+				std::shared_ptr< Bag<uml::ParameterSet> >
+			 m_parameterSet;
 			
 
 		public:
@@ -320,15 +337,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

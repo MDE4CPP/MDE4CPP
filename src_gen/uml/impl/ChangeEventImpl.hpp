@@ -21,6 +21,8 @@
 
 #include "impl/EventImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const ;
+			virtual std::shared_ptr<uml::ValueSpecification > getChangeExpression() const ;
 			
 			/*!
 			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) ;
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression_changeExpression) ;
 							
 			
 			//*********************************
@@ -73,10 +75,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

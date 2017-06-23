@@ -21,6 +21,8 @@
 
 #include "impl/ObservationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -69,12 +71,12 @@ namespace uml
 			/*!
 			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<uml::NamedElement> getEvent() const ;
+			virtual std::shared_ptr<uml::NamedElement > getEvent() const ;
 			
 			/*!
 			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p> */
-			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event) ;
+			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event_event) ;
 							
 			
 			//*********************************
@@ -83,10 +85,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

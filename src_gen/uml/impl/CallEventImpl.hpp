@@ -21,6 +21,8 @@
 
 #include "impl/MessageEventImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::Operation> getOperation() const ;
+			virtual std::shared_ptr<uml::Operation > getOperation() const ;
 			
 			/*!
 			 Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) ;
 							
 			
 			//*********************************
@@ -73,10 +75,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

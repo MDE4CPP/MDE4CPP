@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -103,26 +104,27 @@ namespace uml
 			/*!
 			 The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier> getGeneral() const = 0;
+			virtual std::shared_ptr<uml::Classifier > getGeneral() const = 0;
 			
 			/*!
 			 The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual void setGeneral(std::shared_ptr<uml::Classifier> _general) = 0;
+			virtual void setGeneral(std::shared_ptr<uml::Classifier> _general_general) = 0;
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralizationSet>>> getGeneralizationSet() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::GeneralizationSet> >
+			 getGeneralizationSet() const = 0;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier> getSpecific() const = 0;
+			virtual std::shared_ptr<uml::Classifier > getSpecific() const = 0;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual void setSpecific(std::shared_ptr<uml::Classifier> _specific) = 0;
+			virtual void setSpecific(std::shared_ptr<uml::Classifier> _specific_specific) = 0;
 			
 
 		protected:
@@ -141,15 +143,16 @@ namespace uml
 			/*!
 			 The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier> m_general;
+			std::shared_ptr<uml::Classifier > m_general;
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralizationSet>>> m_generalizationSet;
+				std::shared_ptr< Bag<uml::GeneralizationSet> >
+			 m_generalizationSet;
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier> m_specific;
+			std::shared_ptr<uml::Classifier > m_specific;
 			
 
 		public:
@@ -157,21 +160,23 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getTarget() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getRelatedElement() const = 0;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getTarget() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getSource() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+			 getSource() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

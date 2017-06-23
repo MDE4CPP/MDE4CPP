@@ -21,6 +21,8 @@
 
 #include "impl/NamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,7 +51,8 @@ namespace uml
 			/*!
 			 The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued()) */ 
-			virtual bool selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a lifeline is in an Interaction referred to by an InteractionUse in an enclosing Interaction,  and that lifeline is common with another lifeline in an Interaction referred to by another InteractonUse within that same enclosing Interaction, it must be common to a lifeline within that enclosing Interaction. By common Lifelines we mean Lifelines with the same selector and represents associations.
@@ -91,19 +94,22 @@ namespace uml
 			                                                )
 			                    )
 			) */ 
-			virtual bool interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context') */ 
-			virtual bool same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
 			self.selector.oclIsKindOf(LiteralInteger) or 
 			self.selector.oclIsKindOf(LiteralString) */ 
-			virtual bool selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -118,43 +124,44 @@ namespace uml
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const ;
+			virtual std::shared_ptr<uml::PartDecomposition > getDecomposedAs() const ;
 			
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
-			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs) ;
+			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs_decomposedAs) ;
 			/*!
 			 References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Interaction> getInteraction() const ;
+			virtual std::shared_ptr<uml::Interaction > getInteraction() const ;
 			
 			/*!
 			 References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p> */
-			virtual void setInteraction(std::shared_ptr<uml::Interaction> _interaction) ;
+			virtual void setInteraction(std::shared_ptr<uml::Interaction> _interaction_interaction) ;
 			/*!
 			 References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const ;
+			virtual std::shared_ptr<uml::ConnectableElement > getRepresents() const ;
 			
 			/*!
 			 References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement> _represents) ;
+			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement> _represents_represents) ;
 			/*!
 			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const ;
+			virtual std::shared_ptr<uml::ValueSpecification > getSelector() const ;
 			
 			/*!
 			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
-			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector) ;
+			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector_selector) ;
 			/*!
 			 References the InteractionFragments in which this Lifeline takes part.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> getCoveredBy() const ;
+			virtual 	std::shared_ptr< Bag<uml::InteractionFragment> >
+			 getCoveredBy() const ;
 			
 							
 			
@@ -164,13 +171,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

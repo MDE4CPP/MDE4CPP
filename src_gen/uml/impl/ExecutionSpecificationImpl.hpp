@@ -21,6 +21,8 @@
 
 #include "impl/InteractionFragmentImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -49,7 +51,8 @@ namespace uml
 			/*!
 			 The startEvent and the finishEvent must be on the same Lifeline.
 			start.covered = finish.covered */ 
-			virtual bool same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -64,21 +67,21 @@ namespace uml
 			/*!
 			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const ;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getFinish() const ;
 			
 			/*!
 			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish) ;
+			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish_finish) ;
 			/*!
 			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const ;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getStart() const ;
 			
 			/*!
 			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start) ;
+			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start_start) ;
 							
 			
 			//*********************************
@@ -87,13 +90,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

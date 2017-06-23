@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -125,7 +126,8 @@ namespace uml
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
-			virtual bool action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 action_referenced(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -138,12 +140,12 @@ namespace uml
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Action> getAction() const = 0;
+			virtual std::shared_ptr<uml::Action > getAction() const = 0;
 			
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<uml::Action> _action_action) = 0;
 			
 
 		protected:
@@ -158,7 +160,7 @@ namespace uml
 			/*!
 			 Action whose execution is occurring.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Action> m_action;
+			std::shared_ptr<uml::Action > m_action;
 			
 
 		public:
@@ -166,15 +168,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

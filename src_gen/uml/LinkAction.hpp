@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -166,23 +167,27 @@ namespace uml
 			/*!
 			 The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins() */ 
-			virtual bool same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag() */ 
-			virtual bool same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The ends of the endData must not be static.
 			endData->forAll(not end.isStatic) */ 
-			virtual bool not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Returns the Association acted on by this LinkAction.
 			result = (endData->asSequence()->first().end.association)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Association>  association()  = 0;
+			virtual std::shared_ptr<uml::Association> 
+			 association()  = 0;
 			
 			
 			//*********************************
@@ -195,12 +200,14 @@ namespace uml
 			/*!
 			 The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>> getEndData() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::LinkEndData, uml::Element > >
+			 getEndData() const = 0;
 			
 			/*!
 			 InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInputValue() const = 0;
+			virtual 		std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
+			 getInputValue() const = 0;
 			
 			
 
@@ -216,11 +223,13 @@ namespace uml
 			/*!
 			 The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>> m_endData;
+					std::shared_ptr<Subset<uml::LinkEndData, uml::Element > >
+			 m_endData;
 			/*!
 			 InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p> */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> m_inputValue;
+					std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
+			 m_inputValue;
 			
 
 		public:
@@ -228,21 +237,22 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const = 0; 
+			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+			 getInput() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

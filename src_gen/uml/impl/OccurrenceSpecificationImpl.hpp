@@ -21,6 +21,8 @@
 
 #include "impl/InteractionFragmentImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ namespace uml
 			
 			/*!
 			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
-			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value)  ;
+			virtual void
+			 setCovered(std::shared_ptr<uml::Lifeline>  value)  ;
 			
 			
 			
@@ -65,12 +68,14 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getToAfter() const ;
+			virtual 	std::shared_ptr< Bag<uml::GeneralOrdering> >
+			 getToAfter() const ;
 			
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::GeneralOrdering>>> getToBefore() const ;
+			virtual 	std::shared_ptr< Bag<uml::GeneralOrdering> >
+			 getToBefore() const ;
 			
 							
 			
@@ -80,13 +85,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

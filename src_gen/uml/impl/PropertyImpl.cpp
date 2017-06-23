@@ -32,9 +32,17 @@ PropertyImpl::PropertyImpl()
 	
 	
 	
-	m_qualifier.reset(new std::vector<std::shared_ptr<uml::Property>>());
-	m_redefinedProperty.reset(new std::vector<std::shared_ptr<uml::Property>>());
-	m_subsettedProperty.reset(new std::vector<std::shared_ptr<uml::Property>>());
+		/*Subset*/
+		m_qualifier.reset(new Subset<uml::Property, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
+		/*SubsetUnion*/
+		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >(m_redefinedElement));// redefinedElement));
+	
+	
+		m_subsettedProperty.reset(new Bag<uml::Property>());
+	
+	
 }
 
 PropertyImpl::~PropertyImpl()
@@ -73,19 +81,25 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj)
 
 	m_class  = obj.getClass();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_datatype  = obj.getDatatype();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _deployedElement = obj.getDeployedElement();
-	this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
+		std::shared_ptr< Bag<uml::PackageableElement> >
+	 _deployedElement = obj.getDeployedElement();
+	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
+	(*(obj.getDeployedElement().get())));// this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ConnectorEnd>>> _end = obj.getEnd();
-	this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
+		std::shared_ptr< Bag<uml::ConnectorEnd> >
+	 _end = obj.getEnd();
+	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
+	(*(obj.getEnd().get())));// this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier = obj.getFeaturingClassifier();
-	this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
+			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));// this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
 
 	m_interface  = obj.getInterface();
 
@@ -93,8 +107,8 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj)
 
 	m_opposite  = obj.getOpposite();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
@@ -102,17 +116,21 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj)
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement = obj.getRedefinedElement();
-	this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
+			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));// this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _redefinedProperty = obj.getRedefinedProperty();
-	this->getRedefinedProperty()->insert(this->getRedefinedProperty()->end(), _redefinedProperty->begin(), _redefinedProperty->end());
+			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > >
+	 _redefinedProperty = obj.getRedefinedProperty();
+	m_redefinedProperty.reset(new 		SubsetUnion<uml::Property, uml::RedefinableElement > 
+	(*(obj.getRedefinedProperty().get())));// this->getRedefinedProperty()->insert(this->getRedefinedProperty()->end(), _redefinedProperty->begin(), _redefinedProperty->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext = obj.getRedefinitionContext();
-	this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
+			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));// this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _subsettedProperty = obj.getSubsettedProperty();
-	this->getSubsettedProperty()->insert(this->getSubsettedProperty()->end(), _subsettedProperty->begin(), _subsettedProperty->end());
+		std::shared_ptr< Bag<uml::Property> >
+	 _subsettedProperty = obj.getSubsettedProperty();
+	m_subsettedProperty.reset(new 	 Bag<uml::Property> 
+	(*(obj.getSubsettedProperty().get())));// this->getSubsettedProperty()->insert(this->getSubsettedProperty()->end(), _subsettedProperty->begin(), _subsettedProperty->end());
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -124,15 +142,15 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj)
 	{
 		m_defaultValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getDefaultValue()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> _deploymentList = obj.getDeployment();
+	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->push_back(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
+		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getLowerValue()!=nullptr)
 	{
@@ -142,15 +160,15 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> _qualifierList = obj.getQualifier();
+	std::shared_ptr<Bag<uml::Property>> _qualifierList = obj.getQualifier();
 	for(std::shared_ptr<uml::Property> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->push_back(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_qualifier->copy())));
+		this->getQualifier()->add(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_qualifier->copy())));
 	}
 	if(obj.getUpperValue()!=nullptr)
 	{
@@ -234,25 +252,29 @@ bool PropertyImpl::getIsID() const
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::binding_to_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::derived_union_is_derived(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::derived_union_is_read_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -260,127 +282,148 @@ bool PropertyImpl::derived_union_is_read_only(boost::any diagnostics,std::map < 
 
 
 
-std::shared_ptr<uml::Property>  PropertyImpl::getOtherEnd() 
+std::shared_ptr<uml::Property> 
+ PropertyImpl::getOtherEnd() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isAttribute() 
+bool
+ PropertyImpl::isAttribute() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isComposite() 
+bool
+ PropertyImpl::isComposite() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isNavigable() 
+bool
+ PropertyImpl::isNavigable() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::isSetDefault() 
+bool
+ PropertyImpl::isSetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::multiplicity_of_composite(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::qualified_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::redefined_property_inherited(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setBooleanDefaultValue(bool value) 
+void
+ PropertyImpl::setBooleanDefaultValue(bool value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setIntegerDefaultValue(int value) 
+void
+ PropertyImpl::setIntegerDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setIsNavigable(bool isNavigable) 
+void
+ PropertyImpl::setIsNavigable(bool isNavigable) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setNullDefaultValue() 
+void
+ PropertyImpl::setNullDefaultValue() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setRealDefaultValue(double value) 
+void
+ PropertyImpl::setRealDefaultValue(double value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setStringDefaultValue(std::string value) 
+void
+ PropertyImpl::setStringDefaultValue(std::string value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::setUnlimitedNaturalDefaultValue(int value) 
+void
+ PropertyImpl::setUnlimitedNaturalDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::subsetted_property_names(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> PropertyImpl::subsettingContext() 
+std::shared_ptr<Bag<uml::Type> >
+ PropertyImpl::subsettingContext() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::subsetting_context_conforms(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::subsetting_rules(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PropertyImpl::type_of_opposite_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void PropertyImpl::unsetDefault() 
+void
+ PropertyImpl::unsetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -389,7 +432,7 @@ void PropertyImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
+std::shared_ptr<uml::Association > PropertyImpl::getAssociation() const
 {
 
     return m_association;
@@ -399,7 +442,7 @@ void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association
     m_association = _association;
 }
 
-std::shared_ptr<uml::Property> PropertyImpl::getAssociationEnd() const
+std::shared_ptr<uml::Property > PropertyImpl::getAssociationEnd() const
 {
 
     return m_associationEnd;
@@ -409,7 +452,7 @@ void PropertyImpl::setAssociationEnd(std::shared_ptr<uml::Property> _association
     m_associationEnd = _associationEnd;
 }
 
-std::shared_ptr<uml::Class> PropertyImpl::getClass() const
+std::shared_ptr<uml::Class > PropertyImpl::getClass() const
 {
 
     return m_class;
@@ -419,7 +462,7 @@ void PropertyImpl::setClass(std::shared_ptr<uml::Class> _class)
     m_class = _class;
 }
 
-std::shared_ptr<uml::DataType> PropertyImpl::getDatatype() const
+std::shared_ptr<uml::DataType > PropertyImpl::getDatatype() const
 {
 
     return m_datatype;
@@ -429,7 +472,7 @@ void PropertyImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
     m_datatype = _datatype;
 }
 
-std::shared_ptr<uml::ValueSpecification> PropertyImpl::getDefaultValue() const
+std::shared_ptr<uml::ValueSpecification > PropertyImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
@@ -439,7 +482,7 @@ void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _def
     m_defaultValue = _defaultValue;
 }
 
-std::shared_ptr<uml::Interface> PropertyImpl::getInterface() const
+std::shared_ptr<uml::Interface > PropertyImpl::getInterface() const
 {
 
     return m_interface;
@@ -449,7 +492,7 @@ void PropertyImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
     m_interface = _interface;
 }
 
-std::shared_ptr<uml::Property> PropertyImpl::getOpposite() const
+std::shared_ptr<uml::Property > PropertyImpl::getOpposite() const
 {
 
     return m_opposite;
@@ -459,7 +502,7 @@ void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
     m_opposite = _opposite;
 }
 
-std::shared_ptr<uml::Association> PropertyImpl::getOwningAssociation() const
+std::shared_ptr<uml::Association > PropertyImpl::getOwningAssociation() const
 {
 
     return m_owningAssociation;
@@ -469,21 +512,24 @@ void PropertyImpl::setOwningAssociation(std::shared_ptr<uml::Association> _ownin
     m_owningAssociation = _owningAssociation;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> PropertyImpl::getQualifier() const
+		std::shared_ptr<Subset<uml::Property, uml::Element > >
+ PropertyImpl::getQualifier() const
 {
 
     return m_qualifier;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> PropertyImpl::getRedefinedProperty() const
+		std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > >
+ PropertyImpl::getRedefinedProperty() const
 {
 
     return m_redefinedProperty;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> PropertyImpl::getSubsettedProperty() const
+	std::shared_ptr< Bag<uml::Property> >
+ PropertyImpl::getSubsettedProperty() const
 {
 
     return m_subsettedProperty;
@@ -493,95 +539,41 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> PropertyImpl::getSu
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace> PropertyImpl::getNamespace() const
+		std::shared_ptr<Union<uml::Classifier> > PropertyImpl::getFeaturingClassifier() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getClass()!=nullptr)
-	{
-		_namespace = getClass();
-	}
-	if(getDatatype()!=nullptr)
-	{
-		_namespace = getDatatype();
-	}
-	if(getInterface()!=nullptr)
-	{
-		_namespace = getInterface();
-	}
-	if(getOwningAssociation()!=nullptr)
-	{
-		_namespace = getOwningAssociation();
-	}
 
-	return _namespace;
+	return m_featuringClassifier;
 }
-std::shared_ptr<uml::Element> PropertyImpl::getOwner() const
+		std::shared_ptr<Union<uml::RedefinableElement> > PropertyImpl::getRedefinedElement() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getAssociationEnd()!=nullptr)
-	{
-		_owner = getAssociationEnd();
-	}
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_redefinedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PropertyImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::Classifier> > PropertyImpl::getRedefinitionContext() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getDefaultValue());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Deployment>>> deployment = getDeployment();
-	_ownedElement->insert(_ownedElement->end(), deployment->begin(), deployment->end());
-	_ownedElement->push_back(getLowerValue());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> qualifier = getQualifier();
-	_ownedElement->insert(_ownedElement->end(), qualifier->begin(), qualifier->end());
-	_ownedElement->push_back(getUpperValue());
 
-	return _ownedElement;
+	return m_redefinitionContext;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> PropertyImpl::getRedefinitionContext() const
+std::shared_ptr<uml::Element > PropertyImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _redefinitionContext(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
 	
-	_redefinitionContext->push_back(getClass());
-	_redefinitionContext->push_back(getDatatype());
-	_redefinitionContext->push_back(getInterface());
-	_redefinitionContext->push_back(getOwningAssociation());
 
-	return _redefinitionContext;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> PropertyImpl::getFeaturingClassifier() const
+		std::shared_ptr<Union<uml::Element> > PropertyImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _featuringClassifier(new std::vector<std::shared_ptr<uml::Classifier>>()) ;
 	
-	_featuringClassifier->push_back(getClass());
-	_featuringClassifier->push_back(getDatatype());
-	_featuringClassifier->push_back(getInterface());
-	_featuringClassifier->push_back(getOwningAssociation());
 
-	return _featuringClassifier;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> PropertyImpl::getRedefinedElement() const
+std::shared_ptr<uml::Namespace > PropertyImpl::getNamespace() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> _redefinedElement(new std::vector<std::shared_ptr<uml::RedefinableElement>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> redefinedProperty = getRedefinedProperty();
-	_redefinedElement->insert(_redefinedElement->end(), redefinedProperty->begin(), redefinedProperty->end());
 
-	return _redefinedElement;
+	return m_namespace;
 }
 
 

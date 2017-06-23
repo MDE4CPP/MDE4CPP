@@ -21,6 +21,8 @@
 
 #include "impl/MessageEventImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -59,12 +61,12 @@ namespace uml
 			/*!
 			 The specific Signal that is associated with this SignalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::Signal> getSignal() const ;
+			virtual std::shared_ptr<uml::Signal > getSignal() const ;
 			
 			/*!
 			 The specific Signal that is associated with this SignalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) ;
+			virtual void setSignal(std::shared_ptr<uml::Signal> _signal_signal) ;
 							
 			
 			//*********************************
@@ -73,10 +75,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

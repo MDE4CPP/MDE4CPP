@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -109,12 +110,12 @@ namespace uml
 			/*!
 			 Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual std::shared_ptr<uml::Operation> getOperation() const = 0;
+			virtual std::shared_ptr<uml::Operation > getOperation() const = 0;
 			
 			/*!
 			 Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) = 0;
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) = 0;
 			
 
 		protected:
@@ -129,7 +130,7 @@ namespace uml
 			/*!
 			 Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p> */
-			std::shared_ptr<uml::Operation> m_operation;
+			std::shared_ptr<uml::Operation > m_operation;
 			
 
 		public:
@@ -137,12 +138,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

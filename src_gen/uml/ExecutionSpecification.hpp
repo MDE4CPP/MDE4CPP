@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -116,7 +117,8 @@ namespace uml
 			/*!
 			 The startEvent and the finishEvent must be on the same Lifeline.
 			start.covered = finish.covered */ 
-			virtual bool same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 same_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -129,21 +131,21 @@ namespace uml
 			/*!
 			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const = 0;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getFinish() const = 0;
 			
 			/*!
 			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish) = 0;
+			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish_finish) = 0;
 			/*!
 			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const = 0;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getStart() const = 0;
 			
 			/*!
 			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start) = 0;
+			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start_start) = 0;
 			
 
 		protected:
@@ -158,11 +160,11 @@ namespace uml
 			/*!
 			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::OccurrenceSpecification> m_finish;
+			std::shared_ptr<uml::OccurrenceSpecification > m_finish;
 			/*!
 			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::OccurrenceSpecification> m_start;
+			std::shared_ptr<uml::OccurrenceSpecification > m_start;
 			
 
 		public:
@@ -170,15 +172,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

@@ -6,7 +6,7 @@ using namespace uml;
 //static initialisation
 std::shared_ptr<UmlFactory> UmlFactory::instance;
 
-std::shared_ptr<UmlFactory> UmlFactory::eInstance()
+std::shared_ptr<UmlFactory>UmlFactory::eInstance()
 {
 	if(!instance)
 	{

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -96,7 +97,8 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool
+			 irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -109,21 +111,21 @@ namespace uml
 			/*!
 			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const = 0;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getAfter() const = 0;
 			
 			/*!
 			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p> */
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after) = 0;
+			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after_after) = 0;
 			/*!
 			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const = 0;
+			virtual std::shared_ptr<uml::OccurrenceSpecification > getBefore() const = 0;
 			
 			/*!
 			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p> */
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before) = 0;
+			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before_before) = 0;
 			
 
 		protected:
@@ -138,11 +140,11 @@ namespace uml
 			/*!
 			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::OccurrenceSpecification> m_after;
+			std::shared_ptr<uml::OccurrenceSpecification > m_after;
 			/*!
 			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::OccurrenceSpecification> m_before;
+			std::shared_ptr<uml::OccurrenceSpecification > m_before;
 			
 
 		public:
@@ -150,12 +152,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const = 0; 
+			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

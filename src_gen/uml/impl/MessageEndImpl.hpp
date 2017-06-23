@@ -21,6 +21,8 @@
 
 #include "impl/NamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -51,21 +53,24 @@ namespace uml
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::MessageEnd>>> oppositeEnd()  ;
+			virtual std::shared_ptr<Bag<uml::MessageEnd> >
+			 oppositeEnd()  ;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isSend()  ;
+			virtual bool
+			 isSend()  ;
 			
 			/*!
 			 This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p> */ 
-			virtual bool isReceive()  ;
+			virtual bool
+			 isReceive()  ;
 			
 			/*!
 			 This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
@@ -99,7 +104,8 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InteractionFragment>>> enclosingFragment()  ;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> >
+			 enclosingFragment()  ;
 			
 			
 			
@@ -114,12 +120,12 @@ namespace uml
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Message> getMessage() const ;
+			virtual std::shared_ptr<uml::Message > getMessage() const ;
 			
 			/*!
 			 References a Message.
 			<p>From package UML::Interactions.</p> */
-			virtual void setMessage(std::shared_ptr<uml::Message> _message) ;
+			virtual void setMessage(std::shared_ptr<uml::Message> _message_message) ;
 							
 			
 			//*********************************
@@ -128,10 +134,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ; 
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -19,13 +19,31 @@ PackageImpl::PackageImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_nestedPackage.reset(new std::vector<std::shared_ptr<uml::Package>>());
+		/*Subset*/
+		m_nestedPackage.reset(new Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(m_packagedElement));//(m_packagedElement));
 	
-	m_ownedStereotype.reset(new std::vector<std::shared_ptr<uml::Stereotype>>());
-	m_ownedType.reset(new std::vector<std::shared_ptr<uml::Type>>());
-	m_packageMerge.reset(new std::vector<std::shared_ptr<uml::PackageMerge>>());
-	m_packagedElement.reset(new std::vector<std::shared_ptr<uml::PackageableElement>>());
-	m_profileApplication.reset(new std::vector<std::shared_ptr<uml::ProfileApplication>>());
+	
+	
+		/*Subset*/
+		m_ownedStereotype.reset(new Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(m_packagedElement));//(m_packagedElement));
+	
+	
+		/*Subset*/
+		m_ownedType.reset(new Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(m_packagedElement));//(m_packagedElement));
+	
+	
+		/*Subset*/
+		m_packageMerge.reset(new Subset<uml::PackageMerge, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
+		/*SubsetUnion*/
+		m_packagedElement.reset(new SubsetUnion<uml::PackageableElement, uml::NamedElement >(m_ownedMember));// ownedMember));
+	
+	
+		/*Subset*/
+		m_profileApplication.reset(new Subset<uml::ProfileApplication, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 }
 
 PackageImpl::~PackageImpl()
@@ -46,33 +64,47 @@ PackageImpl::PackageImpl(const PackageImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _importedMember = obj.getImportedMember();
-	this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
+			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > >
+	 _importedMember = obj.getImportedMember();
+	m_importedMember.reset(new 		Subset<uml::PackageableElement, uml::NamedElement > 
+	(*(obj.getImportedMember().get())));// this->getImportedMember()->insert(this->getImportedMember()->end(), _importedMember->begin(), _importedMember->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member = obj.getMember();
-	this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
+			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));// this->getMember()->insert(this->getMember()->end(), _member->begin(), _member->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Package>>> _nestedPackage = obj.getNestedPackage();
-	this->getNestedPackage()->insert(this->getNestedPackage()->end(), _nestedPackage->begin(), _nestedPackage->end());
+			std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > >
+	 _nestedPackage = obj.getNestedPackage();
+	m_nestedPackage.reset(new 		Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > 
+	(*(obj.getNestedPackage().get())));// this->getNestedPackage()->insert(this->getNestedPackage()->end(), _nestedPackage->begin(), _nestedPackage->end());
 
 	m_nestingPackage  = obj.getNestingPackage();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember = obj.getOwnedMember();
-	this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+			,uml::NamedElement > >
+	 _ownedMember = obj.getOwnedMember();
+	m_ownedMember.reset(new 		SubsetUnion<uml::NamedElement, uml::Element
+			,uml::NamedElement > 
+	(*(obj.getOwnedMember().get())));// this->getOwnedMember()->insert(this->getOwnedMember()->end(), _ownedMember->begin(), _ownedMember->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> _ownedStereotype = obj.getOwnedStereotype();
-	this->getOwnedStereotype()->insert(this->getOwnedStereotype()->end(), _ownedStereotype->begin(), _ownedStereotype->end());
+			std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > >
+	 _ownedStereotype = obj.getOwnedStereotype();
+	m_ownedStereotype.reset(new 		Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > 
+	(*(obj.getOwnedStereotype().get())));// this->getOwnedStereotype()->insert(this->getOwnedStereotype()->end(), _ownedStereotype->begin(), _ownedStereotype->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> _ownedType = obj.getOwnedType();
-	this->getOwnedType()->insert(this->getOwnedType()->end(), _ownedType->begin(), _ownedType->end());
+			std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > >
+	 _ownedType = obj.getOwnedType();
+	m_ownedType.reset(new 		Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > 
+	(*(obj.getOwnedType().get())));// this->getOwnedType()->insert(this->getOwnedType()->end(), _ownedType->begin(), _ownedType->end());
 
 	m_owner  = obj.getOwner();
 
@@ -82,58 +114,58 @@ PackageImpl::PackageImpl(const PackageImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> _elementImportList = obj.getElementImport();
+	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->push_back(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> _ownedRuleList = obj.getOwnedRule();
+	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->push_back(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
 	}
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
 		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> _packageImportList = obj.getPackageImport();
+	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->push_back(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageMerge>>> _packageMergeList = obj.getPackageMerge();
+	std::shared_ptr<Bag<uml::PackageMerge>> _packageMergeList = obj.getPackageMerge();
 	for(std::shared_ptr<uml::PackageMerge> _packageMerge : *_packageMergeList)
 	{
-		this->getPackageMerge()->push_back(std::shared_ptr<uml::PackageMerge>(dynamic_cast<uml::PackageMerge*>(_packageMerge->copy())));
+		this->getPackageMerge()->add(std::shared_ptr<uml::PackageMerge>(dynamic_cast<uml::PackageMerge*>(_packageMerge->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> _packagedElementList = obj.getPackagedElement();
+	std::shared_ptr<Bag<uml::PackageableElement>> _packagedElementList = obj.getPackagedElement();
 	for(std::shared_ptr<uml::PackageableElement> _packagedElement : *_packagedElementList)
 	{
-		this->getPackagedElement()->push_back(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_packagedElement->copy())));
+		this->getPackagedElement()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_packagedElement->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ProfileApplication>>> _profileApplicationList = obj.getProfileApplication();
+	std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplicationList = obj.getProfileApplication();
 	for(std::shared_ptr<uml::ProfileApplication> _profileApplication : *_profileApplicationList)
 	{
-		this->getProfileApplication()->push_back(std::shared_ptr<uml::ProfileApplication>(dynamic_cast<uml::ProfileApplication*>(_profileApplication->copy())));
+		this->getProfileApplication()->add(std::shared_ptr<uml::ProfileApplication>(dynamic_cast<uml::ProfileApplication*>(_profileApplication->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> _templateBindingList = obj.getTemplateBinding();
+	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
 	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->push_back(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
+		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
 	}
 }
 
@@ -163,145 +195,169 @@ std::string PackageImpl::getURI() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> PackageImpl::allApplicableStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> >
+ PackageImpl::allApplicableStereotypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> >
+ PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile>  PackageImpl::containingProfile() 
+std::shared_ptr<uml::Profile> 
+ PackageImpl::containingProfile() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Class>  PackageImpl::createOwnedClass(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Class> 
+ PackageImpl::createOwnedClass(std::string name,bool isAbstract) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Enumeration>  PackageImpl::createOwnedEnumeration(std::string name) 
+std::shared_ptr<uml::Enumeration> 
+ PackageImpl::createOwnedEnumeration(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Interface>  PackageImpl::createOwnedInterface(std::string name) 
+std::shared_ptr<uml::Interface> 
+ PackageImpl::createOwnedInterface(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PrimitiveType>  PackageImpl::createOwnedPrimitiveType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> 
+ PackageImpl::createOwnedPrimitiveType(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype>  PackageImpl::createOwnedStereotype(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Stereotype> 
+ PackageImpl::createOwnedStereotype(std::string name,bool isAbstract) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ PackageImpl::elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Profile>>> PackageImpl::getAllAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> >
+ PackageImpl::getAllAppliedProfiles() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ProfileApplication>>> PackageImpl::getAllProfileApplications() 
+std::shared_ptr<Bag<uml::ProfileApplication> >
+ PackageImpl::getAllProfileApplications() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile>  PackageImpl::getAppliedProfile(std::string qualifiedName) 
+std::shared_ptr<uml::Profile> 
+ PackageImpl::getAppliedProfile(std::string qualifiedName) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile>  PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse) 
+std::shared_ptr<uml::Profile> 
+ PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Profile>>> PackageImpl::getAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> >
+ PackageImpl::getAppliedProfiles() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Package>>> PackageImpl::getNestedPackages() 
+std::shared_ptr<Bag<uml::Package> >
+ PackageImpl::getNestedPackages() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> PackageImpl::getOwnedStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> >
+ PackageImpl::getOwnedStereotypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> PackageImpl::getOwnedTypes() 
+std::shared_ptr<Bag<uml::Type> >
+ PackageImpl::getOwnedTypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication>  PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<uml::ProfileApplication> 
+ PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication>  PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) 
+std::shared_ptr<uml::ProfileApplication> 
+ PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::isModelLibrary() 
+bool
+ PackageImpl::isModelLibrary() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile) 
+bool
+ PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el) 
+bool
+ PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> >
+ PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> PackageImpl::visibleMembers() 
+std::shared_ptr<Bag<uml::PackageableElement> >
+ PackageImpl::visibleMembers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -310,14 +366,15 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> PackageIm
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Package>>> PackageImpl::getNestedPackage() const
+		std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > >
+ PackageImpl::getNestedPackage() const
 {
 
     return m_nestedPackage;
 }
 
 
-std::shared_ptr<uml::Package> PackageImpl::getNestingPackage() const
+std::shared_ptr<uml::Package > PackageImpl::getNestingPackage() const
 {
 
     return m_nestingPackage;
@@ -327,35 +384,40 @@ void PackageImpl::setNestingPackage(std::shared_ptr<uml::Package> _nestingPackag
     m_nestingPackage = _nestingPackage;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Stereotype>>> PackageImpl::getOwnedStereotype() const
+		std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > >
+ PackageImpl::getOwnedStereotype() const
 {
 
     return m_ownedStereotype;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Type>>> PackageImpl::getOwnedType() const
+		std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > >
+ PackageImpl::getOwnedType() const
 {
 
     return m_ownedType;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::PackageMerge>>> PackageImpl::getPackageMerge() const
+		std::shared_ptr<Subset<uml::PackageMerge, uml::Element > >
+ PackageImpl::getPackageMerge() const
 {
 
     return m_packageMerge;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> PackageImpl::getPackagedElement() const
+		std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement > >
+ PackageImpl::getPackagedElement() const
 {
 
     return m_packagedElement;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::ProfileApplication>>> PackageImpl::getProfileApplication() const
+		std::shared_ptr<Subset<uml::ProfileApplication, uml::Element > >
+ PackageImpl::getProfileApplication() const
 {
 
     return m_profileApplication;
@@ -365,76 +427,37 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::ProfileApplication>>> PackageIm
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> PackageImpl::getOwner() const
+std::shared_ptr<uml::Namespace > PackageImpl::getNamespace() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_namespace;
 }
-std::shared_ptr<uml::Namespace> PackageImpl::getNamespace() const
+std::shared_ptr<uml::Element > PackageImpl::getOwner() const
 {
-	std::shared_ptr<uml::Namespace> _namespace = nullptr ;
 	
-	if(getNestingPackage()!=nullptr)
-	{
-		_namespace = getNestingPackage();
-	}
 
-	return _namespace;
+	return m_owner;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> PackageImpl::getOwnedMember() const
+		std::shared_ptr<Union<uml::Element> > PackageImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _ownedMember(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Constraint>>> ownedRule = getOwnedRule();
-	_ownedMember->insert(_ownedMember->end(), ownedRule->begin(), ownedRule->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> packagedElement = getPackagedElement();
-	_ownedMember->insert(_ownedMember->end(), packagedElement->begin(), packagedElement->end());
 
-	return _ownedMember;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> PackageImpl::getMember() const
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
+		,uml::NamedElement > >
+ PackageImpl::getOwnedMember() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _member(new std::vector<std::shared_ptr<uml::NamedElement>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageableElement>>> importedMember = getImportedMember();
-	_member->insert(_member->end(), importedMember->begin(), importedMember->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
-	_member->insert(_member->end(), ownedMember->begin(), ownedMember->end());
 
-	return _member;
+	return m_ownedMember;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> PackageImpl::getOwnedElement() const
+		std::shared_ptr<Union<uml::NamedElement> > PackageImpl::getMember() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ElementImport>>> elementImport = getElementImport();
-	_ownedElement->insert(_ownedElement->end(), elementImport->begin(), elementImport->end());
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> ownedMember = getOwnedMember();
-	_ownedElement->insert(_ownedElement->end(), ownedMember->begin(), ownedMember->end());
-	_ownedElement->push_back(getOwnedTemplateSignature());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageImport>>> packageImport = getPackageImport();
-	_ownedElement->insert(_ownedElement->end(), packageImport->begin(), packageImport->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PackageMerge>>> packageMerge = getPackageMerge();
-	_ownedElement->insert(_ownedElement->end(), packageMerge->begin(), packageMerge->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::ProfileApplication>>> profileApplication = getProfileApplication();
-	_ownedElement->insert(_ownedElement->end(), profileApplication->begin(), profileApplication->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateBinding>>> templateBinding = getTemplateBinding();
-	_ownedElement->insert(_ownedElement->end(), templateBinding->begin(), templateBinding->end());
 
-	return _ownedElement;
+	return m_member;
 }
 
 

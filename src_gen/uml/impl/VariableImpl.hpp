@@ -22,6 +22,8 @@
 #include "impl/ConnectableElementImpl.hpp"
 #include "impl/MultiplicityElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -53,7 +55,8 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
+			virtual bool
+			 isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
 			
 			
 			
@@ -68,21 +71,21 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Activity> getActivityScope() const ;
+			virtual std::shared_ptr<uml::Activity > getActivityScope() const ;
 			
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) ;
+			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope_activityScope) ;
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::StructuredActivityNode> getScope() const ;
+			virtual std::shared_ptr<uml::StructuredActivityNode > getScope() const ;
 			
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) ;
+			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope_scope) ;
 							
 			
 			//*********************************
@@ -91,13 +94,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

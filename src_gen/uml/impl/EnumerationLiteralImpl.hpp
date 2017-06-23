@@ -21,6 +21,8 @@
 
 #include "impl/InstanceSpecificationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getClassifiers()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getClassifiers()  ;
 			
 			
 			
@@ -65,12 +68,12 @@ namespace uml
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<uml::Enumeration> getEnumeration() const ;
+			virtual std::shared_ptr<uml::Enumeration > getEnumeration() const ;
 			
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) ;
+			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration_enumeration) ;
 							
 			
 			//*********************************
@@ -79,13 +82,13 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace> getNamespace() const ; 
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -11,7 +11,7 @@ const std::string UmlPackage::eNS_PREFIX ="uml";
 //Singleton 
 std::shared_ptr<UmlPackage> UmlPackage::instance;
 
-std::shared_ptr<UmlPackage> UmlPackage::eInstance()
+std::shared_ptr<UmlPackage>UmlPackage::eInstance()
 {
 	if(!instance)
 	{

@@ -21,6 +21,8 @@
 
 #include "impl/ActionImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -55,16 +57,19 @@ namespace uml
 				outputs.type->forAll(conformsTo(t)) and 
 				-- Note that the following only checks the case when the collection is via multiple tokens.
 				collection.upperBound()>1 implies collection.type.conformsTo(t)) */ 
-			virtual bool reducer_inputs_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 reducer_inputs_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the collection InputPin must be a collection. */ 
-			virtual bool input_type_is_collection(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 input_type_is_collection(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type)) */ 
-			virtual bool output_types_are_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool
+			 output_types_are_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -89,30 +94,30 @@ namespace uml
 			/*!
 			 The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::InputPin> getCollection() const ;
+			virtual std::shared_ptr<uml::InputPin > getCollection() const ;
 			
 			/*!
 			 The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p> */
-			virtual void setCollection(std::shared_ptr<uml::InputPin> _collection) ;
+			virtual void setCollection(std::shared_ptr<uml::InputPin> _collection_collection) ;
 			/*!
 			 A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::Behavior> getReducer() const ;
+			virtual std::shared_ptr<uml::Behavior > getReducer() const ;
 			
 			/*!
 			 A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p> */
-			virtual void setReducer(std::shared_ptr<uml::Behavior> _reducer) ;
+			virtual void setReducer(std::shared_ptr<uml::Behavior> _reducer_reducer) ;
 			/*!
 			 The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
+			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
 			 The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
 							
 			
 			//*********************************
@@ -121,22 +126,24 @@ namespace uml
 			/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::OutputPin>>> getOutput() const ;/*!
+			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
+			 getInput() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element> getOwner() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityGroup>>> getInGroup() const ;/*!
+			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
+			 getOutput() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::RedefinableElement>>> getRedefinedElement() const ; 
+			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

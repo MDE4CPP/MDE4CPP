@@ -20,7 +20,10 @@ TemplateBindingImpl::TemplateBindingImpl()
 	// Reference Members
 	//*********************************
 	
-	m_parameterSubstitution.reset(new std::vector<std::shared_ptr<uml::TemplateParameterSubstitution>>());
+		/*Subset*/
+		m_parameterSubstitution.reset(new Subset<uml::TemplateParameterSubstitution, uml::Element >(m_ownedElement));//(m_ownedElement));
+	
+	
 	
 }
 
@@ -40,38 +43,42 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj)
 	
 	m_boundElement  = obj.getBoundElement();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
-	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
+			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
 
 	m_signature  = obj.getSignature();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
-	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _source = obj.getSource();
+	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
-	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _target = obj.getTarget();
+	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameterSubstitution>>> _parameterSubstitutionList = obj.getParameterSubstitution();
+	std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitutionList = obj.getParameterSubstitution();
 	for(std::shared_ptr<uml::TemplateParameterSubstitution> _parameterSubstitution : *_parameterSubstitutionList)
 	{
-		this->getParameterSubstitution()->push_back(std::shared_ptr<uml::TemplateParameterSubstitution>(dynamic_cast<uml::TemplateParameterSubstitution*>(_parameterSubstitution->copy())));
+		this->getParameterSubstitution()->add(std::shared_ptr<uml::TemplateParameterSubstitution>(dynamic_cast<uml::TemplateParameterSubstitution*>(_parameterSubstitution->copy())));
 	}
 }
 
@@ -92,13 +99,15 @@ std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ TemplateBindingImpl::one_parameter_substitution(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool
+ TemplateBindingImpl::parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -107,7 +116,7 @@ bool TemplateBindingImpl::parameter_substitution_formal(boost::any diagnostics,s
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::TemplateableElement> TemplateBindingImpl::getBoundElement() const
+std::shared_ptr<uml::TemplateableElement > TemplateBindingImpl::getBoundElement() const
 {
 //assert(m_boundElement);
     return m_boundElement;
@@ -117,14 +126,15 @@ void TemplateBindingImpl::setBoundElement(std::shared_ptr<uml::TemplateableEleme
     m_boundElement = _boundElement;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameterSubstitution>>> TemplateBindingImpl::getParameterSubstitution() const
+		std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element > >
+ TemplateBindingImpl::getParameterSubstitution() const
 {
 
     return m_parameterSubstitution;
 }
 
 
-std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() const
+std::shared_ptr<uml::TemplateSignature > TemplateBindingImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
@@ -137,54 +147,37 @@ void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element> TemplateBindingImpl::getOwner() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ TemplateBindingImpl::getTarget() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getBoundElement()!=nullptr)
-	{
-		_owner = getBoundElement();
-	}
 
-	return _owner;
+	return m_target;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateBindingImpl::getSource() const
+		std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getOwnedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_source->push_back(getBoundElement());
 
-	return _source;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateBindingImpl::getTarget() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ TemplateBindingImpl::getSource() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_target->push_back(getSignature());
 
-	return _target;
+	return m_source;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateBindingImpl::getRelatedElement() const
+		std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getRelatedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
-	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
-	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
 
-	return _relatedElement;
+	return m_relatedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> TemplateBindingImpl::getOwnedElement() const
+std::shared_ptr<uml::Element > TemplateBindingImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::TemplateParameterSubstitution>>> parameterSubstitution = getParameterSubstitution();
-	_ownedElement->insert(_ownedElement->end(), parameterSubstitution->begin(), parameterSubstitution->end());
 
-	return _ownedElement;
+	return m_owner;
 }
 
 

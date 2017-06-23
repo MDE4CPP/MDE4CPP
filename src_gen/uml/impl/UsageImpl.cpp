@@ -39,50 +39,60 @@ UsageImpl::UsageImpl(const UsageImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _client = obj.getClient();
-	this->getClient()->insert(this->getClient()->end(), _client->begin(), _client->end());
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > >
+	 _client = obj.getClient();
+	m_client.reset(new 		SubsetUnion<uml::NamedElement, uml::Element > 
+	(*(obj.getClient().get())));// this->getClient()->insert(this->getClient()->end(), _client->begin(), _client->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Dependency>>> _clientDependency = obj.getClientDependency();
-	this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+		std::shared_ptr< Bag<uml::Dependency> >
+	 _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
+	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
 
 	m_namespace  = obj.getNamespace();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement = obj.getOwnedElement();
-	this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
 
 	m_owner  = obj.getOwner();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement = obj.getRelatedElement();
-	this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
+			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source = obj.getSource();
-	this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _source = obj.getSource();
+	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> _supplier = obj.getSupplier();
-	this->getSupplier()->insert(this->getSupplier()->end(), _supplier->begin(), _supplier->end());
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > >
+	 _supplier = obj.getSupplier();
+	m_supplier.reset(new 		SubsetUnion<uml::NamedElement, uml::Element > 
+	(*(obj.getSupplier().get())));// this->getSupplier()->insert(this->getSupplier()->end(), _supplier->begin(), _supplier->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target = obj.getTarget();
-	this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+	 _target = obj.getTarget();
+	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
+	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> _ownedCommentList = obj.getOwnedComment();
+	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->push_back(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
 }
 
@@ -111,59 +121,37 @@ std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> UsageImpl::getRelatedElement() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ UsageImpl::getSource() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _relatedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> source = getSource();
-	_relatedElement->insert(_relatedElement->end(), source->begin(), source->end());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> target = getTarget();
-	_relatedElement->insert(_relatedElement->end(), target->begin(), target->end());
 
-	return _relatedElement;
+	return m_source;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> UsageImpl::getTarget() const
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ UsageImpl::getTarget() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _target(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> supplier = getSupplier();
-	_target->insert(_target->end(), supplier->begin(), supplier->end());
 
-	return _target;
+	return m_target;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> UsageImpl::getOwnedElement() const
+std::shared_ptr<uml::Element > UsageImpl::getOwner() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _ownedElement(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	_ownedElement->push_back(getNameExpression());
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Comment>>> ownedComment = getOwnedComment();
-	_ownedElement->insert(_ownedElement->end(), ownedComment->begin(), ownedComment->end());
 
-	return _ownedElement;
+	return m_owner;
 }
-std::shared_ptr<uml::Element> UsageImpl::getOwner() const
+		std::shared_ptr<Union<uml::Element> > UsageImpl::getOwnedElement() const
 {
-	std::shared_ptr<uml::Element> _owner = nullptr ;
 	
-	if(getNamespace()!=nullptr)
-	{
-		_owner = getNamespace();
-	}
-	if(getOwningTemplateParameter()!=nullptr)
-	{
-		_owner = getOwningTemplateParameter();
-	}
 
-	return _owner;
+	return m_ownedElement;
 }
-std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> UsageImpl::getSource() const
+		std::shared_ptr<Union<uml::Element> > UsageImpl::getRelatedElement() const
 {
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Element>>> _source(new std::vector<std::shared_ptr<uml::Element>>()) ;
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> client = getClient();
-	_source->insert(_source->end(), client->begin(), client->end());
 
-	return _source;
+	return m_relatedElement;
 }
 
 
