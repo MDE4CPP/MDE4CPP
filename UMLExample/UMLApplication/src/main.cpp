@@ -29,6 +29,7 @@ SOFTWARE.
 using namespace std;
 
 #include "uml/UmlFactory.hpp"
+#include "UmlPackage.hpp"
 #include "uml/Class.hpp"
 #include "uml/Model.hpp"
 #include "uml/Operation.hpp"
@@ -43,48 +44,49 @@ using namespace std;
 int main()
 {
     //#############  Create simple UML model  #############
-    uml::UmlFactory *factory=uml::UmlFactory::eInstance();
+    std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
 
-    uml::Model* p=factory->createModel();
+    std::shared_ptr<uml::Model> p(factory->createModel());
     p->setName("Modell");
 
-    uml::Class* c=factory->createClass();
+    std::shared_ptr<uml::Class> c(factory->createClass());
     c->setName("Class1");
     p->getPackagedElement()->push_back(c);
 
     //use Metamodel to create a Class
-    ecore::EObject *a=factory->create(UML::UMLPackage::eInstance()->get_UML_Class()->eClass());
+    std::shared_ptr<ecore::EObject> a(factory->create(uml::UmlPackage::eInstance()->getClass()->getName()));
 
-    c=dynamic_cast<uml::Class*>(a);
+    c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
     c->setPackage(p);
     p->getPackagedElement()->push_back(c);
 
     //create an operation
-    uml::Operation* o=factory->createOperation();
+    std::shared_ptr<uml::Operation> o(factory->createOperation());
     o->setName("do");
     c->getOwnedOperation()->push_back(o);
 
     //create an UML-Objekt (InstanceSpecification) of Class2
-    uml::InstanceSpecification* i=factory->createInstanceSpecification();
+    std::shared_ptr<uml::InstanceSpecification> i(factory->createInstanceSpecification());
     i->setName("o");
-    std::vector<uml::Classifier * > *t=i->getClassifier();
+    std::shared_ptr<Bag<uml::Classifier>> t = i->getClassifier();
     t->push_back(c); //set Type to Class2
     p->getPackagedElement()->push_back(i);
 
     //#############  Print model content  #############
 
     cout << "______________ Model ____________" << endl;
-
-    for(uml::PackageableElement *it :*p->getPackagedElement())
+	std::shared_ptr<Bag<uml::PackageableElement>> elements = p->getPackagedElement();
+    for(std::shared_ptr<uml::PackageableElement>it : *elements)
     {
         // optional type check using UML Metamodel
-        uml::Class* uc=UML::UMLPackage::eInstance()->get_UML_Class();
+        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass();
         if(it->eClass() == uc->eClass())
         {
             cout << it->getName() << " is a Class"<< endl;
-            uml::Class* itC=dynamic_cast<uml::Class*> (it); // It is certainly an uml::Class
-            for(uml::Operation *it :*itC->getOwnedOperation())
+            std::shared_ptr<uml::Class> itC = std::dynamic_pointer_cast<uml::Class>(it); // It is certainly an uml::Class
+			std::shared_ptr<Bag<uml::Operation>> opList = itC->getOwnedOperation();
+            for(std::shared_ptr<uml::Operation>it : *opList)
             {
                 cout << it->getName() << endl;
             }
@@ -97,19 +99,21 @@ int main()
 
     cout << "______________ MetaModel ____________" << endl;
 
-    ecore::EClass *mc = c->eClass(); // UML is defined with ecore
+    std::shared_ptr<ecore::EClass> mc = c->eClass(); // UML is defined with ecore
     cout << mc->getName() << " :" << endl;
-    for(ecore::EOperation * it :*mc->getEAllOperations())
+	std::shared_ptr<Bag<ecore::EOperation>> opList = mc->getEAllOperations();
+    for(std::shared_ptr<ecore::EOperation> it : *opList)
     {
         cout << it->getName() << endl;
     }
 
     cout << "___________ MetaMetaModel _______________" << endl;
 
-    ecore::EClass *mmc = mc->eClass();
+    std::shared_ptr<ecore::EClass> mmc = mc->eClass();
     cout << mmc->getName() << " :" << endl;
 
-    for(ecore::EOperation * it :*mmc->getEAllOperations())
+	std::shared_ptr<Bag<ecore::EOperation>> opList2 = mmc->getEAllOperations();
+    for(std::shared_ptr<ecore::EOperation> it : *opList2)
     {
         cout << it->getName() << endl;
     }
