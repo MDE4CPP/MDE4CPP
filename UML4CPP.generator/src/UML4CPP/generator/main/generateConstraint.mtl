@@ -27,9 +27,9 @@ con->getConstrainedElement()->push_back([elem.appendTypeRes()/]);
 
 oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 [for (it : String | aConstraint.specification.oclAsType(OpaqueExpression).language)]
-oe->getLanguage()->push_back("[it/]");
+oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("[it/]")));
 [/for][for (it : String | aConstraint.specification.oclAsType(OpaqueExpression)._body)]
-oe->getBody()->push_back("[it.substituteAll('\n', '').substituteAll('\r','"\\\r\n"') /]");
+oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("[it.substituteAll('\n', '').substituteAll('\r','"\\\r\n"') /]")));
 [/for]
 
 con->setSpecification(oe);
