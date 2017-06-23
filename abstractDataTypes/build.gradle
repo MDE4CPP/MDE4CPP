@@ -1,0 +1,10 @@
+description 'C++ project of abstractDataTypes'
+
+task deliverAbstractDataTypes(type: Copy) {
+	group 'common'
+	description 'deliver abstract data types header to %MDE4CPP_HOME%/application/include/abstractDataTypes'
+	from "."
+	into System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
+	include "**/*.hpp"
+	exclude "build", ".gradle"
+}
