@@ -8,7 +8,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
 1. Install following software: 
   * Eclipse Modeling Tool
     * add plugin Acceleo 3
-  * Gradle
+  * Gradle 4.0
   * MinGW with package mingw32-gcc-g++ (If you want to use prebuilt libraries, you have to use the version 5.3.0-3.)
   	
 2. checkout a repository with one of the following options:
