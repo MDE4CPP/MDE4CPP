@@ -14,6 +14,7 @@
 #endif
 #include <iostream>
 #include <memory>
+#include "SubsetUnion.hpp"
 
 #include "umlReflection/UMLPackage.hpp"
 #include "impl/PackageImpl.hpp"	

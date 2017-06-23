@@ -6,7 +6,7 @@ using namespace UML;
 //static initialisation
 const std::string UMLPackage::eNAME ="UML";
 const std::string UMLPackage::eNS_URI ="http://www.omg.org/spec/UML/20131001";
-const std::string UMLPackage::eNS_PREFIX ="invalid";
+const std::string UMLPackage::eNS_PREFIX ="";
 
 //Singleton 
 std::shared_ptr<UMLPackage> UMLPackage::instance;

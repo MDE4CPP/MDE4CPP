@@ -6,7 +6,7 @@ using namespace Ecore;
 //static initialisation
 const std::string EcorePackage::eNAME ="Ecore";
 const std::string EcorePackage::eNS_URI ="http://www.eclipse.org/emf/2002/Ecore";
-const std::string EcorePackage::eNS_PREFIX ="invalid";
+const std::string EcorePackage::eNS_PREFIX ="";
 
 //Singleton 
 std::shared_ptr<EcorePackage> EcorePackage::instance;

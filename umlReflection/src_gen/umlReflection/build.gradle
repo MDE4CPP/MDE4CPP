@@ -102,7 +102,10 @@ model {
 					exportedHeaders {
                         srcDirs "../" 
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include"
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
+
                         include "**/*.hpp"
                     }
 					lib library: "ecore"
@@ -136,7 +139,8 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-pipe'
+			linker.args '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-pipe', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

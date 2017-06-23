@@ -2351,14 +2351,14 @@ void EcorePackageImpl::initializePackageContents()
 	ecore_ETypedElement->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_Ecore_ENamedElement());
-	gen->setSpecific(get_Ecore_EClassifier());
-	ecore_EClassifier->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_Ecore_EClassifier());
 	gen->setSpecific(get_Ecore_EDataType());
 	ecore_EDataType->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	gen->setSpecific(get_Ecore_EClassifier());
+	ecore_EClassifier->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_Ecore_EModelElement());
