@@ -9,14 +9,15 @@
 #define FUMLPLUGIN_HPP_
 
 #include "MDE4CPPPlugin.hpp"
-#include "ActivityExecution.hpp"
+#include <memory>
+#include <boost/any.hpp>
 
 class FUMLPlugin: public MDE4CPPPlugin
 {
 	public:
 		virtual ~FUMLPlugin(){}
 
-		virtual std::shared_ptr<fUML::ActivityExecution> getMainActivityExecution() = 0;
+		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
 };
 
 #endif
