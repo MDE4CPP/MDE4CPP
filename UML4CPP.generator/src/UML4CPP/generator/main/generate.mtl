@@ -37,10 +37,10 @@
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateModel()/]
 	[aPackage.allOwnedElements()->filter(Activity).generateElement()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnum()/]
+	[aPackage.generateUMLPlugin()/]
 [/if]
 
 [aPackage.generatePackageImpl()/]
-[aPackage.generateUMLPlugin()/]
 [aPackage.generateProjectsFiles()/]
 [/template]
 
