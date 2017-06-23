@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,23 +52,28 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedVales()  ;
+			virtual int
+			 countOfferedVales()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> retrieveOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 retrieveOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void removeOfferedValues(int count)  ;
+			virtual void
+			 removeOfferedValues(int count)  ;
 			
 			/*!
 			 */ 
-			virtual void removeWithdrawnTokens()  ;
+			virtual void
+			 removeWithdrawnTokens()  ;
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  ;
+			virtual bool
+			 hasTokens()  ;
 			
 			
 			
@@ -80,7 +87,8 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getOfferedTokens() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Token> >
+			 getOfferedTokens() const ;
 			
 							
 			

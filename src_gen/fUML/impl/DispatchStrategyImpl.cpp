@@ -57,19 +57,22 @@ std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution>  DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> 
+ DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	    return object->getLocus()->getFactory()->createExecution(this->retrieveMethod(object,operation),object);
 }
 
-std::shared_ptr<uml::Behavior>  DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> 
+ DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	    return operation->getMethod()->front();
 }
 
-std::string DispatchStrategyImpl::retrieveName() 
+std::string
+ DispatchStrategyImpl::retrieveName() 
 {
 	//generated from body annotation
 	return "dispatch";

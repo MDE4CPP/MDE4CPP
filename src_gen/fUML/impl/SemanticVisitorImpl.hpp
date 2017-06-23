@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,11 +52,13 @@ virtual public SemanticVisitor
 			//*********************************
 			/*!
 			 */ 
-			virtual void _endIsolation()  ;
+			virtual void
+			 _endIsolation()  ;
 			
 			/*!
 			 */ 
-			virtual void _beginIsolation()  ;
+			virtual void
+			 _beginIsolation()  ;
 			
 			
 			

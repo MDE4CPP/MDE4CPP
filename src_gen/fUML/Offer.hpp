@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -59,23 +60,28 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedVales()  = 0;
+			virtual int
+			 countOfferedVales()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> retrieveOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 retrieveOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void removeOfferedValues(int count)  = 0;
+			virtual void
+			 removeOfferedValues(int count)  = 0;
 			
 			/*!
 			 */ 
-			virtual void removeWithdrawnTokens()  = 0;
+			virtual void
+			 removeWithdrawnTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  = 0;
+			virtual bool
+			 hasTokens()  = 0;
 			
 			
 			//*********************************
@@ -87,7 +93,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getOfferedTokens() const = 0;
+			virtual 	std::shared_ptr< Bag<fUML::Token> >
+			 getOfferedTokens() const = 0;
 			
 			
 
@@ -102,7 +109,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> m_offeredTokens;
+				std::shared_ptr< Bag<fUML::Token> >
+			 m_offeredTokens;
 			
 
 		public:

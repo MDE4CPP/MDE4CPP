@@ -57,13 +57,15 @@ std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void SemanticVisitorImpl::_beginIsolation() 
+void
+ SemanticVisitorImpl::_beginIsolation() 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<< "[_beginIsolation] Begin isolation."<<std::endl;)
 }
 
-void SemanticVisitorImpl::_endIsolation() 
+void
+ SemanticVisitorImpl::_endIsolation() 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<< "[_endIsolation] End isolation."<<std::endl;)

@@ -21,7 +21,9 @@ ParameterValueImpl::ParameterValueImpl()
 	// Reference Members
 	//*********************************
 	
-	m_values.reset(new std::vector<std::shared_ptr<fUML::Value>>());
+		m_values.reset(new Bag<fUML::Value>());
+	
+	
 }
 
 ParameterValueImpl::~ParameterValueImpl()
@@ -42,10 +44,10 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> _valuesList = obj.getValues();
+	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
-		this->getValues()->push_back(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
+		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
 	}
 }
 
@@ -70,7 +72,7 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
+std::shared_ptr<uml::Parameter > ParameterValueImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
@@ -80,7 +82,8 @@ void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter
     m_parameter = _parameter;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> ParameterValueImpl::getValues() const
+	std::shared_ptr< Bag<fUML::Value> >
+ ParameterValueImpl::getValues() const
 {
 
     return m_values;

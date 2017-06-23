@@ -75,11 +75,12 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value>  InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> 
+ InstanceValueEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = instance->getClassifier();
+	std::shared_ptr<Bag<uml::Classifier> > types = instance->getClassifier();
 	std::shared_ptr<uml::Classifier> myType = types->at(0);
 
     DEBUG_MESSAGE(std::cout<<("[evaluate] type = " + myType->getName())<<std::endl;)
@@ -133,13 +134,13 @@ std::shared_ptr<fUML::Value>  InstanceValueEvaluationImpl::evaluate()
 
         structuredValue->createFeatureValues();
 
-        std::shared_ptr<std::vector<std::shared_ptr<uml::Slot>>> instanceSlots = instance->getSlot();
+        std::shared_ptr<Bag<uml::Slot> > instanceSlots = instance->getSlot();
         for(unsigned int i = 0; i < instanceSlots->size(); i++)
         {
         	std::shared_ptr<uml::Slot> slot = instanceSlots->at(i);
-        	std::shared_ptr<std::vector<std::shared_ptr<Value>>> values(new std::vector<std::shared_ptr<Value>>());
+        	std::shared_ptr<Bag<Value> > values(new Bag<Value>());
 
-        	std::shared_ptr<std::vector<std::shared_ptr<uml::ValueSpecification>>> slotValues = slot->getValue();
+        	std::shared_ptr<Bag<uml::ValueSpecification> > slotValues = slot->getValue();
             for(unsigned int j = 0; j < slotValues->size(); j++)
             {
             	std::shared_ptr<uml::ValueSpecification> slotValue = slotValues->at(j);

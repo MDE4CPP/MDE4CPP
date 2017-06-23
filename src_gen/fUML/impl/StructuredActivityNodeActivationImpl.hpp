@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "StructuredActivityNode.hpp"
 #include "Action.hpp"
@@ -54,59 +56,73 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  ;
+			virtual void
+			 doStructuredActivity()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> makeActivityNodeList(std::shared_ptr<std::vector<std::shared_ptr<uml::ExecutableNode>>>  nodes)  ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> >
+			 makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> >
+			 getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values)  ;
+			virtual void
+			 putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
 			
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void
+			 doAction()  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation>  getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> 
+			 getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual void createNodeActivations()  ;
+			virtual void
+			 createNodeActivations()  ;
 			
 			/*!
 			 */ 
-			virtual void createEdgeInstances()  ;
+			virtual void
+			 createEdgeInstances()  ;
 			
 			/*!
 			 */ 
-			virtual void terminateAll()  ;
+			virtual void
+			 terminateAll()  ;
 			
 			/*!
 			 */ 
-			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual bool
+			 isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool isSuspended()  ;
+			virtual bool
+			 isSuspended()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> completeAction()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 completeAction()  ;
 			
 			/*!
 			 */ 
-			virtual void resume()  ;
+			virtual void
+			 resume()  ;
 			
 			
 			
@@ -120,11 +136,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getActivationGroup() const ;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) ;
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup_activationGroup) ;
 							
 			
 			//*********************************

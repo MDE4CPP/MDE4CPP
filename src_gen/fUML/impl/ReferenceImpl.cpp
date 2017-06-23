@@ -62,29 +62,33 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position) 
+void
+ ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
 	//generated from body annotation
 	return this->getReferent()->assignFeatureValue(feature,values,position);
 }
 
-void ReferenceImpl::destroy() 
+void
+ ReferenceImpl::destroy() 
 {
 	//generated from body annotation
 	this->getReferent()->destroy();
 }
 
-std::shared_ptr<fUML::Execution>  ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> 
+ ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	return this->getReferent()->dispatch(operation);
 }
 
-bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> myTypes = nullptr;//this->getTypes();
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> otherTypes = nullptr;//otherValue->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > myTypes = nullptr;//this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > otherTypes = nullptr;//otherValue->getTypes();
 
     bool isEqual = true;
 
@@ -122,43 +126,50 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ReferenceImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> >
+ ReferenceImpl::getTypes() 
 {
 	//generated from body annotation
 		return  this->getReferent()->getTypes();
 }
 
-std::shared_ptr<fUML::Value>  ReferenceImpl::new_() 
+std::shared_ptr<fUML::Value> 
+ ReferenceImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createReference());
 }
 
-std::shared_ptr<fUML::FeatureValue>  ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> 
+ ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValue(feature);
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> ReferenceImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> >
+ ReferenceImpl::retrieveFeatureValues() 
 {
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValues();
 }
 
-void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void
+ ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	//generated from body annotation
 	this->getReferent()->send(signalInstance);
 }
 
-void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
+void
+ ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	this->getReferent()->startBehavior(classifier,inputs);
 }
 
-std::string ReferenceImpl::toString() 
+std::string
+ ReferenceImpl::toString() 
 {
 	//generated from body annotation
 	return "Reference to " + this->getReferent()->toString();
@@ -167,7 +178,7 @@ std::string ReferenceImpl::toString()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Object> ReferenceImpl::getReferent() const
+std::shared_ptr<fUML::Object > ReferenceImpl::getReferent() const
 {
 //assert(m_referent);
     return m_referent;

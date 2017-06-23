@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -60,7 +62,8 @@ virtual public TokenSet
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getTokens() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Token> >
+			 getTokens() const ;
 			
 							
 			

@@ -40,20 +40,24 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
-	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
-	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -74,14 +78,15 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void
+ DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Value>value = token->getValue();
 		
 		bool isUnique = true;
 		if (value != nullptr) {
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token> > > heldTokens = this->getTokens();
+			std::shared_ptr<Bag<fUML::Token> > heldTokens = this->getTokens();
 			unsigned int i = 0;
 			while (isUnique && i < heldTokens->size()) {
 				isUnique = !(heldTokens->at(i)->getValue()->equals(value));
@@ -94,7 +99,8 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 		}
 }
 
-int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int
+ DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	int i = ObjectNodeActivationImpl::removeToken(token);

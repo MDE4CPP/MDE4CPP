@@ -45,24 +45,26 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _types = obj.getTypes();
-	this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
+		std::shared_ptr< Bag<uml::Classifier> >
+	 _types = obj.getTypes();
+	m_types.reset(new 	 Bag<uml::Classifier> 
+	(*(obj.getTypes().get())));// this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> _parameterValuesList = obj.getParameterValues();
+	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->push_back(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
 	}
 }
 
@@ -83,21 +85,23 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputParameters,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  outputParameters) 
+void
+ OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void OpaqueBehaviorExecutionImpl::execute() 
+void
+ OpaqueBehaviorExecutionImpl::execute() 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[execute] Opaque behavior " << this->getBehavior()->getName() << "..."<<std::endl;)
 
-	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> inputs(new std::vector<std::shared_ptr<ParameterValue>>());
-	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputs(new std::vector<std::shared_ptr<ParameterValue>>());
+	std::shared_ptr<Bag<ParameterValue> > inputs(new Bag<ParameterValue>());
+	std::shared_ptr<Bag<ParameterValue> > outputs(new Bag<ParameterValue>());
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Parameter>>> parameterList = this->getBehavior()->getOwnedParameter();
+	std::shared_ptr<Bag<uml::Parameter> > parameterList = this->getBehavior()->getOwnedParameter();
     for(std::shared_ptr<uml::Parameter> parameter : *parameterList) 
     {
         DEBUG_MESSAGE(std::cout<<parameter->getName()<< " Parameter Direction: " << parameter->getDirection()<<std::endl;)

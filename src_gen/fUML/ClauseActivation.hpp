@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -74,31 +75,38 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void recieveControl()  = 0;
+			virtual void
+			 recieveControl()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool
+			 isReady()  = 0;
 			
 			/*!
 			 */ 
-			virtual void runTest()  = 0;
+			virtual void
+			 runTest()  = 0;
 			
 			/*!
 			 */ 
-			virtual void selectBody()  = 0;
+			virtual void
+			 selectBody()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue>  getDecision()  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue> 
+			 getDecision()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getPredecessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
+			 getPredecessors()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getSuccessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
+			 getSuccessors()  = 0;
 			
 			
 			//*********************************
@@ -110,18 +118,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Clause> getClause() const = 0;
+			virtual std::shared_ptr<uml::Clause > getClause() const = 0;
 			
 			/*!
 			 */
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause) = 0;
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause_clause) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ConditionalNodeActivation> getConditionalNodeActivation() const = 0;
+			virtual std::shared_ptr<fUML::ConditionalNodeActivation > getConditionalNodeActivation() const = 0;
 			
 			/*!
 			 */
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation) = 0;
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation_conditionalNodeActivation) = 0;
 			
 
 		protected:
@@ -135,10 +143,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<uml::Clause> m_clause;
+			std::shared_ptr<uml::Clause > m_clause;
 			/*!
 			 */
-			std::shared_ptr<fUML::ConditionalNodeActivation> m_conditionalNodeActivation;
+			std::shared_ptr<fUML::ConditionalNodeActivation > m_conditionalNodeActivation;
 			
 
 		public:

@@ -57,7 +57,8 @@ std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string SemanticStrategyImpl::retrieveName() 
+std::string
+ SemanticStrategyImpl::retrieveName() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

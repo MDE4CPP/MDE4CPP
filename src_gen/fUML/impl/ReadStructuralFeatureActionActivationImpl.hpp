@@ -21,6 +21,8 @@
 
 #include "impl/StructuralFeatureActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,15 +50,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<std::vector<std::shared_ptr<uml::LinkEndData>>>  endDataList)  ;
+			virtual bool
+			 linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  ;
 			
 			/*!
 			 */ 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
+			virtual bool
+			 endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association>  getAssociation()  ;
+			virtual std::shared_ptr<uml::Association> 
+			 getAssociation()  ;
 			
 			
 			

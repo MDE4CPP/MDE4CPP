@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/SemanticStrategyImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance>  retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  ;
+			virtual std::shared_ptr<fUML::SignalInstance> 
+			 retrieveNextEvent(std::shared_ptr<fUML::ObjectActivation>  objectActivation)  ;
 			
 			
 			

@@ -19,7 +19,9 @@ ValuesImpl::ValuesImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_values.reset(new std::vector<std::shared_ptr<fUML::Value>>());
+		m_values.reset(new Bag<fUML::Value>());
+	
+	
 }
 
 ValuesImpl::~ValuesImpl()
@@ -36,8 +38,10 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> _values = obj.getValues();
-	this->getValues()->insert(this->getValues()->end(), _values->begin(), _values->end());
+		std::shared_ptr< Bag<fUML::Value> >
+	 _values = obj.getValues();
+	m_values.reset(new 	 Bag<fUML::Value> 
+	(*(obj.getValues().get())));// this->getValues()->insert(this->getValues()->end(), _values->begin(), _values->end());
 
 
 	//clone containt lists
@@ -64,7 +68,8 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> ValuesImpl::getValues() const
+	std::shared_ptr< Bag<fUML::Value> >
+ ValuesImpl::getValues() const
 {
 
     return m_values;

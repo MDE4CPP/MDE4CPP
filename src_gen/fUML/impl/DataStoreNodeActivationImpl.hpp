@@ -21,6 +21,8 @@
 
 #include "impl/CentralBufferNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,11 +50,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int
+			 removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void
+			 addToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			
 			

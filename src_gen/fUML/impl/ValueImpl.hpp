@@ -21,6 +21,8 @@
 
 #include "impl/SemanticVisitorImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include <Classifier.hpp>
 
 
@@ -49,27 +51,33 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> 
+			 specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  const  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  const  ;
 			
 			/*!
 			 */ 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
+			virtual bool
+			 hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string
+			 toString()  ;
 			
 			/*!
 			 */ 
-			virtual std::string objectId()  ;
+			virtual std::string
+			 objectId()  ;
 			
 			
 			

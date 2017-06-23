@@ -21,6 +21,8 @@
 
 #include "impl/ControlNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include"ActivityNode.hpp"
 #include "FUMLFactory.hpp"
 
@@ -50,11 +52,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual void
+			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			
 			

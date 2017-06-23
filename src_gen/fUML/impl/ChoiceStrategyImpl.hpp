@@ -21,6 +21,8 @@
 
 #include "impl/SemanticStrategyImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,11 +50,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int choose(int size)  ;
+			virtual int
+			 choose(int size)  ;
 			
 			/*!
 			 */ 
-			virtual std::string retrieveName()  ;
+			virtual std::string
+			 retrieveName()  ;
 			
 			
 			

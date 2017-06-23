@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,11 +52,13 @@ virtual public EventAccepter
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void
+			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool
+			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			
 			

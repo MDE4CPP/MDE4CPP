@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -96,11 +97,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const = 0;
+			virtual std::shared_ptr<fUML::Execution > getCurrentExecution() const = 0;
 			
 			/*!
 			 */
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) = 0;
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution_currentExecution) = 0;
 			
 
 		protected:
@@ -114,7 +115,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::Execution> m_currentExecution;
+			std::shared_ptr<fUML::Execution > m_currentExecution;
 			
 
 		public:

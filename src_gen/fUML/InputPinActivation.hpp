@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -83,11 +84,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void recieveOffer()  = 0;
+			virtual void
+			 recieveOffer()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool
+			 isReady()  = 0;
 			
 			
 			//*********************************

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -94,15 +95,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Reference>  start(std::shared_ptr<uml::Class>  type,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
+			virtual std::shared_ptr<fUML::Reference> 
+			 start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  = 0;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
+			 execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			
 			//*********************************
@@ -114,11 +118,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus> getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Locus > getLocus() const = 0;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) = 0;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
 			
 
 		protected:
@@ -132,7 +136,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::Locus> m_locus;
+			std::shared_ptr<fUML::Locus > m_locus;
 			
 
 		public:

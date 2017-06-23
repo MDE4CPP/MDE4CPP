@@ -46,10 +46,10 @@ DataValueImpl::DataValueImpl(const DataValueImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -70,15 +70,17 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> DataValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> >
+ DataValueImpl::getTypes() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
 }
 
-std::shared_ptr<fUML::Value>  DataValueImpl::new_() 
+std::shared_ptr<fUML::Value> 
+ DataValueImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createDataValue());
@@ -87,7 +89,7 @@ std::shared_ptr<fUML::Value>  DataValueImpl::new_()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::DataType> DataValueImpl::getType() const
+std::shared_ptr<uml::DataType > DataValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;

@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,27 +52,33 @@ virtual public Token
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Token>  transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
+			virtual std::shared_ptr<fUML::Token> 
+			 transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
 			
 			/*!
 			 */ 
-			virtual void withdraw()  ;
+			virtual void
+			 withdraw()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Token>  other)  ;
 			
 			/*!
 			 */ 
-			virtual bool isWithdrawn()  ;
+			virtual bool
+			 isWithdrawn()  ;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  ;
+			virtual bool
+			 isControl()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 getValue()  const  ;
 			
 			
 			
@@ -84,11 +92,11 @@ virtual public Token
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getHolder() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation > getHolder() const ;
 			
 			/*!
 			 */
-			virtual void setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder) ;
+			virtual void setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder_holder) ;
 							
 			
 			//*********************************

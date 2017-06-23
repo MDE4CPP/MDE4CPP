@@ -64,13 +64,15 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool
+ ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	//generated from body annotation
 	return (this == other.get());
 }
 
-bool ObjectTokenImpl::isControl() 
+bool
+ ObjectTokenImpl::isControl() 
 {
 	//generated from body annotation
 	return false;
@@ -79,7 +81,7 @@ bool ObjectTokenImpl::isControl()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Value> ObjectTokenImpl::getValue() const
+std::shared_ptr<fUML::Value > ObjectTokenImpl::getValue() const
 {
 
     return m_value;

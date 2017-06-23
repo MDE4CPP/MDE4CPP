@@ -21,6 +21,8 @@
 
 #include "impl/ActivityNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "Token.hpp"
 #include "FUMLFactory.hpp"
 
@@ -50,47 +52,58 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedValues()  ;
+			virtual int
+			 countOfferedValues()  ;
 			
 			/*!
 			 */ 
-			virtual void sendUnofferedTokens()  ;
+			virtual void
+			 sendUnofferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual int countUnofferedTokens()  ;
+			virtual int
+			 countUnofferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getUnofferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 getUnofferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeUnofferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeUnofferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void run()  ;
+			virtual void
+			 run()  ;
 			
 			/*!
 			 */ 
-			virtual void sendOffers(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens)  ;
+			virtual void
+			 sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void
+			 addToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int
+			 removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual void clearTokens()  ;
+			virtual void
+			 clearTokens()  ;
 			
 			
 			

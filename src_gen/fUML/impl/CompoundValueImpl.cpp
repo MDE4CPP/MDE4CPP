@@ -24,7 +24,9 @@ CompoundValueImpl::CompoundValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_featureValues.reset(new std::vector<std::shared_ptr<fUML::FeatureValue>>());
+		m_featureValues.reset(new Bag<fUML::FeatureValue>());
+	
+	
 }
 
 CompoundValueImpl::~CompoundValueImpl()
@@ -43,10 +45,10 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj)
 	
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -67,7 +69,8 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position) 
+void
+ CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::FeatureValue> featureValue = this->retrieveFeatureValue(feature);
@@ -85,7 +88,8 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
     featureValue->setPosition(position);
 }
 
-bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	std::shared_ptr<CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<CompoundValue>(otherValue);
@@ -120,13 +124,15 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-void CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) 
+void
+ CompoundValueImpl::removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
 	std::remove_if(this->getFeatureValues()->begin(),this->getFeatureValues()->end(),[classifier](std::shared_ptr<FeatureValue> featureValue){return featureValue->getFeature()->getType()==classifier;});
 }
 
-std::shared_ptr<fUML::FeatureValue>  CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> 
+ CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::FeatureValue> featureValue = nullptr;
@@ -142,18 +148,20 @@ std::shared_ptr<fUML::FeatureValue>  CompoundValueImpl::retrieveFeatureValue(std
     return featureValue;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> CompoundValueImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> >
+ CompoundValueImpl::retrieveFeatureValues() 
 {
 	//generated from body annotation
 	 return this->getFeatureValues();
 }
 
-std::string CompoundValueImpl::toString() 
+std::string
+ CompoundValueImpl::toString() 
 {
 	//generated from body annotation
 	std::string buffer = "(" + this->objectId() + ":";
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
     unsigned int i = 1;
     while(i <= types->size())
@@ -186,7 +194,8 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> CompoundValueImpl::getFeatureValues() const
+	std::shared_ptr< Bag<fUML::FeatureValue> >
+ CompoundValueImpl::getFeatureValues() const
 {
 
     return m_featureValues;

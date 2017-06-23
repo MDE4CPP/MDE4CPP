@@ -63,10 +63,11 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> PrimitiveValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> >
+ PrimitiveValueImpl::getTypes() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
 	std::shared_ptr<uml::PrimitiveType> type = this->getType();
 	if (type != nullptr)
 	{
@@ -78,7 +79,7 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> PrimitiveValueImp
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
+std::shared_ptr<uml::PrimitiveType > PrimitiveValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;

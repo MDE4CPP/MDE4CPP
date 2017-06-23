@@ -22,7 +22,9 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl()
 	//*********************************
 	
 	
-	m_offers.reset(new std::vector<std::shared_ptr<fUML::Offer>>());
+		m_offers.reset(new Bag<fUML::Offer>());
+	
+	
 	
 	
 }
@@ -45,8 +47,10 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImp
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Offer>>> _offers = obj.getOffers();
-	this->getOffers()->insert(this->getOffers()->end(), _offers->begin(), _offers->end());
+		std::shared_ptr< Bag<fUML::Offer> >
+	 _offers = obj.getOffers();
+	m_offers.reset(new 	 Bag<fUML::Offer> 
+	(*(obj.getOffers().get())));// this->getOffers()->insert(this->getOffers()->end(), _offers->begin(), _offers->end());
 
 	m_source  = obj.getSource();
 
@@ -73,11 +77,12 @@ std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int ActivityEdgeInstanceImpl::countOfferedValue() 
+int
+ ActivityEdgeInstanceImpl::countOfferedValue() 
 {
 	//generated from body annotation
 	int count = 0;
-	std::shared_ptr<std::vector<std::shared_ptr<Offer>>> offerList = this->getOffers();
+	std::shared_ptr<Bag<Offer> > offerList = this->getOffers();
     for(std::shared_ptr<Offer> offer : *offerList)
     {
         count+=offer->countOfferedVales();
@@ -85,12 +90,13 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
     return count;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceImpl::getOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> >
+ ActivityEdgeInstanceImpl::getOfferedTokens() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 
-	std::shared_ptr<std::vector<std::shared_ptr<Offer>>> offerList = this->getOffers();
+	std::shared_ptr<Bag<Offer> > offerList = this->getOffers();
     for(std::shared_ptr<Offer> offer : *offerList)
     {
     	auto vec = offer->retrieveOfferedTokens();
@@ -100,14 +106,16 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceI
     return tokens;
 }
 
-bool ActivityEdgeInstanceImpl::hasOffer() 
+bool
+ ActivityEdgeInstanceImpl::hasOffer() 
 {
 	//generated from body annotation
 	return std::any_of(this->getOffers()->begin(),this->getOffers()->end(),[](std::shared_ptr<Offer> offer){return offer->hasTokens();});
 
 }
 
-void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens) 
+void
+ ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
 	//generated from body annotation
 	std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
@@ -116,12 +124,13 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<std::vector<std::shared
     this->getTarget()->recieveOffer();
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> >
+ ActivityEdgeInstanceImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 
-	std::shared_ptr<std::vector<std::shared_ptr<Offer>>> offerList = this->getOffers();
+	std::shared_ptr<Bag<Offer> > offerList = this->getOffers();
 	    for(std::shared_ptr<Offer> offer : *offerList)
     {
     	auto vec = offer->retrieveOfferedTokens();
@@ -132,15 +141,16 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceI
     return tokens;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount) 
+std::shared_ptr<Bag<fUML::Token> >
+ ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
     int remainingCount = maxCount;
 
     while (this->getOffers()->size() > 0 && remainingCount > 0) {
     	std::shared_ptr<Offer> offer = this->getOffers()->at(0);
-    	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> offeredTokens = offer->retrieveOfferedTokens();
+    	std::shared_ptr<Bag<fUML::Token> > offeredTokens = offer->retrieveOfferedTokens();
         int count = offer->countOfferedVales();
         if (count <= remainingCount) {
             for (unsigned int i = 0; i < offeredTokens->size(); i++) {
@@ -166,7 +176,7 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> ActivityEdgeInstanceI
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
+std::shared_ptr<uml::ActivityEdge > ActivityEdgeInstanceImpl::getEdge() const
 {
 
     return m_edge;
@@ -176,7 +186,7 @@ void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
     m_edge = _edge;
 }
 
-std::shared_ptr<fUML::ActivityNodeActivationGroup> ActivityEdgeInstanceImpl::getGroup() const
+std::shared_ptr<fUML::ActivityNodeActivationGroup > ActivityEdgeInstanceImpl::getGroup() const
 {
 //assert(m_group);
     return m_group;
@@ -186,14 +196,15 @@ void ActivityEdgeInstanceImpl::setGroup(std::shared_ptr<fUML::ActivityNodeActiva
     m_group = _group;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Offer>>> ActivityEdgeInstanceImpl::getOffers() const
+	std::shared_ptr< Bag<fUML::Offer> >
+ ActivityEdgeInstanceImpl::getOffers() const
 {
 
     return m_offers;
 }
 
 
-std::shared_ptr<fUML::ActivityNodeActivation> ActivityEdgeInstanceImpl::getSource() const
+std::shared_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
@@ -203,7 +214,7 @@ void ActivityEdgeInstanceImpl::setSource(std::shared_ptr<fUML::ActivityNodeActiv
     m_source = _source;
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation> ActivityEdgeInstanceImpl::getTarget() const
+std::shared_ptr<fUML::ActivityNodeActivation > ActivityEdgeInstanceImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;

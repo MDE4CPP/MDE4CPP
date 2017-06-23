@@ -19,7 +19,9 @@ TokenSetImpl::TokenSetImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_tokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
+		m_tokens.reset(new Bag<fUML::Token>());
+	
+	
 }
 
 TokenSetImpl::~TokenSetImpl()
@@ -36,8 +38,10 @@ TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _tokens = obj.getTokens();
-	this->getTokens()->insert(this->getTokens()->end(), _tokens->begin(), _tokens->end());
+		std::shared_ptr< Bag<fUML::Token> >
+	 _tokens = obj.getTokens();
+	m_tokens.reset(new 	 Bag<fUML::Token> 
+	(*(obj.getTokens().get())));// this->getTokens()->insert(this->getTokens()->end(), _tokens->begin(), _tokens->end());
 
 
 	//clone containt lists
@@ -64,7 +68,8 @@ std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> TokenSetImpl::getTokens() const
+	std::shared_ptr< Bag<fUML::Token> >
+ TokenSetImpl::getTokens() const
 {
 
     return m_tokens;

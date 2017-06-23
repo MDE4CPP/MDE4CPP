@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -59,11 +60,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual void
+			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual bool
+			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			
 			//*********************************

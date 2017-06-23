@@ -21,6 +21,8 @@
 
 #include "impl/GetNextEventStrategyImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

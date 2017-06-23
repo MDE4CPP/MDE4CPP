@@ -74,7 +74,8 @@ std::string StringValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -88,7 +89,8 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<uml::ValueSpecification>  StringValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ StringValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralString> literal(uml::UmlFactory::eInstance()->createLiteralString());
@@ -97,7 +99,8 @@ std::shared_ptr<uml::ValueSpecification>  StringValueImpl::specify()
     return literal;
 }
 
-std::string StringValueImpl::toString() 
+std::string
+ StringValueImpl::toString() 
 {
 	//generated from body annotation
 	return this->getValue();

@@ -21,6 +21,8 @@
 
 #include "impl/ObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include <Parameter.hpp>
 #include <ParameterDirectionKind.hpp>
 #include <ParameterValue.hpp>
@@ -57,31 +59,38 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void
+			 execute()  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
+			virtual void
+			 setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ParameterValue>  getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
+			virtual std::shared_ptr<fUML::ParameterValue> 
+			 getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getOutputParameterValues()  ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
+			 getOutputParameterValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior>  getBehavior()  ;
+			virtual std::shared_ptr<uml::Behavior> 
+			 getBehavior()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			
 			
@@ -95,14 +104,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Object> getContext() const ;
+			virtual std::shared_ptr<fUML::Object > getContext() const ;
 			
 			/*!
 			 */
-			virtual void setContext(std::shared_ptr<fUML::Object> _context) ;
+			virtual void setContext(std::shared_ptr<fUML::Object> _context_context) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> getParameterValues() const ;
+			virtual 	std::shared_ptr< Bag<fUML::ParameterValue> >
+			 getParameterValues() const ;
 			
 							
 			

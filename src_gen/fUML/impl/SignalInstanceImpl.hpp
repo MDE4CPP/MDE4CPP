@@ -21,6 +21,8 @@
 
 #include "impl/CompoundValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,11 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Signal> getType() const ;
+			virtual std::shared_ptr<uml::Signal > getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(std::shared_ptr<uml::Signal> _type) ;
+			virtual void setType(std::shared_ptr<uml::Signal> _type_type) ;
 							
 			
 			//*********************************

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -73,7 +74,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate()  = 0;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate()  = 0;
 			
 			
 			//*********************************
@@ -85,18 +87,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
 			
 			/*!
 			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus> getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Locus > getLocus() const = 0;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) = 0;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
 			
 
 		protected:
@@ -110,10 +112,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<uml::ValueSpecification> m_specification;
+			std::shared_ptr<uml::ValueSpecification > m_specification;
 			/*!
 			 */
-			std::shared_ptr<fUML::Locus> m_locus;
+			std::shared_ptr<fUML::Locus > m_locus;
 			
 
 		public:

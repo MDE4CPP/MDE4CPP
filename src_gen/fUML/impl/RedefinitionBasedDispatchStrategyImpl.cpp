@@ -61,7 +61,8 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
+bool
+ RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
 {
 	//generated from body annotation
 	//#include "NamedElement.hpp"
@@ -85,7 +86,8 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	return matches;
 }
 
-std::shared_ptr<uml::Behavior>  RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> 
+ RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::Behavior> method = nullptr;
@@ -93,7 +95,7 @@ std::shared_ptr<uml::Behavior>  RedefinitionBasedDispatchStrategyImpl::retrieveM
 	while(method == nullptr && (i <= object->getTypes()->size()))
 	{
 		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i - 1));
-		std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> members = type->getMember();
+		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
 		unsigned int j = 1;
 		while(method == nullptr && (j <= members->size()))
 		{

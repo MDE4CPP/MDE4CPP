@@ -67,23 +67,25 @@ std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position) 
+void
+ StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
 	//generated from body annotation
 	
 }
 
-void StructuredValueImpl::createFeatureValues() 
+void
+ StructuredValueImpl::createFeatureValues() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
     if(types!= nullptr)
     {
     	for(unsigned int i = 0; i < types->size(); i++)
     	{
     		std::shared_ptr<uml::Classifier> type = types->at(i);
-    		std::shared_ptr<std::vector<std::shared_ptr<uml::NamedElement>>> members = type->getMember();
+    		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
 
     		for(unsigned int j = 0; j < members->size(); j++)
     		{
@@ -91,7 +93,7 @@ void StructuredValueImpl::createFeatureValues()
     			std::shared_ptr<uml::StructuralFeature> structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(member);
     			if(structuralFeature != nullptr)
     			{
-    				std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> valueList(new std::vector<std::shared_ptr<fUML::Value>>());
+    				std::shared_ptr<Bag<fUML::Value> > valueList(new Bag<fUML::Value>());
     				this->assignFeatureValue(structuralFeature, valueList, 0);
     			}
     		}
@@ -99,19 +101,22 @@ void StructuredValueImpl::createFeatureValues()
     }
 }
 
-std::shared_ptr<fUML::FeatureValue>  StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> 
+ StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> StructuredValueImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> >
+ StructuredValueImpl::retrieveFeatureValues() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ValueSpecification>  StructuredValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ StructuredValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
@@ -122,7 +127,7 @@ std::shared_ptr<uml::ValueSpecification>  StructuredValueImpl::specify()
 
     instance->getClassifier();//->push_back(this->getTypes());
 
-    std::shared_ptr<std::vector<std::shared_ptr<FeatureValue>>> featureValues = this->retrieveFeatureValues();
+    std::shared_ptr<Bag<FeatureValue> > featureValues = this->retrieveFeatureValues();
     // Debug.println("[specify] " + featureValues.size() + " feature(s).");
 
     for(unsigned int i = 0; i < featureValues->size(); i++)
@@ -135,7 +140,7 @@ std::shared_ptr<uml::ValueSpecification>  StructuredValueImpl::specify()
         // Debug.println("[specify] feature = " + featureValue.feature.name
         // + ", " + featureValue.values.size() + " value(s).");
 
-        std::shared_ptr<std::vector<std::shared_ptr<Value>>> values = featureValue->getValues();
+        std::shared_ptr<Bag<Value> > values = featureValue->getValues();
         for(unsigned int j = 0; j < values->size(); j++)
         {
         	std::shared_ptr<Value> value = values->at(j);

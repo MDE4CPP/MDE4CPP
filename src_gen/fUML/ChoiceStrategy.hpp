@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -58,11 +59,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int choose(int size)  = 0;
+			virtual int
+			 choose(int size)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string retrieveName()  = 0;
+			virtual std::string
+			 retrieveName()  = 0;
 			
 			
 			//*********************************

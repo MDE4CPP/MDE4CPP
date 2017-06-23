@@ -21,6 +21,8 @@
 
 #include "impl/LinkActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

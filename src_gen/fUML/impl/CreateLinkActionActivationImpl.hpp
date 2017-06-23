@@ -21,6 +21,8 @@
 
 #include "impl/WriteLinkActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

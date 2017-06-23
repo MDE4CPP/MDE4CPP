@@ -84,25 +84,29 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
-bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
+bool
+ ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
 {
 	//generated from body annotation
 	return (this == otherToken.get());
 }
 
-std::shared_ptr<fUML::Value>  ForkedTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> 
+ ForkedTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return this->getBaseToken()->getValue();
 }
 
-bool ForkedTokenImpl::isControl() 
+bool
+ ForkedTokenImpl::isControl() 
 {
 	//generated from body annotation
 	return this->getBaseToken()->isControl();
 }
 
-void ForkedTokenImpl::withdraw() 
+void
+ ForkedTokenImpl::withdraw() 
 {
 	//generated from body annotation
 	    if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
@@ -122,7 +126,7 @@ void ForkedTokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Token> ForkedTokenImpl::getBaseToken() const
+std::shared_ptr<fUML::Token > ForkedTokenImpl::getBaseToken() const
 {
 
     return m_baseToken;

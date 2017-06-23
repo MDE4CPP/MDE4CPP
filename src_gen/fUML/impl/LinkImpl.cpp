@@ -44,10 +44,10 @@ LinkImpl::LinkImpl(const LinkImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -68,22 +68,25 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
+void
+ LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> LinkImpl::getOtherFeatureValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>>  extent,std::shared_ptr<uml::Property>  end) 
+std::shared_ptr<Bag<fUML::FeatureValue> >
+ LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> LinkImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> >
+ LinkImpl::getTypes() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
 
 	if( this->getType() != nullptr)
 	{
@@ -92,10 +95,11 @@ std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> LinkImpl::getType
     return types;
 }
 
-bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
+bool
+ LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Property>>> ends = this->getType()->getMemberEnd();
+	std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
 
 	bool matches = true;
 	unsigned int i = 1;
@@ -117,7 +121,7 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std:
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Association> LinkImpl::getType() const
+std::shared_ptr<uml::Association > LinkImpl::getType() const
 {
 
     return m_type;

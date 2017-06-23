@@ -21,6 +21,8 @@
 
 #include "impl/ValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "PrimitiveType.hpp"
@@ -52,7 +54,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  ;
 			
 			
 			
@@ -66,11 +69,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::PrimitiveType> getType() const ;
+			virtual std::shared_ptr<uml::PrimitiveType > getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) ;
+			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type_type) ;
 							
 			
 			//*********************************

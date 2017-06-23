@@ -21,6 +21,8 @@
 
 #include "impl/ExecutionFactoryL2Impl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include <ConditionalNode.hpp>
 #include <FUMLFactory.hpp>
 #include <LoopNode.hpp>
@@ -62,7 +64,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> 
+			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			
 			

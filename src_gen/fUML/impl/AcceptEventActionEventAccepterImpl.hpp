@@ -21,6 +21,8 @@
 
 #include "impl/EventAccepterImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,11 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::AcceptEventActionActivation> getActionActivation() const ;
+			virtual std::shared_ptr<fUML::AcceptEventActionActivation > getActionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setActionActivation(std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation) ;
+			virtual void setActionActivation(std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation_actionActivation) ;
 							
 			
 			//*********************************

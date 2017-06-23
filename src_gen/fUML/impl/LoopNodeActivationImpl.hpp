@@ -21,6 +21,8 @@
 
 #include "impl/StructuredActivityNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,19 +50,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool runTest()  ;
+			virtual bool
+			 runTest()  ;
 			
 			/*!
 			 */ 
-			virtual void runBody()  ;
+			virtual void
+			 runBody()  ;
 			
 			/*!
 			 */ 
-			virtual void runLoopVariables()  ;
+			virtual void
+			 runLoopVariables()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode>  makeLoopVariableList()  ;
+			virtual std::shared_ptr<uml::ActivityNode> 
+			 makeLoopVariableList()  ;
 			
 			
 			
@@ -74,7 +80,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> getBodyOutputLists() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Values> >
+			 getBodyOutputLists() const ;
 			
 							
 			

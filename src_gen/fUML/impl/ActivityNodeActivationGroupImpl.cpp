@@ -33,9 +33,15 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl()
 	//*********************************
 	
 	
-	m_edgeInstances.reset(new std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>());
-	m_nodeActivations.reset(new std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>());
-	m_suspendedActivations.reset(new std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>());
+		m_edgeInstances.reset(new Bag<fUML::ActivityEdgeInstance>());
+	
+	
+		m_nodeActivations.reset(new Bag<fUML::ActivityNodeActivation>());
+	
+	
+		m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>());
+	
+	
 }
 
 ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
@@ -56,20 +62,22 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 
 	m_containingNodeActivation  = obj.getContainingNodeActivation();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> _suspendedActivations = obj.getSuspendedActivations();
-	this->getSuspendedActivations()->insert(this->getSuspendedActivations()->end(), _suspendedActivations->begin(), _suspendedActivations->end());
+		std::shared_ptr< Bag<fUML::ActivityNodeActivation> >
+	 _suspendedActivations = obj.getSuspendedActivations();
+	m_suspendedActivations.reset(new 	 Bag<fUML::ActivityNodeActivation> 
+	(*(obj.getSuspendedActivations().get())));// this->getSuspendedActivations()->insert(this->getSuspendedActivations()->end(), _suspendedActivations->begin(), _suspendedActivations->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _edgeInstancesList = obj.getEdgeInstances();
+	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _edgeInstancesList = obj.getEdgeInstances();
 	for(std::shared_ptr<fUML::ActivityEdgeInstance> _edgeInstances : *_edgeInstancesList)
 	{
-		this->getEdgeInstances()->push_back(std::shared_ptr<fUML::ActivityEdgeInstance>(dynamic_cast<fUML::ActivityEdgeInstance*>(_edgeInstances->copy())));
+		this->getEdgeInstances()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(dynamic_cast<fUML::ActivityEdgeInstance*>(_edgeInstances->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> _nodeActivationsList = obj.getNodeActivations();
+	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _nodeActivationsList = obj.getNodeActivations();
 	for(std::shared_ptr<fUML::ActivityNodeActivation> _nodeActivations : *_nodeActivationsList)
 	{
-		this->getNodeActivations()->push_back(std::shared_ptr<fUML::ActivityNodeActivation>(dynamic_cast<fUML::ActivityNodeActivation*>(_nodeActivations->copy())));
+		this->getNodeActivations()->add(std::shared_ptr<fUML::ActivityNodeActivation>(dynamic_cast<fUML::ActivityNodeActivation*>(_nodeActivations->copy())));
 	}
 }
 
@@ -90,16 +98,18 @@ std::shared_ptr<ecore::EClass> ActivityNodeActivationGroupImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationGroupImpl::activate(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes,std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>>  edges) 
+void
+ ActivityNodeActivationGroupImpl::activate(std::shared_ptr<Bag<uml::ActivityNode> >  nodes,std::shared_ptr<Bag<uml::ActivityEdge> >  edges) 
 {
 	//generated from body annotation
 	this->createNodeActivations(nodes);
     this->createEdgeInstance(edges);    
-    std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> nodeActiviations = this->getNodeActivations();
+    std::shared_ptr<Bag<fUML::ActivityNodeActivation> > nodeActiviations = this->getNodeActivations();
     this->run(nodeActiviations);
 }
 
-void ActivityNodeActivationGroupImpl::addEdgeInstance(std::shared_ptr<fUML::ActivityEdgeInstance>  instance) 
+void
+ ActivityNodeActivationGroupImpl::addEdgeInstance(std::shared_ptr<fUML::ActivityEdgeInstance>  instance) 
 {
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
@@ -107,7 +117,8 @@ void ActivityNodeActivationGroupImpl::addEdgeInstance(std::shared_ptr<fUML::Acti
     this->getEdgeInstances()->push_back(instance);
 }
 
-void ActivityNodeActivationGroupImpl::addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
+void
+ ActivityNodeActivationGroupImpl::addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
 {
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
@@ -115,7 +126,8 @@ void ActivityNodeActivationGroupImpl::addNodeActivation(std::shared_ptr<fUML::Ac
     this->getNodeActivations()->push_back(activation);
 }
 
-bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>>  incomingEdges,std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>>  activations) 
+bool
+ ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<Bag<fUML::ActivityEdgeInstance> >  incomingEdges,std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations) 
 {
 	//generated from body annotation
 	    unsigned int j = 1;
@@ -136,7 +148,8 @@ bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<std::ve
     return notFound;
 }
 
-void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>>  edges) 
+void
+ ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge> >  edges) 
 {
 	//generated from body annotation
 	for (unsigned int i = 0; i < edges->size(); i++) 
@@ -159,14 +172,15 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<std::ve
         this->getNodeActivation(edge->getTarget())->addIncomingEdge(edgeInstance);
     }
 
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> nodeActivations = this->getNodeActivations();
+	std::shared_ptr<Bag<ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++) {
     	std::shared_ptr<ActivityNodeActivation> nodeActivation = nodeActivations->at(i);
         nodeActivation->createEdgeInstances();
     }
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation>  ActivityNodeActivationGroupImpl::createNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
+std::shared_ptr<fUML::ActivityNodeActivation> 
+ ActivityNodeActivationGroupImpl::createNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation>  activation = std::dynamic_pointer_cast<ActivityNodeActivation> (this->retrieveActivityExecution()
@@ -185,7 +199,8 @@ std::shared_ptr<fUML::ActivityNodeActivation>  ActivityNodeActivationGroupImpl::
     return activation;
 }
 
-void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes) 
+void
+ ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode> >  nodes) 
 {
 	//generated from body annotation
 	for (unsigned int i = 0; i < nodes->size(); i++) 
@@ -204,7 +219,8 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<std:
     }
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation>  ActivityNodeActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
+std::shared_ptr<fUML::ActivityNodeActivation> 
+ ActivityNodeActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
@@ -233,11 +249,12 @@ std::shared_ptr<fUML::ActivityNodeActivation>  ActivityNodeActivationGroupImpl::
     return activation;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityParameterNodeActivation>>> ActivityNodeActivationGroupImpl::getOutputParameterNodeActivations() 
+std::shared_ptr<Bag<fUML::ActivityParameterNodeActivation> >
+ ActivityNodeActivationGroupImpl::getOutputParameterNodeActivations() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityParameterNodeActivation>>> parameterNodeActivations(new std::vector<std::shared_ptr<ActivityParameterNodeActivation>>());
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> nodeActivations = this->getNodeActivations();
+	std::shared_ptr<Bag<ActivityParameterNodeActivation> > parameterNodeActivations(new Bag<ActivityParameterNodeActivation>());
+	std::shared_ptr<Bag<ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++)
     {
     	std::shared_ptr<ActivityNodeActivation> activation = nodeActivations->at(i);
@@ -254,11 +271,12 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityParameterNodeActivatio
     return parameterNodeActivations;
 }
 
-bool ActivityNodeActivationGroupImpl::hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
+bool
+ ActivityNodeActivationGroupImpl::hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
 {
 	//generated from body annotation
 	bool hasSource = false;
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> activations = this->getNodeActivations();
+	std::shared_ptr<Bag<ActivityNodeActivation> > activations = this->getNodeActivations();
     unsigned int i = 1;
     while (!hasSource && i <= activations->size()) 
     {
@@ -268,13 +286,15 @@ bool ActivityNodeActivationGroupImpl::hasSourceFor(std::shared_ptr<fUML::Activit
     return hasSource;
 }
 
-bool ActivityNodeActivationGroupImpl::isSuspended() 
+bool
+ ActivityNodeActivationGroupImpl::isSuspended() 
 {
 	//generated from body annotation
 	    return this->getSuspendedActivations()->size() > 0;
 }
 
-void ActivityNodeActivationGroupImpl::resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
+void
+ ActivityNodeActivationGroupImpl::resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[resume] node=" << (activation->getNode() == nullptr ? "null" : activation->getNode()->getName())<<std::endl;)
@@ -298,7 +318,8 @@ void ActivityNodeActivationGroupImpl::resume(std::shared_ptr<fUML::ActivityNodeA
     }
 }
 
-std::shared_ptr<fUML::ActivityExecution>  ActivityNodeActivationGroupImpl::retrieveActivityExecution() 
+std::shared_ptr<fUML::ActivityExecution> 
+ ActivityNodeActivationGroupImpl::retrieveActivityExecution() 
 {
 	//generated from body annotation
 	std::shared_ptr<ActivityExecution> activityExecution = this->getActivityExecution();
@@ -309,7 +330,8 @@ std::shared_ptr<fUML::ActivityExecution>  ActivityNodeActivationGroupImpl::retri
     return activityExecution;
 }
 
-void ActivityNodeActivationGroupImpl::run(std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>>  activations) 
+void
+ ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations) 
 {
 	//generated from body annotation
 	for (unsigned int i = 0; i < activations->size(); i++)
@@ -320,7 +342,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<std::vector<std::share
 
     DEBUG_MESSAGE(std::cout<<"[run] Checking for enabled nodes..."<<std::endl;)
 
-    std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> enabledActivations(new std::vector<std::shared_ptr<ActivityNodeActivation>>());
+    std::shared_ptr<Bag<ActivityNodeActivation> > enabledActivations(new Bag<ActivityNodeActivation>());
 
     for (unsigned int i = 0; i < activations->size(); i++)
     {
@@ -333,7 +355,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<std::vector<std::share
                 || std::dynamic_pointer_cast<ControlNodeActivation>(activation) != nullptr
                 || std::dynamic_pointer_cast<ActivityParameterNodeActivation>(activation) != nullptr)
         {
-        	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> edges = activation->getIncomingEdges();
+        	std::shared_ptr<Bag<fUML::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
             bool isEnabled = this->checkIncomingEdges(edges, activations);
 
             // For an action activation, also consider incoming edges to
@@ -343,12 +365,12 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<std::vector<std::share
             	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
                 if(action != nullptr)
                 {
-                	std::shared_ptr<std::vector<std::shared_ptr<uml::InputPin>>> inputPins = action->getInput();
+                	std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
                     unsigned int j = 1;
                     while ((j <= inputPins->size()) && isEnabled) 
                     {
                     	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j - 1);
-                    	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
+                    	std::shared_ptr<Bag<ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
                         isEnabled = this->checkIncomingEdges(inputEdges, activations);
                         j = j + 1;
                     }
@@ -375,10 +397,11 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<std::vector<std::share
     }
 }
 
-void ActivityNodeActivationGroupImpl::runNodes(std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>>  nodes) 
+void
+ ActivityNodeActivationGroupImpl::runNodes(std::shared_ptr<Bag<uml::ActivityNode> >  nodes) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> nodeActivations(new std::vector<std::shared_ptr<ActivityNodeActivation>>());
+	std::shared_ptr<Bag<ActivityNodeActivation> > nodeActivations(new Bag<ActivityNodeActivation>());
 
     for (unsigned int i = 0; i < nodes->size(); i++) 
     {
@@ -393,7 +416,8 @@ void ActivityNodeActivationGroupImpl::runNodes(std::shared_ptr<std::vector<std::
     this->run(nodeActivations);
 }
 
-void ActivityNodeActivationGroupImpl::suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
+void
+ ActivityNodeActivationGroupImpl::suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[suspend] node=" << (activation->getNode() == nullptr ? "null" : activation->getNode()->getName())<<std::endl;)
@@ -409,12 +433,13 @@ void ActivityNodeActivationGroupImpl::suspend(std::shared_ptr<fUML::ActivityNode
     this->getSuspendedActivations()->push_back(activation);
 }
 
-void ActivityNodeActivationGroupImpl::terminateAll() 
+void
+ ActivityNodeActivationGroupImpl::terminateAll() 
 {
 	//generated from body annotation
 	//DEBUG_MESSAGE(//TODO fix std::cout<<"[terminateAll] Terminating activation group for "<< (this->getActivityExecution() != nullptr ? "activity " + this->getActivityExecution()->getTypes()->at(0)->getName() : this->getContainingNodeActivation() != nullptr ? "node " << this->getContainingNodeActivation()->getNode()->getName() : "expansion region") << ".");)
 
-	std::shared_ptr<std::vector<std::shared_ptr<ActivityNodeActivation>>> nodeActivations = this->getNodeActivations();
+	std::shared_ptr<Bag<ActivityNodeActivation> > nodeActivations = this->getNodeActivations();
     for (unsigned int i = 0; i < nodeActivations->size(); i++) 
     {
     	std::shared_ptr<ActivityNodeActivation> nodeActivation = nodeActivations->at(i);
@@ -427,7 +452,7 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationGroupImpl::getActivityExecution() const
+std::shared_ptr<fUML::ActivityExecution > ActivityNodeActivationGroupImpl::getActivityExecution() const
 {
 
     return m_activityExecution;
@@ -437,7 +462,7 @@ void ActivityNodeActivationGroupImpl::setActivityExecution(std::shared_ptr<fUML:
     m_activityExecution = _activityExecution;
 }
 
-std::shared_ptr<fUML::StructuredActivityNodeActivation> ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
+std::shared_ptr<fUML::StructuredActivityNodeActivation > ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
 {
 
     return m_containingNodeActivation;
@@ -447,21 +472,24 @@ void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::shared_pt
     m_containingNodeActivation = _containingNodeActivation;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> ActivityNodeActivationGroupImpl::getEdgeInstances() const
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+ ActivityNodeActivationGroupImpl::getEdgeInstances() const
 {
 
     return m_edgeInstances;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> ActivityNodeActivationGroupImpl::getNodeActivations() const
+	std::shared_ptr< Bag<fUML::ActivityNodeActivation> >
+ ActivityNodeActivationGroupImpl::getNodeActivations() const
 {
 
     return m_nodeActivations;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityNodeActivation>>> ActivityNodeActivationGroupImpl::getSuspendedActivations() const
+	std::shared_ptr< Bag<fUML::ActivityNodeActivation> >
+ ActivityNodeActivationGroupImpl::getSuspendedActivations() const
 {
 
     return m_suspendedActivations;

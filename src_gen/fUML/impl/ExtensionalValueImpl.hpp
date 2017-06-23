@@ -21,6 +21,8 @@
 
 #include "impl/CompoundValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 
 
@@ -49,7 +51,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void
+			 destroy()  ;
 			
 			
 			
@@ -63,11 +66,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
+			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 							
 			
 			//*********************************

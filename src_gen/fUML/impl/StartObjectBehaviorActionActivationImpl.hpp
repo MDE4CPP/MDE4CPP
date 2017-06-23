@@ -21,6 +21,8 @@
 
 #include "impl/InvocationActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

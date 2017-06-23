@@ -21,6 +21,8 @@
 
 #include "impl/ControlNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool
+			 isReady()  ;
 			
 			
 			

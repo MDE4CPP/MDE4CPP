@@ -65,19 +65,22 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void ClassifierBehaviorExecutionImpl::_startObjectBehavior() 
+void
+ ClassifierBehaviorExecutionImpl::_startObjectBehavior() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
+void
+ ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::terminate() 
+void
+ ClassifierBehaviorExecutionImpl::terminate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -86,7 +89,7 @@ void ClassifierBehaviorExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Class> ClassifierBehaviorExecutionImpl::getClassifier() const
+std::shared_ptr<uml::Class > ClassifierBehaviorExecutionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
@@ -96,7 +99,7 @@ void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> 
     m_classifier = _classifier;
 }
 
-std::shared_ptr<fUML::Execution> ClassifierBehaviorExecutionImpl::getExecution() const
+std::shared_ptr<fUML::Execution > ClassifierBehaviorExecutionImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
@@ -106,7 +109,7 @@ void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Executi
     m_execution = _execution;
 }
 
-std::shared_ptr<fUML::ObjectActivation> ClassifierBehaviorExecutionImpl::getObjectActivation() const
+std::shared_ptr<fUML::ObjectActivation > ClassifierBehaviorExecutionImpl::getObjectActivation() const
 {
 
     return m_objectActivation;

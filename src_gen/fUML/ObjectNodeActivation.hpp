@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -78,47 +79,58 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedValues()  = 0;
+			virtual int
+			 countOfferedValues()  = 0;
 			
 			/*!
 			 */ 
-			virtual void sendUnofferedTokens()  = 0;
+			virtual void
+			 sendUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual int countUnofferedTokens()  = 0;
+			virtual int
+			 countUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getUnofferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 getUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeUnofferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void run()  = 0;
+			virtual void
+			 run()  = 0;
 			
 			/*!
 			 */ 
-			virtual void sendOffers(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens)  = 0;
+			virtual void
+			 sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void
+			 terminate()  = 0;
 			
 			/*!
 			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual void
+			 addToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual int
+			 removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual void clearTokens()  = 0;
+			virtual void
+			 clearTokens()  = 0;
 			
 			
 			//*********************************

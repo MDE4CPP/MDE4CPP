@@ -14,6 +14,7 @@
 #endif
 
 #include "EFactory.hpp"
+#include <memory>
 
 namespace fUML 
 {	class AcceptEventActionActivation;
@@ -151,6 +152,8 @@ namespace fUML
 			static std::shared_ptr<FUMLFactory> eInstance();
 		
 			//Creator functions
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const = 0;
+
 			virtual Locus* createLocus() const = 0;
 			virtual Executor* createExecutor() const = 0;
 			virtual ExecutionFactoryL1* createExecutionFactoryL1() const = 0;

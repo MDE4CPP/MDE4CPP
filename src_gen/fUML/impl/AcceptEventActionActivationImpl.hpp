@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,11 +50,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void
+			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool
+			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			
 			
@@ -74,11 +78,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::AcceptEventActionEventAccepter> getEventAccepter() const ;
+			virtual std::shared_ptr<fUML::AcceptEventActionEventAccepter > getEventAccepter() const ;
 			
 			/*!
 			 */
-			virtual void setEventAccepter(std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter) ;
+			virtual void setEventAccepter(std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter_eventAccepter) ;
 							
 			
 			//*********************************

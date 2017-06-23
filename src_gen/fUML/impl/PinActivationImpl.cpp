@@ -44,20 +44,24 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj)
 
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
-	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
-	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -78,7 +82,8 @@ std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void PinActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
+void
+ PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[fire] Pin " << (this->getNode() == nullptr ? "" : this->getNode()->getName() + "...")<<std::endl;)
@@ -86,7 +91,8 @@ void PinActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::T
     this->addTokens(incomingTokens);
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> PinActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> >
+ PinActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
 	int count = this->countUnofferedTokens();
@@ -99,16 +105,16 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> PinActivationImpl::ta
         upper = pin->getUpper();
     }
 
-    std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
+    std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 
     if (upper < 0 || count < upper) 
     {
-    	std::shared_ptr<std::vector<std::shared_ptr<ActivityEdgeInstance>>> incomingEdges = this->getIncomingEdges();
+    	std::shared_ptr<Bag<ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
         for (unsigned int i = 0; i < incomingEdges->size(); i++) 
         {
         	std::shared_ptr<ActivityEdgeInstance> edge = incomingEdges->at(i);
             int incomingCount = edge->countOfferedValue();
-            std::shared_ptr<std::vector<std::shared_ptr<Token>>> incomingTokens(new std::vector<std::shared_ptr<Token>>());
+            std::shared_ptr<Bag<Token> > incomingTokens(new Bag<Token>());
             if (upper < 0 || incomingCount < upper - count) 
             {
                 incomingTokens = edge->takeOfferedTokens();
@@ -133,7 +139,7 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> PinActivationImpl::ta
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActionActivation> PinActivationImpl::getActionActivation() const
+std::shared_ptr<fUML::ActionActivation > PinActivationImpl::getActionActivation() const
 {
 //assert(m_actionActivation);
     return m_actionActivation;

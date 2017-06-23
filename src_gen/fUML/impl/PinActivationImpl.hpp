@@ -21,6 +21,8 @@
 
 #include "impl/ObjectNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "ActivityNode.hpp"
 #include "Pin.hpp"
 
@@ -50,11 +52,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual void
+			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeOfferedTokens()  ;
 			
 			
 			
@@ -68,11 +72,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActionActivation> getActionActivation() const ;
+			virtual std::shared_ptr<fUML::ActionActivation > getActionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation) ;
+			virtual void setActionActivation(std::shared_ptr<fUML::ActionActivation> _actionActivation_actionActivation) ;
 							
 			
 			//*********************************

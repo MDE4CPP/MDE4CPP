@@ -21,6 +21,8 @@
 
 #include "impl/ExecutionImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 #include "Parameter.hpp"
 #include <ParameterDirectionKind.hpp>
@@ -59,15 +61,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void
+			 execute()  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			
 			
@@ -81,11 +86,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getActivationGroup() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getActivationGroup() const ;
 			
 			/*!
 			 */
-			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup) ;
+			virtual void setActivationGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup_activationGroup) ;
 							
 			
 			//*********************************

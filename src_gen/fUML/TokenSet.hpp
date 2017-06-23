@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -67,7 +68,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getTokens() const = 0;
+			virtual 	std::shared_ptr< Bag<fUML::Token> >
+			 getTokens() const = 0;
 			
 			
 
@@ -82,7 +84,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> m_tokens;
+				std::shared_ptr< Bag<fUML::Token> >
+			 m_tokens;
 			
 
 		public:

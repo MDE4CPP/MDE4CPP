@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,31 +52,38 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void recieveControl()  ;
+			virtual void
+			 recieveControl()  ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool
+			 isReady()  ;
 			
 			/*!
 			 */ 
-			virtual void runTest()  ;
+			virtual void
+			 runTest()  ;
 			
 			/*!
 			 */ 
-			virtual void selectBody()  ;
+			virtual void
+			 selectBody()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue>  getDecision()  ;
+			virtual std::shared_ptr<fUML::BooleanValue> 
+			 getDecision()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getPredecessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
+			 getPredecessors()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getSuccessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
+			 getSuccessors()  ;
 			
 			
 			
@@ -88,18 +97,18 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Clause> getClause() const ;
+			virtual std::shared_ptr<uml::Clause > getClause() const ;
 			
 			/*!
 			 */
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause) ;
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause_clause) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ConditionalNodeActivation> getConditionalNodeActivation() const ;
+			virtual std::shared_ptr<fUML::ConditionalNodeActivation > getConditionalNodeActivation() const ;
 			
 			/*!
 			 */
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation) ;
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation_conditionalNodeActivation) ;
 							
 			
 			//*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/StructuredValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include <Classifier.hpp>
     #include "FUMLFactory.hpp"
     #include "Class.hpp"
@@ -51,47 +53,58 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
+			virtual void
+			 startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<fUML::Execution> 
+			 dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void
+			 send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void
+			 destroy()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue> 
+			 retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  ;
+			virtual void
+			 assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> >
+			 retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string
+			 toString()  ;
 			
 			
 			
@@ -105,11 +118,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Object> getReferent() const ;
+			virtual std::shared_ptr<fUML::Object > getReferent() const ;
 			
 			/*!
 			 */
-			virtual void setReferent(std::shared_ptr<fUML::Object> _referent) ;
+			virtual void setReferent(std::shared_ptr<fUML::Object> _referent_referent) ;
 							
 			
 			//*********************************

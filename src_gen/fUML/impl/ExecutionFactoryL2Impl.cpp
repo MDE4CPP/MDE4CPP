@@ -65,16 +65,22 @@ ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & ob
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> _builtInTypes = obj.getBuiltInTypes();
-	this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
+		std::shared_ptr< Bag<uml::PrimitiveType> >
+	 _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
+	(*(obj.getBuiltInTypes().get())));// this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
+		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
+	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
+	(*(obj.getPrimitiveBehaviorPrototypes().get())));// this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> _strategies = obj.getStrategies();
-	this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
+		std::shared_ptr< Bag<fUML::SemanticStrategy> >
+	 _strategies = obj.getStrategies();
+	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
+	(*(obj.getStrategies().get())));// this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
 
 
 	//clone containt lists
@@ -97,7 +103,8 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor>  ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> 
+ ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;

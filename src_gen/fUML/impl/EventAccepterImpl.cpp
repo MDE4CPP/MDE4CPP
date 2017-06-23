@@ -57,13 +57,15 @@ std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void
+ EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+bool
+ EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

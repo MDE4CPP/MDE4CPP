@@ -29,7 +29,9 @@ ExecutionImpl::ExecutionImpl()
 	// Reference Members
 	//*********************************
 	
-	m_parameterValues.reset(new std::vector<std::shared_ptr<fUML::ParameterValue>>());
+		m_parameterValues.reset(new Bag<fUML::ParameterValue>());
+	
+	
 }
 
 ExecutionImpl::~ExecutionImpl()
@@ -50,24 +52,26 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj)
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _types = obj.getTypes();
-	this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
+		std::shared_ptr< Bag<uml::Classifier> >
+	 _types = obj.getTypes();
+	m_types.reset(new 	 Bag<uml::Classifier> 
+	(*(obj.getTypes().get())));// this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> _parameterValuesList = obj.getParameterValues();
+	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->push_back(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
 	}
 }
 
@@ -88,24 +92,27 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionImpl::execute() 
+void
+ ExecutionImpl::execute() 
 {
 	//generated from body annotation
 	
 }
 
-std::shared_ptr<uml::Behavior>  ExecutionImpl::getBehavior() 
+std::shared_ptr<uml::Behavior> 
+ ExecutionImpl::getBehavior() 
 {
 	//generated from body annotation
 	return std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutionImpl::getOutputParameterValues() 
+std::shared_ptr<Bag<fUML::ParameterValue> >
+ ExecutionImpl::getOutputParameterValues() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputs(new std::vector<std::shared_ptr<ParameterValue>>());
+	std::shared_ptr<Bag<ParameterValue> > outputs(new Bag<ParameterValue>());
 
-	std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputParameterValueList = this->getParameterValues();
+	std::shared_ptr<Bag<ParameterValue> > outputParameterValueList = this->getParameterValues();
     for (std::shared_ptr<ParameterValue> parameterValue : *outputParameterValueList)
     {
     	std::shared_ptr<uml::Parameter> parameter = parameterValue->getParameter();
@@ -120,12 +127,13 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutionImp
     return outputs;
 }
 
-std::shared_ptr<fUML::ParameterValue>  ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
+std::shared_ptr<fUML::ParameterValue> 
+ ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
 {
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> parameterValue = nullptr;
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> list = this->getParameterValues();
+	std::shared_ptr<Bag<fUML::ParameterValue> > list = this->getParameterValues();
 	std::vector<std::shared_ptr<fUML::ParameterValue>>::iterator it = std::find_if(list->begin(), list->end(), [parameter] (std::shared_ptr<ParameterValue> p) { return p->getParameter() == parameter; } );
     if(it!= this->getParameterValues()->end() )
     {
@@ -134,13 +142,15 @@ std::shared_ptr<fUML::ParameterValue>  ExecutionImpl::getParameterValue(std::sha
     return parameterValue;
 }
 
-std::shared_ptr<fUML::Value>  ExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> 
+ ExecutionImpl::new_() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
+void
+ ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
 {
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> existingParameterValue = this->getParameterValue(parameterValue->getParameter());
@@ -157,7 +167,8 @@ void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  par
 	}
 }
 
-void ExecutionImpl::terminate() 
+void
+ ExecutionImpl::terminate() 
 {
 	//generated from body annotation
 	return;
@@ -166,7 +177,7 @@ void ExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Object> ExecutionImpl::getContext() const
+std::shared_ptr<fUML::Object > ExecutionImpl::getContext() const
 {
 //assert(m_context);
     return m_context;
@@ -176,7 +187,8 @@ void ExecutionImpl::setContext(std::shared_ptr<fUML::Object> _context)
     m_context = _context;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutionImpl::getParameterValues() const
+	std::shared_ptr< Bag<fUML::ParameterValue> >
+ ExecutionImpl::getParameterValues() const
 {
 
     return m_parameterValues;

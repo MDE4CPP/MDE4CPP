@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -88,19 +89,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool runTest()  = 0;
+			virtual bool
+			 runTest()  = 0;
 			
 			/*!
 			 */ 
-			virtual void runBody()  = 0;
+			virtual void
+			 runBody()  = 0;
 			
 			/*!
 			 */ 
-			virtual void runLoopVariables()  = 0;
+			virtual void
+			 runLoopVariables()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode>  makeLoopVariableList()  = 0;
+			virtual std::shared_ptr<uml::ActivityNode> 
+			 makeLoopVariableList()  = 0;
 			
 			
 			//*********************************
@@ -112,7 +117,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> getBodyOutputLists() const = 0;
+			virtual 	std::shared_ptr< Bag<fUML::Values> >
+			 getBodyOutputLists() const = 0;
 			
 			
 
@@ -127,7 +133,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> m_bodyOutputLists;
+				std::shared_ptr< Bag<fUML::Values> >
+			 m_bodyOutputLists;
 			
 
 		public:

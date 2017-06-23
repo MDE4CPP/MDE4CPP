@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,11 +50,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
+			virtual void
+			 destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
 			
 			/*!
 			 */ 
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
+			virtual bool
+			 objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
 			
 			
 			

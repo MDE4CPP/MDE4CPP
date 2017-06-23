@@ -21,6 +21,8 @@
 
 #include "impl/ObjectNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual void
+			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			
 			

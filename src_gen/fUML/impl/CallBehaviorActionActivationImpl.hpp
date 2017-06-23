@@ -21,6 +21,8 @@
 
 #include "impl/CallActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "CallBehaviorAction.hpp"
 #include "Behavior.hpp"
 
@@ -50,7 +52,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution>  getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution> 
+			 getCallExecution()  ;
 			
 			
 			

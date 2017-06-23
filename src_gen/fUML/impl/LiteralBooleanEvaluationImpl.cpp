@@ -63,7 +63,8 @@ std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value>  LiteralBooleanEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> 
+ LiteralBooleanEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralBoolean> literal = std::dynamic_pointer_cast<uml::LiteralBoolean>(getSpecification());

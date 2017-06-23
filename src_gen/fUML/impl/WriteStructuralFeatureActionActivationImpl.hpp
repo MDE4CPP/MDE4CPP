@@ -21,6 +21,8 @@
 
 #include "impl/StructuralFeatureActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  list,int startAt)  ;
+			virtual int
+			 position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)  ;
 			
 			
 			

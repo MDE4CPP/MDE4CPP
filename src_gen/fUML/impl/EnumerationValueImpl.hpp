@@ -21,6 +21,8 @@
 
 #include "impl/ValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "UmlFactory.hpp"
 #include "FUMLFactory.hpp"
 #include "InstanceValue.hpp"
@@ -55,23 +57,28 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> 
+			 specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string
+			 toString()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  ;
 			
 			
 			
@@ -85,18 +92,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::EnumerationLiteral> getLiteral() const ;
+			virtual std::shared_ptr<uml::EnumerationLiteral > getLiteral() const ;
 			
 			/*!
 			 */
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) ;
+			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal_literal) ;
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Enumeration> getType() const ;
+			virtual std::shared_ptr<uml::Enumeration > getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(std::shared_ptr<uml::Enumeration> _type) ;
+			virtual void setType(std::shared_ptr<uml::Enumeration> _type_type) ;
 							
 			
 			//*********************************

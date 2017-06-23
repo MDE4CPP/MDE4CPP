@@ -21,6 +21,8 @@
 
 #include "impl/ObjectNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation>  getExpansionRegionActivation()  ;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation> 
+			 getExpansionRegionActivation()  ;
 			
 			
 			

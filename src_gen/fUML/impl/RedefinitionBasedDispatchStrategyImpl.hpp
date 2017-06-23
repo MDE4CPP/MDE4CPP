@@ -21,6 +21,8 @@
 
 #include "impl/DispatchStrategyImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "NamedElement.hpp"
 #include "Class.hpp"
 #include "Operation.hpp"
@@ -52,11 +54,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
+			virtual bool
+			 operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior>  retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<uml::Behavior> 
+			 retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
 			
 			
 			

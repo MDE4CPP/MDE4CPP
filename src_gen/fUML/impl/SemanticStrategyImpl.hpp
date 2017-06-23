@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ virtual public SemanticStrategy
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string retrieveName()  ;
+			virtual std::string
+			 retrieveName()  ;
 			
 			
 			

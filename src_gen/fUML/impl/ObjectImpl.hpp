@@ -21,6 +21,8 @@
 
 #include "impl/ExtensionalValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "Class.hpp"
@@ -52,31 +54,38 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
+			virtual void
+			 startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution>  dispatch(std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<fUML::Execution> 
+			 dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void
+			 send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void
+			 _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void
+			 unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void
+			 destroy()  ;
 			
 			
 			
@@ -90,15 +99,16 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes() const ;
+			virtual 	std::shared_ptr< Bag<uml::Classifier> >
+			 getTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const ;
+			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const ;
 			
 			/*!
 			 */
-			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) ;
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) ;
 							
 			
 			//*********************************

@@ -41,28 +41,34 @@ CallOperationActionActivationImpl::CallOperationActionActivationImpl(const CallO
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
-	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
-	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
-	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
+		std::shared_ptr< Bag<fUML::PinActivation> >
+	 _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
+	(*(obj.getPinActivation().get())));// this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> _callExecutionsList = obj.getCallExecutions();
+	std::shared_ptr<Bag<fUML::Execution>> _callExecutionsList = obj.getCallExecutions();
 	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->push_back(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
+		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -83,14 +89,56 @@ std::shared_ptr<ecore::EClass> CallOperationActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Execution>  CallOperationActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> 
+ CallOperationActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Execution> execution = nullptr;
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction> (this->getNode());
     if(action != nullptr)
     {
-    	std::shared_ptr<fUML::Value> target  = this->retrievePinActivation(action->getTarget())->getUnofferedTokens()->front()->getValue();
+
+			//Pin name
+			std::shared_ptr<uml::InputPin> targetPin = action->getTarget();
+			std::string name = targetPin->getName();
+
+			std::shared_ptr<fUML::Value> target = nullptr;
+			std::string attributeName = "";
+
+			if(name.empty())
+			{
+				//std::shared_ptr<uml::Classifier> context = action->getContext();
+			}
+			else if(name.find("self.") == 0){
+				attributeName = name.substr (5, std::string::npos);
+
+				std::shared_ptr<uml::Classifier> context = action->getContext();
+	      std::shared_ptr<Bag<uml::Property> > attributes = context->getAllAttributes();
+				std::shared_ptr<uml::Property> attribute = nullptr;
+				
+				for(unsigned int i=0; i<attributes->size(); i++)
+				{
+					if((*attributes)[i]->getName() == attributeName){
+						attribute = (*attributes)[i];
+						break;
+					}
+				}
+
+				if(nullptr == attribute)
+				{
+					std::cout << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
+					exit(EXIT_FAILURE);
+				}
+				else
+				{
+					DEBUG_MESSAGE(std::cout << "Self attribute found for the target pin" <<std::endl;)
+				}
+				
+			}
+			else{
+				target  = this->retrievePinActivation(action->getTarget())->getUnofferedTokens()->front()->getValue();
+			}
+			
     	std::shared_ptr<fUML::Reference> ref = std::dynamic_pointer_cast<fUML::Reference>(target);
         if(nullptr != ref)
         {

@@ -19,7 +19,9 @@ LoopNodeActivationImpl::LoopNodeActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_bodyOutputLists.reset(new std::vector<std::shared_ptr<fUML::Values>>());
+		m_bodyOutputLists.reset(new Bag<fUML::Values>());
+	
+	
 }
 
 LoopNodeActivationImpl::~LoopNodeActivationImpl()
@@ -40,16 +42,22 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
-	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
-	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::PinActivation>>> _pinActivation = obj.getPinActivation();
-	this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
+		std::shared_ptr< Bag<fUML::PinActivation> >
+	 _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
+	(*(obj.getPinActivation().get())));// this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
 
 
 	//clone containt lists
@@ -57,15 +65,15 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	{
 		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> _bodyOutputListsList = obj.getBodyOutputLists();
+	std::shared_ptr<Bag<fUML::Values>> _bodyOutputListsList = obj.getBodyOutputLists();
 	for(std::shared_ptr<fUML::Values> _bodyOutputLists : *_bodyOutputListsList)
 	{
-		this->getBodyOutputLists()->push_back(std::shared_ptr<fUML::Values>(dynamic_cast<fUML::Values*>(_bodyOutputLists->copy())));
+		this->getBodyOutputLists()->add(std::shared_ptr<fUML::Values>(dynamic_cast<fUML::Values*>(_bodyOutputLists->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -86,25 +94,29 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ActivityNode>  LoopNodeActivationImpl::makeLoopVariableList() 
+std::shared_ptr<uml::ActivityNode> 
+ LoopNodeActivationImpl::makeLoopVariableList() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runBody() 
+void
+ LoopNodeActivationImpl::runBody() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void LoopNodeActivationImpl::runLoopVariables() 
+void
+ LoopNodeActivationImpl::runLoopVariables() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeActivationImpl::runTest() 
+bool
+ LoopNodeActivationImpl::runTest() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -113,7 +125,8 @@ bool LoopNodeActivationImpl::runTest()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Values>>> LoopNodeActivationImpl::getBodyOutputLists() const
+	std::shared_ptr< Bag<fUML::Values> >
+ LoopNodeActivationImpl::getBodyOutputLists() const
 {
 
     return m_bodyOutputLists;

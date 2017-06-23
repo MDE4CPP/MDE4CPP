@@ -41,10 +41,10 @@ ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -65,7 +65,8 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExtensionalValueImpl::destroy() 
+void
+ ExtensionalValueImpl::destroy() 
 {
 	//generated from body annotation
 	if(this->getLocus() != nullptr)
@@ -78,7 +79,7 @@ void ExtensionalValueImpl::destroy()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Locus> ExtensionalValueImpl::getLocus() const
+std::shared_ptr<fUML::Locus > ExtensionalValueImpl::getLocus() const
 {
 
     return m_locus;

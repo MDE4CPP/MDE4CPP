@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "Object.hpp"
 #include "FUMLFactory.hpp"
 
@@ -52,15 +54,18 @@ virtual public Executor
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Reference>  start(std::shared_ptr<uml::Class>  type,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
+			virtual std::shared_ptr<fUML::Reference> 
+			 start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
+			 execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			
 			
@@ -74,11 +79,11 @@ virtual public Executor
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
+			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 							
 			
 			//*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/PinActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

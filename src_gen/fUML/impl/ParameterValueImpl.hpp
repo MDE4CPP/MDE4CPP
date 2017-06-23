@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 
 
@@ -61,14 +63,15 @@ virtual public ParameterValue
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
+			virtual std::shared_ptr<uml::Parameter > getParameter() const ;
 			
 			/*!
 			 */
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Value> >
+			 getValues() const ;
 			
 							
 			

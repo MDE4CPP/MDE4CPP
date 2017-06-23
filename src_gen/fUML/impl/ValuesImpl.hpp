@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -60,7 +62,8 @@ virtual public Values
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Value> >
+			 getValues() const ;
 			
 							
 			

@@ -61,13 +61,15 @@ std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value>  ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Value> 
+ ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
 	//generated from body annotation
 	    return this->getLocus()->getFactory()->createEvaluation(specification)->evaluate();
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
+std::shared_ptr<Bag<fUML::ParameterValue> >
+ ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
@@ -78,13 +80,14 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> ExecutorImpl
     }
 
     execution->execute();
-    std::shared_ptr<std::vector<std::shared_ptr<ParameterValue>>> outputValues = execution->getOutputParameterValues();
+    std::shared_ptr<Bag<ParameterValue> > outputValues = execution->getOutputParameterValues();
     execution->destroy();
 
     return outputValues;
 }
 
-std::shared_ptr<fUML::Reference>  ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs) 
+std::shared_ptr<fUML::Reference> 
+ ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[start] Starting " << typeid(type).name() <<"..."<<std::endl;)
@@ -102,7 +105,7 @@ std::shared_ptr<fUML::Reference>  ExecutorImpl::start(std::shared_ptr<uml::Class
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Locus> ExecutorImpl::getLocus() const
+std::shared_ptr<fUML::Locus > ExecutorImpl::getLocus() const
 {
 
     return m_locus;

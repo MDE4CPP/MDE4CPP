@@ -21,6 +21,8 @@
 
 #include "impl/ControlNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

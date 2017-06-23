@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -93,47 +94,58 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getDecisionValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Value> >
+			 getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  = 0;
+			virtual std::shared_ptr<fUML::Value> 
+			 executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  getDecisionInputFlowValue()  = 0;
+			virtual std::shared_ptr<fUML::Value> 
+			 getDecisionInputFlowValue()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance>  getDecisionInputFlowInstance()  = 0;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> 
+			 getDecisionInputFlowInstance()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
+			virtual bool
+			 test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removeJoinedControlTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool hasObjectFlowInput()  = 0;
+			virtual bool
+			 hasObjectFlowInput()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  = 0;
+			virtual void
+			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual void
+			 terminate()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  = 0;
+			virtual bool
+			 isReady()  = 0;
 			
 			
 			//*********************************
@@ -145,11 +157,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution> getDecisionInputExecution() const = 0;
+			virtual std::shared_ptr<fUML::Execution > getDecisionInputExecution() const = 0;
 			
 			/*!
 			 */
-			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution) = 0;
+			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution_decisionInputExecution) = 0;
 			
 
 		protected:
@@ -163,7 +175,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::Execution> m_decisionInputExecution;
+			std::shared_ptr<fUML::Execution > m_decisionInputExecution;
 			
 
 		public:

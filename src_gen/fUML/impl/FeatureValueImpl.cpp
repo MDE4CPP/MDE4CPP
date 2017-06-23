@@ -23,7 +23,9 @@ FeatureValueImpl::FeatureValueImpl()
 	// Reference Members
 	//*********************************
 	
-	m_values.reset(new std::vector<std::shared_ptr<fUML::Value>>());
+		m_values.reset(new Bag<fUML::Value>());
+	
+	
 }
 
 FeatureValueImpl::~FeatureValueImpl()
@@ -45,10 +47,10 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> _valuesList = obj.getValues();
+	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
-		this->getValues()->push_back(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
+		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
 	}
 }
 
@@ -78,7 +80,8 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
-bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
+bool
+ FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
 {
 	//generated from body annotation
 	bool equal = true;
@@ -104,7 +107,7 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other
         else
         {
         	std::shared_ptr<FeatureValue> otherFeatureValues(FUMLFactory::eInstance()->createFeatureValue());
-        	std::shared_ptr<std::vector<std::shared_ptr<Value>>> values = other->getValues();
+        	std::shared_ptr<Bag<Value> > values = other->getValues();
             for(unsigned int i = 0; i < values->size(); i++)
             {
             	std::shared_ptr<Value> value = values->at(i);
@@ -138,7 +141,7 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::StructuralFeature> FeatureValueImpl::getFeature() const
+std::shared_ptr<uml::StructuralFeature > FeatureValueImpl::getFeature() const
 {
 //assert(m_feature);
     return m_feature;
@@ -148,7 +151,8 @@ void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _featu
     m_feature = _feature;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> FeatureValueImpl::getValues() const
+	std::shared_ptr< Bag<fUML::Value> >
+ FeatureValueImpl::getValues() const
 {
 
     return m_values;

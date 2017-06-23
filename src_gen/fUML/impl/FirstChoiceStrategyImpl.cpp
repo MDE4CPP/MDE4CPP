@@ -57,7 +57,8 @@ std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int FirstChoiceStrategyImpl::choose(int size) 
+int
+ FirstChoiceStrategyImpl::choose(int size) 
 {
 	//generated from body annotation
 	return 1;

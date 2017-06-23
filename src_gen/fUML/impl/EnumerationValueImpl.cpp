@@ -69,7 +69,8 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -81,21 +82,24 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> EnumerationValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> >
+ EnumerationValueImpl::getTypes() 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types(new std::vector<std::shared_ptr<uml::Classifier>>());
+	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
 }
 
-std::shared_ptr<fUML::Value>  EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value> 
+ EnumerationValueImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
 }
 
-std::shared_ptr<uml::ValueSpecification>  EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ EnumerationValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
@@ -108,7 +112,8 @@ std::shared_ptr<uml::ValueSpecification>  EnumerationValueImpl::specify()
     return instanceValue;
 }
 
-std::string EnumerationValueImpl::toString() 
+std::string
+ EnumerationValueImpl::toString() 
 {
 	//generated from body annotation
 	    return this->getLiteral()->getName();
@@ -117,7 +122,7 @@ std::string EnumerationValueImpl::toString()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
+std::shared_ptr<uml::EnumerationLiteral > EnumerationValueImpl::getLiteral() const
 {
 //assert(m_literal);
     return m_literal;
@@ -127,7 +132,7 @@ void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _
     m_literal = _literal;
 }
 
-std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
+std::shared_ptr<uml::Enumeration > EnumerationValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;

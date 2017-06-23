@@ -21,6 +21,8 @@
 
 #include "impl/ExecutionFactoryL1Impl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include <Activity.hpp>
 #include <FUMLFactory.hpp>
 #include <ActivityParameterNode.hpp>
@@ -77,7 +79,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor>  instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> 
+			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			
 			

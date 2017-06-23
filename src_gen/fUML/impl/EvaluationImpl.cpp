@@ -62,7 +62,8 @@ std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value>  EvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> 
+ EvaluationImpl::evaluate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -71,7 +72,7 @@ std::shared_ptr<fUML::Value>  EvaluationImpl::evaluate()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::Locus> EvaluationImpl::getLocus() const
+std::shared_ptr<fUML::Locus > EvaluationImpl::getLocus() const
 {
 //assert(m_locus);
     return m_locus;
@@ -81,7 +82,7 @@ void EvaluationImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
     m_locus = _locus;
 }
 
-std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification > EvaluationImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;

@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,15 +50,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association>  getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<uml::Association> 
+			 getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Link>>> getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  ;
+			virtual std::shared_ptr<Bag<fUML::Link> >
+			 getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Property>  getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  ;
+			virtual std::shared_ptr<uml::Property> 
+			 getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  ;
 			
 			
 			

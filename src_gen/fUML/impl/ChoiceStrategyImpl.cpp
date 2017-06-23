@@ -57,13 +57,15 @@ std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int ChoiceStrategyImpl::choose(int size) 
+int
+ ChoiceStrategyImpl::choose(int size) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string ChoiceStrategyImpl::retrieveName() 
+std::string
+ ChoiceStrategyImpl::retrieveName() 
 {
 	//generated from body annotation
 	return "choice";

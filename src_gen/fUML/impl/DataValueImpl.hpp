@@ -21,6 +21,8 @@
 
 #include "impl/CompoundValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "DataValue.hpp"
 #include "UmlFactory.hpp"
 #include "FUMLFactory.hpp"
@@ -54,11 +56,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  new_()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  ;
 			
 			
 			
@@ -72,11 +76,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::DataType> getType() const ;
+			virtual std::shared_ptr<uml::DataType > getType() const ;
 			
 			/*!
 			 */
-			virtual void setType(std::shared_ptr<uml::DataType> _type) ;
+			virtual void setType(std::shared_ptr<uml::DataType> _type_type) ;
 							
 			
 			//*********************************

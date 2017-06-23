@@ -63,7 +63,8 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value>  LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> 
+ LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(getSpecification());

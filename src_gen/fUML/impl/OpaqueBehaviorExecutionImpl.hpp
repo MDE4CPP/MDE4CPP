@@ -21,6 +21,8 @@
 
 #include "impl/ExecutionImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "ParameterValue.hpp"
 #include "Behavior.hpp"
 #include "Parameter.hpp"
@@ -53,11 +55,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputParameters,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  outputParameters)  ;
+			virtual void
+			 doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  ;
 			
 			/*!
 			 */ 
-			virtual void execute()  ;
+			virtual void
+			 execute()  ;
 			
 			
 			

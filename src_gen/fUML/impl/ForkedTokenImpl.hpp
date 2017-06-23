@@ -21,6 +21,8 @@
 
 #include "impl/TokenImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
  
 
 
@@ -49,19 +51,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Token>  otherToken)  ;
 			
 			/*!
 			 */ 
-			virtual void withdraw()  ;
+			virtual void
+			 withdraw()  ;
 			
 			/*!
 			 */ 
-			virtual bool isControl()  ;
+			virtual bool
+			 isControl()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  getValue()  const  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 getValue()  const  ;
 			
 			
 			
@@ -91,11 +97,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Token> getBaseToken() const ;
+			virtual std::shared_ptr<fUML::Token > getBaseToken() const ;
 			
 			/*!
 			 */
-			virtual void setBaseToken(std::shared_ptr<fUML::Token> _baseToken) ;
+			virtual void setBaseToken(std::shared_ptr<fUML::Token> _baseToken_baseToken) ;
 							
 			
 			//*********************************

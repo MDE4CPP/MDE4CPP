@@ -51,8 +51,10 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj)
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> _types = obj.getTypes();
-	this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
+		std::shared_ptr< Bag<uml::Classifier> >
+	 _types = obj.getTypes();
+	m_types.reset(new 	 Bag<uml::Classifier> 
+	(*(obj.getTypes().get())));// this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
 
 
 	//clone containt lists
@@ -60,19 +62,19 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj)
 	{
 		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> _parameterValuesList = obj.getParameterValues();
+	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->push_back(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
 	}
 }
 
@@ -93,7 +95,8 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ActivityExecutionImpl::execute() 
+void
+ ActivityExecutionImpl::execute() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity> (this->getTypes()->front());
@@ -106,13 +109,13 @@ void ActivityExecutionImpl::execute()
         this->setActivationGroup(std::shared_ptr<ActivityNodeActivationGroup>(fUML::FUMLFactory::eInstance()->createActivityNodeActivationGroup()));
         struct null_deleter{void operator()(void const *) const { } };
         this->getActivationGroup()->setActivityExecution(std::shared_ptr<ActivityExecution>(this, null_deleter()));
-        std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityNode>>> nodes = activity->getNode();
-		std::shared_ptr<std::vector<std::shared_ptr<uml::ActivityEdge>>> edges = activity->getEdge();
+        std::shared_ptr<Bag<uml::ActivityNode> > nodes = activity->getNode();
+		std::shared_ptr<Bag<uml::ActivityEdge> > edges = activity->getEdge();
         this->getActivationGroup()->activate(nodes, edges);
 
         DEBUG_MESSAGE(std::cout<<"[execute] Getting output parameter node activations..."<<std::endl;)
 
-        std::shared_ptr<std::vector<std::shared_ptr<ActivityParameterNodeActivation>>> outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
+        std::shared_ptr<Bag<ActivityParameterNodeActivation> > outputActivationList = this->getActivationGroup()->getOutputParameterNodeActivations();
         for(std::shared_ptr<ActivityParameterNodeActivation> outputActivation : *outputActivationList)
         {
         	std::shared_ptr<ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
@@ -122,7 +125,7 @@ void ActivityExecutionImpl::execute()
             {
                 parameterValue->setParameter(activityParameterNode->getParameter());
 
-                std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokenList = outputActivation->getTokens();
+                std::shared_ptr<Bag<Token> > tokenList = outputActivation->getTokens();
                 for(std::shared_ptr<Token> token : *tokenList)
                 {
                 	std::shared_ptr<Value> value = nullptr;
@@ -161,13 +164,15 @@ void ActivityExecutionImpl::execute()
     }
 }
 
-std::shared_ptr<fUML::Value>  ActivityExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> 
+ ActivityExecutionImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(fUML::FUMLFactory::eInstance()->createActivityExecution());
 }
 
-void ActivityExecutionImpl::terminate() 
+void
+ ActivityExecutionImpl::terminate() 
 {
 	//generated from body annotation
 	    this->getActivationGroup()->terminateAll();
@@ -176,7 +181,7 @@ void ActivityExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
+std::shared_ptr<fUML::ActivityNodeActivationGroup > ActivityExecutionImpl::getActivationGroup() const
 {
 //assert(m_activationGroup);
     return m_activationGroup;

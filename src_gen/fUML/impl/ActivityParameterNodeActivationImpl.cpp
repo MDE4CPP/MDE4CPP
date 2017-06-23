@@ -43,20 +43,24 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	
 	m_group  = obj.getGroup();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _incomingEdges = obj.getIncomingEdges();
-	this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
 
 	m_node  = obj.getNode();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::ActivityEdgeInstance>>> _outgoingEdges = obj.getOutgoingEdges();
-	this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
+	 _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
+	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _heldTokensList = obj.getHeldTokens();
+	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->push_back(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
 }
 
@@ -77,7 +81,8 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass
 //*********************************
 // Operations
 //*********************************
-void ActivityParameterNodeActivationImpl::clearTokens() 
+void
+ ActivityParameterNodeActivationImpl::clearTokens() 
 {
 	//generated from body annotation
 	    if (this->getNode()->getIncoming()->size() == 0) {
@@ -85,7 +90,8 @@ void ActivityParameterNodeActivationImpl::clearTokens()
     }
 }
 
-void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens) 
+void
+ ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	if (this->getNode()->getIncoming()->size() == 0) 
@@ -97,7 +103,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<std::vector<std::
 		if (parameterValue != nullptr) 
 		{
 			DEBUG_MESSAGE(std::cout<< "[fire] Parameter has "<< parameterValue->getValues()->size() << " value(s)."<<std::endl;)
-			std::shared_ptr<std::vector<std::shared_ptr<Value>>> valueList = parameterValue->getValues();
+			std::shared_ptr<Bag<Value> > valueList = parameterValue->getValues();
 			for (std::shared_ptr<Value> value : *valueList)
 			{
 				std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());

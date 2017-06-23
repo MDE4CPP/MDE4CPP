@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "StructuralFeature.hpp"
 
@@ -53,7 +55,8 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */ 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
+			virtual bool
+			 hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
 			
 			
 			
@@ -75,15 +78,16 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getValues() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Value> >
+			 getValues() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const ;
+			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
 			
 			/*!
 			 */
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) ;
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) ;
 							
 			
 			//*********************************

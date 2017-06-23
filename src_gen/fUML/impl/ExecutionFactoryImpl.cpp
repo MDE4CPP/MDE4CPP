@@ -26,10 +26,16 @@ ExecutionFactoryImpl::ExecutionFactoryImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_builtInTypes.reset(new std::vector<std::shared_ptr<uml::PrimitiveType>>());
+		m_builtInTypes.reset(new Bag<uml::PrimitiveType>());
 	
-	m_primitiveBehaviorPrototypes.reset(new std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>());
-	m_strategies.reset(new std::vector<std::shared_ptr<fUML::SemanticStrategy>>());
+	
+	
+		m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>());
+	
+	
+		m_strategies.reset(new Bag<fUML::SemanticStrategy>());
+	
+	
 }
 
 ExecutionFactoryImpl::~ExecutionFactoryImpl()
@@ -46,16 +52,22 @@ ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> _builtInTypes = obj.getBuiltInTypes();
-	this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
+		std::shared_ptr< Bag<uml::PrimitiveType> >
+	 _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
+	(*(obj.getBuiltInTypes().get())));// this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
+		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
+	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
+	(*(obj.getPrimitiveBehaviorPrototypes().get())));// this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
 
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> _strategies = obj.getStrategies();
-	this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
+		std::shared_ptr< Bag<fUML::SemanticStrategy> >
+	 _strategies = obj.getStrategies();
+	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
+	(*(obj.getStrategies().get())));// this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
 
 
 	//clone containt lists
@@ -78,21 +90,24 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) 
+void
+ ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> builtInTypes = this->getBuiltInTypes();
+	std::shared_ptr<Bag<uml::PrimitiveType> > builtInTypes = this->getBuiltInTypes();
     builtInTypes->push_back(type);
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) 
+void
+ ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<OpaqueBehaviorExecution>>> primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
+	std::shared_ptr<Bag<OpaqueBehaviorExecution> > primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
     primBehaviorExecution->push_back(execution);
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
+void
+ ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
 {
 	//generated from body annotation
 	unsigned int i = this->getStrategyIndex(strategy->retrieveName());
@@ -105,7 +120,8 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy
     this->getStrategies()->push_back(strategy);
 }
 
-std::shared_ptr<fUML::Evaluation>  ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Evaluation> 
+ ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Evaluation>(this->instantiateVisitor(std::dynamic_pointer_cast<uml::Element>(specification)));
@@ -116,7 +132,8 @@ std::shared_ptr<fUML::Evaluation>  ExecutionFactoryImpl::createEvaluation(std::s
     return evaluation;
 }
 
-std::shared_ptr<fUML::Execution>  ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
+std::shared_ptr<fUML::Execution> 
+ ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Execution> execution;
@@ -157,7 +174,8 @@ std::shared_ptr<fUML::Execution>  ExecutionFactoryImpl::createExecution(std::sha
     return execution;
 }
 
-std::shared_ptr<uml::PrimitiveType>  ExecutionFactoryImpl::getBuiltInType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> 
+ ExecutionFactoryImpl::getBuiltInType(std::string name) 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::PrimitiveType> type = nullptr;
@@ -175,7 +193,8 @@ std::shared_ptr<uml::PrimitiveType>  ExecutionFactoryImpl::getBuiltInType(std::s
     return type;
 }
 
-std::shared_ptr<fUML::SemanticStrategy>  ExecutionFactoryImpl::getStrategy(std::string name) 
+std::shared_ptr<fUML::SemanticStrategy> 
+ ExecutionFactoryImpl::getStrategy(std::string name) 
 {
 	//generated from body annotation
 	unsigned int i = this->getStrategyIndex(name);
@@ -189,10 +208,11 @@ std::shared_ptr<fUML::SemanticStrategy>  ExecutionFactoryImpl::getStrategy(std::
     return strategy;
 }
 
-int ExecutionFactoryImpl::getStrategyIndex(std::string name) 
+int
+ ExecutionFactoryImpl::getStrategyIndex(std::string name) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<SemanticStrategy>>> strategies = this->getStrategies();
+	std::shared_ptr<Bag<SemanticStrategy> > strategies = this->getStrategies();
 
     unsigned int i = 1;
     bool unmatched = true;
@@ -211,7 +231,8 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
     return i;
 }
 
-std::shared_ptr<fUML::OpaqueBehaviorExecution>  ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) 
+std::shared_ptr<fUML::OpaqueBehaviorExecution> 
+ ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> execution = nullptr;
@@ -236,7 +257,8 @@ std::shared_ptr<fUML::OpaqueBehaviorExecution>  ExecutionFactoryImpl::instantiat
     return execution;
 }
 
-std::shared_ptr<fUML::SemanticVisitor>  ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> 
+ ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -245,14 +267,15 @@ std::shared_ptr<fUML::SemanticVisitor>  ExecutionFactoryImpl::instantiateVisitor
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<uml::PrimitiveType>>> ExecutionFactoryImpl::getBuiltInTypes() const
+	std::shared_ptr< Bag<uml::PrimitiveType> >
+ ExecutionFactoryImpl::getBuiltInTypes() const
 {
 
     return m_builtInTypes;
 }
 
 
-std::shared_ptr<fUML::Locus> ExecutionFactoryImpl::getLocus() const
+std::shared_ptr<fUML::Locus > ExecutionFactoryImpl::getLocus() const
 {
 
     return m_locus;
@@ -262,14 +285,16 @@ void ExecutionFactoryImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
     m_locus = _locus;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::OpaqueBehaviorExecution>>> ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
+	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
+ ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
 {
 
     return m_primitiveBehaviorPrototypes;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::SemanticStrategy>>> ExecutionFactoryImpl::getStrategies() const
+	std::shared_ptr< Bag<fUML::SemanticStrategy> >
+ ExecutionFactoryImpl::getStrategies() const
 {
 
     return m_strategies;

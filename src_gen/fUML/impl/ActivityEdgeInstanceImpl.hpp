@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
  #include "FUMLFactory.hpp"
 
 
@@ -51,27 +53,33 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			/*!
 			 */ 
-			virtual void sendOffer(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  tokens)  ;
+			virtual void
+			 sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
 			
 			/*!
 			 */ 
-			virtual int countOfferedValue()  ;
+			virtual int
+			 countOfferedValue()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens(int maxCount)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeOfferedTokens(int maxCount)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> getOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 getOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual bool hasOffer()  ;
+			virtual bool
+			 hasOffer()  ;
 			
 			
 			
@@ -85,36 +93,37 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::ActivityEdge> getEdge() const ;
+			virtual std::shared_ptr<uml::ActivityEdge > getEdge() const ;
 			
 			/*!
 			 */
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge) ;
+			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge_edge) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getSource() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation > getSource() const ;
 			
 			/*!
 			 */
-			virtual void setSource(std::shared_ptr<fUML::ActivityNodeActivation> _source) ;
+			virtual void setSource(std::shared_ptr<fUML::ActivityNodeActivation> _source_source) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getTarget() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation > getTarget() const ;
 			
 			/*!
 			 */
-			virtual void setTarget(std::shared_ptr<fUML::ActivityNodeActivation> _target) ;
+			virtual void setTarget(std::shared_ptr<fUML::ActivityNodeActivation> _target_target) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Offer>>> getOffers() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Offer> >
+			 getOffers() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup> getGroup() const ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
 			
 			/*!
 			 */
-			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group) ;
+			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
 							
 			
 			//*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/InvocationActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "Execution.hpp"
 #include "ParameterValue.hpp"
 #include "InputPin.hpp"
@@ -57,19 +59,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution>  getCallExecution()  ;
+			virtual std::shared_ptr<fUML::Execution> 
+			 getCallExecution()  ;
 			
 			/*!
 			 */ 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
+			virtual void
+			 removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
 			
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void
+			 doAction()  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			
 			
@@ -83,7 +89,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Execution>>> getCallExecutions() const ;
+			virtual 	std::shared_ptr< Bag<fUML::Execution> >
+			 getCallExecutions() const ;
 			
 							
 			

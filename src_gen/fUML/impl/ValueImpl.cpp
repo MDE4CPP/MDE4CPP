@@ -58,11 +58,12 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> myTypes = this->getTypes();
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> otherTypes = otherValue->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > otherTypes = otherValue->getTypes();
 
     DEBUG_MESSAGE(std::cout<<"in Value"<<std::endl;)
     bool isEqual = true;
@@ -92,16 +93,18 @@ bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> ValueImpl::getTypes()  const 
+std::shared_ptr<Bag<uml::Classifier> >
+ ValueImpl::getTypes()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
+bool
+ ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
 	//generated from body annotation
-	std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> types = this->getTypes();
+	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
     bool found = false;
     unsigned int i = 1;
@@ -114,20 +117,23 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
     return found;
 }
 
-std::string ValueImpl::objectId() 
+std::string
+ ValueImpl::objectId() 
 {
 	//generated from body annotation
 	return "SemanticVisitor";//typename(SemanticVisitor); //return super.toString();
 
 }
 
-std::shared_ptr<uml::ValueSpecification>  ValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ ValueImpl::specify() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string ValueImpl::toString() 
+std::string
+ ValueImpl::toString() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

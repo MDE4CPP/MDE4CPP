@@ -74,7 +74,8 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 // Operations
 //*********************************
-bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -88,7 +89,8 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<uml::ValueSpecification>  BooleanValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ BooleanValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralBoolean> literal(uml::UmlFactory::eInstance()->createLiteralBoolean());    
@@ -97,7 +99,8 @@ std::shared_ptr<uml::ValueSpecification>  BooleanValueImpl::specify()
     return literal;
 }
 
-std::string BooleanValueImpl::toString() 
+std::string
+ BooleanValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::string stringValue = "false";

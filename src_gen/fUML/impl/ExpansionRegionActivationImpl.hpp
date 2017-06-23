@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,19 +50,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  ;
+			virtual void
+			 doStructuredActivity()  ;
 			
 			/*!
 			 */ 
-			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
+			virtual void
+			 runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionNodeActivation>  getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  ;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation> 
+			 getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual int numberOfValues()  ;
+			virtual int
+			 numberOfValues()  ;
 			
 			
 			
@@ -74,15 +80,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputTokens() const ;
+			virtual 	std::shared_ptr< Bag<fUML::TokenSet> >
+			 getInputTokens() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::TokenSet>>> getInputExpansionTokens() const ;
+			virtual 	std::shared_ptr< Bag<fUML::TokenSet> >
+			 getInputExpansionTokens() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ExpansionActivationGroup>>> getActivationGroups() const ;
+			virtual 	std::shared_ptr< Bag<fUML::ExpansionActivationGroup> >
+			 getActivationGroups() const ;
 			
 							
 			

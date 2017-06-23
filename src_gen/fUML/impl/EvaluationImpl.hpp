@@ -21,6 +21,8 @@
 
 #include "impl/SemanticVisitorImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate()  ;
 			
 			
 			
@@ -62,18 +65,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
 			
 			/*!
 			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus> getLocus() const ;
+			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
-			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus) ;
+			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 							
 			
 			//*********************************

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -93,15 +94,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation>  getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual std::shared_ptr<fUML::ClauseActivation> 
+			 getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void
+			 runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void
+			 selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			
 			//*********************************
@@ -113,11 +117,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> getClauseActivations() const = 0;
+			virtual 	std::shared_ptr< Bag<fUML::ClauseActivation> >
+			 getClauseActivations() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> getSelectedClauses() const = 0;
+			virtual 	std::shared_ptr< Bag<uml::Clause> >
+			 getSelectedClauses() const = 0;
 			
 			
 
@@ -132,10 +138,12 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> m_clauseActivations;
+				std::shared_ptr< Bag<fUML::ClauseActivation> >
+			 m_clauseActivations;
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<uml::Clause>>> m_selectedClauses;
+				std::shared_ptr< Bag<uml::Clause> >
+			 m_selectedClauses;
 			
 
 		public:

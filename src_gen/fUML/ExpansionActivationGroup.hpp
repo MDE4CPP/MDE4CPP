@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -91,11 +92,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getRegionActivation() const = 0;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation > getRegionActivation() const = 0;
 			
 			/*!
 			 */
-			virtual void setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation) = 0;
+			virtual void setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation_regionActivation) = 0;
 			
 
 		protected:
@@ -109,7 +110,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::ExpansionRegionActivation> m_regionActivation;
+			std::shared_ptr<fUML::ExpansionRegionActivation > m_regionActivation;
 			
 
 		public:

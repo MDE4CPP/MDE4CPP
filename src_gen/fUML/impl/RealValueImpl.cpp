@@ -75,7 +75,8 @@ float RealValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -90,7 +91,8 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<uml::ValueSpecification>  RealValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ RealValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralReal> literal(uml::UmlFactory::eInstance()->createLiteralReal());
@@ -99,7 +101,8 @@ std::shared_ptr<uml::ValueSpecification>  RealValueImpl::specify()
     return literal;
 }
 
-std::string RealValueImpl::toString() 
+std::string
+ RealValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::ostringstream o;

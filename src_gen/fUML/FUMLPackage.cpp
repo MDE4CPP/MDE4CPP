@@ -11,7 +11,7 @@ const std::string FUMLPackage::eNS_PREFIX ="fUML";
 //Singleton 
 std::shared_ptr<FUMLPackage> FUMLPackage::instance;
 
-std::shared_ptr<FUMLPackage> FUMLPackage::eInstance()
+std::shared_ptr<FUMLPackage>FUMLPackage::eInstance()
 {
 	if(!instance)
 	{

@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -83,19 +84,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<uml::Classifier>>> getTypes()  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> >
+			 getTypes()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
+			virtual bool
+			 isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
 			
 			/*!
 			 */ 
-			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  = 0;
+			virtual void
+			 addTo(std::shared_ptr<fUML::Locus>  locus)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> getOtherFeatureValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::ExtensionalValue>>>  extent,std::shared_ptr<uml::Property>  end)  = 0;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> >
+			 getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)  = 0;
 			
 			
 			//*********************************
@@ -107,11 +112,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Association> getType() const = 0;
+			virtual std::shared_ptr<uml::Association > getType() const = 0;
 			
 			/*!
 			 */
-			virtual void setType(std::shared_ptr<uml::Association> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::Association> _type_type) = 0;
 			
 
 		protected:
@@ -125,7 +130,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<uml::Association> m_type;
+			std::shared_ptr<uml::Association > m_type;
 			
 
 		public:

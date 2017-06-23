@@ -11,6 +11,93 @@ using namespace fUML;
 
 FUMLFactoryImpl::FUMLFactoryImpl()
 {
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("AcceptEventActionActivation",[this](){return this->createAcceptEventActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("AcceptEventActionEventAccepter",[this](){return this->createAcceptEventActionEventAccepter();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ActivityEdgeInstance",[this](){return this->createActivityEdgeInstance();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ActivityExecution",[this](){return this->createActivityExecution();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ActivityFinalNodeActivation",[this](){return this->createActivityFinalNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ActivityNodeActivationGroup",[this](){return this->createActivityNodeActivationGroup();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ActivityParameterNodeActivation",[this](){return this->createActivityParameterNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("AddStructuralFeatureValueActionActivation",[this](){return this->createAddStructuralFeatureValueActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("BooleanValue",[this](){return this->createBooleanValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("CallBehaviorActionActivation",[this](){return this->createCallBehaviorActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("CallOperationActionActivation",[this](){return this->createCallOperationActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("CentralBufferNodeActivation",[this](){return this->createCentralBufferNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClassifierBehaviorExecution",[this](){return this->createClassifierBehaviorExecution();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClassifierBehaviorExecutionActivity",[this](){return this->createClassifierBehaviorExecutionActivity();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1",[this](){return this->createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClauseActivation",[this](){return this->createClauseActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClearAssociationActionActivation",[this](){return this->createClearAssociationActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ClearStructuralFeatureActionActivation",[this](){return this->createClearStructuralFeatureActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ConditionalNodeActivation",[this](){return this->createConditionalNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ControlToken",[this](){return this->createControlToken();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("CreateLinkActionActivation",[this](){return this->createCreateLinkActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("CreateObjectActionActivation",[this](){return this->createCreateObjectActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DataStoreNodeActivation",[this](){return this->createDataStoreNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DataValue",[this](){return this->createDataValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DecisionNodeActivation",[this](){return this->createDecisionNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DestroyLinkActionActivation",[this](){return this->createDestroyLinkActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DestroyObjectActionActivation",[this](){return this->createDestroyObjectActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("DispatchStrategy",[this](){return this->createDispatchStrategy();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EnumerationValue",[this](){return this->createEnumerationValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EventDispatchLoop",[this](){return this->createEventDispatchLoop();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExecutionFactoryL1",[this](){return this->createExecutionFactoryL1();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExecutionFactoryL2",[this](){return this->createExecutionFactoryL2();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExecutionFactoryL3",[this](){return this->createExecutionFactoryL3();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Executor",[this](){return this->createExecutor();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExpansionActivationGroup",[this](){return this->createExpansionActivationGroup();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExpansionNodeActivation",[this](){return this->createExpansionNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExpansionRegionActivation",[this](){return this->createExpansionRegionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ExtensionalValueList",[this](){return this->createExtensionalValueList();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("FIFOGetNextEventStrategy",[this](){return this->createFIFOGetNextEventStrategy();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("FeatureValue",[this](){return this->createFeatureValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("FirstChoiceStrategy",[this](){return this->createFirstChoiceStrategy();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("FlowFinalNodeActivation",[this](){return this->createFlowFinalNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ForkNodeActivation",[this](){return this->createForkNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ForkedToken",[this](){return this->createForkedToken();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("InitialNodeActivation",[this](){return this->createInitialNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("InputPinActivation",[this](){return this->createInputPinActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("InstanceValueEvaluation",[this](){return this->createInstanceValueEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("IntegerValue",[this](){return this->createIntegerValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("JoinNodeActivation",[this](){return this->createJoinNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Link",[this](){return this->createLink();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralBooleanEvaluation",[this](){return this->createLiteralBooleanEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralIntegerEvaluation",[this](){return this->createLiteralIntegerEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralNullEvaluation",[this](){return this->createLiteralNullEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralRealEvaluation",[this](){return this->createLiteralRealEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralStringEvaluation",[this](){return this->createLiteralStringEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LiteralUnlimitedNaturalEvaluation",[this](){return this->createLiteralUnlimitedNaturalEvaluation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Locus",[this](){return this->createLocus();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("LoopNodeActivation",[this](){return this->createLoopNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("MergeNodeActivation",[this](){return this->createMergeNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Object",[this](){return this->createObject();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ObjectActivation",[this](){return this->createObjectActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ObjectToken",[this](){return this->createObjectToken();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Offer",[this](){return this->createOffer();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("OutputPinActivation",[this](){return this->createOutputPinActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ParameterValue",[this](){return this->createParameterValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReadExtentActionActivation",[this](){return this->createReadExtentActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReadIsClassifiedObjectActionActivation",[this](){return this->createReadIsClassifiedObjectActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReadLinkActionActivation",[this](){return this->createReadLinkActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReadSelfActionActivation",[this](){return this->createReadSelfActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReadStructuralFeatureActionActivation",[this](){return this->createReadStructuralFeatureActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("RealValue",[this](){return this->createRealValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReclassifyObjectActionActivation",[this](){return this->createReclassifyObjectActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("RedefinitionBasedDispatchStrategy",[this](){return this->createRedefinitionBasedDispatchStrategy();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ReduceActionActivation",[this](){return this->createReduceActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Reference",[this](){return this->createReference();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("RemoveStructuralFeatureValueActivation",[this](){return this->createRemoveStructuralFeatureValueActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("SendSignalActionActivation",[this](){return this->createSendSignalActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("SignalInstance",[this](){return this->createSignalInstance();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("StartClassifierBehaviorActionActivation",[this](){return this->createStartClassifierBehaviorActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("StartObjectBehaviorActionActivation",[this](){return this->createStartObjectBehaviorActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("StringValue",[this](){return this->createStringValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("StructuredActivityNodeActivation",[this](){return this->createStructuredActivityNodeActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("TestIdentityActionActivation",[this](){return this->createTestIdentityActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("TokenSet",[this](){return this->createTokenSet();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("UnlimitedNaturalValue",[this](){return this->createUnlimitedNaturalValue();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ValueSpecificActionActivation",[this](){return this->createValueSpecificActionActivation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("Values",[this](){return this->createValues();}));
 }
 
 FUMLFactoryImpl::~FUMLFactoryImpl()
@@ -26,106 +113,30 @@ FUMLFactory* FUMLFactoryImpl::create()
 // creators
 //*********************************
 
-ecore::EObject* FUMLFactoryImpl::create(ecore::EClass* _class) const
+std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(ecore::EClass* _class) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	switch (_class->getClassifierID())
-	{
-		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION : return createAcceptEventActionActivation();
-		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER : return createAcceptEventActionEventAccepter();
-		case FUMLPackage::ACTIVITYEDGEINSTANCE : return createActivityEdgeInstance();
-		case FUMLPackage::ACTIVITYEXECUTION : return createActivityExecution();
-		case FUMLPackage::ACTIVITYFINALNODEACTIVATION : return createActivityFinalNodeActivation();
-		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP : return createActivityNodeActivationGroup();
-		case FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION : return createActivityParameterNodeActivation();
-		case FUMLPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION : return createAddStructuralFeatureValueActionActivation();
-		case FUMLPackage::BOOLEANVALUE : return createBooleanValue();
-		case FUMLPackage::CALLBEHAVIORACTIONACTIVATION : return createCallBehaviorActionActivation();
-		case FUMLPackage::CALLOPERATIONACTIONACTIVATION : return createCallOperationActionActivation();
-		case FUMLPackage::CENTRALBUFFERNODEACTIVATION : return createCentralBufferNodeActivation();
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION : return createClassifierBehaviorExecution();
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY : return createClassifierBehaviorExecutionActivity();
-		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1 : return createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1();
-		case FUMLPackage::CLAUSEACTIVATION : return createClauseActivation();
-		case FUMLPackage::CLEARASSOCIATIONACTIONACTIVATION : return createClearAssociationActionActivation();
-		case FUMLPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION : return createClearStructuralFeatureActionActivation();
-		case FUMLPackage::CONDITIONALNODEACTIVATION : return createConditionalNodeActivation();
-		case FUMLPackage::CONTROLTOKEN : return createControlToken();
-		case FUMLPackage::CREATELINKACTIONACTIVATION : return createCreateLinkActionActivation();
-		case FUMLPackage::CREATEOBJECTACTIONACTIVATION : return createCreateObjectActionActivation();
-		case FUMLPackage::DATASTORENODEACTIVATION : return createDataStoreNodeActivation();
-		case FUMLPackage::DATAVALUE : return createDataValue();
-		case FUMLPackage::DECISIONNODEACTIVATION : return createDecisionNodeActivation();
-		case FUMLPackage::DESTROYLINKACTIONACTIVATION : return createDestroyLinkActionActivation();
-		case FUMLPackage::DESTROYOBJECTACTIONACTIVATION : return createDestroyObjectActionActivation();
-		case FUMLPackage::DISPATCHSTRATEGY : return createDispatchStrategy();
-		case FUMLPackage::ENUMERATIONVALUE : return createEnumerationValue();
-		case FUMLPackage::EVENTDISPATCHLOOP : return createEventDispatchLoop();
-		case FUMLPackage::EXECUTIONFACTORYL1 : return createExecutionFactoryL1();
-		case FUMLPackage::EXECUTIONFACTORYL2 : return createExecutionFactoryL2();
-		case FUMLPackage::EXECUTIONFACTORYL3 : return createExecutionFactoryL3();
-		case FUMLPackage::EXECUTOR : return createExecutor();
-		case FUMLPackage::EXPANSIONACTIVATIONGROUP : return createExpansionActivationGroup();
-		case FUMLPackage::EXPANSIONNODEACTIVATION : return createExpansionNodeActivation();
-		case FUMLPackage::EXPANSIONREGIONACTIVATION : return createExpansionRegionActivation();
-		case FUMLPackage::EXTENSIONALVALUELIST : return createExtensionalValueList();
-		case FUMLPackage::FIFOGETNEXTEVENTSTRATEGY : return createFIFOGetNextEventStrategy();
-		case FUMLPackage::FEATUREVALUE : return createFeatureValue();
-		case FUMLPackage::FIRSTCHOICESTRATEGY : return createFirstChoiceStrategy();
-		case FUMLPackage::FLOWFINALNODEACTIVATION : return createFlowFinalNodeActivation();
-		case FUMLPackage::FORKNODEACTIVATION : return createForkNodeActivation();
-		case FUMLPackage::FORKEDTOKEN : return createForkedToken();
-		case FUMLPackage::INITIALNODEACTIVATION : return createInitialNodeActivation();
-		case FUMLPackage::INPUTPINACTIVATION : return createInputPinActivation();
-		case FUMLPackage::INSTANCEVALUEEVALUATION : return createInstanceValueEvaluation();
-		case FUMLPackage::INTEGERVALUE : return createIntegerValue();
-		case FUMLPackage::JOINNODEACTIVATION : return createJoinNodeActivation();
-		case FUMLPackage::LINK : return createLink();
-		case FUMLPackage::LITERALBOOLEANEVALUATION : return createLiteralBooleanEvaluation();
-		case FUMLPackage::LITERALINTEGEREVALUATION : return createLiteralIntegerEvaluation();
-		case FUMLPackage::LITERALNULLEVALUATION : return createLiteralNullEvaluation();
-		case FUMLPackage::LITERALREALEVALUATION : return createLiteralRealEvaluation();
-		case FUMLPackage::LITERALSTRINGEVALUATION : return createLiteralStringEvaluation();
-		case FUMLPackage::LITERALUNLIMITEDNATURALEVALUATION : return createLiteralUnlimitedNaturalEvaluation();
-		case FUMLPackage::LOCUS : return createLocus();
-		case FUMLPackage::LOOPNODEACTIVATION : return createLoopNodeActivation();
-		case FUMLPackage::MERGENODEACTIVATION : return createMergeNodeActivation();
-		case FUMLPackage::OBJECT : return createObject();
-		case FUMLPackage::OBJECTACTIVATION : return createObjectActivation();
-		case FUMLPackage::OBJECTTOKEN : return createObjectToken();
-		case FUMLPackage::OFFER : return createOffer();
-		case FUMLPackage::OUTPUTPINACTIVATION : return createOutputPinActivation();
-		case FUMLPackage::PARAMETERVALUE : return createParameterValue();
-		case FUMLPackage::READEXTENTACTIONACTIVATION : return createReadExtentActionActivation();
-		case FUMLPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION : return createReadIsClassifiedObjectActionActivation();
-		case FUMLPackage::READLINKACTIONACTIVATION : return createReadLinkActionActivation();
-		case FUMLPackage::READSELFACTIONACTIVATION : return createReadSelfActionActivation();
-		case FUMLPackage::READSTRUCTURALFEATUREACTIONACTIVATION : return createReadStructuralFeatureActionActivation();
-		case FUMLPackage::REALVALUE : return createRealValue();
-		case FUMLPackage::RECLASSIFYOBJECTACTIONACTIVATION : return createReclassifyObjectActionActivation();
-		case FUMLPackage::REDEFINITIONBASEDDISPATCHSTRATEGY : return createRedefinitionBasedDispatchStrategy();
-		case FUMLPackage::REDUCEACTIONACTIVATION : return createReduceActionActivation();
-		case FUMLPackage::REFERENCE : return createReference();
-		case FUMLPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION : return createRemoveStructuralFeatureValueActivation();
-		case FUMLPackage::SENDSIGNALACTIONACTIVATION : return createSendSignalActionActivation();
-		case FUMLPackage::SIGNALINSTANCE : return createSignalInstance();
-		case FUMLPackage::STARTCLASSIFIERBEHAVIORACTIONACTIVATION : return createStartClassifierBehaviorActionActivation();
-		case FUMLPackage::STARTOBJECTBEHAVIORACTIONACTIVATION : return createStartObjectBehaviorActionActivation();
-		case FUMLPackage::STRINGVALUE : return createStringValue();
-		case FUMLPackage::STRUCTUREDACTIVITYNODEACTIVATION : return createStructuredActivityNodeActivation();
-		case FUMLPackage::TESTIDENTITYACTIONACTIVATION : return createTestIdentityActionActivation();
-		case FUMLPackage::TOKENSET : return createTokenSet();
-		case FUMLPackage::UNLIMITEDNATURALVALUE : return createUnlimitedNaturalValue();
-		case FUMLPackage::VALUESPECIFICACTIONACTIVATION : return createValueSpecificActionActivation();
-		case FUMLPackage::VALUES : return createValues();
-		default:
-       		throw "Error create class '" + _class->getName();
-	}
-	return nullptr;
+	std::string _className = _class->eClass()->getName();
+	return create(_className);
+}
+
+std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(std::string _className) const
+{
+	//TODO: still two times run through map
+	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
+	
+	std::shared_ptr<ecore::EObject> _createdObject;
+	if(iter != m_creatorMap.end())
+    {
+		//invoke the creator function
+        return std::shared_ptr<ecore::EObject>(iter->second());
+    }
+
+    return nullptr;
 }
 
 AcceptEventActionActivation* FUMLFactoryImpl::createAcceptEventActionActivation () const

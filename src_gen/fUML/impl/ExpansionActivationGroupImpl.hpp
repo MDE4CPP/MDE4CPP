@@ -21,6 +21,8 @@
 
 #include "impl/ActivityNodeActivationGroupImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,11 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ExpansionRegionActivation> getRegionActivation() const ;
+			virtual std::shared_ptr<fUML::ExpansionRegionActivation > getRegionActivation() const ;
 			
 			/*!
 			 */
-			virtual void setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation) ;
+			virtual void setRegionActivation(std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation_regionActivation) ;
 							
 			
 			//*********************************

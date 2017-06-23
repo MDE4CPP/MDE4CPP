@@ -21,6 +21,8 @@
 
 #include "impl/LiteralEvaluationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "LiteralString.hpp"
 
@@ -50,7 +52,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate()  ;
 			
 			
 			

@@ -21,6 +21,8 @@
 
 #include "impl/InvocationActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  ;
+			virtual void
+			 doAction()  ;
 			
 			
 			

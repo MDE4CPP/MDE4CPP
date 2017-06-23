@@ -147,7 +147,8 @@ namespace fUML
 
 		public:
 			virtual ~FUMLFactoryImpl();
-			virtual ecore::EObject* create(ecore::EClass* _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(ecore::EClass* _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions
 			virtual Locus* createLocus() const ;
@@ -244,6 +245,8 @@ namespace fUML
 
 		private:
 			static FUMLFactory * create();
+			std::map<std::string,std::function<ecore::EObject*()>> m_creatorMap;
+
 			virtual void init() {}
 
 	};

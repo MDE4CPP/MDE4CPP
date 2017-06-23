@@ -21,6 +21,8 @@
 
 #include "impl/PrimitiveValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "LiteralBoolean.hpp"
@@ -53,15 +55,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> 
+			 specify()  ;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool
+			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string
+			 toString()  ;
 			
 			
 			

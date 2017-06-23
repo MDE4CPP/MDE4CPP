@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -83,7 +84,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doAction()  = 0;
+			virtual void
+			 doAction()  = 0;
 			
 			
 			//*********************************

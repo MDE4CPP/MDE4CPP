@@ -40,10 +40,10 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> _featureValuesList = obj.getFeatureValues();
+	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->push_back(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
 }
 
@@ -68,7 +68,7 @@ std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
+std::shared_ptr<uml::Signal > SignalInstanceImpl::getType() const
 {
 //assert(m_type);
     return m_type;

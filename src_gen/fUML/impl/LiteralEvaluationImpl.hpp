@@ -21,6 +21,8 @@
 
 #include "impl/EvaluationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "ValueSpecification.hpp"
 #include "PrimitiveType.hpp"
 #include "Type.hpp"
@@ -51,7 +53,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType>  getType(std::string builtInTypeName)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> 
+			 getType(std::string builtInTypeName)  ;
 			
 			
 			

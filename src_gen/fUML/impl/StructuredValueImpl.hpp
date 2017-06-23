@@ -21,6 +21,8 @@
 
 #include "impl/ValueImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "InstanceValue.hpp"
 #include "UmlFactory.hpp"
 #include "Slot.hpp"
@@ -58,23 +60,28 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue>  retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue> 
+			 retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>>  values,int position)  ;
+			virtual void
+			 assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::FeatureValue>>> retrieveFeatureValues()  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> >
+			 retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual void createFeatureValues()  ;
+			virtual void
+			 createFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification>  specify()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> 
+			 specify()  ;
 			
 			
 			

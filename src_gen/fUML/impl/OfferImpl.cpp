@@ -19,7 +19,9 @@ OfferImpl::OfferImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_offeredTokens.reset(new std::vector<std::shared_ptr<fUML::Token>>());
+		m_offeredTokens.reset(new Bag<fUML::Token>());
+	
+	
 }
 
 OfferImpl::~OfferImpl()
@@ -36,8 +38,10 @@ OfferImpl::OfferImpl(const OfferImpl & obj)
 
 	//copy references with now containment
 	
-	std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> _offeredTokens = obj.getOfferedTokens();
-	this->getOfferedTokens()->insert(this->getOfferedTokens()->end(), _offeredTokens->begin(), _offeredTokens->end());
+		std::shared_ptr< Bag<fUML::Token> >
+	 _offeredTokens = obj.getOfferedTokens();
+	m_offeredTokens.reset(new 	 Bag<fUML::Token> 
+	(*(obj.getOfferedTokens().get())));// this->getOfferedTokens()->insert(this->getOfferedTokens()->end(), _offeredTokens->begin(), _offeredTokens->end());
 
 
 	//clone containt lists
@@ -60,7 +64,8 @@ std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-int OfferImpl::countOfferedVales() 
+int
+ OfferImpl::countOfferedVales() 
 {
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
@@ -75,14 +80,16 @@ int OfferImpl::countOfferedVales()
     return count;
 }
 
-bool OfferImpl::hasTokens() 
+bool
+ OfferImpl::hasTokens() 
 {
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
     return (this->getOfferedTokens()->size() > 0);
 }
 
-void OfferImpl::removeOfferedValues(int count) 
+void
+ OfferImpl::removeOfferedValues(int count) 
 {
 	//generated from body annotation
 	    int n = count;
@@ -97,7 +104,8 @@ void OfferImpl::removeOfferedValues(int count)
     }
 }
 
-void OfferImpl::removeWithdrawnTokens() 
+void
+ OfferImpl::removeWithdrawnTokens() 
 {
 	//generated from body annotation
 	    unsigned int i = 1;
@@ -110,13 +118,14 @@ void OfferImpl::removeWithdrawnTokens()
     }
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> OfferImpl::retrieveOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> >
+ OfferImpl::retrieveOfferedTokens() 
 {
 	//generated from body annotation
 	this->removeWithdrawnTokens();
 
-	std::shared_ptr<std::vector<std::shared_ptr<Token>>> tokens(new std::vector<std::shared_ptr<Token>>());
-	std::shared_ptr<std::vector<std::shared_ptr<Token>>> offeredTokens = this->getOfferedTokens();
+	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
+	std::shared_ptr<Bag<Token> > offeredTokens = this->getOfferedTokens();
     for (unsigned int i = 0; i < this->getOfferedTokens()->size(); i++)
     {
     	std::shared_ptr<Token> offeredToken = offeredTokens->at(i);
@@ -129,7 +138,8 @@ std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> OfferImpl::retrieveOf
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> OfferImpl::getOfferedTokens() const
+	std::shared_ptr< Bag<fUML::Token> >
+ OfferImpl::getOfferedTokens() const
 {
 
     return m_offeredTokens;

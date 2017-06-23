@@ -21,6 +21,8 @@
 
 #include "impl/EvaluationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "InstanceSpecification.hpp"
 #include "InstanceValue.hpp"
 #include "Classifier.hpp"
@@ -62,7 +64,8 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 evaluate()  ;
 			
 			
 			

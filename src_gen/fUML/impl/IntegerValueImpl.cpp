@@ -75,7 +75,8 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -89,7 +90,8 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<uml::ValueSpecification>  IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ IntegerValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());
@@ -100,7 +102,8 @@ std::shared_ptr<uml::ValueSpecification>  IntegerValueImpl::specify()
     return literal;
 }
 
-std::string IntegerValueImpl::toString() 
+std::string
+ IntegerValueImpl::toString() 
 {
 	//generated from body annotation
 	    char buf [11];

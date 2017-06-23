@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,15 +52,18 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */ 
-			virtual void execute(std::shared_ptr<std::vector<std::shared_ptr<uml::Class>>>  classifier,std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>>  inputs)  ;
+			virtual void
+			 execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  ;
+			virtual void
+			 _startObjectBehavior()  ;
 			
 			
 			
@@ -72,25 +77,25 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution> getExecution() const ;
+			virtual std::shared_ptr<fUML::Execution > getExecution() const ;
 			
 			/*!
 			 */
-			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution) ;
+			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution_execution) ;
 			/*!
 			 */
-			virtual std::shared_ptr<uml::Class> getClassifier() const ;
+			virtual std::shared_ptr<uml::Class > getClassifier() const ;
 			
 			/*!
 			 */
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier_classifier) ;
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ObjectActivation> getObjectActivation() const ;
+			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const ;
 			
 			/*!
 			 */
-			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation) ;
+			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) ;
 							
 			
 			//*********************************

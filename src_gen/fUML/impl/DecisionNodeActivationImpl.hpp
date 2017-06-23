@@ -21,6 +21,8 @@
 
 #include "impl/ControlNodeActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "DecisionNode.hpp"
 #include "Behavior.hpp"
 #include "Parameter.hpp"
@@ -60,47 +62,58 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Value>>> getDecisionValues(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> >
+			 getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value>  getDecisionInputFlowValue()  ;
+			virtual std::shared_ptr<fUML::Value> 
+			 getDecisionInputFlowValue()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance>  getDecisionInputFlowInstance()  ;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> 
+			 getDecisionInputFlowInstance()  ;
 			
 			/*!
 			 */ 
-			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
+			virtual bool
+			 test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> removeJoinedControlTokens(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual bool hasObjectFlowInput()  ;
+			virtual bool
+			 hasObjectFlowInput()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>> takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> >
+			 takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<std::vector<std::shared_ptr<fUML::Token>>>  incomingTokens)  ;
+			virtual void
+			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual void terminate()  ;
+			virtual void
+			 terminate()  ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool
+			 isReady()  ;
 			
 			
 			
@@ -114,11 +127,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution> getDecisionInputExecution() const ;
+			virtual std::shared_ptr<fUML::Execution > getDecisionInputExecution() const ;
 			
 			/*!
 			 */
-			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution) ;
+			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Execution> _decisionInputExecution_decisionInputExecution) ;
 							
 			
 			//*********************************

@@ -21,6 +21,8 @@
 
 #include "impl/PinActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 #include "ActionActivation.hpp"
 #include "Pin.hpp"
 
@@ -50,11 +52,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void recieveOffer()  ;
+			virtual void
+			 recieveOffer()  ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual bool
+			 isReady()  ;
 			
 			
 			

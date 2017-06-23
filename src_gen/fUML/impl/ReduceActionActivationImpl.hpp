@@ -21,6 +21,8 @@
 
 #include "impl/ActionActivationImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,11 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution> getCurrentExecution() const ;
+			virtual std::shared_ptr<fUML::Execution > getCurrentExecution() const ;
 			
 			/*!
 			 */
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution) ;
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Execution> _currentExecution_currentExecution) ;
 							
 			
 			//*********************************

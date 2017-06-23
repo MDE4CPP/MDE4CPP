@@ -63,7 +63,7 @@ std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass(
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
+std::shared_ptr<fUML::AcceptEventActionActivation > AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
 //assert(m_actionActivation);
     return m_actionActivation;

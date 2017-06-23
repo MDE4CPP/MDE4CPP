@@ -74,7 +74,8 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool
+ UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -87,7 +88,8 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
     return isEqual;
 }
 
-std::shared_ptr<uml::ValueSpecification>  UnlimitedNaturalValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> 
+ UnlimitedNaturalValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());
@@ -96,7 +98,8 @@ std::shared_ptr<uml::ValueSpecification>  UnlimitedNaturalValueImpl::specify()
     return literal;
 }
 
-std::string UnlimitedNaturalValueImpl::toString() 
+std::string
+ UnlimitedNaturalValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::string stringValue = "*";

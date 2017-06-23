@@ -62,43 +62,50 @@ std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::BooleanValue>  ClauseActivationImpl::getDecision() 
+std::shared_ptr<fUML::BooleanValue> 
+ ClauseActivationImpl::getDecision() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> ClauseActivationImpl::getPredecessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> >
+ ClauseActivationImpl::getPredecessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<fUML::ClauseActivation>>> ClauseActivationImpl::getSuccessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> >
+ ClauseActivationImpl::getSuccessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseActivationImpl::isReady() 
+bool
+ ClauseActivationImpl::isReady() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::recieveControl() 
+void
+ ClauseActivationImpl::recieveControl() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::runTest() 
+void
+ ClauseActivationImpl::runTest() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ClauseActivationImpl::selectBody() 
+void
+ ClauseActivationImpl::selectBody() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -107,7 +114,7 @@ void ClauseActivationImpl::selectBody()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
+std::shared_ptr<uml::Clause > ClauseActivationImpl::getClause() const
 {
 //assert(m_clause);
     return m_clause;
@@ -117,7 +124,7 @@ void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
     m_clause = _clause;
 }
 
-std::shared_ptr<fUML::ConditionalNodeActivation> ClauseActivationImpl::getConditionalNodeActivation() const
+std::shared_ptr<fUML::ConditionalNodeActivation > ClauseActivationImpl::getConditionalNodeActivation() const
 {
 //assert(m_conditionalNodeActivation);
     return m_conditionalNodeActivation;
