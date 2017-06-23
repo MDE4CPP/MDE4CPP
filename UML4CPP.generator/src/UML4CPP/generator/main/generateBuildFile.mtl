@@ -27,7 +27,7 @@
 [/template]
 
 [template public generateLibraryNamesWithoutReflection(aPackage : Package)]
-[if (aPackage.includeEcorePackages())]'ecore', 'uml'[if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())], 'primitiveTypesReflection'[/if][else] [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (', ') after (',')]'[pack.name/]'[/for]'ecore', 'uml', 'primitiveTypesReflection'[/if]
+[if (aPackage.includeEcorePackages())]'ecore', 'uml'[if (aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())], 'primitiveTypesReflection'[/if][else] [for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (', ') after (',')]'[pack.name/]'[/for]'ecore', 'uml', 'PluginFramework', 'primitiveTypesReflection'[/if]
 [/template]
 
 [template public generateLibraryIncludes(aPackage : Package)]
@@ -41,6 +41,7 @@
 [else]
 					lib library: "ecore"
 					lib library: "uml"
+					lib library: "PluginFramework"
 					lib library: "primitiveTypesReflection"
 					lib library: "ecoreReflection"
 					lib library: "umlReflection"
