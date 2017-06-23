@@ -53,10 +53,10 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
@@ -138,7 +138,7 @@ int ETypedElementImpl::getUpperBound() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
+std::shared_ptr<ecore::EGenericType > ETypedElementImpl::getEGenericType() const
 {
 
     return m_eGenericType;
@@ -148,7 +148,7 @@ void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eG
     m_eGenericType = _eGenericType;
 }
 
-std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
+std::shared_ptr<ecore::EClassifier > ETypedElementImpl::getEType() const
 {
 
     return m_eType;

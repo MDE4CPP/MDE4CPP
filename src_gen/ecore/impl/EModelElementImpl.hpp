@@ -22,6 +22,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -50,7 +52,8 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EAnnotation>  getEAnnotation(std::string source)  ;
+			virtual std::shared_ptr<ecore::EAnnotation> 
+			 getEAnnotation(std::string source)  ;
 			
 			
 			
@@ -64,7 +67,8 @@ virtual public EModelElement
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> getEAnnotations() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EAnnotation> >
+			 getEAnnotations() const ;
 			
 							
 			

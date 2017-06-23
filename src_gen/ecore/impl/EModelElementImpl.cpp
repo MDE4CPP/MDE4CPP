@@ -19,7 +19,9 @@ EModelElementImpl::EModelElementImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_eAnnotations.reset(new std::vector<std::shared_ptr<ecore::EAnnotation>>());
+		m_eAnnotations.reset(new Bag<ecore::EAnnotation>());
+	
+	
 }
 
 EModelElementImpl::~EModelElementImpl()
@@ -38,10 +40,10 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj)
 	
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -62,7 +64,8 @@ std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EAnnotation>  EModelElementImpl::getEAnnotation(std::string source) 
+std::shared_ptr<ecore::EAnnotation> 
+ EModelElementImpl::getEAnnotation(std::string source) 
 {
 	//generated from body annotation
 	    for(std::shared_ptr<EAnnotation> a : *m_eAnnotations)
@@ -78,7 +81,8 @@ std::shared_ptr<ecore::EAnnotation>  EModelElementImpl::getEAnnotation(std::stri
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> EModelElementImpl::getEAnnotations() const
+	std::shared_ptr< Bag<ecore::EAnnotation> >
+ EModelElementImpl::getEAnnotations() const
 {
 
     return m_eAnnotations;

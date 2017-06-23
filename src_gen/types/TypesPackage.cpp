@@ -11,7 +11,7 @@ const std::string TypesPackage::eNS_PREFIX ="types";
 //Singleton 
 std::shared_ptr<TypesPackage> TypesPackage::instance;
 
-std::shared_ptr<TypesPackage> TypesPackage::eInstance()
+std::shared_ptr<TypesPackage>TypesPackage::eInstance()
 {
 	if(!instance)
 	{

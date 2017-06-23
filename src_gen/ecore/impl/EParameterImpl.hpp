@@ -21,6 +21,8 @@
 
 #include "impl/ETypedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,7 +60,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EOperation> getEOperation() const ;
+			virtual std::shared_ptr<ecore::EOperation > getEOperation() const ;
 			
 							
 			

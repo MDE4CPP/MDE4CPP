@@ -59,85 +59,99 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::vector <   ecore::EObject >  EObjectImpl::eAllContents()  const 
+std::vector <   ecore::EObject > 
+ EObjectImpl::eAllContents()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EClass>  EObjectImpl::eClass()  const 
+std::shared_ptr<ecore::EClass> 
+ EObjectImpl::eClass()  const 
 {
 	//generated from body annotation
 	return this->eStaticClass();
 }
 
-std::shared_ptr<ecore::EStructuralFeature>  EObjectImpl::eContainingFeature()  const 
+std::shared_ptr<ecore::EStructuralFeature> 
+ EObjectImpl::eContainingFeature()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EReference>  EObjectImpl::eContainmentFeature()  const 
+std::shared_ptr<ecore::EReference> 
+ EObjectImpl::eContainmentFeature()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector <   ecore::EObject >  EObjectImpl::eContents()  const 
+std::vector <   ecore::EObject > 
+ EObjectImpl::eContents()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::vector <   ecore::EObject >  EObjectImpl::eCrossReferences()  const 
+std::vector <   ecore::EObject > 
+ EObjectImpl::eCrossReferences()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+boost::any
+ EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	//generated from body annotation
 	return this->eGet(feature,false);
 }
 
-boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
+boost::any
+ EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
 {
 	//generated from body annotation
 	return this->eGet(feature->getFeatureID(),resolve,false);
 }
 
-boost::any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const 
+boost::any
+ EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsProxy()  const 
+bool
+ EObjectImpl::eIsProxy()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+bool
+ EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int EObjectImpl::eResource()  const 
+int
+ EObjectImpl::eResource()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const 
+void
+ EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
+void
+ EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -146,7 +160,7 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
+std::shared_ptr<ecore::EObject > EObjectImpl::eContainer() const
 {
 
     return m_eContainer;

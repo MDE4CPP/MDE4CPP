@@ -19,7 +19,9 @@ EEnumImpl::EEnumImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_eLiterals.reset(new std::vector<std::shared_ptr<ecore::EEnumLiteral>>());
+		m_eLiterals.reset(new Bag<ecore::EEnumLiteral>());
+	
+	
 }
 
 EEnumImpl::~EEnumImpl()
@@ -47,20 +49,20 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> _eLiteralsList = obj.getELiterals();
+	std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiteralsList = obj.getELiterals();
 	for(std::shared_ptr<ecore::EEnumLiteral> _eLiterals : *_eLiteralsList)
 	{
-		this->getELiterals()->push_back(std::shared_ptr<ecore::EEnumLiteral>(dynamic_cast<ecore::EEnumLiteral*>(_eLiterals->copy())));
+		this->getELiterals()->add(std::shared_ptr<ecore::EEnumLiteral>(dynamic_cast<ecore::EEnumLiteral*>(_eLiterals->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> _eTypeParametersList = obj.getETypeParameters();
+	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -81,7 +83,8 @@ std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteral(std::string name)  const 
+std::shared_ptr<ecore::EEnumLiteral> 
+ EEnumImpl::getEEnumLiteral(std::string name)  const 
 {
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
@@ -94,7 +97,8 @@ std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteral(std::string nam
     return std::shared_ptr<ecore::EEnumLiteral>();
 }
 
-std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteral(int value)  const 
+std::shared_ptr<ecore::EEnumLiteral> 
+ EEnumImpl::getEEnumLiteral(int value)  const 
 {
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
@@ -108,7 +112,8 @@ std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteral(int value)  con
 
 }
 
-std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteralByLiteral(std::string literal)  const 
+std::shared_ptr<ecore::EEnumLiteral> 
+ EEnumImpl::getEEnumLiteralByLiteral(std::string literal)  const 
 {
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
@@ -124,7 +129,8 @@ std::shared_ptr<ecore::EEnumLiteral>  EEnumImpl::getEEnumLiteralByLiteral(std::s
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> EEnumImpl::getELiterals() const
+	std::shared_ptr< Bag<ecore::EEnumLiteral> >
+ EEnumImpl::getELiterals() const
 {
 
     return m_eLiterals;

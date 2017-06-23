@@ -21,6 +21,8 @@
 
 #include "impl/EClassifierImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

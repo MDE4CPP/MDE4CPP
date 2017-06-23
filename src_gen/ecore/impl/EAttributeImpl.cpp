@@ -61,10 +61,10 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
@@ -102,7 +102,7 @@ bool EAttributeImpl::isID() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
+std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
     return m_eAttributeType;

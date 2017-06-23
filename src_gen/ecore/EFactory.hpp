@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -83,15 +84,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject>  create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
+			virtual std::shared_ptr<ecore::EObject> 
+			 create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  = 0;
+			virtual boost::any
+			 createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  = 0;
+			virtual std::string
+			 convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  = 0;
 			
 			
 			//*********************************
@@ -103,11 +107,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;
+			virtual std::shared_ptr<ecore::EPackage > getEPackage() const = 0;
 			
 			/*!
 			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) = 0;
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) = 0;
 			
 
 		protected:
@@ -121,7 +125,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EPackage> m_ePackage;
+			std::shared_ptr<ecore::EPackage > m_ePackage;
 			
 
 		public:

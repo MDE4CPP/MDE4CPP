@@ -21,6 +21,8 @@
 
 #include "impl/EModelElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -66,22 +68,25 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStringToStringMapEntry>>> getDetails() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EStringToStringMapEntry> >
+			 getDetails() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EModelElement> getEModelElement() const ;
+			virtual std::shared_ptr<ecore::EModelElement > getEModelElement() const ;
 			
 			/*!
 			 */
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
+			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getContents() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EObject> >
+			 getContents() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EObject>>> getReferences() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EObject> >
+			 getReferences() const ;
 			
 							
 			

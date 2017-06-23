@@ -21,6 +21,8 @@
 
 #include "impl/ETypedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -126,7 +128,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass> getEContainingClass() const ;
+			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const ;
 			
 							
 			

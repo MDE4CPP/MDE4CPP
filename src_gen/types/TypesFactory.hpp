@@ -14,6 +14,7 @@
 #endif
 
 #include "EFactory.hpp"
+#include <memory>
 
 namespace types 
 {
@@ -38,6 +39,8 @@ namespace types
 			static std::shared_ptr<TypesFactory> eInstance();
 		
 			//Creator functions
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const = 0;
+
 			
 			//Package
 			virtual std::shared_ptr<TypesPackage> getTypesPackage() const = 0;

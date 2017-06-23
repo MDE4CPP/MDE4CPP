@@ -21,6 +21,8 @@
 
 #include "impl/ENamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -98,18 +100,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier> getEType() const ;
+			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
 			
 			/*!
 			 */
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) ;
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) ;
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const ;
+			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const ;
 			
 			/*!
 			 */
-			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType) ;
+			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType_eGenericType) ;
 							
 			
 			//*********************************

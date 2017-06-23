@@ -19,7 +19,7 @@ bool TypesPackageImpl::isInited = false;
 
 TypesPackageImpl::TypesPackageImpl()
 {
-	setEFactoryInstance(std::shared_ptr<ecore::EFactory>( TypesFactory::eInstance()));
+	setEFactoryInstance(std::shared_ptr<ecore::EFactory >( TypesFactory::eInstance()));
 }
 
 TypesPackageImpl::~TypesPackageImpl()

@@ -10,6 +10,21 @@ using namespace ecore;
 
 EcoreFactoryImpl::EcoreFactoryImpl()
 {
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EAnnotation",[this](){return this->createEAnnotation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EAttribute",[this](){return this->createEAttribute();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EClass",[this](){return this->createEClass();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EDataType",[this](){return this->createEDataType();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EEnum",[this](){return this->createEEnum();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EEnumLiteral",[this](){return this->createEEnumLiteral();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EFactory",[this](){return this->createEFactory();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EGenericType",[this](){return this->createEGenericType();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EObject",[this](){return this->createEObject();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EOperation",[this](){return this->createEOperation();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EPackage",[this](){return this->createEPackage();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EParameter",[this](){return this->createEParameter();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EReference",[this](){return this->createEReference();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("EStringToStringMapEntry",[this](){return this->createEStringToStringMapEntry();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("ETypeParameter",[this](){return this->createETypeParameter();}));
 }
 
 EcoreFactoryImpl::~EcoreFactoryImpl()
@@ -25,34 +40,30 @@ EcoreFactory* EcoreFactoryImpl::create()
 // creators
 //*********************************
 
-EObject* EcoreFactoryImpl::create(EClass* _class) const
+std::shared_ptr<EObject> EcoreFactoryImpl::create(EClass* _class) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	switch (_class->getClassifierID())
-	{
-		case EcorePackage::EANNOTATION : return createEAnnotation();
-		case EcorePackage::EATTRIBUTE : return createEAttribute();
-		case EcorePackage::ECLASS : return createEClass();
-		case EcorePackage::EDATATYPE : return createEDataType();
-		case EcorePackage::EENUM : return createEEnum();
-		case EcorePackage::EENUMLITERAL : return createEEnumLiteral();
-		case EcorePackage::EFACTORY : return createEFactory();
-		case EcorePackage::EGENERICTYPE : return createEGenericType();
-		case EcorePackage::EOBJECT : return createEObject();
-		case EcorePackage::EOPERATION : return createEOperation();
-		case EcorePackage::EPACKAGE : return createEPackage();
-		case EcorePackage::EPARAMETER : return createEParameter();
-		case EcorePackage::EREFERENCE : return createEReference();
-		case EcorePackage::ESTRINGTOSTRINGMAPENTRY : return createEStringToStringMapEntry();
-		case EcorePackage::ETYPEPARAMETER : return createETypeParameter();
-		default:
-       		throw "Error create class '" + _class->getName();
-	}
-	return nullptr;
+	std::string _className = _class->eClass()->getName();
+	return create(_className);
+}
+
+std::shared_ptr<EObject> EcoreFactoryImpl::create(std::string _className) const
+{
+	//TODO: still two times run through map
+	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
+	
+	std::shared_ptr<EObject> _createdObject;
+	if(iter != m_creatorMap.end())
+    {
+		//invoke the creator function
+        return std::shared_ptr<ecore::EObject>(iter->second());
+    }
+
+    return nullptr;
 }
 
 EAnnotation* EcoreFactoryImpl::createEAnnotation () const

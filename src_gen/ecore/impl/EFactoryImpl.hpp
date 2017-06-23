@@ -21,6 +21,8 @@
 
 #include "impl/EModelElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,15 +50,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject>  create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
+			virtual std::shared_ptr<ecore::EObject> 
+			 create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
+			virtual boost::any
+			 createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  ;
+			virtual std::string
+			 convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  ;
 			
 			
 			
@@ -70,11 +75,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage > getEPackage() const ;
 			
 			/*!
 			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) ;
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) ;
 							
 			
 			//*********************************

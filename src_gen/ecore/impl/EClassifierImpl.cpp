@@ -24,7 +24,9 @@ EClassifierImpl::EClassifierImpl()
 	// Reference Members
 	//*********************************
 	
-	m_eTypeParameters.reset(new std::vector<std::shared_ptr<ecore::ETypeParameter>>());
+		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
+	
+	
 }
 
 EClassifierImpl::~EClassifierImpl()
@@ -51,15 +53,15 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> _eTypeParametersList = obj.getETypeParameters();
+	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->push_back(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
 }
 
@@ -126,13 +128,15 @@ std::string EClassifierImpl::getInstanceTypeName() const
 //*********************************
 // Operations
 //*********************************
-bool EClassifierImpl::isInstance(boost::any object)  const 
+bool
+ EClassifierImpl::isInstance(boost::any object)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EClassifierImpl::setGeneratedInstance(bool isGenerated) 
+void
+ EClassifierImpl::setGeneratedInstance(bool isGenerated) 
 {
 	//generated from body annotation
 	
@@ -141,7 +145,7 @@ void EClassifierImpl::setGeneratedInstance(bool isGenerated)
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
+std::shared_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 {
 
     return m_ePackage;
@@ -151,7 +155,8 @@ void EClassifierImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
     m_ePackage = _ePackage;
 }
 
-std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> EClassifierImpl::getETypeParameters() const
+	std::shared_ptr< Bag<ecore::ETypeParameter> >
+ EClassifierImpl::getETypeParameters() const
 {
 
     return m_eTypeParameters;

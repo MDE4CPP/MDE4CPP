@@ -21,6 +21,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

@@ -14,6 +14,7 @@
 #endif
 
 #include "EFactory.hpp"
+#include <memory>
 
 namespace ecore 
 {	class EAnnotation;
@@ -57,6 +58,8 @@ namespace ecore
 			static std::shared_ptr<EcoreFactory> eInstance();
 		
 			//Creator functions
+			virtual std::shared_ptr<EObject> create(std::string _className) const = 0;
+
 			virtual EAttribute* createEAttribute() const = 0;
 			virtual EAnnotation* createEAnnotation() const = 0;
 			virtual EClass* createEClass() const = 0;

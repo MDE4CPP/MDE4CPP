@@ -21,7 +21,9 @@ EReferenceImpl::EReferenceImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_eKeys.reset(new std::vector<std::shared_ptr<ecore::EAttribute>>());
+		m_eKeys.reset(new Bag<ecore::EAttribute>());
+	
+	
 	
 	
 }
@@ -61,8 +63,10 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> _eKeys = obj.getEKeys();
-	this->getEKeys()->insert(this->getEKeys()->end(), _eKeys->begin(), _eKeys->end());
+		std::shared_ptr< Bag<ecore::EAttribute> >
+	 _eKeys = obj.getEKeys();
+	m_eKeys.reset(new 	 Bag<ecore::EAttribute> 
+	(*(obj.getEKeys().get())));// this->getEKeys()->insert(this->getEKeys()->end(), _eKeys->begin(), _eKeys->end());
 
 	m_eOpposite  = obj.getEOpposite();
 
@@ -72,10 +76,10 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
@@ -130,14 +134,15 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> EReferenceImpl::getEKeys() const
+	std::shared_ptr< Bag<ecore::EAttribute> >
+ EReferenceImpl::getEKeys() const
 {
 
     return m_eKeys;
 }
 
 
-std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
+std::shared_ptr<ecore::EReference > EReferenceImpl::getEOpposite() const
 {
 
     return m_eOpposite;
@@ -147,7 +152,7 @@ void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
     m_eOpposite = _eOpposite;
 }
 
-std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
+std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 {
 //assert(m_eReferenceType);
     return m_eReferenceType;

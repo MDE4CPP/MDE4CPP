@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -118,7 +119,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClassifier>  getEClassifier(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EClassifier> 
+			 getEClassifier(std::string name)  const  = 0;
 			
 			
 			
@@ -200,22 +202,24 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const = 0;
+			virtual std::shared_ptr<ecore::EFactory > getEFactoryInstance() const = 0;
 			
 			/*!
 			 */
-			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) = 0;
+			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance_eFactoryInstance) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> getEClassifiers() const = 0;
+			virtual 	std::shared_ptr< Bag<ecore::EClassifier> >
+			 getEClassifiers() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EPackage>>> getESubpackages() const = 0;
+			virtual 	std::shared_ptr< Bag<ecore::EPackage> >
+			 getESubpackages() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage> getESuperPackage() const = 0;
+			virtual std::shared_ptr<ecore::EPackage > getESuperPackage() const = 0;
 			
 			
 
@@ -236,16 +240,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EFactory> m_eFactoryInstance;
+			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<ecore::EClassifier>>> m_eClassifiers;
+				std::shared_ptr< Bag<ecore::EClassifier> >
+			 m_eClassifiers;
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<ecore::EPackage>>> m_eSubpackages;
+				std::shared_ptr< Bag<ecore::EPackage> >
+			 m_eSubpackages;
 			/*!
 			 */
-			std::shared_ptr<ecore::EPackage> m_eSuperPackage;
+			std::shared_ptr<ecore::EPackage > m_eSuperPackage;
 			
 
 		public:

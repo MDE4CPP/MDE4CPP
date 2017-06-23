@@ -21,6 +21,8 @@
 
 #include "impl/EStructuralFeatureImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -78,18 +80,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EReference> getEOpposite() const ;
+			virtual std::shared_ptr<ecore::EReference > getEOpposite() const ;
 			
 			/*!
 			 */
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) ;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite_eOpposite) ;
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const ;
+			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEKeys() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EAttribute> >
+			 getEKeys() const ;
 			
 							
 			

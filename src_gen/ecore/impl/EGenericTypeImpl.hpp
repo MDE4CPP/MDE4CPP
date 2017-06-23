@@ -21,6 +21,8 @@
 
 #include "impl/EObjectImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,7 +50,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  ;
+			virtual bool
+			 isInstance(boost::any object)  const  ;
 			
 			
 			
@@ -62,40 +65,41 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EGenericType> getEUpperBound() const ;
+			virtual std::shared_ptr<ecore::EGenericType > getEUpperBound() const ;
 			
 			/*!
 			 */
-			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound) ;
+			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound_eUpperBound) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getETypeArguments() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
+			 getETypeArguments() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier> getERawType() const ;
+			virtual std::shared_ptr<ecore::EClassifier > getERawType() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EGenericType> getELowerBound() const ;
+			virtual std::shared_ptr<ecore::EGenericType > getELowerBound() const ;
 			
 			/*!
 			 */
-			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound) ;
+			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound_eLowerBound) ;
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::ETypeParameter> getETypeParameter() const ;
+			virtual std::shared_ptr<ecore::ETypeParameter > getETypeParameter() const ;
 			
 			/*!
 			 */
-			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter) ;
+			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter_eTypeParameter) ;
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const ;
+			virtual std::shared_ptr<ecore::EClassifier > getEClassifier() const ;
 			
 			/*!
 			 */
-			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier) ;
+			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier_eClassifier) ;
 							
 			
 			//*********************************

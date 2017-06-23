@@ -19,7 +19,9 @@ ETypeParameterImpl::ETypeParameterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
-	m_eBounds.reset(new std::vector<std::shared_ptr<ecore::EGenericType>>());
+		m_eBounds.reset(new Bag<ecore::EGenericType>());
+	
+	
 }
 
 ETypeParameterImpl::~ETypeParameterImpl()
@@ -39,15 +41,15 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj)
 	
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eBoundsList = obj.getEBounds();
+	std::shared_ptr<Bag<ecore::EGenericType>> _eBoundsList = obj.getEBounds();
 	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
 	{
-		this->getEBounds()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
+		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
 	}
 }
 
@@ -72,7 +74,8 @@ std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> ETypeParameterImpl::getEBounds() const
+	std::shared_ptr< Bag<ecore::EGenericType> >
+ ETypeParameterImpl::getEBounds() const
 {
 
     return m_eBounds;

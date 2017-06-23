@@ -26,19 +26,30 @@ TypesFactory* TypesFactoryImpl::create()
 // creators
 //*********************************
 
-ecore::EObject* TypesFactoryImpl::create(ecore::EClass* _class) const
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(ecore::EClass* _class) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	switch (_class->getClassifierID())
-	{
-		default:
-       		throw "Error create class '" + _class->getName();
-	}
-	return nullptr;
+	std::string _className = _class->eClass()->getName();
+	return create(_className);
+}
+
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::string _className) const
+{
+	//TODO: still two times run through map
+	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
+	
+	std::shared_ptr<ecore::EObject> _createdObject;
+	if(iter != m_creatorMap.end())
+    {
+		//invoke the creator function
+        return std::shared_ptr<ecore::EObject>(iter->second());
+    }
+
+    return nullptr;
 }
 
 

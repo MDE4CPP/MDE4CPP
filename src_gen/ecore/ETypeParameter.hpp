@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -76,7 +77,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEBounds() const = 0;
+			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
+			 getEBounds() const = 0;
 			
 			
 
@@ -91,7 +93,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> m_eBounds;
+				std::shared_ptr< Bag<ecore::EGenericType> >
+			 m_eBounds;
 			
 
 		public:

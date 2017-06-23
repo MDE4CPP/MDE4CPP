@@ -11,7 +11,7 @@ const std::string EcorePackage::eNS_PREFIX ="ecore";
 //Singleton 
 std::shared_ptr<EcorePackage> EcorePackage::instance;
 
-std::shared_ptr<EcorePackage> EcorePackage::eInstance()
+std::shared_ptr<EcorePackage>EcorePackage::eInstance()
 {
 	if(!instance)
 	{

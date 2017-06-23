@@ -22,7 +22,9 @@ EGenericTypeImpl::EGenericTypeImpl()
 	
 	
 	
-	m_eTypeArguments.reset(new std::vector<std::shared_ptr<ecore::EGenericType>>());
+		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
+	
+	
 	
 	
 }
@@ -55,10 +57,10 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj)
 	{
 		m_eLowerBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getELowerBound()->copy()));
 	}
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> _eTypeArgumentsList = obj.getETypeArguments();
+	std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArgumentsList = obj.getETypeArguments();
 	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *_eTypeArgumentsList)
 	{
-		this->getETypeArguments()->push_back(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
+		this->getETypeArguments()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
 	}
 	if(obj.getEUpperBound()!=nullptr)
 	{
@@ -83,7 +85,8 @@ std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EGenericTypeImpl::isInstance(boost::any object)  const 
+bool
+ EGenericTypeImpl::isInstance(boost::any object)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -92,7 +95,7 @@ bool EGenericTypeImpl::isInstance(boost::any object)  const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getEClassifier() const
+std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getEClassifier() const
 {
 
     return m_eClassifier;
@@ -102,7 +105,7 @@ void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClas
     m_eClassifier = _eClassifier;
 }
 
-std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getELowerBound() const
+std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getELowerBound() const
 {
 
     return m_eLowerBound;
@@ -112,21 +115,22 @@ void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLow
     m_eLowerBound = _eLowerBound;
 }
 
-std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getERawType() const
+std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getERawType() const
 {
 //assert(m_eRawType);
     return m_eRawType;
 }
 
 
-std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> EGenericTypeImpl::getETypeArguments() const
+	std::shared_ptr< Bag<ecore::EGenericType> >
+ EGenericTypeImpl::getETypeArguments() const
 {
 
     return m_eTypeArguments;
 }
 
 
-std::shared_ptr<ecore::ETypeParameter> EGenericTypeImpl::getETypeParameter() const
+std::shared_ptr<ecore::ETypeParameter > EGenericTypeImpl::getETypeParameter() const
 {
 
     return m_eTypeParameter;
@@ -136,7 +140,7 @@ void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> 
     m_eTypeParameter = _eTypeParameter;
 }
 
-std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getEUpperBound() const
+std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getEUpperBound() const
 {
 
     return m_eUpperBound;

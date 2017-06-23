@@ -46,10 +46,10 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 }
 
@@ -103,7 +103,7 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EEnum> EEnumLiteralImpl::getEEnum() const
+std::shared_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;

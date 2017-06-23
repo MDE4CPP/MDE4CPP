@@ -75,14 +75,14 @@ model {
         	sources {
                 cpp {
                     source {
-                        srcDirs "." 
+                        srcDirs "."  
 						include	"impl/TypesFactoryImpl.cpp"
 						include	"TypesFactory.cpp"
 						include	"impl/TypesPackageImpl.cpp"
 						include	"TypesPackage.cpp"
                     }
 					exportedHeaders {
-                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include"
+                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
                         include "**/*.hpp"
                     }
 					lib library: "ecore"
@@ -112,7 +112,8 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe'
+			linker.args '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe', '-fmax-errors=5', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

@@ -49,10 +49,10 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj)
 
 
 	//clone containt lists
-	std::shared_ptr<std::vector<std::shared_ptr<ecore::EAnnotation>>> _eAnnotationsList = obj.getEAnnotations();
+	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->push_back(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
 	if(obj.getEGenericType()!=nullptr)
 	{
@@ -81,7 +81,7 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EOperation> EParameterImpl::getEOperation() const
+std::shared_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 {
 
     return m_eOperation;

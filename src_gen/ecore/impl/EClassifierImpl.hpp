@@ -21,6 +21,8 @@
 
 #include "impl/ENamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,11 +50,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  ;
+			virtual bool
+			 isInstance(boost::any object)  const  ;
 			
 			/*!
 			 */ 
-			virtual void setGeneratedInstance(bool isGenerated)  ;
+			virtual void
+			 setGeneratedInstance(bool isGenerated)  ;
 			
 			
 			
@@ -102,14 +106,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage > getEPackage() const ;
 			
 			/*!
 			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) ;
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) ;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> getETypeParameters() const ;
+			virtual 	std::shared_ptr< Bag<ecore::ETypeParameter> >
+			 getETypeParameters() const ;
 			
 							
 			

@@ -6,7 +6,7 @@ using namespace types;
 //static initialisation
 std::shared_ptr<TypesFactory> TypesFactory::instance;
 
-std::shared_ptr<TypesFactory> TypesFactory::eInstance()
+std::shared_ptr<TypesFactory>TypesFactory::eInstance()
 {
 	if(!instance)
 	{

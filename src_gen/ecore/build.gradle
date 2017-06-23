@@ -58,7 +58,7 @@ model {
         	sources {
                 cpp {
                     source {
-                        srcDirs "." 
+                        srcDirs "."  
 						include "impl/EAnnotationImpl.cpp"
 						include "impl/EAttributeImpl.cpp"
 						include "impl/EClassImpl.cpp"
@@ -85,7 +85,7 @@ model {
 						include	"EcorePackage.cpp"
                     }
 					exportedHeaders {
-                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include"
+                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
                         include "**/*.hpp"
                     }
                 }
@@ -114,7 +114,8 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe'
+			linker.args '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-Wdeprecated-declarations', '-pipe', '-fmax-errors=5', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

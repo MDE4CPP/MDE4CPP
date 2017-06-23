@@ -21,6 +21,8 @@
 
 #include "impl/ENamedElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -58,7 +60,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEBounds() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
+			 getEBounds() const ;
 			
 							
 			

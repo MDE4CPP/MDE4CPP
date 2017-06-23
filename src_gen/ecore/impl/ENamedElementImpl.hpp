@@ -21,6 +21,8 @@
 
 #include "impl/EModelElementImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************

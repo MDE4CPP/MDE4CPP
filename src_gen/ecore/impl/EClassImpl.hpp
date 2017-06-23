@@ -21,6 +21,8 @@
 
 #include "impl/EClassifierImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,43 +50,53 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const  ;
+			virtual bool
+			 isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const  ;
 			
 			/*!
 			 */ 
-			virtual int getFeatureCount()  const  ;
+			virtual int
+			 getFeatureCount()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature>  getEStructuralFeature(int featureID)  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature> 
+			 getEStructuralFeature(int featureID)  const  ;
 			
 			/*!
 			 */ 
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual int
+			 getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature>  getEStructuralFeature(std::string featureName)  const  ;
+			virtual std::shared_ptr<ecore::EStructuralFeature> 
+			 getEStructuralFeature(std::string featureName)  const  ;
 			
 			/*!
 			 */ 
-			virtual int getOperationCount()  const  ;
+			virtual int
+			 getOperationCount()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EOperation>  getEOperation(int operationID)  const  ;
+			virtual std::shared_ptr<ecore::EOperation> 
+			 getEOperation(int operationID)  const  ;
 			
 			/*!
 			 */ 
-			virtual int getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const  ;
+			virtual int
+			 getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EOperation>  getOverride(std::shared_ptr<ecore::EOperation>  operation)  const  ;
+			virtual std::shared_ptr<ecore::EOperation> 
+			 getOverride(std::shared_ptr<ecore::EOperation>  operation)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EGenericType>  getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual std::shared_ptr<ecore::EGenericType> 
+			 getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			
 			
@@ -114,66 +126,77 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClass>>> getESuperTypes() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EClass> >
+			 getESuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> getEOperations() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EOperation> >
+			 getEOperations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEAllAttributes() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EAttribute> >
+			 getEAllAttributes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEAllReferences() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EReference> >
+			 getEAllReferences() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEReferences() const ;
+			virtual 		std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature > >
+			 getEReferences() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EAttribute>>> getEAttributes() const ;
+			virtual 		std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature > >
+			 getEAttributes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EReference>>> getEAllContainments() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EReference> >
+			 getEAllContainments() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EOperation>>> getEAllOperations() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EOperation> >
+			 getEAllOperations() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> getEAllStructuralFeatures() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EStructuralFeature> >
+			 getEAllStructuralFeatures() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EClass>>> getEAllSuperTypes() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EClass> >
+			 getEAllSuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EAttribute> getEIDAttribute() const ;
+			virtual std::shared_ptr<ecore::EAttribute > getEIDAttribute() const ;
+			
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EStructuralFeature>>> getEStructuralFeatures() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
+			 getEGenericSuperTypes() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEGenericSuperTypes() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EGenericType>>> getEAllGenericSuperTypes() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
+			 getEAllGenericSuperTypes() const ;
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			/*!
+			 */
+			virtual 		std::shared_ptr<Union<ecore::EStructuralFeature> > getEStructuralFeatures() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

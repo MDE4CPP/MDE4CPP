@@ -53,7 +53,8 @@ namespace ecore
 
 		public:
 			virtual ~EcoreFactoryImpl();
-			virtual EObject* create(EClass* _class) const;
+			virtual std::shared_ptr<EObject> create(EClass* _class) const;
+			virtual std::shared_ptr<EObject> create(std::string _className) const;
 
 			//Creator functions
 			virtual EAttribute* createEAttribute() const ;
@@ -78,6 +79,8 @@ namespace ecore
 
 		private:
 			static EcoreFactory * create();
+			std::map<std::string,std::function<ecore::EObject*()>> m_creatorMap;
+
 			virtual void init() {}
 
 	};

@@ -21,6 +21,8 @@
 
 #include "impl/EDataTypeImpl.hpp"
 
+#include "SubsetUnion.hpp"
+
 
 
 //*********************************
@@ -48,15 +50,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteral(std::string name)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> 
+			 getEEnumLiteral(std::string name)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteral(int value)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> 
+			 getEEnumLiteral(int value)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral>  getEEnumLiteralByLiteral(std::string literal)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> 
+			 getEEnumLiteralByLiteral(std::string literal)  const  ;
 			
 			
 			
@@ -70,7 +75,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::EEnumLiteral>>> getELiterals() const ;
+			virtual 	std::shared_ptr< Bag<ecore::EEnumLiteral> >
+			 getELiterals() const ;
 			
 							
 			

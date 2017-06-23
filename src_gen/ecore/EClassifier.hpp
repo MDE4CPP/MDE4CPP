@@ -16,6 +16,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -73,7 +74,8 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isInstance(boost::any object)  const  = 0;
+			virtual bool
+			 isInstance(boost::any object)  const  = 0;
 			
 			
 			
@@ -119,14 +121,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage> getEPackage() const = 0;
+			virtual std::shared_ptr<ecore::EPackage > getEPackage() const = 0;
 			
 			/*!
 			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) = 0;
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) = 0;
 			/*!
 			 */
-			virtual std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> getETypeParameters() const = 0;
+			virtual 	std::shared_ptr< Bag<ecore::ETypeParameter> >
+			 getETypeParameters() const = 0;
 			
 			
 
@@ -156,10 +159,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EPackage> m_ePackage;
+			std::shared_ptr<ecore::EPackage > m_ePackage;
 			/*!
 			 */
-			std::shared_ptr<std::vector<std::shared_ptr<ecore::ETypeParameter>>> m_eTypeParameters;
+				std::shared_ptr< Bag<ecore::ETypeParameter> >
+			 m_eTypeParameters;
 			
 
 		public:
