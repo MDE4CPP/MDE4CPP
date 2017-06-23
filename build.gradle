@@ -8,7 +8,7 @@ task createFUML4CPP(dependsOn: ['checkDependencies', 'executeCompiler', 'fUML4CP
 task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies','fUML4CPP.generator.compiler:jar']) {
 	description 'generate emtl files for fUML4CPP generator'
 	main = "-jar"
-	args "fUML4CPP.generator.compiler/build/libs/fUML4CPP.generator.compiler.jar", "fUML4CPP.generator/src", "fUML4CPP.generator/build/classes/main", System.getenv('MDE4CPP_HOME')+"/generator/UML4CPP"
+	args "fUML4CPP.generator.compiler/build/libs/fUML4CPP.generator.compiler.jar", "fUML4CPP.generator/src", "fUML4CPP.generator/build/classes/java/main", System.getenv('MDE4CPP_HOME')+"/generator/UML4CPP"
 }
 tasks.getByPath('fUML4CPP.generator:jar').mustRunAfter(executeCompiler)
 task checkDependencies {
