@@ -26,90 +26,25 @@
 #include <memory>
 #include <vector>
 
-#include "FUMLFactory.hpp"
-#include "Locus.hpp"
-#include "Executor.hpp"
-#include "Parameter.hpp"
-#include "ExecutionFactoryL3.hpp"
-#include "FirstChoiceStrategy.hpp"
-#include "DispatchStrategy.hpp"
-#include "FunctionBehavior.hpp"
-#include "Activity.hpp"
-#include "SubsetUnion.hpp"
+[generateMainIncludes()/]
 [if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[if (aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
-#include "Reference.hpp"
-#include "[aPackage.getPackageName()/]Factory.hpp"
-[/if]
-
-[for ( par : Parameter | aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter)]
-[par.generateParameterInclude()/]
-[/for]
+[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+[generateActivityRelatedIncludes(act, aPackage)/]
+[/let]
 [else]
 //No main activity found (place one activity as child of the module to set it as a main activity).
-[/if]
-
-#include "ParameterValue.hpp"
-
-//include Model package
-#include "[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
-
-[for (beh : OpaqueBehavior | aPackage.getOpaqueBehaviors())]
-#include "[beh.getNearestPackage().getPackageName().toUpperFirst().concat('Package')/].hpp"
-[/for]
-
-[if (aPackage.getOpaqueBehaviors()->size()>0)]
-//OpaqueBehaviourExecutions
-[aPackage.getOpaqueBehaviors().generateInclude()/]
 [/if]
 
 using namespace [aPackage.getPackageName()/];
 
 int main()
 {	
-	DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
-    std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
-    std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
-
-    std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
-    executor->setLocus(locus);
-
-    std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3());
-    factory->setLocus(locus);
-
-    locus->setFactory(factory);
-    locus->setExecutor(executor);
-
-    locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
-	locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
+	[generateLocusInitialization()/]
 
 	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
-	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
-
-    [if (aPackage.getOpaqueBehaviors()->size() > 0)]
-    [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
-	[/if]
-
-    std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
-	[for (par : Parameter | act.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-    
-    //INput parameter [par.name/] 
-    std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
-    [par.name/]P->setParameter([par.packageGetter()/]);
-    [par.generateOutputParameter()/]
-	[if(par.supportedTypes())]
-    [par.name/]Value->setValue([par.default/]);
-	[else]
-	[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]())));	
-	[par.name/]UmlLinker->setLocus(locus);
-	[par.name/]Value->setReferent([par.name/]UmlLinker);
-	[/if]
-    [par.name/]P->getValues()->push_back([par.name/]Value);
-    pList->push_back([par.name/]P);
-	[/for]
-
-    std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute([act.packageGetter()/], nullptr, pList);
+	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+	[act.generateStartActivityExecution(aPackage)/]   
 	[/let]
 
 	if(nullptr == resultPList)
@@ -144,3 +79,87 @@ int main()
 }
 [/file]
 [/template]
+
+[template public generateMainIncludes(aPackage : Package)]
+#include "FUMLFactory.hpp"
+#include "Locus.hpp"
+#include "Executor.hpp"
+#include "Parameter.hpp"
+#include "ExecutionFactoryL3.hpp"
+#include "FirstChoiceStrategy.hpp"
+#include "DispatchStrategy.hpp"
+#include "FunctionBehavior.hpp"
+#include "Activity.hpp"
+#include "SubsetUnion.hpp"
+
+#include "ParameterValue.hpp"
+
+//include Model package
+#include "[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
+
+[for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
+#include "[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+[/for]
+
+[if (aPackage.getOpaqueBehaviors()->size()>0)]
+//OpaqueBehaviourExecutions
+[aPackage.getOpaqueBehaviors().generateInclude()/]
+[/if]
+[/template]
+
+[template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
+[if (aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
+#include "Reference.hpp"
+#include "[aPackage.getPackageName()/]Factory.hpp"
+[/if]
+
+[for ( par : Parameter | aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter)]
+[par.generateParameterInclude()/]
+[/for]
+
+[/template]
+
+[template public generateLocusInitialization(aPackage : Package)]
+DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
+std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
+std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
+
+std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
+executor->setLocus(locus);
+
+std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3());
+factory->setLocus(locus);
+
+locus->setFactory(factory);
+locus->setExecutor(executor);
+
+locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
+locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
+[/template]
+
+[template public generateStartActivityExecution(anActivity : Activity, aPackage : Package)]
+[if (aPackage.getOpaqueBehaviors()->size() > 0)]
+[aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
+[/if]
+
+std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+//INput parameter [par.name/] 
+std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
+[par.name/]P->setParameter([par.packageGetter()/]);
+[par.generateOutputParameter()/]
+[if(par.supportedTypes())]
+[par.name/]Value->setValue([par.default/]);
+[else]
+[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]())));	
+[par.name/]UmlLinker->setLocus(locus);
+[par.name/]Value->setReferent([par.name/]UmlLinker);
+[/if]
+[par.name/]P->getValues()->push_back([par.name/]Value);
+pList->push_back([par.name/]P);
+
+[/for] 
+std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute([anActivity.packageGetter()/], nullptr, pList);
+
+[/template]
+
