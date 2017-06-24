@@ -12,24 +12,34 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateFUMLPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionPluginInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import fUML4CPP::generator::main::plugin::generateFUMLPluginInterfaceHeader /]
-[import fUML4CPP::generator::main::plugin::generateFUMLPluginInterfaceSource /]
-[import fUML4CPP::generator::main::plugin::generateFUMLPluginImplementationHeader /]
-[import fUML4CPP::generator::main::plugin::generateFUMLPluginImplementationSource /]
+[import UML4CPP::generator::main::helper /]
 
-[template public generateFUMLPlugin(aPackage : Package)]
-[aPackage.generateFUMLPluginInterfaceHeader()/]
-[aPackage.generateFUMLPluginInterfaceSource()/]
-[aPackage.generateFUMLPluginImplHeader()/]
-[aPackage.generateFUMLPluginImplSource()/]
+[template public generateExecutionPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('ExecPlugin').toUpperFirst(); }]
+[file  (anPackage.getPackageName().concat('Exec/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+
+#include "[packageName/].hpp"
+#include "impl/[packageName.concat('Impl')/].hpp"
+
+using namespace [anPackage.name/];
+
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> [packageName/]::instance;
+
+std::shared_ptr<MDE4CPPPlugin> [packageName/]::eInstance()
+{
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new [packageName/]Impl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return [packageName/]::eInstance();
+}
+[/file]
 [/template]
-
-
-
-
-
-
-
-

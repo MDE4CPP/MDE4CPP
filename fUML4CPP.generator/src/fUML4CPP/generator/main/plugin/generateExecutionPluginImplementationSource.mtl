@@ -12,12 +12,12 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateFUMLPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionPluginImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateFUMLPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
+[template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[packageName/].hpp"
 [if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
@@ -37,17 +37,6 @@ using namespace [aPackage.name/];
 {
 }
 
-std::shared_ptr<fUML::ActivityExecution> [packageName/]::getMainActivityExecution()
-{
-[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
-	std::shared_ptr<[act.name.toUpperFirst()/]Execution> exec(new [act.name.toUpperFirst()/]Execution());
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
-[/let][else]
-	return nullptr;[/if]
-
-}
-
 std::string [packageName/]::eNAME()
 {
 	return "[aPackage.name/]Exec";
@@ -62,5 +51,19 @@ std::string [packageName/]::eNS_PREFIX()
 {
 	return "[if(not (aPackage.namespace.oclIsUndefined()))][aPackage.namespace.name/][/if]";
 }
+
+
+boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList)
+{
+
+[comment][if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
+[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
+	std::shared_ptr<[act.name.toUpperFirst()/]Execution> exec(new [act.name.toUpperFirst()/]Execution());
+	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
+[/let][else]
+	return nullptr;[/if][/comment]
+	return nullptr;
+}
+
 [/file]
 [/template]

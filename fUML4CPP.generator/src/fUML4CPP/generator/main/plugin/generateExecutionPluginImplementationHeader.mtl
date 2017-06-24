@@ -12,34 +12,32 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateFUMLPluginInterfaceSource('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionPluginImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::generateClass /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateFUMLPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('ExecPlugin').toUpperFirst(); }]
-[file  (anPackage.getPackageName().concat('Exec/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generateExecutionPluginImplHeader(aPackage : Package)]
+[file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'ExecPluginImpl')/]
 
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+#include "[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
 
-using namespace [anPackage.name/];
-
-//static initialisation
-std::shared_ptr<MDE4CPPPlugin> [packageName/]::instance;
-
-std::shared_ptr<MDE4CPPPlugin> [packageName/]::eInstance()
+namespace [aPackage.name/] 
 {
-	if(instance==nullptr)
+	class [aPackage.name.toUpperFirst().concat('ExecPluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('ExecPlugin')/] 
 	{
-		//create a new Singelton Instance
-		instance.reset(new [packageName/]Impl());
-	}
-	return instance;
+		public:
+			[aPackage.name.toUpperFirst()/]ExecPluginImpl();
+			virtual ~[aPackage.name.toUpperFirst()/]ExecPluginImpl();
+		
+			virtual std::string eNAME();
+			virtual std::string eNS_URI();
+			virtual std::string eNS_PREFIX();
+		
+			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList);
+	};
 }
-
-std::shared_ptr<MDE4CPPPlugin> start()
-{
-	return [packageName/]::eInstance();
-}
+[endGuard(aPackage,'ExecPluginImpl')/]
 [/file]
 [/template]

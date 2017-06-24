@@ -26,9 +26,9 @@
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 [import fUML4CPP::generator::main::generateMainExecution /]
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
-[import fUML4CPP::generator::main::generateProjectFiles /]
+[import fUML4CPP::generator::main::generateExecutionProjectFiles /]
 [import fUML4CPP::generator::main::parameterHelper /]
-[import fUML4CPP::generator::main::plugin::generateFUMLPlugin /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
  
 [query public hasConfiguredBuildMode(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->notEmpty() /]
 [query public getBuildMode(aPackage : Package) : ecore::EAnnotation = eAllContents()->filter(ecore::EAnnotation)->select(source = 'BuildMode')->first() /]
@@ -59,13 +59,13 @@
 [act.generateActivityExecutionSource()/]
 [/for]
 
-[if (buildLibrary())]
+[if (not buildLibrary())]
 //generate main
 [aPackage.generateMain()/]
 [/if]
 
 //generate project files
-[aPackage.generateBuildFile(buildLibrary())/]
-[aPackage.generateProjectsFiles()/]
-[aPackage.generateFUMLPlugin()/]
+[aPackage.generateExecutionBuildFile(buildLibrary())/]
+[aPackage.generateExecutionProjectFiles()/]
+[aPackage.generateExecutionPlugin()/]
 [/template]

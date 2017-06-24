@@ -59,11 +59,11 @@
 [/if]
 [/template]
 
-[template public generateBuildFile(aPackage : Package)]
-[generateBuildFile(aPackage, false)/]
+[template public generateExecutionBuildFile(aPackage : Package)]
+[generateExecutionBuildFile(aPackage, false)/]
 [/template]
 
-[template public generateBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
+[template public generateExecutionBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
 [file (aPackage.name.concat('Exec/').concat('build.gradle'), false, 'UTF-8')]
 /*-------------------------------------------------
 *
@@ -185,10 +185,9 @@ model {
 [/if]
                     }
 					exportedHeaders {
-                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/Util"
-[if (aPackage.name='uml')]
+                        srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
-[/if]
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
                         include "**/*.hpp"
                     }
@@ -225,7 +224,8 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-pipe'
+			linker.args '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-pipe', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

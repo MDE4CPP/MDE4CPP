@@ -12,11 +12,11 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateFUMLPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionPluginInterfaceHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helper /]
 
-[template public generateFUMLPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
+[template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
@@ -33,7 +33,7 @@ namespace [aPackage.name/]
 			virtual std::string eNS_URI() = 0;
 			virtual std::string eNS_PREFIX() = 0;
 	
-			virtual std::shared_ptr<fUML::ActivityExecution> getMainActivityExecution() = 0;
+			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
 	
 		protected:
 			[packageName/](){};

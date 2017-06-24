@@ -12,12 +12,12 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateProjectFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionProjectFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
 [import fUML4CPP::generator::main::generateExecutionBuildFile /]
 
-[template public generateProjectsFiles(aPackage : Package) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
+[template public generateExecutionProjectFiles(aPackage : Package) { packageName : String = name.toUpperFirst(); execPackageName : String = packageName.concat('Exec'); }]
 [file (execPackageName.concat('/').concat('.project'), false, 'UTF-8')]
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>

@@ -12,32 +12,16 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generateFUMLPluginImplementationHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+[module generateExecutionPlugin('http://www.eclipse.org/uml2/5.0.0/UML')]
 
-[import UML4CPP::generator::main::generateClass /]
-[import UML4CPP::generator::main::helper /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginInterfaceHeader /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginInterfaceSource /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationHeader /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 
-[template public generateFUMLPluginImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
-[startGuard(aPackage,'ExecPluginImpl')/]
-
-#include "[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
-
-namespace [aPackage.name/] 
-{
-	class [aPackage.name.toUpperFirst().concat('ExecPluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('ExecPlugin')/] 
-	{
-		public:
-			[aPackage.name.toUpperFirst()/]ExecPluginImpl();
-			virtual ~[aPackage.name.toUpperFirst()/]ExecPluginImpl();
-		
-			virtual std::string eNAME();
-			virtual std::string eNS_URI();
-			virtual std::string eNS_PREFIX();
-		
-			virtual std::shared_ptr<fUML::ActivityExecution> getMainActivityExecution();
-	};
-}
-[endGuard(aPackage,'ExecPluginImpl')/]
-[/file]
+[template public generateExecutionPlugin(aPackage : Package)]
+[aPackage.generateExecutionPluginInterfaceHeader()/]
+[aPackage.generateExecutionPluginInterfaceSource()/]
+[aPackage.generateExecutionPluginImplHeader()/]
+[aPackage.generateExecutionPluginImplSource()/]
 [/template]
