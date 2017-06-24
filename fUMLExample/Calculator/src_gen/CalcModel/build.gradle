@@ -68,7 +68,7 @@ model {
 
 	repositories {
         libs(PrebuiltLibraries) {
-			[  'ecore', 'uml', 'primitiveTypesReflection' ].each {
+			[  'ecore', 'uml', 'PluginFramework', 'primitiveTypesReflection' ].each {
 				delegate."$it" {
 					def libraryName = "${name}"
 					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
@@ -96,6 +96,8 @@ model {
 						include "impl/PrimeCheckerImpl.cpp"
 						include	"impl/CalcModelFactoryImpl.cpp"
 						include	"CalcModelFactory.cpp"
+						include	"impl/CalcModelPluginImpl.cpp"
+						include	"CalcModelPlugin.cpp"
 						include	"impl/CalcModelPackageImpl.cpp"
 						include	"CalcModelPackage.cpp"
                     }
@@ -103,15 +105,18 @@ model {
                         srcDirs "."
                         srcDirs "../" 
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include"
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
+						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
+
                         include "**/*.hpp"
                     }
 					lib library: "ecore"
 					lib library: "uml"
+					lib library: "PluginFramework"
 					lib library: "primitiveTypesReflection"
 					lib library: "ecoreReflection"
 					lib library: "umlReflection"
-
 
                 }
             }
@@ -139,7 +144,8 @@ model {
     
     binaries {
         all {
-        	cppCompiler.args '-std=c++11','-Wall', '-Wno-overloaded-virtual', '-pipe'
+			linker.args '-fopenmp'
+        	cppCompiler.args '-std=c++1y','-Wall', '-Wno-overloaded-virtual', '-pipe', '-fopenmp'
 			if (buildType == buildTypes.debug) {
 				cppCompiler.args '-g'
 			}

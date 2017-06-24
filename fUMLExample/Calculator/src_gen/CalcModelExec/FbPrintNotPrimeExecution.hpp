@@ -14,8 +14,10 @@
 #endif
 #include <iostream>
 #include <memory>
+#include "SubsetUnion.hpp"
 
 #include "impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "SubsetUnion.hpp" 
 
 //Included from function behavior "fbPrintNotPrime"
 #include <iostream>
@@ -31,7 +33,7 @@ namespace CalcModel
 		    //destructor
 		    virtual ~FbPrintNotPrimeExecution();
 		
-		    virtual void doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> inputParameters, std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> outputParameters);
+		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
 		    virtual ecore::EObject * copy() const;
 	};
 }

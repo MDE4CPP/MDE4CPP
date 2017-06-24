@@ -14,6 +14,7 @@
 #endif
 #include <iostream>
 #include <memory>
+#include "SubsetUnion.hpp"
 
 #include <boost/any.hpp>
 #include "boost/shared_ptr.hpp"

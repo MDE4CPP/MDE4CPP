@@ -6,7 +6,7 @@ using namespace CalcModel;
 //static initialisation
 const std::string CalcModelPackage::eNAME ="CalcModel";
 const std::string CalcModelPackage::eNS_URI ="";
-const std::string CalcModelPackage::eNS_PREFIX ="invalid";
+const std::string CalcModelPackage::eNS_PREFIX ="";
 
 //Singleton 
 std::shared_ptr<CalcModelPackage> CalcModelPackage::instance;

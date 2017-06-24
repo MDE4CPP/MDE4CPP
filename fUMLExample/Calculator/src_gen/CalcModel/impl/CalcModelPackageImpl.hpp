@@ -14,6 +14,7 @@
 #endif
 #include <iostream>
 #include <memory>
+#include "SubsetUnion.hpp"
 
 #include "CalcModelPackage.hpp"
 #include "impl/PackageImpl.hpp"	

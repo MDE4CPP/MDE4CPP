@@ -14,8 +14,10 @@
 #endif
 #include <iostream>
 #include <memory>
+#include "SubsetUnion.hpp"
 
 #include "fUML/impl/ObjectImpl.hpp"
+#include "SubsetUnion.hpp"
 #include "PrimeChecker.hpp"
 
 namespace CalcModel 

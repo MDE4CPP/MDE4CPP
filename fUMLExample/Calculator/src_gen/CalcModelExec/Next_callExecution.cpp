@@ -34,7 +34,7 @@ ecore::EObject* Next_callExecution::copy()
     return new Next_callExecution(*this);
 }
 
-void Next_callExecution::doBody(std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> inputParameters, std::shared_ptr<std::vector<std::shared_ptr<fUML::ParameterValue>>> outputParameters)
+void Next_callExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
 {
     DEBUG_MESSAGE(std::cout<<"Printing from "<< this->getBehavior()->getName();)
     DEBUG_MESSAGE(std::cout<<"__________________________";)
