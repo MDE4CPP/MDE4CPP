@@ -551,6 +551,10 @@ public class Generate extends AbstractAcceleoGenerator {
         				}
         				else if ((uriString.contains(patternFUMLExecution) || uriString.contains(patternFUMLparamHelper)) && !uriString.contains(patternFUMLPlugin))
         				{
+        					if (uriString.startsWith(patternCD))
+    						{
+    							uriString = uriString.replace(patternCD, emptyString);
+    						}
         					uriString = prefixFUML + uriString;
         				}
         				else

@@ -173,9 +173,10 @@ model {
 [for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity)->sortedBy(name))]
 						include "[act.name.toUpperFirst()/]Execution.cpp"
 [/for]
+[if (buildLibrary)]
 						include "[packageName.concat('ExecPlugin.cpp')/]"
 						include "['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]"
-[if (not (buildLibrary))]
+[else]
 						include "main.cpp"
 [/if]
 [if (aPackage.name='uml')]
