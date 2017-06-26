@@ -29,26 +29,6 @@
 [template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
 [aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
-	[comment][aReference.generateReferenceType()/] _[aReference.name/][if (aReference.upperBound=1)] = nullptr [else](new std::vector<std::shared_ptr<[aReference.eGenericType.generateCppType()/]>>()) [/if];[/comment]
-	
-[comment][if (aReference.upperBound= 1 )]
-	[for (ref : EReference | aClass.getSubsetsForUnion(aReference)->asOrderedSet()->sortedBy(name))]
-	if([ref.GetterName()/]()!=nullptr)
-	{
-		_[aReference.name/] = [ref.GetterName()/]();
-	}
-	[/for]
-[else]
-	[for (ref : EReference | aClass.getSubsetsForUnion(aReference)->asOrderedSet()->sortedBy(name))]
-	[if (ref.upperBound=1)]
-	_[aReference.name/]->push_back([ref.GetterName()/]());
-	[else]
-	[ref.generateReferenceType()/] [ref.name/] = [ref.GetterName()/]();
-	_[aReference.name/]->insert(_[aReference.name/]->end(), [ref.name/]->begin(), [ref.name/]->end());
-	[/if]
-	[/for]
-[/if][/comment]
-
 	return m_[aReference.name/];
 }
 
