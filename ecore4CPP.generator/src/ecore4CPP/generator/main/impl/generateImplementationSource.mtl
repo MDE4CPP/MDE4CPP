@@ -51,7 +51,21 @@ using namespace [aClass.ePackage.name/];
 	//*********************************
 	// Reference Members
 	//*********************************
-	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[comment]References must be initialized in this order:
+	1st Unions
+	2nd Subset Unions
+	3rd all the rest.
+	[/comment]
+	//Unions
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.isUnion() and not(aReference.hasSubset()))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aReference.generateReferenceInit()/][/for]
+
+	//Subset Unions
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.isSubsetUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aReference.generateReferenceInit()/][/for]
+
+	//The rest
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.hasSubset() or not(aReference.isUnion()))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.generateReferenceInit()/][/for]
 
 }
@@ -64,14 +78,15 @@ using namespace [aClass.ePackage.name/];
 	[aClass.eReferences.generateProtectedReferenceDeleter()/]
 }
 
-[className/]::[className/](const [className/] & obj)
+[comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
+[className/]::[className/](const [className/] & obj):[className/]()
 {
 	//create copy of all Attributes
 	[for (att : EAttribute | aClass.eAllAttributes->asOrderedSet()->sortedBy(name))]
 	m_[att.name/] = obj.[att.GetterName()/]();
 	[/for]
 
-	//copy references with now containment
+	[comment]//copy references with no containment
 	
 	[for (ref : EReference | aClass.eAllReferences->select(containment = false)->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
@@ -84,7 +99,35 @@ using namespace [aClass.ePackage.name/];
 	[/for]
 
 	//clone containt lists
-	[for (ref : EReference | aClass.eAllReferences->select(containment = true)->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | aClass.eAllReferences->select(containment = true)->asOrderedSet()->sortedBy(name))][/comment]
+    
+	[comment]References must be copied in this order:
+	1st Unions
+	2nd Subset Unions
+	3rd all the rest.
+	[/comment]
+	//Create unions
+	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.isUnion() and not(aReference.hasSubset())))->asOrderedSet()->sortedBy(name))]
+	[if (ref.hasSetter() or ref.upperBound = 1)]
+	m_[ref.name/]  = obj.[ref.GetterName()/]();
+	[else]
+	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
+	[/if]
+	[/for]
+
+	//Create the SubsetUnions
+	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.isSubsetUnion()))->asOrderedSet()->sortedBy(name))]
+	[if (ref.hasSetter() or ref.upperBound = 1)]
+	m_[ref.name/]  = obj.[ref.GetterName()/]();
+	[else]
+	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
+	[/if]
+	[/for]
+
+	//Clone the rest
+	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.hasSubset() or not(aReference.isUnion())))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
