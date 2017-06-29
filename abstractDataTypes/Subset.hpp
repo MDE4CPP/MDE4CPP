@@ -56,34 +56,36 @@ protected:
     template<std::size_t ... Is>
     void call_addEl_with_tuple(std::shared_ptr<T> el, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple,
                                std::index_sequence<Is...>) {
-        addEll(el, std::get<Is>(tuple)...);
+        addElRecursive(el, std::get<Is>(tuple)...);
     }
 
     template<class FirstU, class ...RestU>
-    void addEll(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj, std::shared_ptr<Union<RestU>> ... rest) {
-        addEll(el, rest...);
+    void addElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj, std::shared_ptr<Union<RestU>> ... rest) {
+        addElRecursive(el, rest...);
         obj->add(el);
     }
 
     template<class FirstU, class ...RestU>
-    void addEll(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj) {
+    void addElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj) {
         obj->add(el);
     }
 
     template<std::size_t ... Is>
     void call_deleteEl_with_tuple(std::shared_ptr<T> el, const std::tuple<std::shared_ptr<Union<U> > ...> &tuple,
                                   std::index_sequence<Is...>) {
-        deleteEll(el, std::get<Is>(tuple)...);
+        deleteElRecursive(el, std::get<Is>(tuple)...);
     }
 
     template<class FirstU, class ...RestU>
-    void deleteEll(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj, std::shared_ptr<Union<RestU>> ... rest) {
-        deleteEll(el, rest...);
+    void deleteElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj, std::shared_ptr<Union<RestU>> ... rest) {
+        deleteElRecursive(el, rest...);
         obj->erase(el);
     }
 
     template<class FirstU, class ...RestU>
-    void deleteEll(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj) {
+    void deleteElRecursive(std::shared_ptr<T> el, std::shared_ptr<Union<FirstU>> obj) {
+        if(nullptr == obj)
+            return;
         obj->erase(el);
     }
 };

@@ -65,8 +65,8 @@ std::shared_ptr<T> front ()
 
 void clear()
 {
-        unsigned size = m_bag.size();
-//#pragma omp parallel for (private i)
+        const unsigned int size = m_bag.size();
+        //#pragma omp parallel for TODO: When uncommented the program does not terminate
         for (unsigned int i = 0; i < size; i++)
         {
                 m_bag[i].reset();
@@ -120,16 +120,18 @@ virtual void erase(std::shared_ptr<T> el)
         int res = find(el);
         if(res < 0)
         {
-                std::cout << "Element not found" << std::endl;
+                //std::cout << "Element not found" << std::endl;
                 return;
         }
-        //TODO?
-        //m_bag.erase(m_bag.begin() + res);
+        m_bag.erase(m_bag.begin() + res);
 }
 
 int find(std::shared_ptr<T> el)
 {
-        int size = m_bag.size();
+        const int size = m_bag.size();
+        if(size == 0) {
+                return -1;
+        }
         volatile bool found = false;
         int first_index = -1;
         int iteration = 0;
