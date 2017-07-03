@@ -25,6 +25,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <omp.h>
 
 [generateMainIncludes()/]
 [if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
@@ -39,6 +40,10 @@ using namespace [aPackage.getPackageName()/];
 
 int main()
 {	
+
+	//OMP parallelization.
+	omp_set_num_threads(omp_get_num_procs());
+
 	[generateLocusInitialization()/]
 
 	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
@@ -59,7 +64,7 @@ int main()
     else{
         DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
         for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++)
-{
+		{
             DEBUG_MESSAGE(std::cout << "Parameter " << parIndex <<" name: "<<resultPList->at(parIndex)->getParameter()->getName() << std::endl;)
             if(resultPList->at(parIndex)->getValues()->empty())
             {
