@@ -58,14 +58,41 @@ _[aReference.name/]) [abstractSufix(impl)/];
 [template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
 [if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
 	/*SubsetUnion*/
-	m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/]));// [eReference.oclAsType(EModelElement).Subset()->asOrderedSet()->first().oclAsType(EReference).name/]));
-[elseif(eReference.oclAsType(EModelElement).hasSubset())]
+	m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising shared pointer SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
+	#endif
+	[elseif(eReference.oclAsType(EModelElement).hasSubset())]
 	/*Subset*/
-	m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/]));//(m_[eReference.oclAsType(EModelElement).Subset()->asOrderedSet()->first().oclAsType(EReference).name/]));
+	m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising shared pointer Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
+	#endif
 	[elseif(eReference.oclAsType(EModelElement).isUnion())]
 	/*Union*/
-	m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType()/]>());[else]
+	m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType()/]>());
+		#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising Union: " << "m_[eReference.name/] - Union<[eReference.eGenericType.generateCppType()/]>()" << std::endl;
+	#endif
+	[else]
 	m_[eReference.name/].reset(new Bag<[eReference.eGenericType.generateCppType()/]>());
+[/if]
+
+[/template]
+
+[template public InitReferences(eReference : EReference)? (not(eReference.upperBound=1))]
+[if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
+	/*SubsetUnion*/
+	m_[eReference.name/]->initSubsetUnion([generateSubsetElements(eReference)/]);
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
+	#endif
+[elseif(eReference.oclAsType(EModelElement).hasSubset())]
+	/*Subset*/
+	m_[eReference.name/]->initSubset([generateSubsetElements(eReference)/]);
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
+	#endif
 [/if]
 
 [/template]
