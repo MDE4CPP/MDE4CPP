@@ -109,9 +109,7 @@ virtual void push_back(std::shared_ptr<T> el)
 
 virtual void erase(iterator el)
 {
-        //TODO
         m_bag.erase(el);
-        //m_bag.erase(m_bag.begin() + res);
 }
 
 
