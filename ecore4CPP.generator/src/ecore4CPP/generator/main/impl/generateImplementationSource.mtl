@@ -54,18 +54,23 @@ using namespace [aClass.ePackage.name/];
 	[comment]References must be initialized in this order:
 	1st Unions
 	2nd Subset Unions
-	3rd all the rest.
+	3rd Subsets that should be unions
+	4th all the rest.
 	[/comment]
 	//Unions
 	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.isUnion() and not(aReference.hasSubset()))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.generateReferenceInit()/][/for]
 
 	//Subset Unions
-	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.isSubsetUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | not(aReference.isSubsetUnion() or aReference.isUnion()) and aReference.isSubsetUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[aReference.generateReferenceInit()/][/for]
+
+	//Subsets that should be Unions
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.subsetIsUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.generateReferenceInit()/][/for]
 
 	//The rest
-	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | aReference.hasSubset() or not(aReference.isUnion()))->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[for (aReference : EReference | aClass.eReferences->select(aReference : EReference | (aReference.hasSubset() and not(aReference.subsetIsUnion())) or not(aReference.isUnion()))->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.generateReferenceInit()/][/for]
 
 }
@@ -126,8 +131,18 @@ using namespace [aClass.ePackage.name/];
 	[/if]
 	[/for]
 
+	//Clone the subset that should be unions too
+	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | not(aReference.isSubsetUnion() or aReference.isUnion()) and aReference.subsetIsUnion()))->asOrderedSet()->sortedBy(name))]
+	[if (ref.hasSetter() or ref.upperBound = 1)]
+	m_[ref.name/]  = obj.[ref.GetterName()/]();
+	[else]
+	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
+	[/if]
+	[/for]
+
 	//Clone the rest
-	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.hasSubset() or not(aReference.isUnion())))->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | (aReference.hasSubset() and not(aReference.subsetIsUnion())) or not(aReference.isUnion())))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
