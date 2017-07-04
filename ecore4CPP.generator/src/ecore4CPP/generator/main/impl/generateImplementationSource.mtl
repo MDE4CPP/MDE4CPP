@@ -20,6 +20,7 @@
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
 [import ecore4CPP::generator::main::generateType/]
 [import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::generateModel /]
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
@@ -33,6 +34,12 @@
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
+
+//Forward declaration includes
+[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[element.name/].hpp";
+[/for]
+
 
 [comment namespace /]
 using namespace [aClass.ePackage.name/];
@@ -87,6 +94,18 @@ using namespace [aClass.ePackage.name/];
 	m_[att.name/] = obj.[att.GetterName()/]();
 	[/for]
 
+	//copy references with no containment (soft copy)
+	
+	[for (ref : EReference | aClass.eAllReferences->select(aRef: EReference | aRef.containment = false and not aRef.hasSubset())->asOrderedSet()->sortedBy(name))]
+	[if (ref.hasSetter() or ref.upperBound = 1)]
+	m_[ref.name/]  = obj.[ref.GetterName()/]();
+	[else]
+	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
+	[/if]
+
+	[/for]
+
 	[comment]//copy references with no containment
 	
 	[for (ref : EReference | aClass.eAllReferences->select(containment = false)->asOrderedSet()->sortedBy(name))]
@@ -94,7 +113,7 @@ using namespace [aClass.ePackage.name/];
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
 	[else]
 	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
+	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
 	[/if]
 
 	[/for]
@@ -107,9 +126,9 @@ using namespace [aClass.ePackage.name/];
 	2nd Subset Unions
 	3rd all the rest.
 	[/comment]
-	//Clone references
+	//Clone references with containment (deep copy)
 
-	[for (ref : EReference | aClass.eAllReferences->select(eRef: EReference|not eRef.isUnion())->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
@@ -131,7 +150,7 @@ using namespace [aClass.ePackage.name/];
 	#endif
 	[/for]
 
-	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|not eRef.isUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.InitReferences()/]
 	[/for]
 
