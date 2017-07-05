@@ -40,7 +40,7 @@ typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
 
 virtual ~SubsetUnion()
 {
-        std::cout << "SubsetUnion: ~~~~~~~~~~~~~~~~~" << std::endl;
+        DEBUG_MESSAGE(std::cout << "SubsetUnion: ~~~~~~~~~~~~~~~~~" << std::endl; )
 }
 
 virtual void push_back(std::shared_ptr<T> el)
