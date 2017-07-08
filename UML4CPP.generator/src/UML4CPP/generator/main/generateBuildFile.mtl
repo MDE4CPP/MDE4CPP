@@ -176,7 +176,6 @@ model {
 [/if]
                         srcDirs "../" 
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include"
-						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/PluginFramework"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/util"
 						srcDirs System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
 
