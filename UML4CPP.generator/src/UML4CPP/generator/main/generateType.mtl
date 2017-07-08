@@ -19,7 +19,7 @@
 
 [template public generateCppType(aProperty : Property)]
 [if (not aProperty.type.oclIsUndefined() and not aProperty.type.isPrimitive())]
-[if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>[/if][else]
+std::shared_ptr<[if (aProperty.upper <> 1)]Bag<[/if][aProperty.type.transformType()/]>[if (aProperty.upper <> 1)]>[/if][else]
 [if (aProperty.upper <> 1)]std::shared_ptr<Bag<[/if][aProperty.type.transformType()/][if (aProperty.upper <> 1)]>[/if][/if]
 [/template]
 
