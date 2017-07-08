@@ -117,7 +117,7 @@ void [className/]::execute()
  		std::shared_ptr<fUML::ActivityParameterNodeActivation> outputActivation = outputActivations->at(i);
  		std::shared_ptr<fUML::ParameterValue> parameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
  		parameterValue->setParameter((std::dynamic_pointer_cast<uml::ActivityParameterNode>(outputActivation->getNode()))->getParameter());
- 		std::shared_ptr<<fUML::Token> > tokens = outputActivation->getTokens();
+ 		std::shared_ptr<Bag<fUML::Token> > tokens = outputActivation->getTokens();
  		for (unsigned int j = 0; j < tokens->size(); j++) 
 		{
             std::shared_ptr<fUML::Token> token = tokens->at(j);
