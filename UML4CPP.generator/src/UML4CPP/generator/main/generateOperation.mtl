@@ -44,12 +44,22 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
-		std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;
+		DEBUG_MESSAGE(std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;)
 
 		std::shared_ptr<FUMLPlugin> fumlplugin = std::dynamic_pointer_cast<FUMLPlugin>(plugin);
 		if (fumlplugin)
 		{
-			std::cout << "JIHA fumlplugin " << fumlplugin->eNAME() << " is accessable" << std::endl;
+			DEBUG_MESSAGE(std::cout << "JIHA fumlplugin " << fumlplugin->eNAME() << " is accessable" << std::endl;)
+
+			std::shared_ptr<std::vector<boost::any>> parameterList(new std::vector<boost::any>());
+[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+			parameterList->push_back([par.name/]);
+[/for]
+			boost::any result = fumlplugin->executeActivity("[aOperation.method->filter(Activity)->asOrderedSet()->first().name/]", parameterList);
+
+[if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = boost::any_cast<[aOperation.generateCppType()/]>(result);
+[/if]
 		}
 		else
 		{
@@ -60,7 +70,6 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 	{ 
 		std::cout << "plugin" << plugin->eNAME() << " not found" << std::endl;
 	}
-	std::cout << "DONE2" << std::endl;
 [else]
 [if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
 	// Implemented as Function behaviour [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).name/]
