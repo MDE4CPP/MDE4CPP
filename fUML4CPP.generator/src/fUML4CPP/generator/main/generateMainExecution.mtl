@@ -49,6 +49,7 @@ int main()
 	[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
     //Executor will execute the first Activity
 	[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first()]
+	[act.generateParameterInstances(aPackage)/]
 	[act.generateStartActivityExecution(aPackage)/]   
 	[/let]
 
@@ -64,7 +65,7 @@ int main()
     else{
         DEBUG_MESSAGE(std::cout << resultPList->size() << std::endl;)
         for(unsigned int parIndex=0; parIndex< resultPList->size(); parIndex++)
-		{
+{
             DEBUG_MESSAGE(std::cout << "Parameter " << parIndex <<" name: "<<resultPList->at(parIndex)->getParameter()->getName() << std::endl;)
             if(resultPList->at(parIndex)->getValues()->empty())
             {
@@ -113,12 +114,12 @@ int main()
 [/template]
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
-[if (aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter->asSet()->parametersArePointers())]
+[if (anActivity.ownedParameter->asSet()->parametersArePointers())]
 #include "Reference.hpp"
 #include "[aPackage.getPackageName()/]Factory.hpp"
 [/if]
 
-[for ( par : Parameter | aPackage.ownedMember->filter(Activity)->asOrderedSet()->first().ownedParameter)]
+[for ( par : Parameter | anActivity->asOrderedSet()->first().ownedParameter)]
 [par.generateParameterInclude()/]
 [/for]
 
@@ -142,6 +143,17 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(f
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
 [/template]
 
+[template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[if(par.supportedTypes())]
+[par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
+[else]
+std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[/if]
+
+[/for]
+[/template]
+
 [template public generateStartActivityExecution(anActivity : Activity, aPackage : Package)]
 [if (aPackage.getOpaqueBehaviors()->size() > 0)]
 [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
@@ -154,9 +166,9 @@ std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue
 [par.name/]P->setParameter([par.packageGetter()/]);
 [par.generateOutputParameter()/]
 [if(par.supportedTypes())]
-[par.name/]Value->setValue([par.default/]);
+[par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
-[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution(std::shared_ptr<[par.type.generateCppType(true)/]>([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]())));	
+[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution([par.name.toLowerFirst()/]));	
 [par.name/]UmlLinker->setLocus(locus);
 [par.name/]Value->setReferent([par.name/]UmlLinker);
 [/if]
