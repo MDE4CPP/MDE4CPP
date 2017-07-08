@@ -18,6 +18,7 @@
 [import ecore4CPP::generator::main::generateBuildFile/]
 [import ecore4CPP::generator::main::generateEnum /]
 [import ecore4CPP::generator::main::generateModel/]
+[import ecore4CPP::generator::main::generateProjectFiles/]
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::impl::generateImplementation/]
 [import ecore4CPP::generator::main::package::generateMetamodelPackage/]
@@ -37,4 +38,5 @@
 [aPackage.generatePackageImpl()/]
 
 [aPackage.generateBuildFile()/]
+[aPackage.generateProjectsFiles()/]
 [/template]
