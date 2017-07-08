@@ -16,13 +16,17 @@
 
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
+[import fUML4CPP::generator::main::generateMainExecution /]
+[import fUML4CPP::generator::main::parameterHelper /]
 
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[packageName/].hpp"
-[if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
-#include "[act.name.toUpperFirst()/]Execution.hpp"[/let][/if]
+[generateMainIncludes()/]
+[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first() ]
+[generateActivityRelatedIncludes(act, aPackage)/]
+[/let][/if]
 
 using namespace [aPackage.name/];
 
@@ -55,15 +59,51 @@ std::string [packageName/]::eNS_PREFIX()
 
 boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList)
 {
+	[generateLocusInitialization()/]
 
-[comment][if (not aPackage.ownedMember->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.ownedElement->filter(Activity)->asOrderedSet()->first() ]
-	std::shared_ptr<[act.name.toUpperFirst()/]Execution> exec(new [act.name.toUpperFirst()/]Execution());
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
+[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
+	[act.generateParameterFromAny(aPackage)/]
+	[act.generateStartActivityExecution(aPackage)/]   
+	[act.generateReturnParameter(aPackage)/]
 [/let][else]
-	return nullptr;[/if][/comment]
 	return nullptr;
+[/if]
 }
 
 [/file]
+[/template]
+
+[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
+
+[template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[if(par.supportedTypes())]
+[par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
+[else]
+std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/] = boost::any_cast<std::shared_ptr<[par.type.generateCppType(true)/]>>(parameterList->at([par.listNumber(anActivity)/]));
+[/if]
+
+[/for]
+[/template]
+
+[template public generateReturnParameter(anActivity : Activity, aPackage : Package)]
+[if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+//The activity has a return parameter
+assert(resultPList->front());
+[let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+[if(par.supportedTypes())]
+std::shared_ptr<fUML::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(resultPList->front()->getValues()->front());
+assert(ret != nullptr);
+return ret->getValue();
+[else]
+std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
+std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Execution>([par.name/]Value->getReferent());
+return [par.name/]UmlLinker->getUmlValue();
+[/if]
+[/let]
+[else]
+std::cout << "Activity [anActivity.myQualifiedName()/] has no return parameter" << std::endl;
+return nullptr;
+[/if]
 [/template]
