@@ -20,11 +20,11 @@
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
-#include "UMLPlugin.hpp"
+#include "UMLModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {
-	class [packageName/] : virtual public UMLPlugin
+	class [packageName/] : virtual public UMLModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
