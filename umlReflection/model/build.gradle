@@ -5,6 +5,8 @@ task generateUmlReflection(type: JavaExec) {
 	description 'generate C++ code of umlReflection.uml model'
 	main = "-jar"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar",  "umlReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("umlReflection.uml")
+	outputs.dir file("../src_gen")
 
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {

@@ -5,6 +5,8 @@ task generateEcoreReflection(type: JavaExec) {
 	description 'generate C++ code of ecoreReflection.uml model'
 	main = "-jar"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "ecoreReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("ecoreReflection.uml")
+	outputs.dir file("../src_gen")
 
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
