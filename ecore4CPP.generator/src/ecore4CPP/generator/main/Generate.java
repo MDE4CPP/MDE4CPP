@@ -433,10 +433,12 @@ public class Generate extends AbstractAcceleoGenerator {
 			String emptyString = "";
 			String patternFactory = "generateFactory";
 			String patternPackage = "generatePackage";
+			String patternPlugin = "generateEcorePlugin";
 			String patternImpl = "generateImpl";
 			String rsrcPath = "rsrc:ecore4CPP/generator/main/";
 			String rsrcPathFactory = "rsrc:ecore4CPP/generator/main/factory/";
 			String rsrcPathPackage = "rsrc:ecore4CPP/generator/main/package/";
+			String rsrcPathPlugin = "rsrc:ecore4CPP/generator/main/plugin/";
 			String rsrcPathImpl = "rsrc:ecore4CPP/generator/main/impl/";
 			Map<URI, Resource> resourceMap = new HashMap<URI, Resource>();
 			
@@ -462,6 +464,10 @@ public class Generate extends AbstractAcceleoGenerator {
 						else if (uriString.startsWith(patternPackage))
 						{
 							uriString = rsrcPathPackage + uriString;
+						}
+						else if (uriString.startsWith(patternPlugin))
+						{
+							uriString = rsrcPathPlugin + uriString;
 						}
 						else if (uriString.startsWith(patternImpl))
 						{

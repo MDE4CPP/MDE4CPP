@@ -12,33 +12,32 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generate('http://www.eclipse.org/emf/2002/Ecore')/]
+[module generateEcorePluginInterfaceSource('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
-[import ecore4CPP::generator::main::generateBuildFile/]
-[import ecore4CPP::generator::main::generateEnum /]
-[import ecore4CPP::generator::main::generateModel/]
-[import ecore4CPP::generator::main::generateProjectFiles/]
-[import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::impl::generateImplementation/]
-[import ecore4CPP::generator::main::package::generateMetamodelPackage/]
-[import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
+[template public generateEcorePluginInterfaceSource(anPackage : EPackage) {packageName : String = anPackage.name.concat('Plugin').toUpperFirst(); }]
+[file  (anPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-[template public generateModel(aPackage : ecore::EPackage)]
-[comment @main/]
-[for (aClass : EClass | aPackage.eAllContents(EClass))]
-	[aClass.generateModel()/]
-	[aClass.generateImplementation()/]
-[/for]
+#include "[packageName/].hpp"
+#include "impl/[packageName.concat('Impl')/].hpp"
 
-[for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
-	[anEEnum.generateEnum()/]
-[/for]
+using namespace [anPackage.name/];
 
-[aPackage.generateFactoryImpl()/]
-[aPackage.generatePackageImpl()/]
-[aPackage.generateEcorePlugin()/]
+//static initialisation
+std::shared_ptr<MDE4CPPPlugin> [packageName/]::instance;
 
-[aPackage.generateBuildFile()/]
-[aPackage.generateProjectsFiles()/]
+std::shared_ptr<MDE4CPPPlugin> [packageName/]::eInstance()
+{
+	if(instance==nullptr)
+	{
+		//create a new Singelton Instance
+		instance.reset(new [packageName/]Impl());
+	}
+	return instance;
+}
+
+std::shared_ptr<MDE4CPPPlugin> start()
+{
+	return [packageName/]::eInstance();
+}
+[/file]
 [/template]

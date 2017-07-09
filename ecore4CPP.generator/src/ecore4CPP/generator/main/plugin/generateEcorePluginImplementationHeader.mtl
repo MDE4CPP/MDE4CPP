@@ -12,33 +12,32 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generate('http://www.eclipse.org/emf/2002/Ecore')/]
+[module generateEcorePluginImplementationHeader('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
-[import ecore4CPP::generator::main::generateBuildFile/]
-[import ecore4CPP::generator::main::generateEnum /]
-[import ecore4CPP::generator::main::generateModel/]
-[import ecore4CPP::generator::main::generateProjectFiles/]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::impl::generateImplementation/]
-[import ecore4CPP::generator::main::package::generateMetamodelPackage/]
-[import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
 
-[template public generateModel(aPackage : ecore::EPackage)]
-[comment @main/]
-[for (aClass : EClass | aPackage.eAllContents(EClass))]
-	[aClass.generateModel()/]
-	[aClass.generateImplementation()/]
-[/for]
+[template public generateEcorePluginImplHeader(aPackage : EPackage)]
+[file (aPackage.name.concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[startGuard(aPackage,'PluginImpl')/]
 
-[for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
-	[anEEnum.generateEnum()/]
-[/for]
+#include "[aPackage.name.toUpperFirst()/]Plugin.hpp"
 
-[aPackage.generateFactoryImpl()/]
-[aPackage.generatePackageImpl()/]
-[aPackage.generateEcorePlugin()/]
-
-[aPackage.generateBuildFile()/]
-[aPackage.generateProjectsFiles()/]
+namespace [aPackage.name/] 
+{
+	class [aPackage.name.toUpperFirst().concat('PluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('Plugin')/] 
+	{
+		public:
+			[aPackage.name.toUpperFirst()/]PluginImpl();
+			virtual ~[aPackage.name.toUpperFirst()/]PluginImpl();
+		
+			virtual std::string eNAME();
+			virtual std::string eNS_URI();
+			virtual std::string eNS_PREFIX();
+		
+			virtual std::shared_ptr<ecore::EFactory> getFactory();
+			virtual std::shared_ptr<ecore::EPackage> getPackage();
+	};
+}
+[endGuard(aPackage,'PluginImpl')/]
+[/file]
 [/template]

@@ -12,33 +12,24 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generate('http://www.eclipse.org/emf/2002/Ecore')/]
+[module generateEcorePlugin('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
-[import ecore4CPP::generator::main::generateBuildFile/]
-[import ecore4CPP::generator::main::generateEnum /]
-[import ecore4CPP::generator::main::generateModel/]
-[import ecore4CPP::generator::main::generateProjectFiles/]
-[import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::impl::generateImplementation/]
-[import ecore4CPP::generator::main::package::generateMetamodelPackage/]
-[import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
+[import ecore4CPP::generator::main::plugin::generateEcorePluginInterfaceHeader /]
+[import ecore4CPP::generator::main::plugin::generateEcorePluginInterfaceSource /]
+[import ecore4CPP::generator::main::plugin::generateEcorePluginImplementationHeader /]
+[import ecore4CPP::generator::main::plugin::generateEcorePluginImplementationSource /]
 
-[template public generateModel(aPackage : ecore::EPackage)]
-[comment @main/]
-[for (aClass : EClass | aPackage.eAllContents(EClass))]
-	[aClass.generateModel()/]
-	[aClass.generateImplementation()/]
-[/for]
-
-[for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
-	[anEEnum.generateEnum()/]
-[/for]
-
-[aPackage.generateFactoryImpl()/]
-[aPackage.generatePackageImpl()/]
-[aPackage.generateEcorePlugin()/]
-
-[aPackage.generateBuildFile()/]
-[aPackage.generateProjectsFiles()/]
+[template public generateEcorePlugin(aPackage : EPackage)]
+[aPackage.generateEcorePluginInterfaceHeader()/]
+[aPackage.generateEcorePluginInterfaceSource()/]
+[aPackage.generateEcorePluginImplHeader()/]
+[aPackage.generateEcorePluginImplSource()/]
 [/template]
+
+
+
+
+
+
+
+

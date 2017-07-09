@@ -74,7 +74,25 @@ model {
 [if (aPackage.metaModelLibraries()->select(not(name = aPackage.name))->size() > 0)]
 	repositories {
         libs(PrebuiltLibraries) {
-			['['/] [for (pack : EPackage | aPackage.metaModelLibraries()) separator (',') ? (not(pack.name = aPackage.name))]"[pack.name/]"[/for] [']'/].each {
+			['['/] [for (pack : EPackage | aPackage.metaModelLibraries()) separator (',') after (', "PluginFramework"') ? (not(pack.name = aPackage.name))]"[pack.name/]"[/for] [']'/].each {
+				delegate."$it" {
+					def libraryName = "${name}"
+					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
+					binaries.withType(SharedLibraryBinary) {
+						if(buildType == buildTypes.debug) {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}d.dll")
+						} else {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}.dll")						
+						}
+					}
+				}	
+			}         
+		}
+	}
+[else]
+	repositories {
+        libs(PrebuiltLibraries) {
+			['["PluginFramework"]'/].each {
 				delegate."$it" {
 					def libraryName = "${name}"
 					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
@@ -105,6 +123,8 @@ model {
 						include	"[aPackage.name.toUpperFirst()/]Factory.cpp"
 						include	"impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp"
 						include	"[aPackage.name.toUpperFirst()/]Package.cpp"
+						include	"impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp"
+						include	"[aPackage.name.toUpperFirst()/]Plugin.cpp"
 [if (aPackage.name='uml')]
 						include "util.cpp"
 						include "registry.cpp"
@@ -123,6 +143,7 @@ model {
 					lib library: "[pack.name/]"
 [/for]
 [/if]
+					lib library: "PluginFramework"
                 }
             }
 
