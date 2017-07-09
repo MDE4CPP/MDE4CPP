@@ -5,7 +5,9 @@ task generateEcore(type: JavaExec) {
 	description 'generate C++ code of ecore.ecore model'
 	main = "-jar"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "ecore.ecore", "../src_gen"
-
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("ecore.ecore")
+	outputs.dir file("../src_gen")
+	
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
 			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
@@ -21,7 +23,9 @@ task generateTypes(type: JavaExec) {
 	description 'generate C++ code of types.ecore model'
 	main = "-jar"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "types.ecore", "../src_gen"
-
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("types.ecore")
+	outputs.dir file("../src_gen")
+	
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
 			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
