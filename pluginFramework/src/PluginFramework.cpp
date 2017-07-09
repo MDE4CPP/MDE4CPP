@@ -51,8 +51,6 @@ std::vector<std::string> PluginFramework::findAllAvailableLibraries()
 		debugMode =  (0 == fileName.compare (fileName.length() - endingString.length(), endingString.length(), endingString));
 	}
 
-	std::cout << "current folder: " << folderBuffer << " debug mode: " << debugMode << std::endl;
-
 	DIR *dir;
 	struct dirent *file;
 	if ((dir = opendir (folderBuffer)) != NULL)
@@ -110,7 +108,6 @@ void PluginFramework::initialize()
 void PluginFramework::loadLibrary(std::string libraryPath)
 {
 	HINSTANCE hGetProcIDDLL = LoadLibrary(libraryPath.c_str());
-
 	if (!hGetProcIDDLL)
 	{
 		std::cout << "could not load the dynamic library, ErrorCode: " << GetLastError() << std::endl;
@@ -120,7 +117,7 @@ void PluginFramework::loadLibrary(std::string libraryPath)
 	StartFunction startFunction = (StartFunction) GetProcAddress(hGetProcIDDLL, "_Z5startv");
 	if (!startFunction)
 	{
-		std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;
+		DEBUG_MESSAGE(std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;)
 	}
 	else
 	{

@@ -8,6 +8,11 @@
 #ifndef SRC_PLUGINFRAMEWORK_HPP_
 #define SRC_PLUGINFRAMEWORK_HPP_
 
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
 #include "boost/shared_ptr.hpp"
 #include <map>
 #include <string>
