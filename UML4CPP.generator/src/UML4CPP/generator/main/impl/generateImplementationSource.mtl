@@ -33,7 +33,7 @@
 [if (aClass.ownedOperation.method->notEmpty())]
 [if(ownedOperation.method->filter(Activity)->notEmpty())]
 #include "PluginFramework.hpp"
-#include "FUMLPlugin.hpp"
+#include "UMLExecutionModelPlugin.hpp"
 [/if][/if]
 
 using namespace [aPackage.name/];
