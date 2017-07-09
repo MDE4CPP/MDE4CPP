@@ -9,4 +9,6 @@ task deliverUtil(type: Copy) {
 	include "**/*.h"
 	include "**/*.cpp"
 	exclude "build", ".gradle"
+	inputs.dir file(".")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/util")
 }
