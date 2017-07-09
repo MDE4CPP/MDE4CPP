@@ -5,17 +5,17 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef FUMLPLUGIN_HPP_
-#define FUMLPLUGIN_HPP_
+#ifndef UMLEXECUTIONMODELPLUGIN_HPP_
+#define UMLEXECUTIONMODELPLUGIN_HPP_
 
 #include "MDE4CPPPlugin.hpp"
 #include <memory>
 #include <boost/any.hpp>
 
-class FUMLPlugin: public MDE4CPPPlugin
+class UMLExecutionModelPlugin: public MDE4CPPPlugin
 {
 	public:
-		virtual ~FUMLPlugin(){}
+		virtual ~UMLExecutionModelPlugin(){}
 
 		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
 };

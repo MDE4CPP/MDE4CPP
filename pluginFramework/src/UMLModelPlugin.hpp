@@ -5,17 +5,17 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef UMLPLUGIN_HPP_
-#define UMLPLUGIN_HPP_
+#ifndef UMLMODELPLUGIN_HPP_
+#define UMLMODELPLUGIN_HPP_
 
 #include "MDE4CPPPlugin.hpp"
 #include "Factory.hpp"
 #include "Package.hpp"
 
-class UMLPlugin: public MDE4CPPPlugin
+class UMLModelPlugin: public MDE4CPPPlugin
 {
 	public:
-		virtual ~UMLPlugin(){}
+		virtual ~UMLModelPlugin(){}
 
 		virtual std::shared_ptr<uml::Factory> getFactory() = 0;
 		virtual std::shared_ptr<uml::Package> getPackage() = 0;
