@@ -63,12 +63,12 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 		}
 		else
 		{
-			std::cout << "plugin " << pluginName << " is not a fuml based plugin" << std::endl;
+			std::cout << "plugin " << plugin->eNAME() << " is not a fuml based plugin" << std::endl;
 		}
 	}
 	else
 	{ 
-		std::cout << "plugin" << plugin->eNAME() << " not found" << std::endl;
+		std::cout << "plugin" << pluginName << " not found" << std::endl;
 	}
 [else]
 [if(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty())]
