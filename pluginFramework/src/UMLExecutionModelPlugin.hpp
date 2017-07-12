@@ -11,13 +11,15 @@
 #include "MDE4CPPPlugin.hpp"
 #include <memory>
 #include <boost/any.hpp>
+#include "Bag.hpp"
 
 class UMLExecutionModelPlugin: public MDE4CPPPlugin
 {
 	public:
 		virtual ~UMLExecutionModelPlugin(){}
 
-		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList) = 0;
+		virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, boost::any externalBehaviorExecutions) = 0;
+		virtual boost::any getBehaviorExecutions() = 0;
 };
 
 #endif
