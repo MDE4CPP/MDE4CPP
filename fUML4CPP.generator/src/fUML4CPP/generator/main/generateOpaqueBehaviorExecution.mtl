@@ -42,6 +42,15 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 
 [/template]
 
+[template public generateExternalOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
+[if (not anOpaqueBehavior.name.oclIsUndefined())]
+std::shared_ptr<fUML::OpaqueBehaviorExecution> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().name/]::[anOpaqueBehavior.name.toUpperFirst()/]Execution());
+[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.packageGetter()/]);
+executionList->push_back([memberName(anOpaqueBehavior)/]Execution);
+[/if]
+
+[/template]
+
 [template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
 [if (not anOpaqueBehavior.oclIsUndefined())]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]

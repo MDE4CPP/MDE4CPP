@@ -34,8 +34,9 @@ namespace [aPackage.name/]
 			virtual std::string eNAME();
 			virtual std::string eNS_URI();
 			virtual std::string eNS_PREFIX();
-		
-			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList);
+
+			virtual boost::any executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, boost::any externalBehaviorExecutions);
+			virtual boost::any getBehaviorExecutions();
 	};
 }
 [endGuard(aPackage,'ExecPluginImpl')/]

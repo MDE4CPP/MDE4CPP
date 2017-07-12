@@ -87,7 +87,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[comment]if it is a Call Operation Action[/comment]
 	//Call Operation action target
 	[for (cOpSet : CallOperationAction | aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first())]
-	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name/]>target = std::dynamic_pointer_cast<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name/]Execution>(this->getContext())->getUmlValue();
+	std::shared_ptr<[cOpSet.target.type.namespace.ns()/]::[cOpSet.target.type.name/]> target = std::dynamic_pointer_cast<[cOpSet.target.type.name/]Execution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 	[/for]
 	[/if]
