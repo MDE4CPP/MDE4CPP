@@ -30,13 +30,13 @@ namespace [aPackage.name/]
 	{
 		public:
 		    //constructor
-		    [className/]([className/] &obj);
+		    [className/](const [className/] &obj);
 		    [className/]();
 		    //destructor
 		    virtual ~[className/]();
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
-		    virtual ecore::EObject* copy();
+		    virtual ecore::EObject* copy() const;
 		};
 }
 

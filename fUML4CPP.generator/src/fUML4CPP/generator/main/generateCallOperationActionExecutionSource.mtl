@@ -68,12 +68,12 @@ using namespace [aPackage.name/];
 }
 
 
-[className/]::[className/]([className/] &obj):
+[className/]::[className/](const [className/] &obj):
 	OpaqueBehaviorExecutionImpl(obj)
 {
 }
 
-ecore::EObject* [className/]::copy()
+ecore::EObject* [className/]::copy() const
 {
     return new [className/](*this);
 }
