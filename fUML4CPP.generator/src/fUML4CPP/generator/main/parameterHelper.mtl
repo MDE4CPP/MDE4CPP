@@ -26,7 +26,7 @@
 				aPackage.ownedElement->filter(Class), 
 				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Interface)).type->asOrderedSet()->sortedBy(name).oclAsType(Interface), 
 				aPackage.allOwnedElements()->filter(Parameter)->select(type.oclIsKindOf(Class)).type->asOrderedSet()->sortedBy(name).oclAsType(Class)	
-			}->flatten()/]
+			}->flatten()->reject(oclIsKindOf(Activity))/]
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer) ? (par.name.oclIsUndefined())]
