@@ -164,6 +164,9 @@ model {
 [for (aBehavior : OpaqueBehavior | aPackage.getOpaqueBehaviors()->sortedBy(name))]
 						include "[aBehavior.name.toUpperFirst()/]Execution.cpp"
 [/for]
+[for (aCallOperationAction : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
+						include "[aCallOperationAction.name.toUpperFirst()/]Execution.cpp"
+[/for]
 [for (anAction : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
 						include "[anAction.name.toUpperFirst()/]Execution.cpp"
 [/for]

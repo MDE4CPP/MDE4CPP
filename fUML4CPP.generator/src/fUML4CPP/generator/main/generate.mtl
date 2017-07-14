@@ -51,7 +51,7 @@
 //generate execution classes
 [getClassiferExecutions().generateClassifierExecutionHeader(aPackage)/]
 [getClassiferExecutions().generateClassifierExecutionSource(aPackage)/]
-
+ 
 //generate activityExecution 
 [comment Generate activities than implement an operation/]
 [for (act : Activity | aPackage.allOwnedElements()->filter(Class).allOwnedElements()->filter(Operation).method->filter(Activity))]

@@ -97,6 +97,8 @@ int main()
 #include "FunctionBehavior.hpp"
 #include "Activity.hpp"
 #include "SubsetUnion.hpp"
+#include "UmlFactory.hpp"
+#include "Operation.hpp"
 
 #include "ParameterValue.hpp"
 
@@ -110,6 +112,11 @@ int main()
 [if (aPackage.getOpaqueBehaviors()->size()>0)]
 //OpaqueBehaviourExecutions
 [aPackage.getOpaqueBehaviors().generateInclude()/]
+[/if]
+
+[if (aPackage.getCallOperationActions()->size()>0)]
+//OpaqueBehaviourExecutions
+[aPackage.getCallOperationActions().generateInclude()/]
 [/if]
 [/template]
 
@@ -159,6 +166,10 @@ std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/]([a
 [aPackage.getOpaqueBehaviors().generateOpaqueBehaviorCreation()/]
 [/if]
 
+[if (aPackage.getCallOperationActions()->size() > 0)]
+[aPackage.getCallOperationActions().generateCallOperationActionCreation()/]
+[/if]
+
 std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 //INput parameter [par.name/] 
@@ -177,6 +188,10 @@ pList->push_back([par.name/]P);
 
 [/for] 
 std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute([anActivity.packageGetter()/], nullptr, pList);
+
+[if (aPackage.getCallOperationActions()->size() > 0)]
+[aPackage.getCallOperationActions().generateCallOperationActionClearing()/]
+[/if]
 
 [/template]
 
