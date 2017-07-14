@@ -17,17 +17,20 @@
 [import UML4CPP::generator::main::helper /]
 
 [query public getOpaqueBehaviors(aPackage : Package) : Set(OpaqueBehavior) = Set{
+		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asSet().operation.method->select(oclIsKindOf(OpaqueBehavior))->asSet(),
 		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),
 		aPackage.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
 	}->flatten()
  /]
 
 [query public getOpaqueBehaviors(aActivity : Activity) : Set(OpaqueBehavior) = OrderedSet{
+		aActivity.ownedNode->filter(CallOperationAction).operation->asSet()->reject(oclIsUndefined()).method->asSet()->reject(oclIsUndefined())->select(oclIsKindOf(OpaqueBehavior))->asSet().oclAsType(OpaqueBehavior)->asSet(),
 		aActivity.ownedNode->filter(CallBehaviorAction)->asSet().behavior.oclAsType(OpaqueBehavior)->reject(oclIsUndefined())->asSet(),		
 		aActivity.allOwnedElements()->selectByKind(DecisionNode).decisionInput->asSet()->reject(oclIsUndefined())->asSet().oclAsType(OpaqueBehavior)->asSet()
 	}->flatten()->sortedBy(name)
 /]
 
+[query public hasCOAAMethod(aCOA : CallOperationAction) : Boolean = aCOA.operation.method->size() > 0 /]
 [query public getCallOperationActions(aPackage : Package) : Set(CallOperationAction) = aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction)->asOrderedSet()->sortedBy(name) /]
 
 [template public generateOpaqueBehaviorCreation(anOpaqueBehavior : OpaqueBehavior) ]
@@ -42,7 +45,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(anOpaqueBehavior)/]Execution)
 
 [query public getFBPackageElement(aCOA : CallOperationAction) : String = 'fb'.concat(aCOA.myName())/]
 
-[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction) ]
+[template public generateCallOperationActionCreation(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
 std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement()/](uml::UmlFactory::eInstance()->createFunctionBehavior());
 [aCallOperationAction.getFBPackageElement()/]->setName("[aCallOperationAction.getFBPackageElement()/]");
@@ -67,7 +70,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 
 [/template]
 
-[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction) ]
+[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction) ? (not hasCOAAMethod()) ]
 [aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
 
 [/template]

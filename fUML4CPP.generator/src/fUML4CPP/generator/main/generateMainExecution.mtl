@@ -99,6 +99,7 @@ int main()
 #include "SubsetUnion.hpp"
 #include "UmlFactory.hpp"
 #include "Operation.hpp"
+#include "PrimitiveType.hpp"
 
 #include "ParameterValue.hpp"
 
@@ -107,7 +108,15 @@ int main()
 
 [for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
 #include "[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+[/for] 
+[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet())]
+[if ((pack.name='UML') or (pack.name='Ecore'))]
+#include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+[elseif (not (pack.name='StandardProfile'))]
+#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
+[/if]
 [/for]
+
 
 [if (aPackage.getOpaqueBehaviors()->size()>0)]
 //OpaqueBehaviourExecutions
@@ -116,7 +125,9 @@ int main()
 
 [if (aPackage.getCallOperationActions()->size()>0)]
 //OpaqueBehaviourExecutions
-[aPackage.getCallOperationActions().generateInclude()/]
+[for (aCOA : CallOperationAction | aPackage.getCallOperationActions())]
+[if (not aCOA.hasCOAAMethod())][aCOA.generateInclude()/][/if]
+[/for]
 [/if]
 [/template]
 

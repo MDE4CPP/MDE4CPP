@@ -45,8 +45,12 @@
 [aPackage.getOpaqueBehaviors().generateBehaviorExecutionSource(aPackage)/]
 
 //generate executionactivation for 
-[aPackage.getCallOperationActions().generateCallOperationActionExecutionHeader(aPackage)/]
-[aPackage.getCallOperationActions().generateCallOperationActionExecutionSource(aPackage)/]
+[for (aCOA : CallOperationAction | aPackage.getCallOperationActions())]
+[if(not aCOA.hasCOAAMethod())]
+[aCOA.generateCallOperationActionExecutionHeader(aPackage)/]
+[aCOA.generateCallOperationActionExecutionSource(aPackage)/]
+[/if]
+[/for]
 
 //generate execution classes
 [getClassiferExecutions().generateClassifierExecutionHeader(aPackage)/]

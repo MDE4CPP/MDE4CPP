@@ -18,7 +18,7 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import UML4CPP::generator::main::helper /]
 
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage()}->flatten() /]
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{aPackage.member->filter(Class).attribute.type.getNearestPackage(),aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage()}->flatten() /]
 [query public includeEcorePackages(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
@@ -167,8 +167,8 @@ model {
 [for (aCallOperationAction : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
 						include "[aCallOperationAction.name.toUpperFirst()/]Execution.cpp"
 [/for]
-[for (anAction : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
-						include "[anAction.name.toUpperFirst()/]Execution.cpp"
+[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
+[if (not aCOA.hasCOAAMethod())]						include "[aCOA.name.toUpperFirst()/]Execution.cpp"[/if]
 [/for]
 [for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
 						include "[aClassifier.name.toUpperFirst()/]Execution.cpp"
