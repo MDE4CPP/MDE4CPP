@@ -58,38 +58,18 @@ std::string [packageName/]::eNS_PREFIX()
 }
 
 
-boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList, boost::any externalBehaviorExecutions)
+boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList)
 {
 	[generateLocusInitialization()/]
 
 [if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
 [let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
 	[act.generateParameterFromAny(aPackage)/]
-
-	std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> executionsList = boost::any_cast<std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>>>(externalBehaviorExecutions);
-	if (executionsList)
-	{
-		for (unsigned int i=0; i<executionsList->size(); i++)
-		{
-			std::shared_ptr<fUML::OpaqueBehaviorExecution> execution = boost::any_cast<std::shared_ptr<fUML::OpaqueBehaviorExecution>>(executionsList->at(i));
-			execution->setLocus(factory->getLocus());
-			factory->addPrimitiveBehaviorPrototype(execution);
-		}
-	}
 	[act.generateStartActivityExecution(aPackage)/]   
 	[act.generateReturnParameter(aPackage)/]
 [/let][else]
 	return nullptr;
 [/if]
-}
-
-boost::any [packageName/]::getBehaviorExecutions()
-{
-	std::shared_ptr<Bag<fUML::OpaqueBehaviorExecution>> executionList(new Bag<fUML::OpaqueBehaviorExecution>());
-	[if (aPackage.getOpaqueBehaviors()->size() > 0)]
-	[aPackage.getOpaqueBehaviors().generateExternalOpaqueBehaviorCreation()/]
-	[/if]
-	return executionList;
 }
 
 [/file]
