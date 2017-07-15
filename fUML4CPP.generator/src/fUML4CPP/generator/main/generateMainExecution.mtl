@@ -99,6 +99,7 @@ int main()
 #include "SubsetUnion.hpp"
 #include "UmlFactory.hpp"
 #include "Operation.hpp"
+#include "Interface.hpp"
 #include "PrimitiveType.hpp"
 
 #include "ParameterValue.hpp"
@@ -116,7 +117,6 @@ int main()
 #include "[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/for]
-
 
 [if (aPackage.getOpaqueBehaviors()->size()>0)]
 //OpaqueBehaviourExecutions
@@ -190,7 +190,6 @@ std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue
 [if(par.supportedTypes())]
 [par.name/]Value->setValue([par.name.toLowerFirst()/]);
 [else]
-[par.name/]UmlLinker.reset(new [par.type.name.toUpperFirst()/]Execution([par.name.toLowerFirst()/]));	
 [par.name/]UmlLinker->setLocus(locus);
 [par.name/]Value->setReferent([par.name/]UmlLinker);
 [/if]
