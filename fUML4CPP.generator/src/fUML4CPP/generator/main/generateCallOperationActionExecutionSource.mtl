@@ -80,8 +80,8 @@ ecore::EObject* [className/]::copy() const
 
 void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
 {
-    DEBUG_MESSAGE(std::cout<<"Printing from "<< this->getBehavior()->getName();)
-    DEBUG_MESSAGE(std::cout<<"__________________________";)
+    DEBUG_MESSAGE(std::cout<<"Printing from [className/]" << std::endl;)
+    DEBUG_MESSAGE(std::cout<<"__________________________" << std::endl;)
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
    	[par.type.generateCppType()/] [par.name/];
