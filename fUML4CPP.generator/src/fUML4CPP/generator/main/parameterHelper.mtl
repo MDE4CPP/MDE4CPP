@@ -65,7 +65,7 @@ std::shared_ptr<fUML::[par.type.name/]Value> [par.name/]Value(fUML::FUMLFactory:
 [if (not (par.direction = ParameterDirectionKind::inout))]
 std::shared_ptr<fUML::Reference> [par.name/]Value(fUML::FUMLFactory::eInstance()->createReference());
 [/if]
-std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Execution());
+std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(new [par.type.name.toUpperFirst()/]Execution([par.name.toLowerFirst()/]));
 [/template]
 
 
