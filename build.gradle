@@ -9,9 +9,6 @@ task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP
 	description 'generate emtl files for Ecore4CPP generator'	
 	main = "-jar"
 	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
-	inputs.dir file("ecore4CPP.generator/src")
-	inputs.dir file("core4CPP.generator.compiler/src")
-	outputs.file file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar")
 }
 tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter executeCompiler
 
