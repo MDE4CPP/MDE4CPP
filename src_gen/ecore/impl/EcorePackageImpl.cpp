@@ -111,6 +111,7 @@ void EcorePackageImpl::createPackageContents()
 
 	eAnnotationEClass = createEClass(EANNOTATION);
 	createEAttribute(eAnnotationEClass, EANNOTATION_SOURCE);
+	
 	createEReference(eAnnotationEClass, EANNOTATION_CONTENTS);
 	createEReference(eAnnotationEClass, EANNOTATION_DETAILS);
 	createEReference(eAnnotationEClass, EANNOTATION_EMODELELEMENT);
@@ -120,12 +121,15 @@ void EcorePackageImpl::createPackageContents()
 
 	eAttributeEClass = createEClass(EATTRIBUTE);
 	createEAttribute(eAttributeEClass, EATTRIBUTE_ID);
+	
 	createEReference(eAttributeEClass, EATTRIBUTE_EATTRIBUTETYPE);
 	
 	
 
 	eClassEClass = createEClass(ECLASS);
-	createEAttribute(eClassEClass, ECLASS_ABSTRACT);createEAttribute(eClassEClass, ECLASS_INTERFACE);
+	createEAttribute(eClassEClass, ECLASS_ABSTRACT);
+	createEAttribute(eClassEClass, ECLASS_INTERFACE);
+	
 	createEReference(eClassEClass, ECLASS_EALLATTRIBUTES);
 	createEReference(eClassEClass, ECLASS_EALLCONTAINMENTS);
 	createEReference(eClassEClass, ECLASS_EALLGENERICSUPERTYPES);
@@ -154,7 +158,12 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	eClassifierEClass = createEClass(ECLASSIFIER);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_CLASSIFIERID);createEAttribute(eClassifierEClass, ECLASSIFIER_DEFAULTVALUE);createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASS);createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASSNAME);createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCETYPENAME);
+	createEAttribute(eClassifierEClass, ECLASSIFIER_CLASSIFIERID);
+	createEAttribute(eClassifierEClass, ECLASSIFIER_DEFAULTVALUE);
+	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASS);
+	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASSNAME);
+	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCETYPENAME);
+	
 	createEReference(eClassifierEClass, ECLASSIFIER_EPACKAGE);
 	createEReference(eClassifierEClass, ECLASSIFIER_ETYPEPARAMETERS);
 	
@@ -163,6 +172,7 @@ void EcorePackageImpl::createPackageContents()
 
 	eDataTypeEClass = createEClass(EDATATYPE);
 	createEAttribute(eDataTypeEClass, EDATATYPE_SERIALIZABLE);
+	
 	
 	
 
@@ -176,7 +186,10 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	eEnumLiteralEClass = createEClass(EENUMLITERAL);
-	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_INSTANCE);createEAttribute(eEnumLiteralEClass, EENUMLITERAL_LITERAL);createEAttribute(eEnumLiteralEClass, EENUMLITERAL_VALUE);
+	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_INSTANCE);
+	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_LITERAL);
+	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_VALUE);
+	
 	createEReference(eEnumLiteralEClass, EENUMLITERAL_EENUM);
 	
 	
@@ -213,6 +226,7 @@ void EcorePackageImpl::createPackageContents()
 	createEAttribute(eNamedElementEClass, ENAMEDELEMENT_NAME);
 	
 	
+	
 
 	eObjectEClass = createEClass(EOBJECT);
 	
@@ -236,6 +250,7 @@ void EcorePackageImpl::createPackageContents()
 
 	eOperationEClass = createEClass(EOPERATION);
 	createEAttribute(eOperationEClass, EOPERATION_OPERATIONID);
+	
 	createEReference(eOperationEClass, EOPERATION_ECONTAININGCLASS);
 	createEReference(eOperationEClass, EOPERATION_EEXCEPTIONS);
 	createEReference(eOperationEClass, EOPERATION_EGENERICEXCEPTIONS);
@@ -246,7 +261,9 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	ePackageEClass = createEClass(EPACKAGE);
-	createEAttribute(ePackageEClass, EPACKAGE_NSPREFIX);createEAttribute(ePackageEClass, EPACKAGE_NSURI);
+	createEAttribute(ePackageEClass, EPACKAGE_NSPREFIX);
+	createEAttribute(ePackageEClass, EPACKAGE_NSURI);
+	
 	createEReference(ePackageEClass, EPACKAGE_ECLASSIFIERS);
 	createEReference(ePackageEClass, EPACKAGE_EFACTORYINSTANCE);
 	createEReference(ePackageEClass, EPACKAGE_ESUBPACKAGES);
@@ -262,7 +279,10 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	eReferenceEClass = createEClass(EREFERENCE);
-	createEAttribute(eReferenceEClass, EREFERENCE_CONTAINER);createEAttribute(eReferenceEClass, EREFERENCE_CONTAINMENT);createEAttribute(eReferenceEClass, EREFERENCE_RESOLVEPROXIES);
+	createEAttribute(eReferenceEClass, EREFERENCE_CONTAINER);
+	createEAttribute(eReferenceEClass, EREFERENCE_CONTAINMENT);
+	createEAttribute(eReferenceEClass, EREFERENCE_RESOLVEPROXIES);
+	
 	createEReference(eReferenceEClass, EREFERENCE_EKEYS);
 	createEReference(eReferenceEClass, EREFERENCE_EOPPOSITE);
 	createEReference(eReferenceEClass, EREFERENCE_EREFERENCETYPE);
@@ -270,12 +290,23 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	eStringToStringMapEntryEClass = createEClass(ESTRINGTOSTRINGMAPENTRY);
-	createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_KEY);createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_VALUE);
+	createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_KEY);
+	createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_VALUE);
+	
 	
 	
 
 	eStructuralFeatureEClass = createEClass(ESTRUCTURALFEATURE);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CHANGEABLE);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CONTAINERCLASS);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUE);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUELITERAL);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DERIVED);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_FEATUREID);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_TRANSIENT);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_UNSETTABLE);createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_VOLATILE);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CHANGEABLE);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CONTAINERCLASS);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUE);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUELITERAL);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DERIVED);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_FEATUREID);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_TRANSIENT);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_UNSETTABLE);
+	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_VOLATILE);
+	
 	createEReference(eStructuralFeatureEClass, ESTRUCTURALFEATURE_ECONTAININGCLASS);
 	
 	
@@ -287,7 +318,13 @@ void EcorePackageImpl::createPackageContents()
 	
 
 	eTypedElementEClass = createEClass(ETYPEDELEMENT);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_LOWERBOUND);createEAttribute(eTypedElementEClass, ETYPEDELEMENT_MANY);createEAttribute(eTypedElementEClass, ETYPEDELEMENT_ORDERED);createEAttribute(eTypedElementEClass, ETYPEDELEMENT_REQUIRED);createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UNIQUE);createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UPPERBOUND);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_LOWERBOUND);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_MANY);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_ORDERED);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_REQUIRED);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UNIQUE);
+	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UPPERBOUND);
+	
 	createEReference(eTypedElementEClass, ETYPEDELEMENT_EGENERICTYPE);
 	createEReference(eTypedElementEClass, ETYPEDELEMENT_ETYPE);
 	

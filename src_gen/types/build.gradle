@@ -53,7 +53,7 @@ model {
     }
 	repositories {
         libs(PrebuiltLibraries) {
-			[ "ecore" ].each {
+			[ "ecore", "PluginFramework" ].each {
 				delegate."$it" {
 					def libraryName = "${name}"
 					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
@@ -80,12 +80,15 @@ model {
 						include	"TypesFactory.cpp"
 						include	"impl/TypesPackageImpl.cpp"
 						include	"TypesPackage.cpp"
+						include	"impl/TypesPluginImpl.cpp"
+						include	"TypesPlugin.cpp"
                     }
 					exportedHeaders {
                         srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
                         include "**/*.hpp"
                     }
 					lib library: "ecore"
+					lib library: "PluginFramework"
                 }
             }
 

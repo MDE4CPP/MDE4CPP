@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EObject.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -20,7 +24,9 @@ EStringToStringMapEntryImpl::EStringToStringMapEntryImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
@@ -31,18 +37,25 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 	
 }
 
-EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj)
+EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj):EStringToStringMapEntryImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStringToStringMapEntry "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_key = obj.getKey();
 	m_value = obj.getValue();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eContainer  = obj.eContainer();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EStringToStringMapEntryImpl::copy() const

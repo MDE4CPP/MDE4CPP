@@ -5,6 +5,34 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EAttribute.hpp";
+
+#include "EClass.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EDataType.hpp";
+
+#include "EEnum.hpp";
+
+#include "EFactory.hpp";
+
+#include "ENamedElement.hpp";
+
+#include "EOperation.hpp";
+
+#include "EPackage.hpp";
+
+#include "EParameter.hpp";
+
+#include "EReference.hpp";
+
+#include "EStructuralFeature.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -20,13 +48,28 @@ EPackageImpl::EPackageImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_eClassifiers.reset(new Bag<ecore::EClassifier>());
 	
 	
+
 	
+
 		m_eSubpackages.reset(new Bag<ecore::EPackage>());
 	
 	
+
+	
+
+	//Init references
+	
+	
+
+	
+
+	
+	
+
 	
 }
 
@@ -38,36 +81,57 @@ EPackageImpl::~EPackageImpl()
 	
 }
 
-EPackageImpl::EPackageImpl(const EPackageImpl & obj)
+EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EPackage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_name = obj.getName();
 	m_nsPrefix = obj.getNsPrefix();
 	m_nsURI = obj.getNsURI();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eFactoryInstance  = obj.getEFactoryInstance();
 
 	m_eSuperPackage  = obj.getESuperPackage();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiersList = obj.getEClassifiers();
 	for(std::shared_ptr<ecore::EClassifier> _eClassifiers : *_eClassifiersList)
 	{
 		this->getEClassifiers()->add(std::shared_ptr<ecore::EClassifier>(dynamic_cast<ecore::EClassifier*>(_eClassifiers->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eClassifiers" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EPackage>> _eSubpackagesList = obj.getESubpackages();
 	for(std::shared_ptr<ecore::EPackage> _eSubpackages : *_eSubpackagesList)
 	{
 		this->getESubpackages()->add(std::shared_ptr<ecore::EPackage>(dynamic_cast<ecore::EPackage*>(_eSubpackages->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eSubpackages" << std::endl;
+	#endif
+
+	
+	
+
+	
+	
+
 }
 
 ecore::EObject *  EPackageImpl::copy() const

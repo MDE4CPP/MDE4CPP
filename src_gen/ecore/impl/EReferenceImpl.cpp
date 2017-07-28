@@ -5,6 +5,22 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EAttribute.hpp";
+
+#include "EClass.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EGenericType.hpp";
+
+#include "EReference.hpp";
+
+#include "EStructuralFeature.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -21,10 +37,21 @@ EReferenceImpl::EReferenceImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_eKeys.reset(new Bag<ecore::EAttribute>());
 	
 	
+
 	
+
+	
+
+	//Init references
+	
+	
+
+	
+
 	
 }
 
@@ -36,9 +63,12 @@ EReferenceImpl::~EReferenceImpl()
 	
 }
 
-EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
+EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_changeable = obj.isChangeable();
 	m_container = obj.isContainer();
 	m_containerClass = obj.getContainerClass();
@@ -59,14 +89,14 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 	m_upperBound = obj.getUpperBound();
 	m_volatile = obj.isVolatile();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
 		std::shared_ptr< Bag<ecore::EAttribute> >
 	 _eKeys = obj.getEKeys();
 	m_eKeys.reset(new 	 Bag<ecore::EAttribute> 
-	(*(obj.getEKeys().get())));// this->getEKeys()->insert(this->getEKeys()->end(), _eKeys->begin(), _eKeys->end());
+	(*(obj.getEKeys().get())));
 
 	m_eOpposite  = obj.getEOpposite();
 
@@ -75,16 +105,26 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj)
 	m_eType  = obj.getEType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  EReferenceImpl::copy() const

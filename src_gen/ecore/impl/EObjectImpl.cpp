@@ -5,6 +5,18 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EClass.hpp";
+
+#include "EObject.hpp";
+
+#include "EOperation.hpp";
+
+#include "EReference.hpp";
+
+#include "EStructuralFeature.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,6 +31,10 @@ EObjectImpl::EObjectImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -30,16 +46,23 @@ EObjectImpl::~EObjectImpl()
 	
 }
 
-EObjectImpl::EObjectImpl(const EObjectImpl & obj)
+EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EObject "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eContainer  = obj.eContainer();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EObjectImpl::copy() const

@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EPackage.hpp";
+
+#include "ETypeParameter.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,7 +29,9 @@ EDataTypeImpl::EDataTypeImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 EDataTypeImpl::~EDataTypeImpl()
@@ -30,9 +42,12 @@ EDataTypeImpl::~EDataTypeImpl()
 	
 }
 
-EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj)
+EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EDataType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_classifierID = obj.getClassifierID();
 	m_defaultValue = obj.getDefaultValue();
 	m_instanceClass = obj.getInstanceClass();
@@ -41,22 +56,32 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj)
 	m_name = obj.getName();
 	m_serializable = obj.isSerializable();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_ePackage  = obj.getEPackage();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
 		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  EDataTypeImpl::copy() const

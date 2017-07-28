@@ -51,6 +51,23 @@ model {
         debug 
         release
     }
+	repositories {
+        libs(PrebuiltLibraries) {
+			["PluginFramework"].each {
+				delegate."$it" {
+					def libraryName = "${name}"
+					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
+					binaries.withType(SharedLibraryBinary) {
+						if(buildType == buildTypes.debug) {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}d.dll")
+						} else {
+							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}.dll")						
+						}
+					}
+				}	
+			}         
+		}
+	}
 
     components {
         ecore(NativeLibrarySpec)
@@ -83,11 +100,14 @@ model {
 						include	"EcoreFactory.cpp"
 						include	"impl/EcorePackageImpl.cpp"
 						include	"EcorePackage.cpp"
+						include	"impl/EcorePluginImpl.cpp"
+						include	"EcorePlugin.cpp"
                     }
 					exportedHeaders {
                         srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
                         include "**/*.hpp"
                     }
+					lib library: "PluginFramework"
                 }
             }
 

@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EGenericType.hpp";
+
+#include "ENamedElement.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -24,7 +34,14 @@ ETypedElementImpl::ETypedElementImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
+	
+
+	//Init references
+	
+
 	
 }
 
@@ -36,9 +53,12 @@ ETypedElementImpl::~ETypedElementImpl()
 	
 }
 
-ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj)
+ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
 	m_name = obj.getName();
@@ -47,21 +67,32 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj)
 	m_unique = obj.isUnique();
 	m_upperBound = obj.getUpperBound();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eType  = obj.getEType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
+	#endif
+
+	
+
 }
 
 ecore::EObject *  ETypedElementImpl::copy() const

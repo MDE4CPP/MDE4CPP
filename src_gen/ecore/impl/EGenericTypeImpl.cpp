@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EClassifier.hpp";
+
+#include "EGenericType.hpp";
+
+#include "EObject.hpp";
+
+#include "ETypeParameter.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,13 +29,33 @@ EGenericTypeImpl::EGenericTypeImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 	
+
 	
+
 		m_eTypeArguments.reset(new Bag<ecore::EGenericType>());
 	
 	
+
 	
+
+	
+
+	//Init references
+	
+
+	
+
+	
+
+	
+	
+
+	
+
 	
 }
 
@@ -37,11 +67,14 @@ EGenericTypeImpl::~EGenericTypeImpl()
 	
 }
 
-EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj)
+EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EGenericType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eClassifier  = obj.getEClassifier();
 
@@ -52,20 +85,39 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj)
 	m_eTypeParameter  = obj.getETypeParameter();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	if(obj.getELowerBound()!=nullptr)
 	{
 		m_eLowerBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getELowerBound()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eLowerBound" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArgumentsList = obj.getETypeArguments();
 	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *_eTypeArgumentsList)
 	{
 		this->getETypeArguments()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eTypeArguments" << std::endl;
+	#endif
 	if(obj.getEUpperBound()!=nullptr)
 	{
 		m_eUpperBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getEUpperBound()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eUpperBound" << std::endl;
+	#endif
+
+	
+
+	
+	
+
+	
+
 }
 
 ecore::EObject *  EGenericTypeImpl::copy() const

@@ -5,6 +5,14 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EGenericType.hpp";
+
+#include "ENamedElement.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,7 +27,12 @@ ETypeParameterImpl::ETypeParameterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_eBounds.reset(new Bag<ecore::EGenericType>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -32,25 +45,40 @@ ETypeParameterImpl::~ETypeParameterImpl()
 	
 }
 
-ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj)
+ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypeParameterImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypeParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_name = obj.getName();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EGenericType>> _eBoundsList = obj.getEBounds();
 	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
 	{
 		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eBounds" << std::endl;
+	#endif
+
+	
+	
+
 }
 
 ecore::EObject *  ETypeParameterImpl::copy() const

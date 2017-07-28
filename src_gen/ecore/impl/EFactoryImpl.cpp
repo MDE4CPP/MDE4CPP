@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EClass.hpp";
+
+#include "EDataType.hpp";
+
+#include "EModelElement.hpp";
+
+#include "EObject.hpp";
+
+#include "EPackage.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,6 +33,10 @@ EFactoryImpl::EFactoryImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -30,21 +48,31 @@ EFactoryImpl::~EFactoryImpl()
 	
 }
 
-EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj)
+EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_ePackage  = obj.getEPackage();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  EFactoryImpl::copy() const

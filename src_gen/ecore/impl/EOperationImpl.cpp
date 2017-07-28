@@ -5,6 +5,24 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EClass.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EGenericType.hpp";
+
+#include "EOperation.hpp";
+
+#include "EParameter.hpp";
+
+#include "ETypeParameter.hpp";
+
+#include "ETypedElement.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,17 +37,37 @@ EOperationImpl::EOperationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_eExceptions.reset(new Bag<ecore::EClassifier>());
 	
 	
+
 		m_eGenericExceptions.reset(new Bag<ecore::EGenericType>());
 	
 	
+
 		m_eParameters.reset(new Bag<ecore::EParameter>());
 	
 	
+
 		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
+	
+	
+
+	//Init references
+	
+
+	
+	
+
+	
+	
+
+	
+	
+
 	
 	
 }
@@ -42,9 +80,12 @@ EOperationImpl::~EOperationImpl()
 	
 }
 
-EOperationImpl::EOperationImpl(const EOperationImpl & obj)
+EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EOperation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
 	m_name = obj.getName();
@@ -54,43 +95,70 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj)
 	m_unique = obj.isUnique();
 	m_upperBound = obj.getUpperBound();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
 		std::shared_ptr< Bag<ecore::EClassifier> >
 	 _eExceptions = obj.getEExceptions();
 	m_eExceptions.reset(new 	 Bag<ecore::EClassifier> 
-	(*(obj.getEExceptions().get())));// this->getEExceptions()->insert(this->getEExceptions()->end(), _eExceptions->begin(), _eExceptions->end());
+	(*(obj.getEExceptions().get())));
 
 	m_eType  = obj.getEType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptionsList = obj.getEGenericExceptions();
 	for(std::shared_ptr<ecore::EGenericType> _eGenericExceptions : *_eGenericExceptionsList)
 	{
 		this->getEGenericExceptions()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericExceptions->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eGenericExceptions" << std::endl;
+	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EParameter>> _eParametersList = obj.getEParameters();
 	for(std::shared_ptr<ecore::EParameter> _eParameters : *_eParametersList)
 	{
 		this->getEParameters()->add(std::shared_ptr<ecore::EParameter>(dynamic_cast<ecore::EParameter*>(_eParameters->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eParameters" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
 		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
+	#endif
+
+	
+	
+
+	
+	
+
+	
+	
+
 }
 
 ecore::EObject *  EOperationImpl::copy() const

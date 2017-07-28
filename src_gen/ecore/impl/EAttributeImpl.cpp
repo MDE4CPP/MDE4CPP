@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "ecorePackageImpl.hpp"
 
+//Forward declaration includes
+#include "EAnnotation.hpp";
+
+#include "EClass.hpp";
+
+#include "EClassifier.hpp";
+
+#include "EDataType.hpp";
+
+#include "EGenericType.hpp";
+
+#include "EStructuralFeature.hpp";
+
+
 using namespace ecore;
 
 //*********************************
@@ -19,6 +33,10 @@ EAttributeImpl::EAttributeImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -30,9 +48,12 @@ EAttributeImpl::~EAttributeImpl()
 	
 }
 
-EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj)
+EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAttribute "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_changeable = obj.isChangeable();
 	m_containerClass = obj.getContainerClass();
 	m_defaultValue = obj.getDefaultValue();
@@ -51,7 +72,7 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj)
 	m_upperBound = obj.getUpperBound();
 	m_volatile = obj.isVolatile();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_eAttributeType  = obj.getEAttributeType();
 
@@ -60,16 +81,26 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj)
 	m_eType  = obj.getEType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  EAttributeImpl::copy() const
