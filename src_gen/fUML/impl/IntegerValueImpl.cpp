@@ -11,6 +11,16 @@
 #include "Type.hpp"
 #include "PrimitiveType.hpp"
 
+//Forward declaration includes
+#include "PrimitiveType.hpp";
+
+#include "PrimitiveValue.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -25,7 +35,9 @@ IntegerValueImpl::IntegerValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 IntegerValueImpl::~IntegerValueImpl()
@@ -36,17 +48,24 @@ IntegerValueImpl::~IntegerValueImpl()
 	
 }
 
-IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj)
+IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy IntegerValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_value = obj.getValue();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  IntegerValueImpl::copy() const

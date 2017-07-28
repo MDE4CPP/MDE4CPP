@@ -7,6 +7,20 @@
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
 
+//Forward declaration includes
+#include "Association.hpp";
+
+#include "Classifier.hpp";
+
+#include "ExtensionalValue.hpp";
+
+#include "FeatureValue.hpp";
+
+#include "Locus.hpp";
+
+#include "Property.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -21,6 +35,10 @@ LinkImpl::LinkImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -32,23 +50,33 @@ LinkImpl::~LinkImpl()
 	
 }
 
-LinkImpl::LinkImpl(const LinkImpl & obj)
+LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Link "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
 		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  LinkImpl::copy() const
@@ -99,13 +127,13 @@ bool
  LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
+		std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
 
 	bool matches = true;
-	unsigned int i = 1;
-	while (matches && i <= ends->size()) 
+	unsigned int i = 0;
+	while (matches && i < ends->size()) 
 	{
-		std::shared_ptr<uml::Property> otherEnd = ends->at(i - 1);
+		std::shared_ptr<uml::Property> otherEnd = ends->at(i);
 		if (otherEnd != end
 				&& !this->retrieveFeatureValue(otherEnd)->getValues()->at(0)
 						->equals(

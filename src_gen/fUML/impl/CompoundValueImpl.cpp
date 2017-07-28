@@ -10,6 +10,18 @@
 
 #include "StructuralFeature.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "FeatureValue.hpp";
+
+#include "StructuralFeature.hpp";
+
+#include "StructuredValue.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -24,7 +36,12 @@ CompoundValueImpl::CompoundValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_featureValues.reset(new Bag<fUML::FeatureValue>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -37,19 +54,31 @@ CompoundValueImpl::~CompoundValueImpl()
 	
 }
 
-CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj)
+CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CompoundValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
 		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
+	#endif
+
+	
+	
+
 }
 
 ecore::EObject *  CompoundValueImpl::copy() const
@@ -92,23 +121,23 @@ bool
  CompoundValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	std::shared_ptr<CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<CompoundValue>(otherValue);
+		std::shared_ptr<CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<CompoundValue>(otherValue);
 	bool isEqual = (otherCompoundValue != nullptr);
     if (isEqual)
     {
         isEqual = StructuredValueImpl::equals(otherValue)
                 && otherCompoundValue->getFeatureValues()->size() == this->getFeatureValues()->size();
 
-        unsigned int i = 1;
-        while (isEqual && i <= this->getFeatureValues()->size())
+        unsigned int i = 0;
+        while (isEqual && i < this->getFeatureValues()->size())
         {
-        	std::shared_ptr<FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i - 1);
+        	std::shared_ptr<FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i);
 
             bool matched = false;
-            unsigned int j = 1;
-            while (!matched && j <= otherCompoundValue->getFeatureValues()->size())
+            unsigned int j = 0;
+            while (!matched && j < otherCompoundValue->getFeatureValues()->size())
             {
-            	std::shared_ptr<FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j - 1);
+            	std::shared_ptr<FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j);
                 if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature())
                 {
                     matched = thisFeatureValue->hasEqualValues(otherFeatureValue);
@@ -135,13 +164,13 @@ std::shared_ptr<fUML::FeatureValue>
  CompoundValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	//generated from body annotation
-	std::shared_ptr<fUML::FeatureValue> featureValue = nullptr;
-    unsigned int i = 1;
-    while(featureValue == nullptr && i <= this->getFeatureValues()->size())
+	    std::shared_ptr<fUML::FeatureValue> featureValue = nullptr;
+    unsigned int i = 0;
+    while(featureValue == nullptr && i < this->getFeatureValues()->size())
     {
-        if(this->getFeatureValues()->at(i - 1)->getFeature() == feature)
+        if(this->getFeatureValues()->at(i)->getFeature() == feature)
         {
-            featureValue = this->getFeatureValues()->at(i - 1);
+            featureValue = this->getFeatureValues()->at(i);
         }
         i = i + 1;
     }
@@ -159,29 +188,29 @@ std::string
  CompoundValueImpl::toString() 
 {
 	//generated from body annotation
-	std::string buffer = "(" + this->objectId() + ":";
+		std::string buffer = "(" + this->objectId() + ":";
 
 	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
-    unsigned int i = 1;
-    while(i <= types->size())
+    unsigned int i = 0;
+    while(i < types->size())
     {
-        buffer = buffer + " " + types->at(i - 1)->getName();
+        buffer = buffer + " " + types->at(i)->getName();
         i = i + 1;
     }
 
-    unsigned int k = 1;
-    while(k <= this->getFeatureValues()->size())
+    unsigned int k = 0;
+    while(k < this->getFeatureValues()->size())
     {
-    	std::shared_ptr<FeatureValue> featureValue = this->getFeatureValues()->at(k - 1);
+    	std::shared_ptr<FeatureValue> featureValue = this->getFeatureValues()->at(k);
         char buf [11];
         std::sprintf(buf, "%d", featureValue->getPosition());
         buffer = buffer + "\n\t\t" + featureValue->getFeature()->getName() + "[" + std::string(buf) + "]  =";
 
-        unsigned int j = 1;
-        while(j <= featureValue->getValues()->size())
+        unsigned int j = 0;
+        while(j < featureValue->getValues()->size())
         {
-            buffer = buffer + " " + featureValue->getValues()->at(j - 1)->toString();
+            buffer = buffer + " " + featureValue->getValues()->at(j)->toString();
             j = j + 1;
         }
 

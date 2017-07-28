@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "BooleanValue.hpp";
+
+#include "Clause.hpp";
+
+#include "ClauseActivation.hpp";
+
+#include "ConditionalNodeActivation.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +29,14 @@ ClauseActivationImpl::ClauseActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
+	
+
+	//Init references
+	
+
 	
 }
 
@@ -31,18 +48,25 @@ ClauseActivationImpl::~ClauseActivationImpl()
 	
 }
 
-ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj)
+ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):ClauseActivationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClauseActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_clause  = obj.getClause();
 
 	m_conditionalNodeActivation  = obj.getConditionalNodeActivation();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ClauseActivationImpl::copy() const

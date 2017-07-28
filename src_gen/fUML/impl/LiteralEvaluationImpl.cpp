@@ -8,6 +8,16 @@
 #include "PrimitiveType.hpp"
 #include "Type.hpp"
 
+//Forward declaration includes
+#include "Evaluation.hpp";
+
+#include "Locus.hpp";
+
+#include "PrimitiveType.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -22,7 +32,9 @@ LiteralEvaluationImpl::LiteralEvaluationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 LiteralEvaluationImpl::~LiteralEvaluationImpl()
@@ -33,18 +45,25 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 	
 }
 
-LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj)
+LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):LiteralEvaluationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_specification  = obj.getSpecification();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  LiteralEvaluationImpl::copy() const

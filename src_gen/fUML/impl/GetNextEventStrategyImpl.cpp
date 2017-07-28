@@ -5,6 +5,14 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "ObjectActivation.hpp";
+
+#include "SemanticStrategy.hpp";
+
+#include "SignalInstance.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +27,9 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
@@ -30,14 +40,21 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 	
 }
 
-GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj)
+GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj):GetNextEventStrategyImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  GetNextEventStrategyImpl::copy() const

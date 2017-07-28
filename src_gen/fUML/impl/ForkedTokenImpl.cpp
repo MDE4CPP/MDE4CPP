@@ -6,6 +6,14 @@
 #include "fUMLPackageImpl.hpp"
  
 
+//Forward declaration includes
+#include "ActivityNodeActivation.hpp";
+
+#include "Token.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -21,6 +29,10 @@ ForkedTokenImpl::ForkedTokenImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -32,20 +44,27 @@ ForkedTokenImpl::~ForkedTokenImpl()
 	
 }
 
-ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj)
+ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ForkedToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_baseTokenIsWithdrawn = obj.isBaseTokenIsWithdrawn();
 	m_remainingOffersCount = obj.getRemainingOffersCount();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_baseToken  = obj.getBaseToken();
 
 	m_holder  = obj.getHolder();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ForkedTokenImpl::copy() const

@@ -6,6 +6,14 @@
 #include "fUMLPackageImpl.hpp"
  #include "FUMLFactory.hpp"
 
+//Forward declaration includes
+#include "ActivityNodeActivation.hpp";
+
+#include "Token.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,6 +28,10 @@ ObjectTokenImpl::ObjectTokenImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -31,20 +43,31 @@ ObjectTokenImpl::~ObjectTokenImpl()
 	
 }
 
-ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj)
+ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_holder  = obj.getHolder();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	if(obj.getValue()!=nullptr)
 	{
 		m_value.reset(dynamic_cast<fUML::Value*>(obj.getValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_value" << std::endl;
+	#endif
+
+	
+
 }
 
 ecore::EObject *  ObjectTokenImpl::copy() const

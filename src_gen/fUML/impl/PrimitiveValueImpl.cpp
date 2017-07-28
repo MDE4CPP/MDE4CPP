@@ -9,6 +9,14 @@
 #include "PrimitiveType.hpp"
 #include "Classifier.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "PrimitiveType.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -23,6 +31,10 @@ PrimitiveValueImpl::PrimitiveValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -34,16 +46,23 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 	
 }
 
-PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj)
+PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):PrimitiveValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PrimitiveValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  PrimitiveValueImpl::copy() const

@@ -6,6 +6,16 @@
 #include "fUMLPackageImpl.hpp"
 #include <Classifier.hpp>
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "SemanticVisitor.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,7 +30,9 @@ ValueImpl::ValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ValueImpl::~ValueImpl()
@@ -31,14 +43,21 @@ ValueImpl::~ValueImpl()
 	
 }
 
-ValueImpl::ValueImpl(const ValueImpl & obj)
+ValueImpl::ValueImpl(const ValueImpl & obj):ValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Value "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ValueImpl::copy() const
@@ -62,7 +81,7 @@ bool
  ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
+		std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
 	std::shared_ptr<Bag<uml::Classifier> > otherTypes = otherValue->getTypes();
 
     DEBUG_MESSAGE(std::cout<<"in Value"<<std::endl;)
@@ -74,14 +93,14 @@ bool
     }
     else
     {
-        unsigned int i = 1;
-        while(isEqual && i <= myTypes->size())
+        unsigned int i = 0;
+        while(isEqual && i < myTypes->size())
         {
             bool matched = false;
-            unsigned int j = 1;
-            while(!matched && j <= otherTypes->size())
+            unsigned int j = 0;
+            while(!matched && j < otherTypes->size())
             {
-                matched = (otherTypes->at(j - 1) == myTypes->at(i - 1));
+                matched = (otherTypes->at(j) == myTypes->at(i));
                 j = j + 1;
             }
 
@@ -104,13 +123,13 @@ bool
  ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
+		std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
     bool found = false;
-    unsigned int i = 1;
-    while(!found && i <= types->size())
+    unsigned int i = 0;
+    while(!found && i < types->size())
     {
-        found = (types->at(i - 1) == type);
+        found = (types->at(i) == type);
         i = i + 1;
     }
 

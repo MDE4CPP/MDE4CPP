@@ -5,6 +5,18 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Behavior.hpp";
+
+#include "Execution.hpp";
+
+#include "Object.hpp";
+
+#include "Operation.hpp";
+
+#include "SemanticStrategy.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +31,9 @@ DispatchStrategyImpl::DispatchStrategyImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 DispatchStrategyImpl::~DispatchStrategyImpl()
@@ -30,14 +44,21 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 	
 }
 
-DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj)
+DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):DispatchStrategyImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DispatchStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  DispatchStrategyImpl::copy() const

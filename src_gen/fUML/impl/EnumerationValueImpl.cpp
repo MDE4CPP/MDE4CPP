@@ -12,6 +12,18 @@
 #include "EnumerationLiteral.hpp"
 #include "Enumeration.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "Enumeration.hpp";
+
+#include "EnumerationLiteral.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -26,7 +38,14 @@ EnumerationValueImpl::EnumerationValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
+	
+
+	//Init references
+	
+
 	
 }
 
@@ -38,18 +57,25 @@ EnumerationValueImpl::~EnumerationValueImpl()
 	
 }
 
-EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj)
+EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):EnumerationValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EnumerationValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_literal  = obj.getLiteral();
 
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EnumerationValueImpl::copy() const

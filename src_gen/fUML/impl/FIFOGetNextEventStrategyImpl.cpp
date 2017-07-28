@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "GetNextEventStrategy.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,9 @@ FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
@@ -30,14 +36,21 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 	
 }
 
-FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj)
+FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj):FIFOGetNextEventStrategyImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FIFOGetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  FIFOGetNextEventStrategyImpl::copy() const

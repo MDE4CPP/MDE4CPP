@@ -34,6 +34,22 @@
 #include <DestroyLinkAction.hpp>
 #include "FlowFinalNode.hpp"
 
+//Forward declaration includes
+#include "Element.hpp";
+
+#include "ExecutionFactoryL1.hpp";
+
+#include "Locus.hpp";
+
+#include "OpaqueBehaviorExecution.hpp";
+
+#include "PrimitiveType.hpp";
+
+#include "SemanticStrategy.hpp";
+
+#include "SemanticVisitor.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -48,7 +64,9 @@ ExecutionFactoryL2Impl::ExecutionFactoryL2Impl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ExecutionFactoryL2Impl::~ExecutionFactoryL2Impl()
@@ -59,31 +77,38 @@ ExecutionFactoryL2Impl::~ExecutionFactoryL2Impl()
 	
 }
 
-ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & obj)
+ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & obj):ExecutionFactoryL2Impl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionFactoryL2 "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::PrimitiveType> >
 	 _builtInTypes = obj.getBuiltInTypes();
 	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));// this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
+	(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
 		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
 	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
 	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));// this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
+	(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
 		std::shared_ptr< Bag<fUML::SemanticStrategy> >
 	 _strategies = obj.getStrategies();
 	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));// this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
+	(*(obj.getStrategies().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ExecutionFactoryL2Impl::copy() const

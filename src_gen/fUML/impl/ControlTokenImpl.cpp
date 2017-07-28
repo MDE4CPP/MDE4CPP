@@ -6,6 +6,14 @@
 #include "fUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
+//Forward declaration includes
+#include "ActivityNodeActivation.hpp";
+
+#include "Token.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,7 +28,9 @@ ControlTokenImpl::ControlTokenImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ControlTokenImpl::~ControlTokenImpl()
@@ -31,16 +41,23 @@ ControlTokenImpl::~ControlTokenImpl()
 	
 }
 
-ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj)
+ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_holder  = obj.getHolder();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ControlTokenImpl::copy() const

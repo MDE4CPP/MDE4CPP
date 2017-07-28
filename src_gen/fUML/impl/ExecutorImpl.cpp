@@ -7,6 +7,24 @@
 #include "Object.hpp"
 #include "FUMLFactory.hpp"
 
+//Forward declaration includes
+#include "Behavior.hpp";
+
+#include "Class.hpp";
+
+#include "Locus.hpp";
+
+#include "Object.hpp";
+
+#include "ParameterValue.hpp";
+
+#include "Reference.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -21,6 +39,10 @@ ExecutorImpl::ExecutorImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -32,16 +54,23 @@ ExecutorImpl::~ExecutorImpl()
 	
 }
 
-ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj)
+ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ExecutorImpl::copy() const
@@ -72,7 +101,13 @@ std::shared_ptr<Bag<fUML::ParameterValue> >
  ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
-	std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
+		std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
+
+    if(nullptr == execution)
+    {
+        std::cerr << "[execute] Execution is null" << std::endl;
+        return nullptr;
+    }
 
     for(std::shared_ptr<fUML::ParameterValue> parameterValue : *inputs )
     {

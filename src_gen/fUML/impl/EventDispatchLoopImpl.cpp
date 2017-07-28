@@ -5,6 +5,9 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +22,9 @@ EventDispatchLoopImpl::EventDispatchLoopImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 EventDispatchLoopImpl::~EventDispatchLoopImpl()
@@ -30,14 +35,21 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 	
 }
 
-EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj)
+EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):EventDispatchLoopImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventDispatchLoop "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EventDispatchLoopImpl::copy() const

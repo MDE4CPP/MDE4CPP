@@ -7,6 +7,16 @@
 #include "FUMLFactory.hpp"
 #include "LiteralString.hpp"
 
+//Forward declaration includes
+#include "LiteralEvaluation.hpp";
+
+#include "Locus.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -21,7 +31,9 @@ LiteralStringEvaluationImpl::LiteralStringEvaluationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
@@ -32,18 +44,25 @@ LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 	
 }
 
-LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEvaluationImpl & obj)
+LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEvaluationImpl & obj):LiteralStringEvaluationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralStringEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_specification  = obj.getSpecification();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  LiteralStringEvaluationImpl::copy() const

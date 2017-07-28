@@ -11,6 +11,26 @@
 
 #include "EClass.hpp"
 
+//Forward declaration includes
+#include "ActivityEdgeInstance.hpp";
+
+#include "ActivityExecution.hpp";
+
+#include "ActivityNode.hpp";
+
+#include "ActivityNodeActivation.hpp";
+
+#include "ActivityNodeActivationGroup.hpp";
+
+#include "Locus.hpp";
+
+#include "Object.hpp";
+
+#include "SemanticVisitor.hpp";
+
+#include "Token.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -25,15 +45,34 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_heldTokens.reset(new Bag<fUML::Token>());
 	
 	
+
 		m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>());
 	
 	
+
 	
+
 		m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>());
+	
+	
+
+	//Init references
+	
+
+	
+	
+
+	
+	
+
+	
+
 	
 	
 }
@@ -46,34 +85,46 @@ ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
 	
 }
 
-ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj)
+ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj):ActivityNodeActivationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_running = obj.isRunning();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_group  = obj.getGroup();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+	(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+	(*(obj.getOutgoingEdges().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
 		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+
+	
+	
+
 }
 
 ecore::EObject *  ActivityNodeActivationImpl::copy() const
@@ -352,13 +403,24 @@ void
  ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
 	//generated from body annotation
-	if (tokens->size() > 0) 
+		if (tokens->size() > 0) 
 	{
         // *** Send all outgoing offers concurrently. ***
 		std::shared_ptr<Bag<ActivityEdgeInstance> > outgoingEdgeList = this->getOutgoingEdges();
         for(std::shared_ptr<ActivityEdgeInstance> outgoingEdge : *outgoingEdgeList)
         {
-            DEBUG_MESSAGE(std::cout<<"[sendOffers] Sending offer to " << outgoingEdge->getTarget()->getNode()->getName() << "."<<std::endl;)
+			DEBUG_MESSAGE(
+			if(nullptr == outgoingEdge->getTarget()){
+				std::cerr << "[sendOffers] Target is NULL for edge: " << outgoingEdge->getEdge()->getName() << std::endl;
+			}
+			else if(nullptr == outgoingEdge->getTarget()->getNode())
+			{
+				std::cerr << "[sendOffers] Node is NULL for target on edge: " <<  outgoingEdge->getEdge()->getName() << std::endl;
+			}else{
+				std::cout << "[sendOffers] Sending offer to " << outgoingEdge->getTarget()->getNode()->getName() << "."
+						  << std::endl;
+			}
+			)
             outgoingEdge->sendOffer(tokens);
         }
     }

@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,12 @@ ValuesImpl::ValuesImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_values.reset(new Bag<fUML::Value>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -32,19 +41,26 @@ ValuesImpl::~ValuesImpl()
 	
 }
 
-ValuesImpl::ValuesImpl(const ValuesImpl & obj)
+ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Values "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<fUML::Value> >
 	 _values = obj.getValues();
 	m_values.reset(new 	 Bag<fUML::Value> 
-	(*(obj.getValues().get())));// this->getValues()->insert(this->getValues()->end(), _values->begin(), _values->end());
+	(*(obj.getValues().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ValuesImpl::copy() const

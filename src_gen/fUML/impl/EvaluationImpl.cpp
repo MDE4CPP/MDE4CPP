@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Locus.hpp";
+
+#include "SemanticVisitor.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +29,14 @@ EvaluationImpl::EvaluationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
+	
+
+	//Init references
+	
+
 	
 }
 
@@ -31,18 +48,25 @@ EvaluationImpl::~EvaluationImpl()
 	
 }
 
-EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj)
+EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Evaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_specification  = obj.getSpecification();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EvaluationImpl::copy() const

@@ -5,6 +5,9 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +22,9 @@ ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImpl()
@@ -30,14 +35,21 @@ ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImp
 	
 }
 
-ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj)
+ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj):ClassifierBehaviorExecutionActivityImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecutionActivity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ClassifierBehaviorExecutionActivityImpl::copy() const

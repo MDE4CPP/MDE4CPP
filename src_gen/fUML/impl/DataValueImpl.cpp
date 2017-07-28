@@ -11,6 +11,18 @@
 #include "DataType.hpp"
 #include "Classifier.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "CompoundValue.hpp";
+
+#include "DataType.hpp";
+
+#include "FeatureValue.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -25,6 +37,10 @@ DataValueImpl::DataValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -36,21 +52,31 @@ DataValueImpl::~DataValueImpl()
 	
 }
 
-DataValueImpl::DataValueImpl(const DataValueImpl & obj)
+DataValueImpl::DataValueImpl(const DataValueImpl & obj):DataValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
 		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  DataValueImpl::copy() const

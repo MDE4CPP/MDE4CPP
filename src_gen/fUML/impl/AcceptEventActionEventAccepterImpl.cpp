@@ -5,6 +5,12 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "AcceptEventActionActivation.hpp";
+
+#include "EventAccepter.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,6 +25,10 @@ AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -30,16 +40,23 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 	
 }
 
-AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj)
+AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj):AcceptEventActionEventAccepterImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventActionEventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_actionActivation  = obj.getActionActivation();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  AcceptEventActionEventAccepterImpl::copy() const

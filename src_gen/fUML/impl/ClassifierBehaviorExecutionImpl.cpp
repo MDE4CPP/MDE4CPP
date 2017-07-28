@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Class.hpp";
+
+#include "Execution.hpp";
+
+#include "ObjectActivation.hpp";
+
+#include "ParameterValue.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,8 +29,18 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 	
+
+	
+
+	//Init references
+	
+
+	
+
 	
 }
 
@@ -32,11 +52,14 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 	
 }
 
-ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj)
+ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj):ClassifierBehaviorExecutionImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_classifier  = obj.getClassifier();
 
@@ -45,7 +68,11 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const Classifie
 	m_objectActivation  = obj.getObjectActivation();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ClassifierBehaviorExecutionImpl::copy() const

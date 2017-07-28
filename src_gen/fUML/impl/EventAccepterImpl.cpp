@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "SignalInstance.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,9 @@ EventAccepterImpl::EventAccepterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 EventAccepterImpl::~EventAccepterImpl()
@@ -30,14 +36,21 @@ EventAccepterImpl::~EventAccepterImpl()
 	
 }
 
-EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj)
+EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepterImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  EventAccepterImpl::copy() const

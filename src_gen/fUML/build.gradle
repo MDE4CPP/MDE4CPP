@@ -53,7 +53,7 @@ model {
     }
 	repositories {
         libs(PrebuiltLibraries) {
-			[ "ecore","ecore","uml","uml" ].each {
+			[ "ecore","ecore","uml","uml", "PluginFramework" ].each {
 				delegate."$it" {
 					def libraryName = "${name}"
 					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
@@ -194,6 +194,8 @@ model {
 						include	"FUMLFactory.cpp"
 						include	"impl/FUMLPackageImpl.cpp"
 						include	"FUMLPackage.cpp"
+						include	"impl/FUMLPluginImpl.cpp"
+						include	"FUMLPlugin.cpp"
                     }
 					exportedHeaders {
                         srcDirs ".", "../", System.getenv('MDE4CPP_HOME')+"/application/include", System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
@@ -203,6 +205,7 @@ model {
 					lib library: "ecore"
 					lib library: "uml"
 					lib library: "uml"
+					lib library: "PluginFramework"
                 }
             }
 
