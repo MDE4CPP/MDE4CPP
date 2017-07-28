@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Token.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,12 @@ TokenSetImpl::TokenSetImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_tokens.reset(new Bag<fUML::Token>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -32,19 +41,26 @@ TokenSetImpl::~TokenSetImpl()
 	
 }
 
-TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj)
+TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj):TokenSetImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TokenSet "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<fUML::Token> >
 	 _tokens = obj.getTokens();
 	m_tokens.reset(new 	 Bag<fUML::Token> 
-	(*(obj.getTokens().get())));// this->getTokens()->insert(this->getTokens()->end(), _tokens->begin(), _tokens->end());
+	(*(obj.getTokens().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  TokenSetImpl::copy() const

@@ -6,6 +6,18 @@
 #include "fUMLPackageImpl.hpp"
  #include "FUMLFactory.hpp"
 
+//Forward declaration includes
+#include "ActivityEdge.hpp";
+
+#include "ActivityNodeActivation.hpp";
+
+#include "ActivityNodeActivationGroup.hpp";
+
+#include "Offer.hpp";
+
+#include "Token.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,12 +32,29 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 	
+
 		m_offers.reset(new Bag<fUML::Offer>());
 	
 	
+
 	
+
+	
+
+	//Init references
+	
+
+	
+
+	
+	
+
+	
+
 	
 }
 
@@ -37,11 +66,14 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 	
 }
 
-ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj)
+ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityEdgeInstance "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_edge  = obj.getEdge();
 
@@ -50,14 +82,18 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImp
 		std::shared_ptr< Bag<fUML::Offer> >
 	 _offers = obj.getOffers();
 	m_offers.reset(new 	 Bag<fUML::Offer> 
-	(*(obj.getOffers().get())));// this->getOffers()->insert(this->getOffers()->end(), _offers->begin(), _offers->end());
+	(*(obj.getOffers().get())));
 
 	m_source  = obj.getSource();
 
 	m_target  = obj.getTarget();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ActivityEdgeInstanceImpl::copy() const
@@ -118,10 +154,17 @@ void
  ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
 	//generated from body annotation
-	std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
+	 std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     this->getOffers()->push_back(offer);
-    this->getTarget()->recieveOffer();
+    if(nullptr == this->getTarget())
+    {
+        std::cout << "[sendOffer] The edge does not have a target" << std::endl;
+    }
+    else
+    {
+        this->getTarget()->recieveOffer();
+    }
 }
 
 std::shared_ptr<Bag<fUML::Token> >

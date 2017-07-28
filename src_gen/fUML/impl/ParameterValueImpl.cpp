@@ -6,6 +6,12 @@
 #include "fUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
+//Forward declaration includes
+#include "Parameter.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,8 +26,16 @@ ParameterValueImpl::ParameterValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_values.reset(new Bag<fUML::Value>());
+	
+	
+
+	//Init references
+	
+
 	
 	
 }
@@ -34,21 +48,33 @@ ParameterValueImpl::~ParameterValueImpl()
 	
 }
 
-ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj)
+ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):ParameterValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_parameter  = obj.getParameter();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
 		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_values" << std::endl;
+	#endif
+
+	
+	
+
 }
 
 ecore::EObject *  ParameterValueImpl::copy() const

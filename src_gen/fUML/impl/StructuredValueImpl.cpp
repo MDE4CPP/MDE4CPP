@@ -15,6 +15,16 @@
 #include "StructuralFeature.hpp"
 
 
+//Forward declaration includes
+#include "FeatureValue.hpp";
+
+#include "StructuralFeature.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -29,7 +39,9 @@ StructuredValueImpl::StructuredValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 StructuredValueImpl::~StructuredValueImpl()
@@ -40,14 +52,21 @@ StructuredValueImpl::~StructuredValueImpl()
 	
 }
 
-StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj)
+StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj):StructuredValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuredValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  StructuredValueImpl::copy() const

@@ -19,6 +19,16 @@
 #include "Behavior.hpp"
 #include "Class.hpp"
 
+//Forward declaration includes
+#include "Evaluation.hpp";
+
+#include "Locus.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -33,7 +43,9 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
@@ -44,18 +56,25 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 	
 }
 
-InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj)
+InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj):InstanceValueEvaluationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValueEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_specification  = obj.getSpecification();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  InstanceValueEvaluationImpl::copy() const

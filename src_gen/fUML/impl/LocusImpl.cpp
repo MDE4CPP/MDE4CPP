@@ -15,6 +15,20 @@
 #include "Execution.hpp"
 
 
+//Forward declaration includes
+#include "Class.hpp";
+
+#include "Classifier.hpp";
+
+#include "ExecutionFactory.hpp";
+
+#include "Executor.hpp";
+
+#include "ExtensionalValue.hpp";
+
+#include "Object.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -29,10 +43,21 @@ LocusImpl::LocusImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_extensionalValues.reset(new Bag<fUML::ExtensionalValue>());
 	
 	
+
+	
+
+	//Init references
+	
+
+	
+	
+
 	
 }
 
@@ -44,27 +69,49 @@ LocusImpl::~LocusImpl()
 	
 }
 
-LocusImpl::LocusImpl(const LocusImpl & obj)
+LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Locus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	if(obj.getExecutor()!=nullptr)
 	{
 		m_executor.reset(dynamic_cast<fUML::Executor*>(obj.getExecutor()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_executor" << std::endl;
+	#endif
 	std::shared_ptr<Bag<fUML::ExtensionalValue>> _extensionalValuesList = obj.getExtensionalValues();
 	for(std::shared_ptr<fUML::ExtensionalValue> _extensionalValues : *_extensionalValuesList)
 	{
 		this->getExtensionalValues()->add(std::shared_ptr<fUML::ExtensionalValue>(dynamic_cast<fUML::ExtensionalValue*>(_extensionalValues->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_extensionalValues" << std::endl;
+	#endif
 	if(obj.getFactory()!=nullptr)
 	{
 		m_factory.reset(dynamic_cast<fUML::ExecutionFactory*>(obj.getFactory()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_factory" << std::endl;
+	#endif
+
+	
+
+	
+	
+
+	
+
 }
 
 ecore::EObject *  LocusImpl::copy() const
@@ -115,17 +162,17 @@ bool
  LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
-	bool doesConform = false;
+		bool doesConform = false;
     if(type == classifier)
     {
         doesConform = true;
     }
     else
     {
-        unsigned int i = 1;
-        while(!doesConform && (i <= type->getGeneral()->size()))
+        unsigned int i = 0;
+        while(!doesConform && (i < type->getGeneral()->size()))
         {
-            doesConform = this->conforms(type->getGeneral()->at(i - 1), classifier);
+            doesConform = this->conforms(type->getGeneral()->at(i), classifier);
             i = i + 1;
         }
     }
@@ -166,7 +213,7 @@ std::shared_ptr<Bag<fUML::ExtensionalValue> >
  LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::ExtensionalValue> > extent =this->getExtensionalValues();
+		std::shared_ptr<Bag<fUML::ExtensionalValue> > extent =this->getExtensionalValues();
 	std::shared_ptr<Bag<fUML::ExtensionalValue> > extensionalValues = this->getExtensionalValues();
 
 	for (unsigned int i=0; i < extensionalValues->size();i++)
@@ -174,10 +221,10 @@ std::shared_ptr<Bag<fUML::ExtensionalValue> >
 		std::shared_ptr<fUML::ExtensionalValue> value = extensionalValues->at(i);
 		std::shared_ptr<Bag<uml::Classifier> > types = value->getTypes();
 		bool conforms = false;
-		unsigned int j = 1;
-		while(!conforms && j <= types->size())
+		unsigned int j = 0;
+		while(!conforms && j < types->size())
 		{
-			conforms = this->conforms(types->at(j - 1), classifier);
+			conforms = this->conforms(types->at(j), classifier);
 			j = j + 1;
 		}
 		if(conforms)

@@ -9,6 +9,20 @@
 #include "Behavior.hpp"
 #include "ClassifierBehaviorExecution.hpp"
 
+//Forward declaration includes
+#include "Class.hpp";
+
+#include "ClassifierBehaviorExecution.hpp";
+
+#include "EventAccepter.hpp";
+
+#include "Object.hpp";
+
+#include "ParameterValue.hpp";
+
+#include "SignalInstance.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -23,14 +37,30 @@ ObjectActivationImpl::ObjectActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_classifierBehaviorExecutions.reset(new Bag<fUML::ClassifierBehaviorExecution>());
 	
 	
+
 		m_eventPool.reset(new Bag<fUML::SignalInstance>());
 	
 	
+
 	
+
 		m_waitingEventAccepters.reset(new Bag<fUML::EventAccepter>());
+	
+	
+
+	//Init references
+	
+	
+
+	
+	
+
+	
+
 	
 	
 }
@@ -43,31 +73,49 @@ ObjectActivationImpl::~ObjectActivationImpl()
 	
 }
 
-ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj)
+ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):ObjectActivationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_object  = obj.getObject();
 
 		std::shared_ptr< Bag<fUML::EventAccepter> >
 	 _waitingEventAccepters = obj.getWaitingEventAccepters();
 	m_waitingEventAccepters.reset(new 	 Bag<fUML::EventAccepter> 
-	(*(obj.getWaitingEventAccepters().get())));// this->getWaitingEventAccepters()->insert(this->getWaitingEventAccepters()->end(), _waitingEventAccepters->begin(), _waitingEventAccepters->end());
+	(*(obj.getWaitingEventAccepters().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> _classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
 	for(std::shared_ptr<fUML::ClassifierBehaviorExecution> _classifierBehaviorExecutions : *_classifierBehaviorExecutionsList)
 	{
 		this->getClassifierBehaviorExecutions()->add(std::shared_ptr<fUML::ClassifierBehaviorExecution>(dynamic_cast<fUML::ClassifierBehaviorExecution*>(_classifierBehaviorExecutions->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_classifierBehaviorExecutions" << std::endl;
+	#endif
 	std::shared_ptr<Bag<fUML::SignalInstance>> _eventPoolList = obj.getEventPool();
 	for(std::shared_ptr<fUML::SignalInstance> _eventPool : *_eventPoolList)
 	{
 		this->getEventPool()->add(std::shared_ptr<fUML::SignalInstance>(dynamic_cast<fUML::SignalInstance*>(_eventPool->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eventPool" << std::endl;
+	#endif
+
+	
+	
+
+	
+	
+
 }
 
 ecore::EObject *  ObjectActivationImpl::copy() const
@@ -137,7 +185,7 @@ void
  ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
-	this->_startObjectBehavior();
+		this->_startObjectBehavior();
 
     if (classifier == nullptr) 
     {
@@ -160,11 +208,11 @@ void
         DEBUG_MESSAGE(std::cout<<"[startBehavior] Starting behavior for "<< classifier->getName() << "..."<<std::endl;)
 
         bool notYetStarted = true;
-        unsigned int i = 1;
+        unsigned int i = 0;
         while (notYetStarted
-               && i <= this->getClassifierBehaviorExecutions()->size()) 
+               && i < this->getClassifierBehaviorExecutions()->size()) 
         {
-            notYetStarted = (this->getClassifierBehaviorExecutions()->at(i - 1)->getClassifier() != classifier);
+            notYetStarted = (this->getClassifierBehaviorExecutions()->at(i)->getClassifier() != classifier);
             i = i + 1;
         }
 
@@ -195,14 +243,14 @@ void
  ObjectActivationImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[unregister] object = " << this->getObject()<<std::endl;)
+		DEBUG_MESSAGE(std::cout<<"[unregister] object = " << this->getObject()<<std::endl;)
     DEBUG_MESSAGE(std::cout<<"[unregister] accepter = " << accepter<<std::endl;)
 
     bool notFound = true;
-    unsigned int i = 1;
-    while (notFound && i <= this->getWaitingEventAccepters()->size()) {
-        if (this->getWaitingEventAccepters()->at(i - 1) == accepter) {
-            this->getWaitingEventAccepters()->erase(this->getWaitingEventAccepters()->begin() + i - 1);
+    unsigned int i = 0;
+    while (notFound && i < this->getWaitingEventAccepters()->size()) {
+        if (this->getWaitingEventAccepters()->at(i) == accepter) {
+            this->getWaitingEventAccepters()->erase(this->getWaitingEventAccepters()->begin() + i);
             notFound = false;
         }
         i = i + 1;

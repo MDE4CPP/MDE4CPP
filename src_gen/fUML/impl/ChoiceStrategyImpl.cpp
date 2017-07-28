@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "SemanticStrategy.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,9 @@ ChoiceStrategyImpl::ChoiceStrategyImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ChoiceStrategyImpl::~ChoiceStrategyImpl()
@@ -30,14 +36,21 @@ ChoiceStrategyImpl::~ChoiceStrategyImpl()
 	
 }
 
-ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj)
+ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj):ChoiceStrategyImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ChoiceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ChoiceStrategyImpl::copy() const

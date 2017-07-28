@@ -5,6 +5,16 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "LiteralEvaluation.hpp";
+
+#include "Locus.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +29,9 @@ LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
@@ -30,18 +42,25 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 	
 }
 
-LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj)
+LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj):LiteralNullEvaluationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralNullEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 	m_specification  = obj.getSpecification();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  LiteralNullEvaluationImpl::copy() const

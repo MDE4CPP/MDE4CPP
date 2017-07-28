@@ -9,6 +9,16 @@
 #include "Operation.hpp"
 
 
+//Forward declaration includes
+#include "Behavior.hpp";
+
+#include "DispatchStrategy.hpp";
+
+#include "Object.hpp";
+
+#include "Operation.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -23,7 +33,9 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
@@ -34,14 +46,21 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 	
 }
 
-RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj)
+RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj):RedefinitionBasedDispatchStrategyImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RedefinitionBasedDispatchStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  RedefinitionBasedDispatchStrategyImpl::copy() const
@@ -65,7 +84,7 @@ bool
  RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
 {
 	//generated from body annotation
-	//#include "NamedElement.hpp"
+		//#include "NamedElement.hpp"
 	//#include "Class.hpp"
 	//#include "Operation.hpp"
 	//
@@ -76,10 +95,10 @@ bool
 	}
 	else
     {
-		unsigned int i = 1;
-		while(!matches && i <= ownedOperation->getRedefinedOperation()->size())
+		unsigned int i = 0;
+		while(!matches && i < ownedOperation->getRedefinedOperation()->size())
         {
-			matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i - 1), baseOperation);
+			matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i), baseOperation);
 			i = i + 1;
         }
     }
@@ -90,16 +109,16 @@ std::shared_ptr<uml::Behavior>
  RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::Behavior> method = nullptr;
-	unsigned int i = 1;
-	while(method == nullptr && (i <= object->getTypes()->size()))
+		std::shared_ptr<uml::Behavior> method = nullptr;
+	unsigned int i = 0;
+	while(method == nullptr && (i < object->getTypes()->size()))
 	{
-		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i - 1));
+		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i));
 		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
-		unsigned int j = 1;
-		while(method == nullptr && (j <= members->size()))
+		unsigned int j = 0;
+		while(method == nullptr && (j < members->size()))
 		{
-			std::shared_ptr<uml::NamedElement> member = members->at(j - 1);
+			std::shared_ptr<uml::NamedElement> member = members->at(j);
 			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
 			if(memberOperation != nullptr)
 			{	

@@ -9,6 +9,32 @@
 #include "Class.hpp"
 #include "Classifier.hpp"
 
+//Forward declaration includes
+#include "Class.hpp";
+
+#include "Classifier.hpp";
+
+#include "EventAccepter.hpp";
+
+#include "Execution.hpp";
+
+#include "ExtensionalValue.hpp";
+
+#include "FeatureValue.hpp";
+
+#include "Locus.hpp";
+
+#include "ObjectActivation.hpp";
+
+#include "Operation.hpp";
+
+#include "ParameterValue.hpp";
+
+#include "SignalInstance.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -23,8 +49,16 @@ ObjectImpl::ObjectImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_types.reset(new Bag<uml::Classifier>());
+	
+	
+
+	//Init references
+	
+
 	
 	
 }
@@ -37,30 +71,44 @@ ObjectImpl::~ObjectImpl()
 	
 }
 
-ObjectImpl::ObjectImpl(const ObjectImpl & obj)
+ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_locus  = obj.getLocus();
 
 		std::shared_ptr< Bag<uml::Classifier> >
 	 _types = obj.getTypes();
 	m_types.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getTypes().get())));// this->getTypes()->insert(this->getTypes()->end(), _types->begin(), _types->end());
+	(*(obj.getTypes().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
 		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
+	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
+	#endif
+
+	
+
 }
 
 ecore::EObject *  ObjectImpl::copy() const

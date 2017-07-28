@@ -17,6 +17,24 @@
 #include "ValueSpecification.hpp"
 #include "ObjectToken.hpp"
 
+//Forward declaration includes
+#include "ActivityEdgeInstance.hpp";
+
+#include "ActivityNode.hpp";
+
+#include "ActivityNodeActivationGroup.hpp";
+
+#include "ControlNodeActivation.hpp";
+
+#include "Execution.hpp";
+
+#include "Token.hpp";
+
+#include "Value.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -31,6 +49,10 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -42,38 +64,52 @@ DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
 	
 }
 
-DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj)
+DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj):DecisionNodeActivationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DecisionNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_running = obj.isRunning();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_group  = obj.getGroup();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+	(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+	(*(obj.getOutgoingEdges().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	if(obj.getDecisionInputExecution()!=nullptr)
 	{
 		m_decisionInputExecution.reset(dynamic_cast<fUML::Execution*>(obj.getDecisionInputExecution()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_decisionInputExecution" << std::endl;
+	#endif
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
 		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+
+	
+
 }
 
 ecore::EObject *  DecisionNodeActivationImpl::copy() const
@@ -97,7 +133,7 @@ std::shared_ptr<fUML::Value>
  DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
+		std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
@@ -122,12 +158,12 @@ std::shared_ptr<fUML::Value>
     {
         this->setDecisionInputExecution(this->getExecutionLocus()->getFactory()->createExecution(decisionInputBehavior,this->getExecutionContext()));
 
-        unsigned int i = 1;
-        int j = 0;
+        unsigned int i = 0;
+        unsigned int j = 0;
         while (((j == 0) || ((j == 1) && (decisionInputValue != nullptr)))
-               && (i <= decisionInputBehavior->getOwnedParameter()->size()))
+               && (i < decisionInputBehavior->getOwnedParameter()->size()))
         {
-        	std::shared_ptr<uml::Parameter> parameter = decisionInputBehavior->getOwnedParameter()->at(i - 1);
+        	std::shared_ptr<uml::Parameter> parameter = decisionInputBehavior->getOwnedParameter()->at(i);
             if (parameter->getDirection() == uml::ParameterDirectionKind::IN
                     || parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
             {
@@ -201,15 +237,15 @@ std::shared_ptr<fUML::ActivityEdgeInstance>
  DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
+		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
 	std::shared_ptr<ActivityEdgeInstance> edgeInstance = nullptr;
     if (decisionInputFlow != nullptr) 
     {
-        unsigned int i = 1;
-        while ((edgeInstance == nullptr) && (i <= this->getIncomingEdges()->size())) 
+        unsigned int i = 0;
+        while ((edgeInstance == nullptr) && (i < this->getIncomingEdges()->size())) 
         {
-        	std::shared_ptr<ActivityEdgeInstance> incomingEdge = this->getIncomingEdges()->at(i - 1);
+        	std::shared_ptr<ActivityEdgeInstance> incomingEdge = this->getIncomingEdges()->at(i);
             if (incomingEdge->getEdge() == decisionInputFlow) 
             {
                 edgeInstance = incomingEdge;
@@ -278,13 +314,13 @@ bool
  DecisionNodeActivationImpl::hasObjectFlowInput() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
+		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
     bool isObjectFlow = false;
-    unsigned int i = 1;
-    while (!isObjectFlow && i <= this->getIncomingEdges()->size()) 
+    unsigned int i = 0;
+    while (!isObjectFlow && i < this->getIncomingEdges()->size()) 
     {
-    	std::shared_ptr<uml::ActivityEdge> edge = this->getIncomingEdges()->at(i - 1)->getEdge();
+    	std::shared_ptr<uml::ActivityEdge> edge = this->getIncomingEdges()->at(i)->getEdge();
         isObjectFlow = (edge != decisionInputFlow) && (std::dynamic_pointer_cast<uml::ObjectFlow>(edge) != nullptr);
         i = i + 1;
     }
@@ -295,11 +331,11 @@ bool
  DecisionNodeActivationImpl::isReady() 
 {
 	//generated from body annotation
-	unsigned int i = 1;
+	unsigned int i = 0;
     bool ready = true;
     DEBUG_MESSAGE(std::cout<< "INCOMING EDGE SIZE:"<< this->getIncomingEdges()->size()<<std::endl;)
-    while (ready && (i <= this->getIncomingEdges()->size())) {
-        ready = this->getIncomingEdges()->at(i - 1)->hasOffer();
+    while (ready && (i < this->getIncomingEdges()->size())) {
+        ready = this->getIncomingEdges()->at(i)->hasOffer();
         i = i + 1;
     }
     DEBUG_MESSAGE(std::cout<< "READY:"<< ready<<std::endl;)
@@ -310,18 +346,18 @@ std::shared_ptr<Bag<fUML::Token> >
  DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<fUML::Token> > removedControlTokens(new Bag<fUML::Token>());
+		std::shared_ptr<Bag<fUML::Token> > removedControlTokens(new Bag<fUML::Token>());
 
     if (this->hasObjectFlowInput()) 
     {
-        unsigned int i = 1;
-        while (i <= incomingTokens->size()) 
+        unsigned int i = 0;
+        while (i < incomingTokens->size()) 
         {
-        	std::shared_ptr<Token> token = incomingTokens->at(i - 1);
+        	std::shared_ptr<Token> token = incomingTokens->at(i);
             if (token->isControl()) 
             {
                 removedControlTokens->push_back(token);
-                incomingTokens->erase(incomingTokens->begin()+i - 1);
+                incomingTokens->erase(incomingTokens->begin()+i);
                 i = i - 1;
             }
             i = i + 1;

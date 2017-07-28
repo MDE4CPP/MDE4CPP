@@ -6,6 +6,22 @@
 #include "fUMLPackageImpl.hpp"
 #include "Execution.hpp"
 
+//Forward declaration includes
+#include "ActivityEdgeInstance.hpp";
+
+#include "ActivityNode.hpp";
+
+#include "ActivityNodeActivationGroup.hpp";
+
+#include "CallActionActivation.hpp";
+
+#include "Execution.hpp";
+
+#include "PinActivation.hpp";
+
+#include "Token.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -20,7 +36,9 @@ CallOperationActionActivationImpl::CallOperationActionActivationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 CallOperationActionActivationImpl::~CallOperationActionActivationImpl()
@@ -31,45 +49,58 @@ CallOperationActionActivationImpl::~CallOperationActionActivationImpl()
 	
 }
 
-CallOperationActionActivationImpl::CallOperationActionActivationImpl(const CallOperationActionActivationImpl & obj)
+CallOperationActionActivationImpl::CallOperationActionActivationImpl(const CallOperationActionActivationImpl & obj):CallOperationActionActivationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallOperationActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_firing = obj.isFiring();
 	m_running = obj.isRunning();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_group  = obj.getGroup();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _incomingEdges = obj.getIncomingEdges();
 	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));// this->getIncomingEdges()->insert(this->getIncomingEdges()->end(), _incomingEdges->begin(), _incomingEdges->end());
+	(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
 		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
 	 _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));// this->getOutgoingEdges()->insert(this->getOutgoingEdges()->end(), _outgoingEdges->begin(), _outgoingEdges->end());
+	(*(obj.getOutgoingEdges().get())));
 
 		std::shared_ptr< Bag<fUML::PinActivation> >
 	 _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));// this->getPinActivation()->insert(this->getPinActivation()->end(), _pinActivation->begin(), _pinActivation->end());
+	(*(obj.getPinActivation().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::Execution>> _callExecutionsList = obj.getCallExecutions();
 	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
 		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_callExecutions" << std::endl;
+	#endif
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
 		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  CallOperationActionActivationImpl::copy() const
@@ -93,7 +124,7 @@ std::shared_ptr<fUML::Execution>
  CallOperationActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
-	std::shared_ptr<fUML::Execution> execution = nullptr;
+		std::shared_ptr<fUML::Execution> execution = nullptr;
 	std::shared_ptr<uml::CallOperationAction> action = std::dynamic_pointer_cast<uml::CallOperationAction> (this->getNode());
     if(action != nullptr)
     {
@@ -136,7 +167,40 @@ std::shared_ptr<fUML::Execution>
 				
 			}
 			else{
-				target  = this->retrievePinActivation(action->getTarget())->getUnofferedTokens()->front()->getValue();
+                std::shared_ptr<uml::InputPin > t = action->getTarget();
+                if(nullptr==t)
+                {
+                    std::cerr<< "[getCallExecution] Target is null" << std::endl;
+                }
+                else
+                {
+                    std::shared_ptr<fUML::PinActivation> pa = this->retrievePinActivation(t);
+                    if(nullptr==pa)
+                    {
+                        std::cerr<< "[getCallExecution] PinActivation is null" << std::endl;
+                    }
+                    else
+                    {
+                        std::shared_ptr<Bag<fUML::Token> > unofferedTokens = pa->getUnofferedTokens();
+                        if(nullptr == unofferedTokens)
+                        {
+                            std::cerr<< "[getCallExecution] UnofferedTokens are null" << std::endl;
+                        }
+                        else
+                        {
+                            std::shared_ptr<fUML::Token> firstToken = unofferedTokens->front();
+                            if(nullptr==firstToken)
+                            {
+                                std::cerr<< "[getCallExecution] FirstToken is null" << std::endl;
+                            }
+                            else
+                            {
+                                target  = firstToken->getValue();
+                            }
+                        }
+
+                    }
+                }
 			}
 			
     	std::shared_ptr<fUML::Reference> ref = std::dynamic_pointer_cast<fUML::Reference>(target);

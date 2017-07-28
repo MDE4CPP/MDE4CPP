@@ -5,6 +5,9 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +22,9 @@ SemanticVisitorImpl::SemanticVisitorImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 SemanticVisitorImpl::~SemanticVisitorImpl()
@@ -30,14 +35,21 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 	
 }
 
-SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj)
+SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):SemanticVisitorImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticVisitor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  SemanticVisitorImpl::copy() const

@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "fUMLPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Token.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -19,7 +23,12 @@ OfferImpl::OfferImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_offeredTokens.reset(new Bag<fUML::Token>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -32,19 +41,26 @@ OfferImpl::~OfferImpl()
 	
 }
 
-OfferImpl::OfferImpl(const OfferImpl & obj)
+OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Offer "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<fUML::Token> >
 	 _offeredTokens = obj.getOfferedTokens();
 	m_offeredTokens.reset(new 	 Bag<fUML::Token> 
-	(*(obj.getOfferedTokens().get())));// this->getOfferedTokens()->insert(this->getOfferedTokens()->end(), _offeredTokens->begin(), _offeredTokens->end());
+	(*(obj.getOfferedTokens().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  OfferImpl::copy() const
@@ -93,10 +109,10 @@ void
 {
 	//generated from body annotation
 	    int n = count;
-    int i = 1;
+    unsigned int i = 0;
     while (n > 0) {
-        if (this->getOfferedTokens()->at(i - 1)->getValue() != nullptr) {
-            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i - 1);
+        if (this->getOfferedTokens()->at(i)->getValue() != nullptr) {
+            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i);
         } else {
             i = i + 1;
         }
@@ -108,10 +124,10 @@ void
  OfferImpl::removeWithdrawnTokens() 
 {
 	//generated from body annotation
-	    unsigned int i = 1;
-    while (i <= this->getOfferedTokens()->size()) {
-        if (this->getOfferedTokens()->at(i - 1)->isWithdrawn()) {
-            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i - 1);
+	    unsigned int i = 0;
+    while (i < this->getOfferedTokens()->size()) {
+        if (this->getOfferedTokens()->at(i)->isWithdrawn()) {
+            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i );
             i = i - 1;
         }
         i = i + 1;

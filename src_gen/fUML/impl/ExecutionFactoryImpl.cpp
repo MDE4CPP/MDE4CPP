@@ -12,6 +12,32 @@
 #include "Element.hpp"
 #include "ValueSpecification.hpp"
 
+//Forward declaration includes
+#include "Behavior.hpp";
+
+#include "Element.hpp";
+
+#include "Evaluation.hpp";
+
+#include "Execution.hpp";
+
+#include "Locus.hpp";
+
+#include "Object.hpp";
+
+#include "OpaqueBehavior.hpp";
+
+#include "OpaqueBehaviorExecution.hpp";
+
+#include "PrimitiveType.hpp";
+
+#include "SemanticStrategy.hpp";
+
+#include "SemanticVisitor.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -26,14 +52,30 @@ ExecutionFactoryImpl::ExecutionFactoryImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_builtInTypes.reset(new Bag<uml::PrimitiveType>());
 	
 	
+
 	
+
 		m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>());
 	
 	
+
 		m_strategies.reset(new Bag<fUML::SemanticStrategy>());
+	
+	
+
+	//Init references
+	
+	
+
+	
+
+	
+	
+
 	
 	
 }
@@ -46,31 +88,38 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 	
 }
 
-ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj)
+ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):ExecutionFactoryImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::PrimitiveType> >
 	 _builtInTypes = obj.getBuiltInTypes();
 	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));// this->getBuiltInTypes()->insert(this->getBuiltInTypes()->end(), _builtInTypes->begin(), _builtInTypes->end());
+	(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
 		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
 	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
 	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));// this->getPrimitiveBehaviorPrototypes()->insert(this->getPrimitiveBehaviorPrototypes()->end(), _primitiveBehaviorPrototypes->begin(), _primitiveBehaviorPrototypes->end());
+	(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
 		std::shared_ptr< Bag<fUML::SemanticStrategy> >
 	 _strategies = obj.getStrategies();
 	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));// this->getStrategies()->insert(this->getStrategies()->end(), _strategies->begin(), _strategies->end());
+	(*(obj.getStrategies().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ExecutionFactoryImpl::copy() const
@@ -110,11 +159,11 @@ void
  ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
 {
 	//generated from body annotation
-	unsigned int i = this->getStrategyIndex(strategy->retrieveName());
+	    unsigned int i = this->getStrategyIndex(strategy->retrieveName());
 
-    if(i <= this->getStrategies()->size())
+    if(i < this->getStrategies()->size())
     {
-        this->getStrategies()->erase(this->getStrategies()->begin() + i - 1);
+        this->getStrategies()->erase(this->getStrategies()->begin() + i);
     }
 
     this->getStrategies()->push_back(strategy);
@@ -136,16 +185,16 @@ std::shared_ptr<fUML::Execution>
  ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
 {
 	//generated from body annotation
-	std::shared_ptr<fUML::Execution> execution;
+	 std::shared_ptr <fUML::Execution> execution;
 
-	std::shared_ptr<uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
+    std::shared_ptr <uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
     if(opaqueBehavior != nullptr)
     {
         execution = this->instantiateOpaqueBehaviorExecution(opaqueBehavior);
     }
     else
     {
-    	execution = std::dynamic_pointer_cast<fUML::Execution>(this->instantiateVisitor(behavior));
+        execution = std::dynamic_pointer_cast<fUML::Execution>(this->instantiateVisitor(behavior));
         if(execution != nullptr)
         {
             execution->getTypes()->push_back(behavior);
@@ -153,21 +202,26 @@ std::shared_ptr<fUML::Execution>
         }
     }
 
+    if(nullptr == execution)
+    {
+        std::cerr << "[createExecution] Execution is null" << std::endl;
+        return nullptr;
+    }
     this->getLocus()->add(execution);
 
 
     if(context == nullptr)
     {
-        if(execution!=nullptr)
+        if(execution != nullptr)
         {
-        	execution->setContext(execution);
+            execution->setContext(execution);
         }
     }
     else
     {
-        if(execution!=nullptr)
+        if(execution != nullptr)
         {
-        	execution->setContext(context);
+            execution->setContext(context);
         }
     }
 
@@ -178,11 +232,11 @@ std::shared_ptr<uml::PrimitiveType>
  ExecutionFactoryImpl::getBuiltInType(std::string name) 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::PrimitiveType> type = nullptr;
-    unsigned int i = 1;
-    while (nullptr == type && i <= this->getBuiltInTypes()->size())
+		std::shared_ptr<uml::PrimitiveType> type = nullptr;
+    unsigned int i = 0;
+    while (nullptr == type && i < this->getBuiltInTypes()->size())
     {
-    	std::shared_ptr<uml::PrimitiveType> primitiveType = this->getBuiltInTypes()->at(i - 1);
+    	std::shared_ptr<uml::PrimitiveType> primitiveType = this->getBuiltInTypes()->at(i);
         if (typeid(primitiveType).name() == name) 
         {
             type = primitiveType;
@@ -197,12 +251,12 @@ std::shared_ptr<fUML::SemanticStrategy>
  ExecutionFactoryImpl::getStrategy(std::string name) 
 {
 	//generated from body annotation
-	unsigned int i = this->getStrategyIndex(name);
+		unsigned int i = this->getStrategyIndex(name);
 
 	std::shared_ptr<SemanticStrategy> strategy = nullptr;
-    if(i <= this->getStrategies()->size())
+    if(i < this->getStrategies()->size())
     {
-        strategy = this->getStrategies()->at(i - 1);
+        strategy = this->getStrategies()->at(i);
     }
 
     return strategy;
@@ -212,13 +266,13 @@ int
  ExecutionFactoryImpl::getStrategyIndex(std::string name) 
 {
 	//generated from body annotation
-	std::shared_ptr<Bag<SemanticStrategy> > strategies = this->getStrategies();
+		std::shared_ptr<Bag<SemanticStrategy> > strategies = this->getStrategies();
 
-    unsigned int i = 1;
+    unsigned int i = 0;
     bool unmatched = true;
-    while(unmatched && (i <= strategies->size()))
+    while(unmatched && (i < strategies->size()))
     {
-        if(strategies->at(i - 1)->retrieveName()==(name))
+        if(strategies->at(i)->retrieveName()==(name))
         {
             unmatched = false;
         }

@@ -8,6 +8,14 @@
 #include "StructuralFeature.hpp"
 
 
+//Forward declaration includes
+#include "FeatureValue.hpp";
+
+#include "StructuralFeature.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -22,8 +30,16 @@ FeatureValueImpl::FeatureValueImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_values.reset(new Bag<fUML::Value>());
+	
+	
+
+	//Init references
+	
+
 	
 	
 }
@@ -36,22 +52,34 @@ FeatureValueImpl::~FeatureValueImpl()
 	
 }
 
-FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj)
+FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FeatureValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_position = obj.getPosition();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_feature  = obj.getFeature();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
 		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_values" << std::endl;
+	#endif
+
+	
+	
+
 }
 
 ecore::EObject *  FeatureValueImpl::copy() const
@@ -84,7 +112,7 @@ bool
  FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
 {
 	//generated from body annotation
-	bool equal = true;
+		bool equal = true;
 
     if(this->getValues()->size() != other->getValues()->size())
     {
@@ -96,10 +124,10 @@ bool
     	std::shared_ptr<uml::StructuralFeature> feature = this->getFeature();
         if(feature->getIsOrdered())
         {
-            unsigned int i = 1;
-            while(equal && (i <= this->getValues()->size()))
+            unsigned int i = 0;
+            while(equal && (i < this->getValues()->size()))
             {
-                equal = this->getValues()->at(i - 1)->equals(other->getValues()->at(i - 1));
+                equal = this->getValues()->at(i)->equals(other->getValues()->at(i));
                 i = i + 1;
             }
 
@@ -114,17 +142,17 @@ bool
                 otherFeatureValues->getValues()->push_back(value);
             }
 
-            unsigned int i = 1;
-            while(equal && (i <= this->getValues()->size()))
+            unsigned int i = 0;
+            while(equal && (i < this->getValues()->size()))
             {
                 bool matched = false;
-                unsigned int j = 1;
-                while(!matched && (j <= otherFeatureValues->getValues()->size()))
+                unsigned int j = 0;
+                while(!matched && (j < otherFeatureValues->getValues()->size()))
                 {
-                    if(this->getValues()->at(i - 1)->equals(otherFeatureValues->getValues()->at(j - 1)))
+                    if(this->getValues()->at(i)->equals(otherFeatureValues->getValues()->at(j)))
                     {
                         matched = true;
-                        otherFeatureValues->getValues()->erase(otherFeatureValues->getValues()->begin() + j - 1);
+                        otherFeatureValues->getValues()->erase(otherFeatureValues->getValues()->begin() + j);
                     }
                     j = j + 1;
                 }

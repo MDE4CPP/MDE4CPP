@@ -8,6 +8,30 @@
     #include "FUMLFactory.hpp"
     #include "Class.hpp"
 
+//Forward declaration includes
+#include "Class.hpp";
+
+#include "Classifier.hpp";
+
+#include "Execution.hpp";
+
+#include "FeatureValue.hpp";
+
+#include "Object.hpp";
+
+#include "Operation.hpp";
+
+#include "ParameterValue.hpp";
+
+#include "SignalInstance.hpp";
+
+#include "StructuralFeature.hpp";
+
+#include "StructuredValue.hpp";
+
+#include "Value.hpp";
+
+
 using namespace fUML;
 
 //*********************************
@@ -22,6 +46,10 @@ ReferenceImpl::ReferenceImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
+	
+
+	//Init references
 	
 }
 
@@ -33,16 +61,23 @@ ReferenceImpl::~ReferenceImpl()
 	
 }
 
-ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj)
+ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Reference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_referent  = obj.getReferent();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ReferenceImpl::copy() const
@@ -102,19 +137,21 @@ bool
     else
     {
         // Debug.println("[equals] " + myTypes.size() + " type(s).");
-        unsigned int i = 1;
-        while(isEqual && i <= myTypes->size())
+        unsigned int i = 0;
+	const unsigned int i_size =  myTypes->size();
+        while(isEqual && i < i_size)
         {
             // Debug.println("[equals] this type = " +
-            // myTypes.getValue(i-1).name);
+            // myTypes.getValue(i).name);
 
             bool matched = false;
-            unsigned int j = 1;
-            while(!matched && j <= otherTypes->size())
+            unsigned int j = 0;
+	     const unsigned int j_size = otherTypes->size();
+            while(!matched && j < j_size)
             {
                 // Debug.println("[equals] other type = " +
-                // otherTypes.getValue(j-1).name);
-                matched = (otherTypes->at(j - 1) == myTypes->at(i - 1));
+                // otherTypes.getValue(j).name);
+                matched = (otherTypes->at(j) == myTypes->at(i));
                 j = j + 1;
             }
 
