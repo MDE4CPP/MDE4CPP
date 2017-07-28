@@ -37,7 +37,7 @@
 
 //Forward declaration includes
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[element.name/].hpp";
+#include "[element.name/].hpp"
 [/for]
 
 
