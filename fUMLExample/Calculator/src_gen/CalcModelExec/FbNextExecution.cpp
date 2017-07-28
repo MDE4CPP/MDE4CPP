@@ -36,7 +36,7 @@ void FbNextExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputPa
 
 
 	//Call Operation action target
-	std::shared_ptr<CalcModel::PrimeChecker>target = std::dynamic_pointer_cast<CalcModel::PrimeCheckerExecution>(this->getContext())->getUmlValue();
+	std::shared_ptr<CalcModel::PrimeChecker> target = std::dynamic_pointer_cast<PrimeCheckerExecution>(this->getContext())->getUmlValue();
     assert(target != nullptr);
 
     //Body of the Opaquebehavior

@@ -10,6 +10,7 @@
 #include "FunctionBehavior.hpp"
 #include "Interface.hpp"
 #include "Operation.hpp"
+#include "Property.hpp"
 
 #include "Activity.hpp"
 #include "ActivityFinalNode.hpp"

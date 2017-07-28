@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <omp.h>
 
 #include "FUMLFactory.hpp"
 #include "Locus.hpp"
@@ -12,6 +13,10 @@
 #include "FunctionBehavior.hpp"
 #include "Activity.hpp"
 #include "SubsetUnion.hpp"
+#include "UmlFactory.hpp"
+#include "Operation.hpp"
+#include "Interface.hpp"
+#include "PrimitiveType.hpp"
 
 #include "ParameterValue.hpp"
 
@@ -19,6 +24,7 @@
 #include "CalcModelPackage.hpp"
 
 #include "CalcModelPackage.hpp" 
+#include "PrimitiveTypesPackage.hpp"
 
 //OpaqueBehaviourExecutions
 #include "FbIsNotFinishedExecution.hpp"
@@ -27,6 +33,13 @@
 #include "FbNextExecution.hpp"
 #include "FbDividesExecution.hpp"
 #include "FbIsOddExecution.hpp"
+
+
+//OpaqueBehaviourExecutions
+
+
+
+
 
 
 #include "Reference.hpp"
@@ -41,6 +54,10 @@ using namespace CalcModel;
 
 int main()
 {	
+
+	//OMP parallelization.
+	omp_set_num_threads(omp_get_num_procs());
+
 	DEBUG_MESSAGE(std::cout<<"Main function is executing"<<std::endl;)
 	std::shared_ptr<fUML::FUMLFactory> fumlFac(fUML::FUMLFactory::eInstance());
 	std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
@@ -58,6 +75,9 @@ int main()
 	locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fumlFac->createDispatchStrategy()));
 
     //Executor will execute the first Activity
+	std::shared_ptr<CalcModel::PrimeChecker> actInputNode(CalcModel::CalcModelFactory::eInstance()->createPrimeChecker());
+	
+	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsOddExecution(new CalcModel::FbIsOddExecution());
 	calcModel_PrimeChecker_fbIsOddExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsOdd());
 	calcModel_PrimeChecker_fbIsOddExecution->setLocus(factory->getLocus());
@@ -90,19 +110,23 @@ int main()
 	
 	
 	
+	
+	
 	std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
 	//INput parameter ActInputNode 
 	std::shared_ptr<fUML::ParameterValue> ActInputNodeP(fumlFac->createParameterValue());
 	ActInputNodeP->setParameter(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode());
 	std::shared_ptr<fUML::Reference> ActInputNodeValue(fUML::FUMLFactory::eInstance()->createReference());
-	std::shared_ptr<PrimeCheckerExecution> ActInputNodeUmlLinker(new PrimeCheckerExecution());
-	ActInputNodeUmlLinker.reset(new PrimeCheckerExecution(std::shared_ptr<CalcModel::PrimeChecker>(CalcModel::CalcModelFactory::eInstance()->createPrimeChecker())));	
+	std::shared_ptr<PrimeCheckerExecution> ActInputNodeUmlLinker(new PrimeCheckerExecution(actInputNode));
 	ActInputNodeUmlLinker->setLocus(locus);
 	ActInputNodeValue->setReferent(ActInputNodeUmlLinker);
 	ActInputNodeP->getValues()->push_back(ActInputNodeValue);
 	pList->push_back(ActInputNodeP);
 	
 	std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime(), nullptr, pList);
+	
+	
+	
 	   
 
 	if(nullptr == resultPList)

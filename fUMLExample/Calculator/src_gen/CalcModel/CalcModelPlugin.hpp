@@ -16,11 +16,11 @@
 #include <memory>
 #include "SubsetUnion.hpp"
 
-#include "UMLPlugin.hpp"
+#include "UMLModelPlugin.hpp"
 
 namespace CalcModel
 {
-	class CalcModelPlugin : virtual public UMLPlugin
+	class CalcModelPlugin : virtual public UMLModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

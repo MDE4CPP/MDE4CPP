@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 			classObject->setName("Class " + sprintf (buffer, "%i", i));
 			shared_ptr<uml::Property> property(umlFactory->createProperty());
 			property->setName("A" + sprintf (buffer, "%i", i));
-			classObject->getAttribute()->push_back(property);
+			classObject->getOwnedAttribute()->push_back(property);
 			package->getPackagedElement()->push_back(classObject);
 		}
 		end = std::chrono::high_resolution_clock::now();

@@ -95,10 +95,12 @@ model {
 						include "CoaIsOddExecution.cpp"
 						include "CoaNextExecution.cpp"
 						include "Next_callExecution.cpp"
-						include "CheckIfPrimeExecution.cpp"
+
+
+
+
+
 						include "PrimeCheckerExecution.cpp"
-						include "CalcModelExecPlugin.cpp"
-						include "impl/CalcModelExecPluginImpl.cpp"
 						include "main.cpp"
                     }
 					exportedHeaders {
