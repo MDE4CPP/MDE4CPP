@@ -219,16 +219,13 @@ namespace uml
 			/*!
 			 The Properties owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property
-					,uml::NamedElement
-					,uml::ConnectableElement > >
+			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement > >
 			 getOwnedAttribute() const = 0;
 			
 			/*!
 			 The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Connector, uml::Feature
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement > >
 			 getOwnedConnector() const = 0;
 			
 			/*!
@@ -252,15 +249,12 @@ namespace uml
 			/*!
 			 The Properties owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-					std::shared_ptr<SubsetUnion<uml::Property, uml::Property
-					,uml::NamedElement
-					,uml::ConnectableElement > >
+					std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement > >
 			 m_ownedAttribute;
 			/*!
 			 The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-					std::shared_ptr<Subset<uml::Connector, uml::Feature
-					,uml::NamedElement > >
+					std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement > >
 			 m_ownedConnector;
 			/*!
 			 The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
@@ -282,11 +276,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
@@ -301,6 +290,10 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
 			 getFeature() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

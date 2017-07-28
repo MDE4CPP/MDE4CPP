@@ -5,6 +5,34 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Association.hpp";
+
+#include "Behavior.hpp";
+
+#include "Classifier.hpp";
+
+#include "Comment.hpp";
+
+#include "Connector.hpp";
+
+#include "ConnectorEnd.hpp";
+
+#include "Dependency.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "Feature.hpp";
+
+#include "Namespace.hpp";
+
+#include "RedefinableElement.hpp";
+
+#include "StringExpression.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,17 +47,49 @@ ConnectorImpl::ConnectorImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_contract.reset(new Bag<uml::Behavior>());
 	
 	
+
 		/*Subset*/
-		m_end.reset(new Subset<uml::ConnectorEnd, uml::Element >(m_ownedElement));//(m_ownedElement));
+		m_end.reset(new Subset<uml::ConnectorEnd, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >()" << std::endl;
+		#endif
 	
 	
+
 		/*Subset*/
-		m_redefinedConnector.reset(new Subset<uml::Connector, uml::RedefinableElement >(m_redefinedElement));//(m_redefinedElement));
+		m_redefinedConnector.reset(new Subset<uml::Connector, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >()" << std::endl;
+		#endif
 	
 	
+
+	
+
+	//Init references
+	
+	
+
+		/*Subset*/
+		m_end->initSubset(m_ownedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(m_ownedElement)" << std::endl;
+		#endif
+	
+	
+
+		/*Subset*/
+		m_redefinedConnector->initSubset(m_redefinedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
+		#endif
+	
+	
+
 	
 }
 
@@ -41,9 +101,12 @@ ConnectorImpl::~ConnectorImpl()
 	
 }
 
-ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj)
+ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Connector "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_isLeaf = obj.getIsLeaf();
 	m_isStatic = obj.getIsStatic();
 	m_kind = obj.getKind();
@@ -51,62 +114,86 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj)
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::Dependency> >
 	 _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+	(*(obj.getClientDependency().get())));
 
 		std::shared_ptr< Bag<uml::Behavior> >
 	 _contract = obj.getContract();
 	m_contract.reset(new 	 Bag<uml::Behavior> 
-	(*(obj.getContract().get())));// this->getContract()->insert(this->getContract()->end(), _contract->begin(), _contract->end());
+	(*(obj.getContract().get())));
 
 			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));// this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
-
-	m_namespace  = obj.getNamespace();
+	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > >
-	 _redefinedConnector = obj.getRedefinedConnector();
-	m_redefinedConnector.reset(new 		Subset<uml::Connector, uml::RedefinableElement > 
-	(*(obj.getRedefinedConnector().get())));// this->getRedefinedConnector()->insert(this->getRedefinedConnector()->end(), _redefinedConnector->begin(), _redefinedConnector->end());
-
 			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));// this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
+	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
 
 			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));// this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
+	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
 
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::ConnectorEnd>> _endList = obj.getEnd();
 	for(std::shared_ptr<uml::ConnectorEnd> _end : *_endList)
 	{
 		this->getEnd()->add(std::shared_ptr<uml::ConnectorEnd>(dynamic_cast<uml::ConnectorEnd*>(_end->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_end" << std::endl;
+	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::Connector>> _redefinedConnectorList = obj.getRedefinedConnector();
+	for(std::shared_ptr<uml::Connector> _redefinedConnector : *_redefinedConnectorList)
+	{
+		this->getRedefinedConnector()->add(std::shared_ptr<uml::Connector>(dynamic_cast<uml::Connector*>(_redefinedConnector->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_redefinedConnector" << std::endl;
+	#endif
+
+		/*Subset*/
+		m_end->initSubset(m_ownedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(m_ownedElement)" << std::endl;
+		#endif
+	
+	
+
 }
 
 ecore::EObject *  ConnectorImpl::copy() const
@@ -193,22 +280,16 @@ void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ConnectorImpl::getOwner() const
-{
-	
-
-	return m_owner;
-}
 		std::shared_ptr<Union<uml::Element> > ConnectorImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
+}
+std::shared_ptr<uml::Element > ConnectorImpl::getOwner() const
+{
+	return m_owner;
 }
 		std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElement() const
 {
-	
-
 	return m_redefinedElement;
 }
 

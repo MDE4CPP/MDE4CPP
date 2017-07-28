@@ -226,11 +226,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
@@ -241,6 +236,10 @@ namespace uml
 			<p>From package UML::Actions.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
 			 getOutput() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

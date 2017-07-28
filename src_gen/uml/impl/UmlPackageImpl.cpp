@@ -334,6 +334,7 @@ void UmlPackageImpl::createPackageContents()
 
 	acceptEventActionEClass = createEClass(ACCEPTEVENTACTION);
 	createEAttribute(acceptEventActionEClass, ACCEPTEVENTACTION_ISUNMARSHALL);
+	
 	createEReference(acceptEventActionEClass, ACCEPTEVENTACTION_RESULT);
 	createEReference(acceptEventActionEClass, ACCEPTEVENTACTION_TRIGGER);
 	
@@ -346,6 +347,7 @@ void UmlPackageImpl::createPackageContents()
 
 	actionEClass = createEClass(ACTION);
 	createEAttribute(actionEClass, ACTION_ISLOCALLYREENTRANT);
+	
 	createEReference(actionEClass, ACTION_CONTEXT);
 	createEReference(actionEClass, ACTION_INPUT);
 	createEReference(actionEClass, ACTION_LOCALPOSTCONDITION);
@@ -375,7 +377,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	activityEClass = createEClass(ACTIVITY);
-	createEAttribute(activityEClass, ACTIVITY_ISREADONLY);createEAttribute(activityEClass, ACTIVITY_ISSINGLEEXECUTION);
+	createEAttribute(activityEClass, ACTIVITY_ISREADONLY);
+	createEAttribute(activityEClass, ACTIVITY_ISSINGLEEXECUTION);
+	
 	createEReference(activityEClass, ACTIVITY_EDGE);
 	createEReference(activityEClass, ACTIVITY_GROUP);
 	createEReference(activityEClass, ACTIVITY_NODE);
@@ -453,7 +457,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	activityPartitionEClass = createEClass(ACTIVITYPARTITION);
-	createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISDIMENSION);createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISEXTERNAL);
+	createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISDIMENSION);
+	createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISEXTERNAL);
+	
 	createEReference(activityPartitionEClass, ACTIVITYPARTITION_EDGE);
 	createEReference(activityPartitionEClass, ACTIVITYPARTITION_NODE);
 	createEReference(activityPartitionEClass, ACTIVITYPARTITION_REPRESENTS);
@@ -475,6 +481,7 @@ void UmlPackageImpl::createPackageContents()
 
 	addStructuralFeatureValueActionEClass = createEClass(ADDSTRUCTURALFEATUREVALUEACTION);
 	createEAttribute(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_ISREPLACEALL);
+	
 	createEReference(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_INSERTAT);
 	
 	createEOperation(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
@@ -483,6 +490,7 @@ void UmlPackageImpl::createPackageContents()
 
 	addVariableValueActionEClass = createEClass(ADDVARIABLEVALUEACTION);
 	createEAttribute(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_ISREPLACEALL);
+	
 	createEReference(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_INSERTAT);
 	
 	createEOperation(addVariableValueActionEClass, ADDVARIABLEVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
@@ -496,6 +504,7 @@ void UmlPackageImpl::createPackageContents()
 
 	artifactEClass = createEClass(ARTIFACT);
 	createEAttribute(artifactEClass, ARTIFACT_FILENAME);
+	
 	createEReference(artifactEClass, ARTIFACT_MANIFESTATION);
 	createEReference(artifactEClass, ARTIFACT_NESTEDARTIFACT);
 	createEReference(artifactEClass, ARTIFACT_OWNEDATTRIBUTE);
@@ -507,6 +516,7 @@ void UmlPackageImpl::createPackageContents()
 
 	associationEClass = createEClass(ASSOCIATION);
 	createEAttribute(associationEClass, ASSOCIATION_ISDERIVED);
+	
 	createEReference(associationEClass, ASSOCIATION_ENDTYPE);
 	createEReference(associationEClass, ASSOCIATION_MEMBEREND);
 	createEReference(associationEClass, ASSOCIATION_NAVIGABLEOWNEDEND);
@@ -530,6 +540,7 @@ void UmlPackageImpl::createPackageContents()
 
 	behaviorEClass = createEClass(BEHAVIOR);
 	createEAttribute(behaviorEClass, BEHAVIOR_ISREENTRANT);
+	
 	createEReference(behaviorEClass, BEHAVIOR_CONTEXT);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETER);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETERSET);
@@ -554,7 +565,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	behavioralFeatureEClass = createEClass(BEHAVIORALFEATURE);
-	createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_CONCURRENCY);createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_ISABSTRACT);
+	createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_CONCURRENCY);
+	createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_ISABSTRACT);
+	
 	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_METHOD);
 	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETER);
 	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETERSET);
@@ -588,6 +601,7 @@ void UmlPackageImpl::createPackageContents()
 
 	callActionEClass = createEClass(CALLACTION);
 	createEAttribute(callActionEClass, CALLACTION_ISSYNCHRONOUS);
+	
 	createEReference(callActionEClass, CALLACTION_RESULT);
 	
 	createEOperation(callActionEClass, CALLACTION___ARGUMENT_PINS__EDIAGNOSTICCHAIN_EMAP);
@@ -631,6 +645,7 @@ void UmlPackageImpl::createPackageContents()
 
 	classEClass = createEClass(CLASS);
 	createEAttribute(classEClass, CLASS_ISACTIVE);
+	
 	createEReference(classEClass, CLASS_EXTENSION);
 	createEReference(classEClass, CLASS_NESTEDCLASSIFIER);
 	createEReference(classEClass, CLASS_OWNEDOPERATION);
@@ -645,7 +660,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	classifierEClass = createEClass(CLASSIFIER);
-	createEAttribute(classifierEClass, CLASSIFIER_ISABSTRACT);createEAttribute(classifierEClass, CLASSIFIER_ISFINALSPECIALIZATION);
+	createEAttribute(classifierEClass, CLASSIFIER_ISABSTRACT);
+	createEAttribute(classifierEClass, CLASSIFIER_ISFINALSPECIALIZATION);
+	
 	createEReference(classifierEClass, CLASSIFIER_ATTRIBUTE);
 	createEReference(classifierEClass, CLASSIFIER_COLLABORATIONUSE);
 	createEReference(classifierEClass, CLASSIFIER_FEATURE);
@@ -690,6 +707,7 @@ void UmlPackageImpl::createPackageContents()
 
 	classifierTemplateParameterEClass = createEClass(CLASSIFIERTEMPLATEPARAMETER);
 	createEAttribute(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE);
+	
 	createEReference(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_CONSTRAININGCLASSIFIER);
 	
 	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___ACTUAL_IS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
@@ -754,6 +772,7 @@ void UmlPackageImpl::createPackageContents()
 
 	combinedFragmentEClass = createEClass(COMBINEDFRAGMENT);
 	createEAttribute(combinedFragmentEClass, COMBINEDFRAGMENT_INTERACTIONOPERATOR);
+	
 	createEReference(combinedFragmentEClass, COMBINEDFRAGMENT_CFRAGMENTGATE);
 	createEReference(combinedFragmentEClass, COMBINEDFRAGMENT_OPERAND);
 	
@@ -764,6 +783,7 @@ void UmlPackageImpl::createPackageContents()
 
 	commentEClass = createEClass(COMMENT);
 	createEAttribute(commentEClass, COMMENT_BODY);
+	
 	createEReference(commentEClass, COMMENT_ANNOTATEDELEMENT);
 	
 	
@@ -775,6 +795,7 @@ void UmlPackageImpl::createPackageContents()
 
 	componentEClass = createEClass(COMPONENT);
 	createEAttribute(componentEClass, COMPONENT_ISINDIRECTLYINSTANTIATED);
+	
 	createEReference(componentEClass, COMPONENT_PACKAGEDELEMENT);
 	createEReference(componentEClass, COMPONENT_PROVIDED);
 	createEReference(componentEClass, COMPONENT_REALIZATION);
@@ -798,7 +819,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	conditionalNodeEClass = createEClass(CONDITIONALNODE);
-	createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISASSURED);createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISDETERMINATE);
+	createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISASSURED);
+	createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISDETERMINATE);
+	
 	createEReference(conditionalNodeEClass, CONDITIONALNODE_CLAUSE);
 	createEReference(conditionalNodeEClass, CONDITIONALNODE_RESULT);
 	
@@ -834,6 +857,7 @@ void UmlPackageImpl::createPackageContents()
 
 	connectorEClass = createEClass(CONNECTOR);
 	createEAttribute(connectorEClass, CONNECTOR_KIND);
+	
 	createEReference(connectorEClass, CONNECTOR_CONTRACT);
 	createEReference(connectorEClass, CONNECTOR_END);
 	createEReference(connectorEClass, CONNECTOR_REDEFINEDCONNECTOR);
@@ -878,6 +902,7 @@ void UmlPackageImpl::createPackageContents()
 
 	continuationEClass = createEClass(CONTINUATION);
 	createEAttribute(continuationEClass, CONTINUATION_SETTING);
+	
 	
 	createEOperation(continuationEClass, CONTINUATION___FIRST_OR_LAST_INTERACTION_FRAGMENT__EDIAGNOSTICCHAIN_EMAP);
 	createEOperation(continuationEClass, CONTINUATION___GLOBAL__EDIAGNOSTICCHAIN_EMAP);
@@ -971,7 +996,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	deploymentSpecificationEClass = createEClass(DEPLOYMENTSPECIFICATION);
-	createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION);createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION);
+	createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION);
+	createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION);
+	
 	createEReference(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENT);
 	
 	createEOperation(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION___DEPLOYED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
@@ -992,7 +1019,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	destroyObjectActionEClass = createEClass(DESTROYOBJECTACTION);
-	createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYLINKS);createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS);
+	createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYLINKS);
+	createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS);
+	
 	createEReference(destroyObjectActionEClass, DESTROYOBJECTACTION_TARGET);
 	
 	createEOperation(destroyObjectActionEClass, DESTROYOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
@@ -1028,6 +1057,7 @@ void UmlPackageImpl::createPackageContents()
 	durationConstraintEClass = createEClass(DURATIONCONSTRAINT);
 	createEAttribute(durationConstraintEClass, DURATIONCONSTRAINT_FIRSTEVENT);
 	
+	
 	createEOperation(durationConstraintEClass, DURATIONCONSTRAINT___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
 	createEOperation(durationConstraintEClass, DURATIONCONSTRAINT___HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -1039,6 +1069,7 @@ void UmlPackageImpl::createPackageContents()
 
 	durationObservationEClass = createEClass(DURATIONOBSERVATION);
 	createEAttribute(durationObservationEClass, DURATIONOBSERVATION_FIRSTEVENT);
+	
 	createEReference(durationObservationEClass, DURATIONOBSERVATION_EVENT);
 	
 	createEOperation(durationObservationEClass, DURATIONOBSERVATION___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
@@ -1091,7 +1122,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	elementImportEClass = createEClass(ELEMENTIMPORT);
-	createEAttribute(elementImportEClass, ELEMENTIMPORT_ALIAS);createEAttribute(elementImportEClass, ELEMENTIMPORT_VISIBILITY);
+	createEAttribute(elementImportEClass, ELEMENTIMPORT_ALIAS);
+	createEAttribute(elementImportEClass, ELEMENTIMPORT_VISIBILITY);
+	
 	createEReference(elementImportEClass, ELEMENTIMPORT_IMPORTEDELEMENT);
 	createEReference(elementImportEClass, ELEMENTIMPORT_IMPORTINGNAMESPACE);
 	
@@ -1177,6 +1210,7 @@ void UmlPackageImpl::createPackageContents()
 
 	expansionRegionEClass = createEClass(EXPANSIONREGION);
 	createEAttribute(expansionRegionEClass, EXPANSIONREGION_MODE);
+	
 	createEReference(expansionRegionEClass, EXPANSIONREGION_INPUTELEMENT);
 	createEReference(expansionRegionEClass, EXPANSIONREGION_OUTPUTELEMENT);
 	
@@ -1184,6 +1218,7 @@ void UmlPackageImpl::createPackageContents()
 
 	expressionEClass = createEClass(EXPRESSION);
 	createEAttribute(expressionEClass, EXPRESSION_SYMBOL);
+	
 	createEReference(expressionEClass, EXPRESSION_OPERAND);
 	
 	
@@ -1200,6 +1235,7 @@ void UmlPackageImpl::createPackageContents()
 
 	extensionEClass = createEClass(EXTENSION);
 	createEAttribute(extensionEClass, EXTENSION_ISREQUIRED);
+	
 	createEReference(extensionEClass, EXTENSION_METACLASS);
 	
 	createEOperation(extensionEClass, EXTENSION___GETMETACLASS);
@@ -1233,6 +1269,7 @@ void UmlPackageImpl::createPackageContents()
 
 	featureEClass = createEClass(FEATURE);
 	createEAttribute(featureEClass, FEATURE_ISSTATIC);
+	
 	createEReference(featureEClass, FEATURE_FEATURINGCLASSIFIER);
 	
 	
@@ -1303,6 +1340,7 @@ void UmlPackageImpl::createPackageContents()
 
 	generalizationEClass = createEClass(GENERALIZATION);
 	createEAttribute(generalizationEClass, GENERALIZATION_ISSUBSTITUTABLE);
+	
 	createEReference(generalizationEClass, GENERALIZATION_GENERAL);
 	createEReference(generalizationEClass, GENERALIZATION_GENERALIZATIONSET);
 	createEReference(generalizationEClass, GENERALIZATION_SPECIFIC);
@@ -1310,7 +1348,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	generalizationSetEClass = createEClass(GENERALIZATIONSET);
-	createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISCOVERING);createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISDISJOINT);
+	createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISCOVERING);
+	createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISDISJOINT);
+	
 	createEReference(generalizationSetEClass, GENERALIZATIONSET_GENERALIZATION);
 	createEReference(generalizationSetEClass, GENERALIZATIONSET_POWERTYPE);
 	
@@ -1319,7 +1359,10 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	imageEClass = createEClass(IMAGE);
-	createEAttribute(imageEClass, IMAGE_CONTENT);createEAttribute(imageEClass, IMAGE_FORMAT);createEAttribute(imageEClass, IMAGE_LOCATION);
+	createEAttribute(imageEClass, IMAGE_CONTENT);
+	createEAttribute(imageEClass, IMAGE_FORMAT);
+	createEAttribute(imageEClass, IMAGE_LOCATION);
+	
 	
 	
 
@@ -1493,6 +1536,7 @@ void UmlPackageImpl::createPackageContents()
 
 	joinNodeEClass = createEClass(JOINNODE);
 	createEAttribute(joinNodeEClass, JOINNODE_ISCOMBINEDUPLICATE);
+	
 	createEReference(joinNodeEClass, JOINNODE_JOINSPEC);
 	
 	createEOperation(joinNodeEClass, JOINNODE___INCOMING_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP);
@@ -1526,6 +1570,7 @@ void UmlPackageImpl::createPackageContents()
 
 	linkEndCreationDataEClass = createEClass(LINKENDCREATIONDATA);
 	createEAttribute(linkEndCreationDataEClass, LINKENDCREATIONDATA_ISREPLACEALL);
+	
 	createEReference(linkEndCreationDataEClass, LINKENDCREATIONDATA_INSERTAT);
 	
 	createEOperation(linkEndCreationDataEClass, LINKENDCREATIONDATA___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
@@ -1547,6 +1592,7 @@ void UmlPackageImpl::createPackageContents()
 
 	linkEndDestructionDataEClass = createEClass(LINKENDDESTRUCTIONDATA);
 	createEAttribute(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES);
+	
 	createEReference(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_DESTROYAT);
 	
 	createEOperation(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA___DESTROYAT_PIN__EDIAGNOSTICCHAIN_EMAP);
@@ -1556,9 +1602,11 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(literalBooleanEClass, LITERALBOOLEAN_VALUE);
 	
 	
+	
 
 	literalIntegerEClass = createEClass(LITERALINTEGER);
 	createEAttribute(literalIntegerEClass, LITERALINTEGER_VALUE);
+	
 	
 	
 
@@ -1571,6 +1619,7 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(literalRealEClass, LITERALREAL_VALUE);
 	
 	
+	
 
 	literalSpecificationEClass = createEClass(LITERALSPECIFICATION);
 	
@@ -1581,14 +1630,17 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(literalStringEClass, LITERALSTRING_VALUE);
 	
 	
+	
 
 	literalUnlimitedNaturalEClass = createEClass(LITERALUNLIMITEDNATURAL);
 	createEAttribute(literalUnlimitedNaturalEClass, LITERALUNLIMITEDNATURAL_VALUE);
 	
 	
+	
 
 	loopNodeEClass = createEClass(LOOPNODE);
 	createEAttribute(loopNodeEClass, LOOPNODE_ISTESTEDFIRST);
+	
 	createEReference(loopNodeEClass, LOOPNODE_BODYOUTPUT);
 	createEReference(loopNodeEClass, LOOPNODE_BODYPART);
 	createEReference(loopNodeEClass, LOOPNODE_DECIDER);
@@ -1623,7 +1675,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	messageEClass = createEClass(MESSAGE);
-	createEAttribute(messageEClass, MESSAGE_MESSAGEKIND);createEAttribute(messageEClass, MESSAGE_MESSAGESORT);
+	createEAttribute(messageEClass, MESSAGE_MESSAGEKIND);
+	createEAttribute(messageEClass, MESSAGE_MESSAGESORT);
+	
 	createEReference(messageEClass, MESSAGE_ARGUMENT);
 	createEReference(messageEClass, MESSAGE_CONNECTOR);
 	createEReference(messageEClass, MESSAGE_INTERACTION);
@@ -1665,11 +1719,16 @@ void UmlPackageImpl::createPackageContents()
 	modelEClass = createEClass(MODEL);
 	createEAttribute(modelEClass, MODEL_VIEWPOINT);
 	
+	
 	createEOperation(modelEClass, MODEL___ISMETAMODEL);
 	
 
 	multiplicityElementEClass = createEClass(MULTIPLICITYELEMENT);
-	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISORDERED);createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISUNIQUE);createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWER);createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPER);
+	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISORDERED);
+	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISUNIQUE);
+	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWER);
+	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPER);
+	
 	createEReference(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWERVALUE);
 	createEReference(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPERVALUE);
 	
@@ -1688,7 +1747,10 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	namedElementEClass = createEClass(NAMEDELEMENT);
-	createEAttribute(namedElementEClass, NAMEDELEMENT_NAME);createEAttribute(namedElementEClass, NAMEDELEMENT_QUALIFIEDNAME);createEAttribute(namedElementEClass, NAMEDELEMENT_VISIBILITY);
+	createEAttribute(namedElementEClass, NAMEDELEMENT_NAME);
+	createEAttribute(namedElementEClass, NAMEDELEMENT_QUALIFIEDNAME);
+	createEAttribute(namedElementEClass, NAMEDELEMENT_VISIBILITY);
+	
 	createEReference(namedElementEClass, NAMEDELEMENT_CLIENTDEPENDENCY);
 	createEReference(namedElementEClass, NAMEDELEMENT_NAMEEXPRESSION);
 	createEReference(namedElementEClass, NAMEDELEMENT_NAMESPACE);
@@ -1751,7 +1813,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	objectFlowEClass = createEClass(OBJECTFLOW);
-	createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTICAST);createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTIRECEIVE);
+	createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTICAST);
+	createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTIRECEIVE);
+	
 	createEReference(objectFlowEClass, OBJECTFLOW_SELECTION);
 	createEReference(objectFlowEClass, OBJECTFLOW_TRANSFORMATION);
 	
@@ -1766,7 +1830,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	objectNodeEClass = createEClass(OBJECTNODE);
-	createEAttribute(objectNodeEClass, OBJECTNODE_ISCONTROLTYPE);createEAttribute(objectNodeEClass, OBJECTNODE_ORDERING);
+	createEAttribute(objectNodeEClass, OBJECTNODE_ISCONTROLTYPE);
+	createEAttribute(objectNodeEClass, OBJECTNODE_ORDERING);
+	
 	createEReference(objectNodeEClass, OBJECTNODE_INSTATE);
 	createEReference(objectNodeEClass, OBJECTNODE_SELECTION);
 	createEReference(objectNodeEClass, OBJECTNODE_UPPERBOUND);
@@ -1791,7 +1857,9 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	opaqueActionEClass = createEClass(OPAQUEACTION);
-	createEAttribute(opaqueActionEClass, OPAQUEACTION_BODY);createEAttribute(opaqueActionEClass, OPAQUEACTION_LANGUAGE);
+	createEAttribute(opaqueActionEClass, OPAQUEACTION_BODY);
+	createEAttribute(opaqueActionEClass, OPAQUEACTION_LANGUAGE);
+	
 	createEReference(opaqueActionEClass, OPAQUEACTION_INPUTVALUE);
 	createEReference(opaqueActionEClass, OPAQUEACTION_OUTPUTVALUE);
 	
@@ -1799,12 +1867,16 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	opaqueBehaviorEClass = createEClass(OPAQUEBEHAVIOR);
-	createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_BODY);createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_LANGUAGE);
+	createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_BODY);
+	createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_LANGUAGE);
+	
 	
 	
 
 	opaqueExpressionEClass = createEClass(OPAQUEEXPRESSION);
-	createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_BODY);createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_LANGUAGE);
+	createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_BODY);
+	createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_LANGUAGE);
+	
 	createEReference(opaqueExpressionEClass, OPAQUEEXPRESSION_BEHAVIOR);
 	createEReference(opaqueExpressionEClass, OPAQUEEXPRESSION_RESULT);
 	
@@ -1819,7 +1891,12 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	operationEClass = createEClass(OPERATION);
-	createEAttribute(operationEClass, OPERATION_ISORDERED);createEAttribute(operationEClass, OPERATION_ISQUERY);createEAttribute(operationEClass, OPERATION_ISUNIQUE);createEAttribute(operationEClass, OPERATION_LOWER);createEAttribute(operationEClass, OPERATION_UPPER);
+	createEAttribute(operationEClass, OPERATION_ISORDERED);
+	createEAttribute(operationEClass, OPERATION_ISQUERY);
+	createEAttribute(operationEClass, OPERATION_ISUNIQUE);
+	createEAttribute(operationEClass, OPERATION_LOWER);
+	createEAttribute(operationEClass, OPERATION_UPPER);
+	
 	createEReference(operationEClass, OPERATION_BODYCONDITION);
 	createEReference(operationEClass, OPERATION_CLASS);
 	createEReference(operationEClass, OPERATION_DATATYPE);
@@ -1859,6 +1936,7 @@ void UmlPackageImpl::createPackageContents()
 
 	packageEClass = createEClass(PACKAGE);
 	createEAttribute(packageEClass, PACKAGE_URI);
+	
 	createEReference(packageEClass, PACKAGE_NESTEDPACKAGE);
 	createEReference(packageEClass, PACKAGE_NESTINGPACKAGE);
 	createEReference(packageEClass, PACKAGE_OWNEDSTEREOTYPE);
@@ -1895,6 +1973,7 @@ void UmlPackageImpl::createPackageContents()
 
 	packageImportEClass = createEClass(PACKAGEIMPORT);
 	createEAttribute(packageImportEClass, PACKAGEIMPORT_VISIBILITY);
+	
 	createEReference(packageImportEClass, PACKAGEIMPORT_IMPORTEDPACKAGE);
 	createEReference(packageImportEClass, PACKAGEIMPORT_IMPORTINGNAMESPACE);
 	
@@ -1915,7 +1994,12 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	parameterEClass = createEClass(PARAMETER);
-	createEAttribute(parameterEClass, PARAMETER_DEFAULT);createEAttribute(parameterEClass, PARAMETER_DIRECTION);createEAttribute(parameterEClass, PARAMETER_EFFECT);createEAttribute(parameterEClass, PARAMETER_ISEXCEPTION);createEAttribute(parameterEClass, PARAMETER_ISSTREAM);
+	createEAttribute(parameterEClass, PARAMETER_DEFAULT);
+	createEAttribute(parameterEClass, PARAMETER_DIRECTION);
+	createEAttribute(parameterEClass, PARAMETER_EFFECT);
+	createEAttribute(parameterEClass, PARAMETER_ISEXCEPTION);
+	createEAttribute(parameterEClass, PARAMETER_ISSTREAM);
+	
 	createEReference(parameterEClass, PARAMETER_DEFAULTVALUE);
 	createEReference(parameterEClass, PARAMETER_OPERATION);
 	createEReference(parameterEClass, PARAMETER_PARAMETERSET);
@@ -1966,12 +2050,16 @@ void UmlPackageImpl::createPackageContents()
 	pinEClass = createEClass(PIN);
 	createEAttribute(pinEClass, PIN_ISCONTROL);
 	
+	
 	createEOperation(pinEClass, PIN___CONTROL_PINS__EDIAGNOSTICCHAIN_EMAP);
 	createEOperation(pinEClass, PIN___NOT_UNIQUE__EDIAGNOSTICCHAIN_EMAP);
 	
 
 	portEClass = createEClass(PORT);
-	createEAttribute(portEClass, PORT_ISBEHAVIOR);createEAttribute(portEClass, PORT_ISCONJUGATED);createEAttribute(portEClass, PORT_ISSERVICE);
+	createEAttribute(portEClass, PORT_ISBEHAVIOR);
+	createEAttribute(portEClass, PORT_ISCONJUGATED);
+	createEAttribute(portEClass, PORT_ISSERVICE);
+	
 	createEReference(portEClass, PORT_PROTOCOL);
 	createEReference(portEClass, PORT_PROVIDED);
 	createEReference(portEClass, PORT_REDEFINEDPORT);
@@ -2011,6 +2099,7 @@ void UmlPackageImpl::createPackageContents()
 
 	profileApplicationEClass = createEClass(PROFILEAPPLICATION);
 	createEAttribute(profileApplicationEClass, PROFILEAPPLICATION_ISSTRICT);
+	
 	createEReference(profileApplicationEClass, PROFILEAPPLICATION_APPLIEDPROFILE);
 	createEReference(profileApplicationEClass, PROFILEAPPLICATION_APPLYINGPACKAGE);
 	
@@ -2019,7 +2108,13 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	propertyEClass = createEClass(PROPERTY);
-	createEAttribute(propertyEClass, PROPERTY_AGGREGATION);createEAttribute(propertyEClass, PROPERTY_DEFAULT);createEAttribute(propertyEClass, PROPERTY_ISCOMPOSITE);createEAttribute(propertyEClass, PROPERTY_ISDERIVED);createEAttribute(propertyEClass, PROPERTY_ISDERIVEDUNION);createEAttribute(propertyEClass, PROPERTY_ISID);
+	createEAttribute(propertyEClass, PROPERTY_AGGREGATION);
+	createEAttribute(propertyEClass, PROPERTY_DEFAULT);
+	createEAttribute(propertyEClass, PROPERTY_ISCOMPOSITE);
+	createEAttribute(propertyEClass, PROPERTY_ISDERIVED);
+	createEAttribute(propertyEClass, PROPERTY_ISDERIVEDUNION);
+	createEAttribute(propertyEClass, PROPERTY_ISID);
+	
 	createEReference(propertyEClass, PROPERTY_ASSOCIATION);
 	createEReference(propertyEClass, PROPERTY_ASSOCIATIONEND);
 	createEReference(propertyEClass, PROPERTY_CLASS);
@@ -2090,6 +2185,7 @@ void UmlPackageImpl::createPackageContents()
 
 	pseudostateEClass = createEClass(PSEUDOSTATE);
 	createEAttribute(pseudostateEClass, PSEUDOSTATE_KIND);
+	
 	createEReference(pseudostateEClass, PSEUDOSTATE_STATE);
 	createEReference(pseudostateEClass, PSEUDOSTATE_STATEMACHINE);
 	
@@ -2131,6 +2227,7 @@ void UmlPackageImpl::createPackageContents()
 
 	readIsClassifiedObjectActionEClass = createEClass(READISCLASSIFIEDOBJECTACTION);
 	createEAttribute(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_ISDIRECT);
+	
 	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_CLASSIFIER);
 	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_OBJECT);
 	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_RESULT);
@@ -2224,6 +2321,7 @@ void UmlPackageImpl::createPackageContents()
 
 	reclassifyObjectActionEClass = createEClass(RECLASSIFYOBJECTACTION);
 	createEAttribute(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_ISREPLACEALL);
+	
 	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_NEWCLASSIFIER);
 	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OBJECT);
 	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OLDCLASSIFIER);
@@ -2235,6 +2333,7 @@ void UmlPackageImpl::createPackageContents()
 
 	redefinableElementEClass = createEClass(REDEFINABLEELEMENT);
 	createEAttribute(redefinableElementEClass, REDEFINABLEELEMENT_ISLEAF);
+	
 	createEReference(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINEDELEMENT);
 	createEReference(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINITIONCONTEXT);
 	
@@ -2257,6 +2356,7 @@ void UmlPackageImpl::createPackageContents()
 
 	reduceActionEClass = createEClass(REDUCEACTION);
 	createEAttribute(reduceActionEClass, REDUCEACTION_ISORDERED);
+	
 	createEReference(reduceActionEClass, REDUCEACTION_COLLECTION);
 	createEReference(reduceActionEClass, REDUCEACTION_REDUCER);
 	createEReference(reduceActionEClass, REDUCEACTION_RESULT);
@@ -2291,6 +2391,7 @@ void UmlPackageImpl::createPackageContents()
 
 	removeStructuralFeatureValueActionEClass = createEClass(REMOVESTRUCTURALFEATUREVALUEACTION);
 	createEAttribute(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_ISREMOVEDUPLICATES);
+	
 	createEReference(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_REMOVEAT);
 	
 	createEOperation(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
@@ -2298,6 +2399,7 @@ void UmlPackageImpl::createPackageContents()
 
 	removeVariableValueActionEClass = createEClass(REMOVEVARIABLEVALUEACTION);
 	createEAttribute(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_ISREMOVEDUPLICATES);
+	
 	createEReference(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_REMOVEAT);
 	
 	createEOperation(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
@@ -2377,7 +2479,11 @@ void UmlPackageImpl::createPackageContents()
 	
 
 	stateEClass = createEClass(STATE);
-	createEAttribute(stateEClass, STATE_ISCOMPOSITE);createEAttribute(stateEClass, STATE_ISORTHOGONAL);createEAttribute(stateEClass, STATE_ISSIMPLE);createEAttribute(stateEClass, STATE_ISSUBMACHINESTATE);
+	createEAttribute(stateEClass, STATE_ISCOMPOSITE);
+	createEAttribute(stateEClass, STATE_ISORTHOGONAL);
+	createEAttribute(stateEClass, STATE_ISSIMPLE);
+	createEAttribute(stateEClass, STATE_ISSUBMACHINESTATE);
+	
 	createEReference(stateEClass, STATE_CONNECTION);
 	createEReference(stateEClass, STATE_CONNECTIONPOINT);
 	createEReference(stateEClass, STATE_DEFERRABLETRIGGER);
@@ -2460,6 +2566,7 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(structuralFeatureEClass, STRUCTURALFEATURE_ISREADONLY);
 	
 	
+	
 
 	structuralFeatureActionEClass = createEClass(STRUCTURALFEATUREACTION);
 	
@@ -2475,6 +2582,7 @@ void UmlPackageImpl::createPackageContents()
 
 	structuredActivityNodeEClass = createEClass(STRUCTUREDACTIVITYNODE);
 	createEAttribute(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_MUSTISOLATE);
+	
 	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_EDGE);
 	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_NODE);
 	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT);
@@ -2571,11 +2679,13 @@ void UmlPackageImpl::createPackageContents()
 	timeConstraintEClass = createEClass(TIMECONSTRAINT);
 	createEAttribute(timeConstraintEClass, TIMECONSTRAINT_FIRSTEVENT);
 	
+	
 	createEOperation(timeConstraintEClass, TIMECONSTRAINT___HAS_ONE_CONSTRAINEDELEMENT__EDIAGNOSTICCHAIN_EMAP);
 	
 
 	timeEventEClass = createEClass(TIMEEVENT);
 	createEAttribute(timeEventEClass, TIMEEVENT_ISRELATIVE);
+	
 	createEReference(timeEventEClass, TIMEEVENT_WHEN);
 	
 	createEOperation(timeEventEClass, TIMEEVENT___WHEN_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP);
@@ -2596,12 +2706,14 @@ void UmlPackageImpl::createPackageContents()
 
 	timeObservationEClass = createEClass(TIMEOBSERVATION);
 	createEAttribute(timeObservationEClass, TIMEOBSERVATION_FIRSTEVENT);
+	
 	createEReference(timeObservationEClass, TIMEOBSERVATION_EVENT);
 	
 	
 
 	transitionEClass = createEClass(TRANSITION);
 	createEAttribute(transitionEClass, TRANSITION_KIND);
+	
 	createEReference(transitionEClass, TRANSITION_CONTAINER);
 	createEReference(transitionEClass, TRANSITION_EFFECT);
 	createEReference(transitionEClass, TRANSITION_GUARD);

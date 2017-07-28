@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Comment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "ParameterableElement.hpp";
+
+#include "TemplateParameter.hpp";
+
+#include "TemplateSignature.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,7 +33,9 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
@@ -30,43 +46,67 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 	
 }
 
-OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj)
+OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj):OperationTemplateParameterImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OperationTemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_default  = obj.getDefault();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 	m_parameteredElement  = obj.getParameteredElement();
 
-	m_signature  = obj.getSignature();
 
+    
+	//Clone references with containment (deep copy)
 
-	//clone containt lists
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
 	if(obj.getOwnedDefault()!=nullptr)
 	{
 		m_ownedDefault.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedDefault()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedDefault" << std::endl;
+	#endif
 	if(obj.getOwnedParameteredElement()!=nullptr)
 	{
 		m_ownedParameteredElement.reset(dynamic_cast<uml::ParameterableElement*>(obj.getOwnedParameteredElement()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
+	#endif
+	if(obj.getSignature()!=nullptr)
+	{
+		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  OperationTemplateParameterImpl::copy() const
@@ -100,17 +140,13 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
-{
-	
-
-	return m_owner;
-}
 		std::shared_ptr<Union<uml::Element> > OperationTemplateParameterImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
+}
+std::shared_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

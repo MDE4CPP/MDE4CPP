@@ -127,9 +127,7 @@ namespace uml
 			/*!
 			 The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/
-					,uml::Feature
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement > >
 			 getOwnedEnd() const ;
 			
 			/*!
@@ -144,11 +142,6 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
@@ -162,6 +155,10 @@ namespace uml
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!

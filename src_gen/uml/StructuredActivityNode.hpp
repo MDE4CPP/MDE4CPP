@@ -239,8 +239,7 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge
-					,uml::Element > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element > >
 			 getEdge() const = 0;
 			
 			/*!
@@ -264,8 +263,7 @@ namespace uml
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode
-					,uml::Element > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element > >
 			 getNode() const = 0;
 			
 			
@@ -286,8 +284,7 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge
-					,uml::Element > >
+					std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element > >
 			 m_edge;
 			/*!
 			 The InputPins owned by the StructuredActivityNode.
@@ -307,8 +304,7 @@ namespace uml
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode
-					,uml::Element > >
+					std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element > >
 			 m_node;
 			
 
@@ -327,11 +323,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
@@ -342,6 +333,10 @@ namespace uml
 			<p>From package UML::Actions.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
 			 getOutput() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

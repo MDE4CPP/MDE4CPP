@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Clause.hpp";
+
+#include "Comment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "ExecutableNode.hpp";
+
+#include "OutputPin.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,20 +33,44 @@ ClauseImpl::ClauseImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_body.reset(new Bag<uml::ExecutableNode>());
 	
 	
+
 		m_bodyOutput.reset(new Bag<uml::OutputPin>());
 	
 	
+
 	
+
 		m_predecessorClause.reset(new Bag<uml::Clause>());
 	
 	
+
 		m_successorClause.reset(new Bag<uml::Clause>());
 	
 	
+
 		m_test.reset(new Bag<uml::ExecutableNode>());
+	
+	
+
+	//Init references
+	
+	
+
+	
+	
+
+	
+
+	
+	
+
+	
+	
+
 	
 	
 }
@@ -45,56 +83,69 @@ ClauseImpl::~ClauseImpl()
 	
 }
 
-ClauseImpl::ClauseImpl(const ClauseImpl & obj)
+ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Clause "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::ExecutableNode> >
 	 _body = obj.getBody();
 	m_body.reset(new 	 Bag<uml::ExecutableNode> 
-	(*(obj.getBody().get())));// this->getBody()->insert(this->getBody()->end(), _body->begin(), _body->end());
+	(*(obj.getBody().get())));
 
 		std::shared_ptr< Bag<uml::OutputPin> >
 	 _bodyOutput = obj.getBodyOutput();
 	m_bodyOutput.reset(new 	 Bag<uml::OutputPin> 
-	(*(obj.getBodyOutput().get())));// this->getBodyOutput()->insert(this->getBodyOutput()->end(), _bodyOutput->begin(), _bodyOutput->end());
+	(*(obj.getBodyOutput().get())));
 
 	m_decider  = obj.getDecider();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 		std::shared_ptr< Bag<uml::Clause> >
 	 _predecessorClause = obj.getPredecessorClause();
 	m_predecessorClause.reset(new 	 Bag<uml::Clause> 
-	(*(obj.getPredecessorClause().get())));// this->getPredecessorClause()->insert(this->getPredecessorClause()->end(), _predecessorClause->begin(), _predecessorClause->end());
+	(*(obj.getPredecessorClause().get())));
 
 		std::shared_ptr< Bag<uml::Clause> >
 	 _successorClause = obj.getSuccessorClause();
 	m_successorClause.reset(new 	 Bag<uml::Clause> 
-	(*(obj.getSuccessorClause().get())));// this->getSuccessorClause()->insert(this->getSuccessorClause()->end(), _successorClause->begin(), _successorClause->end());
+	(*(obj.getSuccessorClause().get())));
 
 		std::shared_ptr< Bag<uml::ExecutableNode> >
 	 _test = obj.getTest();
 	m_test.reset(new 	 Bag<uml::ExecutableNode> 
-	(*(obj.getTest().get())));// this->getTest()->insert(this->getTest()->end(), _test->begin(), _test->end());
+	(*(obj.getTest().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  ClauseImpl::copy() const
@@ -193,8 +244,6 @@ void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 //*********************************
 		std::shared_ptr<Union<uml::Element> > ClauseImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
 }
 

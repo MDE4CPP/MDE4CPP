@@ -112,8 +112,7 @@ namespace uml
 			/*!
 			 The formal parameters that are owned by this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Subset<uml::TemplateParameter, uml::Element
-					,uml::TemplateParameter > >
+			virtual 		std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > >
 			 getOwnedParameter() const = 0;
 			
 			
@@ -138,8 +137,7 @@ namespace uml
 			/*!
 			 The formal parameters that are owned by this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-					std::shared_ptr<Subset<uml::TemplateParameter, uml::Element
-					,uml::TemplateParameter > >
+					std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > >
 			 m_ownedParameter;
 			
 

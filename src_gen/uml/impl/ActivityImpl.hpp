@@ -131,15 +131,13 @@ namespace uml
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup
-					,uml::ActivityGroup /*Subset does not reference a union*/ > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ > >
 			 getPartition() const ;
 			
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup
-					,uml::ActivityNode /*Subset does not reference a union*/ > >
+			virtual 		std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ > >
 			 getStructuredNode() const ;
 			
 							
@@ -152,11 +150,6 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
 			 getAttribute() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
@@ -171,6 +164,10 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > >
 			 getGroup() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!

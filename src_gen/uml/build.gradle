@@ -53,7 +53,7 @@ model {
     }
 	repositories {
         libs(PrebuiltLibraries) {
-			[ "ecore","types" ].each {
+			[ "ecore","types", "PluginFramework" ].each {
 				delegate."$it" {
 					def libraryName = "${name}"
 					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
@@ -325,6 +325,8 @@ model {
 						include	"UmlFactory.cpp"
 						include	"impl/UmlPackageImpl.cpp"
 						include	"UmlPackage.cpp"
+						include	"impl/UmlPluginImpl.cpp"
+						include	"UmlPlugin.cpp"
 						include "util.cpp"
 						include "registry.cpp"
 						include "stereotypestorage.cpp"
@@ -336,6 +338,7 @@ model {
                     }
 					lib library: "ecore"
 					lib library: "types"
+					lib library: "PluginFramework"
                 }
             }
 

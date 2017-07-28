@@ -350,15 +350,13 @@ namespace uml
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup
-					,uml::ActivityGroup /*Subset does not reference a union*/ > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ > >
 			 getPartition() const = 0;
 			
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup
-					,uml::ActivityNode /*Subset does not reference a union*/ > >
+			virtual 		std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ > >
 			 getStructuredNode() const = 0;
 			
 			
@@ -411,14 +409,12 @@ namespace uml
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-					std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup
-					,uml::ActivityGroup /*Subset does not reference a union*/ > >
+					std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ > >
 			 m_partition;
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-					std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup
-					,uml::ActivityNode /*Subset does not reference a union*/ > >
+					std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ > >
 			 m_structuredNode;
 			
 
@@ -430,11 +426,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
@@ -452,6 +443,10 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
 			 getFeature() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

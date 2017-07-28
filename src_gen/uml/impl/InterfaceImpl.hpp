@@ -83,15 +83,13 @@ namespace uml
 			/*!
 			 The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Property, uml::Property
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > >
 			 getOwnedAttribute() const ;
 			
 			/*!
 			 Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Reception, uml::Feature
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement > >
 			 getOwnedReception() const ;
 			
 			/*!
@@ -112,8 +110,7 @@ namespace uml
 			/*!
 			 The Operations owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Operation, uml::Feature
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > >
 			 getOwnedOperation() const ;
 			
 							
@@ -126,11 +123,6 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
 			 getAttribute() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
@@ -141,6 +133,10 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
 			 getFeature() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!

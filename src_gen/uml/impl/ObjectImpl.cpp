@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Property.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,7 +23,9 @@ ObjectImpl::ObjectImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ObjectImpl::~ObjectImpl()
@@ -30,14 +36,21 @@ ObjectImpl::~ObjectImpl()
 	
 }
 
-ObjectImpl::ObjectImpl(const ObjectImpl & obj)
+ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ObjectImpl::copy() const

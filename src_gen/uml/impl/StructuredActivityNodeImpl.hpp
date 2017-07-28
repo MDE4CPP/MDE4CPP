@@ -108,8 +108,7 @@ namespace uml
 			/*!
 			 The ActivityEdges immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge
-					,uml::Element > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element > >
 			 getEdge() const ;
 			
 			/*!
@@ -133,8 +132,7 @@ namespace uml
 			/*!
 			 The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode
-					,uml::Element > >
+			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element > >
 			 getNode() const ;
 			
 							
@@ -150,11 +148,6 @@ namespace uml
 			<p>From package UML::Actions.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
 			 getInput() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
@@ -168,6 +161,10 @@ namespace uml
 			<p>From package UML::Actions.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
 			 getOutput() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!

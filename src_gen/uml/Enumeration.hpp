@@ -234,11 +234,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
@@ -253,6 +248,10 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
 			 getFeature() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

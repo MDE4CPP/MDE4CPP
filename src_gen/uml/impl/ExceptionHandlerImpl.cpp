@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "Comment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "ExecutableNode.hpp";
+
+#include "ObjectNode.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,11 +33,25 @@ ExceptionHandlerImpl::ExceptionHandlerImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_exceptionType.reset(new Bag<uml::Classifier>());
 	
 	
+
 	
+
+	
+
+	//Init references
+	
+
+	
+	
+
+	
+
 	
 }
 
@@ -35,40 +63,58 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 	
 }
 
-ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj)
+ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):ExceptionHandlerImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExceptionHandler "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_exceptionInput  = obj.getExceptionInput();
 
 		std::shared_ptr< Bag<uml::Classifier> >
 	 _exceptionType = obj.getExceptionType();
 	m_exceptionType.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getExceptionType().get())));// this->getExceptionType()->insert(this->getExceptionType()->end(), _exceptionType->begin(), _exceptionType->end());
+	(*(obj.getExceptionType().get())));
 
 	m_handlerBody  = obj.getHandlerBody();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
-	m_protectedNode  = obj.getProtectedNode();
 
+    
+	//Clone references with containment (deep copy)
 
-	//clone containt lists
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+	if(obj.getProtectedNode()!=nullptr)
+	{
+		m_protectedNode.reset(dynamic_cast<uml::ExecutableNode*>(obj.getProtectedNode()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_protectedNode" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  ExceptionHandlerImpl::copy() const
@@ -174,17 +220,13 @@ void ExceptionHandlerImpl::setProtectedNode(std::shared_ptr<uml::ExecutableNode>
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ExceptionHandlerImpl::getOwnedElement() const
-{
-	
-
-	return m_ownedElement;
-}
 std::shared_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
 {
-	
-
 	return m_owner;
+}
+		std::shared_ptr<Union<uml::Element> > ExceptionHandlerImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

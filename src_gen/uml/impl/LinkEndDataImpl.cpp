@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Comment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "InputPin.hpp";
+
+#include "Property.hpp";
+
+#include "QualifierValue.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,11 +33,30 @@ LinkEndDataImpl::LinkEndDataImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		/*Subset*/
-		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >(m_ownedElement));//(m_ownedElement));
+		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >()" << std::endl;
+		#endif
 	
 	
+
+	
+
+	//Init references
+	
+
+		/*Subset*/
+		m_qualifier->initSubset(m_ownedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
+		#endif
+	
+	
+
 	
 }
 
@@ -35,38 +68,61 @@ LinkEndDataImpl::~LinkEndDataImpl()
 	
 }
 
-LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj)
+LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_end  = obj.getEnd();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 	m_value  = obj.getValue();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
 	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
 	{
 		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(dynamic_cast<uml::QualifierValue*>(_qualifier->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
+	#endif
+
+		/*Subset*/
+		m_qualifier->initSubset(m_ownedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
+		#endif
+	
+	
+
 }
 
 ecore::EObject *  LinkEndDataImpl::copy() const
@@ -164,8 +220,6 @@ void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 		std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
 }
 

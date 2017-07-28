@@ -5,6 +5,22 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Comment.hpp";
+
+#include "ConnectableElement.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "MultiplicityElement.hpp";
+
+#include "Property.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,8 +35,18 @@ ConnectorEndImpl::ConnectorEndImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 	
+
+	
+
+	//Init references
+	
+
+	
+
 	
 }
 
@@ -32,20 +58,23 @@ ConnectorEndImpl::~ConnectorEndImpl()
 	
 }
 
-ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj)
+ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectorEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_isOrdered = obj.getIsOrdered();
 	m_isUnique = obj.getIsUnique();
 	m_lower = obj.getLower();
 	m_upper = obj.getUpper();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_definingEnd  = obj.getDefiningEnd();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -54,25 +83,41 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj)
 	m_role  = obj.getRole();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
 	if(obj.getUpperValue()!=nullptr)
 	{
 		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  ConnectorEndImpl::copy() const
@@ -157,8 +202,6 @@ void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 //*********************************
 		std::shared_ptr<Union<uml::Element> > ConnectorEndImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
 }
 

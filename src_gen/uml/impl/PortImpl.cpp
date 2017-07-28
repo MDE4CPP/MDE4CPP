@@ -5,6 +5,50 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Association.hpp";
+
+#include "Class.hpp";
+
+#include "Classifier.hpp";
+
+#include "Comment.hpp";
+
+#include "ConnectorEnd.hpp";
+
+#include "DataType.hpp";
+
+#include "Dependency.hpp";
+
+#include "Deployment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "Interface.hpp";
+
+#include "Namespace.hpp";
+
+#include "PackageableElement.hpp";
+
+#include "Port.hpp";
+
+#include "Property.hpp";
+
+#include "ProtocolStateMachine.hpp";
+
+#include "RedefinableElement.hpp";
+
+#include "StringExpression.hpp";
+
+#include "TemplateParameter.hpp";
+
+#include "Type.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -21,15 +65,39 @@ PortImpl::PortImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_provided.reset(new Bag<uml::Interface>());
 	
 	
+
 		/*Subset*/
-		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(m_redefinedProperty));//(m_redefinedProperty));
+		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
 	
 	
+
 		m_required.reset(new Bag<uml::Interface>());
+	
+	
+
+	//Init references
+	
+
+	
+	
+
+		/*Subset*/
+		m_redefinedPort->initSubset(m_redefinedProperty);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(m_redefinedProperty)" << std::endl;
+		#endif
+	
+	
+
 	
 	
 }
@@ -42,9 +110,12 @@ PortImpl::~PortImpl()
 	
 }
 
-PortImpl::PortImpl(const PortImpl & obj)
+PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Port "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_aggregation = obj.getAggregation();
 	m_default = obj.getDefault();
 	m_isBehavior = obj.getIsBehavior();
@@ -65,124 +136,186 @@ PortImpl::PortImpl(const PortImpl & obj)
 	m_upper = obj.getUpper();
 	m_visibility = obj.getVisibility();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 	m_association  = obj.getAssociation();
-
-	m_associationEnd  = obj.getAssociationEnd();
-
-	m_class  = obj.getClass();
 
 		std::shared_ptr< Bag<uml::Dependency> >
 	 _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
-
-	m_datatype  = obj.getDatatype();
+	(*(obj.getClientDependency().get())));
 
 		std::shared_ptr< Bag<uml::PackageableElement> >
 	 _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
-	(*(obj.getDeployedElement().get())));// this->getDeployedElement()->insert(this->getDeployedElement()->end(), _deployedElement->begin(), _deployedElement->end());
+	(*(obj.getDeployedElement().get())));
 
 		std::shared_ptr< Bag<uml::ConnectorEnd> >
 	 _end = obj.getEnd();
 	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
-	(*(obj.getEnd().get())));// this->getEnd()->insert(this->getEnd()->end(), _end->begin(), _end->end());
+	(*(obj.getEnd().get())));
 
 			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));// this->getFeaturingClassifier()->insert(this->getFeaturingClassifier()->end(), _featuringClassifier->begin(), _featuringClassifier->end());
-
-	m_interface  = obj.getInterface();
-
-	m_namespace  = obj.getNamespace();
+	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
 
 	m_opposite  = obj.getOpposite();
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
-
-	m_owningAssociation  = obj.getOwningAssociation();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_protocol  = obj.getProtocol();
 
 		std::shared_ptr< Bag<uml::Interface> >
 	 _provided = obj.getProvided();
 	m_provided.reset(new 	 Bag<uml::Interface> 
-	(*(obj.getProvided().get())));// this->getProvided()->insert(this->getProvided()->end(), _provided->begin(), _provided->end());
+	(*(obj.getProvided().get())));
 
 			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));// this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
-
-			std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/ > >
-	 _redefinedPort = obj.getRedefinedPort();
-	m_redefinedPort.reset(new 		Subset<uml::Port, uml::Property /*Subset does not reference a union*/ > 
-	(*(obj.getRedefinedPort().get())));// this->getRedefinedPort()->insert(this->getRedefinedPort()->end(), _redefinedPort->begin(), _redefinedPort->end());
-
-			std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement > >
-	 _redefinedProperty = obj.getRedefinedProperty();
-	m_redefinedProperty.reset(new 		SubsetUnion<uml::Property, uml::RedefinableElement > 
-	(*(obj.getRedefinedProperty().get())));// this->getRedefinedProperty()->insert(this->getRedefinedProperty()->end(), _redefinedProperty->begin(), _redefinedProperty->end());
+	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
 
 			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));// this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
+	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
 
 		std::shared_ptr< Bag<uml::Interface> >
 	 _required = obj.getRequired();
 	m_required.reset(new 	 Bag<uml::Interface> 
-	(*(obj.getRequired().get())));// this->getRequired()->insert(this->getRequired()->end(), _required->begin(), _required->end());
+	(*(obj.getRequired().get())));
 
 		std::shared_ptr< Bag<uml::Property> >
 	 _subsettedProperty = obj.getSubsettedProperty();
 	m_subsettedProperty.reset(new 	 Bag<uml::Property> 
-	(*(obj.getSubsettedProperty().get())));// this->getSubsettedProperty()->insert(this->getSubsettedProperty()->end(), _subsettedProperty->begin(), _subsettedProperty->end());
+	(*(obj.getSubsettedProperty().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+	if(obj.getAssociationEnd()!=nullptr)
+	{
+		m_associationEnd.reset(dynamic_cast<uml::Property*>(obj.getAssociationEnd()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_associationEnd" << std::endl;
+	#endif
+	if(obj.getClass()!=nullptr)
+	{
+		m_class.reset(dynamic_cast<uml::Class*>(obj.getClass()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_class" << std::endl;
+	#endif
+	if(obj.getDatatype()!=nullptr)
+	{
+		m_datatype.reset(dynamic_cast<uml::DataType*>(obj.getDatatype()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_datatype" << std::endl;
+	#endif
 	if(obj.getDefaultValue()!=nullptr)
 	{
 		m_defaultValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getDefaultValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_defaultValue" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
 		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
+	if(obj.getInterface()!=nullptr)
+	{
+		m_interface.reset(dynamic_cast<uml::Interface*>(obj.getInterface()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_interface" << std::endl;
+	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
 		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
+	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+	if(obj.getOwningAssociation()!=nullptr)
+	{
+		m_owningAssociation.reset(dynamic_cast<uml::Association*>(obj.getOwningAssociation()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_owningAssociation" << std::endl;
+	#endif
+	if(obj.getOwningTemplateParameter()!=nullptr)
+	{
+		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Property>> _qualifierList = obj.getQualifier();
 	for(std::shared_ptr<uml::Property> _qualifier : *_qualifierList)
 	{
 		this->getQualifier()->add(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_qualifier->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::Port>> _redefinedPortList = obj.getRedefinedPort();
+	for(std::shared_ptr<uml::Port> _redefinedPort : *_redefinedPortList)
+	{
+		this->getRedefinedPort()->add(std::shared_ptr<uml::Port>(dynamic_cast<uml::Port*>(_redefinedPort->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_redefinedPort" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::Property>> _redefinedPropertyList = obj.getRedefinedProperty();
+	for(std::shared_ptr<uml::Property> _redefinedProperty : *_redefinedPropertyList)
+	{
+		this->getRedefinedProperty()->add(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_redefinedProperty->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_redefinedProperty" << std::endl;
+	#endif
 	if(obj.getUpperValue()!=nullptr)
 	{
 		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  PortImpl::copy() const
@@ -320,41 +453,29 @@ void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > PortImpl::getOwner() const
-{
-	
-
-	return m_owner;
-}
 		std::shared_ptr<Union<uml::Element> > PortImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
+}
+		std::shared_ptr<Union<uml::Classifier> > PortImpl::getRedefinitionContext() const
+{
+	return m_redefinitionContext;
+}
+std::shared_ptr<uml::Element > PortImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<uml::Namespace > PortImpl::getNamespace() const
+{
+	return m_namespace;
 }
 		std::shared_ptr<Union<uml::RedefinableElement> > PortImpl::getRedefinedElement() const
 {
-	
-
 	return m_redefinedElement;
 }
 		std::shared_ptr<Union<uml::Classifier> > PortImpl::getFeaturingClassifier() const
 {
-	
-
 	return m_featuringClassifier;
-}
-std::shared_ptr<uml::Namespace > PortImpl::getNamespace() const
-{
-	
-
-	return m_namespace;
-}
-		std::shared_ptr<Union<uml::Classifier> > PortImpl::getRedefinitionContext() const
-{
-	
-
-	return m_redefinitionContext;
 }
 
 

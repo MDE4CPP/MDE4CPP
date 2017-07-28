@@ -5,6 +5,10 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Activity.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,7 +23,9 @@ ActivityContentImpl::ActivityContentImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 
+	//Init references
 }
 
 ActivityContentImpl::~ActivityContentImpl()
@@ -30,14 +36,21 @@ ActivityContentImpl::~ActivityContentImpl()
 	
 }
 
-ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj)
+ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj):ActivityContentImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityContent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+
+
 }
 
 ecore::EObject *  ActivityContentImpl::copy() const

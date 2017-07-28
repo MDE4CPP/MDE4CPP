@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Comment.hpp";
+
+#include "DirectedRelationship.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "Namespace.hpp";
+
+#include "PackageableElement.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -20,7 +34,14 @@ ElementImportImpl::ElementImportImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
+	
+
+	//Init references
+	
+
 	
 }
 
@@ -32,48 +53,61 @@ ElementImportImpl::~ElementImportImpl()
 	
 }
 
-ElementImportImpl::ElementImportImpl(const ElementImportImpl & obj)
+ElementImportImpl::ElementImportImpl(const ElementImportImpl & obj):ElementImportImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ElementImport "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_alias = obj.getAlias();
 	m_visibility = obj.getVisibility();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
-	m_importedElement  = obj.getImportedElement();
-
-	m_importingNamespace  = obj.getImportingNamespace();
-
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-	 _source = obj.getSource();
-	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
-	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-	 _target = obj.getTarget();
-	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
-	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
+	if(obj.getImportedElement()!=nullptr)
+	{
+		m_importedElement.reset(dynamic_cast<uml::PackageableElement*>(obj.getImportedElement()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_importedElement" << std::endl;
+	#endif
+	if(obj.getImportingNamespace()!=nullptr)
+	{
+		m_importingNamespace.reset(dynamic_cast<uml::Namespace*>(obj.getImportingNamespace()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_importingNamespace" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  ElementImportImpl::copy() const
@@ -161,35 +195,25 @@ void ElementImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _i
 //*********************************
 		std::shared_ptr<Union<uml::Element> > ElementImportImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > ElementImportImpl::getOwner() const
-{
-	
-
-	return m_owner;
 }
 		std::shared_ptr<Union<uml::Element> > ElementImportImpl::getRelatedElement() const
 {
-	
-
 	return m_relatedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- ElementImportImpl::getSource() const
-{
-	
-
-	return m_source;
 }
 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
  ElementImportImpl::getTarget() const
 {
-	
-
 	return m_target;
+}
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ ElementImportImpl::getSource() const
+{
+	return m_source;
+}
+std::shared_ptr<uml::Element > ElementImportImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

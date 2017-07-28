@@ -5,6 +5,28 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Activity.hpp";
+
+#include "ActivityEdge.hpp";
+
+#include "ActivityGroup.hpp";
+
+#include "ActivityNode.hpp";
+
+#include "Comment.hpp";
+
+#include "Dependency.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "Namespace.hpp";
+
+#include "StringExpression.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,11 +41,28 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_interruptingEdge.reset(new Bag<uml::ActivityEdge>());
 	
 	
+
 		/*Subset*/
-		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode >(m_containedNode));//(m_containedNode));
+		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >()" << std::endl;
+		#endif
+	
+	
+
+	//Init references
+	
+	
+
+		/*Subset*/
+		m_node->initSubset(m_containedNode);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(m_containedNode)" << std::endl;
+		#endif
 	
 	
 }
@@ -36,68 +75,83 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 	
 }
 
-InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj)
+InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj):InterruptibleActivityRegionImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InterruptibleActivityRegion "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::Dependency> >
 	 _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+	(*(obj.getClientDependency().get())));
 
 			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));// this->getContainedEdge()->insert(this->getContainedEdge()->end(), _containedEdge->begin(), _containedEdge->end());
+	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));
 
 			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));// this->getContainedNode()->insert(this->getContainedNode()->end(), _containedNode->begin(), _containedNode->end());
-
-	m_inActivity  = obj.getInActivity();
+	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));
 
 		std::shared_ptr< Bag<uml::ActivityEdge> >
 	 _interruptingEdge = obj.getInterruptingEdge();
 	m_interruptingEdge.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getInterruptingEdge().get())));// this->getInterruptingEdge()->insert(this->getInterruptingEdge()->end(), _interruptingEdge->begin(), _interruptingEdge->end());
-
-	m_namespace  = obj.getNamespace();
-
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
-	 _node = obj.getNode();
-	m_node.reset(new 		Subset<uml::ActivityNode, uml::ActivityNode > 
-	(*(obj.getNode().get())));// this->getNode()->insert(this->getNode()->end(), _node->begin(), _node->end());
+	(*(obj.getInterruptingEdge().get())));
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > >
-	 _subgroup = obj.getSubgroup();
-	m_subgroup.reset(new 		SubsetUnion<uml::ActivityGroup, uml::Element > 
-	(*(obj.getSubgroup().get())));// this->getSubgroup()->insert(this->getSubgroup()->end(), _subgroup->begin(), _subgroup->end());
 
-	m_superGroup  = obj.getSuperGroup();
+    
+	//Clone references with containment (deep copy)
 
-
-	//clone containt lists
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
+	if(obj.getInActivity()!=nullptr)
+	{
+		m_inActivity.reset(dynamic_cast<uml::Activity*>(obj.getInActivity()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inActivity" << std::endl;
+	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::ActivityNode>> _nodeList = obj.getNode();
+	for(std::shared_ptr<uml::ActivityNode> _node : *_nodeList)
+	{
+		this->getNode()->add(std::shared_ptr<uml::ActivityNode>(dynamic_cast<uml::ActivityNode*>(_node->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_node" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  InterruptibleActivityRegionImpl::copy() const
@@ -148,21 +202,15 @@ bool
 //*********************************
 		std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
-{
-	
-
-	return m_owner;
 }
 		std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
 {
-	
-
 	return m_containedNode;
+}
+std::shared_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

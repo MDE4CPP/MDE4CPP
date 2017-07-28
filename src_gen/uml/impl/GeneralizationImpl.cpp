@@ -5,6 +5,20 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Classifier.hpp";
+
+#include "Comment.hpp";
+
+#include "DirectedRelationship.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "GeneralizationSet.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,10 +33,21 @@ GeneralizationImpl::GeneralizationImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 		m_generalizationSet.reset(new Bag<uml::GeneralizationSet>());
 	
 	
+
+	
+
+	//Init references
+	
+
+	
+	
+
 	
 }
 
@@ -34,52 +59,65 @@ GeneralizationImpl::~GeneralizationImpl()
 	
 }
 
-GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj)
+GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):GeneralizationImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Generalization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_isSubstitutable = obj.getIsSubstitutable();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
-	m_general  = obj.getGeneral();
-
 		std::shared_ptr< Bag<uml::GeneralizationSet> >
 	 _generalizationSet = obj.getGeneralizationSet();
 	m_generalizationSet.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getGeneralizationSet().get())));// this->getGeneralizationSet()->insert(this->getGeneralizationSet()->end(), _generalizationSet->begin(), _generalizationSet->end());
+	(*(obj.getGeneralizationSet().get())));
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));// this->getRelatedElement()->insert(this->getRelatedElement()->end(), _relatedElement->begin(), _relatedElement->end());
-
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-	 _source = obj.getSource();
-	m_source.reset(new 		SubsetUnion<uml::Element, uml::Element > 
-	(*(obj.getSource().get())));// this->getSource()->insert(this->getSource()->end(), _source->begin(), _source->end());
-
-	m_specific  = obj.getSpecific();
-
-			std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-	 _target = obj.getTarget();
-	m_target.reset(new 		SubsetUnion<uml::Element, uml::Element > 
-	(*(obj.getTarget().get())));// this->getTarget()->insert(this->getTarget()->end(), _target->begin(), _target->end());
+	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
+	if(obj.getGeneral()!=nullptr)
+	{
+		m_general.reset(dynamic_cast<uml::Classifier*>(obj.getGeneral()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_general" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+	if(obj.getSpecific()!=nullptr)
+	{
+		m_specific.reset(dynamic_cast<uml::Classifier*>(obj.getSpecific()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_specific" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  GeneralizationImpl::copy() const
@@ -143,36 +181,26 @@ void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- GeneralizationImpl::getSource() const
-{
-	
-
-	return m_source;
-}
 std::shared_ptr<uml::Element > GeneralizationImpl::getOwner() const
 {
-	
-
 	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
-{
-	
-
-	return m_ownedElement;
 }
 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
  GeneralizationImpl::getTarget() const
 {
-	
-
 	return m_target;
+}
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
+ GeneralizationImpl::getSource() const
+{
+	return m_source;
+}
+		std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 		std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getRelatedElement() const
 {
-	
-
 	return m_relatedElement;
 }
 

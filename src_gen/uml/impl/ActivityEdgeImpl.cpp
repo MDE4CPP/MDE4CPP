@@ -5,6 +5,40 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Activity.hpp";
+
+#include "ActivityEdge.hpp";
+
+#include "ActivityGroup.hpp";
+
+#include "ActivityNode.hpp";
+
+#include "ActivityPartition.hpp";
+
+#include "Classifier.hpp";
+
+#include "Comment.hpp";
+
+#include "Dependency.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+#include "InterruptibleActivityRegion.hpp";
+
+#include "Namespace.hpp";
+
+#include "RedefinableElement.hpp";
+
+#include "StringExpression.hpp";
+
+#include "StructuredActivityNode.hpp";
+
+#include "ValueSpecification.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,23 +53,77 @@ ActivityEdgeImpl::ActivityEdgeImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 	
+
 	
+
 		/*Union*/
 		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
 	
+	
+
 		/*Subset*/
-		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >(m_inGroup));//(m_inGroup));
+		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
+		#endif
 	
 	
+
 	
+
 	
+
 		/*Subset*/
-		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >(m_redefinedElement));//(m_redefinedElement));
+		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >()" << std::endl;
+		#endif
 	
 	
+
+	
+
+	
+
+	
+
+	//Init references
+	
+
+	
+
 	
 	
+
+		/*Subset*/
+		m_inPartition->initSubset(m_inGroup);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(m_inGroup)" << std::endl;
+		#endif
+	
+	
+
+	
+
+	
+
+		/*Subset*/
+		m_redefinedEdge->initSubset(m_redefinedElement);
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
+		#endif
+	
+	
+
+	
+
+	
+
 	
 }
 
@@ -47,81 +135,120 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 	
 }
 
-ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj)
+ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityEdge "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_isLeaf = obj.getIsLeaf();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
-	m_activity  = obj.getActivity();
-
 		std::shared_ptr< Bag<uml::Dependency> >
 	 _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));// this->getClientDependency()->insert(this->getClientDependency()->end(), _clientDependency->begin(), _clientDependency->end());
+	(*(obj.getClientDependency().get())));
 
 			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));// this->getInGroup()->insert(this->getInGroup()->end(), _inGroup->begin(), _inGroup->end());
-
-			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > >
-	 _inPartition = obj.getInPartition();
-	m_inPartition.reset(new 		Subset<uml::ActivityPartition, uml::ActivityGroup > 
-	(*(obj.getInPartition().get())));// this->getInPartition()->insert(this->getInPartition()->end(), _inPartition->begin(), _inPartition->end());
-
-	m_inStructuredNode  = obj.getInStructuredNode();
+	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
 
 	m_interrupts  = obj.getInterrupts();
 
-	m_namespace  = obj.getNamespace();
-
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > >
-	 _redefinedEdge = obj.getRedefinedEdge();
-	m_redefinedEdge.reset(new 		Subset<uml::ActivityEdge, uml::RedefinableElement > 
-	(*(obj.getRedefinedEdge().get())));// this->getRedefinedEdge()->insert(this->getRedefinedEdge()->end(), _redefinedEdge->begin(), _redefinedEdge->end());
-
 			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));// this->getRedefinedElement()->insert(this->getRedefinedElement()->end(), _redefinedElement->begin(), _redefinedElement->end());
+	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
 
 			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));// this->getRedefinitionContext()->insert(this->getRedefinitionContext()->end(), _redefinitionContext->begin(), _redefinitionContext->end());
+	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
 
 	m_source  = obj.getSource();
 
 	m_target  = obj.getTarget();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
+	if(obj.getActivity()!=nullptr)
+	{
+		m_activity.reset(dynamic_cast<uml::Activity*>(obj.getActivity()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_activity" << std::endl;
+	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	if(obj.getGuard()!=nullptr)
 	{
 		m_guard.reset(dynamic_cast<uml::ValueSpecification*>(obj.getGuard()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_guard" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
+	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
+	{
+		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(dynamic_cast<uml::ActivityPartition*>(_inPartition->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
+	#endif
+	if(obj.getInStructuredNode()!=nullptr)
+	{
+		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
+	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+	std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdgeList = obj.getRedefinedEdge();
+	for(std::shared_ptr<uml::ActivityEdge> _redefinedEdge : *_redefinedEdgeList)
+	{
+		this->getRedefinedEdge()->add(std::shared_ptr<uml::ActivityEdge>(dynamic_cast<uml::ActivityEdge*>(_redefinedEdge->copy())));
+	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_redefinedEdge" << std::endl;
+	#endif
 	if(obj.getWeight()!=nullptr)
 	{
 		m_weight.reset(dynamic_cast<uml::ValueSpecification*>(obj.getWeight()->copy()));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_weight" << std::endl;
+	#endif
+
+	
+
+	
+
 }
 
 ecore::EObject *  ActivityEdgeImpl::copy() const
@@ -243,29 +370,21 @@ void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weigh
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::ActivityGroup> > ActivityEdgeImpl::getInGroup() const
-{
-	
-
-	return m_inGroup;
-}
 		std::shared_ptr<Union<uml::Element> > ActivityEdgeImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > ActivityEdgeImpl::getRedefinedElement() const
-{
-	
-
-	return m_redefinedElement;
 }
 std::shared_ptr<uml::Element > ActivityEdgeImpl::getOwner() const
 {
-	
-
 	return m_owner;
+}
+		std::shared_ptr<Union<uml::ActivityGroup> > ActivityEdgeImpl::getInGroup() const
+{
+	return m_inGroup;
+}
+		std::shared_ptr<Union<uml::RedefinableElement> > ActivityEdgeImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 
 

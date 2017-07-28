@@ -245,15 +245,13 @@ namespace uml
 			/*!
 			 The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Property, uml::Property
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > >
 			 getOwnedAttribute() const = 0;
 			
 			/*!
 			 The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Operation, uml::Feature
-					,uml::NamedElement > >
+			virtual 		std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > >
 			 getOwnedOperation() const = 0;
 			
 			
@@ -284,14 +282,12 @@ namespace uml
 			/*!
 			 The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::Property, uml::Property
-					,uml::NamedElement > >
+					std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > >
 			 m_ownedAttribute;
 			/*!
 			 The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::Operation, uml::Feature
-					,uml::NamedElement > >
+					std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > >
 			 m_ownedOperation;
 			
 
@@ -303,11 +299,6 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element
-					,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
@@ -322,6 +313,10 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
 			 getFeature() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
+			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!

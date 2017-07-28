@@ -5,6 +5,14 @@
 #include "EClass.hpp"
 #include "umlPackageImpl.hpp"
 
+//Forward declaration includes
+#include "Comment.hpp";
+
+#include "EAnnotation.hpp";
+
+#include "Element.hpp";
+
+
 using namespace uml;
 
 //*********************************
@@ -19,7 +27,12 @@ CommentImpl::CommentImpl()
 	//*********************************
 	// Reference Members
 	//*********************************
+	//References
 		m_annotatedElement.reset(new Bag<uml::Element>());
+	
+	
+
+	//Init references
 	
 	
 }
@@ -32,35 +45,48 @@ CommentImpl::~CommentImpl()
 	
 }
 
-CommentImpl::CommentImpl(const CommentImpl & obj)
+CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 {
 	//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Comment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
 	m_body = obj.getBody();
 
-	//copy references with now containment
+	//copy references with no containment (soft copy)
 	
 		std::shared_ptr< Bag<uml::Element> >
 	 _annotatedElement = obj.getAnnotatedElement();
 	m_annotatedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getAnnotatedElement().get())));// this->getAnnotatedElement()->insert(this->getAnnotatedElement()->end(), _annotatedElement->begin(), _annotatedElement->end());
+	(*(obj.getAnnotatedElement().get())));
 
 			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));// this->getOwnedElement()->insert(this->getOwnedElement()->end(), _ownedElement->begin(), _ownedElement->end());
+	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 
-	//clone containt lists
+    
+	//Clone references with containment (deep copy)
+
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
 		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
+	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
 		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
 	}
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
+	#endif
+
+
 }
 
 ecore::EObject *  CommentImpl::copy() const
@@ -106,8 +132,6 @@ std::string CommentImpl::getBody() const
 //*********************************
 		std::shared_ptr<Union<uml::Element> > CommentImpl::getOwnedElement() const
 {
-	
-
 	return m_ownedElement;
 }
 
