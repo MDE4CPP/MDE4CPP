@@ -1,0 +1,17 @@
+task compileAbstractDataTypes(dependsOn: 'AbstractDataTypes:build') {
+	group 'AbstractDataTypes'
+	description 'compile AbstractDataTypes in debug and release'
+}
+task compileAbstractDataTypesDebug(dependsOn: ['AbstractDataTypes:AbstractDataTypesDebugSharedLibrary', 'AbstractDataTypes:deliverAbstractDataTypesHeaders', 'AbstractDataTypes:deliverAbstractDataTypesDebugSharedLibrary']) {
+	group 'AbstractDataTypes'
+	description 'compile AbstractDataTypes in debug'
+}
+task compileAbstractDataTypesRelease(dependsOn: ['AbstractDataTypes:AbstractDataTypesReleaseSharedLibrary', 'AbstractDataTypes:deliverAbstractDataTypesHeaders', 'AbstractDataTypes:deliverAbstractDataTypesReleaseSharedLibrary']) {
+	group 'AbstractDataTypes'
+	description 'compile AbstractDataTypes in release'
+}
+
+tasks.getByPath('AbstractDataTypes:deliverAbstractDataTypesHeaders').mustRunAfter tasks.getByPath('AbstractDataTypes:AbstractDataTypesDebugSharedLibrary')
+tasks.getByPath('AbstractDataTypes:deliverAbstractDataTypesDebugSharedLibrary').mustRunAfter tasks.getByPath('AbstractDataTypes:AbstractDataTypesDebugSharedLibrary')
+tasks.getByPath('AbstractDataTypes:deliverAbstractDataTypesHeaders').mustRunAfter tasks.getByPath('AbstractDataTypes:AbstractDataTypesReleaseSharedLibrary')
+tasks.getByPath('AbstractDataTypes:deliverAbstractDataTypesReleaseSharedLibrary').mustRunAfter tasks.getByPath('AbstractDataTypes:AbstractDataTypesReleaseSharedLibrary')
