@@ -41,24 +41,6 @@ model {
         debug 
         release
     }
-	
-	repositories {
-        libs(PrebuiltLibraries) {
-			['ecore', 'types', 'uml', 'fuml' ].each {
-				delegate."$it" {
-					def libraryName = "${name}"
-					headers.srcDir System.getenv('MDE4CPP_HOME')+"/application/include/${libraryName}"
-					binaries.withType(SharedLibraryBinary) {
-						if(buildType == buildTypes.debug) {
-							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}d.dll")
-						} else {
-							sharedLibraryFile = file(System.getenv('MDE4CPP_HOME')+"/application/bin/${libraryName}.dll")						
-						}
-					}
-				}	
-			}         
-		}
-	}
 
     components {
         PluginFramework(NativeLibrarySpec)
@@ -73,10 +55,6 @@ model {
                         srcDirs ".", System.getenv('MDE4CPP_HOME')+"/application/include"
                         include "**/*.hpp"
                     }
-					lib library: "ecore"
-					lib library: "types"
-					lib library: "uml"
-					lib library: "fuml"
                 }
             }
 
