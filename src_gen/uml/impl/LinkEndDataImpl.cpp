@@ -6,17 +6,17 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "InputPin.hpp";
+#include "InputPin.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "QualifierValue.hpp";
+#include "QualifierValue.hpp"
 
 
 using namespace uml;

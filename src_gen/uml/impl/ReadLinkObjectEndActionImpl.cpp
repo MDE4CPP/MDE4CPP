@@ -6,47 +6,47 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Action.hpp";
+#include "Action.hpp"
 
-#include "Activity.hpp";
+#include "Activity.hpp"
 
-#include "ActivityEdge.hpp";
+#include "ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp";
+#include "ActivityGroup.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityPartition.hpp";
+#include "ActivityPartition.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExceptionHandler.hpp";
+#include "ExceptionHandler.hpp"
 
-#include "InputPin.hpp";
+#include "InputPin.hpp"
 
-#include "InterruptibleActivityRegion.hpp";
+#include "InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "OutputPin.hpp";
+#include "OutputPin.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp";
+#include "StructuredActivityNode.hpp"
 
 
 using namespace uml;

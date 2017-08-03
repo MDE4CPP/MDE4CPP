@@ -7,31 +7,31 @@
 #include "stereotypestorage.h"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "DirectedRelationship.hpp";
+#include "DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "EClass.hpp";
+#include "EClass.hpp"
 
-#include "EModelElement.hpp";
+#include "EModelElement.hpp"
 
-#include "EObject.hpp";
+#include "EObject.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Model.hpp";
+#include "Model.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "Package.hpp";
+#include "Package.hpp"
 
-#include "Relationship.hpp";
+#include "Relationship.hpp"
 
-#include "Stereotype.hpp";
+#include "Stereotype.hpp"
 
 
 using namespace uml;

@@ -6,35 +6,35 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp";
+#include "ActivityEdge.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Connector.hpp";
+#include "Connector.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "DirectedRelationship.hpp";
+#include "DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Message.hpp";
+#include "Message.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "Relationship.hpp";
+#include "Relationship.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
 
 using namespace uml;

@@ -6,57 +6,57 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "ENamedElement.hpp";
+#include "ENamedElement.hpp"
 
-#include "EObject.hpp";
+#include "EObject.hpp"
 
-#include "EPackage.hpp";
+#include "EPackage.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ElementImport.hpp";
+#include "ElementImport.hpp"
 
-#include "Extension.hpp";
+#include "Extension.hpp"
 
-#include "Model.hpp";
+#include "Model.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "Package.hpp";
+#include "Package.hpp"
 
-#include "PackageImport.hpp";
+#include "PackageImport.hpp"
 
-#include "PackageMerge.hpp";
+#include "PackageMerge.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "ProfileApplication.hpp";
+#include "ProfileApplication.hpp"
 
-#include "Stereotype.hpp";
+#include "Stereotype.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateBinding.hpp";
+#include "TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp";
+#include "TemplateSignature.hpp"
 
-#include "Type.hpp";
+#include "Type.hpp"
 
 
 using namespace uml;

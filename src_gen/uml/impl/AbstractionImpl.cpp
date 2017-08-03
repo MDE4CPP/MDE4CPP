@@ -6,23 +6,23 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "OpaqueExpression.hpp";
+#include "OpaqueExpression.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
 
 using namespace uml;

@@ -6,43 +6,43 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ElementImport.hpp";
+#include "ElementImport.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "PackageImport.hpp";
+#include "PackageImport.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "Region.hpp";
+#include "Region.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "Transition.hpp";
+#include "Transition.hpp"
 
-#include "Trigger.hpp";
+#include "Trigger.hpp"
 
-#include "Vertex.hpp";
+#include "Vertex.hpp"
 
 
 using namespace uml;

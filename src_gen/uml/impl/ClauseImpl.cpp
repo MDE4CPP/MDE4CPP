@@ -6,17 +6,17 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Clause.hpp";
+#include "Clause.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExecutableNode.hpp";
+#include "ExecutableNode.hpp"
 
-#include "OutputPin.hpp";
+#include "OutputPin.hpp"
 
 
 using namespace uml;

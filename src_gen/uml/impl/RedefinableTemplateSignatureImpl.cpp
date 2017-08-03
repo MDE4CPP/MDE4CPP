@@ -6,29 +6,29 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "RedefinableTemplateSignature.hpp";
+#include "RedefinableTemplateSignature.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp";
+#include "TemplateSignature.hpp"
 
-#include "TemplateableElement.hpp";
+#include "TemplateableElement.hpp"
 
 
 using namespace uml;

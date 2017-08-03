@@ -6,43 +6,43 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Association.hpp";
+#include "Association.hpp"
 
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "ConnectorEnd.hpp";
+#include "ConnectorEnd.hpp"
 
-#include "DataType.hpp";
+#include "DataType.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "Deployment.hpp";
+#include "Deployment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Interface.hpp";
+#include "Interface.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
-#include "Type.hpp";
+#include "Type.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace uml;

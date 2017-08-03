@@ -6,7 +6,7 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Property.hpp";
+#include "Property.hpp"
 
 
 using namespace uml;

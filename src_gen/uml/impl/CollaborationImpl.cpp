@@ -6,65 +6,65 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "BehavioredClassifier.hpp";
+#include "BehavioredClassifier.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "CollaborationUse.hpp";
+#include "CollaborationUse.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "ConnectableElement.hpp";
+#include "ConnectableElement.hpp"
 
-#include "Connector.hpp";
+#include "Connector.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ElementImport.hpp";
+#include "ElementImport.hpp"
 
-#include "Feature.hpp";
+#include "Feature.hpp"
 
-#include "Generalization.hpp";
+#include "Generalization.hpp"
 
-#include "GeneralizationSet.hpp";
+#include "GeneralizationSet.hpp"
 
-#include "InterfaceRealization.hpp";
+#include "InterfaceRealization.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "Package.hpp";
+#include "Package.hpp"
 
-#include "PackageImport.hpp";
+#include "PackageImport.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "StructuredClassifier.hpp";
+#include "StructuredClassifier.hpp"
 
-#include "Substitution.hpp";
+#include "Substitution.hpp"
 
-#include "TemplateBinding.hpp";
+#include "TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp";
+#include "TemplateSignature.hpp"
 
-#include "UseCase.hpp";
+#include "UseCase.hpp"
 
 
 using namespace uml;

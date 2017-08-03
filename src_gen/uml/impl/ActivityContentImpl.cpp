@@ -6,7 +6,7 @@
 #include "umlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp";
+#include "Activity.hpp"
 
 
 using namespace uml;
