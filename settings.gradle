@@ -1,1 +1,1 @@
-include 'model', 'src_gen', 'src_gen:uml'
+include 'model'

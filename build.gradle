@@ -1,18 +1,79 @@
-description 'UML meta model collection'
+description 'Build tasks for project: uml'
 
-task buildUML(dependsOn: ['model:generateUML', 'src_gen:compileUML']) {
-	group 'UML'
-	description 'generate and compile UML in debug and release'
+task buildUml(dependsOn: ['model:generateUml', 'compileUml']) {
+	group 'uml'
+	description 'build uml in debug and release'
 }
-task buildUMLDebug(dependsOn: ['model:generateUML', 'src_gen:compileUMLDebug']) {
-	group 'UML'
-	description 'generate and compile UML in debug'
+task buildUmlDebug(dependsOn: ['model:generateUml', 'compileUmlDebug']) {
+	group 'uml'
+	description 'build uml in debug'
 }
-task buildUMLRelease(dependsOn: ['model:generateUML', 'src_gen:compileUMLRelease']) {
-	group 'UML'
-	description 'generate and compile UML in release'
+task buildUmlRelease(dependsOn: ['model:generateUml', 'compileUmlRelease']) {
+	group 'uml'
+	description 'build uml in release'
 }
 
-tasks.getByPath('src_gen:compileUML').mustRunAfter tasks.getByPath('model:generateUML')
-tasks.getByPath('src_gen:compileUMLDebug').mustRunAfter tasks.getByPath('model:generateUML')
-tasks.getByPath('src_gen:compileUMLRelease').mustRunAfter tasks.getByPath('model:generateUML')
+task compileUml(dependsOn: ['compileUmlDebug', 'compileUmlRelease']) {
+	group 'uml'
+	description 'compile uml in debug and release'
+}
+
+task compileUmlDebug {
+	group 'uml'
+	description 'compile uml in Debug'
+
+	def folder = new File(file('./src_gen/uml/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/uml/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/uml").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/uml/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileUmlRelease {
+	group 'uml'
+	description 'compile uml in Release'
+
+	def folder = new File(file('./src_gen/uml/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/uml/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/uml").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/uml/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileUml.mustRunAfter tasks.getByPath('model:generateUml')
+compileUmlDebug.mustRunAfter tasks.getByPath('model:generateUml')
+compileUmlRelease.mustRunAfter tasks.getByPath('model:generateUml')

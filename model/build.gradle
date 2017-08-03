@@ -1,6 +1,6 @@
 description 'UML meta models'
 
-task generateUML(type: JavaExec) {
+task generateUml(type: JavaExec) {
 	group 'UML'
 	description 'generate C++ code of UML.ecore model'
 	main = "-jar"
