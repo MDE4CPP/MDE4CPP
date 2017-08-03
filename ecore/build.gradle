@@ -1,0 +1,79 @@
+description 'Build tasks for project: ecore'
+
+task buildEcore(dependsOn: ['model:generateEcore', 'compileEcore']) {
+	group 'ecore'
+	description 'build ecore in debug and release'
+}
+task buildEcoreDebug(dependsOn: ['model:generateEcore', 'compileEcoreDebug']) {
+	group 'ecore'
+	description 'build ecore in debug'
+}
+task buildEcoreRelease(dependsOn: ['model:generateEcore', 'compileEcoreRelease']) {
+	group 'ecore'
+	description 'build ecore in release'
+}
+
+task compileEcore(dependsOn: ['compileEcoreDebug', 'compileEcoreRelease']) {
+	group 'ecore'
+	description 'compile ecore in debug and release'
+}
+
+task compileEcoreDebug {
+	group 'ecore'
+	description 'compile ecore in Debug'
+
+	def folder = new File(file('./src_gen/ecore/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/ecore").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileEcoreRelease {
+	group 'ecore'
+	description 'compile ecore in Release'
+
+	def folder = new File(file('./src_gen/ecore/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/ecore").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileEcore.mustRunAfter tasks.getByPath('model:generateEcore')
+compileEcoreDebug.mustRunAfter tasks.getByPath('model:generateEcore')
+compileEcoreRelease.mustRunAfter tasks.getByPath('model:generateEcore')

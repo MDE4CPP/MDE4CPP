@@ -1,0 +1,79 @@
+description 'Build tasks for project: types'
+
+task buildTypes(dependsOn: ['model:generateTypes', 'compileTypes']) {
+	group 'types'
+	description 'build types in debug and release'
+}
+task buildTypesDebug(dependsOn: ['model:generateTypes', 'compileTypesDebug']) {
+	group 'types'
+	description 'build types in debug'
+}
+task buildTypesRelease(dependsOn: ['model:generateTypes', 'compileTypesRelease']) {
+	group 'types'
+	description 'build types in release'
+}
+
+task compileTypes(dependsOn: ['compileTypesDebug', 'compileTypesRelease']) {
+	group 'types'
+	description 'compile types in debug and release'
+}
+
+task compileTypesDebug {
+	group 'types'
+	description 'compile types in Debug'
+
+	def folder = new File(file('./src_gen/types/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/types/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/types").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/types/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileTypesRelease {
+	group 'types'
+	description 'compile types in Release'
+
+	def folder = new File(file('./src_gen/types/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/types/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/types").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/types/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileTypes.mustRunAfter tasks.getByPath('model:generateTypes')
+compileTypesDebug.mustRunAfter tasks.getByPath('model:generateTypes')
+compileTypesRelease.mustRunAfter tasks.getByPath('model:generateTypes')
