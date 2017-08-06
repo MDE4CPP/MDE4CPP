@@ -1,14 +1,16 @@
+apply plugin: 'base' 
+
 description 'Common collection'
 
-task buildReflectionModels(dependsOn: ['pluginFramework:compilePluginFramework', 'ecoreReflection:buildEcoreReflection', 'primitiveTypesReflection:buildPrimitivetypesReflection', 'umlReflection:buildUmlReflection']) {
+task buildReflectionModels(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflection', 'primitiveTypesReflection:buildPrimitivetypesReflection', 'umlReflection:buildUmlReflection']) {
 	group 'reflection models'
 	description 'generate and compile reflection models in debug and release'
 }
-task buildReflectionModelsDebug(dependsOn: ['pluginFramework:compilePluginFramework', 'ecoreReflection:buildEcoreReflectionDebug', 'primitiveTypesReflection:buildPrimitivetypesReflectionDebug', 'umlReflection:buildUmlReflectionDebug']) {
+task buildReflectionModelsDebug(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionDebug', 'primitiveTypesReflection:buildPrimitivetypesReflectionDebug', 'umlReflection:buildUmlReflectionDebug']) {
 	group 'reflection models'
 	description 'generate and compile reflection models in debug'
 }
-task buildReflectionModelsRelease(dependsOn: ['pluginFramework:compilePluginFramework', 'ecoreReflection:buildEcoreReflectionRelease', 'primitiveTypesReflection:buildPrimitivetypesReflectionRelease', 'umlReflection:buildUmlReflectionRelease']) {
+task buildReflectionModelsRelease(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionRelease', 'primitiveTypesReflection:buildPrimitivetypesReflectionRelease', 'umlReflection:buildUmlReflectionRelease']) {
 	group 'reflection models'
 	description 'generate and compile reflection models in release'
 }
@@ -90,4 +92,12 @@ task deliverAbstractDataTypes(type: Copy) {
 	exclude "build", ".gradle"
 	inputs.dir file("abstractDataTypes/.")
 	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes")
+}
+
+clean.doFirst {
+	def cmakeFolder = file('./pluginFramework/.cmake')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
 }
