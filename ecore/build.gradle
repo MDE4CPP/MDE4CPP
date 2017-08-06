@@ -1,3 +1,5 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: ecore'
 
 task buildEcore(dependsOn: ['model:generateEcore', 'compileEcore']) {
@@ -77,3 +79,11 @@ task compileEcoreRelease {
 compileEcore.mustRunAfter tasks.getByPath('model:generateEcore')
 compileEcoreDebug.mustRunAfter tasks.getByPath('model:generateEcore')
 compileEcoreRelease.mustRunAfter tasks.getByPath('model:generateEcore')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/ecore/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

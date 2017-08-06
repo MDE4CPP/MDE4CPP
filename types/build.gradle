@@ -1,3 +1,5 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: types'
 
 task buildTypes(dependsOn: ['model:generateTypes', 'compileTypes']) {
@@ -77,3 +79,11 @@ task compileTypesRelease {
 compileTypes.mustRunAfter tasks.getByPath('model:generateTypes')
 compileTypesDebug.mustRunAfter tasks.getByPath('model:generateTypes')
 compileTypesRelease.mustRunAfter tasks.getByPath('model:generateTypes')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/types/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
