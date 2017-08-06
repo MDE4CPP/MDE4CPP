@@ -21,3 +21,62 @@ tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getB
 
 tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionRelease')
 tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionRelease')
+
+task compilePluginFramework(dependsOn: ['compilePluginFrameworkDebug', 'compilePluginFrameworkRelease']) {
+	group 'PluginFramework'
+	description 'compile PluginFramework in Debug and Release'
+}
+task compilePluginFrameworkDebug {
+	group 'PluginFramework'
+	description 'compile PluginFramework in Debug'
+
+	def folder = new File(file('./pluginFramework/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'pluginFramework/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./pluginFramework").absolutePath
+		}
+		exec {
+			workingDir 'pluginFramework/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compilePluginFrameworkRelease {
+	group 'PluginFramework'
+	description 'compile PluginFramework in Release'
+
+	def folder = new File(file('./pluginFramework/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'pluginFramework/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./pluginFramework").absolutePath
+		}
+		exec {
+			workingDir 'pluginFramework/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
