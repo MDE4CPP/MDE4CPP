@@ -3,3 +3,4 @@ build/
 SubsetUnion/Debug/
 
 SubsetUnion/cmake-build-debug/
+.cmake
