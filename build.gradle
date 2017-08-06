@@ -1,3 +1,5 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: uml'
 
 task buildUml(dependsOn: ['model:generateUml', 'compileUml']) {
@@ -77,3 +79,11 @@ task compileUmlRelease {
 compileUml.mustRunAfter tasks.getByPath('model:generateUml')
 compileUmlDebug.mustRunAfter tasks.getByPath('model:generateUml')
 compileUmlRelease.mustRunAfter tasks.getByPath('model:generateUml')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/uml/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
