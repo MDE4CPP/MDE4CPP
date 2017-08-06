@@ -1,18 +1,79 @@
-description 'fUML meta model collection'
+description 'Build tasks for project: fUML'
 
-task buildFUML(dependsOn: ['model:generateFUML', 'src_gen:compileFUML']) {
+task buildFUML(dependsOn: ['model:generateFUML', 'compileFUML']) {
 	group 'fUML'
-	description 'generate and compile fUML in debug and release'
+	description 'build fUML in debug and release'
 }
-task buildFUMLDebug(dependsOn: ['model:generateFUML', 'src_gen:compileFUMLDebug']) {
+task buildFUMLDebug(dependsOn: ['model:generateFUML', 'compileFUMLDebug']) {
 	group 'fUML'
-	description 'generate and compile fUML in debug'
+	description 'build fUML in debug'
 }
-task buildFUMLRelease(dependsOn: ['model:generateFUML', 'src_gen:compileFUMLRelease']) {
+task buildFUMLRelease(dependsOn: ['model:generateFUML', 'compileFUMLRelease']) {
 	group 'fUML'
-	description 'generate and compile fUML in release'
+	description 'build fUML in release'
 }
 
-tasks.getByPath('src_gen:compileFUML').mustRunAfter tasks.getByPath('model:generateFUML')
-tasks.getByPath('src_gen:compileFUMLDebug').mustRunAfter tasks.getByPath('model:generateFUML')
-tasks.getByPath('src_gen:compileFUMLRelease').mustRunAfter tasks.getByPath('model:generateFUML')
+task compileFUML(dependsOn: ['compileFUMLDebug', 'compileFUMLRelease']) {
+	group 'fUML'
+	description 'compile fUML in debug and release'
+}
+
+task compileFUMLDebug {
+	group 'fUML'
+	description 'compile fUML in Debug'
+
+	def folder = new File(file('./src_gen/fUML/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/fUML/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/fUML/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileFUMLRelease {
+	group 'fUML'
+	description 'compile fUML in Release'
+
+	def folder = new File(file('./src_gen/fUML/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/fUML/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/fUML/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileFUML.mustRunAfter tasks.getByPath('model:generateFUML')
+compileFUMLDebug.mustRunAfter tasks.getByPath('model:generateFUML')
+compileFUMLRelease.mustRunAfter tasks.getByPath('model:generateFUML')
