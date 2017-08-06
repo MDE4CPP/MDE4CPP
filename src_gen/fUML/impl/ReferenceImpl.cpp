@@ -9,27 +9,27 @@
     #include "Class.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
-#include "StructuralFeature.hpp";
+#include "StructuralFeature.hpp"
 
-#include "StructuredValue.hpp";
+#include "StructuredValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

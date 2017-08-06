@@ -8,17 +8,17 @@
 #include "uml/Association.hpp"
 
 //Forward declaration includes
-#include "Association.hpp";
+#include "Association.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "ExtensionalValue.hpp";
+#include "ExtensionalValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
 
 using namespace fUML;

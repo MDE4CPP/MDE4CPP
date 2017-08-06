@@ -6,7 +6,7 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;

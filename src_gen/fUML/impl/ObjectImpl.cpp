@@ -10,29 +10,29 @@
 #include "Classifier.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "EventAccepter.hpp";
+#include "EventAccepter.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "ExtensionalValue.hpp";
+#include "ExtensionalValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

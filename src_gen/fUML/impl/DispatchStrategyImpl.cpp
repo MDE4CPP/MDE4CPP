@@ -6,15 +6,15 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
 
 using namespace fUML;

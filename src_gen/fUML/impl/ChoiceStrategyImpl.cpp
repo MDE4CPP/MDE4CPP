@@ -6,7 +6,7 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
 
 using namespace fUML;

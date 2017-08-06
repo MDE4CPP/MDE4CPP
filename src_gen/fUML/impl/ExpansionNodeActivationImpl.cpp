@@ -6,17 +6,17 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ExpansionRegionActivation.hpp";
+#include "ExpansionRegionActivation.hpp"
 
-#include "ObjectNodeActivation.hpp";
+#include "ObjectNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;

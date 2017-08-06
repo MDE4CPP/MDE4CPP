@@ -21,29 +21,29 @@
 
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "BooleanValue.hpp";
+#include "BooleanValue.hpp"
 
-#include "InputPin.hpp";
+#include "InputPin.hpp"
 
-#include "Link.hpp";
+#include "Link.hpp"
 
-#include "OutputPin.hpp";
+#include "OutputPin.hpp"
 
-#include "Pin.hpp";
+#include "Pin.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -388,13 +388,15 @@ void
  ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value) 
 {
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
+		DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
+
 
 	std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
     token->setValue(value);
 
     std::shared_ptr<PinActivation> pinActivation = this->retrievePinActivation(pin);
     pinActivation->addToken(token);
+    ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) <<";DIRECTION:add"<<std::endl;)
 }
 
 void

@@ -13,15 +13,15 @@
 #include "Enumeration.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Enumeration.hpp";
+#include "Enumeration.hpp"
 
-#include "EnumerationLiteral.hpp";
+#include "EnumerationLiteral.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

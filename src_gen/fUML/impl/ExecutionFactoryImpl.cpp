@@ -13,29 +13,29 @@
 #include "ValueSpecification.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Evaluation.hpp";
+#include "Evaluation.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "OpaqueBehavior.hpp";
+#include "OpaqueBehavior.hpp"
 
-#include "OpaqueBehaviorExecution.hpp";
+#include "OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

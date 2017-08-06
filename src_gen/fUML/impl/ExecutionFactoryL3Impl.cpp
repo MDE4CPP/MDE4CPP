@@ -20,19 +20,19 @@
 #include "ExpansionNode.hpp"
 
 //Forward declaration includes
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExecutionFactoryL2.hpp";
+#include "ExecutionFactoryL2.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp";
+#include "OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
 
 using namespace fUML;

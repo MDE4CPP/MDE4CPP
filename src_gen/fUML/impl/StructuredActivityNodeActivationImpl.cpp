@@ -12,25 +12,25 @@
 #include "OutputPin.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp";
+#include "ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ExecutableNode.hpp";
+#include "ExecutableNode.hpp"
 
-#include "OutputPin.hpp";
+#include "OutputPin.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

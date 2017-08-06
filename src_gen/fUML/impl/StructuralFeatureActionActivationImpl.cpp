@@ -6,27 +6,27 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp";
+#include "ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "Association.hpp";
+#include "Association.hpp"
 
-#include "Link.hpp";
+#include "Link.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "StructuralFeature.hpp";
+#include "StructuralFeature.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

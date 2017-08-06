@@ -10,13 +10,13 @@
 
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "DispatchStrategy.hpp";
+#include "DispatchStrategy.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
 
 using namespace fUML;

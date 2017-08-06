@@ -12,23 +12,23 @@
 #include "EClass.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp";
+#include "ActivityExecution.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;
@@ -178,7 +178,7 @@ void
  ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
-	DEBUG_MESSAGE(
+		DEBUG_MESSAGE(
 		if (this->getNode()== nullptr)
 		{
 			std::cout<<"[addToken] ..."<<std::endl;
@@ -186,6 +186,7 @@ void
 		else
 		{
 			std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
+			ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< this->getNode()->getName() <<";TOKEN:"<<token->getValue()<< ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) << ";DIRECTION:add" << std::endl;)
 		}
 	)
 
@@ -193,7 +194,6 @@ void
 	{
 		token->withdraw();
 		token = std::shared_ptr<fUML::Token>(dynamic_cast<Token*>(token->copy()));
-		DEBUG_MESSAGE(std::cout << "ActivityNodeActivationImpl::addToken - no copy created - maybe error";)
 	}
 	struct null_deleter{void operator()(void const *) const { } };
 	token->setHolder(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
@@ -366,6 +366,8 @@ int
 				} else
 				{
 					std::cout<<"[removeToken] node = " + this->getNode()->getName()<<std::endl;
+                    std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner());
+					ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< (owner != nullptr ? owner->getName():"") << "::" << this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;)
 				}
 			)
 			this->getHeldTokens()->erase(iter);

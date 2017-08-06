@@ -11,13 +11,13 @@
 #include "PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp";
+#include "PrimitiveValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

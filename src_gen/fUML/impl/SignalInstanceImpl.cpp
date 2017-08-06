@@ -6,11 +6,11 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp";
+#include "CompoundValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Signal.hpp";
+#include "Signal.hpp"
 
 
 using namespace fUML;

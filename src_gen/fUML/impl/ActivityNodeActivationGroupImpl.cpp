@@ -18,19 +18,19 @@
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp";
+#include "ActivityEdge.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp";
+#include "ActivityExecution.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityParameterNodeActivation.hpp";
+#include "ActivityParameterNodeActivation.hpp"
 
-#include "StructuredActivityNodeActivation.hpp";
+#include "StructuredActivityNodeActivation.hpp"
 
 
 using namespace fUML;

@@ -7,13 +7,13 @@
 #include <Classifier.hpp>
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

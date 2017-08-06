@@ -8,17 +8,17 @@
 #include "Pin.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp";
+#include "ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ObjectNodeActivation.hpp";
+#include "ObjectNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;

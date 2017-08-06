@@ -6,11 +6,11 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
 
 using namespace fUML;

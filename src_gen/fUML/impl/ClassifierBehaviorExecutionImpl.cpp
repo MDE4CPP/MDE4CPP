@@ -6,13 +6,13 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
 
 using namespace fUML;

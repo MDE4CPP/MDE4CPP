@@ -11,15 +11,15 @@
 #include "StructuralFeature.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "StructuralFeature.hpp";
+#include "StructuralFeature.hpp"
 
-#include "StructuredValue.hpp";
+#include "StructuredValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

@@ -8,21 +8,21 @@
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "Reference.hpp";
+#include "Reference.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

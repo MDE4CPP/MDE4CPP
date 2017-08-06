@@ -17,23 +17,23 @@
 #include "ActivityParameterNode.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

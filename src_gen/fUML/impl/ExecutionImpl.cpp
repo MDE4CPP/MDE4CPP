@@ -15,23 +15,23 @@
 
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "Parameter.hpp";
+#include "Parameter.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

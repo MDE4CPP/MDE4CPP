@@ -9,13 +9,13 @@
 #include "Type.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp";
+#include "Evaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

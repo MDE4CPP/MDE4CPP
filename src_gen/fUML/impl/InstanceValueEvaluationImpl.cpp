@@ -20,13 +20,13 @@
 #include "Class.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp";
+#include "Evaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

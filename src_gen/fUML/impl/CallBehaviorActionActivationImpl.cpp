@@ -8,19 +8,19 @@
 #include "Behavior.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "CallActionActivation.hpp";
+#include "CallActionActivation.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;

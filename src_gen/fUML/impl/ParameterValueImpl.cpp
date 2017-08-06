@@ -7,9 +7,9 @@
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Parameter.hpp";
+#include "Parameter.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

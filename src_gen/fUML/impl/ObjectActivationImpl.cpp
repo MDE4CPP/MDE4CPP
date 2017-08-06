@@ -10,17 +10,17 @@
 #include "ClassifierBehaviorExecution.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "ClassifierBehaviorExecution.hpp";
+#include "ClassifierBehaviorExecution.hpp"
 
-#include "EventAccepter.hpp";
+#include "EventAccepter.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
 
 using namespace fUML;

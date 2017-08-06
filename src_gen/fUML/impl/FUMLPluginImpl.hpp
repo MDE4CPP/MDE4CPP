@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) /**/
+#else
+    #define ACT_DEBUG(a) a
+#endif
+
 #include "FUMLPlugin.hpp"
 
 namespace fUML 

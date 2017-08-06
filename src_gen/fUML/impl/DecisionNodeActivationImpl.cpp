@@ -18,21 +18,21 @@
 #include "ObjectToken.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp";
+#include "ControlNodeActivation.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

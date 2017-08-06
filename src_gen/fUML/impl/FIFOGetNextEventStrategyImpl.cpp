@@ -6,7 +6,7 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "GetNextEventStrategy.hpp";
+#include "GetNextEventStrategy.hpp"
 
 
 using namespace fUML;

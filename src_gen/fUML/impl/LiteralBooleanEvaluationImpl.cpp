@@ -8,13 +8,13 @@
 #include "LiteralBoolean.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp";
+#include "LiteralEvaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

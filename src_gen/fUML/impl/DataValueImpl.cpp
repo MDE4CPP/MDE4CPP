@@ -12,15 +12,15 @@
 #include "Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "CompoundValue.hpp";
+#include "CompoundValue.hpp"
 
-#include "DataType.hpp";
+#include "DataType.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

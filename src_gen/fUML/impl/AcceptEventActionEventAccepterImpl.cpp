@@ -6,9 +6,9 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventActionActivation.hpp";
+#include "AcceptEventActionActivation.hpp"
 
-#include "EventAccepter.hpp";
+#include "EventAccepter.hpp"
 
 
 using namespace fUML;

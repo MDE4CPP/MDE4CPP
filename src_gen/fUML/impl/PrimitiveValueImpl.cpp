@@ -10,11 +10,11 @@
 #include "Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

@@ -6,7 +6,7 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
 
 using namespace fUML;

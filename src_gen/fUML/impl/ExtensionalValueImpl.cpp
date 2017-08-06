@@ -7,11 +7,11 @@
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp";
+#include "CompoundValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
 
 using namespace fUML;

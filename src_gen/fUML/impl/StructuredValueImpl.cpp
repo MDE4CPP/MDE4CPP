@@ -16,13 +16,13 @@
 
 
 //Forward declaration includes
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "StructuralFeature.hpp";
+#include "StructuralFeature.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;

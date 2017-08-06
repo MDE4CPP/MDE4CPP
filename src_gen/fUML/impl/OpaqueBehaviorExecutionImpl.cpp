@@ -11,19 +11,19 @@
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
 
 using namespace fUML;

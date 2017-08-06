@@ -6,7 +6,7 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ChoiceStrategy.hpp";
+#include "ChoiceStrategy.hpp"
 
 
 using namespace fUML;

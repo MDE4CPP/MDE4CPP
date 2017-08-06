@@ -6,11 +6,11 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;

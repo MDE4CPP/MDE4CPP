@@ -6,13 +6,13 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "BooleanValue.hpp";
+#include "BooleanValue.hpp"
 
-#include "Clause.hpp";
+#include "Clause.hpp"
 
-#include "ClauseActivation.hpp";
+#include "ClauseActivation.hpp"
 
-#include "ConditionalNodeActivation.hpp";
+#include "ConditionalNodeActivation.hpp"
 
 
 using namespace fUML;

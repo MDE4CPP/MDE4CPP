@@ -7,15 +7,15 @@
  #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp";
+#include "ActivityEdge.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "Offer.hpp";
+#include "Offer.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;

@@ -6,13 +6,13 @@
 #include "fUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
