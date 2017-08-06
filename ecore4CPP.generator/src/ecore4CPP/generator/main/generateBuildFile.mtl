@@ -117,6 +117,8 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/file]
 
 [file ('../build.gradle', false, 'UTF-8')]
+apply plugin: 'base' 
+
 description 'Build tasks for project: [packageName/]'
 
 task build[packageName.toUpperFirst()/](dependsOn: ['['/]'model:generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
@@ -144,6 +146,14 @@ task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.
 compile[packageName.toUpperFirst()/].mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
 compile[packageName.toUpperFirst()/]Debug.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
 compile[packageName.toUpperFirst()/]Release.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
 [/file]
 
 [file ('../settings.gradle', false, 'UTF-8')]
