@@ -1,6 +1,183 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['benchmarks:UMLBenchmark:compileUMLBenchmark', 'benchmarks:ecoreBenchmark:compileEcoreBenchmark', 'fumlExample:Calculator:buildCalcModel']) {
+task buildAllExamples(dependsOn: ['compileUMLBenchmark', 'compileEcoreBenchmark', 'fumlExample:Calculator:buildCalcModel']) {
 	group 'Examples'
 	description 'build all example applications'	
+}
+
+task compileEcoreBenchmark(dependsOn: ['compileEcoreBenchmarkDebug', 'compileEcoreBenchmarkRelease']) {
+	group 'Examples'
+	description 'compile EcoreBenchmark in debug and release'
+}
+task compileEcoreBenchmarkDebug {
+	group 'Examples'
+	description 'compile EcoreBenchmark in Debug'
+
+	def folder = new File(file('./benchmarks/ecoreBenchmark/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/ecoreBenchmark/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./benchmarks/ecoreBenchmark").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/ecoreBenchmark/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileEcoreBenchmarkRelease {
+	group 'Examples'
+	description 'compile EcoreBenchmark in Release'
+
+	def folder = new File(file('./benchmarks/ecoreBenchmark/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/ecoreBenchmark/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./benchmarks/ecoreBenchmark").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/ecoreBenchmark/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileUMLBenchmark(dependsOn: ['compileUMLBenchmarkDebug', 'compileUMLBenchmarkRelease']) {
+	group 'Examples'
+	description 'compile UMLBenchmark in debug and release'
+}
+task compileUMLBenchmarkDebug {
+	group 'Examples'
+	description 'compile UMLBenchmark in Debug'
+
+	def folder = new File(file('./benchmarks/umlBenchmark/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/umlBenchmark/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./benchmarks/umlBenchmark").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/umlBenchmark/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileUMLBenchmarkRelease {
+	group 'Examples'
+	description 'compile UMLBenchmark in Release'
+
+	def folder = new File(file('./benchmarks/umlBenchmark/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/umlBenchmark/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./benchmarks/umlBenchmark").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/umlBenchmark/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task compileUMLApplication(dependsOn: ['compileUMLApplicationDebug', 'compileUMLApplicationRelease']) {
+	group 'Examples'
+	description 'compile UMLApplication in debug and release'
+}
+task compileUMLApplicationDebug {
+	group 'Examples'
+	description 'compile UMLApplication in Debug'
+
+	def folder = new File(file('./UMLExample/UMLApplication/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'UMLExample/UMLApplication/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./UMLExample/UMLApplication").absolutePath
+		}
+		exec {
+			workingDir 'UMLExample/UMLApplication/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileUMLApplicationRelease {
+	group 'Examples'
+	description 'compile UMLApplication in Release'
+
+	def folder = new File(file('./UMLExample/UMLApplication/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'UMLExample/UMLApplication/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./UMLExample/UMLApplication").absolutePath
+		}
+		exec {
+			workingDir 'UMLExample/UMLApplication/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
 }
