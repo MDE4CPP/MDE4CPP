@@ -67,24 +67,6 @@ SET(SOURCE_FILES
 [/if]
 )
 
-SET(HEADER_FILES
-[for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-	[aClass.name.toUpperFirst()/].hpp
-[/for]
-	[packageName.toUpperFirst()/]Factory.hpp
-	[packageName.toUpperFirst()/]Package.hpp
-	[packageName.toUpperFirst()/]Plugin.hpp
-)
-
-SET(IMPLHEADER_FILES
-[for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-	impl/[aClass.name.toUpperFirst()/]Impl.hpp
-[/for]
-	impl/[packageName.toUpperFirst()/]FactoryImpl.hpp
-	impl/[packageName.toUpperFirst()/]PackageImpl.hpp
-	impl/[packageName.toUpperFirst()/]PluginImpl.hpp
-)
-
 INCLUDE_DIRECTORIES(
 	.
 [if (packageName='uml')]
