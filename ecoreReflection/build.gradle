@@ -1,18 +1,87 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: EcoreReflection'
 
-task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'src_gen:EcoreReflection:compileEcoreReflection']) {
+task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflection']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug and release'
 }
-task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionDebug']) {
+task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflectionDebug']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug'
 }
-task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionRelease']) {
+task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflectionRelease']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in release'
 }
 
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionDebug').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionRelease').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+task compileEcoreReflection(dependsOn: ['compileEcoreReflectionDebug', 'compileEcoreReflectionRelease']) {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in debug and release'
+}
+task compileEcoreReflectionDebug {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in Debug'
+
+	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/EcoreReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileEcoreReflectionRelease {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in Release'
+
+	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/EcoreReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileEcoreReflection.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+compileEcoreReflectionDebug.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+compileEcoreReflectionRelease.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

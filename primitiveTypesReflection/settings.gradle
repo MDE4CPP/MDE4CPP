@@ -1,1 +1,1 @@
-include 'model', 'src_gen:PrimitivetypesReflection'
+include 'model'

@@ -1,18 +1,87 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: UmlReflection'
 
-task buildUmlReflection(dependsOn: ['model:generateUmlReflection', 'src_gen:UmlReflection:compileUmlReflection']) {
+task buildUmlReflection(dependsOn: ['model:generateUmlReflection', 'compileUmlReflection']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in debug and release'
 }
-task buildUmlReflectionDebug(dependsOn: ['model:generateUmlReflection', 'src_gen::UmlReflection:compileUmlReflectionDebug']) {
+task buildUmlReflectionDebug(dependsOn: ['model:generateUmlReflection', 'compileUmlReflectionDebug']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in debug'
 }
-task buildUmlReflectionRelease(dependsOn: ['model:generateUmlReflection', 'src_gen::UmlReflection:compileUmlReflectionRelease']) {
+task buildUmlReflectionRelease(dependsOn: ['model:generateUmlReflection', 'compileUmlReflectionRelease']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in release'
 }
 
-tasks.getByPath('src_gen:UmlReflection:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')
-tasks.getByPath('src_gen:UmlReflection:compileUmlReflectionDebug').mustRunAfter tasks.getByPath('model:generateUmlReflection')
-tasks.getByPath('src_gen:UmlReflection:compileUmlReflectionRelease').mustRunAfter tasks.getByPath('model:generateUmlReflection')
+task compileUmlReflection(dependsOn: ['compileUmlReflectionDebug', 'compileUmlReflectionRelease']) {
+	group 'UmlReflection'
+	description 'compile UmlReflection in debug and release'
+}
+task compileUmlReflectionDebug {
+	group 'UmlReflection'
+	description 'compile UmlReflection in Debug'
+
+	def folder = new File(file('./src_gen/UmlReflection/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/UmlReflection/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/UmlReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/UmlReflection/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileUmlReflectionRelease {
+	group 'UmlReflection'
+	description 'compile UmlReflection in Release'
+
+	def folder = new File(file('./src_gen/UmlReflection/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/UmlReflection/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/UmlReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/UmlReflection/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+compileUmlReflection.mustRunAfter tasks.getByPath('model:generateUmlReflection')
+compileUmlReflectionDebug.mustRunAfter tasks.getByPath('model:generateUmlReflection')
+compileUmlReflectionRelease.mustRunAfter tasks.getByPath('model:generateUmlReflection')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/UmlReflection/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
