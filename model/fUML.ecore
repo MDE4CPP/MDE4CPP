@@ -99,7 +99,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;uml::PrimitiveType> type = nullptr;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (nullptr == type &amp;&amp; i &lt; this->getBuiltInTypes()->size())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::PrimitiveType> primitiveType = this->getBuiltInTypes()->at(i);&#xD;&#xA;        if (typeid(primitiveType).name() == name) &#xD;&#xA;        {&#xD;&#xA;            type = primitiveType;&#xD;&#xA;        }&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return type;"/>
       </eAnnotations>
-      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
     </eOperations>
     <eOperations name="assignStrategy" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -111,13 +111,13 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;unsigned int i = this->getStrategyIndex(name);&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;SemanticStrategy> strategy = nullptr;&#xD;&#xA;    if(i &lt; this->getStrategies()->size())&#xD;&#xA;    {&#xD;&#xA;        strategy = this->getStrategies()->at(i);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return strategy;"/>
       </eAnnotations>
-      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
     </eOperations>
-    <eOperations name="getStrategyIndex" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="getStrategyIndex" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;SemanticStrategy> > strategies = this->getStrategies();&#xD;&#xA;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    bool unmatched = true;&#xD;&#xA;    while(unmatched &amp;&amp; (i &lt; strategies->size()))&#xD;&#xA;    {&#xD;&#xA;        if(strategies->at(i)->retrieveName()==(name))&#xD;&#xA;        {&#xD;&#xA;            unmatched = false;&#xD;&#xA;        }&#xD;&#xA;        else&#xD;&#xA;        {&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return i;"/>
       </eAnnotations>
-      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+      <eParameters name="name" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="locus" ordered="false"
         eType="#//Locus" eOpposite="#//Locus/factory"/>
@@ -168,7 +168,7 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SemanticStrategy" abstract="true">
-    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SemanticVisitor" abstract="true">
     <eOperations name="_endIsolation" ordered="false" lowerBound="1">
@@ -183,21 +183,21 @@
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ChoiceStrategy" abstract="true" eSuperTypes="#//SemanticStrategy">
-    <eOperations name="choose" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
-      <eParameters name="size" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+    <eOperations name="choose" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
+      <eParameters name="size" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
-    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return &quot;choice&quot;;"/>
       </eAnnotations>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="FirstChoiceStrategy" eSuperTypes="#//ChoiceStrategy">
-    <eOperations name="choose" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="choose" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return 1;"/>
       </eAnnotations>
-      <eParameters name="size" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="size" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExecutionFactoryL2" eSuperTypes="#//ExecutionFactoryL1">
@@ -229,7 +229,7 @@
     <eOperations name="specify" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > myTypes = this->getTypes();&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > otherTypes = otherValue->getTypes();&#xD;&#xA;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt;&quot;in Value&quot;&lt;&lt;std::endl;)&#xD;&#xA;    bool isEqual = true;&#xD;&#xA;&#xD;&#xA;    if(myTypes->size() != otherTypes->size())&#xD;&#xA;    {&#xD;&#xA;        isEqual = false;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        unsigned int i = 0;&#xD;&#xA;        while(isEqual &amp;&amp; i &lt; myTypes->size())&#xD;&#xA;        {&#xD;&#xA;            bool matched = false;&#xD;&#xA;            unsigned int j = 0;&#xD;&#xA;            while(!matched &amp;&amp; j &lt; otherTypes->size())&#xD;&#xA;            {&#xD;&#xA;                matched = (otherTypes->at(j) == myTypes->at(i));&#xD;&#xA;                j = j + 1;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            isEqual = matched;&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
@@ -240,16 +240,16 @@
         <details key="const"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="hasTypes" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasTypes" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > types = this->getTypes();&#xD;&#xA;&#xD;&#xA;    bool found = false;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while(!found &amp;&amp; i &lt; types->size())&#xD;&#xA;    {&#xD;&#xA;        found = (types->at(i) == type);&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return found;"/>
       </eAnnotations>
       <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Classifier"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
     </eOperations>
-    <eOperations name="objectId" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="objectId" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return &quot;SemanticVisitor&quot;;//typename(SemanticVisitor); //return super.toString();&#xD;&#xA;"/>
       </eAnnotations>
@@ -269,7 +269,7 @@
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
-      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="retrieveFeatureValues" ordered="false" upperBound="-1" eType="#//FeatureValue">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
@@ -313,7 +313,7 @@
         <details key="body" value="this->getReferent()->destroy();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > myTypes = nullptr;//this->getTypes();&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > otherTypes = nullptr;//otherValue->getTypes();&#xD;&#xA;&#xD;&#xA;    bool isEqual = true;&#xD;&#xA;&#xD;&#xA;    // Debug.println(&quot;[equals] Value...&quot;);&#xD;&#xA;    // Debug.println(&quot;[equals] this has &quot; + myTypes.size() +&#xD;&#xA;    // &quot;types, other has &quot; + otherTypes.size() + &quot;.&quot;);&#xD;&#xA;    if(myTypes->size() != otherTypes->size())&#xD;&#xA;    {&#xD;&#xA;        isEqual = false;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        // Debug.println(&quot;[equals] &quot; + myTypes.size() + &quot; type(s).&quot;);&#xD;&#xA;        unsigned int i = 0;&#xD;&#xA;&#x9;const unsigned int i_size =  myTypes->size();&#xD;&#xA;        while(isEqual &amp;&amp; i &lt; i_size)&#xD;&#xA;        {&#xD;&#xA;            // Debug.println(&quot;[equals] this type = &quot; +&#xD;&#xA;            // myTypes.getValue(i).name);&#xD;&#xA;&#xD;&#xA;            bool matched = false;&#xD;&#xA;            unsigned int j = 0;&#xD;&#xA;&#x9;     const unsigned int j_size = otherTypes->size();&#xD;&#xA;            while(!matched &amp;&amp; j &lt; j_size)&#xD;&#xA;            {&#xD;&#xA;                // Debug.println(&quot;[equals] other type = &quot; +&#xD;&#xA;                // otherTypes.getValue(j).name);&#xD;&#xA;                matched = (otherTypes->at(j) == myTypes->at(i));&#xD;&#xA;                j = j + 1;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            isEqual = matched;&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
@@ -341,14 +341,14 @@
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
-      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="retrieveFeatureValues" ordered="false" upperBound="-1" eType="#//FeatureValue">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return this->getReferent()->retrieveFeatureValues();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return &quot;Reference to &quot; + this->getReferent()->toString();"/>
       </eAnnotations>
@@ -366,13 +366,13 @@
       </eAnnotations>
       <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Classifier"/>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;CompoundValue> otherCompoundValue = std::dynamic_pointer_cast&lt;CompoundValue>(otherValue);&#xD;&#xA;&#x9;bool isEqual = (otherCompoundValue != nullptr);&#xD;&#xA;    if (isEqual)&#xD;&#xA;    {&#xD;&#xA;        isEqual = StructuredValueImpl::equals(otherValue)&#xD;&#xA;                &amp;&amp; otherCompoundValue->getFeatureValues()->size() == this->getFeatureValues()->size();&#xD;&#xA;&#xD;&#xA;        unsigned int i = 0;&#xD;&#xA;        while (isEqual &amp;&amp; i &lt; this->getFeatureValues()->size())&#xD;&#xA;        {&#xD;&#xA;        &#x9;std::shared_ptr&lt;FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i);&#xD;&#xA;&#xD;&#xA;            bool matched = false;&#xD;&#xA;            unsigned int j = 0;&#xD;&#xA;            while (!matched &amp;&amp; j &lt; otherCompoundValue->getFeatureValues()->size())&#xD;&#xA;            {&#xD;&#xA;            &#x9;std::shared_ptr&lt;FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j);&#xD;&#xA;                if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature())&#xD;&#xA;                {&#xD;&#xA;                    matched = thisFeatureValue->hasEqualValues(otherFeatureValue);&#xD;&#xA;                }&#xD;&#xA;                j = j + 1;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            isEqual = matched;&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::string buffer = &quot;(&quot; + this->objectId() + &quot;:&quot;;&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier> > types = this->getTypes();&#xD;&#xA;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while(i &lt; types->size())&#xD;&#xA;    {&#xD;&#xA;        buffer = buffer + &quot; &quot; + types->at(i)->getName();&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    unsigned int k = 0;&#xD;&#xA;    while(k &lt; this->getFeatureValues()->size())&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;FeatureValue> featureValue = this->getFeatureValues()->at(k);&#xD;&#xA;        char buf [11];&#xD;&#xA;        std::sprintf(buf, &quot;%d&quot;, featureValue->getPosition());&#xD;&#xA;        buffer = buffer + &quot;\n\t\t&quot; + featureValue->getFeature()->getName() + &quot;[&quot; + std::string(buf) + &quot;]  =&quot;;&#xD;&#xA;&#xD;&#xA;        unsigned int j = 0;&#xD;&#xA;        while(j &lt; featureValue->getValues()->size())&#xD;&#xA;        {&#xD;&#xA;            buffer = buffer + &quot; &quot; + featureValue->getValues()->at(j)->toString();&#xD;&#xA;            j = j + 1;&#xD;&#xA;        }&#xD;&#xA;&#xD;&#xA;        k = k + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return buffer + &quot;)&quot;;"/>
       </eAnnotations>
@@ -389,7 +389,7 @@
       </eAnnotations>
       <eParameters name="feature" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//StructuralFeature"/>
       <eParameters name="values" ordered="false" upperBound="-1" eType="#//Value"/>
-      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="position" ordered="false" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="retrieveFeatureValues" ordered="false" upperBound="-1" eType="#//FeatureValue">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -403,7 +403,7 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;StructuralFeature.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
-    <eOperations name="hasEqualValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasEqualValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;bool equal = true;&#xD;&#xA;&#xD;&#xA;    if(this->getValues()->size() != other->getValues()->size())&#xD;&#xA;    {&#xD;&#xA;        equal = false;&#xD;&#xA;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::StructuralFeature> feature = this->getFeature();&#xD;&#xA;        if(feature->getIsOrdered())&#xD;&#xA;        {&#xD;&#xA;            unsigned int i = 0;&#xD;&#xA;            while(equal &amp;&amp; (i &lt; this->getValues()->size()))&#xD;&#xA;            {&#xD;&#xA;                equal = this->getValues()->at(i)->equals(other->getValues()->at(i));&#xD;&#xA;                i = i + 1;&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;        }&#xD;&#xA;        else&#xD;&#xA;        {&#xD;&#xA;        &#x9;std::shared_ptr&lt;FeatureValue> otherFeatureValues(FUMLFactory::eInstance()->createFeatureValue());&#xD;&#xA;        &#x9;std::shared_ptr&lt;Bag&lt;Value> > values = other->getValues();&#xD;&#xA;            for(unsigned int i = 0; i &lt; values->size(); i++)&#xD;&#xA;            {&#xD;&#xA;            &#x9;std::shared_ptr&lt;Value> value = values->at(i);&#xD;&#xA;                otherFeatureValues->getValues()->push_back(value);&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            unsigned int i = 0;&#xD;&#xA;            while(equal &amp;&amp; (i &lt; this->getValues()->size()))&#xD;&#xA;            {&#xD;&#xA;                bool matched = false;&#xD;&#xA;                unsigned int j = 0;&#xD;&#xA;                while(!matched &amp;&amp; (j &lt; otherFeatureValues->getValues()->size()))&#xD;&#xA;                {&#xD;&#xA;                    if(this->getValues()->at(i)->equals(otherFeatureValues->getValues()->at(j)))&#xD;&#xA;                    {&#xD;&#xA;                        matched = true;&#xD;&#xA;                        otherFeatureValues->getValues()->erase(otherFeatureValues->getValues()->begin() + j);&#xD;&#xA;                    }&#xD;&#xA;                    j = j + 1;&#xD;&#xA;                }&#xD;&#xA;&#xD;&#xA;                equal = matched;&#xD;&#xA;                i = i + 1;&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return equal;"/>
       </eAnnotations>
@@ -412,7 +412,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" ordered="false"
         upperBound="-1" eType="#//Value" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="position" ordered="false"
-        eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt" defaultValueLiteral="0"/>
+        eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt" defaultValueLiteral="0"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" ordered="false"
         lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//StructuralFeature"/>
   </eClassifiers>
@@ -437,19 +437,19 @@
         <details key="body" value="std::shared_ptr&lt;uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());&#xD;&#xA;    literal->setType(this->getType());&#xD;&#xA;    literal->setValue(this->getValue());&#xD;&#xA;    return literal;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;&#x9;std::shared_ptr&lt;fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast&lt;UnlimitedNaturalValue>(otherValue);&#xD;&#xA;    if(unValue != nullptr)&#xD;&#xA;    {&#xD;&#xA;        isEqual = (unValue->getValue() == this->getValue());&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    std::string stringValue = &quot;*&quot;;&#xD;&#xA;&#xD;&#xA;    if(this->getValue() >= 0)&#xD;&#xA;    {&#xD;&#xA;        IntegerValue * integerValue = FUMLFactory::eInstance()->createIntegerValue();&#xD;&#xA;        integerValue->setValue(this->getValue());&#xD;&#xA;        stringValue = integerValue->toString();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return stringValue;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StringValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -460,19 +460,19 @@
         <details key="body" value="std::shared_ptr&lt;uml::LiteralString> literal(uml::UmlFactory::eInstance()->createLiteralString());&#xD;&#xA;&#x9;literal->setType(this->getType());&#xD;&#xA;    literal->setValue(this->getValue());&#xD;&#xA;    return literal;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;    &#xD;&#xA;&#x9;std::shared_ptr&lt;StringValue> otherStringValue = std::dynamic_pointer_cast&lt;StringValue>(otherValue);&#xD;&#xA;    if(otherStringValue != nullptr)&#xD;&#xA;    {&#xD;&#xA;        isEqual = otherStringValue->getValue() == this->getValue();&#xD;&#xA;    }&#xD;&#xA;    &#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return this->getValue();"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="IntegerValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -483,19 +483,19 @@
         <details key="body" value="std::shared_ptr&lt;uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());&#xD;&#xA;&#xD;&#xA;    literal->setType(this->getType());&#xD;&#xA;    literal->setValue(this->getValue());&#xD;&#xA;&#xD;&#xA;    return literal;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;IntegerValue> otherIntegerValue = std::dynamic_pointer_cast&lt;IntegerValue>(otherValue);&#xD;&#xA;    if(otherIntegerValue != nullptr)&#xD;&#xA;    {&#xD;&#xA;        isEqual = (otherIntegerValue->getValue() == this->getValue());&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    char buf [11];&#xD;&#xA;    std::sprintf(buf, &quot;%d&quot;, this->getValue());&#xD;&#xA;    return std::string(buf);"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RealValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -506,19 +506,19 @@
         <details key="body" value="std::shared_ptr&lt;uml::LiteralReal> literal(uml::UmlFactory::eInstance()->createLiteralReal());&#xD;&#xA;&#x9;literal->setType(this->getType());&#xD;&#xA;    literal->setValue(this->getValue());&#xD;&#xA;    return literal;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;RealValue> otherRealValue = std::dynamic_pointer_cast&lt;RealValue>(otherValue);&#xD;&#xA;&#xD;&#xA;    if(otherRealValue != nullptr)&#xD;&#xA;    {&#xD;&#xA;        isEqual = (otherRealValue->getValue() == this->getValue());&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    std::ostringstream o;&#xD;&#xA;     if (!(o &lt;&lt; this->getValue()))&#xD;&#xA;       return &quot;&quot;;&#xD;&#xA;     return o.str();"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EFloat"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EFloat"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BooleanValue" eSuperTypes="#//PrimitiveValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -529,19 +529,19 @@
         <details key="body" value="std::shared_ptr&lt;uml::LiteralBoolean> literal(uml::UmlFactory::eInstance()->createLiteralBoolean());    &#xD;&#xA;    literal->setType(this->getType());&#xD;&#xA;    literal->setValue(this->isValue());&#xD;&#xA;    return literal;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;BooleanValue> otherBooleanValue = std::dynamic_pointer_cast&lt;BooleanValue>(otherValue);&#xD;&#xA;    if(otherBooleanValue != nullptr)&#xD;&#xA;    {&#xD;&#xA;    &#x9;isEqual = otherBooleanValue->isValue() == this->isValue();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
       <eParameters name="otherValue" ordered="false" lowerBound="1" eType="#//Value"/>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    std::string stringValue = &quot;false&quot;;&#xD;&#xA;&#xD;&#xA;    if(this->isValue())&#xD;&#xA;    {&#xD;&#xA;        stringValue = &quot;true&quot;;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return stringValue;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExtensionalValue" abstract="true" eSuperTypes="#//CompoundValue">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -557,19 +557,19 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ExtensionalValueList" eSuperTypes="#//ExtensionalValue">
     <eOperations name="getValue" ordered="false" lowerBound="1" eType="#//ExtensionalValue"/>
-    <eOperations name="addValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="addValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//ExtensionalValue"/>
     </eOperations>
     <eOperations name="addValue" ordered="false" lowerBound="1">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//ExtensionalValue"/>
-      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="setValue" ordered="false" lowerBound="1" eType="#//Value">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//ExtensionalValue"/>
-      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
-    <eOperations name="removeValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
-      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+    <eOperations name="removeValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
+      <eParameters name="i" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Evaluation" abstract="true" eSuperTypes="#//SemanticVisitor">
@@ -589,7 +589,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;uml::PrimitiveType> type = std::dynamic_pointer_cast&lt;uml::PrimitiveType>(this->getSpecification()->getType());&#xD;&#xA;&#xD;&#xA;    if(type == nullptr)&#xD;&#xA;    {&#xD;&#xA;        type = this->getLocus()->getFactory()->getBuiltInType(builtInTypeName);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return type;"/>
       </eAnnotations>
-      <eParameters name="builtInTypeName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString"/>
+      <eParameters name="builtInTypeName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InstanceValueEvaluation" eSuperTypes="#//Evaluation">
@@ -668,7 +668,7 @@
         <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Classifier> > types(new Bag&lt;uml::Classifier>());&#xD;&#xA;&#xD;&#xA;&#x9;if( this->getType() != nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;types->push_back(std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType()));&#xD;&#xA;&#x9;}&#xD;&#xA;    return types;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isMatchingLink" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isMatchingLink" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > ends = this->getType()->getMemberEnd();&#xD;&#xA;&#xD;&#xA;&#x9;bool matches = true;&#xD;&#xA;&#x9;unsigned int i = 0;&#xD;&#xA;&#x9;while (matches &amp;&amp; i &lt; ends->size()) &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Property> otherEnd = ends->at(i);&#xD;&#xA;&#x9;&#x9;if (otherEnd != end&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&amp;&amp; !this->retrieveFeatureValue(otherEnd)->getValues()->at(0)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;->equals(&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;link->retrieveFeatureValue(otherEnd)->getValues()->at(0))) {&#xD;&#xA;&#x9;&#x9;&#x9;matches = false;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;i = i + 1;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;return matches;"/>
       </eAnnotations>
@@ -695,7 +695,7 @@
         <details key="body" value="std::shared_ptr&lt;uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());&#xD;&#xA;    //Remark: instance is so defined in the specification, but even there is not used.&#xD;&#xA;    //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification();&#xD;&#xA;&#xD;&#xA;    instanceValue->setType(this->getType());&#xD;&#xA;    instanceValue->setInstance(this->getLiteral());&#xD;&#xA;&#xD;&#xA;    return instanceValue;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool isEqual = false;&#xD;&#xA;&#x9;std::shared_ptr&lt;fUML::EnumerationValue> value = std::dynamic_pointer_cast&lt;fUML::EnumerationValue>(otherValue);&#xD;&#xA;    if(value != nullptr)&#xD;&#xA;    {&#xD;&#xA;        isEqual = (value->getLiteral() == this->getLiteral());&#xD;&#xA;    }&#xD;&#xA;    return isEqual;"/>
       </eAnnotations>
@@ -706,7 +706,7 @@
         <details key="body" value="return std::shared_ptr&lt;fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return this->getLiteral()->getName();"/>
       </eAnnotations>
@@ -753,7 +753,7 @@
       <eParameters name="object" ordered="false" lowerBound="1" eType="#//Object"/>
       <eParameters name="operation" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Operation"/>
     </eOperations>
-    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EString">
+    <eOperations name="retrieveName" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EString">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return &quot;dispatch&quot;;"/>
       </eAnnotations>
@@ -763,7 +763,7 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;NamedElement.hpp&quot;&#xD;&#xA;#include &quot;Class.hpp&quot;&#xD;&#xA;#include &quot;Operation.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
-    <eOperations name="operationsMatch" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="operationsMatch" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;//#include &quot;NamedElement.hpp&quot;&#xD;&#xA;&#x9;//#include &quot;Class.hpp&quot;&#xD;&#xA;&#x9;//#include &quot;Operation.hpp&quot;&#xD;&#xA;&#x9;//&#xD;&#xA;&#x9;bool matches = false;&#xD;&#xA;&#x9;if(ownedOperation == baseOperation)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;matches = true;&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;else&#xD;&#xA;    {&#xD;&#xA;&#x9;&#x9;unsigned int i = 0;&#xD;&#xA;&#x9;&#x9;while(!matches &amp;&amp; i &lt; ownedOperation->getRedefinedOperation()->size())&#xD;&#xA;        {&#xD;&#xA;&#x9;&#x9;&#x9;matches = this->operationsMatch(ownedOperation->getRedefinedOperation()->at(i), baseOperation);&#xD;&#xA;&#x9;&#x9;&#x9;i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#x9;return matches;"/>
       </eAnnotations>
@@ -908,7 +908,7 @@
     <eOperations name="accept" ordered="false" lowerBound="1">
       <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="#//SignalInstance"/>
     </eOperations>
-    <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="#//SignalInstance"/>
     </eOperations>
   </eClassifiers>
@@ -981,7 +981,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value=""/>
       </eAnnotations>
-      <eParameters name="signal" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EJavaObject"/>
+      <eParameters name="signal" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EJavaObject"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="waitingEventAccepters"
         ordered="false" upperBound="-1" eType="#//EventAccepter"/>
@@ -1009,7 +1009,7 @@
       </eAnnotations>
       <eParameters name="activations" ordered="false" upperBound="-1" eType="#//ActivityNodeActivation"/>
     </eOperations>
-    <eOperations name="checkIncomingEdges" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="checkIncomingEdges" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    unsigned int j = 0;&#xD;&#xA;    bool notFound = true;&#xD;&#xA;&#xD;&#xA;    while (j &lt; incomingEdges->size() &amp;&amp; notFound) {&#xD;&#xA;        unsigned int k = 0;&#xD;&#xA;        while (k &lt; activations->size() &amp;&amp; notFound) {&#xD;&#xA;            if (activations->at(k)->isSourceFor(&#xD;&#xA;                        incomingEdges->at(j))) {&#xD;&#xA;                notFound = false;&#xD;&#xA;            }&#xD;&#xA;            k = k + 1;&#xD;&#xA;        }&#xD;&#xA;        j = j + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return notFound;"/>
       </eAnnotations>
@@ -1093,12 +1093,12 @@
       </eAnnotations>
       <eParameters name="activation" ordered="false" lowerBound="1" eType="#//ActivityNodeActivation"/>
     </eOperations>
-    <eOperations name="isSuspended" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isSuspended" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return this->getSuspendedActivations()->size() > 0;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="hasSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;bool hasSource = false;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;ActivityNodeActivation> > activations = this->getNodeActivations();&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (!hasSource &amp;&amp; i &lt; activations->size()) &#xD;&#xA;    {&#xD;&#xA;        hasSource = activations->at(i)->isSourceFor(edgeInstance);&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;    return hasSource;"/>
       </eAnnotations>
@@ -1124,7 +1124,7 @@
       </eAnnotations>
       <eParameters name="tokens" ordered="false" upperBound="-1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="countOfferedValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="countOfferedValue" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="int count = 0;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;Offer> > offerList = this->getOffers();&#xD;&#xA;    for(std::shared_ptr&lt;Offer> offer : *offerList)&#xD;&#xA;    {&#xD;&#xA;        count+=offer->countOfferedVales();&#xD;&#xA;    }&#xD;&#xA;    return count;"/>
       </eAnnotations>
@@ -1138,14 +1138,14 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;Bag&lt;Token> > tokens(new Bag&lt;Token>());&#xD;&#xA;    int remainingCount = maxCount;&#xD;&#xA;&#xD;&#xA;    while (this->getOffers()->size() > 0 &amp;&amp; remainingCount > 0) {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Offer> offer = this->getOffers()->at(0);&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;fUML::Token> > offeredTokens = offer->retrieveOfferedTokens();&#xD;&#xA;        int count = offer->countOfferedVales();&#xD;&#xA;        if (count &lt;= remainingCount) {&#xD;&#xA;            for (unsigned int i = 0; i &lt; offeredTokens->size(); i++) {&#xD;&#xA;                tokens->push_back(offeredTokens->at(i));&#xD;&#xA;            }&#xD;&#xA;            remainingCount = remainingCount - count;&#xD;&#xA;            this->getOffers()->erase(this->getOffers()->begin());&#xD;&#xA;        } else {&#xD;&#xA;            for (int i = 0; i &lt; remainingCount; i++) {&#xD;&#xA;            &#x9;std::shared_ptr&lt;Token> token = offeredTokens->at(i);&#xD;&#xA;                if (token->getValue() != nullptr) {&#xD;&#xA;                    tokens->push_back(token);&#xD;&#xA;                }&#xD;&#xA;            }&#xD;&#xA;            offer->removeOfferedValues(remainingCount);&#xD;&#xA;            remainingCount = 0;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return tokens;"/>
       </eAnnotations>
-      <eParameters name="maxCount" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="maxCount" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="getOfferedTokens" ordered="false" upperBound="-1" eType="#//Token">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;Bag&lt;Token> > tokens(new Bag&lt;Token>());&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;Offer> > offerList = this->getOffers();&#xD;&#xA;    for(std::shared_ptr&lt;Offer> offer : *offerList)&#xD;&#xA;    {&#xD;&#xA;    &#x9;auto vec = offer->retrieveOfferedTokens();&#xD;&#xA;        tokens->insert(tokens->end(), vec->begin(), vec->end());&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return tokens;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="hasOffer" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasOffer" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return std::any_of(this->getOffers()->begin(),this->getOffers()->end(),[](std::shared_ptr&lt;Offer> offer){return offer->hasTokens();});&#xD;&#xA;"/>
       </eAnnotations>
@@ -1161,7 +1161,7 @@
         lowerBound="1" eType="#//ActivityNodeActivationGroup"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Offer">
-    <eOperations name="countOfferedVales" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="countOfferedVales" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    this->removeWithdrawnTokens();&#xD;&#xA;&#xD;&#xA;    int count = 0;&#xD;&#xA;    for (unsigned int i = 0; i &lt; this->getOfferedTokens()->size(); i++) {&#xD;&#xA;        if (this->getOfferedTokens()->at(i)->getValue() != nullptr) {&#xD;&#xA;            count = count + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return count;"/>
       </eAnnotations>
@@ -1175,14 +1175,14 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    int n = count;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (n > 0) {&#xD;&#xA;        if (this->getOfferedTokens()->at(i)->getValue() != nullptr) {&#xD;&#xA;            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i);&#xD;&#xA;        } else {&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;        n = n - 1;&#xD;&#xA;    }"/>
       </eAnnotations>
-      <eParameters name="count" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="count" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
     <eOperations name="removeWithdrawnTokens" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    unsigned int i = 0;&#xD;&#xA;    while (i &lt; this->getOfferedTokens()->size()) {&#xD;&#xA;        if (this->getOfferedTokens()->at(i)->isWithdrawn()) {&#xD;&#xA;            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i );&#xD;&#xA;            i = i - 1;&#xD;&#xA;        }&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="hasTokens" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasTokens" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    this->removeWithdrawnTokens();&#xD;&#xA;    return (this->getOfferedTokens()->size() > 0);"/>
       </eAnnotations>
@@ -1202,16 +1202,16 @@
         <details key="body" value="if (!this->isWithdrawn()) &#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;&#x9;std::shared_ptr&lt;fUML::ActivityNodeActivation> holder = this->getHolder();&#xD;&#xA;        this->setHolder(nullptr);&#xD;&#xA;&#x9;&#x9;if (holder)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;holder->removeToken(std::shared_ptr&lt;Token>(this, null_deleter()));&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;    }"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen"/>
       <eParameters name="other" ordered="false" lowerBound="1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="isWithdrawn" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isWithdrawn" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return (this->getHolder()==nullptr);"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return dynamic_cast&lt;fUML::ControlToken*>(this) != nullptr;"/>
       </eAnnotations>
@@ -1228,13 +1228,13 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value=" #include &quot;FUMLFactory.hpp&quot;"/>
     </eAnnotations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return (this == other.get());"/>
       </eAnnotations>
       <eParameters name="other" ordered="false" lowerBound="1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return false;"/>
       </eAnnotations>
@@ -1246,7 +1246,7 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value=" "/>
     </eAnnotations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return (this == otherToken.get());"/>
       </eAnnotations>
@@ -1257,7 +1257,7 @@
         <details key="body" value="    if (!this->isBaseTokenIsWithdrawn() &amp; !this->getBaseToken()->isWithdrawn()) {&#xD;&#xA;        this->getBaseToken()->withdraw();&#xD;&#xA;        this->setBaseTokenIsWithdrawn(true);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    if (this->getRemainingOffersCount() > 0) {&#xD;&#xA;        this->setRemainingOffersCount(this->getRemainingOffersCount() - 1);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    if (this->getRemainingOffersCount() == 0) {&#xD;&#xA;        TokenImpl::withdraw();&#xD;&#xA;    }"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return this->getBaseToken()->isControl();"/>
       </eAnnotations>
@@ -1271,21 +1271,21 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="baseToken" ordered="false"
         eType="#//Token"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="remainingOffersCount" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="baseTokenIsWithdrawn" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ControlToken" eSuperTypes="#//Token">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;FUMLFactory.hpp&quot;"/>
     </eAnnotations>
-    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return (std::dynamic_pointer_cast&lt;ControlToken>(other) != nullptr);"/>
       </eAnnotations>
       <eParameters name="other" ordered="false" lowerBound="1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isControl" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;return true;"/>
       </eAnnotations>
@@ -1354,12 +1354,12 @@
         <details key="body" value="    if (this->isRunning()) {&#xD;&#xA;        if (this->getNode() != nullptr) {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        } else {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] Anonymous activation of type &quot; &lt;&lt; this->eClass()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    this->setRunning(false);"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return this->getRunning();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="getRunning" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="getRunning" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return this->isRunning();"/>
       </eAnnotations>
@@ -1386,7 +1386,7 @@
         <details key="body" value="return;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return (edgeInstances->getSource().get() ==this);"/>
       </eAnnotations>
@@ -1419,7 +1419,7 @@
       </eAnnotations>
       <eParameters name="token" ordered="false" lowerBound="1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;Bag&lt;fUML::Token> > heldTokenList = this->getHeldTokens();&#xD;&#xA;&#x9;std::vector&lt;std::shared_ptr&lt;fUML::Token>>::iterator iter = heldTokenList->begin();&#xD;&#xA;&#x9;std::vector&lt;std::shared_ptr&lt;fUML::Token>>::iterator end = heldTokenList->end();&#xD;&#xA;&#xD;&#xA;&#x9;int i = 0;&#xD;&#xA;&#x9;while (iter != end)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;i++;&#xD;&#xA;&#x9;&#x9;if (*iter == token)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;DEBUG_MESSAGE(&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;if (this->getNode() == nullptr)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[removeToken] ...&quot;&lt;&lt;std::endl;&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;} else&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;std::cout&lt;&lt;&quot;[removeToken] node = &quot; + this->getNode()->getName()&lt;&lt;std::endl;&#xD;&#xA;                    std::shared_ptr&lt;uml::NamedElement> owner = std::dynamic_pointer_cast&lt;uml::NamedElement>(this->getNode()->getOwner());&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;ACT_DEBUG(std::cout&lt;&lt;&quot;SET_TOKEN;NODE:&quot;&lt;&lt; (owner != nullptr ? owner->getName():&quot;&quot;) &lt;&lt; &quot;::&quot; &lt;&lt; this->getNode()->getName() &lt;&lt;&quot;;TOKEN:&quot;&lt;&lt;token->getValue() &lt;&lt; &quot;;CURRENT_TOKENS:&quot;&lt;&lt; (heldTokenList->size()-1) &lt;&lt;&quot;;DIRECTION:remove&quot;&lt;&lt;std::endl;)&#xD;&#xA;&#x9;&#x9;&#x9;&#x9;}&#xD;&#xA;&#x9;&#x9;&#x9;)&#xD;&#xA;&#x9;&#x9;&#x9;this->getHeldTokens()->erase(iter);&#xD;&#xA;&#x9;&#x9;&#x9;return i;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;&#x9;iter++;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;return 0;"/>
       </eAnnotations>
@@ -1467,14 +1467,14 @@
         lowerBound="1" eType="#//ActivityNodeActivationGroup"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" ordered="false" eType="ecore:EClass ../../uml/model/uml.ecore#//ActivityNode"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="running" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectNodeActivation" abstract="true"
       eSuperTypes="#//ActivityNodeActivation">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;Token.hpp&quot;&#xD;&#xA;#include &quot;FUMLFactory.hpp&quot;"/>
     </eAnnotations>
-    <eOperations name="countOfferedValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="countOfferedValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;int totalValueCount = 0;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (i &lt; this->getIncomingEdges()->size()) {&#xD;&#xA;        totalValueCount = totalValueCount&#xD;&#xA;                + this->getIncomingEdges()->at(i)->countOfferedValue();&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return totalValueCount;"/>
       </eAnnotations>
@@ -1484,7 +1484,7 @@
         <details key="body" value="std::shared_ptr&lt;Bag&lt;Token> > tokens = this->getUnofferedTokens();&#xD;&#xA;    this->setOfferedTokenCount(this->getOfferedTokenCount() + tokens->size());&#xD;&#xA;    this->sendOffers(tokens);"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="countUnofferedTokens" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="countUnofferedTokens" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    if (this->getHeldTokens()->size() == 0) {&#xD;&#xA;        this->setOfferedTokenCount(0);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return (this->getHeldTokens()->size() - this->getOfferedTokenCount());"/>
       </eAnnotations>
@@ -1521,7 +1521,7 @@
       </eAnnotations>
       <eParameters name="token" ordered="false" lowerBound="1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="removeToken" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    int i = ActivityNodeActivationImpl::removeToken(token);&#xD;&#xA;    if (i > 0 &amp;&amp; i &lt;= this->getOfferedTokenCount()) {&#xD;&#xA;        this->setOfferedTokenCount(this->getOfferedTokenCount() - 1);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return i;"/>
       </eAnnotations>
@@ -1533,7 +1533,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="offeredTokenCount" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"
         defaultValueLiteral="0"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ActivityParameterNodeActivation" eSuperTypes="#//ObjectNodeActivation">
@@ -1566,7 +1566,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MergeNodeActivation" eSuperTypes="#//ControlNodeActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="JoinNodeActivation" eSuperTypes="#//ControlNodeActivation">
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;bool ready = true;&#xD;&#xA;&#x9;unsigned int i = 0;&#xD;&#xA;&#x9;while (ready &amp;&amp; i &lt; this->getIncomingEdges()->size()) {&#xD;&#xA;&#x9;&#x9;ready = this->getIncomingEdges()->at(i)->hasOffer();&#xD;&#xA;&#x9;&#x9;i = i + 1;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;return ready;"/>
       </eAnnotations>
@@ -1627,7 +1627,7 @@
         <details key="body" value="&#x9;std::shared_ptr&lt;uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast&lt;uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;ActivityEdgeInstance> edgeInstance = nullptr;&#xD;&#xA;    if (decisionInputFlow != nullptr) &#xD;&#xA;    {&#xD;&#xA;        unsigned int i = 0;&#xD;&#xA;        while ((edgeInstance == nullptr) &amp;&amp; (i &lt; this->getIncomingEdges()->size())) &#xD;&#xA;        {&#xD;&#xA;        &#x9;std::shared_ptr&lt;ActivityEdgeInstance> incomingEdge = this->getIncomingEdges()->at(i);&#xD;&#xA;            if (incomingEdge->getEdge() == decisionInputFlow) &#xD;&#xA;            {&#xD;&#xA;                edgeInstance = incomingEdge;&#xD;&#xA;            }&#xD;&#xA;            i = i + 1;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return edgeInstance;"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="test" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="test" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool guardResult = true;&#xD;&#xA;    if (gaurd != nullptr) &#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Value> guardValue = this->getExecutionLocus()->getExecutor()->evaluate(gaurd);&#xD;&#xA;        guardResult = guardValue->equals(value);&#xD;&#xA;    }&#xD;&#xA;    return guardResult;"/>
       </eAnnotations>
@@ -1641,7 +1641,7 @@
       </eAnnotations>
       <eParameters name="incomingTokens" ordered="false" upperBound="-1" eType="#//Token"/>
     </eOperations>
-    <eOperations name="hasObjectFlowInput" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="hasObjectFlowInput" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="&#x9;std::shared_ptr&lt;uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast&lt;uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();&#xD;&#xA;&#xD;&#xA;    bool isObjectFlow = false;&#xD;&#xA;    unsigned int i = 0;&#xD;&#xA;    while (!isObjectFlow &amp;&amp; i &lt; this->getIncomingEdges()->size()) &#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::ActivityEdge> edge = this->getIncomingEdges()->at(i)->getEdge();&#xD;&#xA;        isObjectFlow = (edge != decisionInputFlow) &amp;&amp; (std::dynamic_pointer_cast&lt;uml::ObjectFlow>(edge) != nullptr);&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;    return isObjectFlow;"/>
       </eAnnotations>
@@ -1662,7 +1662,7 @@
         <details key="body" value="    if (this->getDecisionInputExecution() != nullptr) {&#xD;&#xA;        this->getDecisionInputExecution()->terminate();&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    ControlNodeActivationImpl::terminate();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="unsigned int i = 0;&#xD;&#xA;    bool ready = true;&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt; &quot;INCOMING EDGE SIZE:&quot;&lt;&lt; this->getIncomingEdges()->size()&lt;&lt;std::endl;)&#xD;&#xA;    while (ready &amp;&amp; (i &lt; this->getIncomingEdges()->size())) {&#xD;&#xA;        ready = this->getIncomingEdges()->at(i)->hasOffer();&#xD;&#xA;        i = i + 1;&#xD;&#xA;    }&#xD;&#xA;    DEBUG_MESSAGE(std::cout&lt;&lt; &quot;READY:&quot;&lt;&lt; ready&lt;&lt;std::endl;)&#xD;&#xA;    return ready;"/>
       </eAnnotations>
@@ -1688,7 +1688,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ClauseActivation">
     <eOperations name="recieveControl" ordered="false" lowerBound="1"/>
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
     <eOperations name="runTest" ordered="false" lowerBound="1"/>
     <eOperations name="selectBody" ordered="false" lowerBound="1"/>
     <eOperations name="getDecision" ordered="false" eType="#//BooleanValue"/>
@@ -1758,13 +1758,13 @@
         <details key="body" value="    this->getActivationGroup()->terminateAll();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    bool isSource = ActionActivationImpl::isSourceFor(edgeInstance);&#xD;&#xA;    if (!isSource) {&#xD;&#xA;        isSource = this->getActivationGroup()->hasSourceFor(edgeInstance);&#xD;&#xA;    }&#xD;&#xA;    return isSource;"/>
       </eAnnotations>
       <eParameters name="edgeInstance" ordered="false" lowerBound="1" eType="#//ActivityEdgeInstance"/>
     </eOperations>
-    <eOperations name="isSuspended" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isSuspended" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return this->getActivationGroup()->isSuspended();"/>
       </eAnnotations>
@@ -1783,7 +1783,7 @@
         lowerBound="1" eType="#//ActivityNodeActivationGroup" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LoopNodeActivation" eSuperTypes="#//StructuredActivityNodeActivation">
-    <eOperations name="runTest" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+    <eOperations name="runTest" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
     <eOperations name="runBody" ordered="false" lowerBound="1"/>
     <eOperations name="runLoopVariables" ordered="false" lowerBound="1"/>
     <eOperations name="makeLoopVariableList" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ActivityNode"/>
@@ -1822,7 +1822,7 @@
         eType="#//ExpansionNodeActivation">
       <eParameters name="node" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ExpansionNode"/>
     </eOperations>
-    <eOperations name="numberOfValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+    <eOperations name="numberOfValues" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputTokens" ordered="false"
         upperBound="-1" eType="#//TokenSet"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="inputExpansionTokens" ordered="false"
@@ -1838,7 +1838,7 @@
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
       <details key="includes" value="#include &quot;Action.hpp&quot;&#xD;&#xA;#include &quot;ActivityNode.hpp&quot;&#xD;&#xA;#include &quot;OutputPin.hpp&quot;&#xD;&#xA;#include &quot;iterator&quot;&#xD;&#xA;#include &quot;InputPin.hpp&quot;&#xD;&#xA;#include &quot;PinActivation.hpp&quot;&#xD;&#xA;#include &quot;FeatureValue.hpp&quot;&#xD;&#xA;#include &quot;Link.hpp&quot;&#xD;&#xA;#include &quot;LiteralBoolean.hpp&quot;&#xD;&#xA;#include &quot;UmlFactory.hpp&quot;&#xD;&#xA;&#xD;&#xA;#include &quot;FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;Behavior.hpp&quot;&#xD;&#xA;&#xD;&#xA;"/>
     </eAnnotations>
-    <eOperations name="isFirng" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isFirng" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    return this->isFiring();"/>
       </eAnnotations>
@@ -1887,7 +1887,7 @@
       </eAnnotations>
       <eParameters name="pin" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//InputPin"/>
     </eOperations>
-    <eOperations name="valueParticipatesInLink" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="valueParticipatesInLink" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool participates = false;&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;FeatureValue> > featureValueList = link->getFeatureValues();&#xD;&#xA;    for (std::shared_ptr&lt;FeatureValue> featureValue : *featureValueList)&#xD;&#xA;    {&#xD;&#xA;        if(featureValue->getValues()->front()->equals(value))&#xD;&#xA;        {&#xD;&#xA;            participates = true;&#xD;&#xA;            break;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return participates;"/>
       </eAnnotations>
@@ -1898,7 +1898,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;uml::LiteralBoolean> booleanValue(uml::UmlFactory::eInstance()->createLiteralBoolean());&#xD;&#xA;    booleanValue->setValue(value);&#xD;&#xA;    return std::dynamic_pointer_cast&lt;fUML::BooleanValue>(this->getExecutionLocus()->getExecutor()->evaluate(booleanValue));"/>
       </eAnnotations>
-      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+      <eParameters name="value" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
     </eOperations>
     <eOperations name="run" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -1921,7 +1921,7 @@
         <details key="body" value="    ActivityNodeActivationImpl::terminate();&#xD;&#xA;&#xD;&#xA;    if (!this->getOutgoingEdges()->empty()) {&#xD;&#xA;        this->getOutgoingEdges()->front()->getTarget()->terminate();&#xD;&#xA;    }"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt;uml::Action> actionNode = std::dynamic_pointer_cast&lt;uml::Action>(this->getNode());&#xD;&#xA;    bool ready = false;&#xD;&#xA;    if(actionNode != nullptr)&#xD;&#xA;    {&#xD;&#xA;        ready = ActivityNodeActivationImpl::isReady()&#xD;&#xA;                 &amp;&amp; ((actionNode->getIsLocallyReentrant()) || !this->isFiring());&#xD;&#xA;&#xD;&#xA;         //Has any Edge Offers?&#xD;&#xA;         if(ready)&#xD;&#xA;         {&#xD;&#xA;        &#x9; std::shared_ptr&lt;Bag&lt;fUML::ActivityEdgeInstance> > edgeList = this->getIncomingEdges();&#xD;&#xA;             ready = std::all_of(edgeList->begin(),edgeList->end(),[](std::shared_ptr&lt;ActivityEdgeInstance> edge ){return edge->hasOffer();});&#xD;&#xA;         }&#xD;&#xA;&#xD;&#xA;         //Have all Inputpin an Activation?&#xD;&#xA;         if(ready)&#xD;&#xA;         {&#xD;&#xA;        &#x9; std::shared_ptr&lt;Bag&lt;uml::InputPin> > list = actionNode->getInput();&#xD;&#xA;             //list->removeAll(nullptr); TODO&#xD;&#xA;             ready = std::all_of(list->begin(),list->end(),[this](std::shared_ptr&lt;uml::InputPin> pin){return this->retrievePinActivation(pin)->isReady();});&#xD;&#xA;         }&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::DataStoreNode> dActivation = std::dynamic_pointer_cast&lt;uml::DataStoreNode>(this->getNode());&#xD;&#xA;        if(dActivation != nullptr)&#xD;&#xA;        {&#xD;&#xA;            ready = true; //TODO&#xD;&#xA;            //Has any Edge Offers?&#xD;&#xA;            if(ready)&#xD;&#xA;            {&#xD;&#xA;            &#x9;std::shared_ptr&lt;Bag&lt;fUML::ActivityEdgeInstance> > edgeList = this->getIncomingEdges();&#xD;&#xA;                ready = std::all_of(edgeList->begin(),edgeList->end(),[](std::shared_ptr&lt;ActivityEdgeInstance> edge ){return edge->hasOffer();});&#xD;&#xA;            }&#xD;&#xA;&#xD;&#xA;            if(!ready)&#xD;&#xA;            {&#xD;&#xA;&#xD;&#xA;            }&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return ready;"/>
       </eAnnotations>
@@ -1942,7 +1942,7 @@
       </eAnnotations>
       <eParameters name="edge" ordered="false" lowerBound="1" eType="#//ActivityEdgeInstance"/>
     </eOperations>
-    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isSourceFor" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="    bool isSource = false;&#xD;&#xA;    if (this->getOutgoingEdges()->size() > 0) {&#xD;&#xA;        isSource = this->getOutgoingEdges()->at(0)->getTarget()->isSourceFor(edgeInstance);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return isSource;"/>
       </eAnnotations>
@@ -1951,7 +1951,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="pinActivation" ordered="false"
         upperBound="-1" eType="#//PinActivation"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firing" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"
         defaultValueLiteral="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="InvocationActionActivation" abstract="true"
@@ -2035,7 +2035,7 @@
         <details key="body" value="    this->getActionActivation()->recieveOffer();"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="bool ready = ActivityNodeActivationImpl::isReady();&#xD;&#xA;&#xD;&#xA;    if (ready) &#xD;&#xA;    {&#xD;&#xA;        int totalValueCount = this->countUnofferedTokens() + this->countOfferedValues();&#xD;&#xA;        int minimum = std::dynamic_pointer_cast&lt;uml::Pin>(this->getNode())->getLower();&#xD;&#xA;        ready = (totalValueCount >= minimum);&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return ready;"/>
       </eAnnotations>
@@ -2048,10 +2048,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="DestroyObjectActionActivation" eSuperTypes="#//ActionActivation">
     <eOperations name="destroyObject" ordered="false" lowerBound="1">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>
-      <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
-      <eParameters name="isDestroyOwnedObjects" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+      <eParameters name="isDestroyLinks" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
+      <eParameters name="isDestroyOwnedObjects" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
     </eOperations>
-    <eOperations name="objectIsComposite" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="objectIsComposite" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="reference" ordered="false" lowerBound="1" eType="#//Reference"/>
       <eParameters name="link" ordered="false" lowerBound="1" eType="#//Link"/>
     </eOperations>
@@ -2060,11 +2060,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="ClearAssociationActionActivation" eSuperTypes="#//ActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="LinkActionActivation" abstract="true"
       eSuperTypes="#//ActionActivation">
-    <eOperations name="linkMatchesEndData" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="linkMatchesEndData" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="link" ordered="false" lowerBound="1" eType="#//Link"/>
       <eParameters name="endDataList" ordered="false" upperBound="-1" eType="ecore:EClass ../../uml/model/uml.ecore#//LinkEndData"/>
     </eOperations>
-    <eOperations name="endMatchesEndData" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="endMatchesEndData" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="link" ordered="false" lowerBound="1" eType="#//Link"/>
       <eParameters name="endData" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//LinkEndData"/>
     </eOperations>
@@ -2096,10 +2096,10 @@
       eSuperTypes="#//StructuralFeatureActionActivation"/>
   <eClassifiers xsi:type="ecore:EClass" name="WriteStructuralFeatureActionActivation"
       abstract="true" eSuperTypes="#//StructuralFeatureActionActivation">
-    <eOperations name="position" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt">
+    <eOperations name="position" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt">
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//Value"/>
       <eParameters name="list" ordered="false" upperBound="-1" eType="#//Value"/>
-      <eParameters name="startAt" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EInt"/>
+      <eParameters name="startAt" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EInt"/>
     </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RemoveStructuralFeatureValueActivation"
@@ -2114,7 +2114,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ReadIsClassifiedObjectActionActivation"
       eSuperTypes="#//ActionActivation">
-    <eOperations name="checkAllParents" ordered="false" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="checkAllParents" ordered="false" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="type" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Classifier"/>
       <eParameters name="classifier" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//Classifier"/>
     </eOperations>
@@ -2125,13 +2125,13 @@
     <eOperations name="accept" ordered="false" lowerBound="1">
       <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="#//SignalInstance"/>
     </eOperations>
-    <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean">
+    <eOperations name="match" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
       <eParameters name="signalInstance" ordered="false" lowerBound="1" eType="#//SignalInstance"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eventAccepter" ordered="false"
         eType="#//AcceptEventActionEventAccepter"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="waiting" ordered="false"
-        lowerBound="1" eType="ecore:EDataType ../../ecore/model/ecore.ecore#//EBoolean"/>
+        lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="StartObjectBehaviorActionActivation"
       eSuperTypes="#//InvocationActionActivation"/>
