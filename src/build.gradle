@@ -1,34 +1,34 @@
 description 'Models and generated source code collection'
 
-task buildEcoreModels(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'ecore:buildEcore', 'ecore:buildTypes', 'uml:buildUML', 'fuml:buildFUML', 'util:src:util:deliverUtil']) {
+task buildEcoreModels(dependsOn: ['common:deliverAbstractDataTypes', 'common:compilePluginFramework', 'ecore:ecore:buildEcore', 'ecore:types:buildTypes', 'uml:buildUml', 'fuml:buildFUML', 'util:deliverUtil']) {
 	group 'Source'
 	description 'generate and compile all ecore models in debug and release'
 }
-tasks.getByPath('ecore:buildEcore').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
-tasks.getByPath('ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFramework')
-tasks.getByPath('ecore:buildTypes').mustRunAfter tasks.getByPath('ecore:buildEcore')
-tasks.getByPath('uml:buildUML').mustRunAfter tasks.getByPath('ecore:buildTypes')
-tasks.getByPath('uml:buildUML').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
-tasks.getByPath('fuml:buildFUML').mustRunAfter tasks.getByPath('uml:buildUML')
+tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:deliverAbstractDataTypes')
+tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:compilePluginFramework')
+tasks.getByPath('ecore:types:buildTypes').mustRunAfter tasks.getByPath('ecore:ecore:buildEcore')
+tasks.getByPath('uml:buildUml').mustRunAfter tasks.getByPath('ecore:types:buildTypes')
+tasks.getByPath('uml:buildUml').mustRunAfter tasks.getByPath('util:deliverUtil')
+tasks.getByPath('fuml:buildFUML').mustRunAfter tasks.getByPath('uml:buildUml')
 
-task buildEcoreModelsDebug(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFrameworkDebug',  'ecore:buildEcoreDebug', 'ecore:buildTypesDebug', 'uml:buildUMLDebug', 'fuml:buildFUMLDebug', 'util:src:util:deliverUtil']) {
+task buildEcoreModelsDebug(dependsOn: ['common:deliverAbstractDataTypes', 'common:compilePluginFrameworkDebug',  'ecore:ecore:buildEcoreDebug', 'ecore:types:buildTypesDebug', 'uml:buildUmlDebug', 'fuml:buildFUMLDebug', 'util:deliverUtil']) {
 	group 'Source'
 	description 'generate and compile all ecore models in debug'
 }
-tasks.getByPath('ecore:buildEcoreDebug').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
-tasks.getByPath('ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFrameworkDebug')
-tasks.getByPath('ecore:buildTypesDebug').mustRunAfter tasks.getByPath('ecore:buildEcoreDebug')
-tasks.getByPath('uml:buildUMLDebug').mustRunAfter tasks.getByPath('ecore:buildTypesDebug')
-tasks.getByPath('uml:buildUMLDebug').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
-tasks.getByPath('fuml:buildFUMLDebug').mustRunAfter tasks.getByPath('uml:buildUMLDebug')
+tasks.getByPath('ecore:ecore:buildEcoreDebug').mustRunAfter tasks.getByPath('common:deliverAbstractDataTypes')
+tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:compilePluginFrameworkDebug')
+tasks.getByPath('ecore:types:buildTypesDebug').mustRunAfter tasks.getByPath('ecore:ecore:buildEcoreDebug')
+tasks.getByPath('uml:buildUmlDebug').mustRunAfter tasks.getByPath('ecore:types:buildTypesDebug')
+tasks.getByPath('uml:buildUmlDebug').mustRunAfter tasks.getByPath('util:deliverUtil')
+tasks.getByPath('fuml:buildFUMLDebug').mustRunAfter tasks.getByPath('uml:buildUmlDebug')
 
-task buildEcoreModelsRelease(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'ecore:buildEcoreRelease', 'ecore:buildTypesRelease', 'uml:buildUMLRelease', 'fuml:buildFUMLRelease', 'util:src:util:deliverUtil']) {
+task buildEcoreModelsRelease(dependsOn: ['common:deliverAbstractDataTypes', 'common:compilePluginFramework', 'ecore:ecore:buildEcoreRelease', 'ecore:types:buildTypesRelease', 'uml:buildUmlRelease', 'fuml:buildFUMLRelease', 'util:deliverUtil']) {
 	group 'Source'
 	description 'generate and compile all ecore models in release'
 }
-tasks.getByPath('ecore:buildEcoreRelease').mustRunAfter tasks.getByPath('common:abstractDataTypes:deliverAbstractDataTypes')
-tasks.getByPath('ecore:buildEcore').mustRunAfter tasks.getByPath('common:pluginFramework:compilePluginFrameworkRelease')
-tasks.getByPath('ecore:buildTypesRelease').mustRunAfter tasks.getByPath('ecore:buildEcoreRelease')
-tasks.getByPath('uml:buildUMLRelease').mustRunAfter tasks.getByPath('ecore:buildTypesRelease')
-tasks.getByPath('uml:buildUMLRelease').mustRunAfter tasks.getByPath('util:src:util:deliverUtil')
-tasks.getByPath('fuml:buildFUMLRelease').mustRunAfter tasks.getByPath('uml:buildUMLRelease')
+tasks.getByPath('ecore:ecore:buildEcoreRelease').mustRunAfter tasks.getByPath('common:deliverAbstractDataTypes')
+tasks.getByPath('ecore:ecore:buildEcore').mustRunAfter tasks.getByPath('common:compilePluginFrameworkRelease')
+tasks.getByPath('ecore:types:buildTypesRelease').mustRunAfter tasks.getByPath('ecore:ecore:buildEcoreRelease')
+tasks.getByPath('uml:buildUmlRelease').mustRunAfter tasks.getByPath('ecore:types:buildTypesRelease')
+tasks.getByPath('uml:buildUmlRelease').mustRunAfter tasks.getByPath('util:deliverUtil')
+tasks.getByPath('fuml:buildFUMLRelease').mustRunAfter tasks.getByPath('uml:buildUmlRelease')
