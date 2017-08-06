@@ -1,3 +1,5 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: fUML'
 
 task buildFUML(dependsOn: ['model:generateFUML', 'compileFUML']) {
@@ -77,3 +79,11 @@ task compileFUMLRelease {
 compileFUML.mustRunAfter tasks.getByPath('model:generateFUML')
 compileFUMLDebug.mustRunAfter tasks.getByPath('model:generateFUML')
 compileFUMLRelease.mustRunAfter tasks.getByPath('model:generateFUML')
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/fUML/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
