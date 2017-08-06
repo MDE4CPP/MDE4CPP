@@ -80,3 +80,14 @@ task compilePluginFrameworkRelease {
 		}
 	}
 }
+
+task deliverAbstractDataTypes(type: Copy) {
+	group 'abstractDataTypes'
+	description 'deliver abstract data types header to %MDE4CPP_HOME%/application/include/abstractDataTypes'
+	from "abstractDataTypes"
+	into System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
+	include "**/*.hpp"
+	exclude "build", ".gradle"
+	inputs.dir file("abstractDataTypes/.")
+	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes")
+}
