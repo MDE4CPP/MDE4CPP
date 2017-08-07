@@ -1,1 +1,1 @@
-include 'ecore', 'ecore:model', 'ecore:src_gen:ecore', 'types:src_gen:types', 'types:model', 'types'
+include 'ecore', 'types'

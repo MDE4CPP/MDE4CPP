@@ -2,15 +2,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: types'
 
-task buildTypes(dependsOn: ['model:generateTypes', 'compileTypes']) {
+task buildTypes(dependsOn: ['generateTypes', 'compileTypes']) {
 	group 'types'
 	description 'build types in debug and release'
 }
-task buildTypesDebug(dependsOn: ['model:generateTypes', 'compileTypesDebug']) {
+task buildTypesDebug(dependsOn: ['generateTypes', 'compileTypesDebug']) {
 	group 'types'
 	description 'build types in debug'
 }
-task buildTypesRelease(dependsOn: ['model:generateTypes', 'compileTypesRelease']) {
+task buildTypesRelease(dependsOn: ['generateTypes', 'compileTypesRelease']) {
 	group 'types'
 	description 'build types in release'
 }
@@ -19,7 +19,6 @@ task compileTypes(dependsOn: ['compileTypesDebug', 'compileTypesRelease']) {
 	group 'types'
 	description 'compile types in debug and release'
 }
-
 task compileTypesDebug {
 	group 'types'
 	description 'compile types in Debug'
@@ -47,7 +46,6 @@ task compileTypesDebug {
 		}
 	}
 }
-
 task compileTypesRelease {
 	group 'types'
 	description 'compile types in Release'
@@ -76,9 +74,28 @@ task compileTypesRelease {
 	}
 }
 
-compileTypes.mustRunAfter tasks.getByPath('model:generateTypes')
-compileTypesDebug.mustRunAfter tasks.getByPath('model:generateTypes')
-compileTypesRelease.mustRunAfter tasks.getByPath('model:generateTypes')
+task generateTypes(type: JavaExec) {
+	group 'types'
+	description 'generate C++ code of types.ecore model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "types.ecore", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("types.ecore")
+	outputs.dir file("../src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
+			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
+		}
+	}
+}
+
+compileTypes.mustRunAfter generateTypes
+compileTypesDebug.mustRunAfter generateTypes
+compileTypesRelease.mustRunAfter generateTypes
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/types/.cmake/')

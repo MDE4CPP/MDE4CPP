@@ -2,15 +2,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: ecore'
 
-task buildEcore(dependsOn: ['model:generateEcore', 'compileEcore']) {
+task buildEcore(dependsOn: ['generateEcore', 'compileEcore']) {
 	group 'ecore'
 	description 'build ecore in debug and release'
 }
-task buildEcoreDebug(dependsOn: ['model:generateEcore', 'compileEcoreDebug']) {
+task buildEcoreDebug(dependsOn: ['generateEcore', 'compileEcoreDebug']) {
 	group 'ecore'
 	description 'build ecore in debug'
 }
-task buildEcoreRelease(dependsOn: ['model:generateEcore', 'compileEcoreRelease']) {
+task buildEcoreRelease(dependsOn: ['generateEcore', 'compileEcoreRelease']) {
 	group 'ecore'
 	description 'build ecore in release'
 }
@@ -19,7 +19,6 @@ task compileEcore(dependsOn: ['compileEcoreDebug', 'compileEcoreRelease']) {
 	group 'ecore'
 	description 'compile ecore in debug and release'
 }
-
 task compileEcoreDebug {
 	group 'ecore'
 	description 'compile ecore in Debug'
@@ -47,7 +46,6 @@ task compileEcoreDebug {
 		}
 	}
 }
-
 task compileEcoreRelease {
 	group 'ecore'
 	description 'compile ecore in Release'
@@ -76,9 +74,28 @@ task compileEcoreRelease {
 	}
 }
 
-compileEcore.mustRunAfter tasks.getByPath('model:generateEcore')
-compileEcoreDebug.mustRunAfter tasks.getByPath('model:generateEcore')
-compileEcoreRelease.mustRunAfter tasks.getByPath('model:generateEcore')
+task generateEcore(type: JavaExec) {
+	group 'ecore'
+	description 'generate C++ code of ecore.ecore model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "ecore.ecore", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("ecore.ecore")
+	outputs.dir file("../src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
+			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
+		}
+	}
+}
+
+compileEcore.mustRunAfter generateEcore
+compileEcoreDebug.mustRunAfter generateEcore
+compileEcoreRelease.mustRunAfter generateEcore
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/ecore/.cmake/')
