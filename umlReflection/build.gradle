@@ -2,15 +2,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: UmlReflection'
 
-task buildUmlReflection(dependsOn: ['model:generateUmlReflection', 'compileUmlReflection']) {
+task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in debug and release'
 }
-task buildUmlReflectionDebug(dependsOn: ['model:generateUmlReflection', 'compileUmlReflectionDebug']) {
+task buildUmlReflectionDebug(dependsOn: ['generateUmlReflection', 'compileUmlReflectionDebug']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in debug'
 }
-task buildUmlReflectionRelease(dependsOn: ['model:generateUmlReflection', 'compileUmlReflectionRelease']) {
+task buildUmlReflectionRelease(dependsOn: ['generateUmlReflection', 'compileUmlReflectionRelease']) {
 	group 'UmlReflection'
 	description 'build UmlReflection in release'
 }
@@ -74,9 +74,28 @@ task compileUmlReflectionRelease {
 	}
 }
 
-compileUmlReflection.mustRunAfter tasks.getByPath('model:generateUmlReflection')
-compileUmlReflectionDebug.mustRunAfter tasks.getByPath('model:generateUmlReflection')
-compileUmlReflectionRelease.mustRunAfter tasks.getByPath('model:generateUmlReflection')
+task generateUmlReflection(type: JavaExec) {
+	group 'UmlReflection'
+	description 'generate C++ code of UmlReflection.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "UmlReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("UmlReflection.uml")
+	outputs.dir file("../src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compileUmlReflection.mustRunAfter generateUmlReflection
+compileUmlReflectionDebug.mustRunAfter generateUmlReflection
+compileUmlReflectionRelease.mustRunAfter generateUmlReflection
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/UmlReflection/.cmake/')

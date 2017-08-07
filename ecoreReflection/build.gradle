@@ -2,15 +2,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: EcoreReflection'
 
-task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflection']) {
+task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug and release'
 }
-task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflectionDebug']) {
+task buildEcoreReflectionDebug(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionDebug']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug'
 }
-task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'compileEcoreReflectionRelease']) {
+task buildEcoreReflectionRelease(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionRelease']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in release'
 }
@@ -74,9 +74,28 @@ task compileEcoreReflectionRelease {
 	}
 }
 
-compileEcoreReflection.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-compileEcoreReflectionDebug.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-compileEcoreReflectionRelease.mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+task generateEcoreReflection(type: JavaExec) {
+	group 'EcoreReflection'
+	description 'generate C++ code of EcoreReflection.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "EcoreReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("EcoreReflection.uml")
+	outputs.dir file("../src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compileEcoreReflection.mustRunAfter generateEcoreReflection
+compileEcoreReflectionDebug.mustRunAfter generateEcoreReflection
+compileEcoreReflectionRelease.mustRunAfter generateEcoreReflection
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')
