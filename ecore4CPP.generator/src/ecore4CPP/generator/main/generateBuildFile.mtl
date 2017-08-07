@@ -127,15 +127,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'model:generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
+task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug and release'
 }
-task build[packageName.toUpperFirst()/]Debug(dependsOn: ['['/]'model:generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Debug'[']'/]) {
+task build[packageName.toUpperFirst()/]Debug(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Debug'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug'
 }
-task build[packageName.toUpperFirst()/]Release(dependsOn: ['['/]'model:generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
+task build[packageName.toUpperFirst()/]Release(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in release'
 }
@@ -144,14 +144,31 @@ task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.
 	group '[packageName/]'
 	description 'compile [packageName/] in debug and release'
 }
-
 [generateCompileTask(packageName, 'Debug')/]
-
 [generateCompileTask(packageName, 'Release')/]
 
-compile[packageName.toUpperFirst()/].mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
-compile[packageName.toUpperFirst()/]Debug.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
-compile[packageName.toUpperFirst()/]Release.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+task generate[packageName.toUpperFirst()/](type: JavaExec) {
+	group '[packageName/]'
+	description 'generate C++ code of [packageName/].ecore model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "[packageName/].ecore", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("[packageName/].ecore")
+	outputs.dir file("../src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
+			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
+		}
+	}
+}
+
+compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
+compile[packageName.toUpperFirst()/]Debug.mustRunAfter generate[packageName.toUpperFirst()/]
+compile[packageName.toUpperFirst()/]Release.mustRunAfter generate[packageName.toUpperFirst()/]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
@@ -160,10 +177,6 @@ clean.doFirst {
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
 }
-[/file]
-
-[file ('../settings.gradle', false, 'UTF-8')]
-include 'model'
 [/file]
 [/template]
 
