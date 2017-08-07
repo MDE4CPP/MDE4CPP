@@ -21,7 +21,7 @@
 					<folderInfo id="0.1." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185.1934256561" name=""/>
-							<builder arguments="" buildPath="${workspace_loc:/CalcModelExec_src_gen}" command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compileCalcModelExecDebug" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compileCalcModelExecDebug" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
@@ -70,7 +70,7 @@
 					<folderInfo id="0.1.2." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.889939462" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="org.eclipse.cdt.build.core.prefbase.toolchain.889939462.2122636331" name=""/>
-							<builder arguments="" buildPath="${workspace_loc:/CalcModel_src_gen}" command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1312542440" incrementalBuildTarget="compileCalcModelExecRelease" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="" buildPath="${ProjDirPath}/../.." command="gradle.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1312542440" incrementalBuildTarget="compileCalcModelExecRelease" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.640181682" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.985992690" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">

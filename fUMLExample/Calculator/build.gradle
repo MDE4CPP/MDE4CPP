@@ -2,15 +2,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: CalcModel'
 
-task buildCalcModel(dependsOn: ['model:generateCalcModel', 'compileCalcModelAll']) {
+task buildCalcModel(dependsOn: ['generateCalcModel', 'compileCalcModelAll']) {
 	group 'CalcModel'
 	description 'build CalcModel in debug and release'
 }
-task buildCalcModelDebug(dependsOn: ['model:generateCalcModel', 'compileCalcModelAllDebug']) {
+task buildCalcModelDebug(dependsOn: ['generateCalcModel', 'compileCalcModelAllDebug']) {
 	group 'CalcModel'
 	description 'build CalcModel in debug'
 }
-task buildCalcModelRelease(dependsOn: ['model:generateCalcModel', 'compileCalcModelAllRelease']) {
+task buildCalcModelRelease(dependsOn: ['generateCalcModel', 'compileCalcModelAllRelease']) {
 	group 'CalcModel'
 	description 'build CalcModel in release'
 }
@@ -147,8 +147,25 @@ task compileCalcModelExecRelease {
 	}
 }
 
-compileCalcModelDebug.mustRunAfter tasks.getByPath('model:generateCalcModel')
-compileCalcModelRelease.mustRunAfter tasks.getByPath('model:generateCalcModel')
+task generateCalcModel(type: JavaExec) {
+	group 'CalcModel'
+	description 'generate C++ code of CalcModel.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "CalcModel.uml", "../src_gen"
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar").exists()) {
+			throw new GradleException('fUML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createFUML4CPP!')
+		}
+	}
+}
+
+compileCalcModelDebug.mustRunAfter generateCalcModel
+compileCalcModelRelease.mustRunAfter generateCalcModel
 compileCalcModelExecDebug.mustRunAfter compileCalcModelDebug
 compileCalcModelExecRelease.mustRunAfter compileCalcModelRelease
 

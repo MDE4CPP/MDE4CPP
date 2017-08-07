@@ -1,1 +1,1 @@
-include 'fumlExample:Calculator', 'fumlExample:Calculator:model'
+include 'fumlExample:Calculator'
