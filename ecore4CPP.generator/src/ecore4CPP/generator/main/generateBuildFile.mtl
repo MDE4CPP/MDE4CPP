@@ -84,20 +84,26 @@ INCLUDE_DIRECTORIES(
 )
 
 FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-SET(DEBUG_LIBRARIES ${PLUGINFRAMEWORK_DEBUG})
 FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-SET(RELEASE_LIBRARIES ${PLUGINFRAMEWORK_RELEASE})
 
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
-SET(DEBUG_LIBRARIES ${DEBUG_LIBRARIES} ${[pack.name.toUpperCase()/]_DEBUG})
 FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
-SET(RELEASE_LIBRARIES ${RELEASE_LIBRARIES} ${[pack.name.toUpperCase()/]_RELEASE})
 [/for]
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} debug ${DEBUG_LIBRARIES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} optimized ${RELEASE_LIBRARIES})
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	debug ${PLUGINFRAMEWORK_DEBUG}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	debug ${[pack.name.toUpperCase()/]_DEBUG}
+[/for]
+)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	optimized ${PLUGINFRAMEWORK_RELEASE}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	optimized ${[pack.name.toUpperCase()/]_RELEASE}
+[/for]
+)
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------
