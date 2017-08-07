@@ -145,15 +145,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName/](dependsOn: ['['/]'model:generate[packageName/]', 'compile[packageName/]'[']'/]) {
+task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug and release'
 }
-task build[packageName/]Debug(dependsOn: ['['/]'model:generate[packageName/]', 'compile[packageName/]Debug'[']'/]) {
+task build[packageName/]Debug(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Debug'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug'
 }
-task build[packageName/]Release(dependsOn: ['['/]'model:generate[packageName/]', 'compile[packageName/]Release'[']'/]) {
+task build[packageName/]Release(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Release'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in release'
 }
@@ -165,9 +165,28 @@ task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.
 [generateCompileTask(packageName, 'Debug')/]
 [generateCompileTask(packageName, 'Release')/]
 
-compile[packageName.toUpperFirst()/].mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
-compile[packageName.toUpperFirst()/]Debug.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
-compile[packageName.toUpperFirst()/]Release.mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+task generate[packageName/](type: JavaExec) {
+	group '[packageName/]'
+	description 'generate C++ code of [packageName/].uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "[packageName/].uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("[packageName/].uml")
+	outputs.dir file("../src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
+compile[packageName.toUpperFirst()/]Debug.mustRunAfter generate[packageName.toUpperFirst()/]
+compile[packageName.toUpperFirst()/]Release.mustRunAfter generate[packageName.toUpperFirst()/]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
@@ -176,10 +195,6 @@ clean.doFirst {
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
 }
-[/file]
-
-[file ('../settings.gradle', false, 'UTF-8')]
-include 'model'
 [/file]
 [/template]
 
