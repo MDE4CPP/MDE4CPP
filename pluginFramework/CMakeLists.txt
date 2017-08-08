@@ -42,7 +42,11 @@ INSTALL(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
 )
 
-INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
-	FILES_MATCHING PATTERN "*.hpp"
-	PATTERN ".cmake" EXCLUDE
+INSTALL(FILES 
+	src/EcoreModelPlugin.hpp
+	src/MDE4CPPPlugin.hpp
+	src/PluginFramework.hpp
+	src/UMLExecutionModelPlugin.hpp
+	src/UMLModelPlugin.hpp
+	DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
 )
