@@ -109,6 +109,7 @@ void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterN
 [if (hasKey('setterbody'))]
 //generated from setterbody annotation
 [valueKey('setterbody')/] 
+//end of body
 [else]
     m_[aReference.name/] = _[aReference.name/];
 [/if]
@@ -121,6 +122,7 @@ void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterN
 [if (hasKey('getterbody'))]
 //generated from getterbody annotation
 [valueKey('getterbody')/]
+//end of body
 [else]
 [if(aReference.lowerBound>0)]//assert(m_[aReference.name/]);[/if]
     return m_[aReference.name/];
