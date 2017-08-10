@@ -67,7 +67,7 @@ virtual void [aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProper
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aClass : Class) ? (aProperty.upper=1 )]
-void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])
+void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 [if ((aProperty.isComposite) and (aProperty.upper=1))]
 	if(m_[aProperty.name/] != nullptr)
