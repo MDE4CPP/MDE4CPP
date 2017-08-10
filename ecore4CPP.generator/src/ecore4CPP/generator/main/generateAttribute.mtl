@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and (aAttribute.upperBound = 1)/]
-[query public hasGetter(aAttribute : EAttribute) : EBoolean = true or hasKey('getterbody') /]
+[query public hasGetter(aAttribute : EAttribute) : EBoolean = not hasKey('getterbody') /]
 
 [***###########################################################################################
  * Section for model and class implementation of an Attribute
@@ -69,7 +69,7 @@ virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
-void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
+void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/]([aAttribute.generateAttributeType()/] _[aAttribute.name/])
 {
 	m_[aAttribute.name/] = _[aAttribute.name/];
 } 
