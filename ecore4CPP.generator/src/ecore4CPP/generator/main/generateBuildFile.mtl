@@ -153,8 +153,8 @@ task generate[packageName.toUpperFirst()/](type: JavaExec) {
 	main = "-jar"
 	workingDir "./model"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "[packageName/].ecore", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("[packageName/].ecore")
-	outputs.dir file("../src_gen")
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/[packageName/].ecore")
+	outputs.dir file("src_gen")
 	
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
