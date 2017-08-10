@@ -52,7 +52,7 @@ std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
 [eParameter.eGenericType.generateCppType()/] [/if]
 [/template]
 
-[template public generateOperationType(eOperation : EOperation)]
+[template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
 [if (not eOperation.eGenericType.oclIsKindOf(EDataType))]
 std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]

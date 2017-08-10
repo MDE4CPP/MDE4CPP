@@ -227,7 +227,7 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 [for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 [aAttribute.generateAttributeSetterImplementationCpp(true)/]
