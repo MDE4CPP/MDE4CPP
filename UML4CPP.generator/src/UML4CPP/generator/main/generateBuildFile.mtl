@@ -171,8 +171,8 @@ task generate[packageName/](type: JavaExec) {
 	main = "-jar"
 	workingDir "./model"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "[packageName/].uml", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("[packageName/].uml")
-	outputs.dir file("../src_gen")
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/[packageName/].uml")
+	outputs.dir file("src_gen")
 
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
