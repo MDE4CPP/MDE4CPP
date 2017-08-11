@@ -28,8 +28,8 @@
 
 //OpaqueBehaviourExecutions
 #include "FbIsNotFinishedExecution.hpp"
-#include "FbPrintIsPrimeExecution.hpp"
 #include "FbPrintNotPrimeExecution.hpp"
+#include "FbPrintIsPrimeExecution.hpp"
 #include "FbNextExecution.hpp"
 #include "FbDividesExecution.hpp"
 #include "FbIsOddExecution.hpp"
@@ -78,15 +78,15 @@ int main()
 	std::shared_ptr<CalcModel::PrimeChecker> actInputNode(CalcModel::CalcModelFactory::eInstance()->createPrimeChecker());
 	
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintIsPrimeExecution(new CalcModel::FbPrintIsPrimeExecution());
-	calcModel_PrimeChecker_fbPrintIsPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
-	calcModel_PrimeChecker_fbPrintIsPrimeExecution->setLocus(factory->getLocus());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintIsPrimeExecution);
-	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsOddExecution(new CalcModel::FbIsOddExecution());
 	calcModel_PrimeChecker_fbIsOddExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsOdd());
 	calcModel_PrimeChecker_fbIsOddExecution->setLocus(factory->getLocus());
 	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbIsOddExecution);
+	
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintIsPrimeExecution(new CalcModel::FbPrintIsPrimeExecution());
+	calcModel_PrimeChecker_fbPrintIsPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
+	calcModel_PrimeChecker_fbPrintIsPrimeExecution->setLocus(factory->getLocus());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintIsPrimeExecution);
 	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbNextExecution(new CalcModel::FbNextExecution());
 	calcModel_PrimeChecker_fbNextExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbNext());

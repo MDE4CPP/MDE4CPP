@@ -16,9 +16,9 @@ template<class T>
 class Union : virtual public Bag<T>
 {
 public:
-    Union()
-    {
-    }
+  Union()
+  {
+  }
 
     template<class U>
     Union(Union<U> const &u)

@@ -44,7 +44,7 @@
       <weight xmi:type="uml:LiteralInteger" xmi:id="_3a_6AI7TEeajycJcSh2X6Q" name="Merge_To_coaDivides_weight"/>
     </edge>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_41ErUI7TEeajycJcSh2X6Q" target="_REVMAI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
-    <edge xmi:type="uml:ObjectFlow" xmi:id="_5hS4II7TEeajycJcSh2X6Q" target="_fCKowIx0EeazCdUXohZ79Q" source="_zBMTEI7REeaDf9S-W91Htg"/>
+    <edge xmi:type="uml:ObjectFlow" xmi:id="_5hS4II7TEeajycJcSh2X6Q" name="" target="_fCKowIx0EeazCdUXohZ79Q" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_6IRYkI7TEeajycJcSh2X6Q" target="_RNIisI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_7bKj0I7TEeajycJcSh2X6Q" target="_RV6EMI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_MAdiII7UEeajycJcSh2X6Q" name="ifDivides" target="_7XVkAIxzEeazCdUXohZ79Q" source="_iIHdII7REeaDf9S-W91Htg"/>
@@ -117,7 +117,7 @@
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_3KBg8IxxEeazCdUXohZ79Q" name="fbPrintIsPrime" specification="_8Vt_MIxwEeazCdUXohZ79Q">
       <language>CPP</language>
       <language>INCLUDE</language>
-      <body>std::cout&lt;&lt;&quot;Number is prime&quot;;</body>
+      <body>std::cout&lt;&lt;&quot;Number is prime&quot;&lt;&lt;std::endl;</body>
       <body>#include &lt;iostream></body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_37xG8IxxEeazCdUXohZ79Q" name="fbIsOdd" specification="_QBniEIxxEeazCdUXohZ79Q">

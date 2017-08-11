@@ -37,9 +37,9 @@ std::shared_ptr<uml::Class> PrimeCheckerImpl::getMetaClass()
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void PrimeCheckerImpl::setDivider (int _divider)
+void PrimeCheckerImpl::setDivider(int _divider)
 {
 	m_divider = _divider;
 }
@@ -48,7 +48,7 @@ int PrimeCheckerImpl::getDivider() const
 	return m_divider;
 }
 
-void PrimeCheckerImpl::setNumber (int _number)
+void PrimeCheckerImpl::setNumber(int _number)
 {
 	m_number = _number;
 }
@@ -107,7 +107,7 @@ void PrimeCheckerImpl::printIsPrime()
 
 	// Implemented as Function behaviour fbPrintIsPrime
 
-std::cout<<"Number is prime";
+std::cout<<"Number is prime"<<std::endl;
 
 }
 

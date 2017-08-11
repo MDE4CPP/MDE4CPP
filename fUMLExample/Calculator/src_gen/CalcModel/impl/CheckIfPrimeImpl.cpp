@@ -32,7 +32,7 @@ std::shared_ptr<uml::Class> CheckIfPrimeImpl::getMetaClass()
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

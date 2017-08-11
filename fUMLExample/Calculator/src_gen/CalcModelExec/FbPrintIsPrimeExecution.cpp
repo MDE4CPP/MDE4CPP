@@ -37,7 +37,7 @@ void FbPrintIsPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >
     //Body of the Opaquebehavior
     //Start ---------------------------
 		//Function Behaviour from a Call Behavior Action
-   		std::cout<<"Number is prime";
+   		std::cout<<"Number is prime"<<std::endl;
     //End -----------------------------
 
 	//set return / out parameters

@@ -8,6 +8,12 @@
 #ifndef BAG_HPP_
 #define BAG_HPP_
 
+#ifdef NDEBUG
+#define DEBUG_MESSAGE(a) /**/
+#else
+#define DEBUG_MESSAGE(a) a
+#endif
+
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -65,8 +71,9 @@ std::shared_ptr<T> front ()
 
 void clear()
 {
-        unsigned size = m_bag.size();
-#pragma omp parallel for
+        const unsigned int size = m_bag.size();
+        //TODO: When uncommented the program does not terminate
+        #pragma omp parallel for if(size > 39)
         for (unsigned int i = 0; i < size; i++)
         {
                 m_bag[i].reset();
@@ -109,9 +116,7 @@ virtual void push_back(std::shared_ptr<T> el)
 
 virtual void erase(iterator el)
 {
-        //TODO
         m_bag.erase(el);
-        //m_bag.erase(m_bag.begin() + res);
 }
 
 
@@ -120,21 +125,23 @@ virtual void erase(std::shared_ptr<T> el)
         int res = find(el);
         if(res < 0)
         {
-                std::cout << "Element not found" << std::endl;
+                //std::cout << "Element not found" << std::endl;
                 return;
         }
-        //TODO?
-        //m_bag.erase(m_bag.begin() + res);
+        m_bag.erase(m_bag.begin() + res);
 }
 
 int find(std::shared_ptr<T> el)
 {
-        int size = m_bag.size();
+        const int size = m_bag.size();
+        if(size == 0) {
+                return -1;
+        }
         volatile bool found = false;
         int first_index = -1;
         int iteration = 0;
 
-#pragma omp parallel //if(size >=40)
+#pragma omp parallel if(size >=40)
         {
                 int my_index = -1;
                 int i;

@@ -153,6 +153,8 @@ task generateCalcModel(type: JavaExec) {
 	main = "-jar"
 	workingDir "./model"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar", "CalcModel.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/fUML4CPP.jar"), file("model/CalcModel.uml")
+	outputs.dir file("src_gen")
 	
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
