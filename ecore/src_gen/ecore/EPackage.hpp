@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -125,8 +127,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClassifier> 
-			 getEClassifier(std::string name)  const  = 0;
+			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  = 0;
 			
 			
 			
@@ -215,13 +216,11 @@ namespace ecore
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance_eFactoryInstance) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EClassifier> >
-			 getEClassifiers() const = 0;
+			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEClassifiers() const = 0;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EPackage> >
-			 getESubpackages() const = 0;
+			virtual std::shared_ptr< Bag<ecore::EPackage> > getESubpackages() const = 0;
 			
 			/*!
 			 */
@@ -249,12 +248,10 @@ namespace ecore
 			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
 			/*!
 			 */
-				std::shared_ptr< Bag<ecore::EClassifier> >
-			 m_eClassifiers;
+			std::shared_ptr< Bag<ecore::EClassifier> > m_eClassifiers;
 			/*!
 			 */
-				std::shared_ptr< Bag<ecore::EPackage> >
-			 m_eSubpackages;
+			std::shared_ptr< Bag<ecore::EPackage> > m_eSubpackages;
 			/*!
 			 */
 			std::shared_ptr<ecore::EPackage > m_eSuperPackage;

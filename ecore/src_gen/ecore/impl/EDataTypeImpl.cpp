@@ -95,9 +95,9 @@ std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EDataTypeImpl::setSerializable (bool _serializable)
+void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
 } 

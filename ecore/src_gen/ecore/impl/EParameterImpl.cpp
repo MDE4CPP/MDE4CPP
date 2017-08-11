@@ -100,7 +100,7 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

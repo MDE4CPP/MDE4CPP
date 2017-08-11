@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -56,8 +58,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  ;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const  ;
 			
 			
 			
@@ -83,23 +84,19 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::ETypeParameter> >
-			 getETypeParameters() const ;
+			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EParameter> >
-			 getEParameters() const ;
+			virtual std::shared_ptr< Bag<ecore::EParameter> > getEParameters() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EClassifier> >
-			 getEExceptions() const ;
+			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEExceptions() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
-			 getEGenericExceptions() const ;
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEGenericExceptions() const ;
 			
 							
 			

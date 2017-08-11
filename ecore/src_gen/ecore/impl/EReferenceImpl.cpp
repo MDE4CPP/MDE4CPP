@@ -93,10 +93,8 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-		std::shared_ptr< Bag<ecore::EAttribute> >
-	 _eKeys = obj.getEKeys();
-	m_eKeys.reset(new 	 Bag<ecore::EAttribute> 
-	(*(obj.getEKeys().get())));
+	std::shared_ptr< Bag<ecore::EAttribute> > _eKeys = obj.getEKeys();
+	m_eKeys.reset(new Bag<ecore::EAttribute>(*(obj.getEKeys().get())));
 
 	m_eOpposite  = obj.getEOpposite();
 
@@ -138,7 +136,7 @@ std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -147,7 +145,7 @@ bool EReferenceImpl::isContainer() const
 	return m_container;
 }
 
-void EReferenceImpl::setContainment (bool _containment)
+void EReferenceImpl::setContainment(bool _containment)
 {
 	m_containment = _containment;
 } 
@@ -157,7 +155,7 @@ bool EReferenceImpl::isContainment() const
 	return m_containment;
 }
 
-void EReferenceImpl::setResolveProxies (bool _resolveProxies)
+void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 {
 	m_resolveProxies = _resolveProxies;
 } 
@@ -174,8 +172,7 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<ecore::EAttribute> >
- EReferenceImpl::getEKeys() const
+std::shared_ptr< Bag<ecore::EAttribute> > EReferenceImpl::getEKeys() const
 {
 
     return m_eKeys;

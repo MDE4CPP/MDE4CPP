@@ -77,10 +77,8 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	
 	m_eModelElement  = obj.getEModelElement();
 
-		std::shared_ptr< Bag<ecore::EObject> >
-	 _references = obj.getReferences();
-	m_references.reset(new 	 Bag<ecore::EObject> 
-	(*(obj.getReferences().get())));
+	std::shared_ptr< Bag<ecore::EObject> > _references = obj.getReferences();
+	m_references.reset(new Bag<ecore::EObject>(*(obj.getReferences().get())));
 
 
     
@@ -130,9 +128,9 @@ std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EAnnotationImpl::setSource (std::string _source)
+void EAnnotationImpl::setSource(std::string _source)
 {
 	m_source = _source;
 } 
@@ -149,16 +147,14 @@ std::string EAnnotationImpl::getSource() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<ecore::EObject> >
- EAnnotationImpl::getContents() const
+std::shared_ptr< Bag<ecore::EObject> > EAnnotationImpl::getContents() const
 {
 
     return m_contents;
 }
 
 
-	std::shared_ptr< Bag<ecore::EStringToStringMapEntry> >
- EAnnotationImpl::getDetails() const
+std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > EAnnotationImpl::getDetails() const
 {
 
     return m_details;
@@ -175,8 +171,7 @@ void EAnnotationImpl::setEModelElement(std::shared_ptr<ecore::EModelElement> _eM
     m_eModelElement = _eModelElement;
 }
 
-	std::shared_ptr< Bag<ecore::EObject> >
- EAnnotationImpl::getReferences() const
+std::shared_ptr< Bag<ecore::EObject> > EAnnotationImpl::getReferences() const
 {
 
     return m_references;

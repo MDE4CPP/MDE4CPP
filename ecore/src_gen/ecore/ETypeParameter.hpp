@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -83,8 +85,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
-			 getEBounds() const = 0;
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEBounds() const = 0;
 			
 			
 
@@ -99,8 +100,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<ecore::EGenericType> >
-			 m_eBounds;
+			std::shared_ptr< Bag<ecore::EGenericType> > m_eBounds;
 			
 
 		public:

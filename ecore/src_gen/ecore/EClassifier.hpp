@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -80,8 +82,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 isInstance(boost::any object)  const  = 0;
+			virtual bool isInstance(boost::any object)  const  = 0;
 			
 			
 			
@@ -134,8 +135,7 @@ namespace ecore
 			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::ETypeParameter> >
-			 getETypeParameters() const = 0;
+			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const = 0;
 			
 			
 
@@ -168,8 +168,7 @@ namespace ecore
 			std::shared_ptr<ecore::EPackage > m_ePackage;
 			/*!
 			 */
-				std::shared_ptr< Bag<ecore::ETypeParameter> >
-			 m_eTypeParameters;
+			std::shared_ptr< Bag<ecore::ETypeParameter> > m_eTypeParameters;
 			
 
 		public:

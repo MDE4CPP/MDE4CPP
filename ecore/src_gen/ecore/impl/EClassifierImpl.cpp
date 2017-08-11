@@ -109,9 +109,9 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EClassifierImpl::setClassifierID (int _classifierID)
+void EClassifierImpl::setClassifierID(int _classifierID)
 {
 	m_classifierID = _classifierID;
 } 
@@ -128,7 +128,7 @@ boost::any EClassifierImpl::getDefaultValue() const
 	return m_defaultValue;
 }
 
-void EClassifierImpl::setInstanceClass (void *  _instanceClass)
+void EClassifierImpl::setInstanceClass(void *  _instanceClass)
 {
 	m_instanceClass = _instanceClass;
 } 
@@ -138,7 +138,7 @@ void *  EClassifierImpl::getInstanceClass() const
 	return m_instanceClass;
 }
 
-void EClassifierImpl::setInstanceClassName (std::string _instanceClassName)
+void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
 } 
@@ -148,7 +148,7 @@ std::string EClassifierImpl::getInstanceClassName() const
 	return m_instanceClassName;
 }
 
-void EClassifierImpl::setInstanceTypeName (std::string _instanceTypeName)
+void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
 } 
@@ -161,18 +161,17 @@ std::string EClassifierImpl::getInstanceTypeName() const
 //*********************************
 // Operations
 //*********************************
-bool
- EClassifierImpl::isInstance(boost::any object)  const 
+bool EClassifierImpl::isInstance(boost::any object)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- EClassifierImpl::setGeneratedInstance(bool isGenerated) 
+void EClassifierImpl::setGeneratedInstance(bool isGenerated) 
 {
 	//generated from body annotation
 	
+	//end of body
 }
 
 //*********************************
@@ -188,8 +187,7 @@ void EClassifierImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
     m_ePackage = _ePackage;
 }
 
-	std::shared_ptr< Bag<ecore::ETypeParameter> >
- EClassifierImpl::getETypeParameters() const
+std::shared_ptr< Bag<ecore::ETypeParameter> > EClassifierImpl::getETypeParameters() const
 {
 
     return m_eTypeParameters;

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -56,18 +58,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> 
-			 create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any
-			 createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
+			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  ;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  ;
 			
 			
 			

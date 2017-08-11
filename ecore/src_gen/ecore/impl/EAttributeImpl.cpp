@@ -114,9 +114,9 @@ std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EAttributeImpl::setID (bool _iD)
+void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 

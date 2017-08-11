@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -84,73 +86,59 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EClass> 
-			 eClass()  const  = 0;
+			virtual std::shared_ptr<ecore::EClass> eClass()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 eIsProxy()  const  = 0;
+			virtual bool eIsProxy()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual int
-			 eResource()  const  = 0;
+			virtual int eResource()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EStructuralFeature> 
-			 eContainingFeature()  const  = 0;
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EReference> 
-			 eContainmentFeature()  const  = 0;
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > 
-			 eContents()  const  = 0;
+			virtual std::vector <   ecore::EObject > eContents()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > 
-			 eAllContents()  const  = 0;
+			virtual std::vector <   ecore::EObject > eAllContents()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > 
-			 eCrossReferences()  const  = 0;
+			virtual std::vector <   ecore::EObject > eCrossReferences()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual boost::any
-			 eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual boost::any
-			 eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  = 0;
+			virtual boost::any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  = 0;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  = 0;
 			
 			/*!
 			 */ 
-			virtual boost::any
-			 eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  = 0;
+			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  = 0;
 			
 			
 			//*********************************

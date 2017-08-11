@@ -117,9 +117,9 @@ std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EStructuralFeatureImpl::setChangeable (bool _changeable)
+void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
 } 
@@ -129,7 +129,7 @@ bool EStructuralFeatureImpl::isChangeable() const
 	return m_changeable;
 }
 
-void EStructuralFeatureImpl::setContainerClass (void *  _containerClass)
+void EStructuralFeatureImpl::setContainerClass(void *  _containerClass)
 {
 	m_containerClass = _containerClass;
 } 
@@ -146,7 +146,7 @@ boost::any EStructuralFeatureImpl::getDefaultValue() const
 	return m_defaultValue;
 }
 
-void EStructuralFeatureImpl::setDefaultValueLiteral (std::string _defaultValueLiteral)
+void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLiteral)
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
 } 
@@ -156,7 +156,7 @@ std::string EStructuralFeatureImpl::getDefaultValueLiteral() const
 	return m_defaultValueLiteral;
 }
 
-void EStructuralFeatureImpl::setDerived (bool _derived)
+void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
 } 
@@ -166,7 +166,7 @@ bool EStructuralFeatureImpl::isDerived() const
 	return m_derived;
 }
 
-void EStructuralFeatureImpl::setFeatureID (int _featureID)
+void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
 } 
@@ -176,7 +176,7 @@ int EStructuralFeatureImpl::getFeatureID() const
 	return m_featureID;
 }
 
-void EStructuralFeatureImpl::setTransient (bool _transient)
+void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
 } 
@@ -186,7 +186,7 @@ bool EStructuralFeatureImpl::isTransient() const
 	return m_transient;
 }
 
-void EStructuralFeatureImpl::setUnsettable (bool _unsettable)
+void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
 } 
@@ -196,7 +196,7 @@ bool EStructuralFeatureImpl::isUnsettable() const
 	return m_unsettable;
 }
 
-void EStructuralFeatureImpl::setVolatile (bool _volatile)
+void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
 } 

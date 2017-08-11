@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -80,8 +82,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 isInstance(boost::any object)  const  = 0;
+			virtual bool isInstance(boost::any object)  const  = 0;
 			
 			
 			//*********************************
@@ -100,8 +101,7 @@ namespace ecore
 			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound_eUpperBound) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EGenericType> >
-			 getETypeArguments() const = 0;
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getETypeArguments() const = 0;
 			
 			/*!
 			 */
@@ -144,8 +144,7 @@ namespace ecore
 			std::shared_ptr<ecore::EGenericType > m_eUpperBound;
 			/*!
 			 */
-				std::shared_ptr< Bag<ecore::EGenericType> >
-			 m_eTypeArguments;
+			std::shared_ptr< Bag<ecore::EGenericType> > m_eTypeArguments;
 			/*!
 			 */
 			std::shared_ptr<ecore::EClassifier > m_eRawType;

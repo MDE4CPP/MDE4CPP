@@ -145,9 +145,9 @@ std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EPackageImpl::setNsPrefix (std::string _nsPrefix)
+void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
 } 
@@ -157,7 +157,7 @@ std::string EPackageImpl::getNsPrefix() const
 	return m_nsPrefix;
 }
 
-void EPackageImpl::setNsURI (std::string _nsURI)
+void EPackageImpl::setNsURI(std::string _nsURI)
 {
 	m_nsURI = _nsURI;
 } 
@@ -170,24 +170,23 @@ std::string EPackageImpl::getNsURI() const
 //*********************************
 // Operations
 //*********************************
-void
- EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
+void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
 	//generated from body annotation
 	internalAddEParameter(owner, type, name);
+	//end of body
 }
 
-void
- EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper) 
+void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper) 
 {
 	//generated from body annotation
 	auto p = internalAddEParameter(owner, type, name);
 p->setLowerBound(lower);
 p->setUpperBound(upper);
+	//end of body
 }
 
-std::shared_ptr<ecore::EParameter> 
- EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered) 
+std::shared_ptr<ecore::EParameter> EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered) 
 {
 	//generated from body annotation
 	auto p = internalAddEParameter(owner, type, name);
@@ -196,10 +195,10 @@ p->setUpperBound(upper);
 p->setUnique(isUnique);
 p->setOrdered(isOrdered);
 return p;
+	//end of body
 }
 
-void
- EPackageImpl::createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id) 
+void EPackageImpl::createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
 	//generated from body annotation
 	    std::shared_ptr<EAttributeImpl> a(dynamic_cast<EAttributeImpl*>(EcoreFactory::eInstance()->createEAttribute()));
@@ -207,10 +206,10 @@ void
     a->setFeatureID(id);
     a->setContainer(owner);
     owner->getEStructuralFeatures()->push_back(a);
+	//end of body
 }
 
-std::shared_ptr<ecore::EClass> 
- EPackageImpl::createEClass(int id) 
+std::shared_ptr<ecore::EClass> EPackageImpl::createEClass(int id) 
 {
 	//generated from body annotation
 	std::shared_ptr<EClassImpl> c( dynamic_cast<EClassImpl *>(EcoreFactory::eInstance()->createEClass()));
@@ -218,10 +217,10 @@ assert(c);
 c->setClassifierID(id);
 getEClassifiers()->push_back(c);
 return c;
+	//end of body
 }
 
-std::shared_ptr<ecore::EDataType> 
- EPackageImpl::createEDataType(int id) 
+std::shared_ptr<ecore::EDataType> EPackageImpl::createEDataType(int id) 
 {
 	//generated from body annotation
 	std::shared_ptr<EDataTypeImpl> d(dynamic_cast<EDataTypeImpl*>(EcoreFactory::eInstance()->createEDataType()));
@@ -229,10 +228,10 @@ assert(d);
 d->setClassifierID(id);
 getEClassifiers()->push_back(d);
 return d;
+	//end of body
 }
 
-std::shared_ptr<ecore::EEnum> 
- EPackageImpl::createEEnum(int id) 
+std::shared_ptr<ecore::EEnum> EPackageImpl::createEEnum(int id) 
 {
 	//generated from body annotation
 	std::shared_ptr<EEnumImpl> e( dynamic_cast<EEnumImpl *>(EcoreFactory::eInstance()->createEEnum()));
@@ -240,20 +239,20 @@ assert(e);
 e->setClassifierID(id);
 getEClassifiers()->push_back(e);
 return e;
+	//end of body
 }
 
-void
- EPackageImpl::createEOperation(std::shared_ptr<ecore::EClass>  owner,int id) 
+void EPackageImpl::createEOperation(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
 	//generated from body annotation
 	std::shared_ptr<EOperationImpl> o(dynamic_cast<EOperationImpl*>(EcoreFactory::eInstance()->createEOperation()));
 assert(o);
 o->setOperationID(id);
 owner->getEOperations()->push_back(o);
+	//end of body
 }
 
-void
- EPackageImpl::createEReference(std::shared_ptr<ecore::EClass>  owner,int id) 
+void EPackageImpl::createEReference(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
 	//generated from body annotation
 	std::shared_ptr<EReferenceImpl> r (dynamic_cast<EReferenceImpl*>(EcoreFactory::eInstance()->createEReference()));
@@ -261,10 +260,10 @@ assert(r);
 r->setFeatureID(id);
 r->setContainer(owner);
 owner->getEStructuralFeatures()->push_back(r);
+	//end of body
 }
 
-std::shared_ptr<ecore::EClassifier> 
- EPackageImpl::getEClassifier(std::string name)  const 
+std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name)  const 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<EClassifier> > classifierList = getEClassifiers();
@@ -276,27 +275,27 @@ std::shared_ptr<ecore::EClassifier>
         }
     }
     return std::shared_ptr<ecore::EClassifier>();
+	//end of body
 }
 
-std::shared_ptr<ecore::EAttribute> 
- EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived) 
+std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived) 
 {
 	//generated from body annotation
 	return initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,true);
+	//end of body
 }
 
-std::shared_ptr<ecore::EAttribute> 
- EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered) 
+std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered) 
 {
 	//generated from body annotation
 	EClassifier* c = dynamic_cast<EClassifier*>(a->eContainer().get());
 assert(c);
 initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,c->getInstanceClass(),isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,isOrdered);
 return a;
+	//end of body
 }
 
-std::shared_ptr<ecore::EAttribute> 
- EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered) 
+std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered) 
 {
 	//generated from body annotation
 	initEStructuralFeature
@@ -316,40 +315,40 @@ std::shared_ptr<ecore::EAttribute>
        isOrdered);
     a->setID(isID);
 return a;
+	//end of body
 }
 
-std::shared_ptr<ecore::EClass> 
- EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface) 
+std::shared_ptr<ecore::EClass> EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface) 
 {
 	//generated from body annotation
 	initEClassifier(c,EcorePackage::eInstance()->getEClass(),instanceClass,name);
 c->setAbstract(isAbstract);
 c->setInterface(isInterface);
 return c;
+	//end of body
 }
 
-std::shared_ptr<ecore::EClass> 
- EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface,bool isGenerated) 
+std::shared_ptr<ecore::EClass> EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface,bool isGenerated) 
 {
 	//generated from body annotation
 	initEClassifier(c,EcorePackage::eInstance()->getEClass(),instanceClass,name,isGenerated);
 c->setAbstract(isAbstract);
 c->setInterface(isInterface);
 return c;
+	//end of body
 }
 
-void
- EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name) 
+void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name) 
 {
 	//generated from body annotation
 	    o->setName(name);
     o->setInstanceClass(instanceClass);
     struct null_deleter{void operator()(void const *) const { } };
     o->setEPackage(std::shared_ptr<EPackage>(this, null_deleter()));
+	//end of body
 }
 
-void
- EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name,bool isGenerated) 
+void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name,bool isGenerated) 
 {
 	//generated from body annotation
 	    o->setName(name);
@@ -360,56 +359,56 @@ void
     {
         setGeneratedClassName(o);
     }
+	//end of body
 }
 
-std::shared_ptr<ecore::EDataType> 
- EPackageImpl::initEDataType(std::shared_ptr<ecore::EDataType>  d,void *  instanceClass,std::string name,bool isSerializable,bool isGenerated) 
+std::shared_ptr<ecore::EDataType> EPackageImpl::initEDataType(std::shared_ptr<ecore::EDataType>  d,void *  instanceClass,std::string name,bool isSerializable,bool isGenerated) 
 {
 	//generated from body annotation
 	initEClassifier(d,EcorePackage::eInstance()->getEClass(),instanceClass,name,isGenerated);
 d->setSerializable(isSerializable);
 return d;
+	//end of body
 }
 
-std::shared_ptr<ecore::EEnum> 
- EPackageImpl::initEEnum(std::shared_ptr<ecore::EEnum>  e,void *  instanceClass,std::string name) 
+std::shared_ptr<ecore::EEnum> EPackageImpl::initEEnum(std::shared_ptr<ecore::EEnum>  e,void *  instanceClass,std::string name) 
 {
 	//generated from body annotation
 	initEClassifier(e,EcorePackage::eInstance()->getEEnum(),instanceClass,name,true);
 return e;
+	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> 
- EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
+std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
 	//generated from body annotation
 	o->setEType(type);
 o->setName(name);
 return o;
+	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> 
- EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound) 
+std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound) 
 {
 	//generated from body annotation
 	initEOperation(o,type,name);
 o->setLowerBound(lowerBound);
 o->setUpperBound(upperBound);
 return o;
+	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> 
- EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound,bool isUnique,bool isOrdered) 
+std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound,bool isUnique,bool isOrdered) 
 {
 	//generated from body annotation
 	initEOperation(o,type,name,lowerBound,upperBound);
 o->setUnique(isUnique);
 o->setOrdered(isOrdered);
 return o;
+	//end of body
 }
 
-std::shared_ptr<ecore::EReference> 
- EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived) 
+std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived) 
 {
 	//generated from body annotation
 	initEReference
@@ -430,10 +429,10 @@ std::shared_ptr<ecore::EReference>
        isDerived,
        true);
     return r;
+	//end of body
 }
 
-std::shared_ptr<ecore::EReference> 
- EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
+std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
 {
 	//generated from body annotation
 	EClassifier* tmp = dynamic_cast<EClassifier*>(r->eContainer().get());
@@ -457,10 +456,10 @@ assert(tmp);
        isDerived,
        isOrdered);
     return r;
+	//end of body
 }
 
-std::shared_ptr<ecore::EReference> 
- EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
+std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
 {
 	//generated from body annotation
 	initEStructuralFeature
@@ -485,10 +484,10 @@ std::shared_ptr<ecore::EReference>
     }
     r->setResolveProxies(isResolveProxies);
     return r;
+	//end of body
 }
 
-void
- EPackageImpl::initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
+void EPackageImpl::initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
 {
 	//generated from body annotation
 	s->setName(name);
@@ -513,10 +512,10 @@ if (!defaultValue.empty())
 {
    s->setDefaultValueLiteral(defaultValue);
 }
+	//end of body
 }
 
-std::shared_ptr<ecore::EParameter> 
- EPackageImpl::internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
+std::shared_ptr<ecore::EParameter> EPackageImpl::internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
 	//generated from body annotation
 	    std::shared_ptr<EParameter> p(EcoreFactory::eInstance()->createEParameter());
@@ -524,22 +523,22 @@ std::shared_ptr<ecore::EParameter>
     p->setName(name);
     owner->getEParameters()->push_back(p);
     return p;
+	//end of body
 }
 
-void
- EPackageImpl::setGeneratedClassName(std::shared_ptr<ecore::EClassifier>  eClassifier) 
+void EPackageImpl::setGeneratedClassName(std::shared_ptr<ecore::EClassifier>  eClassifier) 
 {
 	//generated from body annotation
 	EClassifierImpl * c = dynamic_cast<EClassifierImpl * >(eClassifier.get());
 assert(c);
 c->setGeneratedInstance(true);
+	//end of body
 }
 
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<ecore::EClassifier> >
- EPackageImpl::getEClassifiers() const
+std::shared_ptr< Bag<ecore::EClassifier> > EPackageImpl::getEClassifiers() const
 {
 
     return m_eClassifiers;
@@ -556,8 +555,7 @@ void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactor
     m_eFactoryInstance = _eFactoryInstance;
 }
 
-	std::shared_ptr< Bag<ecore::EPackage> >
- EPackageImpl::getESubpackages() const
+std::shared_ptr< Bag<ecore::EPackage> > EPackageImpl::getESubpackages() const
 {
 
     return m_eSubpackages;

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -74,8 +76,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EStringToStringMapEntry> >
-			 getDetails() const ;
+			virtual std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > getDetails() const ;
 			
 			/*!
 			 */
@@ -86,13 +87,11 @@ namespace ecore
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EObject> >
-			 getContents() const ;
+			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EObject> >
-			 getReferences() const ;
+			virtual std::shared_ptr< Bag<ecore::EObject> > getReferences() const ;
 			
 							
 			

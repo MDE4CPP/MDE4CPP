@@ -99,10 +99,8 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	
 	m_eContainingClass  = obj.getEContainingClass();
 
-		std::shared_ptr< Bag<ecore::EClassifier> >
-	 _eExceptions = obj.getEExceptions();
-	m_eExceptions.reset(new 	 Bag<ecore::EClassifier> 
-	(*(obj.getEExceptions().get())));
+	std::shared_ptr< Bag<ecore::EClassifier> > _eExceptions = obj.getEExceptions();
+	m_eExceptions.reset(new Bag<ecore::EClassifier>(*(obj.getEExceptions().get())));
 
 	m_eType  = obj.getEType();
 
@@ -172,9 +170,9 @@ std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EOperationImpl::setOperationID (int _operationID)
+void EOperationImpl::setOperationID(int _operationID)
 {
 	m_operationID = _operationID;
 } 
@@ -187,8 +185,7 @@ int EOperationImpl::getOperationID() const
 //*********************************
 // Operations
 //*********************************
-bool
- EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
+bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
 {
 	//generated from body annotation
 	    if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) && (someOperation->getName()==getName()))
@@ -206,9 +203,11 @@ bool
                     return false;
         		}
         	}
+            return true;
 		}
-		return true;
 	}
+    return false;
+	//end of body
 }
 
 //*********************************
@@ -221,32 +220,28 @@ std::shared_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
 }
 
 
-	std::shared_ptr< Bag<ecore::EClassifier> >
- EOperationImpl::getEExceptions() const
+std::shared_ptr< Bag<ecore::EClassifier> > EOperationImpl::getEExceptions() const
 {
 
     return m_eExceptions;
 }
 
 
-	std::shared_ptr< Bag<ecore::EGenericType> >
- EOperationImpl::getEGenericExceptions() const
+std::shared_ptr< Bag<ecore::EGenericType> > EOperationImpl::getEGenericExceptions() const
 {
 
     return m_eGenericExceptions;
 }
 
 
-	std::shared_ptr< Bag<ecore::EParameter> >
- EOperationImpl::getEParameters() const
+std::shared_ptr< Bag<ecore::EParameter> > EOperationImpl::getEParameters() const
 {
 
     return m_eParameters;
 }
 
 
-	std::shared_ptr< Bag<ecore::ETypeParameter> >
- EOperationImpl::getETypeParameters() const
+std::shared_ptr< Bag<ecore::ETypeParameter> > EOperationImpl::getETypeParameters() const
 {
 
     return m_eTypeParameters;

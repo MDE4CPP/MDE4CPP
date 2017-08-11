@@ -131,14 +131,13 @@ std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- EGenericTypeImpl::isInstance(boost::any object)  const 
+bool EGenericTypeImpl::isInstance(boost::any object)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -174,8 +173,7 @@ std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getERawType() const
 }
 
 
-	std::shared_ptr< Bag<ecore::EGenericType> >
- EGenericTypeImpl::getETypeArguments() const
+std::shared_ptr< Bag<ecore::EGenericType> > EGenericTypeImpl::getETypeArguments() const
 {
 
     return m_eTypeArguments;

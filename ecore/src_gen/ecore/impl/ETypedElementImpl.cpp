@@ -106,9 +106,9 @@ std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ETypedElementImpl::setLowerBound (int _lowerBound)
+void ETypedElementImpl::setLowerBound(int _lowerBound)
 {
 	m_lowerBound = _lowerBound;
 } 
@@ -125,7 +125,7 @@ bool ETypedElementImpl::isMany() const
 	return m_many;
 }
 
-void ETypedElementImpl::setOrdered (bool _ordered)
+void ETypedElementImpl::setOrdered(bool _ordered)
 {
 	m_ordered = _ordered;
 } 
@@ -142,7 +142,7 @@ bool ETypedElementImpl::isRequired() const
 	return m_required;
 }
 
-void ETypedElementImpl::setUnique (bool _unique)
+void ETypedElementImpl::setUnique(bool _unique)
 {
 	m_unique = _unique;
 } 
@@ -152,7 +152,7 @@ bool ETypedElementImpl::isUnique() const
 	return m_unique;
 }
 
-void ETypedElementImpl::setUpperBound (int _upperBound)
+void ETypedElementImpl::setUpperBound(int _upperBound)
 {
 	m_upperBound = _upperBound;
 } 

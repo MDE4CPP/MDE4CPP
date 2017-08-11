@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -56,18 +58,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> 
-			 getEEnumLiteral(std::string name)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> 
-			 getEEnumLiteral(int value)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value)  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EEnumLiteral> 
-			 getEEnumLiteralByLiteral(std::string literal)  const  ;
+			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal)  const  ;
 			
 			
 			
@@ -81,8 +80,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<ecore::EEnumLiteral> >
-			 getELiterals() const ;
+			virtual std::shared_ptr< Bag<ecore::EEnumLiteral> > getELiterals() const ;
 			
 							
 			

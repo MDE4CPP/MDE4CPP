@@ -86,9 +86,9 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EEnumLiteralImpl::setInstance (boost::any _instance)
+void EEnumLiteralImpl::setInstance(boost::any _instance)
 {
 	m_instance = _instance;
 } 
@@ -98,7 +98,7 @@ boost::any EEnumLiteralImpl::getInstance() const
 	return m_instance;
 }
 
-void EEnumLiteralImpl::setLiteral (std::string _literal)
+void EEnumLiteralImpl::setLiteral(std::string _literal)
 {
 	m_literal = _literal;
 } 
@@ -108,7 +108,7 @@ std::string EEnumLiteralImpl::getLiteral() const
 	return m_literal;
 }
 
-void EEnumLiteralImpl::setValue (int _value)
+void EEnumLiteralImpl::setValue(int _value)
 {
 	m_value = _value;
 } 

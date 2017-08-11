@@ -79,14 +79,13 @@ std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EAnnotation> 
- EModelElementImpl::getEAnnotation(std::string source) 
+std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::string source) 
 {
 	//generated from body annotation
 	    for(std::shared_ptr<EAnnotation> a : *m_eAnnotations)
@@ -97,13 +96,13 @@ std::shared_ptr<ecore::EAnnotation>
 	    }
     }
     return std::shared_ptr<ecore::EAnnotation>();
+	//end of body
 }
 
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<ecore::EAnnotation> >
- EModelElementImpl::getEAnnotations() const
+std::shared_ptr< Bag<ecore::EAnnotation> > EModelElementImpl::getEAnnotations() const
 {
 
     return m_eAnnotations;

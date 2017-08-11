@@ -69,9 +69,9 @@ std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void EStringToStringMapEntryImpl::setKey (std::string _key)
+void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 } 
@@ -81,7 +81,7 @@ std::string EStringToStringMapEntryImpl::getKey() const
 	return m_key;
 }
 
-void EStringToStringMapEntryImpl::setValue (std::string _value)
+void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
