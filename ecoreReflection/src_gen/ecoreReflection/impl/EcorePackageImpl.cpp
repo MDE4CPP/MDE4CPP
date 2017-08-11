@@ -2200,10 +2200,6 @@ void EcorePackageImpl::createPackageContents()
 	ecore_EByteObject->setName("EByteObject");
 	ecore_EByteObject->setPackage(ecore);
 	this->getOwnedType()->push_back(ecore_EByteObject);
-	ecore_EShortObject.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	ecore_EShortObject->setName("EShortObject");
-	ecore_EShortObject->setPackage(ecore);
-	this->getOwnedType()->push_back(ecore_EShortObject);
 	ecore_EChar.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	ecore_EChar->setName("EChar");
 	ecore_EChar->setPackage(ecore);
@@ -2212,6 +2208,10 @@ void EcorePackageImpl::createPackageContents()
 	ecore_EDoubleObject->setName("EDoubleObject");
 	ecore_EDoubleObject->setPackage(ecore);
 	this->getOwnedType()->push_back(ecore_EDoubleObject);
+	ecore_EShortObject.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	ecore_EShortObject->setName("EShortObject");
+	ecore_EShortObject->setPackage(ecore);
+	this->getOwnedType()->push_back(ecore_EShortObject);
 	ecore_EInvocationTargetException.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	ecore_EInvocationTargetException->setName("EInvocationTargetException");
 	ecore_EInvocationTargetException->setPackage(ecore);
@@ -2224,14 +2224,14 @@ void EcorePackageImpl::createPackageContents()
 	ecore_EByte->setName("EByte");
 	ecore_EByte->setPackage(ecore);
 	this->getOwnedType()->push_back(ecore_EByte);
-	ecore_EDouble.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	ecore_EDouble->setName("EDouble");
-	ecore_EDouble->setPackage(ecore);
-	this->getOwnedType()->push_back(ecore_EDouble);
 	ecore_ELong.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	ecore_ELong->setName("ELong");
 	ecore_ELong->setPackage(ecore);
 	this->getOwnedType()->push_back(ecore_ELong);
+	ecore_EDouble.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	ecore_EDouble->setName("EDouble");
+	ecore_EDouble->setPackage(ecore);
+	this->getOwnedType()->push_back(ecore_EDouble);
 	ecore_EMap.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	ecore_EMap->setName("EMap");
 	ecore_EMap->setPackage(ecore);
@@ -2330,14 +2330,14 @@ void EcorePackageImpl::initializePackageContents()
 	ecore_EAnnotation->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_Ecore_ETypedElement());
-	gen->setSpecific(get_Ecore_EParameter());
-	ecore_EParameter->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_Ecore_EObject());
 	gen->setSpecific(get_Ecore_EGenericType());
 	ecore_EGenericType->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_Ecore_ETypedElement());
+	gen->setSpecific(get_Ecore_EParameter());
+	ecore_EParameter->getGeneralization()->push_back(gen);
 	
 	
 	
@@ -2352,14 +2352,14 @@ void EcorePackageImpl::initializePackageContents()
 	ecore_ETypedElement->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_Ecore_ENamedElement());
-	gen->setSpecific(get_Ecore_EClassifier());
-	ecore_EClassifier->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_Ecore_EClassifier());
 	gen->setSpecific(get_Ecore_EDataType());
 	ecore_EDataType->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_Ecore_ENamedElement());
+	gen->setSpecific(get_Ecore_EClassifier());
+	ecore_EClassifier->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_Ecore_EModelElement());

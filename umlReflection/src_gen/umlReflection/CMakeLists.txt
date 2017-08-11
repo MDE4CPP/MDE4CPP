@@ -21,7 +21,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 SET(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
 SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-SET(CMAKE_CXX_FLAGS_DEBUG " -g")
+SET(CMAKE_CXX_FLAGS_DEBUG " -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})

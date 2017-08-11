@@ -93,14 +93,14 @@ void PrimitiveTypesPackageImpl::createPackageContents()
 	primitiveTypes_Boolean->setName("Boolean");
 	primitiveTypes_Boolean->setPackage(primitiveTypes);
 	this->getOwnedType()->push_back(primitiveTypes_Boolean);
-	primitiveTypes_UnlimitedNatural.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
-	primitiveTypes_UnlimitedNatural->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_UnlimitedNatural);
 	primitiveTypes_Real.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
 	primitiveTypes_Real->setName("Real");
 	primitiveTypes_Real->setPackage(primitiveTypes);
 	this->getOwnedType()->push_back(primitiveTypes_Real);
+	primitiveTypes_UnlimitedNatural.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
+	primitiveTypes_UnlimitedNatural->setPackage(primitiveTypes);
+	this->getOwnedType()->push_back(primitiveTypes_UnlimitedNatural);
 	
 
 }

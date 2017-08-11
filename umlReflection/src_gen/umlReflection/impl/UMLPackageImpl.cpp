@@ -7643,14 +7643,12 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("specialized_end_types");
+	con->setName("binary_associations");
 	con->getConstrainedElement()->push_back(uML_Association);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("Sequence{1..memberEnd->size()}->"\
-	"	forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->"\
-	"		forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))")));
 	
 	con->setSpecification(oe);
 	
@@ -7659,12 +7657,14 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Association->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("binary_associations");
+	con->setName("specialized_end_types");
 	con->getConstrainedElement()->push_back(uML_Association);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("Sequence{1..memberEnd->size()}->"\
+	"	forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->"\
+	"		forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))")));
 	
 	con->setSpecification(oe);
 	
@@ -7687,12 +7687,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Association->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("specialized_end_number");
+	con->setName("ends_must_be_typed");
 	con->getConstrainedElement()->push_back(uML_Association);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->forAll(type->notEmpty())")));
 	
 	con->setSpecification(oe);
 	
@@ -7701,12 +7701,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Association->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("ends_must_be_typed");
+	con->setName("specialized_end_number");
 	con->getConstrainedElement()->push_back(uML_Association);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("memberEnd->forAll(type->notEmpty())")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())")));
 	
 	con->setSpecification(oe);
 	
@@ -8388,20 +8388,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_CallAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("synchronous_call");
-	con->getConstrainedElement()->push_back(uML_CallAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result->notEmpty() implies isSynchronous")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_CallAction->getOwnedRule()->push_back(con);
-	con->setContext(uML_CallAction->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("result_pins");
 	con->getConstrainedElement()->push_back(uML_CallAction);
 	
@@ -8413,6 +8399,20 @@ void UMLPackageImpl::createPackageContents()
 	"	parameter->at(i).type.conformsTo(result->at(i).type) and "\
 	"	parameter->at(i).isOrdered = result->at(i).isOrdered and"\
 	"	parameter->at(i).compatibleWith(result->at(i)))")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_CallAction->getOwnedRule()->push_back(con);
+	con->setContext(uML_CallAction->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("synchronous_call");
+	con->getConstrainedElement()->push_back(uML_CallAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result->notEmpty() implies isSynchronous")));
 	
 	con->setSpecification(oe);
 	
@@ -11475,12 +11475,13 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("incoming_outgoing_edges");
+	con->setName("zero_input_parameters");
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
+	"   decisionInput.inputParameters()->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -11489,13 +11490,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_DecisionNode->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("zero_input_parameters");
+	con->setName("incoming_outgoing_edges");
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
-	"   decisionInput.inputParameters()->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0")));
 	
 	con->setSpecification(oe);
 	
@@ -11552,21 +11552,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_DecisionNode->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("incoming_control_one_input_parameter");
-	con->getConstrainedElement()->push_back(uML_DecisionNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
-	"	decisionInput.inputParameters()->size()=1")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_DecisionNode->getOwnedRule()->push_back(con);
-	con->setContext(uML_DecisionNode->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("edges");
 	con->getConstrainedElement()->push_back(uML_DecisionNode);
 	
@@ -11576,6 +11561,21 @@ void UMLPackageImpl::createPackageContents()
 	"let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in"\
 	"allRelevantEdges->forAll(oclIsKindOf(ControlFlow)) or allRelevantEdges->forAll(oclIsKindOf(ObjectFlow))"\
 	"")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_DecisionNode->getOwnedRule()->push_back(con);
+	con->setContext(uML_DecisionNode->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("incoming_control_one_input_parameter");
+	con->getConstrainedElement()->push_back(uML_DecisionNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies"\
+	"	decisionInput.inputParameters()->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -13922,12 +13922,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_FinalState->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("no_exit_behavior");
+	con->setName("no_regions");
 	con->getConstrainedElement()->push_back(uML_FinalState);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exit->isEmpty()")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->size() = 0")));
 	
 	con->setSpecification(oe);
 	
@@ -13936,12 +13936,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_FinalState->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("no_regions");
+	con->setName("no_exit_behavior");
 	con->getConstrainedElement()->push_back(uML_FinalState);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("region->size() = 0")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("exit->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -14190,20 +14190,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Gate->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("formal_gate_distinguishable");
-	con->getConstrainedElement()->push_back(uML_Gate);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isFormal() implies interaction.formalGate->select(getName() = self.getName())->size()=1")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_Gate->getOwnedRule()->push_back(con);
-	con->setContext(uML_Gate->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("inside_cf_gate_distinguishable");
 	con->getConstrainedElement()->push_back(uML_Gate);
 	
@@ -14212,6 +14198,20 @@ void UMLPackageImpl::createPackageContents()
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isInsideCF() implies"\
 	"let selfOperand : InteractionOperand = self.getOperand() in"\
 	"  combinedFragment.cfragmentGate->select(isInsideCF() and getName() = self.getName())->select(getOperand() = selfOperand)->size()=1")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_Gate->getOwnedRule()->push_back(con);
+	con->setContext(uML_Gate->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("formal_gate_distinguishable");
+	con->getConstrainedElement()->push_back(uML_Gate);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isFormal() implies interaction.formalGate->select(getName() = self.getName())->size()=1")));
 	
 	con->setSpecification(oe);
 	
@@ -16793,20 +16793,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_LoopNode->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("result_no_incoming");
-	con->getConstrainedElement()->push_back(uML_LoopNode);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_LoopNode->getOwnedRule()->push_back(con);
-	con->setContext(uML_LoopNode->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("matching_loop_variables");
 	con->getConstrainedElement()->push_back(uML_LoopNode);
 	
@@ -16817,6 +16803,20 @@ void UMLPackageImpl::createPackageContents()
 	"loopVariableInput.isUnique=loopVariable.isUnique and"\
 	"loopVariableInput.lower=loopVariable.lower and"\
 	"loopVariableInput.upper=loopVariable.upper")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_LoopNode->getOwnedRule()->push_back(con);
+	con->setContext(uML_LoopNode->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("result_no_incoming");
+	con->getConstrainedElement()->push_back(uML_LoopNode);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.incoming->isEmpty()")));
 	
 	con->setSpecification(oe);
 	
@@ -17119,6 +17119,18 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Message->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
+	con->setName("occurrence_specifications");
+	con->getConstrainedElement()->push_back(uML_Message);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_Message->getOwnedRule()->push_back(con);
+	con->setContext(uML_Message->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
 	con->setName("cannot_cross_boundaries");
 	con->getConstrainedElement()->push_back(uML_Message);
 	
@@ -17131,18 +17143,6 @@ void UMLPackageImpl::createPackageContents()
 	"let receiveEnclosingFrag : Set(InteractionFragment) = "\
 	"receiveEvent->asOrderedSet()->first().enclosingFragment()"\
 	"in  sendEnclosingFrag = receiveEnclosingFrag")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_Message->getOwnedRule()->push_back(con);
-	con->setContext(uML_Message->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
-	con->setName("occurrence_specifications");
-	con->getConstrainedElement()->push_back(uML_Message);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	
 	con->setSpecification(oe);
 	
@@ -17534,12 +17534,10 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_MultiplicityElement->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("upper_ge_lower");
+	con->setName("value_specification_no_side_effects");
 	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("upperBound() >= lowerBound()")));
 	
 	con->setSpecification(oe);
 	
@@ -17548,10 +17546,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_MultiplicityElement->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("value_specification_no_side_effects");
+	con->setName("upper_ge_lower");
 	con->getConstrainedElement()->push_back(uML_MultiplicityElement);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("upperBound() >= lowerBound()")));
 	
 	con->setSpecification(oe);
 	
@@ -18558,18 +18558,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ObjectFlow->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("target");
-	con->getConstrainedElement()->push_back(uML_ObjectFlow);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_ObjectFlow->getOwnedRule()->push_back(con);
-	con->setContext(uML_ObjectFlow->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("transformation_behavior");
 	con->getConstrainedElement()->push_back(uML_ObjectFlow);
 	
@@ -18578,6 +18566,18 @@ void UMLPackageImpl::createPackageContents()
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("transformation<>null implies"\
 	"	transformation.inputParameters()->size()=1 and"\
 	"	transformation.outputParameters()->size()=1")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_ObjectFlow->getOwnedRule()->push_back(con);
+	con->setContext(uML_ObjectFlow->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("target");
+	con->getConstrainedElement()->push_back(uML_ObjectFlow);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	
 	con->setSpecification(oe);
 	
@@ -20569,12 +20569,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ParameterSet->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("two_parameter_sets");
+	con->setName("same_parameterized_entity");
 	con->getConstrainedElement()->push_back(uML_ParameterSet);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction)")));
 	
 	con->setSpecification(oe);
 	
@@ -20583,12 +20583,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ParameterSet->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("same_parameterized_entity");
+	con->setName("two_parameter_sets");
 	con->getConstrainedElement()->push_back(uML_ParameterSet);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))")));
 	
 	con->setSpecification(oe);
 	
@@ -21251,6 +21251,20 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
+	con->setName("derived_union_is_read_only");
+	con->getConstrainedElement()->push_back(uML_Property);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDerivedUnion implies isReadOnly")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_Property->getOwnedRule()->push_back(con);
+	con->setContext(uML_Property->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
 	con->setName("derived_union_is_derived");
 	con->getConstrainedElement()->push_back(uML_Property);
 	
@@ -21265,12 +21279,16 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Property->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("derived_union_is_read_only");
+	con->setName("binding_to_attribute");
 	con->getConstrainedElement()->push_back(uML_Property);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isDerivedUnion implies isReadOnly")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.isAttribute()"\
+	"and (templateParameterSubstitution->notEmpty())"\
+	"implies (templateParameterSubstitution->forAll(ts |"\
+	"    ts.formal.oclIsKindOf(Property)"\
+	"    and ts.formal.oclAsType(Property).isAttribute())))")));
 	
 	con->setSpecification(oe);
 	
@@ -21307,16 +21325,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Property->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("binding_to_attribute");
+	con->setName("deployment_target");
 	con->getConstrainedElement()->push_back(uML_Property);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(self.isAttribute()"\
-	"and (templateParameterSubstitution->notEmpty())"\
-	"implies (templateParameterSubstitution->forAll(ts |"\
-	"    ts.formal.oclIsKindOf(Property)"\
-	"    and ts.formal.oclAsType(Property).isAttribute())))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))")));
 	
 	con->setSpecification(oe);
 	
@@ -21331,20 +21345,6 @@ void UMLPackageImpl::createPackageContents()
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("subsettedProperty->notEmpty() implies  (subsettingContext()->notEmpty() and subsettingContext()->forAll (sc |    subsettedProperty->forAll(sp |      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_Property->getOwnedRule()->push_back(con);
-	con->setContext(uML_Property->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
-	con->setName("deployment_target");
-	con->getConstrainedElement()->push_back(uML_Property);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))")));
 	
 	con->setSpecification(oe);
 	
@@ -21978,20 +21978,6 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ProtocolTransition->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("associated_actions");
-	con->getConstrainedElement()->push_back(uML_ProtocolTransition);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("effect = null")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_ProtocolTransition->getOwnedRule()->push_back(con);
-	con->setContext(uML_ProtocolTransition->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
 	con->setName("refers_to_operation");
 	con->getConstrainedElement()->push_back(uML_ProtocolTransition);
 	
@@ -22000,6 +21986,20 @@ void UMLPackageImpl::createPackageContents()
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then "\
 	"    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())"\
 	"else true endif")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_ProtocolTransition->getOwnedRule()->push_back(con);
+	con->setContext(uML_ProtocolTransition->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
+	con->setName("associated_actions");
+	con->getConstrainedElement()->push_back(uML_ProtocolTransition);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("effect = null")));
 	
 	con->setSpecification(oe);
 	
@@ -22167,12 +22167,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Pseudostate->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("join_vertex");
+	con->setName("initial_vertex");
 	con->getConstrainedElement()->push_back(uML_Pseudostate);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)")));
 	
 	con->setSpecification(oe);
 	
@@ -22181,12 +22181,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Pseudostate->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("initial_vertex");
+	con->setName("join_vertex");
 	con->getConstrainedElement()->push_back(uML_Pseudostate);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)")));
 	
 	con->setSpecification(oe);
 	
@@ -22393,12 +22393,12 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("no_type");
+	con->setName("multiplicity_of_input");
 	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = null")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -22407,12 +22407,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ReadIsClassifiedObjectAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("multiplicity_of_input");
+	con->setName("no_type");
 	con->getConstrainedElement()->push_back(uML_ReadIsClassifiedObjectAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = null")));
 	
 	con->setSpecification(oe);
 	
@@ -22772,12 +22772,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ReadLinkObjectEndQualifierAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("ends_of_association");
+	con->setName("multiplicity_of_result");
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -22786,12 +22786,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ReadLinkObjectEndQualifierAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("multiplicity_of_result");
+	con->setName("ends_of_association");
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("result.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)")));
 	
 	con->setSpecification(oe);
 	
@@ -22828,12 +22828,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ReadLinkObjectEndQualifierAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("type_of_object");
+	con->setName("multiplicity_of_qualifier");
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = qualifier.associationEnd.association")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -22842,12 +22842,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_ReadLinkObjectEndQualifierAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("multiplicity_of_qualifier");
+	con->setName("type_of_object");
 	con->getConstrainedElement()->push_back(uML_ReadLinkObjectEndQualifierAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("qualifier.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.type = qualifier.associationEnd.association")));
 	
 	con->setSpecification(oe);
 	
@@ -23243,12 +23243,12 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("redefinition_context_valid");
+	con->setName("non_leaf_redefinition");
 	con->getConstrainedElement()->push_back(uML_RedefinableElement);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | self.isRedefinitionContextValid(re))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | not re.isLeaf)")));
 	
 	con->setSpecification(oe);
 	
@@ -23257,12 +23257,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_RedefinableElement->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("non_leaf_redefinition");
+	con->setName("redefinition_context_valid");
 	con->getConstrainedElement()->push_back(uML_RedefinableElement);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | not re.isLeaf)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("redefinedElement->forAll(re | self.isRedefinitionContextValid(re))")));
 	
 	con->setSpecification(oe);
 	
@@ -24396,12 +24396,12 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("submachine_states");
+	con->setName("submachine_or_regions");
 	con->getConstrainedElement()->push_back(uML_State);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isSubmachineState implies connection->notEmpty( )")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isComposite implies not isSubmachineState")));
 	
 	con->setSpecification(oe);
 	
@@ -24410,12 +24410,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_State->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("submachine_or_regions");
+	con->setName("submachine_states");
 	con->getConstrainedElement()->push_back(uML_State);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isComposite implies not isSubmachineState")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("isSubmachineState implies connection->notEmpty( )")));
 	
 	con->setSpecification(oe);
 	
@@ -25417,6 +25417,20 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_StructuralFeatureAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
+	con->setName("multiplicity");
+	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
+	
+	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	
+	con->setSpecification(oe);
+	
+	//insert into model hirachie
+	uML_StructuralFeatureAction->getOwnedRule()->push_back(con);
+	con->setContext(uML_StructuralFeatureAction->getNamespace());
+	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+	
 	con->setName("object_type");
 	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
 	
@@ -25432,12 +25446,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_StructuralFeatureAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("multiplicity");
+	con->setName("visibility");
 	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("object.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("structuralFeature.visibility = VisibilityKind::public or_'context'.allFeatures()->includes(structuralFeature) orstructuralFeature.visibility=VisibilityKind::protected and_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))")));
 	
 	con->setSpecification(oe);
 	
@@ -25452,20 +25466,6 @@ void UMLPackageImpl::createPackageContents()
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
 	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("structuralFeature.featuringClassifier->size() = 1")));
-	
-	con->setSpecification(oe);
-	
-	//insert into model hirachie
-	uML_StructuralFeatureAction->getOwnedRule()->push_back(con);
-	con->setContext(uML_StructuralFeatureAction->getNamespace());
-	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
-	
-	con->setName("visibility");
-	con->getConstrainedElement()->push_back(uML_StructuralFeatureAction);
-	
-	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
-	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("structuralFeature.visibility = VisibilityKind::public or_'context'.allFeatures()->includes(structuralFeature) orstructuralFeature.visibility=VisibilityKind::protected and_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))")));
 	
 	con->setSpecification(oe);
 	
@@ -26476,12 +26476,13 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("join_segment_state");
+	con->setName("state_is_internal");
 	con->getConstrainedElement()->push_back(uML_Transition);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = TransitionKind::internal) implies"\
+	"		(source.oclIsKindOf (State) and source = target)")));
 	
 	con->setSpecification(oe);
 	
@@ -26490,13 +26491,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_Transition->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("state_is_internal");
+	con->setName("join_segment_state");
 	con->getConstrainedElement()->push_back(uML_Transition);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(kind = TransitionKind::internal) implies"\
-	"		(source.oclIsKindOf (State) and source = target)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))")));
 	
 	con->setSpecification(oe);
 	
@@ -27798,12 +27798,12 @@ void UMLPackageImpl::createPackageContents()
 	//constraints
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("value_type");
+	con->setName("multiplicity");
 	con->getConstrainedElement()->push_back(uML_WriteVariableAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null implies value.type.conformsTo(variable.type)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null implies value.is(1,1)")));
 	
 	con->setSpecification(oe);
 	
@@ -27812,12 +27812,12 @@ void UMLPackageImpl::createPackageContents()
 	con->setContext(uML_WriteVariableAction->getNamespace());
 	con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
 	
-	con->setName("multiplicity");
+	con->setName("value_type");
 	con->getConstrainedElement()->push_back(uML_WriteVariableAction);
 	
 	oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
 	oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("OCL")));
-	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value<>null implies value.is(1,1)")));
+	oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("value <> null implies value.type.conformsTo(variable.type)")));
 	
 	con->setSpecification(oe);
 	
@@ -27906,6 +27906,17 @@ void UMLPackageImpl::createPackageContents()
 			lit->setName("terminate");
 			uML_PseudostateKind->getOwnedLiteral()->push_back(lit);
 			lit->setEnumeration(uML_PseudostateKind);
+		uML_ConnectorKind.reset(uml::UmlFactory::eInstance()->createEnumeration());
+		uML_ConnectorKind->setName("ConnectorKind");
+	
+			lit = std::shared_ptr<uml::EnumerationLiteral>(uml::UmlFactory::eInstance()->createEnumerationLiteral());
+			lit->setName("assembly");
+			uML_ConnectorKind->getOwnedLiteral()->push_back(lit);
+			lit->setEnumeration(uML_ConnectorKind);
+			lit = std::shared_ptr<uml::EnumerationLiteral>(uml::UmlFactory::eInstance()->createEnumerationLiteral());
+			lit->setName("delegation");
+			uML_ConnectorKind->getOwnedLiteral()->push_back(lit);
+			lit->setEnumeration(uML_ConnectorKind);
 		uML_ParameterEffectKind.reset(uml::UmlFactory::eInstance()->createEnumeration());
 		uML_ParameterEffectKind->setName("ParameterEffectKind");
 	
@@ -27925,17 +27936,6 @@ void UMLPackageImpl::createPackageContents()
 			lit->setName("update");
 			uML_ParameterEffectKind->getOwnedLiteral()->push_back(lit);
 			lit->setEnumeration(uML_ParameterEffectKind);
-		uML_ConnectorKind.reset(uml::UmlFactory::eInstance()->createEnumeration());
-		uML_ConnectorKind->setName("ConnectorKind");
-	
-			lit = std::shared_ptr<uml::EnumerationLiteral>(uml::UmlFactory::eInstance()->createEnumerationLiteral());
-			lit->setName("assembly");
-			uML_ConnectorKind->getOwnedLiteral()->push_back(lit);
-			lit->setEnumeration(uML_ConnectorKind);
-			lit = std::shared_ptr<uml::EnumerationLiteral>(uml::UmlFactory::eInstance()->createEnumerationLiteral());
-			lit->setName("delegation");
-			uML_ConnectorKind->getOwnedLiteral()->push_back(lit);
-			lit->setEnumeration(uML_ConnectorKind);
 		uML_VisibilityKind.reset(uml::UmlFactory::eInstance()->createEnumeration());
 		uML_VisibilityKind->setName("VisibilityKind");
 	
@@ -28194,11 +28194,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Action->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_StructuredActivityNode());
-	gen->setSpecific(get_UML_LoopNode());
-	uML_LoopNode->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Namespace());
 	gen->setSpecific(get_UML_Region());
 	uML_Region->getGeneralization()->push_back(gen);
@@ -28206,6 +28201,16 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_RedefinableElement());
 	gen->setSpecific(get_UML_Region());
 	uML_Region->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_StructuredActivityNode());
+	gen->setSpecific(get_UML_LoopNode());
+	uML_LoopNode->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_RedefinableElement());
+	gen->setSpecific(get_UML_ExtensionPoint());
+	uML_ExtensionPoint->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_PackageableElement());
@@ -28222,20 +28227,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_ValuePin->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_RedefinableElement());
-	gen->setSpecific(get_UML_ExtensionPoint());
-	uML_ExtensionPoint->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Feature());
-	gen->setSpecific(get_UML_BehavioralFeature());
-	uML_BehavioralFeature->getGeneralization()->push_back(gen);
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Namespace());
-	gen->setSpecific(get_UML_BehavioralFeature());
-	uML_BehavioralFeature->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Namespace());
 	gen->setSpecific(get_UML_Package());
 	uML_Package->getGeneralization()->push_back(gen);
@@ -28247,6 +28238,15 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_TemplateableElement());
 	gen->setSpecific(get_UML_Package());
 	uML_Package->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Feature());
+	gen->setSpecific(get_UML_BehavioralFeature());
+	uML_BehavioralFeature->getGeneralization()->push_back(gen);
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Namespace());
+	gen->setSpecific(get_UML_BehavioralFeature());
+	uML_BehavioralFeature->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_BehavioredClassifier());
@@ -28284,14 +28284,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Element->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_StructuredActivityNode());
-	gen->setSpecific(get_UML_ConditionalNode());
-	uML_ConditionalNode->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Element());
 	gen->setSpecific(get_UML_TemplateParameter());
 	uML_TemplateParameter->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_StructuredActivityNode());
+	gen->setSpecific(get_UML_ConditionalNode());
+	uML_ConditionalNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Observation());
@@ -28308,6 +28308,11 @@ void UMLPackageImpl::initializePackageContents()
 	uML_MessageOccurrenceSpecification->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_NamedElement());
+	gen->setSpecific(get_UML_Lifeline());
+	uML_Lifeline->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Feature());
 	gen->setSpecific(get_UML_StructuralFeature());
 	uML_StructuralFeature->getGeneralization()->push_back(gen);
@@ -28319,11 +28324,6 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_TypedElement());
 	gen->setSpecific(get_UML_StructuralFeature());
 	uML_StructuralFeature->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_NamedElement());
-	gen->setSpecific(get_UML_Lifeline());
-	uML_Lifeline->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_DirectedRelationship());
@@ -28393,14 +28393,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_AddStructuralFeatureValueAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_WriteVariableAction());
-	gen->setSpecific(get_UML_RemoveVariableValueAction());
-	uML_RemoveVariableValueAction->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Feature());
 	gen->setSpecific(get_UML_Connector());
 	uML_Connector->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_WriteVariableAction());
+	gen->setSpecific(get_UML_RemoveVariableValueAction());
+	uML_RemoveVariableValueAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_DataType());
@@ -28423,14 +28423,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_CallAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Classifier());
-	gen->setSpecific(get_UML_BehavioredClassifier());
-	uML_BehavioredClassifier->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Element());
 	gen->setSpecific(get_UML_Comment());
 	uML_Comment->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Classifier());
+	gen->setSpecific(get_UML_BehavioredClassifier());
+	uML_BehavioredClassifier->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_StateMachine());
@@ -28487,14 +28487,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_EnumerationLiteral->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_CentralBufferNode());
-	gen->setSpecific(get_UML_DataStoreNode());
-	uML_DataStoreNode->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ControlNode());
 	gen->setSpecific(get_UML_ForkNode());
 	uML_ForkNode->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_CentralBufferNode());
+	gen->setSpecific(get_UML_DataStoreNode());
+	uML_DataStoreNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_CallAction());
@@ -28557,14 +28557,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Duration->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_IntervalConstraint());
-	gen->setSpecific(get_UML_TimeConstraint());
-	uML_TimeConstraint->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_InteractionFragment());
 	gen->setSpecific(get_UML_Continuation());
 	uML_Continuation->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_IntervalConstraint());
+	gen->setSpecific(get_UML_TimeConstraint());
+	uML_TimeConstraint->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Transition());
@@ -28596,11 +28596,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_PartDecomposition->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_NamedElement());
-	gen->setSpecific(get_UML_Trigger());
-	uML_Trigger->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
 	gen->setSpecific(get_UML_OpaqueAction());
 	uML_OpaqueAction->getGeneralization()->push_back(gen);
@@ -28609,6 +28604,20 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_PackageableElement());
 	gen->setSpecific(get_UML_Constraint());
 	uML_Constraint->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_NamedElement());
+	gen->setSpecific(get_UML_Trigger());
+	uML_Trigger->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Classifier());
+	gen->setSpecific(get_UML_Association());
+	uML_Association->getGeneralization()->push_back(gen);
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Relationship());
+	gen->setSpecific(get_UML_Association());
+	uML_Association->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_NamedElement());
@@ -28629,15 +28638,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_StructuredActivityNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Classifier());
-	gen->setSpecific(get_UML_Association());
-	uML_Association->getGeneralization()->push_back(gen);
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Relationship());
-	gen->setSpecific(get_UML_Association());
-	uML_Association->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ControlNode());
 	gen->setSpecific(get_UML_FinalNode());
 	uML_FinalNode->getGeneralization()->push_back(gen);
@@ -28648,14 +28648,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_MergeNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Constraint());
-	gen->setSpecific(get_UML_InteractionConstraint());
-	uML_InteractionConstraint->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Element());
 	gen->setSpecific(get_UML_ParameterableElement());
 	uML_ParameterableElement->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Constraint());
+	gen->setSpecific(get_UML_InteractionConstraint());
+	uML_InteractionConstraint->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_LiteralSpecification());
@@ -28851,14 +28851,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Pin->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_ValueSpecification());
-	gen->setSpecific(get_UML_LiteralSpecification());
-	uML_LiteralSpecification->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
 	gen->setSpecific(get_UML_ReadExtentAction());
 	uML_ReadExtentAction->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_ValueSpecification());
+	gen->setSpecific(get_UML_LiteralSpecification());
+	uML_LiteralSpecification->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ObjectNode());
@@ -28889,9 +28889,9 @@ void UMLPackageImpl::initializePackageContents()
 	uML_ConnectorEnd->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_StructuredActivityNode());
-	gen->setSpecific(get_UML_ExpansionRegion());
-	uML_ExpansionRegion->getGeneralization()->push_back(gen);
+	gen->setGeneral(get_UML_RedefinableElement());
+	gen->setSpecific(get_UML_ActivityNode());
+	uML_ActivityNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_State());
@@ -28899,9 +28899,9 @@ void UMLPackageImpl::initializePackageContents()
 	uML_FinalState->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_RedefinableElement());
-	gen->setSpecific(get_UML_ActivityNode());
-	uML_ActivityNode->getGeneralization()->push_back(gen);
+	gen->setGeneral(get_UML_StructuredActivityNode());
+	gen->setSpecific(get_UML_ExpansionRegion());
+	uML_ExpansionRegion->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
@@ -28928,11 +28928,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Transition->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_ObjectNode());
-	gen->setSpecific(get_UML_CentralBufferNode());
-	uML_CentralBufferNode->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Behavior());
 	gen->setSpecific(get_UML_Interaction());
 	uML_Interaction->getGeneralization()->push_back(gen);
@@ -28942,14 +28937,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Interaction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_ObjectNode());
+	gen->setSpecific(get_UML_CentralBufferNode());
+	uML_CentralBufferNode->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_StructuredClassifier());
 	gen->setSpecific(get_UML_EncapsulatedClassifier());
 	uML_EncapsulatedClassifier->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Action());
-	gen->setSpecific(get_UML_ReadIsClassifiedObjectAction());
-	uML_ReadIsClassifiedObjectAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Vertex());
@@ -28957,14 +28952,19 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Pseudostate->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Interval());
-	gen->setSpecific(get_UML_TimeInterval());
-	uML_TimeInterval->getGeneralization()->push_back(gen);
+	gen->setGeneral(get_UML_Action());
+	gen->setSpecific(get_UML_ReadIsClassifiedObjectAction());
+	uML_ReadIsClassifiedObjectAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
 	gen->setSpecific(get_UML_ReclassifyObjectAction());
 	uML_ReclassifyObjectAction->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Interval());
+	gen->setSpecific(get_UML_TimeInterval());
+	uML_TimeInterval->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
@@ -29007,14 +29007,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_TemplateParameterSubstitution->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_TemplateParameter());
-	gen->setSpecific(get_UML_ConnectableElementTemplateParameter());
-	uML_ConnectableElementTemplateParameter->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_LinkAction());
 	gen->setSpecific(get_UML_ReadLinkAction());
 	uML_ReadLinkAction->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_TemplateParameter());
+	gen->setSpecific(get_UML_ConnectableElementTemplateParameter());
+	uML_ConnectableElementTemplateParameter->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_RedefinableElement());
@@ -29108,14 +29108,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_ConnectionPointReference->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Dependency());
-	gen->setSpecific(get_UML_Abstraction());
-	uML_Abstraction->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_OpaqueBehavior());
 	gen->setSpecific(get_UML_FunctionBehavior());
 	uML_FunctionBehavior->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Dependency());
+	gen->setSpecific(get_UML_Abstraction());
+	uML_Abstraction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ValueSpecification());
@@ -29168,14 +29168,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_QualifierValue->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_ValueSpecification());
-	gen->setSpecific(get_UML_Expression());
-	uML_Expression->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
 	gen->setSpecific(get_UML_RaiseExceptionAction());
 	uML_RaiseExceptionAction->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_ValueSpecification());
+	gen->setSpecific(get_UML_Expression());
+	uML_Expression->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Action());
@@ -29203,14 +29203,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Reception->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Behavior());
-	gen->setSpecific(get_UML_OpaqueBehavior());
-	uML_OpaqueBehavior->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Element());
 	gen->setSpecific(get_UML_LinkEndData());
 	uML_LinkEndData->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Behavior());
+	gen->setSpecific(get_UML_OpaqueBehavior());
+	uML_OpaqueBehavior->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_MessageEnd());
@@ -29238,14 +29238,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_FlowFinalNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_ControlNode());
-	gen->setSpecific(get_UML_DecisionNode());
-	uML_DecisionNode->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Behavior());
 	gen->setSpecific(get_UML_Activity());
 	uML_Activity->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_ControlNode());
+	gen->setSpecific(get_UML_DecisionNode());
+	uML_DecisionNode->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_LiteralSpecification());
@@ -29285,11 +29285,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Image->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Action());
-	gen->setSpecific(get_UML_StructuralFeatureAction());
-	uML_StructuralFeatureAction->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_Classifier());
 	gen->setSpecific(get_UML_Artifact());
 	uML_Artifact->getGeneralization()->push_back(gen);
@@ -29299,19 +29294,24 @@ void UMLPackageImpl::initializePackageContents()
 	uML_Artifact->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Action());
+	gen->setSpecific(get_UML_StructuralFeatureAction());
+	uML_StructuralFeatureAction->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_WriteStructuralFeatureAction());
 	gen->setSpecific(get_UML_RemoveStructuralFeatureValueAction());
 	uML_RemoveStructuralFeatureValueAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_DirectedRelationship());
-	gen->setSpecific(get_UML_Generalization());
-	uML_Generalization->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_CombinedFragment());
 	gen->setSpecific(get_UML_ConsiderIgnoreFragment());
 	uML_ConsiderIgnoreFragment->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_DirectedRelationship());
+	gen->setSpecific(get_UML_Generalization());
+	uML_Generalization->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_LinkEndData());
@@ -29362,11 +29362,6 @@ void UMLPackageImpl::initializePackageContents()
 	uML_TimeExpression->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Element());
-	gen->setSpecific(get_UML_Clause());
-	uML_Clause->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ConnectableElement());
 	gen->setSpecific(get_UML_Property());
 	uML_Property->getGeneralization()->push_back(gen);
@@ -29378,6 +29373,11 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_StructuralFeature());
 	gen->setSpecific(get_UML_Property());
 	uML_Property->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Element());
+	gen->setSpecific(get_UML_Clause());
+	uML_Clause->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_ActivityGroup());
@@ -29415,6 +29415,11 @@ void UMLPackageImpl::initializePackageContents()
 	uML_TemplateableElement->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Realization());
+	gen->setSpecific(get_UML_InterfaceRealization());
+	uML_InterfaceRealization->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_CallAction());
 	gen->setSpecific(get_UML_CallOperationAction());
 	uML_CallOperationAction->getGeneralization()->push_back(gen);
@@ -29425,19 +29430,9 @@ void UMLPackageImpl::initializePackageContents()
 	uML_BehaviorExecutionSpecification->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Realization());
-	gen->setSpecific(get_UML_InterfaceRealization());
-	uML_InterfaceRealization->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_LinkAction());
 	gen->setSpecific(get_UML_WriteLinkAction());
 	uML_WriteLinkAction->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Event());
-	gen->setSpecific(get_UML_MessageEvent());
-	uML_MessageEvent->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_BehavioredClassifier());
@@ -29447,6 +29442,11 @@ void UMLPackageImpl::initializePackageContents()
 	gen->setGeneral(get_UML_StructuredClassifier());
 	gen->setSpecific(get_UML_Collaboration());
 	uML_Collaboration->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Event());
+	gen->setSpecific(get_UML_MessageEvent());
+	uML_MessageEvent->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_NamedElement());
@@ -29493,14 +29493,14 @@ void UMLPackageImpl::initializePackageContents()
 	uML_TimeEvent->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
-	gen->setGeneral(get_UML_Action());
-	gen->setSpecific(get_UML_ReadLinkObjectEndAction());
-	uML_ReadLinkObjectEndAction->getGeneralization()->push_back(gen);
-	
-	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_InteractionFragment());
 	gen->setSpecific(get_UML_ExecutionSpecification());
 	uML_ExecutionSpecification->getGeneralization()->push_back(gen);
+	
+	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+	gen->setGeneral(get_UML_Action());
+	gen->setSpecific(get_UML_ReadLinkObjectEndAction());
+	uML_ReadLinkObjectEndAction->getGeneralization()->push_back(gen);
 	
 	gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
 	gen->setGeneral(get_UML_StructuralFeatureAction());
