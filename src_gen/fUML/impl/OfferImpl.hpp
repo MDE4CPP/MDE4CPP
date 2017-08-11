@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -58,28 +60,23 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 countOfferedVales()  ;
+			virtual int countOfferedVales()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 retrieveOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeOfferedValues(int count)  ;
+			virtual void removeOfferedValues(int count)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeWithdrawnTokens()  ;
+			virtual void removeWithdrawnTokens()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasTokens()  ;
+			virtual bool hasTokens()  ;
 			
 			
 			
@@ -93,8 +90,7 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Token> >
-			 getOfferedTokens() const ;
+			virtual std::shared_ptr< Bag<fUML::Token> > getOfferedTokens() const ;
 			
 							
 			

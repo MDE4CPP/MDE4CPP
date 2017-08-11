@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -68,58 +70,47 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> >
-			 getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
+			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 getDecisionInputFlowValue()  ;
+			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance> 
-			 getDecisionInputFlowInstance()  ;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasObjectFlowInput()  ;
+			virtual bool hasObjectFlowInput()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual void terminate()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  ;
+			virtual bool isReady()  ;
 			
 			
 			

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -56,28 +58,23 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExtensionalValue> 
-			 getValue()  ;
+			virtual std::shared_ptr<fUML::ExtensionalValue> getValue()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 addValue(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual bool addValue(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
+			virtual void addValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
+			virtual std::shared_ptr<fUML::Value> setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  ;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 removeValue(int i)  ;
+			virtual std::string removeValue(int i)  ;
 			
 			
 			

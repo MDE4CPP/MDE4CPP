@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -95,23 +97,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 runTest()  = 0;
+			virtual bool runTest()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 runBody()  = 0;
+			virtual void runBody()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 runLoopVariables()  = 0;
+			virtual void runLoopVariables()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode> 
-			 makeLoopVariableList()  = 0;
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList()  = 0;
 			
 			
 			//*********************************
@@ -123,8 +121,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Values> >
-			 getBodyOutputLists() const = 0;
+			virtual std::shared_ptr< Bag<fUML::Values> > getBodyOutputLists() const = 0;
 			
 			
 
@@ -139,8 +136,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::Values> >
-			 m_bodyOutputLists;
+			std::shared_ptr< Bag<fUML::Values> > m_bodyOutputLists;
 			
 
 		public:

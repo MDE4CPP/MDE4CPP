@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -65,53 +67,43 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
+			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Evaluation> 
-			 createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
+			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> 
-			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> 
-			 instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> 
-			 getBuiltInType(std::string name)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticStrategy> 
-			 getStrategy(std::string name)  ;
+			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual int
-			 getStrategyIndex(std::string name)  ;
+			virtual int getStrategyIndex(std::string name)  ;
 			
 			
 			
@@ -132,18 +124,15 @@ virtual public ExecutionFactory
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::SemanticStrategy> >
-			 getStrategies() const ;
+			virtual std::shared_ptr< Bag<fUML::SemanticStrategy> > getStrategies() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-			 getPrimitiveBehaviorPrototypes() const ;
+			virtual std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > getPrimitiveBehaviorPrototypes() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::PrimitiveType> >
-			 getBuiltInTypes() const ;
+			virtual std::shared_ptr< Bag<uml::PrimitiveType> > getBuiltInTypes() const ;
 			
 							
 			

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -105,38 +107,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 execute()  = 0;
+			virtual void execute()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  = 0;
+			virtual void terminate()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  = 0;
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ParameterValue> 
-			 getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  = 0;
+			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
-			 getOutputParameterValues()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> > getOutputParameterValues()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> 
-			 getBehavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior> getBehavior()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  = 0;
+			virtual std::shared_ptr<fUML::Value> new_()  = 0;
 			
 			
 			//*********************************
@@ -155,8 +150,7 @@ namespace fUML
 			virtual void setContext(std::shared_ptr<fUML::Object> _context_context) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ParameterValue> >
-			 getParameterValues() const = 0;
+			virtual std::shared_ptr< Bag<fUML::ParameterValue> > getParameterValues() const = 0;
 			
 			
 
@@ -174,8 +168,7 @@ namespace fUML
 			std::shared_ptr<fUML::Object > m_context;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::ParameterValue> >
-			 m_parameterValues;
+			std::shared_ptr< Bag<fUML::ParameterValue> > m_parameterValues;
 			
 
 		public:

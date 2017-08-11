@@ -50,10 +50,8 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<fUML::Value> >
-	 _values = obj.getValues();
-	m_values.reset(new 	 Bag<fUML::Value> 
-	(*(obj.getValues().get())));
+	std::shared_ptr< Bag<fUML::Value> > _values = obj.getValues();
+	m_values.reset(new Bag<fUML::Value>(*(obj.getValues().get())));
 
 
     
@@ -74,7 +72,7 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -84,8 +82,7 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::Value> >
- ValuesImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > ValuesImpl::getValues() const
 {
 
     return m_values;

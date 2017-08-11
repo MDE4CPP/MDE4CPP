@@ -50,10 +50,8 @@ OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<fUML::Token> >
-	 _offeredTokens = obj.getOfferedTokens();
-	m_offeredTokens.reset(new 	 Bag<fUML::Token> 
-	(*(obj.getOfferedTokens().get())));
+	std::shared_ptr< Bag<fUML::Token> > _offeredTokens = obj.getOfferedTokens();
+	m_offeredTokens.reset(new Bag<fUML::Token>(*(obj.getOfferedTokens().get())));
 
 
     
@@ -74,14 +72,13 @@ std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-int
- OfferImpl::countOfferedVales() 
+int OfferImpl::countOfferedVales() 
 {
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
@@ -94,18 +91,18 @@ int
     }
 
     return count;
+	//end of body
 }
 
-bool
- OfferImpl::hasTokens() 
+bool OfferImpl::hasTokens() 
 {
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
     return (this->getOfferedTokens()->size() > 0);
+	//end of body
 }
 
-void
- OfferImpl::removeOfferedValues(int count) 
+void OfferImpl::removeOfferedValues(int count) 
 {
 	//generated from body annotation
 	    int n = count;
@@ -118,10 +115,10 @@ void
         }
         n = n - 1;
     }
+	//end of body
 }
 
-void
- OfferImpl::removeWithdrawnTokens() 
+void OfferImpl::removeWithdrawnTokens() 
 {
 	//generated from body annotation
 	    unsigned int i = 0;
@@ -132,10 +129,10 @@ void
         }
         i = i + 1;
     }
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- OfferImpl::retrieveOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > OfferImpl::retrieveOfferedTokens() 
 {
 	//generated from body annotation
 	this->removeWithdrawnTokens();
@@ -149,13 +146,13 @@ std::shared_ptr<Bag<fUML::Token> >
     }
 
     return tokens;
+	//end of body
 }
 
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::Token> >
- OfferImpl::getOfferedTokens() const
+std::shared_ptr< Bag<fUML::Token> > OfferImpl::getOfferedTokens() const
 {
 
     return m_offeredTokens;

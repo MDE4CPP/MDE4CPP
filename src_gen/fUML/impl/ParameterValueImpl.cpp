@@ -88,7 +88,7 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -108,8 +108,7 @@ void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter
     m_parameter = _parameter;
 }
 
-	std::shared_ptr< Bag<fUML::Value> >
- ParameterValueImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > ParameterValueImpl::getValues() const
 {
 
     return m_values;

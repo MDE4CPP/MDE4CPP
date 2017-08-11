@@ -71,31 +71,31 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	//generated from body annotation
 	return (std::dynamic_pointer_cast<ControlToken>(other) != nullptr);
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ControlTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return nullptr;
+	//end of body
 }
 
-bool
- ControlTokenImpl::isControl() 
+bool ControlTokenImpl::isControl() 
 {
 	//generated from body annotation
 		return true;
+	//end of body
 }
 
 //*********************************

@@ -88,14 +88,13 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
@@ -172,6 +171,7 @@ std::shared_ptr<fUML::Value>
     }
 
     return value;
+	//end of body
 }
 
 //*********************************

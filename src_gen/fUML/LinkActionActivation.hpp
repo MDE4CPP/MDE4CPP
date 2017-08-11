@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -105,18 +107,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  = 0;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  = 0;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> 
-			 getAssociation()  = 0;
+			virtual std::shared_ptr<uml::Association> getAssociation()  = 0;
 			
 			
 			//*********************************

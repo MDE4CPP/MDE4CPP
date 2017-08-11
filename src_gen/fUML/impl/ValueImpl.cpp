@@ -71,14 +71,13 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
@@ -110,17 +109,16 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> >
- ValueImpl::getTypes()  const 
+std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
+bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
@@ -134,25 +132,24 @@ bool
     }
 
     return found;
+	//end of body
 }
 
-std::string
- ValueImpl::objectId() 
+std::string ValueImpl::objectId() 
 {
 	//generated from body annotation
 	return "SemanticVisitor";//typename(SemanticVisitor); //return super.toString();
 
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- ValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> ValueImpl::specify() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string
- ValueImpl::toString() 
+std::string ValueImpl::toString() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -65,17 +65,13 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
     
@@ -104,23 +100,22 @@ std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[fire] Pin " << (this->getNode() == nullptr ? "" : this->getNode()->getName() + "...")<<std::endl;)
 
     this->addTokens(incomingTokens);
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- PinActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
 	int count = this->countUnofferedTokens();
@@ -162,6 +157,7 @@ std::shared_ptr<Bag<fUML::Token> >
     }
 
     return tokens;
+	//end of body
 }
 
 //*********************************

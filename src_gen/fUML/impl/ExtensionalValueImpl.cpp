@@ -81,14 +81,13 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ExtensionalValueImpl::destroy() 
+void ExtensionalValueImpl::destroy() 
 {
 	//generated from body annotation
 	if(this->getLocus() != nullptr)
@@ -96,6 +95,7 @@ void
 		struct null_deleter{void operator()(void const *) const { } };
         this->getLocus()->remove(std::shared_ptr<ExtensionalValue>(this, null_deleter()));
     }
+	//end of body
 }
 
 //*********************************

@@ -65,22 +65,16 @@ ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::PrimitiveType> >
-	 _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr< Bag<uml::PrimitiveType> > _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));
+	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
-		std::shared_ptr< Bag<fUML::SemanticStrategy> >
-	 _strategies = obj.getStrategies();
-	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));
+	std::shared_ptr< Bag<fUML::SemanticStrategy> > _strategies = obj.getStrategies();
+	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
     
@@ -101,14 +95,13 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> 
- ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
 	SemanticVisitor* visitor = nullptr;
@@ -142,6 +135,7 @@ std::shared_ptr<fUML::SemanticVisitor>
     }
 
     return std::shared_ptr<fUML::SemanticVisitor>(visitor);
+	//end of body
 }
 
 //*********************************

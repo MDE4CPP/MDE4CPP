@@ -78,10 +78,8 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _types = obj.getTypes();
-	m_types.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getTypes().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
     
@@ -133,14 +131,13 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ActivityExecutionImpl::execute() 
+void ActivityExecutionImpl::execute() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity> (this->getTypes()->front());
@@ -206,20 +203,21 @@ void
         DEBUG_MESSAGE(std::cout<<"[execute] Activity " << activity->getName()<< " completed."<<std::endl;)
         //TODO: which elements connected to the activity can be safely cleaned up here?
     }
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ActivityExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(fUML::FUMLFactory::eInstance()->createActivityExecution());
+	//end of body
 }
 
-void
- ActivityExecutionImpl::terminate() 
+void ActivityExecutionImpl::terminate() 
 {
 	//generated from body annotation
 	    this->getActivationGroup()->terminateAll();
+	//end of body
 }
 
 //*********************************

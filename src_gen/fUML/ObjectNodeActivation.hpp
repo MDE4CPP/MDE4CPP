@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -85,58 +87,47 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 countOfferedValues()  = 0;
+			virtual int countOfferedValues()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 sendUnofferedTokens()  = 0;
+			virtual void sendUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual int
-			 countUnofferedTokens()  = 0;
+			virtual int countUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 getUnofferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > getUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeUnofferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeUnofferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 run()  = 0;
+			virtual void run()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  = 0;
+			virtual void terminate()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 addToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual int
-			 removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 clearTokens()  = 0;
+			virtual void clearTokens()  = 0;
 			
 			
 			//*********************************

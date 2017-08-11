@@ -78,9 +78,9 @@ std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void BooleanValueImpl::setValue (bool _value)
+void BooleanValueImpl::setValue(bool _value)
 {
 	m_value = _value;
 } 
@@ -93,8 +93,7 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -106,20 +105,20 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- BooleanValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralBoolean> literal(uml::UmlFactory::eInstance()->createLiteralBoolean());    
     literal->setType(this->getType());
     literal->setValue(this->isValue());
     return literal;
+	//end of body
 }
 
-std::string
- BooleanValueImpl::toString() 
+std::string BooleanValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::string stringValue = "false";
@@ -130,6 +129,7 @@ std::string
     }
 
     return stringValue;
+	//end of body
 }
 
 //*********************************

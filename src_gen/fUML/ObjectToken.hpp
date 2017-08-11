@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -75,13 +77,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  other)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  = 0;
+			virtual bool isControl()  = 0;
 			
 			
 			//*********************************

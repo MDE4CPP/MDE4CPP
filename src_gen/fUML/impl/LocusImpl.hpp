@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -68,38 +70,31 @@ virtual public Locus
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignExecutor(std::shared_ptr<fUML::Executor>  executor)  ;
+			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  ;
+			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> >
-			 retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 remove(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> 
-			 instantiate(std::shared_ptr<uml::Class>  type)  ;
+			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  ;
 			
 			
 			
@@ -127,8 +122,7 @@ virtual public Locus
 			virtual void setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory_factory) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ExtensionalValue> >
-			 getExtensionalValues() const ;
+			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const ;
 			
 							
 			

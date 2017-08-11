@@ -74,14 +74,13 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
 {
 	//generated from body annotation
 		//#include "NamedElement.hpp"
@@ -103,10 +102,10 @@ bool
         }
     }
 	return matches;
+	//end of body
 }
 
-std::shared_ptr<uml::Behavior> 
- RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 		std::shared_ptr<uml::Behavior> method = nullptr;
@@ -133,6 +132,7 @@ std::shared_ptr<uml::Behavior>
 	}
 
 	return method;
+	//end of body
 }
 
 //*********************************

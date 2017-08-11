@@ -75,27 +75,19 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
-		std::shared_ptr< Bag<uml::Clause> >
-	 _selectedClauses = obj.getSelectedClauses();
-	m_selectedClauses.reset(new 	 Bag<uml::Clause> 
-	(*(obj.getSelectedClauses().get())));
+	std::shared_ptr< Bag<uml::Clause> > _selectedClauses = obj.getSelectedClauses();
+	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
 
 
     
@@ -141,28 +133,25 @@ std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() con
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::ClauseActivation> 
- ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause) 
+std::shared_ptr<fUML::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause) 
+void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -171,16 +160,14 @@ void
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::ClauseActivation> >
- ConditionalNodeActivationImpl::getClauseActivations() const
+std::shared_ptr< Bag<fUML::ClauseActivation> > ConditionalNodeActivationImpl::getClauseActivations() const
 {
 
     return m_clauseActivations;
 }
 
 
-	std::shared_ptr< Bag<uml::Clause> >
- ConditionalNodeActivationImpl::getSelectedClauses() const
+std::shared_ptr< Bag<uml::Clause> > ConditionalNodeActivationImpl::getSelectedClauses() const
 {
 
     return m_selectedClauses;

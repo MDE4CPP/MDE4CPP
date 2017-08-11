@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -110,23 +112,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 doStructuredActivity()  = 0;
+			virtual void doStructuredActivity()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  = 0;
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ExpansionNodeActivation> 
-			 getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  = 0;
+			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  = 0;
 			
 			/*!
 			 */ 
-			virtual int
-			 numberOfValues()  = 0;
+			virtual int numberOfValues()  = 0;
 			
 			
 			//*********************************
@@ -138,18 +136,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::TokenSet> >
-			 getInputTokens() const = 0;
+			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputTokens() const = 0;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::TokenSet> >
-			 getInputExpansionTokens() const = 0;
+			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputExpansionTokens() const = 0;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ExpansionActivationGroup> >
-			 getActivationGroups() const = 0;
+			virtual std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > getActivationGroups() const = 0;
 			
 			
 
@@ -164,16 +159,13 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::TokenSet> >
-			 m_inputTokens;
+			std::shared_ptr< Bag<fUML::TokenSet> > m_inputTokens;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::TokenSet> >
-			 m_inputExpansionTokens;
+			std::shared_ptr< Bag<fUML::TokenSet> > m_inputExpansionTokens;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::ExpansionActivationGroup> >
-			 m_activationGroups;
+			std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > m_activationGroups;
 			
 
 		public:

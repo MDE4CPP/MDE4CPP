@@ -63,10 +63,8 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 	m_regionActivation  = obj.getRegionActivation();
 
-		std::shared_ptr< Bag<fUML::ActivityNodeActivation> >
-	 _suspendedActivations = obj.getSuspendedActivations();
-	m_suspendedActivations.reset(new 	 Bag<fUML::ActivityNodeActivation> 
-	(*(obj.getSuspendedActivations().get())));
+	std::shared_ptr< Bag<fUML::ActivityNodeActivation> > _suspendedActivations = obj.getSuspendedActivations();
+	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
     
@@ -103,7 +101,7 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

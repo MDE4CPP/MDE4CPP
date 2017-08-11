@@ -79,9 +79,9 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void IntegerValueImpl::setValue (int _value)
+void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -94,8 +94,7 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -107,10 +106,10 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());
@@ -119,15 +118,16 @@ std::shared_ptr<uml::ValueSpecification>
     literal->setValue(this->getValue());
 
     return literal;
+	//end of body
 }
 
-std::string
- IntegerValueImpl::toString() 
+std::string IntegerValueImpl::toString() 
 {
 	//generated from body annotation
 	    char buf [11];
     std::sprintf(buf, "%d", this->getValue());
     return std::string(buf);
+	//end of body
 }
 
 //*********************************

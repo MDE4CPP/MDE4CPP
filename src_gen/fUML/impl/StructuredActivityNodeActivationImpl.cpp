@@ -75,22 +75,16 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
     
@@ -127,14 +121,13 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClas
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<fUML::Token> >
- StructuredActivityNodeActivationImpl::completeAction() 
+std::shared_ptr<Bag<fUML::Token> > StructuredActivityNodeActivationImpl::completeAction() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > incomingTokens(new Bag<fUML::Token>());
@@ -143,18 +136,18 @@ std::shared_ptr<Bag<fUML::Token> >
         incomingTokens = ActionActivationImpl::completeAction();
     }
     return incomingTokens;
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::createEdgeInstances() 
+void StructuredActivityNodeActivationImpl::createEdgeInstances() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::ActivityEdge> > edges = (std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode()))->getEdge();
 	this->getActivationGroup()->createEdgeInstance(edges);
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::createNodeActivations() 
+void StructuredActivityNodeActivationImpl::createNodeActivations() 
 {
 	//generated from body annotation
 	ActionActivationImpl::createNodeActivations();
@@ -166,10 +159,10 @@ void
     std::shared_ptr<uml::StructuredActivityNode> structuredActivityNode = std::dynamic_pointer_cast<uml::StructuredActivityNode> (this->getNode());
     std::shared_ptr<Bag<uml::ActivityNode> > nodes = structuredActivityNode->getNode();
     this->getActivationGroup()->createNodeActivations(nodes);
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::doAction() 
+void StructuredActivityNodeActivationImpl::doAction() 
 {
 	//generated from body annotation
 	if ((std::dynamic_pointer_cast<uml::StructuredActivityNode>(this->getNode()))->getMustIsolate()) 
@@ -182,10 +175,10 @@ void
 	{
         this->doStructuredActivity();
     }
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::doStructuredActivity() 
+void StructuredActivityNodeActivationImpl::doStructuredActivity() 
 {
 	//generated from body annotation
 	//Remark: action is not used in the specification.
@@ -205,10 +198,10 @@ void
 
     std::shared_ptr<Bag<fUML::ActivityNodeActivation> > nodes = this->getActivationGroup()->getNodeActivations();
     this->getActivationGroup()->run(nodes);
+	//end of body
 }
 
-std::shared_ptr<fUML::ActivityNodeActivation> 
- StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
+std::shared_ptr<fUML::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation> thisActivation = ActionActivationImpl::getNodeActivation(node);
@@ -224,10 +217,10 @@ std::shared_ptr<fUML::ActivityNodeActivation>
     }
 
     return activation;
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> >
- StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin) 
+std::shared_ptr<Bag<fUML::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin) 
 {
 	//generated from body annotation
 	std::shared_ptr<PinActivation> pinActivation = std::dynamic_pointer_cast<PinActivation>(this->getActivationGroup()->getNodeActivation(std::dynamic_pointer_cast<uml::ActivityNode>(pin)));
@@ -245,10 +238,10 @@ std::shared_ptr<Bag<fUML::Value> >
     }
 
     return values;
+	//end of body
 }
 
-bool
- StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
+bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
 {
 	//generated from body annotation
 	    bool isSource = ActionActivationImpl::isSourceFor(edgeInstance);
@@ -256,17 +249,17 @@ bool
         isSource = this->getActivationGroup()->hasSourceFor(edgeInstance);
     }
     return isSource;
+	//end of body
 }
 
-bool
- StructuredActivityNodeActivationImpl::isSuspended() 
+bool StructuredActivityNodeActivationImpl::isSuspended() 
 {
 	//generated from body annotation
 	    return this->getActivationGroup()->isSuspended();
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> >
- StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) 
+std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::ActivityNode> > activityNodes(new Bag<uml::ActivityNode>());
@@ -295,10 +288,10 @@ std::shared_ptr<Bag<uml::ActivityNode> >
     }
 
     return activityNodes;
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
+void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
 {
 	//generated from body annotation
 	std::shared_ptr<PinActivation> pinActivation = std::dynamic_pointer_cast<PinActivation>(this->getActivationGroup()->getNodeActivation(std::dynamic_pointer_cast<uml::ActivityNode>(pin)));
@@ -310,10 +303,10 @@ void
         token->setValue(value);
         pinActivation->addToken(token);
     }
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::resume() 
+void StructuredActivityNodeActivationImpl::resume() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > incomingTokens = ActionActivationImpl::completeAction();
@@ -325,21 +318,22 @@ void
     {
         ActionActivationImpl::resume();
     }
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::terminate() 
+void StructuredActivityNodeActivationImpl::terminate() 
 {
 	//generated from body annotation
 	    this->terminateAll();
     ActionActivationImpl::terminate();
+	//end of body
 }
 
-void
- StructuredActivityNodeActivationImpl::terminateAll() 
+void StructuredActivityNodeActivationImpl::terminateAll() 
 {
 	//generated from body annotation
 	    this->getActivationGroup()->terminateAll();
+	//end of body
 }
 
 //*********************************

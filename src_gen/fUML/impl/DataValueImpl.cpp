@@ -90,26 +90,26 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> >
- DataValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- DataValueImpl::new_() 
+std::shared_ptr<fUML::Value> DataValueImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createDataValue());
+	//end of body
 }
 
 //*********************************

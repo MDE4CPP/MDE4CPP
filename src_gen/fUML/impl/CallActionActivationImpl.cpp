@@ -75,22 +75,16 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
     
@@ -129,14 +123,13 @@ std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- CallActionActivationImpl::doAction() 
+void CallActionActivationImpl::doAction() 
 {
 	//generated from body annotation
 	std::shared_ptr<Execution> callExecution = this->getCallExecution();
@@ -195,18 +188,18 @@ void
         callExecution->destroy();
         this->removeCallExecution(callExecution);
     }
+	//end of body
 }
 
-std::shared_ptr<fUML::Execution> 
- CallActionActivationImpl::getCallExecution() 
+std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution() 
 {
 	//generated from body annotation
 	    //TODO verify!
     return this->m_callExecutions->front();
+	//end of body
 }
 
-void
- CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
+void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
 {
 	//generated from body annotation
 	    bool notFound = true;
@@ -217,10 +210,10 @@ void
             notFound = false;
         }
     }
+	//end of body
 }
 
-void
- CallActionActivationImpl::terminate() 
+void CallActionActivationImpl::terminate() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Execution> > executionList = this->getCallExecutions();
@@ -230,13 +223,13 @@ void
     }
 
     InvocationActionActivationImpl::terminate();
+	//end of body
 }
 
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::Execution> >
- CallActionActivationImpl::getCallExecutions() const
+std::shared_ptr< Bag<fUML::Execution> > CallActionActivationImpl::getCallExecutions() const
 {
 
     return m_callExecutions;

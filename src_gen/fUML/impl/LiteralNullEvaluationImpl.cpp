@@ -74,17 +74,17 @@ std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralNullEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	return nullptr;
+	//end of body
 }
 
 //*********************************

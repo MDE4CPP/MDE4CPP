@@ -63,17 +63,13 @@ InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & ob
 
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
     
@@ -102,14 +98,13 @@ std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- InputPinActivationImpl::isReady() 
+bool InputPinActivationImpl::isReady() 
 {
 	//generated from body annotation
 	bool ready = ActivityNodeActivationImpl::isReady();
@@ -122,13 +117,14 @@ bool
     }
 
     return ready;
+	//end of body
 }
 
-void
- InputPinActivationImpl::recieveOffer() 
+void InputPinActivationImpl::recieveOffer() 
 {
 	//generated from body annotation
 	    this->getActionActivation()->recieveOffer();
+	//end of body
 }
 
 //*********************************

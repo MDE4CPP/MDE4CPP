@@ -60,17 +60,13 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
     
@@ -99,23 +95,22 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ActivityParameterNodeActivationImpl::clearTokens() 
+void ActivityParameterNodeActivationImpl::clearTokens() 
 {
 	//generated from body annotation
 	    if (this->getNode()->getIncoming()->size() == 0) {
         ObjectNodeActivationImpl::clearTokens();
     }
+	//end of body
 }
 
-void
- ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	if (this->getNode()->getIncoming()->size() == 0) 
@@ -150,6 +145,7 @@ void
 			forkToken->getBaseToken()->setHolder(std::shared_ptr<ActivityParameterNodeActivation>(this, null_deleter()));
 		}
 	}
+	//end of body
 }
 
 //*********************************

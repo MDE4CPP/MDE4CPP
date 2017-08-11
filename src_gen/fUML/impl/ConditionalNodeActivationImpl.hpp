@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -56,18 +58,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> 
-			 getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			
 			
@@ -81,13 +80,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ClauseActivation> >
-			 getClauseActivations() const ;
+			virtual std::shared_ptr< Bag<fUML::ClauseActivation> > getClauseActivations() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::Clause> >
-			 getSelectedClauses() const ;
+			virtual std::shared_ptr< Bag<uml::Clause> > getSelectedClauses() const ;
 			
 							
 			

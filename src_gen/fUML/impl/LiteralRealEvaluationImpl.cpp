@@ -76,14 +76,13 @@ std::shared_ptr<ecore::EClass> LiteralRealEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralRealEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralRealEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
@@ -91,6 +90,7 @@ std::shared_ptr<fUML::Value>
 	realValue->setType(this->getType("Real"));
 	realValue->setValue(literal->getValue());
 	return realValue;
+	//end of body
 }
 
 //*********************************

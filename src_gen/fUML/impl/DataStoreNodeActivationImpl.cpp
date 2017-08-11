@@ -57,17 +57,13 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
     
@@ -96,14 +92,13 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Value>value = token->getValue();
@@ -121,10 +116,10 @@ void
 		if (isUnique) {
 			ObjectNodeActivationImpl::addToken(token);
 		}
+	//end of body
 }
 
-int
- DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	int i = ObjectNodeActivationImpl::removeToken(token);
@@ -135,6 +130,7 @@ int
 			this->sendUnofferedTokens();
 		}
 		return i;
+	//end of body
 }
 
 //*********************************

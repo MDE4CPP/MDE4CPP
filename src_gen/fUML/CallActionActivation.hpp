@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -95,23 +97,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 getCallExecution()  = 0;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  = 0;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 doAction()  = 0;
+			virtual void doAction()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  = 0;
+			virtual void terminate()  = 0;
 			
 			
 			//*********************************
@@ -123,8 +121,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Execution> >
-			 getCallExecutions() const = 0;
+			virtual std::shared_ptr< Bag<fUML::Execution> > getCallExecutions() const = 0;
 			
 			
 
@@ -139,8 +136,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::Execution> >
-			 m_callExecutions;
+			std::shared_ptr< Bag<fUML::Execution> > m_callExecutions;
 			
 
 		public:

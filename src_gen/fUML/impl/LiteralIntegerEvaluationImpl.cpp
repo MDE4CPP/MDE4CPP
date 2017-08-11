@@ -76,14 +76,13 @@ std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralIntegerEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralIntegerEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
@@ -92,6 +91,7 @@ std::shared_ptr<fUML::Value>
     integerValue ->setValue(literal->getValue());
 
     return integerValue ;
+	//end of body
 }
 
 //*********************************

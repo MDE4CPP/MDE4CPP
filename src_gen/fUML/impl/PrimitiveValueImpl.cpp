@@ -76,14 +76,13 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> >
- PrimitiveValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
@@ -93,6 +92,7 @@ std::shared_ptr<Bag<uml::Classifier> >
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(type));
 	}
     return types;
+	//end of body
 }
 
 //*********************************

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -86,33 +88,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual int
-			 countOfferedValue()  = 0;
+			virtual int countOfferedValue()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens(int maxCount)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 getOfferedTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasOffer()  = 0;
+			virtual bool hasOffer()  = 0;
 			
 			
 			//*********************************
@@ -145,8 +141,7 @@ namespace fUML
 			virtual void setTarget(std::shared_ptr<fUML::ActivityNodeActivation> _target_target) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Offer> >
-			 getOffers() const = 0;
+			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const = 0;
 			
 			/*!
 			 */
@@ -177,8 +172,7 @@ namespace fUML
 			std::shared_ptr<fUML::ActivityNodeActivation > m_target;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::Offer> >
-			 m_offers;
+			std::shared_ptr< Bag<fUML::Offer> > m_offers;
 			/*!
 			 */
 			std::shared_ptr<fUML::ActivityNodeActivationGroup > m_group;

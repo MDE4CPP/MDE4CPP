@@ -78,9 +78,9 @@ std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void UnlimitedNaturalValueImpl::setValue (int _value)
+void UnlimitedNaturalValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -93,8 +93,7 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -105,20 +104,20 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- UnlimitedNaturalValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());
     literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
+	//end of body
 }
 
-std::string
- UnlimitedNaturalValueImpl::toString() 
+std::string UnlimitedNaturalValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::string stringValue = "*";
@@ -131,6 +130,7 @@ std::string
     }
 
     return stringValue;
+	//end of body
 }
 
 //*********************************

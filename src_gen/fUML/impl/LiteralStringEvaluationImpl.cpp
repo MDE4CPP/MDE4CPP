@@ -76,14 +76,13 @@ std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralStringEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralString> literal = std::dynamic_pointer_cast<uml::LiteralString>(getSpecification());
@@ -91,6 +90,7 @@ std::shared_ptr<fUML::Value>
     stringValue->setType(this->getType("String"));
     stringValue->setValue(literal->getValue());
     return stringValue ;
+	//end of body
 }
 
 //*********************************

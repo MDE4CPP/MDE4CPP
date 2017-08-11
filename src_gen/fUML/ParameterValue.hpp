@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -86,8 +88,7 @@ namespace fUML
 			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Value> >
-			 getValues() const = 0;
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const = 0;
 			
 			
 
@@ -105,8 +106,7 @@ namespace fUML
 			std::shared_ptr<uml::Parameter > m_parameter;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::Value> >
-			 m_values;
+			std::shared_ptr< Bag<fUML::Value> > m_values;
 			
 
 		public:

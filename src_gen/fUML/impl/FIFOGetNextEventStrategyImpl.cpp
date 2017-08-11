@@ -64,7 +64,7 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

@@ -93,9 +93,9 @@ std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void FeatureValueImpl::setPosition (int _position)
+void FeatureValueImpl::setPosition(int _position)
 {
 	m_position = _position;
 } 
@@ -108,8 +108,7 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
-bool
- FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
+bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
 {
 	//generated from body annotation
 		bool equal = true;
@@ -164,6 +163,7 @@ bool
     }
 
     return equal;
+	//end of body
 }
 
 //*********************************
@@ -179,8 +179,7 @@ void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _featu
     m_feature = _feature;
 }
 
-	std::shared_ptr< Bag<fUML::Value> >
- FeatureValueImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > FeatureValueImpl::getValues() const
 {
 
     return m_values;

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -60,38 +62,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 dispatch(std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  ;
+			virtual std::shared_ptr<fUML::Value> new_()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 destroy()  ;
+			virtual void destroy()  ;
 			
 			
 			
@@ -105,8 +100,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getTypes() const ;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const ;
 			
 			/*!
 			 */

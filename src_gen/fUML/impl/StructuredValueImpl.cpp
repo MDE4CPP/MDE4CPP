@@ -80,21 +80,20 @@ std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
+void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
 	//generated from body annotation
 	
+	//end of body
 }
 
-void
- StructuredValueImpl::createFeatureValues() 
+void StructuredValueImpl::createFeatureValues() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
@@ -118,24 +117,22 @@ void
     		}
     	}
     }
+	//end of body
 }
 
-std::shared_ptr<fUML::FeatureValue> 
- StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
+std::shared_ptr<fUML::FeatureValue> StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> >
- StructuredValueImpl::retrieveFeatureValues() 
+std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureValues() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- StructuredValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
@@ -171,6 +168,7 @@ std::shared_ptr<uml::ValueSpecification>
     }
 
     return instanceValue;
+	//end of body
 }
 
 //*********************************

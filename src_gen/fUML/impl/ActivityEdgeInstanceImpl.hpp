@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -59,33 +61,27 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
 			
 			/*!
 			 */ 
-			virtual int
-			 countOfferedValue()  ;
+			virtual int countOfferedValue()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens(int maxCount)  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 getOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > getOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasOffer()  ;
+			virtual bool hasOffer()  ;
 			
 			
 			
@@ -120,8 +116,7 @@ virtual public ActivityEdgeInstance
 			virtual void setTarget(std::shared_ptr<fUML::ActivityNodeActivation> _target_target) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Offer> >
-			 getOffers() const ;
+			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const ;
 			
 			/*!
 			 */

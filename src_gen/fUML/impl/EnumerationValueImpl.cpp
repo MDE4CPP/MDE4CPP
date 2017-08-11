@@ -89,14 +89,13 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -106,26 +105,26 @@ bool
         isEqual = (value->getLiteral() == this->getLiteral());
     }
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> >
- EnumerationValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
@@ -136,13 +135,14 @@ std::shared_ptr<uml::ValueSpecification>
     instanceValue->setInstance(this->getLiteral());
 
     return instanceValue;
+	//end of body
 }
 
-std::string
- EnumerationValueImpl::toString() 
+std::string EnumerationValueImpl::toString() 
 {
 	//generated from body annotation
 	    return this->getLiteral()->getName();
+	//end of body
 }
 
 //*********************************

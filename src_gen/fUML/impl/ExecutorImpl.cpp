@@ -84,21 +84,20 @@ std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
 	//generated from body annotation
 	    return this->getLocus()->getFactory()->createEvaluation(specification)->evaluate();
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ParameterValue> >
- ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+std::shared_ptr<Bag<fUML::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 		std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
@@ -119,10 +118,10 @@ std::shared_ptr<Bag<fUML::ParameterValue> >
     execution->destroy();
 
     return outputValues;
+	//end of body
 }
 
-std::shared_ptr<fUML::Reference> 
- ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+std::shared_ptr<fUML::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[start] Starting " << typeid(type).name() <<"..."<<std::endl;)
@@ -135,6 +134,7 @@ std::shared_ptr<fUML::Reference>
     std::shared_ptr<Reference> reference(fUML::FUMLFactory::eInstance()->createReference());
     reference->setReferent(object);
     return reference;
+	//end of body
 }
 
 //*********************************

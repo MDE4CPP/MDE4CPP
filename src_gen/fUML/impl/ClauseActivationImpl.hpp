@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -58,38 +60,31 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 recieveControl()  ;
+			virtual void recieveControl()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  ;
+			virtual bool isReady()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest()  ;
+			virtual void runTest()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody()  ;
+			virtual void selectBody()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> 
-			 getDecision()  ;
+			virtual std::shared_ptr<fUML::BooleanValue> getDecision()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getPredecessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getSuccessors()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors()  ;
 			
 			
 			

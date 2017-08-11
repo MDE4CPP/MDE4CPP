@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -91,38 +93,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignExecutor(std::shared_ptr<fUML::Executor>  executor)  = 0;
+			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  = 0;
+			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> >
-			 retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 add(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 remove(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
+			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> 
-			 instantiate(std::shared_ptr<uml::Class>  type)  = 0;
+			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  = 0;
 			
 			
 			//*********************************
@@ -148,8 +143,7 @@ namespace fUML
 			virtual void setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory_factory) = 0;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ExtensionalValue> >
-			 getExtensionalValues() const = 0;
+			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const = 0;
 			
 			
 
@@ -170,8 +164,7 @@ namespace fUML
 			std::shared_ptr<fUML::ExecutionFactory > m_factory;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::ExtensionalValue> >
-			 m_extensionalValues;
+			std::shared_ptr< Bag<fUML::ExtensionalValue> > m_extensionalValues;
 			
 
 		public:

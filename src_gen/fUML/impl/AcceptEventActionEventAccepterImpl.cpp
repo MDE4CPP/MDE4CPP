@@ -70,7 +70,7 @@ std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass(
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

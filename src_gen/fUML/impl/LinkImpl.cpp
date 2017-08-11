@@ -90,28 +90,25 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
+void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> >
- LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
+std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> >
- LinkImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
@@ -121,10 +118,10 @@ std::shared_ptr<Bag<uml::Classifier> >
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
 	}
     return types;
+	//end of body
 }
 
-bool
- LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
@@ -144,6 +141,7 @@ bool
 	}
 
 	return matches;
+	//end of body
 }
 
 //*********************************

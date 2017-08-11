@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -76,33 +78,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Token> 
-			 transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  = 0;
+			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 withdraw()  = 0;
+			virtual void withdraw()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  other)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isWithdrawn()  = 0;
+			virtual bool isWithdrawn()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  = 0;
+			virtual bool isControl()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 getValue()  const  = 0;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
 			
 			
 			//*********************************

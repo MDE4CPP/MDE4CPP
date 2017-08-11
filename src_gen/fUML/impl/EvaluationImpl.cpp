@@ -80,14 +80,13 @@ std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- EvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> EvaluationImpl::evaluate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

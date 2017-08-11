@@ -76,14 +76,13 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticCla
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(getSpecification());
@@ -91,6 +90,7 @@ std::shared_ptr<fUML::Value>
     unlimitedNaturalValue->setType(this->getType("UnlimitedNatural"));
     unlimitedNaturalValue->setValue(literal->getValue());
     return unlimitedNaturalValue;
+	//end of body
 }
 
 //*********************************

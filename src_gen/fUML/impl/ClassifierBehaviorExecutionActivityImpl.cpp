@@ -63,7 +63,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticC
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

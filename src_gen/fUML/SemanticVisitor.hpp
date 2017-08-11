@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -62,13 +64,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 _endIsolation()  = 0;
+			virtual void _endIsolation()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 _beginIsolation()  = 0;
+			virtual void _beginIsolation()  = 0;
 			
 			
 			//*********************************

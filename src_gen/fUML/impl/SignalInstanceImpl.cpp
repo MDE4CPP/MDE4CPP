@@ -80,7 +80,7 @@ std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

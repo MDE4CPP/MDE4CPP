@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -61,8 +63,7 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other)  ;
 			
 			
 			
@@ -84,8 +85,7 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Value> >
-			 getValues() const ;
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
 			
 			/*!
 			 */

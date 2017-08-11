@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -81,38 +83,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 recieveControl()  = 0;
+			virtual void recieveControl()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  = 0;
+			virtual bool isReady()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest()  = 0;
+			virtual void runTest()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody()  = 0;
+			virtual void selectBody()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> 
-			 getDecision()  = 0;
+			virtual std::shared_ptr<fUML::BooleanValue> getDecision()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getPredecessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getSuccessors()  = 0;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors()  = 0;
 			
 			
 			//*********************************

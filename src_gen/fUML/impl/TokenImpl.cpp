@@ -72,42 +72,39 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool TokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Value> 
- TokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> TokenImpl::getValue()  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TokenImpl::isControl() 
+bool TokenImpl::isControl() 
 {
 	//generated from body annotation
 	return dynamic_cast<fUML::ControlToken*>(this) != nullptr;
+	//end of body
 }
 
-bool
- TokenImpl::isWithdrawn() 
+bool TokenImpl::isWithdrawn() 
 {
 	//generated from body annotation
 	    return (this->getHolder()==nullptr);
+	//end of body
 }
 
-std::shared_ptr<fUML::Token> 
- TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) 
+std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder) 
 {
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
@@ -120,10 +117,10 @@ std::shared_ptr<fUML::Token>
 
     token->setHolder(holder);
     return token;
+	//end of body
 }
 
-void
- TokenImpl::withdraw() 
+void TokenImpl::withdraw() 
 {
 	//generated from body annotation
 	if (!this->isWithdrawn()) 
@@ -136,6 +133,7 @@ void
 			holder->removeToken(std::shared_ptr<Token>(this, null_deleter()));
 		}
     }
+	//end of body
 }
 
 //*********************************

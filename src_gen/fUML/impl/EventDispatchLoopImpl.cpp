@@ -63,7 +63,7 @@ std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
