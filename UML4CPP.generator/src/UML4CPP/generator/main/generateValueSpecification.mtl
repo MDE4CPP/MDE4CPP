@@ -18,6 +18,8 @@
 
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
 [aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]());
+[aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
+this->getOwnedElement()->push_back([aValueSpecification.memberName()/]);
 [if (aValueSpecification.oclIsKindOf(LiteralSpecification))]
 [aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [/if]

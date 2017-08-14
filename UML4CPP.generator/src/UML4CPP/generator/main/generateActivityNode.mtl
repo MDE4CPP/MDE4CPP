@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
-[memberName(anActivityNode)/].reset(uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]());
+[memberName(anActivityNode)/].reset(uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]([anActivityNode.owner.oclAsType(NamedElement).memberName()/]));
 [memberName(anActivityNode)/]->setName("[anActivityNode.name/]");
 [memberName(anActivityNode)/]->setActivity([anActivityNode.activity.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
@@ -44,13 +44,13 @@
 [/template]
 
 [template public generatePin(pin : Pin)]
-[memberName(pin)/].reset(uml::UmlFactory::eInstance()->create[pin.eClass().name/]());
+[memberName(pin)/].reset(uml::UmlFactory::eInstance()->create[pin.eClass().name/]([pin.owner.oclAsType(NamedElement).memberName()/]));
 [memberName(pin)/]->setName("[pin.name/]");
 
 [/template]
 
 [template public generateOperation(operation : Operation)]
-[memberName(operation)/].reset(uml::UmlFactory::eInstance()->createOperation());
+[memberName(operation)/].reset(uml::UmlFactory::eInstance()->createOperation([operation.owner.oclAsType(NamedElement).memberName()/]));
 [memberName(operation)/]->setName("[operation.name/]");
 
 [/template]
