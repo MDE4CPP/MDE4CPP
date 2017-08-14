@@ -26,6 +26,9 @@
 #include "EClass.hpp"
 [/if]
 
+[if(anEPackage.name = 'uml')]
+#include "impl/ElementImpl.hpp"
+[/if]
 [comment namespace /]
 using namespace [anEPackage.name/];
 
@@ -84,6 +87,15 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 {
 	return new [aClass.name.toUpperFirst()/]Impl();
 }
+
+[if (anEPackage.name = 'uml' and (not (aClass.name = 'Object')))]
+[aClass.generateTypeClass()/]* [className/]::create[aClass.name/] (std::shared_ptr<uml::Element > owner) const
+{
+	[aClass.generateTypeClass()/]Impl*  newObj = new [aClass.name.toUpperFirst()/]Impl();
+	newObj->m_owner = owner;
+	return newObj;
+}
+[/if]
 [/for]
 
 std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
