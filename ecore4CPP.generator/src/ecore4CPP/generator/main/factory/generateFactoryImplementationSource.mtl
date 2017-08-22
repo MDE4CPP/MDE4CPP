@@ -39,8 +39,11 @@ using namespace [anEPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("[aClass.generateTypeClass()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
+	m_idMap.insert(std::pair<std::string,unsigned int>("[aClass.generateTypeClass()/]", EcorePackage::[aClass.name.toUpperCase()/]));
 	[/for]
+	[comment]	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+	//m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("[aClass.generateTypeClass()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
+	[/for][/comment]
 }
 
 [className/]::~[className/]()
@@ -56,7 +59,22 @@ using namespace [anEPackage.name/];
 // creators
 //*********************************
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class) const
+std::shared_ptr<ecore::EObject> [className/]::create(unsigned int id,  std::shared_ptr<ecore::EObject> container) const
+{
+	switch(id)
+	{
+	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
+		[let eRef: EReference = aClass.getFirstContainer()]
+	    case EcorePackage::[aClass.name.toUpperCase()/]: return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/](std::dynamic_pointer_cast<[eRef.generateReferenceType(false)/]>(container)));
+		[/let]
+	[/for]
+	default:
+	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << id <<" not found" << std::endl;
+	}
+	return nullptr;
+}
+
+[comment]std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class) const
 {
 	if(_class->isAbstract())
     {
@@ -65,28 +83,55 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([n
 
 	std::string _className = _class->eClass()->getName();
 	return create(_className);
+}[/comment]
+
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class, std::shared_ptr<EObject> _container) const
+{
+	if(_class->isAbstract())
+    {
+    	return nullptr;
+   	}
+
+	std::string _className = _class->eClass()->getName();
+	return create(_className, _container);
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
+[comment]std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
 {
-	//TODO: still two times run through map
-	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
+	auto iter = m_creatorMap.find(_className);
 	
 	std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> _createdObject;
 	if(iter != m_creatorMap.end())
     {
-		//invoke the creator function
-        return std::shared_ptr<ecore::EObject>(iter->second());
+		//get the ID
+        unsigned int id =iter->second;
+		return getCreatorFunction(id, owner);
+    }
+
+    return nullptr;
+}[/comment]
+
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container) const
+{
+	auto iter = m_idMap.find(_className);
+	
+	std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> _createdObject;
+	if(iter != m_idMap.end())
+    {
+		//get the ID
+        unsigned int id =iter->second;
+		return create(id, _container);
     }
 
     return nullptr;
 }
 
+
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-[aClass.generateTypeClass()/]* [className/]::create[aClass.name/] () const
+[comment][aClass.generateTypeClass()/]* [className/]::create[aClass.name/] () const
 {
 	return new [aClass.name.toUpperFirst()/]Impl();
-}
+}[/comment]
 
 [if (anEPackage.name = 'uml' and (not (aClass.name = 'Object')))]
 [aClass.generateTypeClass()/]* [className/]::create[aClass.name/] (std::shared_ptr<uml::Element > owner) const
@@ -96,6 +141,14 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 	return newObj;
 }
 [/if]
+
+
+[let eRef: EReference = aClass.getFirstContainer()]
+[aClass.generateTypeClass()/]* [className/]::create[aClass.name/]([eRef.generateReferenceType(true)/] par_[eRef.name/]) const
+{
+	return new [aClass.name.toUpperFirst()/]Impl(par_[eRef.name/]);
+}
+[/let]
 [/for]
 
 std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const

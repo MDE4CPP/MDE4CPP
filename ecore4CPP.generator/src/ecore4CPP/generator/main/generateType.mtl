@@ -14,12 +14,14 @@
  */]
 [module generateType( 'http://www.eclipse.org/emf/2002/Ecore')]
 
-[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
-[query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
-[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
+[import ecore4CPP::generator::main::helper /]
 
-[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+
+[template public generateParameterList(aOperation:EOperation) post(trim())]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerate())) separator (',')]
+[sParameter.generateParameterType()/] [sParameter.name/][/for]
+[/template]
+
 
 [template public generateCppType(anEDataType : EGenericType)]
 [if (anEDataType.oclIsUndefined())]
@@ -39,10 +41,6 @@ void[else]
 [if (anEDataType.oclIsUndefined())]
 boost::any[else]
 [anEDataType.transformType()/][/if]
-[/template]
-
-[template public generateTypeClass(anEDataType : EClass)]
-[anEDataType.name/]
 [/template]
 
 [template public generateParameterType(eParameter : EParameter)]
@@ -87,7 +85,7 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 
 [template public generateReferenceType(eReference : EReference, pointer : Boolean) post(trim())]
 [if (eReference.upperBound = 1)]
-[if(pointer)]std::shared_ptr<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if][else]
+[if(pointer)][eReference.pointertype()/]<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if][else]
 [if(eReference.oclAsType(EModelElement).isSubsetUnion() or (eReference.oclAsType(EModelElement).hasSubset() and eReference.oclAsType(EModelElement).subsetIsUnion()))]
 		[if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] > [if(pointer)]>[/if]
 [elseif(eReference.oclAsType(EModelElement).hasSubset())]
@@ -98,6 +96,24 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 	[/if]
 [/if]
 [/template]
+
+[template public getConstructorParameters (aClass : EClass) post(trim())]
+[let ref:OrderedSet(EReference) = aClass.getContainsContainerAttribute()]
+[for(aReference:EReference | ref) separator(',')]
+[aReference.generateReferenceType(true)/] par_[aReference.name/]
+[/for]
+[/let]
+
+[/template]
+
+[template public pointertype(aReference : EReference) post(trim())]
+[if(aReference.derived or aReference.hasKey('isContainerAttribute'))]
+std::weak_ptr
+[else]
+std::shared_ptr
+[/if]
+[/template]
+
 
 [template public generateReferenceTypeBag(eReference : EReference)]
 [if (not(eReference.upperBound = 1))]

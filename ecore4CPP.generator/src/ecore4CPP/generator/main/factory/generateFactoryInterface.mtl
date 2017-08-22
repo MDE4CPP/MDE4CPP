@@ -49,7 +49,8 @@ namespace [anEPackage.name/]
 		[generateSingletonDecl(packageName)/]
 		
 			//Creator functions
-			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className) const = 0;
+[comment]			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className) const = 0;[/comment]
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className, std::shared_ptr<EObject> _container) const = 0;
 
 			[anEPackage.eAllContents(EClass).generateClassCreate(false)/]
 			//Package

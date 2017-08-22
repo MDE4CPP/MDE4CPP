@@ -83,6 +83,18 @@ using namespace [aClass.ePackage.name/];
 	[aClass.eReferences.generateProtectedReferenceDeleter()/]
 }
 
+
+
+[let eRef: EReference = aClass.getFirstContainer()]
+//Additional constructor for the containments back reference
+[className/]::[className/]([eRef.generateReferenceType(true)/] par_[eRef.name/])
+:[className/]()
+{
+    m_[eRef.name/] = par_[eRef.name/];
+}
+[/let]
+
+
 [comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
 [className/]::[className/](const [className/] & obj):[className/]()
 {
