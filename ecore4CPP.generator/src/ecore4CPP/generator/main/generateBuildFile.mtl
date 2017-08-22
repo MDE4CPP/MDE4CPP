@@ -89,23 +89,40 @@ INCLUDE_DIRECTORIES(
 [/for]
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+if(NOT UNIX)
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+endif()
 
+
+
+
+if(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
+	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
 [/for]
+else()
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
+[/for]
+endif()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+if(NOT UNIX)
 	debug ${PLUGINFRAMEWORK_DEBUG}
+endif()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	debug ${[pack.name.toUpperCase()/]_DEBUG}
 [/for]
 )
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+if(NOT UNIX) 
 	optimized ${PLUGINFRAMEWORK_RELEASE}
+endif()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	optimized ${[pack.name.toUpperCase()/]_RELEASE}
 [/for]
