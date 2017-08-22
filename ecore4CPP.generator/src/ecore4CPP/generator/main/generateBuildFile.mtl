@@ -199,17 +199,30 @@ task compile[packageName.toUpperFirst()/][buildType/] {
 	doLast {
 		exec {
 			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
+			if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
+			}
 		}
 		exec {
 			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
 			if (make_parallel_jobs)
 			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
 			}
 		}
 	}
