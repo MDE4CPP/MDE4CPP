@@ -1,0 +1,7 @@
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/ecoreBenchmark.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/install.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/list_install_components.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/install/strip.dir
+C:/Projekte/MDE4CPP/src/examples/benchmarks/ecoreBenchmark/cmake-build-debug/CMakeFiles/install/local.dir
