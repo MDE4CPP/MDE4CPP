@@ -80,7 +80,9 @@ INCLUDE_DIRECTORIES(
 [/if]
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
+if(NOT UNIX)
 	${MDE4CPP_HOME}/application/include/PluginFramework
+endif()
 [if (packageName='uml')]
 	${MDE4CPP_HOME}/application/include/util
 [/if]
