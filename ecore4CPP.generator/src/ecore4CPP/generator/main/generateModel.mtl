@@ -46,12 +46,12 @@ namespace [element.ePackage.name/]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"
+#include "[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
 [for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"
+#include "[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]

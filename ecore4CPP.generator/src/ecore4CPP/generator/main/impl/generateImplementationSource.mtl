@@ -30,14 +30,14 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "[aClass.ePackage.name.concat('PackageImpl')/].hpp"
+#include "[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
 
 //Forward declaration includes
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[element.name/].hpp"
+#include "[element.name.toUpperFirst()/].hpp"
 [/for]
 
 
