@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -50,6 +50,19 @@ PackageMergeImpl::~PackageMergeImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage)
+			:PackageMergeImpl()
+			{
+			    m_receivingPackage = par_receivingPackage;
+			}
+
+
+
+
+
+
 PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImpl()
 {
 	//create copy of all Attributes
@@ -59,13 +72,12 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImp
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	m_receivingPackage  = obj.getReceivingPackage();
+
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
     
@@ -94,13 +106,6 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getReceivingPackage()!=nullptr)
-	{
-		m_receivingPackage.reset(dynamic_cast<uml::Package*>(obj.getReceivingPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_receivingPackage" << std::endl;
-	#endif
 
 
 }
@@ -116,7 +121,7 @@ std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -136,7 +141,7 @@ void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPac
     m_mergedPackage = _mergedPackage;
 }
 
-std::shared_ptr<uml::Package > PackageMergeImpl::getReceivingPackage() const
+std::weak_ptr<uml::Package > PackageMergeImpl::getReceivingPackage() const
 {
 //assert(m_receivingPackage);
     return m_receivingPackage;
@@ -149,25 +154,23 @@ void PackageMergeImpl::setReceivingPackage(std::shared_ptr<uml::Package> _receiv
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > PackageMergeImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > PackageMergeImpl::getRelatedElement() const
-{
-	return m_relatedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- PackageMergeImpl::getTarget() const
-{
-	return m_target;
-}
-		std::shared_ptr<Union<uml::Element> > PackageMergeImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > PackageMergeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- PackageMergeImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageMergeImpl::getTarget() const
+{
+	return m_target;
+}
+std::shared_ptr<Union<uml::Element> > PackageMergeImpl::getRelatedElement() const
+{
+	return m_relatedElement;
+}
+std::weak_ptr<uml::Element > PackageMergeImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageMergeImpl::getSource() const
 {
 	return m_source;
 }

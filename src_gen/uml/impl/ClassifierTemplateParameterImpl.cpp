@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -53,6 +53,19 @@ ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+			:ClassifierTemplateParameterImpl()
+			{
+			    m_signature = par_signature;
+			}
+
+
+
+
+
+
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj):ClassifierTemplateParameterImpl()
 {
 	//create copy of all Attributes
@@ -63,19 +76,16 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _constrainingClassifier = obj.getConstrainingClassifier();
-	m_constrainingClassifier.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getConstrainingClassifier().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _constrainingClassifier = obj.getConstrainingClassifier();
+	m_constrainingClassifier.reset(new Bag<uml::Classifier>(*(obj.getConstrainingClassifier().get())));
 
 	m_default  = obj.getDefault();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 	m_parameteredElement  = obj.getParameteredElement();
+
+	m_signature  = obj.getSignature();
 
 
     
@@ -111,13 +121,6 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
-	if(obj.getSignature()!=nullptr)
-	{
-		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
-	#endif
 
 
 }
@@ -133,9 +136,9 @@ std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() c
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ClassifierTemplateParameterImpl::setAllowSubstitutable (bool _allowSubstitutable)
+void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
 {
 	m_allowSubstitutable = _allowSubstitutable;
 } 
@@ -148,43 +151,37 @@ bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 //*********************************
 // Operations
 //*********************************
-bool
- ClassifierTemplateParameterImpl::actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClassifierTemplateParameterImpl::has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClassifierTemplateParameterImpl::matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -193,8 +190,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Classifier> >
- ClassifierTemplateParameterImpl::getConstrainingClassifier() const
+std::shared_ptr< Bag<uml::Classifier> > ClassifierTemplateParameterImpl::getConstrainingClassifier() const
 {
 
     return m_constrainingClassifier;
@@ -204,13 +200,13 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ClassifierTemplateParameterImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
+std::weak_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > ClassifierTemplateParameterImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

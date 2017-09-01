@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -78,6 +78,19 @@ StringExpressionImpl::~StringExpressionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::StringExpression > par_owningExpression)
+			:StringExpressionImpl()
+			{
+			    m_owningExpression = par_owningExpression;
+			}
+
+
+
+
+
+
 StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):StringExpressionImpl()
 {
 	//create copy of all Attributes
@@ -91,15 +104,14 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningExpression  = obj.getOwningExpression();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -147,20 +159,6 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
 	#endif
-	if(obj.getOwningExpression()!=nullptr)
-	{
-		m_owningExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getOwningExpression()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningExpression" << std::endl;
-	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::StringExpression>> _subExpressionList = obj.getSubExpression();
 	for(std::shared_ptr<uml::StringExpression> _subExpression : *_subExpressionList)
 	{
@@ -199,21 +197,19 @@ std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- StringExpressionImpl::operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StringExpressionImpl::operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StringExpressionImpl::subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -222,7 +218,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::StringExpression > StringExpressionImpl::getOwningExpression() const
+std::weak_ptr<uml::StringExpression > StringExpressionImpl::getOwningExpression() const
 {
 
     return m_owningExpression;
@@ -232,8 +228,7 @@ void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpres
     m_owningExpression = _owningExpression;
 }
 
-		std::shared_ptr<Subset<uml::StringExpression, uml::Element > >
- StringExpressionImpl::getSubExpression() const
+std::shared_ptr<Subset<uml::StringExpression, uml::Element > > StringExpressionImpl::getSubExpression() const
 {
 
     return m_subExpression;
@@ -243,11 +238,11 @@ void StringExpressionImpl::setOwningExpression(std::shared_ptr<uml::StringExpres
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > StringExpressionImpl::getOwner() const
+std::weak_ptr<uml::Element > StringExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > StringExpressionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > StringExpressionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

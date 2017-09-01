@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -72,6 +72,19 @@ ModelImpl::~ModelImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ModelImpl::ModelImpl(std::shared_ptr<uml::Package > par_nestingPackage)
+			:ModelImpl()
+			{
+			    m_nestingPackage = par_nestingPackage;
+			}
+
+
+
+
+
+
 ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 {
 	//create copy of all Attributes
@@ -86,18 +99,15 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -190,13 +200,6 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedType" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
@@ -252,9 +255,9 @@ std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ModelImpl::setViewpoint (std::string _viewpoint)
+void ModelImpl::setViewpoint(std::string _viewpoint)
 {
 	m_viewpoint = _viewpoint;
 } 
@@ -267,8 +270,7 @@ std::string ModelImpl::getViewpoint() const
 //*********************************
 // Operations
 //*********************************
-bool
- ModelImpl::isMetamodel() 
+bool ModelImpl::isMetamodel() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -281,24 +283,23 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::NamedElement> > ModelImpl::getMember() const
-{
-	return m_member;
-}
 std::shared_ptr<uml::Namespace > ModelImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > ModelImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ModelImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ModelImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
-std::shared_ptr<uml::Element > ModelImpl::getOwner() const
+std::shared_ptr<Union<uml::NamedElement> > ModelImpl::getMember() const
+{
+	return m_member;
+}
+std::shared_ptr<Union<uml::Element> > ModelImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 {
 	return m_owner;
 }

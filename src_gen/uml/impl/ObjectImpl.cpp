@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Property.hpp"
@@ -36,6 +36,9 @@ ObjectImpl::~ObjectImpl()
 	
 }
 
+
+
+
 ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 {
 	//create copy of all Attributes
@@ -64,28 +67,25 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-boost::any
- ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
+boost::any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
+void ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
+void ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

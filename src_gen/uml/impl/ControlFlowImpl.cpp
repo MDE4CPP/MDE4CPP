@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -66,6 +66,30 @@ ControlFlowImpl::~ControlFlowImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ControlFlowImpl::ControlFlowImpl(std::weak_ptr<uml::Activity > par_activity)
+			:ControlFlowImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ControlFlowImpl::ControlFlowImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:ControlFlowImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+
 ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj):ControlFlowImpl()
 {
 	//create copy of all Attributes
@@ -79,26 +103,25 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj):ControlFlowImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	m_activity  = obj.getActivity();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
+
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
+
+	m_inStructuredNode  = obj.getInStructuredNode();
 
 	m_interrupts  = obj.getInterrupts();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_source  = obj.getSource();
 
@@ -108,13 +131,6 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj):ControlFlowImpl()
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getActivity()!=nullptr)
-	{
-		m_activity.reset(dynamic_cast<uml::Activity*>(obj.getActivity()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_activity" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -137,13 +153,6 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj):ControlFlowImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -190,14 +199,13 @@ std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ControlFlowImpl::object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -210,19 +218,19 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ControlFlowImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > ControlFlowImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::ActivityGroup> > ControlFlowImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup> > ControlFlowImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > ControlFlowImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::Element> > ControlFlowImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ControlFlowImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ControlFlowImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }

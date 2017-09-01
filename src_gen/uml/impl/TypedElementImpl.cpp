@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -52,6 +52,19 @@ TypedElementImpl::~TypedElementImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TypedElementImpl::TypedElementImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:TypedElementImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImpl()
 {
 	//create copy of all Attributes
@@ -64,13 +77,8 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -118,7 +126,7 @@ std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -141,11 +149,11 @@ void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TypedElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > TypedElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > TypedElementImpl::getOwner() const
+std::weak_ptr<uml::Element > TypedElementImpl::getOwner() const
 {
 	return m_owner;
 }

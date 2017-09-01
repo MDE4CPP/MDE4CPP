@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -132,6 +132,41 @@ ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ProtocolStateMachineImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::shared_ptr<uml::Package > par_package)
+			:ProtocolStateMachineImpl()
+			{
+			    m_package = par_package;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Element > par_owner)
+			:ProtocolStateMachineImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj):ProtocolStateMachineImpl()
 {
 	//create copy of all Attributes
@@ -149,68 +184,49 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::StateMachine> >
-	 _extendedStateMachine = obj.getExtendedStateMachine();
-	m_extendedStateMachine.reset(new 	 Bag<uml::StateMachine> 
-	(*(obj.getExtendedStateMachine().get())));
+	std::shared_ptr< Bag<uml::StateMachine> > _extendedStateMachine = obj.getExtendedStateMachine();
+	m_extendedStateMachine.reset(new Bag<uml::StateMachine>(*(obj.getExtendedStateMachine().get())));
 
-		std::shared_ptr< Bag<uml::Extension> >
-	 _extension = obj.getExtension();
-	m_extension.reset(new 	 Bag<uml::Extension> 
-	(*(obj.getExtension().get())));
+	std::shared_ptr< Bag<uml::Extension> > _extension = obj.getExtension();
+	m_extension.reset(new Bag<uml::Extension>(*(obj.getExtension().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Property> >
-	 _part = obj.getPart();
-	m_part.reset(new 	 Bag<uml::Property> 
-	(*(obj.getPart().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
+
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_specification  = obj.getSpecification();
 
-		std::shared_ptr< Bag<uml::State> >
-	 _submachineState = obj.getSubmachineState();
-	m_submachineState.reset(new 	 Bag<uml::State> 
-	(*(obj.getSubmachineState().get())));
+	std::shared_ptr< Bag<uml::State> > _submachineState = obj.getSubmachineState();
+	m_submachineState.reset(new Bag<uml::State>(*(obj.getSubmachineState().get())));
 
-		std::shared_ptr< Bag<uml::Class> >
-	 _superClass = obj.getSuperClass();
-	m_superClass.reset(new 	 Bag<uml::Class> 
-	(*(obj.getSuperClass().get())));
+	std::shared_ptr< Bag<uml::Class> > _superClass = obj.getSuperClass();
+	m_superClass.reset(new Bag<uml::Class>(*(obj.getSuperClass().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
     
@@ -412,13 +428,6 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getPackage()!=nullptr)
 	{
 		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
@@ -519,28 +528,25 @@ std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ProtocolStateMachineImpl::deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::deep_or_shallow_history(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ProtocolStateMachineImpl::entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::entry_exit_do(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ProtocolStateMachineImpl::protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolStateMachineImpl::protocol_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -549,8 +555,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element > >
- ProtocolStateMachineImpl::getConformance() const
+std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element > > ProtocolStateMachineImpl::getConformance() const
 {
 
     return m_conformance;
@@ -560,49 +565,45 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::RedefinableElement> > ProtocolStateMachineImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::NamedElement> > ProtocolStateMachineImpl::getMember() const
 {
-	return m_redefinedElement;
+	return m_member;
 }
-std::shared_ptr<uml::Element > ProtocolStateMachineImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolStateMachineImpl::getOwnedMember() const
 {
-	return m_owner;
+	return m_ownedMember;
 }
-		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
- ProtocolStateMachineImpl::getRole() const
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > ProtocolStateMachineImpl::getRole() const
 {
 	return m_role;
 }
-		std::shared_ptr<Union<uml::Classifier> > ProtocolStateMachineImpl::getRedefinitionContext() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > ProtocolStateMachineImpl::getFeature() const
 {
-	return m_redefinitionContext;
+	return m_feature;
 }
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
- ProtocolStateMachineImpl::getAttribute() const
+std::weak_ptr<uml::Element > ProtocolStateMachineImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ProtocolStateMachineImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > ProtocolStateMachineImpl::getAttribute() const
 {
 	return m_attribute;
-}
-		std::shared_ptr<Union<uml::NamedElement> > ProtocolStateMachineImpl::getMember() const
-{
-	return m_member;
 }
 std::shared_ptr<uml::Namespace > ProtocolStateMachineImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > ProtocolStateMachineImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ProtocolStateMachineImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ProtocolStateMachineImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::Classifier> > ProtocolStateMachineImpl::getRedefinitionContext() const
 {
-	return m_ownedMember;
-}
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- ProtocolStateMachineImpl::getFeature() const
-{
-	return m_feature;
+	return m_redefinitionContext;
 }
 
 

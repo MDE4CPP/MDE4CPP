@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ParameterSetImpl();
 
+			//Additional constructors for the containments back reference
+			ParameterSetImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ParameterSetImpl();
@@ -57,8 +65,7 @@ namespace uml
 			/*!
 			 The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
 			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction) */ 
-			virtual bool
-			 same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a parameterized entity has input Parameters that are in a ParameterSet, then any inputs that are not in a ParameterSet must be streaming. Same for output Parameters.
@@ -67,14 +74,12 @@ namespace uml
 			    and
 			((parameter->exists(direction = ParameterDirectionKind::out)) implies 
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream)) */ 
-			virtual bool
-			 input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Two ParameterSets cannot have exactly the same set of Parameters.
 			parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p)))) */ 
-			virtual bool
-			 two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -89,14 +94,12 @@ namespace uml
 			/*!
 			 A constraint that should be satisfied for the owner of the Parameters in an input ParameterSet to start execution using the values provided for those Parameters, or the owner of the Parameters in an output ParameterSet to end execution providing the values for those Parameters, if all preconditions and conditions on input ParameterSets were satisfied.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Constraint, uml::Element > >
-			 getCondition() const ;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element > > getCondition() const ;
 			
 			/*!
 			 Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Parameter> >
-			 getParameter() const ;
+			virtual std::shared_ptr< Bag<uml::Parameter> > getParameter() const ;
 			
 							
 			
@@ -104,12 +107,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

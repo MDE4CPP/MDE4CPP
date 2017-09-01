@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -60,6 +60,19 @@ TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding > par_templateBinding)
+			:TemplateParameterSubstitutionImpl()
+			{
+			    m_templateBinding = par_templateBinding;
+			}
+
+
+
+
+
+
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj):TemplateParameterSubstitutionImpl()
 {
 	//create copy of all Attributes
@@ -73,10 +86,9 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 
 	m_formal  = obj.getFormal();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
+
+	m_templateBinding  = obj.getTemplateBinding();
 
 
     
@@ -105,13 +117,6 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getTemplateBinding()!=nullptr)
-	{
-		m_templateBinding.reset(dynamic_cast<uml::TemplateBinding*>(obj.getTemplateBinding()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
-	#endif
 
 	
 
@@ -128,14 +133,13 @@ std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass()
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TemplateParameterSubstitutionImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateParameterSubstitutionImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -174,7 +178,7 @@ void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::Para
     m_ownedActual = _ownedActual;
 }
 
-std::shared_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
+std::weak_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
 //assert(m_templateBinding);
     return m_templateBinding;
@@ -187,13 +191,13 @@ void TemplateParameterSubstitutionImpl::setTemplateBinding(std::shared_ptr<uml::
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > TemplateParameterSubstitutionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > TemplateParameterSubstitutionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

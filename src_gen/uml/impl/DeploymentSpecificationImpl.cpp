@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Artifact.hpp"
@@ -93,6 +93,19 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Deployment > par_deployment)
+			:DeploymentSpecificationImpl()
+			{
+			    m_deployment = par_deployment;
+			}
+
+
+
+
+
+
 DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj):DeploymentSpecificationImpl()
 {
 	//create copy of all Attributes
@@ -111,41 +124,34 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecifi
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	m_deployment  = obj.getDeployment();
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
+
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
     
@@ -158,13 +164,6 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecifi
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	if(obj.getDeployment()!=nullptr)
-	{
-		m_deployment.reset(dynamic_cast<uml::Deployment*>(obj.getDeployment()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
 	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
@@ -276,13 +275,6 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecifi
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getPackage()!=nullptr)
 	{
 		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
@@ -344,9 +336,9 @@ std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void DeploymentSpecificationImpl::setDeploymentLocation (std::string _deploymentLocation)
+void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
 } 
@@ -356,7 +348,7 @@ std::string DeploymentSpecificationImpl::getDeploymentLocation() const
 	return m_deploymentLocation;
 }
 
-void DeploymentSpecificationImpl::setExecutionLocation (std::string _executionLocation)
+void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
 {
 	m_executionLocation = _executionLocation;
 } 
@@ -369,15 +361,13 @@ std::string DeploymentSpecificationImpl::getExecutionLocation() const
 //*********************************
 // Operations
 //*********************************
-bool
- DeploymentSpecificationImpl::deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DeploymentSpecificationImpl::deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- DeploymentSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DeploymentSpecificationImpl::deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -386,7 +376,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Deployment > DeploymentSpecificationImpl::getDeployment() const
+std::weak_ptr<uml::Deployment > DeploymentSpecificationImpl::getDeployment() const
 {
 
     return m_deployment;
@@ -399,40 +389,37 @@ void DeploymentSpecificationImpl::setDeployment(std::shared_ptr<uml::Deployment>
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > DeploymentSpecificationImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > DeploymentSpecificationImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- DeploymentSpecificationImpl::getOwnedMember() const
-{
-	return m_ownedMember;
-}
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- DeploymentSpecificationImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > DeploymentSpecificationImpl::getFeature() const
 {
 	return m_feature;
 }
-		std::shared_ptr<Union<uml::NamedElement> > DeploymentSpecificationImpl::getMember() const
+std::shared_ptr<Union<uml::RedefinableElement> > DeploymentSpecificationImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::weak_ptr<uml::Element > DeploymentSpecificationImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::NamedElement> > DeploymentSpecificationImpl::getMember() const
 {
 	return m_member;
 }
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
- DeploymentSpecificationImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > DeploymentSpecificationImpl::getAttribute() const
 {
 	return m_attribute;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > DeploymentSpecificationImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
 }
 std::shared_ptr<uml::Namespace > DeploymentSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > DeploymentSpecificationImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::shared_ptr<Union<uml::Element> > DeploymentSpecificationImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

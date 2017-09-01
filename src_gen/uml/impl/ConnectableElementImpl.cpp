@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -61,6 +61,30 @@ ConnectableElementImpl::~ConnectableElementImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ConnectableElementImpl::ConnectableElementImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ConnectableElementImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ConnectableElementImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj):ConnectableElementImpl()
 {
 	//create copy of all Attributes
@@ -73,20 +97,15 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::ConnectorEnd> >
-	 _end = obj.getEnd();
-	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
-	(*(obj.getEnd().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -119,13 +138,6 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 
 
 }
@@ -141,14 +153,13 @@ std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectorEnd> >
- ConnectableElementImpl::getEnds() 
+std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -157,8 +168,7 @@ std::shared_ptr<Bag<uml::ConnectorEnd> >
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::ConnectorEnd> >
- ConnectableElementImpl::getEnd() const
+std::shared_ptr< Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnd() const
 {
 
     return m_end;
@@ -168,13 +178,13 @@ std::shared_ptr<Bag<uml::ConnectorEnd> >
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ConnectableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > ConnectableElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ConnectableElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ConnectableElementImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

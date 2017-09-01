@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -72,6 +72,19 @@ RedefinableElementImpl::~RedefinableElementImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			RedefinableElementImpl::RedefinableElementImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:RedefinableElementImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj):RedefinableElementImpl()
 {
 	//create copy of all Attributes
@@ -85,21 +98,16 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -143,9 +151,9 @@ std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void RedefinableElementImpl::setIsLeaf (bool _isLeaf)
+void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 {
 	m_isLeaf = _isLeaf;
 } 
@@ -158,36 +166,31 @@ bool RedefinableElementImpl::getIsLeaf() const
 //*********************************
 // Operations
 //*********************************
-bool
- RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) 
+bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) 
+bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RedefinableElementImpl::non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RedefinableElementImpl::redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableElementImpl::redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -205,19 +208,19 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > RedefinableElementImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Classifier> > RedefinableElementImpl::getRedefinitionContext() const
-{
-	return m_redefinitionContext;
-}
-		std::shared_ptr<Union<uml::Element> > RedefinableElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > RedefinableElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > RedefinableElementImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::Classifier> > RedefinableElementImpl::getRedefinitionContext() const
+{
+	return m_redefinitionContext;
+}
+std::weak_ptr<uml::Element > RedefinableElementImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > RedefinableElementImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }

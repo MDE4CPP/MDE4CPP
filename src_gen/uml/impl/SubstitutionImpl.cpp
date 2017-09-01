@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -62,6 +62,19 @@ SubstitutionImpl::~SubstitutionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Classifier > par_substitutingClassifier)
+			:SubstitutionImpl()
+			{
+			    m_substitutingClassifier = par_substitutingClassifier;
+			}
+
+
+
+
+
+
 SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImpl()
 {
 	//create copy of all Attributes
@@ -74,18 +87,17 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
+
+	m_substitutingClassifier  = obj.getSubstitutingClassifier();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -138,20 +150,6 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
-	if(obj.getSubstitutingClassifier()!=nullptr)
-	{
-		m_substitutingClassifier.reset(dynamic_cast<uml::Classifier*>(obj.getSubstitutingClassifier()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_substitutingClassifier" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
 	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
 	{
@@ -175,7 +173,7 @@ std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -195,7 +193,7 @@ void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
     m_contract = _contract;
 }
 
-std::shared_ptr<uml::Classifier > SubstitutionImpl::getSubstitutingClassifier() const
+std::weak_ptr<uml::Classifier > SubstitutionImpl::getSubstitutingClassifier() const
 {
 //assert(m_substitutingClassifier);
     return m_substitutingClassifier;
@@ -208,27 +206,25 @@ void SubstitutionImpl::setSubstitutingClassifier(std::shared_ptr<uml::Classifier
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- SubstitutionImpl::getSource() const
-{
-	return m_source;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- SubstitutionImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > SubstitutionImpl::getTarget() const
 {
 	return m_target;
 }
-		std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getOwnedElement() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > SubstitutionImpl::getSource() const
 {
-	return m_ownedElement;
+	return m_source;
 }
-		std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getRelatedElement() const
+std::weak_ptr<uml::Element > SubstitutionImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<uml::Element > SubstitutionImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > SubstitutionImpl::getOwnedElement() const
 {
-	return m_owner;
+	return m_ownedElement;
 }
 
 

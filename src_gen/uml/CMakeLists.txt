@@ -8,8 +8,14 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
+if(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+SET(CMAKE_C_COMPILER "gcc")
+SET(CMAKE_CXX_COMPILER "g++")
+else()
+   SET(CMAKE_C_COMPILER "gcc.exe")
+   SET(CMAKE_CXX_COMPILER "g++.exe")
+endif()
 
 PROJECT(uml)
 
@@ -21,7 +27,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 SET(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-SET(CMAKE_CXX_FLAGS_DEBUG " -Og")
+SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O1 -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
@@ -288,31 +294,64 @@ INCLUDE_DIRECTORIES(
 	../
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
+if(NOT UNIX)
 	${MDE4CPP_HOME}/application/include/PluginFramework
+endif()
 	${MDE4CPP_HOME}/application/include/util
 	${MDE4CPP_HOME}/application/include/ecore
 	${MDE4CPP_HOME}/application/include/types
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+if(NOT UNIX)
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+endif()
 
-FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+
+
+
+if(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+	FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+	FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+	FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
+	FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
+else()
+	FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+endif()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+if(NOT UNIX)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 	debug ${PLUGINFRAMEWORK_DEBUG}
 	debug ${ECORE_DEBUG}
 	debug ${TYPES_DEBUG}
 )
+else()
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	#debug ${PLUGINFRAMEWORK_DEBUG}
+	debug ${ECORE_DEBUG}
+	debug ${TYPES_DEBUG}
+)
+endif()
+
+if(NOT UNIX) 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	optimized ${PLUGINFRAMEWORK_RELEASE}
 	optimized ${ECORE_RELEASE}
 	optimized ${TYPES_RELEASE}
 )
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	#optimized ${PLUGINFRAMEWORK_RELEASE}
+	optimized ${ECORE_RELEASE}
+	optimized ${TYPES_RELEASE}
+)
+endif()
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------

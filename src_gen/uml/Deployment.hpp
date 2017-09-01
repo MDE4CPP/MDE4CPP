@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -103,9 +105,13 @@ namespace uml
 		public:
  			Deployment(const Deployment &) {}
 			Deployment& operator=(Deployment const&) = delete;
-	
+
 		protected:
 			Deployment(){}
+
+
+			//Additional constructors for the containments back reference
+			Deployment(std::weak_ptr<uml::DeploymentTarget > par_location){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -127,19 +133,17 @@ namespace uml
 			/*!
 			 The specification of properties that parameterize the deployment and execution of one or more Artifacts.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > >
-			 getConfiguration() const = 0;
+			virtual std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > > getConfiguration() const = 0;
 			
 			/*!
 			 The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > >
-			 getDeployedArtifact() const = 0;
+			virtual std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > > getDeployedArtifact() const = 0;
 			
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */
-			virtual std::shared_ptr<uml::DeploymentTarget > getLocation() const = 0;
+			virtual std::weak_ptr<uml::DeploymentTarget > getLocation() const = 0;
 			
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
@@ -159,17 +163,15 @@ namespace uml
 			/*!
 			 The specification of properties that parameterize the deployment and execution of one or more Artifacts.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > >
-			 m_configuration;
+			std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > > m_configuration;
 			/*!
 			 The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > >
-			 m_deployedArtifact;
+			std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > > m_deployedArtifact;
 			/*!
 			 The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<uml::DeploymentTarget > m_location;
+			std::weak_ptr<uml::DeploymentTarget > m_location;
 			
 
 		public:
@@ -177,23 +179,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
 	};
 
 }

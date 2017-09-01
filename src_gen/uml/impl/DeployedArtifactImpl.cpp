@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -48,6 +48,19 @@ DeployedArtifactImpl::~DeployedArtifactImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DeployedArtifactImpl::DeployedArtifactImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DeployedArtifactImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):DeployedArtifactImpl()
 {
 	//create copy of all Attributes
@@ -60,13 +73,8 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -112,7 +120,7 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -126,13 +134,13 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DeployedArtifactImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
+std::weak_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > DeployedArtifactImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

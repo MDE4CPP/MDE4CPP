@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -85,6 +85,30 @@ InteractionFragmentImpl::~InteractionFragmentImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+			:InteractionFragmentImpl()
+			{
+			    m_enclosingInteraction = par_enclosingInteraction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+			:InteractionFragmentImpl()
+			{
+			    m_enclosingOperand = par_enclosingOperand;
+			}
+
+
+
+
+
+
 InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl & obj):InteractionFragmentImpl()
 {
 	//create copy of all Attributes
@@ -97,18 +121,15 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Lifeline> >
-	 _covered = obj.getCovered();
-	m_covered.reset(new 	 Bag<uml::Lifeline> 
-	(*(obj.getCovered().get())));
+	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_enclosingInteraction  = obj.getEnclosingInteraction();
+
+	m_enclosingOperand  = obj.getEnclosingOperand();
 
 	m_owner  = obj.getOwner();
 
@@ -123,20 +144,6 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEnclosingInteraction()!=nullptr)
-	{
-		m_enclosingInteraction.reset(dynamic_cast<uml::Interaction*>(obj.getEnclosingInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingInteraction" << std::endl;
-	#endif
-	if(obj.getEnclosingOperand()!=nullptr)
-	{
-		m_enclosingOperand.reset(dynamic_cast<uml::InteractionOperand*>(obj.getEnclosingOperand()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingOperand" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
@@ -183,7 +190,7 @@ std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -193,15 +200,14 @@ std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Lifeline> >
- InteractionFragmentImpl::getCovered() const
+std::shared_ptr< Bag<uml::Lifeline> > InteractionFragmentImpl::getCovered() const
 {
 
     return m_covered;
 }
 
 
-std::shared_ptr<uml::Interaction > InteractionFragmentImpl::getEnclosingInteraction() const
+std::weak_ptr<uml::Interaction > InteractionFragmentImpl::getEnclosingInteraction() const
 {
 
     return m_enclosingInteraction;
@@ -211,7 +217,7 @@ void InteractionFragmentImpl::setEnclosingInteraction(std::shared_ptr<uml::Inter
     m_enclosingInteraction = _enclosingInteraction;
 }
 
-std::shared_ptr<uml::InteractionOperand > InteractionFragmentImpl::getEnclosingOperand() const
+std::weak_ptr<uml::InteractionOperand > InteractionFragmentImpl::getEnclosingOperand() const
 {
 
     return m_enclosingOperand;
@@ -221,8 +227,7 @@ void InteractionFragmentImpl::setEnclosingOperand(std::shared_ptr<uml::Interacti
     m_enclosingOperand = _enclosingOperand;
 }
 
-		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > >
- InteractionFragmentImpl::getGeneralOrdering() const
+std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > > InteractionFragmentImpl::getGeneralOrdering() const
 {
 
     return m_generalOrdering;
@@ -232,15 +237,15 @@ void InteractionFragmentImpl::setEnclosingOperand(std::shared_ptr<uml::Interacti
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > InteractionFragmentImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
 std::shared_ptr<uml::Namespace > InteractionFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > InteractionFragmentImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > InteractionFragmentImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > InteractionFragmentImpl::getOwner() const
 {
 	return m_owner;
 }

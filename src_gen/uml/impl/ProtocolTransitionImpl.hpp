@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ProtocolTransitionImpl();
 
+			//Additional constructors for the containments back reference
+			ProtocolTransitionImpl(std::weak_ptr<uml::Region > par_container);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ProtocolTransitionImpl();
@@ -59,27 +67,23 @@ namespace uml
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif */ 
-			virtual bool
-			 refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool
-			 associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool
-			 belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Operation> >
-			 getReferreds()  ;
+			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds()  ;
 			
 			
 			
@@ -112,8 +116,7 @@ namespace uml
 			/*!
 			 This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Operation> >
-			 getReferred() const ;
+			virtual std::shared_ptr< Bag<uml::Operation> > getReferred() const ;
 			
 							
 			
@@ -121,25 +124,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

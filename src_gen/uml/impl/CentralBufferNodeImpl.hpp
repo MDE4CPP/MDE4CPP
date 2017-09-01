@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,20 @@ namespace uml
 			friend class UmlFactoryImpl;
 			CentralBufferNodeImpl();
 
+			//Additional constructors for the containments back reference
+			CentralBufferNodeImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			CentralBufferNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			CentralBufferNodeImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+
+
 		public:
 			//destructor
 			virtual ~CentralBufferNodeImpl();
@@ -70,18 +86,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

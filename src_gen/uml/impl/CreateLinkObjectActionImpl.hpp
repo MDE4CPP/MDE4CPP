@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			CreateLinkObjectActionImpl();
 
+			//Additional constructors for the containments back reference
+			CreateLinkObjectActionImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			CreateLinkObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+
+
 		public:
 			//destructor
 			virtual ~CreateLinkObjectActionImpl();
@@ -57,20 +69,17 @@ namespace uml
 			/*!
 			 The multiplicity of the OutputPin is 1..1.
 			result.is(1,1) */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
 			result.type = association() */ 
-			virtual bool
-			 type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The Association must be an AssociationClass.
 			self.association().oclIsKindOf(AssociationClass) */ 
-			virtual bool
-			 association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool association_class(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -97,26 +106,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 getOutput() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

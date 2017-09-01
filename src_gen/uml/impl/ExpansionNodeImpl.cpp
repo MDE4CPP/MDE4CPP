@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -82,6 +82,41 @@ ExpansionNodeImpl::~ExpansionNodeImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExpansionNodeImpl::ExpansionNodeImpl(std::shared_ptr<uml::Activity > par_activity)
+			:ExpansionNodeImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionNodeImpl::ExpansionNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:ExpansionNodeImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionNodeImpl::ExpansionNodeImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ExpansionNodeImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNodeImpl()
 {
 	//create copy of all Attributes
@@ -97,39 +132,30 @@ ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNod
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::State> >
-	 _inState = obj.getInState();
-	m_inState.reset(new 	 Bag<uml::State> 
-	(*(obj.getInState().get())));
+	std::shared_ptr< Bag<uml::State> > _inState = obj.getInState();
+	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_regionAsInput  = obj.getRegionAsInput();
 
@@ -173,13 +199,6 @@ ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNod
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -226,14 +245,13 @@ std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ExpansionNodeImpl::region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExpansionNodeImpl::region_as_input_or_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -265,19 +283,19 @@ void ExpansionNodeImpl::setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> 
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::RedefinableElement> > ExpansionNodeImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-std::shared_ptr<uml::Element > ExpansionNodeImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::ActivityGroup> > ExpansionNodeImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup> > ExpansionNodeImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-		std::shared_ptr<Union<uml::Element> > ExpansionNodeImpl::getOwnedElement() const
+std::weak_ptr<uml::Element > ExpansionNodeImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ExpansionNodeImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > ExpansionNodeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

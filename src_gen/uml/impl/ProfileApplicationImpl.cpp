@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -58,6 +58,19 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package > par_applyingPackage)
+			:ProfileApplicationImpl()
+			{
+			    m_applyingPackage = par_applyingPackage;
+			}
+
+
+
+
+
+
 ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj):ProfileApplicationImpl()
 {
 	//create copy of all Attributes
@@ -68,13 +81,12 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_applyingPackage  = obj.getApplyingPackage();
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
     
@@ -86,13 +98,6 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_appliedProfile" << std::endl;
-	#endif
-	if(obj.getApplyingPackage()!=nullptr)
-	{
-		m_applyingPackage.reset(dynamic_cast<uml::Package*>(obj.getApplyingPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_applyingPackage" << std::endl;
 	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
@@ -125,9 +130,9 @@ std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ProfileApplicationImpl::setIsStrict (bool _isStrict)
+void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 {
 	m_isStrict = _isStrict;
 } 
@@ -140,15 +145,13 @@ bool ProfileApplicationImpl::getIsStrict() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EPackage> 
- ProfileApplicationImpl::getAppliedDefinition() 
+std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> 
- ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -167,7 +170,7 @@ void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _ap
     m_appliedProfile = _appliedProfile;
 }
 
-std::shared_ptr<uml::Package > ProfileApplicationImpl::getApplyingPackage() const
+std::weak_ptr<uml::Package > ProfileApplicationImpl::getApplyingPackage() const
 {
 //assert(m_applyingPackage);
     return m_applyingPackage;
@@ -180,27 +183,25 @@ void ProfileApplicationImpl::setApplyingPackage(std::shared_ptr<uml::Package> _a
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getRelatedElement() const
-{
-	return m_relatedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- ProfileApplicationImpl::getSource() const
-{
-	return m_source;
-}
-std::shared_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- ProfileApplicationImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getTarget() const
 {
 	return m_target;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getSource() const
+{
+	return m_source;
+}
+std::weak_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getRelatedElement() const
+{
+	return m_relatedElement;
 }
 
 

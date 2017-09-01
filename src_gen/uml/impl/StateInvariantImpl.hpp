@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -46,6 +48,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StateInvariantImpl();
+
+			//Additional constructors for the containments back reference
+			StateInvariantImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			StateInvariantImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+
 
 		public:
 			//destructor
@@ -79,15 +91,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -92,9 +94,10 @@ namespace uml
 		public:
  			DurationConstraint(const DurationConstraint &) {}
 			DurationConstraint& operator=(DurationConstraint const&) = delete;
-	
+
 		protected:
 			DurationConstraint(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -110,14 +113,12 @@ namespace uml
 			if (constrainedElement->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
 			endif */ 
-			virtual bool
-			 first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2 */ 
-			virtual bool
-			 has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -153,15 +154,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
 	};
 
 }

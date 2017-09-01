@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -76,6 +76,19 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Component > par_abstraction)
+			:ComponentRealizationImpl()
+			{
+			    m_abstraction = par_abstraction;
+			}
+
+
+
+
+
+
 ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImpl & obj):ComponentRealizationImpl()
 {
 	//create copy of all Attributes
@@ -88,18 +101,17 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	m_abstraction  = obj.getAbstraction();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -107,13 +119,6 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getAbstraction()!=nullptr)
-	{
-		m_abstraction.reset(dynamic_cast<uml::Component*>(obj.getAbstraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_abstraction" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::NamedElement>> _clientList = obj.getClient();
 	for(std::shared_ptr<uml::NamedElement> _client : *_clientList)
 	{
@@ -152,13 +157,6 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Classifier>> _realizingClassifierList = obj.getRealizingClassifier();
 	for(std::shared_ptr<uml::Classifier> _realizingClassifier : *_realizingClassifierList)
 	{
@@ -190,7 +188,7 @@ std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -200,7 +198,7 @@ std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Component > ComponentRealizationImpl::getAbstraction() const
+std::weak_ptr<uml::Component > ComponentRealizationImpl::getAbstraction() const
 {
 
     return m_abstraction;
@@ -210,8 +208,7 @@ void ComponentRealizationImpl::setAbstraction(std::shared_ptr<uml::Component> _a
     m_abstraction = _abstraction;
 }
 
-		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > >
- ComponentRealizationImpl::getRealizingClassifier() const
+std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > > ComponentRealizationImpl::getRealizingClassifier() const
 {
 //assert(m_realizingClassifier);
     return m_realizingClassifier;
@@ -221,27 +218,25 @@ void ComponentRealizationImpl::setAbstraction(std::shared_ptr<uml::Component> _a
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- ComponentRealizationImpl::getSource() const
-{
-	return m_source;
-}
-std::shared_ptr<uml::Element > ComponentRealizationImpl::getOwner() const
+std::weak_ptr<uml::Element > ComponentRealizationImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getRelatedElement() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getSource() const
 {
-	return m_relatedElement;
+	return m_source;
 }
-		std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getOwnedElement() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getTarget() const
+{
+	return m_target;
+}
+std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- ComponentRealizationImpl::getTarget() const
+std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getRelatedElement() const
 {
-	return m_target;
+	return m_relatedElement;
 }
 
 

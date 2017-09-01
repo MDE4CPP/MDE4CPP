@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -58,6 +58,41 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+			:DestructionOccurrenceSpecificationImpl()
+			{
+			    m_enclosingInteraction = par_enclosingInteraction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+			:DestructionOccurrenceSpecificationImpl()
+			{
+			    m_enclosingOperand = par_enclosingOperand;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DestructionOccurrenceSpecificationImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj):DestructionOccurrenceSpecificationImpl()
 {
 	//create copy of all Attributes
@@ -70,32 +105,25 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Lifeline> >
-	 _covered = obj.getCovered();
-	m_covered.reset(new 	 Bag<uml::Lifeline> 
-	(*(obj.getCovered().get())));
+	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
+
+	m_enclosingInteraction  = obj.getEnclosingInteraction();
+
+	m_enclosingOperand  = obj.getEnclosingOperand();
 
 	m_message  = obj.getMessage();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::GeneralOrdering> >
-	 _toAfter = obj.getToAfter();
-	m_toAfter.reset(new 	 Bag<uml::GeneralOrdering> 
-	(*(obj.getToAfter().get())));
+	std::shared_ptr< Bag<uml::GeneralOrdering> > _toAfter = obj.getToAfter();
+	m_toAfter.reset(new Bag<uml::GeneralOrdering>(*(obj.getToAfter().get())));
 
-		std::shared_ptr< Bag<uml::GeneralOrdering> >
-	 _toBefore = obj.getToBefore();
-	m_toBefore.reset(new 	 Bag<uml::GeneralOrdering> 
-	(*(obj.getToBefore().get())));
+	std::shared_ptr< Bag<uml::GeneralOrdering> > _toBefore = obj.getToBefore();
+	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 
     
@@ -108,20 +136,6 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEnclosingInteraction()!=nullptr)
-	{
-		m_enclosingInteraction.reset(dynamic_cast<uml::Interaction*>(obj.getEnclosingInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingInteraction" << std::endl;
-	#endif
-	if(obj.getEnclosingOperand()!=nullptr)
-	{
-		m_enclosingOperand.reset(dynamic_cast<uml::InteractionOperand*>(obj.getEnclosingOperand()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingOperand" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
@@ -161,14 +175,13 @@ std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticCl
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -181,15 +194,15 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DestructionOccurrenceSpecificationImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
 std::shared_ptr<uml::Namespace > DestructionOccurrenceSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > DestructionOccurrenceSpecificationImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > DestructionOccurrenceSpecificationImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > DestructionOccurrenceSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }

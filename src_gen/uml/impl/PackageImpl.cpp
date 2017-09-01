@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Class.hpp"
@@ -184,6 +184,19 @@ PackageImpl::~PackageImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			PackageImpl::PackageImpl(std::shared_ptr<uml::Package > par_nestingPackage)
+			:PackageImpl()
+			{
+			    m_nestingPackage = par_nestingPackage;
+			}
+
+
+
+
+
+
 PackageImpl::PackageImpl(const PackageImpl & obj):PackageImpl()
 {
 	//create copy of all Attributes
@@ -197,18 +210,15 @@ PackageImpl::PackageImpl(const PackageImpl & obj):PackageImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -301,13 +311,6 @@ PackageImpl::PackageImpl(const PackageImpl & obj):PackageImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedType" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
@@ -386,9 +389,9 @@ std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void PackageImpl::setURI (std::string _URI)
+void PackageImpl::setURI(std::string _URI)
 {
 	m_URI = _URI;
 } 
@@ -401,169 +404,145 @@ std::string PackageImpl::getURI() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Stereotype> >
- PackageImpl::allApplicableStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> >
- PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> 
- PackageImpl::containingProfile() 
+std::shared_ptr<uml::Profile> PackageImpl::containingProfile() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Class> 
- PackageImpl::createOwnedClass(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Class> PackageImpl::createOwnedClass(std::string name,bool isAbstract) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Enumeration> 
- PackageImpl::createOwnedEnumeration(std::string name) 
+std::shared_ptr<uml::Enumeration> PackageImpl::createOwnedEnumeration(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Interface> 
- PackageImpl::createOwnedInterface(std::string name) 
+std::shared_ptr<uml::Interface> PackageImpl::createOwnedInterface(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PrimitiveType> 
- PackageImpl::createOwnedPrimitiveType(std::string name) 
+std::shared_ptr<uml::PrimitiveType> PackageImpl::createOwnedPrimitiveType(std::string name) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Stereotype> 
- PackageImpl::createOwnedStereotype(std::string name,bool isAbstract) 
+std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string name,bool isAbstract) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PackageImpl::elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PackageImpl::elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Profile> >
- PackageImpl::getAllAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAllAppliedProfiles() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ProfileApplication> >
- PackageImpl::getAllProfileApplications() 
+std::shared_ptr<Bag<uml::ProfileApplication> > PackageImpl::getAllProfileApplications() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> 
- PackageImpl::getAppliedProfile(std::string qualifiedName) 
+std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> 
- PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse) 
+std::shared_ptr<uml::Profile> PackageImpl::getAppliedProfile(std::string qualifiedName,bool recurse) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Profile> >
- PackageImpl::getAppliedProfiles() 
+std::shared_ptr<Bag<uml::Profile> > PackageImpl::getAppliedProfiles() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Package> >
- PackageImpl::getNestedPackages() 
+std::shared_ptr<Bag<uml::Package> > PackageImpl::getNestedPackages() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Stereotype> >
- PackageImpl::getOwnedStereotypes() 
+std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::getOwnedStereotypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Type> >
- PackageImpl::getOwnedTypes() 
+std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> 
- PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> 
- PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) 
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PackageImpl::isModelLibrary() 
+bool PackageImpl::isModelLibrary() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile) 
+bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el) 
+bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> >
- PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile) 
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> >
- PackageImpl::visibleMembers() 
+std::shared_ptr<Bag<uml::PackageableElement> > PackageImpl::visibleMembers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -572,8 +551,7 @@ std::shared_ptr<Bag<uml::PackageableElement> >
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > >
- PackageImpl::getNestedPackage() const
+std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ > > PackageImpl::getNestedPackage() const
 {
 
     return m_nestedPackage;
@@ -590,40 +568,35 @@ void PackageImpl::setNestingPackage(std::shared_ptr<uml::Package> _nestingPackag
     m_nestingPackage = _nestingPackage;
 }
 
-		std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > >
- PackageImpl::getOwnedStereotype() const
+std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ > > PackageImpl::getOwnedStereotype() const
 {
 
     return m_ownedStereotype;
 }
 
 
-		std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > >
- PackageImpl::getOwnedType() const
+std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ > > PackageImpl::getOwnedType() const
 {
 
     return m_ownedType;
 }
 
 
-		std::shared_ptr<Subset<uml::PackageMerge, uml::Element > >
- PackageImpl::getPackageMerge() const
+std::shared_ptr<Subset<uml::PackageMerge, uml::Element > > PackageImpl::getPackageMerge() const
 {
 
     return m_packageMerge;
 }
 
 
-		std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement > >
- PackageImpl::getPackagedElement() const
+std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement > > PackageImpl::getPackagedElement() const
 {
 
     return m_packagedElement;
 }
 
 
-		std::shared_ptr<Subset<uml::ProfileApplication, uml::Element > >
- PackageImpl::getProfileApplication() const
+std::shared_ptr<Subset<uml::ProfileApplication, uml::Element > > PackageImpl::getProfileApplication() const
 {
 
     return m_profileApplication;
@@ -633,11 +606,7 @@ void PackageImpl::setNestingPackage(std::shared_ptr<uml::Package> _nestingPackag
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > PackageImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::NamedElement> > PackageImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > PackageImpl::getMember() const
 {
 	return m_member;
 }
@@ -645,12 +614,15 @@ std::shared_ptr<uml::Namespace > PackageImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > PackageImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > PackageImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- PackageImpl::getOwnedMember() const
+std::weak_ptr<uml::Element > PackageImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > PackageImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -60,6 +60,30 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			StructuralFeatureImpl::StructuralFeatureImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:StructuralFeatureImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
+			:StructuralFeatureImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):StructuralFeatureImpl()
 {
 	//create copy of all Attributes
@@ -79,24 +103,19 @@ StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_type  = obj.getType();
 
@@ -156,9 +175,9 @@ std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void StructuralFeatureImpl::setIsReadOnly (bool _isReadOnly)
+void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
@@ -179,11 +198,11 @@ bool StructuralFeatureImpl::getIsReadOnly() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > StructuralFeatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > StructuralFeatureImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
+std::weak_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
 {
 	return m_owner;
 }

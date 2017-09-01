@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -76,9 +78,13 @@ namespace uml
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}
 			ExceptionHandler& operator=(ExceptionHandler const&) = delete;
-	
+
 		protected:
 			ExceptionHandler(){}
+
+
+			//Additional constructors for the containments back reference
+			ExceptionHandler(std::weak_ptr<uml::ExecutableNode > par_protectedNode){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -92,8 +98,7 @@ namespace uml
 			/*!
 			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
-			virtual bool
-			 handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -108,37 +113,32 @@ namespace uml
 			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
 			) */ 
-			virtual bool
-			 output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
 			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
 			inputs->size()=1 and inputs->first()=exceptionInput */ 
-			virtual bool
-			 one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
 			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
 			nodes.outgoing->forAll(nodes->includes(target)) and
 			nodes.incoming->forAll(nodes->includes(source)) */ 
-			virtual bool
-			 edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner */ 
-			virtual bool
-			 handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
-			virtual bool
-			 exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -160,8 +160,7 @@ namespace uml
 			/*!
 			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getExceptionType() const = 0;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getExceptionType() const = 0;
 			
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
@@ -175,7 +174,7 @@ namespace uml
 			/*!
 			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::ExecutableNode > getProtectedNode() const = 0;
+			virtual std::weak_ptr<uml::ExecutableNode > getProtectedNode() const = 0;
 			
 			/*!
 			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
@@ -199,8 +198,7 @@ namespace uml
 			/*!
 			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
 			<p>From package UML::Activities.</p> */
-				std::shared_ptr< Bag<uml::Classifier> >
-			 m_exceptionType;
+			std::shared_ptr< Bag<uml::Classifier> > m_exceptionType;
 			/*!
 			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
 			<p>From package UML::Activities.</p> */
@@ -208,7 +206,7 @@ namespace uml
 			/*!
 			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ExecutableNode > m_protectedNode;
+			std::weak_ptr<uml::ExecutableNode > m_protectedNode;
 			
 
 		public:
@@ -216,12 +214,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -76,6 +76,30 @@ FinalStateImpl::~FinalStateImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			FinalStateImpl::FinalStateImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:FinalStateImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Region > par_container)
+			:FinalStateImpl()
+			{
+			    m_container = par_container;
+			}
+
+
+
+
+
+
 FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 {
 	//create copy of all Attributes
@@ -93,34 +117,27 @@ FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getIncoming().get())));
+	m_container  = obj.getContainer();
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_submachine  = obj.getSubmachine();
 
@@ -143,13 +160,6 @@ FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_connectionPoint" << std::endl;
-	#endif
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Trigger>> _deferrableTriggerList = obj.getDeferrableTrigger();
 	for(std::shared_ptr<uml::Trigger> _deferrableTrigger : *_deferrableTriggerList)
@@ -272,49 +282,43 @@ std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- FinalStateImpl::cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- FinalStateImpl::no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- FinalStateImpl::no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- FinalStateImpl::no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- FinalStateImpl::no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- FinalStateImpl::no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool FinalStateImpl::no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -327,30 +331,29 @@ bool
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<uml::NamedElement> > FinalStateImpl::getMember() const
+{
+	return m_member;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > FinalStateImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
 std::shared_ptr<uml::Namespace > FinalStateImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > FinalStateImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > FinalStateImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<uml::Element > FinalStateImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::NamedElement> > FinalStateImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<Union<uml::Element> > FinalStateImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > FinalStateImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- FinalStateImpl::getOwnedMember() const
+std::weak_ptr<uml::Element > FinalStateImpl::getOwner() const
 {
-	return m_ownedMember;
+	return m_owner;
 }
 
 

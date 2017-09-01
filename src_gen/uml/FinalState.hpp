@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -152,9 +154,10 @@ namespace uml
 		public:
  			FinalState(const FinalState &) {}
 			FinalState& operator=(FinalState const&) = delete;
-	
+
 		protected:
 			FinalState(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -168,38 +171,32 @@ namespace uml
 			/*!
 			 A FinalState has no exit Behavior.
 			exit->isEmpty() */ 
-			virtual bool
-			 no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_exit_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0 */ 
-			virtual bool
-			 no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_outgoing_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A FinalState cannot have Regions.
 			region->size() = 0 */ 
-			virtual bool
-			 no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A FinalState cannot reference a submachine.
 			submachine->isEmpty() */ 
-			virtual bool
-			 cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool cannot_reference_submachine(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A FinalState has no entry Behavior.
 			entry->isEmpty() */ 
-			virtual bool
-			 no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_entry_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty() */ 
-			virtual bool
-			 no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_state_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -227,25 +224,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

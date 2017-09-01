@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -97,9 +99,10 @@ namespace uml
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}
 			GeneralizationSet& operator=(GeneralizationSet const&) = delete;
-	
+
 		protected:
 			GeneralizationSet(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -113,16 +116,14 @@ namespace uml
 			/*!
 			 Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
 			generalization->collect(general)->asSet()->size() <= 1 */ 
-			virtual bool
-			 generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
 			  ) */ 
-			virtual bool
-			 maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -164,8 +165,7 @@ namespace uml
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Generalization> >
-			 getGeneralization() const = 0;
+			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const = 0;
 			
 			
 
@@ -193,8 +193,7 @@ namespace uml
 			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
-				std::shared_ptr< Bag<uml::Generalization> >
-			 m_generalization;
+			std::shared_ptr< Bag<uml::Generalization> > m_generalization;
 			
 
 		public:
@@ -202,12 +201,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -107,9 +109,13 @@ namespace uml
 		public:
  			ComponentRealization(const ComponentRealization &) {}
 			ComponentRealization& operator=(ComponentRealization const&) = delete;
-	
+
 		protected:
 			ComponentRealization(){}
+
+
+			//Additional constructors for the containments back reference
+			ComponentRealization(std::weak_ptr<uml::Component > par_abstraction){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -131,13 +137,12 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > >
-			 getRealizingClassifier() const = 0;
+			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > > getRealizingClassifier() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual std::shared_ptr<uml::Component > getAbstraction() const = 0;
+			virtual std::weak_ptr<uml::Component > getAbstraction() const = 0;
 			
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
@@ -157,12 +162,11 @@ namespace uml
 			/*!
 			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p> */
-					std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > >
-			 m_realizingClassifier;
+			std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/ > > m_realizingClassifier;
 			/*!
 			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<uml::Component > m_abstraction;
+			std::weak_ptr<uml::Component > m_abstraction;
 			
 
 		public:
@@ -170,23 +174,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
 	};
 
 }

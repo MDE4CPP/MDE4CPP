@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -124,6 +124,41 @@ StereotypeImpl::~StereotypeImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			StereotypeImpl::StereotypeImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:StereotypeImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StereotypeImpl::StereotypeImpl(std::shared_ptr<uml::Package > par_package)
+			:StereotypeImpl()
+			{
+			    m_package = par_package;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::Element > par_owner)
+			:StereotypeImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 {
 	//create copy of all Attributes
@@ -140,58 +175,43 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Extension> >
-	 _extension = obj.getExtension();
-	m_extension.reset(new 	 Bag<uml::Extension> 
-	(*(obj.getExtension().get())));
+	std::shared_ptr< Bag<uml::Extension> > _extension = obj.getExtension();
+	m_extension.reset(new Bag<uml::Extension>(*(obj.getExtension().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Property> >
-	 _part = obj.getPart();
-	m_part.reset(new 	 Bag<uml::Property> 
-	(*(obj.getPart().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
+
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
 	m_profile  = obj.getProfile();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-		std::shared_ptr< Bag<uml::Class> >
-	 _superClass = obj.getSuperClass();
-	m_superClass.reset(new 	 Bag<uml::Class> 
-	(*(obj.getSuperClass().get())));
+	std::shared_ptr< Bag<uml::Class> > _superClass = obj.getSuperClass();
+	m_superClass.reset(new Bag<uml::Class>(*(obj.getSuperClass().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
     
@@ -362,13 +382,6 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getPackage()!=nullptr)
 	{
 		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
@@ -437,112 +450,97 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- StereotypeImpl::associationEndOwnership(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::associationEndOwnership(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StereotypeImpl::base_property_multiplicity_multiple_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_multiplicity_multiple_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StereotypeImpl::base_property_multiplicity_single_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_multiplicity_single_extension(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StereotypeImpl::base_property_upper_bound(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::base_property_upper_bound(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StereotypeImpl::binaryAssociationsOnly(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::binaryAssociationsOnly(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Profile> 
- StereotypeImpl::containingProfile() 
+std::shared_ptr<uml::Profile> StereotypeImpl::containingProfile() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Extension> 
- StereotypeImpl::createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) 
+std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Image> 
- StereotypeImpl::createIcon(std::string location) 
+std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string location) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Image> 
- StereotypeImpl::createIcon(std::string format,std::string content) 
+std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format,std::string content) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StereotypeImpl::generalize(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::generalize(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> >
- StereotypeImpl::getAllExtendedMetaclasses() 
+std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getAllExtendedMetaclasses() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EClass> 
- StereotypeImpl::getDefinition() 
+std::shared_ptr<ecore::EClass> StereotypeImpl::getDefinition() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Class> >
- StereotypeImpl::getExtendedMetaclasses() 
+std::shared_ptr<Bag<uml::Class> > StereotypeImpl::getExtendedMetaclasses() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string
- StereotypeImpl::getKeyword() 
+std::string StereotypeImpl::getKeyword() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string
- StereotypeImpl::getKeyword(bool localize) 
+std::string StereotypeImpl::getKeyword(bool localize) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -550,8 +548,7 @@ std::string
 
 
 
-bool
- StereotypeImpl::name_not_clash(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StereotypeImpl::name_not_clash(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -560,8 +557,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::Image, uml::Element > >
- StereotypeImpl::getIcon() const
+std::shared_ptr<Subset<uml::Image, uml::Element > > StereotypeImpl::getIcon() const
 {
 
     return m_icon;
@@ -578,45 +574,41 @@ std::shared_ptr<uml::Profile > StereotypeImpl::getProfile() const
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > StereotypeImpl::getRole() const
+{
+	return m_role;
+}
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > StereotypeImpl::getAttribute() const
+{
+	return m_attribute;
+}
+std::weak_ptr<uml::Element > StereotypeImpl::getOwner() const
+{
+	return m_owner;
+}
 std::shared_ptr<uml::Namespace > StereotypeImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::NamedElement> > StereotypeImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<Union<uml::Element> > StereotypeImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > StereotypeImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- StereotypeImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > StereotypeImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
- StereotypeImpl::getAttribute() const
+std::shared_ptr<Union<uml::Element> > StereotypeImpl::getOwnedElement() const
 {
-	return m_attribute;
+	return m_ownedElement;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > StereotypeImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
- StereotypeImpl::getRole() const
-{
-	return m_role;
-}
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- StereotypeImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > StereotypeImpl::getFeature() const
 {
 	return m_feature;
+}
+std::shared_ptr<Union<uml::NamedElement> > StereotypeImpl::getMember() const
+{
+	return m_member;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > StereotypeImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 
 

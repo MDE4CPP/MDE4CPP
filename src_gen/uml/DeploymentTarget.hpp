@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -92,9 +94,10 @@ namespace uml
 		public:
  			DeploymentTarget(const DeploymentTarget &) {}
 			DeploymentTarget& operator=(DeploymentTarget const&) = delete;
-	
+
 		protected:
 			DeploymentTarget(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -109,8 +112,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> >
-			 getDeployedElements()  = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements()  = 0;
 			
 			
 			//*********************************
@@ -123,14 +125,12 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual 	std::shared_ptr< Bag<uml::PackageableElement> >
-			 getDeployedElement() const = 0;
+			virtual std::shared_ptr< Bag<uml::PackageableElement> > getDeployedElement() const = 0;
 			
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Deployment, uml::Element > >
-			 getDeployment() const = 0;
+			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element > > getDeployment() const = 0;
 			
 			
 
@@ -146,13 +146,11 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-				std::shared_ptr< Bag<uml::PackageableElement> >
-			 m_deployedElement;
+			std::shared_ptr< Bag<uml::PackageableElement> > m_deployedElement;
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::Deployment, uml::Element > >
-			 m_deployment;
+			std::shared_ptr<Subset<uml::Deployment, uml::Element > > m_deployment;
 			
 
 		public:
@@ -160,12 +158,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -232,9 +234,10 @@ namespace uml
 		public:
  			Component(const Component &) {}
 			Component& operator=(Component const&) = delete;
-	
+
 		protected:
 			Component(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -248,34 +251,28 @@ namespace uml
 			/*!
 			 A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty() */ 
-			virtual bool
-			 no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_nested_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty() */ 
-			virtual bool
-			 no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_packaged_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Creates a(n) (abstract) class with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Class> 
-			 createOwnedClass(std::string name,bool isAbstract)  = 0;
+			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract)  = 0;
 			
 			/*!
 			 Creates a enumeration with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Enumeration> 
-			 createOwnedEnumeration(std::string name)  = 0;
+			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name)  = 0;
 			
 			/*!
 			 Creates an interface with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::Interface> 
-			 createOwnedInterface(std::string name)  = 0;
+			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name)  = 0;
 			
 			/*!
 			 Creates a primitive type with the specified name as a packaged element of this component. */ 
-			virtual std::shared_ptr<uml::PrimitiveType> 
-			 createOwnedPrimitiveType(std::string name)  = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name)  = 0;
 			
 			/*!
 			 Derivation for Component::/provided
@@ -287,8 +284,7 @@ namespace uml
 			        providedByPorts : Set(Interface) = ports.provided->asSet()
 			in     ris->union(realizingClassifierInterfaces) ->union(providedByPorts)->asSet())
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 getProvideds()  = 0;
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds()  = 0;
 			
 			/*!
 			 Derivation for Component::/required
@@ -301,8 +297,7 @@ namespace uml
 			in	    uis->union(realizingClassifierInterfaces)->union(usedByPorts)->asSet()
 			)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 getRequireds()  = 0;
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds()  = 0;
 			
 			
 			//*********************************
@@ -325,26 +320,22 @@ namespace uml
 			/*!
 			 The set of PackageableElements that a Component owns. In the namespace of a Component, all model elements that are involved in or related to its definition may be owned or imported explicitly. These may include e.g., Classes, Interfaces, Components, Packages, UseCases, Dependencies (e.g., mappings), and Artifacts.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > >
-			 getPackagedElement() const = 0;
+			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > > getPackagedElement() const = 0;
 			
 			/*!
 			 The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Interface> >
-			 getProvided() const = 0;
+			virtual std::shared_ptr< Bag<uml::Interface> > getProvided() const = 0;
 			
 			/*!
 			 The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ComponentRealization, uml::Element > >
-			 getRealization() const = 0;
+			virtual std::shared_ptr<Subset<uml::ComponentRealization, uml::Element > > getRealization() const = 0;
 			
 			/*!
 			 The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Interface> >
-			 getRequired() const = 0;
+			virtual std::shared_ptr< Bag<uml::Interface> > getRequired() const = 0;
 			
 			
 
@@ -364,23 +355,19 @@ namespace uml
 			/*!
 			 The set of PackageableElements that a Component owns. In the namespace of a Component, all model elements that are involved in or related to its definition may be owned or imported explicitly. These may include e.g., Classes, Interfaces, Components, Packages, UseCases, Dependencies (e.g., mappings), and Artifacts.
 			<p>From package UML::StructuredClassifiers.</p> */
-					std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > >
-			 m_packagedElement;
+			std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement > > m_packagedElement;
 			/*!
 			 The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-				std::shared_ptr< Bag<uml::Interface> >
-			 m_provided;
+			std::shared_ptr< Bag<uml::Interface> > m_provided;
 			/*!
 			 The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
 			<p>From package UML::StructuredClassifiers.</p> */
-					std::shared_ptr<Subset<uml::ComponentRealization, uml::Element > >
-			 m_realization;
+			std::shared_ptr<Subset<uml::ComponentRealization, uml::Element > > m_realization;
 			/*!
 			 The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p> */
-				std::shared_ptr< Bag<uml::Interface> >
-			 m_required;
+			std::shared_ptr< Bag<uml::Interface> > m_required;
 			
 
 		public:
@@ -388,37 +375,33 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const = 0;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const = 0;/*!
 			 The roles that instances may play in this StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
-			 getRole() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > getRole() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

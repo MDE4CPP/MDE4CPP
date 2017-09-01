@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -64,6 +64,30 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			GeneralizationSetImpl::GeneralizationSetImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:GeneralizationSetImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:GeneralizationSetImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):GeneralizationSetImpl()
 {
 	//create copy of all Attributes
@@ -78,20 +102,15 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Generalization> >
-	 _generalization = obj.getGeneralization();
-	m_generalization.reset(new 	 Bag<uml::Generalization> 
-	(*(obj.getGeneralization().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Generalization> > _generalization = obj.getGeneralization();
+	m_generalization.reset(new Bag<uml::Generalization>(*(obj.getGeneralization().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_powertype  = obj.getPowertype();
 
@@ -124,13 +143,6 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 
 
 }
@@ -146,9 +158,9 @@ std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void GeneralizationSetImpl::setIsCovering (bool _isCovering)
+void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
@@ -158,7 +170,7 @@ bool GeneralizationSetImpl::getIsCovering() const
 	return m_isCovering;
 }
 
-void GeneralizationSetImpl::setIsDisjoint (bool _isDisjoint)
+void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 {
 	m_isDisjoint = _isDisjoint;
 } 
@@ -171,15 +183,13 @@ bool GeneralizationSetImpl::getIsDisjoint() const
 //*********************************
 // Operations
 //*********************************
-bool
- GeneralizationSetImpl::generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralizationSetImpl::generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralizationSetImpl::maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -188,8 +198,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Generalization> >
- GeneralizationSetImpl::getGeneralization() const
+std::shared_ptr< Bag<uml::Generalization> > GeneralizationSetImpl::getGeneralization() const
 {
 
     return m_generalization;
@@ -209,11 +218,11 @@ void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _power
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
+std::weak_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > GeneralizationSetImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > GeneralizationSetImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

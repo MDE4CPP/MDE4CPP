@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			DurationObservationImpl();
 
+			//Additional constructors for the containments back reference
+			DurationObservationImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
+
 		public:
 			//destructor
 			virtual ~DurationObservationImpl();
@@ -59,8 +71,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool
-			 first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -80,8 +91,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			virtual 	std::shared_ptr< Bag<uml::NamedElement> >
-			 getEvent() const ;
+			virtual std::shared_ptr< Bag<uml::NamedElement> > getEvent() const ;
 			
 							
 			
@@ -89,12 +99,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

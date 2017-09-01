@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -73,6 +73,19 @@ DeploymentTargetImpl::~DeploymentTargetImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DeploymentTargetImpl::DeploymentTargetImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DeploymentTargetImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):DeploymentTargetImpl()
 {
 	//create copy of all Attributes
@@ -85,18 +98,11 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::PackageableElement> >
-	 _deployedElement = obj.getDeployedElement();
-	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
-	(*(obj.getDeployedElement().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -157,14 +163,13 @@ std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::PackageableElement> >
- DeploymentTargetImpl::getDeployedElements() 
+std::shared_ptr<Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElements() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -173,16 +178,14 @@ std::shared_ptr<Bag<uml::PackageableElement> >
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::PackageableElement> >
- DeploymentTargetImpl::getDeployedElement() const
+std::shared_ptr< Bag<uml::PackageableElement> > DeploymentTargetImpl::getDeployedElement() const
 {
 
     return m_deployedElement;
 }
 
 
-		std::shared_ptr<Subset<uml::Deployment, uml::Element > >
- DeploymentTargetImpl::getDeployment() const
+std::shared_ptr<Subset<uml::Deployment, uml::Element > > DeploymentTargetImpl::getDeployment() const
 {
 
     return m_deployment;
@@ -192,11 +195,11 @@ std::shared_ptr<Bag<uml::PackageableElement> >
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DeploymentTargetImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DeploymentTargetImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
+std::weak_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
 {
 	return m_owner;
 }

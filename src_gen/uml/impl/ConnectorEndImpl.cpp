@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -58,6 +58,19 @@ ConnectorEndImpl::~ConnectorEndImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
+			:ConnectorEndImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImpl()
 {
 	//create copy of all Attributes
@@ -72,9 +85,6 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImp
 	//copy references with no containment (soft copy)
 	
 	m_definingEnd  = obj.getDefiningEnd();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -131,7 +141,7 @@ std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -139,29 +149,25 @@ std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 //*********************************
 
 
-bool
- ConnectorEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConnectorEndImpl::part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConnectorEndImpl::role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorEndImpl::self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -200,7 +206,7 @@ void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ConnectorEndImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ConnectorEndImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

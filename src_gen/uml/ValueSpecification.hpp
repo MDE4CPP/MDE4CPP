@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -99,9 +101,10 @@ namespace uml
 		public:
  			ValueSpecification(const ValueSpecification &) {}
 			ValueSpecification& operator=(ValueSpecification const&) = delete;
-	
+
 		protected:
 			ValueSpecification(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -116,50 +119,43 @@ namespace uml
 			 The query booleanValue() gives a single Boolean value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 booleanValue()  = 0;
+			virtual bool booleanValue()  = 0;
 			
 			/*!
 			 The query integerValue() gives a single Integer value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual int
-			 integerValue()  = 0;
+			virtual int integerValue()  = 0;
 			
 			/*!
 			 The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isComputable()  = 0;
+			virtual bool isComputable()  = 0;
 			
 			/*!
 			 The query isNull() returns true when it can be computed that the value is null.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isNull()  = 0;
+			virtual bool isNull()  = 0;
 			
 			/*!
 			 The query realValue() gives a single Real value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual double
-			 realValue()  = 0;
+			virtual double realValue()  = 0;
 			
 			/*!
 			 The query stringValue() gives a single String value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual std::string
-			 stringValue()  = 0;
+			virtual std::string stringValue()  = 0;
 			
 			/*!
 			 The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p> */ 
-			virtual int
-			 unlimitedValue()  = 0;
+			virtual int unlimitedValue()  = 0;
 			
 			
 			//*********************************
@@ -187,12 +183,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

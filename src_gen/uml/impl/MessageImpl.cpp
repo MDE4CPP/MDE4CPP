@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -91,6 +91,19 @@ MessageImpl::~MessageImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			MessageImpl::MessageImpl(std::weak_ptr<uml::Interaction > par_interaction)
+			:MessageImpl()
+			{
+			    m_interaction = par_interaction;
+			}
+
+
+
+
+
+
 MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
 {
 	//create copy of all Attributes
@@ -105,15 +118,12 @@ MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_connector  = obj.getConnector();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_interaction  = obj.getInteraction();
 
 	m_owner  = obj.getOwner();
 
@@ -142,13 +152,6 @@ MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getInteraction()!=nullptr)
-	{
-		m_interaction.reset(dynamic_cast<uml::Interaction*>(obj.getInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_interaction" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -187,7 +190,7 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -196,7 +199,7 @@ MessageKind MessageImpl::getMessageKind() const
 	return m_messageKind;
 }
 
-void MessageImpl::setMessageSort (MessageSort _messageSort)
+void MessageImpl::setMessageSort(MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
@@ -209,64 +212,55 @@ MessageSort MessageImpl::getMessageSort() const
 //*********************************
 // Operations
 //*********************************
-bool
- MessageImpl::arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-MessageKind
- MessageImpl::getMessageKind() 
+MessageKind MessageImpl::getMessageKind() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MessageImpl::signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -275,8 +269,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
- MessageImpl::getArgument() const
+std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > MessageImpl::getArgument() const
 {
 
     return m_argument;
@@ -293,7 +286,7 @@ void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
     m_connector = _connector;
 }
 
-std::shared_ptr<uml::Interaction > MessageImpl::getInteraction() const
+std::weak_ptr<uml::Interaction > MessageImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
@@ -336,11 +329,11 @@ void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > MessageImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > MessageImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > MessageImpl::getOwner() const
+std::weak_ptr<uml::Element > MessageImpl::getOwner() const
 {
 	return m_owner;
 }

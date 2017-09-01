@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -96,6 +96,69 @@ ExpansionRegionImpl::~ExpansionRegionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExpansionRegionImpl::ExpansionRegionImpl(std::shared_ptr<uml::Activity > par_Activity, const int reference_id)
+			:ExpansionRegionImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::ACTIVITYNODE_ACTIVITY:
+					 m_activity = par_Activity;
+					 return;
+				case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+					 m_inActivity = par_Activity;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:ExpansionRegionImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionRegionImpl::ExpansionRegionImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ExpansionRegionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExpansionRegionImpl::ExpansionRegionImpl(std::shared_ptr<uml::ActivityGroup > par_superGroup)
+			:ExpansionRegionImpl()
+			{
+			    m_superGroup = par_superGroup;
+			}
+
+
+
+
+
+
 ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):ExpansionRegionImpl()
 {
 	//create copy of all Attributes
@@ -112,55 +175,44 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):Expans
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));
+	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));
+	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_context  = obj.getContext();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ExpansionNode> >
-	 _inputElement = obj.getInputElement();
-	m_inputElement.reset(new 	 Bag<uml::ExpansionNode> 
-	(*(obj.getInputElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr< Bag<uml::ExpansionNode> > _inputElement = obj.getInputElement();
+	m_inputElement.reset(new Bag<uml::ExpansionNode>(*(obj.getInputElement().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
-		std::shared_ptr< Bag<uml::ExpansionNode> >
-	 _outputElement = obj.getOutputElement();
-	m_outputElement.reset(new 	 Bag<uml::ExpansionNode> 
-	(*(obj.getOutputElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ExpansionNode> > _outputElement = obj.getOutputElement();
+	m_outputElement.reset(new Bag<uml::ExpansionNode>(*(obj.getOutputElement().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -235,13 +287,6 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):Expans
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
 	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
@@ -345,9 +390,9 @@ std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ExpansionRegionImpl::setMode (ExpansionKind _mode)
+void ExpansionRegionImpl::setMode(ExpansionKind _mode)
 {
 	m_mode = _mode;
 } 
@@ -364,16 +409,14 @@ ExpansionKind ExpansionRegionImpl::getMode() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::ExpansionNode> >
- ExpansionRegionImpl::getInputElement() const
+std::shared_ptr< Bag<uml::ExpansionNode> > ExpansionRegionImpl::getInputElement() const
 {
 //assert(m_inputElement);
     return m_inputElement;
 }
 
 
-	std::shared_ptr< Bag<uml::ExpansionNode> >
- ExpansionRegionImpl::getOutputElement() const
+std::shared_ptr< Bag<uml::ExpansionNode> > ExpansionRegionImpl::getOutputElement() const
 {
 
     return m_outputElement;
@@ -383,48 +426,45 @@ ExpansionKind ExpansionRegionImpl::getMode() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::RedefinableElement> > ExpansionRegionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > ExpansionRegionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-		std::shared_ptr<Union<uml::ActivityNode> > ExpansionRegionImpl::getContainedNode() const
-{
-	return m_containedNode;
-}
-		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
- ExpansionRegionImpl::getInput() const
-{
-	return m_input;
-}
-		std::shared_ptr<Union<uml::NamedElement> > ExpansionRegionImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
- ExpansionRegionImpl::getOutput() const
-{
-	return m_output;
-}
-		std::shared_ptr<Union<uml::ActivityGroup> > ExpansionRegionImpl::getInGroup() const
-{
-	return m_inGroup;
-}
-		std::shared_ptr<Union<uml::Element> > ExpansionRegionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ExpansionRegionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > ExpansionRegionImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > ExpansionRegionImpl::getOutput() const
 {
-	return m_owner;
+	return m_output;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ExpansionRegionImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::ActivityNode> > ExpansionRegionImpl::getContainedNode() const
+{
+	return m_containedNode;
+}
+std::shared_ptr<Union<uml::NamedElement> > ExpansionRegionImpl::getMember() const
+{
+	return m_member;
+}
+std::shared_ptr<Union<uml::ActivityEdge> > ExpansionRegionImpl::getContainedEdge() const
+{
+	return m_containedEdge;
+}
+std::shared_ptr<Union<uml::ActivityGroup> > ExpansionRegionImpl::getInGroup() const
+{
+	return m_inGroup;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ExpansionRegionImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
-		std::shared_ptr<Union<uml::ActivityEdge> > ExpansionRegionImpl::getContainedEdge() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > ExpansionRegionImpl::getInput() const
 {
-	return m_containedEdge;
+	return m_input;
+}
+std::weak_ptr<uml::Element > ExpansionRegionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

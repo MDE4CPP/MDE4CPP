@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Action.hpp"
@@ -70,6 +70,30 @@ VariableImpl::~VariableImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			VariableImpl::VariableImpl(std::weak_ptr<uml::Activity > par_activityScope)
+			:VariableImpl()
+			{
+			    m_activityScope = par_activityScope;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope)
+			:VariableImpl()
+			{
+			    m_scope = par_scope;
+			}
+
+
+
+
+
+
 VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 {
 	//create copy of all Attributes
@@ -86,20 +110,19 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	m_activityScope  = obj.getActivityScope();
 
-		std::shared_ptr< Bag<uml::ConnectorEnd> >
-	 _end = obj.getEnd();
-	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
-	(*(obj.getEnd().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	m_scope  = obj.getScope();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -109,13 +132,6 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getActivityScope()!=nullptr)
-	{
-		m_activityScope.reset(dynamic_cast<uml::Activity*>(obj.getActivityScope()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_activityScope" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -146,20 +162,6 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
-	if(obj.getScope()!=nullptr)
-	{
-		m_scope.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getScope()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_scope" << std::endl;
-	#endif
 	if(obj.getUpperValue()!=nullptr)
 	{
 		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
@@ -182,14 +184,13 @@ std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a) 
+bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -198,7 +199,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Activity > VariableImpl::getActivityScope() const
+std::weak_ptr<uml::Activity > VariableImpl::getActivityScope() const
 {
 
     return m_activityScope;
@@ -208,7 +209,7 @@ void VariableImpl::setActivityScope(std::shared_ptr<uml::Activity> _activityScop
     m_activityScope = _activityScope;
 }
 
-std::shared_ptr<uml::StructuredActivityNode > VariableImpl::getScope() const
+std::weak_ptr<uml::StructuredActivityNode > VariableImpl::getScope() const
 {
 
     return m_scope;
@@ -225,13 +226,13 @@ std::shared_ptr<uml::Namespace > VariableImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > VariableImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > VariableImpl::getOwner() const
+std::weak_ptr<uml::Element > VariableImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > VariableImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

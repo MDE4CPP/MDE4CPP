@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,20 @@ namespace uml
 			friend class UmlFactoryImpl;
 			UseCaseImpl();
 
+			//Additional constructors for the containments back reference
+			UseCaseImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			UseCaseImpl(std::shared_ptr<uml::Package > par_package);
+
+
+			//Additional constructors for the containments back reference
+			UseCaseImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
+
 		public:
 			//destructor
 			virtual ~UseCaseImpl();
@@ -57,8 +73,7 @@ namespace uml
 			/*!
 			 UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2) */ 
-			virtual bool
-			 binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool binary_associations(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 UseCases cannot have Associations to UseCases specifying the same subject.
@@ -68,27 +83,23 @@ namespace uml
 			   usecases->size() > 1 implies usecases->collect(subject)->size() > 1
 			   )
 			) */ 
-			virtual bool
-			 no_association_to_use_case(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_association_to_use_case(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self) */ 
-			virtual bool
-			 cannot_include_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool cannot_include_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A UseCase must have a name.
 			name -> notEmpty () */ 
-			virtual bool
-			 must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query allIncludedUseCases() returns the transitive closure of all UseCases (directly or indirectly) included by this UseCase.
 			result = (self.include.addition->union(self.include.addition->collect(uc | uc.allIncludedUseCases()))->asSet())
 			<p>From package UML::UseCases.</p> */ 
-			virtual std::shared_ptr<Bag<uml::UseCase> >
-			 allIncludedUseCases()  ;
+			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases()  ;
 			
 			
 			
@@ -103,26 +114,22 @@ namespace uml
 			/*!
 			 The Extend relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Extend, uml::NamedElement > >
-			 getExtend() const ;
+			virtual std::shared_ptr<Subset<uml::Extend, uml::NamedElement > > getExtend() const ;
 			
 			/*!
 			 The ExtensionPoints owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement > >
-			 getExtensionPoint() const ;
+			virtual std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement > > getExtensionPoint() const ;
 			
 			/*!
 			 The Include relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Include, uml::NamedElement > >
-			 getInclude() const ;
+			virtual std::shared_ptr<Subset<uml::Include, uml::NamedElement > > getInclude() const ;
 			
 			/*!
 			 The subjects to which this UseCase applies. Each subject or its parts realize all the UseCases that apply to it.
 			<p>From package UML::UseCases.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getSubject() const ;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getSubject() const ;
 			
 							
 			
@@ -130,29 +137,27 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -64,6 +64,19 @@ TemplateableElementImpl::~TemplateableElementImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element > par_owner)
+			:TemplateableElementImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj):TemplateableElementImpl()
 {
 	//create copy of all Attributes
@@ -73,9 +86,6 @@ TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl &
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 
@@ -137,21 +147,19 @@ std::shared_ptr<ecore::EClass> TemplateableElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TemplateableElementImpl::isTemplate() 
+bool TemplateableElementImpl::isTemplate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::ParameterableElement> >
- TemplateableElementImpl::parameterableElements() 
+std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parameterableElements() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -170,8 +178,7 @@ void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::Tem
     m_ownedTemplateSignature = _ownedTemplateSignature;
 }
 
-		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > >
- TemplateableElementImpl::getTemplateBinding() const
+std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > > TemplateableElementImpl::getTemplateBinding() const
 {
 
     return m_templateBinding;
@@ -181,7 +188,7 @@ void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::Tem
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TemplateableElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > TemplateableElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -157,9 +159,10 @@ namespace uml
 		public:
  			Action(const Action &) {}
 			Action& operator=(Action const&) = delete;
-	
+
 		protected:
 			Action(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -176,15 +179,13 @@ namespace uml
 			 Return this Action and all Actions contained directly or indirectly in it. By default only the Action itself is returned, but the operation is overridden for StructuredActivityNodes.
 			result = (self->asSet())
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Action> >
-			 allActions()  = 0;
+			virtual std::shared_ptr<Bag<uml::Action> > allActions()  = 0;
 			
 			/*!
 			 Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> >
-			 allOwnedNodes()  = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes()  = 0;
 			
 			/*!
 			 result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
@@ -194,8 +195,7 @@ namespace uml
 			endif
 			)
 			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<uml::Behavior> 
-			 containingBehavior()  = 0;
+			virtual std::shared_ptr<uml::Behavior> containingBehavior()  = 0;
 			
 			
 			//*********************************
@@ -224,14 +224,12 @@ namespace uml
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Constraint, uml::Element > >
-			 getLocalPostcondition() const = 0;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element > > getLocalPostcondition() const = 0;
 			
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Constraint, uml::Element > >
-			 getLocalPrecondition() const = 0;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element > > getLocalPrecondition() const = 0;
 			
 			
 			
@@ -256,23 +254,19 @@ namespace uml
 			/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 m_input;
+			std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > m_input;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is completed.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<Subset<uml::Constraint, uml::Element > >
-			 m_localPostcondition;
+			std::shared_ptr<Subset<uml::Constraint, uml::Element > > m_localPostcondition;
 			/*!
 			 A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<Subset<uml::Constraint, uml::Element > >
-			 m_localPrecondition;
+			std::shared_ptr<Subset<uml::Constraint, uml::Element > > m_localPrecondition;
 			/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 m_output;
+			std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > m_output;
 			
 
 		public:
@@ -280,26 +274,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 getOutput() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
 	};
 
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -68,6 +68,19 @@ LinkEndDataImpl::~LinkEndDataImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
+			:LinkEndDataImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 {
 	//create copy of all Attributes
@@ -78,9 +91,6 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 	//copy references with no containment (soft copy)
 	
 	m_end  = obj.getEnd();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -136,49 +146,43 @@ std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InputPin> >
- LinkEndDataImpl::allPins() 
+std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -197,8 +201,7 @@ void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
     m_end = _end;
 }
 
-		std::shared_ptr<Subset<uml::QualifierValue, uml::Element > >
- LinkEndDataImpl::getQualifier() const
+std::shared_ptr<Subset<uml::QualifierValue, uml::Element > > LinkEndDataImpl::getQualifier() const
 {
 
     return m_qualifier;
@@ -218,7 +221,7 @@ void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

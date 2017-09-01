@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -53,6 +53,19 @@ MultiplicityElementImpl::~MultiplicityElementImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > par_owner)
+			:MultiplicityElementImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj):MultiplicityElementImpl()
 {
 	//create copy of all Attributes
@@ -66,9 +79,6 @@ MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl &
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 
@@ -123,9 +133,9 @@ std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void MultiplicityElementImpl::setIsOrdered (bool _isOrdered)
+void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
@@ -135,7 +145,7 @@ bool MultiplicityElementImpl::getIsOrdered() const
 	return m_isOrdered;
 }
 
-void MultiplicityElementImpl::setIsUnique (bool _isUnique)
+void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 {
 	m_isUnique = _isUnique;
 } 
@@ -145,7 +155,7 @@ bool MultiplicityElementImpl::getIsUnique() const
 	return m_isUnique;
 }
 
-void MultiplicityElementImpl::setLower (int _lower)
+void MultiplicityElementImpl::setLower(int _lower)
 {
 	m_lower = _lower;
 } 
@@ -155,7 +165,7 @@ int MultiplicityElementImpl::getLower() const
 	return m_lower;
 }
 
-void MultiplicityElementImpl::setUpper (int _upper)
+void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
 } 
@@ -168,85 +178,73 @@ int MultiplicityElementImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool
- MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) 
+bool MultiplicityElementImpl::compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) 
+bool MultiplicityElementImpl::includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::is(int lowerbound,int upperbound) 
+bool MultiplicityElementImpl::is(int lowerbound,int upperbound) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::isMultivalued() 
+bool MultiplicityElementImpl::isMultivalued() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int
- MultiplicityElementImpl::lowerBound() 
+int MultiplicityElementImpl::lowerBound() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int
- MultiplicityElementImpl::upperBound() 
+int MultiplicityElementImpl::upperBound() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MultiplicityElementImpl::value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool MultiplicityElementImpl::value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -278,7 +276,7 @@ void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecificat
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > MultiplicityElementImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > MultiplicityElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

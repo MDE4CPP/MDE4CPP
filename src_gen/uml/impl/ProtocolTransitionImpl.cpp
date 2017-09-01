@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -85,6 +85,19 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Region > par_container)
+			:ProtocolTransitionImpl()
+			{
+			    m_container = par_container;
+			}
+
+
+
+
+
+
 ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj):ProtocolTransitionImpl()
 {
 	//create copy of all Attributes
@@ -99,29 +112,24 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	m_container  = obj.getContainer();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-		std::shared_ptr< Bag<uml::Operation> >
-	 _referred = obj.getReferred();
-	m_referred.reset(new 	 Bag<uml::Operation> 
-	(*(obj.getReferred().get())));
+	std::shared_ptr< Bag<uml::Operation> > _referred = obj.getReferred();
+	m_referred.reset(new Bag<uml::Operation>(*(obj.getReferred().get())));
 
 	m_source  = obj.getSource();
 
@@ -131,13 +139,6 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -251,35 +252,31 @@ std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ProtocolTransitionImpl::associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ProtocolTransitionImpl::belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Operation> >
- ProtocolTransitionImpl::getReferreds() 
+std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ProtocolTransitionImpl::refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -308,8 +305,7 @@ void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _p
     m_preCondition = _preCondition;
 }
 
-	std::shared_ptr< Bag<uml::Operation> >
- ProtocolTransitionImpl::getReferred() const
+std::shared_ptr< Bag<uml::Operation> > ProtocolTransitionImpl::getReferred() const
 {
 
     return m_referred;
@@ -319,30 +315,29 @@ void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _p
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::NamedElement> > ProtocolTransitionImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > ProtocolTransitionImpl::getMember() const
 {
 	return m_member;
-}
-		std::shared_ptr<Union<uml::Element> > ProtocolTransitionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > ProtocolTransitionImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
 }
 std::shared_ptr<uml::Namespace > ProtocolTransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ProtocolTransitionImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::Element> > ProtocolTransitionImpl::getOwnedElement() const
 {
-	return m_ownedMember;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
+std::weak_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ProtocolTransitionImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolTransitionImpl::getOwnedMember() const
+{
+	return m_ownedMember;
 }
 
 

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			RelationshipImpl();
 
+			//Additional constructors for the containments back reference
+			RelationshipImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
+
 		public:
 			//destructor
 			virtual ~RelationshipImpl();
@@ -71,12 +79,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

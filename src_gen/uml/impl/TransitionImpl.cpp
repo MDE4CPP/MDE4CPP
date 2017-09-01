@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -110,6 +110,19 @@ TransitionImpl::~TransitionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TransitionImpl::TransitionImpl(std::weak_ptr<uml::Region > par_container)
+			:TransitionImpl()
+			{
+			    m_container = par_container;
+			}
+
+
+
+
+
+
 TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
 {
 	//create copy of all Attributes
@@ -124,24 +137,21 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	m_container  = obj.getContainer();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_source  = obj.getSource();
 
@@ -151,13 +161,6 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -266,9 +269,9 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void TransitionImpl::setKind (TransitionKind _kind)
+void TransitionImpl::setKind(TransitionKind _kind)
 {
 	m_kind = _kind;
 } 
@@ -281,78 +284,67 @@ TransitionKind TransitionImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StateMachine> 
- TransitionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> 
- TransitionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TransitionImpl::state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TransitionImpl::state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -361,7 +353,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Region > TransitionImpl::getContainer() const
+std::weak_ptr<uml::Region > TransitionImpl::getContainer() const
 {
 //assert(m_container);
     return m_container;
@@ -421,8 +413,7 @@ void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
     m_target = _target;
 }
 
-		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
- TransitionImpl::getTrigger() const
+std::shared_ptr<Subset<uml::Trigger, uml::Element > > TransitionImpl::getTrigger() const
 {
 
     return m_trigger;
@@ -432,12 +423,11 @@ void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- TransitionImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::NamedElement> > TransitionImpl::getMember() const
 {
-	return m_ownedMember;
+	return m_member;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > TransitionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > TransitionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
@@ -445,17 +435,17 @@ std::shared_ptr<uml::Namespace > TransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::NamedElement> > TransitionImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<Union<uml::Element> > TransitionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > TransitionImpl::getOwner() const
+std::weak_ptr<uml::Element > TransitionImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > TransitionImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::shared_ptr<Union<uml::Element> > TransitionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

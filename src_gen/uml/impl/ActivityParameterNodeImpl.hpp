@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,20 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ActivityParameterNodeImpl();
 
+			//Additional constructors for the containments back reference
+			ActivityParameterNodeImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ActivityParameterNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ActivityParameterNodeImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ActivityParameterNodeImpl();
@@ -60,34 +76,29 @@ namespace uml
 				(parameter.direction = ParameterDirectionKind::out or 
 				 parameter.direction = ParameterDirectionKind::inout or 
 				 parameter.direction = ParameterDirectionKind::return) */ 
-			virtual bool
-			 no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The parameter of an ActivityParameterNode must be from the containing Activity.
 			activity.ownedParameter->includes(parameter) */ 
-			virtual bool
-			 has_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool has_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of an ActivityParameterNode is the same as the type of its parameter.
 			type = parameter.type */ 
-			virtual bool
-			 same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
 			(outgoing->notEmpty() and incoming->isEmpty()) implies 
 				(parameter.direction = ParameterDirectionKind::_'in' or 
 				 parameter.direction = ParameterDirectionKind::inout) */ 
-			virtual bool
-			 no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
 			incoming->isEmpty() or outgoing->isEmpty() */ 
-			virtual bool
-			 no_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -114,18 +125,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

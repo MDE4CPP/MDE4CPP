@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -62,6 +62,19 @@ TemplateParameterImpl::~TemplateParameterImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+			:TemplateParameterImpl()
+			{
+			    m_signature = par_signature;
+			}
+
+
+
+
+
+
 TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):TemplateParameterImpl()
 {
 	//create copy of all Attributes
@@ -73,12 +86,11 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):
 	
 	m_default  = obj.getDefault();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_parameteredElement  = obj.getParameteredElement();
+
+	m_signature  = obj.getSignature();
 
 
     
@@ -114,13 +126,6 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
-	if(obj.getSignature()!=nullptr)
-	{
-		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
-	#endif
 
 	
 
@@ -139,14 +144,13 @@ std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TemplateParameterImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateParameterImpl::must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -195,7 +199,7 @@ void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::Parameter
     m_parameteredElement = _parameteredElement;
 }
 
-std::shared_ptr<uml::TemplateSignature > TemplateParameterImpl::getSignature() const
+std::weak_ptr<uml::TemplateSignature > TemplateParameterImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
@@ -208,11 +212,11 @@ void TemplateParameterImpl::setSignature(std::shared_ptr<uml::TemplateSignature>
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > TemplateParameterImpl::getOwner() const
+std::weak_ptr<uml::Element > TemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > TemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > TemplateParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

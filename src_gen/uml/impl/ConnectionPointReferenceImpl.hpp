@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ConnectionPointReferenceImpl();
 
+			//Additional constructors for the containments back reference
+			ConnectionPointReferenceImpl(std::weak_ptr<uml::State > par_state);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ConnectionPointReferenceImpl();
@@ -57,14 +65,12 @@ namespace uml
 			/*!
 			 The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool
-			 exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
-			virtual bool
-			 entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -79,19 +85,17 @@ namespace uml
 			/*!
 			 The entryPoint Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Pseudostate> >
-			 getEntry() const ;
+			virtual std::shared_ptr< Bag<uml::Pseudostate> > getEntry() const ;
 			
 			/*!
 			 The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Pseudostate> >
-			 getExit() const ;
+			virtual std::shared_ptr< Bag<uml::Pseudostate> > getExit() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<uml::State > getState() const ;
+			virtual std::weak_ptr<uml::State > getState() const ;
 			
 			/*!
 			 The State in which the ConnectionPointReference is defined.
@@ -103,15 +107,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

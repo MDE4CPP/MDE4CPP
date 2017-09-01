@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -87,6 +87,41 @@ InformationItemImpl::~InformationItemImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			InformationItemImpl::InformationItemImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:InformationItemImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InformationItemImpl::InformationItemImpl(std::shared_ptr<uml::Package > par_package)
+			:InformationItemImpl()
+			{
+			    m_package = par_package;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::Element > par_owner)
+			:InformationItemImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):InformationItemImpl()
 {
 	//create copy of all Attributes
@@ -102,46 +137,35 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):Inform
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _represented = obj.getRepresented();
-	m_represented.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getRepresented().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	std::shared_ptr< Bag<uml::Classifier> > _represented = obj.getRepresented();
+	m_represented.reset(new Bag<uml::Classifier>(*(obj.getRepresented().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
     
@@ -233,13 +257,6 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):Inform
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getPackage()!=nullptr)
 	{
 		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
@@ -301,28 +318,25 @@ std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- InformationItemImpl::has_no(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::has_no(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- InformationItemImpl::not_instantiable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::not_instantiable(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- InformationItemImpl::sources_and_targets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InformationItemImpl::sources_and_targets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -331,8 +345,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Classifier> >
- InformationItemImpl::getRepresented() const
+std::shared_ptr< Bag<uml::Classifier> > InformationItemImpl::getRepresented() const
 {
 
     return m_represented;
@@ -342,12 +355,11 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- InformationItemImpl::getOwnedMember() const
+std::weak_ptr<uml::Element > InformationItemImpl::getOwner() const
 {
-	return m_ownedMember;
+	return m_owner;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > InformationItemImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > InformationItemImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
@@ -355,22 +367,21 @@ std::shared_ptr<uml::Namespace > InformationItemImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > InformationItemImpl::getOwnedElement() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > InformationItemImpl::getOwnedMember() const
 {
-	return m_ownedElement;
+	return m_ownedMember;
 }
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- InformationItemImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > InformationItemImpl::getFeature() const
 {
 	return m_feature;
 }
-		std::shared_ptr<Union<uml::NamedElement> > InformationItemImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > InformationItemImpl::getMember() const
 {
 	return m_member;
 }
-std::shared_ptr<uml::Element > InformationItemImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > InformationItemImpl::getOwnedElement() const
 {
-	return m_owner;
+	return m_ownedElement;
 }
 
 

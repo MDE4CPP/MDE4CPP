@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -84,6 +84,41 @@ DependencyImpl::~DependencyImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DependencyImpl::DependencyImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DependencyImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:DependencyImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DependencyImpl::DependencyImpl(std::weak_ptr<uml::Element > par_owner)
+			:DependencyImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 {
 	//create copy of all Attributes
@@ -96,18 +131,15 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -146,13 +178,6 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
 	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
 	{
@@ -176,7 +201,7 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -186,16 +211,14 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > >
- DependencyImpl::getClient() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > > DependencyImpl::getClient() const
 {
 //assert(m_client);
     return m_client;
 }
 
 
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > >
- DependencyImpl::getSupplier() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element > > DependencyImpl::getSupplier() const
 {
 //assert(m_supplier);
     return m_supplier;
@@ -205,27 +228,25 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DependencyImpl::getRelatedElement() const
-{
-	return m_relatedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DependencyImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DependencyImpl::getTarget() const
 {
 	return m_target;
 }
-std::shared_ptr<uml::Element > DependencyImpl::getOwner() const
+std::weak_ptr<uml::Element > DependencyImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DependencyImpl::getSource() const
+std::shared_ptr<Union<uml::Element> > DependencyImpl::getRelatedElement() const
 {
-	return m_source;
+	return m_relatedElement;
 }
-		std::shared_ptr<Union<uml::Element> > DependencyImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DependencyImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DependencyImpl::getSource() const
+{
+	return m_source;
 }
 
 

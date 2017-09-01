@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			EnumerationLiteralImpl();
 
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EnumerationLiteralImpl();
@@ -56,8 +64,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getClassifiers()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers()  ;
 			
 			
 			
@@ -74,7 +81,7 @@ namespace uml
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<uml::Enumeration > getEnumeration() const ;
+			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const ;
 			
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
@@ -86,15 +93,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

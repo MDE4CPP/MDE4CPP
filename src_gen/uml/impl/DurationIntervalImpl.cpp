@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -54,6 +54,30 @@ DurationIntervalImpl::~DurationIntervalImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DurationIntervalImpl::DurationIntervalImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DurationIntervalImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:DurationIntervalImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):DurationIntervalImpl()
 {
 	//create copy of all Attributes
@@ -66,19 +90,16 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_max  = obj.getMax();
 
 	m_min  = obj.getMin();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -111,13 +132,6 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 
 
 }
@@ -133,7 +147,7 @@ std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -147,11 +161,11 @@ std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DurationIntervalImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DurationIntervalImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > DurationIntervalImpl::getOwner() const
+std::weak_ptr<uml::Element > DurationIntervalImpl::getOwner() const
 {
 	return m_owner;
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -50,6 +50,19 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
+			:LinkEndCreationDataImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj):LinkEndCreationDataImpl()
 {
 	//create copy of all Attributes
@@ -63,9 +76,6 @@ LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl &
 	m_end  = obj.getEnd();
 
 	m_insertAt  = obj.getInsertAt();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -114,9 +124,9 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void LinkEndCreationDataImpl::setIsReplaceAll (bool _isReplaceAll)
+void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -129,8 +139,7 @@ bool LinkEndCreationDataImpl::getIsReplaceAll() const
 //*********************************
 // Operations
 //*********************************
-bool
- LinkEndCreationDataImpl::insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndCreationDataImpl::insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -152,7 +161,7 @@ void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insert
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > LinkEndCreationDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LinkEndCreationDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ConnectorEndImpl();
 
+			//Additional constructors for the containments back reference
+			ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ConnectorEndImpl();
@@ -58,26 +66,22 @@ namespace uml
 			 If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role)) */ 
-			virtual bool
-			 role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool role_and_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty() */ 
-			virtual bool
-			 part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool part_with_port_empty(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
 			self.compatibleWith(definingEnd) */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port) */ 
-			virtual bool
-			 self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool self_part_with_port(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -122,7 +126,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

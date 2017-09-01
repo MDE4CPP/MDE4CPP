@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -72,6 +72,19 @@ VertexImpl::~VertexImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			VertexImpl::VertexImpl(std::weak_ptr<uml::Region > par_container)
+			:VertexImpl()
+			{
+			    m_container = par_container;
+			}
+
+
+
+
+
+
 VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 {
 	//create copy of all Attributes
@@ -84,23 +97,16 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getIncoming().get())));
+	m_container  = obj.getContainer();
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -108,13 +114,6 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -153,42 +152,37 @@ std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StateMachine> 
- VertexImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> VertexImpl::containingStateMachine() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Transition> >
- VertexImpl::getIncomings() 
+std::shared_ptr<Bag<uml::Transition> > VertexImpl::getIncomings() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Transition> >
- VertexImpl::getOutgoings() 
+std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r) 
+bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s) 
+bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -197,7 +191,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Region > VertexImpl::getContainer() const
+std::weak_ptr<uml::Region > VertexImpl::getContainer() const
 {
 
     return m_container;
@@ -207,16 +201,14 @@ void VertexImpl::setContainer(std::shared_ptr<uml::Region> _container)
     m_container = _container;
 }
 
-	std::shared_ptr< Bag<uml::Transition> >
- VertexImpl::getIncoming() const
+std::shared_ptr< Bag<uml::Transition> > VertexImpl::getIncoming() const
 {
 
     return m_incoming;
 }
 
 
-	std::shared_ptr< Bag<uml::Transition> >
- VertexImpl::getOutgoing() const
+std::shared_ptr< Bag<uml::Transition> > VertexImpl::getOutgoing() const
 {
 
     return m_outgoing;
@@ -230,11 +222,11 @@ std::shared_ptr<uml::Namespace > VertexImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > VertexImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > VertexImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > VertexImpl::getOwner() const
+std::weak_ptr<uml::Element > VertexImpl::getOwner() const
 {
 	return m_owner;
 }

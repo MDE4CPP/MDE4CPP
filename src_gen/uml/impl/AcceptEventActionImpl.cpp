@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Action.hpp"
@@ -106,6 +106,30 @@ AcceptEventActionImpl::~AcceptEventActionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			AcceptEventActionImpl::AcceptEventActionImpl(std::shared_ptr<uml::Activity > par_activity)
+			:AcceptEventActionImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			AcceptEventActionImpl::AcceptEventActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:AcceptEventActionImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+
 AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):AcceptEventActionImpl()
 {
 	//create copy of all Attributes
@@ -121,36 +145,29 @@ AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -194,13 +211,6 @@ AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
 	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
@@ -287,9 +297,9 @@ std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void AcceptEventActionImpl::setIsUnmarshall (bool _isUnmarshall)
+void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
 {
 	m_isUnmarshall = _isUnmarshall;
 } 
@@ -302,36 +312,31 @@ bool AcceptEventActionImpl::getIsUnmarshall() const
 //*********************************
 // Operations
 //*********************************
-bool
- AcceptEventActionImpl::conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- AcceptEventActionImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::no_input_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- AcceptEventActionImpl::no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- AcceptEventActionImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool AcceptEventActionImpl::unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -340,16 +345,14 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > >
- AcceptEventActionImpl::getResult() const
+std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin > > AcceptEventActionImpl::getResult() const
 {
 
     return m_result;
 }
 
 
-		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
- AcceptEventActionImpl::getTrigger() const
+std::shared_ptr<Subset<uml::Trigger, uml::Element > > AcceptEventActionImpl::getTrigger() const
 {
 //assert(m_trigger);
     return m_trigger;
@@ -359,26 +362,25 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::RedefinableElement> > AcceptEventActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::Element> > AcceptEventActionImpl::getOwnedElement() const
 {
-	return m_redefinedElement;
+	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
- AcceptEventActionImpl::getOutput() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > AcceptEventActionImpl::getOutput() const
 {
 	return m_output;
 }
-std::shared_ptr<uml::Element > AcceptEventActionImpl::getOwner() const
+std::shared_ptr<Union<uml::RedefinableElement> > AcceptEventActionImpl::getRedefinedElement() const
 {
-	return m_owner;
+	return m_redefinedElement;
 }
-		std::shared_ptr<Union<uml::ActivityGroup> > AcceptEventActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup> > AcceptEventActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-		std::shared_ptr<Union<uml::Element> > AcceptEventActionImpl::getOwnedElement() const
+std::weak_ptr<uml::Element > AcceptEventActionImpl::getOwner() const
 {
-	return m_ownedElement;
+	return m_owner;
 }
 
 

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -48,6 +50,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			PackageableElementImpl();
 
+			//Additional constructors for the containments back reference
+			PackageableElementImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			PackageableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
+
 		public:
 			//destructor
 			virtual ~PackageableElementImpl();
@@ -58,8 +70,7 @@ namespace uml
 			/*!
 			 A PackageableElement owned by a Namespace must have a visibility.
 			visibility = null implies namespace = null */ 
-			virtual bool
-			 namespace_needs_visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool namespace_needs_visibility(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -77,12 +88,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

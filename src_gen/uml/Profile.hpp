@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -177,9 +179,10 @@ namespace uml
 		public:
  			Profile(const Profile &) {}
 			Profile& operator=(Profile const&) = delete;
-	
+
 		protected:
 			Profile(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -199,60 +202,49 @@ namespace uml
 			packagedElement->
 			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool
-			 metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
 			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool
-			 references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile. */ 
-			virtual std::shared_ptr<ecore::EObject> 
-			 create(std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents. */ 
-			virtual std::shared_ptr<ecore::EPackage> 
-			 define()  = 0;
+			virtual std::shared_ptr<ecore::EPackage> define()  = 0;
 			
 			/*!
 			 Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context. */ 
-			virtual std::shared_ptr<ecore::EPackage> 
-			 define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of this profile. */ 
-			virtual std::shared_ptr<ecore::EPackage> 
-			 getDefinition()  = 0;
+			virtual std::shared_ptr<ecore::EPackage> getDefinition()  = 0;
 			
 			/*!
 			 Retrieves the current definition (Ecore representation) of the specified named element in this profile. */ 
-			virtual std::shared_ptr<ecore::ENamedElement> 
-			 getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  = 0;
 			
 			/*!
 			 Retrieves the extensions owned by this profile, excluding non-required extensions if indicated. */ 
-			virtual std::shared_ptr<Bag<uml::Extension> >
-			 getOwnedExtensions(bool requiredOnly)  = 0;
+			virtual std::shared_ptr<Bag<uml::Extension> > getOwnedExtensions(bool requiredOnly)  = 0;
 			
 			/*!
 			 Retrieves the metaclasses referenced by this profile. */ 
-			virtual std::shared_ptr<Bag<uml::Class> >
-			 getReferencedMetaclasses()  = 0;
+			virtual std::shared_ptr<Bag<uml::Class> > getReferencedMetaclasses()  = 0;
 			
 			/*!
 			 Retrieves the metamodels referenced by this profile. */ 
-			virtual std::shared_ptr<Bag<uml::Model> >
-			 getReferencedMetamodels()  = 0;
+			virtual std::shared_ptr<Bag<uml::Model> > getReferencedMetamodels()  = 0;
 			
 			/*!
 			 Determines whether this profile is defined. */ 
-			virtual bool
-			 isDefined()  = 0;
+			virtual bool isDefined()  = 0;
 			
 			
 			//*********************************
@@ -265,14 +257,12 @@ namespace uml
 			/*!
 			 References a metaclass that may be extended.
 			<p>From package UML::Packages.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ > >
-			 getMetaclassReference() const = 0;
+			virtual std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ > > getMetaclassReference() const = 0;
 			
 			/*!
 			 References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p> */
-			virtual 		std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ > >
-			 getMetamodelReference() const = 0;
+			virtual std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ > > getMetamodelReference() const = 0;
 			
 			
 
@@ -288,13 +278,11 @@ namespace uml
 			/*!
 			 References a metaclass that may be extended.
 			<p>From package UML::Packages.</p> */
-					std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ > >
-			 m_metaclassReference;
+			std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ > > m_metaclassReference;
 			/*!
 			 References a package containing (directly or indirectly) metaclasses that may be extended.
 			<p>From package UML::Packages.</p> */
-					std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ > >
-			 m_metamodelReference;
+			std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ > > m_metamodelReference;
 			
 
 		public:
@@ -302,22 +290,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
 	};
 
 }

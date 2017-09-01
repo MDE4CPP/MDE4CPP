@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -92,9 +94,13 @@ namespace uml
 		public:
  			Constraint(const Constraint &) {}
 			Constraint& operator=(Constraint const&) = delete;
-	
+
 		protected:
 			Constraint(){}
+
+
+			//Additional constructors for the containments back reference
+			Constraint(std::weak_ptr<uml::Namespace > par_context){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -107,19 +113,16 @@ namespace uml
 			//*********************************
 			/*!
 			 The ValueSpecification for a Constraint must evaluate to a Boolean value. */ 
-			virtual bool
-			 boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Evaluating the ValueSpecification for a Constraint must not have side effects. */ 
-			virtual bool
-			 no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self) */ 
-			virtual bool
-			 not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -132,13 +135,12 @@ namespace uml
 			/*!
 			 The ordered set of Elements referenced by this Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Element> >
-			 getConstrainedElement() const = 0;
+			virtual std::shared_ptr< Bag<uml::Element> > getConstrainedElement() const = 0;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getContext() const = 0;
+			virtual std::weak_ptr<uml::Namespace > getContext() const = 0;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
@@ -167,12 +169,11 @@ namespace uml
 			/*!
 			 The ordered set of Elements referenced by this Constraint.
 			<p>From package UML::CommonStructure.</p> */
-				std::shared_ptr< Bag<uml::Element> >
-			 m_constrainedElement;
+			std::shared_ptr< Bag<uml::Element> > m_constrainedElement;
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Namespace > m_context;
+			std::weak_ptr<uml::Namespace > m_context;
 			/*!
 			 A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p> */
@@ -184,15 +185,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
 	};
 
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Class.hpp"
@@ -44,6 +44,9 @@ FactoryImpl::~FactoryImpl()
 	
 }
 
+
+
+
 FactoryImpl::FactoryImpl(const FactoryImpl & obj):FactoryImpl()
 {
 	//create copy of all Attributes
@@ -53,8 +56,8 @@ FactoryImpl::FactoryImpl(const FactoryImpl & obj):FactoryImpl()
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
+	m_ownedElement.reset(new Union<uml::Element>(*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -93,14 +96,13 @@ std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Element> 
- FactoryImpl::create(std::shared_ptr<uml::Class>  metaClass) 
+std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class>  metaClass) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -113,7 +115,7 @@ std::shared_ptr<uml::Element>
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > FactoryImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > FactoryImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

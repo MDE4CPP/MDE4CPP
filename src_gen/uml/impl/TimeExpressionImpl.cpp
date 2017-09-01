@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -63,6 +63,30 @@ TimeExpressionImpl::~TimeExpressionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TimeExpressionImpl::TimeExpressionImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:TimeExpressionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:TimeExpressionImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpressionImpl()
 {
 	//create copy of all Attributes
@@ -75,20 +99,15 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Observation> >
-	 _observation = obj.getObservation();
-	m_observation.reset(new 	 Bag<uml::Observation> 
-	(*(obj.getObservation().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Observation> > _observation = obj.getObservation();
+	m_observation.reset(new Bag<uml::Observation>(*(obj.getObservation().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -128,13 +147,6 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 
 	
 
@@ -151,14 +163,13 @@ std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TimeExpressionImpl::no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -177,8 +188,7 @@ void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
     m_expr = _expr;
 }
 
-	std::shared_ptr< Bag<uml::Observation> >
- TimeExpressionImpl::getObservation() const
+std::shared_ptr< Bag<uml::Observation> > TimeExpressionImpl::getObservation() const
 {
 
     return m_observation;
@@ -188,13 +198,13 @@ void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TimeExpressionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > TimeExpressionImpl::getOwner() const
+std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > TimeExpressionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

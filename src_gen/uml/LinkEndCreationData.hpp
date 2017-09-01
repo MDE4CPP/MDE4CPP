@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -81,9 +83,10 @@ namespace uml
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
 			LinkEndCreationData& operator=(LinkEndCreationData const&) = delete;
-	
+
 		protected:
 			LinkEndCreationData(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -102,8 +105,7 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool
-			 insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -160,7 +162,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

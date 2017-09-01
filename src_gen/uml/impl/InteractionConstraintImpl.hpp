@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			InteractionConstraintImpl();
 
+			//Additional constructors for the containments back reference
+			InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_context);
+
+
+
+
 		public:
 			//destructor
 			virtual ~InteractionConstraintImpl();
@@ -59,40 +67,34 @@ namespace uml
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
 			InteractionOperatorKind::loop */ 
-			virtual bool
-			 minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0 */ 
-			virtual bool
-			 minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0 */ 
-			virtual bool
-			 maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
-			virtual bool
-			 dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The constraint may contain references to global data or write-once data. */ 
-			virtual bool
-			 global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool global_data(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() ) */ 
-			virtual bool
-			 maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -128,15 +130,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

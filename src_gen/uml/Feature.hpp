@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -87,9 +89,10 @@ namespace uml
 		public:
  			Feature(const Feature &) {}
 			Feature& operator=(Feature const&) = delete;
-	
+
 		protected:
 			Feature(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -137,7 +140,7 @@ namespace uml
 			/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-					std::shared_ptr<Union<uml::Classifier> > m_featuringClassifier;
+			std::shared_ptr<Union<uml::Classifier> > m_featuringClassifier;
 			
 
 		public:
@@ -145,15 +148,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

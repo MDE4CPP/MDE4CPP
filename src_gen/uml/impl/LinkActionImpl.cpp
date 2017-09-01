@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Action.hpp"
@@ -108,6 +108,30 @@ LinkActionImpl::~LinkActionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkActionImpl::LinkActionImpl(std::shared_ptr<uml::Activity > par_activity)
+			:LinkActionImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:LinkActionImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+
 LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 {
 	//create copy of all Attributes
@@ -122,36 +146,29 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -203,13 +220,6 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::InputPin>> _inputValueList = obj.getInputValue();
 	for(std::shared_ptr<uml::InputPin> _inputValue : *_inputValueList)
@@ -288,35 +298,31 @@ std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Association> 
- LinkActionImpl::association() 
+std::shared_ptr<uml::Association> LinkActionImpl::association() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkActionImpl::not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::not_static(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkActionImpl::same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::same_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkActionImpl::same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkActionImpl::same_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -325,16 +331,14 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::LinkEndData, uml::Element > >
- LinkActionImpl::getEndData() const
+std::shared_ptr<Subset<uml::LinkEndData, uml::Element > > LinkActionImpl::getEndData() const
 {
 //assert(m_endData);
     return m_endData;
 }
 
 
-		std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
- LinkActionImpl::getInputValue() const
+std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > LinkActionImpl::getInputValue() const
 {
 //assert(m_inputValue);
     return m_inputValue;
@@ -344,26 +348,25 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
- LinkActionImpl::getInput() const
-{
-	return m_input;
-}
-		std::shared_ptr<Union<uml::Element> > LinkActionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::ActivityGroup> > LinkActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup> > LinkActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > LinkActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::Element> > LinkActionImpl::getOwnedElement() const
 {
-	return m_redefinedElement;
+	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > LinkActionImpl::getOwner() const
+std::weak_ptr<uml::Element > LinkActionImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > LinkActionImpl::getInput() const
+{
+	return m_input;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > LinkActionImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 
 

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -64,6 +64,19 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration)
+			:EnumerationLiteralImpl()
+			{
+			    m_enumeration = par_enumeration;
+			}
+
+
+
+
+
+
 EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj):EnumerationLiteralImpl()
 {
 	//create copy of all Attributes
@@ -76,25 +89,20 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _classifier = obj.getClassifier();
-	m_classifier.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getClassifier().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _classifier = obj.getClassifier();
+	m_classifier.reset(new Bag<uml::Classifier>(*(obj.getClassifier().get())));
 
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::PackageableElement> >
-	 _deployedElement = obj.getDeployedElement();
-	m_deployedElement.reset(new 	 Bag<uml::PackageableElement> 
-	(*(obj.getDeployedElement().get())));
+	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
+	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_enumeration  = obj.getEnumeration();
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -118,13 +126,6 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
-	if(obj.getEnumeration()!=nullptr)
-	{
-		m_enumeration.reset(dynamic_cast<uml::Enumeration*>(obj.getEnumeration()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enumeration" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
@@ -139,13 +140,6 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Slot>> _slotList = obj.getSlot();
 	for(std::shared_ptr<uml::Slot> _slot : *_slotList)
@@ -177,7 +171,7 @@ std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -185,8 +179,7 @@ std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 //*********************************
 
 
-std::shared_ptr<Bag<uml::Classifier> >
- EnumerationLiteralImpl::getClassifiers() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationLiteralImpl::getClassifiers() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -195,7 +188,7 @@ std::shared_ptr<Bag<uml::Classifier> >
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Enumeration > EnumerationLiteralImpl::getEnumeration() const
+std::weak_ptr<uml::Enumeration > EnumerationLiteralImpl::getEnumeration() const
 {
 //assert(m_enumeration);
     return m_enumeration;
@@ -212,11 +205,11 @@ std::shared_ptr<uml::Namespace > EnumerationLiteralImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<Union<uml::Element> > EnumerationLiteralImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > EnumerationLiteralImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > EnumerationLiteralImpl::getOwner() const
+std::weak_ptr<uml::Element > EnumerationLiteralImpl::getOwner() const
 {
 	return m_owner;
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -141,6 +141,41 @@ StructuredClassifierImpl::~StructuredClassifierImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			StructuredClassifierImpl::StructuredClassifierImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:StructuredClassifierImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StructuredClassifierImpl::StructuredClassifierImpl(std::shared_ptr<uml::Package > par_package)
+			:StructuredClassifierImpl()
+			{
+			    m_package = par_package;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Element > par_owner)
+			:StructuredClassifierImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImpl & obj):StructuredClassifierImpl()
 {
 	//create copy of all Attributes
@@ -156,46 +191,35 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Property> >
-	 _part = obj.getPart();
-	m_part.reset(new 	 Bag<uml::Property> 
-	(*(obj.getPart().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
+	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
+
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
     
@@ -303,13 +327,6 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getPackage()!=nullptr)
 	{
 		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
@@ -386,28 +403,25 @@ std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::ConnectableElement> >
- StructuredClassifierImpl::allRoles() 
+std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRoles() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> 
- StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Property> >
- StructuredClassifierImpl::getParts() 
+std::shared_ptr<Bag<uml::Property> > StructuredClassifierImpl::getParts() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,24 +430,21 @@ std::shared_ptr<Bag<uml::Property> >
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement > >
- StructuredClassifierImpl::getOwnedAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement > > StructuredClassifierImpl::getOwnedAttribute() const
 {
 
     return m_ownedAttribute;
 }
 
 
-		std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement > >
- StructuredClassifierImpl::getOwnedConnector() const
+std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement > > StructuredClassifierImpl::getOwnedConnector() const
 {
 
     return m_ownedConnector;
 }
 
 
-	std::shared_ptr< Bag<uml::Property> >
- StructuredClassifierImpl::getPart() const
+std::shared_ptr< Bag<uml::Property> > StructuredClassifierImpl::getPart() const
 {
 
     return m_part;
@@ -446,45 +457,41 @@ std::shared_ptr<Bag<uml::Property> >
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- StructuredClassifierImpl::getFeature() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > StructuredClassifierImpl::getAttribute() const
 {
-	return m_feature;
+	return m_attribute;
 }
-		std::shared_ptr<Union<uml::Element> > StructuredClassifierImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > StructuredClassifierImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > StructuredClassifierImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > StructuredClassifierImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > StructuredClassifierImpl::getRole() const
+{
+	return m_role;
+}
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > StructuredClassifierImpl::getFeature() const
+{
+	return m_feature;
 }
 std::shared_ptr<uml::Namespace > StructuredClassifierImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > StructuredClassifierImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::NamedElement> > StructuredClassifierImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
- StructuredClassifierImpl::getAttribute() const
-{
-	return m_attribute;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > StructuredClassifierImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > StructuredClassifierImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- StructuredClassifierImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::NamedElement> > StructuredClassifierImpl::getMember() const
 {
-	return m_ownedMember;
-}
-		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
- StructuredClassifierImpl::getRole() const
-{
-	return m_role;
+	return m_member;
 }
 
 

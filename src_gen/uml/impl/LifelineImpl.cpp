@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -79,6 +79,19 @@ LifelineImpl::~LifelineImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LifelineImpl::LifelineImpl(std::weak_ptr<uml::Interaction > par_interaction)
+			:LifelineImpl()
+			{
+			    m_interaction = par_interaction;
+			}
+
+
+
+
+
+
 LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
 {
 	//create copy of all Attributes
@@ -91,20 +104,15 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::InteractionFragment> >
-	 _coveredBy = obj.getCoveredBy();
-	m_coveredBy.reset(new 	 Bag<uml::InteractionFragment> 
-	(*(obj.getCoveredBy().get())));
+	std::shared_ptr< Bag<uml::InteractionFragment> > _coveredBy = obj.getCoveredBy();
+	m_coveredBy.reset(new Bag<uml::InteractionFragment>(*(obj.getCoveredBy().get())));
 
 	m_decomposedAs  = obj.getDecomposedAs();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_interaction  = obj.getInteraction();
 
 	m_owner  = obj.getOwner();
 
@@ -121,13 +129,6 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getInteraction()!=nullptr)
-	{
-		m_interaction.reset(dynamic_cast<uml::Interaction*>(obj.getInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_interaction" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -167,35 +168,31 @@ std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- LifelineImpl::interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::interaction_uses_share_lifeline(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LifelineImpl::same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LifelineImpl::selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LifelineImpl::selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -204,8 +201,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::InteractionFragment> >
- LifelineImpl::getCoveredBy() const
+std::shared_ptr< Bag<uml::InteractionFragment> > LifelineImpl::getCoveredBy() const
 {
 
     return m_coveredBy;
@@ -222,7 +218,7 @@ void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _deco
     m_decomposedAs = _decomposedAs;
 }
 
-std::shared_ptr<uml::Interaction > LifelineImpl::getInteraction() const
+std::weak_ptr<uml::Interaction > LifelineImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
@@ -259,11 +255,11 @@ std::shared_ptr<uml::Namespace > LifelineImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > LifelineImpl::getOwner() const
+std::weak_ptr<uml::Element > LifelineImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > LifelineImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LifelineImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

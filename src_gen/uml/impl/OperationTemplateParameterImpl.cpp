@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -46,6 +46,19 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+			:OperationTemplateParameterImpl()
+			{
+			    m_signature = par_signature;
+			}
+
+
+
+
+
+
 OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj):OperationTemplateParameterImpl()
 {
 	//create copy of all Attributes
@@ -57,12 +70,11 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 	
 	m_default  = obj.getDefault();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_parameteredElement  = obj.getParameteredElement();
+
+	m_signature  = obj.getSignature();
 
 
     
@@ -98,13 +110,6 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
-	if(obj.getSignature()!=nullptr)
-	{
-		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
-	#endif
 
 
 }
@@ -120,14 +125,13 @@ std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() co
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- OperationTemplateParameterImpl::match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationTemplateParameterImpl::match_default_signature(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -140,11 +144,11 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > OperationTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > OperationTemplateParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
+std::weak_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }

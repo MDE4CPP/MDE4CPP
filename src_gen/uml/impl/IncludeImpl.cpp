@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -58,6 +58,19 @@ IncludeImpl::~IncludeImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase)
+			:IncludeImpl()
+			{
+			    m_includingCase = par_includingCase;
+			}
+
+
+
+
+
+
 IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 {
 	//create copy of all Attributes
@@ -70,18 +83,15 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_includingCase  = obj.getIncludingCase();
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
     
@@ -101,13 +111,6 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getIncludingCase()!=nullptr)
-	{
-		m_includingCase.reset(dynamic_cast<uml::UseCase*>(obj.getIncludingCase()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_includingCase" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
@@ -139,7 +142,7 @@ std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -159,7 +162,7 @@ void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
     m_addition = _addition;
 }
 
-std::shared_ptr<uml::UseCase > IncludeImpl::getIncludingCase() const
+std::weak_ptr<uml::UseCase > IncludeImpl::getIncludingCase() const
 {
 //assert(m_includingCase);
     return m_includingCase;
@@ -172,31 +175,29 @@ void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- IncludeImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getTarget() const
 {
-	return m_source;
+	return m_target;
 }
-std::shared_ptr<uml::Element > IncludeImpl::getOwner() const
+std::weak_ptr<uml::Element > IncludeImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > IncludeImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element> > IncludeImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- IncludeImpl::getTarget() const
+std::shared_ptr<Union<uml::Element> > IncludeImpl::getOwnedElement() const
 {
-	return m_target;
+	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getSource() const
+{
+	return m_source;
 }
 std::shared_ptr<uml::Namespace > IncludeImpl::getNamespace() const
 {
 	return m_namespace;
-}
-		std::shared_ptr<Union<uml::Element> > IncludeImpl::getOwnedElement() const
-{
-	return m_ownedElement;
 }
 
 

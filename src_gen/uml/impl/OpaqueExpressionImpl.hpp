@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			OpaqueExpressionImpl();
 
+			//Additional constructors for the containments back reference
+			OpaqueExpressionImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
+
 		public:
 			//destructor
 			virtual ~OpaqueExpressionImpl();
@@ -57,44 +69,38 @@ namespace uml
 			/*!
 			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
 			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool
-			 language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The behavior must have exactly one return result parameter.
 			behavior <> null implies
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool
-			 one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool
-			 only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query isIntegral() tells whether an expression is intended to produce an Integer.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isIntegral()  ;
+			virtual bool isIntegral()  ;
 			
 			/*!
 			 The query isNonNegative() tells whether an integer expression has a non-negative value.
 			self.isIntegral()
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isNonNegative()  ;
+			virtual bool isNonNegative()  ;
 			
 			/*!
 			 The query isPositive() tells whether an integer expression has a positive value.
 			result = (false)
 			self.isIntegral()
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isPositive()  ;
+			virtual bool isPositive()  ;
 			
 			
 			
@@ -103,8 +109,7 @@ namespace uml
 			self.isIntegral()
 			result = (0)
 			<p>From package UML::Values.</p> */ 
-			virtual int
-			 value()  ;
+			virtual int value()  ;
 			
 			
 			
@@ -146,12 +151,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

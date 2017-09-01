@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -65,6 +65,19 @@ ConstraintImpl::~ConstraintImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_context)
+			:ConstraintImpl()
+			{
+			    m_context = par_context;
+			}
+
+
+
+
+
+
 ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 {
 	//create copy of all Attributes
@@ -77,20 +90,17 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Element> >
-	 _constrainedElement = obj.getConstrainedElement();
-	m_constrainedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getConstrainedElement().get())));
+	std::shared_ptr< Bag<uml::Element> > _constrainedElement = obj.getConstrainedElement();
+	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_context  = obj.getContext();
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -98,13 +108,6 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContext()!=nullptr)
-	{
-		m_context.reset(dynamic_cast<uml::Namespace*>(obj.getContext()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -127,13 +130,6 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
 	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
@@ -158,28 +154,25 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ConstraintImpl::boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConstraintImpl::no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConstraintImpl::not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -188,15 +181,14 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Element> >
- ConstraintImpl::getConstrainedElement() const
+std::shared_ptr< Bag<uml::Element> > ConstraintImpl::getConstrainedElement() const
 {
 
     return m_constrainedElement;
 }
 
 
-std::shared_ptr<uml::Namespace > ConstraintImpl::getContext() const
+std::weak_ptr<uml::Namespace > ConstraintImpl::getContext() const
 {
 
     return m_context;
@@ -219,17 +211,17 @@ void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ConstraintImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ConstraintImpl::getOwnedElement() const
 {
 	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > ConstraintImpl::getOwner() const
-{
-	return m_owner;
 }
 std::shared_ptr<uml::Namespace > ConstraintImpl::getNamespace() const
 {
 	return m_namespace;
+}
+std::weak_ptr<uml::Element > ConstraintImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

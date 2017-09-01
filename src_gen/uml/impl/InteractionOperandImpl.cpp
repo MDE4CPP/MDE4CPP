@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -86,6 +86,41 @@ InteractionOperandImpl::~InteractionOperandImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			InteractionOperandImpl::InteractionOperandImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:InteractionOperandImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+			:InteractionOperandImpl()
+			{
+			    m_enclosingInteraction = par_enclosingInteraction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+			:InteractionOperandImpl()
+			{
+			    m_enclosingOperand = par_enclosingOperand;
+			}
+
+
+
+
+
+
 InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & obj):InteractionOperandImpl()
 {
 	//create copy of all Attributes
@@ -98,21 +133,18 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Lifeline> >
-	 _covered = obj.getCovered();
-	m_covered.reset(new 	 Bag<uml::Lifeline> 
-	(*(obj.getCovered().get())));
+	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	m_enclosingInteraction  = obj.getEnclosingInteraction();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_enclosingOperand  = obj.getEnclosingOperand();
+
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -135,20 +167,6 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	if(obj.getEnclosingInteraction()!=nullptr)
-	{
-		m_enclosingInteraction.reset(dynamic_cast<uml::Interaction*>(obj.getEnclosingInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingInteraction" << std::endl;
-	#endif
-	if(obj.getEnclosingOperand()!=nullptr)
-	{
-		m_enclosingOperand.reset(dynamic_cast<uml::InteractionOperand*>(obj.getEnclosingOperand()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingOperand" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::InteractionFragment>> _fragmentList = obj.getFragment();
 	for(std::shared_ptr<uml::InteractionFragment> _fragment : *_fragmentList)
@@ -236,21 +254,19 @@ std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- InteractionOperandImpl::guard_contain_references(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionOperandImpl::guard_contain_references(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- InteractionOperandImpl::guard_directly_prior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InteractionOperandImpl::guard_directly_prior(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -259,8 +275,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement > >
- InteractionOperandImpl::getFragment() const
+std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement > > InteractionOperandImpl::getFragment() const
 {
 
     return m_fragment;
@@ -280,24 +295,23 @@ void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > InteractionOperandImpl::getOwner() const
-{
-	return m_owner;
-}
 std::shared_ptr<uml::Namespace > InteractionOperandImpl::getNamespace() const
 {
 	return m_namespace;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- InteractionOperandImpl::getOwnedMember() const
+std::weak_ptr<uml::Element > InteractionOperandImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > InteractionOperandImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
-		std::shared_ptr<Union<uml::NamedElement> > InteractionOperandImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > InteractionOperandImpl::getMember() const
 {
 	return m_member;
 }
-		std::shared_ptr<Union<uml::Element> > InteractionOperandImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > InteractionOperandImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

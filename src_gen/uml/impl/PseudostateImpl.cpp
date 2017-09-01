@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -62,6 +62,30 @@ PseudostateImpl::~PseudostateImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::State > par_state)
+			:PseudostateImpl()
+			{
+			    m_state = par_state;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
+			:PseudostateImpl()
+			{
+			    m_stateMachine = par_stateMachine;
+			}
+
+
+
+
+
+
 PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 {
 	//create copy of all Attributes
@@ -75,37 +99,27 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getIncoming().get())));
+	m_container  = obj.getContainer();
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_state  = obj.getState();
+
+	m_stateMachine  = obj.getStateMachine();
 
 
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -129,20 +143,6 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getState()!=nullptr)
-	{
-		m_state.reset(dynamic_cast<uml::State*>(obj.getState()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_state" << std::endl;
-	#endif
-	if(obj.getStateMachine()!=nullptr)
-	{
-		m_stateMachine.reset(dynamic_cast<uml::StateMachine*>(obj.getStateMachine()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_stateMachine" << std::endl;
-	#endif
 
 
 }
@@ -158,9 +158,9 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void PseudostateImpl::setKind (PseudostateKind _kind)
+void PseudostateImpl::setKind(PseudostateKind _kind)
 {
 	m_kind = _kind;
 } 
@@ -173,64 +173,55 @@ PseudostateKind PseudostateImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-bool
- PseudostateImpl::choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::history_vertices(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PseudostateImpl::transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -239,7 +230,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::State > PseudostateImpl::getState() const
+std::weak_ptr<uml::State > PseudostateImpl::getState() const
 {
 
     return m_state;
@@ -249,7 +240,7 @@ void PseudostateImpl::setState(std::shared_ptr<uml::State> _state)
     m_state = _state;
 }
 
-std::shared_ptr<uml::StateMachine > PseudostateImpl::getStateMachine() const
+std::weak_ptr<uml::StateMachine > PseudostateImpl::getStateMachine() const
 {
 
     return m_stateMachine;
@@ -262,11 +253,11 @@ void PseudostateImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateM
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > PseudostateImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > PseudostateImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > PseudostateImpl::getOwner() const
+std::weak_ptr<uml::Element > PseudostateImpl::getOwner() const
 {
 	return m_owner;
 }

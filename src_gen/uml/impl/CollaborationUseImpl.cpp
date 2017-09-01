@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Collaboration.hpp"
@@ -68,6 +68,19 @@ CollaborationUseImpl::~CollaborationUseImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			CollaborationUseImpl::CollaborationUseImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:CollaborationUseImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):CollaborationUseImpl()
 {
 	//create copy of all Attributes
@@ -80,13 +93,8 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):Col
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -149,28 +157,25 @@ std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- CollaborationUseImpl::client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- CollaborationUseImpl::connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool CollaborationUseImpl::every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -179,8 +184,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::Dependency, uml::Element > >
- CollaborationUseImpl::getRoleBinding() const
+std::shared_ptr<Subset<uml::Dependency, uml::Element > > CollaborationUseImpl::getRoleBinding() const
 {
 
     return m_roleBinding;
@@ -200,13 +204,13 @@ void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > CollaborationUseImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > CollaborationUseImpl::getOwner() const
+std::weak_ptr<uml::Element > CollaborationUseImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > CollaborationUseImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

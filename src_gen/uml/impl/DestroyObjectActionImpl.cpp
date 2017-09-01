@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Action.hpp"
@@ -77,6 +77,30 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DestroyObjectActionImpl::DestroyObjectActionImpl(std::shared_ptr<uml::Activity > par_activity)
+			:DestroyObjectActionImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:DestroyObjectActionImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+
 DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl & obj):DestroyObjectActionImpl()
 {
 	//create copy of all Attributes
@@ -93,36 +117,29 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl &
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -166,13 +183,6 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl &
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
 	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
@@ -236,9 +246,9 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void DestroyObjectActionImpl::setIsDestroyLinks (bool _isDestroyLinks)
+void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 {
 	m_isDestroyLinks = _isDestroyLinks;
 } 
@@ -248,7 +258,7 @@ bool DestroyObjectActionImpl::getIsDestroyLinks() const
 	return m_isDestroyLinks;
 }
 
-void DestroyObjectActionImpl::setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects)
+void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
 {
 	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
 } 
@@ -261,15 +271,13 @@ bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const
 //*********************************
 // Operations
 //*********************************
-bool
- DestroyObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestroyObjectActionImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- DestroyObjectActionImpl::no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DestroyObjectActionImpl::no_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -291,26 +299,25 @@ void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DestroyObjectActionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
- DestroyObjectActionImpl::getInput() const
-{
-	return m_input;
-}
-std::shared_ptr<uml::Element > DestroyObjectActionImpl::getOwner() const
+std::weak_ptr<uml::Element > DestroyObjectActionImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::ActivityGroup> > DestroyObjectActionImpl::getInGroup() const
-{
-	return m_inGroup;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > DestroyObjectActionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > DestroyObjectActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > DestroyObjectActionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > DestroyObjectActionImpl::getInput() const
+{
+	return m_input;
+}
+std::shared_ptr<Union<uml::ActivityGroup> > DestroyObjectActionImpl::getInGroup() const
+{
+	return m_inGroup;
 }
 
 

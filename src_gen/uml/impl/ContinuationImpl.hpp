@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ContinuationImpl();
 
+			//Additional constructors for the containments back reference
+			ContinuationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			ContinuationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ContinuationImpl();
@@ -60,8 +72,7 @@ namespace uml
 			 let peerFragments : OrderedSet(InteractionFragment) =  enclosingOperand.fragment in 
 			   ( peerFragments->notEmpty() and 
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self))) */ 
-			virtual bool
-			 first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
@@ -89,8 +100,7 @@ namespace uml
 			 c.covered->asSet()->
 			  select(represents = cl.represents and selector = cl.selector)->asSet()->size()=1))
 			  ) */ 
-			virtual bool
-			 same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
@@ -98,8 +108,7 @@ namespace uml
 			  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in 
 			    (operandLifelines->notEmpty() and 
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol))) */ 
-			virtual bool
-			 global(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool global(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -127,15 +136,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

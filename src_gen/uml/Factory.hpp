@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -73,9 +75,10 @@ namespace uml
 		public:
  			Factory(const Factory &) {}
 			Factory& operator=(Factory const&) = delete;
-	
+
 		protected:
 			Factory(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -91,8 +94,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element> 
-			 create(std::shared_ptr<uml::Class>  metaClass)  = 0;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass)  = 0;
 			
 			
 			//*********************************
@@ -121,7 +123,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

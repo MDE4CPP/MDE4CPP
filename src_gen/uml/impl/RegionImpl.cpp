@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -112,6 +112,30 @@ RegionImpl::~RegionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
+			:RegionImpl()
+			{
+			    m_state = par_state;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
+			:RegionImpl()
+			{
+			    m_stateMachine = par_stateMachine;
+			}
+
+
+
+
+
+
 RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 {
 	//create copy of all Attributes
@@ -125,24 +149,23 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_state  = obj.getState();
+
+	m_stateMachine  = obj.getStateMachine();
 
 
     
@@ -210,20 +233,6 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
-	if(obj.getState()!=nullptr)
-	{
-		m_state.reset(dynamic_cast<uml::State*>(obj.getState()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_state" << std::endl;
-	#endif
-	if(obj.getStateMachine()!=nullptr)
-	{
-		m_stateMachine.reset(dynamic_cast<uml::StateMachine*>(obj.getStateMachine()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_stateMachine" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Vertex>> _subvertexList = obj.getSubvertex();
 	for(std::shared_ptr<uml::Vertex> _subvertex : *_subvertexList)
 	{
@@ -270,56 +279,49 @@ std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- RegionImpl::belongsToPSM() 
+bool RegionImpl::belongsToPSM() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::StateMachine> 
- RegionImpl::containingStateMachine() 
+std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RegionImpl::deep_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::deep_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RegionImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RegionImpl::owned(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::owned(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> 
- RegionImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RegionImpl::shallow_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RegionImpl::shallow_history_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -338,7 +340,7 @@ void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
     m_extendedRegion = _extendedRegion;
 }
 
-std::shared_ptr<uml::State > RegionImpl::getState() const
+std::weak_ptr<uml::State > RegionImpl::getState() const
 {
 
     return m_state;
@@ -348,7 +350,7 @@ void RegionImpl::setState(std::shared_ptr<uml::State> _state)
     m_state = _state;
 }
 
-std::shared_ptr<uml::StateMachine > RegionImpl::getStateMachine() const
+std::weak_ptr<uml::StateMachine > RegionImpl::getStateMachine() const
 {
 
     return m_stateMachine;
@@ -358,16 +360,14 @@ void RegionImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachin
     m_stateMachine = _stateMachine;
 }
 
-		std::shared_ptr<Subset<uml::Vertex, uml::NamedElement > >
- RegionImpl::getSubvertex() const
+std::shared_ptr<Subset<uml::Vertex, uml::NamedElement > > RegionImpl::getSubvertex() const
 {
 
     return m_subvertex;
 }
 
 
-		std::shared_ptr<Subset<uml::Transition, uml::NamedElement > >
- RegionImpl::getTransition() const
+std::shared_ptr<Subset<uml::Transition, uml::NamedElement > > RegionImpl::getTransition() const
 {
 
     return m_transition;
@@ -377,30 +377,29 @@ void RegionImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachin
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::RedefinableElement> > RegionImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::Element> > RegionImpl::getOwnedElement() const
 {
-	return m_redefinedElement;
+	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- RegionImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::NamedElement> > RegionImpl::getMember() const
 {
-	return m_ownedMember;
+	return m_member;
 }
-std::shared_ptr<uml::Element > RegionImpl::getOwner() const
+std::weak_ptr<uml::Element > RegionImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::NamedElement> > RegionImpl::getMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > RegionImpl::getOwnedMember() const
 {
-	return m_member;
+	return m_ownedMember;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > RegionImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 std::shared_ptr<uml::Namespace > RegionImpl::getNamespace() const
 {
 	return m_namespace;
-}
-		std::shared_ptr<Union<uml::Element> > RegionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
 }
 
 

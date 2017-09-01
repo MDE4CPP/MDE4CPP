@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -146,9 +148,13 @@ namespace uml
 		public:
  			Transition(const Transition &) {}
 			Transition& operator=(Transition const&) = delete;
-	
+
 		protected:
 			Transition(){}
+
+
+			//Additional constructors for the containments back reference
+			Transition(std::weak_ptr<uml::Region > par_container){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -163,67 +169,57 @@ namespace uml
 			 A Transition with kind external can source any Vertex except entry points.
 			(kind = TransitionKind::external) implies
 				not (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint) */ 
-			virtual bool
-			 state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool state_is_external(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A join segment must not have Guards or Triggers.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool
-			 join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool join_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Transition with kind internal must have a State as its source, and its source and target must be equal.
 			(kind = TransitionKind::internal) implies
 					(source.oclIsKindOf (State) and source = target) */ 
-			virtual bool
-			 state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool state_is_internal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Transitions outgoing Pseudostates may not have a Trigger.
 			source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty() */ 
-			virtual bool
-			 outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool outgoing_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A join segment must always originate from a State.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State)) */ 
-			virtual bool
-			 join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool join_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A fork segment must always target a State.
 			(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State)) */ 
-			virtual bool
-			 fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool fork_segment_state(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A Transition with kind local must have a composite State or an entry point as its source.
 			(kind = TransitionKind::local) implies
 					((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or
 					(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint)) */ 
-			virtual bool
-			 state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool state_is_local(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An initial Transition at the topmost level Region of a StateMachine that has no Trigger.
 			(source.oclIsKindOf(Pseudostate) and container.stateMachine->notEmpty()) implies
 				trigger->isEmpty() */ 
-			virtual bool
-			 initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool initial_transition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A fork segment must not have Guards or Triggers.
 			(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty()) */ 
-			virtual bool
-			 fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool fork_segment_guards(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The query containingStateMachine() returns the StateMachine that contains the Transition either directly or transitively.
 			result = (container.containingStateMachine())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::StateMachine> 
-			 containingStateMachine()  = 0;
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine()  = 0;
 			
 			/*!
 			 The redefinition context of a Transition is the nearest containing StateMachine.
@@ -234,8 +230,7 @@ namespace uml
 			  sm._'context'
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<uml::Classifier> 
-			 redefinitionContext()  = 0;
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext()  = 0;
 			
 			
 			//*********************************
@@ -303,13 +298,12 @@ namespace uml
 			/*!
 			 Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
-			 getTrigger() const = 0;
+			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element > > getTrigger() const = 0;
 			
 			/*!
 			 Designates the Region that owns this Transition.
 			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<uml::Region > getContainer() const = 0;
+			virtual std::weak_ptr<uml::Region > getContainer() const = 0;
 			
 			/*!
 			 Designates the Region that owns this Transition.
@@ -353,12 +347,11 @@ namespace uml
 			/*!
 			 Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p> */
-					std::shared_ptr<Subset<uml::Trigger, uml::Element > >
-			 m_trigger;
+			std::shared_ptr<Subset<uml::Trigger, uml::Element > > m_trigger;
 			/*!
 			 Designates the Region that owns this Transition.
 			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<uml::Region > m_container;
+			std::weak_ptr<uml::Region > m_container;
 			
 
 		public:
@@ -366,25 +359,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

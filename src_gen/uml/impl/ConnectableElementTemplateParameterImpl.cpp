@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -46,6 +46,19 @@ ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImp
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+			:ConnectableElementTemplateParameterImpl()
+			{
+			    m_signature = par_signature;
+			}
+
+
+
+
+
+
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj):ConnectableElementTemplateParameterImpl()
 {
 	//create copy of all Attributes
@@ -57,12 +70,11 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 	
 	m_default  = obj.getDefault();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_parameteredElement  = obj.getParameteredElement();
+
+	m_signature  = obj.getSignature();
 
 
     
@@ -98,13 +110,6 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
-	if(obj.getSignature()!=nullptr)
-	{
-		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
-	#endif
 
 
 }
@@ -120,7 +125,7 @@ std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticC
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -134,13 +139,13 @@ std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticC
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ConnectableElementTemplateParameterImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > ConnectableElementTemplateParameterImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ConnectableElementTemplateParameterImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ConnectableElementTemplateParameterImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

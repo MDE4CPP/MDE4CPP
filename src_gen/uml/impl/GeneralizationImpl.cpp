@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -59,6 +59,19 @@ GeneralizationImpl::~GeneralizationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
+			:GeneralizationImpl()
+			{
+			    m_specific = par_specific;
+			}
+
+
+
+
+
+
 GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):GeneralizationImpl()
 {
 	//create copy of all Attributes
@@ -69,18 +82,15 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _generalizationSet = obj.getGeneralizationSet();
-	m_generalizationSet.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getGeneralizationSet().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _generalizationSet = obj.getGeneralizationSet();
+	m_generalizationSet.reset(new Bag<uml::GeneralizationSet>(*(obj.getGeneralizationSet().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
+
+	m_specific  = obj.getSpecific();
 
 
     
@@ -109,13 +119,6 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getSpecific()!=nullptr)
-	{
-		m_specific.reset(dynamic_cast<uml::Classifier*>(obj.getSpecific()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_specific" << std::endl;
-	#endif
 
 
 }
@@ -131,9 +134,9 @@ std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void GeneralizationImpl::setIsSubstitutable (bool _isSubstitutable)
+void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 } 
@@ -160,15 +163,14 @@ void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
     m_general = _general;
 }
 
-	std::shared_ptr< Bag<uml::GeneralizationSet> >
- GeneralizationImpl::getGeneralizationSet() const
+std::shared_ptr< Bag<uml::GeneralizationSet> > GeneralizationImpl::getGeneralizationSet() const
 {
 
     return m_generalizationSet;
 }
 
 
-std::shared_ptr<uml::Classifier > GeneralizationImpl::getSpecific() const
+std::weak_ptr<uml::Classifier > GeneralizationImpl::getSpecific() const
 {
 //assert(m_specific);
     return m_specific;
@@ -181,27 +183,25 @@ void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > GeneralizationImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- GeneralizationImpl::getTarget() const
-{
-	return m_target;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- GeneralizationImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::getSource() const
 {
 	return m_source;
 }
-		std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
+std::weak_ptr<uml::Element > GeneralizationImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getRelatedElement() const
+{
+	return m_relatedElement;
+}
+std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getRelatedElement() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::getTarget() const
 {
-	return m_relatedElement;
+	return m_target;
 }
 
 

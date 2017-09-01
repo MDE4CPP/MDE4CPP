@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			DecisionNodeImpl();
 
+			//Additional constructors for the containments back reference
+			DecisionNodeImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			DecisionNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+
+
 		public:
 			//destructor
 			virtual ~DecisionNodeImpl();
@@ -58,8 +70,7 @@ namespace uml
 			 If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
 			(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 			   decisionInput.inputParameters()->isEmpty() */ 
-			virtual bool
-			 zero_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool zero_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
@@ -67,34 +78,29 @@ namespace uml
 			let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in
 			allRelevantEdges->forAll(oclIsKindOf(ControlFlow)) or allRelevantEdges->forAll(oclIsKindOf(ObjectFlow))
 			 */ 
-			virtual bool
-			 edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The decisionInputFlow of a DecisionNode must be an incoming ActivityEdge of the DecisionNode.
 			incoming->includes(decisionInputFlow) */ 
-			virtual bool
-			 decision_input_flow_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool decision_input_flow_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=2 */ 
-			virtual bool
-			 two_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool two_input_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
 			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0 */ 
-			virtual bool
-			 incoming_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool incoming_outgoing_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 				decisionInput.inputParameters()->size()=1 */ 
-			virtual bool
-			 incoming_control_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool incoming_control_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
@@ -104,15 +110,13 @@ namespace uml
 			     par.direction <> ParameterDirectionKind::inout ) and
 			   decisionInput.ownedParameter->one(par | 
 			     par.direction <> ParameterDirectionKind::return)) */ 
-			virtual bool
-			 parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
 			(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=1 */ 
-			virtual bool
-			 incoming_object_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool incoming_object_one_input_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -148,18 +152,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

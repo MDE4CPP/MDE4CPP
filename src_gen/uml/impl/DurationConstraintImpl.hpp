@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			DurationConstraintImpl();
 
+			//Additional constructors for the containments back reference
+			DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_context);
+
+
+
+
 		public:
 			//destructor
 			virtual ~DurationConstraintImpl();
@@ -59,14 +67,12 @@ namespace uml
 			if (constrainedElement->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
 			endif */ 
-			virtual bool
-			 first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2 */ 
-			virtual bool
-			 has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -89,15 +95,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

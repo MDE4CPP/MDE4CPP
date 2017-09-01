@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -48,6 +50,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			RedefinableTemplateSignatureImpl();
 
+			//Additional constructors for the containments back reference
+			RedefinableTemplateSignatureImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template);
+
+
+
+
 		public:
 			//destructor
 			virtual ~RedefinableTemplateSignatureImpl();
@@ -58,15 +70,13 @@ namespace uml
 			/*!
 			 If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature)) */ 
-			virtual bool
-			 redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Derivation for RedefinableTemplateSignature::/inheritedParameter
 			result = (if extendedSignature->isEmpty() then Set{} else extendedSignature.parameter->asSet() endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> >
-			 getInheritedParameters()  ;
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters()  ;
 			
 			
 			
@@ -81,14 +91,12 @@ namespace uml
 			/*!
 			 The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement > >
-			 getExtendedSignature() const ;
+			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement > > getExtendedSignature() const ;
 			
 			/*!
 			 The formal template parameters of the extended signatures.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > >
-			 getInheritedParameter() const ;
+			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > > getInheritedParameter() const ;
 			
 			/*!
 			 The Classifier that owns this RedefinableTemplateSignature.
@@ -101,21 +109,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The ordered set of all formal TemplateParameters for this TemplateSignature.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of all formal TemplateParameters for this TemplateSignature.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

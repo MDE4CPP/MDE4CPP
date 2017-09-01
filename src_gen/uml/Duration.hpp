@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -97,9 +99,10 @@ namespace uml
 		public:
  			Duration(const Duration &) {}
 			Duration& operator=(Duration const&) = delete;
-	
+
 		protected:
 			Duration(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -113,8 +116,7 @@ namespace uml
 			/*!
 			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
-			virtual bool
-			 no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -136,8 +138,7 @@ namespace uml
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Observation> >
-			 getObservation() const = 0;
+			virtual std::shared_ptr< Bag<uml::Observation> > getObservation() const = 0;
 			
 			
 
@@ -157,8 +158,7 @@ namespace uml
 			/*!
 			 Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p> */
-				std::shared_ptr< Bag<uml::Observation> >
-			 m_observation;
+			std::shared_ptr< Bag<uml::Observation> > m_observation;
 			
 
 		public:
@@ -166,12 +166,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

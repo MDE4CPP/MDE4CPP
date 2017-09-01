@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -49,6 +51,8 @@ virtual public ActivityContent
 			friend class UmlFactoryImpl;
 			ActivityContentImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~ActivityContentImpl();
@@ -58,8 +62,7 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> 
-			 containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity> containingActivity()  ;
 			
 			
 			

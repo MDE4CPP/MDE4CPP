@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -61,6 +61,19 @@ TriggerImpl::~TriggerImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TriggerImpl::TriggerImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:TriggerImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 {
 	//create copy of all Attributes
@@ -73,22 +86,15 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_event  = obj.getEvent();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Port> >
-	 _port = obj.getPort();
-	m_port.reset(new 	 Bag<uml::Port> 
-	(*(obj.getPort().get())));
+	std::shared_ptr< Bag<uml::Port> > _port = obj.getPort();
+	m_port.reset(new Bag<uml::Port>(*(obj.getPort().get())));
 
 
     
@@ -132,14 +138,13 @@ std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TriggerImpl::trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,8 +163,7 @@ void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
     m_event = _event;
 }
 
-	std::shared_ptr< Bag<uml::Port> >
- TriggerImpl::getPort() const
+std::shared_ptr< Bag<uml::Port> > TriggerImpl::getPort() const
 {
 
     return m_port;
@@ -169,13 +173,13 @@ void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TriggerImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > TriggerImpl::getOwner() const
+std::weak_ptr<uml::Element > TriggerImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > TriggerImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

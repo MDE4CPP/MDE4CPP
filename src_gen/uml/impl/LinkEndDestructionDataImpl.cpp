@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -50,6 +50,19 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+			:LinkEndDestructionDataImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
 {
 	//create copy of all Attributes
@@ -63,9 +76,6 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 	m_destroyAt  = obj.getDestroyAt();
 
 	m_end  = obj.getEnd();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -114,9 +124,9 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void LinkEndDestructionDataImpl::setIsDestroyDuplicates (bool _isDestroyDuplicates)
+void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
@@ -129,8 +139,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool
- LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -152,7 +161,7 @@ void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _de
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > LinkEndDestructionDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LinkEndDestructionDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -236,9 +238,10 @@ namespace uml
 		public:
  			Node(const Node &) {}
 			Node& operator=(Node const&) = delete;
-	
+
 		protected:
 			Node(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -252,18 +255,15 @@ namespace uml
 			/*!
 			 The internal structure of a Node (if defined) consists solely of parts of type Node.
 			part->forAll(oclIsKindOf(Node)) */ 
-			virtual bool
-			 internal_structure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool internal_structure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Creates a (binary) communication path between this node and the specified other node, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this node's nearest package. */ 
-			virtual std::shared_ptr<uml::CommunicationPath> 
-			 createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  = 0;
+			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  = 0;
 			
 			/*!
 			 Retrieves the communication paths in which this node is involved. */ 
-			virtual std::shared_ptr<Bag<uml::CommunicationPath> >
-			 getCommunicationPaths()  = 0;
+			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths()  = 0;
 			
 			
 			//*********************************
@@ -276,8 +276,7 @@ namespace uml
 			/*!
 			 The Nodes that are defined (nested) within the Node.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Node, uml::NamedElement > >
-			 getNestedNode() const = 0;
+			virtual std::shared_ptr<Subset<uml::Node, uml::NamedElement > > getNestedNode() const = 0;
 			
 			
 
@@ -293,8 +292,7 @@ namespace uml
 			/*!
 			 The Nodes that are defined (nested) within the Node.
 			<p>From package UML::Deployments.</p> */
-					std::shared_ptr<Subset<uml::Node, uml::NamedElement > >
-			 m_nestedNode;
+			std::shared_ptr<Subset<uml::Node, uml::NamedElement > > m_nestedNode;
 			
 
 		public:
@@ -302,37 +300,33 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const = 0;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const = 0;/*!
 			 The roles that instances may play in this StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
-			 getRole() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > getRole() const = 0;/*!
+			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

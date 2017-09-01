@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ConsiderIgnoreFragmentImpl();
 
+			//Additional constructors for the containments back reference
+			ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ConsiderIgnoreFragmentImpl();
@@ -57,14 +69,12 @@ namespace uml
 			/*!
 			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
-			virtual bool
-			 consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool consider_or_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
-			virtual bool
-			 type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -79,8 +89,7 @@ namespace uml
 			/*!
 			 The set of messages that apply to this fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::NamedElement> >
-			 getMessage() const ;
+			virtual std::shared_ptr< Bag<uml::NamedElement> > getMessage() const ;
 			
 							
 			
@@ -88,15 +97,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

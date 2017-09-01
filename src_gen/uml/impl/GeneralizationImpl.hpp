@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -46,6 +48,12 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			GeneralizationImpl();
+
+			//Additional constructors for the containments back reference
+			GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific);
+
+
+
 
 		public:
 			//destructor
@@ -86,13 +94,12 @@ namespace uml
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::GeneralizationSet> >
-			 getGeneralizationSet() const ;
+			virtual std::shared_ptr< Bag<uml::GeneralizationSet> > getGeneralizationSet() const ;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier > getSpecific() const ;
+			virtual std::weak_ptr<uml::Classifier > getSpecific() const ;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
@@ -104,23 +111,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ReduceActionImpl();
 
+			//Additional constructors for the containments back reference
+			ReduceActionImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ReduceActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ReduceActionImpl();
@@ -63,19 +75,16 @@ namespace uml
 				outputs.type->forAll(conformsTo(t)) and 
 				-- Note that the following only checks the case when the collection is via multiple tokens.
 				collection.upperBound()>1 implies collection.type.conformsTo(t)) */ 
-			virtual bool
-			 reducer_inputs_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool reducer_inputs_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the collection InputPin must be a collection. */ 
-			virtual bool
-			 input_type_is_collection(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool input_type_is_collection(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type)) */ 
-			virtual bool
-			 output_types_are_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool output_types_are_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -130,26 +139,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 getOutput() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

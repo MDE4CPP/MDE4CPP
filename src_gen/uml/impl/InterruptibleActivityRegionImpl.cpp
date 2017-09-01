@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -75,6 +75,30 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::shared_ptr<uml::Activity > par_inActivity)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_inActivity = par_inActivity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::shared_ptr<uml::ActivityGroup > par_superGroup)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_superGroup = par_superGroup;
+			}
+
+
+
+
+
+
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj):InterruptibleActivityRegionImpl()
 {
 	//create copy of all Attributes
@@ -87,24 +111,17 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));
+	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));
+	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _interruptingEdge = obj.getInterruptingEdge();
-	m_interruptingEdge.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getInterruptingEdge().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _interruptingEdge = obj.getInterruptingEdge();
+	m_interruptingEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getInterruptingEdge().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -165,14 +182,13 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -181,16 +197,14 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::ActivityEdge> >
- InterruptibleActivityRegionImpl::getInterruptingEdge() const
+std::shared_ptr< Bag<uml::ActivityEdge> > InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 
     return m_interruptingEdge;
 }
 
 
-		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
- InterruptibleActivityRegionImpl::getNode() const
+std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > > InterruptibleActivityRegionImpl::getNode() const
 {
 
     return m_node;
@@ -200,17 +214,17 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
+std::weak_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
 {
 	return m_containedNode;
-}
-std::shared_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
-{
-	return m_owner;
 }
 
 

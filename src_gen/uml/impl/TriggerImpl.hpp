@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,12 @@ namespace uml
 			friend class UmlFactoryImpl;
 			TriggerImpl();
 
+			//Additional constructors for the containments back reference
+			TriggerImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+
+
 		public:
 			//destructor
 			virtual ~TriggerImpl();
@@ -57,8 +65,7 @@ namespace uml
 			/*!
 			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
-			virtual bool
-			 trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool trigger_with_ports(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -82,8 +89,7 @@ namespace uml
 			/*!
 			 A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Port> >
-			 getPort() const ;
+			virtual std::shared_ptr< Bag<uml::Port> > getPort() const ;
 			
 							
 			
@@ -91,12 +97,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

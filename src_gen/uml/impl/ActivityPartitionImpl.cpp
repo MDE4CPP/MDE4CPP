@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -111,6 +111,19 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition > par_superPartition)
+			:ActivityPartitionImpl()
+			{
+			    m_superPartition = par_superPartition;
+			}
+
+
+
+
+
+
 ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):ActivityPartitionImpl()
 {
 	//create copy of all Attributes
@@ -125,23 +138,20 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));
+	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
 	m_owner  = obj.getOwner();
 
 	m_represents  = obj.getRepresents();
+
+	m_superPartition  = obj.getSuperPartition();
 
 
     
@@ -201,13 +211,6 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_subpartition" << std::endl;
 	#endif
-	if(obj.getSuperPartition()!=nullptr)
-	{
-		m_superPartition.reset(dynamic_cast<uml::ActivityPartition*>(obj.getSuperPartition()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_superPartition" << std::endl;
-	#endif
 
 		/*Subset*/
 		m_subpartition->initSubset(m_subgroup);
@@ -230,9 +233,9 @@ std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ActivityPartitionImpl::setIsDimension (bool _isDimension)
+void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 {
 	m_isDimension = _isDimension;
 } 
@@ -242,7 +245,7 @@ bool ActivityPartitionImpl::getIsDimension() const
 	return m_isDimension;
 }
 
-void ActivityPartitionImpl::setIsExternal (bool _isExternal)
+void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 {
 	m_isExternal = _isExternal;
 } 
@@ -255,29 +258,25 @@ bool ActivityPartitionImpl::getIsExternal() const
 //*********************************
 // Operations
 //*********************************
-bool
- ActivityPartitionImpl::dimension_not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::dimension_not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ActivityPartitionImpl::represents_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ActivityPartitionImpl::represents_property(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_property(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ActivityPartitionImpl::represents_property_and_is_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ActivityPartitionImpl::represents_property_and_is_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -286,16 +285,14 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge > >
- ActivityPartitionImpl::getEdge() const
+std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge > > ActivityPartitionImpl::getEdge() const
 {
 
     return m_edge;
 }
 
 
-		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
- ActivityPartitionImpl::getNode() const
+std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > > ActivityPartitionImpl::getNode() const
 {
 
     return m_node;
@@ -312,15 +309,14 @@ void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represe
     m_represents = _represents;
 }
 
-		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > >
- ActivityPartitionImpl::getSubpartition() const
+std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > ActivityPartitionImpl::getSubpartition() const
 {
 
     return m_subpartition;
 }
 
 
-std::shared_ptr<uml::ActivityPartition > ActivityPartitionImpl::getSuperPartition() const
+std::weak_ptr<uml::ActivityPartition > ActivityPartitionImpl::getSuperPartition() const
 {
 
     return m_superPartition;
@@ -333,30 +329,29 @@ void ActivityPartitionImpl::setSuperPartition(std::shared_ptr<uml::ActivityParti
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ActivityPartitionImpl::getOwner() const
+std::shared_ptr<Union<uml::ActivityEdge> > ActivityPartitionImpl::getContainedEdge() const
 {
-	return m_owner;
+	return m_containedEdge;
 }
-		std::shared_ptr<Union<uml::Element> > ActivityPartitionImpl::getOwnedElement() const
+std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > > ActivityPartitionImpl::getSubgroup() const
+{
+	return m_subgroup;
+}
+std::shared_ptr<Union<uml::Element> > ActivityPartitionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::ActivityNode> > ActivityPartitionImpl::getContainedNode() const
-{
-	return m_containedNode;
 }
 std::shared_ptr<uml::ActivityGroup > ActivityPartitionImpl::getSuperGroup() const
 {
 	return m_superGroup;
 }
-		std::shared_ptr<Union<uml::ActivityEdge> > ActivityPartitionImpl::getContainedEdge() const
+std::shared_ptr<Union<uml::ActivityNode> > ActivityPartitionImpl::getContainedNode() const
 {
-	return m_containedEdge;
+	return m_containedNode;
 }
-		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > >
- ActivityPartitionImpl::getSubgroup() const
+std::weak_ptr<uml::Element > ActivityPartitionImpl::getOwner() const
 {
-	return m_subgroup;
+	return m_owner;
 }
 
 

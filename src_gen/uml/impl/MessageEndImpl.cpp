@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -56,6 +56,19 @@ MessageEndImpl::~MessageEndImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			MessageEndImpl::MessageEndImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:MessageEndImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 {
 	//create copy of all Attributes
@@ -68,15 +81,10 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_message  = obj.getMessage();
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -122,35 +130,31 @@ std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InteractionFragment> >
- MessageEndImpl::enclosingFragment() 
+std::shared_ptr<Bag<uml::InteractionFragment> > MessageEndImpl::enclosingFragment() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageEndImpl::isReceive() 
+bool MessageEndImpl::isReceive() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- MessageEndImpl::isSend() 
+bool MessageEndImpl::isSend() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::MessageEnd> >
- MessageEndImpl::oppositeEnd() 
+std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -172,11 +176,11 @@ void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > MessageEndImpl::getOwner() const
+std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > MessageEndImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > MessageEndImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

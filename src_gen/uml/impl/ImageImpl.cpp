@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -42,6 +42,19 @@ ImageImpl::~ImageImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ImageImpl::ImageImpl(std::weak_ptr<uml::Element > par_owner)
+			:ImageImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 {
 	//create copy of all Attributes
@@ -54,9 +67,6 @@ ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 
@@ -94,9 +104,9 @@ std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ImageImpl::setContent (std::string _content)
+void ImageImpl::setContent(std::string _content)
 {
 	m_content = _content;
 } 
@@ -106,7 +116,7 @@ std::string ImageImpl::getContent() const
 	return m_content;
 }
 
-void ImageImpl::setFormat (std::string _format)
+void ImageImpl::setFormat(std::string _format)
 {
 	m_format = _format;
 } 
@@ -116,7 +126,7 @@ std::string ImageImpl::getFormat() const
 	return m_format;
 }
 
-void ImageImpl::setLocation (std::string _location)
+void ImageImpl::setLocation(std::string _location)
 {
 	m_location = _location;
 } 
@@ -137,7 +147,7 @@ std::string ImageImpl::getLocation() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ImageImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ImageImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

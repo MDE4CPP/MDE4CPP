@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -73,6 +73,19 @@ ParameterSetImpl::~ParameterSetImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ParameterSetImpl::ParameterSetImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ParameterSetImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImpl()
 {
 	//create copy of all Attributes
@@ -85,20 +98,13 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Parameter> >
-	 _parameter = obj.getParameter();
-	m_parameter.reset(new 	 Bag<uml::Parameter> 
-	(*(obj.getParameter().get())));
+	std::shared_ptr< Bag<uml::Parameter> > _parameter = obj.getParameter();
+	m_parameter.reset(new Bag<uml::Parameter>(*(obj.getParameter().get())));
 
 
     
@@ -157,28 +163,25 @@ std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ParameterSetImpl::input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::input(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterSetImpl::same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterSetImpl::two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterSetImpl::two_parameter_sets(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -187,16 +190,14 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::Constraint, uml::Element > >
- ParameterSetImpl::getCondition() const
+std::shared_ptr<Subset<uml::Constraint, uml::Element > > ParameterSetImpl::getCondition() const
 {
 
     return m_condition;
 }
 
 
-	std::shared_ptr< Bag<uml::Parameter> >
- ParameterSetImpl::getParameter() const
+std::shared_ptr< Bag<uml::Parameter> > ParameterSetImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
@@ -206,11 +207,11 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ParameterSetImpl::getOwner() const
+std::weak_ptr<uml::Element > ParameterSetImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > ParameterSetImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > ParameterSetImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -52,6 +52,19 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_context)
+			:IntervalConstraintImpl()
+			{
+			    m_context = par_context;
+			}
+
+
+
+
+
+
 IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & obj):IntervalConstraintImpl()
 {
 	//create copy of all Attributes
@@ -64,20 +77,17 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Element> >
-	 _constrainedElement = obj.getConstrainedElement();
-	m_constrainedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getConstrainedElement().get())));
+	std::shared_ptr< Bag<uml::Element> > _constrainedElement = obj.getConstrainedElement();
+	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_context  = obj.getContext();
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -85,13 +95,6 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContext()!=nullptr)
-	{
-		m_context.reset(dynamic_cast<uml::Namespace*>(obj.getContext()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -115,13 +118,6 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
 		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
@@ -144,7 +140,7 @@ std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -162,13 +158,13 @@ std::shared_ptr<uml::Namespace > IntervalConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > IntervalConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > IntervalConstraintImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > IntervalConstraintImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > IntervalConstraintImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

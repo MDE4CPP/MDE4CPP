@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -62,6 +62,30 @@ PartDecompositionImpl::~PartDecompositionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+			:PartDecompositionImpl()
+			{
+			    m_enclosingInteraction = par_enclosingInteraction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+			:PartDecompositionImpl()
+			{
+			    m_enclosingOperand = par_enclosingOperand;
+			}
+
+
+
+
+
+
 PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):PartDecompositionImpl()
 {
 	//create copy of all Attributes
@@ -74,18 +98,15 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Lifeline> >
-	 _covered = obj.getCovered();
-	m_covered.reset(new 	 Bag<uml::Lifeline> 
-	(*(obj.getCovered().get())));
+	std::shared_ptr< Bag<uml::Lifeline> > _covered = obj.getCovered();
+	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_enclosingInteraction  = obj.getEnclosingInteraction();
+
+	m_enclosingOperand  = obj.getEnclosingOperand();
 
 	m_owner  = obj.getOwner();
 
@@ -120,20 +141,6 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEnclosingInteraction()!=nullptr)
-	{
-		m_enclosingInteraction.reset(dynamic_cast<uml::Interaction*>(obj.getEnclosingInteraction()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingInteraction" << std::endl;
-	#endif
-	if(obj.getEnclosingOperand()!=nullptr)
-	{
-		m_enclosingOperand.reset(dynamic_cast<uml::InteractionOperand*>(obj.getEnclosingOperand()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_enclosingOperand" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
@@ -180,28 +187,25 @@ std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- PartDecompositionImpl::assume(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::assume(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PartDecompositionImpl::commutativity_of_decomposition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::commutativity_of_decomposition(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool PartDecompositionImpl::parts_of_internal_structures(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -214,17 +218,17 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > PartDecompositionImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > PartDecompositionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > PartDecompositionImpl::getOwner() const
+{
+	return m_owner;
 }
 std::shared_ptr<uml::Namespace > PartDecompositionImpl::getNamespace() const
 {
 	return m_namespace;
-}
-std::shared_ptr<uml::Element > PartDecompositionImpl::getOwner() const
-{
-	return m_owner;
 }
 
 

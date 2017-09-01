@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ActivityEdgeImpl();
 
+			//Additional constructors for the containments back reference
+			ActivityEdgeImpl(std::weak_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ActivityEdgeImpl();
@@ -57,8 +69,7 @@ namespace uml
 			/*!
 			 If an ActivityEdge is directly owned by an Activity, then its source and target must be directly or indirectly contained in the same Activity.
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity */ 
-			virtual bool
-			 source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool source_and_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -73,7 +84,7 @@ namespace uml
 			/*!
 			 The Activity containing the ActivityEdge, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Activity > getActivity() const ;
+			virtual std::weak_ptr<uml::Activity > getActivity() const ;
 			
 			/*!
 			 The Activity containing the ActivityEdge, if it is directly owned by an Activity.
@@ -91,8 +102,7 @@ namespace uml
 			/*!
 			 ActivityPartitions containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > >
-			 getInPartition() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > getInPartition() const ;
 			
 			/*!
 			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
@@ -106,7 +116,7 @@ namespace uml
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::StructuredActivityNode > getInStructuredNode() const ;
+			virtual std::weak_ptr<uml::StructuredActivityNode > getInStructuredNode() const ;
 			
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
@@ -133,8 +143,7 @@ namespace uml
 			/*!
 			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > >
-			 getRedefinedEdge() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > getRedefinedEdge() const ;
 			
 			/*!
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
@@ -152,18 +161,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 ActivityGroups containing the ActivityEdge.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 ActivityGroups containing the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

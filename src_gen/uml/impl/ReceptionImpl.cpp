@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -74,6 +74,19 @@ ReceptionImpl::~ReceptionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ReceptionImpl::ReceptionImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ReceptionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj):ReceptionImpl()
 {
 	//create copy of all Attributes
@@ -90,37 +103,28 @@ ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj):ReceptionImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
+	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
-		std::shared_ptr< Bag<uml::Behavior> >
-	 _method = obj.getMethod();
-	m_method.reset(new 	 Bag<uml::Behavior> 
-	(*(obj.getMethod().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Behavior> > _method = obj.getMethod();
+	m_method.reset(new Bag<uml::Behavior>(*(obj.getMethod().get())));
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Type> >
-	 _raisedException = obj.getRaisedException();
-	m_raisedException.reset(new 	 Bag<uml::Type> 
-	(*(obj.getRaisedException().get())));
+	std::shared_ptr< Bag<uml::Type> > _raisedException = obj.getRaisedException();
+	m_raisedException.reset(new Bag<uml::Type>(*(obj.getRaisedException().get())));
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_signal  = obj.getSignal();
 
@@ -214,21 +218,19 @@ std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ReceptionImpl::same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReceptionImpl::same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReceptionImpl::same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReceptionImpl::same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -250,22 +252,21 @@ void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > ReceptionImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > ReceptionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::NamedElement> > ReceptionImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > ReceptionImpl::getMember() const
 {
 	return m_member;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ReceptionImpl::getOwnedMember() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ReceptionImpl::getOwnedMember() const
 {
 	return m_ownedMember;
+}
+std::shared_ptr<Union<uml::Element> > ReceptionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ReceptionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

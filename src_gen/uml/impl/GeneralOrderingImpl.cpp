@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -56,6 +56,19 @@ GeneralOrderingImpl::~GeneralOrderingImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			GeneralOrderingImpl::GeneralOrderingImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:GeneralOrderingImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):GeneralOrderingImpl()
 {
 	//create copy of all Attributes
@@ -72,13 +85,8 @@ GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):Genera
 
 	m_before  = obj.getBefore();
 
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
@@ -124,14 +132,13 @@ std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool GeneralOrderingImpl::irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -163,13 +170,13 @@ void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > GeneralOrderingImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > GeneralOrderingImpl::getOwner() const
+std::weak_ptr<uml::Element > GeneralOrderingImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > GeneralOrderingImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -74,6 +74,52 @@ OutputPinImpl::~OutputPinImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::shared_ptr<uml::Activity > par_activity)
+			:OutputPinImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:OutputPinImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:OutputPinImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Element > par_owner)
+			:OutputPinImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 {
 	//create copy of all Attributes
@@ -94,39 +140,30 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::State> >
-	 _inState = obj.getInState();
-	m_inState.reset(new 	 Bag<uml::State> 
-	(*(obj.getInState().get())));
+	std::shared_ptr< Bag<uml::State> > _inState = obj.getInState();
+	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_selection  = obj.getSelection();
 
@@ -166,13 +203,6 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
@@ -233,14 +263,13 @@ std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- OutputPinImpl::incoming_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OutputPinImpl::incoming_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -253,21 +282,21 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::ActivityGroup> > OutputPinImpl::getInGroup() const
-{
-	return m_inGroup;
-}
-std::shared_ptr<uml::Element > OutputPinImpl::getOwner() const
+std::weak_ptr<uml::Element > OutputPinImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > OutputPinImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > OutputPinImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > OutputPinImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > OutputPinImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::ActivityGroup> > OutputPinImpl::getInGroup() const
 {
-	return m_redefinedElement;
+	return m_inGroup;
 }
 
 

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Classifier.hpp"
@@ -92,6 +92,30 @@ RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:RedefinableTemplateSignatureImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
+			:RedefinableTemplateSignatureImpl()
+			{
+			    m_template = par_template;
+			}
+
+
+
+
+
+
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj):RedefinableTemplateSignatureImpl()
 {
 	//create copy of all Attributes
@@ -105,24 +129,21 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
-	m_parameter.reset(new 		Union<uml::TemplateParameter> (*(obj.getParameter().get())));
+	std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
+	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_template  = obj.getTemplate();
 
 
     
@@ -182,13 +203,6 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
 	#endif
-	if(obj.getTemplate()!=nullptr)
-	{
-		m_template.reset(dynamic_cast<uml::TemplateableElement*>(obj.getTemplate()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_template" << std::endl;
-	#endif
 
 
 }
@@ -204,21 +218,19 @@ std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() 
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::TemplateParameter> >
- RedefinableTemplateSignatureImpl::getInheritedParameters() 
+std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getInheritedParameters() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- RedefinableTemplateSignatureImpl::redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool RedefinableTemplateSignatureImpl::redefines_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -234,16 +246,14 @@ std::shared_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifie
 }
 
 
-		std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement > >
- RedefinableTemplateSignatureImpl::getExtendedSignature() const
+std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement > > RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
 
     return m_extendedSignature;
 }
 
 
-		std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > >
- RedefinableTemplateSignatureImpl::getInheritedParameter() const
+std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter > > RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
 
     return m_inheritedParameter;
@@ -253,25 +263,25 @@ std::shared_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifie
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > RedefinableTemplateSignatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getParameter() const
 {
-	return m_ownedElement;
+	return m_parameter;
 }
-		std::shared_ptr<Union<uml::Classifier> > RedefinableTemplateSignatureImpl::getRedefinitionContext() const
+std::shared_ptr<Union<uml::Classifier> > RedefinableTemplateSignatureImpl::getRedefinitionContext() const
 {
 	return m_redefinitionContext;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > RedefinableTemplateSignatureImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-std::shared_ptr<uml::Element > RedefinableTemplateSignatureImpl::getOwner() const
+std::weak_ptr<uml::Element > RedefinableTemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::getParameter() const
+std::shared_ptr<Union<uml::RedefinableElement> > RedefinableTemplateSignatureImpl::getRedefinedElement() const
 {
-	return m_parameter;
+	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > RedefinableTemplateSignatureImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

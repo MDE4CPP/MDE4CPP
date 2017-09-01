@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -132,9 +134,10 @@ namespace uml
 		public:
  			ObjectFlow(const ObjectFlow &) {}
 			ObjectFlow& operator=(ObjectFlow const&) = delete;
-	
+
 		protected:
 			ObjectFlow(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -151,49 +154,41 @@ namespace uml
 				selection.inputParameters()->size()=1 and
 				selection.inputParameters()->forAll(not isUnique and is(0,*)) and
 				selection.outputParameters()->size()=1 */ 
-			virtual bool
-			 input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool input_and_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode)) */ 
-			virtual bool
-			 no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
 				transformation.inputParameters()->size()=1 and
 				transformation.outputParameters()->size()=1 */ 
-			virtual bool
-			 transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool transformation_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode) */ 
-			virtual bool
-			 selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type. */ 
-			virtual bool
-			 compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool compatible_types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds. */ 
-			virtual bool
-			 same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_upper_bounds(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight. */ 
-			virtual bool
-			 target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive) */ 
-			virtual bool
-			 is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool is_multicast_or_is_multireceive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -275,18 +270,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityEdge.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

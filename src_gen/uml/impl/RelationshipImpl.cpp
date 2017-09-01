@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -49,6 +49,19 @@ RelationshipImpl::~RelationshipImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+			:RelationshipImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
 {
 	//create copy of all Attributes
@@ -58,13 +71,10 @@ RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImp
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
     
@@ -101,7 +111,7 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -117,13 +127,13 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > RelationshipImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::Element> > RelationshipImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element> > RelationshipImpl::getRelatedElement() const
 {
 	return m_relatedElement;
+}
+std::shared_ptr<Union<uml::Element> > RelationshipImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 

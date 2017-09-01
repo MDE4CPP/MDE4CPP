@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,28 @@ namespace uml
 			friend class UmlFactoryImpl;
 			ExtensionEndImpl();
 
+			//Additional constructors for the containments back reference
+			ExtensionEndImpl(std::weak_ptr<uml::Property > par_associationEnd);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionEndImpl(std::shared_ptr<uml::Class > par_class);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionEndImpl(std::weak_ptr<uml::DataType > par_datatype);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionEndImpl(std::weak_ptr<uml::Interface > par_interface);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionEndImpl(std::weak_ptr<uml::Association > par_owningAssociation);
+
+
+
+
 		public:
 			//destructor
 			virtual ~ExtensionEndImpl();
@@ -57,14 +81,12 @@ namespace uml
 			/*!
 			 The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The aggregation of an ExtensionEnd is composite.
 			self.aggregation = AggregationKind::composite */ 
-			virtual bool
-			 aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -82,24 +104,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
-			 The Element that owns this Element.
+			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

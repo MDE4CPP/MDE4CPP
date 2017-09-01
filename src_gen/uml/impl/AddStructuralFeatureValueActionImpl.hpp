@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			AddStructuralFeatureValueActionImpl();
 
+			//Additional constructors for the containments back reference
+			AddStructuralFeatureValueActionImpl(std::shared_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+
+
 		public:
 			//destructor
 			virtual ~AddStructuralFeatureValueActionImpl();
@@ -57,8 +69,7 @@ namespace uml
 			/*!
 			 A value InputPin is required.
 			value<>null */ 
-			virtual bool
-			 required_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool required_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 AddStructuralFeatureActions adding a value to ordered StructuralFeatures must have a single InputPin for the insertion point with type UnlimitedNatural and multiplicity of 1..1 if isReplaceAll=false, and must have no Input Pin for the insertion point when the StructuralFeature is unordered.
@@ -68,8 +79,7 @@ namespace uml
 			  	insertAt<>null and 
 			  	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))
 			endif */ 
-			virtual bool
-			 insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -106,26 +116,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 getOutput() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

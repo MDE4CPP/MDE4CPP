@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -72,6 +72,19 @@ DirectedRelationshipImpl::~DirectedRelationshipImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+			:DirectedRelationshipImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj):DirectedRelationshipImpl()
 {
 	//create copy of all Attributes
@@ -81,13 +94,10 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImp
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
     
@@ -124,7 +134,7 @@ std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -143,21 +153,19 @@ std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DirectedRelationshipImpl::getRelatedElement() const
-{
-	return m_relatedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DirectedRelationshipImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DirectedRelationshipImpl::getSource() const
 {
 	return m_source;
 }
-		std::shared_ptr<Union<uml::Element> > DirectedRelationshipImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DirectedRelationshipImpl::getRelatedElement() const
+{
+	return m_relatedElement;
+}
+std::shared_ptr<Union<uml::Element> > DirectedRelationshipImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DirectedRelationshipImpl::getTarget() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DirectedRelationshipImpl::getTarget() const
 {
 	return m_target;
 }

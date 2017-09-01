@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -57,6 +57,30 @@ DurationObservationImpl::~DurationObservationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DurationObservationImpl::DurationObservationImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:DurationObservationImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:DurationObservationImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj):DurationObservationImpl()
 {
 	//create copy of all Attributes
@@ -70,20 +94,15 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::NamedElement> >
-	 _event = obj.getEvent();
-	m_event.reset(new 	 Bag<uml::NamedElement> 
-	(*(obj.getEvent().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::NamedElement> > _event = obj.getEvent();
+	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -114,13 +133,6 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 
 
 }
@@ -136,7 +148,7 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -148,8 +160,7 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool
- DurationObservationImpl::first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool DurationObservationImpl::first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,8 +169,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::NamedElement> >
- DurationObservationImpl::getEvent() const
+std::shared_ptr< Bag<uml::NamedElement> > DurationObservationImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
@@ -169,11 +179,11 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Element > DurationObservationImpl::getOwner() const
+std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > DurationObservationImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DurationObservationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

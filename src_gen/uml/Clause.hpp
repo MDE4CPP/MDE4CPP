@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -76,9 +78,10 @@ namespace uml
 		public:
  			Clause(const Clause &) {}
 			Clause& operator=(Clause const&) = delete;
-	
+
 		protected:
 			Clause(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -92,22 +95,19 @@ namespace uml
 			/*!
 			 The bodyOutput Pins are OutputPins on Actions in the body of the Clause.
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
-			virtual bool
-			 body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
 			decider.type = Boolean and
 			decider.is(1,1) */ 
-			virtual bool
-			 decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool decider_output(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty() */ 
-			virtual bool
-			 test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -120,14 +120,12 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::ExecutableNode> >
-			 getBody() const = 0;
+			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getBody() const = 0;
 			
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::OutputPin> >
-			 getBodyOutput() const = 0;
+			virtual std::shared_ptr< Bag<uml::OutputPin> > getBodyOutput() const = 0;
 			
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
@@ -141,20 +139,17 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Clause> >
-			 getPredecessorClause() const = 0;
+			virtual std::shared_ptr< Bag<uml::Clause> > getPredecessorClause() const = 0;
 			
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Clause> >
-			 getSuccessorClause() const = 0;
+			virtual std::shared_ptr< Bag<uml::Clause> > getSuccessorClause() const = 0;
 			
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::ExecutableNode> >
-			 getTest() const = 0;
+			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getTest() const = 0;
 			
 			
 
@@ -170,13 +165,11 @@ namespace uml
 			/*!
 			 The set of ExecutableNodes that are executed if the test evaluates to true and the Clause is chosen over other Clauses within the ConditionalNode that also have tests that evaluate to true.
 			<p>From package UML::Actions.</p> */
-				std::shared_ptr< Bag<uml::ExecutableNode> >
-			 m_body;
+			std::shared_ptr< Bag<uml::ExecutableNode> > m_body;
 			/*!
 			 The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p> */
-				std::shared_ptr< Bag<uml::OutputPin> >
-			 m_bodyOutput;
+			std::shared_ptr< Bag<uml::OutputPin> > m_bodyOutput;
 			/*!
 			 An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p> */
@@ -184,18 +177,15 @@ namespace uml
 			/*!
 			 A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p> */
-				std::shared_ptr< Bag<uml::Clause> >
-			 m_predecessorClause;
+			std::shared_ptr< Bag<uml::Clause> > m_predecessorClause;
 			/*!
 			 A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
 			<p>From package UML::Actions.</p> */
-				std::shared_ptr< Bag<uml::Clause> >
-			 m_successorClause;
+			std::shared_ptr< Bag<uml::Clause> > m_successorClause;
 			/*!
 			 The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p> */
-				std::shared_ptr< Bag<uml::ExecutableNode> >
-			 m_test;
+			std::shared_ptr< Bag<uml::ExecutableNode> > m_test;
 			
 
 		public:
@@ -205,7 +195,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

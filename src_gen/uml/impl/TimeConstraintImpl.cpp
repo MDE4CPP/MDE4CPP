@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -52,6 +52,19 @@ TimeConstraintImpl::~TimeConstraintImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_context)
+			:TimeConstraintImpl()
+			{
+			    m_context = par_context;
+			}
+
+
+
+
+
+
 TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConstraintImpl()
 {
 	//create copy of all Attributes
@@ -65,20 +78,17 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConst
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Element> >
-	 _constrainedElement = obj.getConstrainedElement();
-	m_constrainedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getConstrainedElement().get())));
+	std::shared_ptr< Bag<uml::Element> > _constrainedElement = obj.getConstrainedElement();
+	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_context  = obj.getContext();
 
 	m_owner  = obj.getOwner();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -86,13 +96,6 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConst
     
 	//Clone references with containment (deep copy)
 
-	if(obj.getContext()!=nullptr)
-	{
-		m_context.reset(dynamic_cast<uml::Namespace*>(obj.getContext()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -116,13 +119,6 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConst
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
 		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
@@ -145,9 +141,9 @@ std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void TimeConstraintImpl::setFirstEvent (bool _firstEvent)
+void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
@@ -160,8 +156,7 @@ bool TimeConstraintImpl::getFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool
- TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TimeConstraintImpl::has_one_constrainedElement(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -174,17 +169,17 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TimeConstraintImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Element > TimeConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
 std::shared_ptr<uml::Namespace > TimeConstraintImpl::getNamespace() const
 {
 	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > TimeConstraintImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > TimeConstraintImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Activity.hpp"
@@ -36,6 +36,9 @@ ActivityContentImpl::~ActivityContentImpl()
 	
 }
 
+
+
+
 ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj):ActivityContentImpl()
 {
 	//create copy of all Attributes
@@ -64,14 +67,13 @@ std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Activity> 
- ActivityContentImpl::containingActivity() 
+std::shared_ptr<uml::Activity> ActivityContentImpl::containingActivity() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

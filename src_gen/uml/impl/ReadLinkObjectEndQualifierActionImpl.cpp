@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Action.hpp"
@@ -86,6 +86,30 @@ ReadLinkObjectEndQualifierActionImpl::~ReadLinkObjectEndQualifierActionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(std::shared_ptr<uml::Activity > par_activity)
+			:ReadLinkObjectEndQualifierActionImpl()
+			{
+			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+			:ReadLinkObjectEndQualifierActionImpl()
+			{
+			    m_inStructuredNode = par_inStructuredNode;
+			}
+
+
+
+
+
+
 ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj):ReadLinkObjectEndQualifierActionImpl()
 {
 	//create copy of all Attributes
@@ -100,38 +124,31 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
 	m_context  = obj.getContext();
 
-			std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
-	m_inGroup.reset(new 		Union<uml::ActivityGroup> (*(obj.getInGroup().get())));
+	std::shared_ptr<Union<uml::ActivityGroup> > _inGroup = obj.getInGroup();
+	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getIncoming().get())));
+	m_inStructuredNode  = obj.getInStructuredNode();
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
 	m_qualifier  = obj.getQualifier();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 
     
@@ -175,13 +192,6 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getInStructuredNode()!=nullptr)
-	{
-		m_inStructuredNode.reset(dynamic_cast<uml::StructuredActivityNode*>(obj.getInStructuredNode()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inStructuredNode" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
 	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
@@ -254,63 +264,55 @@ std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClas
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ReadLinkObjectEndQualifierActionImpl::association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ReadLinkObjectEndQualifierActionImpl::type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ReadLinkObjectEndQualifierActionImpl::type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -352,31 +354,29 @@ void ReadLinkObjectEndQualifierActionImpl::setResult(std::shared_ptr<uml::Output
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
- ReadLinkObjectEndQualifierActionImpl::getOutput() const
-{
-	return m_output;
-}
-		std::shared_ptr<Union<uml::Element> > ReadLinkObjectEndQualifierActionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
- ReadLinkObjectEndQualifierActionImpl::getInput() const
-{
-	return m_input;
-}
-		std::shared_ptr<Union<uml::ActivityGroup> > ReadLinkObjectEndQualifierActionImpl::getInGroup() const
+std::shared_ptr<Union<uml::ActivityGroup> > ReadLinkObjectEndQualifierActionImpl::getInGroup() const
 {
 	return m_inGroup;
 }
-std::shared_ptr<uml::Element > ReadLinkObjectEndQualifierActionImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > ReadLinkObjectEndQualifierActionImpl::getOutput() const
 {
-	return m_owner;
+	return m_output;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > ReadLinkObjectEndQualifierActionImpl::getRedefinedElement() const
+std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > ReadLinkObjectEndQualifierActionImpl::getInput() const
+{
+	return m_input;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ReadLinkObjectEndQualifierActionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > ReadLinkObjectEndQualifierActionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ReadLinkObjectEndQualifierActionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -104,9 +106,13 @@ namespace uml
 		public:
  			Extend(const Extend &) {}
 			Extend& operator=(Extend const&) = delete;
-	
+
 		protected:
 			Extend(){}
+
+
+			//Additional constructors for the containments back reference
+			Extend(std::weak_ptr<uml::UseCase > par_extension){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -120,8 +126,7 @@ namespace uml
 			/*!
 			 The ExtensionPoints referenced by the Extend relationship must belong to the UseCase that is being extended.
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp)) */ 
-			virtual bool
-			 extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool extension_points(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -152,13 +157,12 @@ namespace uml
 			/*!
 			 An ordered list of ExtensionPoints belonging to the extended UseCase, specifying where the respective behavioral fragments of the extending UseCase are to be inserted. The first fragment in the extending UseCase is associated with the first extension point in the list, the second fragment with the second point, and so on. Note that, in most practical cases, the extending UseCase has just a single behavior fragment, so that the list of ExtensionPoints is trivial.
 			<p>From package UML::UseCases.</p> */
-			virtual 	std::shared_ptr< Bag<uml::ExtensionPoint> >
-			 getExtensionLocation() const = 0;
+			virtual std::shared_ptr< Bag<uml::ExtensionPoint> > getExtensionLocation() const = 0;
 			
 			/*!
 			 The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p> */
-			virtual std::shared_ptr<uml::UseCase > getExtension() const = 0;
+			virtual std::weak_ptr<uml::UseCase > getExtension() const = 0;
 			
 			/*!
 			 The UseCase that represents the extension and owns the Extend relationship.
@@ -186,12 +190,11 @@ namespace uml
 			/*!
 			 An ordered list of ExtensionPoints belonging to the extended UseCase, specifying where the respective behavioral fragments of the extending UseCase are to be inserted. The first fragment in the extending UseCase is associated with the first extension point in the list, the second fragment with the second point, and so on. Note that, in most practical cases, the extending UseCase has just a single behavior fragment, so that the list of ExtensionPoints is trivial.
 			<p>From package UML::UseCases.</p> */
-				std::shared_ptr< Bag<uml::ExtensionPoint> >
-			 m_extensionLocation;
+			std::shared_ptr< Bag<uml::ExtensionPoint> > m_extensionLocation;
 			/*!
 			 The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p> */
-			std::shared_ptr<uml::UseCase > m_extension;
+			std::weak_ptr<uml::UseCase > m_extension;
 			
 
 		public:
@@ -199,26 +202,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
+			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
 	};
 
 }

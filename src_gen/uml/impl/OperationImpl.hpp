@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -49,6 +51,20 @@ namespace uml
 			friend class UmlFactoryImpl;
 			OperationImpl();
 
+			//Additional constructors for the containments back reference
+			OperationImpl(std::weak_ptr<uml::Class > par_class);
+
+
+			//Additional constructors for the containments back reference
+			OperationImpl(std::weak_ptr<uml::DataType > par_datatype);
+
+
+			//Additional constructors for the containments back reference
+			OperationImpl(std::weak_ptr<uml::Interface > par_interface);
+
+
+
+
 		public:
 			//destructor
 			virtual ~OperationImpl();
@@ -59,72 +75,60 @@ namespace uml
 			/*!
 			 An Operation can have at most one return parameter; i.e., an owned parameter with the direction set to 'return.'
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1 */ 
-			virtual bool
-			 at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery */ 
-			virtual bool
-			 only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves the (only) return result parameter for this operation. */ 
-			virtual std::shared_ptr<uml::Parameter> 
-			 getReturnResult()  ;
+			virtual std::shared_ptr<uml::Parameter> getReturnResult()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setIsOrdered(bool newIsOrdered)  ;
+			virtual void setIsOrdered(bool newIsOrdered)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setIsUnique(bool newIsUnique)  ;
+			virtual void setIsUnique(bool newIsUnique)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setLower(int newLower)  ;
+			virtual void setLower(int newLower)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setType(std::shared_ptr<uml::Type>  newType)  ;
+			virtual void setType(std::shared_ptr<uml::Type>  newType)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setUpper(int newUpper)  ;
+			virtual void setUpper(int newUpper)  ;
 			
 			/*!
 			 If this operation has a return parameter, isOrdered equals the value of isOrdered for that parameter. Otherwise isOrdered is false.
 			result = (if returnResult()->notEmpty() then returnResult()-> exists(isOrdered) else false endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool
-			 isOrdered()  ;
+			virtual bool isOrdered()  ;
 			
 			/*!
 			 If this operation has a return parameter, isUnique equals the value of isUnique for that parameter. Otherwise isUnique is true.
 			result = (if returnResult()->notEmpty() then returnResult()->exists(isUnique) else true endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual bool
-			 isUnique()  ;
+			virtual bool isUnique()  ;
 			
 			/*!
 			 If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).lower else null endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual int
-			 getLower()  ;
+			virtual int getLower()  ;
 			
 			/*!
 			 The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
 			result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> >
-			 returnResult()  ;
+			virtual std::shared_ptr<Bag<uml::Parameter> > returnResult()  ;
 			
 			
 			
@@ -132,8 +136,7 @@ namespace uml
 			 If this operation has a return parameter, upper equals the value of upper for that parameter. Otherwise upper has no value.
 			result = (if returnResult()->notEmpty() then returnResult()->any(true).upper else null endif)
 			<p>From package UML::Classification.</p> */ 
-			virtual int
-			 getUpper()  ;
+			virtual int getUpper()  ;
 			
 			
 			
@@ -187,7 +190,7 @@ namespace uml
 			/*!
 			 The Class that owns this operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Class > getClass() const ;
+			virtual std::weak_ptr<uml::Class > getClass() const ;
 			
 			/*!
 			 The Class that owns this operation, if any.
@@ -196,7 +199,7 @@ namespace uml
 			/*!
 			 The DataType that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::DataType > getDatatype() const ;
+			virtual std::weak_ptr<uml::DataType > getDatatype() const ;
 			
 			/*!
 			 The DataType that owns this Operation, if any.
@@ -205,7 +208,7 @@ namespace uml
 			/*!
 			 The Interface that owns this Operation, if any.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Interface > getInterface() const ;
+			virtual std::weak_ptr<uml::Interface > getInterface() const ;
 			
 			/*!
 			 The Interface that owns this Operation, if any.
@@ -214,20 +217,17 @@ namespace uml
 			/*!
 			 An optional set of Constraints specifying the state of the system when the Operation is completed.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > >
-			 getPostcondition() const ;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > getPostcondition() const ;
 			
 			/*!
 			 An optional set of Constraints on the state of the system when the Operation is invoked.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > >
-			 getPrecondition() const ;
+			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > getPrecondition() const ;
 			
 			/*!
 			 The Operations that are redefined by this Operation.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > >
-			 getRedefinedOperation() const ;
+			virtual std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > > getRedefinedOperation() const ;
 			
 			/*!
 			 The return type of the operation, if present. This information is derived from the return result for this Operation.
@@ -240,31 +240,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
-			 The Element that owns this Element.
+			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

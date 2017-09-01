@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -48,6 +50,16 @@ namespace uml
 			friend class UmlFactoryImpl;
 			VariableImpl();
 
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::Activity > par_activityScope);
+
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope);
+
+
+
+
 		public:
 			//destructor
 			virtual ~VariableImpl();
@@ -61,8 +73,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool
-			 isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
 			
 			
 			
@@ -77,7 +88,7 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Activity > getActivityScope() const ;
+			virtual std::weak_ptr<uml::Activity > getActivityScope() const ;
 			
 			/*!
 			 An Activity that owns the Variable.
@@ -86,7 +97,7 @@ namespace uml
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::StructuredActivityNode > getScope() const ;
+			virtual std::weak_ptr<uml::StructuredActivityNode > getScope() const ;
 			
 			/*!
 			 A StructuredActivityNode that owns the Variable.
@@ -98,15 +109,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
+			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Element that owns this Element.
+			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

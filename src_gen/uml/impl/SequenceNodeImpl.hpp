@@ -13,10 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#define ACTIVITY_DEBUG_ON
+
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -47,6 +49,27 @@ namespace uml
 			friend class UmlFactoryImpl;
 			SequenceNodeImpl();
 
+			//Additional constructors for the containments back reference
+			SequenceNodeImpl(std::shared_ptr<uml::Activity > par_Activity, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			SequenceNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			SequenceNodeImpl(std::shared_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+			SequenceNodeImpl(std::shared_ptr<uml::ActivityGroup > par_superGroup);
+
+
+
+
 		public:
 			//destructor
 			virtual ~SequenceNodeImpl();
@@ -67,8 +90,7 @@ namespace uml
 			/*!
 			 The ordered set of ExecutableNodes to be sequenced.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::ExecutableNode> >
-			 getExecutableNode() const ;
+			virtual std::shared_ptr< Bag<uml::ExecutableNode> > getExecutableNode() const ;
 			
 							
 			
@@ -78,37 +100,34 @@ namespace uml
 			/*!
 			 ActivityNodes immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 ActivityEdges immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > >
-			 getOutput() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 ActivityEdges immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const ;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

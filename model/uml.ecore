@@ -1641,7 +1641,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElement" ordered="false"
         upperBound="-1" eType="#//Element" changeable="false" volatile="true" transient="true"
-        derived="true" eOpposite="#//Element/owner">
+        derived="true" containment="true" eOpposite="#//Element/owner">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Elements owned by this Element.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -1654,6 +1654,9 @@
         <details key="documentation" value="The Element that owns this Element.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="union"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Element">

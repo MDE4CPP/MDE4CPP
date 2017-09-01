@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -50,6 +50,19 @@ QualifierValueImpl::~QualifierValueImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
+			:QualifierValueImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):QualifierValueImpl()
 {
 	//create copy of all Attributes
@@ -59,9 +72,6 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):Qualifier
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_qualifier  = obj.getQualifier();
@@ -103,28 +113,25 @@ std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- QualifierValueImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- QualifierValueImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool QualifierValueImpl::type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -156,7 +163,7 @@ void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > QualifierValueImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > QualifierValueImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

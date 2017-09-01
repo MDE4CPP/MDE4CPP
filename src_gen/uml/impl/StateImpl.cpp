@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -167,6 +167,30 @@ StateImpl::~StateImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			StateImpl::StateImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:StateImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			StateImpl::StateImpl(std::weak_ptr<uml::Region > par_container)
+			:StateImpl()
+			{
+			    m_container = par_container;
+			}
+
+
+
+
+
+
 StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 {
 	//create copy of all Attributes
@@ -184,34 +208,27 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _incoming = obj.getIncoming();
-	m_incoming.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getIncoming().get())));
+	m_container  = obj.getContainer();
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr< Bag<uml::Transition> > _incoming = obj.getIncoming();
+	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
 
-		std::shared_ptr< Bag<uml::Transition> >
-	 _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new 	 Bag<uml::Transition> 
-	(*(obj.getOutgoing().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Transition> > _outgoing = obj.getOutgoing();
+	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_submachine  = obj.getSubmachine();
 
@@ -234,13 +251,6 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_connectionPoint" << std::endl;
-	#endif
-	if(obj.getContainer()!=nullptr)
-	{
-		m_container.reset(dynamic_cast<uml::Region*>(obj.getContainer()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_container" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::Trigger>> _deferrableTriggerList = obj.getDeferrableTrigger();
 	for(std::shared_ptr<uml::Trigger> _deferrableTrigger : *_deferrableTriggerList)
@@ -400,7 +410,7 @@ std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -433,71 +443,61 @@ bool StateImpl::getIsSubmachineState() const
 //*********************************
 // Operations
 //*********************************
-bool
- StateImpl::composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::composite_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::isComposite() 
+bool StateImpl::isComposite() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::isOrthogonal() 
+bool StateImpl::isOrthogonal() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::isSimple() 
+bool StateImpl::isSimple() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::isSubmachineState() 
+bool StateImpl::isSubmachineState() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Classifier> 
- StateImpl::redefinitionContext() 
+std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- StateImpl::submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool StateImpl::submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -506,24 +506,21 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement > >
- StateImpl::getConnection() const
+std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement > > StateImpl::getConnection() const
 {
 
     return m_connection;
 }
 
 
-		std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement > >
- StateImpl::getConnectionPoint() const
+std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement > > StateImpl::getConnectionPoint() const
 {
 
     return m_connectionPoint;
 }
 
 
-		std::shared_ptr<Subset<uml::Trigger, uml::Element > >
- StateImpl::getDeferrableTrigger() const
+std::shared_ptr<Subset<uml::Trigger, uml::Element > > StateImpl::getDeferrableTrigger() const
 {
 
     return m_deferrableTrigger;
@@ -570,8 +567,7 @@ void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
     m_redefinedState = _redefinedState;
 }
 
-		std::shared_ptr<Subset<uml::Region, uml::NamedElement > >
- StateImpl::getRegion() const
+std::shared_ptr<Subset<uml::Region, uml::NamedElement > > StateImpl::getRegion() const
 {
 
     return m_region;
@@ -601,30 +597,29 @@ void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::NamedElement> > StateImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > StateImpl::getMember() const
 {
 	return m_member;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- StateImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::Element> > StateImpl::getOwnedElement() const
 {
-	return m_ownedMember;
+	return m_ownedElement;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > StateImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 std::shared_ptr<uml::Namespace > StateImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > StateImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > StateImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::weak_ptr<uml::Element > StateImpl::getOwner() const
 {
 	return m_owner;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > StateImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-		std::shared_ptr<Union<uml::Element> > StateImpl::getOwnedElement() const
-{
-	return m_ownedElement;
 }
 
 

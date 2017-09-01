@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Association.hpp"
@@ -101,6 +101,19 @@ ConnectorImpl::~ConnectorImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ConnectorImpl::ConnectorImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			:ConnectorImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+
 ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 {
 	//create copy of all Attributes
@@ -116,29 +129,22 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Behavior> >
-	 _contract = obj.getContract();
-	m_contract.reset(new 	 Bag<uml::Behavior> 
-	(*(obj.getContract().get())));
+	std::shared_ptr< Bag<uml::Behavior> > _contract = obj.getContract();
+	m_contract.reset(new Bag<uml::Behavior>(*(obj.getContract().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_type  = obj.getType();
 
@@ -207,7 +213,7 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -219,22 +225,19 @@ ConnectorKind ConnectorImpl::getKind() const
 //*********************************
 // Operations
 //*********************************
-ConnectorKind
- ConnectorImpl::getKind() 
+ConnectorKind ConnectorImpl::getKind() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConnectorImpl::roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorImpl::roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ConnectorImpl::types(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -243,24 +246,21 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Behavior> >
- ConnectorImpl::getContract() const
+std::shared_ptr< Bag<uml::Behavior> > ConnectorImpl::getContract() const
 {
 
     return m_contract;
 }
 
 
-		std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element > >
- ConnectorImpl::getEnd() const
+std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element > > ConnectorImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
 
 
-		std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > >
- ConnectorImpl::getRedefinedConnector() const
+std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement > > ConnectorImpl::getRedefinedConnector() const
 {
 
     return m_redefinedConnector;
@@ -280,17 +280,17 @@ void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ConnectorImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Element> > ConnectorImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > ConnectorImpl::getOwner() const
+std::weak_ptr<uml::Element > ConnectorImpl::getOwner() const
 {
 	return m_owner;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
 }
 
 

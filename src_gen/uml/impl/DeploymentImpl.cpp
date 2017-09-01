@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -90,6 +90,19 @@ DeploymentImpl::~DeploymentImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::DeploymentTarget > par_location)
+			:DeploymentImpl()
+			{
+			    m_location = par_location;
+			}
+
+
+
+
+
+
 DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
 {
 	//create copy of all Attributes
@@ -102,18 +115,17 @@ DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_location  = obj.getLocation();
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new 		Union<uml::Element> (*(obj.getRelatedElement().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
+	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
@@ -153,13 +165,6 @@ DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
-	if(obj.getLocation()!=nullptr)
-	{
-		m_location.reset(dynamic_cast<uml::DeploymentTarget*>(obj.getLocation()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_location" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
@@ -174,13 +179,6 @@ DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
 	#endif
 	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
 	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
@@ -212,7 +210,7 @@ std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -222,23 +220,21 @@ std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > >
- DeploymentImpl::getConfiguration() const
+std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element > > DeploymentImpl::getConfiguration() const
 {
 
     return m_configuration;
 }
 
 
-		std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > >
- DeploymentImpl::getDeployedArtifact() const
+std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ > > DeploymentImpl::getDeployedArtifact() const
 {
 
     return m_deployedArtifact;
 }
 
 
-std::shared_ptr<uml::DeploymentTarget > DeploymentImpl::getLocation() const
+std::weak_ptr<uml::DeploymentTarget > DeploymentImpl::getLocation() const
 {
 //assert(m_location);
     return m_location;
@@ -251,27 +247,25 @@ void DeploymentImpl::setLocation(std::shared_ptr<uml::DeploymentTarget> _locatio
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DeploymentImpl::getSource() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DeploymentImpl::getSource() const
 {
 	return m_source;
 }
-		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
- DeploymentImpl::getTarget() const
-{
-	return m_target;
-}
-std::shared_ptr<uml::Element > DeploymentImpl::getOwner() const
+std::weak_ptr<uml::Element > DeploymentImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::Element> > DeploymentImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::Element> > DeploymentImpl::getRelatedElement() const
+std::shared_ptr<Union<uml::Element> > DeploymentImpl::getRelatedElement() const
 {
 	return m_relatedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DeploymentImpl::getTarget() const
+{
+	return m_target;
+}
+std::shared_ptr<Union<uml::Element> > DeploymentImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 
 
