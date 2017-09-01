@@ -38,14 +38,17 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEClass)/]> get[aEClass.name/]
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 [comment]virtual [aEClass.generateTypeClass()/]* create[aEClass.name/]() const [abstractSufix(impl)/];[/comment]
-[if (aEClass.ePackage.name = 'uml' and (not (aEClass.name = 'Object')))]
-virtual [aEClass.generateTypeClass()/]* create[aEClass.name/](std::shared_ptr<uml::Element > owner) const [abstractSufix(impl)/];
-[/if]
-
-[let eRef: EReference = aEClass.getFirstContainer()]
+[if(getAllContainers()->isEmpty())]
+//Class without a containing object
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() const [abstractSufix(impl)/];
+[else]
+[let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
+[for(aReference:EReference | ref)]
 //Add containing object
-virtual [aEClass.generateTypeClass()/]* create[aEClass.name/]([eRef.generateReferenceType(true)/] par_[eRef.name/]) const [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const [abstractSufix(impl)/];
+[/for]
 [/let]
+[/if]
 [/template]
 
 [template public generateClassGetterImpl(aEClass : EClass)]

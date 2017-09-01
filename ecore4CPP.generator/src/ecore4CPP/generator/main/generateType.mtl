@@ -97,17 +97,10 @@ m_[m.oclAsType(EReference).name/][/for][/let]
 [/if]
 [/template]
 
-[template public getConstructorParameters (aClass : EClass) post(trim())]
-[let ref:OrderedSet(EReference) = aClass.getContainsContainerAttribute()]
-[for(aReference:EReference | ref) separator(',')]
-[aReference.generateReferenceType(true)/] par_[aReference.name/]
-[/for]
-[/let]
-
-[/template]
+[query public isBackReference(aReference:EReference) : Boolean = aReference.container /]
 
 [template public pointertype(aReference : EReference) post(trim())]
-[if(aReference.derived or aReference.hasKey('isContainerAttribute'))]
+[if(isBackReference())]
 std::weak_ptr
 [else]
 std::shared_ptr

@@ -113,22 +113,38 @@ else()
 endif()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 if(NOT UNIX)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 	debug ${PLUGINFRAMEWORK_DEBUG}
-endif()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	debug ${[pack.name.toUpperCase()/]_DEBUG}
 [/for]
 )
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-if(NOT UNIX) 
-	optimized ${PLUGINFRAMEWORK_RELEASE}
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	#debug ${PLUGINFRAMEWORK_DEBUG}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	debug ${[pack.name.toUpperCase()/]_DEBUG}
+[/for]
+)
 endif()
+
+if(NOT UNIX) 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	optimized ${PLUGINFRAMEWORK_RELEASE}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	optimized ${[pack.name.toUpperCase()/]_RELEASE}
 [/for]
 )
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	#optimized ${PLUGINFRAMEWORK_RELEASE}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	optimized ${[pack.name.toUpperCase()/]_RELEASE}
+[/for]
+)
+endif()
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------

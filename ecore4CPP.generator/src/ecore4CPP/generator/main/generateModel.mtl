@@ -76,9 +76,15 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 
 		protected:
 			[aClass.name.toUpperFirst()/](){}
+
 			[if(aClass.containsContainerAttribute())]
+
+			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+			[for(aReference:EReference | ref) separator('\n')]
 			//Additional constructors for the containments back reference
-            [aClass.name.toUpperFirst()/]([getConstructorParameters()/]){}
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]){}
+			[/for]
+			[/let]
 			[/if]
 
 		public:

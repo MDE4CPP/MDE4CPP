@@ -35,7 +35,11 @@
 
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
-[query public isContainerAttribute(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('isContainerAttribute') then aModelElement.valueKey('isContainerAttribute')='true' else false endif /]
+
+[query public isContainerAttribute(aRef : EReference) : Boolean =  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
+
+
+[query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then  getContainsContainerAttribute() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->asOrderedSet() else OrderedSet{} endif endif /]
 [query public getFirstContainer(aClass : EClass) : EReference =  if getContainsContainerAttribute()->notEmpty() then  getContainsContainerAttribute()->first() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes->first().getFirstContainer() else null endif endif /]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('implOnly') then aModelElement.valueKey('implOnly')='true' else false endif /]
@@ -73,6 +77,8 @@
 [query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
 
 [query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+
+[query public findLowerSubset(owner: EClass, thisClass : EClass, ref : EReference) : EReference = let r : EReference = owner.getSubsetsForUnion(ref)->select(aRef : EReference | aRef.eType = thisClass)->asOrderedSet()->first() in if r.oclIsUndefined() then ref else r endif /]
 
 
 [**

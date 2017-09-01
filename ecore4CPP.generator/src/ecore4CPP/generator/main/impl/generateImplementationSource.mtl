@@ -84,14 +84,39 @@ using namespace [aClass.ePackage.name/];
 }
 
 
-
-[let eRef: EReference = aClass.getFirstContainer()]
+[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+[for(aReference:EReference | ref) separator('\n')]
 //Additional constructor for the containments back reference
-[className/]::[className/]([eRef.generateReferenceType(true)/] par_[eRef.name/])
-:[className/]()
-{
-    m_[eRef.name/] = par_[eRef.name/];
-}
+[if(ref->select(eType = aReference.eType)->size()>1 )]
+	[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
+			:[className/]()
+			{
+				switch(reference_id)
+				{	
+				[for(multipleRef : EReference | ref->select(eType = aReference.eType))]
+				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.memberNameUpper()/]:
+					 m_[multipleRef.name/] = par_[aReference.eType.name/];
+					 return;
+				[/for]
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+	[/if]
+	[else]
+			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
+			:[className/]()
+			{
+			    m_[aReference.name/] = par_[aReference.name/];
+			}
+	[/if]
+
+
+
+
+[/for]
 [/let]
 
 
@@ -108,7 +133,7 @@ using namespace [aClass.ePackage.name/];
 
 	//copy references with no containment (soft copy)
 	
-	[for (ref : EReference | aClass.eAllReferences->select(aRef: EReference | aRef.containment = false and not aRef.hasSubset())->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | aClass.eAllReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
 	[else]
@@ -140,7 +165,7 @@ using namespace [aClass.ePackage.name/];
 	[/comment]
 	//Clone references with containment (deep copy)
 
-	[for (ref : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()))->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{

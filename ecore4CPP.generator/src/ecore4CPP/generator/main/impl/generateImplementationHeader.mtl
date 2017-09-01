@@ -66,10 +66,21 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
 
-			[let eRef: EReference = aClass.getFirstContainer()]
-			//Additional constructor for the containments back reference
-			[className/]([eRef.generateReferenceType(true)/] par_[eRef.name/]);
+			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+			[for(aReference:EReference | ref) ]
+			//Additional constructors for the containments back reference
+	[if(ref->select(eType = aReference.eType)->size()>1 )]
+			[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+			[/if]
+	[else]
+			[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+	[/if]
+
+
+			[/for]
 			[/let]
+
 
 		public:
 			//destructor
