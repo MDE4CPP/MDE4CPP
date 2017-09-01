@@ -53,9 +53,10 @@ namespace ecore
 		public:
  			EModelElement(const EModelElement &) {}
 			EModelElement& operator=(EModelElement const&) = delete;
-	
+
 		protected:
 			EModelElement(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

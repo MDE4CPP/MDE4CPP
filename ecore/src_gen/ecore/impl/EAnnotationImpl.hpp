@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EAnnotationImpl();
 
+			//Additional constructors for the containments back reference
+			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EAnnotationImpl();
@@ -80,7 +86,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EModelElement > getEModelElement() const ;
+			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const ;
 			
 			/*!
 			 */

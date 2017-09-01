@@ -71,9 +71,10 @@ namespace ecore
 		public:
  			EObject(const EObject &) {}
 			EObject& operator=(EObject const&) = delete;
-	
+
 		protected:
 			EObject(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -152,9 +153,6 @@ namespace ecore
 			 */
 			virtual std::shared_ptr<ecore::EObject > eContainer() const = 0;
 			
-			/*!
-			 */
-			virtual void setContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) = 0;
 			
 
 		protected:

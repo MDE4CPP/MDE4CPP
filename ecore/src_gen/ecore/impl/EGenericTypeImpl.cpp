@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EClassifier.hpp"
@@ -66,6 +66,9 @@ EGenericTypeImpl::~EGenericTypeImpl()
 #endif
 	
 }
+
+
+
 
 EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImpl()
 {

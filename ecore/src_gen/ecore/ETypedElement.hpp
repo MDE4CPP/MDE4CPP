@@ -67,9 +67,10 @@ namespace ecore
 		public:
  			ETypedElement(const ETypedElement &) {}
 			ETypedElement& operator=(ETypedElement const&) = delete;
-	
+
 		protected:
 			ETypedElement(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

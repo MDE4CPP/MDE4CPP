@@ -8,8 +8,14 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 3.9)
 
-SET(CMAKE_C_COMPILER "gcc.exe")
-SET(CMAKE_CXX_COMPILER "g++.exe")
+if(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+SET(CMAKE_C_COMPILER "gcc")
+SET(CMAKE_CXX_COMPILER "g++")
+else()
+   SET(CMAKE_C_COMPILER "gcc.exe")
+   SET(CMAKE_CXX_COMPILER "g++.exe")
+endif()
 
 PROJECT(ecore)
 
@@ -59,20 +65,45 @@ INCLUDE_DIRECTORIES(
 	.
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
+if(NOT UNIX)
 	${MDE4CPP_HOME}/application/include/PluginFramework
+endif()
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+if(NOT UNIX)
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+endif()
 
+
+
+
+if(UNIX AND NOT APPLE)
+    # for Linux, BSD, Solaris, Minix
+else()
+endif()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+if(NOT UNIX)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 	debug ${PLUGINFRAMEWORK_DEBUG}
 )
+else()
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	#debug ${PLUGINFRAMEWORK_DEBUG}
+)
+endif()
+
+if(NOT UNIX) 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	optimized ${PLUGINFRAMEWORK_RELEASE}
 )
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	#optimized ${PLUGINFRAMEWORK_RELEASE}
+)
+endif()
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------

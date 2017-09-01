@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -53,6 +53,19 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+			:EStructuralFeatureImpl()
+			{
+			    m_eContainingClass = par_eContainingClass;
+			}
+
+
+
+
+
 
 EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
 {
@@ -129,10 +142,7 @@ bool EStructuralFeatureImpl::isChangeable() const
 	return m_changeable;
 }
 
-void EStructuralFeatureImpl::setContainerClass(void *  _containerClass)
-{
-	m_containerClass = _containerClass;
-} 
+
 
 void *  EStructuralFeatureImpl::getContainerClass() const 
 {
@@ -213,7 +223,7 @@ bool EStructuralFeatureImpl::isVolatile() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
+std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;

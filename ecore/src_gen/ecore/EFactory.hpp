@@ -77,9 +77,10 @@ namespace ecore
 		public:
  			EFactory(const EFactory &) {}
 			EFactory& operator=(EFactory const&) = delete;
-	
+
 		protected:
 			EFactory(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

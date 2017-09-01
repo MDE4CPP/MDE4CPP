@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EObject.hpp"
@@ -36,6 +36,9 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 #endif
 	
 }
+
+
+
 
 EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj):EStringToStringMapEntryImpl()
 {

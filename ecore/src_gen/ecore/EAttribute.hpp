@@ -77,9 +77,10 @@ namespace ecore
 		public:
  			EAttribute(const EAttribute &) {}
 			EAttribute& operator=(EAttribute const&) = delete;
-	
+
 		protected:
 			EAttribute(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

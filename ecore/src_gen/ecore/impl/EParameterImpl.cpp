@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -45,6 +45,19 @@ EParameterImpl::~EParameterImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
+			:EParameterImpl()
+			{
+			    m_eOperation = par_eOperation;
+			}
+
+
+
+
+
 
 EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 {
@@ -110,7 +123,7 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
+std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 {
 
     return m_eOperation;

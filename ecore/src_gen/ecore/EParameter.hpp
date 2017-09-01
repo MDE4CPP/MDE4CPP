@@ -72,9 +72,13 @@ namespace ecore
 		public:
  			EParameter(const EParameter &) {}
 			EParameter& operator=(EParameter const&) = delete;
-	
+
 		protected:
 			EParameter(){}
+
+
+			//Additional constructors for the containments back reference
+			EParameter(std::weak_ptr<ecore::EOperation > par_eOperation){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -95,7 +99,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EOperation > getEOperation() const = 0;
+			virtual std::weak_ptr<ecore::EOperation > getEOperation() const = 0;
 			
 			
 
@@ -110,7 +114,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EOperation > m_eOperation;
+			std::weak_ptr<ecore::EOperation > m_eOperation;
 			
 
 		public:

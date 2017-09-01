@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EReferenceImpl();
 
+			//Additional constructors for the containments back reference
+			EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EReferenceImpl();

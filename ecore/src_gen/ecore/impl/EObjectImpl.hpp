@@ -50,6 +50,8 @@ virtual public EObject
 			friend class EcoreFactoryImpl;
 			EObjectImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~EObjectImpl();
@@ -127,9 +129,6 @@ virtual public EObject
 			 */
 			virtual std::shared_ptr<ecore::EObject > eContainer() const ;
 			
-			/*!
-			 */
-			virtual void setContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) ;
 							
 			
 			//*********************************

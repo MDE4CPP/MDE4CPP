@@ -72,9 +72,13 @@ namespace ecore
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
 			EStructuralFeature& operator=(EStructuralFeature const&) = delete;
-	
+
 		protected:
 			EStructuralFeature(){}
+
+
+			//Additional constructors for the containments back reference
+			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -155,7 +159,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const = 0;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
 			
 			
 
@@ -197,7 +201,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EClass > m_eContainingClass;
+			std::weak_ptr<ecore::EClass > m_eContainingClass;
 			
 
 		public:

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -79,6 +79,19 @@ EOperationImpl::~EOperationImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+			:EOperationImpl()
+			{
+			    m_eContainingClass = par_eContainingClass;
+			}
+
+
+
+
+
 
 EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 {
@@ -188,7 +201,21 @@ int EOperationImpl::getOperationID() const
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
 {
 	//generated from body annotation
-	    if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) && (someOperation->getName()==getName()))
+		std::shared_ptr<ecore::EClass > containingClass = someOperation->getEContainingClass().lock();
+	if(nullptr == containingClass)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << " containing class not set." << std::endl;
+		return false;
+	}
+
+	std::shared_ptr<ecore::EClass > thisContainingClass = getEContainingClass().lock();
+	if(nullptr == thisContainingClass)
+	{
+		std::cerr << __PRETTY_FUNCTION__ << " thisContainingClass not set." << std::endl;
+		return false;
+	}
+
+	if (containingClass->isSuperTypeOf(thisContainingClass) && (someOperation->getName()==getName()))
     {
         std::shared_ptr< Bag<ecore::EParameter> > parameters = getEParameters();
         std::shared_ptr< Bag<ecore::EParameter> > otherParameters = someOperation->getEParameters();
@@ -198,7 +225,7 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperat
         	{
             	std::shared_ptr<EParameter> parameter = *i;
             	std::shared_ptr<EParameter> otherParameter = *j;
-                if (!(parameter->getEType().get() == otherParameter->getEType().get()))
+                if (parameter->getEType().get() != otherParameter->getEType().get())
           		{
                     return false;
         		}
@@ -213,7 +240,7 @@ bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperat
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
+std::weak_ptr<ecore::EClass > EOperationImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;

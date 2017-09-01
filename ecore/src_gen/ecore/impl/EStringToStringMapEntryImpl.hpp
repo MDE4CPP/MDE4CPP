@@ -49,6 +49,8 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EStringToStringMapEntryImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~EStringToStringMapEntryImpl();

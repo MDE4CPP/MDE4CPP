@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EPackageImpl();
 
+			//Additional constructors for the containments back reference
+			EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EPackageImpl();
@@ -100,9 +106,7 @@ namespace ecore
 			 */ 
 			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered)  ;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered)  ;
+			
 			
 			/*!
 			 */ 
@@ -112,13 +116,11 @@ namespace ecore
 			 */ 
 			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
+			
 			
 			/*!
 			 */ 
-			virtual void initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,void *  containerClass,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
+			virtual void initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
 			
 			/*!
 			 */ 
@@ -211,7 +213,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage > getESuperPackage() const ;
+			virtual std::weak_ptr<ecore::EPackage > getESuperPackage() const ;
 			
 							
 			

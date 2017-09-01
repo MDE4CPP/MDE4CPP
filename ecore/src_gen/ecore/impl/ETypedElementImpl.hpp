@@ -49,6 +49,8 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			ETypedElementImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~ETypedElementImpl();

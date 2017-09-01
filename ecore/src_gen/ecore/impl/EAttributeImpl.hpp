@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EAttributeImpl();
 
+			//Additional constructors for the containments back reference
+			EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EAttributeImpl();

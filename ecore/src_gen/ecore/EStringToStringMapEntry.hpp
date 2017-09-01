@@ -52,9 +52,10 @@ namespace ecore
 		public:
  			EStringToStringMapEntry(const EStringToStringMapEntry &) {}
 			EStringToStringMapEntry& operator=(EStringToStringMapEntry const&) = delete;
-	
+
 		protected:
 			EStringToStringMapEntry(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

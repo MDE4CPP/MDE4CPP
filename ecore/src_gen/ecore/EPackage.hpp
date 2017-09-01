@@ -112,9 +112,13 @@ namespace ecore
 		public:
  			EPackage(const EPackage &) {}
 			EPackage& operator=(EPackage const&) = delete;
-	
+
 		protected:
 			EPackage(){}
+
+
+			//Additional constructors for the containments back reference
+			EPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -224,7 +228,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage > getESuperPackage() const = 0;
+			virtual std::weak_ptr<ecore::EPackage > getESuperPackage() const = 0;
 			
 			
 
@@ -254,7 +258,7 @@ namespace ecore
 			std::shared_ptr< Bag<ecore::EPackage> > m_eSubpackages;
 			/*!
 			 */
-			std::shared_ptr<ecore::EPackage > m_eSuperPackage;
+			std::weak_ptr<ecore::EPackage > m_eSuperPackage;
 			
 
 		public:

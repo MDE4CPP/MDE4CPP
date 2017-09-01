@@ -66,23 +66,40 @@ namespace ecore
 			static std::shared_ptr<EcoreFactory> eInstance();
 		
 			//Creator functions
-			virtual std::shared_ptr<EObject> create(std::string _className) const = 0;
+			virtual std::shared_ptr<EObject> create(std::string _className, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
 
-			virtual EAttribute* createEAttribute() const = 0;
-			virtual EAnnotation* createEAnnotation() const = 0;
-			virtual EClass* createEClass() const = 0;
-			virtual EDataType* createEDataType() const = 0;
-			virtual EEnum* createEEnum() const = 0;
-			virtual EEnumLiteral* createEEnumLiteral() const = 0;
-			virtual EFactory* createEFactory() const = 0;
-			virtual EObject* createEObject() const = 0;
-			virtual EOperation* createEOperation() const = 0;
-			virtual EPackage* createEPackage() const = 0;
-			virtual EParameter* createEParameter() const = 0;
-			virtual EReference* createEReference() const = 0;
-			virtual EStringToStringMapEntry* createEStringToStringMapEntry() const = 0;
-			virtual EGenericType* createEGenericType() const = 0;
-			virtual ETypeParameter* createETypeParameter() const = 0;
+			virtual std::shared_ptr<EObject> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
+
+			//Add containing object
+			virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EModelElement(std::weak_ptr<ecore::EModelElement > par_eModelElement) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EClass> createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EDataType> createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EEnum> createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EEnum(std::weak_ptr<ecore::EEnum > par_eEnum) const = 0;
+			//Class without a containing object
+			virtual std::shared_ptr<EFactory> createEFactory() const = 0;
+			//Class without a containing object
+			virtual std::shared_ptr<EObject> createEObject() const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EOperation> createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EPackage> createEPackage_in_ESuperPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EParameter> createEParameter_in_EOperation(std::weak_ptr<ecore::EOperation > par_eOperation) const = 0;
+			//Add containing object
+			virtual std::shared_ptr<EReference> createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass) const = 0;
+			//Class without a containing object
+			virtual std::shared_ptr<EStringToStringMapEntry> createEStringToStringMapEntry() const = 0;
+			//Class without a containing object
+			virtual std::shared_ptr<EGenericType> createEGenericType() const = 0;
+			//Class without a containing object
+			virtual std::shared_ptr<ETypeParameter> createETypeParameter() const = 0;
 			
 			//Package
 			virtual std::shared_ptr<EcorePackage> getEcorePackage() const = 0;

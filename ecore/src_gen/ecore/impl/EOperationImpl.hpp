@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EOperationImpl();
 
+			//Additional constructors for the containments back reference
+			EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EOperationImpl();
@@ -80,7 +86,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
 			
 			/*!
 			 */

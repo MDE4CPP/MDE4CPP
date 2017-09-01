@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EClass.hpp"
@@ -45,6 +45,9 @@ EObjectImpl::~EObjectImpl()
 #endif
 	
 }
+
+
+
 
 EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 {
@@ -177,10 +180,7 @@ std::shared_ptr<ecore::EObject > EObjectImpl::eContainer() const
 
     return m_eContainer;
 }
-void EObjectImpl::setContainer(std::shared_ptr<ecore::EObject> _eContainer)
-{
-    m_eContainer = _eContainer;
-}
+
 
 //*********************************
 // Union Getter

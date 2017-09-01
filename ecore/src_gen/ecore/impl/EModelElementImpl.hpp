@@ -51,6 +51,8 @@ virtual public EModelElement
 			friend class EcoreFactoryImpl;
 			EModelElementImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~EModelElementImpl();

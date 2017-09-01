@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EStructuralFeatureImpl();
 
+			//Additional constructors for the containments back reference
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EStructuralFeatureImpl();
@@ -125,10 +131,6 @@ namespace ecore
 			 */ 
 			virtual void *  getContainerClass() const ;
 			
-			/*!
-			 */ 
-			virtual void setContainerClass (void *  _containerClass); 
-			
 			
 			
 			//*********************************
@@ -136,7 +138,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
 			
 							
 			

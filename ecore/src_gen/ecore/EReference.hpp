@@ -82,9 +82,10 @@ namespace ecore
 		public:
  			EReference(const EReference &) {}
 			EReference& operator=(EReference const&) = delete;
-	
+
 		protected:
 			EReference(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

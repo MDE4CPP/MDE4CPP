@@ -67,9 +67,13 @@ namespace ecore
 		public:
  			EClassifier(const EClassifier &) {}
 			EClassifier& operator=(EClassifier const&) = delete;
-	
+
 		protected:
 			EClassifier(){}
+
+
+			//Additional constructors for the containments back reference
+			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -128,7 +132,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage > getEPackage() const = 0;
+			virtual std::weak_ptr<ecore::EPackage > getEPackage() const = 0;
 			
 			/*!
 			 */
@@ -165,7 +169,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EPackage > m_ePackage;
+			std::weak_ptr<ecore::EPackage > m_ePackage;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::ETypeParameter> > m_eTypeParameters;

@@ -67,9 +67,10 @@ namespace ecore
 		public:
  			EDataType(const EDataType &) {}
 			EDataType& operator=(EDataType const&) = delete;
-	
+
 		protected:
 			EDataType(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

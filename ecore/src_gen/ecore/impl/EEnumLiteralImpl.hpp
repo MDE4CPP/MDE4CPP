@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EEnumLiteralImpl();
 
+			//Additional constructors for the containments back reference
+			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EEnumLiteralImpl();
@@ -92,7 +98,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EEnum > getEEnum() const ;
+			virtual std::weak_ptr<ecore::EEnum > getEEnum() const ;
 			
 							
 			

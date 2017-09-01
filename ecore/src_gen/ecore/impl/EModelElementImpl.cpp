@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -40,6 +40,9 @@ EModelElementImpl::~EModelElementImpl()
 #endif
 	
 }
+
+
+
 
 EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElementImpl()
 {

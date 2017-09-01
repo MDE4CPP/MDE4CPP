@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -47,6 +47,9 @@ EFactoryImpl::~EFactoryImpl()
 #endif
 	
 }
+
+
+
 
 EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
 {

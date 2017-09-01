@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -43,6 +43,19 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
+			:EEnumLiteralImpl()
+			{
+			    m_eEnum = par_eEnum;
+			}
+
+
+
+
+
 
 EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
 {
@@ -125,7 +138,7 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
+std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;

@@ -62,9 +62,13 @@ namespace ecore
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}
 			EEnumLiteral& operator=(EEnumLiteral const&) = delete;
-	
+
 		protected:
 			EEnumLiteral(){}
+
+
+			//Additional constructors for the containments back reference
+			EEnumLiteral(std::weak_ptr<ecore::EEnum > par_eEnum){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -109,7 +113,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EEnum > getEEnum() const = 0;
+			virtual std::weak_ptr<ecore::EEnum > getEEnum() const = 0;
 			
 			
 
@@ -133,7 +137,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EEnum > m_eEnum;
+			std::weak_ptr<ecore::EEnum > m_eEnum;
 			
 
 		public:

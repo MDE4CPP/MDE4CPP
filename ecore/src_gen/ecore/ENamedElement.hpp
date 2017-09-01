@@ -57,9 +57,10 @@ namespace ecore
 		public:
  			ENamedElement(const ENamedElement &) {}
 			ENamedElement& operator=(ENamedElement const&) = delete;
-	
+
 		protected:
 			ENamedElement(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

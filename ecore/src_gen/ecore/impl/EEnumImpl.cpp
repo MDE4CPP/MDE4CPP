@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -48,6 +48,19 @@ EEnumImpl::~EEnumImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+			:EEnumImpl()
+			{
+			    m_ePackage = par_ePackage;
+			}
+
+
+
+
+
 
 EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 {

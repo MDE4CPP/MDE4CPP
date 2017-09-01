@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -54,6 +54,19 @@ EClassifierImpl::~EClassifierImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+			:EClassifierImpl()
+			{
+			    m_ePackage = par_ePackage;
+			}
+
+
+
+
+
 
 EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 {
@@ -177,7 +190,7 @@ void EClassifierImpl::setGeneratedInstance(bool isGenerated)
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
+std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 {
 
     return m_ePackage;

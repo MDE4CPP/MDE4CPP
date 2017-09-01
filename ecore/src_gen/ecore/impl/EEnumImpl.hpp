@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EEnumImpl();
 
+			//Additional constructors for the containments back reference
+			EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EEnumImpl();

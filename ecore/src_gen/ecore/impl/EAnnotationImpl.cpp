@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -64,6 +64,19 @@ EAnnotationImpl::~EAnnotationImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement)
+			:EAnnotationImpl()
+			{
+			    m_eModelElement = par_eModelElement;
+			}
+
+
+
+
+
 
 EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 {
@@ -161,7 +174,7 @@ std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > EAnnotationImpl::getDetai
 }
 
 
-std::shared_ptr<ecore::EModelElement > EAnnotationImpl::getEModelElement() const
+std::weak_ptr<ecore::EModelElement > EAnnotationImpl::getEModelElement() const
 {
 
     return m_eModelElement;

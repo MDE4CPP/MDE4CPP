@@ -67,9 +67,10 @@ namespace ecore
 		public:
  			EGenericType(const EGenericType &) {}
 			EGenericType& operator=(EGenericType const&) = delete;
-	
+
 		protected:
 			EGenericType(){}
+
 
 		public:
 			virtual ecore::EObject* copy() const = 0;

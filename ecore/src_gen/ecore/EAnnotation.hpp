@@ -67,9 +67,13 @@ namespace ecore
 		public:
  			EAnnotation(const EAnnotation &) {}
 			EAnnotation& operator=(EAnnotation const&) = delete;
-	
+
 		protected:
 			EAnnotation(){}
+
+
+			//Additional constructors for the containments back reference
+			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement){}
 
 		public:
 			virtual ecore::EObject* copy() const = 0;
@@ -102,7 +106,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EModelElement > getEModelElement() const = 0;
+			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const = 0;
 			
 			/*!
 			 */
@@ -134,7 +138,7 @@ namespace ecore
 			std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > m_details;
 			/*!
 			 */
-			std::shared_ptr<ecore::EModelElement > m_eModelElement;
+			std::weak_ptr<ecore::EModelElement > m_eModelElement;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::EObject> > m_contents;

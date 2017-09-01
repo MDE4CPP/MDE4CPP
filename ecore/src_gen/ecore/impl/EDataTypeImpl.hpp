@@ -49,6 +49,12 @@ namespace ecore
 			friend class EcoreFactoryImpl;
 			EDataTypeImpl();
 
+			//Additional constructors for the containments back reference
+			EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EDataTypeImpl();

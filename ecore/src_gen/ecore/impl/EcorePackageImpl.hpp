@@ -46,6 +46,7 @@
 
 #include "EcorePackage.hpp"
 #include "EcorePackage.hpp"
+#include "EcorePackage.hpp"
 
 namespace ecore
 {
