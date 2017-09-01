@@ -41,8 +41,10 @@ namespace types
 
 		public:
 			virtual ~TypesFactoryImpl();
-			virtual std::shared_ptr<ecore::EObject> create(ecore::EClass* _class) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<ecore::EObject> create(ecore::EClass* _class, std::shared_ptr<EObject> _container = nullptr) const;
+            //virtual std::shared_ptr<ecore::EObject> create(std::string _className, std::shared_ptr<EObject> _container = nullptr) const;
 
 			//Creator functions
 			
@@ -52,8 +54,7 @@ namespace types
 
 		private:
 			static TypesFactory * create();
-			std::map<std::string,std::function<ecore::EObject*()>> m_creatorMap;
-
+            std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 
 	};

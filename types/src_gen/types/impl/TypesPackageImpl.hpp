@@ -25,6 +25,7 @@
 
 
 #include "TypesPackage.hpp"
+#include "TypesPackage.hpp"
 #include "EcorePackage.hpp"
 #include "impl/EPackageImpl.hpp"
 

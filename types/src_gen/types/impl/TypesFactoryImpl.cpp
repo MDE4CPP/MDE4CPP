@@ -26,7 +26,19 @@ TypesFactory* TypesFactoryImpl::create()
 // creators
 //*********************************
 
-std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(ecore::EClass* _class) const
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container /*= nullptr*/, const unsigned int referenceID/* = -1*/) const
+{
+	switch(classID)
+	{
+
+	default:
+	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << classID <<" not found" << std::endl;
+	}
+	return nullptr;
+}
+
+
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(ecore::EClass* _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
 {
 	if(_class->isAbstract())
     {
@@ -34,23 +46,26 @@ std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(ecore::EClass* _class) 
    	}
 
 	std::string _className = _class->eClass()->getName();
-	return create(_className);
+	return create(_className, _container);
 }
 
-std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::string _className) const
+
+std::shared_ptr<ecore::EObject> TypesFactoryImpl::create(std::string _className, std::shared_ptr<EObject> _container/* = nullptr*/, const unsigned int referenceID) const
 {
-	//TODO: still two times run through map
-	std::map<std::string,std::function<ecore::EObject*()>>::const_iterator iter = m_creatorMap.find(_className);
+	auto iter = m_idMap.find(_className);
 	
 	std::shared_ptr<ecore::EObject> _createdObject;
-	if(iter != m_creatorMap.end())
+	if(iter != m_idMap.end())
     {
-		//invoke the creator function
-        return std::shared_ptr<ecore::EObject>(iter->second());
+		//get the ID
+        unsigned int id =iter->second;
+		return create(id, _container, referenceID);
     }
 
     return nullptr;
 }
+
+
 
 
 std::shared_ptr<TypesPackage> TypesFactoryImpl::getTypesPackage() const
