@@ -25,117 +25,135 @@ template<class T>
 class Bag
 {
 protected:
-std::vector<std::shared_ptr<T> > m_bag;
+    std::vector<std::shared_ptr<T> > m_bag;
 public:
 
-typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
+    typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
 
-Bag()
-{
-}
+    Bag()
+    {
+    }
 
-Bag(const Bag<T> &b)
-{
+    Bag(const Bag<T> &b)
+    {
         insert(b);
-}
+    }
 
-virtual ~Bag()
-{
+    virtual ~Bag()
+    {
         clear();
-}
+    }
 
-Bag<T>*  copy() const {
+    Bag<T>*  copy() const {
         return new Bag<T>(*this);
-}
+    }
 
-void insert(const Bag<T> &b){
+    void insert(const Bag<T> &b){
+        for (auto i = b.cbegin(); i != b.cend(); i++) {
+            if(find(*i) > -1) {
+                std::cerr << "Element " << *i << " already present" << std::endl;
+            }
+        }
         m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
-}
+    }
 
-void insert(iterator a, iterator b, iterator c){
+    void insert(iterator a, iterator b, iterator c){
+        for (auto i = b; i != c; i++) {
+            if(find(*i) > -1) {
+                std::cerr << "Element " << *i << " already present" << std::endl;
+            }
+        }
         m_bag.insert(a, b, c);
-}
+    }
 
-void insert(iterator a, std::shared_ptr<T> b){
+    void insert(iterator a, std::shared_ptr<T> b){
+        int i = find(b);
+        if(i>-1)
+        {
+            std::cerr << "Element " << b << " already present" << std::endl;
+        }
         m_bag.insert(a, b);
-}
+    }
 
-bool empty(){
+    bool empty(){
         return m_bag.empty();
-}
+    }
 
-std::shared_ptr<T> front ()
-{
+    std::shared_ptr<T> front ()
+    {
         return m_bag.front();
-}
+    }
 
-void clear()
-{
+    void clear()
+    {
         const unsigned int size = m_bag.size();
         //TODO: When uncommented the program does not terminate
-        #pragma omp parallel for if(size > 39)
+#pragma omp parallel for if(size > 39)
         for (unsigned int i = 0; i < size; i++)
         {
-                m_bag[i].reset();
+            m_bag[i].reset();
         }
         m_bag.clear();
-}
+    }
 
-unsigned int size() const
-{
+    unsigned int size() const
+    {
         return m_bag.size();
-}
+    }
 
-unsigned int max_size() const
-{
+    unsigned int max_size() const
+    {
         return m_bag.max_size();
-}
+    }
 
-const std::shared_ptr<T> operator[](unsigned int n) const
-{
+    const std::shared_ptr<T> operator[](unsigned int n) const
+    {
         return m_bag[n];
-}
+    }
 
-const std::shared_ptr<T> at(unsigned int n) const
-{
+    const std::shared_ptr<T> at(unsigned int n) const
+    {
         if(n < m_bag.size())
-                return m_bag[n];
+            return m_bag[n];
         throw std::invalid_argument( "Bag.hpp: index out of range" );
-}
+    }
 
 
-virtual void add(std::shared_ptr<T> el)
-{
+    virtual void add(std::shared_ptr<T> el)
+    {
+        if(find(el) > -1){
+            std::cerr << "Element " << el << " already present" << std::endl;
+        }
         m_bag.push_back(el);
-}
+    }
 
-virtual void push_back(std::shared_ptr<T> el)
-{
-        m_bag.push_back(el);
-}
+    virtual void push_back(std::shared_ptr<T> el)
+    {
+        add(el);
+    }
 
-virtual void erase(iterator el)
-{
+    virtual void erase(iterator el)
+    {
         m_bag.erase(el);
-}
+    }
 
 
-virtual void erase(std::shared_ptr<T> el)
-{
+    virtual void erase(std::shared_ptr<T> el)
+    {
         int res = find(el);
         if(res < 0)
         {
-                //std::cout << "Element not found" << std::endl;
-                return;
+            //std::cout << "Element not found" << std::endl;
+            return;
         }
         m_bag.erase(m_bag.begin() + res);
-}
+    }
 
-int find(std::shared_ptr<T> el)
-{
+    int find(std::shared_ptr<T> el)
+    {
         const int size = m_bag.size();
         if(size == 0) {
-                return -1;
+            return -1;
         }
         volatile bool found = false;
         int first_index = -1;
@@ -143,61 +161,61 @@ int find(std::shared_ptr<T> el)
 
 #pragma omp parallel if(size >=40)
         {
-                int my_index = -1;
-                int i;
+            int my_index = -1;
+            int i;
 
-                do
-                {
+            do
+            {
 #pragma omp critical(iteration)
-                        {
-                                i = iteration++;
-                        }
-
-                        if(i < size && m_bag[i] == el)
-                        {
-                                found = true;
-                                my_index = i;
-                        }
+                {
+                    i = iteration++;
                 }
-                while (!found && i < size);
+
+                if(i < size && m_bag[i] == el)
+                {
+                    found = true;
+                    my_index = i;
+                }
+            }
+            while (!found && i < size);
 
 #pragma omp critical(reduction)
-                if(my_index != -1)
-                {
-                        if(first_index == -1 || my_index < first_index)
-                                first_index = my_index;
-                }
+            if(my_index != -1)
+            {
+                if(first_index == -1 || my_index < first_index)
+                    first_index = my_index;
+            }
         }
         return first_index;
-}
+    }
 
-template<class U>
-Bag(Bag<U> const &u)
-{
+    template<class U>
+    Bag(Bag<U> const &u)
+    {
         this->m_bag = u.m_bag;
-}
+    }
 
-typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;
+    typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;
 
-virtual const_iterator cbegin() const
-{
+    virtual const_iterator cbegin() const
+    {
         return m_bag.cbegin();
-}
+    }
 
-virtual const_iterator cend() const
-{
+    virtual const_iterator cend() const
+    {
         return m_bag.cend();
-}
+    }
 
-virtual iterator begin()
-{
+    virtual iterator begin()
+    {
         return m_bag.begin();
-}
+    }
 
-virtual iterator end()
-{
+    virtual iterator end()
+    {
         return m_bag.end();
-}
+    }
 
 };
 
