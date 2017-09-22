@@ -247,7 +247,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="#//Parameter" containment="true">
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/behavior">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
@@ -280,6 +280,10 @@
         <details key="documentation" value="References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="subsets" references="#//Classifier/redefinedClassifier"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavioredClassifier" eType="#//BehavioredClassifier"
+        unsettable="true" eOpposite="#//BehavioredClassifier/ownedBehavior">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//EncapsulatedClassifier #//BehavioredClassifier">
@@ -467,7 +471,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBehavior" ordered="false"
-        upperBound="-1" eType="#//Behavior" containment="true">
+        upperBound="-1" eType="#//Behavior" containment="true" eOpposite="#//Behavior/behavioredClassifier.1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Behaviors owned by a BehavioredClassifier.&#xA;&lt;p>From package UML::SimpleClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -1025,7 +1029,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMember" ordered="false"
         upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
-        transient="true" derived="true" eOpposite="#//NamedElement/namespace">
+        transient="true" derived="true" containment="true" eOpposite="#//NamedElement/namespace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A collection of NamedElements owned by the Namespace.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -1159,7 +1163,7 @@
         <details key="documentation" value="The query allNamespaces() gives the sequence of Namespaces in which the NamedElement is nested, working outwards.&#xA;result = (&#xA;if owner = null&#xA;  then OrderedSet{}&#xA;else&#xA;  let enclosingNamespace : Namespace =&#xA;    if owner.oclIsKindOf(TemplateParameter) and owner.oclAsType(TemplateParameter).signature.template.oclIsKindOf(Namespace)&#xA;      then owner.oclAsType(TemplateParameter).signature.template.oclAsType(Namespace)&#xA;    else&#xA;      namespace&#xA;    endif&#xA;  in enclosingNamespace.allNamespaces()->prepend(enclosingNamespace)&#xA;endif)&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace> > allNS(new Bag&lt;uml::Namespace>());&#xD;&#xA;    if (getNamespace()==nullptr)&#xD;&#xA;    {&#xD;&#xA;        return allNS;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace> > currentNSList = getNamespace()->allNamespaces();&#xD;&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xD;&#xA;        currentNSList = nullptr;&#xD;&#xA;&#xD;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace();&#xD;&#xA;        if (currentNS != nullptr)&#xD;&#xA;        {&#xD;&#xA;            allNS->push_back(currentNS);&#xD;&#xA;        }&#xD;&#xA;        return allNS;&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace> > allNS(new Bag&lt;uml::Namespace>());&#xD;&#xA;    if (getNamespace().lock() == nullptr)&#xD;&#xA;    {&#xD;&#xA;        return allNS;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace> > currentNSList = getNamespace().lock()->allNamespaces();&#xD;&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xD;&#xA;        currentNSList = nullptr;&#xD;&#xA;&#xD;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace().lock();&#xD;&#xA;        if (currentNS != nullptr)&#xD;&#xA;        {&#xD;&#xA;            allNS->push_back(currentNS);&#xD;&#xA;        }&#xD;&#xA;        return allNS;&#xD;&#xA;    }"/>
         <details key="const"/>
       </eAnnotations>
     </eOperations>
@@ -4546,6 +4550,10 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ParameterSets containing the parameter. See ParameterSet.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="#//Behavior"
+        eOpposite="#//Behavior/ownedParameter">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ParameterDirectionKind">
@@ -9547,6 +9555,18 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatureAction"
+        eType="#//StructuralFeatureAction" eOpposite="#//StructuralFeatureAction/object">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callOperationAction" eType="#//CallOperationAction"
+        eOpposite="#//CallOperationAction/target">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationAction" eType="#//InvocationAction"
+        eOpposite="#//InvocationAction/argument">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9621,6 +9641,10 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callAction" eType="#//CallAction"
+        eOpposite="#//CallAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ConnectableElement #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -10234,7 +10258,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="object" ordered="false"
-        lowerBound="1" eType="#//InputPin" containment="true">
+        lowerBound="1" eType="#//InputPin" containment="true" eOpposite="#//InputPin/structuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin from which the object whose StructuralFeature is to be read or written is obtained.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10764,7 +10788,7 @@
       <details key="documentation" value="InvocationAction is an abstract class for the various actions that request Behavior invocation.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/invocationAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPins that provide the argument values passed in the invocation request.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10856,7 +10880,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" upperBound="-1"
-        eType="#//OutputPin" containment="true">
+        eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/callAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPins on which the reply values from the invocation are placed (if the call is synchronous).&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10955,7 +10979,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
-        lowerBound="1" eType="#//InputPin" containment="true">
+        lowerBound="1" eType="#//InputPin" containment="true" eOpposite="#//InputPin/callOperationAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin that provides the target object to which the Operation call request is sent.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
