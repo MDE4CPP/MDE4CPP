@@ -26,7 +26,7 @@
 [/template]
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/].reset(uml::UmlFactory::eInstance()->createInstanceSpecification());
+[memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(); // TODO: set owner
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(name))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);

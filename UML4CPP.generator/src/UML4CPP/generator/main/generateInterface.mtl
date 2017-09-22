@@ -28,11 +28,11 @@ virtual public uml::Element
 [/template]
 
 [template public generateInterfaceCreation(anInterface : Interface)]
-[memberName(anInterface)/].reset(uml::UmlFactory::eInstance()->createInterface());
+[memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
 [memberName(anInterface)/]->setName("[anInterface.name/]");
 [memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
-[memberName(anInterface)/]->setPackage([anInterface.ancestors(Package)->first().memberName()/]);
-[anInterface.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInterface)/]);
+//[memberName(anInterface)/]->setPackage([anInterface.ancestors(Package)->first().memberName()/]);
+//[anInterface.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInterface)/]);
 
 //generate Nested Activities
 [/template]

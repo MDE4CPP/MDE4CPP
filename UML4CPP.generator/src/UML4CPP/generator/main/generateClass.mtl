@@ -31,11 +31,11 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 [/template]
 
 [template public generateClassCreation(aEClass : Class)]
-[memberName(aEClass)/].reset(uml::UmlFactory::eInstance()->createClass());
+[memberName(aEClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aEClass.ancestors(Package)->first().memberName()/]);
 [memberName(aEClass)/]->setName("[aEClass.name/]");
 [memberName(aEClass)/]->setIsAbstract([aEClass.isAbstract/]);
-[memberName(aEClass)/]->setPackage([aEClass.ancestors(Package)->first().memberName()/]);
-[aEClass.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(aEClass)/]);
+//[memberName(aEClass)/]->setPackage([aEClass.ancestors(Package)->first().memberName()/]);
+//[aEClass.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(aEClass)/]);
 
 //constraints
 [aEClass.ownedRule.generateConstraintCreation()/]
@@ -44,10 +44,10 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 
 [template public initSuperTypes(aClass : Class)]
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
-gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.packageGetter(aClass)/]);
 gen->setGeneral([superClass.packageGetter(aClass)/]);
-gen->setSpecific([aClass.packageGetter(aClass)/]);
-[aClass.memberName()/]->getGeneralization()->push_back(gen);
+//gen->setSpecific([aClass.packageGetter(aClass)/]);
+//[aClass.memberName()/]->getGeneralization()->push_back(gen);
 [/for]
 
 [/template]

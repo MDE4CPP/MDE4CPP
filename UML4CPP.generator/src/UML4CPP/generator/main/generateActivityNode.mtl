@@ -19,9 +19,9 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityNodeCreation(anActivityNode : ActivityNode)]
-[memberName(anActivityNode)/].reset(uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]([anActivityNode.owner.oclAsType(NamedElement).memberName()/]));
+[memberName(anActivityNode)/] = uml::UmlFactory::eInstance()->create[anActivityNode.eClass().name/]_in_Activity([anActivityNode.owner.oclAsType(NamedElement).memberName()/]);
 [memberName(anActivityNode)/]->setName("[anActivityNode.name/]");
-[memberName(anActivityNode)/]->setActivity([anActivityNode.activity.oclAsType(NamedElement).memberName()/]);
+//[memberName(anActivityNode)/]->setActivity([anActivityNode.activity.oclAsType(NamedElement).memberName()/]);
 [anActivityNode.generateActivityNodeSpecial()/]
 [/template]
 
@@ -44,19 +44,27 @@
 [/template]
 
 [template public generatePin(pin : Pin)]
-[memberName(pin)/].reset(uml::UmlFactory::eInstance()->create[pin.eClass().name/]([pin.owner.oclAsType(NamedElement).memberName()/]));
+//Pin owner type: [pin.owner.eClass().name/]
+[if (pin.owner.oclIsKindOf(CallOperationAction))]
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[else]
+//TODO: check containment type!
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
 [memberName(pin)/]->setName("[pin.name/]");
 
 [/template]
 
 [template public generateOperation(operation : Operation)]
-[memberName(operation)/].reset(uml::UmlFactory::eInstance()->createOperation([operation.owner.oclAsType(NamedElement).memberName()/]));
+[memberName(operation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([operation.owner.oclAsType(NamedElement).memberName()/]); //TODO: check if used 
 [memberName(operation)/]->setName("[operation.name/]");
 
 [/template]
 
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
-[anActivityNode.activity.oclAsType(NamedElement).memberName()/]->getNode()->push_back([memberName(anActivityNode)/]);
+[anActivityNode.activity.oclAsType(NamedElement).memberName()/]->getNode()->push_back([memberName(anActivityNode)/]); //TODO: Check if still needed
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 
 [/template]

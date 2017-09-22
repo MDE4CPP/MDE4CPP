@@ -17,8 +17,8 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateValueSpecificationCreation(aValueSpecification : ValueSpecification)]
-[aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]());
-[aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
+//[aValueSpecification.memberName()/].reset(uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]());
+[aValueSpecification.memberName()/] = uml::UmlFactory::eInstance()->create[aValueSpecification.eClass().name/]_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>([aValueSpecification.owner.oclAsType(NamedElement).memberName()/]));
 this->getOwnedElement()->push_back([aValueSpecification.memberName()/]);
 [if (aValueSpecification.oclIsKindOf(LiteralSpecification))]
 [aValueSpecification.memberName()/]->setValue([aValueSpecification.oclAsType(LiteralSpecification).generateLiteralValue()/]);

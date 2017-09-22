@@ -17,9 +17,9 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generatePrimitiveTypeCreation(aPrimitiveType : PrimitiveType)]
-[aPrimitiveType.memberName()/].reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+[aPrimitiveType.memberName()/] = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package([aPrimitiveType.ancestors(Package)->first().memberName()/]);
 [aPrimitiveType.memberName()/]->setName("[aPrimitiveType.name/]");
-[aPrimitiveType.memberName()/]->setPackage([aPrimitiveType.ancestors(Package)->first().memberName()/]);
-this->getOwnedType()->push_back([aPrimitiveType.memberName()/]);
+//[aPrimitiveType.memberName()/]->setPackage([aPrimitiveType.ancestors(Package)->first().memberName()/]);
+//this->getOwnedType()->push_back([aPrimitiveType.memberName()/]);
 
 [/template]
