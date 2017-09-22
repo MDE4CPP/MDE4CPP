@@ -87,14 +87,14 @@ using namespace [aClass.ePackage.name/];
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 [for(aReference:EReference | ref) separator('\n')]
 //Additional constructor for the containments back reference
-[if(ref->select(eType = aReference.eType)->size()>1 )]
-	[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
 			:[className/]()
 			{
 				switch(reference_id)
 				{	
-				[for(multipleRef : EReference | ref->select(eType = aReference.eType))]
+				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name))]
 				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.memberNameUpper()/]:
 					 m_[multipleRef.name/] = par_[aReference.eType.name/];
 					 return;

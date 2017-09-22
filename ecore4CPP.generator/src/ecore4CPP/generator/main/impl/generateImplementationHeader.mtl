@@ -69,8 +69,8 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref) ]
 			//Additional constructors for the containments back reference
-	[if(ref->select(eType = aReference.eType)->size()>1 )]
-			[if(ref->select(eType = aReference.eType)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+	[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+			[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
 			[/if]
 	[else]

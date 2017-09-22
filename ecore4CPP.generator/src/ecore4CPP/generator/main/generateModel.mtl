@@ -82,7 +82,14 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref) separator('\n')]
 			//Additional constructors for the containments back reference
-			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]){}
+
+			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+					[/if]
+			[else]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+			[/if]
 			[/for]
 			[/let]
 			[/if]
