@@ -52,7 +52,7 @@ std::shared_ptr<uml::FunctionBehavior> [aCallOperationAction.getFBPackageElement
 [aCallOperationAction.operation->asOrderedSet()->first().packageGetter()/]->getMethod()->push_back([aCallOperationAction.getFBPackageElement()/]);
 
 [for (aParameter : Parameter | aCallOperationAction.operation->asOrderedSet()->first().ownedParameter)]
-std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->create[aParameter.eClass().name/]());
+std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Operation([aCallOperationAction.operation->asOrderedSet()->first().memberName()/]));
 [memberName(aParameter)/]->setName("[aParameter.name/]");
 [memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().name.concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.packageGetter(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
