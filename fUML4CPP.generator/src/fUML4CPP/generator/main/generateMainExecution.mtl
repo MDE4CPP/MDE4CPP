@@ -151,10 +151,10 @@ std::shared_ptr<fUML::Locus> locus(fumlFac->createLocus());
 std::shared_ptr<fUML::Executor> executor(fumlFac->createExecutor());
 executor->setLocus(locus);
 
-std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3());
-factory->setLocus(locus);
+std::shared_ptr<fUML::ExecutionFactoryL3> factory(fumlFac->createExecutionFactoryL3_in_Locus(locus));
+//factory->setLocus(locus);
+//locus->setFactory(factory);
 
-locus->setFactory(factory);
 locus->setExecutor(executor);
 
 locus->getFactory()->assignStrategy(std::shared_ptr<fUML::FirstChoiceStrategy>(fumlFac->createFirstChoiceStrategy()));
