@@ -67,7 +67,7 @@ namespace [aClass.ePackage.name/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
 [/if]
 	{
 		public:
