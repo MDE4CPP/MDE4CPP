@@ -46,7 +46,11 @@
 [template public generatePin(pin : Pin)]
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
+[if (pin.oclIsKindOf(InputPin))]
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[else]
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
 [elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
@@ -64,7 +68,7 @@
 [/template]
 
 [template public initializeActivityNode(anActivityNode : ActivityNode)]
-[anActivityNode.activity.oclAsType(NamedElement).memberName()/]->getNode()->push_back([memberName(anActivityNode)/]); //TODO: Check if still needed
+//[anActivityNode.activity.oclAsType(NamedElement).memberName()/]->getNode()->push_back([memberName(anActivityNode)/]); //TODO: remove
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
 
 [/template]

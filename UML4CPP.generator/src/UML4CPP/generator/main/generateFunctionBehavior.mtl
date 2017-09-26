@@ -22,9 +22,9 @@
  * @param aFunctionBehavior
  */]
 [template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[memberName(aFunctionBehavior)/] = uml::UmlFactory::eInstance()->createFunctionBehavior_in_Owner([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
+[memberName(aFunctionBehavior)/] = uml::UmlFactory::eInstance()->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
 [memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
-[memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]->getOwnedBehavior()->push_back([memberName(aFunctionBehavior)/]); //TODO: Check create
+//[memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]->getOwnedBehavior()->push_back([memberName(aFunctionBehavior)/]); //TODO: Check create
 
 [aFunctionBehavior.ownedParameter.generateParameterCreation()/]
 
