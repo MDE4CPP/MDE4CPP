@@ -36,7 +36,7 @@
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
 
-[query public isContainerAttribute(aRef : EReference) : Boolean =  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
+[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey('no_back_reference')) and  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
 
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
 
