@@ -1356,7 +1356,7 @@
     </eOperations>
     <eOperations name="terminate" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    if (this->isRunning()) {&#xD;&#xA;        if (this->getNode() != nullptr) {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        } else {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] Anonymous activation of type &quot; &lt;&lt; this->eClass()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    this->setRunning(false);"/>
+        <details key="body" value="/*    if (this->isRunning()) {&#xD;&#xA;        if (this->getNode() != nullptr) {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] node = &quot; &lt;&lt; this->getNode()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        } else {&#xD;&#xA;            DEBUG_MESSAGE(std::cout&lt;&lt;&quot;[terminate] Anonymous activation of type &quot; &lt;&lt; this->eClass()->getName()&lt;&lt;std::endl;)&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;*/&#xD;&#xA;this->setRunning(false);"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isReady" ordered="false" lowerBound="1" eType="ecore:EDataType ../../ecore/ecore/model/ecore.ecore#//EBoolean">
