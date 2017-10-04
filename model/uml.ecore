@@ -3911,6 +3911,10 @@
         <details key="documentation" value="The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.&#xA;result = (null)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningSlot" eType="#//Slot"
+        eOpposite="#//Slot/value">
+      <eAnnotations source="subsets" references="#//Element/owner"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectableElementTemplateParameter"
       eSuperTypes="#//TemplateParameter">
@@ -7328,7 +7332,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//ValueSpecification" containment="true">
+        eType="#//ValueSpecification" containment="true" eOpposite="#//ValueSpecification/owningSlot">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value or values held by the Slot.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
