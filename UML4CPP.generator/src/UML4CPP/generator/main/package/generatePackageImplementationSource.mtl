@@ -128,7 +128,7 @@ void [packageName/]::createPackageContents()
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 	
-	[aPackage.allOwnedElements()->filter(ValueSpecification)->sortedBy(myQualifiedName()).generateValueSpecificationCreation()/]
+	[aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generateValueSpecificationCreation()/]
 
 [if (not (aPackage.name='UML'))]
 [for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
