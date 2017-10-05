@@ -15,18 +15,26 @@
 [module generateInstanceSpecification('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import UML4CPP::generator::main::helper /]
+[import UML4CPP::generator::main::generateValueSpecification /]
 
 [template public generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
 {
-	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot());
+	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([memberName(anInstSpec)/]));
 	slot->setDefiningFeature([memberName(aSlot.definingFeature)/]);
-	[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]slot->getValue()->push_back([aValueSpec.memberName()/]);[/for]
-	[memberName(anInstSpec)/]->getSlot()->push_back(slot);
+[for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
+	std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
+[if (aValueSpec.oclIsKindOf(LiteralSpecification))]
+	literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
+[/if]
+	this->getOwnedElement()->push_back(literal);
+	//slot->getValue()->push_back(literal);
+[/for]
+	//[memberName(anInstSpec)/]->getSlot()->push_back(slot);
 }
 [/template]
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
-[memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(); // TODO: set owner
+[memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(name))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
