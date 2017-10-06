@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
-  <packagedElement xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _7Bd8gYyFEeaE8Ot-1J8eNg _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MCHPUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _zBMTEI7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg">
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
+  <packagedElement xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _7Bd8gYyFEeaE8Ot-1J8eNg _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _zBMTEI7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg">
     <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="ActInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_We8DcIx0EeazCdUXohZ79Q" target="_Vf7dgIx0EeazCdUXohZ79Q" source="_QJrKgIx0EeazCdUXohZ79Q">
       <guard xmi:type="uml:LiteralBoolean" xmi:id="_We8qgIx0EeazCdUXohZ79Q" name="_To_ActivityFinal1_guard" value="true"/>
@@ -34,6 +34,7 @@
     <edge xmi:type="uml:ObjectFlow" xmi:id="_409ogI7REeaDf9S-W91Htg" target="_fMouMIyGEeaffY4wOnNpKQ" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_PQBq4I7TEeajycJcSh2X6Q" name="ifIsOdd" target="_AXMOYI7TEeaDf9S-W91Htg" source="_0LbcII7SEeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ControlFlow" xmi:id="_VwIh4I7TEeajycJcSh2X6Q" target="_-az8EIxzEeazCdUXohZ79Q" source="_AXMOYI7TEeaDf9S-W91Htg">
+      <name xsi:nil="true"/>
       <guard xmi:type="uml:LiteralBoolean" xmi:id="_t1mtEI7TEeajycJcSh2X6Q" name="isOddGuard" value="true"/>
     </edge>
     <edge xmi:type="uml:ControlFlow" xmi:id="_WsgDgI7TEeajycJcSh2X6Q" target="_QJrKgIx0EeazCdUXohZ79Q" source="_AXMOYI7TEeaDf9S-W91Htg">
@@ -45,7 +46,6 @@
     </edge>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_41ErUI7TEeajycJcSh2X6Q" target="_REVMAI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_5hS4II7TEeajycJcSh2X6Q" name="" target="_fCKowIx0EeazCdUXohZ79Q" source="_zBMTEI7REeaDf9S-W91Htg"/>
-    <edge xmi:type="uml:ObjectFlow" xmi:id="_6IRYkI7TEeajycJcSh2X6Q" target="_RNIisI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_7bKj0I7TEeajycJcSh2X6Q" target="_RV6EMI7REeaDf9S-W91Htg" source="_zBMTEI7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_MAdiII7UEeajycJcSh2X6Q" name="ifDivides" target="_7XVkAIxzEeazCdUXohZ79Q" source="_iIHdII7REeaDf9S-W91Htg"/>
     <edge xmi:type="uml:ObjectFlow" xmi:id="_j5U0sI7UEeajycJcSh2X6Q" name="ifIsNotFinished" target="_8C8QUIx0EeazCdUXohZ79Q" source="_eLsD0I7REeaDf9S-W91Htg"/>
@@ -81,16 +81,13 @@
       </result>
       <target xmi:id="_REVMAI7REeaDf9S-W91Htg" name="target" incoming="_41ErUI7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
-    <node xmi:type="uml:CallOperationAction" xmi:id="_MCHPUI7REeaDf9S-W91Htg" name="coaNext" operation="_UtQZgIxrEeazCdUXohZ79Q">
-      <target xmi:id="_RNIisI7REeaDf9S-W91Htg" name="target" incoming="_6IRYkI7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
-    </node>
     <node xmi:type="uml:CallOperationAction" xmi:id="_MUDT4I7REeaDf9S-W91Htg" name="coaIsNotFinished" incoming="_Tvp9QIx1EeazCdUXohZ79Q" operation="_FtjmYIxzEeazCdUXohZ79Q">
       <result xmi:id="_eLsD0I7REeaDf9S-W91Htg" name="isNotFinished" outgoing="_j5U0sI7UEeajycJcSh2X6Q">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </result>
       <target xmi:id="_RV6EMI7REeaDf9S-W91Htg" name="target" incoming="_7bKj0I7TEeajycJcSh2X6Q" type="_As0b8IxpEeazCdUXohZ79Q"/>
     </node>
-    <node xmi:type="uml:ForkNode" xmi:id="_zBMTEI7REeaDf9S-W91Htg" name="Fork1" incoming="_yeMecIyGEeaffY4wOnNpKQ" outgoing="_409ogI7REeaDf9S-W91Htg _41ErUI7TEeajycJcSh2X6Q _5hS4II7TEeajycJcSh2X6Q _6IRYkI7TEeajycJcSh2X6Q _7bKj0I7TEeajycJcSh2X6Q"/>
+    <node xmi:type="uml:ForkNode" xmi:id="_zBMTEI7REeaDf9S-W91Htg" name="Fork1" incoming="_yeMecIyGEeaffY4wOnNpKQ" outgoing="_409ogI7REeaDf9S-W91Htg _41ErUI7TEeajycJcSh2X6Q _5hS4II7TEeajycJcSh2X6Q _7bKj0I7TEeajycJcSh2X6Q"/>
     <node xmi:type="uml:DecisionNode" xmi:id="_AXMOYI7TEeaDf9S-W91Htg" name="IsOdd" incoming="_PQBq4I7TEeajycJcSh2X6Q" outgoing="_VwIh4I7TEeajycJcSh2X6Q _WsgDgI7TEeajycJcSh2X6Q" decisionInputFlow="_PQBq4I7TEeajycJcSh2X6Q"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_As0b8IxpEeazCdUXohZ79Q" name="PrimeChecker">
