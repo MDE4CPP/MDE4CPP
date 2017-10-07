@@ -47,7 +47,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 SET(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
+SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 [if (packageName='uml')]
 SET(CMAKE_CXX_FLAGS_RELEASE " -O1 -DNDEBUG")
 [else]
