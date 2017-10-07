@@ -103,6 +103,6 @@
 [template public initializePin(pin : Pin)]
 [if (pin.oclIsKindOf(InputPin))]
 [memberName(pin.owner.oclAsType(NamedElement))/]->getArgument()->push_back([memberName(pin)/]);[else]
-[memberName(pin.owner.oclAsType(NamedElement))/]->getResult()->push_back([memberName(pin)/]);[/if]
+//[memberName(pin.owner.oclAsType(NamedElement))/]->getResult()->push_back([memberName(pin)/]);[/if]
 
 [/template]
