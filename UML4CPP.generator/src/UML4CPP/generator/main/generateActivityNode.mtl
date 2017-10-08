@@ -52,7 +52,11 @@
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [elseif (pin.owner.oclIsKindOf(CallBehaviorAction))]
+[if (pin.oclIsKindOf(InputPin))]
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[else]
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
 [else]
 //TODO: check containment type!
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_Owner([pin.owner.oclAsType(NamedElement).memberName()/]);
