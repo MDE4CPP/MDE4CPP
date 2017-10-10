@@ -145,7 +145,7 @@ void [packageName/]::createPackageContents()
 	[aClass.ownedOperation->sortedBy(name).generateOperationCreation()/]
 	[aClass.ownedBehavior->filter(FunctionBehavior).generateFunctionBehaviorCreation()/]
 
-	[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->asOrderedSet()->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+	[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->asOrderedSet()->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 	[aAttribute.addInterfaceAttribute(aClass)/]
 	[/if][/for][/for]
 [/for]
