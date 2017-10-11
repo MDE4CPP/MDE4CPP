@@ -46,8 +46,10 @@
 [template public generatePin(pin : Pin)]
 //Pin owner type: [pin.owner.eClass().name/]
 [if (pin.owner.oclIsKindOf(CallOperationAction))]
-[if (pin.oclIsKindOf(InputPin))]
+[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallOperationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
+[elseif (pin.oclIsKindOf(InputPin))]
+[memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_InvocationAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [else]
 [memberName(pin)/] = uml::UmlFactory::eInstance()->create[pin.eClass().name/]_in_CallAction([pin.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
@@ -93,7 +95,7 @@
 [memberName(anActivityNode)/]->setOperation([anActivityNode.oclAsType(CallOperationAction).operation.packageGetter()/]);
 [anActivityNode.oclAsType(CallOperationAction).input.initializePin()/]
 [anActivityNode.oclAsType(CallOperationAction).output.initializePin()/]
-[memberName(anActivityNode)/]->setTarget([anActivityNode.oclAsType(CallOperationAction).target.packageGetter()/]);
+//[memberName(anActivityNode)/]->setTarget([anActivityNode.oclAsType(CallOperationAction).target.packageGetter()/]);
 
 [/template]
 
@@ -105,8 +107,10 @@
 [/template]
 
 [template public initializePin(pin : Pin)]
-[if (pin.oclIsKindOf(InputPin))]
-[memberName(pin.owner.oclAsType(NamedElement))/]->getArgument()->push_back([memberName(pin)/]);[else]
+[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
+[memberName(pin.owner.oclAsType(NamedElement))/]->getInput()->push_back([memberName(pin)/]);
+[elseif (pin.oclIsKindOf(InputPin))]
+//[memberName(pin.owner.oclAsType(NamedElement))/]->getArgument()->push_back([memberName(pin)/]);[else]
 //[memberName(pin.owner.oclAsType(NamedElement))/]->getResult()->push_back([memberName(pin)/]);[/if]
 
 [/template]
