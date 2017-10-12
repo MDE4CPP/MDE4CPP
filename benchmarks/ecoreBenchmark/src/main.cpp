@@ -21,6 +21,7 @@ using namespace ecore;
 
 int main()
 {
+	omp_set_num_threads(1);
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 
     start = std::chrono::high_resolution_clock::now();
@@ -30,7 +31,7 @@ int main()
 
     std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;
 
-    std::shared_ptr<EObject> c2 = factory->create("EClass");
+    std::shared_ptr<EObject> c2 = factory->create("EClass", package);
     if (c2 != nullptr)
     {
     	std::shared_ptr<EClass> c3 = std::dynamic_pointer_cast<EClass>(c2);
@@ -42,7 +43,7 @@ int main()
     // creation class instances using class name (manual given (usable for serialization or by using meta class)
     std::shared_ptr<EClass> c_metaclass = c2->eClass();
     std::cout << "class name " << c_metaclass->getName() << std::endl;
-    std::shared_ptr<EObject> c4 = factory->create(c_metaclass->getName());
+    std::shared_ptr<EObject> c4 = factory->create(c_metaclass->getName(), package);
 	if (c4 != nullptr)
 	{
 		std::shared_ptr<EClass> c5 = std::dynamic_pointer_cast<EClass>(c4);
@@ -55,7 +56,7 @@ int main()
 
 
 	// Benchmark section
-    EClass * c = factory->createEClass();
+	std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(package);
 
     c->setName("Test");
 
@@ -64,14 +65,12 @@ int main()
     start = std::chrono::high_resolution_clock::now();
     for (int var = 0; var < 10000; ++var)
     {
-        ecore::EClass* c = factory->createEClass();
+    	std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(package);
         std::string b = boost::any_cast<std::string>(c->eGet(package->getENamedElement_Name()));
         c->setName(b);
-        delete(c);
     }
     end = std::chrono::high_resolution_clock::now();
     std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
-    //qDebug()<<b;
 
 
 
