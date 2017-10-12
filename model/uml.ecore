@@ -2336,7 +2336,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false"
         upperBound="-1" eType="#//Package" volatile="true" transient="true" derived="true"
-        eOpposite="#//Package/nestingPackage">
+        containment="true" eOpposite="#//Package/nestingPackage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the packaged elements that are Packages.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2351,7 +2351,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStereotype" ordered="false"
         upperBound="-1" eType="#//Stereotype" changeable="false" volatile="true" transient="true"
-        derived="true">
+        derived="true" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the Stereotypes that are owned by the Package.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2359,7 +2359,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" ordered="false"
         upperBound="-1" eType="#//Type" volatile="true" transient="true" derived="true"
-        eOpposite="#//Type/package">
+        containment="true" eOpposite="#//Type/package">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the packaged elements that are Types.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2373,7 +2373,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElement" ordered="false"
-        upperBound="-1" eType="#//PackageableElement" containment="true">
+        upperBound="-1" eType="#//PackageableElement" containment="true" eOpposite="#//PackageableElement/owningPackage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the packageable elements that are owned by this Package.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2420,6 +2420,10 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningPackage" eType="#//Package"
+        eOpposite="#//Package/packagedElement">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterableElement" abstract="true"
       eSuperTypes="#//Element">
@@ -8682,7 +8686,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subgroup" ordered="false"
         upperBound="-1" eType="#//ActivityGroup" changeable="false" volatile="true"
-        transient="true" derived="true" eOpposite="#//ActivityGroup/superGroup">
+        transient="true" derived="true" containment="true" eOpposite="#//ActivityGroup/superGroup">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Other ActivityGroups immediately contained in this ActivityGroup.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
       </eAnnotations>
