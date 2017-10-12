@@ -1,5 +1,6 @@
 #include <iostream>
 #include "UmlFactory.hpp"
+#include "UmlPackage.hpp"
 #include "Package.hpp"
 #include "Class.hpp"
 #include "Property.hpp"
@@ -9,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include "UmlReflection/UMLPackage.hpp"
 
 #define SSTR( x ) static_cast< std::ostringstream & >( \
         ( std::ostringstream() << std::dec << x ) ).str()
@@ -17,15 +19,20 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
+	//OMP parallelization.
+	omp_set_num_threads(1);
+
     cout << "Hello World!" << endl;
 
-	for (int i=0; i<100; i++){
+	for (int i=0; i<1; i++){
 	
     shared_ptr<uml::UmlFactory> umlFactory = uml::UmlFactory::eInstance();
     cout << "factory created " << umlFactory << endl;
+    shared_ptr<UML::UMLPackage> umlPackage = UML::UMLPackage::eInstance();
+    cout << "package created " << umlPackage << endl;
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 	{
-		shared_ptr<uml::Package> package(umlFactory->createPackage());
+		shared_ptr<uml::Package> package = umlFactory->createPackage_in_OwningPackage(umlPackage);
 		cout << "package created" << endl;
 		package->setName(std::string("Benchmark UML"));
 		cout << package->getName() << endl;
@@ -33,14 +40,13 @@ int main(int argc, char *argv[])
 		char buffer [33];
 
 		start = std::chrono::high_resolution_clock::now();
-		for (int i=0; i<100000; i++)
+		for (int i=0; i<10; i++)
 		{
-			shared_ptr<uml::Class> classObject(umlFactory->createClass());
+			shared_ptr<uml::Class> classObject = umlFactory->createClass_in_Package(package);
 			classObject->setName("Class " + sprintf (buffer, "%i", i));
-			shared_ptr<uml::Property> property(umlFactory->createProperty());
+			shared_ptr<uml::Property> property = umlFactory->createProperty_in_Class(classObject);
 			property->setName("A" + sprintf (buffer, "%i", i));
 			classObject->getOwnedAttribute()->push_back(property);
-			package->getPackagedElement()->push_back(classObject);
 		}
 		end = std::chrono::high_resolution_clock::now();
 		std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;
@@ -59,6 +65,6 @@ int main(int argc, char *argv[])
     std::cout << std::chrono::duration_cast<std::chrono::seconds>(end-start).count() << std::endl;
 
 	}
-	Sleep( 10000000 ); 
+//	Sleep( 10000000 );
     return 0;
 }
