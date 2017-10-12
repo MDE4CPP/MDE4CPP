@@ -40,38 +40,41 @@ using namespace std;
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 
+#include "UmlReflection/UMLPackage.hpp"
 
 int main()
 {
+	omp_set_num_threads(1);
+
     //#############  Create simple UML model  #############
     std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+    std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
-    std::shared_ptr<uml::Model> p(factory->createModel());
+    auto aa = UML::UMLPackage::eInstance();
+
+std::cout << package << "  " << aa << std::endl;
+    std::shared_ptr<uml::Model> p = factory->createModel_in_OwningPackage(aa);
     p->setName("Modell");
-
-    std::shared_ptr<uml::Class> c(factory->createClass());
+//
+    std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
     c->setName("Class1");
-    p->getPackagedElement()->push_back(c);
-
+//
     //use Metamodel to create a Class
-    std::shared_ptr<ecore::EObject> a(factory->create(uml::UmlPackage::eInstance()->getClass()->getName()));
-
+    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass()->getName(), p, package->TYPE_PACKAGE);
+//
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
     c->setPackage(p);
-    p->getPackagedElement()->push_back(c);
 
     //create an operation
-    std::shared_ptr<uml::Operation> o(factory->createOperation());
+    std::shared_ptr<uml::Operation> o = factory->createOperation_in_Class(c);
     o->setName("do");
-    c->getOwnedOperation()->push_back(o);
 
     //create an UML-Objekt (InstanceSpecification) of Class2
-    std::shared_ptr<uml::InstanceSpecification> i(factory->createInstanceSpecification());
+    std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_in_OwningPackage(p);
     i->setName("o");
     std::shared_ptr<Bag<uml::Classifier>> t = i->getClassifier();
     t->push_back(c); //set Type to Class2
-    p->getPackagedElement()->push_back(i);
 
     //#############  Print model content  #############
 
