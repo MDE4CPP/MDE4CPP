@@ -21,6 +21,7 @@ using namespace ecore;
 
 int main()
 {
+	omp_set_num_threads(1);
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 
     start = std::chrono::high_resolution_clock::now();
@@ -32,7 +33,7 @@ int main()
     for (int var2 = 0; var2 < 10; ++var2) {
         system("PAUSE");
         std::shared_ptr<EPackage> p = std::dynamic_pointer_cast<EPackage>(
-                factory->create("EPackage", std::shared_ptr<EPackage>()));
+                factory->create("EPackage", package));
        /* std::shared_ptr<EObject> c2 = factory->create("EClass", p);
         if (c2 != nullptr) {
             std::shared_ptr<EClass> c3 = std::dynamic_pointer_cast<EClass>(c2);
@@ -68,7 +69,7 @@ int main()
         start = std::chrono::high_resolution_clock::now();
 
         for (int var = 0; var < 1000000; ++var) {
-            std::shared_ptr<ecore::EClass> c = std::shared_ptr<ecore::EClass>(factory->createEClass(p));
+            std::shared_ptr<ecore::EClass> c = factory->createEClass_in_EPackage(p);
             //std::string b = boost::any_cast<std::string>(c->eGet(package->getENamedElement_Name()));
             // c->setName("Name"); //b
             //p->getEClassifiers()->push_back(std::shared_ptr<ecore::EClass>(c));
