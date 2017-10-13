@@ -8,6 +8,8 @@
 #include "EStructuralFeature.hpp"
 #include "EAttribute.hpp"
 #include "EReference.hpp"
+#include "EClassifier.hpp"
+#include "SubsetUnion.hpp"
 #include "EStringToStringMapEntry.hpp"
 
 #include <string>
@@ -21,19 +23,13 @@ using namespace ecore;
 int main()
 {
 	omp_set_num_threads(1);
-    std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
-
-    start = std::chrono::high_resolution_clock::now();
     std::shared_ptr<EcorePackage> package=EcorePackage::eInstance();
     std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();
-    end = std::chrono::high_resolution_clock::now();
-
-    std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;
 
     //Create Instances of Ecore-Elemets
 
     //Create EPackage instance using Factory-Operation
-	std::shared_ptr<EPackage> rootPackage = factory->createEPackage_in_ESuperPackage(std::shared_ptr<ecore::EPackage>()); // root-Package has no SuperPackage
+	std::shared_ptr<EPackage> rootPackage = factory->createEPackage(); // root-Package has no SuperPackage
 	//Create EClass instance in root Package using Factory-Operation
     std::shared_ptr<EClass> c1 = factory->createEClass_in_EPackage(rootPackage);
 	//Create EAttribute in class using Factory-Operation
@@ -46,57 +42,67 @@ int main()
     a1->setLowerBound(0);
     a1->setUpperBound(10);
 
-    //Create Class instance using Name of Metaclass
+    //Create Class instance using Name of Metaclass (usable for serialization)
 
     std::shared_ptr<EObject> o1 = factory->create("EClass");
 
     if (o1 != nullptr)
     {
-    	std::shared_ptr< Bag<ecore::EClassifier> > classifiers = rootPackage->getEClassifiers();
     	std::shared_ptr<EClass> c2 = std::dynamic_pointer_cast<EClass>(o1);
     	if (c2 != nullptr)
     	{
     		std::cout << c2->eClass()->getName() << " for c3 created by typed class name" << std::endl;
+    		c2->setName("c2");
+    	    std::shared_ptr<EAttribute> a2 = factory->createEAttribute_in_EContainingClass(c2);
+    	    a2->setName("a2");
+    		// Add Class to package
+    		std::shared_ptr< Bag<ecore::EClassifier> > classifiers = rootPackage->getEClassifiers();
     		classifiers->add(c2);
     	}
     }
 
-
-    // creation class instances using class name (manual given (usable for serialization or by using meta class)
+    // creation class instances using class ID (manual given (usable by using meta class))
     std::shared_ptr<EClass> c_metaclass = o1->eClass();
     std::cout << "class name " << c_metaclass->getName() << std::endl;
-    std::shared_ptr<EObject> c4 = factory->create(c_metaclass->getName());
-	if (c4 != nullptr)
+    std::shared_ptr<EObject> o2 = factory->create(c_metaclass->getClassifierID());
+	if (o2 != nullptr)
 	{
-		std::shared_ptr<EClass> c5 = std::dynamic_pointer_cast<EClass>(c4);
-		if (c5 != nullptr)
+		std::shared_ptr<EClass> c3 = std::dynamic_pointer_cast<EClass>(o2);
+		if (c3 != nullptr)
 		{
-			std::cout << c5->eClass()->getName() << " for c5 created by name given by meta class of EClass" << std::endl;
+			std::cout << c3->eClass()->getName() << " for c3 created by name given by meta class of EClass" << std::endl;
+			c3->setName("c3");
+			// Add a new Reference
+		    std::shared_ptr<EReference> r1 = factory->createEReference_in_EContainingClass(c3);
+		    r1->setName("r1");
+		    r1->setEType(c1);
+			// Add Class to package
+    		std::shared_ptr< Bag<ecore::EClassifier> > classifiers = rootPackage->getEClassifiers();
+    		classifiers->add(c3);
 		}
 	}
 
+	//Output Package content
 
-
-	// Benchmark section
-	std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(rootPackage);
-
-    c->setName("Test");
-
-
-    //invoke anony getter
-    start = std::chrono::high_resolution_clock::now();
-    for (int var = 0; var < 10000; ++var)
+	std::shared_ptr< Bag<ecore::EClassifier> > classifiers = rootPackage->getEClassifiers();
+	Bag<ecore::EClassifier>::const_iterator endIt = classifiers->end();
+    for(Bag<ecore::EClassifier>::const_iterator it = classifiers->begin();it != endIt;++it)
     {
-    	std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(rootPackage);
-        std::string b = boost::any_cast<std::string>(c->eGet(package->getENamedElement_Name()));
-        c->setName(b);
-        c.reset();
+    	std::cout << "class: " << (*it)->getName() << std::endl;
+    	std::shared_ptr<EClass> c = std::dynamic_pointer_cast<EClass>(*it);
+
+    	std::cout << "	Features:" << std::endl;
+
+    	std::shared_ptr< Bag<ecore::EStructuralFeature> > structuralFeatures = c->getEAllStructuralFeatures();
+    	Bag<ecore::EStructuralFeature>::const_iterator endItFeature = structuralFeatures->end();
+        for(Bag<ecore::EStructuralFeature>::const_iterator itFeature = structuralFeatures->begin();itFeature != endItFeature;++itFeature)
+        {
+        	std::cout << "		- " <<  (*itFeature)->getName() << std::endl;
+        }
+        std::cout << "____________" << std::endl;
     }
-    end = std::chrono::high_resolution_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
-    //qDebug()<<b;
 
-
+    std::cout << "Finished..." << std::endl;
 
 	return 0;
 }
