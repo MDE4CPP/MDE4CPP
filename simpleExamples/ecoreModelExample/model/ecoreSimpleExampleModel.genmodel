@@ -7,16 +7,21 @@
   <foreignModel>ecoreSimpleExampleModel.ecore</foreignModel>
   <genPackages prefix="EcoreSimpleExampleModel" disposableProviderFactory="true" ecorePackage="ecoreSimpleExampleModel.ecore#/">
     <genClasses ecoreClass="ecoreSimpleExampleModel.ecore#//Book">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//Book/author"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//Book/authors"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//Book/library"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//Book/pictures"/>
     </genClasses>
     <genClasses ecoreClass="ecoreSimpleExampleModel.ecore#//Author"/>
     <genClasses ecoreClass="ecoreSimpleExampleModel.ecore#//LibraryModel">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//LibraryModel/book"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//LibraryModel/author"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//LibraryModel/authors"/>
     </genClasses>
     <genClasses ecoreClass="ecoreSimpleExampleModel.ecore#//NamedElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecoreSimpleExampleModel.ecore#//NamedElement/Name"/>
+    </genClasses>
+    <genClasses ecoreClass="ecoreSimpleExampleModel.ecore#//Picture">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference ecoreSimpleExampleModel.ecore#//Picture/book"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ecoreSimpleExampleModel.ecore#//Picture/pageNumber"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>
