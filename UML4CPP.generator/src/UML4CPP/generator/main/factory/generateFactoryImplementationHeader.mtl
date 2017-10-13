@@ -52,7 +52,7 @@ namespace [aPackage.name/]
 
 		private:
 			static [aPackage.name.toUpperFirst().concat('Factory')/] * create();
-			std::map<std::string,std::function<uml::Element *()>> m_creatorMap;
+			std::map<std::string,std::function<std::shared_ptr<uml::Element>()>> m_creatorMap;
 
 			virtual void init() {}
 	};
