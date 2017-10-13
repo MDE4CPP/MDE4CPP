@@ -51,7 +51,7 @@ public:
     void insert(const Bag<T> &b){
         for (auto i = b.cbegin(); i != b.cend(); i++) {
             if(find(*i) > -1) {
-                std::cerr << "Element " << *i << " already present" << std::endl;
+                DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
             }
         }
         m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
@@ -60,7 +60,7 @@ public:
     void insert(iterator a, iterator b, iterator c){
         for (auto i = b; i != c; i++) {
             if(find(*i) > -1) {
-                std::cerr << "Element " << *i << " already present" << std::endl;
+                DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
             }
         }
         m_bag.insert(a, b, c);
@@ -70,7 +70,7 @@ public:
         int i = find(b);
         if(i>-1)
         {
-            std::cerr << "Element " << b << " already present" << std::endl;
+            DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
         }
         m_bag.insert(a, b);
     }
@@ -122,7 +122,7 @@ public:
     virtual void add(std::shared_ptr<T> el)
     {
         if(find(el) > -1){
-            std::cerr << "Element " << el << " already present" << std::endl;
+            DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
         }
         m_bag.push_back(el);
     }
@@ -143,7 +143,6 @@ public:
         int res = find(el);
         if(res < 0)
         {
-            //std::cout << "Element not found" << std::endl;
             return;
         }
         m_bag.erase(m_bag.begin() + res);
