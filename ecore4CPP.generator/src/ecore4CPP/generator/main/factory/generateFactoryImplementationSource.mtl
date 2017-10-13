@@ -102,7 +102,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 	return nullptr;
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
 {
 	if(_class->isAbstract())
     {

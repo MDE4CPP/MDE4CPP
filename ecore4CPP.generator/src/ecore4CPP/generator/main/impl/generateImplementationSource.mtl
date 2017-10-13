@@ -155,16 +155,16 @@ using namespace [aClass.ePackage.name/];
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
 		[if(ref.upperBound=1)]
-		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
+		m_[ref.name/] = std::dynamic_pointer_cast<[ref.eType.generateType()/]>(obj.[ref.GetterName()/]()->copy());
 		[else]
-		m_[ref.name/].reset(dynamic_cast<Bag<[ref.eType.generateType()/]>* >(obj.[ref.GetterName()/]()->copy()));
+		m_[ref.name/] = std::dynamic_pointer_cast<Bag<[ref.eType.generateType()/]>>(obj.[ref.GetterName()/]()->copy());
 		[/if]
 	}
 	[else]
 	std::shared_ptr<Bag<[ref.eType.generateType()/]>> _[ref.name/]List = obj.[ref.GetterName()/]();
 	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *_[ref.name/]List)
 	{
-		this->[ref.GetterName()/]()->add(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
+		this->[ref.GetterName()/]()->add(std::shared_ptr<[ref.eType.generateType()/]>(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy())));
 	}
 	[/if]
 	#ifdef SHOW_SUBSET_UNION
@@ -177,9 +177,10 @@ using namespace [aClass.ePackage.name/];
 	[/for]
 }
 
-ecore::EObject *  [className/]::copy() const
+std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
-	return new [className/](*this);
+	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	return element;
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const

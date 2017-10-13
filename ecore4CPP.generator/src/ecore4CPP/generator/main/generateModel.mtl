@@ -94,7 +94,7 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shar
 			[/if]
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~[aClass.name.toUpperFirst()/]() {}
