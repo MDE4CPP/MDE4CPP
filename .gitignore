@@ -10,3 +10,4 @@ fUMLExample/Calculator/src_gen/\.idea/
 SubsetUnion/\.idea/
 
 fUMLExample/Calculator/src_gen/cmake-build-debug/
+/SubsetUnion/.settings
