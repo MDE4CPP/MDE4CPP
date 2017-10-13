@@ -1,1 +1,1 @@
-include 'ecore:ecore', 'ecore:types', 'fuml', 'uml', 'common', 'common:ecoreReflection',  'common:primitiveTypesReflection', 'common:umlReflection', 'util', 'examples:fumlExample:Calculator'
+include 'ecore:ecore', 'ecore:types', 'fuml', 'uml', 'common', 'common:ecoreReflection',  'common:primitiveTypesReflection', 'common:umlReflection', 'util', 'examples:fumlExample:Calculator', 'examples:simpleExamples'
