@@ -133,7 +133,7 @@
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/PluginFramework&quot;"/>
-[for (aMetaModelPackage : EPackage | aPackage.metaModelLibraries()->select(not(name = aPackage.name)))]
+[for (aMetaModelPackage : EPackage | aPackage.metaModelLibraries()->select(not(name = aPackage.name))->sortedBy(name))]
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aMetaModelPackage.name/]&quot;"/>
 [/for]
 								</option>

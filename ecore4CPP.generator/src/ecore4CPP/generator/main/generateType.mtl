@@ -58,9 +58,6 @@ std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
 std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
 [eOperation.eGenericType.generateCppType()/] [/if]
 
-[comment]std::shared_ptr<std::vector<[if (not eOperation.eGenericType.oclIsKindOf(EDataType))]std::shared_ptr<[/if][eOperation.eGenericType.generateCppType()/][if (not eOperation.eGenericType.oclIsKindOf(EDataType))]>[/if]>>[elseif ((not eOperation.eType.oclIsUndefined()) and (not eOperation.eType.oclIsKindOf(EDataType)))]
-std::shared_ptr<[eOperation.eGenericType.generateCppType()/]> [else]
-[eOperation.eGenericType.generateCppType()/] [/if][/comment]
 [/template]
 
 [template public generateReferenceType(eReference : EReference) post(trim())]

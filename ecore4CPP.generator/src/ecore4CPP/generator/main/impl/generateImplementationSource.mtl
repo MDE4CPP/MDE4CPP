@@ -80,12 +80,12 @@ using namespace [aClass.ePackage.name/];
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [aClass.name.toUpperFirst()/] "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	[aClass.eReferences.generateProtectedReferenceDeleter()/]
+	[aClass.eReferences->sortedBy(name).generateProtectedReferenceDeleter()/]
 }
 
 
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref) separator('\n')]
+[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
 //Additional constructor for the containments back reference
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
@@ -94,7 +94,7 @@ using namespace [aClass.ePackage.name/];
 			{
 				switch(reference_id)
 				{	
-				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name))]
+				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
 				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.memberNameUpper()/]:
 					 m_[multipleRef.name/] = par_[aReference.eType.name/];
 					 return;
@@ -143,21 +143,6 @@ using namespace [aClass.ePackage.name/];
 
 	[/for]
 
-	[comment]//copy references with no containment
-	
-	[for (ref : EReference | aClass.eAllReferences->select(containment = false)->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
-	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[else]
-	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
-	[/if]
-
-	[/for]
-
-	//clone containt lists
-	[for (ref : EReference | aClass.eAllReferences->select(containment = true)->asOrderedSet()->sortedBy(name))][/comment]
-    
 	[comment]References must be copied in this order:
 	1st Unions
 	2nd Subset Unions
@@ -190,67 +175,6 @@ using namespace [aClass.ePackage.name/];
 	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.InitReferences()/]
 	[/for]
-
-	[comment][for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.isUnion() and not(aReference.hasSubset())))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
-	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[else]
-	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
-	[/if]
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying Union: " << "m_[ref.name/]" << std::endl;
-	#endif
-	[/for]
-
-	//Copy the SubsetUnions
-	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.isSubsetUnion()))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
-	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[else]
-	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
-	[/if]
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying SubsetUnion: " << "m_[ref.name/]" << std::endl;
-	#endif
-	[/for]
-
-	//Clone the subset that should be unions too
-	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | (not aReference.isUnion()) and aReference.subsetIsUnion()))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
-	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[else]
-	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));// this->[ref.GetterName()/]()->insert(this->[ref.GetterName()/]()->end(), _[ref.name/]->begin(), _[ref.name/]->end());
-	[/if]
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying Subset that should be a union: " << "m_[ref.name/]" << std::endl;
-	#endif
-	[/for]
-
-	//Clone the rest
-	[for (ref : EReference | (aClass.eAllReferences->select(aReference : EReference | aReference.hasSubset() and not(aReference.subsetIsUnion()) and not(aReference.isUnion())))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
-	if(obj.[ref.GetterName()/]()!=nullptr)
-	{
-		[if(ref.upperBound=1)]
-		m_[ref.name/].reset(dynamic_cast<[ref.eType.generateType()/]*>(obj.[ref.GetterName()/]()->copy()));
-		[else]
-		m_[ref.name/].reset(dynamic_cast<Bag<[ref.eType.generateType()/]>* >(obj.[ref.GetterName()/]()->copy()));
-		[/if]
-	}
-	[else]
-	std::shared_ptr<Bag<[ref.eType.generateType()/]>> _[ref.name/]List = obj.[ref.GetterName()/]();
-	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *_[ref.name/]List)
-	{
-		this->[ref.GetterName()/]()->add(std::shared_ptr<[ref.eType.generateType()/]>(dynamic_cast<[ref.eType.generateType()/]*>(_[ref.name/]->copy())));
-	}
-	[/if]
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_[ref.name/]" << std::endl;
-	#endif
-	[/for][/comment]
 }
 
 ecore::EObject *  [className/]::copy() const

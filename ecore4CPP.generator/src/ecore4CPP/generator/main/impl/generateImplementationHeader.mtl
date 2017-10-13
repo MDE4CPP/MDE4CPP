@@ -67,7 +67,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[className/]();
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-			[for(aReference:EReference | ref) ]
+			[for(aReference:EReference | ref->sortedBy(name)) ]
 			//Additional constructors for the containments back reference
 	[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 			[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
@@ -89,17 +89,17 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations.generateOperationDecl(true)/]
+			[aClass.eOperations->sortedBy(name).generateOperationDecl(true)/]
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes.generateAttributeAccessorsDecl(true)/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(true)/]
 			
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences.generateReferenceDecl(true)/]				
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]				
 			
 			//*********************************
 			// Union Getter

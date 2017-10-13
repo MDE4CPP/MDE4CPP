@@ -60,7 +60,6 @@ namespace [element.ePackage.name/]
 [/if]
 
 //*********************************
-[comment namespace /]
 namespace [aClass.ePackage.name/] 
 {
 	[aClass.generateDokumentation()/]
@@ -80,7 +79,7 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shar
 			[if(aClass.containsContainerAttribute())]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-			[for(aReference:EReference | ref) separator('\n')]
+			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
 			//Additional constructors for the containments back reference
 
 			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
@@ -103,26 +102,26 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shar
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations.generateOperationDecl(false)/]
+			[aClass.eOperations->sortedBy(name).generateOperationDecl(false)/]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes.generateAttributeAccessorsDecl(false)/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(false)/]
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences.generateReferenceDecl(false)/]
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(false)/]
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			[aClass.eAttributes.generateAttributeProtectedMember()/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeProtectedMember()/]
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			[aClass.eReferences.generateProtectedReference()/]
+			[aClass.eReferences->sortedBy(name).generateProtectedReference()/]
 
 		public:
 			//*********************************

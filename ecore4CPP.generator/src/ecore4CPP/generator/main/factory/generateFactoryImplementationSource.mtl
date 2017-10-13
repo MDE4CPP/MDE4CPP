@@ -41,9 +41,6 @@ using namespace [anEPackage.name/];
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	m_idMap.insert(std::pair<std::string,unsigned int>("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.name.toUpperCase()/]));
 	[/for]
-	[comment]	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	//m_creatorMap.insert(std::pair<std::string,std::function<ecore::EObject*()>>("[aClass.generateTypeClass()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name/]();}));
-	[/for][/comment]
 }
 
 [className/]::~[className/]()
@@ -79,7 +76,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 				[if(ref->size()>1)]
 				switch(referenceID)
 				{
-					[for(aReference:EReference | ref)]
+					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
 					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.memberNameUpper()/]: 
 					{
@@ -149,8 +146,8 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl());
 	return element;
 }
-[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref)]
+[let ref : OrderedSet(EReference) = aClass.getAllContainers()]
+[for(aReference:EReference | ref->sortedBy(name))]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const
 {
 	[if(ref->select(eType = aReference.eType)->size()>1)]
@@ -159,7 +156,7 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
 	[/if]
 	[if(not aReference.eOpposite.name.oclIsUndefined())]
-	[let r:EReference = findLowerSubset(aReference.eType.oclAsType(EClass), aClass, aReference.eOpposite)]
+	[let r : EReference = findLowerSubset(aReference.eType.oclAsType(EClass), aClass, aReference.eOpposite)]
 	[if(aReference.isBackReference())]
 	if(auto wp = par_[aReference.name/].lock())
 	{
