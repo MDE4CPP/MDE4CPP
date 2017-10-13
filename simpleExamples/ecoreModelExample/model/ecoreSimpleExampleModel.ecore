@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecoreSimpleExampleModel" nsURI="http://www.example.org/ecoreSimpleExampleModel"
+    nsPrefix="ecoreSimpleExampleModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Book" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="author" upperBound="-1"
+        eType="#//Author"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" eType="#//LibraryModel"
+        eOpposite="#//LibraryModel/book"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Author" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LibraryModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" upperBound="-1" eType="#//Book"
+        containment="true" eOpposite="#//Book/library"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="author" upperBound="-1"
+        eType="#//Author" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//String"/>
+  </eClassifiers>
+</ecore:EPackage>
