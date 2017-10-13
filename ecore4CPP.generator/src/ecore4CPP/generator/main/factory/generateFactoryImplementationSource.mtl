@@ -65,52 +65,45 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 	{
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-	[if(ref->size() = 0)]
-		//[aClass.name/] is not contained in any other element
-	    case [anEPackage.name.toUpperFirst()/]Package::[aClass.name.toUpperCase()/]: return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]());
-		[else]
 		case [anEPackage.name.toUpperFirst()/]Package::[aClass.name.toUpperCase()/]:
 		{
-			[if(ref->size()>1)]
-			switch(referenceID)
+[if(ref->size()>0)]
+			if (nullptr == container)
 			{
-				[for(aReference:EReference | ref)]
-				//[aClass.name/] has [aReference.name/] as a containment
-				case  [anEPackage.name.toUpperFirst()/]Package::[aReference.memberNameUpper()/]: 
+[/if]
+				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]());
+[if(ref->size()>0)]			}
+			else
+			{
+[/if]
+				[if(ref->size()>1)]
+				switch(referenceID)
 				{
-					auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
-					return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
+					[for(aReference:EReference | ref)]
+					//[aClass.name/] has [aReference.name/] as a containment
+					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.memberNameUpper()/]: 
+					{
+						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
+						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
+					}
+					[/for]
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
-				[/for]
-				default:
-					std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				[elseif(ref->size()=1)]
+				auto castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
+				assert(castedContainer);
+				return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
+				[/if]
+			[if(ref->size()>0)]}[/if]
 		}
-		[else]
-			auto castedContainer = std::dynamic_pointer_cast<[ref->first().generateReferenceType(false)/]>(container);
-			assert(castedContainer);
-			return std::shared_ptr<[aClass.name/]>(this->create[aClass.name/]_in_[ref->first().name.toUpperFirst()/](castedContainer));
-		[/if]
-		}
-	[/if]
 	[/let]
 	[/for]
-
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << classID <<" not found" << std::endl;
 	}
 	return nullptr;
 }
-
-[comment]std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class) const
-{
-	if(_class->isAbstract())
-    {
-    	return nullptr;
-   	}
-
-	std::string _className = _class->eClass()->getName();
-	return create(_className);
-}[/comment]
 
 std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([needNamespace(anEPackage, 'EClass*')/] _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
 {
@@ -123,30 +116,26 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create([n
 	return create(_className, _container);
 }
 
-[comment]std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className) const
 {
-	auto iter = m_creatorMap.find(_className);
-	
-	std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> _createdObject;
-	if(iter != m_creatorMap.end())
+	auto iter = m_idMap.find(_className);
+	if(iter != m_idMap.end())
     {
 		//get the ID
-        unsigned int id =iter->second;
-		return getCreatorFunction(id, owner);
+        unsigned int id = iter->second;
+		return create(id);
     }
 
     return nullptr;
-}[/comment]
+}
 
 std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container/* = nullptr*/, const unsigned int referenceID) const
 {
 	auto iter = m_idMap.find(_className);
-	
-	std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> _createdObject;
 	if(iter != m_idMap.end())
     {
 		//get the ID
-        unsigned int id =iter->second;
+        unsigned int id = iter->second;
 		return create(id, _container, referenceID);
     }
 
@@ -155,12 +144,11 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
 
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-[comment][aClass.generateTypeClass()/]* [className/]::create[aClass.name/] () const
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
 {
-	return new [aClass.name.toUpperFirst()/]Impl();
-}[/comment]
-
-
+	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl());
+	return element;
+}
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 [for(aReference:EReference | ref)]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const
@@ -189,16 +177,9 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 	[/if]    
 	return element;
 }
+
 [/for]
 [/let]
-[/for]
-
-[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->select(getAllContainers()->isEmpty())->sortedBy(name)) ? (aClass.abstract=false)]
-//Class without container
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]() const
-{
-	return std::shared_ptr<[aClass.generateTypeClass()/]>(new [aClass.name.toUpperFirst()/]Impl());
-}
 [/for]
 
 std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
