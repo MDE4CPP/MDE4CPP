@@ -129,7 +129,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(st
     return nullptr;
 }
 
-std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container/* = nullptr*/, const unsigned int referenceID) const
+std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(std::string _className, std::shared_ptr<EObject> _container, const unsigned int referenceID) const
 {
 	auto iter = m_idMap.find(_className);
 	if(iter != m_idMap.end())
