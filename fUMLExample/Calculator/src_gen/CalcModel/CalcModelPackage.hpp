@@ -94,7 +94,6 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaDivides()= 0;
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaIsNotFinished()= 0;
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaIsOdd()= 0;
-			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaNext()= 0;
 			virtual std::shared_ptr<uml::DecisionNode> get_CalcModel_CheckIfPrimedivides()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_CalcModel_CheckIfPrimeifDivides()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_CalcModel_CheckIfPrimeifIsNotFinished()= 0;
@@ -126,12 +125,10 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaDividestarget()= 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaIsNotFinishedtarget()= 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaIsOddtarget()= 0;
-			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaNexttarget()= 0;
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_next_calltarget()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget()= 0;
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget()= 0;
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1()= 0;
 			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_coaDividesisDivisible()= 0;

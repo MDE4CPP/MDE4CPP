@@ -37,7 +37,6 @@ SET(SOURCE_FILES
 
 
 
-
 	PrimeCheckerExecution.cpp
 	main.cpp
 )
