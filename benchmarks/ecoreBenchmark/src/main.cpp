@@ -41,10 +41,11 @@ int main()
 			for (int var = 0; var < NUM_ELEMENT; ++var)
 			{
 				std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(package);
-				c->setName(std::string("Class"+var));
+				c->setName(std::string("Class")+std::to_string(var));
 				std::shared_ptr<EAttribute> a = factory->createEAttribute_in_EContainingClass(c);
-				a->setName(std::string("a"+var));
-			}
+				a->setName(std::string("a")+std::to_string(var));
+            }
+
 			end = std::chrono::high_resolution_clock::now();
 			std::cout << "time to create " << NUM_ELEMENT << " classes: " <<  std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
 		}
