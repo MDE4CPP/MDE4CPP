@@ -50,11 +50,8 @@ int main()
     std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
     std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
 
-    auto aa = UML::UMLPackage::eInstance();
-
-std::cout << package << "  " << aa << std::endl;
-    std::shared_ptr<uml::Model> p = factory->createModel_in_OwningPackage(aa);
-    p->setName("Modell");
+    std::shared_ptr<uml::Model> p = factory->createModel();
+    p->setName("Model");
 //
     std::shared_ptr<uml::Class> c = factory->createClass_in_Package(p);
     c->setName("Class1");
@@ -71,7 +68,7 @@ std::cout << package << "  " << aa << std::endl;
     o->setName("do");
 
     //create an UML-Objekt (InstanceSpecification) of Class2
-    std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_in_OwningPackage(p);
+    std::shared_ptr<uml::InstanceSpecification> i = factory->createInstanceSpecification_in_Owner(p);
     i->setName("o");
     std::shared_ptr<Bag<uml::Classifier>> t = i->getClassifier();
     t->push_back(c); //set Type to Class2
@@ -96,11 +93,11 @@ std::cout << package << "  " << aa << std::endl;
         }
         else
         {
-            cout << it->getName() << " ia a " << it->eClass()->getName() << endl;
+            cout << it->getName() << " is a " << it->eClass()->getName() << endl;
         }
     }
 
-    cout << "______________ MetaModel ____________" << endl;
+    cout << "______________ Ecore MetaModel ____________" << endl;
 
     std::shared_ptr<ecore::EClass> mc = c->eClass(); // UML is defined with ecore
     cout << mc->getName() << " :" << endl;
@@ -110,7 +107,7 @@ std::cout << package << "  " << aa << std::endl;
         cout << it->getName() << endl;
     }
 
-    cout << "___________ MetaMetaModel _______________" << endl;
+    cout << "___________ Ecore MetaMetaModel _______________" << endl;
 
     std::shared_ptr<ecore::EClass> mmc = mc->eClass();
     cout << mmc->getName() << " :" << endl;
