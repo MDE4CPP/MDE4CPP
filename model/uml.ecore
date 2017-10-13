@@ -3443,7 +3443,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" ordered="false"
-        eType="#//Class" volatile="true" transient="true">
+        eType="#//Class" volatile="true" transient="true" eOpposite="#//StructuredClassifier/ownedAttribute">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Class that owns this Property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -7891,7 +7891,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-        eType="#//Property" containment="true">
+        eType="#//Property" containment="true" eOpposite="#//Property/class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Properties owned by the StructuredClassifier.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
