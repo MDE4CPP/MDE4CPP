@@ -5,11 +5,17 @@ set(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_COMPILE_FLAGS "-fopenmp")
 
 set(SOURCE_FILES
-        src/Bag.hpp
         src/main.cpp
-        src/Subset.hpp
-        src/SubsetUnion.hpp
-        src/Union.hpp)
+        #src/Bag.hpp
+        #src/Subset.hpp
+        #src/SubsetUnion.hpp
+        #src/Union.hpp
+        )
+
+
+INCLUDE_DIRECTORIES(
+        ${MDE4CPP_HOME}/application/include/abstractDataTypes
+)
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )
 add_executable(SubsetUnion ${SOURCE_FILES})
