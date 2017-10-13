@@ -1,6 +1,6 @@
 description 'Example collection'
 
-task buildAllExamples(dependsOn: ['compileUMLBenchmark', 'compileEcoreBenchmark', 'fumlExample:Calculator:buildCalcModel']) {
+task buildAllExamples(dependsOn: ['compileUMLBenchmark', 'compileEcoreBenchmark', 'compileMemoryBenchmarkEcore', 'fumlExample:Calculator:buildCalcModel']) {
 	group 'Examples'
 	description 'build all example applications'	
 }
@@ -63,6 +63,66 @@ task compileEcoreBenchmarkRelease {
 		}
 	}
 }
+
+task compileMemoryBenchmarkEcore(dependsOn: ['compileMemoryBenchmarkEcoreDebug', 'compileMemoryBenchmarkEcoreRelease']) {
+	group 'Examples'
+	description 'compile memoryBenchmarkEcore in debug and release'
+}
+task compileMemoryBenchmarkEcoreDebug {
+	group 'Examples'
+	description 'compile memoryBenchmarkEcore in Debug'
+
+	def folder = new File(file('./benchmarks/memoryBenchmarkEcore/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/memoryBenchmarkEcore/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./benchmarks/memoryBenchmarkEcore").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/memoryBenchmarkEcore/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileMemoryBenchmarkEcoreRelease {
+	group 'Examples'
+	description 'compile memoryBenchmarkEcore in Release'
+
+	def folder = new File(file('./benchmarks/memoryBenchmarkEcore/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'benchmarks/memoryBenchmarkEcore/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./benchmarks/memoryBenchmarkEcore").absolutePath
+		}
+		exec {
+			workingDir 'benchmarks/memoryBenchmarkEcore/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
 
 task compileUMLBenchmark(dependsOn: ['compileUMLBenchmarkDebug', 'compileUMLBenchmarkRelease']) {
 	group 'Examples'
