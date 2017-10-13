@@ -80,9 +80,10 @@ void [className/]::terminate()
     this->getActivationGroup()->terminateAll();
 }
 
-ecore::EObject* [className/]::copy() const
+std::shared_ptr<ecore::EObject> [className/]::copy() const
 {
-    return new [className/](*this);
+	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	return element;
 }
 
 void [className/]::execute()
