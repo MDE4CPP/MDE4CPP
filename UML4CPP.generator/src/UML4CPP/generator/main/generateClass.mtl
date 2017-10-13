@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateClassCreate(aEClass : Class,impl : Boolean) ? (aEClass.isAbstract=false)]
-virtual [aEClass.generateCppType(true)/]* create[aEClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateCppType(true)/]> create[aEClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
 
 [/template]
 
@@ -34,8 +34,6 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 [memberName(aEClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aEClass.ancestors(Package)->first().memberName()/]);
 [memberName(aEClass)/]->setName("[aEClass.name/]");
 [memberName(aEClass)/]->setIsAbstract([aEClass.isAbstract/]);
-//[memberName(aEClass)/]->setPackage([aEClass.ancestors(Package)->first().memberName()/]);
-//[aEClass.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(aEClass)/]);
 
 //constraints
 [aEClass.ownedRule.generateConstraintCreation()/]
@@ -43,11 +41,9 @@ static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedO
 [/template]
 
 [template public initSuperTypes(aClass : Class)]
-[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
+[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
 gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.packageGetter(aClass)/]);
 gen->setGeneral([superClass.packageGetter(aClass)/]);
-//gen->setSpecific([aClass.packageGetter(aClass)/]);
-//[aClass.memberName()/]->getGeneralization()->push_back(gen);
 [/for]
 
 [/template]

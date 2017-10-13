@@ -27,16 +27,14 @@
 	literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [/if]
 	this->getOwnedElement()->push_back(literal);
-	//slot->getValue()->push_back(literal);
 [/for]
-	//[memberName(anInstSpec)/]->getSlot()->push_back(slot);
 }
 [/template]
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
-[for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(name))]
+[for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(myQualifiedName()))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
 
 [for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(myQualifiedName()))]

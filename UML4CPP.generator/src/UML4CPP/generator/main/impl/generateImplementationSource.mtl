@@ -27,7 +27,7 @@
 #include "[className.concat('.hpp')/]"
 #include "[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().name/].hpp"
-[for (cl : Type | aClass.includes()->sortedBy(name)) ? ( oclIsKindOf(Class))]
+[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
 #include "[cl.name/].hpp"
 [/for]
 [if (aClass.ownedOperation.method->notEmpty())]
@@ -49,7 +49,7 @@ using boost::any_cast;
 	[aClass.generateGetSetInit()/] 
 
 	// init properties without default
-	[for (aProperty : Property | aClass.ownedAttribute)]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
 	[/for]
 }
@@ -66,7 +66,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 //*********************************
 // Attribute Setter Getter
 //*********************************
-[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(name)) separator ('\n')]
+[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
 [aAttribute.generateAttributeSetterImplementationCpp()/]
 [aAttribute.generateAttributeGetterImplementationCpp()/]
 [/for]
@@ -78,7 +78,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 //*********************************
 // Operations
 //*********************************
-[for (aOperation : Operation | aClass.ownedOperation->sortedBy(name)) separator('\n')]
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
 [aOperation.generateOperationImplementation()/]
 [/for]
 

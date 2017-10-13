@@ -21,7 +21,7 @@
 con = uml::UmlFactory::eInstance()->createConstraint_in_Context([memberName(aConstraint.owner.oclAsType(Class))/]);
 
 con->setName("[aConstraint.name/]");
-[for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(name))]
+[for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(myQualifiedName()))]
 con->getConstrainedElement()->push_back([elem.appendTypeRes()/]);
 [/for]
 
@@ -33,10 +33,6 @@ oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("[it.subst
 [/for]
 
 con->setSpecification(oe);
-
-//insert into model hirachie
-//[memberName(aConstraint.owner.oclAsType(Class))/]->getOwnedRule()->push_back(con);
-//con->setContext([memberName(aConstraint.owner.oclAsType(Class))/]->getNamespace());
 
 [/template]
 

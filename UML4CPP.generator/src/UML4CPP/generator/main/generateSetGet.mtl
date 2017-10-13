@@ -35,7 +35,7 @@ std::map<std::string,std::function<void()>> m_unsetterMap;
 
 [template public generateGetSetInit(aClass : Class)]
 //getter init
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(name))]
+[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration))]
 m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){ return this->[prop.GetterName()/]();}));
 [else][if (prop.upper=1)]
@@ -50,7 +50,7 @@ m_getterMap.insert(std::pair<std::string,std::function<boost::any()>>("[prop.qua
 m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFeature.qualifiedName/]",[ '[' /]this[ ']' /](boost::any object){this->[aFeature.SetterName()/](any_cast<[if (aFeature.upper<>1)]std::shared_ptr<Bag[/if][aFeature.type.generateCppType()/][if (aFeature.upper<>1)]>[/if]>(object));}));
 [/for]
 
-[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(name)) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
+[for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 [if (prop.upper=1)]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = nullptr;}));
 [else]

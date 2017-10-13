@@ -20,8 +20,6 @@
 [template public generateActivityEdgeCreation(anActivityEdge : ActivityEdge)]
 [memberName(anActivityEdge)/] = uml::UmlFactory::eInstance()->create[anActivityEdge.eClass().name/]_in_Activity([anActivityEdge.activity.oclAsType(NamedElement).memberName()/]);
 [memberName(anActivityEdge)/]->setName("[anActivityEdge.name/]");
-//[memberName(anActivityEdge)/]->setActivity([anActivityEdge.activity.oclAsType(NamedElement).memberName()/]);
-//[anActivityEdge.activity.oclAsType(NamedElement).memberName()/]->getEdge()->push_back([memberName(anActivityEdge)/]);
 
 [/template]
 

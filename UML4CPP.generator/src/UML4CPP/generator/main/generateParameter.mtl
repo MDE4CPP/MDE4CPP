@@ -30,6 +30,5 @@
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
 
-//[aParameter.owner.oclAsType(NamedElement).memberName()/]->getOwnedParameter()->push_back([memberName(aParameter)/]); TODO: uncomment?
 
 [/template]

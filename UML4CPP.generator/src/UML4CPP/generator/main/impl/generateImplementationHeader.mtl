@@ -37,7 +37,7 @@ virtual public uml::ClassImpl
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 #include <functional>
-[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (sClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 #include "impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (aClass.superClass->isEmpty())]

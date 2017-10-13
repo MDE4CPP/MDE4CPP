@@ -22,7 +22,7 @@
 [startGuard(aPackage,'FactoryImpl')/]
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(name))]
+[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(myQualifiedName()))]
 #include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 

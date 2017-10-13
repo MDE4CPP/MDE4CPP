@@ -47,7 +47,7 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
-[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 #include "[nE.name/].hpp"[/for]
 
 //metamodel factory
@@ -57,7 +57,7 @@
 #include "UmlFactory.hpp"
 
 //depending model packages
-[for (pack : Package | aPackage.metaModelIncludes()->sortedBy(name)) ?  (not (pack=aPackage))]
+[for (pack : Package | aPackage.metaModelIncludes()->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
 [if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
 [if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
@@ -70,7 +70,7 @@
 [/if]
 [/for]
 
-[for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(name))]
+[for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
 #include "[stereo.name/].hpp"
 [/for]
 [for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
@@ -131,7 +131,7 @@ void [packageName/]::createPackageContents()
 	[aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generateValueSpecificationCreation()/]
 
 [if (not (aPackage.name='UML'))]
-[for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 	[aInterface.generateInterfaceCreation()/]
 	[aInterface.ownedAttribute.generateAttributeCreation()/]
 	[aInterface.ownedOperation.generateOperationCreation()/]
@@ -150,7 +150,7 @@ void [packageName/]::createPackageContents()
 	[/if][/for][/for]
 [/for]
 
-[for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->asOrderedSet()->sortedBy(name))]
+[for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->asOrderedSet()->sortedBy(myQualifiedName()))]
 	[anInstSpec.generateInstanceSpecificationCreation()/]
 [/for]
 
@@ -161,7 +161,7 @@ void [packageName/]::createPackageContents()
 	[aStereotype.ownedOperation->sortedBy(name)->sortedBy(name).generateOperationCreation()/]
 [/for]
 
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->sortedBy(name))) separator ('\n')]
+[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->sortedBy(myQualifiedName()))) separator ('\n')]
 	[anActivity.generateActivityCreation()/]
 	//Node
 	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]
