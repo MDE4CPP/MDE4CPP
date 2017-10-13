@@ -18,25 +18,25 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateClassCreate(aEClass : Class,impl : Boolean) ? (aEClass.isAbstract=false)]
-virtual std::shared_ptr<[aEClass.generateCppType(true)/]> create[aEClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
+[template public generateClassCreate(aClass : Class,impl : Boolean) ? (aClass.isAbstract=false)]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
 
 [/template]
 
-[template public generateStaticClassID(aEClass : Class)]
-static const int [aEClass.name.toUpperCase()/] = [aEClass._package.member->asOrderedSet()->indexOf(aEClass)/];
-static const int [aEClass.name.toUpperCase()/]_FEATURE_COUNT = [aEClass.allFeatures()->size()/];
-static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedOperation->size()/];
+[template public generateStaticClassID(aClass : Class)]
+static const int [aClass.name.toUpperCase()/] = [aClass._package.member->asOrderedSet()->indexOf(aClass)/];
+static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
+static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 
 [/template]
 
-[template public generateClassCreation(aEClass : Class)]
-[memberName(aEClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aEClass.ancestors(Package)->first().memberName()/]);
-[memberName(aEClass)/]->setName("[aEClass.name/]");
-[memberName(aEClass)/]->setIsAbstract([aEClass.isAbstract/]);
+[template public generateClassCreation(aClass : Class)]
+[memberName(aClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+[memberName(aClass)/]->setName("[aClass.name/]");
+[memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
 
 //constraints
-[aEClass.ownedRule.generateConstraintCreation()/]
+[aClass.ownedRule.generateConstraintCreation()/]
 
 [/template]
 
