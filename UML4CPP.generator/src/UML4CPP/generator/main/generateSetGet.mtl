@@ -52,7 +52,7 @@ m_setterMap.insert(std::pair<std::string,std::function<void(boost::any)>>("[aFea
 
 [for (prop : Property | aClass.allFeatures()->filter(Property)->asOrderedSet()->sortedBy(myQualifiedName())) ? (not(prop.type.oclIsKindOf(PrimitiveType) or prop.type.oclIsKindOf(Enumeration)))]
 [if (prop.upper=1)]
-m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = nullptr;}));
+m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
 [else]
 m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("[prop.qualifiedName/]",[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]

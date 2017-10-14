@@ -16,8 +16,9 @@
 
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
 
 [query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type}->flatten() /]
 
@@ -53,6 +54,22 @@ using boost::any_cast;
 	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
 	[/for]
 }
+
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+[className/]::[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+:[className/]()
+{
+    m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
+}
+[/if]
+[/let]
+[/let]
+[/for]
+
+
 
 [className/]::~[className/]()
 {

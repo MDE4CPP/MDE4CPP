@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
 [import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
 [template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
@@ -64,6 +65,16 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.superC
 			friend class [aClass.getNearestPackage().name.concat('FactoryImpl').toUpperFirst()/];
 			//constructor
 			[className/]();
+
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+			[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/]);
+[/if] 
+[/let]
+[/let]
+[/for]
 
 		public:
 			//destructor

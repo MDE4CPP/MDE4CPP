@@ -14,6 +14,7 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
@@ -77,6 +78,25 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 	std::shared_ptr<[aClass.generateCppType(true)/]> element(new [aClass.name.toUpperFirst()/]Impl());
 	return element;
 }
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+{
+	std::shared_ptr<[aClass.generateCppType(true)/]> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
+[if (containmentProperty.isBackReference())]
+	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
+[else]
+	if (nullptr != [containmentProperty.name.toLowerFirst()/])
+[/if]
+	{
+		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[containerProperty.GetterName()/]()->push_back(element);
+	}
+	return element;
+}
+[/let]
+[/let]
+[/for]
 [/for]
 
 std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()

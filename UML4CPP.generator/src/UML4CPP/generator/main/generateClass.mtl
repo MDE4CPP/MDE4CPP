@@ -20,6 +20,13 @@
 
 [template public generateClassCreate(aClass : Class,impl : Boolean) ? (aClass.isAbstract=false)]
 virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])[abstractSufix(impl)/]; 
+[/let]
+[/let]
+[/for]
 
 [/template]
 
