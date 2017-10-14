@@ -2,7 +2,15 @@ description 'Example collection'
 
 task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample' ]) {
 	group 'Examples'
-	description 'build all simple example applications'	
+	description 'build all simple example applications in debug and release'	
+}
+task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug' ]) {
+	group 'Examples'
+	description 'build all simple example applications in debug'	
+}
+task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease' ]) {
+	group 'Examples'
+	description 'build all simple example applications in release'	
 }
 
 task compileEcoreExample(dependsOn: ['compileEcoreExampleDebug', 'compileEcoreExampleRelease']) {
