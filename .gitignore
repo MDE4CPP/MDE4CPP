@@ -11,3 +11,7 @@ SubsetUnion/\.idea/
 
 fUMLExample/Calculator/src_gen/cmake-build-debug/
 /SubsetUnion/.settings
+
+simpleExamples/ecoreModelExample/src_gen/ecoreSimpleExampleModel/\.idea/
+
+simpleExamples/UMLExample/\.idea/
