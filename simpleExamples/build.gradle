@@ -1,14 +1,14 @@
 description 'Example collection'
 
-task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample' ]) {
+task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample', 'ecoreModelExample:buildLibraryModel_ecore', 'ecoreModelExample:application:compileEcoreModelExample']) {
 	group 'Examples'
 	description 'build all simple example applications in debug and release'	
 }
-task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug' ]) {
+task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug', 'ecoreModelExample:buildLibraryModel_ecoreDebug', 'ecoreModelExample:application:compileEcoreModelExampleDebug']) {
 	group 'Examples'
 	description 'build all simple example applications in debug'	
 }
-task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease' ]) {
+task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease', 'ecoreModelExample:buildLibraryModel_ecoreRelease', 'ecoreModelExample:application:compileEcoreModelExampleRelease']) {
 	group 'Examples'
 	description 'build all simple example applications in release'	
 }
