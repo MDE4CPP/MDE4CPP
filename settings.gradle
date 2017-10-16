@@ -1,1 +1,1 @@
-include 'fumlExample:Calculator', 'simpleExamples'
+include 'benchmarks', 'fumlExample:Calculator', 'simpleExamples'

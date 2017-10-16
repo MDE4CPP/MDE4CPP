@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="LibraryModel">
+  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packageImport xmi:id="_wv5WoLArEeert7O7oCVCsA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aPikkLAqEeert7O7oCVCsA" name="Book" visibility="public">
+    <generalization xmi:id="_sY1FMLAqEeert7O7oCVCsA" general="_pEeYgLAqEeert7O7oCVCsA"/>
+    <ownedAttribute xmi:id="_yoCZdLAqEeert7O7oCVCsA" name="authors" visibility="private" type="_tprpELAqEeert7O7oCVCsA" association="_yoCZcLAqEeert7O7oCVCsA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yoCZdbAqEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yoCZdrAqEeert7O7oCVCsA" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_pEeYgLAqEeert7O7oCVCsA" name="NamedElement" visibility="public">
+    <ownedAttribute xmi:id="_8JK8ALArEeert7O7oCVCsA" name="name" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8JLjELArEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8JLjEbArEeert7O7oCVCsA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_tprpELAqEeert7O7oCVCsA" name="Author" visibility="public">
+    <generalization xmi:id="_vEzjQLAqEeert7O7oCVCsA" general="_pEeYgLAqEeert7O7oCVCsA"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_yoCZcLAqEeert7O7oCVCsA" memberEnd="_yoCZcbAqEeert7O7oCVCsA _yoCZdLAqEeert7O7oCVCsA">
+    <ownedEnd xmi:id="_yoCZcbAqEeert7O7oCVCsA" name="books" type="_aPikkLAqEeert7O7oCVCsA" association="_yoCZcLAqEeert7O7oCVCsA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_yoCZcrAqEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_yoCZc7AqEeert7O7oCVCsA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_aWP0ELArEeert7O7oCVCsA" name="Picture" visibility="public">
+    <generalization xmi:id="_yz-HMLArEeert7O7oCVCsA" general="_pEeYgLAqEeert7O7oCVCsA"/>
+    <ownedAttribute xmi:id="_lQyPALArEeert7O7oCVCsA" name="pageNumber" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/JavaPrimitiveTypes.library.uml#int"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_lQy2ELArEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_lQy2EbArEeert7O7oCVCsA" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_hhi9ILArEeert7O7oCVCsA" memberEnd="_hhi9IbArEeert7O7oCVCsA _hhjkMrArEeert7O7oCVCsA" navigableOwnedEnd="_hhjkMrArEeert7O7oCVCsA">
+    <ownedEnd xmi:id="_hhi9IbArEeert7O7oCVCsA" name="book" type="_aPikkLAqEeert7O7oCVCsA" association="_hhi9ILArEeert7O7oCVCsA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hhjkMLArEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hhjkMbArEeert7O7oCVCsA" value="1"/>
+    </ownedEnd>
+    <ownedEnd xmi:id="_hhjkMrArEeert7O7oCVCsA" name="pictures" type="_aWP0ELArEeert7O7oCVCsA" aggregation="composite" association="_hhi9ILArEeert7O7oCVCsA">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_hhkLQLArEeert7O7oCVCsA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_hhkLQbArEeert7O7oCVCsA" value="*"/>
+    </ownedEnd>
+  </packagedElement>
+</uml:Model>
