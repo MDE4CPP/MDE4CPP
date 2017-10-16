@@ -1,0 +1,62 @@
+apply plugin: 'base' 
+
+description 'Build tasks for project: libraryModel_ecore'
+
+task compileEcoreModelExample(dependsOn: ['compileEcoreModelExampleDebug', 'compileEcoreModelExampleRelease']) {
+	group 'Examples'
+	description 'compile Ecore example in debug and release'
+}
+task compileEcoreModelExampleDebug {
+	group 'Examples'
+	description 'compile Ecore Model example in Debug'
+
+	def folder = new File(file('./.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir '.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug . '
+		}
+		exec {
+			workingDir '.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileEcoreModelExampleRelease {
+	group 'Examples'
+	description 'compile Ecore Model example in Release'
+
+	def folder = new File(file('./.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir '.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("../application").absolutePath
+		}
+		exec {
+			workingDir '.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
