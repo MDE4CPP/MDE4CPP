@@ -4,23 +4,48 @@ task generateAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreMod
 	group 'MDE4CPP'
 	description 'build generators and all models in debug and release'
 }
+tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
 task generateAllDebug(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModelsDebug', 'src:common:buildReflectionModelsDebug']) {
 	group 'MDE4CPP'
 	description 'build generators and all models in debug'
 }
+tasks.getByPath('src:buildEcoreModelsDebug').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModelsDebug').mustRunAfter tasks.getByPath('src:buildEcoreModelsDebug')
 
 task generateAllRelease(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModelsRelease', 'src:common:buildReflectionModelsRelease']) {
 	group 'MDE4CPP'
 	description 'build generators and all models in release'
 }
+tasks.getByPath('src:buildEcoreModelsRelease').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModelsRelease').mustRunAfter tasks.getByPath('src:buildEcoreModelsRelease')
+
+//Compile All
+
+task compileAll(dependsOn: ['src:compileEcoreModels', 'src:common:ecoreReflection:compileEcoreReflection']) {
+	group 'MDE4CPP'
+	description 'compiles all models in debug and release without generating the models'
+}
+tasks.getByPath('src:common:ecoreReflection:compileEcoreReflection').mustRunAfter tasks.getByPath('src:compileEcoreModels')
+
+task compileAllDebug(dependsOn: ['src:compileEcoreModelsDebug', 'src:common:ecoreReflection:compileEcoreReflectionDebug']) {
+	group 'MDE4CPP'
+	description 'compiles all models in debug without generating the models'
+}
+tasks.getByPath('src:common:ecoreReflection:compileEcoreReflectionDebug').mustRunAfter tasks.getByPath('src:compileEcoreModelsDebug')
+
+task compileAllRelease(dependsOn: ['src:compileEcoreModelsRelease', 'src:common:ecoreReflection:compileEcoreReflectionRelease']) {
+	group 'MDE4CPP'
+	description 'compiles all models in release without generating the models'
+}
+tasks.getByPath('src:common:ecoreReflection:compileEcoreReflectionRelease').mustRunAfter tasks.getByPath('src:compileEcoreModelsRelease')
+
+//Compile All
 
 task generateEcoreModels(dependsOn: ['generator:ecore4CPP:createEcore4CPP', 'src:buildEcoreModels']) {
 	group 'MDE4CPP'
-	description 'build ecore4CPP generator and all ecore models in debug and release'	
+	description 'build ecore4CPP generator and all ecore models in debug and release'
 }
 tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:ecore4CPP:createEcore4CPP')
 
@@ -38,7 +63,7 @@ tasks.getByPath('src:buildEcoreModelsRelease').mustRunAfter tasks.getByPath('gen
 
 task generateReflectionModels(dependsOn: ['generator:UML4CPP:createUML4CPP', 'src:common:buildReflectionModels']) {
 	group 'MDE4CPP'
-	description 'build UML4CPP generator and all reflection models in debug and release'	
+	description 'build UML4CPP generator and all reflection models in debug and release'
 }
 tasks.getByPath('src:common:buildReflectionModels').mustRunAfter tasks.getByPath('generator:UML4CPP:createUML4CPP')
 

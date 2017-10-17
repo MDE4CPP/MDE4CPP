@@ -8,8 +8,9 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
 1. Install following software: 
   * Eclipse Modeling Tool
     * add plugin Acceleo 3
-  * Gradle 4.0
-  * MinGW with package mingw32-gcc-g++ (If you want to use prebuilt libraries, you have to use the version 5.3.0-3.)
+  * Gradle 4.2
+  * MinGW with package mingw32-gcc-g++ (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
+  * CMake
   	
 2. checkout a repository with one of the following options:
   * clone [MDE4CPP] (https://github.com/MDE4CPP/MDE4CPP) respository and update submodules
