@@ -15,73 +15,59 @@
 #include <iostream>
 #include <chrono>
 
-
+#define NUMBER_OF_OBJECTS 50000
 
 using namespace ecore;
 
 int main()
 {
-	omp_set_num_threads(1);
+	omp_set_num_threads(omp_get_num_procs());
     std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
 
-    start = std::chrono::high_resolution_clock::now();
-    std::shared_ptr<EcorePackage> package=EcorePackage::eInstance();
     std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();
-    end = std::chrono::high_resolution_clock::now();
 
     std::cout << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;
-    for (int var2 = 0; var2 < 10; ++var2) {
-        system("PAUSE");
-        std::shared_ptr<EPackage> p = std::dynamic_pointer_cast<EPackage>(
-                factory->create("EPackage", package));
-       /* std::shared_ptr<EObject> c2 = factory->create("EClass", p);
-        if (c2 != nullptr) {
-            std::shared_ptr<EClass> c3 = std::dynamic_pointer_cast<EClass>(c2);
-            if (c3 != nullptr) {
-                std::cout << c3->eClass()->getName() << " for c3 created by typed class name" << std::endl;
-            }
-        }
-        // creation class instances using class name (manual given (usable for serialization or by using meta class)
-        std::shared_ptr<EClass> c_metaclass = c2->eClass();
-        std::cout << "class name " << c_metaclass->getName() << std::endl;
-        std::shared_ptr<EObject> c4 = factory->create(c_metaclass->getName(), p);
-        if (c4 != nullptr) {
-            std::shared_ptr<EClass> c5 = std::dynamic_pointer_cast<EClass>(c4);
-            if (c5 != nullptr) {
-                std::cout << c5->eClass()->getName() << " for c5 created by name given by meta class of EClass"
-                          << std::endl;
-            }
-        }
 
-
-
-        // Benchmark section
-        std::shared_ptr<ecore::EClass> c = std::shared_ptr<ecore::EClass>(factory->createEClass(p));
-
-        c->setName("Test");
-
-*/
-
-
-
-        //invoke anony getter
-
+    for (int var2 = 0; var2 < 5; ++var2)
+    {
+        std::cout<< "----------------------------   start next iteration  ---------------------------------------\n";
+    	system("PAUSE");
         start = std::chrono::high_resolution_clock::now();
+        {
+        	std::shared_ptr<EPackage> p = factory->createEPackage();
+			std::shared_ptr<EEnum> e = factory->createEEnum_in_EPackage(p);
+			std::shared_ptr<EClass> t = factory->createEClass_in_EPackage(p);
+			t->setName("AClass");
 
-        for (int var = 0; var < 1000000; ++var) {
-            std::shared_ptr<ecore::EClass> c = factory->createEClass_in_EPackage(p);
-            //std::string b = boost::any_cast<std::string>(c->eGet(package->getENamedElement_Name()));
-            // c->setName("Name"); //b
-            //p->getEClassifiers()->push_back(std::shared_ptr<ecore::EClass>(c));
+			for (int var = 0; var<=NUMBER_OF_OBJECTS; ++var)
+			{
+				std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(p);
+				std::shared_ptr<EAttribute> a = factory->createEAttribute_in_EContainingClass(c);
+				std::shared_ptr<EReference> r = factory->createEReference_in_EContainingClass(c);
+				std::shared_ptr<EOperation> o = factory->createEOperation_in_EContainingClass(c);
+				std::shared_ptr<EParameter> p = factory->createEParameter_in_EOperation(o);
+
+				c->setName("Class");
+				e->setName("Enumeration");
+				a->setName("Attribute");
+				a->setEType(e);
+				r->setName("Reference");
+				r->setEType(t); // Use class c creates a ring dependency!
+				o->setName("Operation");
+				p->setName("Parameter");
+				p->setEType(t);
+			}
+
+			end = std::chrono::high_resolution_clock::now();
+			std::cout << "Time to create objects:" << std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
+	    	system("PAUSE");
+			std::cout<< "----------- delete objects\n" << std::endl;
+	        start = std::chrono::high_resolution_clock::now();
         }
-
-    end = std::chrono::high_resolution_clock::now();
-    std::cout << std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
-    std::cout<< "-------------------------------------------------------------------\n";
-
+    	end = std::chrono::high_resolution_clock::now();
+        std::cout << "Time to delete objects: " << std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count() << std::endl;
     }
-    //qDebug()<<b;
-
+    std::cout<< "------------------------------- Finished  ------------------------------------\n";
 
 
 	return 0;
