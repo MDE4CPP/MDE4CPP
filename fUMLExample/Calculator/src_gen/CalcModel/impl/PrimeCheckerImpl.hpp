@@ -41,6 +41,7 @@ namespace CalcModel
 			//constructor
 			PrimeCheckerImpl();
 
+
 		public:
 			//destructor
 			virtual ~PrimeCheckerImpl();

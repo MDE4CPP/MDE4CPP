@@ -21,9 +21,10 @@ FbPrintNotPrimeExecution::FbPrintNotPrimeExecution(const FbPrintNotPrimeExecutio
 {
 }
 
-ecore::EObject* FbPrintNotPrimeExecution::copy() const
+std::shared_ptr<ecore::EObject> FbPrintNotPrimeExecution::copy() const
 {
-    return new FbPrintNotPrimeExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbPrintNotPrimeExecution(*this));
+	return element;
 }
 
 void FbPrintNotPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

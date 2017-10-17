@@ -32,7 +32,7 @@ namespace CalcModel
 		    //destructor
 		    virtual ~PrimeCheckerExecution();
 		
-		    virtual ecore::EObject* copy();
+		    virtual std::shared_ptr<ecore::EObject> copy();
 			
 			std::shared_ptr<PrimeChecker> getUmlValue() const;
 			void setUmlValue(std::shared_ptr<PrimeChecker>);

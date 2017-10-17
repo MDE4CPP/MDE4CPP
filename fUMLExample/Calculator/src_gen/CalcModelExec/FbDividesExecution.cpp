@@ -24,9 +24,10 @@ FbDividesExecution::FbDividesExecution(const FbDividesExecution &obj)
 {
 }
 
-ecore::EObject* FbDividesExecution::copy() const
+std::shared_ptr<ecore::EObject> FbDividesExecution::copy() const
 {
-    return new FbDividesExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbDividesExecution(*this));
+	return element;
 }
 
 void FbDividesExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

@@ -12,13 +12,13 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
-#include "LiteralUnlimitedNatural.hpp"
-#include "Class.hpp"
-#include "LiteralInteger.hpp"
 #include "PackageImport.hpp"
-#include "Generalization.hpp"
 #include "Property.hpp"
+#include "LiteralInteger.hpp"
+#include "Generalization.hpp"
+#include "Class.hpp"
 #include "Association.hpp"
+#include "LiteralUnlimitedNatural.hpp"
 //metamodel factory
 #include "LibraryModel_umlFactory.hpp"
 #include "UmlFactory.hpp"

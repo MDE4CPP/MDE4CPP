@@ -41,6 +41,7 @@ namespace CalcModel
 			//constructor
 			CheckIfPrimeImpl();
 
+
 		public:
 			//destructor
 			virtual ~CheckIfPrimeImpl();

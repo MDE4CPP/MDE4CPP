@@ -21,9 +21,10 @@ FbPrintIsPrimeExecution::FbPrintIsPrimeExecution(const FbPrintIsPrimeExecution &
 {
 }
 
-ecore::EObject* FbPrintIsPrimeExecution::copy() const
+std::shared_ptr<ecore::EObject> FbPrintIsPrimeExecution::copy() const
 {
-    return new FbPrintIsPrimeExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbPrintIsPrimeExecution(*this));
+	return element;
 }
 
 void FbPrintIsPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

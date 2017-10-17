@@ -9,8 +9,8 @@ using namespace CalcModel;
 //*********************************
 CalcModelFactoryImpl::CalcModelFactoryImpl()
 {
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("CheckIfPrime",[this](){return this->createCheckIfPrime();}));
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("PrimeChecker",[this](){return this->createPrimeChecker();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("CheckIfPrime",[this](){return this->createCheckIfPrime();}));
+	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("PrimeChecker",[this](){return this->createPrimeChecker();}));
 }
 
 CalcModelFactoryImpl::~CalcModelFactoryImpl()
@@ -39,23 +39,25 @@ std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::shared_ptr<uml::
 
 std::shared_ptr<uml::Element> CalcModelFactoryImpl::create(std::string _className)
 {
-	std::map<std::string,std::function<uml::Element *()>>::iterator iter = m_creatorMap.find(_className);
+	std::map<std::string,std::function<std::shared_ptr<uml::Element>()>>::iterator iter = m_creatorMap.find(_className);
     if(iter != m_creatorMap.end())
     {
 		//invoke the creator function
-        return std::shared_ptr<uml::Element>(iter->second());
+        return iter->second();
     }
 
     return nullptr;
 }
 
-CalcModel::CheckIfPrime* CalcModelFactoryImpl::createCheckIfPrime ()
+std::shared_ptr<CalcModel::CheckIfPrime> CalcModelFactoryImpl::createCheckIfPrime ()
 {
-	return new CheckIfPrimeImpl();
+	std::shared_ptr<CalcModel::CheckIfPrime> element(new CheckIfPrimeImpl());
+	return element;
 }
-CalcModel::PrimeChecker* CalcModelFactoryImpl::createPrimeChecker ()
+std::shared_ptr<CalcModel::PrimeChecker> CalcModelFactoryImpl::createPrimeChecker ()
 {
-	return new PrimeCheckerImpl();
+	std::shared_ptr<CalcModel::PrimeChecker> element(new PrimeCheckerImpl());
+	return element;
 }
 
 std::shared_ptr<CalcModelPackage> CalcModelFactoryImpl::getCalcModelPackage()

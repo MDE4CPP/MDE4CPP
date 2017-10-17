@@ -22,9 +22,10 @@ PrimeCheckerExecution::~PrimeCheckerExecution()
 {
 }
 
-ecore::EObject* PrimeCheckerExecution::copy()
+std::shared_ptr<ecore::EObject> PrimeCheckerExecution::copy()
 {
-	return new PrimeCheckerExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new PrimeCheckerExecution(*this));
+	return element;
 }
 
 std::shared_ptr<PrimeChecker> PrimeCheckerExecution::getUmlValue() const
