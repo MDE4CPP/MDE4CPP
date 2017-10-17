@@ -73,9 +73,10 @@ using namespace [aPackage.name/];
 {
 }
 
-ecore::EObject* [className/]::copy() const
+std::shared_ptr<ecore::EObject> [className/]::copy() const
 {
-    return new [className/](*this);
+	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	return element;
 }
 
 void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

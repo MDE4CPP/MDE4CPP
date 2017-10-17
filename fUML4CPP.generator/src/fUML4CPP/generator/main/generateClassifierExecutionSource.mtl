@@ -48,9 +48,10 @@ using namespace [aPackage.name/];
 {
 }
 
-ecore::EObject* [className/]::copy()
+std::shared_ptr<ecore::EObject> [className/]::copy()
 {
-	return new [className/](*this);
+	std::shared_ptr<ecore::EObject> element(new [className/](*this));
+	return element;
 }
 
 std::shared_ptr<[pointerName/]> [className/]::getUmlValue() const
