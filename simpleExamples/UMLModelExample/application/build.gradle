@@ -1,14 +1,14 @@
 apply plugin: 'base' 
 
-description 'Build tasks for project: libraryModel_ecore'
+description 'Build tasks for project: Application for libraryModel_uml'
 
-task compileEcoreModelExample(dependsOn: ['compileEcoreModelExampleDebug', 'compileEcoreModelExampleRelease']) {
+task compileUmlModelExample(dependsOn: ['compileUmlModelExampleDebug', 'compileUmlModelExampleRelease']) {
 	group 'Examples'
-	description 'compile Ecore example in debug and release'
+	description 'compile UML Model application example in debug and release'
 }
-task compileEcoreModelExampleDebug {
+task compileUmlModelExampleDebug {
 	group 'Examples'
-	description 'compile Ecore Model example in Debug'
+	description 'compile UML Model example in Debug'
 
 	def folder = new File(file('./.cmake/Debug').absolutePath)
 	if( !folder.exists() ) {
@@ -33,9 +33,9 @@ task compileEcoreModelExampleDebug {
 		}
 	}
 }
-task compileEcoreModelExampleRelease {
+task compileUmlModelExampleRelease {
 	group 'Examples'
-	description 'compile Ecore Model example in Release'
+	description 'compile UML Model example in Release'
 
 	def folder = new File(file('./.cmake/Release').absolutePath)
 	if( !folder.exists() ) {
@@ -45,7 +45,7 @@ task compileEcoreModelExampleRelease {
 	doLast {
 		exec {
 			workingDir '.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release  ../..'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ../.. '
 		}
 		exec {
 			workingDir '.cmake/Release'
