@@ -22,6 +22,11 @@
 [query public getterPrefix(feature : EStructuralFeature) : String = if feature.eType.name = 'EBoolean' then 'is' else 'get' endif/]
 
 [**
+ * check if application should be prepared
+*/]
+[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
+
+[**
  * Helper for sourcegen annotations
 */]
 [query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'http://sse.tu-ilmenau.de/codegen')->notEmpty()  /]
