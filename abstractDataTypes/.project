@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-<!-- Start of user code main
-	You may manually edit the following lines, won't be overwritten upon generation. -->
-	<name>UmlReflection_src_gen</name>
-<!-- End of user code -->
+	<name>abstractDataTypes_src_gen</name>
 	<comment></comment>
 	<projects> 
 	</projects>

@@ -1,18 +1,107 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: PrimitivetypesReflection'
 
-task buildPrimitivetypesReflection(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen:PrimitivetypesReflection:compilePrimitivetypesReflection']) {
+task buildPrimitivetypesReflection(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflection']) {
 	group 'PrimitivetypesReflection'
 	description 'build PrimitivetypesReflection in debug and release'
 }
-task buildPrimitivetypesReflectionDebug(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen::PrimitivetypesReflection:compilePrimitivetypesReflectionDebug']) {
+task buildPrimitivetypesReflectionDebug(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflectionDebug']) {
 	group 'PrimitivetypesReflection'
 	description 'build PrimitivetypesReflection in debug'
 }
-task buildPrimitivetypesReflectionRelease(dependsOn: ['model:generatePrimitivetypesReflection', 'src_gen::PrimitivetypesReflection:compilePrimitivetypesReflectionRelease']) {
+task buildPrimitivetypesReflectionRelease(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflectionRelease']) {
 	group 'PrimitivetypesReflection'
 	description 'build PrimitivetypesReflection in release'
 }
 
-tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflection').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
-tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflectionDebug').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
-tasks.getByPath('src_gen:PrimitivetypesReflection:compilePrimitivetypesReflectionRelease').mustRunAfter tasks.getByPath('model:generatePrimitivetypesReflection')
+task compilePrimitivetypesReflection(dependsOn: ['compilePrimitivetypesReflectionDebug', 'compilePrimitivetypesReflectionRelease']) {
+	group 'PrimitivetypesReflection'
+	description 'compile PrimitivetypesReflection in debug and release'
+}
+task compilePrimitivetypesReflectionDebug {
+	group 'PrimitivetypesReflection'
+	description 'compile PrimitivetypesReflection in Debug'
+
+	def folder = new File(file('./src_gen/PrimitivetypesReflection/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/PrimitivetypesReflection/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/PrimitivetypesReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/PrimitivetypesReflection/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compilePrimitivetypesReflectionRelease {
+	group 'PrimitivetypesReflection'
+	description 'compile PrimitivetypesReflection in Release'
+
+	def folder = new File(file('./src_gen/PrimitivetypesReflection/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/PrimitivetypesReflection/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/PrimitivetypesReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/PrimitivetypesReflection/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task generatePrimitivetypesReflection(type: JavaExec) {
+	group 'PrimitivetypesReflection'
+	description 'generate C++ code of PrimitivetypesReflection.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "PrimitivetypesReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/PrimitivetypesReflection.uml")
+	outputs.dir file("src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compilePrimitivetypesReflection.mustRunAfter generatePrimitivetypesReflection
+compilePrimitivetypesReflectionDebug.mustRunAfter generatePrimitivetypesReflection
+compilePrimitivetypesReflectionRelease.mustRunAfter generatePrimitivetypesReflection
+
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/PrimitivetypesReflection/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

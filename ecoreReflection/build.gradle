@@ -1,18 +1,107 @@
+apply plugin: 'base' 
+
 description 'Build tasks for project: EcoreReflection'
 
-task buildEcoreReflection(dependsOn: ['model:generateEcoreReflection', 'src_gen:EcoreReflection:compileEcoreReflection']) {
+task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug and release'
 }
-task buildEcoreReflectionDebug(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionDebug']) {
+task buildEcoreReflectionDebug(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionDebug']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in debug'
 }
-task buildEcoreReflectionRelease(dependsOn: ['model:generateEcoreReflection', 'src_gen::EcoreReflection:compileEcoreReflectionRelease']) {
+task buildEcoreReflectionRelease(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionRelease']) {
 	group 'EcoreReflection'
 	description 'build EcoreReflection in release'
 }
 
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflection').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionDebug').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
-tasks.getByPath('src_gen:EcoreReflection:compileEcoreReflectionRelease').mustRunAfter tasks.getByPath('model:generateEcoreReflection')
+task compileEcoreReflection(dependsOn: ['compileEcoreReflectionDebug', 'compileEcoreReflectionRelease']) {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in debug and release'
+}
+task compileEcoreReflectionDebug {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in Debug'
+
+	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/EcoreReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileEcoreReflectionRelease {
+	group 'EcoreReflection'
+	description 'compile EcoreReflection in Release'
+
+	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/EcoreReflection").absolutePath
+		}
+		exec {
+			workingDir 'src_gen/EcoreReflection/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+
+task generateEcoreReflection(type: JavaExec) {
+	group 'EcoreReflection'
+	description 'generate C++ code of EcoreReflection.uml model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar", "EcoreReflection.uml", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar"), file("model/EcoreReflection.uml")
+	outputs.dir file("src_gen")
+
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/UML4CPP.jar").exists()) {
+			throw new GradleException('UML4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createUML4CPP!')
+		}
+	}
+}
+
+compileEcoreReflection.mustRunAfter generateEcoreReflection
+compileEcoreReflectionDebug.mustRunAfter generateEcoreReflection
+compileEcoreReflectionRelease.mustRunAfter generateEcoreReflection
+
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}

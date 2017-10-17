@@ -11,6 +11,12 @@
 #include <iostream>
 #include <windows.h>
 
+#ifdef NDEBUG
+    #define DEBUG_MESSAGE(a) /**/
+#else
+    #define DEBUG_MESSAGE(a) a
+#endif
+
 std::shared_ptr<PluginFramework> PluginFramework::instance;
 
 PluginFramework::PluginFramework()
@@ -20,6 +26,7 @@ PluginFramework::PluginFramework()
 
 PluginFramework::~PluginFramework()
 {
+	m_pluginMap.clear();
 }
 
 std::shared_ptr<PluginFramework> PluginFramework::eInstance()
@@ -89,7 +96,7 @@ std::vector<std::string> PluginFramework::findAllAvailableLibraries()
 	}
 	else
 	{
-		std::cout << "Could not open directory " << folderName << " failed" << std::endl;
+		std::cerr << "Could not open directory " << folderName << " failed" << std::endl;
 	}
 
 	return libraries;
@@ -110,7 +117,7 @@ void PluginFramework::loadLibrary(std::string libraryPath)
 	HINSTANCE hGetProcIDDLL = LoadLibrary(libraryPath.c_str());
 	if (!hGetProcIDDLL)
 	{
-		std::cout << "could not load the dynamic library, ErrorCode: " << GetLastError() << std::endl;
+		std::cerr << "could not load the dynamic library, ErrorCode: " << GetLastError() << std::endl;
 		return;
 	}
 
@@ -123,7 +130,14 @@ void PluginFramework::loadLibrary(std::string libraryPath)
 	{
 		std::shared_ptr<MDE4CPPPlugin> plugin = startFunction();
 		m_pluginMap.insert(std::pair<std::string, std::shared_ptr<MDE4CPPPlugin>>(plugin->eNAME(), plugin));
+
+		DEBUG_MESSAGE(std::cout << "library " << plugin << " started" << std::endl;)
 	}
+}
+
+void PluginFramework::clear()
+{
+	m_pluginMap.clear();
 }
 
 std::shared_ptr<MDE4CPPPlugin> PluginFramework::findPluginByName(const std::string name) const

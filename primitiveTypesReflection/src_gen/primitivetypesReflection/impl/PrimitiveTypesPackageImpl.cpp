@@ -81,26 +81,16 @@ void PrimitiveTypesPackageImpl::createPackageContents()
 
 //Dependency 
 
-	primitiveTypes_Integer.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	primitiveTypes_Integer->setName("Integer");
-	primitiveTypes_Integer->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_Integer);
-	primitiveTypes_String.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	primitiveTypes_String->setName("String");
-	primitiveTypes_String->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_String);
-	primitiveTypes_Boolean.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
-	primitiveTypes_Boolean->setName("Boolean");
-	primitiveTypes_Boolean->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_Boolean);
-	primitiveTypes_UnlimitedNatural.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_UnlimitedNatural = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
-	primitiveTypes_UnlimitedNatural->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_UnlimitedNatural);
-	primitiveTypes_Real.reset(uml::UmlFactory::eInstance()->createPrimitiveType());
+	primitiveTypes_Boolean = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Boolean->setName("Boolean");
+	primitiveTypes_String = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_String->setName("String");
+	primitiveTypes_Real = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_Real->setName("Real");
-	primitiveTypes_Real->setPackage(primitiveTypes);
-	this->getOwnedType()->push_back(primitiveTypes_Real);
+	primitiveTypes_Integer = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(primitiveTypes);
+	primitiveTypes_Integer->setName("Integer");
 	
 
 }
