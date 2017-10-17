@@ -82,18 +82,17 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 
 [comment MetaModel Package/]
 [template public generateAttributeCreation(aProperty : Property)]
-[aProperty.memberName()/].reset(uml::UmlFactory::eInstance()->createProperty());
+[if (not aProperty.class.oclIsUndefined())]
+[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Class([aProperty.class.memberName()/]);
+[else][if (not aProperty.interface.oclIsUndefined())]
+[aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Interface([aProperty.interface.memberName()/]);
+[/if][/if]
+
 [aProperty.memberName()/]->setName("[aProperty.name/]");
 [aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
-[if (not aProperty.class.oclIsUndefined())]
-[aProperty.class.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
-[aProperty.memberName()/]->setClass([aProperty.class.memberName()/]);
-[else][if (not aProperty.interface.oclIsUndefined())]
-[aProperty.interface.memberName()/]->getOwnedAttribute()->push_back([aProperty.memberName()/]);
-[aProperty.memberName()/]->setInterface([aProperty.interface.memberName()/]);
-[/if][/if]
+
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
 

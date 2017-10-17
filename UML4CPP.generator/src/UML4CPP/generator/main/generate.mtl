@@ -16,11 +16,13 @@
 
 
 [import UML4CPP::generator::main::factory::generateMetamodelFactory /]
+[import UML4CPP::generator::main::generateApplication /]
 [import UML4CPP::generator::main::generateBuildFile /]
 [import UML4CPP::generator::main::generateProjectFiles /]
 [import UML4CPP::generator::main::generateEnum /]
 [import UML4CPP::generator::main::generateInterface /]
 [import UML4CPP::generator::main::generateModel /]
+[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::impl::generateImplementation /]
 [import UML4CPP::generator::main::package::generateMetamodelPackage /]
 [import UML4CPP::generator::main::plugin::generateUMLPlugin /]
@@ -41,6 +43,11 @@
 
 [aPackage.generatePackageImpl()/]
 [aPackage.generateProjectsFiles()/]
+
+[if (aPackage.prepareApplication())]
+[aPackage.generateApplication()/]
+[/if]
+
 [/template]
 
 [template public generateElement(aClass : Class)]

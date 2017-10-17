@@ -56,7 +56,7 @@ namespace [aPackage.name/]
 
 		private:
 			//private variables for ownedMember of the metamodel package
-			[(aPackage.allOwnedElements()->filter(NamedElement))->sortedBy(myQualifiedName()).generatePrivatePackageMember()/]
+			[(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePrivatePackageMember()/]
 
 			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
 			static bool isInited;

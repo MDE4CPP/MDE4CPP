@@ -18,12 +18,10 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateActivityCreation(anActivity : Activity)]
-[memberName(anActivity)/].reset(uml::UmlFactory::eInstance()->createActivity());
+[memberName(anActivity)/] = uml::UmlFactory::eInstance()->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
 [memberName(anActivity)/]->setName("[anActivity.name/]");
-[memberName(anActivity)/]->setPackage([anActivity.ancestors(Package)->first().memberName()/]);
 
 //parameter
 [anActivity.ownedParameter.generateParameterCreation()/]
 
-[anActivity.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anActivity)/]);
 [/template]

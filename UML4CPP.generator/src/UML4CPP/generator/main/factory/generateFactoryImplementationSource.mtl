@@ -14,6 +14,7 @@
  */]
 [module generateFactoryImplementationSource('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
@@ -30,8 +31,8 @@ using namespace [aPackage.name/];
 //*********************************
 [className/]::[className/]()
 {
-	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(name)) ? (aClass.isAbstract=false)]
-	m_creatorMap.insert(std::pair<std::string,std::function<uml::Element *()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
+	[for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
+	m_creatorMap.insert(std::pair<std::string,std::function<std::shared_ptr<uml::Element>()>>("[aClass.name.toUpperFirst()/]",[ '[' /]this[ ']' /](){return this->create[aClass.name.toUpperFirst()/]();}));
 	[/for]
 }
 
@@ -61,21 +62,41 @@ std::shared_ptr<uml::Element> [className/]::create(std::shared_ptr<uml::Class> _
 
 std::shared_ptr<uml::Element> [className/]::create(std::string _className)
 {
-	std::map<std::string,std::function<uml::Element *()>>::iterator iter = m_creatorMap.find(_className);
+	std::map<std::string,std::function<std::shared_ptr<uml::Element>()>>::iterator iter = m_creatorMap.find(_className);
     if(iter != m_creatorMap.end())
     {
 		//invoke the creator function
-        return std::shared_ptr<uml::Element>(iter->second());
+        return iter->second();
     }
 
     return nullptr;
 }
 
 [for (aClass : Class | aPackage.packagedElement->selectByKind(Class)->sortedBy(myQualifiedName())) ? (aClass.isAbstract=false)]
-[aClass.generateCppType(true)/]* [className/]::create[aClass.name.toUpperFirst()/] ()
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/] ()
 {
-	return new [aClass.name.toUpperFirst()/]Impl();
+	std::shared_ptr<[aClass.generateCppType(true)/]> element(new [aClass.name.toUpperFirst()/]Impl());
+	return element;
 }
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+{
+	std::shared_ptr<[aClass.generateCppType(true)/]> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
+[if (containmentProperty.isBackReference())]
+	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
+[else]
+	if (nullptr != [containmentProperty.name.toLowerFirst()/])
+[/if]
+	{
+		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[containerProperty.GetterName()/]()->push_back(element);
+	}
+	return element;
+}
+[/let]
+[/let]
+[/for]
 [/for]
 
 std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()

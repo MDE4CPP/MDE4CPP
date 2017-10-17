@@ -16,8 +16,9 @@
 
 [import UML4CPP::generator::main::generateAttribute /]
 [import UML4CPP::generator::main::generateOperation /]
-[import UML4CPP::generator::main::helper /]
 [import UML4CPP::generator::main::generateSetGet /]
+[import UML4CPP::generator::main::generateType /]
+[import UML4CPP::generator::main::helper /]
 
 [query public includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type}->flatten() /]
 
@@ -27,7 +28,7 @@
 #include "[className.concat('.hpp')/]"
 #include "[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().name/].hpp"
-[for (cl : Type | aClass.includes()->sortedBy(name)) ? ( oclIsKindOf(Class))]
+[for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
 #include "[cl.name/].hpp"
 [/for]
 [if (aClass.ownedOperation.method->notEmpty())]
@@ -49,10 +50,26 @@ using boost::any_cast;
 	[aClass.generateGetSetInit()/] 
 
 	// init properties without default
-	[for (aProperty : Property | aClass.ownedAttribute)]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
 	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
 	[/for]
 }
+
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+[if (containmentProperty.isBackReference())]
+[className/]::[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
+:[className/]()
+{
+    m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
+}
+[/if]
+[/let]
+[/let]
+[/for]
+
+
 
 [className/]::~[className/]()
 {
@@ -66,11 +83,11 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 //*********************************
 // Attribute Setter Getter
 //*********************************
-[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(name)) separator ('\n')]
+[for (aAttribute : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
 [aAttribute.generateAttributeSetterImplementationCpp()/]
 [aAttribute.generateAttributeGetterImplementationCpp()/]
 [/for]
-[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
+[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 [aAttribute.generateAttributeSetterImplementationCpp(aClass)/]
 [aAttribute.generateAttributeGetterImplementationCpp(aClass)/]
 [/if][/for][/for]
@@ -78,7 +95,7 @@ std::shared_ptr<[aClass.metamodelClassTypeString('Class')/]> [className/]::getMe
 //*********************************
 // Operations
 //*********************************
-[for (aOperation : Operation | aClass.ownedOperation->sortedBy(name)) separator('\n')]
+[for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
 [aOperation.generateOperationImplementation()/]
 [/for]
 
