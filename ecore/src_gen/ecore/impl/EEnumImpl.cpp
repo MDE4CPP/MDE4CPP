@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -49,6 +49,19 @@ EEnumImpl::~EEnumImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+			:EEnumImpl()
+			{
+			    m_ePackage = par_ePackage;
+			}
+
+
+
+
+
+
 EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 {
 	//create copy of all Attributes
@@ -68,13 +81,12 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 	m_ePackage  = obj.getEPackage();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -82,7 +94,7 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 	std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiteralsList = obj.getELiterals();
 	for(std::shared_ptr<ecore::EEnumLiteral> _eLiterals : *_eLiteralsList)
 	{
-		this->getELiterals()->add(std::shared_ptr<ecore::EEnumLiteral>(dynamic_cast<ecore::EEnumLiteral*>(_eLiterals->copy())));
+		this->getELiterals()->add(std::shared_ptr<ecore::EEnumLiteral>(std::dynamic_pointer_cast<ecore::EEnumLiteral>(_eLiterals->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eLiterals" << std::endl;
@@ -90,7 +102,7 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
@@ -98,12 +110,12 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EEnumImpl::copy() const
+std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
 {
-	return new EEnumImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EEnumImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -44,6 +42,7 @@
 #include "ETypeParameterImpl.hpp"
 #include "ETypedElementImpl.hpp"
 
+#include "EcorePackage.hpp"
 #include "EcorePackage.hpp"
 #include "EcorePackage.hpp"
 

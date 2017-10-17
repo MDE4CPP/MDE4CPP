@@ -404,40 +404,44 @@ void EcorePackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 	// Begin Class EAnnotation
 	initEClass(eAnnotationEClass, nullptr, "EAnnotation", false, false, true);
-	initEAttribute(getEAnnotation_Source(),getEString(),"source","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEAnnotation_Contents(),getEObject(),nullptr,"contents","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEAnnotation_Details(),getEStringToStringMapEntry(),nullptr,"details","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEAnnotation_EModelElement(),getEModelElement(),getEModelElement_EAnnotations(),"eModelElement","",0,1, nullptr , true,false, true, false, false, false, true, false,true);
-	initEReference(getEAnnotation_References(),getEObject(),nullptr,"references","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
+	initEAttribute(getEAnnotation_Source(),getEString(),"source","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEAnnotation_Contents(),getEObject(),nullptr,"contents","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEAnnotation_Details(),getEStringToStringMapEntry(),nullptr,"details","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEAnnotation_EModelElement(),getEModelElement(),getEModelElement_EAnnotations(),"eModelElement","",0,1, true,false, true, false, false, false, true, false,true);
+	initEReference(getEAnnotation_References(),getEObject(),nullptr,"references","",0,-1, false,false, true, false, true, false, true, false,true);
 	
 	
 	// End Class EAnnotation
 
 	// Begin Class EAttribute
 	initEClass(eAttributeEClass, nullptr, "EAttribute", false, false, true);
-	initEAttribute(getEAttribute_ID(),getEBoolean(),"iD","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEAttribute_EAttributeType(),getEDataType(),nullptr,"eAttributeType","",1,1, nullptr , true,true, false, false, true, false, true, true,true);
+	initEAttribute(getEAttribute_ID(),getEBoolean(),"iD","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEAttribute_EAttributeType(),getEDataType(),nullptr,"eAttributeType","",1,1, true,true, false, false, true, false, true, true,true);
 	
 	
 	// End Class EAttribute
 
 	// Begin Class EClass
 	initEClass(eClassEClass, nullptr, "EClass", false, false, true);
-	initEAttribute(getEClass_Abstract(),getEBoolean(),"abstract","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEClass_Interface(),getEBoolean(),"interface","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEClass_EAllAttributes(),getEAttribute(),nullptr,"eAllAttributes","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllContainments(),getEReference(),nullptr,"eAllContainments","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllGenericSuperTypes(),getEGenericType(),nullptr,"eAllGenericSuperTypes","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllOperations(),getEOperation(),nullptr,"eAllOperations","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllReferences(),getEReference(),nullptr,"eAllReferences","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllStructuralFeatures(),getEStructuralFeature(),nullptr,"eAllStructuralFeatures","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllSuperTypes(),getEClass(),nullptr,"eAllSuperTypes","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAttributes(),getEAttribute(),nullptr,"eAttributes","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EGenericSuperTypes(),getEGenericType(),nullptr,"eGenericSuperTypes","",0,-1, nullptr , false,false, true, true, false, true, true, false,true);
-	initEReference(getEClass_EIDAttribute(),getEAttribute(),nullptr,"eIDAttribute","",0,1, nullptr , true,true, false, false, false, false, true, true,true);
-	initEReference(getEClass_EOperations(),getEOperation(),getEOperation_EContainingClass(),"eOperations","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEClass_EReferences(),getEReference(),nullptr,"eReferences","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EStructuralFeatures(),getEStructuralFeature(),getEStructuralFeature_EContainingClass(),"eStructuralFeatures","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEClass_ESuperTypes(),getEClass(),nullptr,"eSuperTypes","",0,-1, nullptr , false,false, true, false, true, true, true, false,true);
+	initEAttribute(getEClass_Abstract(),getEBoolean(),"abstract","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEClass_Interface(),getEBoolean(),"interface","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEClass_EAllAttributes(),getEAttribute(),nullptr,"eAllAttributes","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllContainments(),getEReference(),nullptr,"eAllContainments","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllGenericSuperTypes(),getEGenericType(),nullptr,"eAllGenericSuperTypes","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllOperations(),getEOperation(),nullptr,"eAllOperations","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllReferences(),getEReference(),nullptr,"eAllReferences","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllStructuralFeatures(),getEStructuralFeature(),nullptr,"eAllStructuralFeatures","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAllSuperTypes(),getEClass(),nullptr,"eAllSuperTypes","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EAttributes(),getEAttribute(),nullptr,"eAttributes","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EGenericSuperTypes(),getEGenericType(),nullptr,"eGenericSuperTypes","",0,-1, false,false, true, true, false, true, true, false,true);
+	initEReference(getEClass_EIDAttribute(),getEAttribute(),nullptr,"eIDAttribute","",0,1, true,true, false, false, false, false, true, true,true);
+	initEReference(getEClass_EOperations(),getEOperation(),getEOperation_EContainingClass(),"eOperations","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEClass_EReferences(),getEReference(),nullptr,"eReferences","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getEClass_EStructuralFeatures(),getEStructuralFeature(),getEStructuralFeature_EContainingClass(),"eStructuralFeatures","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEClass_ESuperTypes(),getEClass(),nullptr,"eSuperTypes","",0,-1, false,false, true, false, true, true, true, false,true);
 	
 	op = initEOperation(getEClass___GetEOperation__EInt(),getEOperation(), "getEOperation", 0, 1, true,true );
 	addEParameter(op ,getEInt()  , "operationID",0,1, true,true);
@@ -472,9 +476,14 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class EClassifier
 	initEClass(eClassifierEClass, nullptr, "EClassifier", true, false, true);
-	initEAttribute(getEClassifier_ClassifierID(),getEInt(),"classifierID","-1",0,1, nullptr, false,false, false, false, false, true, false, true);initEAttribute(getEClassifier_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, nullptr, true,true, false, false, false, true, true, true);initEAttribute(getEClassifier_InstanceClass(),getEJavaClass(),"instanceClass","",0,1, nullptr, true,true, true, false, false, true, false, true);initEAttribute(getEClassifier_InstanceClassName(),getEString(),"instanceClassName","",0,1, nullptr, false,true, true, true, false, true, false, true);initEAttribute(getEClassifier_InstanceTypeName(),getEString(),"instanceTypeName","",0,1, nullptr, false,true, true, true, false, true, false, true);
-	initEReference(getEClassifier_EPackage(),getEPackage(),getEPackage_EClassifiers(),"ePackage","",0,1, nullptr , true,false, true, false, true, false, true, false,true);
-	initEReference(getEClassifier_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getEClassifier_ClassifierID(),getEInt(),"classifierID","-1",0,1, false,false, false, false, false, true, false, true);
+	initEAttribute(getEClassifier_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, true,true, false, false, false, true, true, true);
+	initEAttribute(getEClassifier_InstanceClass(),getEJavaClass(),"instanceClass","",0,1, true,true, true, false, false, true, false, true);
+	initEAttribute(getEClassifier_InstanceClassName(),getEString(),"instanceClassName","",0,1, false,true, true, true, false, true, false, true);
+	initEAttribute(getEClassifier_InstanceTypeName(),getEString(),"instanceTypeName","",0,1, false,true, true, true, false, true, false, true);
+	
+	initEReference(getEClassifier_EPackage(),getEPackage(),getEPackage_EClassifiers(),"ePackage","",0,1, true,false, true, false, true, false, true, false,true);
+	initEReference(getEClassifier_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getEClassifier___IsInstance__EJavaObject(),getEBoolean(), "isInstance", 0, 1, true,true );
 	addEParameter(op ,getEJavaObject()  , "object",0,1, true,true);
@@ -484,7 +493,8 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class EDataType
 	initEClass(eDataTypeEClass, nullptr, "EDataType", false, false, true);
-	initEAttribute(getEDataType_Serializable(),getEBoolean(),"serializable","true",0,1, nullptr, false,false, true, false, false, true, false, true);
+	initEAttribute(getEDataType_Serializable(),getEBoolean(),"serializable","true",0,1, false,false, true, false, false, true, false, true);
+	
 	
 	
 	// End Class EDataType
@@ -492,7 +502,7 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EEnum
 	initEClass(eEnumEClass, nullptr, "EEnum", false, false, true);
 	
-	initEReference(getEEnum_ELiterals(),getEEnumLiteral(),getEEnumLiteral_EEnum(),"eLiterals","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
+	initEReference(getEEnum_ELiterals(),getEEnumLiteral(),getEEnumLiteral_EEnum(),"eLiterals","",0,-1, false,false, true, true, false, false, true, false,true);
 	
 	op = initEOperation(getEEnum___GetEEnumLiteral__EString(),getEEnumLiteral(), "getEEnumLiteral", 0, 1, true,true );
 	addEParameter(op ,getEString()  , "name",0,1, true,true);
@@ -508,8 +518,11 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class EEnumLiteral
 	initEClass(eEnumLiteralEClass, nullptr, "EEnumLiteral", false, false, true);
-	initEAttribute(getEEnumLiteral_Instance(),getEEnumerator(),"instance","",0,1, nullptr, true,false, true, false, false, true, false, true);initEAttribute(getEEnumLiteral_Literal(),getEString(),"literal","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEEnumLiteral_Value(),getEInt(),"value","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEEnumLiteral_EEnum(),getEEnum(),getEEnum_ELiterals(),"eEnum","",0,1, nullptr , true,false, false, false, false, false, true, false,true);
+	initEAttribute(getEEnumLiteral_Instance(),getEEnumerator(),"instance","",0,1, true,false, true, false, false, true, false, true);
+	initEAttribute(getEEnumLiteral_Literal(),getEString(),"literal","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEEnumLiteral_Value(),getEInt(),"value","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEEnumLiteral_EEnum(),getEEnum(),getEEnum_ELiterals(),"eEnum","",0,1, true,false, false, false, false, false, true, false,true);
 	
 	
 	// End Class EEnumLiteral
@@ -517,7 +530,7 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EFactory
 	initEClass(eFactoryEClass, nullptr, "EFactory", false, false, true);
 	
-	initEReference(getEFactory_EPackage(),getEPackage(),getEPackage_EFactoryInstance(),"ePackage","",1,1, nullptr , true,false, true, false, false, false, true, false,true);
+	initEReference(getEFactory_EPackage(),getEPackage(),getEPackage_EFactoryInstance(),"ePackage","",1,1, true,false, true, false, false, false, true, false,true);
 	
 	op = initEOperation(getEFactory___ConvertToString__EDataType_EJavaObject(),getEString(), "convertToString", 0, 1, true,true );
 	addEParameter(op ,getEDataType()  , "eDataType",0,1, true,true);
@@ -536,12 +549,12 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EGenericType
 	initEClass(eGenericTypeEClass, nullptr, "EGenericType", false, false, true);
 	
-	initEReference(getEGenericType_EClassifier(),getEClassifier(),nullptr,"eClassifier","",0,1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getEGenericType_ELowerBound(),getEGenericType(),nullptr,"eLowerBound","",0,1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEGenericType_ERawType(),getEClassifier(),nullptr,"eRawType","",1,1, nullptr , true,false, false, false, true, false, true, true,true);
-	initEReference(getEGenericType_ETypeArguments(),getEGenericType(),nullptr,"eTypeArguments","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEGenericType_ETypeParameter(),getETypeParameter(),nullptr,"eTypeParameter","",0,1, nullptr , false,false, true, false, false, false, true, false,true);
-	initEReference(getEGenericType_EUpperBound(),getEGenericType(),nullptr,"eUpperBound","",0,1, nullptr , false,false, true, true, false, false, true, false,true);
+	initEReference(getEGenericType_EClassifier(),getEClassifier(),nullptr,"eClassifier","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getEGenericType_ELowerBound(),getEGenericType(),nullptr,"eLowerBound","",0,1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEGenericType_ERawType(),getEClassifier(),nullptr,"eRawType","",1,1, true,false, false, false, true, false, true, true,true);
+	initEReference(getEGenericType_ETypeArguments(),getEGenericType(),nullptr,"eTypeArguments","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEGenericType_ETypeParameter(),getETypeParameter(),nullptr,"eTypeParameter","",0,1, false,false, true, false, false, false, true, false,true);
+	initEReference(getEGenericType_EUpperBound(),getEGenericType(),nullptr,"eUpperBound","",0,1, false,false, true, true, false, false, true, false,true);
 	
 	op = initEOperation(getEGenericType___IsInstance__EJavaObject(),getEBoolean(), "isInstance", 0, 1, true,true );
 	addEParameter(op ,getEJavaObject()  , "object",0,1, true,true);
@@ -552,7 +565,7 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EModelElement
 	initEClass(eModelElementEClass, nullptr, "EModelElement", true, false, true);
 	
-	initEReference(getEModelElement_EAnnotations(),getEAnnotation(),getEAnnotation_EModelElement(),"eAnnotations","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
+	initEReference(getEModelElement_EAnnotations(),getEAnnotation(),getEAnnotation_EModelElement(),"eAnnotations","",0,-1, false,false, true, true, false, false, true, false,true);
 	
 	op = initEOperation(getEModelElement___GetEAnnotation__EString(),getEAnnotation(), "getEAnnotation", 0, 1, true,true );
 	addEParameter(op ,getEString()  , "source",0,1, true,true);
@@ -562,7 +575,8 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class ENamedElement
 	initEClass(eNamedElementEClass, nullptr, "ENamedElement", true, false, true);
-	initEAttribute(getENamedElement_Name(),getEString(),"name","",0,1, nullptr, false,false, true, false, false, true, false, true);
+	initEAttribute(getENamedElement_Name(),getEString(),"name","",0,1, false,false, true, false, false, true, false, true);
+	
 	
 	
 	// End Class ENamedElement
@@ -570,7 +584,7 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EObject
 	initEClass(eObjectEClass, nullptr, "EObject", false, false, true);
 	
-	initEReference(getEObject_EContainer(),getEObject(),nullptr,"eContainer","",0,1, nullptr , false,false, true, false, true, false, true, false,true);
+	initEReference(getEObject_EContainer(),getEObject(),nullptr,"eContainer","",0,1, false,false, false, false, true, false, true, false,true);
 	
 	op = initEOperation(getEObject___EAllContents(),getETreeIterator(), "eAllContents", 0, 1, true,true );
 	
@@ -614,12 +628,13 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class EOperation
 	initEClass(eOperationEClass, nullptr, "EOperation", false, false, true);
-	initEAttribute(getEOperation_OperationID(),getEInt(),"operationID","-1",0,1, nullptr, false,false, false, false, false, true, false, true);
-	initEReference(getEOperation_EContainingClass(),getEClass(),getEClass_EOperations(),"eContainingClass","",0,1, nullptr , true,false, false, false, false, false, true, false,true);
-	initEReference(getEOperation_EExceptions(),getEClassifier(),nullptr,"eExceptions","",0,-1, nullptr , false,false, true, false, true, true, true, false,true);
-	initEReference(getEOperation_EGenericExceptions(),getEGenericType(),nullptr,"eGenericExceptions","",0,-1, nullptr , false,false, true, true, false, true, true, false,true);
-	initEReference(getEOperation_EParameters(),getEParameter(),getEParameter_EOperation(),"eParameters","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
-	initEReference(getEOperation_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getEOperation_OperationID(),getEInt(),"operationID","-1",0,1, false,false, false, false, false, true, false, true);
+	
+	initEReference(getEOperation_EContainingClass(),getEClass(),getEClass_EOperations(),"eContainingClass","",0,1, true,false, false, false, false, false, true, false,true);
+	initEReference(getEOperation_EExceptions(),getEClassifier(),nullptr,"eExceptions","",0,-1, false,false, true, false, true, true, true, false,true);
+	initEReference(getEOperation_EGenericExceptions(),getEGenericType(),nullptr,"eGenericExceptions","",0,-1, false,false, true, true, false, true, true, false,true);
+	initEReference(getEOperation_EParameters(),getEParameter(),getEParameter_EOperation(),"eParameters","",0,-1, false,false, true, true, false, false, true, false,true);
+	initEReference(getEOperation_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getEOperation___IsOverrideOf__EOperation(),getEBoolean(), "isOverrideOf", 0, 1, true,true );
 	addEParameter(op ,getEOperation()  , "someOperation",0,1, true,true);
@@ -629,11 +644,13 @@ void EcorePackageImpl::initializePackageContents()
 
 	// Begin Class EPackage
 	initEClass(ePackageEClass, nullptr, "EPackage", false, false, true);
-	initEAttribute(getEPackage_NsPrefix(),getEString(),"nsPrefix","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEPackage_NsURI(),getEString(),"nsURI","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEPackage_EClassifiers(),getEClassifier(),getEClassifier_EPackage(),"eClassifiers","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getEPackage_EFactoryInstance(),getEFactory(),getEFactory_EPackage(),"eFactoryInstance","",1,1, nullptr , true,false, true, false, false, false, true, false,true);
-	initEReference(getEPackage_ESubpackages(),getEPackage(),getEPackage_ESuperPackage(),"eSubpackages","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getEPackage_ESuperPackage(),getEPackage(),getEPackage_ESubpackages(),"eSuperPackage","",0,1, nullptr , true,false, false, false, true, false, true, false,true);
+	initEAttribute(getEPackage_NsPrefix(),getEString(),"nsPrefix","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEPackage_NsURI(),getEString(),"nsURI","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEPackage_EClassifiers(),getEClassifier(),getEClassifier_EPackage(),"eClassifiers","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getEPackage_EFactoryInstance(),getEFactory(),getEFactory_EPackage(),"eFactoryInstance","",1,1, true,false, true, false, false, false, true, false,true);
+	initEReference(getEPackage_ESubpackages(),getEPackage(),getEPackage_ESuperPackage(),"eSubpackages","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getEPackage_ESuperPackage(),getEPackage(),getEPackage_ESubpackages(),"eSuperPackage","",0,1, true,false, false, false, true, false, true, false,true);
 	
 	op = initEOperation(getEPackage___GetEClassifier__EString(),getEClassifier(), "getEClassifier", 0, 1, true,true );
 	addEParameter(op ,getEString()  , "name",0,1, true,true);
@@ -644,32 +661,46 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class EParameter
 	initEClass(eParameterEClass, nullptr, "EParameter", false, false, true);
 	
-	initEReference(getEParameter_EOperation(),getEOperation(),getEOperation_EParameters(),"eOperation","",0,1, nullptr , true,false, false, false, false, false, true, false,true);
+	initEReference(getEParameter_EOperation(),getEOperation(),getEOperation_EParameters(),"eOperation","",0,1, true,false, false, false, false, false, true, false,true);
 	
 	
 	// End Class EParameter
 
 	// Begin Class EReference
 	initEClass(eReferenceEClass, nullptr, "EReference", false, false, true);
-	initEAttribute(getEReference_Container(),getEBoolean(),"container","",0,1, nullptr, true,true, false, false, false, true, true, true);initEAttribute(getEReference_Containment(),getEBoolean(),"containment","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEReference_ResolveProxies(),getEBoolean(),"resolveProxies","true",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEReference_EKeys(),getEAttribute(),nullptr,"eKeys","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getEReference_EOpposite(),getEReference(),nullptr,"eOpposite","",0,1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getEReference_EReferenceType(),getEClass(),nullptr,"eReferenceType","",1,1, nullptr , true,true, false, false, true, false, true, true,true);
+	initEAttribute(getEReference_Container(),getEBoolean(),"container","",0,1, true,true, false, false, false, true, true, true);
+	initEAttribute(getEReference_Containment(),getEBoolean(),"containment","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEReference_ResolveProxies(),getEBoolean(),"resolveProxies","true",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEReference_EKeys(),getEAttribute(),nullptr,"eKeys","",0,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getEReference_EOpposite(),getEReference(),nullptr,"eOpposite","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getEReference_EReferenceType(),getEClass(),nullptr,"eReferenceType","",1,1, true,true, false, false, true, false, true, true,true);
 	
 	
 	// End Class EReference
 
 	// Begin Class EStringToStringMapEntry
 	initEClass(eStringToStringMapEntryEClass, nullptr, "EStringToStringMapEntry", false, false, true);
-	initEAttribute(getEStringToStringMapEntry_Key(),getEString(),"key","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStringToStringMapEntry_Value(),getEString(),"value","",0,1, nullptr, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStringToStringMapEntry_Key(),getEString(),"key","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStringToStringMapEntry_Value(),getEString(),"value","",0,1, false,false, true, false, false, true, false, true);
+	
 	
 	
 	// End Class EStringToStringMapEntry
 
 	// Begin Class EStructuralFeature
 	initEClass(eStructuralFeatureEClass, nullptr, "EStructuralFeature", true, false, true);
-	initEAttribute(getEStructuralFeature_Changeable(),getEBoolean(),"changeable","true",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStructuralFeature_ContainerClass(),getEJavaClass(),"containerClass","",0,1, nullptr, false,false, false, false, false, true, false, true);initEAttribute(getEStructuralFeature_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, nullptr, true,true, false, false, false, true, true, true);initEAttribute(getEStructuralFeature_DefaultValueLiteral(),getEString(),"defaultValueLiteral","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStructuralFeature_Derived(),getEBoolean(),"derived","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStructuralFeature_FeatureID(),getEInt(),"featureID","-1",0,1, nullptr, false,false, false, false, false, true, false, true);initEAttribute(getEStructuralFeature_Transient(),getEBoolean(),"transient","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStructuralFeature_Unsettable(),getEBoolean(),"unsettable","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getEStructuralFeature_Volatile(),getEBoolean(),"volatile","",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getEStructuralFeature_EContainingClass(),getEClass(),getEClass_EStructuralFeatures(),"eContainingClass","",0,1, nullptr , true,false, false, false, false, false, true, false,true);
+	initEAttribute(getEStructuralFeature_Changeable(),getEBoolean(),"changeable","true",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_ContainerClass(),getEJavaClass(),"containerClass","",0,1, false,false, false, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, true,true, false, false, false, true, true, true);
+	initEAttribute(getEStructuralFeature_DefaultValueLiteral(),getEString(),"defaultValueLiteral","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_Derived(),getEBoolean(),"derived","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_FeatureID(),getEInt(),"featureID","-1",0,1, false,false, false, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_Transient(),getEBoolean(),"transient","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_Unsettable(),getEBoolean(),"unsettable","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getEStructuralFeature_Volatile(),getEBoolean(),"volatile","",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getEStructuralFeature_EContainingClass(),getEClass(),getEClass_EStructuralFeatures(),"eContainingClass","",0,1, true,false, false, false, false, false, true, false,true);
 	
 	
 	// End Class EStructuralFeature
@@ -677,16 +708,22 @@ void EcorePackageImpl::initializePackageContents()
 	// Begin Class ETypeParameter
 	initEClass(eTypeParameterEClass, nullptr, "ETypeParameter", false, false, true);
 	
-	initEReference(getETypeParameter_EBounds(),getEGenericType(),nullptr,"eBounds","",0,-1, nullptr , false,false, true, true, false, false, true, false,true);
+	initEReference(getETypeParameter_EBounds(),getEGenericType(),nullptr,"eBounds","",0,-1, false,false, true, true, false, false, true, false,true);
 	
 	
 	// End Class ETypeParameter
 
 	// Begin Class ETypedElement
 	initEClass(eTypedElementEClass, nullptr, "ETypedElement", true, false, true);
-	initEAttribute(getETypedElement_LowerBound(),getEInt(),"lowerBound","",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getETypedElement_Many(),getEBoolean(),"many","",0,1, nullptr, true,true, false, false, false, true, true, true);initEAttribute(getETypedElement_Ordered(),getEBoolean(),"ordered","true",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getETypedElement_Required(),getEBoolean(),"required","",0,1, nullptr, true,true, false, false, false, true, true, true);initEAttribute(getETypedElement_Unique(),getEBoolean(),"unique","true",0,1, nullptr, false,false, true, false, false, true, false, true);initEAttribute(getETypedElement_UpperBound(),getEInt(),"upperBound","1",0,1, nullptr, false,false, true, false, false, true, false, true);
-	initEReference(getETypedElement_EGenericType(),getEGenericType(),nullptr,"eGenericType","",0,1, nullptr , false,true, true, true, false, true, true, false,true);
-	initEReference(getETypedElement_EType(),getEClassifier(),nullptr,"eType","",0,1, nullptr , false,true, true, false, true, true, true, false,true);
+	initEAttribute(getETypedElement_LowerBound(),getEInt(),"lowerBound","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getETypedElement_Many(),getEBoolean(),"many","",0,1, true,true, false, false, false, true, true, true);
+	initEAttribute(getETypedElement_Ordered(),getEBoolean(),"ordered","true",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getETypedElement_Required(),getEBoolean(),"required","",0,1, true,true, false, false, false, true, true, true);
+	initEAttribute(getETypedElement_Unique(),getEBoolean(),"unique","true",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getETypedElement_UpperBound(),getEInt(),"upperBound","1",0,1, false,false, true, false, false, true, false, true);
+	
+	initEReference(getETypedElement_EGenericType(),getEGenericType(),nullptr,"eGenericType","",0,1, false,true, true, true, false, true, true, false,true);
+	initEReference(getETypedElement_EType(),getEClassifier(),nullptr,"eType","",0,1, false,true, true, false, true, true, true, false,true);
 	
 	
 	// End Class ETypedElement

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,16 +66,22 @@ namespace ecore
 {
 	/*!
 	 */
-	class EParameter:virtual public ETypedElement	{
+	class EParameter:virtual public ETypedElement
+	{
 		public:
  			EParameter(const EParameter &) {}
 			EParameter& operator=(EParameter const&) = delete;
-	
+
 		protected:
 			EParameter(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EParameter(std::weak_ptr<ecore::EOperation > par_eOperation);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EParameter() {}
@@ -95,7 +99,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EOperation > getEOperation() const = 0;
+			virtual std::weak_ptr<ecore::EOperation > getEOperation() const = 0;
 			
 			
 
@@ -110,7 +114,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EOperation > m_eOperation;
+			std::weak_ptr<ecore::EOperation > m_eOperation;
 			
 
 		public:

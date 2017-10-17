@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -65,6 +65,19 @@ EAnnotationImpl::~EAnnotationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement)
+			:EAnnotationImpl()
+			{
+			    m_eModelElement = par_eModelElement;
+			}
+
+
+
+
+
+
 EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 {
 	//create copy of all Attributes
@@ -81,13 +94,12 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	m_references.reset(new Bag<ecore::EObject>(*(obj.getReferences().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EObject>> _contentsList = obj.getContents();
 	for(std::shared_ptr<ecore::EObject> _contents : *_contentsList)
 	{
-		this->getContents()->add(std::shared_ptr<ecore::EObject>(dynamic_cast<ecore::EObject*>(_contents->copy())));
+		this->getContents()->add(std::shared_ptr<ecore::EObject>(std::dynamic_pointer_cast<ecore::EObject>(_contents->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_contents" << std::endl;
@@ -95,7 +107,7 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> _detailsList = obj.getDetails();
 	for(std::shared_ptr<ecore::EStringToStringMapEntry> _details : *_detailsList)
 	{
-		this->getDetails()->add(std::shared_ptr<ecore::EStringToStringMapEntry>(dynamic_cast<ecore::EStringToStringMapEntry*>(_details->copy())));
+		this->getDetails()->add(std::shared_ptr<ecore::EStringToStringMapEntry>(std::dynamic_pointer_cast<ecore::EStringToStringMapEntry>(_details->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_details" << std::endl;
@@ -103,7 +115,7 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -114,12 +126,12 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EAnnotationImpl::copy() const
+std::shared_ptr<ecore::EObject>  EAnnotationImpl::copy() const
 {
-	return new EAnnotationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EAnnotationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
@@ -161,7 +173,7 @@ std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > EAnnotationImpl::getDetai
 }
 
 
-std::shared_ptr<ecore::EModelElement > EAnnotationImpl::getEModelElement() const
+std::weak_ptr<ecore::EModelElement > EAnnotationImpl::getEModelElement() const
 {
 
     return m_eModelElement;

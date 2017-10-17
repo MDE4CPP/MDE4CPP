@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EStructuralFeatureImpl();
+
+			//Additional constructors for the containments back reference
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
 
 		public:
 			//destructor
@@ -71,19 +75,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isVolatile() const ;
+			virtual void *  getContainerClass() const ;
 			
 			/*!
 			 */ 
-			virtual void setVolatile (bool _volatile); 
-			
-			/*!
-			 */ 
-			virtual bool isTransient() const ;
-			
-			/*!
-			 */ 
-			virtual void setTransient (bool _transient); 
+			virtual boost::any getDefaultValue() const ;
 			
 			/*!
 			 */ 
@@ -92,18 +88,6 @@ namespace ecore
 			/*!
 			 */ 
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral); 
-			
-			/*!
-			 */ 
-			virtual boost::any getDefaultValue() const ;
-			
-			/*!
-			 */ 
-			virtual bool isUnsettable() const ;
-			
-			/*!
-			 */ 
-			virtual void setUnsettable (bool _unsettable); 
 			
 			/*!
 			 */ 
@@ -123,11 +107,27 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void *  getContainerClass() const ;
+			virtual bool isTransient() const ;
 			
 			/*!
 			 */ 
-			virtual void setContainerClass (void *  _containerClass); 
+			virtual void setTransient (bool _transient); 
+			
+			/*!
+			 */ 
+			virtual bool isUnsettable() const ;
+			
+			/*!
+			 */ 
+			virtual void setUnsettable (bool _unsettable); 
+			
+			/*!
+			 */ 
+			virtual bool isVolatile() const ;
+			
+			/*!
+			 */ 
+			virtual void setVolatile (bool _volatile); 
 			
 			
 			
@@ -136,7 +136,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
 			
 							
 			

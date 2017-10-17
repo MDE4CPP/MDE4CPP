@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EOperationImpl& operator=(EOperationImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EOperationImpl();
+
+			//Additional constructors for the containments back reference
+			EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
+
+
 
 		public:
 			//destructor
@@ -80,15 +84,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EParameter> > getEParameters() const ;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
 			
 			/*!
 			 */
@@ -97,6 +93,14 @@ namespace ecore
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEGenericExceptions() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EParameter> > getEParameters() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const ;
 			
 							
 			

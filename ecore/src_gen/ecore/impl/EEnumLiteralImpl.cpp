@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -44,6 +44,19 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
+			:EEnumLiteralImpl()
+			{
+			    m_eEnum = par_eEnum;
+			}
+
+
+
+
+
+
 EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
 {
 	//create copy of all Attributes
@@ -60,24 +73,23 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImp
 	m_eEnum  = obj.getEEnum();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  EEnumLiteralImpl::copy() const
+std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
 {
-	return new EEnumLiteralImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EEnumLiteralImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
@@ -125,7 +137,7 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
+std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;

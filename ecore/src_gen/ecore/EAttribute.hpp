@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace ecore
 {
 	/*!
 	 */
-	class EAttribute:virtual public EStructuralFeature	{
+	class EAttribute:virtual public EStructuralFeature
+	{
 		public:
  			EAttribute(const EAttribute &) {}
 			EAttribute& operator=(EAttribute const&) = delete;
-	
+
 		protected:
 			EAttribute(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EAttribute() {}

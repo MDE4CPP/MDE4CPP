@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EClassifierImpl(const EClassifierImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EClassifierImpl& operator=(EClassifierImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EClassifierImpl();
+
+			//Additional constructors for the containments back reference
+			EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
+
+
+
 
 		public:
 			//destructor
@@ -71,11 +75,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string getInstanceClassName() const ;
+			virtual int getClassifierID() const ;
 			
 			/*!
 			 */ 
-			virtual void setInstanceClassName (std::string _instanceClassName); 
+			virtual void setClassifierID (int _classifierID); 
+			
+			/*!
+			 */ 
+			virtual boost::any getDefaultValue() const ;
 			
 			/*!
 			 */ 
@@ -87,15 +95,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual boost::any getDefaultValue() const ;
+			virtual std::string getInstanceClassName() const ;
 			
 			/*!
 			 */ 
-			virtual int getClassifierID() const ;
-			
-			/*!
-			 */ 
-			virtual void setClassifierID (int _classifierID); 
+			virtual void setInstanceClassName (std::string _instanceClassName); 
 			
 			/*!
 			 */ 
@@ -112,7 +116,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EPackage > getEPackage() const ;
+			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
 			
 			/*!
 			 */

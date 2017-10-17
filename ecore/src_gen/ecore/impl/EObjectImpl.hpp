@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ virtual public EObject
 	{
 		public: 
 			EObjectImpl(const EObjectImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EObjectImpl& operator=(EObjectImpl const&) = delete;
@@ -49,6 +47,8 @@ virtual public EObject
 		protected:
 			friend class EcoreFactoryImpl;
 			EObjectImpl();
+
+
 
 		public:
 			//destructor
@@ -59,15 +59,11 @@ virtual public EObject
 			//*********************************
 			/*!
 			 */ 
+			virtual std::vector <   ecore::EObject > eAllContents()  const  ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<ecore::EClass> eClass()  const  ;
-			
-			/*!
-			 */ 
-			virtual bool eIsProxy()  const  ;
-			
-			/*!
-			 */ 
-			virtual int eResource()  const  ;
 			
 			/*!
 			 */ 
@@ -83,10 +79,6 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual std::vector <   ecore::EObject > eAllContents()  const  ;
-			
-			/*!
-			 */ 
 			virtual std::vector <   ecore::EObject > eCrossReferences()  const  ;
 			
 			/*!
@@ -99,7 +91,11 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  ;
+			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  ;
+			
+			/*!
+			 */ 
+			virtual bool eIsProxy()  const  ;
 			
 			/*!
 			 */ 
@@ -107,11 +103,15 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual int eResource()  const  ;
 			
 			/*!
 			 */ 
-			virtual boost::any eInvoke(std::shared_ptr<ecore::EOperation>  operation,std::vector <   boost::any >  arguments)  const  ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  ;
+			
+			/*!
+			 */ 
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
 			
 			
 			
@@ -127,9 +127,6 @@ virtual public EObject
 			 */
 			virtual std::shared_ptr<ecore::EObject > eContainer() const ;
 			
-			/*!
-			 */
-			virtual void setContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) ;
 							
 			
 			//*********************************

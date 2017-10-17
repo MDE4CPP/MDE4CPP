@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -58,16 +56,22 @@ namespace ecore
 {
 	/*!
 	 */
-	class EEnumLiteral:virtual public ENamedElement	{
+	class EEnumLiteral:virtual public ENamedElement
+	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}
 			EEnumLiteral& operator=(EEnumLiteral const&) = delete;
-	
+
 		protected:
 			EEnumLiteral(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EEnumLiteral(std::weak_ptr<ecore::EEnum > par_eEnum);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EEnumLiteral() {}
@@ -79,14 +83,6 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
-			virtual int getValue() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setValue (int _value)= 0; 
-			
 			/*!
 			 */ 
 			virtual boost::any getInstance() const = 0;
@@ -103,13 +99,21 @@ namespace ecore
 			 */ 
 			virtual void setLiteral (std::string _literal)= 0; 
 			
+			/*!
+			 */ 
+			virtual int getValue() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setValue (int _value)= 0; 
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EEnum > getEEnum() const = 0;
+			virtual std::weak_ptr<ecore::EEnum > getEEnum() const = 0;
 			
 			
 
@@ -119,13 +123,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			int m_value ;
-			/*!
-			 */ 
 			boost::any m_instance ;
 			/*!
 			 */ 
 			std::string m_literal ;
+			/*!
+			 */ 
+			int m_value ;
 			
 			
 			//*********************************
@@ -133,7 +137,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EEnum > m_eEnum;
+			std::weak_ptr<ecore::EEnum > m_eEnum;
 			
 
 		public:

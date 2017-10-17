@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -83,16 +81,22 @@ namespace ecore
 {
 	/*!
 	 */
-	class EOperation:virtual public ETypedElement	{
+	class EOperation:virtual public ETypedElement
+	{
 		public:
  			EOperation(const EOperation &) {}
 			EOperation& operator=(EOperation const&) = delete;
-	
+
 		protected:
 			EOperation(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EOperation(std::weak_ptr<ecore::EClass > par_eContainingClass);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EOperation() {}
@@ -118,15 +122,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClass > getEContainingClass() const = 0;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const = 0;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EParameter> > getEParameters() const = 0;
+			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
 			
 			/*!
 			 */
@@ -135,6 +131,14 @@ namespace ecore
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEGenericExceptions() const = 0;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EParameter> > getEParameters() const = 0;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const = 0;
 			
 			
 
@@ -152,19 +156,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EClass > m_eContainingClass;
-			/*!
-			 */
-			std::shared_ptr< Bag<ecore::ETypeParameter> > m_eTypeParameters;
-			/*!
-			 */
-			std::shared_ptr< Bag<ecore::EParameter> > m_eParameters;
+			std::weak_ptr<ecore::EClass > m_eContainingClass;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::EClassifier> > m_eExceptions;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::EGenericType> > m_eGenericExceptions;
+			/*!
+			 */
+			std::shared_ptr< Bag<ecore::EParameter> > m_eParameters;
+			/*!
+			 */
+			std::shared_ptr< Bag<ecore::ETypeParameter> > m_eTypeParameters;
 			
 
 		public:

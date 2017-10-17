@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EParameterImpl(const EParameterImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EParameterImpl& operator=(EParameterImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EParameterImpl();
+
+			//Additional constructors for the containments back reference
+			EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation);
+
+
+
 
 		public:
 			//destructor
@@ -68,7 +72,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EOperation > getEOperation() const ;
+			virtual std::weak_ptr<ecore::EOperation > getEOperation() const ;
 			
 							
 			

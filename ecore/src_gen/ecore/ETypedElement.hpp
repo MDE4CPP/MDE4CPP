@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,18 @@ namespace ecore
 {
 	/*!
 	 */
-	class ETypedElement:virtual public ENamedElement	{
+	class ETypedElement:virtual public ENamedElement
+	{
 		public:
  			ETypedElement(const ETypedElement &) {}
 			ETypedElement& operator=(ETypedElement const&) = delete;
-	
+
 		protected:
 			ETypedElement(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ETypedElement() {}
@@ -86,11 +86,27 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
+			virtual int getLowerBound() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setLowerBound (int _lowerBound)= 0; 
+			
+			/*!
+			 */ 
+			virtual bool isMany() const = 0;
+			
+			/*!
+			 */ 
 			virtual bool isOrdered() const = 0;
 			
 			/*!
 			 */ 
 			virtual void setOrdered (bool _ordered)= 0; 
+			
+			/*!
+			 */ 
+			virtual bool isRequired() const = 0;
 			
 			/*!
 			 */ 
@@ -102,27 +118,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual int getLowerBound() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setLowerBound (int _lowerBound)= 0; 
-			
-			/*!
-			 */ 
 			virtual int getUpperBound() const = 0;
 			
 			/*!
 			 */ 
 			virtual void setUpperBound (int _upperBound)= 0; 
-			
-			/*!
-			 */ 
-			virtual bool isMany() const = 0;
-			
-			/*!
-			 */ 
-			virtual bool isRequired() const = 0;
 			
 			
 			//*********************************
@@ -130,18 +130,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier > getEType() const = 0;
-			
-			/*!
-			 */
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) = 0;
-			/*!
-			 */
 			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const = 0;
 			
 			/*!
 			 */
 			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType_eGenericType) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<ecore::EClassifier > getEType() const = 0;
+			
+			/*!
+			 */
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) = 0;
 			
 
 		protected:
@@ -150,22 +150,22 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			bool m_ordered =  true;
-			/*!
-			 */ 
-			bool m_unique =  true;
-			/*!
-			 */ 
 			int m_lowerBound ;
-			/*!
-			 */ 
-			int m_upperBound =  1;
 			/*!
 			 */ 
 			bool m_many ;
 			/*!
 			 */ 
+			bool m_ordered =  true;
+			/*!
+			 */ 
 			bool m_required ;
+			/*!
+			 */ 
+			bool m_unique =  true;
+			/*!
+			 */ 
+			int m_upperBound =  1;
 			
 			
 			//*********************************
@@ -173,10 +173,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EClassifier > m_eType;
+			std::shared_ptr<ecore::EGenericType > m_eGenericType;
 			/*!
 			 */
-			std::shared_ptr<ecore::EGenericType > m_eGenericType;
+			std::shared_ptr<ecore::EClassifier > m_eType;
 			
 
 		public:

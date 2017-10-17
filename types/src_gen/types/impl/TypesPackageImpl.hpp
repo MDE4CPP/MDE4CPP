@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -24,6 +22,7 @@
 #include <cassert>
 
 
+#include "TypesPackage.hpp"
 #include "TypesPackage.hpp"
 #include "EcorePackage.hpp"
 #include "impl/EPackageImpl.hpp"

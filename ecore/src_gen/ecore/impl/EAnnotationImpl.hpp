@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EAnnotationImpl& operator=(EAnnotationImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EAnnotationImpl();
+
+			//Additional constructors for the containments back reference
+			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
+
+
+
 
 		public:
 			//destructor
@@ -76,19 +80,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > getDetails() const ;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EModelElement > getEModelElement() const ;
+			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const ;
 			
 			/*!
 			 */
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) ;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const ;
-			
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<ecore::EObject> > getReferences() const ;

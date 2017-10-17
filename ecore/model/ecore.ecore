@@ -17,7 +17,11 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="details" upperBound="-1"
         eType="#//EStringToStringMapEntry" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eModelElement" eType="#//EModelElement"
-        transient="true" resolveProxies="false" eOpposite="#//EModelElement/eAnnotations"/>
+        transient="true" resolveProxies="false" eOpposite="#//EModelElement/eAnnotations">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
         eType="#//EObject" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
@@ -214,7 +218,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ePackage" eType="#//EPackage"
-        transient="true" eOpposite="#//EPackage/eClassifiers"/>
+        transient="true" eOpposite="#//EPackage/eClassifiers">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
         eType="#//ETypeParameter" containment="true"/>
   </eClassifiers>
@@ -256,7 +264,11 @@
         transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eEnum" eType="#//EEnum"
-        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EEnum/eLiterals"/>
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EEnum/eLiterals">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EFactory" eSuperTypes="#//EModelElement">
     <eOperations name="create" eType="#//EObject">
@@ -397,11 +409,13 @@
         </eGenericType>
       </eParameters>
     </eOperations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainer" eType="#//EObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eContainer" eType="#//EObject"
+        changeable="false">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="GetterName" value="eContainer"/>
         <details key="SetterName" value="setContainer"/>
         <details key="implSetterOnly" value="true"/>
+        <details key="isContainerAttribute" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
@@ -411,7 +425,7 @@
     </eAnnotations>
     <eOperations name="isOverrideOf" eType="#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    if (someOperation->getEContainingClass()->isSuperTypeOf(getEContainingClass()) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (Bag&lt;EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (!(parameter->getEType().get() == otherParameter->getEType().get()))&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;            return true;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;    return false;"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;ecore::EClass > containingClass = someOperation->getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == containingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; containing class not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;ecore::EClass > thisContainingClass = getEContainingClass().lock();&#xD;&#xA;&#x9;if(nullptr == thisContainingClass)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;std::cerr &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; &quot; thisContainingClass not set.&quot; &lt;&lt; std::endl;&#xD;&#xA;&#x9;&#x9;return false;&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;if (containingClass->isSuperTypeOf(thisContainingClass) &amp;&amp; (someOperation->getName()==getName()))&#xD;&#xA;    {&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > parameters = getEParameters();&#xD;&#xA;        std::shared_ptr&lt; Bag&lt;ecore::EParameter> > otherParameters = someOperation->getEParameters();&#xD;&#xA;        if (parameters->size() == otherParameters->size())&#xD;&#xA;        {&#xD;&#xA;            for (Bag&lt;EParameter> ::iterator i = parameters->begin(), j = otherParameters->begin(); i != parameters->end(); ++i,++j )&#xD;&#xA;        &#x9;{&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> parameter = *i;&#xD;&#xA;            &#x9;std::shared_ptr&lt;EParameter> otherParameter = *j;&#xD;&#xA;                if (parameter->getEType().get() != otherParameter->getEType().get())&#xD;&#xA;          &#x9;&#x9;{&#xD;&#xA;                    return false;&#xD;&#xA;        &#x9;&#x9;}&#xD;&#xA;        &#x9;}&#xD;&#xA;            return true;&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;    return false;"/>
         <details key="implOnly" value="false"/>
         <details key="const"/>
       </eAnnotations>
@@ -424,7 +438,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
-        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eOperations"/>
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eOperations">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameters" upperBound="-1"
         eType="#//ETypeParameter" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eParameters" upperBound="-1"
@@ -460,21 +478,21 @@
     </eOperations>
     <eOperations name="createEClass" eType="#//EClass">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;EClassImpl> c( dynamic_cast&lt;EClassImpl *>(EcoreFactory::eInstance()->createEClass()));&#xD;&#xA;assert(c);&#xD;&#xA;c->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(c);&#xD;&#xA;return c;"/>
+        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EClassImpl> c(std::dynamic_pointer_cast&lt;EClassImpl>(EcoreFactory::eInstance()->create(&quot;EClass&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(c);&#xD;&#xA;&#x9;c->setClassifierID(id);&#xD;&#xA;&#x9;return c;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEEnum" eType="#//EEnum">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;EEnumImpl> e( dynamic_cast&lt;EEnumImpl *>(EcoreFactory::eInstance()->createEEnum()));&#xD;&#xA;assert(e);&#xD;&#xA;e->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(e);&#xD;&#xA;return e;"/>
+        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EEnumImpl> e( std::dynamic_pointer_cast&lt;EEnumImpl>(EcoreFactory::eInstance()->create(&quot;EEnum&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(e);&#xD;&#xA;&#x9;e->setClassifierID(id);&#xD;&#xA;&#x9;return e;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEAttribute">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::shared_ptr&lt;EAttributeImpl> a(dynamic_cast&lt;EAttributeImpl*>(EcoreFactory::eInstance()->createEAttribute()));&#xD;&#xA;    assert(a);&#xD;&#xA;    a->setFeatureID(id);&#xD;&#xA;    a->setContainer(owner);&#xD;&#xA;    owner->getEStructuralFeatures()->push_back(a);"/>
+        <details key="body" value="    std::shared_ptr&lt;EAttributeImpl> a(std::dynamic_pointer_cast&lt;EAttributeImpl>(EcoreFactory::eInstance()->create(&quot;EAttribute&quot;, owner)));&#xD;&#xA;    assert(a);&#xD;&#xA;    a->setFeatureID(id);"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
@@ -483,14 +501,14 @@
     <eOperations name="createEReference">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="implOnly" value="true"/>
-        <details key="body" value="std::shared_ptr&lt;EReferenceImpl> r (dynamic_cast&lt;EReferenceImpl*>(EcoreFactory::eInstance()->createEReference()));&#xD;&#xA;assert(r);&#xD;&#xA;r->setFeatureID(id);&#xD;&#xA;r->setContainer(owner);&#xD;&#xA;owner->getEStructuralFeatures()->push_back(r);"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;EReferenceImpl> r (std::dynamic_pointer_cast&lt;EReferenceImpl>(EcoreFactory::eInstance()->create(&quot;EReference&quot;, owner)));&#xD;&#xA;&#x9;assert(r);&#xD;&#xA;&#x9;r->setFeatureID(id);"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
       <eParameters name="id" eType="#//EInt"/>
     </eOperations>
     <eOperations name="createEOperation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;EOperationImpl> o(dynamic_cast&lt;EOperationImpl*>(EcoreFactory::eInstance()->createEOperation()));&#xD;&#xA;assert(o);&#xD;&#xA;o->setOperationID(id);&#xD;&#xA;owner->getEOperations()->push_back(o);"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;EOperationImpl> o(std::dynamic_pointer_cast&lt;EOperationImpl>(EcoreFactory::eInstance()->create(&quot;EOperation&quot;,owner)));&#xD;&#xA;&#x9;assert(o);&#xD;&#xA;&#x9;o->setOperationID(id);"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EClass"/>
@@ -498,7 +516,7 @@
     </eOperations>
     <eOperations name="createEDataType" eType="#//EDataType">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;EDataTypeImpl> d(dynamic_cast&lt;EDataTypeImpl*>(EcoreFactory::eInstance()->createEDataType()));&#xD;&#xA;assert(d);&#xD;&#xA;d->setClassifierID(id);&#xD;&#xA;getEClassifiers()->push_back(d);&#xD;&#xA;return d;"/>
+        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EDataTypeImpl> d(std::dynamic_pointer_cast&lt;EDataTypeImpl>(EcoreFactory::eInstance()->create(&quot;EDataType&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(d);&#xD;&#xA;&#x9;d->setClassifierID(id);&#xD;&#xA;&#x9;return d;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="id" eType="#//EInt"/>
@@ -555,7 +573,7 @@
     </eOperations>
     <eOperations name="initEAttribute" eType="#//EAttribute">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="EClassifier* c = dynamic_cast&lt;EClassifier*>(a->eContainer().get());&#xD;&#xA;assert(c);&#xD;&#xA;initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,c->getInstanceClass(),isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,isOrdered);&#xD;&#xA;return a;"/>
+        <details key="body" value="initEStructuralFeature&#xD;&#xA;      (a, &#xD;&#xA;       type, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound, &#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique, &#xD;&#xA;       isDerived, &#xD;&#xA;       isOrdered);&#xD;&#xA;    a->setID(isID);&#xD;&#xA;return a;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="a" eType="#//EAttribute"/>
@@ -577,6 +595,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="initEStructuralFeature&#xD;&#xA;      (a, &#xD;&#xA;       type, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound, &#xD;&#xA;       containerClass,&#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique, &#xD;&#xA;       isDerived, &#xD;&#xA;       isOrdered);&#xD;&#xA;    a->setID(isID);&#xD;&#xA;return a;"/>
         <details key="implOnly" value="true"/>
+        <details key="doNotGenerate" value="true"/>
       </eAnnotations>
       <eParameters name="a" eType="#//EAttribute"/>
       <eParameters name="type" eType="#//EClassifier"/>
@@ -621,7 +640,7 @@
     </eOperations>
     <eOperations name="initEReference" eType="#//EReference">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="EClassifier* tmp = dynamic_cast&lt;EClassifier*>(r->eContainer().get());&#xD;&#xA;assert(tmp);&#xD;&#xA;    initEReference&#xD;&#xA;      (r, &#xD;&#xA;       type, &#xD;&#xA;       otherEnd, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound,&#xD;&#xA;       tmp->getInstanceClass(), &#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isContainment, &#xD;&#xA;       isResolveProxies, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique,&#xD;&#xA;       isDerived,&#xD;&#xA;       isOrdered);&#xD;&#xA;    return r;"/>
+        <details key="body" value="initEStructuralFeature&#xD;&#xA;      (r, &#xD;&#xA;       type, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound, &#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique, &#xD;&#xA;       isDerived, &#xD;&#xA;       isOrdered);&#xD;&#xA;    r->setContainment(isContainment);&#xD;&#xA;    if (otherEnd!= nullptr)&#xD;&#xA;    {&#xD;&#xA;      r->setEOpposite(otherEnd);&#xD;&#xA;    }&#xD;&#xA;    r->setResolveProxies(isResolveProxies);&#xD;&#xA;    return r;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="r" eType="#//EReference"/>
@@ -645,6 +664,7 @@
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="initEStructuralFeature&#xD;&#xA;      (r, &#xD;&#xA;       type, &#xD;&#xA;       name, &#xD;&#xA;       defaultValue, &#xD;&#xA;       lowerBound, &#xD;&#xA;       upperBound, &#xD;&#xA;       containerClass,&#xD;&#xA;       isTransient, &#xD;&#xA;       isVolatile, &#xD;&#xA;       isChangeable, &#xD;&#xA;       isUnsettable, &#xD;&#xA;       isUnique, &#xD;&#xA;       isDerived, &#xD;&#xA;       isOrdered);&#xD;&#xA;    r->setContainment(isContainment);&#xD;&#xA;    if (otherEnd!= nullptr)&#xD;&#xA;    {&#xD;&#xA;      r->setEOpposite(otherEnd);&#xD;&#xA;    }&#xD;&#xA;    r->setResolveProxies(isResolveProxies);&#xD;&#xA;    return r;"/>
         <details key="implOnly" value="true"/>
+        <details key="doNotGenerate" value="true"/>
       </eAnnotations>
       <eParameters name="r" eType="#//EReference"/>
       <eParameters name="type" eType="#//EClassifier"/>
@@ -670,7 +690,7 @@
     </eOperations>
     <eOperations name="initEStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="s->setName(name);&#xD;&#xA;&#xD;&#xA;EStructuralFeatureImpl* tmp = dynamic_cast&lt;EStructuralFeatureImpl*>(s.get());&#xD;&#xA;if(tmp)&#xD;&#xA;{&#xD;&#xA;tmp->setContainerClass(containerClass);&#xD;&#xA;}&#xD;&#xA;&#xD;&#xA;s->setTransient(isTransient);&#xD;&#xA;s->setVolatile(isVolatile);&#xD;&#xA;s->setChangeable(isChangeable);&#xD;&#xA;s->setUnsettable(isUnsettable);&#xD;&#xA;s->setUnique(isUnique);&#xD;&#xA;s->setDerived(isDerived);&#xD;&#xA;s->setOrdered(isOrdered);&#xD;&#xA;s->setLowerBound(lowerBound);&#xD;&#xA;s->setUpperBound(upperBound);&#xD;&#xA;s->setEType(type);&#xD;&#xA;if (!defaultValue.empty())&#xD;&#xA;{&#xD;&#xA;   s->setDefaultValueLiteral(defaultValue);&#xD;&#xA;}"/>
+        <details key="body" value="s->setName(name);&#xD;&#xA;&#xD;&#xA;s->setTransient(isTransient);&#xD;&#xA;s->setVolatile(isVolatile);&#xD;&#xA;s->setChangeable(isChangeable);&#xD;&#xA;s->setUnsettable(isUnsettable);&#xD;&#xA;s->setUnique(isUnique);&#xD;&#xA;s->setDerived(isDerived);&#xD;&#xA;s->setOrdered(isOrdered);&#xD;&#xA;s->setLowerBound(lowerBound);&#xD;&#xA;s->setUpperBound(upperBound);&#xD;&#xA;s->setEType(type);&#xD;&#xA;if (!defaultValue.empty())&#xD;&#xA;{&#xD;&#xA;   s->setDefaultValueLiteral(defaultValue);&#xD;&#xA;}"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="s" eType="#//EStructuralFeature"/>
@@ -680,6 +700,9 @@
       <eParameters name="lowerBound" eType="#//EInt"/>
       <eParameters name="upperBound" eType="#//EInt"/>
       <eParameters name="containerClass">
+        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+          <details key="doNotGenerate" value="true"/>
+        </eAnnotations>
         <eGenericType eClassifier="#//EJavaClass">
           <eTypeArguments/>
         </eGenericType>
@@ -817,7 +840,7 @@
     </eOperations>
     <eOperations name="internalAddEParameter" eType="#//EParameter">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::shared_ptr&lt;EParameter> p(EcoreFactory::eInstance()->createEParameter());&#xD;&#xA;    p->setEType(type);&#xD;&#xA;    p->setName(name);&#xD;&#xA;    owner->getEParameters()->push_back(p);&#xD;&#xA;    return p;"/>
+        <details key="body" value="    std::shared_ptr&lt;EParameter> p(EcoreFactory::eInstance()->createEParameter_in_EOperation(owner));&#xD;&#xA;    p->setEType(type);&#xD;&#xA;    p->setName(name);&#xD;&#xA;    return p;"/>
         <details key="implOnly" value="true"/>
       </eAnnotations>
       <eParameters name="owner" eType="#//EOperation"/>
@@ -840,11 +863,19 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSubpackages" upperBound="-1"
         eType="#//EPackage" containment="true" eOpposite="#//EPackage/eSuperPackage"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eSuperPackage" eType="#//EPackage"
-        changeable="false" transient="true" eOpposite="#//EPackage/eSubpackages"/>
+        changeable="false" transient="true" eOpposite="#//EPackage/eSubpackages">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EParameter" eSuperTypes="#//ETypedElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOperation" eType="#//EOperation"
-        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EOperation/eParameters"/>
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EOperation/eParameters">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EReference" eSuperTypes="#//EStructuralFeature">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -883,14 +914,18 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerClass" changeable="false">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="implSetterOnly" value="true"/>
+        <details key="hasImplOnly"/>
       </eAnnotations>
       <eGenericType eClassifier="#//EJavaClass">
         <eTypeArguments/>
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eContainingClass" eType="#//EClass"
-        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eStructuralFeatures"/>
+        changeable="false" transient="true" resolveProxies="false" eOpposite="#//EClass/eStructuralFeatures">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ETypedElement" abstract="true" eSuperTypes="#//ENamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,22 @@ namespace ecore
 {
 	/*!
 	 */
-	class EAnnotation:virtual public EModelElement	{
+	class EAnnotation:virtual public EModelElement
+	{
 		public:
  			EAnnotation(const EAnnotation &) {}
 			EAnnotation& operator=(EAnnotation const&) = delete;
-	
+
 		protected:
 			EAnnotation(){}
 
+
+			//Additional constructors for the containments back reference
+
+			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EAnnotation() {}
@@ -98,19 +102,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const = 0;
+			
+			/*!
+			 */
 			virtual std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > getDetails() const = 0;
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EModelElement > getEModelElement() const = 0;
+			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const = 0;
 			
 			/*!
 			 */
 			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) = 0;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EObject> > getContents() const = 0;
-			
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<ecore::EObject> > getReferences() const = 0;
@@ -131,13 +135,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			std::shared_ptr< Bag<ecore::EObject> > m_contents;
+			/*!
+			 */
 			std::shared_ptr< Bag<ecore::EStringToStringMapEntry> > m_details;
 			/*!
 			 */
-			std::shared_ptr<ecore::EModelElement > m_eModelElement;
-			/*!
-			 */
-			std::shared_ptr< Bag<ecore::EObject> > m_contents;
+			std::weak_ptr<ecore::EModelElement > m_eModelElement;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::EObject> > m_references;

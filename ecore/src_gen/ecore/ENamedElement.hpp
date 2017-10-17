@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -53,16 +51,18 @@ namespace ecore
 {
 	/*!
 	 */
-	class ENamedElement:virtual public EModelElement	{
+	class ENamedElement:virtual public EModelElement
+	{
 		public:
  			ENamedElement(const ENamedElement &) {}
 			ENamedElement& operator=(ENamedElement const&) = delete;
-	
+
 		protected:
 			ENamedElement(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ENamedElement() {}

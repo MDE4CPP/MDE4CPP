@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -54,6 +54,19 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+			:EStructuralFeatureImpl()
+			{
+			    m_eContainingClass = par_eContainingClass;
+			}
+
+
+
+
+
+
 EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
 {
 	//create copy of all Attributes
@@ -84,31 +97,30 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 	m_eType  = obj.getEType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
+		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  EStructuralFeatureImpl::copy() const
+std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
 {
-	return new EStructuralFeatureImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EStructuralFeatureImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
@@ -129,10 +141,7 @@ bool EStructuralFeatureImpl::isChangeable() const
 	return m_changeable;
 }
 
-void EStructuralFeatureImpl::setContainerClass(void *  _containerClass)
-{
-	m_containerClass = _containerClass;
-} 
+
 
 void *  EStructuralFeatureImpl::getContainerClass() const 
 {
@@ -213,7 +222,7 @@ bool EStructuralFeatureImpl::isVolatile() const
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
+std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;

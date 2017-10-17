@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EAnnotation.hpp"
@@ -45,6 +45,9 @@ ETypeParameterImpl::~ETypeParameterImpl()
 	
 }
 
+
+
+
 ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypeParameterImpl()
 {
 	//create copy of all Attributes
@@ -56,13 +59,12 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypePara
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -70,7 +72,7 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypePara
 	std::shared_ptr<Bag<ecore::EGenericType>> _eBoundsList = obj.getEBounds();
 	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
 	{
-		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eBounds->copy())));
+		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eBounds" << std::endl;
@@ -78,12 +80,12 @@ ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypePara
 
 	
 	
-
 }
 
-ecore::EObject *  ETypeParameterImpl::copy() const
+std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
 {
-	return new ETypeParameterImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ETypeParameterImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const

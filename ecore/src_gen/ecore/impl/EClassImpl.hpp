@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EClassImpl(const EClassImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EClassImpl& operator=(EClassImpl const&) = delete;
@@ -48,6 +46,12 @@ namespace ecore
 		protected:
 			friend class EcoreFactoryImpl;
 			EClassImpl();
+
+			//Additional constructors for the containments back reference
+			EClassImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
+
+
+
 
 		public:
 			//destructor
@@ -58,11 +62,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const  ;
-			
-			/*!
-			 */ 
-			virtual int getFeatureCount()  const  ;
+			virtual std::shared_ptr<ecore::EOperation> getEOperation(int operationID)  const  ;
 			
 			/*!
 			 */ 
@@ -70,19 +70,23 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<ecore::EStructuralFeature> getEStructuralFeature(std::string featureName)  const  ;
 			
 			/*!
 			 */ 
-			virtual int getOperationCount()  const  ;
+			virtual int getFeatureCount()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EOperation> getEOperation(int operationID)  const  ;
+			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			
+			/*!
+			 */ 
+			virtual int getOperationCount()  const  ;
 			
 			/*!
 			 */ 
@@ -94,7 +98,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature)  const  ;
+			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const  ;
 			
 			
 			
@@ -124,27 +128,7 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EClass> > getESuperTypes() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EOperation> > getEOperations() const ;
-			
-			/*!
-			 */
 			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEAllAttributes() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EReference> > getEAllReferences() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature > > getEReferences() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature > > getEAttributes() const ;
 			
 			/*!
 			 */
@@ -152,7 +136,15 @@ namespace ecore
 			
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEAllGenericSuperTypes() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr< Bag<ecore::EOperation> > getEAllOperations() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EReference> > getEAllReferences() const ;
 			
 			/*!
 			 */
@@ -164,8 +156,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EAttribute > getEIDAttribute() const ;
-			
+			virtual std::shared_ptr<Subset<ecore::EAttribute, ecore::EStructuralFeature > > getEAttributes() const ;
 			
 			/*!
 			 */
@@ -173,7 +164,20 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEAllGenericSuperTypes() const ;
+			virtual std::shared_ptr<ecore::EAttribute > getEIDAttribute() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EOperation> > getEOperations() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<ecore::EReference, ecore::EStructuralFeature > > getEReferences() const ;
+			
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EClass> > getESuperTypes() const ;
 			
 							
 			

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "ecorePackageImpl.hpp"
+#include "EcorePackageImpl.hpp"
 
 //Forward declaration includes
 #include "EClass.hpp"
@@ -46,6 +46,9 @@ EObjectImpl::~EObjectImpl()
 	
 }
 
+
+
+
 EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 	m_eContainer  = obj.eContainer();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EObjectImpl::copy() const
+std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
 {
-	return new EObjectImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EObjectImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
@@ -177,10 +179,7 @@ std::shared_ptr<ecore::EObject > EObjectImpl::eContainer() const
 
     return m_eContainer;
 }
-void EObjectImpl::setContainer(std::shared_ptr<ecore::EObject> _eContainer)
-{
-    m_eContainer = _eContainer;
-}
+
 
 //*********************************
 // Union Getter
