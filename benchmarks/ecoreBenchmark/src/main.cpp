@@ -16,7 +16,7 @@
 #include <iostream>
 #include <chrono>
 
-#define NUM_ELEMENT 100000
+#define NUM_ELEMENT 50000
 
 using namespace ecore;
 
