@@ -65,21 +65,21 @@ namespace CalcModel
 			//*********************************
 			// Getter Setter
 			//*********************************
-			virtual int getDivider() const = 0;
-			virtual void setDivider (int _divider)= 0; 
-			virtual int getNumber() const = 0;
-			virtual void setNumber (int _number)= 0; 
+			virtual int getDivider() const  = 0;
+			virtual void setDivider (int _divider) = 0; 
+			virtual int getNumber() const  = 0;
+			virtual void setNumber (int _number) = 0; 
 			
 			
 			//*********************************
 			// Operations
 			//*********************************
-			virtual bool divides(  ) = 0;
-			virtual bool isNotFinished(  ) = 0;
-			virtual bool isOdd(  ) = 0;
-			virtual void next(  ) = 0;
-			virtual void printIsPrime(  ) = 0;
-			virtual void printNotPrime(  ) = 0;
+			virtual bool divides(  )  = 0;
+			virtual bool isNotFinished(  )  = 0;
+			virtual bool isOdd(  )  = 0;
+			virtual void next(  )  = 0;
+			virtual void printIsPrime(  )  = 0;
+			virtual void printNotPrime(  )  = 0;
 			
 			
 		protected:

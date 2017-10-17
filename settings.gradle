@@ -1,1 +1,1 @@
-include 'benchmarks:UMLBenchmark', 'benchmarks:ecoreBenchmark', 'fumlExample:Calculator', 'fumlExample:Calculator:model', 'fumlExample:Calculator:src_gen', 'fumlExample:Calculator:src_gen:CalcModel', 'fumlExample:Calculator:src_gen:CalcModelExec', 'UMLExample:UMLApplication'
+include 'benchmarks', 'fumlExample:Calculator', 'simpleExamples', 'simpleExamples:ecoreModelExample', 'simpleExamples:UMLModelExample'

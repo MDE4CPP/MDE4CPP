@@ -24,9 +24,10 @@ FbIsOddExecution::FbIsOddExecution(const FbIsOddExecution &obj)
 {
 }
 
-ecore::EObject* FbIsOddExecution::copy() const
+std::shared_ptr<ecore::EObject> FbIsOddExecution::copy() const
 {
-    return new FbIsOddExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbIsOddExecution(*this));
+	return element;
 }
 
 void FbIsOddExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

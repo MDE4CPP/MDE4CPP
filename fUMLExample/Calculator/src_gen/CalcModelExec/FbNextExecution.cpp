@@ -23,9 +23,10 @@ FbNextExecution::FbNextExecution(const FbNextExecution &obj)
 {
 }
 
-ecore::EObject* FbNextExecution::copy() const
+std::shared_ptr<ecore::EObject> FbNextExecution::copy() const
 {
-    return new FbNextExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbNextExecution(*this));
+	return element;
 }
 
 void FbNextExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

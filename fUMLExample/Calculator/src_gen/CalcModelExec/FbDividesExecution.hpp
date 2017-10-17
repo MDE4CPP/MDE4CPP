@@ -32,7 +32,7 @@ namespace CalcModel
 		    virtual ~FbDividesExecution();
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
-		    virtual ecore::EObject * copy() const;
+		    virtual std::shared_ptr<ecore::EObject> copy() const;
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER_FBDIVIDES_EXECUTION_HPP */

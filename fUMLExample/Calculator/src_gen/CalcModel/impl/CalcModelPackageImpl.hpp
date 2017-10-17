@@ -57,7 +57,6 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaDivides();
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaIsNotFinished();
 			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaIsOdd();
-			virtual std::shared_ptr<uml::CallOperationAction> get_CalcModel_CheckIfPrimecoaNext();
 			virtual std::shared_ptr<uml::DecisionNode> get_CalcModel_CheckIfPrimedivides();
 			virtual std::shared_ptr<uml::ObjectFlow> get_CalcModel_CheckIfPrimeifDivides();
 			virtual std::shared_ptr<uml::ObjectFlow> get_CalcModel_CheckIfPrimeifIsNotFinished();
@@ -89,12 +88,10 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaDividestarget();
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaIsNotFinishedtarget();
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaIsOddtarget();
-			virtual std::shared_ptr<uml::InputPin> get_InputPin_coaNexttarget();
 			virtual std::shared_ptr<uml::InputPin> get_InputPin_next_calltarget();
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget();
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget();
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget();
-			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget();
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget();
 			virtual std::shared_ptr<uml::ObjectFlow> get_OF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1();
 			virtual std::shared_ptr<uml::OutputPin> get_OutputPin_coaDividesisDivisible();
@@ -148,7 +145,6 @@ namespace CalcModel
 			std::shared_ptr<uml::CallOperationAction> calcModel_CheckIfPrimecoaDivides = nullptr;
 			std::shared_ptr<uml::CallOperationAction> calcModel_CheckIfPrimecoaIsNotFinished = nullptr;
 			std::shared_ptr<uml::CallOperationAction> calcModel_CheckIfPrimecoaIsOdd = nullptr;
-			std::shared_ptr<uml::CallOperationAction> calcModel_CheckIfPrimecoaNext = nullptr;
 			std::shared_ptr<uml::DecisionNode> calcModel_CheckIfPrimedivides = nullptr;
 			std::shared_ptr<uml::ObjectFlow> calcModel_CheckIfPrimeifDivides = nullptr;
 			std::shared_ptr<uml::ObjectFlow> calcModel_CheckIfPrimeifIsNotFinished = nullptr;
@@ -187,12 +183,10 @@ namespace CalcModel
 			std::shared_ptr<uml::InputPin> inputPin_coaDividestarget = nullptr;
 			std::shared_ptr<uml::InputPin> inputPin_coaIsNotFinishedtarget = nullptr;
 			std::shared_ptr<uml::InputPin> inputPin_coaIsOddtarget = nullptr;
-			std::shared_ptr<uml::InputPin> inputPin_coaNexttarget = nullptr;
 			std::shared_ptr<uml::InputPin> inputPin_next_calltarget = nullptr;
 			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget = nullptr;
 			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget = nullptr;
 			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget = nullptr;
-			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget = nullptr;
 			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget = nullptr;
 			std::shared_ptr<uml::ObjectFlow> oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1 = nullptr;
 			std::shared_ptr<uml::OutputPin> outputPin_coaDividesisDivisible = nullptr;

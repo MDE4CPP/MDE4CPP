@@ -24,9 +24,10 @@ FbIsNotFinishedExecution::FbIsNotFinishedExecution(const FbIsNotFinishedExecutio
 {
 }
 
-ecore::EObject* FbIsNotFinishedExecution::copy() const
+std::shared_ptr<ecore::EObject> FbIsNotFinishedExecution::copy() const
 {
-    return new FbIsNotFinishedExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbIsNotFinishedExecution(*this));
+	return element;
 }
 
 void FbIsNotFinishedExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)

@@ -34,7 +34,7 @@ namespace CalcModel
 		    virtual ~FbPrintNotPrimeExecution();
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters);
-		    virtual ecore::EObject * copy() const;
+		    virtual std::shared_ptr<ecore::EObject> copy() const;
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER_FBPRINTNOTPRIME_EXECUTION_HPP */

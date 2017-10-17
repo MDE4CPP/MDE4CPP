@@ -21,9 +21,10 @@ FbPrintIsPrimeExecution::FbPrintIsPrimeExecution(const FbPrintIsPrimeExecution &
 {
 }
 
-ecore::EObject* FbPrintIsPrimeExecution::copy() const
+std::shared_ptr<ecore::EObject> FbPrintIsPrimeExecution::copy() const
 {
-    return new FbPrintIsPrimeExecution(*this);
+	std::shared_ptr<ecore::EObject> element(new FbPrintIsPrimeExecution(*this));
+	return element;
 }
 
 void FbPrintIsPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::ParameterValue> > outputParameters)
@@ -37,7 +38,7 @@ void FbPrintIsPrimeExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> >
     //Body of the Opaquebehavior
     //Start ---------------------------
 		//Function Behaviour from a Call Behavior Action
-   		std::cout<<"Number is prime";
+   		std::cout<<"Number is prime"<<std::endl;
     //End -----------------------------
 
 	//set return / out parameters

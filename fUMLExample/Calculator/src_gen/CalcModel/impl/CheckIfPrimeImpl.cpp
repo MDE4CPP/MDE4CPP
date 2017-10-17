@@ -22,6 +22,9 @@ CheckIfPrimeImpl::CheckIfPrimeImpl()
 	// init properties without default
 }
 
+
+
+
 CheckIfPrimeImpl::~CheckIfPrimeImpl()
 {
 }
@@ -32,7 +35,7 @@ std::shared_ptr<uml::Class> CheckIfPrimeImpl::getMetaClass()
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
