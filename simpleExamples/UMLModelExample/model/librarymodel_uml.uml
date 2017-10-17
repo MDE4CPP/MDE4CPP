@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="LibraryModel_uml">
+  <eAnnotations xmi:id="_emzA0LMsEeeG6co6VmdxTw" source="prepareApplication"/>
   <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
     <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
   </packageImport>

@@ -31,12 +31,12 @@ namespace LibraryModel_uml
 
 namespace uml 
 {
+	class LiteralUnlimitedNatural;
+	class Class;
+	class LiteralInteger;
+	class PackageImport;
 	class Generalization;
 	class Property;
-	class PackageImport;
-	class Class;
-	class LiteralUnlimitedNatural;
-	class LiteralInteger;
 	class Association;
 }
 

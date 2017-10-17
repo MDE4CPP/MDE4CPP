@@ -1,14 +1,14 @@
 description 'Example collection'
 
-task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample', 'ecoreModelExample:buildLibraryModel_ecore', 'ecoreModelExample:application:compileEcoreModelExample', 'UMLModelExample:buildLibraryModel_uml', 'UMLModelExample:application:compileUmlModelExample']) {
+task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample', 'ecoreModelExample:buildLibraryModel_ecore', 'ecoreModelExample:application:compileEcoreModelExample', 'UMLModelExample:buildLibraryModel_uml']) {
 	group 'Examples'
 	description 'build all simple example applications in debug and release'	
 }
-task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug', 'ecoreModelExample:buildLibraryModel_ecoreDebug', 'ecoreModelExample:application:compileEcoreModelExampleDebug', 'UMLModelExample:buildLibraryModel_umlDebug', 'UMLModelExample:application:compileUmlModelExampleDebug']) {
+task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug', 'ecoreModelExample:buildLibraryModel_ecoreDebug', 'ecoreModelExample:application:compileEcoreModelExampleDebug', 'UMLModelExample:buildLibraryModel_umlDebug']) {
 	group 'Examples'
 	description 'build all simple example applications in debug'	
 }
-task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease', 'ecoreModelExample:buildLibraryModel_ecoreRelease', 'ecoreModelExample:application:compileEcoreModelExampleRelease', 'UMLModelExample:buildLibraryModel_umlRelease', 'UMLModelExample:application:compileUmlModelExampleRelease']) {
+task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease', 'ecoreModelExample:buildLibraryModel_ecoreRelease', 'ecoreModelExample:application:compileEcoreModelExampleRelease', 'UMLModelExample:buildLibraryModel_umlRelease']) {
 	group 'Examples'
 	description 'build all simple example applications in release'	
 }
@@ -16,12 +16,6 @@ task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compi
 tasks.getByPath('ecoreModelExample:application:compileEcoreModelExample').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecore')
 tasks.getByPath('ecoreModelExample:application:compileEcoreModelExampleDebug').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecoreDebug')
 tasks.getByPath('ecoreModelExample:application:compileEcoreModelExampleRelease').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecoreRelease')
-
-
-tasks.getByPath('UMLModelExample:application:compileUmlModelExample').mustRunAfter tasks.getByPath('UMLModelExample:buildLibraryModel_uml')
-tasks.getByPath('UMLModelExample:application:compileUmlModelExampleDebug').mustRunAfter tasks.getByPath('UMLModelExample:buildLibraryModel_umlDebug')
-tasks.getByPath('UMLModelExample:application:compileUmlModelExampleRelease').mustRunAfter tasks.getByPath('UMLModelExample:buildLibraryModel_umlRelease')
-
 
 task compileEcoreExample(dependsOn: ['compileEcoreExampleDebug', 'compileEcoreExampleRelease']) {
 	group 'Examples'

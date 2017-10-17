@@ -2,17 +2,76 @@ apply plugin: 'base'
 
 description 'Build tasks for project: LibraryModel_uml'
 
-task buildLibraryModel_uml(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_uml']) {
+task buildLibraryModel_uml(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_uml', 'compileApplicationForLibraryModel_uml']) {
 	group 'LibraryModel_uml'
 	description 'build LibraryModel_uml in debug and release'
 }
-task buildLibraryModel_umlDebug(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlDebug']) {
+task buildLibraryModel_umlDebug(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlDebug', 'compileApplicationForLibraryModel_umlDebug']) {
 	group 'LibraryModel_uml'
 	description 'build LibraryModel_uml in debug'
 }
-task buildLibraryModel_umlRelease(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlRelease']) {
+task buildLibraryModel_umlRelease(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlRelease', 'compileApplicationForLibraryModel_umlRelease']) {
 	group 'LibraryModel_uml'
 	description 'build LibraryModel_uml in release'
+}
+
+task compileApplicationForLibraryModel_uml(dependsOn: ['compileApplicationForLibraryModel_umlDebug', 'compileApplicationForLibraryModel_umlRelease']) {
+	group 'LibraryModel_uml'
+	description 'compile LibraryModel_uml in debug and release'
+}
+task compileApplicationForLibraryModel_umlDebug {
+	group 'ApplicationForLibraryModel_uml'
+	description 'compile ApplicationForLibraryModel_uml in Debug'
+
+	def folder = new File(file('./application/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'application/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./application").absolutePath
+		}
+		exec {
+			workingDir 'application/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+task compileApplicationForLibraryModel_umlRelease {
+	group 'ApplicationForLibraryModel_uml'
+	description 'compile ApplicationForLibraryModel_uml in Release'
+
+	def folder = new File(file('./application/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'application/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./application").absolutePath
+		}
+		exec {
+			workingDir 'application/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
 }
 
 task compileLibraryModel_uml(dependsOn: ['compileLibraryModel_umlDebug', 'compileLibraryModel_umlRelease']) {
@@ -97,8 +156,17 @@ compileLibraryModel_uml.mustRunAfter generateLibraryModel_uml
 compileLibraryModel_umlDebug.mustRunAfter generateLibraryModel_uml
 compileLibraryModel_umlRelease.mustRunAfter generateLibraryModel_uml
 
+compileApplicationForLibraryModel_uml.mustRunAfter compileLibraryModel_uml
+compileApplicationForLibraryModel_umlDebug.mustRunAfter compileLibraryModel_umlDebug
+compileApplicationForLibraryModel_umlRelease.mustRunAfter compileLibraryModel_umlRelease
+
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/LibraryModel_uml/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+	cmakeFolder = file('./application/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
