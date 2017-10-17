@@ -43,7 +43,7 @@ int main()
 				std::shared_ptr<EClass> c = factory->createEClass_in_EPackage(package);
 				c->setName(std::string("Class")+std::to_string(var));
 				std::shared_ptr<EAttribute> a = factory->createEAttribute_in_EContainingClass(c);
-				a->setName(std::string("a")+std::to_string(var));
+				a->setName(std::string("a") + std::to_string(var));
             }
 
 			end = std::chrono::high_resolution_clock::now();
