@@ -4,18 +4,21 @@ task generateAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreMod
 	group 'MDE4CPP'
 	description 'build generators and all models in debug and release'
 }
+tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
 task generateAllDebug(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModelsDebug', 'src:common:buildReflectionModelsDebug']) {
 	group 'MDE4CPP'
 	description 'build generators and all models in debug'
 }
+tasks.getByPath('src:buildEcoreModelsDebug').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModelsDebug').mustRunAfter tasks.getByPath('src:buildEcoreModelsDebug')
 
 task generateAllRelease(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModelsRelease', 'src:common:buildReflectionModelsRelease']) {
 	group 'MDE4CPP'
 	description 'build generators and all models in release'
 }
+tasks.getByPath('src:buildEcoreModelsRelease').mustRunAfter tasks.getByPath('generator:createAllGenerators')
 tasks.getByPath('src:common:buildReflectionModelsRelease').mustRunAfter tasks.getByPath('src:buildEcoreModelsRelease')
 
 //Compile All
