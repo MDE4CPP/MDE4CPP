@@ -24,6 +24,11 @@
 
 
 [**
+ * check if application should be created
+*/]
+[query public prepareApplication(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
+
+[**
  * check and get key value from sourcegen eannotation
 */]
 [query public SetterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
