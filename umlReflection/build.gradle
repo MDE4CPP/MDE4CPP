@@ -97,6 +97,7 @@ compileUmlReflection.mustRunAfter generateUmlReflection
 compileUmlReflectionDebug.mustRunAfter generateUmlReflection
 compileUmlReflectionRelease.mustRunAfter generateUmlReflection
 
+
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/UmlReflection/.cmake/')
 	if(cmakeFolder.exists()) {

@@ -97,6 +97,7 @@ compilePrimitivetypesReflection.mustRunAfter generatePrimitivetypesReflection
 compilePrimitivetypesReflectionDebug.mustRunAfter generatePrimitivetypesReflection
 compilePrimitivetypesReflectionRelease.mustRunAfter generatePrimitivetypesReflection
 
+
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/PrimitivetypesReflection/.cmake/')
 	if(cmakeFolder.exists()) {

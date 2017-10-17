@@ -97,6 +97,7 @@ compileEcoreReflection.mustRunAfter generateEcoreReflection
 compileEcoreReflectionDebug.mustRunAfter generateEcoreReflection
 compileEcoreReflectionRelease.mustRunAfter generateEcoreReflection
 
+
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/EcoreReflection/.cmake/')
 	if(cmakeFolder.exists()) {
