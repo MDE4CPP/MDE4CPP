@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			FactoryImpl& operator=(FactoryImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FactoryImpl();
+
+
 
 		public:
 			//destructor
@@ -53,8 +61,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element> 
-			 create(std::shared_ptr<uml::Class>  metaClass)  ;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass)  ;
 			
 			
 			
@@ -73,7 +80,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

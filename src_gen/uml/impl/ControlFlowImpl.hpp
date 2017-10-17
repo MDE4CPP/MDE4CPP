@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ControlFlowImpl(const ControlFlowImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ControlFlowImpl& operator=(ControlFlowImpl const&) = delete;
@@ -40,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ControlFlowImpl();
+
+			//Additional constructors for the containments back reference
+			ControlFlowImpl(std::weak_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ControlFlowImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ControlFlowImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ControlFlowImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -52,8 +76,7 @@ namespace uml
 			 ControlFlows may not have ObjectNodes at either end, except for ObjectNodes with control type.
 			(source.oclIsKindOf(ObjectNode) implies source.oclAsType(ObjectNode).isControlType) and 
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType) */ 
-			virtual bool
-			 object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool object_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -71,18 +94,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

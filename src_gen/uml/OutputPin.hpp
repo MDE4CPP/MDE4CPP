@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -52,6 +58,11 @@ namespace uml
 namespace uml 
 {
 	class Behavior;
+}
+
+namespace uml 
+{
+	class CallAction;
 }
 
 namespace uml 
@@ -139,16 +150,38 @@ namespace uml
 	/*!
 	 An OutputPin is a Pin that holds output values produced by an Action.
 	<p>From package UML::Actions.</p> */
-	class OutputPin:virtual public Pin	{
+	class OutputPin:virtual public Pin
+	{
 		public:
  			OutputPin(const OutputPin &) {}
 			OutputPin& operator=(OutputPin const&) = delete;
-	
+
 		protected:
 			OutputPin(){}
 
+
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::Activity > par_activity);
+
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::CallAction > par_callAction);
+
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			OutputPin(std::weak_ptr<uml::Element > par_owner);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~OutputPin() {}
@@ -162,8 +195,7 @@ namespace uml
 				action<>null and
 				action.oclIsKindOf(StructuredActivityNode) and
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source) */ 
-			virtual bool
-			 incoming_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool incoming_edges_structured_only(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -173,6 +205,13 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::CallAction > getCallAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction_callAction) = 0;
 			
 
 		protected:
@@ -184,6 +223,9 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<uml::CallAction > m_callAction;
 			
 
 		public:
@@ -191,18 +233,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

@@ -3,28 +3,28 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp";
+#include "Activity.hpp"
 
-#include "ActivityEdge.hpp";
+#include "ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp";
+#include "ActivityGroup.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
 
 using namespace uml;
@@ -75,6 +75,52 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity > par_inActivity)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_inActivity = par_inActivity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::Element > par_owner)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+			:InterruptibleActivityRegionImpl()
+			{
+			    m_superGroup = par_superGroup;
+			}
+
+
+
+
+
+
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj):InterruptibleActivityRegionImpl()
 {
 	//create copy of all Attributes
@@ -87,49 +133,40 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new 		Union<uml::ActivityEdge> (*(obj.getContainedEdge().get())));
+	std::shared_ptr<Union<uml::ActivityEdge> > _containedEdge = obj.getContainedEdge();
+	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
 
-			std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new 		Union<uml::ActivityNode> (*(obj.getContainedNode().get())));
+	std::shared_ptr<Union<uml::ActivityNode> > _containedNode = obj.getContainedNode();
+	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
 
-		std::shared_ptr< Bag<uml::ActivityEdge> >
-	 _interruptingEdge = obj.getInterruptingEdge();
-	m_interruptingEdge.reset(new 	 Bag<uml::ActivityEdge> 
-	(*(obj.getInterruptingEdge().get())));
+	m_inActivity  = obj.getInActivity();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ActivityEdge> > _interruptingEdge = obj.getInterruptingEdge();
+	m_interruptingEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getInterruptingEdge().get())));
+
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
+	m_superGroup  = obj.getSuperGroup();
 
-    
+
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
-	if(obj.getInActivity()!=nullptr)
-	{
-		m_inActivity.reset(dynamic_cast<uml::Activity*>(obj.getInActivity()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inActivity" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -137,7 +174,7 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 	std::shared_ptr<Bag<uml::ActivityNode>> _nodeList = obj.getNode();
 	for(std::shared_ptr<uml::ActivityNode> _node : *_nodeList)
 	{
-		this->getNode()->add(std::shared_ptr<uml::ActivityNode>(dynamic_cast<uml::ActivityNode*>(_node->copy())));
+		this->getNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_node" << std::endl;
@@ -145,18 +182,18 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  InterruptibleActivityRegionImpl::copy() const
+std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
 {
-	return new InterruptibleActivityRegionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new InterruptibleActivityRegionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
@@ -165,14 +202,13 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool InterruptibleActivityRegionImpl::interrupting_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -181,16 +217,14 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::ActivityEdge> >
- InterruptibleActivityRegionImpl::getInterruptingEdge() const
+std::shared_ptr< Bag<uml::ActivityEdge> > InterruptibleActivityRegionImpl::getInterruptingEdge() const
 {
 
     return m_interruptingEdge;
 }
 
 
-		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > >
- InterruptibleActivityRegionImpl::getNode() const
+std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode > > InterruptibleActivityRegionImpl::getNode() const
 {
 
     return m_node;
@@ -200,15 +234,15 @@ bool
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
+std::shared_ptr<Union<uml::ActivityNode> > InterruptibleActivityRegionImpl::getContainedNode() const
 {
 	return m_containedNode;
 }
-std::shared_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > InterruptibleActivityRegionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > InterruptibleActivityRegionImpl::getOwner() const
 {
 	return m_owner;
 }

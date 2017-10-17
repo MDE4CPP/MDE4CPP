@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			CollaborationUseImpl(const CollaborationUseImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CollaborationUseImpl& operator=(CollaborationUseImpl const&) = delete;
@@ -40,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CollaborationUseImpl();
+
+			//Additional constructors for the containments back reference
+			CollaborationUseImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			CollaborationUseImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -59,14 +75,7 @@ namespace uml
 			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
 			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
 			      ce1.collaboration = ce2.collaboration) */ 
-			virtual bool
-			 client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
-			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
-			virtual bool
-			 every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
@@ -79,8 +88,12 @@ namespace uml
 			              correspondingConnector.end.role->forAll( role | boundRoles->includes(role) )
 			              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty()) implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
 			) */ 
-			virtual bool
-			 connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
+			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
+			virtual bool every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -95,8 +108,7 @@ namespace uml
 			/*!
 			 A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Dependency, uml::Element > >
-			 getRoleBinding() const ;
+			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element > > getRoleBinding() const ;
 			
 			/*!
 			 The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
@@ -115,10 +127,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

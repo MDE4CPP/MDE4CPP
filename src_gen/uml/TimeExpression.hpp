@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -56,6 +62,16 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
+	class Slot;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -87,16 +103,18 @@ namespace uml
 	/*!
 	 A TimeExpression is a ValueSpecification that represents a time value.
 	<p>From package UML::Values.</p> */
-	class TimeExpression:virtual public ValueSpecification	{
+	class TimeExpression:virtual public ValueSpecification
+	{
 		public:
  			TimeExpression(const TimeExpression &) {}
 			TimeExpression& operator=(TimeExpression const&) = delete;
-	
+
 		protected:
 			TimeExpression(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TimeExpression() {}
@@ -107,8 +125,7 @@ namespace uml
 			/*!
 			 If a TimeExpression has no expr, then it must have a single observation that is a TimeObservation.
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation))) */ 
-			virtual bool
-			 no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool no_expr_requires_observation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -130,8 +147,7 @@ namespace uml
 			/*!
 			 Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Observation> >
-			 getObservation() const = 0;
+			virtual std::shared_ptr< Bag<uml::Observation> > getObservation() const = 0;
 			
 			
 
@@ -151,8 +167,7 @@ namespace uml
 			/*!
 			 Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p> */
-				std::shared_ptr< Bag<uml::Observation> >
-			 m_observation;
+			std::shared_ptr< Bag<uml::Observation> > m_observation;
 			
 
 		public:
@@ -160,12 +175,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -92,16 +98,18 @@ namespace uml
 	/*!
 	 A Continuation is a syntactic way to define continuations of different branches of an alternative CombinedFragment. Continuations are intuitively similar to labels representing intermediate points in a flow of control.
 	<p>From package UML::Interactions.</p> */
-	class Continuation:virtual public InteractionFragment	{
+	class Continuation:virtual public InteractionFragment
+	{
 		public:
  			Continuation(const Continuation &) {}
 			Continuation& operator=(Continuation const&) = delete;
-	
+
 		protected:
 			Continuation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Continuation() {}
@@ -115,8 +123,15 @@ namespace uml
 			 let peerFragments : OrderedSet(InteractionFragment) =  enclosingOperand.fragment in 
 			   ( peerFragments->notEmpty() and 
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self))) */ 
-			virtual bool
-			 first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool first_or_last_interaction_fragment(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
+			enclosingOperand->notEmpty() and
+			  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in 
+			    (operandLifelines->notEmpty() and 
+			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol))) */ 
+			virtual bool global(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
@@ -144,17 +159,7 @@ namespace uml
 			 c.covered->asSet()->
 			  select(represents = cl.represents and selector = cl.selector)->asSet()->size()=1))
 			  ) */ 
-			virtual bool
-			 same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
-			enclosingOperand->notEmpty() and
-			  let operandLifelines : Set(Lifeline) =  enclosingOperand.covered in 
-			    (operandLifelines->notEmpty() and 
-			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol))) */ 
-			virtual bool
-			 global(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool same_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -196,15 +201,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

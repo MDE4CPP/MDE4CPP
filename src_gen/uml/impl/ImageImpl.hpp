@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ImageImpl(const ImageImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ImageImpl& operator=(ImageImpl const&) = delete;
@@ -40,6 +46,12 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ImageImpl();
+
+			//Additional constructors for the containments back reference
+			ImageImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -96,7 +108,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

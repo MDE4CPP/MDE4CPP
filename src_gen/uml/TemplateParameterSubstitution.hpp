@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -66,16 +72,26 @@ namespace uml
 	/*!
 	 A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.
 	<p>From package UML::CommonStructure.</p> */
-	class TemplateParameterSubstitution:virtual public Element	{
+	class TemplateParameterSubstitution:virtual public Element
+	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}
 			TemplateParameterSubstitution& operator=(TemplateParameterSubstitution const&) = delete;
-	
+
 		protected:
 			TemplateParameterSubstitution(){}
 
+
+			//Additional constructors for the containments back reference
+
+			TemplateParameterSubstitution(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			TemplateParameterSubstitution(std::weak_ptr<uml::TemplateBinding > par_templateBinding);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TemplateParameterSubstitution() {}
@@ -86,8 +102,7 @@ namespace uml
 			/*!
 			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
 			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
-			virtual bool
-			 must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -127,7 +142,7 @@ namespace uml
 			/*!
 			 The TemplateBinding that owns this TemplateParameterSubstitution.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateBinding > getTemplateBinding() const = 0;
+			virtual std::weak_ptr<uml::TemplateBinding > getTemplateBinding() const = 0;
 			
 			/*!
 			 The TemplateBinding that owns this TemplateParameterSubstitution.
@@ -159,7 +174,7 @@ namespace uml
 			/*!
 			 The TemplateBinding that owns this TemplateParameterSubstitution.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::TemplateBinding > m_templateBinding;
+			std::weak_ptr<uml::TemplateBinding > m_templateBinding;
 			
 
 		public:
@@ -167,12 +182,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

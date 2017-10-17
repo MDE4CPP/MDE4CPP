@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LinkEndCreationDataImpl& operator=(LinkEndCreationDataImpl const&) = delete;
@@ -40,6 +46,12 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndCreationDataImpl();
+
+			//Additional constructors for the containments back reference
+			LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -56,8 +68,7 @@ namespace uml
 				not isReplaceAll=false implies
 				insertAt <> null and insertAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool
-			 insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool insertAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -96,7 +107,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

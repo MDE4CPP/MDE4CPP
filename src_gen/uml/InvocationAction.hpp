@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -142,16 +148,18 @@ namespace uml
 	/*!
 	 InvocationAction is an abstract class for the various actions that request Behavior invocation.
 	<p>From package UML::Actions.</p> */
-	class InvocationAction:virtual public Action	{
+	class InvocationAction:virtual public Action
+	{
 		public:
  			InvocationAction(const InvocationAction &) {}
 			InvocationAction& operator=(InvocationAction const&) = delete;
-	
+
 		protected:
 			InvocationAction(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InvocationAction() {}
@@ -170,8 +178,7 @@ namespace uml
 			/*!
 			 The InputPins that provide the argument values passed in the invocation request.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
-			 getArgument() const = 0;
+			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > getArgument() const = 0;
 			
 			/*!
 			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
@@ -196,8 +203,7 @@ namespace uml
 			/*!
 			 The InputPins that provide the argument values passed in the invocation request.
 			<p>From package UML::Actions.</p> */
-					std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
-			 m_argument;
+			std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > m_argument;
 			/*!
 			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p> */
@@ -209,22 +215,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

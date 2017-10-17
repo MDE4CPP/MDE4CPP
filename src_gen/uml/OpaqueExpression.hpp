@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -56,7 +62,17 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class Parameter;
+}
+
+namespace uml 
+{
+	class Slot;
 }
 
 namespace uml 
@@ -92,16 +108,18 @@ namespace uml
 	/*!
 	 An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML
 	<p>From package UML::Values.</p> */
-	class OpaqueExpression:virtual public ValueSpecification	{
+	class OpaqueExpression:virtual public ValueSpecification
+	{
 		public:
  			OpaqueExpression(const OpaqueExpression &) {}
 			OpaqueExpression& operator=(OpaqueExpression const&) = delete;
-	
+
 		protected:
 			OpaqueExpression(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~OpaqueExpression() {}
@@ -109,57 +127,50 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool
-			 language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
-			/*!
-			 The behavior must have exactly one return result parameter.
-			behavior <> null implies
-			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool
-			 one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The behavior may only have return result parameters.
-			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool
-			 only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The query isIntegral() tells whether an expression is intended to produce an Integer.
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isIntegral()  = 0;
+			virtual bool isIntegral()  = 0;
 			
 			/*!
 			 The query isNonNegative() tells whether an integer expression has a non-negative value.
 			self.isIntegral()
 			result = (false)
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isNonNegative()  = 0;
+			virtual bool isNonNegative()  = 0;
 			
 			/*!
 			 The query isPositive() tells whether an integer expression has a positive value.
 			result = (false)
 			self.isIntegral()
 			<p>From package UML::Values.</p> */ 
-			virtual bool
-			 isPositive()  = 0;
+			virtual bool isPositive()  = 0;
 			
+			/*!
+			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
+			language->notEmpty() implies (_'body'->size() = language->size()) */ 
+			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
+			/*!
+			 The behavior must have exactly one return result parameter.
+			behavior <> null implies
+			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
+			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The behavior may only have return result parameters.
+			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
+			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
 			result = (0)
 			<p>From package UML::Values.</p> */ 
-			virtual int
-			 value()  = 0;
+			virtual int value()  = 0;
 			
 			
 			//*********************************
@@ -225,12 +236,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

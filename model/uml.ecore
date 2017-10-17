@@ -65,7 +65,8 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="node" ordered="false" upperBound="-1"
-        eType="#//ActivityNode" volatile="true" transient="true" derived="true" eOpposite="#//ActivityNode/activity">
+        eType="#//ActivityNode" volatile="true" transient="true" derived="true" containment="true"
+        eOpposite="#//ActivityNode/activity">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="ActivityNodes coordinated by the Activity.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
       </eAnnotations>
@@ -87,7 +88,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="group" ordered="false"
         upperBound="-1" eType="#//ActivityGroup" volatile="true" transient="true"
-        derived="true" eOpposite="#//ActivityGroup/inActivity">
+        derived="true" containment="true" eOpposite="#//ActivityGroup/inActivity">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Top-level ActivityGroups in the Activity.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
       </eAnnotations>
@@ -247,7 +248,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="#//Parameter" containment="true">
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/behavior">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
@@ -280,6 +281,10 @@
         <details key="documentation" value="References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.&#xA;&lt;p>From package UML::CommonBehavior.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="subsets" references="#//Classifier/redefinedClassifier"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavioredClassifier" eType="#//BehavioredClassifier"
+        unsettable="true" eOpposite="#//BehavioredClassifier/ownedBehavior">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//EncapsulatedClassifier #//BehavioredClassifier">
@@ -467,7 +472,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedBehavior" ordered="false"
-        upperBound="-1" eType="#//Behavior" containment="true">
+        upperBound="-1" eType="#//Behavior" containment="true" eOpposite="#//Behavior/behavioredClassifier.1">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Behaviors owned by a BehavioredClassifier.&#xA;&lt;p>From package UML::SimpleClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -1025,7 +1030,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedMember" ordered="false"
         upperBound="-1" eType="#//NamedElement" changeable="false" volatile="true"
-        transient="true" derived="true" eOpposite="#//NamedElement/namespace">
+        transient="true" derived="true" containment="true" eOpposite="#//NamedElement/namespace">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A collection of NamedElements owned by the Namespace.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -1159,7 +1164,8 @@
         <details key="documentation" value="The query allNamespaces() gives the sequence of Namespaces in which the NamedElement is nested, working outwards.&#xA;result = (&#xA;if owner = null&#xA;  then OrderedSet{}&#xA;else&#xA;  let enclosingNamespace : Namespace =&#xA;    if owner.oclIsKindOf(TemplateParameter) and owner.oclAsType(TemplateParameter).signature.template.oclIsKindOf(Namespace)&#xA;      then owner.oclAsType(TemplateParameter).signature.template.oclAsType(Namespace)&#xA;    else&#xA;      namespace&#xA;    endif&#xA;  in enclosingNamespace.allNamespaces()->prepend(enclosingNamespace)&#xA;endif)&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace> > allNS(new Bag&lt;uml::Namespace>());&#xD;&#xA;    if (getNamespace()==nullptr)&#xD;&#xA;    {&#xD;&#xA;        return allNS;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace> > currentNSList = getNamespace()->allNamespaces();&#xD;&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xD;&#xA;        currentNSList = nullptr;&#xD;&#xA;&#xD;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace();&#xD;&#xA;        if (currentNS != nullptr)&#xD;&#xA;        {&#xD;&#xA;            allNS->push_back(currentNS);&#xD;&#xA;        }&#xD;&#xA;        return allNS;&#xD;&#xA;    }"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Namespace> > allNS(new Bag&lt;uml::Namespace>());&#xD;&#xA;    if (getNamespace().lock() == nullptr)&#xD;&#xA;    {&#xD;&#xA;        return allNS;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;    &#x9;std::shared_ptr&lt;Bag&lt;uml::Namespace> > currentNSList = getNamespace().lock()->allNamespaces();&#xD;&#xA;        allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());&#xD;&#xA;        currentNSList = nullptr;&#xD;&#xA;&#xD;&#xA;        std::shared_ptr&lt;uml::Namespace> currentNS = getNamespace().lock();&#xD;&#xA;        if (currentNS != nullptr)&#xD;&#xA;        {&#xD;&#xA;            allNS->push_back(currentNS);&#xD;&#xA;        }&#xD;&#xA;        return allNS;&#xD;&#xA;    }"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="allOwningPackages" ordered="false" upperBound="-1" eType="#//Package">
@@ -1184,6 +1190,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Namespace> >  allNS = allNamespaces();&#xD;&#xA;&#xD;&#xA;    if(!this->getName().empty() &amp;&amp; std::none_of(allNS->cbegin(), allNS->cend(), [](std::shared_ptr&lt;uml::Namespace> ns){ return ns->getName().empty(); }))&#xD;&#xA;    {&#xD;&#xA;        std::string ret;&#xD;&#xA;        for(std::shared_ptr&lt;uml::Namespace> ns : *allNS )&#xD;&#xA;        {&#xD;&#xA;            ret = ns->getName() + separator() + ret;&#xD;&#xA;        }&#xD;&#xA;        ret += getName();&#xD;&#xA;        return ret;&#xD;&#xA;    }&#xD;&#xA;    else&#xD;&#xA;    {&#xD;&#xA;        return std::string();&#xD;&#xA;    }"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="separator" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
@@ -1192,6 +1199,7 @@
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="return &quot;::&quot;;"/>
+        <details key="const"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getClientDependencies" ordered="false" upperBound="-1" eType="#//Dependency">
@@ -1237,6 +1245,9 @@
         changeable="false" volatile="true" transient="true" derived="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="getterbody"/>
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" ordered="false"
@@ -1635,7 +1646,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedElement" ordered="false"
         upperBound="-1" eType="#//Element" changeable="false" volatile="true" transient="true"
-        derived="true" eOpposite="#//Element/owner">
+        derived="true" containment="true" eOpposite="#//Element/owner">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Elements owned by this Element.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
@@ -1648,6 +1659,9 @@
         <details key="documentation" value="The Element that owns this Element.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="union"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="isContainerAttribute" value="true"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Comment" eSuperTypes="#//Element">
@@ -2322,7 +2336,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="nestedPackage" ordered="false"
         upperBound="-1" eType="#//Package" volatile="true" transient="true" derived="true"
-        eOpposite="#//Package/nestingPackage">
+        containment="true" eOpposite="#//Package/nestingPackage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the packaged elements that are Packages.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2337,7 +2351,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedStereotype" ordered="false"
         upperBound="-1" eType="#//Stereotype" changeable="false" volatile="true" transient="true"
-        derived="true">
+        derived="true" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the Stereotypes that are owned by the Package.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2345,7 +2359,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedType" ordered="false"
         upperBound="-1" eType="#//Type" volatile="true" transient="true" derived="true"
-        eOpposite="#//Type/package">
+        containment="true" eOpposite="#//Type/package">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="References the packaged elements that are Types.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2359,7 +2373,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="packagedElement" ordered="false"
-        upperBound="-1" eType="#//PackageableElement" containment="true">
+        upperBound="-1" eType="#//PackageableElement" containment="true" eOpposite="#//PackageableElement/owningPackage">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Specifies the packageable elements that are owned by this Package.&#xA;&lt;p>From package UML::Packages.&lt;/p>"/>
       </eAnnotations>
@@ -2406,6 +2420,10 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningPackage" eType="#//Package"
+        eOpposite="#//Package/packagedElement">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterableElement" abstract="true"
       eSuperTypes="#//Element">
@@ -3425,7 +3443,7 @@
       <eAnnotations source="subsets" references="#//Element/ownedElement"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="class" ordered="false"
-        eType="#//Class" volatile="true" transient="true">
+        eType="#//Class" volatile="true" transient="true" eOpposite="#//StructuredClassifier/ownedAttribute">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Class that owns this Property, if any.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -3898,6 +3916,10 @@
         <details key="documentation" value="The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.&#xA;result = (null)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owningSlot" eType="#//Slot"
+        eOpposite="#//Slot/value">
+      <eAnnotations source="subsets" references="#//Element/owner"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ConnectableElementTemplateParameter"
       eSuperTypes="#//TemplateParameter">
@@ -4526,7 +4548,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" ordered="false"
-        eType="#//Operation" changeable="false" volatile="true" transient="true">
+        eType="#//Operation" changeable="false" volatile="true" transient="true" eOpposite="#//BehavioralFeature/ownedParameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Operation owning this parameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -4537,6 +4559,10 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ParameterSets containing the parameter. See ParameterSet.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" eType="#//Behavior"
+        eOpposite="#//Behavior/ownedParameter">
+      <eAnnotations source="subsets" references="#//NamedElement/namespace"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ParameterDirectionKind">
@@ -4901,7 +4927,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="#//Parameter" containment="true">
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/operation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ordered set of formal Parameters of this BehavioralFeature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -7311,7 +7337,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" upperBound="-1"
-        eType="#//ValueSpecification" containment="true">
+        eType="#//ValueSpecification" containment="true" eOpposite="#//ValueSpecification/owningSlot">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value or values held by the Slot.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -7865,7 +7891,7 @@
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
-        eType="#//Property" containment="true">
+        eType="#//Property" containment="true" eOpposite="#//Property/class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Properties owned by the StructuredClassifier.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -8660,7 +8686,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subgroup" ordered="false"
         upperBound="-1" eType="#//ActivityGroup" changeable="false" volatile="true"
-        transient="true" derived="true" eOpposite="#//ActivityGroup/superGroup">
+        transient="true" derived="true" containment="true" eOpposite="#//ActivityGroup/superGroup">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Other ActivityGroups immediately contained in this ActivityGroup.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
       </eAnnotations>
@@ -9538,6 +9564,18 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatureAction"
+        eType="#//StructuralFeatureAction" eOpposite="#//StructuralFeatureAction/object">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callOperationAction" eType="#//CallOperationAction"
+        eOpposite="#//CallOperationAction/target">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="invocationAction" eType="#//InvocationAction"
+        eOpposite="#//InvocationAction/argument">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9612,6 +9650,10 @@
         </eGenericType>
       </eParameters>
     </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="callAction" eType="#//CallAction"
+        eOpposite="#//CallAction/result">
+      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ConnectableElement #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -10225,7 +10267,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="object" ordered="false"
-        lowerBound="1" eType="#//InputPin" containment="true">
+        lowerBound="1" eType="#//InputPin" containment="true" eOpposite="#//InputPin/structuralFeatureAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin from which the object whose StructuralFeature is to be read or written is obtained.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10755,7 +10797,7 @@
       <details key="documentation" value="InvocationAction is an abstract class for the various actions that request Behavior invocation.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="argument" upperBound="-1"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/invocationAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPins that provide the argument values passed in the invocation request.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10847,7 +10889,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="result" upperBound="-1"
-        eType="#//OutputPin" containment="true">
+        eType="#//OutputPin" containment="true" eOpposite="#//OutputPin/callAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The OutputPins on which the reply values from the invocation are placed (if the call is synchronous).&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -10946,7 +10988,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
-        lowerBound="1" eType="#//InputPin" containment="true">
+        lowerBound="1" eType="#//InputPin" containment="true" eOpposite="#//InputPin/callOperationAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The InputPin that provides the target object to which the Operation call request is sent.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>

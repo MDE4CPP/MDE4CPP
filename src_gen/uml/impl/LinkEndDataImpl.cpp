@@ -3,20 +3,20 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "InputPin.hpp";
+#include "InputPin.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "QualifierValue.hpp";
+#include "QualifierValue.hpp"
 
 
 using namespace uml;
@@ -68,6 +68,19 @@ LinkEndDataImpl::~LinkEndDataImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
+			:LinkEndDataImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 {
 	//create copy of all Attributes
@@ -79,21 +92,17 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 	
 	m_end  = obj.getEnd();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_value  = obj.getValue();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -101,7 +110,7 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -109,7 +118,7 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
 	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(dynamic_cast<uml::QualifierValue*>(_qualifier->copy())));
+		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
@@ -122,12 +131,12 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  LinkEndDataImpl::copy() const
+std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 {
-	return new LinkEndDataImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LinkEndDataImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
@@ -136,49 +145,43 @@ std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::InputPin> >
- LinkEndDataImpl::allPins() 
+std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDataImpl::same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -197,8 +200,7 @@ void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
     m_end = _end;
 }
 
-		std::shared_ptr<Subset<uml::QualifierValue, uml::Element > >
- LinkEndDataImpl::getQualifier() const
+std::shared_ptr<Subset<uml::QualifierValue, uml::Element > > LinkEndDataImpl::getQualifier() const
 {
 
     return m_qualifier;
@@ -218,7 +220,7 @@ void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LinkEndDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

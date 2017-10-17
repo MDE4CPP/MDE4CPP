@@ -3,10 +3,10 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp";
+#include "Activity.hpp"
 
 
 using namespace uml;
@@ -36,6 +36,9 @@ ActivityContentImpl::~ActivityContentImpl()
 	
 }
 
+
+
+
 ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj):ActivityContentImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj):Activi
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ActivityContentImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityContentImpl::copy() const
 {
-	return new ActivityContentImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityContentImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
@@ -64,14 +66,13 @@ std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Activity> 
- ActivityContentImpl::containingActivity() 
+std::shared_ptr<uml::Activity> ActivityContentImpl::containingActivity() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

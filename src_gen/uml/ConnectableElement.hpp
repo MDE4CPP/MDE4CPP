@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -94,16 +100,18 @@ namespace uml
 	/*!
 	 ConnectableElement is an abstract metaclass representing a set of instances that play roles of a StructuredClassifier. ConnectableElements may be joined by attached Connectors and specify configurations of linked instances to be created within an instance of the containing StructuredClassifier.
 	<p>From package UML::StructuredClassifiers.</p> */
-	class ConnectableElement:virtual public ParameterableElement,virtual public TypedElement	{
+	class ConnectableElement:virtual public ParameterableElement,virtual public TypedElement
+	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}
 			ConnectableElement& operator=(ConnectableElement const&) = delete;
-	
+
 		protected:
 			ConnectableElement(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConnectableElement() {}
@@ -115,8 +123,7 @@ namespace uml
 			 Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::ConnectorEnd> >
-			 getEnds()  = 0;
+			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds()  = 0;
 			
 			
 			//*********************************
@@ -129,8 +136,7 @@ namespace uml
 			/*!
 			 A set of ConnectorEnds that attach to this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 	std::shared_ptr< Bag<uml::ConnectorEnd> >
-			 getEnd() const = 0;
+			virtual std::shared_ptr< Bag<uml::ConnectorEnd> > getEnd() const = 0;
 			
 			
 
@@ -146,8 +152,7 @@ namespace uml
 			/*!
 			 A set of ConnectorEnds that attach to this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p> */
-				std::shared_ptr< Bag<uml::ConnectorEnd> >
-			 m_end;
+			std::shared_ptr< Bag<uml::ConnectorEnd> > m_end;
 			
 
 		public:
@@ -155,12 +160,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

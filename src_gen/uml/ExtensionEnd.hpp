@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -135,16 +141,18 @@ namespace uml
 	 An extension end is used to tie an extension to a stereotype when extending a metaclass.
 	The default multiplicity of an extension end is 0..1.
 	<p>From package UML::Packages.</p> */
-	class ExtensionEnd:virtual public Property	{
+	class ExtensionEnd:virtual public Property
+	{
 		public:
  			ExtensionEnd(const ExtensionEnd &) {}
 			ExtensionEnd& operator=(ExtensionEnd const&) = delete;
-	
+
 		protected:
 			ExtensionEnd(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExtensionEnd() {}
@@ -153,16 +161,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of ExtensionEnd is 0..1 or 1.
-			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The aggregation of an ExtensionEnd is composite.
 			self.aggregation = AggregationKind::composite */ 
-			virtual bool
-			 aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The multiplicity of ExtensionEnd is 0..1 or 1.
+			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -190,24 +196,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0; 
 	};
 
 }

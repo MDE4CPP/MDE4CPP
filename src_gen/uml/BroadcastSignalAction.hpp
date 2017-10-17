@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -147,16 +153,18 @@ namespace uml
 	/*!
 	 A BroadcastSignalAction is an InvocationAction that transmits a Signal instance to all the potential target objects in the system. Values from the argument InputPins are used to provide values for the attributes of the Signal. The requestor continues execution immediately after the Signal instances are sent out and cannot receive reply values.
 	<p>From package UML::Actions.</p> */
-	class BroadcastSignalAction:virtual public InvocationAction	{
+	class BroadcastSignalAction:virtual public InvocationAction
+	{
 		public:
  			BroadcastSignalAction(const BroadcastSignalAction &) {}
 			BroadcastSignalAction& operator=(BroadcastSignalAction const&) = delete;
-	
+
 		protected:
 			BroadcastSignalAction(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~BroadcastSignalAction() {}
@@ -165,10 +173,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 A BroadcaseSignalAction may not specify onPort.
+			onPort=null */ 
+			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size() */ 
-			virtual bool
-			 number_of_arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool number_of_arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
@@ -177,14 +189,7 @@ namespace uml
 				argument->at(i).type.conformsTo(attribute->at(i).type) and 
 				argument->at(i).isOrdered = attribute->at(i).isOrdered and
 				argument->at(i).compatibleWith(attribute->at(i))) */ 
-			virtual bool
-			 type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 A BroadcaseSignalAction may not specify onPort.
-			onPort=null */ 
-			virtual bool
-			 no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -225,22 +230,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

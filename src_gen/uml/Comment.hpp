@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -51,16 +57,18 @@ namespace uml
 	/*!
 	 A Comment is a textual annotation that can be attached to a set of Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Comment:virtual public Element	{
+	class Comment:virtual public Element
+	{
 		public:
  			Comment(const Comment &) {}
 			Comment& operator=(Comment const&) = delete;
-	
+
 		protected:
 			Comment(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Comment() {}
@@ -89,8 +97,7 @@ namespace uml
 			/*!
 			 References the Element(s) being commented.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Element> >
-			 getAnnotatedElement() const = 0;
+			virtual std::shared_ptr< Bag<uml::Element> > getAnnotatedElement() const = 0;
 			
 			
 
@@ -110,8 +117,7 @@ namespace uml
 			/*!
 			 References the Element(s) being commented.
 			<p>From package UML::CommonStructure.</p> */
-				std::shared_ptr< Bag<uml::Element> >
-			 m_annotatedElement;
+			std::shared_ptr< Bag<uml::Element> > m_annotatedElement;
 			
 
 		public:
@@ -121,7 +127,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

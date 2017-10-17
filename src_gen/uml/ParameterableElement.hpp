@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -61,16 +67,26 @@ namespace uml
 	/*!
 	 A ParameterableElement is an Element that can be exposed as a formal TemplateParameter for a template, or specified as an actual parameter in a binding of a template.
 	<p>From package UML::CommonStructure.</p> */
-	class ParameterableElement:virtual public Element	{
+	class ParameterableElement:virtual public Element
+	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}
 			ParameterableElement& operator=(ParameterableElement const&) = delete;
-	
+
 		protected:
 			ParameterableElement(){}
 
+
+			//Additional constructors for the containments back reference
+
+			ParameterableElement(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			ParameterableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ParameterableElement() {}
@@ -82,15 +98,13 @@ namespace uml
 			 The query isCompatibleWith() determines if this ParameterableElement is compatible with the specified ParameterableElement. By default, this ParameterableElement is compatible with another ParameterableElement p if the kind of this ParameterableElement is the same as or a subtype of the kind of p. Subclasses of ParameterableElement should override this operation to specify different compatibility constraints.
 			result = (self.oclIsKindOf(p.oclType()))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool
-			 isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)  = 0;
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)  = 0;
 			
 			/*!
 			 The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool
-			 isTemplateParameter()  = 0;
+			virtual bool isTemplateParameter()  = 0;
 			
 			
 			//*********************************
@@ -103,7 +117,7 @@ namespace uml
 			/*!
 			 The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateParameter > getOwningTemplateParameter() const = 0;
+			virtual std::weak_ptr<uml::TemplateParameter > getOwningTemplateParameter() const = 0;
 			
 			/*!
 			 The formal TemplateParameter that owns this ParameterableElement.
@@ -132,7 +146,7 @@ namespace uml
 			/*!
 			 The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::TemplateParameter > m_owningTemplateParameter;
+			std::weak_ptr<uml::TemplateParameter > m_owningTemplateParameter;
 			/*!
 			 The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p> */
@@ -144,12 +158,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

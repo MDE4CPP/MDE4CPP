@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -51,16 +57,18 @@ namespace uml
 	/*!
 	 Relationship is an abstract concept that specifies some kind of relationship between Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Relationship:virtual public Element	{
+	class Relationship:virtual public Element
+	{
 		public:
  			Relationship(const Relationship &) {}
 			Relationship& operator=(Relationship const&) = delete;
-	
+
 		protected:
 			Relationship(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Relationship() {}
@@ -91,7 +99,7 @@ namespace uml
 			/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
-					std::shared_ptr<Union<uml::Element> > m_relatedElement;
+			std::shared_ptr<Union<uml::Element> > m_relatedElement;
 			
 
 		public:
@@ -99,12 +107,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0; 
 	};
 
 }

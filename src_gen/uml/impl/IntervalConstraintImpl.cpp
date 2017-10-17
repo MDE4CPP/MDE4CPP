@@ -3,26 +3,28 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "StringExpression.hpp";
+#include "Package.hpp"
 
-#include "TemplateParameter.hpp";
+#include "StringExpression.hpp"
 
-#include "ValueSpecification.hpp";
+#include "TemplateParameter.hpp"
+
+#include "ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -52,6 +54,69 @@ IntervalConstraintImpl::~IntervalConstraintImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+			:IntervalConstraintImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::CONSTRAINT_CONTEXT:
+					 m_context = par_Namespace;
+					 return;
+				case UmlPackage::NAMEDELEMENT_NAMESPACE:
+					 m_namespace = par_Namespace;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
+//Additional constructor for the containments back reference
+			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+			:IntervalConstraintImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:IntervalConstraintImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:IntervalConstraintImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & obj):IntervalConstraintImpl()
 {
 	//create copy of all Attributes
@@ -64,45 +129,38 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Element> >
-	 _constrainedElement = obj.getConstrainedElement();
-	m_constrainedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getConstrainedElement().get())));
+	std::shared_ptr< Bag<uml::Element> > _constrainedElement = obj.getConstrainedElement();
+	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_context  = obj.getContext();
+
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
+
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
-	if(obj.getContext()!=nullptr)
-	{
-		m_context.reset(dynamic_cast<uml::Namespace*>(obj.getContext()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_context" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -110,32 +168,25 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
+		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  IntervalConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
 {
-	return new IntervalConstraintImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new IntervalConstraintImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
@@ -144,7 +195,7 @@ std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -158,17 +209,17 @@ std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > IntervalConstraintImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > IntervalConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > IntervalConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Element> > IntervalConstraintImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > IntervalConstraintImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > IntervalConstraintImpl::getOwner() const
+{
+	return m_owner;
 }
 
 
@@ -182,9 +233,9 @@ boost::any IntervalConstraintImpl::eGet(int featureID,  bool resolve, bool coreT
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //2444
 		case UmlPackage::CONSTRAINT_CONSTRAINEDELEMENT:
-			return getConstrainedElement(); //24412
+			return getConstrainedElement(); //24413
 		case UmlPackage::CONSTRAINT_CONTEXT:
-			return getContext(); //24413
+			return getContext(); //24414
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2440
 		case UmlPackage::NAMEDELEMENT_NAME:
@@ -199,12 +250,14 @@ boost::any IntervalConstraintImpl::eGet(int featureID,  bool resolve, bool coreT
 			return getOwnedElement(); //2442
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2443
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24412
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2444
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //2448
 		case UmlPackage::CONSTRAINT_SPECIFICATION:
-			return getSpecification(); //24414
+			return getSpecification(); //24415
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //2445
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

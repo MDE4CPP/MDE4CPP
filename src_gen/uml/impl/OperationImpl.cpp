@@ -3,62 +3,62 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "BehavioralFeature.hpp";
+#include "BehavioralFeature.hpp"
 
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Constraint.hpp";
+#include "Constraint.hpp"
 
-#include "DataType.hpp";
+#include "DataType.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ElementImport.hpp";
+#include "ElementImport.hpp"
 
-#include "Interface.hpp";
+#include "Interface.hpp"
 
-#include "NamedElement.hpp";
+#include "NamedElement.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "PackageImport.hpp";
+#include "PackageImport.hpp"
 
-#include "PackageableElement.hpp";
+#include "PackageableElement.hpp"
 
-#include "Parameter.hpp";
+#include "Parameter.hpp"
 
-#include "ParameterSet.hpp";
+#include "ParameterSet.hpp"
 
-#include "ParameterableElement.hpp";
+#include "ParameterableElement.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "TemplateBinding.hpp";
+#include "TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp";
+#include "TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp";
+#include "TemplateSignature.hpp"
 
-#include "TemplateableElement.hpp";
+#include "TemplateableElement.hpp"
 
-#include "Type.hpp";
+#include "Type.hpp"
 
 
 using namespace uml;
@@ -158,6 +158,74 @@ OperationImpl::~OperationImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::Class > par_class)
+			:OperationImpl()
+			{
+			    m_class = par_class;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::DataType > par_datatype)
+			:OperationImpl()
+			{
+			    m_datatype = par_datatype;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::Interface > par_interface)
+			:OperationImpl()
+			{
+			    m_interface = par_interface;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:OperationImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::Element > par_owner)
+			:OperationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:OperationImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+
 OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 {
 	//create copy of all Attributes
@@ -179,71 +247,57 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	m_class  = obj.getClass();
 
-			std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new 		Union<uml::Classifier> (*(obj.getFeaturingClassifier().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	m_datatype  = obj.getDatatype();
 
-		std::shared_ptr< Bag<uml::Behavior> >
-	 _method = obj.getMethod();
-	m_method.reset(new 	 Bag<uml::Behavior> 
-	(*(obj.getMethod().get())));
+	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
+	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_interface  = obj.getInterface();
+
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
+
+	std::shared_ptr< Bag<uml::Behavior> > _method = obj.getMethod();
+	m_method.reset(new Bag<uml::Behavior>(*(obj.getMethod().get())));
+
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::Type> >
-	 _raisedException = obj.getRaisedException();
-	m_raisedException.reset(new 	 Bag<uml::Type> 
-	(*(obj.getRaisedException().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr< Bag<uml::Type> > _raisedException = obj.getRaisedException();
+	m_raisedException.reset(new Bag<uml::Type>(*(obj.getRaisedException().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
+
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getBodyCondition()!=nullptr)
 	{
-		m_bodyCondition.reset(dynamic_cast<uml::Constraint*>(obj.getBodyCondition()->copy()));
+		m_bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getBodyCondition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_bodyCondition" << std::endl;
 	#endif
-	if(obj.getClass()!=nullptr)
-	{
-		m_class.reset(dynamic_cast<uml::Class*>(obj.getClass()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_class" << std::endl;
-	#endif
-	if(obj.getDatatype()!=nullptr)
-	{
-		m_datatype.reset(dynamic_cast<uml::DataType*>(obj.getDatatype()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_datatype" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -251,7 +305,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
@@ -259,21 +313,14 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
 	#endif
-	if(obj.getInterface()!=nullptr)
-	{
-		m_interface.reset(dynamic_cast<uml::Interface*>(obj.getInterface()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_interface" << std::endl;
-	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -281,7 +328,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -289,7 +336,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Parameter>> _ownedParameterList = obj.getOwnedParameter();
 	for(std::shared_ptr<uml::Parameter> _ownedParameter : *_ownedParameterList)
 	{
-		this->getOwnedParameter()->add(std::shared_ptr<uml::Parameter>(dynamic_cast<uml::Parameter*>(_ownedParameter->copy())));
+		this->getOwnedParameter()->add(std::shared_ptr<uml::Parameter>(std::dynamic_pointer_cast<uml::Parameter>(_ownedParameter->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
@@ -297,7 +344,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSetList = obj.getOwnedParameterSet();
 	for(std::shared_ptr<uml::ParameterSet> _ownedParameterSet : *_ownedParameterSetList)
 	{
-		this->getOwnedParameterSet()->add(std::shared_ptr<uml::ParameterSet>(dynamic_cast<uml::ParameterSet*>(_ownedParameterSet->copy())));
+		this->getOwnedParameterSet()->add(std::shared_ptr<uml::ParameterSet>(std::dynamic_pointer_cast<uml::ParameterSet>(_ownedParameterSet->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameterSet" << std::endl;
@@ -305,29 +352,22 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
 	#endif
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
+		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
@@ -335,7 +375,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _postconditionList = obj.getPostcondition();
 	for(std::shared_ptr<uml::Constraint> _postcondition : *_postconditionList)
 	{
-		this->getPostcondition()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_postcondition->copy())));
+		this->getPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_postcondition->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_postcondition" << std::endl;
@@ -343,7 +383,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _preconditionList = obj.getPrecondition();
 	for(std::shared_ptr<uml::Constraint> _precondition : *_preconditionList)
 	{
-		this->getPrecondition()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_precondition->copy())));
+		this->getPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_precondition->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_precondition" << std::endl;
@@ -351,7 +391,7 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::Operation>> _redefinedOperationList = obj.getRedefinedOperation();
 	for(std::shared_ptr<uml::Operation> _redefinedOperation : *_redefinedOperationList)
 	{
-		this->getRedefinedOperation()->add(std::shared_ptr<uml::Operation>(dynamic_cast<uml::Operation*>(_redefinedOperation->copy())));
+		this->getRedefinedOperation()->add(std::shared_ptr<uml::Operation>(std::dynamic_pointer_cast<uml::Operation>(_redefinedOperation->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedOperation" << std::endl;
@@ -359,18 +399,18 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
 	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
+		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  OperationImpl::copy() const
+std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
 {
-	return new OperationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new OperationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
@@ -379,7 +419,7 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 
@@ -388,7 +428,7 @@ bool OperationImpl::getIsOrdered() const
 	return m_isOrdered;
 }
 
-void OperationImpl::setIsQuery (bool _isQuery)
+void OperationImpl::setIsQuery(bool _isQuery)
 {
 	m_isQuery = _isQuery;
 } 
@@ -422,22 +462,19 @@ int OperationImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool
- OperationImpl::at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationImpl::at_most_one_return(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int
- OperationImpl::getLower() 
+int OperationImpl::getLower() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Parameter> 
- OperationImpl::getReturnResult() 
+std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -445,71 +482,61 @@ std::shared_ptr<uml::Parameter>
 
 
 
-int
- OperationImpl::getUpper() 
+int OperationImpl::getUpper() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- OperationImpl::isOrdered() 
+bool OperationImpl::isOrdered() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- OperationImpl::isUnique() 
+bool OperationImpl::isUnique() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- OperationImpl::only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool OperationImpl::only_body_for_query(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Parameter> >
- OperationImpl::returnResult() 
+std::shared_ptr<Bag<uml::Parameter> > OperationImpl::returnResult() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- OperationImpl::setIsOrdered(bool newIsOrdered) 
+void OperationImpl::setIsOrdered(bool newIsOrdered) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- OperationImpl::setIsUnique(bool newIsUnique) 
+void OperationImpl::setIsUnique(bool newIsUnique) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- OperationImpl::setLower(int newLower) 
+void OperationImpl::setLower(int newLower) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- OperationImpl::setType(std::shared_ptr<uml::Type>  newType) 
+void OperationImpl::setType(std::shared_ptr<uml::Type>  newType) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- OperationImpl::setUpper(int newUpper) 
+void OperationImpl::setUpper(int newUpper) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -528,7 +555,7 @@ void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondi
     m_bodyCondition = _bodyCondition;
 }
 
-std::shared_ptr<uml::Class > OperationImpl::getClass() const
+std::weak_ptr<uml::Class > OperationImpl::getClass() const
 {
 
     return m_class;
@@ -538,7 +565,7 @@ void OperationImpl::setClass(std::shared_ptr<uml::Class> _class)
     m_class = _class;
 }
 
-std::shared_ptr<uml::DataType > OperationImpl::getDatatype() const
+std::weak_ptr<uml::DataType > OperationImpl::getDatatype() const
 {
 
     return m_datatype;
@@ -548,7 +575,7 @@ void OperationImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
     m_datatype = _datatype;
 }
 
-std::shared_ptr<uml::Interface > OperationImpl::getInterface() const
+std::weak_ptr<uml::Interface > OperationImpl::getInterface() const
 {
 
     return m_interface;
@@ -558,24 +585,21 @@ void OperationImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
     m_interface = _interface;
 }
 
-		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > >
- OperationImpl::getPostcondition() const
+std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > OperationImpl::getPostcondition() const
 {
 
     return m_postcondition;
 }
 
 
-		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > >
- OperationImpl::getPrecondition() const
+std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ > > OperationImpl::getPrecondition() const
 {
 
     return m_precondition;
 }
 
 
-		std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > >
- OperationImpl::getRedefinedOperation() const
+std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement > > OperationImpl::getRedefinedOperation() const
 {
 
     return m_redefinedOperation;
@@ -592,38 +616,37 @@ std::shared_ptr<uml::Type > OperationImpl::getType() const
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > OperationImpl::getNamespace() const
-{
-	return m_namespace;
-}
-std::shared_ptr<uml::Element > OperationImpl::getOwner() const
-{
-	return m_owner;
-}
-		std::shared_ptr<Union<uml::Classifier> > OperationImpl::getFeaturingClassifier() const
+std::shared_ptr<Union<uml::Classifier> > OperationImpl::getFeaturingClassifier() const
 {
 	return m_featuringClassifier;
 }
-		std::shared_ptr<Union<uml::RedefinableElement> > OperationImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-		std::shared_ptr<Union<uml::Element> > OperationImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<Union<uml::NamedElement> > OperationImpl::getMember() const
+std::shared_ptr<Union<uml::NamedElement> > OperationImpl::getMember() const
 {
 	return m_member;
 }
-		std::shared_ptr<Union<uml::Classifier> > OperationImpl::getRedefinitionContext() const
+std::weak_ptr<uml::Namespace > OperationImpl::getNamespace() const
 {
-	return m_redefinitionContext;
+	return m_namespace;
 }
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- OperationImpl::getOwnedMember() const
+std::shared_ptr<Union<uml::Element> > OperationImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > OperationImpl::getOwnedMember() const
 {
 	return m_ownedMember;
+}
+std::weak_ptr<uml::Element > OperationImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > OperationImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<Union<uml::Classifier> > OperationImpl::getRedefinitionContext() const
+{
+	return m_redefinitionContext;
 }
 
 

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			LinkEndDataImpl(const LinkEndDataImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LinkEndDataImpl& operator=(LinkEndDataImpl const&) = delete;
@@ -40,6 +46,12 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			LinkEndDataImpl();
+
+			//Additional constructors for the containments back reference
+			LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -49,41 +61,35 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The type of the value InputPin conforms to the type of the Association end.
-			value<>null implies value.type.conformsTo(end.type) */ 
-			virtual bool
-			 same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The multiplicity of the value InputPin must be 1..1.
-			value<>null implies value.is(1,1) */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
+			result = (value->asBag()->union(qualifier.value))
+			<p>From package UML::Actions.</p> */ 
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins()  ;
 			
 			/*!
 			 The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value) */ 
-			virtual bool
-			 end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The multiplicity of the value InputPin must be 1..1.
+			value<>null implies value.is(1,1) */ 
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The Property must be an Association memberEnd.
 			end.association <> null */ 
-			virtual bool
-			 property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool property_is_association_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier) */ 
-			virtual bool
-			 qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
-			result = (value->asBag()->union(qualifier.value))
-			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InputPin> >
-			 allPins()  ;
+			 The type of the value InputPin conforms to the type of the Association end.
+			value<>null implies value.type.conformsTo(end.type) */ 
+			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -107,8 +113,7 @@ namespace uml
 			/*!
 			 A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::QualifierValue, uml::Element > >
-			 getQualifier() const ;
+			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element > > getQualifier() const ;
 			
 			/*!
 			 The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
@@ -127,7 +132,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

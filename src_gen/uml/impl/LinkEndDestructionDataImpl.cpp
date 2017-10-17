@@ -3,22 +3,22 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "InputPin.hpp";
+#include "InputPin.hpp"
 
-#include "LinkEndData.hpp";
+#include "LinkEndData.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
-#include "QualifierValue.hpp";
+#include "QualifierValue.hpp"
 
 
 using namespace uml;
@@ -50,6 +50,19 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+			:LinkEndDestructionDataImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
 {
 	//create copy of all Attributes
@@ -64,21 +77,17 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 
 	m_end  = obj.getEnd();
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
 	m_value  = obj.getValue();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -86,7 +95,7 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -94,18 +103,18 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
 	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
 	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(dynamic_cast<uml::QualifierValue*>(_qualifier->copy())));
+		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  LinkEndDestructionDataImpl::copy() const
+std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
 {
-	return new LinkEndDestructionDataImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LinkEndDestructionDataImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
@@ -114,9 +123,9 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void LinkEndDestructionDataImpl::setIsDestroyDuplicates (bool _isDestroyDuplicates)
+void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
@@ -129,8 +138,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 //*********************************
 // Operations
 //*********************************
-bool
- LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool LinkEndDestructionDataImpl::destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -152,7 +160,7 @@ void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _de
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > LinkEndDestructionDataImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > LinkEndDestructionDataImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

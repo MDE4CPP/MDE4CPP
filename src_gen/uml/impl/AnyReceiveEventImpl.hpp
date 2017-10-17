@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			AnyReceiveEventImpl(const AnyReceiveEventImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			AnyReceiveEventImpl& operator=(AnyReceiveEventImpl const&) = delete;
@@ -40,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			AnyReceiveEventImpl();
+
+			//Additional constructors for the containments back reference
+			AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -64,12 +88,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public ActivityContent
 	{
 		public: 
 			ActivityContentImpl(const ActivityContentImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityContentImpl& operator=(ActivityContentImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public ActivityContent
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityContentImpl();
+
+
 
 		public:
 			//destructor
@@ -52,8 +60,7 @@ virtual public ActivityContent
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> 
-			 containingActivity()  ;
+			virtual std::shared_ptr<uml::Activity> containingActivity()  ;
 			
 			
 			

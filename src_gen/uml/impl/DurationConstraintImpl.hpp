@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			DurationConstraintImpl(const DurationConstraintImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			DurationConstraintImpl& operator=(DurationConstraintImpl const&) = delete;
@@ -40,6 +46,27 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DurationConstraintImpl();
+
+			//Additional constructors for the containments back reference
+			DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+			DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -53,14 +80,12 @@ namespace uml
 			if (constrainedElement->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0) 
 			endif */ 
-			virtual bool
-			 first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2 */ 
-			virtual bool
-			 has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool has_one_or_two_constrainedElements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -83,15 +108,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

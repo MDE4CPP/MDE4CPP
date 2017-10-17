@@ -3,26 +3,26 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "Dependency.hpp";
+#include "Dependency.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "Namespace.hpp";
+#include "Namespace.hpp"
 
-#include "RedefinableElement.hpp";
+#include "RedefinableElement.hpp"
 
-#include "StringExpression.hpp";
+#include "StringExpression.hpp"
 
-#include "UseCase.hpp";
+#include "UseCase.hpp"
 
 
 using namespace uml;
@@ -54,6 +54,41 @@ ExtensionPointImpl::~ExtensionPointImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ExtensionPointImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Element > par_owner)
+			:ExtensionPointImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase > par_useCase)
+			:ExtensionPointImpl()
+			{
+			    m_useCase = par_useCase;
+			}
+
+
+
+
+
+
 ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):ExtensionPointImpl()
 {
 	//create copy of all Attributes
@@ -67,37 +102,35 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):Extension
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
+
+	m_useCase  = obj.getUseCase();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -105,25 +138,18 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):Extension
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getUseCase()!=nullptr)
-	{
-		m_useCase.reset(dynamic_cast<uml::UseCase*>(obj.getUseCase()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_useCase" << std::endl;
-	#endif
-
 
 }
 
-ecore::EObject *  ExtensionPointImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
 {
-	return new ExtensionPointImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExtensionPointImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
@@ -132,14 +158,13 @@ std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ExtensionPointImpl::must_have_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -148,7 +173,7 @@ bool
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::UseCase > ExtensionPointImpl::getUseCase() const
+std::weak_ptr<uml::UseCase > ExtensionPointImpl::getUseCase() const
 {
 //assert(m_useCase);
     return m_useCase;
@@ -161,15 +186,15 @@ void ExtensionPointImpl::setUseCase(std::shared_ptr<uml::UseCase> _useCase)
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ExtensionPointImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Namespace > ExtensionPointImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > ExtensionPointImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > ExtensionPointImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > ExtensionPointImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ExtensionPointImpl::getOwner() const
 {
 	return m_owner;
 }

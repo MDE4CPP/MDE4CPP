@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ReceptionImpl(const ReceptionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ReceptionImpl& operator=(ReceptionImpl const&) = delete;
@@ -40,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReceptionImpl();
+
+			//Additional constructors for the containments back reference
+			ReceptionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ReceptionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -51,8 +67,7 @@ namespace uml
 			/*!
 			 A Reception has the same name as its signal
 			name = signal.name */ 
-			virtual bool
-			 same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_name_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -64,8 +79,7 @@ namespace uml
 			    ownedParameter->at(i).lowerBound() = signal.ownedAttribute->at(i).lowerBound() and
 			    ownedParameter->at(i).upperBound() = signal.ownedAttribute->at(i).upperBound()
 			) */ 
-			virtual bool
-			 same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool same_structure_as_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -94,17 +108,16 @@ namespace uml
 			/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 A collection of NamedElements owned by the Namespace.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -87,16 +93,18 @@ namespace uml
 	/*!
 	 MessageEnd is an abstract specialization of NamedElement that represents what can occur at the end of a Message.
 	<p>From package UML::Interactions.</p> */
-	class MessageEnd:virtual public NamedElement	{
+	class MessageEnd:virtual public NamedElement
+	{
 		public:
  			MessageEnd(const MessageEnd &) {}
 			MessageEnd& operator=(MessageEnd const&) = delete;
-	
+
 		protected:
 			MessageEnd(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~MessageEnd() {}
@@ -104,30 +112,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
-			result = (message->asSet().messageEnd->asSet()->excluding(self))
-			message->notEmpty()
-			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::MessageEnd> >
-			 oppositeEnd()  = 0;
-			
-			/*!
-			 This query returns value true if this MessageEnd is a sendEvent.
-			message->notEmpty()
-			result = (message.sendEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
-			virtual bool
-			 isSend()  = 0;
-			
-			/*!
-			 This query returns value true if this MessageEnd is a receiveEvent.
-			message->notEmpty()
-			result = (message.receiveEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
-			virtual bool
-			 isReceive()  = 0;
-			
 			/*!
 			 This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
 			result = (if self->select(oclIsKindOf(Gate))->notEmpty() 
@@ -160,8 +144,28 @@ namespace uml
 			  endif
 			endif)
 			<p>From package UML::Interactions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> >
-			 enclosingFragment()  = 0;
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment()  = 0;
+			
+			/*!
+			 This query returns value true if this MessageEnd is a receiveEvent.
+			message->notEmpty()
+			result = (message.receiveEvent->asSet()->includes(self))
+			<p>From package UML::Interactions.</p> */ 
+			virtual bool isReceive()  = 0;
+			
+			/*!
+			 This query returns value true if this MessageEnd is a sendEvent.
+			message->notEmpty()
+			result = (message.sendEvent->asSet()->includes(self))
+			<p>From package UML::Interactions.</p> */ 
+			virtual bool isSend()  = 0;
+			
+			/*!
+			 This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
+			result = (message->asSet().messageEnd->asSet()->excluding(self))
+			message->notEmpty()
+			<p>From package UML::Interactions.</p> */ 
+			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd()  = 0;
 			
 			
 			//*********************************
@@ -202,12 +206,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

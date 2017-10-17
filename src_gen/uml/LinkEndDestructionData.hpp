@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -71,16 +77,18 @@ namespace uml
 	/*!
 	 LinkEndDestructionData is LinkEndData used to provide values for one end of a link to be destroyed by a DestroyLinkAction.
 	<p>From package UML::Actions.</p> */
-	class LinkEndDestructionData:virtual public LinkEndData	{
+	class LinkEndDestructionData:virtual public LinkEndData
+	{
 		public:
  			LinkEndDestructionData(const LinkEndDestructionData &) {}
 			LinkEndDestructionData& operator=(LinkEndDestructionData const&) = delete;
-	
+
 		protected:
 			LinkEndDestructionData(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LinkEndDestructionData() {}
@@ -96,8 +104,7 @@ namespace uml
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
 			endif */ 
-			virtual bool
-			 destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool destroyAt_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -154,7 +161,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

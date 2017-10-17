@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -56,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -77,16 +88,18 @@ namespace uml
 	/*!
 	 A trigger for an AnyReceiveEvent is triggered by the receipt of any message that is not explicitly handled by any related trigger.
 	<p>From package UML::CommonBehavior.</p> */
-	class AnyReceiveEvent:virtual public MessageEvent	{
+	class AnyReceiveEvent:virtual public MessageEvent
+	{
 		public:
  			AnyReceiveEvent(const AnyReceiveEvent &) {}
 			AnyReceiveEvent& operator=(AnyReceiveEvent const&) = delete;
-	
+
 		protected:
 			AnyReceiveEvent(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~AnyReceiveEvent() {}
@@ -120,12 +133,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace uml
 	{
 		public: 
 			GeneralizationSetImpl(const GeneralizationSetImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			GeneralizationSetImpl& operator=(GeneralizationSetImpl const&) = delete;
@@ -40,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			GeneralizationSetImpl();
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -51,16 +75,14 @@ namespace uml
 			/*!
 			 Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
 			generalization->collect(general)->asSet()->size() <= 1 */ 
-			virtual bool
-			 generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool generalization_same_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
 			  ) */ 
-			virtual bool
-			 maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -93,6 +115,11 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
+			 Designates the instances of Generalization that are members of this GeneralizationSet.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const ;
+			
+			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<uml::Classifier > getPowertype() const ;
@@ -101,24 +128,21 @@ namespace uml
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype_powertype) ;
-			/*!
-			 Designates the instances of Generalization that are members of this GeneralizationSet.
-			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Generalization> >
-			 getGeneralization() const ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

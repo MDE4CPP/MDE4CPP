@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -122,16 +128,18 @@ namespace uml
 	/*!
 	 A JoinNode is a ControlNode that synchronizes multiple flows.
 	<p>From package UML::Activities.</p> */
-	class JoinNode:virtual public ControlNode	{
+	class JoinNode:virtual public ControlNode
+	{
 		public:
  			JoinNode(const JoinNode &) {}
 			JoinNode& operator=(JoinNode const&) = delete;
-	
+
 		protected:
 			JoinNode(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~JoinNode() {}
@@ -140,18 +148,16 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A JoinNode has one outgoing ActivityEdge.
-			outgoing->size() = 1 */ 
-			virtual bool
-			 one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 If one of the incoming ActivityEdges of a JoinNode is an ObjectFlow, then its outgoing ActivityEdge must be an ObjectFlow. Otherwise its outgoing ActivityEdge must be a ControlFlow.
 			if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))
 			else outgoing->forAll(oclIsKindOf(ControlFlow))
 			endif */ 
-			virtual bool
-			 incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool incoming_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 A JoinNode has one outgoing ActivityEdge.
+			outgoing->size() = 1 */ 
+			virtual bool one_outgoing_edge(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -206,18 +212,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

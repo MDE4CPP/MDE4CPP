@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -66,16 +72,26 @@ namespace uml
 	/*!
 	 A Generalization is a taxonomic relationship between a more general Classifier and a more specific Classifier. Each instance of the specific Classifier is also an instance of the general Classifier. The specific Classifier inherits the features of the more general Classifier. A Generalization is owned by the specific Classifier.
 	<p>From package UML::Classification.</p> */
-	class Generalization:virtual public DirectedRelationship	{
+	class Generalization:virtual public DirectedRelationship
+	{
 		public:
  			Generalization(const Generalization &) {}
 			Generalization& operator=(Generalization const&) = delete;
-	
+
 		protected:
 			Generalization(){}
 
+
+			//Additional constructors for the containments back reference
+
+			Generalization(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Generalization(std::weak_ptr<uml::Classifier > par_specific);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Generalization() {}
@@ -113,13 +129,12 @@ namespace uml
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::GeneralizationSet> >
-			 getGeneralizationSet() const = 0;
+			virtual std::shared_ptr< Bag<uml::GeneralizationSet> > getGeneralizationSet() const = 0;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Classifier > getSpecific() const = 0;
+			virtual std::weak_ptr<uml::Classifier > getSpecific() const = 0;
 			
 			/*!
 			 The specializing Classifier in the Generalization relationship.
@@ -147,12 +162,11 @@ namespace uml
 			/*!
 			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p> */
-				std::shared_ptr< Bag<uml::GeneralizationSet> >
-			 m_generalizationSet;
+			std::shared_ptr< Bag<uml::GeneralizationSet> > m_generalizationSet;
 			/*!
 			 The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier > m_specific;
+			std::weak_ptr<uml::Classifier > m_specific;
 			
 
 		public:
@@ -160,23 +174,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0; 
 	};
 
 }

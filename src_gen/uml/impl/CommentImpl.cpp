@@ -3,14 +3,14 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp";
+#include "Comment.hpp"
 
-#include "EAnnotation.hpp";
+#include "EAnnotation.hpp"
 
-#include "Element.hpp";
+#include "Element.hpp"
 
 
 using namespace uml;
@@ -45,6 +45,19 @@ CommentImpl::~CommentImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			CommentImpl::CommentImpl(std::weak_ptr<uml::Element > par_owner)
+			:CommentImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 {
 	//create copy of all Attributes
@@ -55,24 +68,18 @@ CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Element> >
-	 _annotatedElement = obj.getAnnotatedElement();
-	m_annotatedElement.reset(new 	 Bag<uml::Element> 
-	(*(obj.getAnnotatedElement().get())));
-
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::Element> > _annotatedElement = obj.getAnnotatedElement();
+	m_annotatedElement.reset(new Bag<uml::Element>(*(obj.getAnnotatedElement().get())));
 
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -80,18 +87,18 @@ CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  CommentImpl::copy() const
+std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
 {
-	return new CommentImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new CommentImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
@@ -100,9 +107,9 @@ std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void CommentImpl::setBody (std::string _body)
+void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
 } 
@@ -119,8 +126,7 @@ std::string CommentImpl::getBody() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<uml::Element> >
- CommentImpl::getAnnotatedElement() const
+std::shared_ptr< Bag<uml::Element> > CommentImpl::getAnnotatedElement() const
 {
 
     return m_annotatedElement;
@@ -130,7 +136,7 @@ std::string CommentImpl::getBody() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > CommentImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > CommentImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }

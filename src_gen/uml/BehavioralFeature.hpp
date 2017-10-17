@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -131,16 +137,18 @@ namespace uml
 	/*!
 	 A BehavioralFeature is a feature of a Classifier that specifies an aspect of the behavior of its instances.  A BehavioralFeature is implemented (realized) by a Behavior. A BehavioralFeature specifies that a Classifier will respond to a designated request by invoking its implementing method.
 	<p>From package UML::Classification.</p> */
-	class BehavioralFeature:virtual public Feature,virtual public Namespace	{
+	class BehavioralFeature:virtual public Feature,virtual public Namespace
+	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}
 			BehavioralFeature& operator=(BehavioralFeature const&) = delete;
-	
+
 		protected:
 			BehavioralFeature(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~BehavioralFeature() {}
@@ -151,27 +159,23 @@ namespace uml
 			/*!
 			 When isAbstract is true there are no methods.
 			isAbstract implies method->isEmpty() */ 
-			virtual bool
-			 abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool abstract_no_method(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Creates a return result parameter with the specified name and type. */ 
-			virtual std::shared_ptr<uml::Parameter> 
-			 createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)  = 0;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)  = 0;
 			
 			/*!
 			 The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> >
-			 inputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters()  = 0;
 			
 			/*!
 			 The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Parameter> >
-			 outputParameters()  = 0;
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters()  = 0;
 			
 			
 			//*********************************
@@ -204,26 +208,22 @@ namespace uml
 			/*!
 			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Behavior> >
-			 getMethod() const = 0;
+			virtual std::shared_ptr< Bag<uml::Behavior> > getMethod() const = 0;
 			
 			/*!
 			 The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Parameter, uml::NamedElement > >
-			 getOwnedParameter() const = 0;
+			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement > > getOwnedParameter() const = 0;
 			
 			/*!
 			 The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement > >
-			 getOwnedParameterSet() const = 0;
+			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement > > getOwnedParameterSet() const = 0;
 			
 			/*!
 			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Type> >
-			 getRaisedException() const = 0;
+			virtual std::shared_ptr< Bag<uml::Type> > getRaisedException() const = 0;
 			
 			
 
@@ -247,23 +247,19 @@ namespace uml
 			/*!
 			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
 			<p>From package UML::Classification.</p> */
-				std::shared_ptr< Bag<uml::Behavior> >
-			 m_method;
+			std::shared_ptr< Bag<uml::Behavior> > m_method;
 			/*!
 			 The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-					std::shared_ptr<Subset<uml::Parameter, uml::NamedElement > >
-			 m_ownedParameter;
+			std::shared_ptr<Subset<uml::Parameter, uml::NamedElement > > m_ownedParameter;
 			/*!
 			 The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-					std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement > >
-			 m_ownedParameterSet;
+			std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement > > m_ownedParameterSet;
 			/*!
 			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
 			<p>From package UML::Classification.</p> */
-				std::shared_ptr< Bag<uml::Type> >
-			 m_raisedException;
+			std::shared_ptr< Bag<uml::Type> > m_raisedException;
 			
 
 		public:
@@ -271,19 +267,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -107,16 +113,18 @@ namespace uml
 	/*!
 	 An InteractionUse refers to an Interaction. The InteractionUse is a shorthand for copying the contents of the referenced Interaction where the InteractionUse is. To be accurate the copying must take into account substituting parameters with arguments and connect the formal Gates with the actual ones.
 	<p>From package UML::Interactions.</p> */
-	class InteractionUse:virtual public InteractionFragment	{
+	class InteractionUse:virtual public InteractionFragment
+	{
 		public:
  			InteractionUse(const InteractionUse &) {}
 			InteractionUse& operator=(InteractionUse const&) = delete;
-	
+
 		protected:
 			InteractionUse(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InteractionUse() {}
@@ -124,40 +132,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
-			actualGate->notEmpty() implies 
-			refersTo.formalGate->forAll( fg : Gate | self.actualGate->select(matches(fg))->size()=1) and
-			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1) */ 
-			virtual bool
-			 gates_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction. */ 
-			virtual bool
-			 arguments_are_constants(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
-			returnValueRecipient->asSet()->notEmpty() implies
-			let covCE : Set(ConnectableElement) = covered.represents->asSet() in 
-			covCE->notEmpty() and let classes:Set(Classifier) = covCE.type.oclIsKindOf(Classifier).oclAsType(Classifier)->asSet() in 
-			let allProps : Set(Property) = classes.attribute->union(classes.allParents().attribute)->asSet() in 
-			allProps->includes(returnValueRecipient) */ 
-			virtual bool
-			 returnValueRecipient_coverage(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The arguments of the InteractionUse must correspond to parameters of the referred Interaction. */ 
-			virtual bool
-			 arguments_correspond_to_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The type of the returnValue must correspond to the type of the returnValueRecipient.
-			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first() */ 
-			virtual bool
-			 returnValue_type_recipient_correspondence(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The InteractionUse must cover all Lifelines of the enclosing Interaction that are common with the lifelines covered by the referred Interaction. Lifelines are common if they have the same selector and represents associationEnd values.
 			let parentInteraction : Set(Interaction) = enclosingInteraction->asSet()->
@@ -175,8 +149,36 @@ namespace uml
 			  refLifeline.selector.oclAsType(LiteralInteger).value = intLifeline.selector.oclAsType(LiteralInteger).value )
 			)
 			 implies self.covered->asSet()->includes(intLifeline))) */ 
-			virtual bool
-			 all_lifelines(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool all_lifelines(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction. */ 
+			virtual bool arguments_are_constants(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The arguments of the InteractionUse must correspond to parameters of the referred Interaction. */ 
+			virtual bool arguments_correspond_to_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
+			actualGate->notEmpty() implies 
+			refersTo.formalGate->forAll( fg : Gate | self.actualGate->select(matches(fg))->size()=1) and
+			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1) */ 
+			virtual bool gates_match(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
+			returnValueRecipient->asSet()->notEmpty() implies
+			let covCE : Set(ConnectableElement) = covered.represents->asSet() in 
+			covCE->notEmpty() and let classes:Set(Classifier) = covCE.type.oclIsKindOf(Classifier).oclAsType(Classifier)->asSet() in 
+			let allProps : Set(Property) = classes.attribute->union(classes.allParents().attribute)->asSet() in 
+			allProps->includes(returnValueRecipient) */ 
+			virtual bool returnValueRecipient_coverage(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The type of the returnValue must correspond to the type of the returnValueRecipient.
+			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first() */ 
+			virtual bool returnValue_type_recipient_correspondence(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -189,14 +191,12 @@ namespace uml
 			/*!
 			 The actual gates of the InteractionUse.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Gate, uml::Element > >
-			 getActualGate() const = 0;
+			virtual std::shared_ptr<Subset<uml::Gate, uml::Element > > getActualGate() const = 0;
 			
 			/*!
 			 The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
-			 getArgument() const = 0;
+			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > getArgument() const = 0;
 			
 			/*!
 			 Refers to the Interaction that defines its meaning.
@@ -239,13 +239,11 @@ namespace uml
 			/*!
 			 The actual gates of the InteractionUse.
 			<p>From package UML::Interactions.</p> */
-					std::shared_ptr<Subset<uml::Gate, uml::Element > >
-			 m_actualGate;
+			std::shared_ptr<Subset<uml::Gate, uml::Element > > m_actualGate;
 			/*!
 			 The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p> */
-					std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
-			 m_argument;
+			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > m_argument;
 			/*!
 			 Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p> */
@@ -265,15 +263,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

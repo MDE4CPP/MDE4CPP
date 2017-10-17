@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -63,16 +69,18 @@ namespace uml
 	instances of the types in a Package.
 	
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */
-	class Factory:virtual public Element	{
+	class Factory:virtual public Element
+	{
 		public:
  			Factory(const Factory &) {}
 			Factory& operator=(Factory const&) = delete;
-	
+
 		protected:
 			Factory(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Factory() {}
@@ -85,8 +93,7 @@ namespace uml
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
 			every property. */ 
-			virtual std::shared_ptr<uml::Element> 
-			 create(std::shared_ptr<uml::Class>  metaClass)  = 0;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass)  = 0;
 			
 			
 			//*********************************
@@ -115,7 +122,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

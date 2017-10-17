@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -72,16 +78,18 @@ namespace uml
 	/*!
 	 A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.
 	<p>From package UML::Deployments.</p> */
-	class DeployedArtifact:virtual public NamedElement	{
+	class DeployedArtifact:virtual public NamedElement
+	{
 		public:
  			DeployedArtifact(const DeployedArtifact &) {}
 			DeployedArtifact& operator=(DeployedArtifact const&) = delete;
-	
+
 		protected:
 			DeployedArtifact(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DeployedArtifact() {}
@@ -115,12 +123,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }
