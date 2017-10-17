@@ -1,6 +1,6 @@
 //============================================================================
 
-// Name        : TestUnion2.cpp
+// Name        : main.cpp
 
 // Author      :
 
@@ -31,11 +31,14 @@
 
 using namespace std;
 
+//___________________________________________________________________________________
+//
+// Example for usage of Subset and union using Simplified UML-like - Metamodel classes
+
 class Element
 {
-
 public:
-
+    // Union for all Elements
     std::shared_ptr<Union<Element>> ownedElement;
 
     Element()
@@ -43,10 +46,7 @@ public:
         ownedElement.reset(new Union<Element>());
     }
 
-    virtual ~Element()
-    {
-
-    }
+    virtual ~Element(){}
 
 };
 
@@ -54,20 +54,12 @@ class NamedElement : public Element
 {
 
 private:
-
     string m_name = "_";
-
 public:
 
-    NamedElement()
-    {
+    NamedElement(){}
 
-    }
-
-    virtual ~NamedElement()
-    {
-
-    }
+    virtual ~NamedElement(){}
 
     void setName(const string &name)
     {
@@ -78,75 +70,56 @@ public:
     {
         std::cout << "my name is: " << m_name;
     }
-
 };
 
 class PackageableElement : public NamedElement
 {
-
 public:
-
     PackageableElement()
     {
-
     }
-
 };
 
 class Namespace : public NamedElement
 {
 
 public:
+    std::shared_ptr<Union<NamedElement>> member; // Union for namespace members (see UML specification)
 
-//	std::shared_ptr<SubsetUnion<NamedElement, NamedElement> > ownedMemberTest;
-    //std::shared_ptr<SubsetUnion<NamedElement, NamedElement, NamedElement>  > ownedMemberTest2;
+    std::shared_ptr<SubsetUnion<NamedElement, Element, NamedElement>> ownedMember; // First NamedElement: Type of attribute; Element: Type of first Union --> Element::ownedElement; Second NamedElement: Type of second Union: Namespace::member
 
-    std::shared_ptr<SubsetUnion<NamedElement, Element, NamedElement>> ownedMember;
+    std::shared_ptr<Union<Element>> additionalTestUnion; // Additional Union for an additional example
 
-    std::shared_ptr<Union<NamedElement>> member;
-
-    std::shared_ptr<Union<Element>> additionalTestUnion;
-
-    std::shared_ptr<Subset<PackageableElement, NamedElement, Element, NamedElement>> importedMember;
+    std::shared_ptr<Subset<PackageableElement, NamedElement, Element, NamedElement>> importedMember; // extendet Example - PackageableElement: Type of attribute; NamedElement, Element and NamedElement Unions
 
     Namespace()
     {
+	   // Create Members using subset and Union (see UML specification)
         member = std::shared_ptr<Union<NamedElement> >(new Union<NamedElement>());
+        ownedMember.reset(new SubsetUnion<NamedElement, Element, NamedElement>(ownedElement, member));
+
+	   // additional test case
         additionalTestUnion = std::shared_ptr<Union<Element> >(new Union<Element>());
         importedMember.reset(new Subset<PackageableElement, NamedElement, Element, NamedElement>(member, additionalTestUnion, member));
-        ownedMember.reset(new SubsetUnion<NamedElement, Element, NamedElement>(ownedElement, member));
     }
-
 };
 
 class Package : public Namespace, public PackageableElement
 {
-
 public:
-
     std::shared_ptr<Subset<PackageableElement, NamedElement>> packagedElement;
-
-    Package()
-    {
-
-    }
-
-    virtual ~Package()
-    {
-
-    }
-
+    Package(){ }
+    virtual ~Package() { }
 };
+
+//___________________________________________________________________________________
+//
+// Secont example to creation and destruction of subset and union instances
 
 class K1
 {
-private:
-
 public:
-    K1()
-    {
-
-    }
+    K1() {}
 
     virtual void print()
     {
@@ -161,6 +134,7 @@ public:
 
 class K2 : public K1
 {
+private:
     int attribute;
 public:
     explicit K2(int val)
