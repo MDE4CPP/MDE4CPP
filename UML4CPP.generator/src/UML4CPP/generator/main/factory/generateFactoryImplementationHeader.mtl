@@ -22,7 +22,7 @@
 [startGuard(aPackage,'FactoryImpl')/]
 
 [comment  Generate Includes for the Factory/]
-[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(name))]
+[for (aClass : Class | aPackage.ownedMember->filter(Class)->sortedBy(myQualifiedName()))]
 #include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
@@ -52,7 +52,7 @@ namespace [aPackage.name/]
 
 		private:
 			static [aPackage.name.toUpperFirst().concat('Factory')/] * create();
-			std::map<std::string,std::function<uml::Element *()>> m_creatorMap;
+			std::map<std::string,std::function<std::shared_ptr<uml::Element>()>> m_creatorMap;
 
 			virtual void init() {}
 	};

@@ -19,9 +19,14 @@
 [**
  * Helper for c++ abstract function sufix
 */]
-[query public abstractSufix(impl : Boolean) : String = if impl then '' else '= 0' endif/]
+[query public abstractSufix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
 [query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
 
+
+[**
+ * check if application should be created
+*/]
+[query public prepareApplication(aPackage : Package) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
 
 [**
  * check and get key value from sourcegen eannotation
@@ -100,6 +105,16 @@
 [query public getPackageName(pack : Package) : String = if (pack.name='UML') or (pack.name='Ecore') or (pack.name = 'PrimitiveTypes') then pack.name.toLowerCase().concat('Reflection') else pack.name endif /] 
 
 [query public sanitize(str : String) : String = str.replaceAll(' ', '_').replaceAll('-', '_').replaceAll('::', '_') /] 
+
+[**
+ * helper for container based creation
+*/]
+
+[** get all associations where aClass is memberType */]
+[query public getAssociationsToClass(aClass : Class) : Set(Association) = aClass.getNearestPackage().ownedMember->select(oclIsKindOf(Association))->asOrderedSet() /]
+[query public isCompositionForClass(anAssociation : Association, aClass : Class) : Boolean = anAssociation.memberEnd->select(type = aClass and isComposite and (not owner.oclIsKindOf(Association)))->size() > 0/]
+[query public getCompositionsToClass(aClass : Class) : Set(Association) = getAssociationsToClass()->select(isCompositionForClass(aClass))->asOrderedSet()->sortedBy(myQualifiedName()) /]
+
 
 [**
  * Helper for include guard

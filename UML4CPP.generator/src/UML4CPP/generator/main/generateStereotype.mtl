@@ -29,11 +29,9 @@ static const int [aStereotype.name.toUpperCase()/]_OPERATION_COUNT = [aStereotyp
 [/template]
 
 [template public generateStereotypeCreation(aStereotype : Stereotype)]
-[aStereotype.memberName()/].reset(uml::UmlFactory::eInstance()->createStereotype());
+[aStereotype.memberName()/] = uml::UmlFactory::eInstance()->createStereotype_in_Package([aStereotype.ancestors(Package)->first().memberName()/]);
 [aStereotype.memberName()/]->setName("[aStereotype.name/]");
 [aStereotype.memberName()/]->setIsAbstract([aStereotype.isAbstract/]);
-[aStereotype.ancestors(Package)->first().memberName()/]->getOwnedStereotype()->push_back([aStereotype.memberName()/]);
-[aStereotype.memberName()/]->setPackage([aStereotype.ancestors(Package)->first().memberName()/]);
 [/template]
 
 [template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name='UML'))))]

@@ -18,36 +18,39 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[template public generateClassCreate(aEClass : Class,impl : Boolean) ? (aEClass.isAbstract=false)]
-virtual [aEClass.generateCppType(true)/]* create[aEClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
+[template public generateClassCreate(aClass : Class,impl : Boolean) ? (aClass.isAbstract=false)]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]()[abstractSufix(impl)/];
+[for (anAssociation : Association | aClass.getCompositionsToClass())]
+[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
+[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_in_[containmentProperty.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])[abstractSufix(impl)/]; 
+[/let]
+[/let]
+[/for]
 
 [/template]
 
-[template public generateStaticClassID(aEClass : Class)]
-static const int [aEClass.name.toUpperCase()/] = [aEClass._package.member->asOrderedSet()->indexOf(aEClass)/];
-static const int [aEClass.name.toUpperCase()/]_FEATURE_COUNT = [aEClass.allFeatures()->size()/];
-static const int [aEClass.name.toUpperCase()/]_OPERATION_COUNT = [aEClass.ownedOperation->size()/];
+[template public generateStaticClassID(aClass : Class)]
+static const int [aClass.name.toUpperCase()/] = [aClass._package.member->asOrderedSet()->indexOf(aClass)/];
+static const int [aClass.name.toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
+static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 
 [/template]
 
-[template public generateClassCreation(aEClass : Class)]
-[memberName(aEClass)/].reset(uml::UmlFactory::eInstance()->createClass());
-[memberName(aEClass)/]->setName("[aEClass.name/]");
-[memberName(aEClass)/]->setIsAbstract([aEClass.isAbstract/]);
-[memberName(aEClass)/]->setPackage([aEClass.ancestors(Package)->first().memberName()/]);
-[aEClass.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(aEClass)/]);
+[template public generateClassCreation(aClass : Class)]
+[memberName(aClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+[memberName(aClass)/]->setName("[aClass.name/]");
+[memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
 
 //constraints
-[aEClass.ownedRule.generateConstraintCreation()/]
+[aClass.ownedRule.generateConstraintCreation()/]
 
 [/template]
 
 [template public initSuperTypes(aClass : Class)]
-[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(name))]
-gen = std::shared_ptr<uml::Generalization>(uml::UmlFactory::eInstance()->createGeneralization());
+[for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName()))]
+gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.packageGetter(aClass)/]);
 gen->setGeneral([superClass.packageGetter(aClass)/]);
-gen->setSpecific([aClass.packageGetter(aClass)/]);
-[aClass.memberName()/]->getGeneralization()->push_back(gen);
 [/for]
 
 [/template]

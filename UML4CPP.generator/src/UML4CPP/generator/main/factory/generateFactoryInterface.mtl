@@ -27,7 +27,7 @@
 [comment  Generate Includes for the Factory/]
 namespace [aPackage.name/] 
 {
-[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->sortedBy(name)) separator ('\n')]
+[for (elements : Class| aPackage.ownedMember->selectByKind(Class)->sortedBy(myQualifiedName())) separator ('\n')]
 	class [elements.name.toUpperFirst()/];[/for]
 
 	class [aPackage.name.toUpperFirst().concat('Package')/];

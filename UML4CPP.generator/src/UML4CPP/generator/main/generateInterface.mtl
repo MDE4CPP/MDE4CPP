@@ -28,13 +28,10 @@ virtual public uml::Element
 [/template]
 
 [template public generateInterfaceCreation(anInterface : Interface)]
-[memberName(anInterface)/].reset(uml::UmlFactory::eInstance()->createInterface());
+[memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
 [memberName(anInterface)/]->setName("[anInterface.name/]");
 [memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
-[memberName(anInterface)/]->setPackage([anInterface.ancestors(Package)->first().memberName()/]);
-[anInterface.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInterface)/]);
 
-//generate Nested Activities
 [/template]
 
 [template public generateModel(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
@@ -50,21 +47,21 @@ virtual public uml::Element
 // generated Includes
 
 //Forward Declaration for used types
-[for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : Interface| aInterface.ownedAttribute.type->flatten()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
 	class [element.name/];
 }
 [/for]
 
-[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : Class| aInterface.ownedAttribute.type->flatten()->filter(Class)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
 	class [element.name/];
 }
 [/for]
 
-[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : Type | aInterface.allOwnedElements()->filter(Operation).ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
 	class [element.name/];
@@ -75,7 +72,7 @@ namespace [element.namespace.ns()/]
 #include "Stereotype.hpp"
 [/if]
 // enum includes
-[for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (elements : Enumeration| aInterface.allOwnedElements()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 #include "[elements.name.concat('.hpp')/]"[/for]
 
 //*********************************

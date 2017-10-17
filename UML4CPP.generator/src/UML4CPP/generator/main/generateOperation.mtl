@@ -101,11 +101,11 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/template]
 
 [template public generateOperationCreation(aOperation : Operation) ]
-[memberName(aOperation)/].reset(uml::UmlFactory::eInstance()->createOperation());
+[if (not aOperation.class.oclIsUndefined())]
+[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([memberName(aOperation.class)/]);[else]
+[if (not aOperation.interface.oclIsUndefined())][memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Interface([memberName(aOperation.interface)/]);[/if][/if]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
 [aOperation.ownedParameter.generateParameterCreation()/]
-
-[if (not aOperation.class.oclIsUndefined())][memberName(aOperation.class)/][else][if (not aOperation.interface.oclIsUndefined())][memberName(aOperation.interface)/][/if][/if]->getOwnedOperation()->push_back([memberName(aOperation)/]); 
 
 [/template]
 
@@ -116,7 +116,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/template]
 
 [template public generateDependencyCreation(aDependency : Dependency) ]
-[memberName(aDependency)/].reset(uml::UmlFactory::eInstance()->createDependency());
+[memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
 [memberName(aDependency)/]->setName("[aDependency.name/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]

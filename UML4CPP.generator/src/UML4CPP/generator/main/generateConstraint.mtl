@@ -18,14 +18,14 @@
 [import UML4CPP::generator::main::helper /]
  
 [template public generateConstraintCreation(aConstraint : Constraint)]
-con = std::shared_ptr<uml::Constraint>(uml::UmlFactory::eInstance()->createConstraint());
+con = uml::UmlFactory::eInstance()->createConstraint_in_Context([memberName(aConstraint.owner.oclAsType(Class))/]);
 
 con->setName("[aConstraint.name/]");
-[for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(name))]
+[for (elem : Element | aConstraint.constrainedElement->asOrderedSet()->sortedBy(myQualifiedName()))]
 con->getConstrainedElement()->push_back([elem.appendTypeRes()/]);
 [/for]
 
-oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression());
+oe = std::shared_ptr<uml::OpaqueExpression>(uml::UmlFactory::eInstance()->createOpaqueExpression_in_Owner([memberName(aConstraint.owner.oclAsType(Class))/]));
 [for (it : String | aConstraint.specification.oclAsType(OpaqueExpression).language)]
 oe->getLanguage()->push_back(std::shared_ptr<std::string>(new std::string("[it/]")));
 [/for][for (it : String | aConstraint.specification.oclAsType(OpaqueExpression)._body)]
@@ -33,10 +33,6 @@ oe->getBody()->push_back(std::shared_ptr<std::string>(new std::string("[it.subst
 [/for]
 
 con->setSpecification(oe);
-
-//insert into model hirachie
-[memberName(aConstraint.owner.oclAsType(Class))/]->getOwnedRule()->push_back(con);
-con->setContext([memberName(aConstraint.owner.oclAsType(Class))/]->getNamespace());
 
 [/template]
 
