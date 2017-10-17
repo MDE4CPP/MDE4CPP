@@ -149,7 +149,7 @@
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aMetaModelPackage.getPackageName()/]&quot;"/>
 [/for]
 [if (prepareApplication)]
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[getPackageName()/]&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[packageName/]&quot;"/>
 [/if]	
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1168779061" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
@@ -202,7 +202,7 @@
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aMetaModelPackage.getPackageName()/]&quot;"/>
 [/for]
 [if (prepareApplication)]
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[getPackageName()/]&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[packageName/]&quot;"/>
 [/if]		
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2144890842" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
