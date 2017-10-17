@@ -1,3 +1,4 @@
 .gradle/
 application/*
 !application/include/boost/*
+/*.bat
