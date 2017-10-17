@@ -20,6 +20,8 @@
 
 #include "Behavior.hpp"
 
+#include "CallOperationAction.hpp"
+
 #include "Classifier.hpp"
 
 #include "Comment.hpp"
@@ -34,6 +36,8 @@
 
 #include "InterruptibleActivityRegion.hpp"
 
+#include "InvocationAction.hpp"
+
 #include "Namespace.hpp"
 
 #include "RedefinableElement.hpp"
@@ -41,6 +45,8 @@
 #include "State.hpp"
 
 #include "StringExpression.hpp"
+
+#include "StructuralFeatureAction.hpp"
 
 #include "StructuredActivityNode.hpp"
 
@@ -80,10 +86,21 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 //Additional constructor for the containments back reference
-			ActionInputPinImpl::ActionInputPinImpl(std::shared_ptr<uml::Activity > par_activity)
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::Activity > par_activity)
 			:ActionInputPinImpl()
 			{
 			    m_activity = par_activity;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction)
+			:ActionInputPinImpl()
+			{
+			    m_callOperationAction = par_callOperationAction;
 			}
 
 
@@ -102,7 +119,18 @@ ActionInputPinImpl::~ActionInputPinImpl()
 
 
 //Additional constructor for the containments back reference
-			ActionInputPinImpl::ActionInputPinImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::InvocationAction > par_invocationAction)
+			:ActionInputPinImpl()
+			{
+			    m_invocationAction = par_invocationAction;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ActionInputPinImpl()
 			{
 			    m_namespace = par_namespace;
@@ -117,6 +145,17 @@ ActionInputPinImpl::~ActionInputPinImpl()
 			:ActionInputPinImpl()
 			{
 			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
+			:ActionInputPinImpl()
+			{
+			    m_structuralFeatureAction = par_structuralFeatureAction;
 			}
 
 
@@ -144,6 +183,10 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	//copy references with no containment (soft copy)
 	
+	m_activity  = obj.getActivity();
+
+	m_callOperationAction  = obj.getCallOperationAction();
+
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
@@ -158,6 +201,10 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	std::shared_ptr< Bag<uml::ActivityEdge> > _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
 
+	m_invocationAction  = obj.getInvocationAction();
+
+	m_namespace  = obj.getNamespace();
+
 	std::shared_ptr< Bag<uml::ActivityEdge> > _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
 
@@ -171,30 +218,24 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 
 	m_selection  = obj.getSelection();
 
+	m_structuralFeatureAction  = obj.getStructuralFeatureAction();
+
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
-	if(obj.getActivity()!=nullptr)
-	{
-		m_activity.reset(dynamic_cast<uml::Activity*>(obj.getActivity()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_activity" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getFromAction()!=nullptr)
 	{
-		m_fromAction.reset(dynamic_cast<uml::Action*>(obj.getFromAction()->copy()));
+		m_fromAction = std::dynamic_pointer_cast<uml::Action>(obj.getFromAction()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_fromAction" << std::endl;
@@ -202,7 +243,7 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
 	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
 	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(dynamic_cast<uml::InterruptibleActivityRegion*>(_inInterruptibleRegion->copy())));
+		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
@@ -210,21 +251,21 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
 	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(dynamic_cast<uml::ActivityPartition*>(_inPartition->copy())));
+		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
 	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
+		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -232,7 +273,7 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -240,33 +281,33 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
 	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
 	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(dynamic_cast<uml::ActivityNode*>(_redefinedNode->copy())));
+		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 	if(obj.getUpperBound()!=nullptr)
 	{
-		m_upperBound.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperBound()->copy()));
+		m_upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperBound()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
 	#endif
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
+		m_upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ActionInputPinImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
 {
-	return new ActionInputPinImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActionInputPinImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
@@ -315,6 +356,10 @@ void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
 //*********************************
 // Union Getter
 //*********************************
+std::shared_ptr<Union<uml::ActivityGroup> > ActionInputPinImpl::getInGroup() const
+{
+	return m_inGroup;
+}
 std::shared_ptr<Union<uml::Element> > ActionInputPinImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -327,10 +372,6 @@ std::shared_ptr<Union<uml::RedefinableElement> > ActionInputPinImpl::getRedefine
 {
 	return m_redefinedElement;
 }
-std::shared_ptr<Union<uml::ActivityGroup> > ActionInputPinImpl::getInGroup() const
-{
-	return m_inGroup;
-}
 
 
 //*********************************
@@ -342,12 +383,14 @@ boost::any ActionInputPinImpl::eGet(int featureID,  bool resolve, bool coreType)
 	{
 		case UmlPackage::ACTIVITYNODE_ACTIVITY:
 			return getActivity(); //13413
+		case UmlPackage::INPUTPIN_CALLOPERATIONACTION:
+			return getCallOperationAction(); //13435
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //1344
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //1340
 		case UmlPackage::ACTIONINPUTPIN_FROMACTION:
-			return getFromAction(); //13434
+			return getFromAction(); //13437
 		case UmlPackage::ACTIVITYNODE_INGROUP:
 			return getInGroup(); //13414
 		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
@@ -360,6 +403,8 @@ boost::any ActionInputPinImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getInStructuredNode(); //13416
 		case UmlPackage::ACTIVITYNODE_INCOMING:
 			return getIncoming(); //13417
+		case UmlPackage::INPUTPIN_INVOCATIONACTION:
+			return getInvocationAction(); //13436
 		case UmlPackage::PIN_ISCONTROL:
 			return getIsControl(); //13433
 		case UmlPackage::OBJECTNODE_ISCONTROLTYPE:
@@ -400,6 +445,8 @@ boost::any ActionInputPinImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getRedefinitionContext(); //13412
 		case UmlPackage::OBJECTNODE_SELECTION:
 			return getSelection(); //13425
+		case UmlPackage::INPUTPIN_STRUCTURALFEATUREACTION:
+			return getStructuralFeatureAction(); //13434
 		case UmlPackage::TYPEDELEMENT_TYPE:
 			return getType(); //13410
 		case UmlPackage::MULTIPLICITYELEMENT_UPPER:

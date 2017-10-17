@@ -64,6 +64,17 @@ PackageImportImpl::~PackageImportImpl()
 
 
 
+//Additional constructor for the containments back reference
+			PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
+			:PackageImportImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImportImpl()
 {
@@ -83,20 +94,19 @@ PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImpor
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getImportedPackage()!=nullptr)
 	{
-		m_importedPackage.reset(dynamic_cast<uml::Package*>(obj.getImportedPackage()->copy()));
+		m_importedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getImportedPackage()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedPackage" << std::endl;
@@ -104,18 +114,18 @@ PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImpor
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  PackageImportImpl::copy() const
+std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
 {
-	return new PackageImportImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new PackageImportImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
@@ -171,25 +181,25 @@ void PackageImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _i
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageImportImpl::getSource() const
+std::shared_ptr<Union<uml::Element> > PackageImportImpl::getOwnedElement() const
 {
-	return m_source;
+	return m_ownedElement;
 }
 std::weak_ptr<uml::Element > PackageImportImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageImportImpl::getTarget() const
-{
-	return m_target;
-}
-std::shared_ptr<Union<uml::Element> > PackageImportImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
 std::shared_ptr<Union<uml::Element> > PackageImportImpl::getRelatedElement() const
 {
 	return m_relatedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageImportImpl::getSource() const
+{
+	return m_source;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageImportImpl::getTarget() const
+{
+	return m_target;
 }
 
 

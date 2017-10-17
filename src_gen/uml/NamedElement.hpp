@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -90,7 +88,8 @@ namespace uml
 	/*!
 	 A NamedElement is an Element in a model that may have a name. The name may be given directly and/or via the use of a StringExpression.
 	<p>From package UML::CommonStructure.</p> */
-	class NamedElement:virtual public Element	{
+	class NamedElement:virtual public Element
+	{
 		public:
  			NamedElement(const NamedElement &) {}
 			NamedElement& operator=(NamedElement const&) = delete;
@@ -100,10 +99,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			NamedElement(std::shared_ptr<uml::Namespace > par_namespace){}
+
+			NamedElement(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			NamedElement(std::weak_ptr<uml::Element > par_owner);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~NamedElement() {}
@@ -111,40 +115,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides mustBeOwned()) may have a visibility.
-			(namespace = null and owner <> null) implies visibility = null */ 
-			virtual bool visibility_needs_ownership(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
-			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
-			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg)) */ 
-			virtual bool has_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If there is no name, or one of the containing Namespaces has no name, there is no qualifiedName.
-			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null */ 
-			virtual bool has_no_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package. */ 
-			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement>  supplier)  = 0;
-			
-			/*!
-			 Creates a usage between this named element and the specified supplier, owned by this named element's nearest package. */ 
-			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement>  supplier)  = 0;
-			
-			/*!
-			 Retrieves a localized label for this named element. */ 
-			virtual std::string getLabel()  = 0;
-			
-			/*!
-			 Retrieves a label for this named element, localized if indicated. */ 
-			virtual std::string getLabel(bool localize)  = 0;
-			
-			
-			
 			/*!
 			 The query allNamespaces() gives the sequence of Namespaces in which the NamedElement is nested, working outwards.
 			result = (
@@ -175,12 +145,27 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Package> > allOwningPackages()  = 0;
 			
 			/*!
-			 The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
-			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
-			    ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
-			)
+			 Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package. */ 
+			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement>  supplier)  = 0;
+			
+			/*!
+			 Creates a usage between this named element and the specified supplier, owned by this named element's nearest package. */ 
+			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement>  supplier)  = 0;
+			
+			/*!
+			 result = (Dependency.allInstances()->select(d | d.client->includes(self)))
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns)  = 0;
+			virtual std::shared_ptr<Bag<uml::Dependency> > getClientDependencies()  = 0;
+			
+			/*!
+			 Retrieves a localized label for this named element. */ 
+			virtual std::string getLabel()  = 0;
+			
+			/*!
+			 Retrieves a label for this named element, localized if indicated. */ 
+			virtual std::string getLabel(bool localize)  = 0;
+			
+			
 			
 			/*!
 			 When a NamedElement has a name, and all of its containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
@@ -194,15 +179,34 @@ namespace uml
 			virtual std::string getQualifiedName()  const  = 0;
 			
 			/*!
+			 If there is no name, or one of the containing Namespaces has no name, there is no qualifiedName.
+			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null */ 
+			virtual bool has_no_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
+			(name <> null and allNamespaces()->select(ns | ns.name = null)->isEmpty()) implies
+			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg)) */ 
+			virtual bool has_qualified_name(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
+			result = ((self.oclIsKindOf(n.oclType()) or n.oclIsKindOf(self.oclType())) implies
+			    ns.getNamesOfMember(self)->intersection(ns.getNamesOfMember(n))->isEmpty()
+			)
+			<p>From package UML::CommonStructure.</p> */ 
+			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns)  = 0;
+			
+			/*!
 			 The query separator() gives the string that is used to separate names when constructing a qualifiedName.
 			result = ('::')
 			<p>From package UML::CommonStructure.</p> */ 
 			virtual std::string separator()  const  = 0;
 			
 			/*!
-			 result = (Dependency.allInstances()->select(d | d.client->includes(self)))
-			<p>From package UML::CommonStructure.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Dependency> > getClientDependencies()  = 0;
+			 If a NamedElement is owned by something other than a Namespace, it does not have a visibility. One that is not owned by anything (and hence must be a Package, as this is the only kind of NamedElement that overrides mustBeOwned()) may have a visibility.
+			(namespace = null and owner <> null) implies visibility = null */ 
+			virtual bool visibility_needs_ownership(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -282,7 +286,7 @@ namespace uml
 			/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Namespace > m_namespace;
+			std::weak_ptr<uml::Namespace > m_namespace;
 			
 
 		public:
@@ -290,15 +294,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

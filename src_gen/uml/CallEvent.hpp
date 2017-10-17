@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,6 +67,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -90,7 +93,8 @@ namespace uml
 	/*!
 	 A CallEvent models the receipt by an object of a message invoking a call of an Operation.
 	<p>From package UML::CommonBehavior.</p> */
-	class CallEvent:virtual public MessageEvent	{
+	class CallEvent:virtual public MessageEvent
+	{
 		public:
  			CallEvent(const CallEvent &) {}
 			CallEvent& operator=(CallEvent const&) = delete;
@@ -100,7 +104,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~CallEvent() {}
@@ -147,6 +151,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

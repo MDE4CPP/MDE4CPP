@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -59,7 +57,8 @@ namespace uml
 	/*!
 	 A Comment is a textual annotation that can be attached to a set of Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Comment:virtual public Element	{
+	class Comment:virtual public Element
+	{
 		public:
  			Comment(const Comment &) {}
 			Comment& operator=(Comment const&) = delete;
@@ -69,7 +68,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Comment() {}

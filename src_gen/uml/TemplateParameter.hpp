@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,7 +67,8 @@ namespace uml
 	/*!
 	 A TemplateParameter exposes a ParameterableElement as a formal parameter of a template.
 	<p>From package UML::CommonStructure.</p> */
-	class TemplateParameter:virtual public Element	{
+	class TemplateParameter:virtual public Element
+	{
 		public:
  			TemplateParameter(const TemplateParameter &) {}
 			TemplateParameter& operator=(TemplateParameter const&) = delete;
@@ -79,10 +78,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			TemplateParameter(std::weak_ptr<uml::TemplateSignature > par_signature){}
+
+			TemplateParameter(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			TemplateParameter(std::weak_ptr<uml::TemplateSignature > par_signature);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TemplateParameter() {}
@@ -122,6 +126,15 @@ namespace uml
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault_ownedDefault) = 0;
 			/*!
+			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::ParameterableElement > getOwnedParameteredElement() const = 0;
+			
+			/*!
+			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement_ownedParameteredElement) = 0;
+			/*!
 			 The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::ParameterableElement > getParameteredElement() const = 0;
@@ -139,15 +152,6 @@ namespace uml
 			 The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setSignature(std::shared_ptr<uml::TemplateSignature> _signature_signature) = 0;
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::ParameterableElement > getOwnedParameteredElement() const = 0;
-			
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement_ownedParameteredElement) = 0;
 			
 
 		protected:
@@ -168,6 +172,10 @@ namespace uml
 			<p>From package UML::CommonStructure.</p> */
 			std::shared_ptr<uml::ParameterableElement > m_ownedDefault;
 			/*!
+			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
+			<p>From package UML::CommonStructure.</p> */
+			std::shared_ptr<uml::ParameterableElement > m_ownedParameteredElement;
+			/*!
 			 The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			std::shared_ptr<uml::ParameterableElement > m_parameteredElement;
@@ -175,10 +183,6 @@ namespace uml
 			 The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			std::weak_ptr<uml::TemplateSignature > m_signature;
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::ParameterableElement > m_ownedParameteredElement;
 			
 
 		public:

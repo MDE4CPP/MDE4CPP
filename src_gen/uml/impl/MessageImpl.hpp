@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			MessageImpl(const MessageImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			MessageImpl& operator=(MessageImpl const&) = delete;
@@ -53,6 +51,14 @@ namespace uml
 			MessageImpl(std::weak_ptr<uml::Interaction > par_interaction);
 
 
+			//Additional constructors for the containments back reference
+			MessageImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			MessageImpl(std::weak_ptr<uml::Element > par_owner);
+
+
 
 
 		public:
@@ -62,16 +68,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 If the sendEvent and the receiveEvent of the same Message are on the same Lifeline, the sendEvent must be ordered before the receiveEvent.
-			receiveEvent.oclIsKindOf(MessageOccurrenceSpecification)
-			implies
-			let f :  Lifeline = sendEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered in
-			f = receiveEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered  implies
-			f.events->indexOf(sendEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) < 
-			f.events->indexOf(receiveEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) */ 
-			virtual bool sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
 			/*!
 			 Arguments of a Message must only be: i) attributes of the sending lifeline, ii) constants, iii) symbolic values (which are wildcard values representing any legal value), iv) explicit parameters of the enclosing Interaction, v) attributes of the class owning the Interaction. */ 
 			virtual bool arguments(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
@@ -88,44 +84,24 @@ namespace uml
 			virtual bool cannot_cross_boundaries(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 In the case when the Message signature is a Signal, the arguments of the Message must correspond to the attributes of the Signal. A Message Argument corresponds to a Signal Attribute if the Argument is of the same Class or a specialization of that of the Attribute.
-			(messageSort = MessageSort::asynchSignal ) and signature.oclIsKindOf(Signal) implies
-			   let signalAttributes : OrderedSet(Property) = signature.oclAsType(Signal).inheritedMember()->
-			             select(n:NamedElement | n.oclIsTypeOf(Property))->collect(oclAsType(Property))->asOrderedSet()
-			   in signalAttributes->size() = self.argument->size()
-			   and self.argument->forAll( o: ValueSpecification |
-			          not (o.oclIsKindOf(Expression)
-			          and o.oclAsType(Expression).symbol->size()=0
-			          and o.oclAsType(Expression).operand->isEmpty() ) implies
-			              let p : Property = signalAttributes->at(self.argument->indexOf(o))
-			              in o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier))) */ 
-			virtual bool signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 This query returns the MessageKind value for this Message.
+			result = (messageKind)
+			<p>From package UML::Interactions.</p> */ 
+			virtual MessageKind getMessageKind()  ;
 			
 			/*!
 			 If the MessageEnds are both OccurrenceSpecifications, then the connector must go between the Parts represented by the Lifelines of the two MessageEnds. */ 
 			virtual bool occurrence_specifications(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 The signature must either refer an Operation (in which case messageSort is either synchCall or asynchCall or reply) or a Signal (in which case messageSort is asynchSignal). The name of the NamedElement referenced by signature must be the same as that of the Message.
-			signature->notEmpty() implies 
-			((signature.oclIsKindOf(Operation) and 
-			(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall or messageSort = MessageSort::reply) 
-			) or (signature.oclIsKindOf(Signal)  and messageSort = MessageSort::asynchSignal )
-			 ) and name = signature.name */ 
-			virtual bool signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 In the case when a Message with messageSort synchCall or asynchCall has a non empty Operation signature, the arguments of the Message must correspond to the in and inout parameters of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that of the Parameter.
-			(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall) and signature.oclIsKindOf(Operation)  implies 
-			 let requestParms : OrderedSet(Parameter) = signature.oclAsType(Operation).ownedParameter->
-			 select(direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::_'in'  )
-			in requestParms->size() = self.argument->size() and
-			self.argument->forAll( o: ValueSpecification | 
-			not (o.oclIsKindOf(Expression) and o.oclAsType(Expression).symbol->size()=0 and o.oclAsType(Expression).operand->isEmpty() ) implies 
-			let p : Parameter = requestParms->at(self.argument->indexOf(o)) in
-			o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier))
-			) */ 
-			virtual bool signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 If the sendEvent and the receiveEvent of the same Message are on the same Lifeline, the sendEvent must be ordered before the receiveEvent.
+			receiveEvent.oclIsKindOf(MessageOccurrenceSpecification)
+			implies
+			let f :  Lifeline = sendEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered in
+			f = receiveEvent->select(oclIsKindOf(MessageOccurrenceSpecification)).oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first().covered  implies
+			f.events->indexOf(sendEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) < 
+			f.events->indexOf(receiveEvent.oclAsType(MessageOccurrenceSpecification)->asOrderedSet()->first() ) */ 
+			virtual bool sending_receiving_message_event(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 In the case when a Message with messageSort reply has a non empty Operation signature, the arguments of the Message must correspond to the out, inout, and return parameters of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that of the Parameter.
@@ -141,10 +117,40 @@ namespace uml
 			virtual bool signature_is_operation_reply(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 This query returns the MessageKind value for this Message.
-			result = (messageKind)
-			<p>From package UML::Interactions.</p> */ 
-			virtual MessageKind getMessageKind()  ;
+			 In the case when a Message with messageSort synchCall or asynchCall has a non empty Operation signature, the arguments of the Message must correspond to the in and inout parameters of the Operation. A Parameter corresponds to an Argument if the Argument is of the same Class or a specialization of that of the Parameter.
+			(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall) and signature.oclIsKindOf(Operation)  implies 
+			 let requestParms : OrderedSet(Parameter) = signature.oclAsType(Operation).ownedParameter->
+			 select(direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::_'in'  )
+			in requestParms->size() = self.argument->size() and
+			self.argument->forAll( o: ValueSpecification | 
+			not (o.oclIsKindOf(Expression) and o.oclAsType(Expression).symbol->size()=0 and o.oclAsType(Expression).operand->isEmpty() ) implies 
+			let p : Parameter = requestParms->at(self.argument->indexOf(o)) in
+			o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier))
+			) */ 
+			virtual bool signature_is_operation_request(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 In the case when the Message signature is a Signal, the arguments of the Message must correspond to the attributes of the Signal. A Message Argument corresponds to a Signal Attribute if the Argument is of the same Class or a specialization of that of the Attribute.
+			(messageSort = MessageSort::asynchSignal ) and signature.oclIsKindOf(Signal) implies
+			   let signalAttributes : OrderedSet(Property) = signature.oclAsType(Signal).inheritedMember()->
+			             select(n:NamedElement | n.oclIsTypeOf(Property))->collect(oclAsType(Property))->asOrderedSet()
+			   in signalAttributes->size() = self.argument->size()
+			   and self.argument->forAll( o: ValueSpecification |
+			          not (o.oclIsKindOf(Expression)
+			          and o.oclAsType(Expression).symbol->size()=0
+			          and o.oclAsType(Expression).operand->isEmpty() ) implies
+			              let p : Property = signalAttributes->at(self.argument->indexOf(o))
+			              in o.type.oclAsType(Classifier).conformsTo(p.type.oclAsType(Classifier))) */ 
+			virtual bool signature_is_signal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The signature must either refer an Operation (in which case messageSort is either synchCall or asynchCall or reply) or a Signal (in which case messageSort is asynchSignal). The name of the NamedElement referenced by signature must be the same as that of the Message.
+			signature->notEmpty() implies 
+			((signature.oclIsKindOf(Operation) and 
+			(messageSort = MessageSort::asynchCall or messageSort = MessageSort::synchCall or messageSort = MessageSort::reply) 
+			) or (signature.oclIsKindOf(Signal)  and messageSort = MessageSort::asynchSignal )
+			 ) and name = signature.name */ 
+			virtual bool signature_refer_to(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -227,15 +233,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

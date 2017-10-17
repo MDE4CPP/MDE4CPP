@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -100,7 +98,8 @@ namespace uml
 	/*!
 	 A Vertex is an abstraction of a node in a StateMachine graph. It can be the source or destination of any number of Transitions.
 	<p>From package UML::StateMachines.</p> */
-	class Vertex:virtual public NamedElement	{
+	class Vertex:virtual public NamedElement
+	{
 		public:
  			Vertex(const Vertex &) {}
 			Vertex& operator=(Vertex const&) = delete;
@@ -110,10 +109,19 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			Vertex(std::weak_ptr<uml::Region > par_container){}
+
+			Vertex(std::weak_ptr<uml::Region > par_container);
+
+			//Additional constructors for the containments back reference
+
+			Vertex(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Vertex(std::weak_ptr<uml::Element > par_owner);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Vertex() {}
@@ -155,20 +163,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings()  = 0;
 			
 			/*!
-			 This utility operation returns true if the Vertex is contained in the State s (input argument).
-			result = (if not s.isComposite() or container->isEmpty() then
-				false
-			else
-				if container.state = s then 
-					true
-				else
-					container.state.isContainedInState(s)
-				endif
-			endif)
-			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  = 0;
-			
-			/*!
 			 This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
 				true
@@ -181,6 +175,20 @@ namespace uml
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
 			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r)  = 0;
+			
+			/*!
+			 This utility operation returns true if the Vertex is contained in the State s (input argument).
+			result = (if not s.isComposite() or container->isEmpty() then
+				false
+			else
+				if container.state = s then 
+					true
+				else
+					container.state.isContainedInState(s)
+				endif
+			endif)
+			<p>From package UML::StateMachines.</p> */ 
+			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  = 0;
 			
 			
 			//*********************************
@@ -239,15 +247,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

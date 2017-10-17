@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			PseudostateImpl(const PseudostateImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			PseudostateImpl& operator=(PseudostateImpl const&) = delete;
@@ -48,6 +46,18 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PseudostateImpl();
+
+			//Additional constructors for the containments back reference
+			PseudostateImpl(std::weak_ptr<uml::Region > par_container);
+
+
+			//Additional constructors for the containments back reference
+			PseudostateImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			PseudostateImpl(std::weak_ptr<uml::Element > par_owner);
+
 
 			//Additional constructors for the containments back reference
 			PseudostateImpl(std::weak_ptr<uml::State > par_state);
@@ -67,36 +77,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
-			(kind = PseudostateKind::fork) implies
-			
-			-- for any pair of outgoing transitions there exists an orthogonal state which contains the targets of these transitions 
-			-- such that these targets belong to different regions of that orthogonal state 
-			
-			outgoing->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.target, t2.target) in
-				((contState <> null) and (contState.region
-					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2))))) */ 
-			virtual bool transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 In a complete statemachine, a choice Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1) */ 
 			virtual bool choice_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
-			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty()) */ 
-			virtual bool outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
-			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2) */ 
-			virtual bool join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
-			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1) */ 
-			virtual bool junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
+			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2) */ 
+			virtual bool fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 History Vertices can have at most one outgoing Transition.
@@ -109,9 +97,19 @@ namespace uml
 			virtual bool initial_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
-			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2) */ 
-			virtual bool fork_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
+			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2) */ 
+			virtual bool join_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
+			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1) */ 
+			virtual bool junction_vertex(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
+			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty()) */ 
+			virtual bool outgoing_from_initial(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
@@ -124,6 +122,18 @@ namespace uml
 				((contState <> null) and (contState.region
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2))))) */ 
 			virtual bool transitions_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
+			(kind = PseudostateKind::fork) implies
+			
+			-- for any pair of outgoing transitions there exists an orthogonal state which contains the targets of these transitions 
+			-- such that these targets belong to different regions of that orthogonal state 
+			
+			outgoing->forAll(t1:Transition, t2:Transition | let contState:State = containingStateMachine().LCAState(t1.target, t2.target) in
+				((contState <> null) and (contState.region
+					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2))))) */ 
+			virtual bool transitions_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -169,15 +179,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

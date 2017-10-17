@@ -65,6 +65,17 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 
 
 //Additional constructor for the containments back reference
+			ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::Element > par_owner)
+			:ExceptionHandlerImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode > par_protectedNode)
 			:ExceptionHandlerImpl()
 			{
@@ -97,13 +108,12 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):Exc
 	m_protectedNode  = obj.getProtectedNode();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -111,18 +121,18 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):Exc
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ExceptionHandlerImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
 {
-	return new ExceptionHandlerImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExceptionHandlerImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
@@ -216,13 +226,13 @@ void ExceptionHandlerImpl::setProtectedNode(std::shared_ptr<uml::ExecutableNode>
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
-{
-	return m_owner;
-}
 std::shared_ptr<Union<uml::Element> > ExceptionHandlerImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -79,7 +77,8 @@ namespace uml
 	/*!
 	 A ClassifierTemplateParameter exposes a Classifier as a formal template parameter.
 	<p>From package UML::Classification.</p> */
-	class ClassifierTemplateParameter:virtual public TemplateParameter	{
+	class ClassifierTemplateParameter:virtual public TemplateParameter
+	{
 		public:
  			ClassifierTemplateParameter(const ClassifierTemplateParameter &) {}
 			ClassifierTemplateParameter& operator=(ClassifierTemplateParameter const&) = delete;
@@ -89,7 +88,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ClassifierTemplateParameter() {}
@@ -97,21 +96,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 If allowSubstitutable is true, then there must be a constrainingClassifier.
-			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
-			virtual bool has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
-			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
-			virtual bool parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
-			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
-			virtual bool matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The argument to a ClassifierTemplateParameter is a Classifier.
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier)) */ 
@@ -134,6 +118,21 @@ namespace uml
 			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
 			) */ 
 			virtual bool constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If allowSubstitutable is true, then there must be a constrainingClassifier.
+			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
+			virtual bool has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
+			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
+			virtual bool matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
+			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
+			virtual bool parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

@@ -82,10 +82,21 @@ DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl(
 
 
 //Additional constructor for the containments back reference
-			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:DestructionOccurrenceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+			:DestructionOccurrenceSpecificationImpl()
+			{
+			    m_owner = par_owner;
 			}
 
 
@@ -117,6 +128,8 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 
 	m_message  = obj.getMessage();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr< Bag<uml::GeneralOrdering> > _toAfter = obj.getToAfter();
@@ -126,13 +139,12 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -140,14 +152,14 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
+		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -155,18 +167,18 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DestructionOccurrenceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() const
 {
-	return new DestructionOccurrenceSpecificationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DestructionOccurrenceSpecificationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
@@ -194,7 +206,7 @@ bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > DestructionOccurrenceSpecificationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > DestructionOccurrenceSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }

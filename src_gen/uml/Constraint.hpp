@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -59,6 +57,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class PackageableElement;
 }
 
@@ -90,7 +93,8 @@ namespace uml
 	/*!
 	 A Constraint is a condition or restriction expressed in natural language text or in a machine readable language for the purpose of declaring some of the semantics of an Element or set of Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Constraint:virtual public PackageableElement	{
+	class Constraint:virtual public PackageableElement
+	{
 		public:
  			Constraint(const Constraint &) {}
 			Constraint& operator=(Constraint const&) = delete;
@@ -100,10 +104,26 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			Constraint(std::weak_ptr<uml::Namespace > par_context){}
+
+			Constraint(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+
+			Constraint(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Constraint(std::weak_ptr<uml::Package > par_owningPackage);
+
+			//Additional constructors for the containments back reference
+
+			Constraint(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Constraint() {}
@@ -185,15 +205,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

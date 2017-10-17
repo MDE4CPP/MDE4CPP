@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -150,7 +148,8 @@ namespace uml
 	/*!
 	 A ReadLinkObjectEndAction is an Action that retrieves an end object from a link object.
 	<p>From package UML::Actions.</p> */
-	class ReadLinkObjectEndAction:virtual public Action	{
+	class ReadLinkObjectEndAction:virtual public Action
+	{
 		public:
  			ReadLinkObjectEndAction(const ReadLinkObjectEndAction &) {}
 			ReadLinkObjectEndAction& operator=(ReadLinkObjectEndAction const&) = delete;
@@ -160,7 +159,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ReadLinkObjectEndAction() {}
@@ -169,14 +168,9 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The end Property must be an Association memberEnd.
-			end.association <> null */ 
-			virtual bool property(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The multiplicity of the object InputPin is 1..1.
-			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The association of the end must be an AssociationClass.
+			end.association.oclIsKindOf(AssociationClass) */ 
+			virtual bool association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The ends of the association must not be static.
@@ -184,9 +178,9 @@ namespace uml
 			virtual bool ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 The type of the result OutputPin is the same as the type of the end Property.
-			result.type = end.type */ 
-			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The multiplicity of the object InputPin is 1..1.
+			object.is(1,1) */ 
+			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The multiplicity of the result OutputPin is 1..1.
@@ -194,14 +188,19 @@ namespace uml
 			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
+			 The end Property must be an Association memberEnd.
+			end.association <> null */ 
+			virtual bool property(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 The type of the object InputPin is the AssociationClass that owns the end Property.
 			object.type = end.association */ 
 			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 The association of the end must be an AssociationClass.
-			end.association.oclIsKindOf(AssociationClass) */ 
-			virtual bool association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The type of the result OutputPin is the same as the type of the end Property.
+			result.type = end.type */ 
+			virtual bool type_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -268,24 +267,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

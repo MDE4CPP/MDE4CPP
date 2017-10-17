@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 LinkEndData is an Element that identifies on end of a link to be read or written by a LinkAction. As a link (that is not a link object) cannot be passed as a runtime value to or from an Action, it is instead identified by its end objects and qualifier values, if any. A LinkEndData instance provides these values for a single Association end.
 	<p>From package UML::Actions.</p> */
-	class LinkEndData:virtual public Element	{
+	class LinkEndData:virtual public Element
+	{
 		public:
  			LinkEndData(const LinkEndData &) {}
 			LinkEndData& operator=(LinkEndData const&) = delete;
@@ -84,7 +83,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LinkEndData() {}
@@ -93,19 +92,20 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The type of the value InputPin conforms to the type of the Association end.
-			value<>null implies value.type.conformsTo(end.type) */ 
-			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The multiplicity of the value InputPin must be 1..1.
-			value<>null implies value.is(1,1) */ 
-			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
+			result = (value->asBag()->union(qualifier.value))
+			<p>From package UML::Actions.</p> */ 
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins()  = 0;
 			
 			/*!
 			 The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value) */ 
 			virtual bool end_object_input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The multiplicity of the value InputPin must be 1..1.
+			value<>null implies value.is(1,1) */ 
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The Property must be an Association memberEnd.
@@ -118,10 +118,9 @@ namespace uml
 			virtual bool qualifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 Returns all the InputPins referenced by this LinkEndData. By default this includes the value and qualifier InputPins, but subclasses may override the operation to add other InputPins.
-			result = (value->asBag()->union(qualifier.value))
-			<p>From package UML::Actions.</p> */ 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins()  = 0;
+			 The type of the value InputPin conforms to the type of the Association end.
+			value<>null implies value.type.conformsTo(end.type) */ 
+			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

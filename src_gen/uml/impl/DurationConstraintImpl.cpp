@@ -18,6 +18,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -54,10 +56,60 @@ DurationConstraintImpl::~DurationConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_context)
+			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
 			:DurationConstraintImpl()
 			{
-			    m_context = par_context;
+				switch(reference_id)
+				{	
+				case UmlPackage::CONSTRAINT_CONTEXT:
+					 m_context = par_Namespace;
+					 return;
+				case UmlPackage::NAMEDELEMENT_NAMESPACE:
+					 m_namespace = par_Namespace;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+			:DurationConstraintImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:DurationConstraintImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:DurationConstraintImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
 			}
 
 
@@ -86,27 +138,30 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 
 	m_context  = obj.getContext();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -114,25 +169,25 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
+		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DurationConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
 {
-	return new DurationConstraintImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DurationConstraintImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
@@ -172,17 +227,17 @@ bool DurationConstraintImpl::has_one_or_two_constrainedElements(boost::any diagn
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > DurationConstraintImpl::getOwner() const
-{
-	return m_owner;
-}
-std::shared_ptr<uml::Namespace > DurationConstraintImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > DurationConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
 std::shared_ptr<Union<uml::Element> > DurationConstraintImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > DurationConstraintImpl::getOwner() const
+{
+	return m_owner;
 }
 
 
@@ -196,13 +251,13 @@ boost::any DurationConstraintImpl::eGet(int featureID,  bool resolve, bool coreT
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //2434
 		case UmlPackage::CONSTRAINT_CONSTRAINEDELEMENT:
-			return getConstrainedElement(); //24312
+			return getConstrainedElement(); //24313
 		case UmlPackage::CONSTRAINT_CONTEXT:
-			return getContext(); //24313
+			return getContext(); //24314
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2430
 		case UmlPackage::DURATIONCONSTRAINT_FIRSTEVENT:
-			return getFirstEvent(); //24315
+			return getFirstEvent(); //24316
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //2435
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -215,12 +270,14 @@ boost::any DurationConstraintImpl::eGet(int featureID,  bool resolve, bool coreT
 			return getOwnedElement(); //2432
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2433
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24312
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2434
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //2438
 		case UmlPackage::CONSTRAINT_SPECIFICATION:
-			return getSpecification(); //24314
+			return getSpecification(); //24315
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //2435
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

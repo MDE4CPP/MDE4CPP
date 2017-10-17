@@ -85,6 +85,28 @@ ExtendImpl::~ExtendImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ExtendImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
+			:ExtendImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 {
@@ -106,18 +128,19 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 	std::shared_ptr< Bag<uml::ExtensionPoint> > _extensionLocation = obj.getExtensionLocation();
 	m_extensionLocation.reset(new Bag<uml::ExtensionPoint>(*(obj.getExtensionLocation().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getCondition()!=nullptr)
 	{
-		m_condition.reset(dynamic_cast<uml::Constraint*>(obj.getCondition()->copy()));
+		m_condition = std::dynamic_pointer_cast<uml::Constraint>(obj.getCondition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_condition" << std::endl;
@@ -125,21 +148,21 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getExtendedCase()!=nullptr)
 	{
-		m_extendedCase.reset(dynamic_cast<uml::UseCase*>(obj.getExtendedCase()->copy()));
+		m_extendedCase = std::dynamic_pointer_cast<uml::UseCase>(obj.getExtendedCase()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_extendedCase" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -147,19 +170,19 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ExtendImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
 {
-	return new ExtendImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExtendImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
@@ -223,13 +246,17 @@ std::shared_ptr< Bag<uml::ExtensionPoint> > ExtendImpl::getExtensionLocation() c
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > ExtendImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > ExtendImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Namespace > ExtendImpl::getNamespace() const
+std::weak_ptr<uml::Element > ExtendImpl::getOwner() const
 {
-	return m_namespace;
+	return m_owner;
 }
 std::shared_ptr<Union<uml::Element> > ExtendImpl::getRelatedElement() const
 {
@@ -242,10 +269,6 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ExtendImpl::getSource
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ExtendImpl::getTarget() const
 {
 	return m_target;
-}
-std::weak_ptr<uml::Element > ExtendImpl::getOwner() const
-{
-	return m_owner;
 }
 
 

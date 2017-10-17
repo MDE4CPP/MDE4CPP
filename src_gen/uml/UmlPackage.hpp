@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -299,10 +297,10 @@ namespace uml
 			// Begin Class Abstraction
 			//Class and Feature IDs 
 			static const int ABSTRACTION = 42;
-			static const int ABSTRACTION_FEATURE_COUNT = 18;
+			static const int ABSTRACTION_FEATURE_COUNT = 19;
 			static const int ABSTRACTION_OPERATION_COUNT = 59;
 			
-			static const int ABSTRACTION_MAPPING = 4217;
+			static const int ABSTRACTION_MAPPING = 4218;
 			
 			
 			//Class and Feature Getter
@@ -429,10 +427,10 @@ namespace uml
 			// Begin Class ActionInputPin
 			//Class and Feature IDs 
 			static const int ACTIONINPUTPIN = 134;
-			static const int ACTIONINPUTPIN_FEATURE_COUNT = 35;
+			static const int ACTIONINPUTPIN_FEATURE_COUNT = 38;
 			static const int ACTIONINPUTPIN_OPERATION_COUNT = 83;
 			
-			static const int ACTIONINPUTPIN_FROMACTION = 13434;
+			static const int ACTIONINPUTPIN_FROMACTION = 13437;
 			
 			static const int ACTIONINPUTPIN___INPUT_PIN__EDIAGNOSTICCHAIN_EMAP = 80;
 			static const int ACTIONINPUTPIN___NO_CONTROL_OR_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP = 82;
@@ -453,19 +451,19 @@ namespace uml
 			// Begin Class Activity
 			//Class and Feature IDs 
 			static const int ACTIVITY = 1;
-			static const int ACTIVITY_FEATURE_COUNT = 70;
+			static const int ACTIVITY_FEATURE_COUNT = 72;
 			static const int ACTIVITY_OPERATION_COUNT = 130;
-			static const int ACTIVITY_ISREADONLY = 166;
-			static const int ACTIVITY_ISSINGLEEXECUTION = 167;
+			static const int ACTIVITY_ISREADONLY = 168;
+			static const int ACTIVITY_ISSINGLEEXECUTION = 169;
 			
-			static const int ACTIVITY_EDGE = 161;
-			static const int ACTIVITY_GROUP = 164;
-			static const int ACTIVITY_NODE = 162;
-			static const int ACTIVITY_OWNEDGROUP = 160;
-			static const int ACTIVITY_OWNEDNODE = 165;
-			static const int ACTIVITY_PARTITION = 168;
-			static const int ACTIVITY_STRUCTUREDNODE = 169;
-			static const int ACTIVITY_VARIABLE = 163;
+			static const int ACTIVITY_EDGE = 163;
+			static const int ACTIVITY_GROUP = 166;
+			static const int ACTIVITY_NODE = 164;
+			static const int ACTIVITY_OWNEDGROUP = 162;
+			static const int ACTIVITY_OWNEDNODE = 167;
+			static const int ACTIVITY_PARTITION = 170;
+			static const int ACTIVITY_STRUCTUREDNODE = 171;
+			static const int ACTIVITY_VARIABLE = 165;
 			
 			static const int ACTIVITY___MAXIMUM_ONE_PARAMETER_NODE__EDIAGNOSTICCHAIN_EMAP = 128;
 			static const int ACTIVITY___MAXIMUM_TWO_PARAMETER_NODES__EDIAGNOSTICCHAIN_EMAP = 129;
@@ -693,7 +691,7 @@ namespace uml
 			// Begin Class Actor
 			//Class and Feature IDs 
 			static const int ACTOR = 241;
-			static const int ACTOR_FEATURE_COUNT = 41;
+			static const int ACTOR_FEATURE_COUNT = 42;
 			static const int ACTOR_OPERATION_COUNT = 114;
 			
 			
@@ -761,7 +759,7 @@ namespace uml
 			// Begin Class AnyReceiveEvent
 			//Class and Feature IDs 
 			static const int ANYRECEIVEEVENT = 195;
-			static const int ANYRECEIVEEVENT_FEATURE_COUNT = 12;
+			static const int ANYRECEIVEEVENT_FEATURE_COUNT = 13;
 			static const int ANYRECEIVEEVENT_OPERATION_COUNT = 59;
 			
 			
@@ -777,14 +775,14 @@ namespace uml
 			// Begin Class Artifact
 			//Class and Feature IDs 
 			static const int ARTIFACT = 39;
-			static const int ARTIFACT_FEATURE_COUNT = 43;
+			static const int ARTIFACT_FEATURE_COUNT = 44;
 			static const int ARTIFACT_OPERATION_COUNT = 111;
-			static const int ARTIFACT_FILENAME = 3938;
+			static const int ARTIFACT_FILENAME = 3939;
 			
-			static const int ARTIFACT_MANIFESTATION = 3939;
-			static const int ARTIFACT_NESTEDARTIFACT = 3940;
-			static const int ARTIFACT_OWNEDATTRIBUTE = 3941;
-			static const int ARTIFACT_OWNEDOPERATION = 3942;
+			static const int ARTIFACT_MANIFESTATION = 3940;
+			static const int ARTIFACT_NESTEDARTIFACT = 3941;
+			static const int ARTIFACT_OWNEDATTRIBUTE = 3942;
+			static const int ARTIFACT_OWNEDOPERATION = 3943;
 			
 			static const int ARTIFACT___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL = 109;
 			static const int ARTIFACT___CREATEOWNEDOPERATION__STRING_TYPE = 110;
@@ -807,14 +805,14 @@ namespace uml
 			// Begin Class Association
 			//Class and Feature IDs 
 			static const int ASSOCIATION = 27;
-			static const int ASSOCIATION_FEATURE_COUNT = 44;
+			static const int ASSOCIATION_FEATURE_COUNT = 45;
 			static const int ASSOCIATION_OPERATION_COUNT = 116;
-			static const int ASSOCIATION_ISDERIVED = 2740;
+			static const int ASSOCIATION_ISDERIVED = 2741;
 			
-			static const int ASSOCIATION_ENDTYPE = 2739;
-			static const int ASSOCIATION_MEMBEREND = 2741;
-			static const int ASSOCIATION_NAVIGABLEOWNEDEND = 2743;
-			static const int ASSOCIATION_OWNEDEND = 2742;
+			static const int ASSOCIATION_ENDTYPE = 2740;
+			static const int ASSOCIATION_MEMBEREND = 2742;
+			static const int ASSOCIATION_NAVIGABLEOWNEDEND = 2744;
+			static const int ASSOCIATION_OWNEDEND = 2743;
 			
 			static const int ASSOCIATION___ASSOCIATION_ENDS__EDIAGNOSTICCHAIN_EMAP = 112;
 			static const int ASSOCIATION___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP = 111;
@@ -847,7 +845,7 @@ namespace uml
 			// Begin Class AssociationClass
 			//Class and Feature IDs 
 			static const int ASSOCIATIONCLASS = 238;
-			static const int ASSOCIATIONCLASS_FEATURE_COUNT = 58;
+			static const int ASSOCIATIONCLASS_FEATURE_COUNT = 59;
 			static const int ASSOCIATIONCLASS_OPERATION_COUNT = 130;
 			
 			
@@ -867,17 +865,18 @@ namespace uml
 			// Begin Class Behavior
 			//Class and Feature IDs 
 			static const int BEHAVIOR = 2;
-			static const int BEHAVIOR_FEATURE_COUNT = 60;
+			static const int BEHAVIOR_FEATURE_COUNT = 62;
 			static const int BEHAVIOR_OPERATION_COUNT = 128;
-			static const int BEHAVIOR_ISREENTRANT = 254;
+			static const int BEHAVIOR_ISREENTRANT = 255;
 			
-			static const int BEHAVIOR_CONTEXT = 253;
-			static const int BEHAVIOR_OWNEDPARAMETER = 255;
-			static const int BEHAVIOR_OWNEDPARAMETERSET = 256;
-			static const int BEHAVIOR_POSTCONDITION = 257;
-			static const int BEHAVIOR_PRECONDITION = 258;
-			static const int BEHAVIOR_REDEFINEDBEHAVIOR = 259;
-			static const int BEHAVIOR_SPECIFICATION = 252;
+			static const int BEHAVIOR_BEHAVIOREDCLASSIFIER = 261;
+			static const int BEHAVIOR_CONTEXT = 254;
+			static const int BEHAVIOR_OWNEDPARAMETER = 256;
+			static const int BEHAVIOR_OWNEDPARAMETERSET = 257;
+			static const int BEHAVIOR_POSTCONDITION = 258;
+			static const int BEHAVIOR_PRECONDITION = 259;
+			static const int BEHAVIOR_REDEFINEDBEHAVIOR = 260;
+			static const int BEHAVIOR_SPECIFICATION = 253;
 			
 			static const int BEHAVIOR___BEHAVIOREDCLASSIFIER__ELEMENT = 125;
 			static const int BEHAVIOR___FEATURE_OF_CONTEXT_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP = 123;
@@ -891,6 +890,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EClass> getBehavior() const = 0;
 			virtual std::shared_ptr<ecore::EAttribute> getBehavior_IsReentrant() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getBehavior_BehavioredClassifier() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_Context() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_OwnedParameter() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_OwnedParameterSet() const = 0;
@@ -967,12 +967,12 @@ namespace uml
 			// Begin Class BehavioredClassifier
 			//Class and Feature IDs 
 			static const int BEHAVIOREDCLASSIFIER = 4;
-			static const int BEHAVIOREDCLASSIFIER_FEATURE_COUNT = 41;
+			static const int BEHAVIOREDCLASSIFIER_FEATURE_COUNT = 42;
 			static const int BEHAVIOREDCLASSIFIER_OPERATION_COUNT = 112;
 			
-			static const int BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR = 438;
-			static const int BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION = 439;
-			static const int BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR = 440;
+			static const int BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR = 439;
+			static const int BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION = 440;
+			static const int BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR = 441;
 			
 			static const int BEHAVIOREDCLASSIFIER___CLASS_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP = 109;
 			static const int BEHAVIOREDCLASSIFIER___GETALLIMPLEMENTEDINTERFACES = 110;
@@ -1069,10 +1069,10 @@ namespace uml
 			// Begin Class CallEvent
 			//Class and Feature IDs 
 			static const int CALLEVENT = 197;
-			static const int CALLEVENT_FEATURE_COUNT = 13;
+			static const int CALLEVENT_FEATURE_COUNT = 14;
 			static const int CALLEVENT_OPERATION_COUNT = 59;
 			
-			static const int CALLEVENT_OPERATION = 19712;
+			static const int CALLEVENT_OPERATION = 19713;
 			
 			
 			//Class and Feature Getter
@@ -1125,10 +1125,10 @@ namespace uml
 			// Begin Class ChangeEvent
 			//Class and Feature IDs 
 			static const int CHANGEEVENT = 198;
-			static const int CHANGEEVENT_FEATURE_COUNT = 13;
+			static const int CHANGEEVENT_FEATURE_COUNT = 14;
 			static const int CHANGEEVENT_OPERATION_COUNT = 59;
 			
-			static const int CHANGEEVENT_CHANGEEXPRESSION = 19812;
+			static const int CHANGEEVENT_CHANGEEXPRESSION = 19813;
 			
 			
 			//Class and Feature Getter
@@ -1143,15 +1143,15 @@ namespace uml
 			// Begin Class Class
 			//Class and Feature IDs 
 			static const int CLASS = 3;
-			static const int CLASS_FEATURE_COUNT = 52;
+			static const int CLASS_FEATURE_COUNT = 53;
 			static const int CLASS_OPERATION_COUNT = 121;
-			static const int CLASS_ISACTIVE = 348;
+			static const int CLASS_ISACTIVE = 349;
 			
-			static const int CLASS_EXTENSION = 347;
-			static const int CLASS_NESTEDCLASSIFIER = 349;
-			static const int CLASS_OWNEDOPERATION = 346;
-			static const int CLASS_OWNEDRECEPTION = 350;
-			static const int CLASS_SUPERCLASS = 351;
+			static const int CLASS_EXTENSION = 348;
+			static const int CLASS_NESTEDCLASSIFIER = 350;
+			static const int CLASS_OWNEDOPERATION = 347;
+			static const int CLASS_OWNEDRECEPTION = 351;
+			static const int CLASS_SUPERCLASS = 352;
 			
 			static const int CLASS___CREATEOWNEDOPERATION__STRING_TYPE = 117;
 			static const int CLASS___GETEXTENSIONS = 119;
@@ -1181,23 +1181,23 @@ namespace uml
 			// Begin Class Classifier
 			//Class and Feature IDs 
 			static const int CLASSIFIER = 5;
-			static const int CLASSIFIER_FEATURE_COUNT = 38;
+			static const int CLASSIFIER_FEATURE_COUNT = 39;
 			static const int CLASSIFIER_OPERATION_COUNT = 109;
-			static const int CLASSIFIER_ISABSTRACT = 531;
-			static const int CLASSIFIER_ISFINALSPECIALIZATION = 532;
+			static const int CLASSIFIER_ISABSTRACT = 532;
+			static const int CLASSIFIER_ISFINALSPECIALIZATION = 533;
 			
-			static const int CLASSIFIER_ATTRIBUTE = 525;
-			static const int CLASSIFIER_COLLABORATIONUSE = 526;
-			static const int CLASSIFIER_FEATURE = 524;
-			static const int CLASSIFIER_GENERAL = 527;
-			static const int CLASSIFIER_GENERALIZATION = 528;
-			static const int CLASSIFIER_INHERITEDMEMBER = 530;
-			static const int CLASSIFIER_OWNEDUSECASE = 533;
-			static const int CLASSIFIER_POWERTYPEEXTENT = 529;
-			static const int CLASSIFIER_REDEFINEDCLASSIFIER = 535;
-			static const int CLASSIFIER_REPRESENTATION = 536;
-			static const int CLASSIFIER_SUBSTITUTION = 537;
-			static const int CLASSIFIER_USECASE = 534;
+			static const int CLASSIFIER_ATTRIBUTE = 526;
+			static const int CLASSIFIER_COLLABORATIONUSE = 527;
+			static const int CLASSIFIER_FEATURE = 525;
+			static const int CLASSIFIER_GENERAL = 528;
+			static const int CLASSIFIER_GENERALIZATION = 529;
+			static const int CLASSIFIER_INHERITEDMEMBER = 531;
+			static const int CLASSIFIER_OWNEDUSECASE = 534;
+			static const int CLASSIFIER_POWERTYPEEXTENT = 530;
+			static const int CLASSIFIER_REDEFINEDCLASSIFIER = 536;
+			static const int CLASSIFIER_REPRESENTATION = 537;
+			static const int CLASSIFIER_SUBSTITUTION = 538;
+			static const int CLASSIFIER_USECASE = 535;
 			
 			static const int CLASSIFIER___ALLATTRIBUTES = 107;
 			static const int CLASSIFIER___ALLFEATURES = 93;
@@ -1407,10 +1407,10 @@ namespace uml
 			// Begin Class Collaboration
 			//Class and Feature IDs 
 			static const int COLLABORATION = 91;
-			static const int COLLABORATION_FEATURE_COUNT = 46;
+			static const int COLLABORATION_FEATURE_COUNT = 47;
 			static const int COLLABORATION_OPERATION_COUNT = 115;
 			
-			static const int COLLABORATION_COLLABORATIONROLE = 9145;
+			static const int COLLABORATION_COLLABORATIONROLE = 9146;
 			
 			
 			//Class and Feature Getter
@@ -1499,7 +1499,7 @@ namespace uml
 			// Begin Class CommunicationPath
 			//Class and Feature IDs 
 			static const int COMMUNICATIONPATH = 205;
-			static const int COMMUNICATIONPATH_FEATURE_COUNT = 44;
+			static const int COMMUNICATIONPATH_FEATURE_COUNT = 45;
 			static const int COMMUNICATIONPATH_OPERATION_COUNT = 116;
 			
 			
@@ -1515,14 +1515,14 @@ namespace uml
 			// Begin Class Component
 			//Class and Feature IDs 
 			static const int COMPONENT = 239;
-			static const int COMPONENT_FEATURE_COUNT = 57;
+			static const int COMPONENT_FEATURE_COUNT = 58;
 			static const int COMPONENT_OPERATION_COUNT = 129;
-			static const int COMPONENT_ISINDIRECTLYINSTANTIATED = 23952;
+			static const int COMPONENT_ISINDIRECTLYINSTANTIATED = 23953;
 			
-			static const int COMPONENT_PACKAGEDELEMENT = 23953;
-			static const int COMPONENT_PROVIDED = 23954;
-			static const int COMPONENT_REALIZATION = 23955;
-			static const int COMPONENT_REQUIRED = 23956;
+			static const int COMPONENT_PACKAGEDELEMENT = 23954;
+			static const int COMPONENT_PROVIDED = 23955;
+			static const int COMPONENT_REALIZATION = 23956;
+			static const int COMPONENT_REQUIRED = 23957;
 			
 			static const int COMPONENT___CREATEOWNEDCLASS__STRING_BOOLEAN = 123;
 			static const int COMPONENT___CREATEOWNEDENUMERATION__STRING = 124;
@@ -1557,11 +1557,11 @@ namespace uml
 			// Begin Class ComponentRealization
 			//Class and Feature IDs 
 			static const int COMPONENTREALIZATION = 240;
-			static const int COMPONENTREALIZATION_FEATURE_COUNT = 20;
+			static const int COMPONENTREALIZATION_FEATURE_COUNT = 21;
 			static const int COMPONENTREALIZATION_OPERATION_COUNT = 59;
 			
-			static const int COMPONENTREALIZATION_ABSTRACTION = 24019;
-			static const int COMPONENTREALIZATION_REALIZINGCLASSIFIER = 24018;
+			static const int COMPONENTREALIZATION_ABSTRACTION = 24020;
+			static const int COMPONENTREALIZATION_REALIZINGCLASSIFIER = 24019;
 			
 			
 			//Class and Feature Getter
@@ -1761,12 +1761,12 @@ namespace uml
 			// Begin Class Constraint
 			//Class and Feature IDs 
 			static const int CONSTRAINT = 53;
-			static const int CONSTRAINT_FEATURE_COUNT = 15;
+			static const int CONSTRAINT_FEATURE_COUNT = 16;
 			static const int CONSTRAINT_OPERATION_COUNT = 62;
 			
-			static const int CONSTRAINT_CONSTRAINEDELEMENT = 5312;
-			static const int CONSTRAINT_CONTEXT = 5313;
-			static const int CONSTRAINT_SPECIFICATION = 5314;
+			static const int CONSTRAINT_CONSTRAINEDELEMENT = 5313;
+			static const int CONSTRAINT_CONTEXT = 5314;
+			static const int CONSTRAINT_SPECIFICATION = 5315;
 			
 			static const int CONSTRAINT___BOOLEAN_VALUE__EDIAGNOSTICCHAIN_EMAP = 59;
 			static const int CONSTRAINT___NO_SIDE_EFFECTS__EDIAGNOSTICCHAIN_EMAP = 60;
@@ -1933,11 +1933,11 @@ namespace uml
 			// Begin Class DataType
 			//Class and Feature IDs 
 			static const int DATATYPE = 54;
-			static const int DATATYPE_FEATURE_COUNT = 40;
+			static const int DATATYPE_FEATURE_COUNT = 41;
 			static const int DATATYPE_OPERATION_COUNT = 111;
 			
-			static const int DATATYPE_OWNEDATTRIBUTE = 5438;
-			static const int DATATYPE_OWNEDOPERATION = 5439;
+			static const int DATATYPE_OWNEDATTRIBUTE = 5439;
+			static const int DATATYPE_OWNEDOPERATION = 5440;
 			
 			static const int DATATYPE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL = 109;
 			static const int DATATYPE___CREATEOWNEDOPERATION__STRING_TYPE = 110;
@@ -1993,11 +1993,11 @@ namespace uml
 			// Begin Class Dependency
 			//Class and Feature IDs 
 			static const int DEPENDENCY = 37;
-			static const int DEPENDENCY_FEATURE_COUNT = 17;
+			static const int DEPENDENCY_FEATURE_COUNT = 18;
 			static const int DEPENDENCY_OPERATION_COUNT = 59;
 			
-			static const int DEPENDENCY_CLIENT = 3715;
-			static const int DEPENDENCY_SUPPLIER = 3716;
+			static const int DEPENDENCY_CLIENT = 3716;
+			static const int DEPENDENCY_SUPPLIER = 3717;
 			
 			
 			//Class and Feature Getter
@@ -2029,12 +2029,12 @@ namespace uml
 			// Begin Class Deployment
 			//Class and Feature IDs 
 			static const int DEPLOYMENT = 36;
-			static const int DEPLOYMENT_FEATURE_COUNT = 20;
+			static const int DEPLOYMENT_FEATURE_COUNT = 21;
 			static const int DEPLOYMENT_OPERATION_COUNT = 59;
 			
-			static const int DEPLOYMENT_CONFIGURATION = 3617;
-			static const int DEPLOYMENT_DEPLOYEDARTIFACT = 3618;
-			static const int DEPLOYMENT_LOCATION = 3619;
+			static const int DEPLOYMENT_CONFIGURATION = 3618;
+			static const int DEPLOYMENT_DEPLOYEDARTIFACT = 3619;
+			static const int DEPLOYMENT_LOCATION = 3620;
 			
 			
 			//Class and Feature Getter
@@ -2051,12 +2051,12 @@ namespace uml
 			// Begin Class DeploymentSpecification
 			//Class and Feature IDs 
 			static const int DEPLOYMENTSPECIFICATION = 38;
-			static const int DEPLOYMENTSPECIFICATION_FEATURE_COUNT = 46;
+			static const int DEPLOYMENTSPECIFICATION_FEATURE_COUNT = 47;
 			static const int DEPLOYMENTSPECIFICATION_OPERATION_COUNT = 113;
-			static const int DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION = 3843;
-			static const int DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION = 3844;
+			static const int DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION = 3844;
+			static const int DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION = 3845;
 			
-			static const int DEPLOYMENTSPECIFICATION_DEPLOYMENT = 3845;
+			static const int DEPLOYMENTSPECIFICATION_DEPLOYMENT = 3846;
 			
 			static const int DEPLOYMENTSPECIFICATION___DEPLOYED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP = 112;
 			static const int DEPLOYMENTSPECIFICATION___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP = 111;
@@ -2159,7 +2159,7 @@ namespace uml
 			// Begin Class Device
 			//Class and Feature IDs 
 			static const int DEVICE = 206;
-			static const int DEVICE_FEATURE_COUNT = 55;
+			static const int DEVICE_FEATURE_COUNT = 56;
 			static const int DEVICE_OPERATION_COUNT = 125;
 			
 			
@@ -2195,11 +2195,11 @@ namespace uml
 			// Begin Class Duration
 			//Class and Feature IDs 
 			static const int DURATION = 242;
-			static const int DURATION_FEATURE_COUNT = 15;
+			static const int DURATION_FEATURE_COUNT = 17;
 			static const int DURATION_OPERATION_COUNT = 67;
 			
-			static const int DURATION_EXPR = 24213;
-			static const int DURATION_OBSERVATION = 24214;
+			static const int DURATION_EXPR = 24215;
+			static const int DURATION_OBSERVATION = 24216;
 			
 			static const int DURATION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP = 66;
 			
@@ -2217,9 +2217,9 @@ namespace uml
 			// Begin Class DurationConstraint
 			//Class and Feature IDs 
 			static const int DURATIONCONSTRAINT = 243;
-			static const int DURATIONCONSTRAINT_FEATURE_COUNT = 16;
+			static const int DURATIONCONSTRAINT_FEATURE_COUNT = 17;
 			static const int DURATIONCONSTRAINT_OPERATION_COUNT = 64;
-			static const int DURATIONCONSTRAINT_FIRSTEVENT = 24315;
+			static const int DURATIONCONSTRAINT_FIRSTEVENT = 24316;
 			
 			
 			static const int DURATIONCONSTRAINT___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP = 62;
@@ -2239,7 +2239,7 @@ namespace uml
 			// Begin Class DurationInterval
 			//Class and Feature IDs 
 			static const int DURATIONINTERVAL = 246;
-			static const int DURATIONINTERVAL_FEATURE_COUNT = 15;
+			static const int DURATIONINTERVAL_FEATURE_COUNT = 17;
 			static const int DURATIONINTERVAL_OPERATION_COUNT = 66;
 			
 			
@@ -2255,11 +2255,11 @@ namespace uml
 			// Begin Class DurationObservation
 			//Class and Feature IDs 
 			static const int DURATIONOBSERVATION = 247;
-			static const int DURATIONOBSERVATION_FEATURE_COUNT = 14;
+			static const int DURATIONOBSERVATION_FEATURE_COUNT = 15;
 			static const int DURATIONOBSERVATION_OPERATION_COUNT = 60;
-			static const int DURATIONOBSERVATION_FIRSTEVENT = 24713;
+			static const int DURATIONOBSERVATION_FIRSTEVENT = 24714;
 			
-			static const int DURATIONOBSERVATION_EVENT = 24712;
+			static const int DURATIONOBSERVATION_EVENT = 24713;
 			
 			static const int DURATIONOBSERVATION___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP = 59;
 			
@@ -2405,10 +2405,10 @@ namespace uml
 			// Begin Class EncapsulatedClassifier
 			//Class and Feature IDs 
 			static const int ENCAPSULATEDCLASSIFIER = 106;
-			static const int ENCAPSULATEDCLASSIFIER_FEATURE_COUNT = 43;
+			static const int ENCAPSULATEDCLASSIFIER_FEATURE_COUNT = 44;
 			static const int ENCAPSULATEDCLASSIFIER_OPERATION_COUNT = 113;
 			
-			static const int ENCAPSULATEDCLASSIFIER_OWNEDPORT = 10642;
+			static const int ENCAPSULATEDCLASSIFIER_OWNEDPORT = 10643;
 			
 			static const int ENCAPSULATEDCLASSIFIER___GETOWNEDPORTS = 112;
 			
@@ -2425,10 +2425,10 @@ namespace uml
 			// Begin Class Enumeration
 			//Class and Feature IDs 
 			static const int ENUMERATION = 77;
-			static const int ENUMERATION_FEATURE_COUNT = 41;
+			static const int ENUMERATION_FEATURE_COUNT = 42;
 			static const int ENUMERATION_OPERATION_COUNT = 112;
 			
-			static const int ENUMERATION_OWNEDLITERAL = 7740;
+			static const int ENUMERATION_OWNEDLITERAL = 7741;
 			
 			static const int ENUMERATION___IMMUTABLE__EDIAGNOSTICCHAIN_EMAP = 111;
 			
@@ -2445,10 +2445,10 @@ namespace uml
 			// Begin Class EnumerationLiteral
 			//Class and Feature IDs 
 			static const int ENUMERATIONLITERAL = 78;
-			static const int ENUMERATIONLITERAL_FEATURE_COUNT = 18;
+			static const int ENUMERATIONLITERAL_FEATURE_COUNT = 19;
 			static const int ENUMERATIONLITERAL_OPERATION_COUNT = 66;
 			
-			static const int ENUMERATIONLITERAL_ENUMERATION = 7817;
+			static const int ENUMERATIONLITERAL_ENUMERATION = 7818;
 			
 			static const int ENUMERATIONLITERAL___GETCLASSIFIER = 65;
 			static const int ENUMERATIONLITERAL___GETCLASSIFIERS = 64;
@@ -2467,7 +2467,7 @@ namespace uml
 			// Begin Class Event
 			//Class and Feature IDs 
 			static const int EVENT = 66;
-			static const int EVENT_FEATURE_COUNT = 12;
+			static const int EVENT_FEATURE_COUNT = 13;
 			static const int EVENT_OPERATION_COUNT = 59;
 			
 			
@@ -2537,7 +2537,7 @@ namespace uml
 			// Begin Class ExecutionEnvironment
 			//Class and Feature IDs 
 			static const int EXECUTIONENVIRONMENT = 208;
-			static const int EXECUTIONENVIRONMENT_FEATURE_COUNT = 55;
+			static const int EXECUTIONENVIRONMENT_FEATURE_COUNT = 56;
 			static const int EXECUTIONENVIRONMENT_OPERATION_COUNT = 125;
 			
 			
@@ -2637,11 +2637,11 @@ namespace uml
 			// Begin Class Expression
 			//Class and Feature IDs 
 			static const int EXPRESSION = 88;
-			static const int EXPRESSION_FEATURE_COUNT = 15;
+			static const int EXPRESSION_FEATURE_COUNT = 17;
 			static const int EXPRESSION_OPERATION_COUNT = 66;
-			static const int EXPRESSION_SYMBOL = 8814;
+			static const int EXPRESSION_SYMBOL = 8816;
 			
-			static const int EXPRESSION_OPERAND = 8813;
+			static const int EXPRESSION_OPERAND = 8815;
 			
 			
 			//Class and Feature Getter
@@ -2683,11 +2683,11 @@ namespace uml
 			// Begin Class Extension
 			//Class and Feature IDs 
 			static const int EXTENSION = 84;
-			static const int EXTENSION_FEATURE_COUNT = 46;
+			static const int EXTENSION_FEATURE_COUNT = 47;
 			static const int EXTENSION_OPERATION_COUNT = 123;
-			static const int EXTENSION_ISREQUIRED = 8444;
+			static const int EXTENSION_ISREQUIRED = 8445;
 			
-			static const int EXTENSION_METACLASS = 8445;
+			static const int EXTENSION_METACLASS = 8446;
 			
 			static const int EXTENSION___GETMETACLASS = 121;
 			static const int EXTENSION___GETSTEREOTYPE = 118;
@@ -2877,7 +2877,7 @@ namespace uml
 			// Begin Class FunctionBehavior
 			//Class and Feature IDs 
 			static const int FUNCTIONBEHAVIOR = 199;
-			static const int FUNCTIONBEHAVIOR_FEATURE_COUNT = 62;
+			static const int FUNCTIONBEHAVIOR_FEATURE_COUNT = 64;
 			static const int FUNCTIONBEHAVIOR_OPERATION_COUNT = 131;
 			
 			
@@ -2989,13 +2989,13 @@ namespace uml
 			// Begin Class GeneralizationSet
 			//Class and Feature IDs 
 			static const int GENERALIZATIONSET = 96;
-			static const int GENERALIZATIONSET_FEATURE_COUNT = 16;
+			static const int GENERALIZATIONSET_FEATURE_COUNT = 17;
 			static const int GENERALIZATIONSET_OPERATION_COUNT = 61;
-			static const int GENERALIZATIONSET_ISCOVERING = 9612;
-			static const int GENERALIZATIONSET_ISDISJOINT = 9613;
+			static const int GENERALIZATIONSET_ISCOVERING = 9613;
+			static const int GENERALIZATIONSET_ISDISJOINT = 9614;
 			
-			static const int GENERALIZATIONSET_GENERALIZATION = 9615;
-			static const int GENERALIZATIONSET_POWERTYPE = 9614;
+			static const int GENERALIZATIONSET_GENERALIZATION = 9616;
+			static const int GENERALIZATIONSET_POWERTYPE = 9615;
 			
 			static const int GENERALIZATIONSET___GENERALIZATION_SAME_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP = 59;
 			static const int GENERALIZATIONSET___MAPS_TO_GENERALIZATION_SET__EDIAGNOSTICCHAIN_EMAP = 60;
@@ -3059,16 +3059,16 @@ namespace uml
 			// Begin Class InformationFlow
 			//Class and Feature IDs 
 			static const int INFORMATIONFLOW = 209;
-			static const int INFORMATIONFLOW_FEATURE_COUNT = 22;
+			static const int INFORMATIONFLOW_FEATURE_COUNT = 23;
 			static const int INFORMATIONFLOW_OPERATION_COUNT = 62;
 			
-			static const int INFORMATIONFLOW_CONVEYED = 20915;
-			static const int INFORMATIONFLOW_INFORMATIONSOURCE = 20916;
-			static const int INFORMATIONFLOW_INFORMATIONTARGET = 20917;
-			static const int INFORMATIONFLOW_REALIZATION = 20918;
-			static const int INFORMATIONFLOW_REALIZINGACTIVITYEDGE = 20919;
-			static const int INFORMATIONFLOW_REALIZINGCONNECTOR = 20920;
-			static const int INFORMATIONFLOW_REALIZINGMESSAGE = 20921;
+			static const int INFORMATIONFLOW_CONVEYED = 20916;
+			static const int INFORMATIONFLOW_INFORMATIONSOURCE = 20917;
+			static const int INFORMATIONFLOW_INFORMATIONTARGET = 20918;
+			static const int INFORMATIONFLOW_REALIZATION = 20919;
+			static const int INFORMATIONFLOW_REALIZINGACTIVITYEDGE = 20920;
+			static const int INFORMATIONFLOW_REALIZINGCONNECTOR = 20921;
+			static const int INFORMATIONFLOW_REALIZINGMESSAGE = 20922;
 			
 			static const int INFORMATIONFLOW___CONVEY_CLASSIFIERS__EDIAGNOSTICCHAIN_EMAP = 61;
 			static const int INFORMATIONFLOW___MUST_CONFORM__EDIAGNOSTICCHAIN_EMAP = 59;
@@ -3095,10 +3095,10 @@ namespace uml
 			// Begin Class InformationItem
 			//Class and Feature IDs 
 			static const int INFORMATIONITEM = 224;
-			static const int INFORMATIONITEM_FEATURE_COUNT = 39;
+			static const int INFORMATIONITEM_FEATURE_COUNT = 40;
 			static const int INFORMATIONITEM_OPERATION_COUNT = 112;
 			
-			static const int INFORMATIONITEM_REPRESENTED = 22438;
+			static const int INFORMATIONITEM_REPRESENTED = 22439;
 			
 			static const int INFORMATIONITEM___HAS_NO__EDIAGNOSTICCHAIN_EMAP = 110;
 			static const int INFORMATIONITEM___NOT_INSTANTIABLE__EDIAGNOSTICCHAIN_EMAP = 111;
@@ -3139,15 +3139,21 @@ namespace uml
 			// Begin Class InputPin
 			//Class and Feature IDs 
 			static const int INPUTPIN = 118;
-			static const int INPUTPIN_FEATURE_COUNT = 34;
+			static const int INPUTPIN_FEATURE_COUNT = 37;
 			static const int INPUTPIN_OPERATION_COUNT = 80;
 			
+			static const int INPUTPIN_CALLOPERATIONACTION = 11835;
+			static const int INPUTPIN_INVOCATIONACTION = 11836;
+			static const int INPUTPIN_STRUCTURALFEATUREACTION = 11834;
 			
 			static const int INPUTPIN___OUTGOING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP = 79;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getInputPin_CallOperationAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_InvocationAction() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_StructuralFeatureAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const = 0;
 			
@@ -3157,12 +3163,12 @@ namespace uml
 			// Begin Class InstanceSpecification
 			//Class and Feature IDs 
 			static const int INSTANCESPECIFICATION = 79;
-			static const int INSTANCESPECIFICATION_FEATURE_COUNT = 17;
+			static const int INSTANCESPECIFICATION_FEATURE_COUNT = 18;
 			static const int INSTANCESPECIFICATION_OPERATION_COUNT = 64;
 			
-			static const int INSTANCESPECIFICATION_CLASSIFIER = 7914;
-			static const int INSTANCESPECIFICATION_SLOT = 7915;
-			static const int INSTANCESPECIFICATION_SPECIFICATION = 7916;
+			static const int INSTANCESPECIFICATION_CLASSIFIER = 7915;
+			static const int INSTANCESPECIFICATION_SLOT = 7916;
+			static const int INSTANCESPECIFICATION_SPECIFICATION = 7917;
 			
 			static const int INSTANCESPECIFICATION___DEFINING_FEATURE__EDIAGNOSTICCHAIN_EMAP = 62;
 			static const int INSTANCESPECIFICATION___DEPLOYMENT_ARTIFACT__EDIAGNOSTICCHAIN_EMAP = 60;
@@ -3187,10 +3193,10 @@ namespace uml
 			// Begin Class InstanceValue
 			//Class and Feature IDs 
 			static const int INSTANCEVALUE = 194;
-			static const int INSTANCEVALUE_FEATURE_COUNT = 14;
+			static const int INSTANCEVALUE_FEATURE_COUNT = 16;
 			static const int INSTANCEVALUE_OPERATION_COUNT = 66;
 			
-			static const int INSTANCEVALUE_INSTANCE = 19413;
+			static const int INSTANCEVALUE_INSTANCE = 19415;
 			
 			
 			//Class and Feature Getter
@@ -3205,14 +3211,14 @@ namespace uml
 			// Begin Class Interaction
 			//Class and Feature IDs 
 			static const int INTERACTION = 211;
-			static const int INTERACTION_FEATURE_COUNT = 69;
+			static const int INTERACTION_FEATURE_COUNT = 71;
 			static const int INTERACTION_OPERATION_COUNT = 129;
 			
-			static const int INTERACTION_ACTION = 21166;
-			static const int INTERACTION_FORMALGATE = 21167;
-			static const int INTERACTION_FRAGMENT = 21165;
-			static const int INTERACTION_LIFELINE = 21164;
-			static const int INTERACTION_MESSAGE = 21168;
+			static const int INTERACTION_ACTION = 21168;
+			static const int INTERACTION_FORMALGATE = 21169;
+			static const int INTERACTION_FRAGMENT = 21167;
+			static const int INTERACTION_LIFELINE = 21166;
+			static const int INTERACTION_MESSAGE = 21170;
 			
 			static const int INTERACTION___NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP = 128;
 			
@@ -3233,11 +3239,11 @@ namespace uml
 			// Begin Class InteractionConstraint
 			//Class and Feature IDs 
 			static const int INTERACTIONCONSTRAINT = 219;
-			static const int INTERACTIONCONSTRAINT_FEATURE_COUNT = 17;
+			static const int INTERACTIONCONSTRAINT_FEATURE_COUNT = 18;
 			static const int INTERACTIONCONSTRAINT_OPERATION_COUNT = 68;
 			
-			static const int INTERACTIONCONSTRAINT_MAXINT = 21915;
-			static const int INTERACTIONCONSTRAINT_MININT = 21916;
+			static const int INTERACTIONCONSTRAINT_MAXINT = 21916;
+			static const int INTERACTIONCONSTRAINT_MININT = 21917;
 			
 			static const int INTERACTIONCONSTRAINT___DYNAMIC_VARIABLES__EDIAGNOSTICCHAIN_EMAP = 65;
 			static const int INTERACTIONCONSTRAINT___GLOBAL_DATA__EDIAGNOSTICCHAIN_EMAP = 66;
@@ -3351,15 +3357,15 @@ namespace uml
 			// Begin Class Interface
 			//Class and Feature IDs 
 			static const int INTERFACE = 55;
-			static const int INTERFACE_FEATURE_COUNT = 44;
+			static const int INTERFACE_FEATURE_COUNT = 45;
 			static const int INTERFACE_OPERATION_COUNT = 112;
 			
-			static const int INTERFACE_NESTEDCLASSIFIER = 5538;
-			static const int INTERFACE_OWNEDATTRIBUTE = 5539;
-			static const int INTERFACE_OWNEDOPERATION = 5543;
-			static const int INTERFACE_OWNEDRECEPTION = 5540;
-			static const int INTERFACE_PROTOCOL = 5541;
-			static const int INTERFACE_REDEFINEDINTERFACE = 5542;
+			static const int INTERFACE_NESTEDCLASSIFIER = 5539;
+			static const int INTERFACE_OWNEDATTRIBUTE = 5540;
+			static const int INTERFACE_OWNEDOPERATION = 5544;
+			static const int INTERFACE_OWNEDRECEPTION = 5541;
+			static const int INTERFACE_PROTOCOL = 5542;
+			static const int INTERFACE_REDEFINEDINTERFACE = 5543;
 			
 			static const int INTERFACE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL = 110;
 			static const int INTERFACE___CREATEOWNEDOPERATION__STRING_TYPE = 111;
@@ -3385,11 +3391,11 @@ namespace uml
 			// Begin Class InterfaceRealization
 			//Class and Feature IDs 
 			static const int INTERFACEREALIZATION = 105;
-			static const int INTERFACEREALIZATION_FEATURE_COUNT = 20;
+			static const int INTERFACEREALIZATION_FEATURE_COUNT = 21;
 			static const int INTERFACEREALIZATION_OPERATION_COUNT = 59;
 			
-			static const int INTERFACEREALIZATION_CONTRACT = 10518;
-			static const int INTERFACEREALIZATION_IMPLEMENTINGCLASSIFIER = 10519;
+			static const int INTERFACEREALIZATION_CONTRACT = 10519;
+			static const int INTERFACEREALIZATION_IMPLEMENTINGCLASSIFIER = 10520;
 			
 			
 			//Class and Feature Getter
@@ -3427,11 +3433,11 @@ namespace uml
 			// Begin Class Interval
 			//Class and Feature IDs 
 			static const int INTERVAL = 245;
-			static const int INTERVAL_FEATURE_COUNT = 15;
+			static const int INTERVAL_FEATURE_COUNT = 17;
 			static const int INTERVAL_OPERATION_COUNT = 66;
 			
-			static const int INTERVAL_MAX = 24513;
-			static const int INTERVAL_MIN = 24514;
+			static const int INTERVAL_MAX = 24515;
+			static const int INTERVAL_MIN = 24516;
 			
 			
 			//Class and Feature Getter
@@ -3447,7 +3453,7 @@ namespace uml
 			// Begin Class IntervalConstraint
 			//Class and Feature IDs 
 			static const int INTERVALCONSTRAINT = 244;
-			static const int INTERVALCONSTRAINT_FEATURE_COUNT = 15;
+			static const int INTERVALCONSTRAINT_FEATURE_COUNT = 16;
 			static const int INTERVALCONSTRAINT_OPERATION_COUNT = 62;
 			
 			
@@ -3647,9 +3653,9 @@ namespace uml
 			// Begin Class LiteralBoolean
 			//Class and Feature IDs 
 			static const int LITERALBOOLEAN = 248;
-			static const int LITERALBOOLEAN_FEATURE_COUNT = 14;
+			static const int LITERALBOOLEAN_FEATURE_COUNT = 16;
 			static const int LITERALBOOLEAN_OPERATION_COUNT = 66;
-			static const int LITERALBOOLEAN_VALUE = 24813;
+			static const int LITERALBOOLEAN_VALUE = 24815;
 			
 			
 			
@@ -3665,9 +3671,9 @@ namespace uml
 			// Begin Class LiteralInteger
 			//Class and Feature IDs 
 			static const int LITERALINTEGER = 250;
-			static const int LITERALINTEGER_FEATURE_COUNT = 14;
+			static const int LITERALINTEGER_FEATURE_COUNT = 16;
 			static const int LITERALINTEGER_OPERATION_COUNT = 66;
-			static const int LITERALINTEGER_VALUE = 25013;
+			static const int LITERALINTEGER_VALUE = 25015;
 			
 			
 			
@@ -3683,7 +3689,7 @@ namespace uml
 			// Begin Class LiteralNull
 			//Class and Feature IDs 
 			static const int LITERALNULL = 251;
-			static const int LITERALNULL_FEATURE_COUNT = 13;
+			static const int LITERALNULL_FEATURE_COUNT = 15;
 			static const int LITERALNULL_OPERATION_COUNT = 66;
 			
 			
@@ -3699,9 +3705,9 @@ namespace uml
 			// Begin Class LiteralReal
 			//Class and Feature IDs 
 			static const int LITERALREAL = 252;
-			static const int LITERALREAL_FEATURE_COUNT = 14;
+			static const int LITERALREAL_FEATURE_COUNT = 16;
 			static const int LITERALREAL_OPERATION_COUNT = 66;
-			static const int LITERALREAL_VALUE = 25213;
+			static const int LITERALREAL_VALUE = 25215;
 			
 			
 			
@@ -3717,7 +3723,7 @@ namespace uml
 			// Begin Class LiteralSpecification
 			//Class and Feature IDs 
 			static const int LITERALSPECIFICATION = 249;
-			static const int LITERALSPECIFICATION_FEATURE_COUNT = 13;
+			static const int LITERALSPECIFICATION_FEATURE_COUNT = 15;
 			static const int LITERALSPECIFICATION_OPERATION_COUNT = 66;
 			
 			
@@ -3733,9 +3739,9 @@ namespace uml
 			// Begin Class LiteralString
 			//Class and Feature IDs 
 			static const int LITERALSTRING = 253;
-			static const int LITERALSTRING_FEATURE_COUNT = 14;
+			static const int LITERALSTRING_FEATURE_COUNT = 16;
 			static const int LITERALSTRING_OPERATION_COUNT = 66;
-			static const int LITERALSTRING_VALUE = 25313;
+			static const int LITERALSTRING_VALUE = 25315;
 			
 			
 			
@@ -3751,9 +3757,9 @@ namespace uml
 			// Begin Class LiteralUnlimitedNatural
 			//Class and Feature IDs 
 			static const int LITERALUNLIMITEDNATURAL = 254;
-			static const int LITERALUNLIMITEDNATURAL_FEATURE_COUNT = 14;
+			static const int LITERALUNLIMITEDNATURAL_FEATURE_COUNT = 16;
 			static const int LITERALUNLIMITEDNATURAL_OPERATION_COUNT = 66;
-			static const int LITERALUNLIMITEDNATURAL_VALUE = 25413;
+			static const int LITERALUNLIMITEDNATURAL_VALUE = 25415;
 			
 			
 			
@@ -3821,10 +3827,10 @@ namespace uml
 			// Begin Class Manifestation
 			//Class and Feature IDs 
 			static const int MANIFESTATION = 41;
-			static const int MANIFESTATION_FEATURE_COUNT = 19;
+			static const int MANIFESTATION_FEATURE_COUNT = 20;
 			static const int MANIFESTATION_OPERATION_COUNT = 59;
 			
-			static const int MANIFESTATION_UTILIZEDELEMENT = 4118;
+			static const int MANIFESTATION_UTILIZEDELEMENT = 4119;
 			
 			
 			//Class and Feature Getter
@@ -3935,7 +3941,7 @@ namespace uml
 			// Begin Class MessageEvent
 			//Class and Feature IDs 
 			static const int MESSAGEEVENT = 196;
-			static const int MESSAGEEVENT_FEATURE_COUNT = 12;
+			static const int MESSAGEEVENT_FEATURE_COUNT = 13;
 			static const int MESSAGEEVENT_OPERATION_COUNT = 59;
 			
 			
@@ -3967,9 +3973,9 @@ namespace uml
 			// Begin Class Model
 			//Class and Feature IDs 
 			static const int MODEL = 86;
-			static const int MODEL_FEATURE_COUNT = 29;
+			static const int MODEL_FEATURE_COUNT = 30;
 			static const int MODEL_OPERATION_COUNT = 99;
-			static const int MODEL_VIEWPOINT = 8628;
+			static const int MODEL_VIEWPOINT = 8629;
 			
 			
 			static const int MODEL___ISMETAMODEL = 98;
@@ -4149,10 +4155,10 @@ namespace uml
 			// Begin Class Node
 			//Class and Feature IDs 
 			static const int NODE = 207;
-			static const int NODE_FEATURE_COUNT = 55;
+			static const int NODE_FEATURE_COUNT = 56;
 			static const int NODE_OPERATION_COUNT = 125;
 			
-			static const int NODE_NESTEDNODE = 20754;
+			static const int NODE_NESTEDNODE = 20755;
 			
 			static const int NODE___CREATECOMMUNICATIONPATH__BOOLEAN_UNLIMITEDNATURAL = 123;
 			static const int NODE___GETCOMMUNICATIONPATHS = 124;
@@ -4267,7 +4273,7 @@ namespace uml
 			// Begin Class Observation
 			//Class and Feature IDs 
 			static const int OBSERVATION = 204;
-			static const int OBSERVATION_FEATURE_COUNT = 12;
+			static const int OBSERVATION_FEATURE_COUNT = 13;
 			static const int OBSERVATION_OPERATION_COUNT = 59;
 			
 			
@@ -4333,10 +4339,10 @@ namespace uml
 			// Begin Class OpaqueBehavior
 			//Class and Feature IDs 
 			static const int OPAQUEBEHAVIOR = 200;
-			static const int OPAQUEBEHAVIOR_FEATURE_COUNT = 62;
+			static const int OPAQUEBEHAVIOR_FEATURE_COUNT = 64;
 			static const int OPAQUEBEHAVIOR_OPERATION_COUNT = 128;
-			static const int OPAQUEBEHAVIOR_BODY = 20060;
-			static const int OPAQUEBEHAVIOR_LANGUAGE = 20061;
+			static const int OPAQUEBEHAVIOR_BODY = 20062;
+			static const int OPAQUEBEHAVIOR_LANGUAGE = 20063;
 			
 			
 			
@@ -4353,13 +4359,13 @@ namespace uml
 			// Begin Class OpaqueExpression
 			//Class and Feature IDs 
 			static const int OPAQUEEXPRESSION = 43;
-			static const int OPAQUEEXPRESSION_FEATURE_COUNT = 17;
+			static const int OPAQUEEXPRESSION_FEATURE_COUNT = 19;
 			static const int OPAQUEEXPRESSION_OPERATION_COUNT = 74;
-			static const int OPAQUEEXPRESSION_BODY = 4314;
-			static const int OPAQUEEXPRESSION_LANGUAGE = 4315;
+			static const int OPAQUEEXPRESSION_BODY = 4316;
+			static const int OPAQUEEXPRESSION_LANGUAGE = 4317;
 			
-			static const int OPAQUEEXPRESSION_BEHAVIOR = 4313;
-			static const int OPAQUEEXPRESSION_RESULT = 4316;
+			static const int OPAQUEEXPRESSION_BEHAVIOR = 4315;
+			static const int OPAQUEEXPRESSION_RESULT = 4318;
 			
 			static const int OPAQUEEXPRESSION___GETRESULT = 72;
 			static const int OPAQUEEXPRESSION___ISINTEGRAL = 69;
@@ -4481,15 +4487,17 @@ namespace uml
 			// Begin Class OutputPin
 			//Class and Feature IDs 
 			static const int OUTPUTPIN = 120;
-			static const int OUTPUTPIN_FEATURE_COUNT = 34;
+			static const int OUTPUTPIN_FEATURE_COUNT = 35;
 			static const int OUTPUTPIN_OPERATION_COUNT = 80;
 			
+			static const int OUTPUTPIN_CALLACTION = 12034;
 			
 			static const int OUTPUTPIN___INCOMING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP = 79;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_CallAction() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const = 0;
 			
@@ -4499,17 +4507,17 @@ namespace uml
 			// Begin Class Package
 			//Class and Feature IDs 
 			static const int PACKAGE = 13;
-			static const int PACKAGE_FEATURE_COUNT = 28;
+			static const int PACKAGE_FEATURE_COUNT = 29;
 			static const int PACKAGE_OPERATION_COUNT = 98;
-			static const int PACKAGE_URI = 1320;
+			static const int PACKAGE_URI = 1321;
 			
-			static const int PACKAGE_NESTEDPACKAGE = 1321;
-			static const int PACKAGE_NESTINGPACKAGE = 1322;
-			static const int PACKAGE_OWNEDSTEREOTYPE = 1323;
-			static const int PACKAGE_OWNEDTYPE = 1324;
-			static const int PACKAGE_PACKAGEMERGE = 1325;
-			static const int PACKAGE_PACKAGEDELEMENT = 1326;
-			static const int PACKAGE_PROFILEAPPLICATION = 1327;
+			static const int PACKAGE_NESTEDPACKAGE = 1322;
+			static const int PACKAGE_NESTINGPACKAGE = 1323;
+			static const int PACKAGE_OWNEDSTEREOTYPE = 1324;
+			static const int PACKAGE_OWNEDTYPE = 1325;
+			static const int PACKAGE_PACKAGEMERGE = 1326;
+			static const int PACKAGE_PACKAGEDELEMENT = 1327;
+			static const int PACKAGE_PROFILEAPPLICATION = 1328;
 			
 			static const int PACKAGE___ALLAPPLICABLESTEREOTYPES = 91;
 			static const int PACKAGE___APPLYPROFILE__PROFILE = 75;
@@ -4623,15 +4631,17 @@ namespace uml
 			// Begin Class PackageableElement
 			//Class and Feature IDs 
 			static const int PACKAGEABLEELEMENT = 14;
-			static const int PACKAGEABLEELEMENT_FEATURE_COUNT = 12;
+			static const int PACKAGEABLEELEMENT_FEATURE_COUNT = 13;
 			static const int PACKAGEABLEELEMENT_OPERATION_COUNT = 59;
 			
+			static const int PACKAGEABLEELEMENT_OWNINGPACKAGE = 1412;
 			
 			static const int PACKAGEABLEELEMENT___NAMESPACE_NEEDS_VISIBILITY__EDIAGNOSTICCHAIN_EMAP = 58;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackageableElement() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getPackageableElement_OwningPackage() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const = 0;
 			
@@ -4641,7 +4651,7 @@ namespace uml
 			// Begin Class Parameter
 			//Class and Feature IDs 
 			static const int PARAMETER = 44;
-			static const int PARAMETER_FEATURE_COUNT = 28;
+			static const int PARAMETER_FEATURE_COUNT = 29;
 			static const int PARAMETER_OPERATION_COUNT = 85;
 			static const int PARAMETER_DEFAULT = 4420;
 			static const int PARAMETER_DIRECTION = 4422;
@@ -4649,6 +4659,7 @@ namespace uml
 			static const int PARAMETER_ISEXCEPTION = 4424;
 			static const int PARAMETER_ISSTREAM = 4425;
 			
+			static const int PARAMETER_BEHAVIOR = 4428;
 			static const int PARAMETER_DEFAULTVALUE = 4421;
 			static const int PARAMETER_OPERATION = 4426;
 			static const int PARAMETER_PARAMETERSET = 4427;
@@ -4676,6 +4687,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getParameter_IsException() const = 0;
 			virtual std::shared_ptr<ecore::EAttribute> getParameter_IsStream() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getParameter_Behavior() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getParameter_DefaultValue() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getParameter_Operation() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getParameter_ParameterSet() const = 0;
@@ -4839,7 +4851,7 @@ namespace uml
 			// Begin Class PrimitiveType
 			//Class and Feature IDs 
 			static const int PRIMITIVETYPE = 81;
-			static const int PRIMITIVETYPE_FEATURE_COUNT = 40;
+			static const int PRIMITIVETYPE_FEATURE_COUNT = 41;
 			static const int PRIMITIVETYPE_OPERATION_COUNT = 111;
 			
 			
@@ -4855,11 +4867,11 @@ namespace uml
 			// Begin Class Profile
 			//Class and Feature IDs 
 			static const int PROFILE = 12;
-			static const int PROFILE_FEATURE_COUNT = 30;
+			static const int PROFILE_FEATURE_COUNT = 31;
 			static const int PROFILE_OPERATION_COUNT = 109;
 			
-			static const int PROFILE_METACLASSREFERENCE = 1228;
-			static const int PROFILE_METAMODELREFERENCE = 1229;
+			static const int PROFILE_METACLASSREFERENCE = 1229;
+			static const int PROFILE_METAMODELREFERENCE = 1230;
 			
 			static const int PROFILE___CREATE__CLASSIFIER = 100;
 			static const int PROFILE___DEFINE = 101;
@@ -5045,10 +5057,10 @@ namespace uml
 			// Begin Class ProtocolStateMachine
 			//Class and Feature IDs 
 			static const int PROTOCOLSTATEMACHINE = 58;
-			static const int PROTOCOLSTATEMACHINE_FEATURE_COUNT = 65;
+			static const int PROTOCOLSTATEMACHINE_FEATURE_COUNT = 67;
 			static const int PROTOCOLSTATEMACHINE_OPERATION_COUNT = 138;
 			
-			static const int PROTOCOLSTATEMACHINE_CONFORMANCE = 5864;
+			static const int PROTOCOLSTATEMACHINE_CONFORMANCE = 5866;
 			
 			static const int PROTOCOLSTATEMACHINE___DEEP_OR_SHALLOW_HISTORY__EDIAGNOSTICCHAIN_EMAP = 135;
 			static const int PROTOCOLSTATEMACHINE___ENTRY_EXIT_DO__EDIAGNOSTICCHAIN_EMAP = 136;
@@ -5411,7 +5423,7 @@ namespace uml
 			// Begin Class Realization
 			//Class and Feature IDs 
 			static const int REALIZATION = 103;
-			static const int REALIZATION_FEATURE_COUNT = 18;
+			static const int REALIZATION_FEATURE_COUNT = 19;
 			static const int REALIZATION_OPERATION_COUNT = 59;
 			
 			
@@ -5761,10 +5773,10 @@ namespace uml
 			// Begin Class Signal
 			//Class and Feature IDs 
 			static const int SIGNAL = 57;
-			static const int SIGNAL_FEATURE_COUNT = 39;
+			static const int SIGNAL_FEATURE_COUNT = 40;
 			static const int SIGNAL_OPERATION_COUNT = 110;
 			
-			static const int SIGNAL_OWNEDATTRIBUTE = 5738;
+			static const int SIGNAL_OWNEDATTRIBUTE = 5739;
 			
 			static const int SIGNAL___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL = 109;
 			
@@ -5781,10 +5793,10 @@ namespace uml
 			// Begin Class SignalEvent
 			//Class and Feature IDs 
 			static const int SIGNALEVENT = 201;
-			static const int SIGNALEVENT_FEATURE_COUNT = 13;
+			static const int SIGNALEVENT_FEATURE_COUNT = 14;
 			static const int SIGNALEVENT_OPERATION_COUNT = 59;
 			
-			static const int SIGNALEVENT_SIGNAL = 20112;
+			static const int SIGNALEVENT_SIGNAL = 20113;
 			
 			
 			//Class and Feature Getter
@@ -5951,13 +5963,13 @@ namespace uml
 			// Begin Class StateMachine
 			//Class and Feature IDs 
 			static const int STATEMACHINE = 59;
-			static const int STATEMACHINE_FEATURE_COUNT = 64;
+			static const int STATEMACHINE_FEATURE_COUNT = 66;
 			static const int STATEMACHINE_OPERATION_COUNT = 135;
 			
-			static const int STATEMACHINE_CONNECTIONPOINT = 5960;
-			static const int STATEMACHINE_EXTENDEDSTATEMACHINE = 5963;
-			static const int STATEMACHINE_REGION = 5962;
-			static const int STATEMACHINE_SUBMACHINESTATE = 5961;
+			static const int STATEMACHINE_CONNECTIONPOINT = 5962;
+			static const int STATEMACHINE_EXTENDEDSTATEMACHINE = 5965;
+			static const int STATEMACHINE_REGION = 5964;
+			static const int STATEMACHINE_SUBMACHINESTATE = 5963;
 			
 			static const int STATEMACHINE___LCA__VERTEX_VERTEX = 132;
 			static const int STATEMACHINE___LCASTATE__VERTEX_VERTEX = 134;
@@ -5989,11 +6001,11 @@ namespace uml
 			// Begin Class Stereotype
 			//Class and Feature IDs 
 			static const int STEREOTYPE = 10;
-			static const int STEREOTYPE_FEATURE_COUNT = 54;
+			static const int STEREOTYPE_FEATURE_COUNT = 55;
 			static const int STEREOTYPE_OPERATION_COUNT = 138;
 			
-			static const int STEREOTYPE_ICON = 1052;
-			static const int STEREOTYPE_PROFILE = 1053;
+			static const int STEREOTYPE_ICON = 1053;
+			static const int STEREOTYPE_PROFILE = 1054;
 			
 			static const int STEREOTYPE___ASSOCIATIONENDOWNERSHIP__EDIAGNOSTICCHAIN_EMAP = 124;
 			static const int STEREOTYPE___BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION__EDIAGNOSTICCHAIN_EMAP = 127;
@@ -6043,11 +6055,11 @@ namespace uml
 			// Begin Class StringExpression
 			//Class and Feature IDs 
 			static const int STRINGEXPRESSION = 87;
-			static const int STRINGEXPRESSION_FEATURE_COUNT = 19;
+			static const int STRINGEXPRESSION_FEATURE_COUNT = 21;
 			static const int STRINGEXPRESSION_OPERATION_COUNT = 70;
 			
-			static const int STRINGEXPRESSION_OWNINGEXPRESSION = 8717;
-			static const int STRINGEXPRESSION_SUBEXPRESSION = 8718;
+			static const int STRINGEXPRESSION_OWNINGEXPRESSION = 8719;
+			static const int STRINGEXPRESSION_SUBEXPRESSION = 8720;
 			
 			static const int STRINGEXPRESSION___OPERANDS__EDIAGNOSTICCHAIN_EMAP = 68;
 			static const int STRINGEXPRESSION___SUBEXPRESSIONS__EDIAGNOSTICCHAIN_EMAP = 69;
@@ -6153,13 +6165,13 @@ namespace uml
 			// Begin Class StructuredClassifier
 			//Class and Feature IDs 
 			static const int STRUCTUREDCLASSIFIER = 92;
-			static const int STRUCTUREDCLASSIFIER_FEATURE_COUNT = 42;
+			static const int STRUCTUREDCLASSIFIER_FEATURE_COUNT = 43;
 			static const int STRUCTUREDCLASSIFIER_OPERATION_COUNT = 112;
 			
-			static const int STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE = 9238;
-			static const int STRUCTUREDCLASSIFIER_OWNEDCONNECTOR = 9239;
-			static const int STRUCTUREDCLASSIFIER_PART = 9240;
-			static const int STRUCTUREDCLASSIFIER_ROLE = 9241;
+			static const int STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE = 9239;
+			static const int STRUCTUREDCLASSIFIER_OWNEDCONNECTOR = 9240;
+			static const int STRUCTUREDCLASSIFIER_PART = 9241;
+			static const int STRUCTUREDCLASSIFIER_ROLE = 9242;
 			
 			static const int STRUCTUREDCLASSIFIER___ALLROLES = 111;
 			static const int STRUCTUREDCLASSIFIER___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL = 109;
@@ -6183,11 +6195,11 @@ namespace uml
 			// Begin Class Substitution
 			//Class and Feature IDs 
 			static const int SUBSTITUTION = 102;
-			static const int SUBSTITUTION_FEATURE_COUNT = 20;
+			static const int SUBSTITUTION_FEATURE_COUNT = 21;
 			static const int SUBSTITUTION_OPERATION_COUNT = 59;
 			
-			static const int SUBSTITUTION_CONTRACT = 10218;
-			static const int SUBSTITUTION_SUBSTITUTINGCLASSIFIER = 10219;
+			static const int SUBSTITUTION_CONTRACT = 10219;
+			static const int SUBSTITUTION_SUBSTITUTINGCLASSIFIER = 10220;
 			
 			
 			//Class and Feature Getter
@@ -6361,9 +6373,9 @@ namespace uml
 			// Begin Class TimeConstraint
 			//Class and Feature IDs 
 			static const int TIMECONSTRAINT = 255;
-			static const int TIMECONSTRAINT_FEATURE_COUNT = 16;
+			static const int TIMECONSTRAINT_FEATURE_COUNT = 17;
 			static const int TIMECONSTRAINT_OPERATION_COUNT = 63;
-			static const int TIMECONSTRAINT_FIRSTEVENT = 25515;
+			static const int TIMECONSTRAINT_FIRSTEVENT = 25516;
 			
 			
 			static const int TIMECONSTRAINT___HAS_ONE_CONSTRAINEDELEMENT__EDIAGNOSTICCHAIN_EMAP = 62;
@@ -6381,11 +6393,11 @@ namespace uml
 			// Begin Class TimeEvent
 			//Class and Feature IDs 
 			static const int TIMEEVENT = 202;
-			static const int TIMEEVENT_FEATURE_COUNT = 14;
+			static const int TIMEEVENT_FEATURE_COUNT = 15;
 			static const int TIMEEVENT_OPERATION_COUNT = 60;
-			static const int TIMEEVENT_ISRELATIVE = 20212;
+			static const int TIMEEVENT_ISRELATIVE = 20213;
 			
-			static const int TIMEEVENT_WHEN = 20213;
+			static const int TIMEEVENT_WHEN = 20214;
 			
 			static const int TIMEEVENT___WHEN_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP = 59;
 			
@@ -6403,11 +6415,11 @@ namespace uml
 			// Begin Class TimeExpression
 			//Class and Feature IDs 
 			static const int TIMEEXPRESSION = 203;
-			static const int TIMEEXPRESSION_FEATURE_COUNT = 15;
+			static const int TIMEEXPRESSION_FEATURE_COUNT = 17;
 			static const int TIMEEXPRESSION_OPERATION_COUNT = 67;
 			
-			static const int TIMEEXPRESSION_EXPR = 20313;
-			static const int TIMEEXPRESSION_OBSERVATION = 20314;
+			static const int TIMEEXPRESSION_EXPR = 20315;
+			static const int TIMEEXPRESSION_OBSERVATION = 20316;
 			
 			static const int TIMEEXPRESSION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP = 66;
 			
@@ -6425,7 +6437,7 @@ namespace uml
 			// Begin Class TimeInterval
 			//Class and Feature IDs 
 			static const int TIMEINTERVAL = 256;
-			static const int TIMEINTERVAL_FEATURE_COUNT = 15;
+			static const int TIMEINTERVAL_FEATURE_COUNT = 17;
 			static const int TIMEINTERVAL_OPERATION_COUNT = 66;
 			
 			
@@ -6441,11 +6453,11 @@ namespace uml
 			// Begin Class TimeObservation
 			//Class and Feature IDs 
 			static const int TIMEOBSERVATION = 257;
-			static const int TIMEOBSERVATION_FEATURE_COUNT = 14;
+			static const int TIMEOBSERVATION_FEATURE_COUNT = 15;
 			static const int TIMEOBSERVATION_OPERATION_COUNT = 59;
-			static const int TIMEOBSERVATION_FIRSTEVENT = 25713;
+			static const int TIMEOBSERVATION_FIRSTEVENT = 25714;
 			
-			static const int TIMEOBSERVATION_EVENT = 25712;
+			static const int TIMEOBSERVATION_EVENT = 25713;
 			
 			
 			//Class and Feature Getter
@@ -6537,10 +6549,10 @@ namespace uml
 			// Begin Class Type
 			//Class and Feature IDs 
 			static const int TYPE = 26;
-			static const int TYPE_FEATURE_COUNT = 13;
+			static const int TYPE_FEATURE_COUNT = 14;
 			static const int TYPE_OPERATION_COUNT = 62;
 			
-			static const int TYPE_PACKAGE = 2612;
+			static const int TYPE_PACKAGE = 2613;
 			
 			static const int TYPE___CONFORMSTO__TYPE = 61;
 			static const int TYPE___CREATEASSOCIATION__BOOLEAN_UNLIMITEDNATURAL = 59;
@@ -6611,7 +6623,7 @@ namespace uml
 			// Begin Class Usage
 			//Class and Feature IDs 
 			static const int USAGE = 89;
-			static const int USAGE_FEATURE_COUNT = 17;
+			static const int USAGE_FEATURE_COUNT = 18;
 			static const int USAGE_OPERATION_COUNT = 59;
 			
 			
@@ -6627,13 +6639,13 @@ namespace uml
 			// Begin Class UseCase
 			//Class and Feature IDs 
 			static const int USECASE = 98;
-			static const int USECASE_FEATURE_COUNT = 45;
+			static const int USECASE_FEATURE_COUNT = 46;
 			static const int USECASE_OPERATION_COUNT = 117;
 			
-			static const int USECASE_EXTEND = 9841;
-			static const int USECASE_EXTENSIONPOINT = 9842;
-			static const int USECASE_INCLUDE = 9843;
-			static const int USECASE_SUBJECT = 9844;
+			static const int USECASE_EXTEND = 9842;
+			static const int USECASE_EXTENSIONPOINT = 9843;
+			static const int USECASE_INCLUDE = 9844;
+			static const int USECASE_SUBJECT = 9845;
 			
 			static const int USECASE___ALLINCLUDEDUSECASES = 116;
 			static const int USECASE___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP = 112;
@@ -6661,10 +6673,10 @@ namespace uml
 			// Begin Class ValuePin
 			//Class and Feature IDs 
 			static const int VALUEPIN = 179;
-			static const int VALUEPIN_FEATURE_COUNT = 35;
+			static const int VALUEPIN_FEATURE_COUNT = 38;
 			static const int VALUEPIN_OPERATION_COUNT = 82;
 			
-			static const int VALUEPIN_VALUE = 17934;
+			static const int VALUEPIN_VALUE = 17937;
 			
 			static const int VALUEPIN___COMPATIBLE_TYPE__EDIAGNOSTICCHAIN_EMAP = 81;
 			static const int VALUEPIN___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP = 80;
@@ -6683,9 +6695,10 @@ namespace uml
 			// Begin Class ValueSpecification
 			//Class and Feature IDs 
 			static const int VALUESPECIFICATION = 33;
-			static const int VALUESPECIFICATION_FEATURE_COUNT = 13;
+			static const int VALUESPECIFICATION_FEATURE_COUNT = 15;
 			static const int VALUESPECIFICATION_OPERATION_COUNT = 66;
 			
+			static const int VALUESPECIFICATION_OWNINGSLOT = 3314;
 			
 			static const int VALUESPECIFICATION___BOOLEANVALUE = 59;
 			static const int VALUESPECIFICATION___INTEGERVALUE = 60;
@@ -6698,6 +6711,7 @@ namespace uml
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecification() const = 0;
 			
+			virtual std::shared_ptr<ecore::EReference> getValueSpecification_OwningSlot() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification___BooleanValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification___IntegerValue() const = 0;

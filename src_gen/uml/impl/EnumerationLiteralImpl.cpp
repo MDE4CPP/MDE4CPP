@@ -24,6 +24,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "PackageableElement.hpp"
 
 #include "Slot.hpp"
@@ -76,6 +78,50 @@ EnumerationLiteralImpl::~EnumerationLiteralImpl()
 
 
 
+//Additional constructor for the containments back reference
+			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:EnumerationLiteralImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Element > par_owner)
+			:EnumerationLiteralImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:EnumerationLiteralImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:EnumerationLiteralImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
 
 EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj):EnumerationLiteralImpl()
 {
@@ -100,20 +146,23 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 
 	m_enumeration  = obj.getEnumeration();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
+		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
@@ -121,14 +170,14 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -136,7 +185,7 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -144,25 +193,25 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	std::shared_ptr<Bag<uml::Slot>> _slotList = obj.getSlot();
 	for(std::shared_ptr<uml::Slot> _slot : *_slotList)
 	{
-		this->getSlot()->add(std::shared_ptr<uml::Slot>(dynamic_cast<uml::Slot*>(_slot->copy())));
+		this->getSlot()->add(std::shared_ptr<uml::Slot>(std::dynamic_pointer_cast<uml::Slot>(_slot->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_slot" << std::endl;
 	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
+		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  EnumerationLiteralImpl::copy() const
+std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
 {
-	return new EnumerationLiteralImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EnumerationLiteralImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
@@ -201,7 +250,7 @@ void EnumerationLiteralImpl::setEnumeration(std::shared_ptr<uml::Enumeration> _e
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > EnumerationLiteralImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > EnumerationLiteralImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -223,7 +272,7 @@ boost::any EnumerationLiteralImpl::eGet(int featureID,  bool resolve, bool coreT
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_CLASSIFIER:
-			return getClassifier(); //7814
+			return getClassifier(); //7815
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //784
 		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
@@ -233,7 +282,7 @@ boost::any EnumerationLiteralImpl::eGet(int featureID,  bool resolve, bool coreT
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //780
 		case UmlPackage::ENUMERATIONLITERAL_ENUMERATION:
-			return getEnumeration(); //7817
+			return getEnumeration(); //7818
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //785
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -246,14 +295,16 @@ boost::any EnumerationLiteralImpl::eGet(int featureID,  bool resolve, bool coreT
 			return getOwnedElement(); //782
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //783
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //7812
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //784
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //788
 		case UmlPackage::INSTANCESPECIFICATION_SLOT:
-			return getSlot(); //7815
+			return getSlot(); //7816
 		case UmlPackage::INSTANCESPECIFICATION_SPECIFICATION:
-			return getSpecification(); //7816
+			return getSpecification(); //7817
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //785
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

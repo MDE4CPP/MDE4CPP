@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -112,7 +110,8 @@ namespace uml
 	/*!
 	 A Connector specifies links that enables communication between two or more instances. In contrast to Associations, which specify links between any instance of the associated Classifiers, Connectors specify links between instances playing the connected parts only.
 	<p>From package UML::StructuredClassifiers.</p> */
-	class Connector:virtual public Feature	{
+	class Connector:virtual public Feature
+	{
 		public:
  			Connector(const Connector &) {}
 			Connector& operator=(Connector const&) = delete;
@@ -122,7 +121,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Connector() {}
@@ -130,22 +129,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
-			type<>null implies 
-			  let noOfEnds : Integer = end->size() in 
-			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type)) */ 
-			virtual bool types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
-			structuredClassifier <> null
-			and
-			  end->forAll( e | structuredClassifier.allRoles()->includes(e.role)
-			or
-			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort)) */ 
-			virtual bool roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 Derivation for Connector::/kind : ConnectorKind
 			result = (if end->exists(
@@ -157,6 +140,22 @@ namespace uml
 			endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
 			virtual ConnectorKind getKind()  = 0;
+			
+			/*!
+			 The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
+			structuredClassifier <> null
+			and
+			  end->forAll( e | structuredClassifier.allRoles()->includes(e.role)
+			or
+			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort)) */ 
+			virtual bool roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
+			type<>null implies 
+			  let noOfEnds : Integer = end->size() in 
+			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type)) */ 
+			virtual bool types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

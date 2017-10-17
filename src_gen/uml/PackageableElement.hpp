@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -64,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class ParameterableElement;
 }
 
@@ -92,7 +95,8 @@ namespace uml
 	/*!
 	 A PackageableElement is a NamedElement that may be owned directly by a Package. A PackageableElement is also able to serve as the parameteredElement of a TemplateParameter.
 	<p>From package UML::CommonStructure.</p> */
-	class PackageableElement:virtual public NamedElement,virtual public ParameterableElement	{
+	class PackageableElement:virtual public NamedElement,virtual public ParameterableElement
+	{
 		public:
  			PackageableElement(const PackageableElement &) {}
 			PackageableElement& operator=(PackageableElement const&) = delete;
@@ -101,8 +105,24 @@ namespace uml
 			PackageableElement(){}
 
 
+			//Additional constructors for the containments back reference
+
+			PackageableElement(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			PackageableElement(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			PackageableElement(std::weak_ptr<uml::Package > par_owningPackage);
+
+			//Additional constructors for the containments back reference
+
+			PackageableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~PackageableElement() {}
@@ -123,6 +143,13 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::Package > getOwningPackage() const = 0;
+			
+			/*!
+			 */
+			virtual void setOwningPackage(std::shared_ptr<uml::Package> _owningPackage_owningPackage) = 0;
 			
 
 		protected:
@@ -134,6 +161,9 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<uml::Package > m_owningPackage;
 			
 
 		public:
@@ -141,6 +171,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

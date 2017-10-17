@@ -70,6 +70,28 @@ IncludeImpl::~IncludeImpl()
 
 
 
+//Additional constructor for the containments back reference
+			IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:IncludeImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element > par_owner)
+			:IncludeImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 {
@@ -88,18 +110,19 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 
 	m_includingCase  = obj.getIncludingCase();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::Element> > _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getAddition()!=nullptr)
 	{
-		m_addition.reset(dynamic_cast<uml::UseCase*>(obj.getAddition()->copy()));
+		m_addition = std::dynamic_pointer_cast<uml::UseCase>(obj.getAddition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_addition" << std::endl;
@@ -107,14 +130,14 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -122,18 +145,18 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  IncludeImpl::copy() const
+std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
 {
-	return new IncludeImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new IncludeImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
@@ -175,9 +198,13 @@ void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getTarget() const
+std::weak_ptr<uml::Namespace > IncludeImpl::getNamespace() const
 {
-	return m_target;
+	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > IncludeImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 std::weak_ptr<uml::Element > IncludeImpl::getOwner() const
 {
@@ -187,17 +214,13 @@ std::shared_ptr<Union<uml::Element> > IncludeImpl::getRelatedElement() const
 {
 	return m_relatedElement;
 }
-std::shared_ptr<Union<uml::Element> > IncludeImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getSource() const
 {
 	return m_source;
 }
-std::shared_ptr<uml::Namespace > IncludeImpl::getNamespace() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getTarget() const
 {
-	return m_namespace;
+	return m_target;
 }
 
 

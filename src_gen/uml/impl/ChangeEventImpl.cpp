@@ -18,6 +18,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -56,10 +58,32 @@ ChangeEventImpl::~ChangeEventImpl()
 
 
 //Additional constructor for the containments back reference
-			ChangeEventImpl::ChangeEventImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ChangeEventImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Element > par_owner)
+			:ChangeEventImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:ChangeEventImpl()
+			{
+			    m_owningPackage = par_owningPackage;
 			}
 
 
@@ -93,19 +117,22 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getChangeExpression()!=nullptr)
 	{
-		m_changeExpression.reset(dynamic_cast<uml::ValueSpecification*>(obj.getChangeExpression()->copy()));
+		m_changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getChangeExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_changeExpression" << std::endl;
@@ -113,14 +140,14 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -128,19 +155,19 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ChangeEventImpl::copy() const
+std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
 {
-	return new ChangeEventImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ChangeEventImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const
@@ -172,6 +199,10 @@ void ChangeEventImpl::setChangeExpression(std::shared_ptr<uml::ValueSpecificatio
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > ChangeEventImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > ChangeEventImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -190,7 +221,7 @@ boost::any ChangeEventImpl::eGet(int featureID,  bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case UmlPackage::CHANGEEVENT_CHANGEEXPRESSION:
-			return getChangeExpression(); //19812
+			return getChangeExpression(); //19813
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //1984
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
@@ -207,6 +238,8 @@ boost::any ChangeEventImpl::eGet(int featureID,  bool resolve, bool coreType) co
 			return getOwnedElement(); //1982
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //1983
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //19812
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //1984
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:

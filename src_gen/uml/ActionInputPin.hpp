@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,6 +67,11 @@ namespace uml
 
 namespace uml 
 {
+	class CallOperationAction;
+}
+
+namespace uml 
+{
 	class Classifier;
 }
 
@@ -104,6 +107,11 @@ namespace uml
 
 namespace uml 
 {
+	class InvocationAction;
+}
+
+namespace uml 
+{
 	class Namespace;
 }
 
@@ -120,6 +128,11 @@ namespace uml
 namespace uml 
 {
 	class StringExpression;
+}
+
+namespace uml 
+{
+	class StructuralFeatureAction;
 }
 
 namespace uml 
@@ -152,7 +165,8 @@ namespace uml
 	/*!
 	 An ActionInputPin is a kind of InputPin that executes an Action to determine the values to input to another Action.
 	<p>From package UML::Actions.</p> */
-	class ActionInputPin:virtual public InputPin	{
+	class ActionInputPin:virtual public InputPin
+	{
 		public:
  			ActionInputPin(const ActionInputPin &) {}
 			ActionInputPin& operator=(ActionInputPin const&) = delete;
@@ -162,7 +176,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ActionInputPin() {}
@@ -176,16 +190,16 @@ namespace uml
 			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 The fromAction of an ActionInputPin must have exactly one OutputPin.
-			fromAction.output->size() = 1 */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty() */ 
 			virtual bool no_control_or_object_flow(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The fromAction of an ActionInputPin must have exactly one OutputPin.
+			fromAction.output->size() = 1 */ 
+			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -226,6 +240,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
@@ -234,10 +251,7 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

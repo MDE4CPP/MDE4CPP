@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -75,7 +73,8 @@ namespace uml
 	/*!
 	 A PackageImport is a Relationship that imports all the non-private members of a Package into the Namespace owning the PackageImport, so that those Elements may be referred to by their unqualified names in the importingNamespace.
 	<p>From package UML::CommonStructure.</p> */
-	class PackageImport:virtual public DirectedRelationship	{
+	class PackageImport:virtual public DirectedRelationship
+	{
 		public:
  			PackageImport(const PackageImport &) {}
 			PackageImport& operator=(PackageImport const&) = delete;
@@ -85,10 +84,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			PackageImport(std::weak_ptr<uml::Namespace > par_importingNamespace){}
+
+			PackageImport(std::weak_ptr<uml::Namespace > par_importingNamespace);
+
+			//Additional constructors for the containments back reference
+
+			PackageImport(std::weak_ptr<uml::Element > par_owner);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~PackageImport() {}
@@ -173,15 +177,15 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0; 
 	};
 
 }

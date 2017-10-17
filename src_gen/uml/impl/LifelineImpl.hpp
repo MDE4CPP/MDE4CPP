@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			LifelineImpl(const LifelineImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LifelineImpl& operator=(LifelineImpl const&) = delete;
@@ -53,6 +51,14 @@ namespace uml
 			LifelineImpl(std::weak_ptr<uml::Interaction > par_interaction);
 
 
+			//Additional constructors for the containments back reference
+			LifelineImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			LifelineImpl(std::weak_ptr<uml::Element > par_owner);
+
+
 
 
 		public:
@@ -62,11 +68,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 The selector for a Lifeline must only be specified if the referenced Part is multivalued.
-			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued()) */ 
-			virtual bool selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
 			/*!
 			 If a lifeline is in an Interaction referred to by an InteractionUse in an enclosing Interaction,  and that lifeline is common with another lifeline in an Interaction referred to by another InteractonUse within that same enclosing Interaction, it must be common to a lifeline within that enclosing Interaction. By common Lifelines we mean Lifelines with the same selector and represents associations.
 			let intUses : Set(InteractionUse) = interaction.interactionUse  in 
@@ -121,6 +122,11 @@ namespace uml
 			self.selector.oclIsKindOf(LiteralString) */ 
 			virtual bool selector_int_or_string(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
+			/*!
+			 The selector for a Lifeline must only be specified if the referenced Part is multivalued.
+			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued()) */ 
+			virtual bool selector_specified(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
 			
 			
 			//*********************************
@@ -131,6 +137,11 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 References the InteractionFragments in which this Lifeline takes part.
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr< Bag<uml::InteractionFragment> > getCoveredBy() const ;
+			
 			/*!
 			 References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p> */
@@ -167,26 +178,21 @@ namespace uml
 			 If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p> */
 			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector_selector) ;
-			/*!
-			 References the InteractionFragments in which this Lifeline takes part.
-			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr< Bag<uml::InteractionFragment> > getCoveredBy() const ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

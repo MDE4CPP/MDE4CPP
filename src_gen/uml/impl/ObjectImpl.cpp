@@ -49,16 +49,15 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ObjectImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 {
-	return new ObjectImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const

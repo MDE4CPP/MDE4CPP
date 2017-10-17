@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			OpaqueExpressionImpl(const OpaqueExpressionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			OpaqueExpressionImpl& operator=(OpaqueExpressionImpl const&) = delete;
@@ -50,7 +48,19 @@ namespace uml
 			OpaqueExpressionImpl();
 
 			//Additional constructors for the containments back reference
-			OpaqueExpressionImpl(std::shared_ptr<uml::Namespace > par_namespace);
+			OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot);
 
 
 			//Additional constructors for the containments back reference
@@ -66,21 +76,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size()) */ 
-			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
-			/*!
-			 The behavior must have exactly one return result parameter.
-			behavior <> null implies
-			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
-			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The behavior may only have return result parameters.
-			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
-			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query isIntegral() tells whether an expression is intended to produce an Integer.
@@ -102,7 +98,21 @@ namespace uml
 			<p>From package UML::Values.</p> */ 
 			virtual bool isPositive()  ;
 			
+			/*!
+			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
+			language->notEmpty() implies (_'body'->size() = language->size()) */ 
+			virtual bool language_body_size(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
+			/*!
+			 The behavior must have exactly one return result parameter.
+			behavior <> null implies
+			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
+			virtual bool one_return_result_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The behavior may only have return result parameters.
+			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
+			virtual bool only_return_result_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query value() gives an integer value for an expression intended to produce one.
@@ -151,12 +161,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

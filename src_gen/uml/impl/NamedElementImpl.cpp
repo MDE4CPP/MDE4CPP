@@ -69,10 +69,21 @@ NamedElementImpl::~NamedElementImpl()
 
 
 //Additional constructor for the containments back reference
-			NamedElementImpl::NamedElementImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:NamedElementImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element > par_owner)
+			:NamedElementImpl()
+			{
+			    m_owner = par_owner;
 			}
 
 
@@ -95,23 +106,24 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -119,19 +131,19 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  NamedElementImpl::copy() const
+std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
 {
-	return new NamedElementImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new NamedElementImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
@@ -173,17 +185,17 @@ std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Namespace> > allNS(new Bag<uml::Namespace>());
-    if (getNamespace()==nullptr)
+    if (getNamespace().lock() == nullptr)
     {
         return allNS;
     }
     else
     {
-    	std::shared_ptr<Bag<uml::Namespace> > currentNSList = getNamespace()->allNamespaces();
+    	std::shared_ptr<Bag<uml::Namespace> > currentNSList = getNamespace().lock()->allNamespaces();
         allNS->insert(allNS->end(), currentNSList->begin(), currentNSList->end());
         currentNSList = nullptr;
 
-        std::shared_ptr<uml::Namespace> currentNS = getNamespace();
+        std::shared_ptr<uml::Namespace> currentNS = getNamespace().lock();
         if (currentNS != nullptr)
         {
             allNS->push_back(currentNS);
@@ -310,17 +322,17 @@ void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> 
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
+std::weak_ptr<uml::Namespace > NamedElementImpl::getNamespace() const
 {
-	return m_owner;
+	return m_namespace;
 }
 std::shared_ptr<Union<uml::Element> > NamedElementImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Namespace > NamedElementImpl::getNamespace() const
+std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
 {
-	return m_namespace;
+	return m_owner;
 }
 
 

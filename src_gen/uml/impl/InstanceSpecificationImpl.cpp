@@ -24,6 +24,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "PackageableElement.hpp"
 
 #include "Slot.hpp"
@@ -89,10 +91,32 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 
 
 //Additional constructor for the containments back reference
-			InstanceSpecificationImpl::InstanceSpecificationImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:InstanceSpecificationImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+			:InstanceSpecificationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:InstanceSpecificationImpl()
+			{
+			    m_owningPackage = par_owningPackage;
 			}
 
 
@@ -132,20 +156,23 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	std::shared_ptr< Bag<uml::PackageableElement> > _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
 	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
 	{
-		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(dynamic_cast<uml::Deployment*>(_deployment->copy())));
+		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
@@ -153,14 +180,14 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -168,7 +195,7 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -176,14 +203,14 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	std::shared_ptr<Bag<uml::Slot>> _slotList = obj.getSlot();
 	for(std::shared_ptr<uml::Slot> _slot : *_slotList)
 	{
-		this->getSlot()->add(std::shared_ptr<uml::Slot>(dynamic_cast<uml::Slot*>(_slot->copy())));
+		this->getSlot()->add(std::shared_ptr<uml::Slot>(std::dynamic_pointer_cast<uml::Slot>(_slot->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_slot" << std::endl;
 	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
+		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
@@ -198,12 +225,12 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	
 
 	
-
 }
 
-ecore::EObject *  InstanceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
 {
-	return new InstanceSpecificationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new InstanceSpecificationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
@@ -272,6 +299,10 @@ void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpeci
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > InstanceSpecificationImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > InstanceSpecificationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -290,7 +321,7 @@ boost::any InstanceSpecificationImpl::eGet(int featureID,  bool resolve, bool co
 	switch(featureID)
 	{
 		case UmlPackage::INSTANCESPECIFICATION_CLASSIFIER:
-			return getClassifier(); //7914
+			return getClassifier(); //7915
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //794
 		case UmlPackage::DEPLOYMENTTARGET_DEPLOYEDELEMENT:
@@ -311,14 +342,16 @@ boost::any InstanceSpecificationImpl::eGet(int featureID,  bool resolve, bool co
 			return getOwnedElement(); //792
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //793
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //7912
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //794
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //798
 		case UmlPackage::INSTANCESPECIFICATION_SLOT:
-			return getSlot(); //7915
+			return getSlot(); //7916
 		case UmlPackage::INSTANCESPECIFICATION_SPECIFICATION:
-			return getSpecification(); //7916
+			return getSpecification(); //7917
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //795
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

@@ -20,6 +20,8 @@
 
 #include "Operation.hpp"
 
+#include "Package.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -56,10 +58,32 @@ CallEventImpl::~CallEventImpl()
 
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:CallEventImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element > par_owner)
+			:CallEventImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:CallEventImpl()
+			{
+			    m_owningPackage = par_owningPackage;
 			}
 
 
@@ -93,29 +117,32 @@ CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_operation  = obj.getOperation();
 
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -123,18 +150,18 @@ CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  CallEventImpl::copy() const
+std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
 {
-	return new CallEventImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new CallEventImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
@@ -166,6 +193,10 @@ void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > CallEventImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > CallEventImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -194,13 +225,15 @@ boost::any CallEventImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 		case UmlPackage::NAMEDELEMENT_NAMESPACE:
 			return getNamespace(); //1977
 		case UmlPackage::CALLEVENT_OPERATION:
-			return getOperation(); //19712
+			return getOperation(); //19713
 		case UmlPackage::ELEMENT_OWNEDCOMMENT:
 			return getOwnedComment(); //1971
 		case UmlPackage::ELEMENT_OWNEDELEMENT:
 			return getOwnedElement(); //1972
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //1973
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //19712
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //1974
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:

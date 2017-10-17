@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,7 +67,8 @@ namespace uml
 	/*!
 	 A ParameterableElement is an Element that can be exposed as a formal TemplateParameter for a template, or specified as an actual parameter in a binding of a template.
 	<p>From package UML::CommonStructure.</p> */
-	class ParameterableElement:virtual public Element	{
+	class ParameterableElement:virtual public Element
+	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}
 			ParameterableElement& operator=(ParameterableElement const&) = delete;
@@ -79,10 +78,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			ParameterableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter){}
+
+			ParameterableElement(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			ParameterableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ParameterableElement() {}

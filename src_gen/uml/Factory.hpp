@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -71,7 +69,8 @@ namespace uml
 	instances of the types in a Package.
 	
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */
-	class Factory:virtual public Element	{
+	class Factory:virtual public Element
+	{
 		public:
  			Factory(const Factory &) {}
 			Factory& operator=(Factory const&) = delete;
@@ -81,7 +80,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Factory() {}

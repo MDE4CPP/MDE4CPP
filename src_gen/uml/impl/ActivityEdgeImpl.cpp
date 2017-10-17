@@ -158,6 +158,28 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ActivityEdgeImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
+			:ActivityEdgeImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImpl()
 {
@@ -184,6 +206,8 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 
 	m_interrupts  = obj.getInterrupts();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
@@ -197,20 +221,19 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	m_target  = obj.getTarget();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getGuard()!=nullptr)
 	{
-		m_guard.reset(dynamic_cast<uml::ValueSpecification*>(obj.getGuard()->copy()));
+		m_guard = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getGuard()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_guard" << std::endl;
@@ -218,14 +241,14 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
 	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(dynamic_cast<uml::ActivityPartition*>(_inPartition->copy())));
+		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -233,7 +256,7 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -241,14 +264,14 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdgeList = obj.getRedefinedEdge();
 	for(std::shared_ptr<uml::ActivityEdge> _redefinedEdge : *_redefinedEdgeList)
 	{
-		this->getRedefinedEdge()->add(std::shared_ptr<uml::ActivityEdge>(dynamic_cast<uml::ActivityEdge*>(_redefinedEdge->copy())));
+		this->getRedefinedEdge()->add(std::shared_ptr<uml::ActivityEdge>(std::dynamic_pointer_cast<uml::ActivityEdge>(_redefinedEdge->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedEdge" << std::endl;
 	#endif
 	if(obj.getWeight()!=nullptr)
 	{
-		m_weight.reset(dynamic_cast<uml::ValueSpecification*>(obj.getWeight()->copy()));
+		m_weight = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getWeight()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_weight" << std::endl;
@@ -257,12 +280,12 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	
 
 	
-
 }
 
-ecore::EObject *  ActivityEdgeImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityEdgeImpl::copy() const
 {
-	return new ActivityEdgeImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityEdgeImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
@@ -376,21 +399,21 @@ void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weigh
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::RedefinableElement> > ActivityEdgeImpl::getRedefinedElement() const
+std::shared_ptr<Union<uml::ActivityGroup> > ActivityEdgeImpl::getInGroup() const
 {
-	return m_redefinedElement;
-}
-std::weak_ptr<uml::Element > ActivityEdgeImpl::getOwner() const
-{
-	return m_owner;
+	return m_inGroup;
 }
 std::shared_ptr<Union<uml::Element> > ActivityEdgeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<Union<uml::ActivityGroup> > ActivityEdgeImpl::getInGroup() const
+std::weak_ptr<uml::Element > ActivityEdgeImpl::getOwner() const
 {
-	return m_inGroup;
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ActivityEdgeImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 
 

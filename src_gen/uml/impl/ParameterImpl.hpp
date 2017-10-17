@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace uml
 	{
 		public: 
 			ParameterImpl(const ParameterImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ParameterImpl& operator=(ParameterImpl const&) = delete;
@@ -51,7 +49,23 @@ namespace uml
 			ParameterImpl();
 
 			//Additional constructors for the containments back reference
-			ParameterImpl(std::shared_ptr<uml::Operation > par_operation);
+			ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior);
+
+
+			//Additional constructors for the containments back reference
+			ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ParameterImpl(std::weak_ptr<uml::Operation > par_operation);
+
+
+			//Additional constructors for the containments back reference
+			ParameterImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 
 
@@ -64,6 +78,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
+			end->notEmpty() implies collaboration->notEmpty() */ 
+			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
@@ -71,24 +90,13 @@ namespace uml
 			virtual bool in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
+			 */ 
+			virtual bool isSetDefault()  ;
+			
+			/*!
 			 An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
 			virtual bool not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty() */ 
-			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant */ 
-			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream) */ 
-			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Parameters typed by DataTypes cannot have an effect.
@@ -96,8 +104,9 @@ namespace uml
 			virtual bool object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 */ 
-			virtual bool isSetDefault()  ;
+			 Reentrant behaviors cannot have stream Parameters.
+			(isStream and behavior <> null) implies not behavior.isReentrant */ 
+			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Sets the default value for this parameter to the specified Boolean value. */ 
@@ -122,6 +131,11 @@ namespace uml
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
 			virtual void setUnlimitedNaturalDefaultValue(int value)  ;
+			
+			/*!
+			 A Parameter cannot be a stream and exception at the same time.
+			not (isException and isStream) */ 
+			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 */ 
@@ -188,6 +202,13 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
+			 */
+			virtual std::weak_ptr<uml::Behavior > getBehavior() const ;
+			
+			/*!
+			 */
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) ;
+			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<uml::ValueSpecification > getDefaultValue() const ;
@@ -199,7 +220,7 @@ namespace uml
 			/*!
 			 The Operation owning this parameter.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Operation > getOperation() const ;
+			virtual std::weak_ptr<uml::Operation > getOperation() const ;
 			
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
@@ -212,15 +233,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ProfileImpl(const ProfileImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ProfileImpl& operator=(ProfileImpl const&) = delete;
@@ -50,7 +48,22 @@ namespace uml
 			ProfileImpl();
 
 			//Additional constructors for the containments back reference
-			ProfileImpl(std::shared_ptr<uml::Package > par_nestingPackage);
+			ProfileImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			ProfileImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+			ProfileImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 
 
@@ -62,23 +75,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 An element imported as a metaclassReference is not specialized or generalized in a Profile.
-			metaclassReference.importedElement->
-				select(c | c.oclIsKindOf(Classifier) and
-					(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()
-			and 
-			packagedElement->
-			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
-			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
-			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
-			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
-			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
-			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
 			/*!
 			 Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile. */ 
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier>  classifier)  ;
@@ -115,6 +111,23 @@ namespace uml
 			 Determines whether this profile is defined. */ 
 			virtual bool isDefined()  ;
 			
+			/*!
+			 An element imported as a metaclassReference is not specialized or generalized in a Profile.
+			metaclassReference.importedElement->
+				select(c | c.oclIsKindOf(Classifier) and
+					(c.oclAsType(Classifier).allParents()->collect(namespace)->includes(self)))->isEmpty()
+			and 
+			packagedElement->
+			    select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier).allParents())->
+			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty() */ 
+			virtual bool metaclass_reference_not_specialized(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
+			metamodelReference.importedPackage.elementImport.importedElement.allOwningPackages()->
+			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty() */ 
+			virtual bool references_same_metamodel(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
 			
 			
 			//*********************************
@@ -141,21 +154,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

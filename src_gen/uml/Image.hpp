@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -59,7 +57,8 @@ namespace uml
 	/*!
 	 Physical definition of a graphical image.
 	<p>From package UML::Packages.</p> */
-	class Image:virtual public Element	{
+	class Image:virtual public Element
+	{
 		public:
  			Image(const Image &) {}
 			Image& operator=(Image const&) = delete;
@@ -69,7 +68,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Image() {}

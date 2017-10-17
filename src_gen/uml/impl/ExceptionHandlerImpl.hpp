@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ExceptionHandlerImpl(const ExceptionHandlerImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExceptionHandlerImpl& operator=(ExceptionHandlerImpl const&) = delete;
@@ -48,6 +46,10 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ExceptionHandlerImpl();
+
+			//Additional constructors for the containments back reference
+			ExceptionHandlerImpl(std::weak_ptr<uml::Element > par_owner);
+
 
 			//Additional constructors for the containments back reference
 			ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode > par_protectedNode);
@@ -63,9 +65,34 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
+			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
+			nodes.outgoing->forAll(nodes->includes(target)) and
+			nodes.incoming->forAll(nodes->includes(source)) */ 
+			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
+			exceptionInput.type=null or 
+			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
+			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
 			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The handlerBody must have the same owner as the protectedNode.
+			handlerBody.owner=protectedNode.owner */ 
+			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
+			handlerBody.oclIsKindOf(Action) and
+			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
+			inputs->size()=1 and inputs->first()=exceptionInput */ 
+			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -81,31 +108,6 @@ namespace uml
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
 			) */ 
 			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
-			handlerBody.oclIsKindOf(Action) and
-			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput */ 
-			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
-			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
-			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source)) */ 
-			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner */ 
-			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
-			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
-			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -155,12 +157,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

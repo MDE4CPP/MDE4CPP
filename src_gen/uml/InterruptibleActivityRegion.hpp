@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -95,7 +93,8 @@ namespace uml
 	/*!
 	 An InterruptibleActivityRegion is an ActivityGroup that supports the termination of tokens flowing in the portions of an activity within it.
 	<p>From package UML::Activities.</p> */
-	class InterruptibleActivityRegion:virtual public ActivityGroup	{
+	class InterruptibleActivityRegion:virtual public ActivityGroup
+	{
 		public:
  			InterruptibleActivityRegion(const InterruptibleActivityRegion &) {}
 			InterruptibleActivityRegion& operator=(InterruptibleActivityRegion const&) = delete;
@@ -105,7 +104,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InterruptibleActivityRegion() {}
@@ -163,15 +162,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

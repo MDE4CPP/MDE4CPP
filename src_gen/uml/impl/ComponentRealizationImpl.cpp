@@ -24,6 +24,8 @@
 
 #include "OpaqueExpression.hpp"
 
+#include "Package.hpp"
+
 #include "Realization.hpp"
 
 #include "StringExpression.hpp"
@@ -88,6 +90,50 @@ ComponentRealizationImpl::~ComponentRealizationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ComponentRealizationImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Element > par_owner)
+			:ComponentRealizationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:ComponentRealizationImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ComponentRealizationImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
 
 ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImpl & obj):ComponentRealizationImpl()
 {
@@ -106,7 +152,11 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -116,13 +166,12 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<uml::NamedElement>> _clientList = obj.getClient();
 	for(std::shared_ptr<uml::NamedElement> _client : *_clientList)
 	{
-		this->getClient()->add(std::shared_ptr<uml::NamedElement>(dynamic_cast<uml::NamedElement*>(_client->copy())));
+		this->getClient()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_client" << std::endl;
@@ -130,21 +179,21 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getMapping()!=nullptr)
 	{
-		m_mapping.reset(dynamic_cast<uml::OpaqueExpression*>(obj.getMapping()->copy()));
+		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_mapping" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -152,7 +201,7 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -160,7 +209,7 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	std::shared_ptr<Bag<uml::Classifier>> _realizingClassifierList = obj.getRealizingClassifier();
 	for(std::shared_ptr<uml::Classifier> _realizingClassifier : *_realizingClassifierList)
 	{
-		this->getRealizingClassifier()->add(std::shared_ptr<uml::Classifier>(dynamic_cast<uml::Classifier*>(_realizingClassifier->copy())));
+		this->getRealizingClassifier()->add(std::shared_ptr<uml::Classifier>(std::dynamic_pointer_cast<uml::Classifier>(_realizingClassifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_realizingClassifier" << std::endl;
@@ -168,18 +217,18 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
 	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
 	{
-		this->getSupplier()->add(std::shared_ptr<uml::NamedElement>(dynamic_cast<uml::NamedElement*>(_supplier->copy())));
+		this->getSupplier()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ComponentRealizationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
 {
-	return new ComponentRealizationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ComponentRealizationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const
@@ -218,9 +267,21 @@ std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not refe
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > ComponentRealizationImpl::getNamespace() const
+{
+	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
 std::weak_ptr<uml::Element > ComponentRealizationImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getRelatedElement() const
+{
+	return m_relatedElement;
 }
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getSource() const
 {
@@ -229,14 +290,6 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationI
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ComponentRealizationImpl::getTarget() const
 {
 	return m_target;
-}
-std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<Union<uml::Element> > ComponentRealizationImpl::getRelatedElement() const
-{
-	return m_relatedElement;
 }
 
 
@@ -248,15 +301,15 @@ boost::any ComponentRealizationImpl::eGet(int featureID,  bool resolve, bool cor
 	switch(featureID)
 	{
 		case UmlPackage::COMPONENTREALIZATION_ABSTRACTION:
-			return getAbstraction(); //24019
+			return getAbstraction(); //24020
 		case UmlPackage::DEPENDENCY_CLIENT:
-			return getClient(); //24015
+			return getClient(); //24016
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //2404
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2400
 		case UmlPackage::ABSTRACTION_MAPPING:
-			return getMapping(); //24017
+			return getMapping(); //24018
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //2405
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -269,18 +322,20 @@ boost::any ComponentRealizationImpl::eGet(int featureID,  bool resolve, bool cor
 			return getOwnedElement(); //2402
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2403
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24012
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2404
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //2408
 		case UmlPackage::COMPONENTREALIZATION_REALIZINGCLASSIFIER:
-			return getRealizingClassifier(); //24018
+			return getRealizingClassifier(); //24019
 		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
 			return getRelatedElement(); //2404
 		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
 			return getSource(); //2405
 		case UmlPackage::DEPENDENCY_SUPPLIER:
-			return getSupplier(); //24016
+			return getSupplier(); //24017
 		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
 			return getTarget(); //2406
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TemplateSignatureImpl(const TemplateSignatureImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TemplateSignatureImpl& operator=(TemplateSignatureImpl const&) = delete;
@@ -48,6 +46,10 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateSignatureImpl();
+
+			//Additional constructors for the containments back reference
+			TemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner);
+
 
 			//Additional constructors for the containments back reference
 			TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template);
@@ -83,6 +85,11 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 The formal parameters that are owned by this TemplateSignature.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > getOwnedParameter() const ;
+			
 			
 			/*!
 			 The TemplateableElement that owns this TemplateSignature.
@@ -93,26 +100,21 @@ namespace uml
 			 The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template_template) ;
-			/*!
-			 The formal parameters that are owned by this TemplateSignature.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > getOwnedParameter() const ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&) = delete;
@@ -55,6 +53,14 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 			InteractionFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -82,15 +88,6 @@ namespace uml
 			virtual std::shared_ptr< Bag<uml::Lifeline> > getCovered() const ;
 			
 			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
-			virtual std::weak_ptr<uml::InteractionOperand > getEnclosingOperand() const ;
-			
-			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) ;
-			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
 			virtual std::weak_ptr<uml::Interaction > getEnclosingInteraction() const ;
@@ -99,6 +96,15 @@ namespace uml
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
 			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction_enclosingInteraction) ;
+			/*!
+			 The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p> */
+			virtual std::weak_ptr<uml::InteractionOperand > getEnclosingOperand() const ;
+			
+			/*!
+			 The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p> */
+			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) ;
 			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
@@ -110,15 +116,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

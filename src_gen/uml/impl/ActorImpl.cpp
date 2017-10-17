@@ -90,21 +90,10 @@ ActorImpl::~ActorImpl()
 
 
 //Additional constructor for the containments back reference
-			ActorImpl::ActorImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			ActorImpl::ActorImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ActorImpl()
 			{
 			    m_namespace = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ActorImpl::ActorImpl(std::shared_ptr<uml::Package > par_package)
-			:ActorImpl()
-			{
-			    m_package = par_package;
 			}
 
 
@@ -117,6 +106,45 @@ ActorImpl::~ActorImpl()
 			{
 			    m_owner = par_owner;
 			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActorImpl::ActorImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+			:ActorImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+					 m_owningPackage = par_Package;
+					 return;
+				case UmlPackage::TYPE_PACKAGE:
+					 m_package = par_Package;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ActorImpl::ActorImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ActorImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 
 
 
@@ -147,9 +175,15 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
+	m_owningPackage  = obj.getOwningPackage();
+
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	m_package  = obj.getPackage();
 
 	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
 	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
@@ -166,12 +200,11 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getClassifierBehavior()!=nullptr)
 	{
-		m_classifierBehavior.reset(dynamic_cast<uml::Behavior*>(obj.getClassifierBehavior()->copy()));
+		m_classifierBehavior = std::dynamic_pointer_cast<uml::Behavior>(obj.getClassifierBehavior()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_classifierBehavior" << std::endl;
@@ -179,7 +212,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUseList = obj.getCollaborationUse();
 	for(std::shared_ptr<uml::CollaborationUse> _collaborationUse : *_collaborationUseList)
 	{
-		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(dynamic_cast<uml::CollaborationUse*>(_collaborationUse->copy())));
+		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(std::dynamic_pointer_cast<uml::CollaborationUse>(_collaborationUse->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
@@ -187,7 +220,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -195,7 +228,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
@@ -203,7 +236,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Generalization>> _generalizationList = obj.getGeneralization();
 	for(std::shared_ptr<uml::Generalization> _generalization : *_generalizationList)
 	{
-		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(dynamic_cast<uml::Generalization*>(_generalization->copy())));
+		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(std::dynamic_pointer_cast<uml::Generalization>(_generalization->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalization" << std::endl;
@@ -211,7 +244,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
@@ -219,7 +252,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::NamedElement>> _inheritedMemberList = obj.getInheritedMember();
 	for(std::shared_ptr<uml::NamedElement> _inheritedMember : *_inheritedMemberList)
 	{
-		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(dynamic_cast<uml::NamedElement*>(_inheritedMember->copy())));
+		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_inheritedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inheritedMember" << std::endl;
@@ -227,14 +260,14 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::InterfaceRealization>> _interfaceRealizationList = obj.getInterfaceRealization();
 	for(std::shared_ptr<uml::InterfaceRealization> _interfaceRealization : *_interfaceRealizationList)
 	{
-		this->getInterfaceRealization()->add(std::shared_ptr<uml::InterfaceRealization>(dynamic_cast<uml::InterfaceRealization*>(_interfaceRealization->copy())));
+		this->getInterfaceRealization()->add(std::shared_ptr<uml::InterfaceRealization>(std::dynamic_pointer_cast<uml::InterfaceRealization>(_interfaceRealization->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_interfaceRealization" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -242,7 +275,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Behavior>> _ownedBehaviorList = obj.getOwnedBehavior();
 	for(std::shared_ptr<uml::Behavior> _ownedBehavior : *_ownedBehaviorList)
 	{
-		this->getOwnedBehavior()->add(std::shared_ptr<uml::Behavior>(dynamic_cast<uml::Behavior*>(_ownedBehavior->copy())));
+		this->getOwnedBehavior()->add(std::shared_ptr<uml::Behavior>(std::dynamic_pointer_cast<uml::Behavior>(_ownedBehavior->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedBehavior" << std::endl;
@@ -250,7 +283,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -258,14 +291,14 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
 	#endif
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
+		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
@@ -273,22 +306,15 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::UseCase>> _ownedUseCaseList = obj.getOwnedUseCase();
 	for(std::shared_ptr<uml::UseCase> _ownedUseCase : *_ownedUseCaseList)
 	{
-		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(dynamic_cast<uml::UseCase*>(_ownedUseCase->copy())));
+		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(std::dynamic_pointer_cast<uml::UseCase>(_ownedUseCase->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getPackage()!=nullptr)
-	{
-		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_package" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
@@ -296,14 +322,14 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifierList = obj.getRedefinedClassifier();
 	for(std::shared_ptr<uml::Classifier> _redefinedClassifier : *_redefinedClassifierList)
 	{
-		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(dynamic_cast<uml::Classifier*>(_redefinedClassifier->copy())));
+		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(std::dynamic_pointer_cast<uml::Classifier>(_redefinedClassifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedClassifier" << std::endl;
 	#endif
 	if(obj.getRepresentation()!=nullptr)
 	{
-		m_representation.reset(dynamic_cast<uml::CollaborationUse*>(obj.getRepresentation()->copy()));
+		m_representation = std::dynamic_pointer_cast<uml::CollaborationUse>(obj.getRepresentation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_representation" << std::endl;
@@ -311,7 +337,7 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::Substitution>> _substitutionList = obj.getSubstitution();
 	for(std::shared_ptr<uml::Substitution> _substitution : *_substitutionList)
 	{
-		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(dynamic_cast<uml::Substitution*>(_substitution->copy())));
+		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(std::dynamic_pointer_cast<uml::Substitution>(_substitution->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_substitution" << std::endl;
@@ -319,18 +345,18 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
 	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
+		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ActorImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActorImpl::copy() const
 {
-	return new ActorImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActorImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
@@ -368,6 +394,14 @@ std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > ActorImpl::getFe
 {
 	return m_feature;
 }
+std::shared_ptr<Union<uml::NamedElement> > ActorImpl::getMember() const
+{
+	return m_member;
+}
+std::weak_ptr<uml::Namespace > ActorImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > ActorImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -376,21 +410,13 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > 
 {
 	return m_ownedMember;
 }
-std::shared_ptr<uml::Namespace > ActorImpl::getNamespace() const
+std::weak_ptr<uml::Element > ActorImpl::getOwner() const
 {
-	return m_namespace;
-}
-std::shared_ptr<Union<uml::NamedElement> > ActorImpl::getMember() const
-{
-	return m_member;
+	return m_owner;
 }
 std::shared_ptr<Union<uml::RedefinableElement> > ActorImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
-}
-std::weak_ptr<uml::Element > ActorImpl::getOwner() const
-{
-	return m_owner;
 }
 
 
@@ -402,33 +428,33 @@ boost::any ActorImpl::eGet(int featureID,  bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //24125
+			return getAttribute(); //24126
 		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
-			return getClassifierBehavior(); //24138
+			return getClassifierBehavior(); //24139
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //2414
 		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //24126
+			return getCollaborationUse(); //24127
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2410
 		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
 			return getElementImport(); //24111
 		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //24124
+			return getFeature(); //24125
 		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //24127
+			return getGeneral(); //24128
 		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //24128
+			return getGeneralization(); //24129
 		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
 			return getImportedMember(); //24114
 		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //24130
+			return getInheritedMember(); //24131
 		case UmlPackage::BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION:
-			return getInterfaceRealization(); //24139
+			return getInterfaceRealization(); //24140
 		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //24131
+			return getIsAbstract(); //24132
 		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //24132
+			return getIsFinalSpecialization(); //24133
 		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
 			return getIsLeaf(); //24110
 		case UmlPackage::NAMESPACE_MEMBER:
@@ -440,7 +466,7 @@ boost::any ActorImpl::eGet(int featureID,  bool resolve, bool coreType) const
 		case UmlPackage::NAMEDELEMENT_NAMESPACE:
 			return getNamespace(); //2417
 		case UmlPackage::BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR:
-			return getOwnedBehavior(); //24140
+			return getOwnedBehavior(); //24141
 		case UmlPackage::ELEMENT_OWNEDCOMMENT:
 			return getOwnedComment(); //2411
 		case UmlPackage::ELEMENT_OWNEDELEMENT:
@@ -452,35 +478,37 @@ boost::any ActorImpl::eGet(int featureID,  bool resolve, bool coreType) const
 		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
 			return getOwnedTemplateSignature(); //2415
 		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //24133
+			return getOwnedUseCase(); //24134
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2413
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24112
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2414
 		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //24112
+			return getPackage(); //24113
 		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
 			return getPackageImport(); //24112
 		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //24129
+			return getPowertypeExtent(); //24130
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //2418
 		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //24135
+			return getRedefinedClassifier(); //24136
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
 			return getRedefinedElement(); //24111
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //24112
 		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //24136
+			return getRepresentation(); //24137
 		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //24137
+			return getSubstitution(); //24138
 		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
 			return getTemplateBinding(); //2414
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //2415
 		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //24134
+			return getUseCase(); //24135
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:
 			return getVisibility(); //2419
 	}

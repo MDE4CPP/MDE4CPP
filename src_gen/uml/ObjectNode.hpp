@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -149,7 +147,8 @@ namespace uml
 	/*!
 	 An ObjectNode is an abstract ActivityNode that may hold tokens within the object flow in an Activity. ObjectNodes also support token selection, limitation on the number of tokens held, specification of the state required for tokens being held, and carrying control values.
 	<p>From package UML::Activities.</p> */
-	class ObjectNode:virtual public ActivityNode,virtual public TypedElement	{
+	class ObjectNode:virtual public ActivityNode,virtual public TypedElement
+	{
 		public:
  			ObjectNode(const ObjectNode &) {}
 			ObjectNode& operator=(ObjectNode const&) = delete;
@@ -159,7 +158,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ObjectNode() {}
@@ -177,14 +176,14 @@ namespace uml
 			virtual bool input_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
-			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered) */ 
-			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow)) */ 
 			virtual bool object_flow_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
+			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered) */ 
+			virtual bool selection_behavior(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -275,6 +274,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
@@ -283,10 +285,7 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

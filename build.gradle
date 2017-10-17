@@ -15,6 +15,7 @@ task buildUmlRelease(dependsOn: ['generateUml', 'compileUmlRelease']) {
 	description 'build uml in release'
 }
 
+
 task compileUml(dependsOn: ['compileUmlDebug', 'compileUmlRelease']) {
 	group 'uml'
 	description 'compile uml in debug and release'
@@ -122,6 +123,7 @@ task generateUml(type: JavaExec) {
 compileUml.mustRunAfter generateUml
 compileUmlDebug.mustRunAfter generateUml
 compileUmlRelease.mustRunAfter generateUml
+
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/uml/.cmake/')

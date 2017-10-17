@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -79,7 +77,8 @@ namespace uml
 	/*!
 	 LinkEndCreationData is LinkEndData used to provide values for one end of a link to be created by a CreateLinkAction.
 	<p>From package UML::Actions.</p> */
-	class LinkEndCreationData:virtual public LinkEndData	{
+	class LinkEndCreationData:virtual public LinkEndData
+	{
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
 			LinkEndCreationData& operator=(LinkEndCreationData const&) = delete;
@@ -89,7 +88,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LinkEndCreationData() {}

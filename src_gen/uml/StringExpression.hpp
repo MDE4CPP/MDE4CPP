@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -60,6 +58,16 @@ namespace uml
 namespace uml 
 {
 	class Namespace;
+}
+
+namespace uml 
+{
+	class Package;
+}
+
+namespace uml 
+{
+	class Slot;
 }
 
 namespace uml 
@@ -112,7 +120,8 @@ namespace uml
 	/*!
 	 A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.
 	<p>From package UML::Values.</p> */
-	class StringExpression:virtual public Expression,virtual public TemplateableElement	{
+	class StringExpression:virtual public Expression,virtual public TemplateableElement
+	{
 		public:
  			StringExpression(const StringExpression &) {}
 			StringExpression& operator=(StringExpression const&) = delete;
@@ -122,10 +131,31 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			StringExpression(std::weak_ptr<uml::StringExpression > par_owningExpression){}
+
+			StringExpression(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::StringExpression > par_owningExpression);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::Package > par_owningPackage);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::Slot > par_owningSlot);
+
+			//Additional constructors for the containments back reference
+
+			StringExpression(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~StringExpression() {}
@@ -191,6 +221,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

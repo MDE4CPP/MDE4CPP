@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ namespace uml
 	{
 		public: 
 			StructuralFeatureImpl(const StructuralFeatureImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			StructuralFeatureImpl& operator=(StructuralFeatureImpl const&) = delete;
@@ -52,7 +50,7 @@ namespace uml
 			StructuralFeatureImpl();
 
 			//Additional constructors for the containments back reference
-			StructuralFeatureImpl(std::shared_ptr<uml::Namespace > par_namespace);
+			StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
 
 
 			//Additional constructors for the containments back reference
@@ -94,12 +92,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -49,16 +49,15 @@ ActivityContentImpl::ActivityContentImpl(const ActivityContentImpl & obj):Activi
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ActivityContentImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityContentImpl::copy() const
 {
-	return new ActivityContentImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityContentImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityContentImpl::eStaticClass() const

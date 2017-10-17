@@ -97,6 +97,28 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ProtocolTransitionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Element > par_owner)
+			:ProtocolTransitionImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj):ProtocolTransitionImpl()
 {
@@ -120,6 +142,8 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
@@ -136,20 +160,19 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	m_target  = obj.getTarget();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getEffect()!=nullptr)
 	{
-		m_effect.reset(dynamic_cast<uml::Behavior*>(obj.getEffect()->copy()));
+		m_effect = std::dynamic_pointer_cast<uml::Behavior>(obj.getEffect()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_effect" << std::endl;
@@ -157,14 +180,14 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
 	#endif
 	if(obj.getGuard()!=nullptr)
 	{
-		m_guard.reset(dynamic_cast<uml::Constraint*>(obj.getGuard()->copy()));
+		m_guard = std::dynamic_pointer_cast<uml::Constraint>(obj.getGuard()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_guard" << std::endl;
@@ -172,14 +195,14 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -187,7 +210,7 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -195,7 +218,7 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
@@ -203,28 +226,28 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
 	if(obj.getPostCondition()!=nullptr)
 	{
-		m_postCondition.reset(dynamic_cast<uml::Constraint*>(obj.getPostCondition()->copy()));
+		m_postCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getPostCondition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_postCondition" << std::endl;
 	#endif
 	if(obj.getPreCondition()!=nullptr)
 	{
-		m_preCondition.reset(dynamic_cast<uml::Constraint*>(obj.getPreCondition()->copy()));
+		m_preCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getPreCondition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_preCondition" << std::endl;
 	#endif
 	if(obj.getRedefinedTransition()!=nullptr)
 	{
-		m_redefinedTransition.reset(dynamic_cast<uml::Transition*>(obj.getRedefinedTransition()->copy()));
+		m_redefinedTransition = std::dynamic_pointer_cast<uml::Transition>(obj.getRedefinedTransition()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedTransition" << std::endl;
@@ -232,18 +255,18 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	std::shared_ptr<Bag<uml::Trigger>> _triggerList = obj.getTrigger();
 	for(std::shared_ptr<uml::Trigger> _trigger : *_triggerList)
 	{
-		this->getTrigger()->add(std::shared_ptr<uml::Trigger>(dynamic_cast<uml::Trigger*>(_trigger->copy())));
+		this->getTrigger()->add(std::shared_ptr<uml::Trigger>(std::dynamic_pointer_cast<uml::Trigger>(_trigger->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_trigger" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ProtocolTransitionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
 {
-	return new ProtocolTransitionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ProtocolTransitionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
@@ -319,13 +342,17 @@ std::shared_ptr<Union<uml::NamedElement> > ProtocolTransitionImpl::getMember() c
 {
 	return m_member;
 }
-std::shared_ptr<uml::Namespace > ProtocolTransitionImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > ProtocolTransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
 std::shared_ptr<Union<uml::Element> > ProtocolTransitionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolTransitionImpl::getOwnedMember() const
+{
+	return m_ownedMember;
 }
 std::weak_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
 {
@@ -334,10 +361,6 @@ std::weak_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
 std::shared_ptr<Union<uml::RedefinableElement> > ProtocolTransitionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
-}
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ProtocolTransitionImpl::getOwnedMember() const
-{
-	return m_ownedMember;
 }
 
 

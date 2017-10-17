@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -159,7 +157,8 @@ namespace uml
 	/*!
 	 A State models a situation during which some (usually implicit) invariant condition holds.
 	<p>From package UML::StateMachines.</p> */
-	class State:virtual public Namespace,virtual public RedefinableElement,virtual public Vertex	{
+	class State:virtual public Namespace,virtual public RedefinableElement,virtual public Vertex
+	{
 		public:
  			State(const State &) {}
 			State& operator=(State const&) = delete;
@@ -169,7 +168,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~State() {}
@@ -177,16 +176,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 Only entry or exit Pseudostates can serve as connection points.
-			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
-			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 Only submachine States can have connection point references.
-			isSubmachineState implies connection->notEmpty( ) */ 
-			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 Only composite States can have entry or exit Pseudostates defined.
 			connectionPoint->notEmpty() implies isComposite */ 
@@ -200,9 +189,9 @@ namespace uml
 			virtual bool destinations_or_sources_of_transitions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 A State is not allowed to have both a submachine and Regions.
-			isComposite implies not isSubmachineState */ 
-			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 Only entry or exit Pseudostates can serve as connection points.
+			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint) */ 
+			virtual bool entry_or_exit(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A composite State is a State with at least one Region.
@@ -238,6 +227,16 @@ namespace uml
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
 			virtual std::shared_ptr<uml::Classifier> redefinitionContext()  = 0;
+			
+			/*!
+			 A State is not allowed to have both a submachine and Regions.
+			isComposite implies not isSubmachineState */ 
+			virtual bool submachine_or_regions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 Only submachine States can have connection point references.
+			isSubmachineState implies connection->notEmpty( ) */ 
+			virtual bool submachine_states(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -319,6 +318,11 @@ namespace uml
 			<p>From package UML::StateMachines.</p> */
 			virtual void setRedefinedState(std::shared_ptr<uml::State> _redefinedState_redefinedState) = 0;
 			/*!
+			 The Regions owned directly by the State.
+			<p>From package UML::StateMachines.</p> */
+			virtual std::shared_ptr<Subset<uml::Region, uml::NamedElement > > getRegion() const = 0;
+			
+			/*!
 			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p> */
 			virtual std::shared_ptr<uml::Constraint > getStateInvariant() const = 0;
@@ -336,11 +340,6 @@ namespace uml
 			 The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p> */
 			virtual void setSubmachine(std::shared_ptr<uml::StateMachine> _submachine_submachine) = 0;
-			/*!
-			 The Regions owned directly by the State.
-			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<Subset<uml::Region, uml::NamedElement > > getRegion() const = 0;
-			
 			
 
 		protected:
@@ -397,6 +396,10 @@ namespace uml
 			<p>From package UML::StateMachines.</p> */
 			std::shared_ptr<uml::State > m_redefinedState;
 			/*!
+			 The Regions owned directly by the State.
+			<p>From package UML::StateMachines.</p> */
+			std::shared_ptr<Subset<uml::Region, uml::NamedElement > > m_region;
+			/*!
 			 Specifies conditions that are always true when this State is the current State. In ProtocolStateMachines state invariants are additional conditions to the preconditions of the outgoing Transitions, and to the postcondition of the incoming Transitions.
 			<p>From package UML::StateMachines.</p> */
 			std::shared_ptr<uml::Constraint > m_stateInvariant;
@@ -404,10 +407,6 @@ namespace uml
 			 The StateMachine that is to be inserted in place of the (submachine) State.
 			<p>From package UML::StateMachines.</p> */
 			std::shared_ptr<uml::StateMachine > m_submachine;
-			/*!
-			 The Regions owned directly by the State.
-			<p>From package UML::StateMachines.</p> */
-			std::shared_ptr<Subset<uml::Region, uml::NamedElement > > m_region;
 			
 
 		public:
@@ -415,21 +414,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 

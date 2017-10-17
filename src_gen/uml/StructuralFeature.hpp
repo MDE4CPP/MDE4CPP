@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -114,7 +112,8 @@ namespace uml
 	/*!
 	 A StructuralFeature is a typed feature of a Classifier that specifies the structure of instances of the Classifier.
 	<p>From package UML::Classification.</p> */
-	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement	{
+	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement
+	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}
 			StructuralFeature& operator=(StructuralFeature const&) = delete;
@@ -124,7 +123,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~StructuralFeature() {}

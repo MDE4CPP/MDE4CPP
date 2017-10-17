@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ExtensionImpl(const ExtensionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExtensionImpl& operator=(ExtensionImpl const&) = delete;
@@ -50,15 +48,22 @@ namespace uml
 			ExtensionImpl();
 
 			//Additional constructors for the containments back reference
-			ExtensionImpl(std::shared_ptr<uml::Namespace > par_namespace);
-
-
-			//Additional constructors for the containments back reference
-			ExtensionImpl(std::shared_ptr<uml::Package > par_package);
+			ExtensionImpl(std::weak_ptr<uml::Namespace > par_namespace);
 
 
 			//Additional constructors for the containments back reference
 			ExtensionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			ExtensionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
 
 
 
@@ -70,15 +75,7 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 The non-owned end of an Extension is typed by a Class.
-			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
-			virtual bool non_owned_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
-			/*!
-			 An Extension is binary, i.e., it has only two memberEnds.
-			memberEnd->size() = 2 */ 
-			virtual bool is_binary(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Retrieves the stereotype that extends a metaclass through this extension. */ 
@@ -94,13 +91,21 @@ namespace uml
 			<p>From package UML::Packages.</p> */ 
 			virtual bool isRequired()  ;
 			
-			
+			/*!
+			 An Extension is binary, i.e., it has only two memberEnds.
+			memberEnd->size() = 2 */ 
+			virtual bool is_binary(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
 			<p>From package UML::Packages.</p> */ 
 			virtual std::shared_ptr<uml::Property> metaclassEnd()  ;
+			
+			/*!
+			 The non-owned end of an Extension is typed by a Class.
+			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
+			virtual bool non_owned_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -128,30 +133,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

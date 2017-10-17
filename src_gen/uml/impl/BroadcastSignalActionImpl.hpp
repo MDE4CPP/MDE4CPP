@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&) = delete;
@@ -50,11 +48,19 @@ namespace uml
 			BroadcastSignalActionImpl();
 
 			//Additional constructors for the containments back reference
-			BroadcastSignalActionImpl(std::shared_ptr<uml::Activity > par_activity);
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Activity > par_activity);
 
 
 			//Additional constructors for the containments back reference
 			BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -66,6 +72,11 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 A BroadcaseSignalAction may not specify onPort.
+			onPort=null */ 
+			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
 			/*!
 			 The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size() */ 
@@ -79,11 +90,6 @@ namespace uml
 				argument->at(i).isOrdered = attribute->at(i).isOrdered and
 				argument->at(i).compatibleWith(attribute->at(i))) */ 
 			virtual bool type_ordering_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 A BroadcaseSignalAction may not specify onPort.
-			onPort=null */ 
-			virtual bool no_onport(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -110,21 +116,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

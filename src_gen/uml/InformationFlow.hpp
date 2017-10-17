@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -89,6 +87,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class PackageableElement;
 }
 
@@ -122,7 +125,8 @@ namespace uml
 	/*!
 	 InformationFlows describe circulation of information through a system in a general manner. They do not specify the nature of the information, mechanisms by which it is conveyed, sequences of exchange or any control conditions. During more detailed modeling, representation and realization links may be added to specify which model elements implement an InformationFlow and to show how information is conveyed.  InformationFlows require some kind of “information channel” for unidirectional transmission of information items from sources to targets.  They specify the information channel’s realizations, if any, and identify the information that flows along them.  Information moving along the information channel may be represented by abstract InformationItems and by concrete Classifiers.
 	<p>From package UML::InformationFlows.</p> */
-	class InformationFlow:virtual public DirectedRelationship,virtual public PackageableElement	{
+	class InformationFlow:virtual public DirectedRelationship,virtual public PackageableElement
+	{
 		public:
  			InformationFlow(const InformationFlow &) {}
 			InformationFlow& operator=(InformationFlow const&) = delete;
@@ -132,7 +136,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InformationFlow() {}
@@ -140,6 +144,12 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			 An information flow can only convey classifiers that are allowed to represent an information item.
+			self.conveyed->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface)
+			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)) */ 
+			virtual bool convey_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
 			/*!
 			 The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships. */ 
 			virtual bool must_conform(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
@@ -161,12 +171,6 @@ namespace uml
 			  oclIsKindOf(Interface) or oclIsKindOf(Package) or oclIsKindOf(ActivityNode) or oclIsKindOf(ActivityPartition) or 
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship))))) */ 
 			virtual bool sources_and_targets_kind(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 An information flow can only convey classifiers that are allowed to represent an information item.
-			self.conveyed->forAll(oclIsKindOf(Class) or oclIsKindOf(Interface)
-			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)) */ 
-			virtual bool convey_classifiers(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -257,21 +261,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0; 
 	};
 
 }

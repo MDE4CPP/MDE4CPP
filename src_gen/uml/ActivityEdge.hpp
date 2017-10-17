@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -125,7 +123,8 @@ namespace uml
 	/*!
 	 An ActivityEdge is an abstract class for directed connections between two ActivityNodes.
 	<p>From package UML::Activities.</p> */
-	class ActivityEdge:virtual public RedefinableElement	{
+	class ActivityEdge:virtual public RedefinableElement
+	{
 		public:
  			ActivityEdge(const ActivityEdge &) {}
 			ActivityEdge& operator=(ActivityEdge const&) = delete;
@@ -135,13 +134,23 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			ActivityEdge(std::weak_ptr<uml::Activity > par_activity){}
+
+			ActivityEdge(std::weak_ptr<uml::Activity > par_activity);
 
 			//Additional constructors for the containments back reference
-			ActivityEdge(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode){}
+
+			ActivityEdge(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+			//Additional constructors for the containments back reference
+
+			ActivityEdge(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			ActivityEdge(std::weak_ptr<uml::Element > par_owner);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ActivityEdge() {}
@@ -180,20 +189,12 @@ namespace uml
 			 A ValueSpecification that is evaluated to determine if a token can traverse the ActivityEdge. If an ActivityEdge has no guard, then there is no restriction on tokens traversing the edge.
 			<p>From package UML::Activities.</p> */
 			virtual void setGuard(std::shared_ptr<uml::ValueSpecification> _guard_guard) = 0;
+			
 			/*!
 			 ActivityPartitions containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > getInPartition() const = 0;
 			
-			/*!
-			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::InterruptibleActivityRegion > getInterrupts() const = 0;
-			
-			/*!
-			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
-			<p>From package UML::Activities.</p> */
-			virtual void setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts_interrupts) = 0;
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
@@ -204,14 +205,19 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual void setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode_inStructuredNode) = 0;
 			/*!
-			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::ActivityNode > getTarget() const = 0;
+			virtual std::shared_ptr<uml::InterruptibleActivityRegion > getInterrupts() const = 0;
 			
 			/*!
-			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p> */
-			virtual void setTarget(std::shared_ptr<uml::ActivityNode> _target_target) = 0;
+			virtual void setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts_interrupts) = 0;
+			/*!
+			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > getRedefinedEdge() const = 0;
+			
 			/*!
 			 The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p> */
@@ -222,10 +228,14 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual void setSource(std::shared_ptr<uml::ActivityNode> _source_source) = 0;
 			/*!
-			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
+			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > getRedefinedEdge() const = 0;
+			virtual std::shared_ptr<uml::ActivityNode > getTarget() const = 0;
 			
+			/*!
+			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual void setTarget(std::shared_ptr<uml::ActivityNode> _target_target) = 0;
 			/*!
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p> */
@@ -235,7 +245,6 @@ namespace uml
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p> */
 			virtual void setWeight(std::shared_ptr<uml::ValueSpecification> _weight_weight) = 0;
-			
 			
 
 		protected:
@@ -256,37 +265,37 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			std::shared_ptr<uml::ValueSpecification > m_guard;
 			/*!
+			 ActivityGroups containing the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			std::shared_ptr<Union<uml::ActivityGroup> > m_inGroup;
+			/*!
 			 ActivityPartitions containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > m_inPartition;
-			/*!
-			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::InterruptibleActivityRegion > m_interrupts;
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
 			std::weak_ptr<uml::StructuredActivityNode > m_inStructuredNode;
 			/*!
-			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ActivityNode > m_target;
-			/*!
-			 The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ActivityNode > m_source;
+			std::shared_ptr<uml::InterruptibleActivityRegion > m_interrupts;
 			/*!
 			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > m_redefinedEdge;
 			/*!
+			 The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			std::shared_ptr<uml::ActivityNode > m_source;
+			/*!
+			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			std::shared_ptr<uml::ActivityNode > m_target;
+			/*!
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p> */
 			std::shared_ptr<uml::ValueSpecification > m_weight;
-			/*!
-			 ActivityGroups containing the ActivityEdge.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Union<uml::ActivityGroup> > m_inGroup;
 			
 
 		public:
@@ -294,12 +303,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!

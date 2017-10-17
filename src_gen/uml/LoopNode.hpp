@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -170,7 +168,8 @@ namespace uml
 	/*!
 	 A LoopNode is a StructuredActivityNode that represents an iterative loop with setup, test, and body sections.
 	<p>From package UML::Actions.</p> */
-	class LoopNode:virtual public StructuredActivityNode	{
+	class LoopNode:virtual public StructuredActivityNode
+	{
 		public:
  			LoopNode(const LoopNode &) {}
 			LoopNode& operator=(LoopNode const&) = delete;
@@ -180,7 +179,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LoopNode() {}
@@ -189,14 +188,9 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The result OutputPins have no incoming edges.
-			result.incoming->isEmpty() */ 
-			virtual bool result_no_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The loopVariableInputs must not have outgoing edges.
-			loopVariableInput.outgoing->isEmpty() */ 
-			virtual bool input_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The bodyOutput pins are OutputPins on Actions in the body of the LoopNode.
+			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
+			virtual bool body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
@@ -204,16 +198,23 @@ namespace uml
 			virtual bool executable_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 The bodyOutput pins are OutputPins on Actions in the body of the LoopNode.
-			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput) */ 
-			virtual bool body_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The loopVariableInputs must not have outgoing edges.
+			loopVariableInput.outgoing->isEmpty() */ 
+			virtual bool input_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 The test and body parts of a ConditionalNode must be disjoint with each other.
-			setupPart->intersection(test)->isEmpty() and
-			setupPart->intersection(bodyPart)->isEmpty() and
-			test->intersection(bodyPart)->isEmpty() */ 
-			virtual bool setup_test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
+			allOwnedNodes()->includesAll(loopVariable.outgoing.target) */ 
+			virtual bool loop_variable_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
+			loopVariableInput->size()=loopVariable->size() and
+			loopVariableInput.type=loopVariable.type and
+			loopVariableInput.isUnique=loopVariable.isUnique and
+			loopVariableInput.lower=loopVariable.lower and
+			loopVariableInput.upper=loopVariable.upper */ 
+			virtual bool matching_loop_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
@@ -226,15 +227,6 @@ namespace uml
 			virtual bool matching_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
-			loopVariableInput->size()=loopVariable->size() and
-			loopVariableInput.type=loopVariable.type and
-			loopVariableInput.isUnique=loopVariable.isUnique and
-			loopVariableInput.lower=loopVariable.lower and
-			loopVariableInput.upper=loopVariable.upper */ 
-			virtual bool matching_loop_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
 			result->size()=loopVariable->size() and
 			result.type=loopVariable.type and
@@ -244,9 +236,16 @@ namespace uml
 			virtual bool matching_result_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
-			allOwnedNodes()->includesAll(loopVariable.outgoing.target) */ 
-			virtual bool loop_variable_outgoing(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The result OutputPins have no incoming edges.
+			result.incoming->isEmpty() */ 
+			virtual bool result_no_incoming(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The test and body parts of a ConditionalNode must be disjoint with each other.
+			setupPart->intersection(test)->isEmpty() and
+			setupPart->intersection(bodyPart)->isEmpty() and
+			test->intersection(bodyPart)->isEmpty() */ 
+			virtual bool setup_test_and_body(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -367,33 +366,33 @@ namespace uml
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

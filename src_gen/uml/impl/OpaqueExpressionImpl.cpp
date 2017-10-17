@@ -18,7 +18,11 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "Parameter.hpp"
+
+#include "Slot.hpp"
 
 #include "StringExpression.hpp"
 
@@ -65,10 +69,43 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 
 
 //Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:OpaqueExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+			:OpaqueExpressionImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:OpaqueExpressionImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+			:OpaqueExpressionImpl()
+			{
+			    m_owningSlot = par_owningSlot;
 			}
 
 
@@ -106,7 +143,13 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
+
+	m_owningSlot  = obj.getOwningSlot();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -117,20 +160,19 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -138,18 +180,18 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  OpaqueExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
 {
-	return new OpaqueExpressionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new OpaqueExpressionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
@@ -244,6 +286,10 @@ std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > OpaqueExpressionImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > OpaqueExpressionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -262,15 +308,15 @@ boost::any OpaqueExpressionImpl::eGet(int featureID,  bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case UmlPackage::OPAQUEEXPRESSION_BEHAVIOR:
-			return getBehavior(); //4313
+			return getBehavior(); //4315
 		case UmlPackage::OPAQUEEXPRESSION_BODY:
-			return getBody(); //4314
+			return getBody(); //4316
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //434
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //430
 		case UmlPackage::OPAQUEEXPRESSION_LANGUAGE:
-			return getLanguage(); //4315
+			return getLanguage(); //4317
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //435
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -283,12 +329,16 @@ boost::any OpaqueExpressionImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getOwnedElement(); //432
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //433
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //4312
+		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
+			return getOwningSlot(); //4314
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //434
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //438
 		case UmlPackage::OPAQUEEXPRESSION_RESULT:
-			return getResult(); //4316
+			return getResult(); //4318
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //435
 		case UmlPackage::TYPEDELEMENT_TYPE:

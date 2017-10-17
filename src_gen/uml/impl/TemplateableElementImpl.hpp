@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TemplateableElementImpl& operator=(TemplateableElementImpl const&) = delete;
@@ -85,11 +83,6 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The optional TemplateBindings from this TemplateableElement to one or more templates.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > > getTemplateBinding() const ;
-			
-			/*!
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::TemplateSignature > getOwnedTemplateSignature() const ;
@@ -98,6 +91,11 @@ namespace uml
 			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature_ownedTemplateSignature) ;
+			/*!
+			 The optional TemplateBindings from this TemplateableElement to one or more templates.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element > > getTemplateBinding() const ;
+			
 							
 			
 			//*********************************

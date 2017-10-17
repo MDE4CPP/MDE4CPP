@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ namespace uml
 	{
 		public: 
 			ElementImpl(const ElementImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ElementImpl& operator=(ElementImpl const&) = delete;
@@ -65,22 +63,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Elements that must be owned must have an owner.
-			mustBeOwned() implies owner->notEmpty() */ 
-			virtual bool has_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 An element may not directly or indirectly own itself.
-			not allOwnedElements()->includes(self) */ 
-			virtual bool not_own_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 Adds the specified keyword to this element. */ 
 			virtual bool addKeyword(std::string keyword)  ;
 			
 			/*!
+			 The query allOwnedElements() gives all of the direct and indirect ownedElements of an Element.
+			result = (ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))->asSet())
+			<p>From package UML::CommonStructure.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Element> > allOwnedElements()  ;
+			
+			/*!
 			 Applies the specified stereotype to this element. */ 
 			virtual std::shared_ptr<ecore::EObject> applyStereotype(std::shared_ptr<uml::Stereotype>  stereotype)  ;
+			
+			/*!
+			 Returns the parent container of this element if any. Return Null if there is no containing element.
+			
+			<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */ 
+			virtual std::shared_ptr<uml::Element> container()  ;
 			
 			/*!
 			 Creates an annotation with the specified source and this element as its model element. */ 
@@ -89,10 +89,6 @@ namespace uml
 			/*!
 			 Destroys this element by removing all cross references to/from it and removing it from its containing resource or object. */ 
 			virtual void destroy()  ;
-			
-			/*!
-			 Retrieves the keywords for this element. */ 
-			virtual std::shared_ptr<Bag<std::string> > getKeywords()  ;
 			
 			/*!
 			 Retrieves the stereotype with the specified qualified name that is applicable to this element, or null if no such stereotype is applicable. */ 
@@ -117,6 +113,16 @@ namespace uml
 			/*!
 			 Retrieves the substereotypes of the specified stereotype that are applied to this element. */ 
 			virtual std::shared_ptr<Bag<uml::Stereotype> > getAppliedSubstereotypes(std::shared_ptr<uml::Stereotype>  stereotype)  ;
+			
+			/*!
+			 Retrieves the keywords for this element. */ 
+			virtual std::shared_ptr<Bag<std::string> > getKeywords()  ;
+			
+			/*!
+			 Returns the Class that describes this element.
+			
+			<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */ 
+			virtual std::shared_ptr<uml::Class> getMetaClass()  ;
 			
 			/*!
 			 Retrieves the model that owns (either directly or indirectly) this element. */ 
@@ -179,6 +185,11 @@ namespace uml
 			virtual bool hasValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName)  ;
 			
 			/*!
+			 Elements that must be owned must have an owner.
+			mustBeOwned() implies owner->notEmpty() */ 
+			virtual bool has_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 Determines whether the specified stereotype is applicable to this element. */ 
 			virtual bool isStereotypeApplicable(std::shared_ptr<uml::Stereotype>  stereotype)  ;
 			
@@ -191,6 +202,17 @@ namespace uml
 			virtual bool isStereotypeRequired(std::shared_ptr<uml::Stereotype>  stereotype)  ;
 			
 			/*!
+			 The query mustBeOwned() indicates whether Elements of this type must have an owner. Subclasses of Element that do not require an owner must override this operation.
+			result = (true)
+			<p>From package UML::CommonStructure.</p> */ 
+			virtual bool mustBeOwned()  ;
+			
+			/*!
+			 An element may not directly or indirectly own itself.
+			not allOwnedElements()->includes(self) */ 
+			virtual bool not_own_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 Removes the specified keyword from this element. */ 
 			virtual bool removeKeyword(std::string keyword)  ;
 			
@@ -201,30 +223,6 @@ namespace uml
 			/*!
 			 Unapplies the specified stereotype from this element. */ 
 			virtual std::shared_ptr<ecore::EObject> unapplyStereotype(std::shared_ptr<uml::Stereotype>  stereotype)  ;
-			
-			/*!
-			 The query allOwnedElements() gives all of the direct and indirect ownedElements of an Element.
-			result = (ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))->asSet())
-			<p>From package UML::CommonStructure.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Element> > allOwnedElements()  ;
-			
-			/*!
-			 The query mustBeOwned() indicates whether Elements of this type must have an owner. Subclasses of Element that do not require an owner must override this operation.
-			result = (true)
-			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool mustBeOwned()  ;
-			
-			/*!
-			 Returns the Class that describes this element.
-			
-			<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */ 
-			virtual std::shared_ptr<uml::Class> getMetaClass()  ;
-			
-			/*!
-			 Returns the parent container of this element if any. Return Null if there is no containing element.
-			
-			<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */ 
-			virtual std::shared_ptr<uml::Element> container()  ;
 			
 			
 			
@@ -249,12 +247,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

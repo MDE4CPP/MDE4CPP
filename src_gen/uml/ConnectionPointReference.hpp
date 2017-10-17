@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -100,7 +98,8 @@ namespace uml
 	/*!
 	 A ConnectionPointReference represents a usage (as part of a submachine State) of an entry/exit point Pseudostate defined in the StateMachine referenced by the submachine State.
 	<p>From package UML::StateMachines.</p> */
-	class ConnectionPointReference:virtual public Vertex	{
+	class ConnectionPointReference:virtual public Vertex
+	{
 		public:
  			ConnectionPointReference(const ConnectionPointReference &) {}
 			ConnectionPointReference& operator=(ConnectionPointReference const&) = delete;
@@ -110,10 +109,23 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReference(std::weak_ptr<uml::State > par_state){}
+
+			ConnectionPointReference(std::weak_ptr<uml::Region > par_container);
+
+			//Additional constructors for the containments back reference
+
+			ConnectionPointReference(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			ConnectionPointReference(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			ConnectionPointReference(std::weak_ptr<uml::State > par_state);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConnectionPointReference() {}
@@ -122,14 +134,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The exit Pseudostates must be Pseudostates with kind exitPoint.
-			exit->forAll(kind = PseudostateKind::exitPoint) */ 
-			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The entry Pseudostates must be Pseudostates with kind entryPoint.
 			entry->forAll(kind = PseudostateKind::entryPoint) */ 
 			virtual bool entry_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The exit Pseudostates must be Pseudostates with kind exitPoint.
+			exit->forAll(kind = PseudostateKind::exitPoint) */ 
+			virtual bool exit_pseudostates(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -188,15 +200,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

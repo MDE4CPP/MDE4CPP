@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -64,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class CallOperationAction;
+}
+
+namespace uml 
+{
 	class Classifier;
 }
 
@@ -94,6 +97,11 @@ namespace uml
 
 namespace uml 
 {
+	class InvocationAction;
+}
+
+namespace uml 
+{
 	class Namespace;
 }
 
@@ -115,6 +123,11 @@ namespace uml
 namespace uml 
 {
 	class StringExpression;
+}
+
+namespace uml 
+{
+	class StructuralFeatureAction;
 }
 
 namespace uml 
@@ -147,7 +160,8 @@ namespace uml
 	/*!
 	 An InputPin is a Pin that holds input values to be consumed by an Action.
 	<p>From package UML::Actions.</p> */
-	class InputPin:virtual public Pin	{
+	class InputPin:virtual public Pin
+	{
 		public:
  			InputPin(const InputPin &) {}
 			InputPin& operator=(InputPin const&) = delete;
@@ -156,8 +170,36 @@ namespace uml
 			InputPin(){}
 
 
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::Activity > par_activity);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::InvocationAction > par_invocationAction);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			InputPin(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InputPin() {}
@@ -181,6 +223,27 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::CallOperationAction > getCallOperationAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction_callOperationAction) = 0;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::InvocationAction > getInvocationAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction_invocationAction) = 0;
+			/*!
+			 */
+			virtual std::weak_ptr<uml::StructuralFeatureAction > getStructuralFeatureAction() const = 0;
+			
+			/*!
+			 */
+			virtual void setStructuralFeatureAction(std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction_structuralFeatureAction) = 0;
 			
 
 		protected:
@@ -192,6 +255,15 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<uml::CallOperationAction > m_callOperationAction;
+			/*!
+			 */
+			std::weak_ptr<uml::InvocationAction > m_invocationAction;
+			/*!
+			 */
+			std::weak_ptr<uml::StructuralFeatureAction > m_structuralFeatureAction;
 			
 
 		public:
@@ -199,6 +271,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
@@ -207,10 +282,7 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

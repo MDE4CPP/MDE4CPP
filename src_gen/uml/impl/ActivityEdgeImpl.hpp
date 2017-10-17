@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ActivityEdgeImpl(const ActivityEdgeImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityEdgeImpl& operator=(ActivityEdgeImpl const&) = delete;
@@ -55,6 +53,14 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 			ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -99,20 +105,12 @@ namespace uml
 			 A ValueSpecification that is evaluated to determine if a token can traverse the ActivityEdge. If an ActivityEdge has no guard, then there is no restriction on tokens traversing the edge.
 			<p>From package UML::Activities.</p> */
 			virtual void setGuard(std::shared_ptr<uml::ValueSpecification> _guard_guard) ;
+			
 			/*!
 			 ActivityPartitions containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > getInPartition() const ;
 			
-			/*!
-			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::InterruptibleActivityRegion > getInterrupts() const ;
-			
-			/*!
-			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
-			<p>From package UML::Activities.</p> */
-			virtual void setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts_interrupts) ;
 			/*!
 			 The StructuredActivityNode containing the ActivityEdge, if it is owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p> */
@@ -123,14 +121,19 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual void setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode_inStructuredNode) ;
 			/*!
-			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::ActivityNode > getTarget() const ;
+			virtual std::shared_ptr<uml::InterruptibleActivityRegion > getInterrupts() const ;
 			
 			/*!
-			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			 The InterruptibleActivityRegion for which this ActivityEdge is an interruptingEdge.
 			<p>From package UML::Activities.</p> */
-			virtual void setTarget(std::shared_ptr<uml::ActivityNode> _target_target) ;
+			virtual void setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts_interrupts) ;
+			/*!
+			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > getRedefinedEdge() const ;
+			
 			/*!
 			 The ActivityNode from which tokens are taken when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p> */
@@ -141,10 +144,14 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual void setSource(std::shared_ptr<uml::ActivityNode> _source_source) ;
 			/*!
-			 ActivityEdges from a generalization of the Activity containing this ActivityEdge that are redefined by this ActivityEdge.
+			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement > > getRedefinedEdge() const ;
+			virtual std::shared_ptr<uml::ActivityNode > getTarget() const ;
 			
+			/*!
+			 The ActivityNode to which tokens are put when they traverse the ActivityEdge.
+			<p>From package UML::Activities.</p> */
+			virtual void setTarget(std::shared_ptr<uml::ActivityNode> _target_target) ;
 			/*!
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p> */
@@ -154,25 +161,24 @@ namespace uml
 			 The minimum number of tokens that must traverse the ActivityEdge at the same time. If no weight is specified, this is equivalent to specifying a constant value of 1.
 			<p>From package UML::Activities.</p> */
 			virtual void setWeight(std::shared_ptr<uml::ValueSpecification> _weight_weight) ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 ActivityGroups containing the ActivityEdge.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

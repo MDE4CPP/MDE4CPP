@@ -106,21 +106,10 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 
 
 //Additional constructor for the containments back reference
-			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:EncapsulatedClassifierImpl()
 			{
 			    m_namespace = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::shared_ptr<uml::Package > par_package)
-			:EncapsulatedClassifierImpl()
-			{
-			    m_package = par_package;
 			}
 
 
@@ -133,6 +122,45 @@ EncapsulatedClassifierImpl::~EncapsulatedClassifierImpl()
 			{
 			    m_owner = par_owner;
 			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+			:EncapsulatedClassifierImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+					 m_owningPackage = par_Package;
+					 return;
+				case UmlPackage::TYPE_PACKAGE:
+					 m_package = par_Package;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:EncapsulatedClassifierImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 
 
 
@@ -163,9 +191,15 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
+	m_owningPackage  = obj.getOwningPackage();
+
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	m_package  = obj.getPackage();
 
 	std::shared_ptr< Bag<uml::Property> > _part = obj.getPart();
 	m_part.reset(new Bag<uml::Property>(*(obj.getPart().get())));
@@ -185,13 +219,12 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUseList = obj.getCollaborationUse();
 	for(std::shared_ptr<uml::CollaborationUse> _collaborationUse : *_collaborationUseList)
 	{
-		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(dynamic_cast<uml::CollaborationUse*>(_collaborationUse->copy())));
+		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(std::dynamic_pointer_cast<uml::CollaborationUse>(_collaborationUse->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
@@ -199,7 +232,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -207,7 +240,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
@@ -215,7 +248,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Generalization>> _generalizationList = obj.getGeneralization();
 	for(std::shared_ptr<uml::Generalization> _generalization : *_generalizationList)
 	{
-		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(dynamic_cast<uml::Generalization*>(_generalization->copy())));
+		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(std::dynamic_pointer_cast<uml::Generalization>(_generalization->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalization" << std::endl;
@@ -223,7 +256,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
@@ -231,14 +264,14 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::NamedElement>> _inheritedMemberList = obj.getInheritedMember();
 	for(std::shared_ptr<uml::NamedElement> _inheritedMember : *_inheritedMemberList)
 	{
-		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(dynamic_cast<uml::NamedElement*>(_inheritedMember->copy())));
+		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_inheritedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inheritedMember" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -246,7 +279,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Property>> _ownedAttributeList = obj.getOwnedAttribute();
 	for(std::shared_ptr<uml::Property> _ownedAttribute : *_ownedAttributeList)
 	{
-		this->getOwnedAttribute()->add(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_ownedAttribute->copy())));
+		this->getOwnedAttribute()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_ownedAttribute->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedAttribute" << std::endl;
@@ -254,7 +287,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -262,7 +295,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Connector>> _ownedConnectorList = obj.getOwnedConnector();
 	for(std::shared_ptr<uml::Connector> _ownedConnector : *_ownedConnectorList)
 	{
-		this->getOwnedConnector()->add(std::shared_ptr<uml::Connector>(dynamic_cast<uml::Connector*>(_ownedConnector->copy())));
+		this->getOwnedConnector()->add(std::shared_ptr<uml::Connector>(std::dynamic_pointer_cast<uml::Connector>(_ownedConnector->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedConnector" << std::endl;
@@ -270,7 +303,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Port>> _ownedPortList = obj.getOwnedPort();
 	for(std::shared_ptr<uml::Port> _ownedPort : *_ownedPortList)
 	{
-		this->getOwnedPort()->add(std::shared_ptr<uml::Port>(dynamic_cast<uml::Port*>(_ownedPort->copy())));
+		this->getOwnedPort()->add(std::shared_ptr<uml::Port>(std::dynamic_pointer_cast<uml::Port>(_ownedPort->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedPort" << std::endl;
@@ -278,14 +311,14 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
 	#endif
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
+		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
@@ -293,22 +326,15 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::UseCase>> _ownedUseCaseList = obj.getOwnedUseCase();
 	for(std::shared_ptr<uml::UseCase> _ownedUseCase : *_ownedUseCaseList)
 	{
-		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(dynamic_cast<uml::UseCase*>(_ownedUseCase->copy())));
+		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(std::dynamic_pointer_cast<uml::UseCase>(_ownedUseCase->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getPackage()!=nullptr)
-	{
-		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_package" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
@@ -316,14 +342,14 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifierList = obj.getRedefinedClassifier();
 	for(std::shared_ptr<uml::Classifier> _redefinedClassifier : *_redefinedClassifierList)
 	{
-		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(dynamic_cast<uml::Classifier*>(_redefinedClassifier->copy())));
+		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(std::dynamic_pointer_cast<uml::Classifier>(_redefinedClassifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedClassifier" << std::endl;
 	#endif
 	if(obj.getRepresentation()!=nullptr)
 	{
-		m_representation.reset(dynamic_cast<uml::CollaborationUse*>(obj.getRepresentation()->copy()));
+		m_representation = std::dynamic_pointer_cast<uml::CollaborationUse>(obj.getRepresentation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_representation" << std::endl;
@@ -331,7 +357,7 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::Substitution>> _substitutionList = obj.getSubstitution();
 	for(std::shared_ptr<uml::Substitution> _substitution : *_substitutionList)
 	{
-		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(dynamic_cast<uml::Substitution*>(_substitution->copy())));
+		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(std::dynamic_pointer_cast<uml::Substitution>(_substitution->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_substitution" << std::endl;
@@ -339,18 +365,18 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
 	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
+		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  EncapsulatedClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject>  EncapsulatedClassifierImpl::copy() const
 {
-	return new EncapsulatedClassifierImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EncapsulatedClassifierImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
@@ -384,29 +410,9 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > EncapsulatedClassifierImpl::getNamespace() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > EncapsulatedClassifierImpl::getAttribute() const
 {
-	return m_namespace;
-}
-std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > EncapsulatedClassifierImpl::getOwnedMember() const
-{
-	return m_ownedMember;
-}
-std::shared_ptr<Union<uml::RedefinableElement> > EncapsulatedClassifierImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > EncapsulatedClassifierImpl::getRole() const
-{
-	return m_role;
-}
-std::weak_ptr<uml::Element > EncapsulatedClassifierImpl::getOwner() const
-{
-	return m_owner;
-}
-std::shared_ptr<Union<uml::Element> > EncapsulatedClassifierImpl::getOwnedElement() const
-{
-	return m_ownedElement;
+	return m_attribute;
 }
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > EncapsulatedClassifierImpl::getFeature() const
 {
@@ -416,9 +422,29 @@ std::shared_ptr<Union<uml::NamedElement> > EncapsulatedClassifierImpl::getMember
 {
 	return m_member;
 }
-std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > EncapsulatedClassifierImpl::getAttribute() const
+std::weak_ptr<uml::Namespace > EncapsulatedClassifierImpl::getNamespace() const
 {
-	return m_attribute;
+	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > EncapsulatedClassifierImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > EncapsulatedClassifierImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::weak_ptr<uml::Element > EncapsulatedClassifierImpl::getOwner() const
+{
+	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > EncapsulatedClassifierImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
+}
+std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > EncapsulatedClassifierImpl::getRole() const
+{
+	return m_role;
 }
 
 
@@ -430,29 +456,29 @@ boost::any EncapsulatedClassifierImpl::eGet(int featureID,  bool resolve, bool c
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //10625
+			return getAttribute(); //10626
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //1064
 		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //10626
+			return getCollaborationUse(); //10627
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //1060
 		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
 			return getElementImport(); //10611
 		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //10624
+			return getFeature(); //10625
 		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //10627
+			return getGeneral(); //10628
 		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //10628
+			return getGeneralization(); //10629
 		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
 			return getImportedMember(); //10614
 		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //10630
+			return getInheritedMember(); //10631
 		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //10631
+			return getIsAbstract(); //10632
 		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //10632
+			return getIsFinalSpecialization(); //10633
 		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
 			return getIsLeaf(); //10610
 		case UmlPackage::NAMESPACE_MEMBER:
@@ -464,55 +490,57 @@ boost::any EncapsulatedClassifierImpl::eGet(int featureID,  bool resolve, bool c
 		case UmlPackage::NAMEDELEMENT_NAMESPACE:
 			return getNamespace(); //1067
 		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //10638
+			return getOwnedAttribute(); //10639
 		case UmlPackage::ELEMENT_OWNEDCOMMENT:
 			return getOwnedComment(); //1061
 		case UmlPackage::STRUCTUREDCLASSIFIER_OWNEDCONNECTOR:
-			return getOwnedConnector(); //10639
+			return getOwnedConnector(); //10640
 		case UmlPackage::ELEMENT_OWNEDELEMENT:
 			return getOwnedElement(); //1062
 		case UmlPackage::NAMESPACE_OWNEDMEMBER:
 			return getOwnedMember(); //10613
 		case UmlPackage::ENCAPSULATEDCLASSIFIER_OWNEDPORT:
-			return getOwnedPort(); //10642
+			return getOwnedPort(); //10643
 		case UmlPackage::NAMESPACE_OWNEDRULE:
 			return getOwnedRule(); //10610
 		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
 			return getOwnedTemplateSignature(); //1065
 		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //10633
+			return getOwnedUseCase(); //10634
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //1063
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //10612
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //1064
 		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //10612
+			return getPackage(); //10613
 		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
 			return getPackageImport(); //10612
 		case UmlPackage::STRUCTUREDCLASSIFIER_PART:
-			return getPart(); //10640
+			return getPart(); //10641
 		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //10629
+			return getPowertypeExtent(); //10630
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //1068
 		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //10635
+			return getRedefinedClassifier(); //10636
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
 			return getRedefinedElement(); //10611
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //10612
 		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //10636
+			return getRepresentation(); //10637
 		case UmlPackage::STRUCTUREDCLASSIFIER_ROLE:
-			return getRole(); //10641
+			return getRole(); //10642
 		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //10637
+			return getSubstitution(); //10638
 		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
 			return getTemplateBinding(); //1064
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //1065
 		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //10634
+			return getUseCase(); //10635
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:
 			return getVisibility(); //1069
 	}

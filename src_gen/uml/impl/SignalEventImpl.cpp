@@ -18,6 +18,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "Signal.hpp"
 
 #include "StringExpression.hpp"
@@ -56,10 +58,32 @@ SignalEventImpl::~SignalEventImpl()
 
 
 //Additional constructor for the containments back reference
-			SignalEventImpl::SignalEventImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:SignalEventImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element > par_owner)
+			:SignalEventImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:SignalEventImpl()
+			{
+			    m_owningPackage = par_owningPackage;
 			}
 
 
@@ -93,7 +117,11 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -102,20 +130,19 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -123,18 +150,18 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  SignalEventImpl::copy() const
+std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
 {
-	return new SignalEventImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new SignalEventImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
@@ -166,6 +193,10 @@ void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > SignalEventImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > SignalEventImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -199,12 +230,14 @@ boost::any SignalEventImpl::eGet(int featureID,  bool resolve, bool coreType) co
 			return getOwnedElement(); //2012
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2013
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //20112
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2014
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //2018
 		case UmlPackage::SIGNALEVENT_SIGNAL:
-			return getSignal(); //20112
+			return getSignal(); //20113
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //2015
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

@@ -82,6 +82,17 @@ TemplateBindingImpl::~TemplateBindingImpl()
 
 
 
+//Additional constructor for the containments back reference
+			TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner)
+			:TemplateBindingImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):TemplateBindingImpl()
 {
@@ -100,13 +111,12 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -114,7 +124,7 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -122,14 +132,14 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 	std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitutionList = obj.getParameterSubstitution();
 	for(std::shared_ptr<uml::TemplateParameterSubstitution> _parameterSubstitution : *_parameterSubstitutionList)
 	{
-		this->getParameterSubstitution()->add(std::shared_ptr<uml::TemplateParameterSubstitution>(dynamic_cast<uml::TemplateParameterSubstitution*>(_parameterSubstitution->copy())));
+		this->getParameterSubstitution()->add(std::shared_ptr<uml::TemplateParameterSubstitution>(std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(_parameterSubstitution->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_parameterSubstitution" << std::endl;
 	#endif
 	if(obj.getSignature()!=nullptr)
 	{
-		m_signature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getSignature()->copy()));
+		m_signature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getSignature()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
@@ -142,12 +152,12 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  TemplateBindingImpl::copy() const
+std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
 {
-	return new TemplateBindingImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TemplateBindingImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
@@ -211,9 +221,9 @@ std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getOwnedElement() con
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::getTarget() const
+std::weak_ptr<uml::Element > TemplateBindingImpl::getOwner() const
 {
-	return m_target;
+	return m_owner;
 }
 std::shared_ptr<Union<uml::Element> > TemplateBindingImpl::getRelatedElement() const
 {
@@ -223,9 +233,9 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::
 {
 	return m_source;
 }
-std::weak_ptr<uml::Element > TemplateBindingImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::getTarget() const
 {
-	return m_owner;
+	return m_target;
 }
 
 

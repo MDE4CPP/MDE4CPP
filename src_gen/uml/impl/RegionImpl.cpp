@@ -114,6 +114,28 @@ RegionImpl::~RegionImpl()
 
 
 //Additional constructor for the containments back reference
+			RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:RegionImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			RegionImpl::RegionImpl(std::weak_ptr<uml::Element > par_owner)
+			:RegionImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
 			:RegionImpl()
 			{
@@ -155,6 +177,8 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
@@ -168,13 +192,12 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	m_stateMachine  = obj.getStateMachine();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -182,14 +205,14 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
 	#endif
 	if(obj.getExtendedRegion()!=nullptr)
 	{
-		m_extendedRegion.reset(dynamic_cast<uml::Region*>(obj.getExtendedRegion()->copy()));
+		m_extendedRegion = std::dynamic_pointer_cast<uml::Region>(obj.getExtendedRegion()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_extendedRegion" << std::endl;
@@ -197,14 +220,14 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -212,7 +235,7 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -220,7 +243,7 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
@@ -228,7 +251,7 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
@@ -236,7 +259,7 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::Vertex>> _subvertexList = obj.getSubvertex();
 	for(std::shared_ptr<uml::Vertex> _subvertex : *_subvertexList)
 	{
-		this->getSubvertex()->add(std::shared_ptr<uml::Vertex>(dynamic_cast<uml::Vertex*>(_subvertex->copy())));
+		this->getSubvertex()->add(std::shared_ptr<uml::Vertex>(std::dynamic_pointer_cast<uml::Vertex>(_subvertex->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_subvertex" << std::endl;
@@ -244,7 +267,7 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 	std::shared_ptr<Bag<uml::Transition>> _transitionList = obj.getTransition();
 	for(std::shared_ptr<uml::Transition> _transition : *_transitionList)
 	{
-		this->getTransition()->add(std::shared_ptr<uml::Transition>(dynamic_cast<uml::Transition*>(_transition->copy())));
+		this->getTransition()->add(std::shared_ptr<uml::Transition>(std::dynamic_pointer_cast<uml::Transition>(_transition->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_transition" << std::endl;
@@ -265,12 +288,12 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  RegionImpl::copy() const
+std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
 {
-	return new RegionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new RegionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
@@ -377,29 +400,29 @@ std::shared_ptr<Subset<uml::Transition, uml::NamedElement > > RegionImpl::getTra
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::Element> > RegionImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
 std::shared_ptr<Union<uml::NamedElement> > RegionImpl::getMember() const
 {
 	return m_member;
 }
-std::weak_ptr<uml::Element > RegionImpl::getOwner() const
+std::weak_ptr<uml::Namespace > RegionImpl::getNamespace() const
 {
-	return m_owner;
+	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > RegionImpl::getOwnedElement() const
+{
+	return m_ownedElement;
 }
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > RegionImpl::getOwnedMember() const
 {
 	return m_ownedMember;
 }
+std::weak_ptr<uml::Element > RegionImpl::getOwner() const
+{
+	return m_owner;
+}
 std::shared_ptr<Union<uml::RedefinableElement> > RegionImpl::getRedefinedElement() const
 {
 	return m_redefinedElement;
-}
-std::shared_ptr<uml::Namespace > RegionImpl::getNamespace() const
-{
-	return m_namespace;
 }
 
 

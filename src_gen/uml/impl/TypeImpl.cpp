@@ -60,11 +60,61 @@ TypeImpl::~TypeImpl()
 
 
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::shared_ptr<uml::Package > par_package)
+			TypeImpl::TypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:TypeImpl()
 			{
-			    m_package = par_package;
+			    m_namespace = par_namespace;
 			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
+			:TypeImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+			:TypeImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+					 m_owningPackage = par_Package;
+					 return;
+				case UmlPackage::TYPE_PACKAGE:
+					 m_package = par_Package;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:TypeImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 
 
 
@@ -86,27 +136,32 @@ TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
+	m_owningPackage  = obj.getOwningPackage();
+
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	m_package  = obj.getPackage();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -114,25 +169,18 @@ TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getPackage()!=nullptr)
-	{
-		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_package" << std::endl;
-	#endif
-
 
 }
 
-ecore::EObject *  TypeImpl::copy() const
+std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 {
-	return new TypeImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TypeImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
@@ -168,7 +216,7 @@ std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Package > TypeImpl::getPackage() const
+std::weak_ptr<uml::Package > TypeImpl::getPackage() const
 {
 
     return m_package;
@@ -181,17 +229,17 @@ void TypeImpl::setPackage(std::shared_ptr<uml::Package> _package)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > TypeImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > TypeImpl::getNamespace() const
 {
 	return m_namespace;
-}
-std::weak_ptr<uml::Element > TypeImpl::getOwner() const
-{
-	return m_owner;
 }
 std::shared_ptr<Union<uml::Element> > TypeImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > TypeImpl::getOwner() const
+{
+	return m_owner;
 }
 
 
@@ -218,10 +266,12 @@ boost::any TypeImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOwnedElement(); //262
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //263
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //2612
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //264
 		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //2612
+			return getPackage(); //2613
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //268
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:

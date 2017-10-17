@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ namespace uml
 	{
 		public: 
 			InstanceSpecificationImpl(const InstanceSpecificationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			InstanceSpecificationImpl& operator=(InstanceSpecificationImpl const&) = delete;
@@ -52,7 +50,15 @@ namespace uml
 			InstanceSpecificationImpl();
 
 			//Additional constructors for the containments back reference
-			InstanceSpecificationImpl(std::shared_ptr<uml::Namespace > par_namespace);
+			InstanceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			InstanceSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			InstanceSpecificationImpl(std::weak_ptr<uml::Package > par_owningPackage);
 
 
 			//Additional constructors for the containments back reference
@@ -69,24 +75,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
-			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact)) */ 
-			virtual bool deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 No more than one slot in an InstanceSpecification may have the same definingFeature.
-			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1))) */ 
-			virtual bool structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 The definingFeature of each slot is a StructuralFeature related to a classifier of the InstanceSpecification, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
 			slot->forAll(s | classifier->exists (c | c.allSlottableFeatures()->includes (s.definingFeature))) */ 
 			virtual bool defining_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
+			 An InstanceSpecification can act as a DeployedArtifact if it represents an instance of an Artifact.
+			deploymentForArtifact->notEmpty() implies classifier->exists(oclIsKindOf(Artifact)) */ 
+			virtual bool deployment_artifact(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 An InstanceSpecification can act as a DeploymentTarget if it represents an instance of a Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies classifier->exists(node | node.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p.type = node))) */ 
 			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 No more than one slot in an InstanceSpecification may have the same definingFeature.
+			classifier->forAll(c | (c.allSlottableFeatures()->forAll(f | slot->select(s | s.definingFeature = f)->size() <= 1))) */ 
+			virtual bool structural_feature(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -123,12 +129,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

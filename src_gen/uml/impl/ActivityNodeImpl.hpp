@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace uml
 	{
 		public: 
 			ActivityNodeImpl(const ActivityNodeImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityNodeImpl& operator=(ActivityNodeImpl const&) = delete;
@@ -51,11 +49,19 @@ namespace uml
 			ActivityNodeImpl();
 
 			//Additional constructors for the containments back reference
-			ActivityNodeImpl(std::shared_ptr<uml::Activity > par_activity);
+			ActivityNodeImpl(std::weak_ptr<uml::Activity > par_activity);
 
 
 			//Additional constructors for the containments back reference
 			ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ActivityNodeImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -80,7 +86,7 @@ namespace uml
 			/*!
 			 The Activity containing the ActivityNode, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Activity > getActivity() const ;
+			virtual std::weak_ptr<uml::Activity > getActivity() const ;
 			
 			/*!
 			 The Activity containing the ActivityNode, if it is directly owned by an Activity.
@@ -91,6 +97,11 @@ namespace uml
 			 InterruptibleActivityRegions containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup > > getInInterruptibleRegion() const ;
+			
+			/*!
+			 ActivityPartitions containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > getInPartition() const ;
 			
 			/*!
 			 The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
@@ -116,29 +127,24 @@ namespace uml
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement > > getRedefinedNode() const ;
 			
-			/*!
-			 ActivityPartitions containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup > > getInPartition() const ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

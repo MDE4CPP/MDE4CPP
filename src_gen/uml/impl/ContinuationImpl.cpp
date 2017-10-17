@@ -79,6 +79,28 @@ ContinuationImpl::~ContinuationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ContinuationImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Element > par_owner)
+			:ContinuationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImpl()
 {
@@ -103,16 +125,17 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 
 	m_enclosingOperand  = obj.getEnclosingOperand();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -120,14 +143,14 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
+		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -135,18 +158,18 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ContinuationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
 {
-	return new ContinuationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ContinuationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
@@ -195,6 +218,10 @@ bool ContinuationImpl::same_name(boost::any diagnostics,std::map <   boost::any,
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > ContinuationImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > ContinuationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -202,10 +229,6 @@ std::shared_ptr<Union<uml::Element> > ContinuationImpl::getOwnedElement() const
 std::weak_ptr<uml::Element > ContinuationImpl::getOwner() const
 {
 	return m_owner;
-}
-std::shared_ptr<uml::Namespace > ContinuationImpl::getNamespace() const
-{
-	return m_namespace;
 }
 
 

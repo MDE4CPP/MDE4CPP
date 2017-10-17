@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TemplateBindingImpl(const TemplateBindingImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TemplateBindingImpl& operator=(TemplateBindingImpl const&) = delete;
@@ -53,6 +51,10 @@ namespace uml
 			TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement > par_boundElement);
 
 
+			//Additional constructors for the containments back reference
+			TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner);
+
+
 
 
 		public:
@@ -63,14 +65,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
-			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal)) */ 
-			virtual bool parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 A TemplateBiinding contains at most one TemplateParameterSubstitution for each formal TemplateParameter of the target TemplateSignature.
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1) */ 
 			virtual bool one_parameter_substitution(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
+			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal)) */ 
+			virtual bool parameter_substitution_formal(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -82,6 +84,15 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 The TemplateableElement that is bound by this TemplateBinding.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::TemplateableElement > getBoundElement() const ;
+			
+			/*!
+			 The TemplateableElement that is bound by this TemplateBinding.
+			<p>From package UML::CommonStructure.</p> */
+			virtual void setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement_boundElement) ;
 			/*!
 			 The TemplateParameterSubstitutions owned by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p> */
@@ -96,36 +107,27 @@ namespace uml
 			 The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setSignature(std::shared_ptr<uml::TemplateSignature> _signature_signature) ;
-			/*!
-			 The TemplateableElement that is bound by this TemplateBinding.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::TemplateableElement > getBoundElement() const ;
-			
-			/*!
-			 The TemplateableElement that is bound by this TemplateBinding.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement_boundElement) ;
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the target Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

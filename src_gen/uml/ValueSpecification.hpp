@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -59,7 +57,17 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class PackageableElement;
+}
+
+namespace uml 
+{
+	class Slot;
 }
 
 namespace uml 
@@ -97,7 +105,8 @@ namespace uml
 	/*!
 	 A ValueSpecification is the specification of a (possibly empty) set of values. A ValueSpecification is a ParameterableElement that may be exposed as a formal TemplateParameter and provided as the actual parameter in the binding of a template.
 	<p>From package UML::Values.</p> */
-	class ValueSpecification:virtual public PackageableElement,virtual public TypedElement	{
+	class ValueSpecification:virtual public PackageableElement,virtual public TypedElement
+	{
 		public:
  			ValueSpecification(const ValueSpecification &) {}
 			ValueSpecification& operator=(ValueSpecification const&) = delete;
@@ -106,8 +115,28 @@ namespace uml
 			ValueSpecification(){}
 
 
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::Package > par_owningPackage);
+
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::Slot > par_owningSlot);
+
+			//Additional constructors for the containments back reference
+
+			ValueSpecification(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ValueSpecification() {}
@@ -165,6 +194,13 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 */
+			virtual std::weak_ptr<uml::Slot > getOwningSlot() const = 0;
+			
+			/*!
+			 */
+			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot_owningSlot) = 0;
 			
 
 		protected:
@@ -176,6 +212,9 @@ namespace uml
 			//*********************************
 			// Reference Members
 			//*********************************
+			/*!
+			 */
+			std::weak_ptr<uml::Slot > m_owningSlot;
 			
 
 		public:
@@ -183,6 +222,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

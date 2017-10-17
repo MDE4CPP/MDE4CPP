@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -64,6 +62,16 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
+	class Slot;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -95,7 +103,8 @@ namespace uml
 	/*!
 	 An InstanceValue is a ValueSpecification that identifies an instance.
 	<p>From package UML::Classification.</p> */
-	class InstanceValue:virtual public ValueSpecification	{
+	class InstanceValue:virtual public ValueSpecification
+	{
 		public:
  			InstanceValue(const InstanceValue &) {}
 			InstanceValue& operator=(InstanceValue const&) = delete;
@@ -105,7 +114,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InstanceValue() {}
@@ -152,6 +161,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

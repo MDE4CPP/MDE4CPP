@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 An OperationTemplateParameter exposes an Operation as a formal parameter for a template.
 	<p>From package UML::Classification.</p> */
-	class OperationTemplateParameter:virtual public TemplateParameter	{
+	class OperationTemplateParameter:virtual public TemplateParameter
+	{
 		public:
  			OperationTemplateParameter(const OperationTemplateParameter &) {}
 			OperationTemplateParameter& operator=(OperationTemplateParameter const&) = delete;
@@ -84,7 +83,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~OperationTemplateParameter() {}

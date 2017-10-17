@@ -541,6 +541,7 @@ void UmlPackageImpl::createPackageContents()
 	behaviorEClass = createEClass(BEHAVIOR);
 	createEAttribute(behaviorEClass, BEHAVIOR_ISREENTRANT);
 	
+	createEReference(behaviorEClass, BEHAVIOR_BEHAVIOREDCLASSIFIER);
 	createEReference(behaviorEClass, BEHAVIOR_CONTEXT);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETER);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETERSET);
@@ -1406,6 +1407,9 @@ void UmlPackageImpl::createPackageContents()
 
 	inputPinEClass = createEClass(INPUTPIN);
 	
+	createEReference(inputPinEClass, INPUTPIN_CALLOPERATIONACTION);
+	createEReference(inputPinEClass, INPUTPIN_INVOCATIONACTION);
+	createEReference(inputPinEClass, INPUTPIN_STRUCTURALFEATUREACTION);
 	
 	createEOperation(inputPinEClass, INPUTPIN___OUTGOING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -1930,6 +1934,7 @@ void UmlPackageImpl::createPackageContents()
 
 	outputPinEClass = createEClass(OUTPUTPIN);
 	
+	createEReference(outputPinEClass, OUTPUTPIN_CALLACTION);
 	
 	createEOperation(outputPinEClass, OUTPUTPIN___INCOMING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -1989,6 +1994,7 @@ void UmlPackageImpl::createPackageContents()
 
 	packageableElementEClass = createEClass(PACKAGEABLEELEMENT);
 	
+	createEReference(packageableElementEClass, PACKAGEABLEELEMENT_OWNINGPACKAGE);
 	
 	createEOperation(packageableElementEClass, PACKAGEABLEELEMENT___NAMESPACE_NEEDS_VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -2000,6 +2006,7 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(parameterEClass, PARAMETER_ISEXCEPTION);
 	createEAttribute(parameterEClass, PARAMETER_ISSTREAM);
 	
+	createEReference(parameterEClass, PARAMETER_BEHAVIOR);
 	createEReference(parameterEClass, PARAMETER_DEFAULTVALUE);
 	createEReference(parameterEClass, PARAMETER_OPERATION);
 	createEReference(parameterEClass, PARAMETER_PARAMETERSET);
@@ -2800,6 +2807,7 @@ void UmlPackageImpl::createPackageContents()
 
 	valueSpecificationEClass = createEClass(VALUESPECIFICATION);
 	
+	createEReference(valueSpecificationEClass, VALUESPECIFICATION_OWNINGSLOT);
 	
 	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___BOOLEANVALUE);
 	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___INTEGERVALUE);
@@ -3311,8 +3319,8 @@ void UmlPackageImpl::initializePackageContents()
 	initEAttribute(getActivity_IsSingleExecution(),types::TypesPackage::eInstance()->getBoolean(),"isSingleExecution","false",1,1, false,false, true, false, false, true, false, false);
 	
 	initEReference(getActivity_Edge(),getActivityEdge(),getActivityEdge_Activity(),"edge","",0,-1, false,false, true, true, true, false, true, false,false);
-	initEReference(getActivity_Group(),getActivityGroup(),getActivityGroup_InActivity(),"group","",0,-1, true,true, true, false, true, false, true, true,false);
-	initEReference(getActivity_Node(),getActivityNode(),getActivityNode_Activity(),"node","",0,-1, true,true, true, false, true, false, true, true,false);
+	initEReference(getActivity_Group(),getActivityGroup(),getActivityGroup_InActivity(),"group","",0,-1, true,true, true, true, true, false, true, true,false);
+	initEReference(getActivity_Node(),getActivityNode(),getActivityNode_Activity(),"node","",0,-1, true,true, true, true, true, false, true, true,false);
 	initEReference(getActivity_OwnedGroup(),getActivityGroup(),nullptr,"ownedGroup","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getActivity_OwnedNode(),getActivityNode(),nullptr,"ownedNode","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getActivity_Partition(),getActivityPartition(),nullptr,"partition","",0,-1, false,false, true, false, true, false, true, false,false);
@@ -3373,7 +3381,7 @@ void UmlPackageImpl::initializePackageContents()
 	initEReference(getActivityGroup_ContainedEdge(),getActivityEdge(),getActivityEdge_InGroup(),"containedEdge","",0,-1, true,true, false, false, true, false, true, true,false);
 	initEReference(getActivityGroup_ContainedNode(),getActivityNode(),getActivityNode_InGroup(),"containedNode","",0,-1, true,true, false, false, true, false, true, true,false);
 	initEReference(getActivityGroup_InActivity(),getActivity(),getActivity_Group(),"inActivity","",0,1, true,true, true, false, true, false, true, true,false);
-	initEReference(getActivityGroup_Subgroup(),getActivityGroup(),getActivityGroup_SuperGroup(),"subgroup","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityGroup_Subgroup(),getActivityGroup(),getActivityGroup_SuperGroup(),"subgroup","",0,-1, true,true, false, true, true, false, true, true,false);
 	initEReference(getActivityGroup_SuperGroup(),getActivityGroup(),getActivityGroup_Subgroup(),"superGroup","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getActivityGroup___Nodes_and_edges__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "nodes_and_edges", 0, 1, true,true );
@@ -3595,8 +3603,9 @@ void UmlPackageImpl::initializePackageContents()
 	initEClass(behaviorEClass, nullptr, "Behavior", true, false, true);
 	initEAttribute(getBehavior_IsReentrant(),types::TypesPackage::eInstance()->getBoolean(),"isReentrant","true",0,1, false,false, true, true, false, true, false, false);
 	
+	initEReference(getBehavior_BehavioredClassifier(),getBehavioredClassifier(),getBehavioredClassifier_OwnedBehavior(),"behavioredClassifier","",0,1, false,false, true, false, true, true, true, false,true);
 	initEReference(getBehavior_Context(),getBehavioredClassifier(),nullptr,"context","",0,1, true,true, false, false, true, false, true, true,false);
-	initEReference(getBehavior_OwnedParameter(),getParameter(),nullptr,"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getBehavior_OwnedParameter(),getParameter(),getParameter_Behavior(),"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
 	initEReference(getBehavior_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getBehavior_Postcondition(),getConstraint(),nullptr,"postcondition","",0,-1, false,false, true, false, true, false, true, false,false);
 	initEReference(getBehavior_Precondition(),getConstraint(),nullptr,"precondition","",0,-1, false,false, true, false, true, false, true, false,false);
@@ -3641,7 +3650,7 @@ void UmlPackageImpl::initializePackageContents()
 	initEAttribute(getBehavioralFeature_IsAbstract(),types::TypesPackage::eInstance()->getBoolean(),"isAbstract","false",1,1, false,false, true, false, false, true, false, false);
 	
 	initEReference(getBehavioralFeature_Method(),getBehavior(),getBehavior_Specification(),"method","",0,-1, false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavioralFeature_OwnedParameter(),getParameter(),nullptr,"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getBehavioralFeature_OwnedParameter(),getParameter(),getParameter_Operation(),"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
 	initEReference(getBehavioralFeature_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getBehavioralFeature_RaisedException(),getType(),nullptr,"raisedException","",0,-1, false,false, true, false, true, false, true, false,false);
 	
@@ -3665,7 +3674,7 @@ void UmlPackageImpl::initializePackageContents()
 	
 	initEReference(getBehavioredClassifier_ClassifierBehavior(),getBehavior(),nullptr,"classifierBehavior","",0,1, false,false, true, false, true, false, true, false,false);
 	initEReference(getBehavioredClassifier_InterfaceRealization(),getInterfaceRealization(),getInterfaceRealization_ImplementingClassifier(),"interfaceRealization","",0,-1, false,false, true, true, true, false, true, false,false);
-	initEReference(getBehavioredClassifier_OwnedBehavior(),getBehavior(),nullptr,"ownedBehavior","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getBehavioredClassifier_OwnedBehavior(),getBehavior(),getBehavior_BehavioredClassifier(),"ownedBehavior","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getBehavioredClassifier___Class_behavior__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "class_behavior", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3702,7 +3711,7 @@ void UmlPackageImpl::initializePackageContents()
 	initEClass(callActionEClass, nullptr, "CallAction", true, false, true);
 	initEAttribute(getCallAction_IsSynchronous(),types::TypesPackage::eInstance()->getBoolean(),"isSynchronous","true",1,1, false,false, true, false, false, true, false, false);
 	
-	initEReference(getCallAction_Result(),getOutputPin(),nullptr,"result","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getCallAction_Result(),getOutputPin(),getOutputPin_CallAction(),"result","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getCallAction___Argument_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "argument_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3747,7 +3756,7 @@ void UmlPackageImpl::initializePackageContents()
 	initEClass(callOperationActionEClass, nullptr, "CallOperationAction", false, false, true);
 	
 	initEReference(getCallOperationAction_Operation(),getOperation(),nullptr,"operation","",1,1, false,false, true, false, true, false, true, false,false);
-	initEReference(getCallOperationAction_Target(),getInputPin(),nullptr,"target","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getCallOperationAction_Target(),getInputPin(),getInputPin_CallOperationAction(),"target","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCallOperationAction___Type_target_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "type_target_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5210,6 +5219,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InputPin
 	initEClass(inputPinEClass, nullptr, "InputPin", false, false, true);
 	
+	initEReference(getInputPin_CallOperationAction(),getCallOperationAction(),getCallOperationAction_Target(),"callOperationAction","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getInputPin_InvocationAction(),getInvocationAction(),getInvocationAction_Argument(),"invocationAction","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getInputPin_StructuralFeatureAction(),getStructuralFeatureAction(),getStructuralFeatureAction_Object(),"structuralFeatureAction","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "outgoing_edges_structured_only", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5435,7 +5447,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InvocationAction
 	initEClass(invocationActionEClass, nullptr, "InvocationAction", true, false, true);
 	
-	initEReference(getInvocationAction_Argument(),getInputPin(),nullptr,"argument","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInvocationAction_Argument(),getInputPin(),getInputPin_InvocationAction(),"argument","",0,-1, false,false, true, true, true, false, true, false,true);
 	initEReference(getInvocationAction_OnPort(),getPort(),nullptr,"onPort","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	
@@ -5896,7 +5908,7 @@ void UmlPackageImpl::initializePackageContents()
 	initEReference(getNamespace_ElementImport(),getElementImport(),getElementImport_ImportingNamespace(),"elementImport","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getNamespace_ImportedMember(),getPackageableElement(),nullptr,"importedMember","",0,-1, true,true, false, false, true, false, true, true,false);
 	initEReference(getNamespace_Member(),getNamedElement(),nullptr,"member","",0,-1, true,true, false, false, true, false, true, true,false);
-	initEReference(getNamespace_OwnedMember(),getNamedElement(),getNamedElement_Namespace(),"ownedMember","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getNamespace_OwnedMember(),getNamedElement(),getNamedElement_Namespace(),"ownedMember","",0,-1, true,true, false, true, true, false, true, true,false);
 	initEReference(getNamespace_OwnedRule(),getConstraint(),getConstraint_Context(),"ownedRule","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getNamespace_PackageImport(),getPackageImport(),getPackageImport_ImportingNamespace(),"packageImport","",0,-1, false,false, true, true, true, false, true, false,false);
 	
@@ -6202,6 +6214,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class OutputPin
 	initEClass(outputPinEClass, nullptr, "OutputPin", false, false, true);
 	
+	initEReference(getOutputPin_CallAction(),getCallAction(),getCallAction_Result(),"callAction","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "incoming_edges_structured_only", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6214,12 +6227,12 @@ void UmlPackageImpl::initializePackageContents()
 	initEClass(packageEClass, nullptr, "Package", false, false, true);
 	initEAttribute(getPackage_URI(),types::TypesPackage::eInstance()->getString(),"URI","",0,1, false,false, true, false, false, true, false, false);
 	
-	initEReference(getPackage_NestedPackage(),getPackage(),getPackage_NestingPackage(),"nestedPackage","",0,-1, true,true, true, false, true, false, true, true,false);
+	initEReference(getPackage_NestedPackage(),getPackage(),getPackage_NestingPackage(),"nestedPackage","",0,-1, true,true, true, true, true, false, true, true,false);
 	initEReference(getPackage_NestingPackage(),getPackage(),getPackage_NestedPackage(),"nestingPackage","",0,1, true,true, true, false, true, false, true, true,false);
-	initEReference(getPackage_OwnedStereotype(),getStereotype(),nullptr,"ownedStereotype","",0,-1, true,true, false, false, true, false, true, true,false);
-	initEReference(getPackage_OwnedType(),getType(),getType_Package(),"ownedType","",0,-1, true,true, true, false, true, false, true, true,false);
+	initEReference(getPackage_OwnedStereotype(),getStereotype(),nullptr,"ownedStereotype","",0,-1, true,true, false, true, true, false, true, true,false);
+	initEReference(getPackage_OwnedType(),getType(),getType_Package(),"ownedType","",0,-1, true,true, true, true, true, false, true, true,false);
 	initEReference(getPackage_PackageMerge(),getPackageMerge(),getPackageMerge_ReceivingPackage(),"packageMerge","",0,-1, false,false, true, true, true, false, true, false,false);
-	initEReference(getPackage_PackagedElement(),getPackageableElement(),nullptr,"packagedElement","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getPackage_PackagedElement(),getPackageableElement(),getPackageableElement_OwningPackage(),"packagedElement","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getPackage_ProfileApplication(),getProfileApplication(),getProfileApplication_ApplyingPackage(),"profileApplication","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getPackage___AllApplicableStereotypes(),getStereotype(), "allApplicableStereotypes", 0, -1, true,false );
@@ -6318,6 +6331,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class PackageableElement
 	initEClass(packageableElementEClass, nullptr, "PackageableElement", true, false, true);
 	
+	initEReference(getPackageableElement_OwningPackage(),getPackage(),getPackage_PackagedElement(),"owningPackage","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "namespace_needs_visibility", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6334,8 +6348,9 @@ void UmlPackageImpl::initializePackageContents()
 	initEAttribute(getParameter_IsException(),types::TypesPackage::eInstance()->getBoolean(),"isException","false",1,1, false,false, true, false, false, true, false, false);
 	initEAttribute(getParameter_IsStream(),types::TypesPackage::eInstance()->getBoolean(),"isStream","false",1,1, false,false, true, false, false, true, false, false);
 	
+	initEReference(getParameter_Behavior(),getBehavior(),getBehavior_OwnedParameter(),"behavior","",0,1, false,false, true, false, true, false, true, false,true);
 	initEReference(getParameter_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, false,false, true, true, true, false, true, false,false);
-	initEReference(getParameter_Operation(),getOperation(),nullptr,"operation","",0,1, true,true, false, false, true, false, true, false,false);
+	initEReference(getParameter_Operation(),getOperation(),getBehavioralFeature_OwnedParameter(),"operation","",0,1, true,true, false, false, true, false, true, false,false);
 	initEReference(getParameter_ParameterSet(),getParameterSet(),getParameterSet_Parameter(),"parameterSet","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getParameter___Connector_end__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "connector_end", 0, 1, true,true );
@@ -6564,7 +6579,7 @@ void UmlPackageImpl::initializePackageContents()
 	
 	initEReference(getProperty_Association(),getAssociation(),getAssociation_MemberEnd(),"association","",0,1, false,false, true, false, true, false, true, false,false);
 	initEReference(getProperty_AssociationEnd(),getProperty(),getProperty_Qualifier(),"associationEnd","",0,1, false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_Class(),getClass(),nullptr,"class","",0,1, true,true, true, false, true, false, true, false,false);
+	initEReference(getProperty_Class(),getClass(),getStructuredClassifier_OwnedAttribute(),"class","",0,1, true,true, true, false, true, false, true, false,false);
 	initEReference(getProperty_Datatype(),getDataType(),getDataType_OwnedAttribute(),"datatype","",0,1, false,false, true, false, true, false, true, false,false);
 	initEReference(getProperty_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, false,false, true, true, true, false, true, false,false);
 	initEReference(getProperty_Interface(),getInterface(),getInterface_OwnedAttribute(),"interface","",0,1, false,false, true, false, true, false, true, false,false);
@@ -7259,7 +7274,7 @@ void UmlPackageImpl::initializePackageContents()
 	
 	initEReference(getSlot_DefiningFeature(),getStructuralFeature(),nullptr,"definingFeature","",1,1, false,false, true, false, true, false, true, false,false);
 	initEReference(getSlot_OwningInstance(),getInstanceSpecification(),getInstanceSpecification_Slot(),"owningInstance","",1,1, false,false, true, false, true, false, true, false,false);
-	initEReference(getSlot_Value(),getValueSpecification(),nullptr,"value","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getSlot_Value(),getValueSpecification(),getValueSpecification_OwningSlot(),"value","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	
 	// End Class Slot
@@ -7491,7 +7506,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StructuralFeatureAction
 	initEClass(structuralFeatureActionEClass, nullptr, "StructuralFeatureAction", true, false, true);
 	
-	initEReference(getStructuralFeatureAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuralFeatureAction_Object(),getInputPin(),getInputPin_StructuralFeatureAction(),"object","",1,1, false,false, true, true, true, false, true, false,false);
 	initEReference(getStructuralFeatureAction_StructuralFeature(),getStructuralFeature(),nullptr,"structuralFeature","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getStructuralFeatureAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
@@ -7549,7 +7564,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StructuredClassifier
 	initEClass(structuredClassifierEClass, nullptr, "StructuredClassifier", true, false, true);
 	
-	initEReference(getStructuredClassifier_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getStructuredClassifier_OwnedAttribute(),getProperty(),getProperty_Class(),"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
 	initEReference(getStructuredClassifier_OwnedConnector(),getConnector(),nullptr,"ownedConnector","",0,-1, false,false, true, true, true, false, true, false,false);
 	initEReference(getStructuredClassifier_Part(),getProperty(),nullptr,"part","",0,-1, true,true, false, false, true, false, true, true,false);
 	initEReference(getStructuredClassifier_Role(),getConnectableElement(),nullptr,"role","",0,-1, true,true, false, false, true, false, true, true,false);
@@ -7919,6 +7934,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ValueSpecification
 	initEClass(valueSpecificationEClass, nullptr, "ValueSpecification", true, false, true);
 	
+	initEReference(getValueSpecification_OwningSlot(),getSlot(),getSlot_Value(),"owningSlot","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getValueSpecification___BooleanValue(),types::TypesPackage::eInstance()->getBoolean(), "booleanValue", 0, 1, true,false );
 	
@@ -8752,33 +8768,37 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getBehavior_IsReentrant() con
 	return std::dynamic_pointer_cast<ecore::EAttribute>(behaviorEClass->getEStructuralFeatures()->at(0));
 }
 
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Context() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_BehavioredClassifier() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(1));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Context() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(2));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameterSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameter() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(3));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Postcondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameterSet() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(4));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Precondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Postcondition() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(5));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_RedefinedBehavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Precondition() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(6));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Specification() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_RedefinedBehavior() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(7));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Specification() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(8));
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___BehavioredClassifier__Element() const
@@ -11312,6 +11332,18 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getInputPin() const
 	return inputPinEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_CallOperationAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(0));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_InvocationAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(1));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_StructuralFeatureAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(2));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const
 {
@@ -12918,6 +12950,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getOutputPin() const
 	return outputPinEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_CallAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(outputPinEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const
 {
@@ -13114,6 +13150,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackageableElement() const
 	return packageableElementEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageableElement_OwningPackage() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(packageableElementEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const
 {
@@ -13148,17 +13188,21 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_IsStream() const
 	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(4));
 }
 
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_DefaultValue() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Behavior() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(5));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Operation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_DefaultValue() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(6));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_ParameterSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Operation() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(7));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_ParameterSet() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(8));
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Connector_end__EDiagnosticChain_EMap() const
@@ -15628,6 +15672,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getValueSpecification() const
 	return valueSpecificationEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecification_OwningSlot() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(valueSpecificationEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___BooleanValue() const
 {

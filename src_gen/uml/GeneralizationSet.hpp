@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,6 +67,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class PackageableElement;
 }
 
@@ -95,7 +98,8 @@ namespace uml
 	/*!
 	 A GeneralizationSet is a PackageableElement whose instances represent sets of Generalization relationships.
 	<p>From package UML::Classification.</p> */
-	class GeneralizationSet:virtual public PackageableElement	{
+	class GeneralizationSet:virtual public PackageableElement
+	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}
 			GeneralizationSet& operator=(GeneralizationSet const&) = delete;
@@ -105,7 +109,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~GeneralizationSet() {}
@@ -154,6 +158,11 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
+			 Designates the instances of Generalization that are members of this GeneralizationSet.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const = 0;
+			
+			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<uml::Classifier > getPowertype() const = 0;
@@ -162,11 +171,6 @@ namespace uml
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype_powertype) = 0;
-			/*!
-			 Designates the instances of Generalization that are members of this GeneralizationSet.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const = 0;
-			
 			
 
 		protected:
@@ -187,13 +191,13 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
-			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier > m_powertype;
-			/*!
 			 Designates the instances of Generalization that are members of this GeneralizationSet.
 			<p>From package UML::Classification.</p> */
 			std::shared_ptr< Bag<uml::Generalization> > m_generalization;
+			/*!
+			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
+			<p>From package UML::Classification.</p> */
+			std::shared_ptr<uml::Classifier > m_powertype;
 			
 
 		public:
@@ -201,6 +205,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!

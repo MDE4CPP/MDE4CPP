@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -32,6 +30,11 @@
 // generated Includes
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Behavior;
+}
+
 namespace uml 
 {
 	class Comment;
@@ -121,7 +124,8 @@ namespace uml
 	/*!
 	 A Parameter is a specification of an argument used to pass information into or out of an invocation of a BehavioralFeature.  Parameters can be treated as ConnectableElements within Collaborations.
 	<p>From package UML::Classification.</p> */
-	class Parameter:virtual public ConnectableElement,virtual public MultiplicityElement	{
+	class Parameter:virtual public ConnectableElement,virtual public MultiplicityElement
+	{
 		public:
  			Parameter(const Parameter &) {}
 			Parameter& operator=(Parameter const&) = delete;
@@ -131,10 +135,27 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			Parameter(std::shared_ptr<uml::Operation > par_operation){}
+
+			Parameter(std::weak_ptr<uml::Behavior > par_behavior);
+
+			//Additional constructors for the containments back reference
+
+			Parameter(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Parameter(std::weak_ptr<uml::Operation > par_operation);
+
+			//Additional constructors for the containments back reference
+
+			Parameter(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Parameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Parameter() {}
@@ -143,6 +164,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
+			end->notEmpty() implies collaboration->notEmpty() */ 
+			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
@@ -150,24 +176,13 @@ namespace uml
 			virtual bool in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
+			 */ 
+			virtual bool isSetDefault()  = 0;
+			
+			/*!
 			 An input Parameter cannot be an exception.
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
 			virtual bool not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty() */ 
-			virtual bool connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant */ 
-			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream) */ 
-			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Parameters typed by DataTypes cannot have an effect.
@@ -175,8 +190,9 @@ namespace uml
 			virtual bool object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 */ 
-			virtual bool isSetDefault()  = 0;
+			 Reentrant behaviors cannot have stream Parameters.
+			(isStream and behavior <> null) implies not behavior.isReentrant */ 
+			virtual bool reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Sets the default value for this parameter to the specified Boolean value. */ 
@@ -201,6 +217,11 @@ namespace uml
 			/*!
 			 Sets the default value for this parameter to the specified unlimited natural value. */ 
 			virtual void setUnlimitedNaturalDefaultValue(int value)  = 0;
+			
+			/*!
+			 A Parameter cannot be a stream and exception at the same time.
+			not (isException and isStream) */ 
+			virtual bool stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 */ 
@@ -265,6 +286,13 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
+			 */
+			virtual std::weak_ptr<uml::Behavior > getBehavior() const = 0;
+			
+			/*!
+			 */
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) = 0;
+			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<uml::ValueSpecification > getDefaultValue() const = 0;
@@ -276,7 +304,7 @@ namespace uml
 			/*!
 			 The Operation owning this parameter.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::Operation > getOperation() const = 0;
+			virtual std::weak_ptr<uml::Operation > getOperation() const = 0;
 			
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
@@ -315,13 +343,16 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
+			 */
+			std::weak_ptr<uml::Behavior > m_behavior;
+			/*!
 			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p> */
 			std::shared_ptr<uml::ValueSpecification > m_defaultValue;
 			/*!
 			 The Operation owning this parameter.
 			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Operation > m_operation;
+			std::weak_ptr<uml::Operation > m_operation;
 			/*!
 			 The ParameterSets containing the parameter. See ParameterSet.
 			<p>From package UML::Classification.</p> */
@@ -333,15 +364,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

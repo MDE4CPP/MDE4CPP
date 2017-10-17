@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -75,7 +73,8 @@ namespace uml
 	/*!
 	 An ElementImport identifies a NamedElement in a Namespace other than the one that owns that NamedElement and allows the NamedElement to be referenced using an unqualified name in the Namespace owning the ElementImport.
 	<p>From package UML::CommonStructure.</p> */
-	class ElementImport:virtual public DirectedRelationship	{
+	class ElementImport:virtual public DirectedRelationship
+	{
 		public:
  			ElementImport(const ElementImport &) {}
 			ElementImport& operator=(ElementImport const&) = delete;
@@ -85,10 +84,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			ElementImport(std::weak_ptr<uml::Namespace > par_importingNamespace){}
+
+			ElementImport(std::weak_ptr<uml::Namespace > par_importingNamespace);
+
+			//Additional constructors for the containments back reference
+
+			ElementImport(std::weak_ptr<uml::Element > par_owner);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ElementImport() {}
@@ -96,16 +100,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 An importedElement has either public visibility or no visibility at all.
-			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public */ 
-			virtual bool imported_element_is_public(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The visibility of an ElementImport is either public or private.
-			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool visibility_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The query getName() returns the name under which the imported PackageableElement will be known in the importing namespace.
 			result = (if alias->notEmpty() then
@@ -115,6 +109,16 @@ namespace uml
 			endif)
 			<p>From package UML::CommonStructure.</p> */ 
 			virtual std::string getName()  = 0;
+			
+			/*!
+			 An importedElement has either public visibility or no visibility at all.
+			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public */ 
+			virtual bool imported_element_is_public(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The visibility of an ElementImport is either public or private.
+			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
+			virtual bool visibility_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -202,15 +206,15 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0;/*!
 			 Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
 			 Specifies the source Element(s) of the DirectedRelationship.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0; 
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0; 
 	};
 
 }

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,7 +67,8 @@ namespace uml
 	/*!
 	 A Template Signature bundles the set of formal TemplateParameters for a template.
 	<p>From package UML::CommonStructure.</p> */
-	class TemplateSignature:virtual public Element	{
+	class TemplateSignature:virtual public Element
+	{
 		public:
  			TemplateSignature(const TemplateSignature &) {}
 			TemplateSignature& operator=(TemplateSignature const&) = delete;
@@ -79,10 +78,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			TemplateSignature(std::weak_ptr<uml::TemplateableElement > par_template){}
+
+			TemplateSignature(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			TemplateSignature(std::weak_ptr<uml::TemplateableElement > par_template);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TemplateSignature() {}
@@ -109,6 +113,11 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
+			/*!
+			 The formal parameters that are owned by this TemplateSignature.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > getOwnedParameter() const = 0;
+			
 			
 			/*!
 			 The TemplateableElement that owns this TemplateSignature.
@@ -119,11 +128,6 @@ namespace uml
 			 The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template_template) = 0;
-			/*!
-			 The formal parameters that are owned by this TemplateSignature.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > getOwnedParameter() const = 0;
-			
 			
 
 		protected:
@@ -136,6 +140,10 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
+			 The formal parameters that are owned by this TemplateSignature.
+			<p>From package UML::CommonStructure.</p> */
+			std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > m_ownedParameter;
+			/*!
 			 The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
 			std::shared_ptr<Union<uml::TemplateParameter> > m_parameter;
@@ -143,10 +151,6 @@ namespace uml
 			 The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
 			std::weak_ptr<uml::TemplateableElement > m_template;
-			/*!
-			 The formal parameters that are owned by this TemplateSignature.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > m_ownedParameter;
 			
 
 		public:

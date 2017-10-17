@@ -18,6 +18,10 @@
 
 #include "Observation.hpp"
 
+#include "Package.hpp"
+
+#include "Slot.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -65,10 +69,43 @@ TimeExpressionImpl::~TimeExpressionImpl()
 
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:TimeExpressionImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+			:TimeExpressionImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:TimeExpressionImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+			:TimeExpressionImpl()
+			{
+			    m_owningSlot = par_owningSlot;
 			}
 
 
@@ -102,10 +139,16 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	std::shared_ptr< Bag<uml::Observation> > _observation = obj.getObservation();
 	m_observation.reset(new Bag<uml::Observation>(*(obj.getObservation().get())));
 
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
+
+	m_owningSlot  = obj.getOwningSlot();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -114,27 +157,26 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getExpr()!=nullptr)
 	{
-		m_expr.reset(dynamic_cast<uml::ValueSpecification*>(obj.getExpr()->copy()));
+		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_expr" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -142,19 +184,19 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  TimeExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
 {
-	return new TimeExpressionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TimeExpressionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
@@ -198,13 +240,17 @@ std::shared_ptr< Bag<uml::Observation> > TimeExpressionImpl::getObservation() co
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
+std::weak_ptr<uml::Namespace > TimeExpressionImpl::getNamespace() const
 {
-	return m_owner;
+	return m_namespace;
 }
 std::shared_ptr<Union<uml::Element> > TimeExpressionImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
+{
+	return m_owner;
 }
 
 
@@ -220,7 +266,7 @@ boost::any TimeExpressionImpl::eGet(int featureID,  bool resolve, bool coreType)
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2030
 		case UmlPackage::TIMEEXPRESSION_EXPR:
-			return getExpr(); //20313
+			return getExpr(); //20315
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //2035
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -228,13 +274,17 @@ boost::any TimeExpressionImpl::eGet(int featureID,  bool resolve, bool coreType)
 		case UmlPackage::NAMEDELEMENT_NAMESPACE:
 			return getNamespace(); //2037
 		case UmlPackage::TIMEEXPRESSION_OBSERVATION:
-			return getObservation(); //20314
+			return getObservation(); //20316
 		case UmlPackage::ELEMENT_OWNEDCOMMENT:
 			return getOwnedComment(); //2031
 		case UmlPackage::ELEMENT_OWNEDELEMENT:
 			return getOwnedElement(); //2032
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2033
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //20312
+		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
+			return getOwningSlot(); //20314
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2034
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:

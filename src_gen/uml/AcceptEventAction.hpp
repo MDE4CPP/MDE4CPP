@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -150,7 +148,8 @@ namespace uml
 	/*!
 	 An AcceptEventAction is an Action that waits for the occurrence of one or more specific Events.
 	<p>From package UML::Actions.</p> */
-	class AcceptEventAction:virtual public Action	{
+	class AcceptEventAction:virtual public Action
+	{
 		public:
  			AcceptEventAction(const AcceptEventAction &) {}
 			AcceptEventAction& operator=(AcceptEventAction const&) = delete;
@@ -160,7 +159,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~AcceptEventAction() {}
@@ -169,10 +168,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
-			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
-				output->size() = 1 and output->first().is(1,1) */ 
-			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 If isUnmarshall=false and all the triggers are for SignalEvents, then the type of the single result OutputPin must either be null or all the signals must conform to it.
+			not isUnmarshall implies 
+				result->isEmpty() or
+				let type: Type = result->first().type in
+				type=null or 
+					(trigger->forAll(event.oclIsKindOf(SignalEvent)) and 
+					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type))) */ 
+			virtual bool conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 AcceptEventActions may have no input pins.
@@ -188,6 +191,12 @@ namespace uml
 			virtual bool no_output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
+			 If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
+			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
+				output->size() = 1 and output->first().is(1,1) */ 
+			virtual bool one_output_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
 			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
 				trigger->size()=1 and
@@ -199,16 +208,6 @@ namespace uml
 					result->at(i).isOrdered = attribute->at(i).isOrdered and
 					result->at(i).includesMultiplicity(attribute->at(i))) */ 
 			virtual bool unmarshall_signal_events(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If isUnmarshall=false and all the triggers are for SignalEvents, then the type of the single result OutputPin must either be null or all the signals must conform to it.
-			not isUnmarshall implies 
-				result->isEmpty() or
-				let type: Type = result->first().type in
-				type=null or 
-					(trigger->forAll(event.oclIsKindOf(SignalEvent)) and 
-					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type))) */ 
-			virtual bool conforming_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -268,21 +267,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

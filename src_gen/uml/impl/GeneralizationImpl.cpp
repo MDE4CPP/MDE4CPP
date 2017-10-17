@@ -61,6 +61,17 @@ GeneralizationImpl::~GeneralizationImpl()
 
 
 //Additional constructor for the containments back reference
+			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element > par_owner)
+			:GeneralizationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
 			:GeneralizationImpl()
 			{
@@ -93,20 +104,19 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 	m_specific  = obj.getSpecific();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getGeneral()!=nullptr)
 	{
-		m_general.reset(dynamic_cast<uml::Classifier*>(obj.getGeneral()->copy()));
+		m_general = std::dynamic_pointer_cast<uml::Classifier>(obj.getGeneral()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_general" << std::endl;
@@ -114,18 +124,18 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  GeneralizationImpl::copy() const
+std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
 {
-	return new GeneralizationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new GeneralizationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
@@ -183,9 +193,9 @@ void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::getSource() const
+std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
 {
-	return m_source;
+	return m_ownedElement;
 }
 std::weak_ptr<uml::Element > GeneralizationImpl::getOwner() const
 {
@@ -195,9 +205,9 @@ std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getRelatedElement() co
 {
 	return m_relatedElement;
 }
-std::shared_ptr<Union<uml::Element> > GeneralizationImpl::getOwnedElement() const
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::getSource() const
 {
-	return m_ownedElement;
+	return m_source;
 }
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::getTarget() const
 {

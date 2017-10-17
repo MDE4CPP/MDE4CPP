@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 A Clause is an Element that represents a single branch of a ConditionalNode, including a test and a body section. The body section is executed only if (but not necessarily if) the test section evaluates to true.
 	<p>From package UML::Actions.</p> */
-	class Clause:virtual public Element	{
+	class Clause:virtual public Element
+	{
 		public:
  			Clause(const Clause &) {}
 			Clause& operator=(Clause const&) = delete;
@@ -84,7 +83,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Clause() {}

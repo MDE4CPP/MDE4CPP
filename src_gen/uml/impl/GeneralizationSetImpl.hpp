@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			GeneralizationSetImpl(const GeneralizationSetImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			GeneralizationSetImpl& operator=(GeneralizationSetImpl const&) = delete;
@@ -50,7 +48,15 @@ namespace uml
 			GeneralizationSetImpl();
 
 			//Additional constructors for the containments back reference
-			GeneralizationSetImpl(std::shared_ptr<uml::Namespace > par_namespace);
+			GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage);
 
 
 			//Additional constructors for the containments back reference
@@ -109,6 +115,11 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
+			 Designates the instances of Generalization that are members of this GeneralizationSet.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const ;
+			
+			/*!
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<uml::Classifier > getPowertype() const ;
@@ -117,23 +128,21 @@ namespace uml
 			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p> */
 			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype_powertype) ;
-			/*!
-			 Designates the instances of Generalization that are members of this GeneralizationSet.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::Generalization> > getGeneralization() const ;
-			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

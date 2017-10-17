@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -85,7 +83,8 @@ namespace uml
 	/*!
 	 A CollaborationUse is used to specify the application of a pattern specified by a Collaboration to a specific situation.
 	<p>From package UML::StructuredClassifiers.</p> */
-	class CollaborationUse:virtual public NamedElement	{
+	class CollaborationUse:virtual public NamedElement
+	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}
 			CollaborationUse& operator=(CollaborationUse const&) = delete;
@@ -95,7 +94,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~CollaborationUse() {}
@@ -117,11 +116,6 @@ namespace uml
 			virtual bool client_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
-			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
-			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
-			virtual bool every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
 			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
@@ -133,6 +127,11 @@ namespace uml
 			              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty()) implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
 			) */ 
 			virtual bool connectors(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
+			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
+			virtual bool every_role(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

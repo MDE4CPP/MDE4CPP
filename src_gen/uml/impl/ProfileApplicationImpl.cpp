@@ -70,6 +70,17 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 
 
 
+//Additional constructor for the containments back reference
+			ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element > par_owner)
+			:ProfileApplicationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj):ProfileApplicationImpl()
 {
@@ -89,12 +100,11 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getAppliedProfile()!=nullptr)
 	{
-		m_appliedProfile.reset(dynamic_cast<uml::Profile*>(obj.getAppliedProfile()->copy()));
+		m_appliedProfile = std::dynamic_pointer_cast<uml::Profile>(obj.getAppliedProfile()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_appliedProfile" << std::endl;
@@ -102,7 +112,7 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -110,18 +120,18 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ProfileApplicationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
 {
-	return new ProfileApplicationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ProfileApplicationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
@@ -187,14 +197,6 @@ std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getOwnedElement() 
 {
 	return m_ownedElement;
 }
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getTarget() const
-{
-	return m_target;
-}
-std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getSource() const
-{
-	return m_source;
-}
 std::weak_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
 {
 	return m_owner;
@@ -202,6 +204,14 @@ std::weak_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
 std::shared_ptr<Union<uml::Element> > ProfileApplicationImpl::getRelatedElement() const
 {
 	return m_relatedElement;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getSource() const
+{
+	return m_source;
+}
+std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImpl::getTarget() const
+{
+	return m_target;
 }
 
 

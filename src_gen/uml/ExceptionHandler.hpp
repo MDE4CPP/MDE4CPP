@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 An ExceptionHandler is an Element that specifies a handlerBody ExecutableNode to execute in case the specified exception occurs during the execution of the protected ExecutableNode.
 	<p>From package UML::Activities.</p> */
-	class ExceptionHandler:virtual public Element	{
+	class ExceptionHandler:virtual public Element
+	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}
 			ExceptionHandler& operator=(ExceptionHandler const&) = delete;
@@ -84,10 +83,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			ExceptionHandler(std::weak_ptr<uml::ExecutableNode > par_protectedNode){}
+
+			ExceptionHandler(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			ExceptionHandler(std::weak_ptr<uml::ExecutableNode > par_protectedNode);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExceptionHandler() {}
@@ -96,9 +100,34 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
+			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
+			nodes.outgoing->forAll(nodes->includes(target)) and
+			nodes.incoming->forAll(nodes->includes(source)) */ 
+			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
+			exceptionInput.type=null or 
+			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
+			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
 			virtual bool handler_body_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The handlerBody must have the same owner as the protectedNode.
+			handlerBody.owner=protectedNode.owner */ 
+			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
+			handlerBody.oclIsKindOf(Action) and
+			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
+			inputs->size()=1 and inputs->first()=exceptionInput */ 
+			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -114,31 +143,6 @@ namespace uml
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
 			) */ 
 			virtual bool output_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
-			handlerBody.oclIsKindOf(Action) and
-			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput */ 
-			virtual bool one_input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
-			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
-			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source)) */ 
-			virtual bool edge_source_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner */ 
-			virtual bool handler_body_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
-			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
-			virtual bool exception_input_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

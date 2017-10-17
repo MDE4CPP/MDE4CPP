@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -85,7 +83,8 @@ namespace uml
 	/*!
 	 A TypedElement is a NamedElement that may have a Type specified for it.
 	<p>From package UML::CommonStructure.</p> */
-	class TypedElement:virtual public NamedElement	{
+	class TypedElement:virtual public NamedElement
+	{
 		public:
  			TypedElement(const TypedElement &) {}
 			TypedElement& operator=(TypedElement const&) = delete;
@@ -95,7 +94,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TypedElement() {}

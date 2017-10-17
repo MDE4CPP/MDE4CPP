@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 A ConnectableElementTemplateParameter exposes a ConnectableElement as a formal parameter for a template.
 	<p>From package UML::StructuredClassifiers.</p> */
-	class ConnectableElementTemplateParameter:virtual public TemplateParameter	{
+	class ConnectableElementTemplateParameter:virtual public TemplateParameter
+	{
 		public:
  			ConnectableElementTemplateParameter(const ConnectableElementTemplateParameter &) {}
 			ConnectableElementTemplateParameter& operator=(ConnectableElementTemplateParameter const&) = delete;
@@ -84,7 +83,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConnectableElementTemplateParameter() {}

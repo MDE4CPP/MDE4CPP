@@ -18,6 +18,10 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
+#include "Slot.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -54,10 +58,43 @@ LiteralStringImpl::~LiteralStringImpl()
 
 
 //Additional constructor for the containments back reference
-			LiteralStringImpl::LiteralStringImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:LiteralStringImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Element > par_owner)
+			:LiteralStringImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:LiteralStringImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+			:LiteralStringImpl()
+			{
+			    m_owningSlot = par_owningSlot;
 			}
 
 
@@ -92,7 +129,13 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStrin
 	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
+
+	m_owningSlot  = obj.getOwningSlot();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -101,20 +144,19 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStrin
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -122,18 +164,18 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStrin
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  LiteralStringImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralStringImpl::copy() const
 {
-	return new LiteralStringImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralStringImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
@@ -165,6 +207,10 @@ std::string LiteralStringImpl::getValue() const
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > LiteralStringImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > LiteralStringImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -198,6 +244,10 @@ boost::any LiteralStringImpl::eGet(int featureID,  bool resolve, bool coreType) 
 			return getOwnedElement(); //2532
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2533
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //25312
+		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
+			return getOwningSlot(); //25314
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2534
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
@@ -207,7 +257,7 @@ boost::any LiteralStringImpl::eGet(int featureID,  bool resolve, bool coreType) 
 		case UmlPackage::TYPEDELEMENT_TYPE:
 			return getType(); //25310
 		case UmlPackage::LITERALSTRING_VALUE:
-			return getValue(); //25313
+			return getValue(); //25315
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:
 			return getVisibility(); //2539
 	}

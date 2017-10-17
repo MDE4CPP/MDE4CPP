@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -90,7 +88,8 @@ namespace uml
 	/*!
 	 A Trigger specifies a specific point  at which an Event occurrence may trigger an effect in a Behavior. A Trigger may be qualified by the Port on which the Event occurred.
 	<p>From package UML::CommonBehavior.</p> */
-	class Trigger:virtual public NamedElement	{
+	class Trigger:virtual public NamedElement
+	{
 		public:
  			Trigger(const Trigger &) {}
 			Trigger& operator=(Trigger const&) = delete;
@@ -100,7 +99,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Trigger() {}

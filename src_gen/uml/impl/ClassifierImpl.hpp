@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -43,7 +41,7 @@ namespace uml
 	{
 		public: 
 			ClassifierImpl(const ClassifierImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ClassifierImpl& operator=(ClassifierImpl const&) = delete;
@@ -53,15 +51,22 @@ namespace uml
 			ClassifierImpl();
 
 			//Additional constructors for the containments back reference
-			ClassifierImpl(std::shared_ptr<uml::Namespace > par_namespace);
-
-
-			//Additional constructors for the containments back reference
-			ClassifierImpl(std::shared_ptr<uml::Package > par_package);
+			ClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace);
 
 
 			//Additional constructors for the containments back reference
 			ClassifierImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			ClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			ClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
 
 
 
@@ -74,27 +79,59 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A Classifier may only specialize Classifiers of a valid type.
-			parents()->forAll(c | self.maySpecializeType(c)) */ 
-			virtual bool specialize_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The query allAttributes gives an ordered set of all owned and inherited attributes of the Classifier. All owned attributes appear before any inherited attributes, and the attributes inherited from any more specific parent Classifier appear before those of any more general parent Classifier. However, if the Classifier has multiple immediate parents, then the relative ordering of the sets of attributes from those parents is not defined.
+			result = (attribute->asSequence()->union(parents()->asSequence().allAttributes())->select(p | member->includes(p))->asOrderedSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Property> > allAttributes()  ;
 			
 			/*!
-			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances also be its subclasses.
-			powertypeExtent->forAll( gs | 
-			  gs.generalization->forAll( gen | 
-			    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) 
-			  )) */ 
-			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The query allFeatures() gives all of the Features in the namespace of the Classifier. In general, through mechanisms such as inheritance, this will be a larger set than feature.
+			result = (member->select(oclIsKindOf(Feature))->collect(oclAsType(Feature))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Feature> > allFeatures()  ;
 			
 			/*!
-			 The parents of a Classifier must be non-final.
-			parents()->forAll(not isFinalSpecialization) */ 
-			virtual bool non_final_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The query allParents() gives all of the direct and indirect ancestors of a generalized Classifier.
+			result = (parents()->union(parents()->collect(allParents())->asSet()))
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Classifier> > allParents()  ;
 			
 			/*!
-			 Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
-			not allParents()->includes(self) */ 
-			virtual bool no_cycles_in_generalization(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The Interfaces realized by this Classifier and all of its generalizations
+			result = (directlyRealizedInterfaces()->union(self.allParents()->collect(directlyRealizedInterfaces()))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > allRealizedInterfaces()  ;
+			
+			/*!
+			 All StructuralFeatures related to the Classifier that may have Slots, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
+			result = (member->select(oclIsKindOf(StructuralFeature))->
+			  collect(oclAsType(StructuralFeature))->
+			   union(self.inherit(self.allParents()->collect(p | p.attribute)->asSet())->
+			     collect(oclAsType(StructuralFeature)))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::StructuralFeature> > allSlottableFeatures()  ;
+			
+			/*!
+			 The Interfaces used by this Classifier and all of its generalizations
+			result = (directlyUsedInterfaces()->union(self.allParents()->collect(directlyUsedInterfaces()))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > allUsedInterfaces()  ;
+			
+			/*!
+			 The Interfaces directly realized by this Classifier
+			result = ((clientDependency->
+			  select(oclIsKindOf(Realization) and supplier->forAll(oclIsKindOf(Interface))))->
+			      collect(supplier.oclAsType(Interface))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > directlyRealizedInterfaces()  ;
+			
+			/*!
+			 The Interfaces directly used by this Classifier
+			result = ((supplierDependency->
+			  select(oclIsKindOf(Usage) and client->forAll(oclIsKindOf(Interface))))->
+			    collect(client.oclAsType(Interface))->asSet())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > directlyUsedInterfaces()  ;
 			
 			/*!
 			 Retrieves all the attributes of this classifier, including those inherited from its parents. */ 
@@ -107,6 +144,18 @@ namespace uml
 			/*!
 			 Retrieves all the interfaces on which this classifier or any of its parents has a usage dependency. */ 
 			virtual std::shared_ptr<Bag<uml::Interface> > getAllUsedInterfaces()  ;
+			
+			/*!
+			 The general Classifiers are the ones referenced by the Generalization relationships.
+			result = (parents())
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getGenerals()  ;
+			
+			/*!
+			 The inheritedMember association is derived by inheriting the inheritable members of the parents.
+			result = (inherit(parents()->collect(inheritableMembers(self))->asSet()))
+			<p>From package UML::Classification.</p> */ 
+			virtual std::shared_ptr<Bag<uml::NamedElement> > getInheritedMembers()  ;
 			
 			/*!
 			 Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier. */ 
@@ -123,24 +172,6 @@ namespace uml
 			/*!
 			 Retrieves the interfaces on which this classifier has a usage dependency. */ 
 			virtual std::shared_ptr<Bag<uml::Interface> > getUsedInterfaces()  ;
-			
-			/*!
-			 The query allFeatures() gives all of the Features in the namespace of the Classifier. In general, through mechanisms such as inheritance, this will be a larger set than feature.
-			result = (member->select(oclIsKindOf(Feature))->collect(oclAsType(Feature))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Feature> > allFeatures()  ;
-			
-			/*!
-			 The query allParents() gives all of the direct and indirect ancestors of a generalized Classifier.
-			result = (parents()->union(parents()->collect(allParents())->asSet()))
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > allParents()  ;
-			
-			/*!
-			 The general Classifiers are the ones referenced by the Generalization relationships.
-			result = (parents())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getGenerals()  ;
 			
 			/*!
 			 The query hasVisibilityOf() determines whether a NamedElement is visible in the classifier. Non-private members are visible. It is only called when the argument is something owned by a parent.
@@ -167,10 +198,17 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(std::shared_ptr<uml::Classifier>  c)  ;
 			
 			/*!
-			 The inheritedMember association is derived by inheriting the inheritable members of the parents.
-			result = (inherit(parents()->collect(inheritableMembers(self))->asSet()))
+			 result = (substitution.contract->includes(contract))
 			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > getInheritedMembers()  ;
+			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier>  contract)  ;
+			
+			/*!
+			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances also be its subclasses.
+			powertypeExtent->forAll( gs | 
+			  gs.generalization->forAll( gen | 
+			    not (gen.general = self) and not gen.general.allParents()->includes(self) and not (gen.specific = self) and not self.allParents()->includes(gen.specific) 
+			  )) */ 
+			virtual bool maps_to_generalization_set(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
@@ -179,58 +217,25 @@ namespace uml
 			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier>  c)  ;
 			
 			/*!
+			 Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
+			not allParents()->includes(self) */ 
+			virtual bool no_cycles_in_generalization(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The parents of a Classifier must be non-final.
+			parents()->forAll(not isFinalSpecialization) */ 
+			virtual bool non_final_parents(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 The query parents() gives all of the immediate ancestors of a generalized Classifier.
 			result = (generalization.general->asSet())
 			<p>From package UML::Classification.</p> */ 
 			virtual std::shared_ptr<Bag<uml::Classifier> > parents()  ;
 			
 			/*!
-			 The Interfaces directly realized by this Classifier
-			result = ((clientDependency->
-			  select(oclIsKindOf(Realization) and supplier->forAll(oclIsKindOf(Interface))))->
-			      collect(supplier.oclAsType(Interface))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > directlyRealizedInterfaces()  ;
-			
-			/*!
-			 The Interfaces directly used by this Classifier
-			result = ((supplierDependency->
-			  select(oclIsKindOf(Usage) and client->forAll(oclIsKindOf(Interface))))->
-			    collect(client.oclAsType(Interface))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > directlyUsedInterfaces()  ;
-			
-			/*!
-			 The Interfaces realized by this Classifier and all of its generalizations
-			result = (directlyRealizedInterfaces()->union(self.allParents()->collect(directlyRealizedInterfaces()))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > allRealizedInterfaces()  ;
-			
-			/*!
-			 The Interfaces used by this Classifier and all of its generalizations
-			result = (directlyUsedInterfaces()->union(self.allParents()->collect(directlyUsedInterfaces()))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> > allUsedInterfaces()  ;
-			
-			/*!
-			 result = (substitution.contract->includes(contract))
-			<p>From package UML::Classification.</p> */ 
-			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier>  contract)  ;
-			
-			/*!
-			 The query allAttributes gives an ordered set of all owned and inherited attributes of the Classifier. All owned attributes appear before any inherited attributes, and the attributes inherited from any more specific parent Classifier appear before those of any more general parent Classifier. However, if the Classifier has multiple immediate parents, then the relative ordering of the sets of attributes from those parents is not defined.
-			result = (attribute->asSequence()->union(parents()->asSequence().allAttributes())->select(p | member->includes(p))->asOrderedSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Property> > allAttributes()  ;
-			
-			/*!
-			 All StructuralFeatures related to the Classifier that may have Slots, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.
-			result = (member->select(oclIsKindOf(StructuralFeature))->
-			  collect(oclAsType(StructuralFeature))->
-			   union(self.inherit(self.allParents()->collect(p | p.attribute)->asSet())->
-			     collect(oclAsType(StructuralFeature)))->asSet())
-			<p>From package UML::Classification.</p> */ 
-			virtual std::shared_ptr<Bag<uml::StructuralFeature> > allSlottableFeatures()  ;
+			 A Classifier may only specialize Classifiers of a valid type.
+			parents()->forAll(c | self.maySpecializeType(c)) */ 
+			virtual bool specialize_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -263,11 +268,11 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			
 			/*!
 			 The CollaborationUses owned by the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element > > getCollaborationUse() const ;
+			
 			
 			/*!
 			 The generalizing Classifiers for this Classifier.
@@ -280,11 +285,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Generalization, uml::Element > > getGeneralization() const ;
 			
 			/*!
-			 The GeneralizationSet of which this Classifier is a power type.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::GeneralizationSet> > getPowertypeExtent() const ;
-			
-			/*!
 			 All elements inherited by this Classifier from its general Classifiers.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement > > getInheritedMember() const ;
@@ -295,9 +295,9 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::UseCase, uml::NamedElement > > getOwnedUseCase() const ;
 			
 			/*!
-			 The set of UseCases for which this Classifier is the subject.
+			 The GeneralizationSet of which this Classifier is a power type.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr< Bag<uml::UseCase> > getUseCase() const ;
+			virtual std::shared_ptr< Bag<uml::GeneralizationSet> > getPowertypeExtent() const ;
 			
 			/*!
 			 The Classifiers redefined by this Classifier.
@@ -318,36 +318,41 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<Subset<uml::Substitution, uml::Element > > getSubstitution() const ;
 			
+			/*!
+			 The set of UseCases for which this Classifier is the subject.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr< Bag<uml::UseCase> > getUseCase() const ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

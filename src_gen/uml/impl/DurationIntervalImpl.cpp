@@ -18,6 +18,10 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
+#include "Slot.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -56,10 +60,43 @@ DurationIntervalImpl::~DurationIntervalImpl()
 
 
 //Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:DurationIntervalImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element > par_owner)
+			:DurationIntervalImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:DurationIntervalImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+			:DurationIntervalImpl()
+			{
+			    m_owningSlot = par_owningSlot;
 			}
 
 
@@ -97,7 +134,13 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 
 	m_min  = obj.getMin();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
+
+	m_owningSlot  = obj.getOwningSlot();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
@@ -106,20 +149,19 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -127,18 +169,18 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DurationIntervalImpl::copy() const
+std::shared_ptr<ecore::EObject>  DurationIntervalImpl::copy() const
 {
-	return new DurationIntervalImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DurationIntervalImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
@@ -161,6 +203,10 @@ std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > DurationIntervalImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > DurationIntervalImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -183,9 +229,9 @@ boost::any DurationIntervalImpl::eGet(int featureID,  bool resolve, bool coreTyp
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2460
 		case UmlPackage::INTERVAL_MAX:
-			return getMax(); //24613
+			return getMax(); //24615
 		case UmlPackage::INTERVAL_MIN:
-			return getMin(); //24614
+			return getMin(); //24616
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //2465
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -198,6 +244,10 @@ boost::any DurationIntervalImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getOwnedElement(); //2462
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2463
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24612
+		case UmlPackage::VALUESPECIFICATION_OWNINGSLOT:
+			return getOwningSlot(); //24614
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2464
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:

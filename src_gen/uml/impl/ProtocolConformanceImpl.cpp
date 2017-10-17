@@ -52,6 +52,17 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 
 
 //Additional constructor for the containments back reference
+			ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::Element > par_owner)
+			:ProtocolConformanceImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
 			ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine)
 			:ProtocolConformanceImpl()
 			{
@@ -80,20 +91,19 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 	m_specificMachine  = obj.getSpecificMachine();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getGeneralMachine()!=nullptr)
 	{
-		m_generalMachine.reset(dynamic_cast<uml::ProtocolStateMachine*>(obj.getGeneralMachine()->copy()));
+		m_generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(obj.getGeneralMachine()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalMachine" << std::endl;
@@ -101,18 +111,18 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ProtocolConformanceImpl::copy() const
+std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
 {
-	return new ProtocolConformanceImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ProtocolConformanceImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
@@ -158,6 +168,10 @@ std::shared_ptr<Union<uml::Element> > ProtocolConformanceImpl::getOwnedElement()
 {
 	return m_ownedElement;
 }
+std::weak_ptr<uml::Element > ProtocolConformanceImpl::getOwner() const
+{
+	return m_owner;
+}
 std::shared_ptr<Union<uml::Element> > ProtocolConformanceImpl::getRelatedElement() const
 {
 	return m_relatedElement;
@@ -169,10 +183,6 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProtocolConformanceIm
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProtocolConformanceImpl::getTarget() const
 {
 	return m_target;
-}
-std::weak_ptr<uml::Element > ProtocolConformanceImpl::getOwner() const
-{
-	return m_owner;
 }
 
 

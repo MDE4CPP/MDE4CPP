@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ConnectorImpl(const ConnectorImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ConnectorImpl& operator=(ConnectorImpl const&) = delete;
@@ -50,7 +48,11 @@ namespace uml
 			ConnectorImpl();
 
 			//Additional constructors for the containments back reference
-			ConnectorImpl(std::shared_ptr<uml::Namespace > par_namespace);
+			ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ConnectorImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -63,11 +65,16 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
-			type<>null implies 
-			  let noOfEnds : Integer = end->size() in 
-			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type)) */ 
-			virtual bool types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 Derivation for Connector::/kind : ConnectorKind
+			result = (if end->exists(
+					role.oclIsKindOf(Port) 
+					and partWithPort->isEmpty()
+					and not role.oclAsType(Port).isBehavior)
+			then ConnectorKind::delegation 
+			else ConnectorKind::assembly 
+			endif)
+			<p>From package UML::StructuredClassifiers.</p> */ 
+			virtual ConnectorKind getKind()  ;
 			
 			/*!
 			 The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
@@ -79,16 +86,11 @@ namespace uml
 			virtual bool roles(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 Derivation for Connector::/kind : ConnectorKind
-			result = (if end->exists(
-					role.oclIsKindOf(Port) 
-					and partWithPort->isEmpty()
-					and not role.oclAsType(Port).isBehavior)
-			then ConnectorKind::delegation 
-			else ConnectorKind::assembly 
-			endif)
-			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual ConnectorKind getKind()  ;
+			 The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
+			type<>null implies 
+			  let noOfEnds : Integer = end->size() in 
+			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type)) */ 
+			virtual bool types(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -135,15 +137,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

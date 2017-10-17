@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -90,7 +88,8 @@ namespace uml
 	/*!
 	 A ParameterSet designates alternative sets of inputs or outputs that a Behavior may use.
 	<p>From package UML::Classification.</p> */
-	class ParameterSet:virtual public NamedElement	{
+	class ParameterSet:virtual public NamedElement
+	{
 		public:
  			ParameterSet(const ParameterSet &) {}
 			ParameterSet& operator=(ParameterSet const&) = delete;
@@ -100,7 +99,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ParameterSet() {}
@@ -109,11 +108,6 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
-			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction) */ 
-			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 If a parameterized entity has input Parameters that are in a ParameterSet, then any inputs that are not in a ParameterSet must be streaming. Same for output Parameters.
 			((parameter->exists(direction = ParameterDirectionKind::_'in')) implies 
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::_'in' and p.parameterSet->isEmpty())->forAll(isStream))
@@ -121,6 +115,11 @@ namespace uml
 			((parameter->exists(direction = ParameterDirectionKind::out)) implies 
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream)) */ 
 			virtual bool input(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
+			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction) */ 
+			virtual bool same_parameterized_entity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Two ParameterSets cannot have exactly the same set of Parameters.

@@ -108,6 +108,28 @@ InteractionFragmentImpl::~InteractionFragmentImpl()
 
 
 
+//Additional constructor for the containments back reference
+			InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:InteractionFragmentImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::Element > par_owner)
+			:InteractionFragmentImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
 
 InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl & obj):InteractionFragmentImpl()
 {
@@ -131,16 +153,17 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 
 	m_enclosingOperand  = obj.getEnclosingOperand();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -148,14 +171,14 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
 	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
 	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(dynamic_cast<uml::GeneralOrdering*>(_generalOrdering->copy())));
+		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -163,7 +186,7 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -176,12 +199,12 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  InteractionFragmentImpl::copy() const
+std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
 {
-	return new InteractionFragmentImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new InteractionFragmentImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const
@@ -237,7 +260,7 @@ std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > > InteractionFragmen
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<uml::Namespace > InteractionFragmentImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > InteractionFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }

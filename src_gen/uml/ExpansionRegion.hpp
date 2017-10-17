@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -172,7 +170,8 @@ namespace uml
 	/*!
 	 An ExpansionRegion is a StructuredActivityNode that executes its content multiple times corresponding to elements of input collection(s).
 	<p>From package UML::Actions.</p> */
-	class ExpansionRegion:virtual public StructuredActivityNode	{
+	class ExpansionRegion:virtual public StructuredActivityNode
+	{
 		public:
  			ExpansionRegion(const ExpansionRegion &) {}
 			ExpansionRegion& operator=(ExpansionRegion const&) = delete;
@@ -182,7 +181,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExpansionRegion() {}
@@ -209,14 +208,14 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ExpansionNodes that form the output collections of the ExpansionRegion.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr< Bag<uml::ExpansionNode> > getOutputElement() const = 0;
-			
-			/*!
 			 The ExpansionNodes that hold the input collections for the ExpansionRegion.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr< Bag<uml::ExpansionNode> > getInputElement() const = 0;
+			
+			/*!
+			 The ExpansionNodes that form the output collections of the ExpansionRegion.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr< Bag<uml::ExpansionNode> > getOutputElement() const = 0;
 			
 			
 
@@ -234,13 +233,13 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The ExpansionNodes that form the output collections of the ExpansionRegion.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr< Bag<uml::ExpansionNode> > m_outputElement;
-			/*!
 			 The ExpansionNodes that hold the input collections for the ExpansionRegion.
 			<p>From package UML::Actions.</p> */
 			std::shared_ptr< Bag<uml::ExpansionNode> > m_inputElement;
+			/*!
+			 The ExpansionNodes that form the output collections of the ExpansionRegion.
+			<p>From package UML::Actions.</p> */
+			std::shared_ptr< Bag<uml::ExpansionNode> > m_outputElement;
 			
 
 		public:
@@ -251,33 +250,33 @@ namespace uml
 			 ActivityEdges immediately contained in the ActivityGroup.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityEdge> > getContainedEdge() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityNode> > getContainedNode() const = 0;/*!
+			 The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

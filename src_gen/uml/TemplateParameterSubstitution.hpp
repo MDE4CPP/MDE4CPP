@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -74,7 +72,8 @@ namespace uml
 	/*!
 	 A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.
 	<p>From package UML::CommonStructure.</p> */
-	class TemplateParameterSubstitution:virtual public Element	{
+	class TemplateParameterSubstitution:virtual public Element
+	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}
 			TemplateParameterSubstitution& operator=(TemplateParameterSubstitution const&) = delete;
@@ -84,10 +83,15 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			TemplateParameterSubstitution(std::weak_ptr<uml::TemplateBinding > par_templateBinding){}
+
+			TemplateParameterSubstitution(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			TemplateParameterSubstitution(std::weak_ptr<uml::TemplateBinding > par_templateBinding);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TemplateParameterSubstitution() {}

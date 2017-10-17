@@ -20,6 +20,8 @@
 
 #include "Observation.hpp"
 
+#include "Package.hpp"
+
 #include "StringExpression.hpp"
 
 #include "TemplateParameter.hpp"
@@ -59,10 +61,32 @@ DurationObservationImpl::~DurationObservationImpl()
 
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:DurationObservationImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
+			:DurationObservationImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:DurationObservationImpl()
+			{
+			    m_owningPackage = par_owningPackage;
 			}
 
 
@@ -100,27 +124,30 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	std::shared_ptr< Bag<uml::NamedElement> > _event = obj.getEvent();
 	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -128,18 +155,18 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DurationObservationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
 {
-	return new DurationObservationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DurationObservationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
@@ -179,13 +206,17 @@ std::shared_ptr< Bag<uml::NamedElement> > DurationObservationImpl::getEvent() co
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
+std::weak_ptr<uml::Namespace > DurationObservationImpl::getNamespace() const
 {
-	return m_owner;
+	return m_namespace;
 }
 std::shared_ptr<Union<uml::Element> > DurationObservationImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
+{
+	return m_owner;
 }
 
 
@@ -201,9 +232,9 @@ boost::any DurationObservationImpl::eGet(int featureID,  bool resolve, bool core
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //2470
 		case UmlPackage::DURATIONOBSERVATION_EVENT:
-			return getEvent(); //24712
+			return getEvent(); //24713
 		case UmlPackage::DURATIONOBSERVATION_FIRSTEVENT:
-			return getFirstEvent(); //24713
+			return getFirstEvent(); //24714
 		case UmlPackage::NAMEDELEMENT_NAME:
 			return getName(); //2475
 		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
@@ -216,6 +247,8 @@ boost::any DurationObservationImpl::eGet(int featureID,  bool resolve, bool core
 			return getOwnedElement(); //2472
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //2473
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //24712
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2474
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:

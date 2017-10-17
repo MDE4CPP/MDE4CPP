@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -181,7 +179,8 @@ namespace uml
 	Package specializes TemplateableElement and PackageableElement specializes ParameterableElement to specify that a package can be used as a template and a PackageableElement as a template parameter.
 	A package is used to group elements, and provides a namespace for the grouped elements.
 	<p>From package UML::Packages.</p> */
-	class Package:virtual public Namespace,virtual public PackageableElement,virtual public TemplateableElement	{
+	class Package:virtual public Namespace,virtual public PackageableElement,virtual public TemplateableElement
+	{
 		public:
  			Package(const Package &) {}
 			Package& operator=(Package const&) = delete;
@@ -191,10 +190,26 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			Package(std::shared_ptr<uml::Package > par_nestingPackage){}
+
+			Package(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Package(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+			//Additional constructors for the containments back reference
+
+			Package(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+
+			Package(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Package() {}
@@ -203,13 +218,26 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If an element that is owned by a package has visibility, it is public or private.
-			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private) */ 
-			virtual bool elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			 The query allApplicableStereotypes() returns all the directly or indirectly owned stereotypes, including stereotypes contained in sub-profiles.
+			result = (let ownedPackages : Bag(Package) = ownedMember->select(oclIsKindOf(Package))->collect(oclAsType(Package)) in
+			 ownedStereotype->union(ownedPackages.allApplicableStereotypes())->flatten()->asSet()
+			)
+			<p>From package UML::Packages.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Stereotype> > allApplicableStereotypes()  = 0;
 			
 			/*!
 			 Applies the current definition of the specified profile to this package and automatically applies required stereotypes in the profile to elements within this package's namespace hieararchy. If a different definition is already applied, automatically migrates any associated stereotype values on a "best effort" basis (matching classifiers and structural features by name). */ 
 			virtual std::shared_ptr<Bag<ecore::EObject> > applyProfile(std::shared_ptr<uml::Profile>  profile)  = 0;
+			
+			/*!
+			 The query containingProfile() returns the closest profile directly or indirectly containing this package (or this package itself, if it is a profile).
+			result = (if self.oclIsKindOf(Profile) then 
+				self.oclAsType(Profile)
+			else
+				self.namespace.oclAsType(Package).containingProfile()
+			endif)
+			<p>From package UML::Packages.</p> */ 
+			virtual std::shared_ptr<uml::Profile> containingProfile()  = 0;
 			
 			/*!
 			 Creates a(n) (abstract) class with the specified name as an owned type of this package. */ 
@@ -232,6 +260,11 @@ namespace uml
 			virtual std::shared_ptr<uml::Stereotype> createOwnedStereotype(std::string name,bool isAbstract)  = 0;
 			
 			/*!
+			 If an element that is owned by a package has visibility, it is public or private.
+			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private) */ 
+			virtual bool elements_public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s). */ 
 			virtual std::shared_ptr<Bag<uml::Profile> > getAllAppliedProfiles()  = 0;
 			
@@ -252,53 +285,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Profile> > getAppliedProfiles()  = 0;
 			
 			/*!
-			 Retrieves the application of the specified profile to this package, or null if no such profile is applied. */ 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile)  = 0;
-			
-			/*!
-			 Retrieves the application of the specified profile to this package or any of its nesting packages (if indicated), or null if no such profile is applied. */ 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse)  = 0;
-			
-			/*!
-			 Determines whether this package is a model library. */ 
-			virtual bool isModelLibrary()  = 0;
-			
-			/*!
-			 Determines whether the specified profile is applied to this package. */ 
-			virtual bool isProfileApplied(std::shared_ptr<uml::Profile>  profile)  = 0;
-			
-			/*!
-			 Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy. */ 
-			virtual std::shared_ptr<Bag<ecore::EObject> > unapplyProfile(std::shared_ptr<uml::Profile>  profile)  = 0;
-			
-			/*!
-			 The query allApplicableStereotypes() returns all the directly or indirectly owned stereotypes, including stereotypes contained in sub-profiles.
-			result = (let ownedPackages : Bag(Package) = ownedMember->select(oclIsKindOf(Package))->collect(oclAsType(Package)) in
-			 ownedStereotype->union(ownedPackages.allApplicableStereotypes())->flatten()->asSet()
-			)
-			<p>From package UML::Packages.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Stereotype> > allApplicableStereotypes()  = 0;
-			
-			/*!
-			 The query containingProfile() returns the closest profile directly or indirectly containing this package (or this package itself, if it is a profile).
-			result = (if self.oclIsKindOf(Profile) then 
-				self.oclAsType(Profile)
-			else
-				self.namespace.oclAsType(Package).containingProfile()
-			endif)
-			<p>From package UML::Packages.</p> */ 
-			virtual std::shared_ptr<uml::Profile> containingProfile()  = 0;
-			
-			/*!
-			 The query makesVisible() defines whether a Package makes an element visible outside itself. Elements with no visibility and elements with public visibility are made visible.
-			member->includes(el)
-			result = (ownedMember->includes(el) or
-			(elementImport->select(ei|ei.importedElement = VisibilityKind::public)->collect(importedElement.oclAsType(NamedElement))->includes(el)) or
-			(packageImport->select(visibility = VisibilityKind::public)->collect(importedPackage.member->includes(el))->notEmpty()))
-			<p>From package UML::Packages.</p> */ 
-			virtual bool makesVisible(std::shared_ptr<uml::NamedElement>  el)  = 0;
-			
-			/*!
 			 Derivation for Package::/nestedPackage
 			result = (packagedElement->select(oclIsKindOf(Package))->collect(oclAsType(Package))->asSet())
 			<p>From package UML::Packages.</p> */ 
@@ -315,6 +301,35 @@ namespace uml
 			result = (packagedElement->select(oclIsKindOf(Type))->collect(oclAsType(Type))->asSet())
 			<p>From package UML::Packages.</p> */ 
 			virtual std::shared_ptr<Bag<uml::Type> > getOwnedTypes()  = 0;
+			
+			/*!
+			 Retrieves the application of the specified profile to this package, or null if no such profile is applied. */ 
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile)  = 0;
+			
+			/*!
+			 Retrieves the application of the specified profile to this package or any of its nesting packages (if indicated), or null if no such profile is applied. */ 
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse)  = 0;
+			
+			/*!
+			 Determines whether this package is a model library. */ 
+			virtual bool isModelLibrary()  = 0;
+			
+			/*!
+			 Determines whether the specified profile is applied to this package. */ 
+			virtual bool isProfileApplied(std::shared_ptr<uml::Profile>  profile)  = 0;
+			
+			/*!
+			 The query makesVisible() defines whether a Package makes an element visible outside itself. Elements with no visibility and elements with public visibility are made visible.
+			member->includes(el)
+			result = (ownedMember->includes(el) or
+			(elementImport->select(ei|ei.importedElement = VisibilityKind::public)->collect(importedElement.oclAsType(NamedElement))->includes(el)) or
+			(packageImport->select(visibility = VisibilityKind::public)->collect(importedPackage.member->includes(el))->notEmpty()))
+			<p>From package UML::Packages.</p> */ 
+			virtual bool makesVisible(std::shared_ptr<uml::NamedElement>  el)  = 0;
+			
+			/*!
+			 Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy. */ 
+			virtual std::shared_ptr<Bag<ecore::EObject> > unapplyProfile(std::shared_ptr<uml::Profile>  profile)  = 0;
 			
 			/*!
 			 The query visibleMembers() defines which members of a Package can be accessed outside it.
@@ -348,7 +363,7 @@ namespace uml
 			/*!
 			 References the Package that owns this Package.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<uml::Package > getNestingPackage() const = 0;
+			virtual std::weak_ptr<uml::Package > getNestingPackage() const = 0;
 			
 			/*!
 			 References the Package that owns this Package.
@@ -401,7 +416,7 @@ namespace uml
 			/*!
 			 References the Package that owns this Package.
 			<p>From package UML::Packages.</p> */
-			std::shared_ptr<uml::Package > m_nestingPackage;
+			std::weak_ptr<uml::Package > m_nestingPackage;
 			/*!
 			 References the Stereotypes that are owned by the Package.
 			<p>From package UML::Packages.</p> */
@@ -429,21 +444,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

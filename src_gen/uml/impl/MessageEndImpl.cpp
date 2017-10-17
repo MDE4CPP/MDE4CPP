@@ -58,10 +58,21 @@ MessageEndImpl::~MessageEndImpl()
 
 
 //Additional constructor for the containments back reference
-			MessageEndImpl::MessageEndImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:MessageEndImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element > par_owner)
+			:MessageEndImpl()
+			{
+			    m_owner = par_owner;
 			}
 
 
@@ -86,23 +97,24 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 
 	m_message  = obj.getMessage();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -110,18 +122,18 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  MessageEndImpl::copy() const
+std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
 {
-	return new MessageEndImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new MessageEndImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
@@ -176,13 +188,13 @@ void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
-{
-	return m_owner;
-}
 std::shared_ptr<Union<uml::Element> > MessageEndImpl::getOwnedElement() const
 {
 	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
+{
+	return m_owner;
 }
 
 

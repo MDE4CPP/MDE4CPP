@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ReadLinkObjectEndQualifierActionImpl& operator=(ReadLinkObjectEndQualifierActionImpl const&) = delete;
@@ -50,11 +48,19 @@ namespace uml
 			ReadLinkObjectEndQualifierActionImpl();
 
 			//Additional constructors for the containments back reference
-			ReadLinkObjectEndQualifierActionImpl(std::shared_ptr<uml::Activity > par_activity);
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Activity > par_activity);
 
 
 			//Additional constructors for the containments back reference
 			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -67,19 +73,9 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the object InputPin is 1..1.
-			object.is(1,1) */ 
-			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
-			object.type = qualifier.associationEnd.association */ 
-			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The multiplicity of the qualifier Property is 1..1.
-			qualifier.is(1,1) */ 
-			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The association of the Association end of the qualifier Property must be an AssociationClass.
+			qualifier.associationEnd.association.oclIsKindOf(AssociationClass) */ 
+			virtual bool association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The ends of the Association must not be static.
@@ -87,9 +83,24 @@ namespace uml
 			virtual bool ends_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
+			 The multiplicity of the object InputPin is 1..1.
+			object.is(1,1) */ 
+			virtual bool multiplicity_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The multiplicity of the qualifier Property is 1..1.
+			qualifier.is(1,1) */ 
+			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1) */ 
 			virtual bool multiplicity_of_result(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The qualifier Property must be a qualifier of an Association end.
+			qualifier.associationEnd <> null */ 
+			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The type of the result OutputPin is the same as the type of the qualifier Property.
@@ -97,14 +108,9 @@ namespace uml
 			virtual bool same_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 The association of the Association end of the qualifier Property must be an AssociationClass.
-			qualifier.associationEnd.association.oclIsKindOf(AssociationClass) */ 
-			virtual bool association_of_association(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The qualifier Property must be a qualifier of an Association end.
-			qualifier.associationEnd <> null */ 
-			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			 The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
+			object.type = qualifier.associationEnd.association */ 
+			virtual bool type_of_object(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -149,24 +155,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
 			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
 			 The ordered set of OutputPins representing outputs from the Action.
 			<p>From package UML::Actions.</p> */
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element > > getOutput() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

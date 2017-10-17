@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -64,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -90,7 +93,8 @@ namespace uml
 	/*!
 	 An InteractionConstraint is a Boolean expression that guards an operand in a CombinedFragment.
 	<p>From package UML::Interactions.</p> */
-	class InteractionConstraint:virtual public Constraint	{
+	class InteractionConstraint:virtual public Constraint
+	{
 		public:
  			InteractionConstraint(const InteractionConstraint &) {}
 			InteractionConstraint& operator=(InteractionConstraint const&) = delete;
@@ -100,7 +104,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InteractionConstraint() {}
@@ -108,25 +112,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
-			maxint->notEmpty() or minint->notEmpty() implies
-			interactionOperand.combinedFragment.interactionOperator =
-			InteractionOperatorKind::loop */ 
-			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If minint is specified, then the expression must evaluate to a non-negative integer.
-			minint->notEmpty() implies 
-			minint->asSequence()->first().integerValue() >= 0 */ 
-			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If maxint is specified, then the expression must evaluate to a positive integer.
-			maxint->notEmpty() implies 
-			maxint->asSequence()->first().integerValue() > 0 */ 
-			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
 			virtual bool dynamic_variables(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
@@ -141,6 +126,25 @@ namespace uml
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() ) */ 
 			virtual bool maxint_greater_equal_minint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If maxint is specified, then the expression must evaluate to a positive integer.
+			maxint->notEmpty() implies 
+			maxint->asSequence()->first().integerValue() > 0 */ 
+			virtual bool maxint_positive(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
+			maxint->notEmpty() or minint->notEmpty() implies
+			interactionOperand.combinedFragment.interactionOperator =
+			InteractionOperatorKind::loop */ 
+			virtual bool minint_maxint(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If minint is specified, then the expression must evaluate to a non-negative integer.
+			minint->notEmpty() implies 
+			minint->asSequence()->first().integerValue() >= 0 */ 
+			virtual bool minint_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -194,15 +198,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

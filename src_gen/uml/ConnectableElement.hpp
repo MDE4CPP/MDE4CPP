@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -102,7 +100,8 @@ namespace uml
 	/*!
 	 ConnectableElement is an abstract metaclass representing a set of instances that play roles of a StructuredClassifier. ConnectableElements may be joined by attached Connectors and specify configurations of linked instances to be created within an instance of the containing StructuredClassifier.
 	<p>From package UML::StructuredClassifiers.</p> */
-	class ConnectableElement:virtual public ParameterableElement,virtual public TypedElement	{
+	class ConnectableElement:virtual public ParameterableElement,virtual public TypedElement
+	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}
 			ConnectableElement& operator=(ConnectableElement const&) = delete;
@@ -112,7 +111,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConnectableElement() {}

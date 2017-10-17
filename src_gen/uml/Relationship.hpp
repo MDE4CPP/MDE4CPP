@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -59,7 +57,8 @@ namespace uml
 	/*!
 	 Relationship is an abstract concept that specifies some kind of relationship between Elements.
 	<p>From package UML::CommonStructure.</p> */
-	class Relationship:virtual public Element	{
+	class Relationship:virtual public Element
+	{
 		public:
  			Relationship(const Relationship &) {}
 			Relationship& operator=(Relationship const&) = delete;
@@ -69,7 +68,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Relationship() {}

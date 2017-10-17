@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TypeImpl(const TypeImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TypeImpl& operator=(TypeImpl const&) = delete;
@@ -50,7 +48,22 @@ namespace uml
 			TypeImpl();
 
 			//Additional constructors for the containments back reference
-			TypeImpl(std::shared_ptr<uml::Package > par_package);
+			TypeImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			TypeImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
 
 
 
@@ -63,18 +76,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
+			result = (false)
+			<p>From package UML::CommonStructure.</p> */ 
+			virtual bool conformsTo(std::shared_ptr<uml::Type>  other)  ;
+			
+			/*!
 			 Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package. */ 
 			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  ;
 			
 			/*!
 			 Retrieves the associations in which this type is involved. */ 
 			virtual std::shared_ptr<Bag<uml::Association> > getAssociations()  ;
-			
-			/*!
-			 The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
-			result = (false)
-			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool conformsTo(std::shared_ptr<uml::Type>  other)  ;
 			
 			
 			
@@ -89,7 +102,7 @@ namespace uml
 			/*!
 			 Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Package > getPackage() const ;
+			virtual std::weak_ptr<uml::Package > getPackage() const ;
 			
 			/*!
 			 Specifies the owning Package of this Type, if any.
@@ -101,15 +114,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

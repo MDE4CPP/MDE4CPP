@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -90,7 +88,8 @@ namespace uml
 	/*!
 	 A RedefinableElement is an element that, when defined in the context of a Classifier, can be redefined more specifically or differently in the context of another Classifier that specializes (directly or indirectly) the context Classifier.
 	<p>From package UML::Classification.</p> */
-	class RedefinableElement:virtual public NamedElement	{
+	class RedefinableElement:virtual public NamedElement
+	{
 		public:
  			RedefinableElement(const RedefinableElement &) {}
 			RedefinableElement& operator=(RedefinableElement const&) = delete;
@@ -100,7 +99,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~RedefinableElement() {}
@@ -108,21 +107,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 A redefining element must be consistent with each redefined element.
-			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
-			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 A RedefinableElement can only redefine non-leaf RedefinableElements.
-			redefinedElement->forAll(re | not re.isLeaf) */ 
-			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
-			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
-			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The query isConsistentWith() specifies, for any two RedefinableElements in a context in which redefinition is possible, whether redefinition would be logically consistent. By default, this is false; this operation must be overridden for subclasses of RedefinableElement to define the consistency conditions.
 			result = (false)
@@ -135,6 +119,21 @@ namespace uml
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p> */ 
 			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement)  = 0;
+			
+			/*!
+			 A RedefinableElement can only redefine non-leaf RedefinableElements.
+			redefinedElement->forAll(re | not re.isLeaf) */ 
+			virtual bool non_leaf_redefinition(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 A redefining element must be consistent with each redefined element.
+			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
+			virtual bool redefinition_consistent(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
+			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
+			virtual bool redefinition_context_valid(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -192,12 +191,12 @@ namespace uml
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const = 0; 
 	};
 
 }

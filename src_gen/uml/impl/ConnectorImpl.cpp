@@ -103,10 +103,21 @@ ConnectorImpl::~ConnectorImpl()
 
 
 //Additional constructor for the containments back reference
-			ConnectorImpl::ConnectorImpl(std::shared_ptr<uml::Namespace > par_namespace)
+			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace)
 			:ConnectorImpl()
 			{
 			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element > par_owner)
+			:ConnectorImpl()
+			{
+			    m_owner = par_owner;
 			}
 
 
@@ -138,6 +149,8 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 	std::shared_ptr<Union<uml::Classifier> > _featuringClassifier = obj.getFeaturingClassifier();
 	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
 
 	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
@@ -149,13 +162,12 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -163,14 +175,14 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 	std::shared_ptr<Bag<uml::ConnectorEnd>> _endList = obj.getEnd();
 	for(std::shared_ptr<uml::ConnectorEnd> _end : *_endList)
 	{
-		this->getEnd()->add(std::shared_ptr<uml::ConnectorEnd>(dynamic_cast<uml::ConnectorEnd*>(_end->copy())));
+		this->getEnd()->add(std::shared_ptr<uml::ConnectorEnd>(std::dynamic_pointer_cast<uml::ConnectorEnd>(_end->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_end" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -178,7 +190,7 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -186,7 +198,7 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 	std::shared_ptr<Bag<uml::Connector>> _redefinedConnectorList = obj.getRedefinedConnector();
 	for(std::shared_ptr<uml::Connector> _redefinedConnector : *_redefinedConnectorList)
 	{
-		this->getRedefinedConnector()->add(std::shared_ptr<uml::Connector>(dynamic_cast<uml::Connector*>(_redefinedConnector->copy())));
+		this->getRedefinedConnector()->add(std::shared_ptr<uml::Connector>(std::dynamic_pointer_cast<uml::Connector>(_redefinedConnector->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedConnector" << std::endl;
@@ -199,12 +211,12 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  ConnectorImpl::copy() const
+std::shared_ptr<ecore::EObject>  ConnectorImpl::copy() const
 {
-	return new ConnectorImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ConnectorImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
@@ -280,10 +292,6 @@ void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 // Union Getter
 //*********************************
-std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
 std::shared_ptr<Union<uml::Element> > ConnectorImpl::getOwnedElement() const
 {
 	return m_ownedElement;
@@ -291,6 +299,10 @@ std::shared_ptr<Union<uml::Element> > ConnectorImpl::getOwnedElement() const
 std::weak_ptr<uml::Element > ConnectorImpl::getOwner() const
 {
 	return m_owner;
+}
+std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElement() const
+{
+	return m_redefinedElement;
 }
 
 

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -69,7 +67,8 @@ namespace uml
 	/*!
 	 A multiplicity is a definition of an inclusive interval of non-negative integers beginning with a lower bound and ending with a (possibly infinite) upper bound. A MultiplicityElement embeds this information to specify the allowable cardinalities for an instantiation of the Element.
 	<p>From package UML::CommonStructure.</p> */
-	class MultiplicityElement:virtual public Element	{
+	class MultiplicityElement:virtual public Element
+	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}
 			MultiplicityElement& operator=(MultiplicityElement const&) = delete;
@@ -79,7 +78,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~MultiplicityElement() {}
@@ -87,34 +86,6 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 The upper bound must be greater than or equal to the lower bound.
-			upperBound() >= lowerBound() */ 
-			virtual bool upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The lower bound must be a non-negative integer literal.
-			lowerBound() >= 0 */ 
-			virtual bool lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects. */ 
-			virtual bool value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression. */ 
-			virtual bool value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If it is not empty, then lowerValue must have an Integer value.
-			lowerValue <> null implies lowerValue.integerValue() <> null */ 
-			virtual bool lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If it is not empty, then upperValue must have an UnlimitedNatural value.
-			upperValue <> null implies upperValue.unlimitedValue() <> null */ 
-			virtual bool upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
 			/*!
 			 The operation compatibleWith takes another multiplicity as input. It returns true if the other multiplicity is wider than, or the same as, self.
 			result = ((other.lowerBound() <= self.lowerBound()) and ((other.upperBound() = *) or (self.upperBound() <= other.upperBound())))
@@ -148,10 +119,38 @@ namespace uml
 			virtual int lowerBound()  = 0;
 			
 			/*!
+			 The lower bound must be a non-negative integer literal.
+			lowerBound() >= 0 */ 
+			virtual bool lower_ge_0(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If it is not empty, then lowerValue must have an Integer value.
+			lowerValue <> null implies lowerValue.integerValue() <> null */ 
+			virtual bool lower_is_integer(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
 			 The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
 			result = (if (upperValue=null or upperValue.unlimitedValue()=null) then 1 else upperValue.unlimitedValue() endif)
 			<p>From package UML::CommonStructure.</p> */ 
 			virtual int upperBound()  = 0;
+			
+			/*!
+			 The upper bound must be greater than or equal to the lower bound.
+			upperBound() >= lowerBound() */ 
+			virtual bool upper_ge_lower(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If it is not empty, then upperValue must have an UnlimitedNatural value.
+			upperValue <> null implies upperValue.unlimitedValue() <> null */ 
+			virtual bool upper_is_unlimitedNatural(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression. */ 
+			virtual bool value_specification_constant(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects. */ 
+			virtual bool value_specification_no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************

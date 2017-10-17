@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			VertexImpl(const VertexImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			VertexImpl& operator=(VertexImpl const&) = delete;
@@ -51,6 +49,14 @@ namespace uml
 
 			//Additional constructors for the containments back reference
 			VertexImpl(std::weak_ptr<uml::Region > par_container);
+
+
+			//Additional constructors for the containments back reference
+			VertexImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			VertexImpl(std::weak_ptr<uml::Element > par_owner);
 
 
 
@@ -96,20 +102,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings()  ;
 			
 			/*!
-			 This utility operation returns true if the Vertex is contained in the State s (input argument).
-			result = (if not s.isComposite() or container->isEmpty() then
-				false
-			else
-				if container.state = s then 
-					true
-				else
-					container.state.isContainedInState(s)
-				endif
-			endif)
-			<p>From package UML::StateMachines.</p> */ 
-			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  ;
-			
-			/*!
 			 This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
 				true
@@ -122,6 +114,20 @@ namespace uml
 			endif)
 			<p>From package UML::StateMachines.</p> */ 
 			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r)  ;
+			
+			/*!
+			 This utility operation returns true if the Vertex is contained in the State s (input argument).
+			result = (if not s.isComposite() or container->isEmpty() then
+				false
+			else
+				if container.state = s then 
+					true
+				else
+					container.state.isContainedInState(s)
+				endif
+			endif)
+			<p>From package UML::StateMachines.</p> */ 
+			virtual bool isContainedInState(std::shared_ptr<uml::State>  s)  ;
 			
 			
 			
@@ -158,15 +164,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

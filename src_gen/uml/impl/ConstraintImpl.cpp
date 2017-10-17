@@ -16,6 +16,8 @@
 
 #include "Namespace.hpp"
 
+#include "Package.hpp"
+
 #include "PackageableElement.hpp"
 
 #include "StringExpression.hpp"
@@ -67,10 +69,60 @@ ConstraintImpl::~ConstraintImpl()
 
 
 //Additional constructor for the containments back reference
-			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_context)
+			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
 			:ConstraintImpl()
 			{
-			    m_context = par_context;
+				switch(reference_id)
+				{	
+				case UmlPackage::CONSTRAINT_CONTEXT:
+					 m_context = par_Namespace;
+					 return;
+				case UmlPackage::NAMEDELEMENT_NAMESPACE:
+					 m_namespace = par_Namespace;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+			:ConstraintImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+			:ConstraintImpl()
+			{
+			    m_owningPackage = par_owningPackage;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ConstraintImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
 			}
 
 
@@ -98,27 +150,30 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 
 	m_context  = obj.getContext();
 
+	m_namespace  = obj.getNamespace();
+
 	m_owner  = obj.getOwner();
+
+	m_owningPackage  = obj.getOwningPackage();
 
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -126,26 +181,26 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
-		m_specification.reset(dynamic_cast<uml::ValueSpecification*>(obj.getSpecification()->copy()));
+		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
 {
-	return new ConstraintImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ConstraintImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
@@ -211,13 +266,13 @@ void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 //*********************************
 // Union Getter
 //*********************************
+std::weak_ptr<uml::Namespace > ConstraintImpl::getNamespace() const
+{
+	return m_namespace;
+}
 std::shared_ptr<Union<uml::Element> > ConstraintImpl::getOwnedElement() const
 {
 	return m_ownedElement;
-}
-std::shared_ptr<uml::Namespace > ConstraintImpl::getNamespace() const
-{
-	return m_namespace;
 }
 std::weak_ptr<uml::Element > ConstraintImpl::getOwner() const
 {
@@ -235,9 +290,9 @@ boost::any ConstraintImpl::eGet(int featureID,  bool resolve, bool coreType) con
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //534
 		case UmlPackage::CONSTRAINT_CONSTRAINEDELEMENT:
-			return getConstrainedElement(); //5312
+			return getConstrainedElement(); //5313
 		case UmlPackage::CONSTRAINT_CONTEXT:
-			return getContext(); //5313
+			return getContext(); //5314
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //530
 		case UmlPackage::NAMEDELEMENT_NAME:
@@ -252,12 +307,14 @@ boost::any ConstraintImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return getOwnedElement(); //532
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //533
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //5312
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //534
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //538
 		case UmlPackage::CONSTRAINT_SPECIFICATION:
-			return getSpecification(); //5314
+			return getSpecification(); //5315
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //535
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:

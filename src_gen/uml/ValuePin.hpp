@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -64,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class CallOperationAction;
+}
+
+namespace uml 
+{
 	class Classifier;
 }
 
@@ -99,6 +102,11 @@ namespace uml
 
 namespace uml 
 {
+	class InvocationAction;
+}
+
+namespace uml 
+{
 	class Namespace;
 }
 
@@ -115,6 +123,11 @@ namespace uml
 namespace uml 
 {
 	class StringExpression;
+}
+
+namespace uml 
+{
+	class StructuralFeatureAction;
 }
 
 namespace uml 
@@ -147,7 +160,8 @@ namespace uml
 	/*!
 	 A ValuePin is an InputPin that provides a value by evaluating a ValueSpecification.
 	<p>From package UML::Actions.</p> */
-	class ValuePin:virtual public InputPin	{
+	class ValuePin:virtual public InputPin
+	{
 		public:
  			ValuePin(const ValuePin &) {}
 			ValuePin& operator=(ValuePin const&) = delete;
@@ -157,7 +171,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ValuePin() {}
@@ -166,14 +180,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A ValuePin may have no incoming ActivityEdges.
-			incoming->isEmpty() */ 
-			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The type of the value ValueSpecification must conform to the type of the ValuePin.
 			value.type.conformsTo(type) */ 
 			virtual bool compatible_type(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 A ValuePin may have no incoming ActivityEdges.
+			incoming->isEmpty() */ 
+			virtual bool no_incoming_edges(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -214,6 +228,9 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
@@ -222,10 +239,7 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

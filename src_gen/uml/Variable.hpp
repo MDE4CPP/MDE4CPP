@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -122,7 +120,8 @@ namespace uml
 	/*!
 	 A Variable is a ConnectableElement that may store values during the execution of an Activity. Reading and writing the values of a Variable provides an alternative means for passing data than the use of ObjectFlows. A Variable may be owned directly by an Activity, in which case it is accessible from anywhere within that activity, or it may be owned by a StructuredActivityNode, in which case it is only accessible within that node.
 	<p>From package UML::Activities.</p> */
-	class Variable:virtual public ConnectableElement,virtual public MultiplicityElement	{
+	class Variable:virtual public ConnectableElement,virtual public MultiplicityElement
+	{
 		public:
  			Variable(const Variable &) {}
 			Variable& operator=(Variable const&) = delete;
@@ -132,13 +131,27 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
-			Variable(std::weak_ptr<uml::Activity > par_activityScope){}
+
+			Variable(std::weak_ptr<uml::Activity > par_activityScope);
 
 			//Additional constructors for the containments back reference
-			Variable(std::weak_ptr<uml::StructuredActivityNode > par_scope){}
+
+			Variable(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Variable(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Variable(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+
+			Variable(std::weak_ptr<uml::StructuredActivityNode > par_scope);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Variable() {}
@@ -206,15 +219,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0; 
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

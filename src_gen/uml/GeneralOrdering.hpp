@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -85,7 +83,8 @@ namespace uml
 	/*!
 	 A GeneralOrdering represents a binary relation between two OccurrenceSpecifications, to describe that one OccurrenceSpecification must occur before the other in a valid trace. This mechanism provides the ability to define partial orders of OccurrenceSpecifications that may otherwise not have a specified order.
 	<p>From package UML::Interactions.</p> */
-	class GeneralOrdering:virtual public NamedElement	{
+	class GeneralOrdering:virtual public NamedElement
+	{
 		public:
  			GeneralOrdering(const GeneralOrdering &) {}
 			GeneralOrdering& operator=(GeneralOrdering const&) = delete;
@@ -95,7 +94,7 @@ namespace uml
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~GeneralOrdering() {}

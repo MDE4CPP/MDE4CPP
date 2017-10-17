@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace uml
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			QualifierValueImpl& operator=(QualifierValueImpl const&) = delete;
@@ -68,14 +66,14 @@ namespace uml
 			virtual bool multiplicity_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
-			 The type of the value InputPin conforms to the type of the qualifier Property.
-			value.type.conformsTo(qualifier.type) */ 
-			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier) */ 
 			virtual bool qualifier_attribute(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The type of the value InputPin conforms to the type of the qualifier Property.
+			value.type.conformsTo(qualifier.type) */ 
+			virtual bool type_of_qualifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
