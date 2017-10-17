@@ -541,6 +541,7 @@ void UmlPackageImpl::createPackageContents()
 	behaviorEClass = createEClass(BEHAVIOR);
 	createEAttribute(behaviorEClass, BEHAVIOR_ISREENTRANT);
 	
+	createEReference(behaviorEClass, BEHAVIOR_BEHAVIOREDCLASSIFIER);
 	createEReference(behaviorEClass, BEHAVIOR_CONTEXT);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETER);
 	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETERSET);
@@ -1406,6 +1407,9 @@ void UmlPackageImpl::createPackageContents()
 
 	inputPinEClass = createEClass(INPUTPIN);
 	
+	createEReference(inputPinEClass, INPUTPIN_CALLOPERATIONACTION);
+	createEReference(inputPinEClass, INPUTPIN_INVOCATIONACTION);
+	createEReference(inputPinEClass, INPUTPIN_STRUCTURALFEATUREACTION);
 	
 	createEOperation(inputPinEClass, INPUTPIN___OUTGOING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -1930,6 +1934,7 @@ void UmlPackageImpl::createPackageContents()
 
 	outputPinEClass = createEClass(OUTPUTPIN);
 	
+	createEReference(outputPinEClass, OUTPUTPIN_CALLACTION);
 	
 	createEOperation(outputPinEClass, OUTPUTPIN___INCOMING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -1989,6 +1994,7 @@ void UmlPackageImpl::createPackageContents()
 
 	packageableElementEClass = createEClass(PACKAGEABLEELEMENT);
 	
+	createEReference(packageableElementEClass, PACKAGEABLEELEMENT_OWNINGPACKAGE);
 	
 	createEOperation(packageableElementEClass, PACKAGEABLEELEMENT___NAMESPACE_NEEDS_VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
 	
@@ -2000,6 +2006,7 @@ void UmlPackageImpl::createPackageContents()
 	createEAttribute(parameterEClass, PARAMETER_ISEXCEPTION);
 	createEAttribute(parameterEClass, PARAMETER_ISSTREAM);
 	
+	createEReference(parameterEClass, PARAMETER_BEHAVIOR);
 	createEReference(parameterEClass, PARAMETER_DEFAULTVALUE);
 	createEReference(parameterEClass, PARAMETER_OPERATION);
 	createEReference(parameterEClass, PARAMETER_PARAMETERSET);
@@ -2800,6 +2807,7 @@ void UmlPackageImpl::createPackageContents()
 
 	valueSpecificationEClass = createEClass(VALUESPECIFICATION);
 	
+	createEReference(valueSpecificationEClass, VALUESPECIFICATION_OWNINGSLOT);
 	
 	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___BOOLEANVALUE);
 	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___INTEGERVALUE);
@@ -3197,7 +3205,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Abstraction
 	initEClass(abstractionEClass, nullptr, "Abstraction", false, false, true);
 	
-	initEReference(getAbstraction_Mapping(),getOpaqueExpression(),nullptr,"mapping","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getAbstraction_Mapping(),getOpaqueExpression(),nullptr,"mapping","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class Abstraction
@@ -3205,7 +3213,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class AcceptCallAction
 	initEClass(acceptCallActionEClass, nullptr, "AcceptCallAction", false, false, true);
 	
-	initEReference(getAcceptCallAction_ReturnInformation(),getOutputPin(),nullptr,"returnInformation","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getAcceptCallAction_ReturnInformation(),getOutputPin(),nullptr,"returnInformation","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getAcceptCallAction___Result_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "result_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3224,9 +3232,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class AcceptEventAction
 	initEClass(acceptEventActionEClass, nullptr, "AcceptEventAction", false, false, true);
-	initEAttribute(getAcceptEventAction_IsUnmarshall(),types::TypesPackage::eInstance()->getBoolean(),"isUnmarshall","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAcceptEventAction_Result(),getOutputPin(),nullptr,"result","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getAcceptEventAction_Trigger(),getTrigger(),nullptr,"trigger","",1,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getAcceptEventAction_IsUnmarshall(),types::TypesPackage::eInstance()->getBoolean(),"isUnmarshall","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAcceptEventAction_Result(),getOutputPin(),nullptr,"result","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getAcceptEventAction_Trigger(),getTrigger(),nullptr,"trigger","",1,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getAcceptEventAction___Conforming_type__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "conforming_type", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3253,12 +3262,13 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Action
 	initEClass(actionEClass, nullptr, "Action", true, false, true);
-	initEAttribute(getAction_IsLocallyReentrant(),types::TypesPackage::eInstance()->getBoolean(),"isLocallyReentrant","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAction_Context(),getClassifier(),nullptr,"context","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getAction_Input(),getInputPin(),nullptr,"input","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getAction_LocalPostcondition(),getConstraint(),nullptr,"localPostcondition","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getAction_LocalPrecondition(),getConstraint(),nullptr,"localPrecondition","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getAction_Output(),getOutputPin(),nullptr,"output","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
+	initEAttribute(getAction_IsLocallyReentrant(),types::TypesPackage::eInstance()->getBoolean(),"isLocallyReentrant","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAction_Context(),getClassifier(),nullptr,"context","",0,1, true,true, false, false, true, false, true, true,false);
+	initEReference(getAction_Input(),getInputPin(),nullptr,"input","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getAction_LocalPostcondition(),getConstraint(),nullptr,"localPostcondition","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getAction_LocalPrecondition(),getConstraint(),nullptr,"localPrecondition","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getAction_Output(),getOutputPin(),nullptr,"output","",0,-1, true,true, false, false, true, false, true, true,true);
 	
 	op = initEOperation(getAction___AllActions(),getAction(), "allActions", 0, -1, true,false );
 	
@@ -3274,7 +3284,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActionExecutionSpecification
 	initEClass(actionExecutionSpecificationEClass, nullptr, "ActionExecutionSpecification", false, false, true);
 	
-	initEReference(getActionExecutionSpecification_Action(),getAction(),nullptr,"action","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getActionExecutionSpecification_Action(),getAction(),nullptr,"action","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActionExecutionSpecification___Action_referenced__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "action_referenced", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3286,7 +3296,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActionInputPin
 	initEClass(actionInputPinEClass, nullptr, "ActionInputPin", false, false, true);
 	
-	initEReference(getActionInputPin_FromAction(),getAction(),nullptr,"fromAction","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getActionInputPin_FromAction(),getAction(),nullptr,"fromAction","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getActionInputPin___Input_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "input_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3305,15 +3315,17 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Activity
 	initEClass(activityEClass, nullptr, "Activity", false, false, true);
-	initEAttribute(getActivity_IsReadOnly(),types::TypesPackage::eInstance()->getBoolean(),"isReadOnly","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getActivity_IsSingleExecution(),types::TypesPackage::eInstance()->getBoolean(),"isSingleExecution","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getActivity_Edge(),getActivityEdge(),getActivityEdge_Activity(),"edge","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivity_Group(),getActivityGroup(),getActivityGroup_InActivity(),"group","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getActivity_Node(),getActivityNode(),getActivityNode_Activity(),"node","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getActivity_OwnedGroup(),getActivityGroup(),nullptr,"ownedGroup","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivity_OwnedNode(),getActivityNode(),nullptr,"ownedNode","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivity_Partition(),getActivityPartition(),nullptr,"partition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivity_StructuredNode(),getStructuredActivityNode(),nullptr,"structuredNode","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivity_Variable(),getVariable(),getVariable_ActivityScope(),"variable","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getActivity_IsReadOnly(),types::TypesPackage::eInstance()->getBoolean(),"isReadOnly","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getActivity_IsSingleExecution(),types::TypesPackage::eInstance()->getBoolean(),"isSingleExecution","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getActivity_Edge(),getActivityEdge(),getActivityEdge_Activity(),"edge","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivity_Group(),getActivityGroup(),getActivityGroup_InActivity(),"group","",0,-1, true,true, true, true, true, false, true, true,false);
+	initEReference(getActivity_Node(),getActivityNode(),getActivityNode_Activity(),"node","",0,-1, true,true, true, true, true, false, true, true,false);
+	initEReference(getActivity_OwnedGroup(),getActivityGroup(),nullptr,"ownedGroup","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivity_OwnedNode(),getActivityNode(),nullptr,"ownedNode","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivity_Partition(),getActivityPartition(),nullptr,"partition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivity_StructuredNode(),getStructuredActivityNode(),nullptr,"structuredNode","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivity_Variable(),getVariable(),getVariable_ActivityScope(),"variable","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getActivity___Maximum_one_parameter_node__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "maximum_one_parameter_node", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3338,16 +3350,16 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActivityEdge
 	initEClass(activityEdgeEClass, nullptr, "ActivityEdge", true, false, true);
 	
-	initEReference(getActivityEdge_Activity(),getActivity(),getActivity_Edge(),"activity","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_Guard(),getValueSpecification(),nullptr,"guard","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivityEdge_InGroup(),getActivityGroup(),getActivityGroup_ContainedEdge(),"inGroup","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getActivityEdge_InPartition(),getActivityPartition(),getActivityPartition_Edge(),"inPartition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_InStructuredNode(),getStructuredActivityNode(),getStructuredActivityNode_Edge(),"inStructuredNode","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_Interrupts(),getInterruptibleActivityRegion(),getInterruptibleActivityRegion_InterruptingEdge(),"interrupts","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_RedefinedEdge(),getActivityEdge(),nullptr,"redefinedEdge","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_Source(),getActivityNode(),getActivityNode_Outgoing(),"source","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_Target(),getActivityNode(),getActivityNode_Incoming(),"target","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdge_Weight(),getValueSpecification(),nullptr,"weight","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityEdge_Activity(),getActivity(),getActivity_Edge(),"activity","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_Guard(),getValueSpecification(),nullptr,"guard","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityEdge_InGroup(),getActivityGroup(),getActivityGroup_ContainedEdge(),"inGroup","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityEdge_InPartition(),getActivityPartition(),getActivityPartition_Edge(),"inPartition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_InStructuredNode(),getStructuredActivityNode(),getStructuredActivityNode_Edge(),"inStructuredNode","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_Interrupts(),getInterruptibleActivityRegion(),getInterruptibleActivityRegion_InterruptingEdge(),"interrupts","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_RedefinedEdge(),getActivityEdge(),nullptr,"redefinedEdge","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_Source(),getActivityNode(),getActivityNode_Outgoing(),"source","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_Target(),getActivityNode(),getActivityNode_Incoming(),"target","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdge_Weight(),getValueSpecification(),nullptr,"weight","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getActivityEdge___Source_and_target__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "source_and_target", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3366,11 +3378,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActivityGroup
 	initEClass(activityGroupEClass, nullptr, "ActivityGroup", true, false, true);
 	
-	initEReference(getActivityGroup_ContainedEdge(),getActivityEdge(),getActivityEdge_InGroup(),"containedEdge","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getActivityGroup_ContainedNode(),getActivityNode(),getActivityNode_InGroup(),"containedNode","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getActivityGroup_InActivity(),getActivity(),getActivity_Group(),"inActivity","",0,1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getActivityGroup_Subgroup(),getActivityGroup(),getActivityGroup_SuperGroup(),"subgroup","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getActivityGroup_SuperGroup(),getActivityGroup(),getActivityGroup_Subgroup(),"superGroup","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityGroup_ContainedEdge(),getActivityEdge(),getActivityEdge_InGroup(),"containedEdge","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityGroup_ContainedNode(),getActivityNode(),getActivityNode_InGroup(),"containedNode","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityGroup_InActivity(),getActivity(),getActivity_Group(),"inActivity","",0,1, true,true, true, false, true, false, true, true,false);
+	initEReference(getActivityGroup_Subgroup(),getActivityGroup(),getActivityGroup_SuperGroup(),"subgroup","",0,-1, true,true, false, true, true, false, true, true,false);
+	initEReference(getActivityGroup_SuperGroup(),getActivityGroup(),getActivityGroup_Subgroup(),"superGroup","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getActivityGroup___Nodes_and_edges__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "nodes_and_edges", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3386,14 +3398,14 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActivityNode
 	initEClass(activityNodeEClass, nullptr, "ActivityNode", true, false, true);
 	
-	initEReference(getActivityNode_Activity(),getActivity(),getActivity_Node(),"activity","",0,1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getActivityNode_InGroup(),getActivityGroup(),getActivityGroup_ContainedNode(),"inGroup","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getActivityNode_InInterruptibleRegion(),getInterruptibleActivityRegion(),getInterruptibleActivityRegion_Node(),"inInterruptibleRegion","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNode_InPartition(),getActivityPartition(),getActivityPartition_Node(),"inPartition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNode_InStructuredNode(),getStructuredActivityNode(),getStructuredActivityNode_Node(),"inStructuredNode","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNode_Incoming(),getActivityEdge(),getActivityEdge_Target(),"incoming","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNode_Outgoing(),getActivityEdge(),getActivityEdge_Source(),"outgoing","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNode_RedefinedNode(),getActivityNode(),nullptr,"redefinedNode","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_Activity(),getActivity(),getActivity_Node(),"activity","",0,1, true,true, true, false, true, false, true, true,false);
+	initEReference(getActivityNode_InGroup(),getActivityGroup(),getActivityGroup_ContainedNode(),"inGroup","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getActivityNode_InInterruptibleRegion(),getInterruptibleActivityRegion(),getInterruptibleActivityRegion_Node(),"inInterruptibleRegion","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_InPartition(),getActivityPartition(),getActivityPartition_Node(),"inPartition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_InStructuredNode(),getStructuredActivityNode(),getStructuredActivityNode_Node(),"inStructuredNode","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_Incoming(),getActivityEdge(),getActivityEdge_Target(),"incoming","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_Outgoing(),getActivityEdge(),getActivityEdge_Source(),"outgoing","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNode_RedefinedNode(),getActivityNode(),nullptr,"redefinedNode","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ActivityNode
@@ -3401,7 +3413,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ActivityParameterNode
 	initEClass(activityParameterNodeEClass, nullptr, "ActivityParameterNode", false, false, true);
 	
-	initEReference(getActivityParameterNode_Parameter(),getParameter(),nullptr,"parameter","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityParameterNode_Parameter(),getParameter(),nullptr,"parameter","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActivityParameterNode___Has_parameters__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "has_parameters", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3428,12 +3440,14 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ActivityPartition
 	initEClass(activityPartitionEClass, nullptr, "ActivityPartition", false, false, true);
-	initEAttribute(getActivityPartition_IsDimension(),types::TypesPackage::eInstance()->getBoolean(),"isDimension","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getActivityPartition_IsExternal(),types::TypesPackage::eInstance()->getBoolean(),"isExternal","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getActivityPartition_Edge(),getActivityEdge(),getActivityEdge_InPartition(),"edge","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityPartition_Node(),getActivityNode(),getActivityNode_InPartition(),"node","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityPartition_Represents(),getElement(),nullptr,"represents","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityPartition_Subpartition(),getActivityPartition(),getActivityPartition_SuperPartition(),"subpartition","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivityPartition_SuperPartition(),getActivityPartition(),getActivityPartition_Subpartition(),"superPartition","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getActivityPartition_IsDimension(),types::TypesPackage::eInstance()->getBoolean(),"isDimension","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getActivityPartition_IsExternal(),types::TypesPackage::eInstance()->getBoolean(),"isExternal","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getActivityPartition_Edge(),getActivityEdge(),getActivityEdge_InPartition(),"edge","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityPartition_Node(),getActivityNode(),getActivityNode_InPartition(),"node","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityPartition_Represents(),getElement(),nullptr,"represents","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityPartition_Subpartition(),getActivityPartition(),getActivityPartition_SuperPartition(),"subpartition","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityPartition_SuperPartition(),getActivityPartition(),getActivityPartition_Subpartition(),"superPartition","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActivityPartition___Dimension_not_contained__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "dimension_not_contained", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3471,8 +3485,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class AddStructuralFeatureValueAction
 	initEClass(addStructuralFeatureValueActionEClass, nullptr, "AddStructuralFeatureValueAction", false, false, true);
-	initEAttribute(getAddStructuralFeatureValueAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAddStructuralFeatureValueAction_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getAddStructuralFeatureValueAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAddStructuralFeatureValueAction_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getAddStructuralFeatureValueAction___InsertAt_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "insertAt_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3487,8 +3502,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class AddVariableValueAction
 	initEClass(addVariableValueActionEClass, nullptr, "AddVariableValueAction", false, false, true);
-	initEAttribute(getAddVariableValueAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAddVariableValueAction_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getAddVariableValueAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAddVariableValueAction_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getAddVariableValueAction___InsertAt_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "insertAt_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3510,11 +3526,12 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Artifact
 	initEClass(artifactEClass, nullptr, "Artifact", false, false, true);
-	initEAttribute(getArtifact_FileName(),types::TypesPackage::eInstance()->getString(),"fileName","",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getArtifact_Manifestation(),getManifestation(),nullptr,"manifestation","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getArtifact_NestedArtifact(),getArtifact(),nullptr,"nestedArtifact","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getArtifact_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getArtifact_OwnedOperation(),getOperation(),nullptr,"ownedOperation","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getArtifact_FileName(),types::TypesPackage::eInstance()->getString(),"fileName","",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getArtifact_Manifestation(),getManifestation(),nullptr,"manifestation","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getArtifact_NestedArtifact(),getArtifact(),nullptr,"nestedArtifact","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getArtifact_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getArtifact_OwnedOperation(),getOperation(),nullptr,"ownedOperation","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getArtifact___CreateOwnedAttribute__String_UnlimitedNatural(),getProperty(), "createOwnedAttribute", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -3533,11 +3550,12 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Association
 	initEClass(associationEClass, nullptr, "Association", false, false, true);
-	initEAttribute(getAssociation_IsDerived(),types::TypesPackage::eInstance()->getBoolean(),"isDerived","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAssociation_EndType(),getType(),nullptr,"endType","",1,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getAssociation_MemberEnd(),getProperty(),getProperty_Association(),"memberEnd","",2,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getAssociation_NavigableOwnedEnd(),getProperty(),nullptr,"navigableOwnedEnd","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getAssociation_OwnedEnd(),getProperty(),getProperty_OwningAssociation(),"ownedEnd","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getAssociation_IsDerived(),types::TypesPackage::eInstance()->getBoolean(),"isDerived","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAssociation_EndType(),getType(),nullptr,"endType","",1,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getAssociation_MemberEnd(),getProperty(),getProperty_Association(),"memberEnd","",2,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getAssociation_NavigableOwnedEnd(),getProperty(),nullptr,"navigableOwnedEnd","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getAssociation_OwnedEnd(),getProperty(),getProperty_OwningAssociation(),"ownedEnd","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getAssociation___Association_ends__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "association_ends", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3583,14 +3601,16 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Behavior
 	initEClass(behaviorEClass, nullptr, "Behavior", true, false, true);
-	initEAttribute(getBehavior_IsReentrant(),types::TypesPackage::eInstance()->getBoolean(),"isReentrant","true",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getBehavior_Context(),getBehavioredClassifier(),nullptr,"context","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getBehavior_OwnedParameter(),getParameter(),nullptr,"ownedParameter","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getBehavior_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getBehavior_Postcondition(),getConstraint(),nullptr,"postcondition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavior_Precondition(),getConstraint(),nullptr,"precondition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavior_RedefinedBehavior(),getBehavior(),nullptr,"redefinedBehavior","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavior_Specification(),getBehavioralFeature(),getBehavioralFeature_Method(),"specification","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getBehavior_IsReentrant(),types::TypesPackage::eInstance()->getBoolean(),"isReentrant","true",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getBehavior_BehavioredClassifier(),getBehavioredClassifier(),getBehavioredClassifier_OwnedBehavior(),"behavioredClassifier","",0,1, false,false, true, false, true, true, true, false,true);
+	initEReference(getBehavior_Context(),getBehavioredClassifier(),nullptr,"context","",0,1, true,true, false, false, true, false, true, true,false);
+	initEReference(getBehavior_OwnedParameter(),getParameter(),getParameter_Behavior(),"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getBehavior_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getBehavior_Postcondition(),getConstraint(),nullptr,"postcondition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getBehavior_Precondition(),getConstraint(),nullptr,"precondition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getBehavior_RedefinedBehavior(),getBehavior(),nullptr,"redefinedBehavior","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getBehavior_Specification(),getBehavioralFeature(),getBehavioralFeature_Method(),"specification","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getBehavior___BehavioredClassifier__Element(),getBehavioredClassifier(), "behavioredClassifier", 0, 1, true,false );
 	addEParameter(op ,getElement()  , "from",0,1, true,true);
@@ -3619,18 +3639,20 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class BehaviorExecutionSpecification
 	initEClass(behaviorExecutionSpecificationEClass, nullptr, "BehaviorExecutionSpecification", false, false, true);
 	
-	initEReference(getBehaviorExecutionSpecification_Behavior(),getBehavior(),nullptr,"behavior","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getBehaviorExecutionSpecification_Behavior(),getBehavior(),nullptr,"behavior","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class BehaviorExecutionSpecification
 
 	// Begin Class BehavioralFeature
 	initEClass(behavioralFeatureEClass, nullptr, "BehavioralFeature", true, false, true);
-	initEAttribute(getBehavioralFeature_Concurrency(),getCallConcurrencyKind(),"concurrency","sequential",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getBehavioralFeature_IsAbstract(),types::TypesPackage::eInstance()->getBoolean(),"isAbstract","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getBehavioralFeature_Method(),getBehavior(),getBehavior_Specification(),"method","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavioralFeature_OwnedParameter(),getParameter(),nullptr,"ownedParameter","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getBehavioralFeature_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getBehavioralFeature_RaisedException(),getType(),nullptr,"raisedException","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getBehavioralFeature_Concurrency(),getCallConcurrencyKind(),"concurrency","sequential",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getBehavioralFeature_IsAbstract(),types::TypesPackage::eInstance()->getBoolean(),"isAbstract","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getBehavioralFeature_Method(),getBehavior(),getBehavior_Specification(),"method","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getBehavioralFeature_OwnedParameter(),getParameter(),getParameter_Operation(),"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getBehavioralFeature_OwnedParameterSet(),getParameterSet(),nullptr,"ownedParameterSet","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getBehavioralFeature_RaisedException(),getType(),nullptr,"raisedException","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getBehavioralFeature___Abstract_no_method__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "abstract_no_method", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3650,9 +3672,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class BehavioredClassifier
 	initEClass(behavioredClassifierEClass, nullptr, "BehavioredClassifier", true, false, true);
 	
-	initEReference(getBehavioredClassifier_ClassifierBehavior(),getBehavior(),nullptr,"classifierBehavior","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getBehavioredClassifier_InterfaceRealization(),getInterfaceRealization(),getInterfaceRealization_ImplementingClassifier(),"interfaceRealization","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getBehavioredClassifier_OwnedBehavior(),getBehavior(),nullptr,"ownedBehavior","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getBehavioredClassifier_ClassifierBehavior(),getBehavior(),nullptr,"classifierBehavior","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getBehavioredClassifier_InterfaceRealization(),getInterfaceRealization(),getInterfaceRealization_ImplementingClassifier(),"interfaceRealization","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getBehavioredClassifier_OwnedBehavior(),getBehavior(),getBehavior_BehavioredClassifier(),"ownedBehavior","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getBehavioredClassifier___Class_behavior__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "class_behavior", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3668,7 +3690,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class BroadcastSignalAction
 	initEClass(broadcastSignalActionEClass, nullptr, "BroadcastSignalAction", false, false, true);
 	
-	initEReference(getBroadcastSignalAction_Signal(),getSignal(),nullptr,"signal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getBroadcastSignalAction_Signal(),getSignal(),nullptr,"signal","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getBroadcastSignalAction___No_onport__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "no_onport", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3687,8 +3709,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class CallAction
 	initEClass(callActionEClass, nullptr, "CallAction", true, false, true);
-	initEAttribute(getCallAction_IsSynchronous(),types::TypesPackage::eInstance()->getBoolean(),"isSynchronous","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getCallAction_Result(),getOutputPin(),nullptr,"result","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getCallAction_IsSynchronous(),types::TypesPackage::eInstance()->getBoolean(),"isSynchronous","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getCallAction_Result(),getOutputPin(),getOutputPin_CallAction(),"result","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getCallAction___Argument_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "argument_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3712,7 +3735,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CallBehaviorAction
 	initEClass(callBehaviorActionEClass, nullptr, "CallBehaviorAction", false, false, true);
 	
-	initEReference(getCallBehaviorAction_Behavior(),getBehavior(),nullptr,"behavior","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getCallBehaviorAction_Behavior(),getBehavior(),nullptr,"behavior","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getCallBehaviorAction___No_onport__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "no_onport", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3724,7 +3747,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CallEvent
 	initEClass(callEventEClass, nullptr, "CallEvent", false, false, true);
 	
-	initEReference(getCallEvent_Operation(),getOperation(),nullptr,"operation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getCallEvent_Operation(),getOperation(),nullptr,"operation","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class CallEvent
@@ -3732,8 +3755,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CallOperationAction
 	initEClass(callOperationActionEClass, nullptr, "CallOperationAction", false, false, true);
 	
-	initEReference(getCallOperationAction_Operation(),getOperation(),nullptr,"operation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getCallOperationAction_Target(),getInputPin(),nullptr,"target","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getCallOperationAction_Operation(),getOperation(),nullptr,"operation","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getCallOperationAction_Target(),getInputPin(),getInputPin_CallOperationAction(),"target","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCallOperationAction___Type_target_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "type_target_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3752,19 +3775,20 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ChangeEvent
 	initEClass(changeEventEClass, nullptr, "ChangeEvent", false, false, true);
 	
-	initEReference(getChangeEvent_ChangeExpression(),getValueSpecification(),nullptr,"changeExpression","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getChangeEvent_ChangeExpression(),getValueSpecification(),nullptr,"changeExpression","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class ChangeEvent
 
 	// Begin Class Class
 	initEClass(classEClass, nullptr, "Class", false, false, true);
-	initEAttribute(getClass_IsActive(),types::TypesPackage::eInstance()->getBoolean(),"isActive","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getClass_Extension(),getExtension(),getExtension_Metaclass(),"extension","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getClass_NestedClassifier(),getClassifier(),nullptr,"nestedClassifier","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getClass_OwnedOperation(),getOperation(),getOperation_Class(),"ownedOperation","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getClass_OwnedReception(),getReception(),nullptr,"ownedReception","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getClass_SuperClass(),getClass(),nullptr,"superClass","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
+	initEAttribute(getClass_IsActive(),types::TypesPackage::eInstance()->getBoolean(),"isActive","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getClass_Extension(),getExtension(),getExtension_Metaclass(),"extension","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getClass_NestedClassifier(),getClassifier(),nullptr,"nestedClassifier","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getClass_OwnedOperation(),getOperation(),getOperation_Class(),"ownedOperation","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getClass_OwnedReception(),getReception(),nullptr,"ownedReception","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getClass_SuperClass(),getClass(),nullptr,"superClass","",0,-1, true,true, true, false, true, false, true, true,false);
 	
 	op = initEOperation(getClass___CreateOwnedOperation__String_Type(),getOperation(), "createOwnedOperation", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -3787,19 +3811,21 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Classifier
 	initEClass(classifierEClass, nullptr, "Classifier", true, false, true);
-	initEAttribute(getClassifier_IsAbstract(),types::TypesPackage::eInstance()->getBoolean(),"isAbstract","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getClassifier_IsFinalSpecialization(),types::TypesPackage::eInstance()->getBoolean(),"isFinalSpecialization","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getClassifier_Attribute(),getProperty(),nullptr,"attribute","",0,-1, nullptr , true,true, false, false, true, false, true, true,true);
-	initEReference(getClassifier_CollaborationUse(),getCollaborationUse(),nullptr,"collaborationUse","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getClassifier_Feature(),getFeature(),getFeature_FeaturingClassifier(),"feature","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getClassifier_General(),getClassifier(),nullptr,"general","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getClassifier_Generalization(),getGeneralization(),getGeneralization_Specific(),"generalization","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getClassifier_InheritedMember(),getNamedElement(),nullptr,"inheritedMember","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getClassifier_OwnedUseCase(),getUseCase(),nullptr,"ownedUseCase","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getClassifier_PowertypeExtent(),getGeneralizationSet(),getGeneralizationSet_Powertype(),"powertypeExtent","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClassifier_RedefinedClassifier(),getClassifier(),nullptr,"redefinedClassifier","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClassifier_Representation(),getCollaborationUse(),nullptr,"representation","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClassifier_Substitution(),getSubstitution(),getSubstitution_SubstitutingClassifier(),"substitution","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getClassifier_UseCase(),getUseCase(),getUseCase_Subject(),"useCase","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getClassifier_IsAbstract(),types::TypesPackage::eInstance()->getBoolean(),"isAbstract","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getClassifier_IsFinalSpecialization(),types::TypesPackage::eInstance()->getBoolean(),"isFinalSpecialization","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getClassifier_Attribute(),getProperty(),nullptr,"attribute","",0,-1, true,true, false, false, true, false, true, true,true);
+	initEReference(getClassifier_CollaborationUse(),getCollaborationUse(),nullptr,"collaborationUse","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getClassifier_Feature(),getFeature(),getFeature_FeaturingClassifier(),"feature","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getClassifier_General(),getClassifier(),nullptr,"general","",0,-1, true,true, true, false, true, false, true, true,false);
+	initEReference(getClassifier_Generalization(),getGeneralization(),getGeneralization_Specific(),"generalization","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getClassifier_InheritedMember(),getNamedElement(),nullptr,"inheritedMember","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getClassifier_OwnedUseCase(),getUseCase(),nullptr,"ownedUseCase","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getClassifier_PowertypeExtent(),getGeneralizationSet(),getGeneralizationSet_Powertype(),"powertypeExtent","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifier_RedefinedClassifier(),getClassifier(),nullptr,"redefinedClassifier","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifier_Representation(),getCollaborationUse(),nullptr,"representation","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifier_Substitution(),getSubstitution(),getSubstitution_SubstitutingClassifier(),"substitution","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getClassifier_UseCase(),getUseCase(),getUseCase_Subject(),"useCase","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getClassifier___AllAttributes(),getProperty(), "allAttributes", 0, -1, true,true );
 	
@@ -3880,8 +3906,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ClassifierTemplateParameter
 	initEClass(classifierTemplateParameterEClass, nullptr, "ClassifierTemplateParameter", false, false, true);
-	initEAttribute(getClassifierTemplateParameter_AllowSubstitutable(),types::TypesPackage::eInstance()->getBoolean(),"allowSubstitutable","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getClassifierTemplateParameter_ConstrainingClassifier(),getClassifier(),nullptr,"constrainingClassifier","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getClassifierTemplateParameter_AllowSubstitutable(),types::TypesPackage::eInstance()->getBoolean(),"allowSubstitutable","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getClassifierTemplateParameter_ConstrainingClassifier(),getClassifier(),nullptr,"constrainingClassifier","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getClassifierTemplateParameter___Actual_is_classifier__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "actual_is_classifier", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3913,12 +3940,12 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Clause
 	initEClass(clauseEClass, nullptr, "Clause", false, false, true);
 	
-	initEReference(getClause_Body(),getExecutableNode(),nullptr,"body","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClause_BodyOutput(),getOutputPin(),nullptr,"bodyOutput","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getClause_Decider(),getOutputPin(),nullptr,"decider","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClause_PredecessorClause(),getClause(),getClause_SuccessorClause(),"predecessorClause","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClause_SuccessorClause(),getClause(),getClause_PredecessorClause(),"successorClause","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClause_Test(),getExecutableNode(),nullptr,"test","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getClause_Body(),getExecutableNode(),nullptr,"body","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClause_BodyOutput(),getOutputPin(),nullptr,"bodyOutput","",0,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getClause_Decider(),getOutputPin(),nullptr,"decider","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClause_PredecessorClause(),getClause(),getClause_SuccessorClause(),"predecessorClause","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClause_SuccessorClause(),getClause(),getClause_PredecessorClause(),"successorClause","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClause_Test(),getExecutableNode(),nullptr,"test","",1,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getClause___Body_output_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "body_output_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3938,8 +3965,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ClearAssociationAction
 	initEClass(clearAssociationActionEClass, nullptr, "ClearAssociationAction", false, false, true);
 	
-	initEReference(getClearAssociationAction_Association(),getAssociation(),nullptr,"association","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClearAssociationAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getClearAssociationAction_Association(),getAssociation(),nullptr,"association","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClearAssociationAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getClearAssociationAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3955,7 +3982,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ClearStructuralFeatureAction
 	initEClass(clearStructuralFeatureActionEClass, nullptr, "ClearStructuralFeatureAction", false, false, true);
 	
-	initEReference(getClearStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getClearStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getClearStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity_of_result", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -3978,7 +4005,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Collaboration
 	initEClass(collaborationEClass, nullptr, "Collaboration", false, false, true);
 	
-	initEReference(getCollaboration_CollaborationRole(),getConnectableElement(),nullptr,"collaborationRole","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getCollaboration_CollaborationRole(),getConnectableElement(),nullptr,"collaborationRole","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Collaboration
@@ -3986,8 +4013,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CollaborationUse
 	initEClass(collaborationUseEClass, nullptr, "CollaborationUse", false, false, true);
 	
-	initEReference(getCollaborationUse_RoleBinding(),getDependency(),nullptr,"roleBinding","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getCollaborationUse_Type(),getCollaboration(),nullptr,"type","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getCollaborationUse_RoleBinding(),getDependency(),nullptr,"roleBinding","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getCollaborationUse_Type(),getCollaboration(),nullptr,"type","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getCollaborationUse___Client_elements__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "client_elements", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4006,9 +4033,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class CombinedFragment
 	initEClass(combinedFragmentEClass, nullptr, "CombinedFragment", false, false, true);
-	initEAttribute(getCombinedFragment_InteractionOperator(),getInteractionOperatorKind(),"interactionOperator","seq",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getCombinedFragment_CfragmentGate(),getGate(),nullptr,"cfragmentGate","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getCombinedFragment_Operand(),getInteractionOperand(),nullptr,"operand","",1,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getCombinedFragment_InteractionOperator(),getInteractionOperatorKind(),"interactionOperator","seq",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getCombinedFragment_CfragmentGate(),getGate(),nullptr,"cfragmentGate","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getCombinedFragment_Operand(),getInteractionOperand(),nullptr,"operand","",1,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getCombinedFragment___Break___EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "break_", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4027,8 +4055,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Comment
 	initEClass(commentEClass, nullptr, "Comment", false, false, true);
-	initEAttribute(getComment_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getComment_AnnotatedElement(),getElement(),nullptr,"annotatedElement","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getComment_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getComment_AnnotatedElement(),getElement(),nullptr,"annotatedElement","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Comment
@@ -4042,11 +4071,12 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Component
 	initEClass(componentEClass, nullptr, "Component", false, false, true);
-	initEAttribute(getComponent_IsIndirectlyInstantiated(),types::TypesPackage::eInstance()->getBoolean(),"isIndirectlyInstantiated","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getComponent_PackagedElement(),getPackageableElement(),nullptr,"packagedElement","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getComponent_Provided(),getInterface(),nullptr,"provided","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getComponent_Realization(),getComponentRealization(),getComponentRealization_Abstraction(),"realization","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getComponent_Required(),getInterface(),nullptr,"required","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getComponent_IsIndirectlyInstantiated(),types::TypesPackage::eInstance()->getBoolean(),"isIndirectlyInstantiated","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getComponent_PackagedElement(),getPackageableElement(),nullptr,"packagedElement","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getComponent_Provided(),getInterface(),nullptr,"provided","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getComponent_Realization(),getComponentRealization(),getComponentRealization_Abstraction(),"realization","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getComponent_Required(),getInterface(),nullptr,"required","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getComponent___CreateOwnedClass__String_Boolean(),getClass(), "createOwnedClass", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -4079,17 +4109,19 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ComponentRealization
 	initEClass(componentRealizationEClass, nullptr, "ComponentRealization", false, false, true);
 	
-	initEReference(getComponentRealization_Abstraction(),getComponent(),getComponent_Realization(),"abstraction","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getComponentRealization_RealizingClassifier(),getClassifier(),nullptr,"realizingClassifier","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getComponentRealization_Abstraction(),getComponent(),getComponent_Realization(),"abstraction","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getComponentRealization_RealizingClassifier(),getClassifier(),nullptr,"realizingClassifier","",1,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ComponentRealization
 
 	// Begin Class ConditionalNode
 	initEClass(conditionalNodeEClass, nullptr, "ConditionalNode", false, false, true);
-	initEAttribute(getConditionalNode_IsAssured(),types::TypesPackage::eInstance()->getBoolean(),"isAssured","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getConditionalNode_IsDeterminate(),types::TypesPackage::eInstance()->getBoolean(),"isDeterminate","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getConditionalNode_Clause(),getClause(),nullptr,"clause","",1,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getConditionalNode_Result(),getOutputPin(),nullptr,"result","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getConditionalNode_IsAssured(),types::TypesPackage::eInstance()->getBoolean(),"isAssured","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getConditionalNode_IsDeterminate(),types::TypesPackage::eInstance()->getBoolean(),"isDeterminate","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getConditionalNode_Clause(),getClause(),nullptr,"clause","",1,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getConditionalNode_Result(),getOutputPin(),nullptr,"result","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getConditionalNode___Clause_no_predecessor__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "clause_no_predecessor", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4121,7 +4153,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ConnectableElement
 	initEClass(connectableElementEClass, nullptr, "ConnectableElement", true, false, true);
 	
-	initEReference(getConnectableElement_End(),getConnectorEnd(),nullptr,"end","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getConnectableElement_End(),getConnectorEnd(),nullptr,"end","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getConnectableElement___GetEnds(),getConnectorEnd(), "getEnds", 0, -1, true,false );
 	
@@ -4138,9 +4170,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ConnectionPointReference
 	initEClass(connectionPointReferenceEClass, nullptr, "ConnectionPointReference", false, false, true);
 	
-	initEReference(getConnectionPointReference_Entry(),getPseudostate(),nullptr,"entry","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConnectionPointReference_Exit(),getPseudostate(),nullptr,"exit","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConnectionPointReference_State(),getState(),getState_Connection(),"state","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getConnectionPointReference_Entry(),getPseudostate(),nullptr,"entry","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConnectionPointReference_Exit(),getPseudostate(),nullptr,"exit","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConnectionPointReference_State(),getState(),getState_Connection(),"state","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getConnectionPointReference___Entry_pseudostates__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "entry_pseudostates", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4155,11 +4187,12 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Connector
 	initEClass(connectorEClass, nullptr, "Connector", false, false, true);
-	initEAttribute(getConnector_Kind(),getConnectorKind(),"kind","",1,1, nullptr, true,true, false, false, false, true, true, false);
-	initEReference(getConnector_Contract(),getBehavior(),nullptr,"contract","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConnector_End(),getConnectorEnd(),nullptr,"end","",2,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getConnector_RedefinedConnector(),getConnector(),nullptr,"redefinedConnector","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConnector_Type(),getAssociation(),nullptr,"type","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getConnector_Kind(),getConnectorKind(),"kind","",1,1, true,true, false, false, false, true, true, false);
+	
+	initEReference(getConnector_Contract(),getBehavior(),nullptr,"contract","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConnector_End(),getConnectorEnd(),nullptr,"end","",2,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getConnector_RedefinedConnector(),getConnector(),nullptr,"redefinedConnector","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConnector_Type(),getAssociation(),nullptr,"type","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getConnector___GetKind(),getConnectorKind(), "getKind", 1, 1, true,false );
 	
@@ -4177,9 +4210,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ConnectorEnd
 	initEClass(connectorEndEClass, nullptr, "ConnectorEnd", false, false, true);
 	
-	initEReference(getConnectorEnd_DefiningEnd(),getProperty(),nullptr,"definingEnd","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getConnectorEnd_PartWithPort(),getProperty(),nullptr,"partWithPort","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConnectorEnd_Role(),getConnectableElement(),nullptr,"role","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getConnectorEnd_DefiningEnd(),getProperty(),nullptr,"definingEnd","",0,1, true,true, false, false, true, false, true, true,false);
+	initEReference(getConnectorEnd_PartWithPort(),getProperty(),nullptr,"partWithPort","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConnectorEnd_Role(),getConnectableElement(),nullptr,"role","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getConnectorEnd___GetDefiningEnd(),getProperty(), "getDefiningEnd", 0, 1, true,false );
 	
@@ -4205,7 +4238,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ConsiderIgnoreFragment
 	initEClass(considerIgnoreFragmentEClass, nullptr, "ConsiderIgnoreFragment", false, false, true);
 	
-	initEReference(getConsiderIgnoreFragment_Message(),getNamedElement(),nullptr,"message","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getConsiderIgnoreFragment_Message(),getNamedElement(),nullptr,"message","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getConsiderIgnoreFragment___Consider_or_ignore__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "consider_or_ignore", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4221,9 +4254,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Constraint
 	initEClass(constraintEClass, nullptr, "Constraint", false, false, true);
 	
-	initEReference(getConstraint_ConstrainedElement(),getElement(),nullptr,"constrainedElement","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getConstraint_Context(),getNamespace(),getNamespace_OwnedRule(),"context","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getConstraint_Specification(),getValueSpecification(),nullptr,"specification","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getConstraint_ConstrainedElement(),getElement(),nullptr,"constrainedElement","",0,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getConstraint_Context(),getNamespace(),getNamespace_OwnedRule(),"context","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getConstraint_Specification(),getValueSpecification(),nullptr,"specification","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getConstraint___Boolean_value__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "boolean_value", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4242,7 +4275,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Continuation
 	initEClass(continuationEClass, nullptr, "Continuation", false, false, true);
-	initEAttribute(getContinuation_Setting(),types::TypesPackage::eInstance()->getBoolean(),"setting","true",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getContinuation_Setting(),types::TypesPackage::eInstance()->getBoolean(),"setting","true",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getContinuation___First_or_last_interaction_fragment__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "first_or_last_interaction_fragment", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4291,7 +4325,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CreateLinkObjectAction
 	initEClass(createLinkObjectActionEClass, nullptr, "CreateLinkObjectAction", false, false, true);
 	
-	initEReference(getCreateLinkObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getCreateLinkObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCreateLinkObjectAction___Association_class__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "association_class", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4311,8 +4345,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class CreateObjectAction
 	initEClass(createObjectActionEClass, nullptr, "CreateObjectAction", false, false, true);
 	
-	initEReference(getCreateObjectAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getCreateObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getCreateObjectAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getCreateObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCreateObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "classifier_not_abstract", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4343,8 +4377,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class DataType
 	initEClass(dataTypeEClass, nullptr, "DataType", false, false, true);
 	
-	initEReference(getDataType_OwnedAttribute(),getProperty(),getProperty_Datatype(),"ownedAttribute","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getDataType_OwnedOperation(),getOperation(),getOperation_Datatype(),"ownedOperation","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getDataType_OwnedAttribute(),getProperty(),getProperty_Datatype(),"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getDataType_OwnedOperation(),getOperation(),getOperation_Datatype(),"ownedOperation","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getDataType___CreateOwnedAttribute__String_UnlimitedNatural(),getProperty(), "createOwnedAttribute", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -4364,8 +4398,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class DecisionNode
 	initEClass(decisionNodeEClass, nullptr, "DecisionNode", false, false, true);
 	
-	initEReference(getDecisionNode_DecisionInput(),getBehavior(),nullptr,"decisionInput","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getDecisionNode_DecisionInputFlow(),getObjectFlow(),nullptr,"decisionInputFlow","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getDecisionNode_DecisionInput(),getBehavior(),nullptr,"decisionInput","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getDecisionNode_DecisionInputFlow(),getObjectFlow(),nullptr,"decisionInputFlow","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getDecisionNode___Decision_input_flow_incoming__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "decision_input_flow_incoming", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4405,8 +4439,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Dependency
 	initEClass(dependencyEClass, nullptr, "Dependency", false, false, true);
 	
-	initEReference(getDependency_Client(),getNamedElement(),nullptr,"client","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getDependency_Supplier(),getNamedElement(),nullptr,"supplier","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getDependency_Client(),getNamedElement(),nullptr,"client","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getDependency_Supplier(),getNamedElement(),nullptr,"supplier","",1,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Dependency
@@ -4421,17 +4455,19 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Deployment
 	initEClass(deploymentEClass, nullptr, "Deployment", false, false, true);
 	
-	initEReference(getDeployment_Configuration(),getDeploymentSpecification(),getDeploymentSpecification_Deployment(),"configuration","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getDeployment_DeployedArtifact(),getDeployedArtifact(),nullptr,"deployedArtifact","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getDeployment_Location(),getDeploymentTarget(),getDeploymentTarget_Deployment(),"location","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getDeployment_Configuration(),getDeploymentSpecification(),getDeploymentSpecification_Deployment(),"configuration","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getDeployment_DeployedArtifact(),getDeployedArtifact(),nullptr,"deployedArtifact","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getDeployment_Location(),getDeploymentTarget(),getDeploymentTarget_Deployment(),"location","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Deployment
 
 	// Begin Class DeploymentSpecification
 	initEClass(deploymentSpecificationEClass, nullptr, "DeploymentSpecification", false, false, true);
-	initEAttribute(getDeploymentSpecification_DeploymentLocation(),types::TypesPackage::eInstance()->getString(),"deploymentLocation","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getDeploymentSpecification_ExecutionLocation(),types::TypesPackage::eInstance()->getString(),"executionLocation","",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getDeploymentSpecification_Deployment(),getDeployment(),getDeployment_Configuration(),"deployment","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getDeploymentSpecification_DeploymentLocation(),types::TypesPackage::eInstance()->getString(),"deploymentLocation","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getDeploymentSpecification_ExecutionLocation(),types::TypesPackage::eInstance()->getString(),"executionLocation","",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getDeploymentSpecification_Deployment(),getDeployment(),getDeployment_Configuration(),"deployment","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getDeploymentSpecification___Deployed_elements__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "deployed_elements", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4447,8 +4483,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class DeploymentTarget
 	initEClass(deploymentTargetEClass, nullptr, "DeploymentTarget", true, false, true);
 	
-	initEReference(getDeploymentTarget_DeployedElement(),getPackageableElement(),nullptr,"deployedElement","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getDeploymentTarget_Deployment(),getDeployment(),getDeployment_Location(),"deployment","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getDeploymentTarget_DeployedElement(),getPackageableElement(),nullptr,"deployedElement","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getDeploymentTarget_Deployment(),getDeployment(),getDeployment_Location(),"deployment","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getDeploymentTarget___GetDeployedElements(),getPackageableElement(), "getDeployedElements", 0, -1, true,false );
 	
@@ -4464,8 +4500,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class DestroyObjectAction
 	initEClass(destroyObjectActionEClass, nullptr, "DestroyObjectAction", false, false, true);
-	initEAttribute(getDestroyObjectAction_IsDestroyLinks(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyLinks","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getDestroyObjectAction_IsDestroyOwnedObjects(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyOwnedObjects","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getDestroyObjectAction_Target(),getInputPin(),nullptr,"target","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getDestroyObjectAction_IsDestroyLinks(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyLinks","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getDestroyObjectAction_IsDestroyOwnedObjects(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyOwnedObjects","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getDestroyObjectAction_Target(),getInputPin(),nullptr,"target","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getDestroyObjectAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4499,8 +4537,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class DirectedRelationship
 	initEClass(directedRelationshipEClass, nullptr, "DirectedRelationship", true, false, true);
 	
-	initEReference(getDirectedRelationship_Source(),getElement(),nullptr,"source","",1,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getDirectedRelationship_Target(),getElement(),nullptr,"target","",1,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getDirectedRelationship_Source(),getElement(),nullptr,"source","",1,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getDirectedRelationship_Target(),getElement(),nullptr,"target","",1,-1, true,true, false, false, true, false, true, true,false);
 	
 	
 	// End Class DirectedRelationship
@@ -4508,8 +4546,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Duration
 	initEClass(durationEClass, nullptr, "Duration", false, false, true);
 	
-	initEReference(getDuration_Expr(),getValueSpecification(),nullptr,"expr","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getDuration_Observation(),getObservation(),nullptr,"observation","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getDuration_Expr(),getValueSpecification(),nullptr,"expr","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getDuration_Observation(),getObservation(),nullptr,"observation","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getDuration___No_expr_requires_observation__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "no_expr_requires_observation", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4520,7 +4558,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class DurationConstraint
 	initEClass(durationConstraintEClass, nullptr, "DurationConstraint", false, false, true);
-	initEAttribute(getDurationConstraint_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","",0,2, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getDurationConstraint_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","",0,2, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getDurationConstraint___First_event_multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "first_event_multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4542,8 +4581,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class DurationObservation
 	initEClass(durationObservationEClass, nullptr, "DurationObservation", false, false, true);
-	initEAttribute(getDurationObservation_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","",0,2, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getDurationObservation_Event(),getNamedElement(),nullptr,"event","",1,2, nullptr , false,false, true, false, true, false, true, false,true);
+	initEAttribute(getDurationObservation_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","",0,2, false,false, true, false, false, true, false, false);
+	
+	initEReference(getDurationObservation_Event(),getNamedElement(),nullptr,"event","",1,2, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getDurationObservation___First_event_multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "first_event_multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4555,9 +4595,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Element
 	initEClass(elementEClass, nullptr, "Element", true, false, true);
 	
-	initEReference(getElement_OwnedComment(),getComment(),nullptr,"ownedComment","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getElement_OwnedElement(),getElement(),getElement_Owner(),"ownedElement","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getElement_Owner(),getElement(),getElement_OwnedElement(),"owner","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getElement_OwnedComment(),getComment(),nullptr,"ownedComment","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getElement_OwnedElement(),getElement(),getElement_Owner(),"ownedElement","",0,-1, true,true, false, true, true, false, true, true,false);
+	initEReference(getElement_Owner(),getElement(),getElement_OwnedElement(),"owner","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getElement___AddKeyword__String(),types::TypesPackage::eInstance()->getBoolean(), "addKeyword", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "keyword",0,1, true,true);
@@ -4670,9 +4710,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ElementImport
 	initEClass(elementImportEClass, nullptr, "ElementImport", false, false, true);
-	initEAttribute(getElementImport_Alias(),types::TypesPackage::eInstance()->getString(),"alias","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getElementImport_Visibility(),getVisibilityKind(),"visibility","public",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getElementImport_ImportedElement(),getPackageableElement(),nullptr,"importedElement","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getElementImport_ImportingNamespace(),getNamespace(),getNamespace_ElementImport(),"importingNamespace","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getElementImport_Alias(),types::TypesPackage::eInstance()->getString(),"alias","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getElementImport_Visibility(),getVisibilityKind(),"visibility","public",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getElementImport_ImportedElement(),getPackageableElement(),nullptr,"importedElement","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getElementImport_ImportingNamespace(),getNamespace(),getNamespace_ElementImport(),"importingNamespace","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getElementImport___GetName(),types::TypesPackage::eInstance()->getString(), "getName", 1, 1, true,false );
 	
@@ -4690,7 +4732,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class EncapsulatedClassifier
 	initEClass(encapsulatedClassifierEClass, nullptr, "EncapsulatedClassifier", true, false, true);
 	
-	initEReference(getEncapsulatedClassifier_OwnedPort(),getPort(),nullptr,"ownedPort","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getEncapsulatedClassifier_OwnedPort(),getPort(),nullptr,"ownedPort","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getEncapsulatedClassifier___GetOwnedPorts(),getPort(), "getOwnedPorts", 0, -1, true,true );
 	
@@ -4700,7 +4742,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Enumeration
 	initEClass(enumerationEClass, nullptr, "Enumeration", false, false, true);
 	
-	initEReference(getEnumeration_OwnedLiteral(),getEnumerationLiteral(),getEnumerationLiteral_Enumeration(),"ownedLiteral","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getEnumeration_OwnedLiteral(),getEnumerationLiteral(),getEnumerationLiteral_Enumeration(),"ownedLiteral","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getEnumeration___Immutable__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "immutable", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4712,7 +4754,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class EnumerationLiteral
 	initEClass(enumerationLiteralEClass, nullptr, "EnumerationLiteral", false, false, true);
 	
-	initEReference(getEnumerationLiteral_Enumeration(),getEnumeration(),getEnumeration_OwnedLiteral(),"enumeration","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getEnumerationLiteral_Enumeration(),getEnumeration(),getEnumeration_OwnedLiteral(),"enumeration","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getEnumerationLiteral___GetClassifier(),getEnumeration(), "getClassifier", 1, 1, true,false );
 	
@@ -4731,10 +4773,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExceptionHandler
 	initEClass(exceptionHandlerEClass, nullptr, "ExceptionHandler", false, false, true);
 	
-	initEReference(getExceptionHandler_ExceptionInput(),getObjectNode(),nullptr,"exceptionInput","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExceptionHandler_ExceptionType(),getClassifier(),nullptr,"exceptionType","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExceptionHandler_HandlerBody(),getExecutableNode(),nullptr,"handlerBody","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExceptionHandler_ProtectedNode(),getExecutableNode(),getExecutableNode_Handler(),"protectedNode","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExceptionHandler_ExceptionInput(),getObjectNode(),nullptr,"exceptionInput","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExceptionHandler_ExceptionType(),getClassifier(),nullptr,"exceptionType","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExceptionHandler_HandlerBody(),getExecutableNode(),nullptr,"handlerBody","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExceptionHandler_ProtectedNode(),getExecutableNode(),getExecutableNode_Handler(),"protectedNode","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExceptionHandler___Edge_source_target__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "edge_source_target", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4766,7 +4808,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExecutableNode
 	initEClass(executableNodeEClass, nullptr, "ExecutableNode", true, false, true);
 	
-	initEReference(getExecutableNode_Handler(),getExceptionHandler(),getExceptionHandler_ProtectedNode(),"handler","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getExecutableNode_Handler(),getExceptionHandler(),getExceptionHandler_ProtectedNode(),"handler","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class ExecutableNode
@@ -4781,7 +4823,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExecutionOccurrenceSpecification
 	initEClass(executionOccurrenceSpecificationEClass, nullptr, "ExecutionOccurrenceSpecification", false, false, true);
 	
-	initEReference(getExecutionOccurrenceSpecification_Execution(),getExecutionSpecification(),nullptr,"execution","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionOccurrenceSpecification_Execution(),getExecutionSpecification(),nullptr,"execution","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ExecutionOccurrenceSpecification
@@ -4789,8 +4831,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExecutionSpecification
 	initEClass(executionSpecificationEClass, nullptr, "ExecutionSpecification", true, false, true);
 	
-	initEReference(getExecutionSpecification_Finish(),getOccurrenceSpecification(),nullptr,"finish","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExecutionSpecification_Start(),getOccurrenceSpecification(),nullptr,"start","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionSpecification_Finish(),getOccurrenceSpecification(),nullptr,"finish","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionSpecification_Start(),getOccurrenceSpecification(),nullptr,"start","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExecutionSpecification___Same_lifeline__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "same_lifeline", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4802,8 +4844,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExpansionNode
 	initEClass(expansionNodeEClass, nullptr, "ExpansionNode", false, false, true);
 	
-	initEReference(getExpansionNode_RegionAsInput(),getExpansionRegion(),getExpansionRegion_InputElement(),"regionAsInput","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExpansionNode_RegionAsOutput(),getExpansionRegion(),getExpansionRegion_OutputElement(),"regionAsOutput","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionNode_RegionAsInput(),getExpansionRegion(),getExpansionRegion_InputElement(),"regionAsInput","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionNode_RegionAsOutput(),getExpansionRegion(),getExpansionRegion_OutputElement(),"regionAsOutput","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExpansionNode___Region_as_input_or_output__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "region_as_input_or_output", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4814,17 +4856,19 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ExpansionRegion
 	initEClass(expansionRegionEClass, nullptr, "ExpansionRegion", false, false, true);
-	initEAttribute(getExpansionRegion_Mode(),getExpansionKind(),"mode","iterative",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getExpansionRegion_InputElement(),getExpansionNode(),getExpansionNode_RegionAsInput(),"inputElement","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExpansionRegion_OutputElement(),getExpansionNode(),getExpansionNode_RegionAsOutput(),"outputElement","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getExpansionRegion_Mode(),getExpansionKind(),"mode","iterative",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getExpansionRegion_InputElement(),getExpansionNode(),getExpansionNode_RegionAsInput(),"inputElement","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionRegion_OutputElement(),getExpansionNode(),getExpansionNode_RegionAsOutput(),"outputElement","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ExpansionRegion
 
 	// Begin Class Expression
 	initEClass(expressionEClass, nullptr, "Expression", false, false, true);
-	initEAttribute(getExpression_Symbol(),types::TypesPackage::eInstance()->getString(),"symbol","",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getExpression_Operand(),getValueSpecification(),nullptr,"operand","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEAttribute(getExpression_Symbol(),types::TypesPackage::eInstance()->getString(),"symbol","",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getExpression_Operand(),getValueSpecification(),nullptr,"operand","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	
 	// End Class Expression
@@ -4832,10 +4876,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Extend
 	initEClass(extendEClass, nullptr, "Extend", false, false, true);
 	
-	initEReference(getExtend_Condition(),getConstraint(),nullptr,"condition","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getExtend_ExtendedCase(),getUseCase(),nullptr,"extendedCase","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExtend_Extension(),getUseCase(),getUseCase_Extend(),"extension","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExtend_ExtensionLocation(),getExtensionPoint(),nullptr,"extensionLocation","",1,-1, nullptr , false,false, true, false, true, false, true, false,true);
+	initEReference(getExtend_Condition(),getConstraint(),nullptr,"condition","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getExtend_ExtendedCase(),getUseCase(),nullptr,"extendedCase","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExtend_Extension(),getUseCase(),getUseCase_Extend(),"extension","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExtend_ExtensionLocation(),getExtensionPoint(),nullptr,"extensionLocation","",1,-1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getExtend___Extension_points__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "extension_points", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4846,8 +4890,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Extension
 	initEClass(extensionEClass, nullptr, "Extension", false, false, true);
-	initEAttribute(getExtension_IsRequired(),types::TypesPackage::eInstance()->getBoolean(),"isRequired","",1,1, nullptr, true,true, false, false, false, true, true, false);
-	initEReference(getExtension_Metaclass(),getClass(),getClass_Extension(),"metaclass","",1,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getExtension_IsRequired(),types::TypesPackage::eInstance()->getBoolean(),"isRequired","",1,1, true,true, false, false, false, true, true, false);
+	
+	initEReference(getExtension_Metaclass(),getClass(),getClass_Extension(),"metaclass","",1,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getExtension___GetMetaclass(),getClass(), "getMetaclass", 1, 1, true,false );
 	
@@ -4888,7 +4933,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ExtensionPoint
 	initEClass(extensionPointEClass, nullptr, "ExtensionPoint", false, false, true);
 	
-	initEReference(getExtensionPoint_UseCase(),getUseCase(),getUseCase_ExtensionPoint(),"useCase","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExtensionPoint_UseCase(),getUseCase(),getUseCase_ExtensionPoint(),"useCase","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExtensionPoint___Must_have_name__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "must_have_name", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -4909,8 +4954,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Feature
 	initEClass(featureEClass, nullptr, "Feature", true, false, true);
-	initEAttribute(getFeature_IsStatic(),types::TypesPackage::eInstance()->getBoolean(),"isStatic","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getFeature_FeaturingClassifier(),getClassifier(),getClassifier_Feature(),"featuringClassifier","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getFeature_IsStatic(),types::TypesPackage::eInstance()->getBoolean(),"isStatic","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getFeature_FeaturingClassifier(),getClassifier(),getClassifier_Feature(),"featuringClassifier","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	
 	// End Class Feature
@@ -5050,8 +5096,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class GeneralOrdering
 	initEClass(generalOrderingEClass, nullptr, "GeneralOrdering", false, false, true);
 	
-	initEReference(getGeneralOrdering_After(),getOccurrenceSpecification(),getOccurrenceSpecification_ToBefore(),"after","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getGeneralOrdering_Before(),getOccurrenceSpecification(),getOccurrenceSpecification_ToAfter(),"before","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getGeneralOrdering_After(),getOccurrenceSpecification(),getOccurrenceSpecification_ToBefore(),"after","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getGeneralOrdering_Before(),getOccurrenceSpecification(),getOccurrenceSpecification_ToAfter(),"before","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getGeneralOrdering___Irreflexive_transitive_closure__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "irreflexive_transitive_closure", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5062,19 +5108,22 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Generalization
 	initEClass(generalizationEClass, nullptr, "Generalization", false, false, true);
-	initEAttribute(getGeneralization_IsSubstitutable(),types::TypesPackage::eInstance()->getBoolean(),"isSubstitutable","true",0,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getGeneralization_General(),getClassifier(),nullptr,"general","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getGeneralization_GeneralizationSet(),getGeneralizationSet(),getGeneralizationSet_Generalization(),"generalizationSet","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getGeneralization_Specific(),getClassifier(),getClassifier_Generalization(),"specific","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getGeneralization_IsSubstitutable(),types::TypesPackage::eInstance()->getBoolean(),"isSubstitutable","true",0,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getGeneralization_General(),getClassifier(),nullptr,"general","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getGeneralization_GeneralizationSet(),getGeneralizationSet(),getGeneralizationSet_Generalization(),"generalizationSet","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getGeneralization_Specific(),getClassifier(),getClassifier_Generalization(),"specific","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Generalization
 
 	// Begin Class GeneralizationSet
 	initEClass(generalizationSetEClass, nullptr, "GeneralizationSet", false, false, true);
-	initEAttribute(getGeneralizationSet_IsCovering(),types::TypesPackage::eInstance()->getBoolean(),"isCovering","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getGeneralizationSet_IsDisjoint(),types::TypesPackage::eInstance()->getBoolean(),"isDisjoint","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getGeneralizationSet_Generalization(),getGeneralization(),getGeneralization_GeneralizationSet(),"generalization","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getGeneralizationSet_Powertype(),getClassifier(),getClassifier_PowertypeExtent(),"powertype","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getGeneralizationSet_IsCovering(),types::TypesPackage::eInstance()->getBoolean(),"isCovering","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getGeneralizationSet_IsDisjoint(),types::TypesPackage::eInstance()->getBoolean(),"isDisjoint","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getGeneralizationSet_Generalization(),getGeneralization(),getGeneralization_GeneralizationSet(),"generalization","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getGeneralizationSet_Powertype(),getClassifier(),getClassifier_PowertypeExtent(),"powertype","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getGeneralizationSet___Generalization_same_classifier__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "generalization_same_classifier", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5089,7 +5138,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Image
 	initEClass(imageEClass, nullptr, "Image", false, false, true);
-	initEAttribute(getImage_Content(),types::TypesPackage::eInstance()->getString(),"content","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getImage_Format(),types::TypesPackage::eInstance()->getString(),"format","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getImage_Location(),types::TypesPackage::eInstance()->getString(),"location","",0,1, nullptr, false,false, true, true, false, true, false, false);
+	initEAttribute(getImage_Content(),types::TypesPackage::eInstance()->getString(),"content","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getImage_Format(),types::TypesPackage::eInstance()->getString(),"format","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getImage_Location(),types::TypesPackage::eInstance()->getString(),"location","",0,1, false,false, true, true, false, true, false, false);
+	
 	
 	
 	// End Class Image
@@ -5097,8 +5149,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Include
 	initEClass(includeEClass, nullptr, "Include", false, false, true);
 	
-	initEReference(getInclude_Addition(),getUseCase(),nullptr,"addition","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInclude_IncludingCase(),getUseCase(),getUseCase_Include(),"includingCase","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInclude_Addition(),getUseCase(),nullptr,"addition","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInclude_IncludingCase(),getUseCase(),getUseCase_Include(),"includingCase","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Include
@@ -5106,13 +5158,13 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InformationFlow
 	initEClass(informationFlowEClass, nullptr, "InformationFlow", false, false, true);
 	
-	initEReference(getInformationFlow_Conveyed(),getClassifier(),nullptr,"conveyed","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_InformationSource(),getNamedElement(),nullptr,"informationSource","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_InformationTarget(),getNamedElement(),nullptr,"informationTarget","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_Realization(),getRelationship(),nullptr,"realization","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_RealizingActivityEdge(),getActivityEdge(),nullptr,"realizingActivityEdge","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_RealizingConnector(),getConnector(),nullptr,"realizingConnector","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInformationFlow_RealizingMessage(),getMessage(),nullptr,"realizingMessage","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_Conveyed(),getClassifier(),nullptr,"conveyed","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_InformationSource(),getNamedElement(),nullptr,"informationSource","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_InformationTarget(),getNamedElement(),nullptr,"informationTarget","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_Realization(),getRelationship(),nullptr,"realization","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_RealizingActivityEdge(),getActivityEdge(),nullptr,"realizingActivityEdge","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_RealizingConnector(),getConnector(),nullptr,"realizingConnector","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationFlow_RealizingMessage(),getMessage(),nullptr,"realizingMessage","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getInformationFlow___Convey_classifiers__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "convey_classifiers", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5132,7 +5184,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InformationItem
 	initEClass(informationItemEClass, nullptr, "InformationItem", false, false, true);
 	
-	initEReference(getInformationItem_Represented(),getClassifier(),nullptr,"represented","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInformationItem_Represented(),getClassifier(),nullptr,"represented","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getInformationItem___Has_no__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "has_no", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5167,6 +5219,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InputPin
 	initEClass(inputPinEClass, nullptr, "InputPin", false, false, true);
 	
+	initEReference(getInputPin_CallOperationAction(),getCallOperationAction(),getCallOperationAction_Target(),"callOperationAction","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getInputPin_InvocationAction(),getInvocationAction(),getInvocationAction_Argument(),"invocationAction","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getInputPin_StructuralFeatureAction(),getStructuralFeatureAction(),getStructuralFeatureAction_Object(),"structuralFeatureAction","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "outgoing_edges_structured_only", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5178,9 +5233,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InstanceSpecification
 	initEClass(instanceSpecificationEClass, nullptr, "InstanceSpecification", false, false, true);
 	
-	initEReference(getInstanceSpecification_Classifier(),getClassifier(),nullptr,"classifier","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInstanceSpecification_Slot(),getSlot(),getSlot_OwningInstance(),"slot","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInstanceSpecification_Specification(),getValueSpecification(),nullptr,"specification","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getInstanceSpecification_Classifier(),getClassifier(),nullptr,"classifier","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInstanceSpecification_Slot(),getSlot(),getSlot_OwningInstance(),"slot","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInstanceSpecification_Specification(),getValueSpecification(),nullptr,"specification","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getInstanceSpecification___Defining_feature__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "defining_feature", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5204,7 +5259,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InstanceValue
 	initEClass(instanceValueEClass, nullptr, "InstanceValue", false, false, true);
 	
-	initEReference(getInstanceValue_Instance(),getInstanceSpecification(),nullptr,"instance","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInstanceValue_Instance(),getInstanceSpecification(),nullptr,"instance","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class InstanceValue
@@ -5212,11 +5267,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Interaction
 	initEClass(interactionEClass, nullptr, "Interaction", false, false, true);
 	
-	initEReference(getInteraction_Action(),getAction(),nullptr,"action","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteraction_FormalGate(),getGate(),nullptr,"formalGate","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteraction_Fragment(),getInteractionFragment(),getInteractionFragment_EnclosingInteraction(),"fragment","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInteraction_Lifeline(),getLifeline(),getLifeline_Interaction(),"lifeline","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteraction_Message(),getMessage(),getMessage_Interaction(),"message","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getInteraction_Action(),getAction(),nullptr,"action","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteraction_FormalGate(),getGate(),nullptr,"formalGate","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteraction_Fragment(),getInteractionFragment(),getInteractionFragment_EnclosingInteraction(),"fragment","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInteraction_Lifeline(),getLifeline(),getLifeline_Interaction(),"lifeline","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteraction_Message(),getMessage(),getMessage_Interaction(),"message","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getInteraction___Not_contained__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "not_contained", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5228,8 +5283,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InteractionConstraint
 	initEClass(interactionConstraintEClass, nullptr, "InteractionConstraint", false, false, true);
 	
-	initEReference(getInteractionConstraint_Maxint(),getValueSpecification(),nullptr,"maxint","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteractionConstraint_Minint(),getValueSpecification(),nullptr,"minint","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionConstraint_Maxint(),getValueSpecification(),nullptr,"maxint","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionConstraint_Minint(),getValueSpecification(),nullptr,"minint","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getInteractionConstraint___Dynamic_variables__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "dynamic_variables", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5261,10 +5316,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InteractionFragment
 	initEClass(interactionFragmentEClass, nullptr, "InteractionFragment", true, false, true);
 	
-	initEReference(getInteractionFragment_Covered(),getLifeline(),getLifeline_CoveredBy(),"covered","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInteractionFragment_EnclosingInteraction(),getInteraction(),getInteraction_Fragment(),"enclosingInteraction","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInteractionFragment_EnclosingOperand(),getInteractionOperand(),getInteractionOperand_Fragment(),"enclosingOperand","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInteractionFragment_GeneralOrdering(),getGeneralOrdering(),nullptr,"generalOrdering","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionFragment_Covered(),getLifeline(),getLifeline_CoveredBy(),"covered","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInteractionFragment_EnclosingInteraction(),getInteraction(),getInteraction_Fragment(),"enclosingInteraction","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInteractionFragment_EnclosingOperand(),getInteractionOperand(),getInteractionOperand_Fragment(),"enclosingOperand","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInteractionFragment_GeneralOrdering(),getGeneralOrdering(),nullptr,"generalOrdering","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class InteractionFragment
@@ -5272,8 +5327,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InteractionOperand
 	initEClass(interactionOperandEClass, nullptr, "InteractionOperand", false, false, true);
 	
-	initEReference(getInteractionOperand_Fragment(),getInteractionFragment(),getInteractionFragment_EnclosingOperand(),"fragment","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInteractionOperand_Guard(),getInteractionConstraint(),nullptr,"guard","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionOperand_Fragment(),getInteractionFragment(),getInteractionFragment_EnclosingOperand(),"fragment","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInteractionOperand_Guard(),getInteractionConstraint(),nullptr,"guard","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getInteractionOperand___Guard_contain_references__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "guard_contain_references", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5289,11 +5344,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InteractionUse
 	initEClass(interactionUseEClass, nullptr, "InteractionUse", false, false, true);
 	
-	initEReference(getInteractionUse_ActualGate(),getGate(),nullptr,"actualGate","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteractionUse_Argument(),getValueSpecification(),nullptr,"argument","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInteractionUse_RefersTo(),getInteraction(),nullptr,"refersTo","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInteractionUse_ReturnValue(),getValueSpecification(),nullptr,"returnValue","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInteractionUse_ReturnValueRecipient(),getProperty(),nullptr,"returnValueRecipient","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInteractionUse_ActualGate(),getGate(),nullptr,"actualGate","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionUse_Argument(),getValueSpecification(),nullptr,"argument","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInteractionUse_RefersTo(),getInteraction(),nullptr,"refersTo","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInteractionUse_ReturnValue(),getValueSpecification(),nullptr,"returnValue","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInteractionUse_ReturnValueRecipient(),getProperty(),nullptr,"returnValueRecipient","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getInteractionUse___All_lifelines__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "all_lifelines", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5325,12 +5380,12 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Interface
 	initEClass(interfaceEClass, nullptr, "Interface", false, false, true);
 	
-	initEReference(getInterface_NestedClassifier(),getClassifier(),nullptr,"nestedClassifier","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInterface_OwnedAttribute(),getProperty(),getProperty_Interface(),"ownedAttribute","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInterface_OwnedOperation(),getOperation(),getOperation_Interface(),"ownedOperation","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInterface_OwnedReception(),getReception(),nullptr,"ownedReception","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInterface_Protocol(),getProtocolStateMachine(),nullptr,"protocol","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getInterface_RedefinedInterface(),getInterface(),nullptr,"redefinedInterface","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInterface_NestedClassifier(),getClassifier(),nullptr,"nestedClassifier","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInterface_OwnedAttribute(),getProperty(),getProperty_Interface(),"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInterface_OwnedOperation(),getOperation(),getOperation_Interface(),"ownedOperation","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInterface_OwnedReception(),getReception(),nullptr,"ownedReception","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInterface_Protocol(),getProtocolStateMachine(),nullptr,"protocol","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getInterface_RedefinedInterface(),getInterface(),nullptr,"redefinedInterface","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getInterface___CreateOwnedAttribute__String_UnlimitedNatural(),getProperty(), "createOwnedAttribute", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -5354,8 +5409,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InterfaceRealization
 	initEClass(interfaceRealizationEClass, nullptr, "InterfaceRealization", false, false, true);
 	
-	initEReference(getInterfaceRealization_Contract(),getInterface(),nullptr,"contract","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInterfaceRealization_ImplementingClassifier(),getBehavioredClassifier(),getBehavioredClassifier_InterfaceRealization(),"implementingClassifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInterfaceRealization_Contract(),getInterface(),nullptr,"contract","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInterfaceRealization_ImplementingClassifier(),getBehavioredClassifier(),getBehavioredClassifier_InterfaceRealization(),"implementingClassifier","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class InterfaceRealization
@@ -5363,8 +5418,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InterruptibleActivityRegion
 	initEClass(interruptibleActivityRegionEClass, nullptr, "InterruptibleActivityRegion", false, false, true);
 	
-	initEReference(getInterruptibleActivityRegion_InterruptingEdge(),getActivityEdge(),getActivityEdge_Interrupts(),"interruptingEdge","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInterruptibleActivityRegion_Node(),getActivityNode(),getActivityNode_InInterruptibleRegion(),"node","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInterruptibleActivityRegion_InterruptingEdge(),getActivityEdge(),getActivityEdge_Interrupts(),"interruptingEdge","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInterruptibleActivityRegion_Node(),getActivityNode(),getActivityNode_InInterruptibleRegion(),"node","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getInterruptibleActivityRegion___Interrupting_edges__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "interrupting_edges", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5376,8 +5431,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Interval
 	initEClass(intervalEClass, nullptr, "Interval", false, false, true);
 	
-	initEReference(getInterval_Max(),getValueSpecification(),nullptr,"max","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getInterval_Min(),getValueSpecification(),nullptr,"min","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInterval_Max(),getValueSpecification(),nullptr,"max","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getInterval_Min(),getValueSpecification(),nullptr,"min","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Interval
@@ -5392,16 +5447,17 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class InvocationAction
 	initEClass(invocationActionEClass, nullptr, "InvocationAction", true, false, true);
 	
-	initEReference(getInvocationAction_Argument(),getInputPin(),nullptr,"argument","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getInvocationAction_OnPort(),getPort(),nullptr,"onPort","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getInvocationAction_Argument(),getInputPin(),getInputPin_InvocationAction(),"argument","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getInvocationAction_OnPort(),getPort(),nullptr,"onPort","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class InvocationAction
 
 	// Begin Class JoinNode
 	initEClass(joinNodeEClass, nullptr, "JoinNode", false, false, true);
-	initEAttribute(getJoinNode_IsCombineDuplicate(),types::TypesPackage::eInstance()->getBoolean(),"isCombineDuplicate","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getJoinNode_JoinSpec(),getValueSpecification(),nullptr,"joinSpec","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getJoinNode_IsCombineDuplicate(),types::TypesPackage::eInstance()->getBoolean(),"isCombineDuplicate","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getJoinNode_JoinSpec(),getValueSpecification(),nullptr,"joinSpec","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getJoinNode___Incoming_object_flow__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "incoming_object_flow", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5417,11 +5473,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Lifeline
 	initEClass(lifelineEClass, nullptr, "Lifeline", false, false, true);
 	
-	initEReference(getLifeline_CoveredBy(),getInteractionFragment(),getInteractionFragment_Covered(),"coveredBy","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLifeline_DecomposedAs(),getPartDecomposition(),nullptr,"decomposedAs","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLifeline_Interaction(),getInteraction(),getInteraction_Lifeline(),"interaction","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLifeline_Represents(),getConnectableElement(),nullptr,"represents","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLifeline_Selector(),getValueSpecification(),nullptr,"selector","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getLifeline_CoveredBy(),getInteractionFragment(),getInteractionFragment_Covered(),"coveredBy","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLifeline_DecomposedAs(),getPartDecomposition(),nullptr,"decomposedAs","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLifeline_Interaction(),getInteraction(),getInteraction_Lifeline(),"interaction","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLifeline_Represents(),getConnectableElement(),nullptr,"represents","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLifeline_Selector(),getValueSpecification(),nullptr,"selector","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getLifeline___Interaction_uses_share_lifeline__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "interaction_uses_share_lifeline", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5445,8 +5501,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class LinkAction
 	initEClass(linkActionEClass, nullptr, "LinkAction", true, false, true);
 	
-	initEReference(getLinkAction_EndData(),getLinkEndData(),nullptr,"endData","",2,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getLinkAction_InputValue(),getInputPin(),nullptr,"inputValue","",1,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getLinkAction_EndData(),getLinkEndData(),nullptr,"endData","",2,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getLinkAction_InputValue(),getInputPin(),nullptr,"inputValue","",1,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getLinkAction___Association(),getAssociation(), "association", 1, 1, true,false );
 	
@@ -5467,8 +5523,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class LinkEndCreationData
 	initEClass(linkEndCreationDataEClass, nullptr, "LinkEndCreationData", false, false, true);
-	initEAttribute(getLinkEndCreationData_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getLinkEndCreationData_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getLinkEndCreationData_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getLinkEndCreationData_InsertAt(),getInputPin(),nullptr,"insertAt","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getLinkEndCreationData___InsertAt_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "insertAt_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5480,9 +5537,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class LinkEndData
 	initEClass(linkEndDataEClass, nullptr, "LinkEndData", false, false, true);
 	
-	initEReference(getLinkEndData_End(),getProperty(),nullptr,"end","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLinkEndData_Qualifier(),getQualifierValue(),nullptr,"qualifier","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getLinkEndData_Value(),getInputPin(),nullptr,"value","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getLinkEndData_End(),getProperty(),nullptr,"end","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLinkEndData_Qualifier(),getQualifierValue(),nullptr,"qualifier","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getLinkEndData_Value(),getInputPin(),nullptr,"value","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getLinkEndData___AllPins(),getInputPin(), "allPins", 0, -1, false,false );
 	
@@ -5511,8 +5568,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class LinkEndDestructionData
 	initEClass(linkEndDestructionDataEClass, nullptr, "LinkEndDestructionData", false, false, true);
-	initEAttribute(getLinkEndDestructionData_IsDestroyDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyDuplicates","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getLinkEndDestructionData_DestroyAt(),getInputPin(),nullptr,"destroyAt","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getLinkEndDestructionData_IsDestroyDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isDestroyDuplicates","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getLinkEndDestructionData_DestroyAt(),getInputPin(),nullptr,"destroyAt","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getLinkEndDestructionData___DestroyAt_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "destroyAt_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5523,14 +5581,16 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class LiteralBoolean
 	initEClass(literalBooleanEClass, nullptr, "LiteralBoolean", false, false, true);
-	initEAttribute(getLiteralBoolean_Value(),types::TypesPackage::eInstance()->getBoolean(),"value","false",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getLiteralBoolean_Value(),types::TypesPackage::eInstance()->getBoolean(),"value","false",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	
 	// End Class LiteralBoolean
 
 	// Begin Class LiteralInteger
 	initEClass(literalIntegerEClass, nullptr, "LiteralInteger", false, false, true);
-	initEAttribute(getLiteralInteger_Value(),types::TypesPackage::eInstance()->getInteger(),"value","0",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getLiteralInteger_Value(),types::TypesPackage::eInstance()->getInteger(),"value","0",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	
 	// End Class LiteralInteger
@@ -5544,7 +5604,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class LiteralReal
 	initEClass(literalRealEClass, nullptr, "LiteralReal", false, false, true);
-	initEAttribute(getLiteralReal_Value(),types::TypesPackage::eInstance()->getReal(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getLiteralReal_Value(),types::TypesPackage::eInstance()->getReal(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	
 	// End Class LiteralReal
@@ -5558,29 +5619,32 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class LiteralString
 	initEClass(literalStringEClass, nullptr, "LiteralString", false, false, true);
-	initEAttribute(getLiteralString_Value(),types::TypesPackage::eInstance()->getString(),"value","",0,1, nullptr, false,false, true, true, false, true, false, false);
+	initEAttribute(getLiteralString_Value(),types::TypesPackage::eInstance()->getString(),"value","",0,1, false,false, true, true, false, true, false, false);
+	
 	
 	
 	// End Class LiteralString
 
 	// Begin Class LiteralUnlimitedNatural
 	initEClass(literalUnlimitedNaturalEClass, nullptr, "LiteralUnlimitedNatural", false, false, true);
-	initEAttribute(getLiteralUnlimitedNatural_Value(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"value","0",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getLiteralUnlimitedNatural_Value(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"value","0",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	
 	// End Class LiteralUnlimitedNatural
 
 	// Begin Class LoopNode
 	initEClass(loopNodeEClass, nullptr, "LoopNode", false, false, true);
-	initEAttribute(getLoopNode_IsTestedFirst(),types::TypesPackage::eInstance()->getBoolean(),"isTestedFirst","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getLoopNode_BodyOutput(),getOutputPin(),nullptr,"bodyOutput","",0,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getLoopNode_BodyPart(),getExecutableNode(),nullptr,"bodyPart","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLoopNode_Decider(),getOutputPin(),nullptr,"decider","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLoopNode_LoopVariable(),getOutputPin(),nullptr,"loopVariable","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getLoopNode_LoopVariableInput(),getInputPin(),nullptr,"loopVariableInput","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getLoopNode_Result(),getOutputPin(),nullptr,"result","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getLoopNode_SetupPart(),getExecutableNode(),nullptr,"setupPart","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getLoopNode_Test(),getExecutableNode(),nullptr,"test","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getLoopNode_IsTestedFirst(),types::TypesPackage::eInstance()->getBoolean(),"isTestedFirst","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getLoopNode_BodyOutput(),getOutputPin(),nullptr,"bodyOutput","",0,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getLoopNode_BodyPart(),getExecutableNode(),nullptr,"bodyPart","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLoopNode_Decider(),getOutputPin(),nullptr,"decider","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLoopNode_LoopVariable(),getOutputPin(),nullptr,"loopVariable","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getLoopNode_LoopVariableInput(),getInputPin(),nullptr,"loopVariableInput","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getLoopNode_Result(),getOutputPin(),nullptr,"result","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getLoopNode_SetupPart(),getExecutableNode(),nullptr,"setupPart","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getLoopNode_Test(),getExecutableNode(),nullptr,"test","",1,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getLoopNode___Body_output_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "body_output_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5624,7 +5688,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Manifestation
 	initEClass(manifestationEClass, nullptr, "Manifestation", false, false, true);
 	
-	initEReference(getManifestation_UtilizedElement(),getPackageableElement(),nullptr,"utilizedElement","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getManifestation_UtilizedElement(),getPackageableElement(),nullptr,"utilizedElement","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Manifestation
@@ -5646,13 +5710,15 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Message
 	initEClass(messageEClass, nullptr, "Message", false, false, true);
-	initEAttribute(getMessage_MessageKind(),getMessageKind(),"messageKind","unknown",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getMessage_MessageSort(),getMessageSort(),"messageSort","synchCall",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getMessage_Argument(),getValueSpecification(),nullptr,"argument","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getMessage_Connector(),getConnector(),nullptr,"connector","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getMessage_Interaction(),getInteraction(),getInteraction_Message(),"interaction","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getMessage_ReceiveEvent(),getMessageEnd(),nullptr,"receiveEvent","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getMessage_SendEvent(),getMessageEnd(),nullptr,"sendEvent","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getMessage_Signature(),getNamedElement(),nullptr,"signature","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getMessage_MessageKind(),getMessageKind(),"messageKind","unknown",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getMessage_MessageSort(),getMessageSort(),"messageSort","synchCall",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getMessage_Argument(),getValueSpecification(),nullptr,"argument","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getMessage_Connector(),getConnector(),nullptr,"connector","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getMessage_Interaction(),getInteraction(),getInteraction_Message(),"interaction","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getMessage_ReceiveEvent(),getMessageEnd(),nullptr,"receiveEvent","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getMessage_SendEvent(),getMessageEnd(),nullptr,"sendEvent","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getMessage_Signature(),getNamedElement(),nullptr,"signature","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getMessage___Arguments__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "arguments", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5694,7 +5760,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class MessageEnd
 	initEClass(messageEndEClass, nullptr, "MessageEnd", true, false, true);
 	
-	initEReference(getMessageEnd_Message(),getMessage(),nullptr,"message","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getMessageEnd_Message(),getMessage(),nullptr,"message","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getMessageEnd___EnclosingFragment(),getInteractionFragment(), "enclosingFragment", 0, -1, true,false );
 	
@@ -5723,7 +5789,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Model
 	initEClass(modelEClass, nullptr, "Model", false, false, true);
-	initEAttribute(getModel_Viewpoint(),types::TypesPackage::eInstance()->getString(),"viewpoint","",0,1, nullptr, false,false, true, true, false, true, false, false);
+	initEAttribute(getModel_Viewpoint(),types::TypesPackage::eInstance()->getString(),"viewpoint","",0,1, false,false, true, true, false, true, false, false);
+	
 	
 	op = initEOperation(getModel___IsMetamodel(),types::TypesPackage::eInstance()->getBoolean(), "isMetamodel", 1, 1, true,false );
 	
@@ -5732,9 +5799,13 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class MultiplicityElement
 	initEClass(multiplicityElementEClass, nullptr, "MultiplicityElement", true, false, true);
-	initEAttribute(getMultiplicityElement_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getMultiplicityElement_IsUnique(),types::TypesPackage::eInstance()->getBoolean(),"isUnique","true",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getMultiplicityElement_Lower(),types::TypesPackage::eInstance()->getInteger(),"lower","1",0,1, nullptr, true,true, true, false, false, true, true, false);initEAttribute(getMultiplicityElement_Upper(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"upper","1",1,1, nullptr, true,true, true, false, false, true, true, false);
-	initEReference(getMultiplicityElement_LowerValue(),getValueSpecification(),nullptr,"lowerValue","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getMultiplicityElement_UpperValue(),getValueSpecification(),nullptr,"upperValue","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getMultiplicityElement_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getMultiplicityElement_IsUnique(),types::TypesPackage::eInstance()->getBoolean(),"isUnique","true",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getMultiplicityElement_Lower(),types::TypesPackage::eInstance()->getInteger(),"lower","1",0,1, true,true, true, false, false, true, true, false);
+	initEAttribute(getMultiplicityElement_Upper(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"upper","1",1,1, true,true, true, false, false, true, true, false);
+	
+	initEReference(getMultiplicityElement_LowerValue(),getValueSpecification(),nullptr,"lowerValue","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getMultiplicityElement_UpperValue(),getValueSpecification(),nullptr,"upperValue","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getMultiplicityElement___CompatibleWith__MultiplicityElement(),types::TypesPackage::eInstance()->getBoolean(), "compatibleWith", 1, 1, true,false );
 	addEParameter(op ,getMultiplicityElement()  , "other",0,1, true,true);
@@ -5781,10 +5852,13 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class NamedElement
 	initEClass(namedElementEClass, nullptr, "NamedElement", true, false, true);
-	initEAttribute(getNamedElement_Name(),types::TypesPackage::eInstance()->getString(),"name","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getNamedElement_QualifiedName(),types::TypesPackage::eInstance()->getString(),"qualifiedName","",0,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getNamedElement_Visibility(),getVisibilityKind(),"visibility","",0,1, nullptr, false,false, true, true, false, true, false, false);
-	initEReference(getNamedElement_ClientDependency(),getDependency(),nullptr,"clientDependency","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getNamedElement_NameExpression(),getStringExpression(),nullptr,"nameExpression","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getNamedElement_Namespace(),getNamespace(),getNamespace_OwnedMember(),"namespace","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getNamedElement_Name(),types::TypesPackage::eInstance()->getString(),"name","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getNamedElement_QualifiedName(),types::TypesPackage::eInstance()->getString(),"qualifiedName","",0,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getNamedElement_Visibility(),getVisibilityKind(),"visibility","",0,1, false,false, true, true, false, true, false, false);
+	
+	initEReference(getNamedElement_ClientDependency(),getDependency(),nullptr,"clientDependency","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getNamedElement_NameExpression(),getStringExpression(),nullptr,"nameExpression","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getNamedElement_Namespace(),getNamespace(),getNamespace_OwnedMember(),"namespace","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getNamedElement___AllNamespaces(),getNamespace(), "allNamespaces", 0, -1, true,true );
 	
@@ -5831,12 +5905,12 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Namespace
 	initEClass(namespaceEClass, nullptr, "Namespace", true, false, true);
 	
-	initEReference(getNamespace_ElementImport(),getElementImport(),getElementImport_ImportingNamespace(),"elementImport","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getNamespace_ImportedMember(),getPackageableElement(),nullptr,"importedMember","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getNamespace_Member(),getNamedElement(),nullptr,"member","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getNamespace_OwnedMember(),getNamedElement(),getNamedElement_Namespace(),"ownedMember","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getNamespace_OwnedRule(),getConstraint(),getConstraint_Context(),"ownedRule","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getNamespace_PackageImport(),getPackageImport(),getPackageImport_ImportingNamespace(),"packageImport","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getNamespace_ElementImport(),getElementImport(),getElementImport_ImportingNamespace(),"elementImport","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getNamespace_ImportedMember(),getPackageableElement(),nullptr,"importedMember","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getNamespace_Member(),getNamedElement(),nullptr,"member","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getNamespace_OwnedMember(),getNamedElement(),getNamedElement_Namespace(),"ownedMember","",0,-1, true,true, false, true, true, false, true, true,false);
+	initEReference(getNamespace_OwnedRule(),getConstraint(),getConstraint_Context(),"ownedRule","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getNamespace_PackageImport(),getPackageImport(),getPackageImport_ImportingNamespace(),"packageImport","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getNamespace___Cannot_import_ownedMembers__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "cannot_import_ownedMembers", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5883,7 +5957,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Node
 	initEClass(nodeEClass, nullptr, "Node", false, false, true);
 	
-	initEReference(getNode_NestedNode(),getNode(),nullptr,"nestedNode","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getNode_NestedNode(),getNode(),nullptr,"nestedNode","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getNode___CreateCommunicationPath__Boolean_UnlimitedNatural(),getCommunicationPath(), "createCommunicationPath", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getBoolean()  , "end1IsNavigable",0,1, true,true);
@@ -5926,9 +6000,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ObjectFlow
 	initEClass(objectFlowEClass, nullptr, "ObjectFlow", false, false, true);
-	initEAttribute(getObjectFlow_IsMulticast(),types::TypesPackage::eInstance()->getBoolean(),"isMulticast","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getObjectFlow_IsMultireceive(),types::TypesPackage::eInstance()->getBoolean(),"isMultireceive","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getObjectFlow_Selection(),getBehavior(),nullptr,"selection","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getObjectFlow_Transformation(),getBehavior(),nullptr,"transformation","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getObjectFlow_IsMulticast(),types::TypesPackage::eInstance()->getBoolean(),"isMulticast","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getObjectFlow_IsMultireceive(),types::TypesPackage::eInstance()->getBoolean(),"isMultireceive","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getObjectFlow_Selection(),getBehavior(),nullptr,"selection","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getObjectFlow_Transformation(),getBehavior(),nullptr,"transformation","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getObjectFlow___Compatible_types__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "compatible_types", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5967,10 +6043,12 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ObjectNode
 	initEClass(objectNodeEClass, nullptr, "ObjectNode", true, false, true);
-	initEAttribute(getObjectNode_IsControlType(),types::TypesPackage::eInstance()->getBoolean(),"isControlType","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getObjectNode_Ordering(),getObjectNodeOrderingKind(),"ordering","FIFO",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getObjectNode_InState(),getState(),nullptr,"inState","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getObjectNode_Selection(),getBehavior(),nullptr,"selection","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getObjectNode_UpperBound(),getValueSpecification(),nullptr,"upperBound","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getObjectNode_IsControlType(),types::TypesPackage::eInstance()->getBoolean(),"isControlType","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getObjectNode_Ordering(),getObjectNodeOrderingKind(),"ordering","FIFO",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getObjectNode_InState(),getState(),nullptr,"inState","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getObjectNode_Selection(),getBehavior(),nullptr,"selection","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getObjectNode_UpperBound(),getValueSpecification(),nullptr,"upperBound","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getObjectNode___Input_output_parameter__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "input_output_parameter", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -5997,8 +6075,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class OccurrenceSpecification
 	initEClass(occurrenceSpecificationEClass, nullptr, "OccurrenceSpecification", false, false, true);
 	
-	initEReference(getOccurrenceSpecification_ToAfter(),getGeneralOrdering(),getGeneralOrdering_Before(),"toAfter","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOccurrenceSpecification_ToBefore(),getGeneralOrdering(),getGeneralOrdering_After(),"toBefore","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getOccurrenceSpecification_ToAfter(),getGeneralOrdering(),getGeneralOrdering_Before(),"toAfter","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOccurrenceSpecification_ToBefore(),getGeneralOrdering(),getGeneralOrdering_After(),"toBefore","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getOccurrenceSpecification___GetCovered(),getLifeline(), "getCovered", 0, 1, true,false );
 	
@@ -6010,9 +6088,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class OpaqueAction
 	initEClass(opaqueActionEClass, nullptr, "OpaqueAction", false, false, true);
-	initEAttribute(getOpaqueAction_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, nullptr, false,false, true, true, false, false, false, true);initEAttribute(getOpaqueAction_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, nullptr, false,false, true, true, false, true, false, true);
-	initEReference(getOpaqueAction_InputValue(),getInputPin(),nullptr,"inputValue","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getOpaqueAction_OutputValue(),getOutputPin(),nullptr,"outputValue","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getOpaqueAction_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, false,false, true, true, false, false, false, true);
+	initEAttribute(getOpaqueAction_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, false,false, true, true, false, true, false, true);
+	
+	initEReference(getOpaqueAction_InputValue(),getInputPin(),nullptr,"inputValue","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getOpaqueAction_OutputValue(),getOutputPin(),nullptr,"outputValue","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getOpaqueAction___Language_body_size__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "language_body_size", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6023,16 +6103,20 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class OpaqueBehavior
 	initEClass(opaqueBehaviorEClass, nullptr, "OpaqueBehavior", false, false, true);
-	initEAttribute(getOpaqueBehavior_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, nullptr, false,false, true, true, false, false, false, true);initEAttribute(getOpaqueBehavior_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, nullptr, false,false, true, true, false, true, false, true);
+	initEAttribute(getOpaqueBehavior_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, false,false, true, true, false, false, false, true);
+	initEAttribute(getOpaqueBehavior_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, false,false, true, true, false, true, false, true);
+	
 	
 	
 	// End Class OpaqueBehavior
 
 	// Begin Class OpaqueExpression
 	initEClass(opaqueExpressionEClass, nullptr, "OpaqueExpression", false, false, true);
-	initEAttribute(getOpaqueExpression_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, nullptr, false,false, true, true, false, false, false, true);initEAttribute(getOpaqueExpression_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, nullptr, false,false, true, true, false, true, false, true);
-	initEReference(getOpaqueExpression_Behavior(),getBehavior(),nullptr,"behavior","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOpaqueExpression_Result(),getParameter(),nullptr,"result","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getOpaqueExpression_Body(),types::TypesPackage::eInstance()->getString(),"body","",0,-1, false,false, true, true, false, false, false, true);
+	initEAttribute(getOpaqueExpression_Language(),types::TypesPackage::eInstance()->getString(),"language","",0,-1, false,false, true, true, false, true, false, true);
+	
+	initEReference(getOpaqueExpression_Behavior(),getBehavior(),nullptr,"behavior","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOpaqueExpression_Result(),getParameter(),nullptr,"result","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getOpaqueExpression___GetResult(),getParameter(), "getResult", 0, 1, true,false );
 	
@@ -6061,15 +6145,20 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Operation
 	initEClass(operationEClass, nullptr, "Operation", false, false, true);
-	initEAttribute(getOperation_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getOperation_IsQuery(),types::TypesPackage::eInstance()->getBoolean(),"isQuery","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getOperation_IsUnique(),types::TypesPackage::eInstance()->getBoolean(),"isUnique","true",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getOperation_Lower(),types::TypesPackage::eInstance()->getInteger(),"lower","1",0,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getOperation_Upper(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"upper","1",0,1, nullptr, true,true, false, false, false, true, true, false);
-	initEReference(getOperation_BodyCondition(),getConstraint(),nullptr,"bodyCondition","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Class(),getClass(),getClass_OwnedOperation(),"class","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Datatype(),getDataType(),getDataType_OwnedOperation(),"datatype","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Interface(),getInterface(),getInterface_OwnedOperation(),"interface","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Postcondition(),getConstraint(),nullptr,"postcondition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Precondition(),getConstraint(),nullptr,"precondition","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_RedefinedOperation(),getOperation(),nullptr,"redefinedOperation","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getOperation_Type(),getType(),nullptr,"type","",0,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getOperation_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getOperation_IsQuery(),types::TypesPackage::eInstance()->getBoolean(),"isQuery","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getOperation_IsUnique(),types::TypesPackage::eInstance()->getBoolean(),"isUnique","true",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getOperation_Lower(),types::TypesPackage::eInstance()->getInteger(),"lower","1",0,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getOperation_Upper(),types::TypesPackage::eInstance()->getUnlimitedNatural(),"upper","1",0,1, true,true, false, false, false, true, true, false);
+	
+	initEReference(getOperation_BodyCondition(),getConstraint(),nullptr,"bodyCondition","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Class(),getClass(),getClass_OwnedOperation(),"class","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Datatype(),getDataType(),getDataType_OwnedOperation(),"datatype","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Interface(),getInterface(),getInterface_OwnedOperation(),"interface","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Postcondition(),getConstraint(),nullptr,"postcondition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Precondition(),getConstraint(),nullptr,"precondition","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_RedefinedOperation(),getOperation(),nullptr,"redefinedOperation","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getOperation_Type(),getType(),nullptr,"type","",0,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getOperation___At_most_one_return__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "at_most_one_return", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6125,6 +6214,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class OutputPin
 	initEClass(outputPinEClass, nullptr, "OutputPin", false, false, true);
 	
+	initEReference(getOutputPin_CallAction(),getCallAction(),getCallAction_Result(),"callAction","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "incoming_edges_structured_only", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6135,14 +6225,15 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Package
 	initEClass(packageEClass, nullptr, "Package", false, false, true);
-	initEAttribute(getPackage_URI(),types::TypesPackage::eInstance()->getString(),"URI","",0,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getPackage_NestedPackage(),getPackage(),getPackage_NestingPackage(),"nestedPackage","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getPackage_NestingPackage(),getPackage(),getPackage_NestedPackage(),"nestingPackage","",0,1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getPackage_OwnedStereotype(),getStereotype(),nullptr,"ownedStereotype","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getPackage_OwnedType(),getType(),getType_Package(),"ownedType","",0,-1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getPackage_PackageMerge(),getPackageMerge(),getPackageMerge_ReceivingPackage(),"packageMerge","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getPackage_PackagedElement(),getPackageableElement(),nullptr,"packagedElement","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getPackage_ProfileApplication(),getProfileApplication(),getProfileApplication_ApplyingPackage(),"profileApplication","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getPackage_URI(),types::TypesPackage::eInstance()->getString(),"URI","",0,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getPackage_NestedPackage(),getPackage(),getPackage_NestingPackage(),"nestedPackage","",0,-1, true,true, true, true, true, false, true, true,false);
+	initEReference(getPackage_NestingPackage(),getPackage(),getPackage_NestedPackage(),"nestingPackage","",0,1, true,true, true, false, true, false, true, true,false);
+	initEReference(getPackage_OwnedStereotype(),getStereotype(),nullptr,"ownedStereotype","",0,-1, true,true, false, true, true, false, true, true,false);
+	initEReference(getPackage_OwnedType(),getType(),getType_Package(),"ownedType","",0,-1, true,true, true, true, true, false, true, true,false);
+	initEReference(getPackage_PackageMerge(),getPackageMerge(),getPackageMerge_ReceivingPackage(),"packageMerge","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getPackage_PackagedElement(),getPackageableElement(),getPackageableElement_OwningPackage(),"packagedElement","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getPackage_ProfileApplication(),getProfileApplication(),getProfileApplication_ApplyingPackage(),"profileApplication","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getPackage___AllApplicableStereotypes(),getStereotype(), "allApplicableStereotypes", 0, -1, true,false );
 	
@@ -6216,9 +6307,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class PackageImport
 	initEClass(packageImportEClass, nullptr, "PackageImport", false, false, true);
-	initEAttribute(getPackageImport_Visibility(),getVisibilityKind(),"visibility","public",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getPackageImport_ImportedPackage(),getPackage(),nullptr,"importedPackage","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getPackageImport_ImportingNamespace(),getNamespace(),getNamespace_PackageImport(),"importingNamespace","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getPackageImport_Visibility(),getVisibilityKind(),"visibility","public",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getPackageImport_ImportedPackage(),getPackage(),nullptr,"importedPackage","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getPackageImport_ImportingNamespace(),getNamespace(),getNamespace_PackageImport(),"importingNamespace","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getPackageImport___Public_or_private__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "public_or_private", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6230,8 +6322,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class PackageMerge
 	initEClass(packageMergeEClass, nullptr, "PackageMerge", false, false, true);
 	
-	initEReference(getPackageMerge_MergedPackage(),getPackage(),nullptr,"mergedPackage","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getPackageMerge_ReceivingPackage(),getPackage(),getPackage_PackageMerge(),"receivingPackage","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getPackageMerge_MergedPackage(),getPackage(),nullptr,"mergedPackage","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getPackageMerge_ReceivingPackage(),getPackage(),getPackage_PackageMerge(),"receivingPackage","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class PackageMerge
@@ -6239,6 +6331,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class PackageableElement
 	initEClass(packageableElementEClass, nullptr, "PackageableElement", true, false, true);
 	
+	initEReference(getPackageableElement_OwningPackage(),getPackage(),getPackage_PackagedElement(),"owningPackage","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "namespace_needs_visibility", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6249,10 +6342,16 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Parameter
 	initEClass(parameterEClass, nullptr, "Parameter", false, false, true);
-	initEAttribute(getParameter_Default(),types::TypesPackage::eInstance()->getString(),"default","",0,1, nullptr, true,true, true, true, false, true, true, false);initEAttribute(getParameter_Direction(),getParameterDirectionKind(),"direction","in",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getParameter_Effect(),getParameterEffectKind(),"effect","",0,1, nullptr, false,false, true, true, false, true, false, false);initEAttribute(getParameter_IsException(),types::TypesPackage::eInstance()->getBoolean(),"isException","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getParameter_IsStream(),types::TypesPackage::eInstance()->getBoolean(),"isStream","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getParameter_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getParameter_Operation(),getOperation(),nullptr,"operation","",0,1, nullptr , true,true, false, false, true, false, true, false,false);
-	initEReference(getParameter_ParameterSet(),getParameterSet(),getParameterSet_Parameter(),"parameterSet","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getParameter_Default(),types::TypesPackage::eInstance()->getString(),"default","",0,1, true,true, true, true, false, true, true, false);
+	initEAttribute(getParameter_Direction(),getParameterDirectionKind(),"direction","in",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getParameter_Effect(),getParameterEffectKind(),"effect","",0,1, false,false, true, true, false, true, false, false);
+	initEAttribute(getParameter_IsException(),types::TypesPackage::eInstance()->getBoolean(),"isException","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getParameter_IsStream(),types::TypesPackage::eInstance()->getBoolean(),"isStream","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getParameter_Behavior(),getBehavior(),getBehavior_OwnedParameter(),"behavior","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getParameter_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getParameter_Operation(),getOperation(),getBehavioralFeature_OwnedParameter(),"operation","",0,1, true,true, false, false, true, false, true, false,false);
+	initEReference(getParameter_ParameterSet(),getParameterSet(),getParameterSet_Parameter(),"parameterSet","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getParameter___Connector_end__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "connector_end", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6305,8 +6404,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ParameterSet
 	initEClass(parameterSetEClass, nullptr, "ParameterSet", false, false, true);
 	
-	initEReference(getParameterSet_Condition(),getConstraint(),nullptr,"condition","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getParameterSet_Parameter(),getParameter(),getParameter_ParameterSet(),"parameter","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getParameterSet_Condition(),getConstraint(),nullptr,"condition","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getParameterSet_Parameter(),getParameter(),getParameter_ParameterSet(),"parameter","",1,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getParameterSet___Input__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "input", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6326,8 +6425,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ParameterableElement
 	initEClass(parameterableElementEClass, nullptr, "ParameterableElement", true, false, true);
 	
-	initEReference(getParameterableElement_OwningTemplateParameter(),getTemplateParameter(),getTemplateParameter_OwnedParameteredElement(),"owningTemplateParameter","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getParameterableElement_TemplateParameter(),getTemplateParameter(),getTemplateParameter_ParameteredElement(),"templateParameter","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getParameterableElement_OwningTemplateParameter(),getTemplateParameter(),getTemplateParameter_OwnedParameteredElement(),"owningTemplateParameter","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getParameterableElement_TemplateParameter(),getTemplateParameter(),getTemplateParameter_ParameteredElement(),"templateParameter","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getParameterableElement___IsCompatibleWith__ParameterableElement(),types::TypesPackage::eInstance()->getBoolean(), "isCompatibleWith", 1, 1, true,false );
 	addEParameter(op ,getParameterableElement()  , "p",0,1, true,true);
@@ -6358,7 +6457,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Pin
 	initEClass(pinEClass, nullptr, "Pin", true, false, true);
-	initEAttribute(getPin_IsControl(),types::TypesPackage::eInstance()->getBoolean(),"isControl","false",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getPin_IsControl(),types::TypesPackage::eInstance()->getBoolean(),"isControl","false",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getPin___Control_pins__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "control_pins", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6373,11 +6473,14 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Port
 	initEClass(portEClass, nullptr, "Port", false, false, true);
-	initEAttribute(getPort_IsBehavior(),types::TypesPackage::eInstance()->getBoolean(),"isBehavior","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getPort_IsConjugated(),types::TypesPackage::eInstance()->getBoolean(),"isConjugated","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getPort_IsService(),types::TypesPackage::eInstance()->getBoolean(),"isService","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getPort_Protocol(),getProtocolStateMachine(),nullptr,"protocol","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getPort_Provided(),getInterface(),nullptr,"provided","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getPort_RedefinedPort(),getPort(),nullptr,"redefinedPort","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getPort_Required(),getInterface(),nullptr,"required","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getPort_IsBehavior(),types::TypesPackage::eInstance()->getBoolean(),"isBehavior","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getPort_IsConjugated(),types::TypesPackage::eInstance()->getBoolean(),"isConjugated","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getPort_IsService(),types::TypesPackage::eInstance()->getBoolean(),"isService","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getPort_Protocol(),getProtocolStateMachine(),nullptr,"protocol","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getPort_Provided(),getInterface(),nullptr,"provided","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getPort_RedefinedPort(),getPort(),nullptr,"redefinedPort","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getPort_Required(),getInterface(),nullptr,"required","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getPort___BasicProvided(),getInterface(), "basicProvided", 0, -1, true,false );
 	
@@ -6412,8 +6515,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Profile
 	initEClass(profileEClass, nullptr, "Profile", false, false, true);
 	
-	initEReference(getProfile_MetaclassReference(),getElementImport(),nullptr,"metaclassReference","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProfile_MetamodelReference(),getPackageImport(),nullptr,"metamodelReference","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getProfile_MetaclassReference(),getElementImport(),nullptr,"metaclassReference","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProfile_MetamodelReference(),getPackageImport(),nullptr,"metamodelReference","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getProfile___Create__Classifier(),ecore::EcorePackage::eInstance()->getEObject(), "create", 1, 1, true,false );
 	addEParameter(op ,getClassifier()  , "classifier",0,1, true,true);
@@ -6452,9 +6555,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ProfileApplication
 	initEClass(profileApplicationEClass, nullptr, "ProfileApplication", false, false, true);
-	initEAttribute(getProfileApplication_IsStrict(),types::TypesPackage::eInstance()->getBoolean(),"isStrict","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getProfileApplication_AppliedProfile(),getProfile(),nullptr,"appliedProfile","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProfileApplication_ApplyingPackage(),getPackage(),getPackage_ProfileApplication(),"applyingPackage","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getProfileApplication_IsStrict(),types::TypesPackage::eInstance()->getBoolean(),"isStrict","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getProfileApplication_AppliedProfile(),getProfile(),nullptr,"appliedProfile","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProfileApplication_ApplyingPackage(),getPackage(),getPackage_ProfileApplication(),"applyingPackage","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getProfileApplication___GetAppliedDefinition(),ecore::EcorePackage::eInstance()->getEPackage(), "getAppliedDefinition", 0, 1, true,false );
 	
@@ -6466,18 +6570,24 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Property
 	initEClass(propertyEClass, nullptr, "Property", false, false, true);
-	initEAttribute(getProperty_Aggregation(),getAggregationKind(),"aggregation","none",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getProperty_Default(),types::TypesPackage::eInstance()->getString(),"default","",0,1, nullptr, true,true, true, true, false, true, true, false);initEAttribute(getProperty_IsComposite(),types::TypesPackage::eInstance()->getBoolean(),"isComposite","false",1,1, nullptr, true,true, true, false, false, true, true, false);initEAttribute(getProperty_IsDerived(),types::TypesPackage::eInstance()->getBoolean(),"isDerived","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getProperty_IsDerivedUnion(),types::TypesPackage::eInstance()->getBoolean(),"isDerivedUnion","false",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getProperty_IsID(),types::TypesPackage::eInstance()->getBoolean(),"isID","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getProperty_Association(),getAssociation(),getAssociation_MemberEnd(),"association","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_AssociationEnd(),getProperty(),getProperty_Qualifier(),"associationEnd","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_Class(),getClass(),nullptr,"class","",0,1, nullptr , true,true, true, false, true, false, true, false,false);
-	initEReference(getProperty_Datatype(),getDataType(),getDataType_OwnedAttribute(),"datatype","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getProperty_Interface(),getInterface(),getInterface_OwnedAttribute(),"interface","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_Opposite(),getProperty(),nullptr,"opposite","",0,1, nullptr , true,true, true, false, true, false, true, true,false);
-	initEReference(getProperty_OwningAssociation(),getAssociation(),getAssociation_OwnedEnd(),"owningAssociation","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_Qualifier(),getProperty(),getProperty_AssociationEnd(),"qualifier","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getProperty_RedefinedProperty(),getProperty(),nullptr,"redefinedProperty","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProperty_SubsettedProperty(),getProperty(),nullptr,"subsettedProperty","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getProperty_Aggregation(),getAggregationKind(),"aggregation","none",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getProperty_Default(),types::TypesPackage::eInstance()->getString(),"default","",0,1, true,true, true, true, false, true, true, false);
+	initEAttribute(getProperty_IsComposite(),types::TypesPackage::eInstance()->getBoolean(),"isComposite","false",1,1, true,true, true, false, false, true, true, false);
+	initEAttribute(getProperty_IsDerived(),types::TypesPackage::eInstance()->getBoolean(),"isDerived","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getProperty_IsDerivedUnion(),types::TypesPackage::eInstance()->getBoolean(),"isDerivedUnion","false",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getProperty_IsID(),types::TypesPackage::eInstance()->getBoolean(),"isID","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getProperty_Association(),getAssociation(),getAssociation_MemberEnd(),"association","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_AssociationEnd(),getProperty(),getProperty_Qualifier(),"associationEnd","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_Class(),getClass(),getStructuredClassifier_OwnedAttribute(),"class","",0,1, true,true, true, false, true, false, true, false,false);
+	initEReference(getProperty_Datatype(),getDataType(),getDataType_OwnedAttribute(),"datatype","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_DefaultValue(),getValueSpecification(),nullptr,"defaultValue","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getProperty_Interface(),getInterface(),getInterface_OwnedAttribute(),"interface","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_Opposite(),getProperty(),nullptr,"opposite","",0,1, true,true, true, false, true, false, true, true,false);
+	initEReference(getProperty_OwningAssociation(),getAssociation(),getAssociation_OwnedEnd(),"owningAssociation","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_Qualifier(),getProperty(),getProperty_AssociationEnd(),"qualifier","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getProperty_RedefinedProperty(),getProperty(),nullptr,"redefinedProperty","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProperty_SubsettedProperty(),getProperty(),nullptr,"subsettedProperty","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getProperty___Binding_to_attribute__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "binding_to_attribute", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6565,8 +6675,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ProtocolConformance
 	initEClass(protocolConformanceEClass, nullptr, "ProtocolConformance", false, false, true);
 	
-	initEReference(getProtocolConformance_GeneralMachine(),getProtocolStateMachine(),nullptr,"generalMachine","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProtocolConformance_SpecificMachine(),getProtocolStateMachine(),getProtocolStateMachine_Conformance(),"specificMachine","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getProtocolConformance_GeneralMachine(),getProtocolStateMachine(),nullptr,"generalMachine","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProtocolConformance_SpecificMachine(),getProtocolStateMachine(),getProtocolStateMachine_Conformance(),"specificMachine","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ProtocolConformance
@@ -6574,7 +6684,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ProtocolStateMachine
 	initEClass(protocolStateMachineEClass, nullptr, "ProtocolStateMachine", false, false, true);
 	
-	initEReference(getProtocolStateMachine_Conformance(),getProtocolConformance(),getProtocolConformance_SpecificMachine(),"conformance","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getProtocolStateMachine_Conformance(),getProtocolConformance(),getProtocolConformance_SpecificMachine(),"conformance","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getProtocolStateMachine___Deep_or_shallow_history__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "deep_or_shallow_history", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6594,9 +6704,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ProtocolTransition
 	initEClass(protocolTransitionEClass, nullptr, "ProtocolTransition", false, false, true);
 	
-	initEReference(getProtocolTransition_PostCondition(),getConstraint(),nullptr,"postCondition","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProtocolTransition_PreCondition(),getConstraint(),nullptr,"preCondition","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getProtocolTransition_Referred(),getOperation(),nullptr,"referred","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getProtocolTransition_PostCondition(),getConstraint(),nullptr,"postCondition","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProtocolTransition_PreCondition(),getConstraint(),nullptr,"preCondition","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getProtocolTransition_Referred(),getOperation(),nullptr,"referred","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getProtocolTransition___Associated_actions__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "associated_actions", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6617,9 +6727,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class Pseudostate
 	initEClass(pseudostateEClass, nullptr, "Pseudostate", false, false, true);
-	initEAttribute(getPseudostate_Kind(),getPseudostateKind(),"kind","initial",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getPseudostate_State(),getState(),getState_ConnectionPoint(),"state","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getPseudostate_StateMachine(),getStateMachine(),getStateMachine_ConnectionPoint(),"stateMachine","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getPseudostate_Kind(),getPseudostateKind(),"kind","initial",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getPseudostate_State(),getState(),getState_ConnectionPoint(),"state","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getPseudostate_StateMachine(),getStateMachine(),getStateMachine_ConnectionPoint(),"stateMachine","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getPseudostate___Choice_vertex__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "choice_vertex", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6663,8 +6774,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class QualifierValue
 	initEClass(qualifierValueEClass, nullptr, "QualifierValue", false, false, true);
 	
-	initEReference(getQualifierValue_Qualifier(),getProperty(),nullptr,"qualifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getQualifierValue_Value(),getInputPin(),nullptr,"value","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getQualifierValue_Qualifier(),getProperty(),nullptr,"qualifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getQualifierValue_Value(),getInputPin(),nullptr,"value","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getQualifierValue___Multiplicity_of_qualifier__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity_of_qualifier", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6684,7 +6795,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class RaiseExceptionAction
 	initEClass(raiseExceptionActionEClass, nullptr, "RaiseExceptionAction", false, false, true);
 	
-	initEReference(getRaiseExceptionAction_Exception(),getInputPin(),nullptr,"exception","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getRaiseExceptionAction_Exception(),getInputPin(),nullptr,"exception","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class RaiseExceptionAction
@@ -6692,8 +6803,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadExtentAction
 	initEClass(readExtentActionEClass, nullptr, "ReadExtentAction", false, false, true);
 	
-	initEReference(getReadExtentAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReadExtentAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadExtentAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReadExtentAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadExtentAction___Multiplicity_of_result__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity_of_result", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6708,10 +6819,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ReadIsClassifiedObjectAction
 	initEClass(readIsClassifiedObjectActionEClass, nullptr, "ReadIsClassifiedObjectAction", false, false, true);
-	initEAttribute(getReadIsClassifiedObjectAction_IsDirect(),types::TypesPackage::eInstance()->getBoolean(),"isDirect","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getReadIsClassifiedObjectAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReadIsClassifiedObjectAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getReadIsClassifiedObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getReadIsClassifiedObjectAction_IsDirect(),types::TypesPackage::eInstance()->getBoolean(),"isDirect","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getReadIsClassifiedObjectAction_Classifier(),getClassifier(),nullptr,"classifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReadIsClassifiedObjectAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getReadIsClassifiedObjectAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadIsClassifiedObjectAction___Boolean_result__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "boolean_result", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6735,7 +6847,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadLinkAction
 	initEClass(readLinkActionEClass, nullptr, "ReadLinkAction", false, false, true);
 	
-	initEReference(getReadLinkAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadLinkAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadLinkAction___Compatible_multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "compatible_multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6765,9 +6877,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadLinkObjectEndAction
 	initEClass(readLinkObjectEndActionEClass, nullptr, "ReadLinkObjectEndAction", false, false, true);
 	
-	initEReference(getReadLinkObjectEndAction_End(),getProperty(),nullptr,"end","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReadLinkObjectEndAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getReadLinkObjectEndAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndAction_End(),getProperty(),nullptr,"end","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadLinkObjectEndAction___Association_of_association__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "association_of_association", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6803,9 +6915,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadLinkObjectEndQualifierAction
 	initEClass(readLinkObjectEndQualifierActionEClass, nullptr, "ReadLinkObjectEndQualifierAction", false, false, true);
 	
-	initEReference(getReadLinkObjectEndQualifierAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getReadLinkObjectEndQualifierAction_Qualifier(),getProperty(),nullptr,"qualifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReadLinkObjectEndQualifierAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndQualifierAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndQualifierAction_Qualifier(),getProperty(),nullptr,"qualifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReadLinkObjectEndQualifierAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadLinkObjectEndQualifierAction___Association_of_association__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "association_of_association", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6845,7 +6957,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadSelfAction
 	initEClass(readSelfActionEClass, nullptr, "ReadSelfAction", false, false, true);
 	
-	initEReference(getReadSelfAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadSelfAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadSelfAction___Contained__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "contained", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6869,7 +6981,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadStructuralFeatureAction
 	initEClass(readStructuralFeatureActionEClass, nullptr, "ReadStructuralFeatureAction", false, false, true);
 	
-	initEReference(getReadStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadStructuralFeatureAction___Type_and_ordering__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "type_and_ordering", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6881,7 +6993,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReadVariableAction
 	initEClass(readVariableActionEClass, nullptr, "ReadVariableAction", false, false, true);
 	
-	initEReference(getReadVariableAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReadVariableAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReadVariableAction___Compatible_multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "compatible_multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6904,7 +7016,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Reception
 	initEClass(receptionEClass, nullptr, "Reception", false, false, true);
 	
-	initEReference(getReception_Signal(),getSignal(),nullptr,"signal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getReception_Signal(),getSignal(),nullptr,"signal","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getReception___Same_name_as_signal__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "same_name_as_signal", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6919,10 +7031,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ReclassifyObjectAction
 	initEClass(reclassifyObjectActionEClass, nullptr, "ReclassifyObjectAction", false, false, true);
-	initEAttribute(getReclassifyObjectAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getReclassifyObjectAction_NewClassifier(),getClassifier(),nullptr,"newClassifier","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReclassifyObjectAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getReclassifyObjectAction_OldClassifier(),getClassifier(),nullptr,"oldClassifier","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getReclassifyObjectAction_IsReplaceAll(),types::TypesPackage::eInstance()->getBoolean(),"isReplaceAll","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getReclassifyObjectAction_NewClassifier(),getClassifier(),nullptr,"newClassifier","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReclassifyObjectAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getReclassifyObjectAction_OldClassifier(),getClassifier(),nullptr,"oldClassifier","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getReclassifyObjectAction___Classifier_not_abstract__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "classifier_not_abstract", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -6941,9 +7054,10 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class RedefinableElement
 	initEClass(redefinableElementEClass, nullptr, "RedefinableElement", true, false, true);
-	initEAttribute(getRedefinableElement_IsLeaf(),types::TypesPackage::eInstance()->getBoolean(),"isLeaf","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getRedefinableElement_RedefinedElement(),getRedefinableElement(),nullptr,"redefinedElement","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getRedefinableElement_RedefinitionContext(),getClassifier(),nullptr,"redefinitionContext","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEAttribute(getRedefinableElement_IsLeaf(),types::TypesPackage::eInstance()->getBoolean(),"isLeaf","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getRedefinableElement_RedefinedElement(),getRedefinableElement(),nullptr,"redefinedElement","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getRedefinableElement_RedefinitionContext(),getClassifier(),nullptr,"redefinitionContext","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getRedefinableElement___IsConsistentWith__RedefinableElement(),types::TypesPackage::eInstance()->getBoolean(), "isConsistentWith", 1, 1, true,false );
 	addEParameter(op ,getRedefinableElement()  , "redefiningElement",0,1, true,true);
@@ -6969,9 +7083,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class RedefinableTemplateSignature
 	initEClass(redefinableTemplateSignatureEClass, nullptr, "RedefinableTemplateSignature", false, false, true);
 	
-	initEReference(getRedefinableTemplateSignature_Classifier(),getClassifier(),nullptr,"classifier","",1,1, nullptr , true,true, false, false, true, false, true, false,false);
-	initEReference(getRedefinableTemplateSignature_ExtendedSignature(),getRedefinableTemplateSignature(),nullptr,"extendedSignature","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getRedefinableTemplateSignature_InheritedParameter(),getTemplateParameter(),nullptr,"inheritedParameter","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getRedefinableTemplateSignature_Classifier(),getClassifier(),nullptr,"classifier","",1,1, true,true, false, false, true, false, true, false,false);
+	initEReference(getRedefinableTemplateSignature_ExtendedSignature(),getRedefinableTemplateSignature(),nullptr,"extendedSignature","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getRedefinableTemplateSignature_InheritedParameter(),getTemplateParameter(),nullptr,"inheritedParameter","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getRedefinableTemplateSignature___GetInheritedParameters(),getTemplateParameter(), "getInheritedParameters", 0, -1, true,false );
 	
@@ -6984,10 +7098,11 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class ReduceAction
 	initEClass(reduceActionEClass, nullptr, "ReduceAction", false, false, true);
-	initEAttribute(getReduceAction_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getReduceAction_Collection(),getInputPin(),nullptr,"collection","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getReduceAction_Reducer(),getBehavior(),nullptr,"reducer","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReduceAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getReduceAction_IsOrdered(),types::TypesPackage::eInstance()->getBoolean(),"isOrdered","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getReduceAction_Collection(),getInputPin(),nullptr,"collection","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getReduceAction_Reducer(),getBehavior(),nullptr,"reducer","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReduceAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReduceAction___Input_type_is_collection__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "input_type_is_collection", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7007,11 +7122,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Region
 	initEClass(regionEClass, nullptr, "Region", false, false, true);
 	
-	initEReference(getRegion_ExtendedRegion(),getRegion(),nullptr,"extendedRegion","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getRegion_State(),getState(),getState_Region(),"state","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getRegion_StateMachine(),getStateMachine(),getStateMachine_Region(),"stateMachine","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getRegion_Subvertex(),getVertex(),getVertex_Container(),"subvertex","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getRegion_Transition(),getTransition(),getTransition_Container(),"transition","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getRegion_ExtendedRegion(),getRegion(),nullptr,"extendedRegion","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getRegion_State(),getState(),getState_Region(),"state","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getRegion_StateMachine(),getStateMachine(),getStateMachine_Region(),"stateMachine","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getRegion_Subvertex(),getVertex(),getVertex_Container(),"subvertex","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getRegion_Transition(),getTransition(),getTransition_Container(),"transition","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getRegion___BelongsToPSM(),types::TypesPackage::eInstance()->getBoolean(), "belongsToPSM", 1, 1, true,false );
 	
@@ -7041,15 +7156,16 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Relationship
 	initEClass(relationshipEClass, nullptr, "Relationship", true, false, true);
 	
-	initEReference(getRelationship_RelatedElement(),getElement(),nullptr,"relatedElement","",1,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getRelationship_RelatedElement(),getElement(),nullptr,"relatedElement","",1,-1, true,true, false, false, true, false, true, true,false);
 	
 	
 	// End Class Relationship
 
 	// Begin Class RemoveStructuralFeatureValueAction
 	initEClass(removeStructuralFeatureValueActionEClass, nullptr, "RemoveStructuralFeatureValueAction", false, false, true);
-	initEAttribute(getRemoveStructuralFeatureValueAction_IsRemoveDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isRemoveDuplicates","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getRemoveStructuralFeatureValueAction_RemoveAt(),getInputPin(),nullptr,"removeAt","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getRemoveStructuralFeatureValueAction_IsRemoveDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isRemoveDuplicates","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getRemoveStructuralFeatureValueAction_RemoveAt(),getInputPin(),nullptr,"removeAt","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getRemoveStructuralFeatureValueAction___RemoveAt_and_value__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "removeAt_and_value", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7060,8 +7176,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class RemoveVariableValueAction
 	initEClass(removeVariableValueActionEClass, nullptr, "RemoveVariableValueAction", false, false, true);
-	initEAttribute(getRemoveVariableValueAction_IsRemoveDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isRemoveDuplicates","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getRemoveVariableValueAction_RemoveAt(),getInputPin(),nullptr,"removeAt","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getRemoveVariableValueAction_IsRemoveDuplicates(),types::TypesPackage::eInstance()->getBoolean(),"isRemoveDuplicates","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getRemoveVariableValueAction_RemoveAt(),getInputPin(),nullptr,"removeAt","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getRemoveVariableValueAction___RemoveAt_and_value__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "removeAt_and_value", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7073,9 +7190,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ReplyAction
 	initEClass(replyActionEClass, nullptr, "ReplyAction", false, false, true);
 	
-	initEReference(getReplyAction_ReplyToCall(),getTrigger(),nullptr,"replyToCall","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getReplyAction_ReplyValue(),getInputPin(),nullptr,"replyValue","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getReplyAction_ReturnInformation(),getInputPin(),nullptr,"returnInformation","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getReplyAction_ReplyToCall(),getTrigger(),nullptr,"replyToCall","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getReplyAction_ReplyValue(),getInputPin(),nullptr,"replyValue","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getReplyAction_ReturnInformation(),getInputPin(),nullptr,"returnInformation","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getReplyAction___Event_on_reply_to_call_trigger__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "event_on_reply_to_call_trigger", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7091,8 +7208,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class SendObjectAction
 	initEClass(sendObjectActionEClass, nullptr, "SendObjectAction", false, false, true);
 	
-	initEReference(getSendObjectAction_Request(),getInputPin(),nullptr,"request","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getSendObjectAction_Target(),getInputPin(),nullptr,"target","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getSendObjectAction_Request(),getInputPin(),nullptr,"request","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getSendObjectAction_Target(),getInputPin(),nullptr,"target","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getSendObjectAction___Type_target_pin__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "type_target_pin", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7104,8 +7221,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class SendSignalAction
 	initEClass(sendSignalActionEClass, nullptr, "SendSignalAction", false, false, true);
 	
-	initEReference(getSendSignalAction_Signal(),getSignal(),nullptr,"signal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getSendSignalAction_Target(),getInputPin(),nullptr,"target","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getSendSignalAction_Signal(),getSignal(),nullptr,"signal","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getSendSignalAction_Target(),getInputPin(),nullptr,"target","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getSendSignalAction___Number_order__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "number_order", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7125,7 +7242,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class SequenceNode
 	initEClass(sequenceNodeEClass, nullptr, "SequenceNode", false, false, true);
 	
-	initEReference(getSequenceNode_ExecutableNode(),getExecutableNode(),nullptr,"executableNode","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getSequenceNode_ExecutableNode(),getExecutableNode(),nullptr,"executableNode","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	
 	// End Class SequenceNode
@@ -7133,7 +7250,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Signal
 	initEClass(signalEClass, nullptr, "Signal", false, false, true);
 	
-	initEReference(getSignal_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getSignal_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getSignal___CreateOwnedAttribute__String_UnlimitedNatural(),getProperty(), "createOwnedAttribute", 1, 1, true,false );
 	addEParameter(op ,types::TypesPackage::eInstance()->getString()  , "name",0,1, true,true);
@@ -7147,7 +7264,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class SignalEvent
 	initEClass(signalEventEClass, nullptr, "SignalEvent", false, false, true);
 	
-	initEReference(getSignalEvent_Signal(),getSignal(),nullptr,"signal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getSignalEvent_Signal(),getSignal(),nullptr,"signal","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class SignalEvent
@@ -7155,9 +7272,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Slot
 	initEClass(slotEClass, nullptr, "Slot", false, false, true);
 	
-	initEReference(getSlot_DefiningFeature(),getStructuralFeature(),nullptr,"definingFeature","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getSlot_OwningInstance(),getInstanceSpecification(),getInstanceSpecification_Slot(),"owningInstance","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getSlot_Value(),getValueSpecification(),nullptr,"value","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getSlot_DefiningFeature(),getStructuralFeature(),nullptr,"definingFeature","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getSlot_OwningInstance(),getInstanceSpecification(),getInstanceSpecification_Slot(),"owningInstance","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getSlot_Value(),getValueSpecification(),getValueSpecification_OwningSlot(),"value","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	
 	// End Class Slot
@@ -7165,7 +7282,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StartClassifierBehaviorAction
 	initEClass(startClassifierBehaviorActionEClass, nullptr, "StartClassifierBehaviorAction", false, false, true);
 	
-	initEReference(getStartClassifierBehaviorAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getStartClassifierBehaviorAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getStartClassifierBehaviorAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7181,7 +7298,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StartObjectBehaviorAction
 	initEClass(startObjectBehaviorActionEClass, nullptr, "StartObjectBehaviorAction", false, false, true);
 	
-	initEReference(getStartObjectBehaviorAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getStartObjectBehaviorAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getStartObjectBehaviorAction___Behavior(),getBehavior(), "behavior", 0, 1, true,false );
 	
@@ -7202,17 +7319,21 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class State
 	initEClass(stateEClass, nullptr, "State", false, false, true);
-	initEAttribute(getState_IsComposite(),types::TypesPackage::eInstance()->getBoolean(),"isComposite","",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getState_IsOrthogonal(),types::TypesPackage::eInstance()->getBoolean(),"isOrthogonal","",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getState_IsSimple(),types::TypesPackage::eInstance()->getBoolean(),"isSimple","true",1,1, nullptr, true,true, false, false, false, true, true, false);initEAttribute(getState_IsSubmachineState(),types::TypesPackage::eInstance()->getBoolean(),"isSubmachineState","",1,1, nullptr, true,true, false, false, false, true, true, false);
-	initEReference(getState_Connection(),getConnectionPointReference(),getConnectionPointReference_State(),"connection","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_ConnectionPoint(),getPseudostate(),getPseudostate_State(),"connectionPoint","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_DeferrableTrigger(),getTrigger(),nullptr,"deferrableTrigger","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_DoActivity(),getBehavior(),nullptr,"doActivity","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_Entry(),getBehavior(),nullptr,"entry","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_Exit(),getBehavior(),nullptr,"exit","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_RedefinedState(),getState(),nullptr,"redefinedState","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getState_Region(),getRegion(),getRegion_State(),"region","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getState_StateInvariant(),getConstraint(),nullptr,"stateInvariant","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getState_Submachine(),getStateMachine(),getStateMachine_SubmachineState(),"submachine","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getState_IsComposite(),types::TypesPackage::eInstance()->getBoolean(),"isComposite","",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getState_IsOrthogonal(),types::TypesPackage::eInstance()->getBoolean(),"isOrthogonal","",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getState_IsSimple(),types::TypesPackage::eInstance()->getBoolean(),"isSimple","true",1,1, true,true, false, false, false, true, true, false);
+	initEAttribute(getState_IsSubmachineState(),types::TypesPackage::eInstance()->getBoolean(),"isSubmachineState","",1,1, true,true, false, false, false, true, true, false);
+	
+	initEReference(getState_Connection(),getConnectionPointReference(),getConnectionPointReference_State(),"connection","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_ConnectionPoint(),getPseudostate(),getPseudostate_State(),"connectionPoint","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_DeferrableTrigger(),getTrigger(),nullptr,"deferrableTrigger","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_DoActivity(),getBehavior(),nullptr,"doActivity","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_Entry(),getBehavior(),nullptr,"entry","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_Exit(),getBehavior(),nullptr,"exit","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_RedefinedState(),getState(),nullptr,"redefinedState","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getState_Region(),getRegion(),getRegion_State(),"region","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getState_StateInvariant(),getConstraint(),nullptr,"stateInvariant","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getState_Submachine(),getStateMachine(),getStateMachine_SubmachineState(),"submachine","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getState___Composite_states__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "composite_states", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7250,7 +7371,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StateInvariant
 	initEClass(stateInvariantEClass, nullptr, "StateInvariant", false, false, true);
 	
-	initEReference(getStateInvariant_Invariant(),getConstraint(),nullptr,"invariant","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getStateInvariant_Invariant(),getConstraint(),nullptr,"invariant","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class StateInvariant
@@ -7258,10 +7379,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StateMachine
 	initEClass(stateMachineEClass, nullptr, "StateMachine", false, false, true);
 	
-	initEReference(getStateMachine_ConnectionPoint(),getPseudostate(),getPseudostate_StateMachine(),"connectionPoint","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStateMachine_ExtendedStateMachine(),getStateMachine(),nullptr,"extendedStateMachine","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getStateMachine_Region(),getRegion(),getRegion_StateMachine(),"region","",1,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStateMachine_SubmachineState(),getState(),getState_Submachine(),"submachineState","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getStateMachine_ConnectionPoint(),getPseudostate(),getPseudostate_StateMachine(),"connectionPoint","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStateMachine_ExtendedStateMachine(),getStateMachine(),nullptr,"extendedStateMachine","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getStateMachine_Region(),getRegion(),getRegion_StateMachine(),"region","",1,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStateMachine_SubmachineState(),getState(),getState_Submachine(),"submachineState","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getStateMachine___LCA__Vertex_Vertex(),getRegion(), "LCA", 1, 1, true,false );
 	addEParameter(op ,getVertex()  , "s1",0,1, true,true);
@@ -7297,8 +7418,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Stereotype
 	initEClass(stereotypeEClass, nullptr, "Stereotype", false, false, true);
 	
-	initEReference(getStereotype_Icon(),getImage(),nullptr,"icon","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStereotype_Profile(),getProfile(),nullptr,"profile","",1,1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getStereotype_Icon(),getImage(),nullptr,"icon","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStereotype_Profile(),getProfile(),nullptr,"profile","",1,1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getStereotype___AssociationEndOwnership__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "associationEndOwnership", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7360,8 +7481,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StringExpression
 	initEClass(stringExpressionEClass, nullptr, "StringExpression", false, false, true);
 	
-	initEReference(getStringExpression_OwningExpression(),getStringExpression(),getStringExpression_SubExpression(),"owningExpression","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getStringExpression_SubExpression(),getStringExpression(),getStringExpression_OwningExpression(),"subExpression","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getStringExpression_OwningExpression(),getStringExpression(),getStringExpression_SubExpression(),"owningExpression","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getStringExpression_SubExpression(),getStringExpression(),getStringExpression_OwningExpression(),"subExpression","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getStringExpression___Operands__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "operands", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7376,7 +7497,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class StructuralFeature
 	initEClass(structuralFeatureEClass, nullptr, "StructuralFeature", true, false, true);
-	initEAttribute(getStructuralFeature_IsReadOnly(),types::TypesPackage::eInstance()->getBoolean(),"isReadOnly","false",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getStructuralFeature_IsReadOnly(),types::TypesPackage::eInstance()->getBoolean(),"isReadOnly","false",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	
 	// End Class StructuralFeature
@@ -7384,8 +7506,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StructuralFeatureAction
 	initEClass(structuralFeatureActionEClass, nullptr, "StructuralFeatureAction", true, false, true);
 	
-	initEReference(getStructuralFeatureAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuralFeatureAction_StructuralFeature(),getStructuralFeature(),nullptr,"structuralFeature","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getStructuralFeatureAction_Object(),getInputPin(),getInputPin_StructuralFeatureAction(),"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuralFeatureAction_StructuralFeature(),getStructuralFeature(),nullptr,"structuralFeature","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getStructuralFeatureAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7412,12 +7534,13 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class StructuredActivityNode
 	initEClass(structuredActivityNodeEClass, nullptr, "StructuredActivityNode", false, false, true);
-	initEAttribute(getStructuredActivityNode_MustIsolate(),types::TypesPackage::eInstance()->getBoolean(),"mustIsolate","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getStructuredActivityNode_Edge(),getActivityEdge(),getActivityEdge_InStructuredNode(),"edge","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuredActivityNode_Node(),getActivityNode(),getActivityNode_InStructuredNode(),"node","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuredActivityNode_StructuredNodeInput(),getInputPin(),nullptr,"structuredNodeInput","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuredActivityNode_StructuredNodeOutput(),getOutputPin(),nullptr,"structuredNodeOutput","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuredActivityNode_Variable(),getVariable(),getVariable_Scope(),"variable","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getStructuredActivityNode_MustIsolate(),types::TypesPackage::eInstance()->getBoolean(),"mustIsolate","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getStructuredActivityNode_Edge(),getActivityEdge(),getActivityEdge_InStructuredNode(),"edge","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredActivityNode_Node(),getActivityNode(),getActivityNode_InStructuredNode(),"node","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredActivityNode_StructuredNodeInput(),getInputPin(),nullptr,"structuredNodeInput","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredActivityNode_StructuredNodeOutput(),getOutputPin(),nullptr,"structuredNodeOutput","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredActivityNode_Variable(),getVariable(),getVariable_Scope(),"variable","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getStructuredActivityNode___Edges__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "edges", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7441,10 +7564,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class StructuredClassifier
 	initEClass(structuredClassifierEClass, nullptr, "StructuredClassifier", true, false, true);
 	
-	initEReference(getStructuredClassifier_OwnedAttribute(),getProperty(),nullptr,"ownedAttribute","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getStructuredClassifier_OwnedConnector(),getConnector(),nullptr,"ownedConnector","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getStructuredClassifier_Part(),getProperty(),nullptr,"part","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getStructuredClassifier_Role(),getConnectableElement(),nullptr,"role","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getStructuredClassifier_OwnedAttribute(),getProperty(),getProperty_Class(),"ownedAttribute","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getStructuredClassifier_OwnedConnector(),getConnector(),nullptr,"ownedConnector","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredClassifier_Part(),getProperty(),nullptr,"part","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getStructuredClassifier_Role(),getConnectableElement(),nullptr,"role","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getStructuredClassifier___AllRoles(),getConnectableElement(), "allRoles", 0, -1, true,false );
 	
@@ -7462,8 +7585,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Substitution
 	initEClass(substitutionEClass, nullptr, "Substitution", false, false, true);
 	
-	initEReference(getSubstitution_Contract(),getClassifier(),nullptr,"contract","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getSubstitution_SubstitutingClassifier(),getClassifier(),getClassifier_Substitution(),"substitutingClassifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getSubstitution_Contract(),getClassifier(),nullptr,"contract","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getSubstitution_SubstitutingClassifier(),getClassifier(),getClassifier_Substitution(),"substitutingClassifier","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Substitution
@@ -7471,9 +7594,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TemplateBinding
 	initEClass(templateBindingEClass, nullptr, "TemplateBinding", false, false, true);
 	
-	initEReference(getTemplateBinding_BoundElement(),getTemplateableElement(),getTemplateableElement_TemplateBinding(),"boundElement","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTemplateBinding_ParameterSubstitution(),getTemplateParameterSubstitution(),getTemplateParameterSubstitution_TemplateBinding(),"parameterSubstitution","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTemplateBinding_Signature(),getTemplateSignature(),nullptr,"signature","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateBinding_BoundElement(),getTemplateableElement(),getTemplateableElement_TemplateBinding(),"boundElement","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateBinding_ParameterSubstitution(),getTemplateParameterSubstitution(),getTemplateParameterSubstitution_TemplateBinding(),"parameterSubstitution","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateBinding_Signature(),getTemplateSignature(),nullptr,"signature","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTemplateBinding___One_parameter_substitution__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "one_parameter_substitution", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7489,11 +7612,11 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TemplateParameter
 	initEClass(templateParameterEClass, nullptr, "TemplateParameter", false, false, true);
 	
-	initEReference(getTemplateParameter_Default(),getParameterableElement(),nullptr,"default","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTemplateParameter_OwnedDefault(),getParameterableElement(),nullptr,"ownedDefault","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTemplateParameter_OwnedParameteredElement(),getParameterableElement(),getParameterableElement_OwningTemplateParameter(),"ownedParameteredElement","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTemplateParameter_ParameteredElement(),getParameterableElement(),getParameterableElement_TemplateParameter(),"parameteredElement","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTemplateParameter_Signature(),getTemplateSignature(),getTemplateSignature_OwnedParameter(),"signature","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameter_Default(),getParameterableElement(),nullptr,"default","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameter_OwnedDefault(),getParameterableElement(),nullptr,"ownedDefault","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateParameter_OwnedParameteredElement(),getParameterableElement(),getParameterableElement_OwningTemplateParameter(),"ownedParameteredElement","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateParameter_ParameteredElement(),getParameterableElement(),getParameterableElement_TemplateParameter(),"parameteredElement","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameter_Signature(),getTemplateSignature(),getTemplateSignature_OwnedParameter(),"signature","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTemplateParameter___Must_be_compatible__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "must_be_compatible", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7505,10 +7628,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TemplateParameterSubstitution
 	initEClass(templateParameterSubstitutionEClass, nullptr, "TemplateParameterSubstitution", false, false, true);
 	
-	initEReference(getTemplateParameterSubstitution_Actual(),getParameterableElement(),nullptr,"actual","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTemplateParameterSubstitution_Formal(),getTemplateParameter(),nullptr,"formal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTemplateParameterSubstitution_OwnedActual(),getParameterableElement(),nullptr,"ownedActual","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTemplateParameterSubstitution_TemplateBinding(),getTemplateBinding(),getTemplateBinding_ParameterSubstitution(),"templateBinding","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameterSubstitution_Actual(),getParameterableElement(),nullptr,"actual","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameterSubstitution_Formal(),getTemplateParameter(),nullptr,"formal","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateParameterSubstitution_OwnedActual(),getParameterableElement(),nullptr,"ownedActual","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateParameterSubstitution_TemplateBinding(),getTemplateBinding(),getTemplateBinding_ParameterSubstitution(),"templateBinding","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTemplateParameterSubstitution___Must_be_compatible__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "must_be_compatible", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7520,9 +7643,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TemplateSignature
 	initEClass(templateSignatureEClass, nullptr, "TemplateSignature", false, false, true);
 	
-	initEReference(getTemplateSignature_OwnedParameter(),getTemplateParameter(),getTemplateParameter_Signature(),"ownedParameter","",0,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getTemplateSignature_Parameter(),getTemplateParameter(),nullptr,"parameter","",1,-1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getTemplateSignature_Template(),getTemplateableElement(),getTemplateableElement_OwnedTemplateSignature(),"template","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTemplateSignature_OwnedParameter(),getTemplateParameter(),getTemplateParameter_Signature(),"ownedParameter","",0,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getTemplateSignature_Parameter(),getTemplateParameter(),nullptr,"parameter","",1,-1, false,false, true, false, true, false, true, false,true);
+	initEReference(getTemplateSignature_Template(),getTemplateableElement(),getTemplateableElement_OwnedTemplateSignature(),"template","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTemplateSignature___Own_elements__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "own_elements", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7538,8 +7661,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TemplateableElement
 	initEClass(templateableElementEClass, nullptr, "TemplateableElement", true, false, true);
 	
-	initEReference(getTemplateableElement_OwnedTemplateSignature(),getTemplateSignature(),getTemplateSignature_Template(),"ownedTemplateSignature","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTemplateableElement_TemplateBinding(),getTemplateBinding(),getTemplateBinding_BoundElement(),"templateBinding","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateableElement_OwnedTemplateSignature(),getTemplateSignature(),getTemplateSignature_Template(),"ownedTemplateSignature","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTemplateableElement_TemplateBinding(),getTemplateBinding(),getTemplateBinding_BoundElement(),"templateBinding","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getTemplateableElement___IsTemplate(),types::TypesPackage::eInstance()->getBoolean(), "isTemplate", 1, 1, true,false );
 	
@@ -7551,9 +7674,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TestIdentityAction
 	initEClass(testIdentityActionEClass, nullptr, "TestIdentityAction", false, false, true);
 	
-	initEReference(getTestIdentityAction_First(),getInputPin(),nullptr,"first","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTestIdentityAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTestIdentityAction_Second(),getInputPin(),nullptr,"second","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getTestIdentityAction_First(),getInputPin(),nullptr,"first","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTestIdentityAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTestIdentityAction_Second(),getInputPin(),nullptr,"second","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getTestIdentityAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7572,7 +7695,8 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class TimeConstraint
 	initEClass(timeConstraintEClass, nullptr, "TimeConstraint", false, false, true);
-	initEAttribute(getTimeConstraint_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","true",0,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getTimeConstraint_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","true",0,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getTimeConstraint___Has_one_constrainedElement__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "has_one_constrainedElement", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7583,8 +7707,9 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class TimeEvent
 	initEClass(timeEventEClass, nullptr, "TimeEvent", false, false, true);
-	initEAttribute(getTimeEvent_IsRelative(),types::TypesPackage::eInstance()->getBoolean(),"isRelative","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getTimeEvent_When(),getTimeExpression(),nullptr,"when","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getTimeEvent_IsRelative(),types::TypesPackage::eInstance()->getBoolean(),"isRelative","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getTimeEvent_When(),getTimeExpression(),nullptr,"when","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getTimeEvent___When_non_negative__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "when_non_negative", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7596,8 +7721,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TimeExpression
 	initEClass(timeExpressionEClass, nullptr, "TimeExpression", false, false, true);
 	
-	initEReference(getTimeExpression_Expr(),getValueSpecification(),nullptr,"expr","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTimeExpression_Observation(),getObservation(),nullptr,"observation","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTimeExpression_Expr(),getValueSpecification(),nullptr,"expr","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTimeExpression_Observation(),getObservation(),nullptr,"observation","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTimeExpression___No_expr_requires_observation__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "no_expr_requires_observation", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7615,22 +7740,24 @@ void UmlPackageImpl::initializePackageContents()
 
 	// Begin Class TimeObservation
 	initEClass(timeObservationEClass, nullptr, "TimeObservation", false, false, true);
-	initEAttribute(getTimeObservation_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","true",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getTimeObservation_Event(),getNamedElement(),nullptr,"event","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getTimeObservation_FirstEvent(),types::TypesPackage::eInstance()->getBoolean(),"firstEvent","true",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getTimeObservation_Event(),getNamedElement(),nullptr,"event","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class TimeObservation
 
 	// Begin Class Transition
 	initEClass(transitionEClass, nullptr, "Transition", false, false, true);
-	initEAttribute(getTransition_Kind(),getTransitionKind(),"kind","external",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getTransition_Container(),getRegion(),getRegion_Transition(),"container","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTransition_Effect(),getBehavior(),nullptr,"effect","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getTransition_Guard(),getConstraint(),nullptr,"guard","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTransition_RedefinedTransition(),getTransition(),nullptr,"redefinedTransition","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTransition_Source(),getVertex(),nullptr,"source","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTransition_Target(),getVertex(),nullptr,"target","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTransition_Trigger(),getTrigger(),nullptr,"trigger","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getTransition_Kind(),getTransitionKind(),"kind","external",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getTransition_Container(),getRegion(),getRegion_Transition(),"container","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTransition_Effect(),getBehavior(),nullptr,"effect","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getTransition_Guard(),getConstraint(),nullptr,"guard","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTransition_RedefinedTransition(),getTransition(),nullptr,"redefinedTransition","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTransition_Source(),getVertex(),nullptr,"source","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTransition_Target(),getVertex(),nullptr,"target","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTransition_Trigger(),getTrigger(),nullptr,"trigger","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getTransition___ContainingStateMachine(),getStateMachine(), "containingStateMachine", 1, 1, true,false );
 	
@@ -7678,8 +7805,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Trigger
 	initEClass(triggerEClass, nullptr, "Trigger", false, false, true);
 	
-	initEReference(getTrigger_Event(),getEvent(),nullptr,"event","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getTrigger_Port(),getPort(),nullptr,"port","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTrigger_Event(),getEvent(),nullptr,"event","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getTrigger_Port(),getPort(),nullptr,"port","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getTrigger___Trigger_with_ports__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "trigger_with_ports", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7691,7 +7818,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Type
 	initEClass(typeEClass, nullptr, "Type", true, false, true);
 	
-	initEReference(getType_Package(),getPackage(),getPackage_OwnedType(),"package","",0,1, nullptr , true,true, true, false, true, false, true, true,false);
+	initEReference(getType_Package(),getPackage(),getPackage_OwnedType(),"package","",0,1, true,true, true, false, true, false, true, true,false);
 	
 	op = initEOperation(getType___ConformsTo__Type(),types::TypesPackage::eInstance()->getBoolean(), "conformsTo", 1, 1, true,false );
 	addEParameter(op ,getType()  , "other",0,1, true,true);
@@ -7717,7 +7844,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class TypedElement
 	initEClass(typedElementEClass, nullptr, "TypedElement", true, false, true);
 	
-	initEReference(getTypedElement_Type(),getType(),nullptr,"type","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTypedElement_Type(),getType(),nullptr,"type","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class TypedElement
@@ -7725,9 +7852,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class UnmarshallAction
 	initEClass(unmarshallActionEClass, nullptr, "UnmarshallAction", false, false, true);
 	
-	initEReference(getUnmarshallAction_Object(),getInputPin(),nullptr,"object","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getUnmarshallAction_Result(),getOutputPin(),nullptr,"result","",1,-1, nullptr , false,false, true, true, true, false, true, false,true);
-	initEReference(getUnmarshallAction_UnmarshallType(),getClassifier(),nullptr,"unmarshallType","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getUnmarshallAction_Object(),getInputPin(),nullptr,"object","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getUnmarshallAction_Result(),getOutputPin(),nullptr,"result","",1,-1, false,false, true, true, true, false, true, false,true);
+	initEReference(getUnmarshallAction_UnmarshallType(),getClassifier(),nullptr,"unmarshallType","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getUnmarshallAction___Multiplicity_of_object__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity_of_object", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7762,10 +7889,10 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class UseCase
 	initEClass(useCaseEClass, nullptr, "UseCase", false, false, true);
 	
-	initEReference(getUseCase_Extend(),getExtend(),getExtend_Extension(),"extend","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getUseCase_ExtensionPoint(),getExtensionPoint(),getExtensionPoint_UseCase(),"extensionPoint","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getUseCase_Include(),getInclude(),getInclude_IncludingCase(),"include","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getUseCase_Subject(),getClassifier(),getClassifier_UseCase(),"subject","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getUseCase_Extend(),getExtend(),getExtend_Extension(),"extend","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getUseCase_ExtensionPoint(),getExtensionPoint(),getExtensionPoint_UseCase(),"extensionPoint","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getUseCase_Include(),getInclude(),getInclude_IncludingCase(),"include","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getUseCase_Subject(),getClassifier(),getClassifier_UseCase(),"subject","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getUseCase___AllIncludedUseCases(),getUseCase(), "allIncludedUseCases", 0, -1, true,false );
 	
@@ -7791,7 +7918,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ValuePin
 	initEClass(valuePinEClass, nullptr, "ValuePin", false, false, true);
 	
-	initEReference(getValuePin_Value(),getValueSpecification(),nullptr,"value","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getValuePin_Value(),getValueSpecification(),nullptr,"value","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getValuePin___Compatible_type__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "compatible_type", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7807,6 +7934,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ValueSpecification
 	initEClass(valueSpecificationEClass, nullptr, "ValueSpecification", true, false, true);
 	
+	initEReference(getValueSpecification_OwningSlot(),getSlot(),getSlot_Value(),"owningSlot","",0,1, false,false, true, false, true, false, true, false,true);
 	
 	op = initEOperation(getValueSpecification___BooleanValue(),types::TypesPackage::eInstance()->getBoolean(), "booleanValue", 0, 1, true,false );
 	
@@ -7828,8 +7956,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class ValueSpecificationAction
 	initEClass(valueSpecificationActionEClass, nullptr, "ValueSpecificationAction", false, false, true);
 	
-	initEReference(getValueSpecificationAction_Result(),getOutputPin(),nullptr,"result","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getValueSpecificationAction_Value(),getValueSpecification(),nullptr,"value","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getValueSpecificationAction_Result(),getOutputPin(),nullptr,"result","",1,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getValueSpecificationAction_Value(),getValueSpecification(),nullptr,"value","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getValueSpecificationAction___Compatible_type__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "compatible_type", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7845,8 +7973,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Variable
 	initEClass(variableEClass, nullptr, "Variable", false, false, true);
 	
-	initEReference(getVariable_ActivityScope(),getActivity(),getActivity_Variable(),"activityScope","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getVariable_Scope(),getStructuredActivityNode(),getStructuredActivityNode_Variable(),"scope","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getVariable_ActivityScope(),getActivity(),getActivity_Variable(),"activityScope","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getVariable_Scope(),getStructuredActivityNode(),getStructuredActivityNode_Variable(),"scope","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getVariable___IsAccessibleBy__Action(),types::TypesPackage::eInstance()->getBoolean(), "isAccessibleBy", 1, 1, true,false );
 	addEParameter(op ,getAction()  , "a",0,1, true,true);
@@ -7857,7 +7985,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class VariableAction
 	initEClass(variableActionEClass, nullptr, "VariableAction", true, false, true);
 	
-	initEReference(getVariableAction_Variable(),getVariable(),nullptr,"variable","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getVariableAction_Variable(),getVariable(),nullptr,"variable","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getVariableAction___Scope_of_variable__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "scope_of_variable", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7869,9 +7997,9 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class Vertex
 	initEClass(vertexEClass, nullptr, "Vertex", true, false, true);
 	
-	initEReference(getVertex_Container(),getRegion(),getRegion_Subvertex(),"container","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getVertex_Incoming(),getTransition(),nullptr,"incoming","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
-	initEReference(getVertex_Outgoing(),getTransition(),nullptr,"outgoing","",0,-1, nullptr , true,true, false, false, true, false, true, true,false);
+	initEReference(getVertex_Container(),getRegion(),getRegion_Subvertex(),"container","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getVertex_Incoming(),getTransition(),nullptr,"incoming","",0,-1, true,true, false, false, true, false, true, true,false);
+	initEReference(getVertex_Outgoing(),getTransition(),nullptr,"outgoing","",0,-1, true,true, false, false, true, false, true, true,false);
 	
 	op = initEOperation(getVertex___ContainingStateMachine(),getStateMachine(), "containingStateMachine", 1, 1, true,false );
 	
@@ -7902,8 +8030,8 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class WriteStructuralFeatureAction
 	initEClass(writeStructuralFeatureActionEClass, nullptr, "WriteStructuralFeatureAction", true, false, true);
 	
-	initEReference(getWriteStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getWriteStructuralFeatureAction_Value(),getInputPin(),nullptr,"value","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getWriteStructuralFeatureAction_Result(),getOutputPin(),nullptr,"result","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getWriteStructuralFeatureAction_Value(),getInputPin(),nullptr,"value","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getWriteStructuralFeatureAction___Multiplicity_of_result__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity_of_result", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -7927,7 +8055,7 @@ void UmlPackageImpl::initializePackageContents()
 	// Begin Class WriteVariableAction
 	initEClass(writeVariableActionEClass, nullptr, "WriteVariableAction", true, false, true);
 	
-	initEReference(getWriteVariableAction_Value(),getInputPin(),nullptr,"value","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getWriteVariableAction_Value(),getInputPin(),nullptr,"value","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getWriteVariableAction___Multiplicity__EDiagnosticChain_EMap(),ecore::EcorePackage::eInstance()->getEBoolean(), "multiplicity", 0, 1, true,true );
 	addEParameter(op ,ecore::EcorePackage::eInstance()->getEDiagnosticChain()  , "diagnostics",0,1, true,true);
@@ -8640,33 +8768,37 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getBehavior_IsReentrant() con
 	return std::dynamic_pointer_cast<ecore::EAttribute>(behaviorEClass->getEStructuralFeatures()->at(0));
 }
 
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Context() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_BehavioredClassifier() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(1));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameter() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Context() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(2));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameterSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameter() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(3));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Postcondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_OwnedParameterSet() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(4));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Precondition() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Postcondition() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(5));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_RedefinedBehavior() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Precondition() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(6));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Specification() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_RedefinedBehavior() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(7));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getBehavior_Specification() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(behaviorEClass->getEStructuralFeatures()->at(8));
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getBehavior___BehavioredClassifier__Element() const
@@ -11200,6 +11332,18 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getInputPin() const
 	return inputPinEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_CallOperationAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(0));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_InvocationAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(1));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getInputPin_StructuralFeatureAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(inputPinEClass->getEStructuralFeatures()->at(2));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const
 {
@@ -12806,6 +12950,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getOutputPin() const
 	return outputPinEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getOutputPin_CallAction() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(outputPinEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const
 {
@@ -13002,6 +13150,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getPackageableElement() const
 	return packageableElementEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getPackageableElement_OwningPackage() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(packageableElementEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const
 {
@@ -13036,17 +13188,21 @@ std::shared_ptr<ecore::EAttribute> UmlPackageImpl::getParameter_IsStream() const
 	return std::dynamic_pointer_cast<ecore::EAttribute>(parameterEClass->getEStructuralFeatures()->at(4));
 }
 
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_DefaultValue() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Behavior() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(5));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Operation() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_DefaultValue() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(6));
 }
-std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_ParameterSet() const
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_Operation() const
 {
 	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(7));
+}
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getParameter_ParameterSet() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(parameterEClass->getEStructuralFeatures()->at(8));
 }
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getParameter___Connector_end__EDiagnosticChain_EMap() const
@@ -15516,6 +15672,10 @@ std::shared_ptr<ecore::EClass> UmlPackageImpl::getValueSpecification() const
 	return valueSpecificationEClass;
 }
 
+std::shared_ptr<ecore::EReference> UmlPackageImpl::getValueSpecification_OwningSlot() const
+{
+	return std::dynamic_pointer_cast<ecore::EReference>(valueSpecificationEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getValueSpecification___BooleanValue() const
 {

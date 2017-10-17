@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -39,7 +39,7 @@ namespace uml
 	{
 		public: 
 			InteractionImpl(const InteractionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			InteractionImpl& operator=(InteractionImpl const&) = delete;
@@ -47,6 +47,39 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionImpl();
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			InteractionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
+
+
+
 
 		public:
 			//destructor
@@ -58,8 +91,7 @@ namespace uml
 			/*!
 			 An Interaction instance must not be contained within another Interaction instance.
 			enclosingInteraction->isEmpty() */ 
-			virtual bool
-			 not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_contained(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -72,34 +104,29 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the participants in this Interaction.
-			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement > >
-			 getLifeline() const ;
-			
-			/*!
-			 The ordered set of fragments in the Interaction.
-			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement > >
-			 getFragment() const ;
-			
-			/*!
 			 Actions owned by the Interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Action, uml::Element > >
-			 getAction() const ;
+			virtual std::shared_ptr<Subset<uml::Action, uml::Element > > getAction() const ;
 			
 			/*!
 			 Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Gate, uml::NamedElement > >
-			 getFormalGate() const ;
+			virtual std::shared_ptr<Subset<uml::Gate, uml::NamedElement > > getFormalGate() const ;
+			
+			/*!
+			 The ordered set of fragments in the Interaction.
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement > > getFragment() const ;
+			
+			/*!
+			 Specifies the participants in this Interaction.
+			<p>From package UML::Interactions.</p> */
+			virtual std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement > > getLifeline() const ;
 			
 			/*!
 			 The Messages contained in this Interaction.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Message, uml::NamedElement > >
-			 getMessage() const ;
+			virtual std::shared_ptr<Subset<uml::Message, uml::NamedElement > > getMessage() const ;
 			
 							
 			
@@ -109,38 +136,34 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const ;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
-			 getRole() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > getRole() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

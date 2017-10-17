@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			FunctionBehaviorImpl(const FunctionBehaviorImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			FunctionBehaviorImpl& operator=(FunctionBehaviorImpl const&) = delete;
@@ -46,6 +46,31 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			FunctionBehaviorImpl();
+
+			//Additional constructors for the containments back reference
+			FunctionBehaviorImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
+
+
+			//Additional constructors for the containments back reference
+			FunctionBehaviorImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			FunctionBehaviorImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			FunctionBehaviorImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			FunctionBehaviorImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
+
+
+
 
 		public:
 			//destructor
@@ -55,27 +80,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A FunctionBehavior has at least one output Parameter.
-			self.ownedParameter->
-			  select(p | p.direction = ParameterDirectionKind::out or p.direction= ParameterDirectionKind::inout or p.direction= ParameterDirectionKind::return)->size() >= 1 */ 
-			virtual bool
-			 one_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The types of the ownedParameters are all DataTypes, which may not nest anything but other DataTypes.
-			ownedParameter->forAll(p | p.type <> null and
-			  p.type.oclIsTypeOf(DataType) and hasAllDataTypeAttributes(p.type.oclAsType(DataType))) */ 
-			virtual bool
-			 types_of_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 The hasAllDataTypeAttributes query tests whether the types of the attributes of the given DataType are all DataTypes, and similarly for all those DataTypes.
 			result = (d.ownedAttribute->forAll(a |
 			    a.type.oclIsKindOf(DataType) and
 			      hasAllDataTypeAttributes(a.type.oclAsType(DataType))))
 			<p>From package UML::CommonBehavior.</p> */ 
-			virtual bool
-			 hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d)  ;
+			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d)  ;
+			
+			/*!
+			 A FunctionBehavior has at least one output Parameter.
+			self.ownedParameter->
+			  select(p | p.direction = ParameterDirectionKind::out or p.direction= ParameterDirectionKind::inout or p.direction= ParameterDirectionKind::return)->size() >= 1 */ 
+			virtual bool one_output_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The types of the ownedParameters are all DataTypes, which may not nest anything but other DataTypes.
+			ownedParameter->forAll(p | p.type <> null and
+			  p.type.oclIsTypeOf(DataType) and hasAllDataTypeAttributes(p.type.oclAsType(DataType))) */ 
+			virtual bool types_of_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -95,38 +117,34 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const ;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
-			 getRole() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > getRole() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

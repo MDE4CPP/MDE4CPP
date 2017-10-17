@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -83,16 +83,18 @@ namespace uml
 	/*!
 	 A GeneralOrdering represents a binary relation between two OccurrenceSpecifications, to describe that one OccurrenceSpecification must occur before the other in a valid trace. This mechanism provides the ability to define partial orders of OccurrenceSpecifications that may otherwise not have a specified order.
 	<p>From package UML::Interactions.</p> */
-	class GeneralOrdering:virtual public NamedElement	{
+	class GeneralOrdering:virtual public NamedElement
+	{
 		public:
  			GeneralOrdering(const GeneralOrdering &) {}
 			GeneralOrdering& operator=(GeneralOrdering const&) = delete;
-	
+
 		protected:
 			GeneralOrdering(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~GeneralOrdering() {}
@@ -103,8 +105,7 @@ namespace uml
 			/*!
 			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
 			after->closure(toAfter.after)->excludes(before) */ 
-			virtual bool
-			 irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool irreflexive_transitive_closure(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -158,12 +159,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

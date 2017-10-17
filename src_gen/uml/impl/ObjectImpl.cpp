@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Property.hpp"
@@ -36,6 +36,9 @@ ObjectImpl::~ObjectImpl()
 	
 }
 
+
+
+
 ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ObjectImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 {
-	return new ObjectImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
@@ -64,28 +66,25 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-boost::any
- ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
+boost::any ObjectImpl::get(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
+void ObjectImpl::set(std::shared_ptr<uml::Property>  property,boost::any value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
+void ObjectImpl::unset(std::shared_ptr<uml::Property>  property) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

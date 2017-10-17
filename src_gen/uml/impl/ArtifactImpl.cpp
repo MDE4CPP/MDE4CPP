@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Artifact.hpp"
@@ -154,6 +154,69 @@ ArtifactImpl::~ArtifactImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ArtifactImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Element > par_owner)
+			:ArtifactImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+			:ArtifactImpl()
+			{
+				switch(reference_id)
+				{	
+				case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+					 m_owningPackage = par_Package;
+					 return;
+				case UmlPackage::TYPE_PACKAGE:
+					 m_package = par_Package;
+					 return;
+				default:
+				std::cerr << __PRETTY_FUNCTION__ <<" Reference not found in class with the given ID" << std::endl;
+				}
+			   
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ArtifactImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+
+
+
+
+
+
 ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 {
 	//create copy of all Attributes
@@ -170,50 +233,46 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _general = obj.getGeneral();
-	m_general.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getGeneral().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _general = obj.getGeneral();
+	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
 
-			std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
-	m_member.reset(new 		Union<uml::NamedElement> (*(obj.getMember().get())));
+	std::shared_ptr<Union<uml::NamedElement> > _member = obj.getMember();
+	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::GeneralizationSet> >
-	 _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new 	 Bag<uml::GeneralizationSet> 
-	(*(obj.getPowertypeExtent().get())));
+	m_owningPackage  = obj.getOwningPackage();
 
-			std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new 		Union<uml::RedefinableElement> (*(obj.getRedefinedElement().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
 
-			std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new 		Union<uml::Classifier> (*(obj.getRedefinitionContext().get())));
+	m_package  = obj.getPackage();
+
+	std::shared_ptr< Bag<uml::GeneralizationSet> > _powertypeExtent = obj.getPowertypeExtent();
+	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
+
+	std::shared_ptr<Union<uml::RedefinableElement> > _redefinedElement = obj.getRedefinedElement();
+	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
+
+	std::shared_ptr<Union<uml::Classifier> > _redefinitionContext = obj.getRedefinitionContext();
+	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
-		std::shared_ptr< Bag<uml::UseCase> >
-	 _useCase = obj.getUseCase();
-	m_useCase.reset(new 	 Bag<uml::UseCase> 
-	(*(obj.getUseCase().get())));
+	std::shared_ptr< Bag<uml::UseCase> > _useCase = obj.getUseCase();
+	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUseList = obj.getCollaborationUse();
 	for(std::shared_ptr<uml::CollaborationUse> _collaborationUse : *_collaborationUseList)
 	{
-		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(dynamic_cast<uml::CollaborationUse*>(_collaborationUse->copy())));
+		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(std::dynamic_pointer_cast<uml::CollaborationUse>(_collaborationUse->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
@@ -221,7 +280,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -229,7 +288,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
 	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(dynamic_cast<uml::ElementImport*>(_elementImport->copy())));
+		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
@@ -237,7 +296,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Generalization>> _generalizationList = obj.getGeneralization();
 	for(std::shared_ptr<uml::Generalization> _generalization : *_generalizationList)
 	{
-		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(dynamic_cast<uml::Generalization*>(_generalization->copy())));
+		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(std::dynamic_pointer_cast<uml::Generalization>(_generalization->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generalization" << std::endl;
@@ -245,7 +304,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
 	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(dynamic_cast<uml::PackageableElement*>(_importedMember->copy())));
+		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
@@ -253,7 +312,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::NamedElement>> _inheritedMemberList = obj.getInheritedMember();
 	for(std::shared_ptr<uml::NamedElement> _inheritedMember : *_inheritedMemberList)
 	{
-		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(dynamic_cast<uml::NamedElement*>(_inheritedMember->copy())));
+		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_inheritedMember->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_inheritedMember" << std::endl;
@@ -261,14 +320,14 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Manifestation>> _manifestationList = obj.getManifestation();
 	for(std::shared_ptr<uml::Manifestation> _manifestation : *_manifestationList)
 	{
-		this->getManifestation()->add(std::shared_ptr<uml::Manifestation>(dynamic_cast<uml::Manifestation*>(_manifestation->copy())));
+		this->getManifestation()->add(std::shared_ptr<uml::Manifestation>(std::dynamic_pointer_cast<uml::Manifestation>(_manifestation->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_manifestation" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -276,7 +335,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Artifact>> _nestedArtifactList = obj.getNestedArtifact();
 	for(std::shared_ptr<uml::Artifact> _nestedArtifact : *_nestedArtifactList)
 	{
-		this->getNestedArtifact()->add(std::shared_ptr<uml::Artifact>(dynamic_cast<uml::Artifact*>(_nestedArtifact->copy())));
+		this->getNestedArtifact()->add(std::shared_ptr<uml::Artifact>(std::dynamic_pointer_cast<uml::Artifact>(_nestedArtifact->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nestedArtifact" << std::endl;
@@ -284,7 +343,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Property>> _ownedAttributeList = obj.getOwnedAttribute();
 	for(std::shared_ptr<uml::Property> _ownedAttribute : *_ownedAttributeList)
 	{
-		this->getOwnedAttribute()->add(std::shared_ptr<uml::Property>(dynamic_cast<uml::Property*>(_ownedAttribute->copy())));
+		this->getOwnedAttribute()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_ownedAttribute->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedAttribute" << std::endl;
@@ -292,7 +351,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -300,7 +359,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Operation>> _ownedOperationList = obj.getOwnedOperation();
 	for(std::shared_ptr<uml::Operation> _ownedOperation : *_ownedOperationList)
 	{
-		this->getOwnedOperation()->add(std::shared_ptr<uml::Operation>(dynamic_cast<uml::Operation*>(_ownedOperation->copy())));
+		this->getOwnedOperation()->add(std::shared_ptr<uml::Operation>(std::dynamic_pointer_cast<uml::Operation>(_ownedOperation->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedOperation" << std::endl;
@@ -308,14 +367,14 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
 	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(dynamic_cast<uml::Constraint*>(_ownedRule->copy())));
+		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
 	#endif
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
-		m_ownedTemplateSignature.reset(dynamic_cast<uml::TemplateSignature*>(obj.getOwnedTemplateSignature()->copy()));
+		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
@@ -323,29 +382,15 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::UseCase>> _ownedUseCaseList = obj.getOwnedUseCase();
 	for(std::shared_ptr<uml::UseCase> _ownedUseCase : *_ownedUseCaseList)
 	{
-		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(dynamic_cast<uml::UseCase*>(_ownedUseCase->copy())));
+		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(std::dynamic_pointer_cast<uml::UseCase>(_ownedUseCase->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
-	if(obj.getPackage()!=nullptr)
-	{
-		m_package.reset(dynamic_cast<uml::Package*>(obj.getPackage()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_package" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
 	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(dynamic_cast<uml::PackageImport*>(_packageImport->copy())));
+		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
@@ -353,14 +398,14 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifierList = obj.getRedefinedClassifier();
 	for(std::shared_ptr<uml::Classifier> _redefinedClassifier : *_redefinedClassifierList)
 	{
-		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(dynamic_cast<uml::Classifier*>(_redefinedClassifier->copy())));
+		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(std::dynamic_pointer_cast<uml::Classifier>(_redefinedClassifier->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_redefinedClassifier" << std::endl;
 	#endif
 	if(obj.getRepresentation()!=nullptr)
 	{
-		m_representation.reset(dynamic_cast<uml::CollaborationUse*>(obj.getRepresentation()->copy()));
+		m_representation = std::dynamic_pointer_cast<uml::CollaborationUse>(obj.getRepresentation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_representation" << std::endl;
@@ -368,7 +413,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::Substitution>> _substitutionList = obj.getSubstitution();
 	for(std::shared_ptr<uml::Substitution> _substitution : *_substitutionList)
 	{
-		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(dynamic_cast<uml::Substitution*>(_substitution->copy())));
+		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(std::dynamic_pointer_cast<uml::Substitution>(_substitution->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_substitution" << std::endl;
@@ -376,7 +421,7 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
 	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
 	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(dynamic_cast<uml::TemplateBinding*>(_templateBinding->copy())));
+		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
@@ -413,12 +458,12 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  ArtifactImpl::copy() const
+std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
 {
-	return new ArtifactImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ArtifactImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
@@ -427,9 +472,9 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ArtifactImpl::setFileName (std::string _fileName)
+void ArtifactImpl::setFileName(std::string _fileName)
 {
 	m_fileName = _fileName;
 } 
@@ -442,15 +487,13 @@ std::string ArtifactImpl::getFileName() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> 
- ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> 
- ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -459,32 +502,28 @@ std::shared_ptr<uml::Operation>
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::Manifestation, uml::Element > >
- ArtifactImpl::getManifestation() const
+std::shared_ptr<Subset<uml::Manifestation, uml::Element > > ArtifactImpl::getManifestation() const
 {
 
     return m_manifestation;
 }
 
 
-		std::shared_ptr<Subset<uml::Artifact, uml::NamedElement > >
- ArtifactImpl::getNestedArtifact() const
+std::shared_ptr<Subset<uml::Artifact, uml::NamedElement > > ArtifactImpl::getNestedArtifact() const
 {
 
     return m_nestedArtifact;
 }
 
 
-		std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > >
- ArtifactImpl::getOwnedAttribute() const
+std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement > > ArtifactImpl::getOwnedAttribute() const
 {
 
     return m_ownedAttribute;
 }
 
 
-		std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > >
- ArtifactImpl::getOwnedOperation() const
+std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement > > ArtifactImpl::getOwnedOperation() const
 {
 
     return m_ownedOperation;
@@ -494,40 +533,37 @@ std::shared_ptr<uml::Operation>
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ArtifactImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
- ArtifactImpl::getFeature() const
-{
-	return m_feature;
-}
-		std::shared_ptr<Union<uml::RedefinableElement> > ArtifactImpl::getRedefinedElement() const
-{
-	return m_redefinedElement;
-}
-		std::shared_ptr<Union<uml::NamedElement> > ArtifactImpl::getMember() const
-{
-	return m_member;
-}
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
- ArtifactImpl::getOwnedMember() const
-{
-	return m_ownedMember;
-}
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
- ArtifactImpl::getAttribute() const
+std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > ArtifactImpl::getAttribute() const
 {
 	return m_attribute;
 }
-std::shared_ptr<uml::Element > ArtifactImpl::getOwner() const
+std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > ArtifactImpl::getFeature() const
+{
+	return m_feature;
+}
+std::shared_ptr<Union<uml::NamedElement> > ArtifactImpl::getMember() const
+{
+	return m_member;
+}
+std::weak_ptr<uml::Namespace > ArtifactImpl::getNamespace() const
+{
+	return m_namespace;
+}
+std::shared_ptr<Union<uml::Element> > ArtifactImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > ArtifactImpl::getOwnedMember() const
+{
+	return m_ownedMember;
+}
+std::weak_ptr<uml::Element > ArtifactImpl::getOwner() const
 {
 	return m_owner;
 }
-std::shared_ptr<uml::Namespace > ArtifactImpl::getNamespace() const
+std::shared_ptr<Union<uml::RedefinableElement> > ArtifactImpl::getRedefinedElement() const
 {
-	return m_namespace;
+	return m_redefinedElement;
 }
 
 
@@ -539,35 +575,35 @@ boost::any ArtifactImpl::eGet(int featureID,  bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case UmlPackage::CLASSIFIER_ATTRIBUTE:
-			return getAttribute(); //3925
+			return getAttribute(); //3926
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //394
 		case UmlPackage::CLASSIFIER_COLLABORATIONUSE:
-			return getCollaborationUse(); //3926
+			return getCollaborationUse(); //3927
 		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
 			return getEAnnotations(); //390
 		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
 			return getElementImport(); //3911
 		case UmlPackage::CLASSIFIER_FEATURE:
-			return getFeature(); //3924
+			return getFeature(); //3925
 		case UmlPackage::ARTIFACT_FILENAME:
-			return getFileName(); //3938
+			return getFileName(); //3939
 		case UmlPackage::CLASSIFIER_GENERAL:
-			return getGeneral(); //3927
+			return getGeneral(); //3928
 		case UmlPackage::CLASSIFIER_GENERALIZATION:
-			return getGeneralization(); //3928
+			return getGeneralization(); //3929
 		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
 			return getImportedMember(); //3914
 		case UmlPackage::CLASSIFIER_INHERITEDMEMBER:
-			return getInheritedMember(); //3930
+			return getInheritedMember(); //3931
 		case UmlPackage::CLASSIFIER_ISABSTRACT:
-			return getIsAbstract(); //3931
+			return getIsAbstract(); //3932
 		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
-			return getIsFinalSpecialization(); //3932
+			return getIsFinalSpecialization(); //3933
 		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
 			return getIsLeaf(); //3910
 		case UmlPackage::ARTIFACT_MANIFESTATION:
-			return getManifestation(); //3939
+			return getManifestation(); //3940
 		case UmlPackage::NAMESPACE_MEMBER:
 			return getMember(); //3915
 		case UmlPackage::NAMEDELEMENT_NAME:
@@ -577,9 +613,9 @@ boost::any ArtifactImpl::eGet(int featureID,  bool resolve, bool coreType) const
 		case UmlPackage::NAMEDELEMENT_NAMESPACE:
 			return getNamespace(); //397
 		case UmlPackage::ARTIFACT_NESTEDARTIFACT:
-			return getNestedArtifact(); //3940
+			return getNestedArtifact(); //3941
 		case UmlPackage::ARTIFACT_OWNEDATTRIBUTE:
-			return getOwnedAttribute(); //3941
+			return getOwnedAttribute(); //3942
 		case UmlPackage::ELEMENT_OWNEDCOMMENT:
 			return getOwnedComment(); //391
 		case UmlPackage::ELEMENT_OWNEDELEMENT:
@@ -587,41 +623,43 @@ boost::any ArtifactImpl::eGet(int featureID,  bool resolve, bool coreType) const
 		case UmlPackage::NAMESPACE_OWNEDMEMBER:
 			return getOwnedMember(); //3913
 		case UmlPackage::ARTIFACT_OWNEDOPERATION:
-			return getOwnedOperation(); //3942
+			return getOwnedOperation(); //3943
 		case UmlPackage::NAMESPACE_OWNEDRULE:
 			return getOwnedRule(); //3910
 		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
 			return getOwnedTemplateSignature(); //395
 		case UmlPackage::CLASSIFIER_OWNEDUSECASE:
-			return getOwnedUseCase(); //3933
+			return getOwnedUseCase(); //3934
 		case UmlPackage::ELEMENT_OWNER:
 			return getOwner(); //393
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+			return getOwningPackage(); //3912
 		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //394
 		case UmlPackage::TYPE_PACKAGE:
-			return getPackage(); //3912
+			return getPackage(); //3913
 		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
 			return getPackageImport(); //3912
 		case UmlPackage::CLASSIFIER_POWERTYPEEXTENT:
-			return getPowertypeExtent(); //3929
+			return getPowertypeExtent(); //3930
 		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
 			return getQualifiedName(); //398
 		case UmlPackage::CLASSIFIER_REDEFINEDCLASSIFIER:
-			return getRedefinedClassifier(); //3935
+			return getRedefinedClassifier(); //3936
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
 			return getRedefinedElement(); //3911
 		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //3912
 		case UmlPackage::CLASSIFIER_REPRESENTATION:
-			return getRepresentation(); //3936
+			return getRepresentation(); //3937
 		case UmlPackage::CLASSIFIER_SUBSTITUTION:
-			return getSubstitution(); //3937
+			return getSubstitution(); //3938
 		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
 			return getTemplateBinding(); //394
 		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //395
 		case UmlPackage::CLASSIFIER_USECASE:
-			return getUseCase(); //3934
+			return getUseCase(); //3935
 		case UmlPackage::NAMEDELEMENT_VISIBILITY:
 			return getVisibility(); //399
 	}

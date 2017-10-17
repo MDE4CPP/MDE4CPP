@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -100,16 +100,37 @@ namespace uml
 	/*!
 	 A Type constrains the values represented by a TypedElement.
 	<p>From package UML::CommonStructure.</p> */
-	class Type:virtual public PackageableElement	{
+	class Type:virtual public PackageableElement
+	{
 		public:
  			Type(const Type &) {}
 			Type& operator=(Type const&) = delete;
-	
+
 		protected:
 			Type(){}
 
+
+			//Additional constructors for the containments back reference
+
+			Type(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			Type(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			Type(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+			//Additional constructors for the containments back reference
+
+			Type(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Type() {}
@@ -118,21 +139,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package. */ 
-			virtual std::shared_ptr<uml::Association> 
-			 createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  = 0;
-			
-			/*!
-			 Retrieves the associations in which this type is involved. */ 
-			virtual std::shared_ptr<Bag<uml::Association> >
-			 getAssociations()  = 0;
-			
-			/*!
 			 The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
 			result = (false)
 			<p>From package UML::CommonStructure.</p> */ 
-			virtual bool
-			 conformsTo(std::shared_ptr<uml::Type>  other)  = 0;
+			virtual bool conformsTo(std::shared_ptr<uml::Type>  other)  = 0;
+			
+			/*!
+			 Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package. */ 
+			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)  = 0;
+			
+			/*!
+			 Retrieves the associations in which this type is involved. */ 
+			virtual std::shared_ptr<Bag<uml::Association> > getAssociations()  = 0;
 			
 			
 			//*********************************
@@ -145,7 +163,7 @@ namespace uml
 			/*!
 			 Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Package > getPackage() const = 0;
+			virtual std::weak_ptr<uml::Package > getPackage() const = 0;
 			
 			/*!
 			 Specifies the owning Package of this Type, if any.
@@ -165,7 +183,7 @@ namespace uml
 			/*!
 			 Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Package > m_package;
+			std::weak_ptr<uml::Package > m_package;
 			
 
 		public:
@@ -173,15 +191,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

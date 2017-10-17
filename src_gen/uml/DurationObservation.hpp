@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -67,6 +67,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -88,16 +93,18 @@ namespace uml
 	/*!
 	 A DurationObservation is a reference to a duration during an execution. It points out the NamedElement(s) in the model to observe and whether the observations are when this NamedElement is entered or when it is exited.
 	<p>From package UML::Values.</p> */
-	class DurationObservation:virtual public Observation	{
+	class DurationObservation:virtual public Observation
+	{
 		public:
  			DurationObservation(const DurationObservation &) {}
 			DurationObservation& operator=(DurationObservation const&) = delete;
-	
+
 		protected:
 			DurationObservation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DurationObservation() {}
@@ -110,8 +117,7 @@ namespace uml
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
 			endif */ 
-			virtual bool
-			 first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool first_event_multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -129,8 +135,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-			virtual 	std::shared_ptr< Bag<uml::NamedElement> >
-			 getEvent() const = 0;
+			virtual std::shared_ptr< Bag<uml::NamedElement> > getEvent() const = 0;
 			
 			
 
@@ -149,8 +154,7 @@ namespace uml
 			/*!
 			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
 			<p>From package UML::Values.</p> */
-				std::shared_ptr< Bag<uml::NamedElement> >
-			 m_event;
+			std::shared_ptr< Bag<uml::NamedElement> > m_event;
 			
 
 		public:
@@ -158,12 +162,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

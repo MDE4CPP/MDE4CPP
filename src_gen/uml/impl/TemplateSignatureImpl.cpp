@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -73,6 +73,30 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
+			:TemplateSignatureImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
+			:TemplateSignatureImpl()
+			{
+			    m_template = par_template;
+			}
+
+
+
+
+
+
 TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):TemplateSignatureImpl()
 {
 	//create copy of all Attributes
@@ -82,22 +106,20 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 
 	//copy references with no containment (soft copy)
 	
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
-
 	m_owner  = obj.getOwner();
 
-			std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
-	m_parameter.reset(new 		Union<uml::TemplateParameter> (*(obj.getParameter().get())));
+	std::shared_ptr<Union<uml::TemplateParameter> > _parameter = obj.getParameter();
+	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
+
+	m_template  = obj.getTemplate();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -105,7 +127,7 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
@@ -113,17 +135,10 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 	std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameterList = obj.getOwnedParameter();
 	for(std::shared_ptr<uml::TemplateParameter> _ownedParameter : *_ownedParameterList)
 	{
-		this->getOwnedParameter()->add(std::shared_ptr<uml::TemplateParameter>(dynamic_cast<uml::TemplateParameter*>(_ownedParameter->copy())));
+		this->getOwnedParameter()->add(std::shared_ptr<uml::TemplateParameter>(std::dynamic_pointer_cast<uml::TemplateParameter>(_ownedParameter->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
-	#endif
-	if(obj.getTemplate()!=nullptr)
-	{
-		m_template.reset(dynamic_cast<uml::TemplateableElement*>(obj.getTemplate()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_template" << std::endl;
 	#endif
 
 		/*Subset*/
@@ -133,12 +148,12 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 		#endif
 	
 	
-
 }
 
-ecore::EObject *  TemplateSignatureImpl::copy() const
+std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
 {
-	return new TemplateSignatureImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TemplateSignatureImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
@@ -147,21 +162,19 @@ std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- TemplateSignatureImpl::own_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateSignatureImpl::own_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool TemplateSignatureImpl::unique_parameters(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -170,8 +183,7 @@ bool
 //*********************************
 // References
 //*********************************
-		std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > >
- TemplateSignatureImpl::getOwnedParameter() const
+std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter > > TemplateSignatureImpl::getOwnedParameter() const
 {
 
     return m_ownedParameter;
@@ -181,7 +193,7 @@ bool
 
 
 
-std::shared_ptr<uml::TemplateableElement > TemplateSignatureImpl::getTemplate() const
+std::weak_ptr<uml::TemplateableElement > TemplateSignatureImpl::getTemplate() const
 {
 //assert(m_template);
     return m_template;
@@ -194,15 +206,15 @@ void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > TemplateSignatureImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > TemplateSignatureImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > TemplateSignatureImpl::getOwner() const
+std::weak_ptr<uml::Element > TemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
-		std::shared_ptr<Union<uml::TemplateParameter> > TemplateSignatureImpl::getParameter() const
+std::shared_ptr<Union<uml::TemplateParameter> > TemplateSignatureImpl::getParameter() const
 {
 	return m_parameter;
 }

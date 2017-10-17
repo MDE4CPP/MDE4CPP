@@ -15,6 +15,7 @@ task buildUmlRelease(dependsOn: ['generateUml', 'compileUmlRelease']) {
 	description 'build uml in release'
 }
 
+
 task compileUml(dependsOn: ['compileUmlDebug', 'compileUmlRelease']) {
 	group 'uml'
 	description 'compile uml in debug and release'
@@ -31,17 +32,30 @@ task compileUmlDebug {
 	doLast {
 		exec {
 			workingDir 'src_gen/uml/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/uml").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/uml").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/uml").absolutePath
+			}
 		}
 		exec {
 			workingDir 'src_gen/uml/.cmake/Debug'
 			if (make_parallel_jobs)
 			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
 			}
 		}
 	}
@@ -58,17 +72,30 @@ task compileUmlRelease {
 	doLast {
 		exec {
 			workingDir 'src_gen/uml/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/uml").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/uml").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/uml").absolutePath
+			}
 		}
 		exec {
 			workingDir 'src_gen/uml/.cmake/Release'
 			if (make_parallel_jobs)
 			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
 			}
 		}
 	}
@@ -80,8 +107,8 @@ task generateUml(type: JavaExec) {
 	main = "-jar"
 	workingDir "./model"
 	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "uml.ecore", "../src_gen"
-	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("uml.ecore")
-	outputs.dir file("../src_gen")
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/uml.ecore")
+	outputs.dir file("src_gen")
 	
 	doFirst {
 		if (System.getenv('MDE4CPP_HOME') == null) {
@@ -96,6 +123,7 @@ task generateUml(type: JavaExec) {
 compileUml.mustRunAfter generateUml
 compileUmlDebug.mustRunAfter generateUml
 compileUmlRelease.mustRunAfter generateUml
+
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/uml/.cmake/')

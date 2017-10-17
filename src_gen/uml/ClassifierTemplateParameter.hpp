@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -77,16 +77,18 @@ namespace uml
 	/*!
 	 A ClassifierTemplateParameter exposes a Classifier as a formal template parameter.
 	<p>From package UML::Classification.</p> */
-	class ClassifierTemplateParameter:virtual public TemplateParameter	{
+	class ClassifierTemplateParameter:virtual public TemplateParameter
+	{
 		public:
  			ClassifierTemplateParameter(const ClassifierTemplateParameter &) {}
 			ClassifierTemplateParameter& operator=(ClassifierTemplateParameter const&) = delete;
-	
+
 		protected:
 			ClassifierTemplateParameter(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ClassifierTemplateParameter() {}
@@ -95,28 +97,9 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If allowSubstitutable is true, then there must be a constrainingClassifier.
-			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
-			virtual bool
-			 has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
-			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
-			virtual bool
-			 parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
-			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
-			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
-			virtual bool
-			 matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The argument to a ClassifierTemplateParameter is a Classifier.
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier)) */ 
-			virtual bool
-			 actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool actual_is_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
@@ -127,16 +110,29 @@ namespace uml
 			         arg = cc or arg.conformsTo(cc) or (allowSubstitutable and arg.isSubstitutableFor(cc))
 			      )
 			) */ 
-			virtual bool
-			 constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool constraining_classifiers_constrain_args(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			constrainingClassifier->forAll(
 			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
 			) */ 
-			virtual bool
-			 constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool constraining_classifiers_constrain_parametered_element(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If allowSubstitutable is true, then there must be a constrainingClassifier.
+			allowSubstitutable implies constrainingClassifier->notEmpty() */ 
+			virtual bool has_constraining_classifier(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
+			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract) */ 
+			virtual bool matching_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
+			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty()) */ 
+			virtual bool parametered_element_no_features(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -159,8 +155,7 @@ namespace uml
 			/*!
 			 The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any Classifier that is compatible with this constraining Classifier can be substituted; otherwise, it must be either this Classifier or one of its specializations. If this property is empty, there are no constraints on the Classifier that can be used as an argument.
 			<p>From package UML::Classification.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getConstrainingClassifier() const = 0;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getConstrainingClassifier() const = 0;
 			
 			
 
@@ -180,8 +175,7 @@ namespace uml
 			/*!
 			 The classifiers that constrain the argument that can be used for the parameter. If the allowSubstitutable attribute is true, then any Classifier that is compatible with this constraining Classifier can be substituted; otherwise, it must be either this Classifier or one of its specializations. If this property is empty, there are no constraints on the Classifier that can be used as an argument.
 			<p>From package UML::Classification.</p> */
-				std::shared_ptr< Bag<uml::Classifier> >
-			 m_constrainingClassifier;
+			std::shared_ptr< Bag<uml::Classifier> > m_constrainingClassifier;
 			
 
 		public:
@@ -189,12 +183,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

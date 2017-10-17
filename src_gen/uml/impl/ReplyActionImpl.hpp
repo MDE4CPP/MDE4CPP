@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ReplyActionImpl(const ReplyActionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ReplyActionImpl& operator=(ReplyActionImpl const&) = delete;
@@ -46,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReplyActionImpl();
+
+			//Additional constructors for the containments back reference
+			ReplyActionImpl(std::weak_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ReplyActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ReplyActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ReplyActionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -55,6 +73,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
+			 The event of the replyToCall Trigger must be a CallEvent.
+			replyToCall.event.oclIsKindOf(CallEvent) */ 
+			virtual bool event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
 			 The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
 			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
 			replyValue->size()=parameter->size() and
@@ -62,14 +85,7 @@ namespace uml
 				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
 				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
 				replyValue->at(i).compatibleWith(parameter->at(i))) */ 
-			virtual bool
-			 pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 The event of the replyToCall Trigger must be a CallEvent.
-			replyToCall.event.oclIsKindOf(CallEvent) */ 
-			virtual bool
-			 event_on_reply_to_call_trigger(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool pins_match_parameter(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -93,8 +109,7 @@ namespace uml
 			/*!
 			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::InputPin, uml::InputPin > >
-			 getReplyValue() const ;
+			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin > > getReplyValue() const ;
 			
 			/*!
 			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
@@ -111,22 +126,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

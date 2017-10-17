@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&) = delete;
@@ -46,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			InteractionFragmentImpl();
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			InteractionFragmentImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -67,32 +85,30 @@ namespace uml
 			/*!
 			 References the Lifelines that the InteractionFragment involves.
 			<p>From package UML::Interactions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Lifeline> >
-			 getCovered() const ;
+			virtual std::shared_ptr< Bag<uml::Lifeline> > getCovered() const ;
 			
-			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::InteractionOperand > getEnclosingOperand() const ;
-			
-			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) ;
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
-			virtual std::shared_ptr<uml::Interaction > getEnclosingInteraction() const ;
+			virtual std::weak_ptr<uml::Interaction > getEnclosingInteraction() const ;
 			
 			/*!
 			 The Interaction enclosing this InteractionFragment.
 			<p>From package UML::Interactions.</p> */
 			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction_enclosingInteraction) ;
 			/*!
+			 The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p> */
+			virtual std::weak_ptr<uml::InteractionOperand > getEnclosingOperand() const ;
+			
+			/*!
+			 The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p> */
+			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) ;
+			/*!
 			 The general ordering relationships contained in this fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > >
-			 getGeneralOrdering() const ;
+			virtual std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element > > getGeneralOrdering() const ;
 			
 							
 			
@@ -100,15 +116,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

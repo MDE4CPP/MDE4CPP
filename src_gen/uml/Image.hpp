@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -57,16 +57,18 @@ namespace uml
 	/*!
 	 Physical definition of a graphical image.
 	<p>From package UML::Packages.</p> */
-	class Image:virtual public Element	{
+	class Image:virtual public Element
+	{
 		public:
  			Image(const Image &) {}
 			Image& operator=(Image const&) = delete;
-	
+
 		protected:
 			Image(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Image() {}
@@ -144,7 +146,7 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
 	};
 
 }

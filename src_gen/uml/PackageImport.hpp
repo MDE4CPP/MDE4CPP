@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -73,16 +73,26 @@ namespace uml
 	/*!
 	 A PackageImport is a Relationship that imports all the non-private members of a Package into the Namespace owning the PackageImport, so that those Elements may be referred to by their unqualified names in the importingNamespace.
 	<p>From package UML::CommonStructure.</p> */
-	class PackageImport:virtual public DirectedRelationship	{
+	class PackageImport:virtual public DirectedRelationship
+	{
 		public:
  			PackageImport(const PackageImport &) {}
 			PackageImport& operator=(PackageImport const&) = delete;
-	
+
 		protected:
 			PackageImport(){}
 
+
+			//Additional constructors for the containments back reference
+
+			PackageImport(std::weak_ptr<uml::Namespace > par_importingNamespace);
+
+			//Additional constructors for the containments back reference
+
+			PackageImport(std::weak_ptr<uml::Element > par_owner);
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~PackageImport() {}
@@ -93,8 +103,7 @@ namespace uml
 			/*!
 			 The visibility of a PackageImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
-			virtual bool
-			 public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool public_or_private(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -126,7 +135,7 @@ namespace uml
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getImportingNamespace() const = 0;
+			virtual std::weak_ptr<uml::Namespace > getImportingNamespace() const = 0;
 			
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
@@ -154,7 +163,7 @@ namespace uml
 			/*!
 			 Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Namespace > m_importingNamespace;
+			std::weak_ptr<uml::Namespace > m_importingNamespace;
 			
 
 		public:
@@ -162,23 +171,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const = 0;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const = 0;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const = 0; 
 	};
 
 }

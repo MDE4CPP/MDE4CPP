@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -39,7 +39,7 @@ namespace uml
 	{
 		public: 
 			VariableImpl(const VariableImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			VariableImpl& operator=(VariableImpl const&) = delete;
@@ -47,6 +47,28 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			VariableImpl();
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::Activity > par_activityScope);
+
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
+			VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope);
+
+
+
 
 		public:
 			//destructor
@@ -61,8 +83,7 @@ namespace uml
 			else a.containingActivity()=activityScope
 			endif)
 			<p>From package UML::Activities.</p> */ 
-			virtual bool
-			 isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a)  ;
 			
 			
 			
@@ -77,7 +98,7 @@ namespace uml
 			/*!
 			 An Activity that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::Activity > getActivityScope() const ;
+			virtual std::weak_ptr<uml::Activity > getActivityScope() const ;
 			
 			/*!
 			 An Activity that owns the Variable.
@@ -86,7 +107,7 @@ namespace uml
 			/*!
 			 A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<uml::StructuredActivityNode > getScope() const ;
+			virtual std::weak_ptr<uml::StructuredActivityNode > getScope() const ;
 			
 			/*!
 			 A StructuredActivityNode that owns the Variable.
@@ -98,15 +119,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

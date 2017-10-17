@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			CombinedFragmentImpl(const CombinedFragmentImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CombinedFragmentImpl& operator=(CombinedFragmentImpl const&) = delete;
@@ -46,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			CombinedFragmentImpl();
+
+			//Additional constructors for the containments back reference
+			CombinedFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
+
+
+			//Additional constructors for the containments back reference
+			CombinedFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
+
+
+			//Additional constructors for the containments back reference
+			CombinedFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			CombinedFragmentImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -59,14 +77,12 @@ namespace uml
 			interactionOperator=InteractionOperatorKind::break  implies   
 			enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union(
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet() */ 
-			virtual bool
-			 break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment) */ 
-			virtual bool
-			 consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
@@ -74,8 +90,7 @@ namespace uml
 			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
 			interactionOperator = InteractionOperatorKind::neg)
 			implies operand->size()=1 */ 
-			virtual bool
-			 opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -100,14 +115,12 @@ namespace uml
 			/*!
 			 Specifies the gates that form the interface between this CombinedFragment and its surroundings
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Gate, uml::Element > >
-			 getCfragmentGate() const ;
+			virtual std::shared_ptr<Subset<uml::Gate, uml::Element > > getCfragmentGate() const ;
 			
 			/*!
 			 The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > >
-			 getOperand() const ;
+			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > > getOperand() const ;
 			
 							
 			
@@ -115,15 +128,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

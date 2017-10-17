@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Comment.hpp"
@@ -48,6 +48,30 @@ DeployedArtifactImpl::~DeployedArtifactImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:DeployedArtifactImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Element > par_owner)
+			:DeployedArtifactImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+
 DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):DeployedArtifactImpl()
 {
 	//create copy of all Attributes
@@ -60,31 +84,27 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	m_namespace  = obj.getNamespace();
 
 	m_owner  = obj.getOwner();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
@@ -92,18 +112,18 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DeployedArtifactImpl::copy() const
+std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
 {
-	return new DeployedArtifactImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DeployedArtifactImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
@@ -112,7 +132,7 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -126,11 +146,11 @@ std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > DeployedArtifactImpl::getOwnedElement() const
+std::shared_ptr<Union<uml::Element> > DeployedArtifactImpl::getOwnedElement() const
 {
 	return m_ownedElement;
 }
-std::shared_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
+std::weak_ptr<uml::Element > DeployedArtifactImpl::getOwner() const
 {
 	return m_owner;
 }

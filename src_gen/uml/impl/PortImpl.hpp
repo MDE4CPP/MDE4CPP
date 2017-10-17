@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			PortImpl(const PortImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			PortImpl& operator=(PortImpl const&) = delete;
@@ -46,6 +46,40 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			PortImpl();
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Property > par_associationEnd);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Class > par_class);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::DataType > par_datatype);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Interface > par_interface);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::Association > par_owningAssociation);
+
+
+			//Additional constructors for the containments back reference
+			PortImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -55,53 +89,46 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Port.aggregation must be composite.
-			aggregation = AggregationKind::composite */ 
-			virtual bool
-			 port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 A defaultValue for port cannot be specified when the type of the Port is an Interface.
-			type.oclIsKindOf(Interface) implies defaultValue->isEmpty() */ 
-			virtual bool
-			 default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 All Ports are owned by an EncapsulatedClassifier.
-			owner = encapsulatedClassifier */ 
-			virtual bool
-			 encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
-			 Derivation for Port::/provided
-			result = (if isConjugated then basicRequired() else basicProvided() endif)
-			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 getProvideds()  ;
-			
-			/*!
-			 Derivation for Port::/required
-			result = (if isConjugated then basicProvided() else basicRequired() endif)
-			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 getRequireds()  ;
-			
-			/*!
 			 The union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly the type of the Port if the Port is typed by an Interface.
 			result = (if type.oclIsKindOf(Interface) 
 			then type.oclAsType(Interface)->asSet() 
 			else type.oclAsType(Classifier).allRealizedInterfaces() 
 			endif)
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 basicProvided()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > basicProvided()  ;
 			
 			/*!
 			 The union of the sets of Interfaces used by the type of the Port and its supertypes.
 			result = ( type.oclAsType(Classifier).allUsedInterfaces() )
 			<p>From package UML::StructuredClassifiers.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Interface> >
-			 basicRequired()  ;
+			virtual std::shared_ptr<Bag<uml::Interface> > basicRequired()  ;
+			
+			/*!
+			 A defaultValue for port cannot be specified when the type of the Port is an Interface.
+			type.oclIsKindOf(Interface) implies defaultValue->isEmpty() */ 
+			virtual bool default_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 All Ports are owned by an EncapsulatedClassifier.
+			owner = encapsulatedClassifier */ 
+			virtual bool encapsulated_owner(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 Derivation for Port::/provided
+			result = (if isConjugated then basicRequired() else basicProvided() endif)
+			<p>From package UML::StructuredClassifiers.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds()  ;
+			
+			/*!
+			 Derivation for Port::/required
+			result = (if isConjugated then basicProvided() else basicRequired() endif)
+			<p>From package UML::StructuredClassifiers.</p> */ 
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds()  ;
+			
+			/*!
+			 Port.aggregation must be composite.
+			aggregation = AggregationKind::composite */ 
+			virtual bool port_aggregation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -155,20 +182,17 @@ namespace uml
 			/*!
 			 The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCclassifier offers to its environment via this Port, and which it will handle either directly or by forwarding it to a part of its internal structure. This association is derived according to the value of isConjugated. If isConjugated is false, provided is derived as the union of the sets of Interfaces realized by the type of the port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface. If isConjugated is true, it is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Interface> >
-			 getProvided() const ;
+			virtual std::shared_ptr< Bag<uml::Interface> > getProvided() const ;
 			
 			/*!
 			 A Port may be redefined when its containing EncapsulatedClassifier is specialized. The redefining Port may have additional Interfaces to those that are associated with the redefined Port or it may replace an Interface by one of its subtypes.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/ > >
-			 getRedefinedPort() const ;
+			virtual std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/ > > getRedefinedPort() const ;
 			
 			/*!
 			 The Interfaces specifying the set of Operations and Receptions that the EncapsulatedCassifier expects its environment to handle via this port. This association is derived according to the value of isConjugated. If isConjugated is false, required is derived as the union of the sets of Interfaces used by the type of the Port and its supertypes. If isConjugated is true, it is derived as the union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly from the type of the Port if the Port is typed by an Interface.
 			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Interface> >
-			 getRequired() const ;
+			virtual std::shared_ptr< Bag<uml::Interface> > getRequired() const ;
 			
 							
 			
@@ -176,24 +200,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Classifiers that have this Feature as a feature.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
+			virtual std::shared_ptr<Union<uml::Classifier> > getFeaturingClassifier() const ;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

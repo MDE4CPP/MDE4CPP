@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ActivityImpl(const ActivityImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityImpl& operator=(ActivityImpl const&) = delete;
@@ -46,6 +46,31 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ActivityImpl();
+
+			//Additional constructors for the containments back reference
+			ActivityImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
+
+
+			//Additional constructors for the containments back reference
+			ActivityImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ActivityImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+			ActivityImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+			//Additional constructors for the containments back reference
+
+
+
 
 		public:
 			//destructor
@@ -59,8 +84,7 @@ namespace uml
 			ownedParameter->forAll(p | 
 			   p.direction <> ParameterDirectionKind::inout implies node->select(
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1) */ 
-			virtual bool
-			 maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maximum_one_parameter_node(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -72,8 +96,7 @@ namespace uml
 			  associatedNodes->select(incoming->notEmpty())->size()<=1 and
 			  associatedNodes->select(outgoing->notEmpty())->size()<=1
 			) */ 
-			virtual bool
-			 maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool maximum_two_parameter_nodes(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -106,45 +129,38 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup > >
-			 getOwnedGroup() const ;
-			
-			/*!
 			 ActivityEdges expressing flow between the nodes of the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityEdge, uml::Element > >
-			 getEdge() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::Element > > getEdge() const ;
+			
 			
 			/*!
 			 ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element > >
-			 getNode() const ;
-			
-			/*!
-			 Top-level Variables defined by the Activity.
-			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Variable, uml::NamedElement > >
-			 getVariable() const ;
-			
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element > > getNode() const ;
 			
 			/*!
 			 */
-			virtual 		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ > >
-			 getOwnedNode() const ;
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup > > getOwnedGroup() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/ > > getOwnedNode() const ;
 			
 			/*!
 			 Top-level ActivityPartitions in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ > >
-			 getPartition() const ;
+			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/ > > getPartition() const ;
 			
 			/*!
 			 Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ > >
-			 getStructuredNode() const ;
+			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/ > > getStructuredNode() const ;
+			
+			/*!
+			 Top-level Variables defined by the Activity.
+			<p>From package UML::Activities.</p> */
+			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement > > getVariable() const ;
 			
 							
 			
@@ -154,42 +170,37 @@ namespace uml
 			/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const ;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const ;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const ;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const ;/*!
 			 Top-level ActivityGroups in the Activity.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > >
-			 getGroup() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
+			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element > > getGroup() const ;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The roles that instances may play in this StructuredClassifier.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > >
-			 getRole() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
+			 The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::Classifier> > getRedefinitionContext() const ;/*!
+			 The roles that instances may play in this StructuredClassifier.
+			<p>From package UML::StructuredClassifiers.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > getRole() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

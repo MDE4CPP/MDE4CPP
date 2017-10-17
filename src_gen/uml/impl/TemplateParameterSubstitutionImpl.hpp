@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TemplateParameterSubstitutionImpl& operator=(TemplateParameterSubstitutionImpl const&) = delete;
@@ -46,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateParameterSubstitutionImpl();
+
+			//Additional constructors for the containments back reference
+			TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding > par_templateBinding);
+
+
+
 
 		public:
 			//destructor
@@ -57,8 +67,7 @@ namespace uml
 			/*!
 			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
 			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
-			virtual bool
-			 must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -100,7 +109,7 @@ namespace uml
 			/*!
 			 The TemplateBinding that owns this TemplateParameterSubstitution.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateBinding > getTemplateBinding() const ;
+			virtual std::weak_ptr<uml::TemplateBinding > getTemplateBinding() const ;
 			
 			/*!
 			 The TemplateBinding that owns this TemplateParameterSubstitution.
@@ -114,10 +123,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

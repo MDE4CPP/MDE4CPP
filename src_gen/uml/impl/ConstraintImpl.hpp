@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ConstraintImpl(const ConstraintImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ConstraintImpl& operator=(ConstraintImpl const&) = delete;
@@ -46,6 +46,27 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ConstraintImpl();
+
+			//Additional constructors for the containments back reference
+			ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
+
+
+			//Additional constructors for the containments back reference
+
+
+			//Additional constructors for the containments back reference
+			ConstraintImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -56,19 +77,16 @@ namespace uml
 			//*********************************
 			/*!
 			 The ValueSpecification for a Constraint must evaluate to a Boolean value. */ 
-			virtual bool
-			 boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool boolean_value(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 Evaluating the ValueSpecification for a Constraint must not have side effects. */ 
-			virtual bool
-			 no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool no_side_effects(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self) */ 
-			virtual bool
-			 not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool not_apply_to_self(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -83,13 +101,12 @@ namespace uml
 			/*!
 			 The ordered set of Elements referenced by this Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Element> >
-			 getConstrainedElement() const ;
+			virtual std::shared_ptr< Bag<uml::Element> > getConstrainedElement() const ;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getContext() const ;
+			virtual std::weak_ptr<uml::Namespace > getContext() const ;
 			
 			/*!
 			 Specifies the Namespace that owns the Constraint.
@@ -110,15 +127,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

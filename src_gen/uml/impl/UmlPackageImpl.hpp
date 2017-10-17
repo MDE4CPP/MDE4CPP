@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <cassert>
@@ -267,6 +267,7 @@
 #include "WriteStructuralFeatureActionImpl.hpp"
 #include "WriteVariableActionImpl.hpp"
 
+#include "UmlPackage.hpp"
 #include "UmlPackage.hpp"
 #include "EcorePackage.hpp"
 #include "impl/EPackageImpl.hpp"
@@ -574,6 +575,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EClass> getBehavior() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getBehavior_IsReentrant() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getBehavior_BehavioredClassifier() const ;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_Context() const ;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_OwnedParameter() const ;
 			virtual std::shared_ptr<ecore::EReference> getBehavior_OwnedParameterSet() const ;
@@ -1709,6 +1711,9 @@ namespace uml
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInputPin() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getInputPin_CallOperationAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_InvocationAction() const ;
+			virtual std::shared_ptr<ecore::EReference> getInputPin_StructuralFeatureAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getInputPin___Outgoing_edges_structured_only__EDiagnosticChain_EMap() const ;
 			
@@ -2380,6 +2385,7 @@ namespace uml
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOutputPin() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getOutputPin_CallAction() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getOutputPin___Incoming_edges_structured_only__EDiagnosticChain_EMap() const ;
 			
@@ -2451,6 +2457,7 @@ namespace uml
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPackageableElement() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getPackageableElement_OwningPackage() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getPackageableElement___Namespace_needs_visibility__EDiagnosticChain_EMap() const ;
 			
@@ -2465,6 +2472,7 @@ namespace uml
 			virtual std::shared_ptr<ecore::EAttribute> getParameter_IsException() const ;
 			virtual std::shared_ptr<ecore::EAttribute> getParameter_IsStream() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getParameter_Behavior() const ;
 			virtual std::shared_ptr<ecore::EReference> getParameter_DefaultValue() const ;
 			virtual std::shared_ptr<ecore::EReference> getParameter_Operation() const ;
 			virtual std::shared_ptr<ecore::EReference> getParameter_ParameterSet() const ;
@@ -3481,6 +3489,7 @@ namespace uml
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValueSpecification() const ;
 			
+			virtual std::shared_ptr<ecore::EReference> getValueSpecification_OwningSlot() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification___BooleanValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getValueSpecification___IntegerValue() const ;

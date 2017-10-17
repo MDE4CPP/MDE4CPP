@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -54,12 +54,13 @@ namespace uml
 		public:
  			Object(const Object &) {}
 			Object& operator=(Object const&) = delete;
-	
+
 		protected:
 			Object(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Object() {}
@@ -71,19 +72,16 @@ namespace uml
 			 Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
-			virtual boost::any
-			 get(std::shared_ptr<uml::Property>  property)  = 0;
+			virtual boost::any get(std::shared_ptr<uml::Property>  property)  = 0;
 			
 			/*!
 			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection. */ 
-			virtual void
-			 set(std::shared_ptr<uml::Property>  property,boost::any value)  = 0;
+			virtual void set(std::shared_ptr<uml::Property>  property,boost::any value)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 unset(std::shared_ptr<uml::Property>  property)  = 0;
+			virtual void unset(std::shared_ptr<uml::Property>  property)  = 0;
 			
 			
 			//*********************************

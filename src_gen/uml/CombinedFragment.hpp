@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -105,16 +105,18 @@ namespace uml
 	/*!
 	 A CombinedFragment defines an expression of InteractionFragments. A CombinedFragment is defined by an interaction operator and corresponding InteractionOperands. Through the use of CombinedFragments the user will be able to describe a number of traces in a compact and concise manner.
 	<p>From package UML::Interactions.</p> */
-	class CombinedFragment:virtual public InteractionFragment	{
+	class CombinedFragment:virtual public InteractionFragment
+	{
 		public:
  			CombinedFragment(const CombinedFragment &) {}
 			CombinedFragment& operator=(CombinedFragment const&) = delete;
-	
+
 		protected:
 			CombinedFragment(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~CombinedFragment() {}
@@ -127,14 +129,12 @@ namespace uml
 			interactionOperator=InteractionOperatorKind::break  implies   
 			enclosingInteraction.oclAsType(InteractionFragment)->asSet()->union(
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet() */ 
-			virtual bool
-			 break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool break_(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment) */ 
-			virtual bool
-			 consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool consider_and_ignore(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
@@ -142,8 +142,7 @@ namespace uml
 			interactionOperator = InteractionOperatorKind::break or interactionOperator = InteractionOperatorKind::assert or
 			interactionOperator = InteractionOperatorKind::neg)
 			implies operand->size()=1 */ 
-			virtual bool
-			 opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool opt_loop_break_neg(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -166,14 +165,12 @@ namespace uml
 			/*!
 			 Specifies the gates that form the interface between this CombinedFragment and its surroundings
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Gate, uml::Element > >
-			 getCfragmentGate() const = 0;
+			virtual std::shared_ptr<Subset<uml::Gate, uml::Element > > getCfragmentGate() const = 0;
 			
 			/*!
 			 The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p> */
-			virtual 		std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > >
-			 getOperand() const = 0;
+			virtual std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > > getOperand() const = 0;
 			
 			
 
@@ -193,13 +190,11 @@ namespace uml
 			/*!
 			 Specifies the gates that form the interface between this CombinedFragment and its surroundings
 			<p>From package UML::Interactions.</p> */
-					std::shared_ptr<Subset<uml::Gate, uml::Element > >
-			 m_cfragmentGate;
+			std::shared_ptr<Subset<uml::Gate, uml::Element > > m_cfragmentGate;
 			/*!
 			 The set of operands of the combined fragment.
 			<p>From package UML::Interactions.</p> */
-					std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > >
-			 m_operand;
+			std::shared_ptr<Subset<uml::InteractionOperand, uml::Element > > m_operand;
 			
 
 		public:
@@ -207,15 +202,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

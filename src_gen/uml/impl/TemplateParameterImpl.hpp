@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			TemplateParameterImpl(const TemplateParameterImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TemplateParameterImpl& operator=(TemplateParameterImpl const&) = delete;
@@ -46,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			TemplateParameterImpl();
+
+			//Additional constructors for the containments back reference
+			TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature);
+
+
+
 
 		public:
 			//destructor
@@ -57,8 +67,7 @@ namespace uml
 			/*!
 			 The default must be compatible with the formal TemplateParameter.
 			default <> null implies default.isCompatibleWith(parameteredElement) */ 
-			virtual bool
-			 must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool must_be_compatible(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -89,6 +98,15 @@ namespace uml
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault_ownedDefault) ;
 			/*!
+			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<uml::ParameterableElement > getOwnedParameteredElement() const ;
+			
+			/*!
+			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement_ownedParameteredElement) ;
+			/*!
 			 The ParameterableElement exposed by this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			virtual std::shared_ptr<uml::ParameterableElement > getParameteredElement() const ;
@@ -100,21 +118,12 @@ namespace uml
 			/*!
 			 The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::TemplateSignature > getSignature() const ;
+			virtual std::weak_ptr<uml::TemplateSignature > getSignature() const ;
 			
 			/*!
 			 The TemplateSignature that owns this TemplateParameter.
 			<p>From package UML::CommonStructure.</p> */
 			virtual void setSignature(std::shared_ptr<uml::TemplateSignature> _signature_signature) ;
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::ParameterableElement > getOwnedParameteredElement() const ;
-			
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameter for the purpose of exposing it as the parameteredElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement_ownedParameteredElement) ;
 							
 			
 			//*********************************
@@ -123,10 +132,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

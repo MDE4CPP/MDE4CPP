@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -98,16 +98,18 @@ namespace uml
 	/*!
 	 An OccurrenceSpecification is the basic semantic unit of Interactions. The sequences of occurrences specified by them are the meanings of Interactions.
 	<p>From package UML::Interactions.</p> */
-	class OccurrenceSpecification:virtual public InteractionFragment	{
+	class OccurrenceSpecification:virtual public InteractionFragment
+	{
 		public:
  			OccurrenceSpecification(const OccurrenceSpecification &) {}
 			OccurrenceSpecification& operator=(OccurrenceSpecification const&) = delete;
-	
+
 		protected:
 			OccurrenceSpecification(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~OccurrenceSpecification() {}
@@ -119,8 +121,7 @@ namespace uml
 			
 			/*!
 			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
-			virtual void
-			 setCovered(std::shared_ptr<uml::Lifeline>  value)  = 0;
+			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value)  = 0;
 			
 			
 			//*********************************
@@ -133,14 +134,12 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::GeneralOrdering> >
-			 getToAfter() const = 0;
+			virtual std::shared_ptr< Bag<uml::GeneralOrdering> > getToAfter() const = 0;
 			
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::GeneralOrdering> >
-			 getToBefore() const = 0;
+			virtual std::shared_ptr< Bag<uml::GeneralOrdering> > getToBefore() const = 0;
 			
 			
 
@@ -156,13 +155,11 @@ namespace uml
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-				std::shared_ptr< Bag<uml::GeneralOrdering> >
-			 m_toAfter;
+			std::shared_ptr< Bag<uml::GeneralOrdering> > m_toAfter;
 			/*!
 			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p> */
-				std::shared_ptr< Bag<uml::GeneralOrdering> >
-			 m_toBefore;
+			std::shared_ptr< Bag<uml::GeneralOrdering> > m_toBefore;
 			
 
 		public:
@@ -170,15 +167,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -112,16 +112,18 @@ namespace uml
 	/*!
 	 A StructuralFeature is a typed feature of a Classifier that specifies the structure of instances of the Classifier.
 	<p>From package UML::Classification.</p> */
-	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement	{
+	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement
+	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}
 			StructuralFeature& operator=(StructuralFeature const&) = delete;
-	
+
 		protected:
 			StructuralFeature(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~StructuralFeature() {}
@@ -169,12 +171,12 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

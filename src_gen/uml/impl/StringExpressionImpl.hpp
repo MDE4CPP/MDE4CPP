@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -39,7 +39,7 @@ namespace uml
 	{
 		public: 
 			StringExpressionImpl(const StringExpressionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			StringExpressionImpl& operator=(StringExpressionImpl const&) = delete;
@@ -47,6 +47,32 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			StringExpressionImpl();
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::StringExpression > par_owningExpression);
+
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot);
+
+
+			//Additional constructors for the containments back reference
+			StringExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
 
 		public:
 			//destructor
@@ -58,14 +84,12 @@ namespace uml
 			/*!
 			 All the operands of a StringExpression must be LiteralStrings
 			operand->forAll (oclIsKindOf (LiteralString)) */ 
-			virtual bool
-			 operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool operands(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
-			virtual bool
-			 subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool subexpressions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -80,7 +104,7 @@ namespace uml
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p> */
-			virtual std::shared_ptr<uml::StringExpression > getOwningExpression() const ;
+			virtual std::weak_ptr<uml::StringExpression > getOwningExpression() const ;
 			
 			/*!
 			 The StringExpression of which this StringExpression is a subExpression.
@@ -89,8 +113,7 @@ namespace uml
 			/*!
 			 The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p> */
-			virtual 		std::shared_ptr<Subset<uml::StringExpression, uml::Element > >
-			 getSubExpression() const ;
+			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element > > getSubExpression() const ;
 			
 							
 			
@@ -98,12 +121,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -183,16 +183,41 @@ namespace uml
 	/*!
 	 A deployment specification specifies a set of properties that determine execution parameters of a component artifact that is deployed on a node. A deployment specification can be aimed at a specific type of container. An artifact that reifies or implements deployment specification properties is a deployment descriptor.
 	<p>From package UML::Deployments.</p> */
-	class DeploymentSpecification:virtual public Artifact	{
+	class DeploymentSpecification:virtual public Artifact
+	{
 		public:
  			DeploymentSpecification(const DeploymentSpecification &) {}
 			DeploymentSpecification& operator=(DeploymentSpecification const&) = delete;
-	
+
 		protected:
 			DeploymentSpecification(){}
 
+
+			//Additional constructors for the containments back reference
+
+			DeploymentSpecification(std::weak_ptr<uml::Deployment > par_deployment);
+
+			//Additional constructors for the containments back reference
+
+			DeploymentSpecification(std::weak_ptr<uml::Namespace > par_namespace);
+
+			//Additional constructors for the containments back reference
+
+			DeploymentSpecification(std::weak_ptr<uml::Element > par_owner);
+
+			//Additional constructors for the containments back reference
+
+			DeploymentSpecification(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+
+			//Additional constructors for the containments back reference
+
+			DeploymentSpecification(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DeploymentSpecification() {}
@@ -201,16 +226,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
-			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment)) */ 
-			virtual bool
-			 deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 The deployedElements of a DeploymentTarget that are involved in a Deployment that has an associated Deployment-Specification is a kind of Component (i.e., the configured components).
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component))) */ 
-			virtual bool
-			 deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool deployed_elements(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			
+			/*!
+			 The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
+			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment)) */ 
+			virtual bool deployment_target(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -243,7 +266,7 @@ namespace uml
 			/*!
 			 The deployment with which the DeploymentSpecification is associated.
 			<p>From package UML::Deployments.</p> */
-			virtual std::shared_ptr<uml::Deployment > getDeployment() const = 0;
+			virtual std::weak_ptr<uml::Deployment > getDeployment() const = 0;
 			
 			/*!
 			 The deployment with which the DeploymentSpecification is associated.
@@ -271,7 +294,7 @@ namespace uml
 			/*!
 			 The deployment with which the DeploymentSpecification is associated.
 			<p>From package UML::Deployments.</p> */
-			std::shared_ptr<uml::Deployment > m_deployment;
+			std::weak_ptr<uml::Deployment > m_deployment;
 			
 
 		public:
@@ -279,33 +302,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > >
-			 getAttribute() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature > > getAttribute() const = 0;/*!
 			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
 			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > >
-			 getFeature() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
+			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement > > getFeature() const = 0;/*!
+			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			 Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

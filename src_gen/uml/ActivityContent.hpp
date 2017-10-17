@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -51,12 +51,13 @@ namespace uml
 		public:
  			ActivityContent(const ActivityContent &) {}
 			ActivityContent& operator=(ActivityContent const&) = delete;
-	
+
 		protected:
 			ActivityContent(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ActivityContent() {}
@@ -66,8 +67,7 @@ namespace uml
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Activity> 
-			 containingActivity()  = 0;
+			virtual std::shared_ptr<uml::Activity> containingActivity()  = 0;
 			
 			
 			//*********************************

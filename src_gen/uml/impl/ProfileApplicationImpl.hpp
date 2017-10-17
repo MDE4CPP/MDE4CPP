@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ProfileApplicationImpl(const ProfileApplicationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&) = delete;
@@ -46,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ProfileApplicationImpl();
+
+			//Additional constructors for the containments back reference
+			ProfileApplicationImpl(std::weak_ptr<uml::Package > par_applyingPackage);
+
+
+			//Additional constructors for the containments back reference
+			ProfileApplicationImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -56,13 +66,11 @@ namespace uml
 			//*********************************
 			/*!
 			 Retrieves the definition (Ecore representation) of the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::EPackage> 
-			 getAppliedDefinition()  ;
+			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition()  ;
 			
 			/*!
 			 Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application. */ 
-			virtual std::shared_ptr<ecore::ENamedElement> 
-			 getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  ;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)  ;
 			
 			
 			
@@ -96,7 +104,7 @@ namespace uml
 			/*!
 			 The package that owns the profile application.
 			<p>From package UML::Packages.</p> */
-			virtual std::shared_ptr<uml::Package > getApplyingPackage() const ;
+			virtual std::weak_ptr<uml::Package > getApplyingPackage() const ;
 			
 			/*!
 			 The package that owns the profile application.
@@ -110,21 +118,19 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getTarget() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::Element, uml::Element > >
-			 getSource() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getRelatedElement() const ;/*!
+			 Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getSource() const ;/*!
+			 Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > getTarget() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

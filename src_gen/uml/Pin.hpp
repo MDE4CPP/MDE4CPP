@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -152,16 +152,18 @@ namespace uml
 	/*!
 	 A Pin is an ObjectNode and MultiplicityElement that provides input values to an Action or accepts output values from an Action.
 	<p>From package UML::Actions.</p> */
-	class Pin:virtual public MultiplicityElement,virtual public ObjectNode	{
+	class Pin:virtual public MultiplicityElement,virtual public ObjectNode
+	{
 		public:
  			Pin(const Pin &) {}
 			Pin& operator=(Pin const&) = delete;
-	
+
 		protected:
 			Pin(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Pin() {}
@@ -172,14 +174,12 @@ namespace uml
 			/*!
 			 A control Pin has a control type.
 			isControl implies isControlType */ 
-			virtual bool
-			 control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool control_pins(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Pin multiplicity is not unique.
 			not isUnique */ 
-			virtual bool
-			 not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool not_unique(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -221,18 +221,18 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

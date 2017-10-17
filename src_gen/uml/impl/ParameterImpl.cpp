@@ -3,9 +3,11 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "umlPackageImpl.hpp"
+#include "UmlPackageImpl.hpp"
 
 //Forward declaration includes
+#include "Behavior.hpp"
+
 #include "Comment.hpp"
 
 #include "ConnectableElement.hpp"
@@ -58,11 +60,15 @@ ParameterImpl::ParameterImpl()
 
 	
 
+	
+
 		m_parameterSet.reset(new Bag<uml::ParameterSet>());
 	
 	
 
 	//Init references
+	
+
 	
 
 	
@@ -78,6 +84,63 @@ ParameterImpl::~ParameterImpl()
 #endif
 	
 }
+
+
+//Additional constructor for the containments back reference
+			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior)
+			:ParameterImpl()
+			{
+			    m_behavior = par_behavior;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace)
+			:ParameterImpl()
+			{
+			    m_namespace = par_namespace;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation > par_operation)
+			:ParameterImpl()
+			{
+			    m_operation = par_operation;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element > par_owner)
+			:ParameterImpl()
+			{
+			    m_owner = par_owner;
+			}
+
+
+
+
+
+//Additional constructor for the containments back reference
+			ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+			:ParameterImpl()
+			{
+			    m_owningTemplateParameter = par_owningTemplateParameter;
+			}
+
+
+
+
+
 
 ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 {
@@ -100,37 +163,35 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::Dependency> >
-	 _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new 	 Bag<uml::Dependency> 
-	(*(obj.getClientDependency().get())));
+	m_behavior  = obj.getBehavior();
 
-		std::shared_ptr< Bag<uml::ConnectorEnd> >
-	 _end = obj.getEnd();
-	m_end.reset(new 	 Bag<uml::ConnectorEnd> 
-	(*(obj.getEnd().get())));
+	std::shared_ptr< Bag<uml::Dependency> > _clientDependency = obj.getClientDependency();
+	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
-			std::shared_ptr<Union<uml::Element> > _ownedElement = obj.getOwnedElement();
-	m_ownedElement.reset(new 		Union<uml::Element> (*(obj.getOwnedElement().get())));
+	std::shared_ptr< Bag<uml::ConnectorEnd> > _end = obj.getEnd();
+	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
+
+	m_namespace  = obj.getNamespace();
+
+	m_operation  = obj.getOperation();
 
 	m_owner  = obj.getOwner();
 
-		std::shared_ptr< Bag<uml::ParameterSet> >
-	 _parameterSet = obj.getParameterSet();
-	m_parameterSet.reset(new 	 Bag<uml::ParameterSet> 
-	(*(obj.getParameterSet().get())));
+	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
+
+	std::shared_ptr< Bag<uml::ParameterSet> > _parameterSet = obj.getParameterSet();
+	m_parameterSet.reset(new Bag<uml::ParameterSet>(*(obj.getParameterSet().get())));
 
 	m_templateParameter  = obj.getTemplateParameter();
 
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getDefaultValue()!=nullptr)
 	{
-		m_defaultValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getDefaultValue()->copy()));
+		m_defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getDefaultValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_defaultValue" << std::endl;
@@ -138,62 +199,48 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getLowerValue()!=nullptr)
 	{
-		m_lowerValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getLowerValue()->copy()));
+		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
 	#endif
 	if(obj.getNameExpression()!=nullptr)
 	{
-		m_nameExpression.reset(dynamic_cast<uml::StringExpression*>(obj.getNameExpression()->copy()));
+		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
 	#endif
-	if(obj.getOperation()!=nullptr)
-	{
-		m_operation.reset(dynamic_cast<uml::Operation*>(obj.getOperation()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_operation" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
 	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(dynamic_cast<uml::Comment*>(_ownedComment->copy())));
+		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
-	if(obj.getOwningTemplateParameter()!=nullptr)
-	{
-		m_owningTemplateParameter.reset(dynamic_cast<uml::TemplateParameter*>(obj.getOwningTemplateParameter()->copy()));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_owningTemplateParameter" << std::endl;
-	#endif
 	if(obj.getUpperValue()!=nullptr)
 	{
-		m_upperValue.reset(dynamic_cast<uml::ValueSpecification*>(obj.getUpperValue()->copy()));
+		m_upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ParameterImpl::copy() const
+std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
 {
-	return new ParameterImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ParameterImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
@@ -202,9 +249,9 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ParameterImpl::setDefault (std::string _default)
+void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
@@ -214,7 +261,7 @@ std::string ParameterImpl::getDefault() const
 	return m_default;
 }
 
-void ParameterImpl::setDirection (ParameterDirectionKind _direction)
+void ParameterImpl::setDirection(ParameterDirectionKind _direction)
 {
 	m_direction = _direction;
 } 
@@ -224,7 +271,7 @@ ParameterDirectionKind ParameterImpl::getDirection() const
 	return m_direction;
 }
 
-void ParameterImpl::setEffect (ParameterEffectKind _effect)
+void ParameterImpl::setEffect(ParameterEffectKind _effect)
 {
 	m_effect = _effect;
 } 
@@ -234,7 +281,7 @@ ParameterEffectKind ParameterImpl::getEffect() const
 	return m_effect;
 }
 
-void ParameterImpl::setIsException (bool _isException)
+void ParameterImpl::setIsException(bool _isException)
 {
 	m_isException = _isException;
 } 
@@ -244,7 +291,7 @@ bool ParameterImpl::getIsException() const
 	return m_isException;
 }
 
-void ParameterImpl::setIsStream (bool _isStream)
+void ParameterImpl::setIsStream(bool _isStream)
 {
 	m_isStream = _isStream;
 } 
@@ -257,99 +304,85 @@ bool ParameterImpl::getIsStream() const
 //*********************************
 // Operations
 //*********************************
-bool
- ParameterImpl::connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::connector_end(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::in_and_out(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::isSetDefault() 
+bool ParameterImpl::isSetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::not_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::object_effect(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::reentrant_behaviors(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setBooleanDefaultValue(bool value) 
+void ParameterImpl::setBooleanDefaultValue(bool value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setIntegerDefaultValue(int value) 
+void ParameterImpl::setIntegerDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setNullDefaultValue() 
+void ParameterImpl::setNullDefaultValue() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setRealDefaultValue(double value) 
+void ParameterImpl::setRealDefaultValue(double value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setStringDefaultValue(std::string value) 
+void ParameterImpl::setStringDefaultValue(std::string value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
+void ParameterImpl::setUnlimitedNaturalDefaultValue(int value) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ParameterImpl::stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
+bool ParameterImpl::stream_and_exception(boost::any diagnostics,std::map <   boost::any, boost::any >  context) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ParameterImpl::unsetDefault() 
+void ParameterImpl::unsetDefault() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -358,6 +391,16 @@ void
 //*********************************
 // References
 //*********************************
+std::weak_ptr<uml::Behavior > ParameterImpl::getBehavior() const
+{
+
+    return m_behavior;
+}
+void ParameterImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+{
+    m_behavior = _behavior;
+}
+
 std::shared_ptr<uml::ValueSpecification > ParameterImpl::getDefaultValue() const
 {
 
@@ -368,15 +411,14 @@ void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _de
     m_defaultValue = _defaultValue;
 }
 
-std::shared_ptr<uml::Operation > ParameterImpl::getOperation() const
+std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 {
 
     return m_operation;
 }
 
 
-	std::shared_ptr< Bag<uml::ParameterSet> >
- ParameterImpl::getParameterSet() const
+std::shared_ptr< Bag<uml::ParameterSet> > ParameterImpl::getParameterSet() const
 {
 
     return m_parameterSet;
@@ -386,15 +428,15 @@ std::shared_ptr<uml::Operation > ParameterImpl::getOperation() const
 //*********************************
 // Union Getter
 //*********************************
-		std::shared_ptr<Union<uml::Element> > ParameterImpl::getOwnedElement() const
-{
-	return m_ownedElement;
-}
-std::shared_ptr<uml::Namespace > ParameterImpl::getNamespace() const
+std::weak_ptr<uml::Namespace > ParameterImpl::getNamespace() const
 {
 	return m_namespace;
 }
-std::shared_ptr<uml::Element > ParameterImpl::getOwner() const
+std::shared_ptr<Union<uml::Element> > ParameterImpl::getOwnedElement() const
+{
+	return m_ownedElement;
+}
+std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -407,6 +449,8 @@ boost::any ParameterImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
+		case UmlPackage::PARAMETER_BEHAVIOR:
+			return getBehavior(); //4428
 		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
 			return getClientDependency(); //444
 		case UmlPackage::PARAMETER_DEFAULT:

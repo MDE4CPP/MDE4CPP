@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -62,6 +62,11 @@ namespace uml
 
 namespace uml 
 {
+	class Package;
+}
+
+namespace uml 
+{
 	class StringExpression;
 }
 
@@ -88,16 +93,18 @@ namespace uml
 	/*!
 	 A TimeEvent is an Event that occurs at a specific point in time.
 	<p>From package UML::CommonBehavior.</p> */
-	class TimeEvent:virtual public Event	{
+	class TimeEvent:virtual public Event
+	{
 		public:
  			TimeEvent(const TimeEvent &) {}
 			TimeEvent& operator=(TimeEvent const&) = delete;
-	
+
 		protected:
 			TimeEvent(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~TimeEvent() {}
@@ -108,8 +115,7 @@ namespace uml
 			/*!
 			 The ValueSpecification when must return a non-negative Integer.
 			when.integerValue() >= 0 */ 
-			virtual bool
-			 when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool when_non_negative(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -164,12 +170,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
+			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0; 
 	};
 
 }

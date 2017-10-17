@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 #include <string>
@@ -140,16 +140,18 @@ namespace uml
 	/*!
 	 A ProtocolTransition specifies a legal Transition for an Operation. Transitions of ProtocolStateMachines have the following information: a pre-condition (guard), a Trigger, and a post-condition. Every ProtocolTransition is associated with at most one BehavioralFeature belonging to the context Classifier of the ProtocolStateMachine.
 	<p>From package UML::StateMachines.</p> */
-	class ProtocolTransition:virtual public Transition	{
+	class ProtocolTransition:virtual public Transition
+	{
 		public:
  			ProtocolTransition(const ProtocolTransition &) {}
 			ProtocolTransition& operator=(ProtocolTransition const&) = delete;
-	
+
 		protected:
 			ProtocolTransition(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ProtocolTransition() {}
@@ -158,31 +160,27 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
-			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
-			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
-			else true endif */ 
-			virtual bool
-			 refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
-			
-			/*!
 			 A ProtocolTransition never has associated Behaviors.
 			effect = null */ 
-			virtual bool
-			 associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool associated_actions(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM() */ 
-			virtual bool
-			 belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
+			virtual bool belongs_to_psm(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			/*!
 			 Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p> */ 
-			virtual std::shared_ptr<Bag<uml::Operation> >
-			 getReferreds()  = 0;
+			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds()  = 0;
+			
+			/*!
+			 If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
+			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
+			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
+			else true endif */ 
+			virtual bool refers_to_operation(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  = 0;
 			
 			
 			//*********************************
@@ -213,8 +211,7 @@ namespace uml
 			/*!
 			 This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Operation> >
-			 getReferred() const = 0;
+			virtual std::shared_ptr< Bag<uml::Operation> > getReferred() const = 0;
 			
 			
 
@@ -238,8 +235,7 @@ namespace uml
 			/*!
 			 This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p> */
-				std::shared_ptr< Bag<uml::Operation> >
-			 m_referred;
+			std::shared_ptr< Bag<uml::Operation> > m_referred;
 			
 
 		public:
@@ -247,25 +243,24 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const = 0;/*!
 			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
+			virtual std::shared_ptr<Union<uml::NamedElement> > getMember() const = 0;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > >
-			 getOwnedMember() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const = 0;/*!
+			 A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement > > getOwnedMember() const = 0;/*!
+			 The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
 	};
 
 }

@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			SlotImpl& operator=(SlotImpl const&) = delete;
@@ -46,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			SlotImpl();
+
+			//Additional constructors for the containments back reference
+			SlotImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance);
+
+
+
 
 		public:
 			//destructor
@@ -74,20 +84,19 @@ namespace uml
 			<p>From package UML::Classification.</p> */
 			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature_definingFeature) ;
 			/*!
-			 The value or values held by the Slot.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > >
-			 getValue() const ;
-			
-			/*!
 			 The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<uml::InstanceSpecification > getOwningInstance() const ;
+			virtual std::weak_ptr<uml::InstanceSpecification > getOwningInstance() const ;
 			
 			/*!
 			 The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p> */
 			virtual void setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance_owningInstance) ;
+			/*!
+			 The value or values held by the Slot.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element > > getValue() const ;
+			
 							
 			
 			//*********************************
@@ -96,10 +105,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

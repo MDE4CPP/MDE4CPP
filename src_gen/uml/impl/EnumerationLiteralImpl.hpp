@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EnumerationLiteralImpl& operator=(EnumerationLiteralImpl const&) = delete;
@@ -47,6 +47,28 @@ namespace uml
 			friend class UmlFactoryImpl;
 			EnumerationLiteralImpl();
 
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration);
+
+
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::Package > par_owningPackage);
+
+
+			//Additional constructors for the containments back reference
+			EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+
+
+
+
 		public:
 			//destructor
 			virtual ~EnumerationLiteralImpl();
@@ -54,12 +76,11 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			
+			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getClassifiers()  ;
-			
-			
+			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers()  ;
 			
 			
 			
@@ -74,7 +95,7 @@ namespace uml
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p> */
-			virtual std::shared_ptr<uml::Enumeration > getEnumeration() const ;
+			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const ;
 			
 			/*!
 			 The Enumeration that this EnumerationLiteral is a member of.
@@ -86,15 +107,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 Specifies the Namespace that owns the NamedElement.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

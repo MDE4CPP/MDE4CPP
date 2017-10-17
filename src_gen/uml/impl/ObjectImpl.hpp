@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -40,7 +40,7 @@ virtual public Object
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ObjectImpl& operator=(ObjectImpl const&) = delete;
@@ -48,6 +48,8 @@ virtual public Object
 		protected:
 			friend class UmlFactoryImpl;
 			ObjectImpl();
+
+
 
 		public:
 			//destructor
@@ -60,19 +62,16 @@ virtual public Object
 			 Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
 			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
-			virtual boost::any
-			 get(std::shared_ptr<uml::Property>  property)  ;
+			virtual boost::any get(std::shared_ptr<uml::Property>  property)  ;
 			
 			/*!
 			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection. */ 
-			virtual void
-			 set(std::shared_ptr<uml::Property>  property,boost::any value)  ;
+			virtual void set(std::shared_ptr<uml::Property>  property,boost::any value)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 unset(std::shared_ptr<uml::Property>  property)  ;
+			virtual void unset(std::shared_ptr<uml::Property>  property)  ;
 			
 			
 			

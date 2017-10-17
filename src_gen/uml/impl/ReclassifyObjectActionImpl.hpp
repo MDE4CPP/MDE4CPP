@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ReclassifyObjectActionImpl& operator=(ReclassifyObjectActionImpl const&) = delete;
@@ -46,6 +46,24 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			ReclassifyObjectActionImpl();
+
+			//Additional constructors for the containments back reference
+			ReclassifyObjectActionImpl(std::weak_ptr<uml::Activity > par_activity);
+
+
+			//Additional constructors for the containments back reference
+			ReclassifyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+
+
+			//Additional constructors for the containments back reference
+			ReclassifyObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			ReclassifyObjectActionImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -55,22 +73,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The object InputPin has no type.
-			object.type = null */ 
-			virtual bool
-			 input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
-			
-			/*!
 			 None of the newClassifiers may be abstract.
 			not newClassifier->exists(isAbstract) */ 
-			virtual bool
-			 classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool classifier_not_abstract(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			
+			/*!
+			 The object InputPin has no type.
+			object.type = null */ 
+			virtual bool input_pin(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			/*!
 			 The multiplicity of the object InputPin is 1..1.
 			object.is(1,1) */ 
-			virtual bool
-			 multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
+			virtual bool multiplicity(boost::any diagnostics,std::map <   boost::any, boost::any >  context)  ;
 			
 			
 			
@@ -95,8 +110,7 @@ namespace uml
 			/*!
 			 A set of Classifiers to be added to the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getNewClassifier() const ;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getNewClassifier() const ;
 			
 			/*!
 			 The InputPin that holds the object to be reclassified.
@@ -110,8 +124,7 @@ namespace uml
 			/*!
 			 A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p> */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getOldClassifier() const ;
+			virtual std::shared_ptr< Bag<uml::Classifier> > getOldClassifier() const ;
 			
 							
 			
@@ -119,22 +132,21 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
-			virtual 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > >
-			 getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
-			virtual 		std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ;/*!
 			 ActivityGroups containing the ActivityNode.
 			<p>From package UML::Activities.</p> */
-			virtual 		std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			virtual std::shared_ptr<Union<uml::ActivityGroup> > getInGroup() const ;/*!
+			 The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p> */
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element > > getInput() const ;/*!
+			 The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p> */
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			 The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p> */
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

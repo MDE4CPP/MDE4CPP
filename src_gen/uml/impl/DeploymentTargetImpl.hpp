@@ -14,9 +14,9 @@
 #endif
 
 #ifdef ACTIVITY_DEBUG_ON
-    #define ACT_DEBUG(a) /**/
-#else
     #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
 #endif
 
 //*********************************
@@ -38,7 +38,7 @@ namespace uml
 	{
 		public: 
 			DeploymentTargetImpl(const DeploymentTargetImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			DeploymentTargetImpl& operator=(DeploymentTargetImpl const&) = delete;
@@ -46,6 +46,16 @@ namespace uml
 		protected:
 			friend class UmlFactoryImpl;
 			DeploymentTargetImpl();
+
+			//Additional constructors for the containments back reference
+			DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_namespace);
+
+
+			//Additional constructors for the containments back reference
+			DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owner);
+
+
+
 
 		public:
 			//destructor
@@ -58,8 +68,7 @@ namespace uml
 			 Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
 			<p>From package UML::Deployments.</p> */ 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> >
-			 getDeployedElements()  ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements()  ;
 			
 			
 			
@@ -74,14 +83,12 @@ namespace uml
 			/*!
 			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual 	std::shared_ptr< Bag<uml::PackageableElement> >
-			 getDeployedElement() const ;
+			virtual std::shared_ptr< Bag<uml::PackageableElement> > getDeployedElement() const ;
 			
 			/*!
 			 The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p> */
-			virtual 		std::shared_ptr<Subset<uml::Deployment, uml::Element > >
-			 getDeployment() const ;
+			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element > > getDeployment() const ;
 			
 							
 			
@@ -91,10 +98,10 @@ namespace uml
 			/*!
 			 The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual 		std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
+			virtual std::shared_ptr<Union<uml::Element> > getOwnedElement() const ;/*!
 			 The Element that owns this Element.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
