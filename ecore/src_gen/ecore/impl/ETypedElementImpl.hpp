@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ETypedElementImpl& operator=(ETypedElementImpl const&) = delete;
@@ -65,11 +63,27 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
+			virtual int getLowerBound() const ;
+			
+			/*!
+			 */ 
+			virtual void setLowerBound (int _lowerBound); 
+			
+			/*!
+			 */ 
+			virtual bool isMany() const ;
+			
+			/*!
+			 */ 
 			virtual bool isOrdered() const ;
 			
 			/*!
 			 */ 
 			virtual void setOrdered (bool _ordered); 
+			
+			/*!
+			 */ 
+			virtual bool isRequired() const ;
 			
 			/*!
 			 */ 
@@ -81,27 +95,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual int getLowerBound() const ;
-			
-			/*!
-			 */ 
-			virtual void setLowerBound (int _lowerBound); 
-			
-			/*!
-			 */ 
 			virtual int getUpperBound() const ;
 			
 			/*!
 			 */ 
 			virtual void setUpperBound (int _upperBound); 
-			
-			/*!
-			 */ 
-			virtual bool isMany() const ;
-			
-			/*!
-			 */ 
-			virtual bool isRequired() const ;
 			
 			
 			
@@ -110,18 +108,18 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
-			
-			/*!
-			 */
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) ;
-			/*!
-			 */
 			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const ;
 			
 			/*!
 			 */
 			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType_eGenericType) ;
+			/*!
+			 */
+			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
+			
+			/*!
+			 */
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) ;
 							
 			
 			//*********************************

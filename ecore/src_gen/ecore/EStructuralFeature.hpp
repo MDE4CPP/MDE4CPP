@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,7 +66,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EStructuralFeature:virtual public ETypedElement	{
+	class EStructuralFeature:virtual public ETypedElement
+	{
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
 			EStructuralFeature& operator=(EStructuralFeature const&) = delete;
@@ -78,10 +77,11 @@ namespace ecore
 
 
 			//Additional constructors for the containments back reference
-			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass){}
+
+			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EStructuralFeature() {}
@@ -103,19 +103,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual bool isVolatile() const = 0;
+			virtual void *  getContainerClass() const = 0;
 			
 			/*!
 			 */ 
-			virtual void setVolatile (bool _volatile)= 0; 
-			
-			/*!
-			 */ 
-			virtual bool isTransient() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setTransient (bool _transient)= 0; 
+			virtual boost::any getDefaultValue() const = 0;
 			
 			/*!
 			 */ 
@@ -124,18 +116,6 @@ namespace ecore
 			/*!
 			 */ 
 			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0; 
-			
-			/*!
-			 */ 
-			virtual boost::any getDefaultValue() const = 0;
-			
-			/*!
-			 */ 
-			virtual bool isUnsettable() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setUnsettable (bool _unsettable)= 0; 
 			
 			/*!
 			 */ 
@@ -151,7 +131,27 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void *  getContainerClass() const = 0;
+			virtual bool isTransient() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setTransient (bool _transient)= 0; 
+			
+			/*!
+			 */ 
+			virtual bool isUnsettable() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setUnsettable (bool _unsettable)= 0; 
+			
+			/*!
+			 */ 
+			virtual bool isVolatile() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setVolatile (bool _volatile)= 0; 
 			
 			
 			//*********************************
@@ -172,19 +172,13 @@ namespace ecore
 			bool m_changeable =  true;
 			/*!
 			 */ 
-			bool m_volatile ;
-			/*!
-			 */ 
-			bool m_transient ;
-			/*!
-			 */ 
-			std::string m_defaultValueLiteral ;
+			void *  m_containerClass ;
 			/*!
 			 */ 
 			boost::any m_defaultValue ;
 			/*!
 			 */ 
-			bool m_unsettable ;
+			std::string m_defaultValueLiteral ;
 			/*!
 			 */ 
 			bool m_derived ;
@@ -193,7 +187,13 @@ namespace ecore
 			int m_featureID =  -1;
 			/*!
 			 */ 
-			void *  m_containerClass ;
+			bool m_transient ;
+			/*!
+			 */ 
+			bool m_unsettable ;
+			/*!
+			 */ 
+			bool m_volatile ;
 			
 			
 			//*********************************

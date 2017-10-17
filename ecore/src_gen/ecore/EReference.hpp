@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -78,7 +76,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EReference:virtual public EStructuralFeature	{
+	class EReference:virtual public EStructuralFeature
+	{
 		public:
  			EReference(const EReference &) {}
 			EReference& operator=(EReference const&) = delete;
@@ -88,7 +87,7 @@ namespace ecore
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EReference() {}
@@ -102,15 +101,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
+			virtual bool isContainer() const = 0;
+			
+			/*!
+			 */ 
 			virtual bool isContainment() const = 0;
 			
 			/*!
 			 */ 
 			virtual void setContainment (bool _containment)= 0; 
-			
-			/*!
-			 */ 
-			virtual bool isContainer() const = 0;
 			
 			/*!
 			 */ 
@@ -126,6 +125,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEKeys() const = 0;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<ecore::EReference > getEOpposite() const = 0;
 			
 			/*!
@@ -135,10 +138,6 @@ namespace ecore
 			 */
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const = 0;
 			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEKeys() const = 0;
-			
 			
 
 		protected:
@@ -147,10 +146,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			bool m_containment ;
+			bool m_container ;
 			/*!
 			 */ 
-			bool m_container ;
+			bool m_containment ;
 			/*!
 			 */ 
 			bool m_resolveProxies =  true;
@@ -161,13 +160,13 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			std::shared_ptr< Bag<ecore::EAttribute> > m_eKeys;
+			/*!
+			 */
 			std::shared_ptr<ecore::EReference > m_eOpposite;
 			/*!
 			 */
 			std::shared_ptr<ecore::EClass > m_eReferenceType;
-			/*!
-			 */
-			std::shared_ptr< Bag<ecore::EAttribute> > m_eKeys;
 			
 
 		public:

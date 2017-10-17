@@ -94,31 +94,30 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 	m_eType  = obj.getEType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
+		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  EAttributeImpl::copy() const
+std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 {
-	return new EAttributeImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EAttributeImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const

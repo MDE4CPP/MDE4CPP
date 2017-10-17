@@ -15,6 +15,7 @@ task buildEcoreRelease(dependsOn: ['generateEcore', 'compileEcoreRelease']) {
 	description 'build ecore in release'
 }
 
+
 task compileEcore(dependsOn: ['compileEcoreDebug', 'compileEcoreRelease']) {
 	group 'ecore'
 	description 'compile ecore in debug and release'
@@ -122,6 +123,7 @@ task generateEcore(type: JavaExec) {
 compileEcore.mustRunAfter generateEcore
 compileEcoreDebug.mustRunAfter generateEcore
 compileEcoreRelease.mustRunAfter generateEcore
+
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/ecore/.cmake/')

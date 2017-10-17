@@ -54,16 +54,15 @@ EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMa
 	m_eContainer  = obj.eContainer();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EStringToStringMapEntryImpl::copy() const
+std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
 {
-	return new EStringToStringMapEntryImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EStringToStringMapEntryImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EGenericTypeImpl(const EGenericTypeImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EGenericTypeImpl& operator=(EGenericTypeImpl const&) = delete;
@@ -74,19 +72,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EGenericType > getEUpperBound() const ;
+			virtual std::shared_ptr<ecore::EClassifier > getEClassifier() const ;
 			
 			/*!
 			 */
-			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound_eUpperBound) ;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EGenericType> > getETypeArguments() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr<ecore::EClassifier > getERawType() const ;
-			
+			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier_eClassifier) ;
 			/*!
 			 */
 			virtual std::shared_ptr<ecore::EGenericType > getELowerBound() const ;
@@ -96,6 +86,14 @@ namespace ecore
 			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound_eLowerBound) ;
 			/*!
 			 */
+			virtual std::shared_ptr<ecore::EClassifier > getERawType() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getETypeArguments() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<ecore::ETypeParameter > getETypeParameter() const ;
 			
 			/*!
@@ -103,11 +101,11 @@ namespace ecore
 			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter_eTypeParameter) ;
 			/*!
 			 */
-			virtual std::shared_ptr<ecore::EClassifier > getEClassifier() const ;
+			virtual std::shared_ptr<ecore::EGenericType > getEUpperBound() const ;
 			
 			/*!
 			 */
-			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier_eClassifier) ;
+			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound_eUpperBound) ;
 							
 			
 			//*********************************

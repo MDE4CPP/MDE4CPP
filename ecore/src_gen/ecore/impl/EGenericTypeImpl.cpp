@@ -88,12 +88,11 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImp
 	m_eTypeParameter  = obj.getETypeParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getELowerBound()!=nullptr)
 	{
-		m_eLowerBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getELowerBound()->copy()));
+		m_eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getELowerBound()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eLowerBound" << std::endl;
@@ -101,14 +100,14 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImp
 	std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArgumentsList = obj.getETypeArguments();
 	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *_eTypeArgumentsList)
 	{
-		this->getETypeArguments()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eTypeArguments->copy())));
+		this->getETypeArguments()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eTypeArguments->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eTypeArguments" << std::endl;
 	#endif
 	if(obj.getEUpperBound()!=nullptr)
 	{
-		m_eUpperBound.reset(dynamic_cast<ecore::EGenericType*>(obj.getEUpperBound()->copy()));
+		m_eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEUpperBound()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eUpperBound" << std::endl;
@@ -120,12 +119,12 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImp
 	
 
 	
-
 }
 
-ecore::EObject *  EGenericTypeImpl::copy() const
+std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
 {
-	return new EGenericTypeImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EGenericTypeImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const

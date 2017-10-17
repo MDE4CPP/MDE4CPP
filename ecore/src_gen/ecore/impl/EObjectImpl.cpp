@@ -61,16 +61,15 @@ EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
 	m_eContainer  = obj.eContainer();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EObjectImpl::copy() const
+std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
 {
-	return new EObjectImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EObjectImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const

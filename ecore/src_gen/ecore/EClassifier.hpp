@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,7 +61,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EClassifier:virtual public ENamedElement	{
+	class EClassifier:virtual public ENamedElement
+	{
 		public:
  			EClassifier(const EClassifier &) {}
 			EClassifier& operator=(EClassifier const&) = delete;
@@ -73,10 +72,11 @@ namespace ecore
 
 
 			//Additional constructors for the containments back reference
-			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage){}
+
+			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EClassifier() {}
@@ -96,11 +96,11 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string getInstanceClassName() const = 0;
+			virtual int getClassifierID() const = 0;
 			
 			/*!
 			 */ 
-			virtual void setInstanceClassName (std::string _instanceClassName)= 0; 
+			virtual boost::any getDefaultValue() const = 0;
 			
 			/*!
 			 */ 
@@ -112,11 +112,11 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual boost::any getDefaultValue() const = 0;
+			virtual std::string getInstanceClassName() const = 0;
 			
 			/*!
 			 */ 
-			virtual int getClassifierID() const = 0;
+			virtual void setInstanceClassName (std::string _instanceClassName)= 0; 
 			
 			/*!
 			 */ 
@@ -149,16 +149,16 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			std::string m_instanceClassName ;
-			/*!
-			 */ 
-			void *  m_instanceClass ;
+			int m_classifierID =  -1;
 			/*!
 			 */ 
 			boost::any m_defaultValue ;
 			/*!
 			 */ 
-			int m_classifierID =  -1;
+			void *  m_instanceClass ;
+			/*!
+			 */ 
+			std::string m_instanceClassName ;
 			/*!
 			 */ 
 			std::string m_instanceTypeName ;

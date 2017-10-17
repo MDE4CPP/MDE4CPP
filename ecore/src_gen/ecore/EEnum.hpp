@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,7 +66,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EEnum:virtual public EDataType	{
+	class EEnum:virtual public EDataType
+	{
 		public:
  			EEnum(const EEnum &) {}
 			EEnum& operator=(EEnum const&) = delete;
@@ -78,7 +77,7 @@ namespace ecore
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EEnum() {}

@@ -27,7 +27,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 SET(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
+SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
@@ -74,9 +74,6 @@ if(NOT UNIX)
 	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
 	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
 endif()
-
-
-
 
 if(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix

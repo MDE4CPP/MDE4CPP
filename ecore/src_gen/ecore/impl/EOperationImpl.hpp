@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EOperationImpl& operator=(EOperationImpl const&) = delete;
@@ -90,7 +88,11 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const ;
+			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEExceptions() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEGenericExceptions() const ;
 			
 			/*!
 			 */
@@ -98,11 +100,7 @@ namespace ecore
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEExceptions() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EGenericType> > getEGenericExceptions() const ;
+			virtual std::shared_ptr< Bag<ecore::ETypeParameter> > getETypeParameters() const ;
 			
 							
 			

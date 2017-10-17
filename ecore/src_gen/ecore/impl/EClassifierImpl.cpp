@@ -86,13 +86,12 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 	m_ePackage  = obj.getEPackage();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -100,7 +99,7 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
@@ -108,12 +107,12 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject>  EClassifierImpl::copy() const
 {
-	return new EClassifierImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EClassifierImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const

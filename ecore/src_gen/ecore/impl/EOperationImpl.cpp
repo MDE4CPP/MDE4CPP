@@ -118,13 +118,12 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	m_eType  = obj.getEType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -132,14 +131,14 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	std::shared_ptr<Bag<ecore::EGenericType>> _eGenericExceptionsList = obj.getEGenericExceptions();
 	for(std::shared_ptr<ecore::EGenericType> _eGenericExceptions : *_eGenericExceptionsList)
 	{
-		this->getEGenericExceptions()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericExceptions->copy())));
+		this->getEGenericExceptions()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eGenericExceptions->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eGenericExceptions" << std::endl;
 	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
-		m_eGenericType.reset(dynamic_cast<ecore::EGenericType*>(obj.getEGenericType()->copy()));
+		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
@@ -147,7 +146,7 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	std::shared_ptr<Bag<ecore::EParameter>> _eParametersList = obj.getEParameters();
 	for(std::shared_ptr<ecore::EParameter> _eParameters : *_eParametersList)
 	{
-		this->getEParameters()->add(std::shared_ptr<ecore::EParameter>(dynamic_cast<ecore::EParameter*>(_eParameters->copy())));
+		this->getEParameters()->add(std::shared_ptr<ecore::EParameter>(std::dynamic_pointer_cast<ecore::EParameter>(_eParameters->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eParameters" << std::endl;
@@ -155,7 +154,7 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
@@ -169,12 +168,12 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EOperationImpl::copy() const
+std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
 {
-	return new EOperationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EOperationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EOperationImpl::eStaticClass() const

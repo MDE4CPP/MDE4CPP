@@ -111,13 +111,12 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 	m_eSuperPackage  = obj.getESuperPackage();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -125,7 +124,7 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 	std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiersList = obj.getEClassifiers();
 	for(std::shared_ptr<ecore::EClassifier> _eClassifiers : *_eClassifiersList)
 	{
-		this->getEClassifiers()->add(std::shared_ptr<ecore::EClassifier>(dynamic_cast<ecore::EClassifier*>(_eClassifiers->copy())));
+		this->getEClassifiers()->add(std::shared_ptr<ecore::EClassifier>(std::dynamic_pointer_cast<ecore::EClassifier>(_eClassifiers->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eClassifiers" << std::endl;
@@ -133,7 +132,7 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 	std::shared_ptr<Bag<ecore::EPackage>> _eSubpackagesList = obj.getESubpackages();
 	for(std::shared_ptr<ecore::EPackage> _eSubpackages : *_eSubpackagesList)
 	{
-		this->getESubpackages()->add(std::shared_ptr<ecore::EPackage>(dynamic_cast<ecore::EPackage*>(_eSubpackages->copy())));
+		this->getESubpackages()->add(std::shared_ptr<ecore::EPackage>(std::dynamic_pointer_cast<ecore::EPackage>(_eSubpackages->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eSubpackages" << std::endl;
@@ -144,12 +143,12 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EPackageImpl::copy() const
+std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
 {
-	return new EPackageImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EPackageImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
@@ -217,7 +216,6 @@ void EPackageImpl::createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id
 	    std::shared_ptr<EAttributeImpl> a(std::dynamic_pointer_cast<EAttributeImpl>(EcoreFactory::eInstance()->create("EAttribute", owner)));
     assert(a);
     a->setFeatureID(id);
-    owner->getEStructuralFeatures()->push_back(a);
 	//end of body
 }
 
@@ -228,7 +226,6 @@ std::shared_ptr<ecore::EClass> EPackageImpl::createEClass(int id)
 	std::shared_ptr<EClassImpl> c(std::dynamic_pointer_cast<EClassImpl>(EcoreFactory::eInstance()->create("EClass",std::shared_ptr<EPackage>(this, null_deleter()))));
 	assert(c);
 	c->setClassifierID(id);
-	getEClassifiers()->push_back(c);
 	return c;
 	//end of body
 }
@@ -240,7 +237,6 @@ std::shared_ptr<ecore::EDataType> EPackageImpl::createEDataType(int id)
 	std::shared_ptr<EDataTypeImpl> d(std::dynamic_pointer_cast<EDataTypeImpl>(EcoreFactory::eInstance()->create("EDataType",std::shared_ptr<EPackage>(this, null_deleter()))));
 	assert(d);
 	d->setClassifierID(id);
-	getEClassifiers()->push_back(d);
 	return d;
 	//end of body
 }
@@ -252,7 +248,6 @@ std::shared_ptr<ecore::EEnum> EPackageImpl::createEEnum(int id)
 	std::shared_ptr<EEnumImpl> e( std::dynamic_pointer_cast<EEnumImpl>(EcoreFactory::eInstance()->create("EEnum",std::shared_ptr<EPackage>(this, null_deleter()))));
 	assert(e);
 	e->setClassifierID(id);
-	getEClassifiers()->push_back(e);
 	return e;
 	//end of body
 }
@@ -263,7 +258,6 @@ void EPackageImpl::createEOperation(std::shared_ptr<ecore::EClass>  owner,int id
 		std::shared_ptr<EOperationImpl> o(std::dynamic_pointer_cast<EOperationImpl>(EcoreFactory::eInstance()->create("EOperation",owner)));
 	assert(o);
 	o->setOperationID(id);
-	owner->getEOperations()->push_back(o);
 	//end of body
 }
 
@@ -273,7 +267,6 @@ void EPackageImpl::createEReference(std::shared_ptr<ecore::EClass>  owner,int id
 		std::shared_ptr<EReferenceImpl> r (std::dynamic_pointer_cast<EReferenceImpl>(EcoreFactory::eInstance()->create("EReference", owner)));
 	assert(r);
 	r->setFeatureID(id);
-	owner->getEStructuralFeatures()->push_back(r);
 	//end of body
 }
 
@@ -494,7 +487,6 @@ std::shared_ptr<ecore::EParameter> EPackageImpl::internalAddEParameter(std::shar
 	    std::shared_ptr<EParameter> p(EcoreFactory::eInstance()->createEParameter_in_EOperation(owner));
     p->setEType(type);
     p->setName(name);
-    owner->getEParameters()->push_back(p);
     return p;
 	//end of body
 }

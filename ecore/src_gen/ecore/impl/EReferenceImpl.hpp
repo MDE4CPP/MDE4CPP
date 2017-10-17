@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace ecore
 	{
 		public: 
 			EReferenceImpl(const EReferenceImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EReferenceImpl& operator=(EReferenceImpl const&) = delete;
@@ -69,15 +67,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
+			virtual bool isContainer() const ;
+			
+			/*!
+			 */ 
 			virtual bool isContainment() const ;
 			
 			/*!
 			 */ 
 			virtual void setContainment (bool _containment); 
-			
-			/*!
-			 */ 
-			virtual bool isContainer() const ;
 			
 			/*!
 			 */ 
@@ -94,6 +92,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEKeys() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<ecore::EReference > getEOpposite() const ;
 			
 			/*!
@@ -102,10 +104,6 @@ namespace ecore
 			/*!
 			 */
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EAttribute> > getEKeys() const ;
 			
 							
 			

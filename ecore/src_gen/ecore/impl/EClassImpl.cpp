@@ -229,13 +229,12 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	m_eSuperTypes.reset(new Bag<ecore::EClass>(*(obj.getESuperTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(dynamic_cast<ecore::EAnnotation*>(_eAnnotations->copy())));
+		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
@@ -243,7 +242,7 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::shared_ptr<Bag<ecore::EAttribute>> _eAttributesList = obj.getEAttributes();
 	for(std::shared_ptr<ecore::EAttribute> _eAttributes : *_eAttributesList)
 	{
-		this->getEAttributes()->add(std::shared_ptr<ecore::EAttribute>(dynamic_cast<ecore::EAttribute*>(_eAttributes->copy())));
+		this->getEAttributes()->add(std::shared_ptr<ecore::EAttribute>(std::dynamic_pointer_cast<ecore::EAttribute>(_eAttributes->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eAttributes" << std::endl;
@@ -251,7 +250,7 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::shared_ptr<Bag<ecore::EGenericType>> _eGenericSuperTypesList = obj.getEGenericSuperTypes();
 	for(std::shared_ptr<ecore::EGenericType> _eGenericSuperTypes : *_eGenericSuperTypesList)
 	{
-		this->getEGenericSuperTypes()->add(std::shared_ptr<ecore::EGenericType>(dynamic_cast<ecore::EGenericType*>(_eGenericSuperTypes->copy())));
+		this->getEGenericSuperTypes()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eGenericSuperTypes->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eGenericSuperTypes" << std::endl;
@@ -259,7 +258,7 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::shared_ptr<Bag<ecore::EOperation>> _eOperationsList = obj.getEOperations();
 	for(std::shared_ptr<ecore::EOperation> _eOperations : *_eOperationsList)
 	{
-		this->getEOperations()->add(std::shared_ptr<ecore::EOperation>(dynamic_cast<ecore::EOperation*>(_eOperations->copy())));
+		this->getEOperations()->add(std::shared_ptr<ecore::EOperation>(std::dynamic_pointer_cast<ecore::EOperation>(_eOperations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eOperations" << std::endl;
@@ -267,7 +266,7 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::shared_ptr<Bag<ecore::EReference>> _eReferencesList = obj.getEReferences();
 	for(std::shared_ptr<ecore::EReference> _eReferences : *_eReferencesList)
 	{
-		this->getEReferences()->add(std::shared_ptr<ecore::EReference>(dynamic_cast<ecore::EReference*>(_eReferences->copy())));
+		this->getEReferences()->add(std::shared_ptr<ecore::EReference>(std::dynamic_pointer_cast<ecore::EReference>(_eReferences->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eReferences" << std::endl;
@@ -275,7 +274,7 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
 	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
 	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(dynamic_cast<ecore::ETypeParameter*>(_eTypeParameters->copy())));
+		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
@@ -286,12 +285,12 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  EClassImpl::copy() const
+std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
 {
-	return new EClassImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EClassImpl(*this));
+	return element;
 }
 
 std::shared_ptr<EClass> EClassImpl::eStaticClass() const

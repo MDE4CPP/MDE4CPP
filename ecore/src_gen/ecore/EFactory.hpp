@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,7 +71,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EFactory:virtual public EModelElement	{
+	class EFactory:virtual public EModelElement
+	{
 		public:
  			EFactory(const EFactory &) {}
 			EFactory& operator=(EFactory const&) = delete;
@@ -83,7 +82,7 @@ namespace ecore
 
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EFactory() {}
@@ -93,15 +92,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  = 0;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
 			
 			/*!
 			 */ 
 			virtual boost::any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue)  const  = 0;
-			
-			/*!
-			 */ 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,boost::any instanceValue)  const  = 0;
 			
 			
 			//*********************************

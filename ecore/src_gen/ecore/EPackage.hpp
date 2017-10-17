@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -108,7 +106,8 @@ namespace ecore
 {
 	/*!
 	 */
-	class EPackage:virtual public ENamedElement	{
+	class EPackage:virtual public ENamedElement
+	{
 		public:
  			EPackage(const EPackage &) {}
 			EPackage& operator=(EPackage const&) = delete;
@@ -118,10 +117,11 @@ namespace ecore
 
 
 			//Additional constructors for the containments back reference
-			EPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage){}
+
+			EPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
 
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EPackage() {}
@@ -129,27 +129,27 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			/*!
 			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  = 0;
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -193,19 +193,19 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string getNsURI() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setNsURI (std::string _nsURI)= 0; 
-			
-			/*!
-			 */ 
 			virtual std::string getNsPrefix() const = 0;
 			
 			/*!
 			 */ 
 			virtual void setNsPrefix (std::string _nsPrefix)= 0; 
+			
+			/*!
+			 */ 
+			virtual std::string getNsURI() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setNsURI (std::string _nsURI)= 0; 
 			
 			
 			//*********************************
@@ -213,15 +213,15 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEClassifiers() const = 0;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<ecore::EFactory > getEFactoryInstance() const = 0;
 			
 			/*!
 			 */
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance_eFactoryInstance) = 0;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<ecore::EClassifier> > getEClassifiers() const = 0;
-			
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<ecore::EPackage> > getESubpackages() const = 0;
@@ -238,10 +238,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */ 
-			std::string m_nsURI ;
+			std::string m_nsPrefix ;
 			/*!
 			 */ 
-			std::string m_nsPrefix ;
+			std::string m_nsURI ;
 			
 			
 			//*********************************
@@ -249,10 +249,10 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
+			std::shared_ptr< Bag<ecore::EClassifier> > m_eClassifiers;
 			/*!
 			 */
-			std::shared_ptr< Bag<ecore::EClassifier> > m_eClassifiers;
+			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
 			/*!
 			 */
 			std::shared_ptr< Bag<ecore::EPackage> > m_eSubpackages;

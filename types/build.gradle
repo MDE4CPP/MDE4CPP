@@ -15,6 +15,7 @@ task buildTypesRelease(dependsOn: ['generateTypes', 'compileTypesRelease']) {
 	description 'build types in release'
 }
 
+
 task compileTypes(dependsOn: ['compileTypesDebug', 'compileTypesRelease']) {
 	group 'types'
 	description 'compile types in debug and release'
@@ -122,6 +123,7 @@ task generateTypes(type: JavaExec) {
 compileTypes.mustRunAfter generateTypes
 compileTypesDebug.mustRunAfter generateTypes
 compileTypesRelease.mustRunAfter generateTypes
+
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/types/.cmake/')
