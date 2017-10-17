@@ -45,7 +45,7 @@ namespace [aPackage.name/]
 		
 			virtual void terminate();
 		    virtual void execute();
-		    virtual ecore::EObject* copy() const;
+		    virtual std::shared_ptr<ecore::EObject> copy() const;
 	};
 }
 [endGuard(aActivity,'Execution')/]
