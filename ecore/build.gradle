@@ -1,0 +1,134 @@
+apply plugin: 'base' 
+
+description 'Build tasks for project: ecore'
+
+task buildEcore(dependsOn: ['generateEcore', 'compileEcore']) {
+	group 'ecore'
+	description 'build ecore in debug and release'
+}
+task buildEcoreDebug(dependsOn: ['generateEcore', 'compileEcoreDebug']) {
+	group 'ecore'
+	description 'build ecore in debug'
+}
+task buildEcoreRelease(dependsOn: ['generateEcore', 'compileEcoreRelease']) {
+	group 'ecore'
+	description 'build ecore in release'
+}
+
+
+task compileEcore(dependsOn: ['compileEcoreDebug', 'compileEcoreRelease']) {
+	group 'ecore'
+	description 'compile ecore in debug and release'
+}
+task compileEcoreDebug {
+	group 'ecore'
+	description 'compile ecore in Debug'
+
+	def folder = new File(file('./src_gen/ecore/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Debug'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/ecore").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/ecore").absolutePath
+			}
+		}
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+task compileEcoreRelease {
+	group 'ecore'
+	description 'compile ecore in Release'
+
+	def folder = new File(file('./src_gen/ecore/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Release'
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/ecore").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/ecore").absolutePath
+			}
+		}
+		exec {
+			workingDir 'src_gen/ecore/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
+			}
+			else
+			{
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
+			}
+		}
+	}
+}
+
+task generateEcore(type: JavaExec) {
+	group 'ecore'
+	description 'generate C++ code of ecore.ecore model'
+	main = "-jar"
+	workingDir "./model"
+	args System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar", "ecore.ecore", "../src_gen"
+	inputs.files file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar"), file("model/ecore.ecore")
+	outputs.dir file("src_gen")
+	
+	doFirst {
+		if (System.getenv('MDE4CPP_HOME') == null) {
+			throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
+		}
+		if (!file(System.getenv('MDE4CPP_HOME') + "/application/generator/ecore4CPP.jar").exists()) {
+			throw new GradleException('ecore4CPP.jar is missing in folder ' + file(System.getenv('MDE4CPP_HOME') + '/application/generator') + '. Please run task createEcore4CPP!')
+		}
+	}
+}
+
+compileEcore.mustRunAfter generateEcore
+compileEcoreDebug.mustRunAfter generateEcore
+compileEcoreRelease.mustRunAfter generateEcore
+
+
+clean.doFirst {
+	def cmakeFolder = file('./src_gen/ecore/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
