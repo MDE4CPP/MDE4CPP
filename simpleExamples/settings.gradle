@@ -1,0 +1,1 @@
+include 'ecoreModelExample', 'ecoreModelExample:application', 'UMLModelExample', 'UMLModelExample:application'
