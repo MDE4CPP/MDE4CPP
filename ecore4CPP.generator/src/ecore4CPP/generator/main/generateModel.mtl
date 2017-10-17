@@ -18,6 +18,7 @@
 [import ecore4CPP::generator::main::generateOperation/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
 [query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
@@ -59,25 +60,41 @@ namespace [element.ePackage.name/]
 [/if]
 
 //*********************************
-[comment namespace /]
 namespace [aClass.ePackage.name/] 
 {
 	[aClass.generateDokumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EObject 
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+virtual public [ClassWithNamespace(aClass,sClass)/][/for][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
 [/if]
 	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
 			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
-	
+
 		protected:
 			[aClass.name.toUpperFirst()/](){}
 
+			[if(aClass.containsContainerAttribute())]
+
+			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
+			//Additional constructors for the containments back reference
+
+			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+					[/if]
+			[else]
+			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+			[/if]
+			[/for]
+			[/let]
+			[/if]
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~[aClass.name.toUpperFirst()/]() {}
@@ -85,26 +102,26 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations.generateOperationDecl(false)/]
+			[aClass.eOperations->sortedBy(name).generateOperationDecl(false)/]
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes.generateAttributeAccessorsDecl(false)/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(false)/]
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences.generateReferenceDecl(false)/]
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(false)/]
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			[aClass.eAttributes.generateAttributeProtectedMember()/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeProtectedMember()/]
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			[aClass.eReferences.generateProtectedReference()/]
+			[aClass.eReferences->sortedBy(name).generateProtectedReference()/]
 
 		public:
 			//*********************************

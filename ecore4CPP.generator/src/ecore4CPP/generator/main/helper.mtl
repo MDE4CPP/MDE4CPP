@@ -14,13 +14,17 @@
  */]
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateType /]
 
 [**
  * Helper for c++ abstract function sufix
 */]
 [query public abstractSufix(impl : Boolean) : String = if (impl = false) then '= 0' else '' endif/]
 [query public getterPrefix(feature : EStructuralFeature) : String = if feature.eType.name = 'EBoolean' then 'is' else 'get' endif/]
+
+[**
+ * check if application should be prepared
+*/]
+[query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = 'prepareApplication')->notEmpty() /]
 
 [**
  * Helper for sourcegen annotations
@@ -34,7 +38,18 @@
 [query public hasKey(aModelElement : EModelElement, aKey:String) : Boolean = if aModelElement.hasSourceGen() then aModelElement.SourceGen().details->select(key = aKey)->notEmpty() else false endif /]
 [query public valueKey(aModelElement : EModelElement, aKey:String) : String = aModelElement.SourceGen().details->select(key = aKey)->first().value /]
 
+[query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
+[query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
+
+[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey('no_back_reference')) and  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
+
+[query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
+
+[query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
+[comment][query public getFirstContainer(aClass : EClass) : EReference =  if getContainsContainerAttribute()->notEmpty() then getContainsContainerAttribute()->first() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getFirstContainer()->flatten() else null endif endif /][/comment]
+
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('implOnly') then aModelElement.valueKey('implOnly')='true' else false endif /]
+[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey('doNotGenerate') then aModelElement.valueKey('doNotGenerate')='true' else false endif /]
 [query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey('implSetterOnly') then aModelElement.valueKey('implSetterOnly')='true' else false endif/]
 
 [query public SetterName(feature : EStructuralFeature) : String = if hasKey('SetterName') then valueKey('SetterName') else 'set'.concat(name.toUpperFirst()) endif/]
@@ -60,8 +75,25 @@
 [query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name )then '' else  aClassifier1.ePackage.nsPrefix.concat('::').concat(aClassifier1.ePackage.name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
 [**
+ * Subset Union helper queries
+*/]
+[query public hasSubset(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'subsets')->notEmpty()  /]
+[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
+[query public isSubsetUnion(aModelElement: EModelElement) : Boolean = hasSubset(aModelElement) and isUnion(aModelElement) /]
+[query public Subset(aModelElement : EModelElement) : Set(EObject) = eAnnotations->select(source = 'subsets')->asOrderedSet()->first().references /]
+
+[query public subsetIsUnion(aModelElement : EModelElement) : Boolean = aModelElement.ancestors(EPackage).eAllContents()->filter(EAnnotation)->select(a:EAnnotation|a.source='subsets').references->includes(self) /]
+
+[query public findLowerSubset(owner: EClass, thisClass : EClass, ref : EReference) : EReference = let r : EReference = owner.getSubsetsForUnion(ref)->select(aRef : EReference | aRef.eType = thisClass)->asOrderedSet()->first() in if r.oclIsUndefined() then ref else r endif /]
+
+
+[**
  * 
 */]
+[template public generateTypeClass(anEDataType : EClass)]
+[anEDataType.name/]
+[/template]
+
 [query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().ePackage.name.concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
 [query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().ePackage.name.concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
 
@@ -99,8 +131,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -137,8 +167,6 @@
 [/template]
 
 [query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'ignore')->notEmpty()  /]
-
-[query public isUnion(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = 'union')->notEmpty()  /]
 
 [query public getUnionsReference(aClass : EClass) : Set(EReference) = OrderedSet{aClass.getSubsetedUnionsReference(),aClass.eReferences->select(isUnion())}->flatten()->sortedBy(name) /]
 

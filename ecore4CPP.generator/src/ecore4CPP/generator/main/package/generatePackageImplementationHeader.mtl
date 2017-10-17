@@ -33,6 +33,7 @@
 [/for]
 
 #include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[anEPackage.name.toUpperFirst()/]Package.hpp"
 #include "EcorePackage.hpp"
 [if (not(anEPackage.name = 'ecore') )]
 #include "impl/EPackageImpl.hpp"

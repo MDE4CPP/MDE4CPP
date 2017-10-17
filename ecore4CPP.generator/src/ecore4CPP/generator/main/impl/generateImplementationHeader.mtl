@@ -19,6 +19,7 @@
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
 [import ecore4CPP::generator::main::generateUnion /]
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateImplementationHeader(aClass : EClass){ className : String = aClass.name.toUpperFirst().concat('Impl'); }]
@@ -56,7 +57,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 	{
 		public: 
 			[className/](const [className/] & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			[className/]& operator=([className/] const&) = delete;
@@ -65,6 +66,22 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			friend class [aClass.ePackage.name.concat('FactoryImpl').toUpperFirst()/];
 			[className/]();
 
+			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
+			[for(aReference:EReference | ref->sortedBy(name)) ]
+			//Additional constructors for the containments back reference
+	[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
+			[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+			[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
+			[/if]
+	[else]
+			[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
+	[/if]
+
+
+			[/for]
+			[/let]
+
+
 		public:
 			//destructor
 			virtual ~[className/]();
@@ -72,17 +89,17 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Operations
 			//*********************************
-			[aClass.eOperations.generateOperationDecl(true)/]
+			[aClass.eOperations->sortedBy(name).generateOperationDecl(true)/]
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			[aClass.eAttributes.generateAttributeAccessorsDecl(true)/]
+			[aClass.eAttributes->sortedBy(name).generateAttributeAccessorsDecl(true)/]
 			
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences.generateReferenceDecl(true)/]				
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]				
 			
 			//*********************************
 			// Union Getter

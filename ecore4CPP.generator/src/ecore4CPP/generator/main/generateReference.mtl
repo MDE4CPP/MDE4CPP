@@ -154,7 +154,7 @@ createEReference([aReference.eContainingClass.classNameMember()/], [aReference.m
 [/template] 
  
 [template public generateReferenceInitialization(aReference : EReference)]
-initEReference([aReference.packageGetter()/],[aReference.eGenericType.eClassifier.packageGetter(aReference)/],[aReference.eOpposite.packageGetter()/],"[aReference.name/]","[aReference.defaultValueLiteral/]",[aReference.lowerBound/],[aReference.upperBound/], nullptr , [aReference.transient.toString()/],[aReference.volatile.toString()/], [aReference.changeable.toString()/], [aReference.containment.toString()/], [aReference.resolveProxies.toString()/], [aReference.unsettable.toString()/], [aReference.unique.toString()/], [aReference.derived.toString()/],[aReference.ordered.toString()/]);
+initEReference([aReference.packageGetter()/],[aReference.eGenericType.eClassifier.packageGetter(aReference)/],[aReference.eOpposite.packageGetter()/],"[aReference.name/]","[aReference.defaultValueLiteral/]",[aReference.lowerBound/],[aReference.upperBound/], [aReference.transient.toString()/],[aReference.volatile.toString()/], [aReference.changeable.toString()/], [aReference.containment.toString()/], [aReference.resolveProxies.toString()/], [aReference.unsettable.toString()/], [aReference.unique.toString()/], [aReference.derived.toString()/],[aReference.ordered.toString()/]);
 
 [/template]
 

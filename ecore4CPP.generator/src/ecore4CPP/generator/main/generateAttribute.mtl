@@ -80,7 +80,8 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
 */]
 
 [template public generateAttributeInitialization(aAttribute : EAttribute)]
-initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], nullptr, [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+
 [/template]
 
 [template public generateStaticAttributeID(aAttribute : EAttribute)]

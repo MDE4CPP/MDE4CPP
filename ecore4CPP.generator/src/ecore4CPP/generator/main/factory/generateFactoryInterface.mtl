@@ -46,12 +46,14 @@ namespace [anEPackage.name/]
 			[packageName/](){}
 		
 			//Singleton Instance and Getter
-		[generateSingletonDecl(packageName)/]
+			[generateSingletonDecl(packageName)/]
 		
 			//Creator functions
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className) const = 0;
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className, std::shared_ptr<EObject> _container, 	const unsigned int referenceID = -1) const = 0;
+			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const unsigned int classID, std::shared_ptr<EObject> _container = nullptr, 	const unsigned int referenceID = -1) const = 0;
 
-			[anEPackage.eAllContents(EClass).generateClassCreate(false)/]
+			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(false)/]
 			//Package
 			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
 	};

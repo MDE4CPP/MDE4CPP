@@ -14,9 +14,12 @@
  */]
 [module generateBuildFile('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::helper /]
+
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().ePackage,anEPackage.eAllContents(EClass).eAllSuperTypes.ePackage,anEPackage.eAllContents(EStructuralFeature).eType.ePackage,anEPackage.eAllContents(EParameter).eType.ePackage}->flatten()->sortedBy(name) /]
 
 [template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.name; }]
+[comment	generate CMakeLists.txt for model libary/]
 [file (packageName.concat('/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
@@ -47,7 +50,7 @@ SET(CMAKE_DEBUG_POSTFIX d)
 SET(CMAKE_CXX_STANDARD 14)
 SET(GCC_COVERAGE_LINK_FLAGS "-fopenmp")
 SET(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fopenmp -fmax-errors=5")
-SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb")
+SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb -DACTIVITY_DEBUG_ON")
 [if (packageName='uml')]
 SET(CMAKE_CXX_FLAGS_RELEASE " -O1 -DNDEBUG")
 [else]
@@ -96,9 +99,6 @@ if(NOT UNIX)
 	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
 endif()
 
-
-
-
 if(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
@@ -113,22 +113,38 @@ else()
 endif()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 if(NOT UNIX)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
 	debug ${PLUGINFRAMEWORK_DEBUG}
-endif()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	debug ${[pack.name.toUpperCase()/]_DEBUG}
 [/for]
 )
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-if(NOT UNIX) 
-	optimized ${PLUGINFRAMEWORK_RELEASE}
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+	#debug ${PLUGINFRAMEWORK_DEBUG}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	debug ${[pack.name.toUpperCase()/]_DEBUG}
+[/for]
+)
 endif()
+
+if(NOT UNIX) 
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	optimized ${PLUGINFRAMEWORK_RELEASE}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	optimized ${[pack.name.toUpperCase()/]_RELEASE}
 [/for]
 )
+else()
+TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+	#optimized ${PLUGINFRAMEWORK_RELEASE}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+	optimized ${[pack.name.toUpperCase()/]_RELEASE}
+[/for]
+)
+endif()
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------
@@ -152,25 +168,35 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[']'/]) {
+task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug and release'
 }
-task build[packageName.toUpperFirst()/]Debug(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Debug'[']'/]) {
+task build[packageName.toUpperFirst()/]Debug(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Debug'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Debug'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug'
 }
-task build[packageName.toUpperFirst()/]Release(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
+task build[packageName.toUpperFirst()/]Release(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Release'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Release'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in release'
 }
+
+[if(aPackage.prepareApplication())]
+task compileApplicationFor[packageName/](dependsOn: ['['/]'compileApplicationFor[packageName/]Debug', 'compileApplicationFor[packageName/]Release'[']'/]) {
+	group '[packageName/]'
+	description 'compile [packageName/] in debug and release'
+}
+[generateCompileTask('ApplicationFor'.concat(packageName), 'Debug', 'application')/]
+[generateCompileTask('ApplicationFor'.concat(packageName), 'Release', 'application')/]
+
+[/if]
 
 task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.toUpperFirst()/]Debug', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
 	group '[packageName/]'
 	description 'compile [packageName/] in debug and release'
 }
-[generateCompileTask(packageName, 'Debug')/]
-[generateCompileTask(packageName, 'Release')/]
+[generateCompileTask(packageName, 'Debug', 'src_gen/'.concat(packageName))/]
+[generateCompileTask(packageName, 'Release', 'src_gen/'.concat(packageName))/]
 
 task generate[packageName.toUpperFirst()/](type: JavaExec) {
 	group '[packageName/]'
@@ -195,37 +221,50 @@ compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFi
 compile[packageName.toUpperFirst()/]Debug.mustRunAfter generate[packageName.toUpperFirst()/]
 compile[packageName.toUpperFirst()/]Release.mustRunAfter generate[packageName.toUpperFirst()/]
 
+[if(aPackage.prepareApplication())] 
+compileApplicationFor[packageName/].mustRunAfter compile[packageName.toUpperFirst()/]
+compileApplicationFor[packageName/]Debug.mustRunAfter compile[packageName.toUpperFirst()/]Debug
+compileApplicationFor[packageName/]Release.mustRunAfter compile[packageName.toUpperFirst()/]Release
+[/if]
+
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
+[if(aPackage.prepareApplication())] 
+	cmakeFolder = file('./application/.cmake/')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+[/if]
 }
 [/file]
 [/template]
 
-[template private generateCompileTask(packageName : String, buildType : String)]
+[template private generateCompileTask(packageName : String, buildType : String, subfolder : String)]
 task compile[packageName.toUpperFirst()/][buildType/] {
 	group '[packageName/]'
 	description 'compile [packageName/] in [buildType/]'
 
-	def folder = new File(file('./src_gen/[packageName/]/.cmake/[buildType/]').absolutePath)
+	def folder = new File(file('./[subfolder/]/.cmake/[buildType/]').absolutePath)
 	if( !folder.exists() ) {
 		folder.mkdirs()
 	}
 
 	doLast {
 		exec {
-			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
+			workingDir '[subfolder/]/.cmake/[buildType/]'
 			if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./[subfolder/]").absolutePath
 			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./[subfolder/]").absolutePath
 			}
 		}
 		exec {
-			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
+			workingDir '[subfolder/]/.cmake/[buildType/]'
 			if (make_parallel_jobs)
 			{			
 				if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {

@@ -15,6 +15,7 @@
 [module generate('http://www.eclipse.org/emf/2002/Ecore')/]
 
 [import ecore4CPP::generator::main::factory::generateMetamodelFactory/]
+[import ecore4CPP::generator::main::generateApplication/]
 [import ecore4CPP::generator::main::generateBuildFile/]
 [import ecore4CPP::generator::main::generateEnum /]
 [import ecore4CPP::generator::main::generateModel/]
@@ -41,4 +42,8 @@
 
 [aPackage.generateBuildFile()/]
 [aPackage.generateProjectsFiles()/]
+
+[if (aPackage.prepareApplication())]
+[aPackage.generateApplication()/]
+[/if]
 [/template]
