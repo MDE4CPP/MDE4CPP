@@ -9,9 +9,9 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
   * Eclipse Modeling Tool
     * add plugin Acceleo 3
   * Gradle 4.2
-	* Go to <user folder>\.gradle 
+	* Go to user folder\.gradle 
 	* create file gradle.properties
-		* create entry: make_parallel_jobs=<number>
+		* create entry: make_parallel_jobs=number
 		* number ... count of parallel build jobs
   * MinGW with package mingw32-gcc-g++ (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
   * CMake
