@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ActivityNode.hpp"
 #include "ActivityParameterNode.hpp"
 #include "FUMLFactory.hpp"
@@ -47,6 +47,9 @@ ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
 	
 }
 
+
+
+
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj):ActivityParameterNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -69,24 +72,23 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ActivityParameterNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() const
 {
-	return new ActivityParameterNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityParameterNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const
@@ -125,6 +127,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 			std::shared_ptr<Bag<Value> > valueList = parameterValue->getValues();
 			for (std::shared_ptr<Value> value : *valueList)
 			{
+                //struct null_deleter{void operator()(void const *) const { } };
 				std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
 				token->setValue(value);
 				this->addToken(token);
@@ -141,8 +144,8 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>(incomingTokens->at(0));
 		if (forkToken != nullptr) 
 		{
-			struct null_deleter{void operator()(void const *) const { } };
-			forkToken->getBaseToken()->setHolder(std::shared_ptr<ActivityParameterNodeActivation>(this, null_deleter()));
+			//struct null_deleter{void operator()(void const *) const { } };
+			forkToken->getBaseToken()->setHolder(shared_from_this());
 		}
 	}
 	//end of body

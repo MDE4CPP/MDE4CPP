@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <ConditionalNode.hpp>
 #include <FUMLFactory.hpp>
 #include <LoopNode.hpp>
@@ -62,6 +62,19 @@ ExecutionFactoryL3Impl::~ExecutionFactoryL3Impl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryL3Impl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & obj):ExecutionFactoryL3Impl()
 {
 	//create copy of all Attributes
@@ -83,16 +96,15 @@ ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & ob
 	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryL3Impl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryL3Impl::copy() const
 {
-	return new ExecutionFactoryL3Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL3Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL3Impl::eStaticClass() const

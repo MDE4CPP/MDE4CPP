@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -50,7 +48,7 @@ namespace fUML
 	{
 		public: 
 			StructuredValueImpl(const StructuredValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			StructuredValueImpl& operator=(StructuredValueImpl const&) = delete;
@@ -58,6 +56,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredValueImpl();
+
+
 
 		public:
 			//destructor
@@ -68,19 +68,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
-			
-			/*!
-			 */ 
 			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
+			virtual void createFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual void createFeatureValues()  ;
+			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 

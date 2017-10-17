@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ActionActivation.hpp"
@@ -52,6 +52,9 @@ DestroyObjectActionActivationImpl::~DestroyObjectActionActivationImpl()
 	
 }
 
+
+
+
 DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(const DestroyObjectActionActivationImpl & obj):DestroyObjectActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -77,24 +80,23 @@ DestroyObjectActionActivationImpl::DestroyObjectActionActivationImpl(const Destr
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DestroyObjectActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DestroyObjectActionActivationImpl::copy() const
 {
-	return new DestroyObjectActionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DestroyObjectActionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass() const

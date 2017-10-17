@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 	{
 		public: 
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl const&) = delete;
@@ -50,6 +48,8 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl();
+
+
 
 		public:
 			//destructor

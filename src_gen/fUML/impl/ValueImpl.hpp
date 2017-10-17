@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ValueImpl(const ValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ValueImpl& operator=(ValueImpl const&) = delete;
@@ -50,6 +48,8 @@ namespace fUML
 			friend class FUMLFactoryImpl;
 			ValueImpl();
 
+
+
 		public:
 			//destructor
 			virtual ~ValueImpl();
@@ -57,10 +57,6 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
-			
 			/*!
 			 */ 
 			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
@@ -75,11 +71,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::string toString()  ;
+			virtual std::string objectId()  ;
 			
 			/*!
 			 */ 
-			virtual std::string objectId()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
+			
+			/*!
+			 */ 
+			virtual std::string toString()  ;
 			
 			
 			

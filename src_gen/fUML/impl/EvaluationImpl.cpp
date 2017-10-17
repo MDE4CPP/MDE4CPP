@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Locus.hpp"
@@ -48,6 +48,9 @@ EvaluationImpl::~EvaluationImpl()
 	
 }
 
+
+
+
 EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 {
 	//create copy of all Attributes
@@ -62,16 +65,15 @@ EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
 {
-	return new EvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const

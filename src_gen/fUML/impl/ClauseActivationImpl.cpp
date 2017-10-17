@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "BooleanValue.hpp"
@@ -48,6 +48,9 @@ ClauseActivationImpl::~ClauseActivationImpl()
 	
 }
 
+
+
+
 ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):ClauseActivationImpl()
 {
 	//create copy of all Attributes
@@ -62,16 +65,15 @@ ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):Cla
 	m_conditionalNodeActivation  = obj.getConditionalNodeActivation();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ClauseActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
 {
-	return new ClauseActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ClauseActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const

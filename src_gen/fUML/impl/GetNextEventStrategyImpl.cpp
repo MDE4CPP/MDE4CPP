@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ObjectActivation.hpp"
@@ -40,6 +40,9 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 	
 }
 
+
+
+
 GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj):GetNextEventStrategyImpl()
 {
 	//create copy of all Attributes
@@ -50,16 +53,15 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImp
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  GetNextEventStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
 {
-	return new GetNextEventStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new GetNextEventStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class Link:virtual public ExtensionalValue	{
+	class Link:virtual public ExtensionalValue
+	{
 		public:
  			Link(const Link &) {}
 			Link& operator=(Link const&) = delete;
-	
+
 		protected:
 			Link(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Link() {}
@@ -92,19 +92,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
-			
-			/*!
-			 */ 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
-			
-			/*!
-			 */ 
 			virtual void addTo(std::shared_ptr<fUML::Locus>  locus)  = 0;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<Bag<fUML::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
+			
+			/*!
+			 */ 
+			virtual bool isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)  = 0;
 			
 			
 			//*********************************

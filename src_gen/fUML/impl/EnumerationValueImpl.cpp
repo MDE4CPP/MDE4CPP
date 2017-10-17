@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "UmlFactory.hpp"
 #include "FUMLFactory.hpp"
 #include "InstanceValue.hpp"
@@ -57,6 +57,9 @@ EnumerationValueImpl::~EnumerationValueImpl()
 	
 }
 
+
+
+
 EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):EnumerationValueImpl()
 {
 	//create copy of all Attributes
@@ -71,16 +74,15 @@ EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):Enu
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EnumerationValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 {
-	return new EnumerationValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EnumerationValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
@@ -127,9 +129,9 @@ std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
+	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>()));
     //Remark: instance is so defined in the specification, but even there is not used.
-    //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification();
+    //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification(std::shared_ptr<uml::Class>());
 
     instanceValue->setType(this->getType());
     instanceValue->setInstance(this->getLiteral());

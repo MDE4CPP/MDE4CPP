@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -35,6 +35,9 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 	
 }
 
+
+
+
 EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):EventDispatchLoopImpl()
 {
 	//create copy of all Attributes
@@ -45,16 +48,15 @@ EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EventDispatchLoopImpl::copy() const
+std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
 {
-	return new EventDispatchLoopImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EventDispatchLoopImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const

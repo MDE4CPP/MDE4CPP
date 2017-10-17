@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,12 +66,13 @@ namespace fUML
 		public:
  			ClassifierBehaviorExecution(const ClassifierBehaviorExecution &) {}
 			ClassifierBehaviorExecution& operator=(ClassifierBehaviorExecution const&) = delete;
-	
+
 		protected:
 			ClassifierBehaviorExecution(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ClassifierBehaviorExecution() {}
@@ -83,15 +82,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
+			virtual void _startObjectBehavior()  = 0;
+			
+			/*!
+			 */ 
 			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			/*!
 			 */ 
 			virtual void terminate()  = 0;
-			
-			/*!
-			 */ 
-			virtual void _startObjectBehavior()  = 0;
 			
 			
 			//*********************************
@@ -103,18 +102,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution > getExecution() const = 0;
-			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution_execution) = 0;
-			/*!
-			 */
 			virtual std::shared_ptr<uml::Class > getClassifier() const = 0;
 			
 			/*!
 			 */
 			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier_classifier) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::Execution > getExecution() const = 0;
+			
+			/*!
+			 */
+			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution_execution) = 0;
 			/*!
 			 */
 			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const = 0;
@@ -135,10 +134,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::Execution > m_execution;
+			std::shared_ptr<uml::Class > m_classifier;
 			/*!
 			 */
-			std::shared_ptr<uml::Class > m_classifier;
+			std::shared_ptr<fUML::Execution > m_execution;
 			/*!
 			 */
 			std::shared_ptr<fUML::ObjectActivation > m_objectActivation;

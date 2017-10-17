@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "LiteralEvaluation.hpp"
@@ -42,6 +42,9 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 	
 }
 
+
+
+
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj):LiteralNullEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -56,16 +59,15 @@ LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluation
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralNullEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
 {
-	return new LiteralNullEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralNullEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const

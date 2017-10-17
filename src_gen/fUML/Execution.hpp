@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -88,16 +86,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class Execution:virtual public Object	{
+	class Execution:virtual public Object
+	{
 		public:
  			Execution(const Execution &) {}
 			Execution& operator=(Execution const&) = delete;
-	
+
 		protected:
 			Execution(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Execution() {}
@@ -111,15 +111,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
-			
-			/*!
-			 */ 
-			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  = 0;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  = 0;
+			virtual std::shared_ptr<uml::Behavior> getBehavior()  = 0;
 			
 			/*!
 			 */ 
@@ -127,11 +119,19 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> getBehavior()  = 0;
+			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  = 0;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<fUML::Value> new_()  = 0;
+			
+			/*!
+			 */ 
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  = 0;
+			
+			/*!
+			 */ 
+			virtual void terminate()  = 0;
 			
 			
 			//*********************************

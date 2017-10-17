@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "fUMLPackage.hpp"
 #include "OpaqueBehavior.hpp"
 #include "OpaqueBehaviorExecution.hpp"
@@ -88,6 +88,19 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryImpl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):ExecutionFactoryImpl()
 {
 	//create copy of all Attributes
@@ -109,16 +122,15 @@ ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):Exe
 	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
 {
-	return new ExecutionFactoryImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
@@ -169,7 +181,7 @@ std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::sh
 	std::shared_ptr<fUML::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Evaluation>(this->instantiateVisitor(std::dynamic_pointer_cast<uml::Element>(specification)));
 
     evaluation->setSpecification(specification);
-    evaluation->setLocus(this->getLocus());
+    evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;
 
     return evaluation;
 	//end of body
@@ -200,7 +212,7 @@ std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shar
         std::cerr << "[createExecution] Execution is null" << std::endl;
         return nullptr;
     }
-    this->getLocus()->add(execution);
+    this->getLocus().lock()->add(execution);
 
 
     if(context == nullptr)
@@ -291,7 +303,7 @@ std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiate
         //DEBUG_MESSAGE(std::cout<<"BEHAVIOUR NAME:"<<prototype->getBehavior()->getName()<<"AND"<<behavior->getName()<<std::endl;)
         if( prototype->getBehavior() == behavior)
         {
-            execution = std::shared_ptr<fUML::OpaqueBehaviorExecution>(dynamic_cast<OpaqueBehaviorExecution*>(prototype->copy()));
+            execution = std::dynamic_pointer_cast<OpaqueBehaviorExecution>(prototype->copy());
         }
         i++;
     }
@@ -321,7 +333,7 @@ std::shared_ptr< Bag<uml::PrimitiveType> > ExecutionFactoryImpl::getBuiltInTypes
 }
 
 
-std::shared_ptr<fUML::Locus > ExecutionFactoryImpl::getLocus() const
+std::weak_ptr<fUML::Locus > ExecutionFactoryImpl::getLocus() const
 {
 
     return m_locus;

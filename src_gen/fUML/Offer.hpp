@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -53,12 +51,13 @@ namespace fUML
 		public:
  			Offer(const Offer &) {}
 			Offer& operator=(Offer const&) = delete;
-	
+
 		protected:
 			Offer(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Offer() {}
@@ -72,7 +71,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  = 0;
+			virtual bool hasTokens()  = 0;
 			
 			/*!
 			 */ 
@@ -84,7 +83,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  = 0;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  = 0;
 			
 			
 			//*********************************

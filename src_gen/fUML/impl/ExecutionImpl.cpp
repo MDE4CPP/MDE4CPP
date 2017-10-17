@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <Parameter.hpp>
 #include <ParameterDirectionKind.hpp>
 #include <ParameterValue.hpp>
@@ -70,6 +70,9 @@ ExecutionImpl::~ExecutionImpl()
 	
 }
 
+
+
+
 ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 {
 	//create copy of all Attributes
@@ -87,20 +90,19 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
+		m_objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
@@ -108,7 +110,7 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(std::dynamic_pointer_cast<fUML::ParameterValue>(_parameterValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
@@ -116,12 +118,12 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  ExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
 {
-	return new ExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const

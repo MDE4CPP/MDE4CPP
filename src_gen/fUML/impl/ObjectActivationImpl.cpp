@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Class.hpp"
 #include "FUMLFactory.hpp"
 #include "Behavior.hpp"
@@ -73,6 +73,9 @@ ObjectActivationImpl::~ObjectActivationImpl()
 	
 }
 
+
+
+
 ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):ObjectActivationImpl()
 {
 	//create copy of all Attributes
@@ -88,13 +91,12 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 	m_waitingEventAccepters.reset(new Bag<fUML::EventAccepter>(*(obj.getWaitingEventAccepters().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::ClassifierBehaviorExecution>> _classifierBehaviorExecutionsList = obj.getClassifierBehaviorExecutions();
 	for(std::shared_ptr<fUML::ClassifierBehaviorExecution> _classifierBehaviorExecutions : *_classifierBehaviorExecutionsList)
 	{
-		this->getClassifierBehaviorExecutions()->add(std::shared_ptr<fUML::ClassifierBehaviorExecution>(dynamic_cast<fUML::ClassifierBehaviorExecution*>(_classifierBehaviorExecutions->copy())));
+		this->getClassifierBehaviorExecutions()->add(std::shared_ptr<fUML::ClassifierBehaviorExecution>(std::dynamic_pointer_cast<fUML::ClassifierBehaviorExecution>(_classifierBehaviorExecutions->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_classifierBehaviorExecutions" << std::endl;
@@ -102,7 +104,7 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 	std::shared_ptr<Bag<fUML::SignalInstance>> _eventPoolList = obj.getEventPool();
 	for(std::shared_ptr<fUML::SignalInstance> _eventPool : *_eventPoolList)
 	{
-		this->getEventPool()->add(std::shared_ptr<fUML::SignalInstance>(dynamic_cast<fUML::SignalInstance*>(_eventPool->copy())));
+		this->getEventPool()->add(std::shared_ptr<fUML::SignalInstance>(std::dynamic_pointer_cast<fUML::SignalInstance>(_eventPool->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_eventPool" << std::endl;
@@ -113,12 +115,12 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 
 	
 	
-
 }
 
-ecore::EObject *  ObjectActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
 {
-	return new ObjectActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
@@ -173,7 +175,7 @@ std::shared_ptr<fUML::SignalInstance> ObjectActivationImpl::retrieveNextEvent()
 void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	//generated from body annotation
-	this->getEventPool()->push_back(std::shared_ptr<fUML::SignalInstance>(dynamic_cast<fUML::SignalInstance*>(signalInstance->copy())));
+	this->getEventPool()->push_back(std::dynamic_pointer_cast<fUML::SignalInstance>(signalInstance->copy()));
     //_send(new ArrivalSignal());
 	//end of body
 }

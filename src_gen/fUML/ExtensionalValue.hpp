@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -58,16 +56,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ExtensionalValue:virtual public CompoundValue	{
+	class ExtensionalValue:virtual public CompoundValue
+	{
 		public:
  			ExtensionalValue(const ExtensionalValue &) {}
 			ExtensionalValue& operator=(ExtensionalValue const&) = delete;
-	
+
 		protected:
 			ExtensionalValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExtensionalValue() {}

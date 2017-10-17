@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Classifier.hpp"
 #include <FUMLFactory.hpp>
 #include <cstdio>
@@ -54,6 +54,9 @@ CompoundValueImpl::~CompoundValueImpl()
 	
 }
 
+
+
+
 CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValueImpl()
 {
 	//create copy of all Attributes
@@ -64,13 +67,12 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
@@ -78,12 +80,12 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 
 	
 	
-
 }
 
-ecore::EObject *  CompoundValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 {
-	return new CompoundValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new CompoundValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
@@ -104,7 +106,7 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
 	std::shared_ptr<fUML::FeatureValue> featureValue = this->retrieveFeatureValue(feature);
     if(featureValue == nullptr)
     {
-        featureValue.reset(FUMLFactory::eInstance()->createFeatureValue());
+        featureValue = FUMLFactory::eInstance()->createFeatureValue();
         this->getFeatureValues()->push_back(featureValue);
     }
     featureValue->setFeature(feature);

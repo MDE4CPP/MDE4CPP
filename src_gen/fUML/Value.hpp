@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class Value:virtual public SemanticVisitor	{
+	class Value:virtual public SemanticVisitor
+	{
 		public:
  			Value(const Value &) {}
 			Value& operator=(Value const&) = delete;
-	
+
 		protected:
 			Value(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Value() {}
@@ -80,10 +80,6 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
-			
 			/*!
 			 */ 
 			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
@@ -98,11 +94,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::string toString()  = 0;
+			virtual std::string objectId()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string objectId()  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
+			
+			/*!
+			 */ 
+			virtual std::string toString()  = 0;
 			
 			
 			//*********************************

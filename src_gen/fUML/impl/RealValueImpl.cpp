@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <sstream>
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
@@ -48,6 +48,9 @@ RealValueImpl::~RealValueImpl()
 	
 }
 
+
+
+
 RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 {
 	//create copy of all Attributes
@@ -61,16 +64,15 @@ RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  RealValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 {
-	return new RealValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new RealValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
@@ -113,7 +115,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal(uml::UmlFactory::eInstance()->createLiteralReal());
+	std::shared_ptr<uml::LiteralReal> literal = uml::UmlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;

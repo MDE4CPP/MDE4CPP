@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LoopNodeActivationImpl& operator=(LoopNodeActivationImpl const&) = delete;
@@ -48,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LoopNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -58,7 +58,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool runTest()  ;
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList()  ;
 			
 			/*!
 			 */ 
@@ -70,7 +70,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList()  ;
+			virtual bool runTest()  ;
 			
 			
 			

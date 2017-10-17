@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&) = delete;
@@ -49,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExtensionalValueImpl();
+
+
 
 		public:
 			//destructor

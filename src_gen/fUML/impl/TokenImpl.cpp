@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ActivityNodeActivation.hpp"
@@ -42,6 +42,9 @@ TokenImpl::~TokenImpl()
 	
 }
 
+
+
+
 TokenImpl::TokenImpl(const TokenImpl & obj):TokenImpl()
 {
 	//create copy of all Attributes
@@ -54,16 +57,15 @@ TokenImpl::TokenImpl(const TokenImpl & obj):TokenImpl()
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  TokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
 {
-	return new TokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
@@ -100,7 +102,7 @@ bool TokenImpl::isControl()
 bool TokenImpl::isWithdrawn() 
 {
 	//generated from body annotation
-	    return (this->getHolder()==nullptr);
+	    return (this->getHolder().lock()==nullptr);
 	//end of body
 }
 
@@ -109,10 +111,10 @@ std::shared_ptr<fUML::Token> TokenImpl::transfer(std::shared_ptr<fUML::ActivityN
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<fUML::Token> token = std::shared_ptr<Token>(this, null_deleter());
-    if (this->getHolder() != nullptr) 
+    if (this->getHolder().lock() != nullptr) 
     {
         this->withdraw();
-        token = std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(this->copy()));
+        token = std::dynamic_pointer_cast<fUML::Token>(this->copy());
     }
 
     token->setHolder(holder);
@@ -126,7 +128,7 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		struct null_deleter{void operator()(void const *) const { } };
-		std::shared_ptr<fUML::ActivityNodeActivation> holder = this->getHolder();
+		std::shared_ptr<fUML::ActivityNodeActivation> holder = this->getHolder().lock();
         this->setHolder(nullptr);
 		if (holder)
 		{
@@ -139,7 +141,7 @@ void TokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
-std::shared_ptr<fUML::ActivityNodeActivation > TokenImpl::getHolder() const
+std::weak_ptr<fUML::ActivityNodeActivation > TokenImpl::getHolder() const
 {
 
     return m_holder;

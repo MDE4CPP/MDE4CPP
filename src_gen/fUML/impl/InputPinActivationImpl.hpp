@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ namespace fUML
 	{
 		public: 
 			InputPinActivationImpl(const InputPinActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			InputPinActivationImpl& operator=(InputPinActivationImpl const&) = delete;
@@ -50,6 +48,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			InputPinActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -60,11 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void recieveOffer()  ;
+			virtual bool isReady()  ;
 			
 			/*!
 			 */ 
-			virtual bool isReady()  ;
+			virtual void recieveOffer()  ;
 			
 			
 			

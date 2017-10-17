@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
  #include "FUMLFactory.hpp"
 
 //Forward declaration includes
@@ -43,6 +43,9 @@ ObjectTokenImpl::~ObjectTokenImpl()
 	
 }
 
+
+
+
 ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
 {
 	//create copy of all Attributes
@@ -55,24 +58,23 @@ ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getValue()!=nullptr)
 	{
-		m_value.reset(dynamic_cast<fUML::Value*>(obj.getValue()->copy()));
+		m_value = std::dynamic_pointer_cast<fUML::Value>(obj.getValue()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_value" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ObjectTokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
 {
-	return new ObjectTokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectTokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const

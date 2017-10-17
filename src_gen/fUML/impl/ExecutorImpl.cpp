@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Object.hpp"
 #include "FUMLFactory.hpp"
 
@@ -54,6 +54,9 @@ ExecutorImpl::~ExecutorImpl()
 	
 }
 
+
+
+
 ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 {
 	//create copy of all Attributes
@@ -66,16 +69,15 @@ ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 	m_locus  = obj.getLocus();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutorImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
 {
-	return new ExecutorImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutorImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const

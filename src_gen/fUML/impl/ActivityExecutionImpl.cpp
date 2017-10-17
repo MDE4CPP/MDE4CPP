@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 #include "Parameter.hpp"
 #include <ParameterDirectionKind.hpp>
@@ -65,6 +65,9 @@ ActivityExecutionImpl::~ActivityExecutionImpl()
 	
 }
 
+
+
+
 ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):ActivityExecutionImpl()
 {
 	//create copy of all Attributes
@@ -82,12 +85,11 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getActivationGroup()!=nullptr)
 	{
-		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
+		m_activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_activationGroup" << std::endl;
@@ -95,14 +97,14 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
+		m_objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
@@ -110,19 +112,19 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(std::dynamic_pointer_cast<fUML::ParameterValue>(_parameterValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ActivityExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
 {
-	return new ActivityExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const

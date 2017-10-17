@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <Classifier.hpp>
 
 //Forward declaration includes
@@ -43,6 +43,9 @@ ValueImpl::~ValueImpl()
 	
 }
 
+
+
+
 ValueImpl::ValueImpl(const ValueImpl & obj):ValueImpl()
 {
 	//create copy of all Attributes
@@ -53,16 +56,15 @@ ValueImpl::ValueImpl(const ValueImpl & obj):ValueImpl()
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
 {
-	return new ValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const

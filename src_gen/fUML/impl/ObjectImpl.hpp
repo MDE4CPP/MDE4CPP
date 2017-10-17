@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -44,7 +42,7 @@ namespace fUML
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ObjectImpl& operator=(ObjectImpl const&) = delete;
@@ -52,6 +50,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectImpl();
+
+
 
 		public:
 			//destructor
@@ -62,7 +62,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			
+			/*!
+			 */ 
+			virtual void destroy()  ;
 			
 			/*!
 			 */ 
@@ -70,23 +74,19 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
-			
-			/*!
-			 */ 
-			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
-			
-			/*!
-			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<fUML::Value> new_()  ;
 			
 			/*!
 			 */ 
-			virtual void destroy()  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			
+			/*!
+			 */ 
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			
+			/*!
+			 */ 
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			
 			
@@ -100,15 +100,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const ;
-			
-			/*!
-			 */
 			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const ;
 			
 			/*!
 			 */
 			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) ;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const ;
+			
 							
 			
 			//*********************************

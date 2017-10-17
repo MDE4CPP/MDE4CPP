@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "SignalInstance.hpp"
@@ -36,6 +36,9 @@ EventAccepterImpl::~EventAccepterImpl()
 	
 }
 
+
+
+
 EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepterImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepte
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
 {
-	return new EventAccepterImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EventAccepterImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Behavior.hpp"
@@ -44,6 +44,9 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 	
 }
 
+
+
+
 DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):DispatchStrategyImpl()
 {
 	//create copy of all Attributes
@@ -54,16 +57,15 @@ DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):Dis
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  DispatchStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
 {
-	return new DispatchStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DispatchStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const

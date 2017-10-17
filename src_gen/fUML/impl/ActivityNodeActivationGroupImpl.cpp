@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ActivityNode.hpp"
 #include "ActivityNodeActivation.hpp"
 #include "ActivityNodeActivationGroup.hpp"
@@ -87,6 +87,9 @@ ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
 	
 }
 
+
+
+
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj):ActivityNodeActivationGroupImpl()
 {
 	//create copy of all Attributes
@@ -104,13 +107,12 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _edgeInstancesList = obj.getEdgeInstances();
 	for(std::shared_ptr<fUML::ActivityEdgeInstance> _edgeInstances : *_edgeInstancesList)
 	{
-		this->getEdgeInstances()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(dynamic_cast<fUML::ActivityEdgeInstance*>(_edgeInstances->copy())));
+		this->getEdgeInstances()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_edgeInstances->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_edgeInstances" << std::endl;
@@ -118,7 +120,7 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _nodeActivationsList = obj.getNodeActivations();
 	for(std::shared_ptr<fUML::ActivityNodeActivation> _nodeActivations : *_nodeActivationsList)
 	{
-		this->getNodeActivations()->add(std::shared_ptr<fUML::ActivityNodeActivation>(dynamic_cast<fUML::ActivityNodeActivation*>(_nodeActivations->copy())));
+		this->getNodeActivations()->add(std::shared_ptr<fUML::ActivityNodeActivation>(std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(_nodeActivations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nodeActivations" << std::endl;
@@ -129,12 +131,12 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 
 	
 	
-
 }
 
-ecore::EObject *  ActivityNodeActivationGroupImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityNodeActivationGroupImpl::copy() const
 {
-	return new ActivityNodeActivationGroupImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityNodeActivationGroupImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeActivationGroupImpl::eStaticClass() const
@@ -233,8 +235,7 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml
 std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationGroupImpl::createNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
 	//generated from body annotation
-	std::shared_ptr<ActivityNodeActivation>  activation = std::dynamic_pointer_cast<ActivityNodeActivation> (this->retrieveActivityExecution()
-                                                                                  ->getLocus()->getFactory()->instantiateVisitor(node));
+	std::shared_ptr<ActivityNodeActivation>  activation = std::dynamic_pointer_cast<ActivityNodeActivation> (this->retrieveActivityExecution()->getLocus()->getFactory()->instantiateVisitor(node));
     if(activation!=nullptr)
     {
     	activation->setNode(node);
@@ -411,10 +412,10 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::ActivityNode
                 if(action != nullptr)
                 {
                 	std::shared_ptr<Bag<uml::InputPin> > inputPins = action->getInput();
-                    unsigned int j = 1;
-                    while ((j <= inputPins->size()) && isEnabled) 
+                    unsigned int j = 0;
+                    while ((j < inputPins->size()) && isEnabled)
                     {
-                    	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j - 1);
+                    	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j);
                     	std::shared_ptr<Bag<ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
                         isEnabled = this->checkIncomingEdges(inputEdges, activations);
                         j = j + 1;

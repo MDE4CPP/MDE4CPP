@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -43,7 +41,7 @@ virtual public ActivityEdgeInstance
 	{
 		public: 
 			ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&) = delete;
@@ -51,6 +49,8 @@ virtual public ActivityEdgeInstance
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityEdgeInstanceImpl();
+
+
 
 		public:
 			//destructor
@@ -61,19 +61,7 @@ virtual public ActivityEdgeInstance
 			//*********************************
 			/*!
 			 */ 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
-			
-			/*!
-			 */ 
 			virtual int countOfferedValue()  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  ;
 			
 			/*!
 			 */ 
@@ -82,6 +70,18 @@ virtual public ActivityEdgeInstance
 			/*!
 			 */ 
 			virtual bool hasOffer()  ;
+			
+			/*!
+			 */ 
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens(int maxCount)  ;
 			
 			
 			
@@ -102,6 +102,17 @@ virtual public ActivityEdgeInstance
 			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge_edge) ;
 			/*!
 			 */
+			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
+			
+			/*!
+			 */
+			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<fUML::ActivityNodeActivation > getSource() const ;
 			
 			/*!
@@ -114,17 +125,6 @@ virtual public ActivityEdgeInstance
 			/*!
 			 */
 			virtual void setTarget(std::shared_ptr<fUML::ActivityNodeActivation> _target_target) ;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<fUML::Offer> > getOffers() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
-			
-			/*!
-			 */
-			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
 							
 			
 			//*********************************

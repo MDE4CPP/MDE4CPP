@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "LiteralString.hpp"
@@ -47,6 +47,9 @@ StringValueImpl::~StringValueImpl()
 	
 }
 
+
+
+
 StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  StringValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
 {
-	return new StringValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new StringValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
@@ -111,7 +113,7 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralString> literal(uml::UmlFactory::eInstance()->createLiteralString());
+	std::shared_ptr<uml::LiteralString> literal = uml::UmlFactory::eInstance()->createLiteralString_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;

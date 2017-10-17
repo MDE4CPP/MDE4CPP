@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ChoiceStrategy.hpp"
@@ -36,6 +36,9 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 	
 }
 
+
+
+
 FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj):FirstChoiceStrategyImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl &
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  FirstChoiceStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
 {
-	return new FirstChoiceStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new FirstChoiceStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const

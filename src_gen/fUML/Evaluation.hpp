@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class Evaluation:virtual public SemanticVisitor	{
+	class Evaluation:virtual public SemanticVisitor
+	{
 		public:
  			Evaluation(const Evaluation &) {}
 			Evaluation& operator=(Evaluation const&) = delete;
-	
+
 		protected:
 			Evaluation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Evaluation() {}
@@ -94,18 +94,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
-			
-			/*!
-			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) = 0;
-			/*!
-			 */
 			virtual std::shared_ptr<fUML::Locus > getLocus() const = 0;
 			
 			/*!
 			 */
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
+			
+			/*!
+			 */
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) = 0;
 			
 
 		protected:
@@ -119,10 +119,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<uml::ValueSpecification > m_specification;
+			std::shared_ptr<fUML::Locus > m_locus;
 			/*!
 			 */
-			std::shared_ptr<fUML::Locus > m_locus;
+			std::shared_ptr<uml::ValueSpecification > m_specification;
 			
 
 		public:

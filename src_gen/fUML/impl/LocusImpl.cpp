@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Classifier.hpp"
 #include "Behavior.hpp"
 #include "Class.hpp"
@@ -69,6 +69,9 @@ LocusImpl::~LocusImpl()
 	
 }
 
+
+
+
 LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 {
 	//create copy of all Attributes
@@ -79,12 +82,11 @@ LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getExecutor()!=nullptr)
 	{
-		m_executor.reset(dynamic_cast<fUML::Executor*>(obj.getExecutor()->copy()));
+		m_executor = std::dynamic_pointer_cast<fUML::Executor>(obj.getExecutor()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_executor" << std::endl;
@@ -92,14 +94,14 @@ LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 	std::shared_ptr<Bag<fUML::ExtensionalValue>> _extensionalValuesList = obj.getExtensionalValues();
 	for(std::shared_ptr<fUML::ExtensionalValue> _extensionalValues : *_extensionalValuesList)
 	{
-		this->getExtensionalValues()->add(std::shared_ptr<fUML::ExtensionalValue>(dynamic_cast<fUML::ExtensionalValue*>(_extensionalValues->copy())));
+		this->getExtensionalValues()->add(std::shared_ptr<fUML::ExtensionalValue>(std::dynamic_pointer_cast<fUML::ExtensionalValue>(_extensionalValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_extensionalValues" << std::endl;
 	#endif
 	if(obj.getFactory()!=nullptr)
 	{
-		m_factory.reset(dynamic_cast<fUML::ExecutionFactory*>(obj.getFactory()->copy()));
+		m_factory = std::dynamic_pointer_cast<fUML::ExecutionFactory>(obj.getFactory()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_factory" << std::endl;
@@ -111,12 +113,12 @@ LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 	
 
 	
-
 }
 
-ecore::EObject *  LocusImpl::copy() const
+std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
 {
-	return new LocusImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LocusImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
@@ -191,7 +193,7 @@ std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>
     }
     else
     {
-        object.reset(FUMLFactory::eInstance()->createObject());
+        object = FUMLFactory::eInstance()->createObject();
         object->getTypes()->push_back(type);
         object->createFeatureValues();
         this->add(object);

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExpansionRegionActivationImpl& operator=(ExpansionRegionActivationImpl const&) = delete;
@@ -48,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExpansionRegionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -62,15 +62,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<fUML::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node)  ;
 			
 			/*!
 			 */ 
 			virtual int numberOfValues()  ;
+			
+			/*!
+			 */ 
+			virtual void runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup)  ;
 			
 			
 			
@@ -84,7 +84,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputTokens() const ;
+			virtual std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > getActivationGroups() const ;
 			
 			/*!
 			 */
@@ -92,7 +92,7 @@ namespace fUML
 			
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > getActivationGroups() const ;
+			virtual std::shared_ptr< Bag<fUML::TokenSet> > getInputTokens() const ;
 			
 							
 			

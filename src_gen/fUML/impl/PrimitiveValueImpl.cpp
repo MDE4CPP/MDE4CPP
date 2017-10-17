@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "PrimitiveType.hpp"
@@ -46,6 +46,9 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 	
 }
 
+
+
+
 PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):PrimitiveValueImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):Primitive
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  PrimitiveValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 {
-	return new PrimitiveValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new PrimitiveValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const

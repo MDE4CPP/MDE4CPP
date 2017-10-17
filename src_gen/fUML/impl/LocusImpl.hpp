@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -52,7 +50,7 @@ virtual public Locus
 	{
 		public: 
 			LocusImpl(const LocusImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LocusImpl& operator=(LocusImpl const&) = delete;
@@ -60,6 +58,8 @@ virtual public Locus
 		protected:
 			friend class FUMLFactoryImpl;
 			LocusImpl();
+
+
 
 		public:
 			//destructor
@@ -70,7 +70,7 @@ virtual public Locus
 			//*********************************
 			/*!
 			 */ 
-			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
 			
 			/*!
 			 */ 
@@ -82,11 +82,11 @@ virtual public Locus
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  ;
+			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  ;
 			
 			/*!
 			 */ 
@@ -94,7 +94,7 @@ virtual public Locus
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  ;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			
 			
@@ -115,15 +115,15 @@ virtual public Locus
 			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor_executor) ;
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<fUML::ExecutionFactory > getFactory() const ;
 			
 			/*!
 			 */
 			virtual void setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory_factory) ;
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const ;
-			
 							
 			
 			//*********************************

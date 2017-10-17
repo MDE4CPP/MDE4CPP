@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -83,16 +81,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DecisionNodeActivation:virtual public ControlNodeActivation	{
+	class DecisionNodeActivation:virtual public ControlNodeActivation
+	{
 		public:
  			DecisionNodeActivation(const DecisionNodeActivation &) {}
 			DecisionNodeActivation& operator=(DecisionNodeActivation const&) = delete;
-	
+
 		protected:
 			DecisionNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DecisionNodeActivation() {}
@@ -102,35 +102,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<fUML::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue)  = 0;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue()  = 0;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance()  = 0;
-			
-			/*!
-			 */ 
-			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
-			
-			/*!
-			 */ 
-			virtual bool hasObjectFlowInput()  = 0;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
 			
 			/*!
 			 */ 
@@ -138,11 +110,39 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void terminate()  = 0;
+			virtual std::shared_ptr<fUML::ActivityEdgeInstance> getDecisionInputFlowInstance()  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Value> getDecisionInputFlowValue()  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			
+			/*!
+			 */ 
+			virtual bool hasObjectFlowInput()  = 0;
 			
 			/*!
 			 */ 
 			virtual bool isReady()  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  = 0;
+			
+			/*!
+			 */ 
+			virtual void terminate()  = 0;
+			
+			/*!
+			 */ 
+			virtual bool test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value)  = 0;
 			
 			
 			//*********************************

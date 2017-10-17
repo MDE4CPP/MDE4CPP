@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class EnumerationValue:virtual public Value	{
+	class EnumerationValue:virtual public Value
+	{
 		public:
  			EnumerationValue(const EnumerationValue &) {}
 			EnumerationValue& operator=(EnumerationValue const&) = delete;
-	
+
 		protected:
 			EnumerationValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EnumerationValue() {}
@@ -87,11 +87,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
 			
 			/*!
 			 */ 
@@ -99,11 +99,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::string toString()  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
+			virtual std::string toString()  = 0;
 			
 			
 			//*********************************

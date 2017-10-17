@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -78,16 +76,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ExecutionFactoryL2:virtual public ExecutionFactoryL1	{
+	class ExecutionFactoryL2:virtual public ExecutionFactoryL1
+	{
 		public:
  			ExecutionFactoryL2(const ExecutionFactoryL2 &) {}
 			ExecutionFactoryL2& operator=(ExecutionFactoryL2 const&) = delete;
-	
+
 		protected:
 			ExecutionFactoryL2(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExecutionFactoryL2() {}

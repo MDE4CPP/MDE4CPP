@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public ClassifierBehaviorExecution
 	{
 		public: 
 			ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ClassifierBehaviorExecutionImpl& operator=(ClassifierBehaviorExecutionImpl const&) = delete;
@@ -50,6 +48,8 @@ virtual public ClassifierBehaviorExecution
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionImpl();
+
+
 
 		public:
 			//destructor
@@ -60,15 +60,15 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */ 
+			virtual void _startObjectBehavior()  ;
+			
+			/*!
+			 */ 
 			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
 			virtual void terminate()  ;
-			
-			/*!
-			 */ 
-			virtual void _startObjectBehavior()  ;
 			
 			
 			
@@ -82,18 +82,18 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Execution > getExecution() const ;
-			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution_execution) ;
-			/*!
-			 */
 			virtual std::shared_ptr<uml::Class > getClassifier() const ;
 			
 			/*!
 			 */
 			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier_classifier) ;
+			/*!
+			 */
+			virtual std::shared_ptr<fUML::Execution > getExecution() const ;
+			
+			/*!
+			 */
+			virtual void setExecution(std::shared_ptr<fUML::Execution> _execution_execution) ;
 			/*!
 			 */
 			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const ;

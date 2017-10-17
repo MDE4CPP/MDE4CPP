@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
@@ -41,6 +41,9 @@ ControlTokenImpl::~ControlTokenImpl()
 	
 }
 
+
+
+
 ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImpl()
 {
 	//create copy of all Attributes
@@ -53,16 +56,15 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ControlTokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 {
-	return new ControlTokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ControlTokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const

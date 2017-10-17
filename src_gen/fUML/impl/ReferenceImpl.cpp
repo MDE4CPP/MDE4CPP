@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <Classifier.hpp>
     #include "FUMLFactory.hpp"
     #include "Class.hpp"
@@ -61,6 +61,9 @@ ReferenceImpl::~ReferenceImpl()
 	
 }
 
+
+
+
 ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 {
 	//create copy of all Attributes
@@ -73,16 +76,15 @@ ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 	m_referent  = obj.getReferent();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ReferenceImpl::copy() const
+std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
 {
-	return new ReferenceImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ReferenceImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const

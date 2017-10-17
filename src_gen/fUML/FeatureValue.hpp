@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,12 +61,13 @@ namespace fUML
 		public:
  			FeatureValue(const FeatureValue &) {}
 			FeatureValue& operator=(FeatureValue const&) = delete;
-	
+
 		protected:
 			FeatureValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~FeatureValue() {}
@@ -98,15 +97,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const = 0;
-			
-			/*!
-			 */
 			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const = 0;
 			
 			/*!
 			 */
 			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const = 0;
+			
 			
 
 		protected:
@@ -123,10 +122,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr< Bag<fUML::Value> > m_values;
+			std::shared_ptr<uml::StructuralFeature > m_feature;
 			/*!
 			 */
-			std::shared_ptr<uml::StructuralFeature > m_feature;
+			std::shared_ptr< Bag<fUML::Value> > m_values;
 			
 
 		public:

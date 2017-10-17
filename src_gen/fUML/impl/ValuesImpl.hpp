@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public Values
 	{
 		public: 
 			ValuesImpl(const ValuesImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ValuesImpl& operator=(ValuesImpl const&) = delete;
@@ -50,6 +48,8 @@ virtual public Values
 		protected:
 			friend class FUMLFactoryImpl;
 			ValuesImpl();
+
+
 
 		public:
 			//destructor

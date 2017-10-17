@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -46,7 +44,7 @@ virtual public ObjectActivation
 	{
 		public: 
 			ObjectActivationImpl(const ObjectActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ObjectActivationImpl& operator=(ObjectActivationImpl const&) = delete;
@@ -54,6 +52,8 @@ virtual public ObjectActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -64,23 +64,15 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
-			
-			/*!
-			 */ 
-			virtual void stop()  ;
-			
-			/*!
-			 */ 
 			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void _send(boost::any signal)  ;
 			
 			/*!
 			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void _startObjectBehavior()  ;
 			
 			/*!
 			 */ 
@@ -92,11 +84,19 @@ virtual public ObjectActivation
 			
 			/*!
 			 */ 
-			virtual void _startObjectBehavior()  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void _send(boost::any signal)  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			
+			/*!
+			 */ 
+			virtual void stop()  ;
+			
+			/*!
+			 */ 
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			
 			
@@ -110,7 +110,7 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const ;
+			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const ;
 			
 			/*!
 			 */
@@ -125,7 +125,7 @@ virtual public ObjectActivation
 			virtual void setObject(std::shared_ptr<fUML::Object> _object_object) ;
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const ;
+			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const ;
 			
 							
 			

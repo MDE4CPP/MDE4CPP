@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "StructuredActivityNode.hpp"
 #include "Action.hpp"
@@ -62,6 +62,9 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 	
 }
 
+
+
+
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj):StructuredActivityNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -87,12 +90,11 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getActivationGroup()!=nullptr)
 	{
-		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
+		m_activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_activationGroup" << std::endl;
@@ -100,19 +102,19 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  StructuredActivityNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  StructuredActivityNodeActivationImpl::copy() const
 {
-	return new StructuredActivityNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new StructuredActivityNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeActivationImpl::eStaticClass() const
@@ -299,7 +301,7 @@ void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::Out
     for (unsigned int i = 0; i < values->size(); i++) 
     {
     	std::shared_ptr<Value> value = values->at(i);
-    	std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
+    	std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
         token->setValue(value);
         pinActivation->addToken(token);
     }
