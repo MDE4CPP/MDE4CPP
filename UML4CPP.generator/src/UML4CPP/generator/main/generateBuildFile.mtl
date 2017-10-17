@@ -146,15 +146,15 @@ apply plugin: 'base'
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]', 'compileApplicationFor[packageName/]'[']'/]) {
+task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug and release'
 }
-task build[packageName/]Debug(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Debug', 'compileApplicationFor[packageName/]Debug'[']'/]) {
+task build[packageName/]Debug(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Debug'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Debug'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in debug'
 }
-task build[packageName/]Release(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Release', 'compileApplicationFor[packageName/]Release'[']'/]) {
+task build[packageName/]Release(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]Release'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Release'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/] in release'
 }
