@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ActivityNode.hpp"
 #include "Pin.hpp"
 
@@ -50,6 +50,9 @@ PinActivationImpl::~PinActivationImpl()
 	
 }
 
+
+
+
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivationImpl()
 {
 	//create copy of all Attributes
@@ -74,24 +77,23 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  PinActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  PinActivationImpl::copy() const
 {
-	return new PinActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new PinActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const

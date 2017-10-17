@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -49,7 +47,7 @@ namespace fUML
 	{
 		public: 
 			CallActionActivationImpl(const CallActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CallActionActivationImpl& operator=(CallActionActivationImpl const&) = delete;
@@ -57,6 +55,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CallActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -67,15 +67,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
+			virtual void doAction()  ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::Execution> getCallExecution()  ;
 			
 			/*!
 			 */ 
 			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
-			
-			/*!
-			 */ 
-			virtual void doAction()  ;
 			
 			/*!
 			 */ 

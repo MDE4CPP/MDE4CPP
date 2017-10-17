@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -138,6 +136,7 @@
 #include "WriteLinkActionActivationImpl.hpp"
 #include "WriteStructuralFeatureActionActivationImpl.hpp"
 
+#include "FUMLPackage.hpp"
 #include "FUMLPackage.hpp"
 #include "EcorePackage.hpp"
 #include "impl/EPackageImpl.hpp"

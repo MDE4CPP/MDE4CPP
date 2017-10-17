@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ActionActivation.hpp"
@@ -73,6 +73,9 @@ ExpansionRegionActivationImpl::~ExpansionRegionActivationImpl()
 	
 }
 
+
+
+
 ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj):ExpansionRegionActivationImpl()
 {
 	//create copy of all Attributes
@@ -107,24 +110,23 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegi
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ExpansionRegionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
 {
-	return new ExpansionRegionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExpansionRegionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const

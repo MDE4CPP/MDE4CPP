@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -98,16 +96,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class StructuralFeatureActionActivation:virtual public ActionActivation	{
+	class StructuralFeatureActionActivation:virtual public ActionActivation
+	{
 		public:
  			StructuralFeatureActionActivation(const StructuralFeatureActionActivation &) {}
 			StructuralFeatureActionActivation& operator=(StructuralFeatureActionActivation const&) = delete;
-	
+
 		protected:
 			StructuralFeatureActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~StructuralFeatureActionActivation() {}

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Value.hpp"
@@ -41,6 +41,9 @@ ValuesImpl::~ValuesImpl()
 	
 }
 
+
+
+
 ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 {
 	//create copy of all Attributes
@@ -54,16 +57,15 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 	m_values.reset(new Bag<fUML::Value>(*(obj.getValues().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ValuesImpl::copy() const
+std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
 {
-	return new ValuesImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ValuesImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -68,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ObjectNodeActivation:virtual public ActivityNodeActivation	{
+	class ObjectNodeActivation:virtual public ActivityNodeActivation
+	{
 		public:
  			ObjectNodeActivation(const ObjectNodeActivation &) {}
 			ObjectNodeActivation& operator=(ObjectNodeActivation const&) = delete;
-	
+
 		protected:
 			ObjectNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ObjectNodeActivation() {}
@@ -87,11 +87,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int countOfferedValues()  = 0;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual void sendUnofferedTokens()  = 0;
+			virtual void clearTokens()  = 0;
+			
+			/*!
+			 */ 
+			virtual int countOfferedValues()  = 0;
 			
 			/*!
 			 */ 
@@ -103,7 +107,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > takeUnofferedTokens()  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
@@ -115,19 +119,15 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual void sendUnofferedTokens()  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Token> > takeUnofferedTokens()  = 0;
+			
+			/*!
+			 */ 
 			virtual void terminate()  = 0;
-			
-			/*!
-			 */ 
-			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
-			
-			/*!
-			 */ 
-			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
-			
-			/*!
-			 */ 
-			virtual void clearTokens()  = 0;
 			
 			
 			//*********************************

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -46,7 +44,7 @@ namespace fUML
 	{
 		public: 
 			StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			StructuredActivityNodeActivationImpl& operator=(StructuredActivityNodeActivationImpl const&) = delete;
@@ -54,6 +52,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredActivityNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -64,35 +64,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void doStructuredActivity()  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
-			
-			/*!
-			 */ 
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
-			
-			/*!
-			 */ 
-			virtual void doAction()  ;
-			
-			/*!
-			 */ 
-			virtual void terminate()  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
-			
-			/*!
-			 */ 
-			virtual void createNodeActivations()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  ;
 			
 			/*!
 			 */ 
@@ -100,7 +72,23 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void terminateAll()  ;
+			virtual void createNodeActivations()  ;
+			
+			/*!
+			 */ 
+			virtual void doAction()  ;
+			
+			/*!
+			 */ 
+			virtual void doStructuredActivity()  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<Bag<fUML::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
 			
 			/*!
 			 */ 
@@ -112,11 +100,23 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
+			
+			/*!
+			 */ 
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
 			
 			/*!
 			 */ 
 			virtual void resume()  ;
+			
+			/*!
+			 */ 
+			virtual void terminate()  ;
+			
+			/*!
+			 */ 
+			virtual void terminateAll()  ;
 			
 			
 			

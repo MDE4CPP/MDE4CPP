@@ -15,6 +15,7 @@ task buildFUMLRelease(dependsOn: ['generateFUML', 'compileFUMLRelease']) {
 	description 'build fUML in release'
 }
 
+
 task compileFUML(dependsOn: ['compileFUMLDebug', 'compileFUMLRelease']) {
 	group 'fUML'
 	description 'compile fUML in debug and release'
@@ -31,17 +32,30 @@ task compileFUMLDebug {
 	doLast {
 		exec {
 			workingDir 'src_gen/fUML/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/fUML").absolutePath
+			}
 		}
 		exec {
 			workingDir 'src_gen/fUML/.cmake/Debug'
 			if (make_parallel_jobs)
 			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
 			}
 		}
 	}
@@ -58,17 +72,30 @@ task compileFUMLRelease {
 	doLast {
 		exec {
 			workingDir 'src_gen/fUML/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
+			if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
+			} else {
+			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/fUML").absolutePath
+			}
 		}
 		exec {
 			workingDir 'src_gen/fUML/.cmake/Release'
 			if (make_parallel_jobs)
 			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+				} else {
+				   commandLine 'make install -j' + make_parallel_jobs
+				}
+				
 			}
 			else
 			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
+				if (System.properties['os.name'].toLowerCase().contains('windows')) {
+					commandLine 'cmd', '/c', 'mingw32-make install' 
+				} else {
+					commandLine 'make install' 
+				}
 			}
 		}
 	}
@@ -96,6 +123,7 @@ task generateFUML(type: JavaExec) {
 compileFUML.mustRunAfter generateFUML
 compileFUMLDebug.mustRunAfter generateFUML
 compileFUMLRelease.mustRunAfter generateFUML
+
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/fUML/.cmake/')

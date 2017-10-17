@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "NamedElement.hpp"
 #include "Class.hpp"
 #include "Operation.hpp"
@@ -46,6 +46,9 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 	
 }
 
+
+
+
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj):RedefinitionBasedDispatchStrategyImpl()
 {
 	//create copy of all Attributes
@@ -56,16 +59,15 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(con
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  RedefinitionBasedDispatchStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() const
 {
-	return new RedefinitionBasedDispatchStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new RedefinitionBasedDispatchStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const

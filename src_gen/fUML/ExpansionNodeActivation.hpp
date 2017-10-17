@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ExpansionNodeActivation:virtual public ObjectNodeActivation	{
+	class ExpansionNodeActivation:virtual public ObjectNodeActivation
+	{
 		public:
  			ExpansionNodeActivation(const ExpansionNodeActivation &) {}
 			ExpansionNodeActivation& operator=(ExpansionNodeActivation const&) = delete;
-	
+
 		protected:
 			ExpansionNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExpansionNodeActivation() {}

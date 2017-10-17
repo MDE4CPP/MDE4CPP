@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "CallBehaviorAction.hpp"
 #include "Behavior.hpp"
 
@@ -50,6 +50,9 @@ CallBehaviorActionActivationImpl::~CallBehaviorActionActivationImpl()
 	
 }
 
+
+
+
 CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBehaviorActionActivationImpl & obj):CallBehaviorActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -75,13 +78,12 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBeh
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Execution>> _callExecutionsList = obj.getCallExecutions();
 	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
+		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(std::dynamic_pointer_cast<fUML::Execution>(_callExecutions->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_callExecutions" << std::endl;
@@ -89,18 +91,18 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBeh
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  CallBehaviorActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  CallBehaviorActionActivationImpl::copy() const
 {
-	return new CallBehaviorActionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new CallBehaviorActionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() const

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "DecisionNode.hpp"
 #include "Behavior.hpp"
 #include "Parameter.hpp"
@@ -64,6 +64,9 @@ DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
 	
 }
 
+
+
+
 DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj):DecisionNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -85,12 +88,11 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getDecisionInputExecution()!=nullptr)
 	{
-		m_decisionInputExecution.reset(dynamic_cast<fUML::Execution*>(obj.getDecisionInputExecution()->copy()));
+		m_decisionInputExecution = std::dynamic_pointer_cast<fUML::Execution>(obj.getDecisionInputExecution()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_decisionInputExecution" << std::endl;
@@ -98,19 +100,19 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  DecisionNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
 {
-	return new DecisionNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DecisionNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
@@ -297,7 +299,7 @@ std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues
 			}
 			else
 			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr";
+				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr" << std::endl;
 			}
 		}
     )

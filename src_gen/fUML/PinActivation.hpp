@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class PinActivation:virtual public ObjectNodeActivation	{
+	class PinActivation:virtual public ObjectNodeActivation
+	{
 		public:
  			PinActivation(const PinActivation &) {}
 			PinActivation& operator=(PinActivation const&) = delete;
-	
+
 		protected:
 			PinActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~PinActivation() {}

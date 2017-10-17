@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -54,7 +52,7 @@ virtual public ActivityNodeActivationGroup
 	{
 		public: 
 			ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityNodeActivationGroupImpl& operator=(ActivityNodeActivationGroupImpl const&) = delete;
@@ -62,6 +60,8 @@ virtual public ActivityNodeActivationGroup
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationGroupImpl();
+
+
 
 		public:
 			//destructor
@@ -72,43 +72,7 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			/*!
 			 */ 
-			virtual void run(std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
-			
-			/*!
-			 */ 
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::ActivityEdgeInstance> >  incomingEdges,std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
-			
-			/*!
-			 */ 
 			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode> >  nodes,std::shared_ptr<Bag<uml::ActivityEdge> >  edges)  ;
-			
-			/*!
-			 */ 
-			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
-			
-			/*!
-			 */ 
-			virtual void terminateAll()  ;
-			
-			/*!
-			 */ 
-			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
-			
-			/*!
-			 */ 
-			virtual void addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
-			
-			/*!
-			 */ 
-			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge> >  edges)  ;
 			
 			/*!
 			 */ 
@@ -116,7 +80,27 @@ virtual public ActivityNodeActivationGroup
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution()  ;
+			virtual void addNodeActivation(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			
+			/*!
+			 */ 
+			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::ActivityEdgeInstance> >  incomingEdges,std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
+			
+			/*!
+			 */ 
+			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge> >  edges)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			
+			/*!
+			 */ 
+			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
@@ -124,11 +108,7 @@ virtual public ActivityNodeActivationGroup
 			
 			/*!
 			 */ 
-			virtual void resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
-			
-			/*!
-			 */ 
-			virtual void suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			virtual bool hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			/*!
 			 */ 
@@ -136,7 +116,27 @@ virtual public ActivityNodeActivationGroup
 			
 			/*!
 			 */ 
-			virtual bool hasSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual void resume(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::ActivityExecution> retrieveActivityExecution()  ;
+			
+			/*!
+			 */ 
+			virtual void run(std::shared_ptr<Bag<fUML::ActivityNodeActivation> >  activations)  ;
+			
+			/*!
+			 */ 
+			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode> >  nodes)  ;
+			
+			/*!
+			 */ 
+			virtual void suspend(std::shared_ptr<fUML::ActivityNodeActivation>  activation)  ;
+			
+			/*!
+			 */ 
+			virtual void terminateAll()  ;
 			
 			
 			
@@ -148,14 +148,6 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getEdgeInstances() const ;
-			
-			/*!
-			 */
-			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getNodeActivations() const ;
-			
 			/*!
 			 */
 			virtual std::shared_ptr<fUML::ActivityExecution > getActivityExecution() const ;
@@ -170,6 +162,14 @@ virtual public ActivityNodeActivationGroup
 			/*!
 			 */
 			virtual void setContainingNodeActivation(std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation_containingNodeActivation) ;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getEdgeInstances() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getNodeActivations() const ;
+			
 			/*!
 			 */
 			virtual std::shared_ptr< Bag<fUML::ActivityNodeActivation> > getSuspendedActivations() const ;

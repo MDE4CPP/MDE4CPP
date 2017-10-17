@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DestroyLinkActionActivation:virtual public WriteLinkActionActivation	{
+	class DestroyLinkActionActivation:virtual public WriteLinkActionActivation
+	{
 		public:
  			DestroyLinkActionActivation(const DestroyLinkActionActivation &) {}
 			DestroyLinkActionActivation& operator=(DestroyLinkActionActivation const&) = delete;
-	
+
 		protected:
 			DestroyLinkActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DestroyLinkActionActivation() {}

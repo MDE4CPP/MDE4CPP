@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ControlNodeActivationImpl(const ControlNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ControlNodeActivationImpl& operator=(ControlNodeActivationImpl const&) = delete;
@@ -49,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ControlNodeActivationImpl();
+
+
 
 		public:
 			//destructor

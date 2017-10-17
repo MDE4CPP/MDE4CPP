@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public SemanticVisitor
 	{
 		public: 
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&) = delete;
@@ -50,6 +48,8 @@ virtual public SemanticVisitor
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticVisitorImpl();
+
+
 
 		public:
 			//destructor
@@ -60,11 +60,11 @@ virtual public SemanticVisitor
 			//*********************************
 			/*!
 			 */ 
-			virtual void _endIsolation()  ;
+			virtual void _beginIsolation()  ;
 			
 			/*!
 			 */ 
-			virtual void _beginIsolation()  ;
+			virtual void _endIsolation()  ;
 			
 			
 			

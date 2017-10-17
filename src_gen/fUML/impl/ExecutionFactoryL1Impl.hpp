@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -48,7 +46,7 @@ namespace fUML
 	{
 		public: 
 			ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExecutionFactoryL1Impl& operator=(ExecutionFactoryL1Impl const&) = delete;
@@ -56,6 +54,12 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryL1Impl();
+
+			//Additional constructors for the containments back reference
+			ExecutionFactoryL1Impl(std::weak_ptr<fUML::Locus > par_locus);
+
+
+
 
 		public:
 			//destructor

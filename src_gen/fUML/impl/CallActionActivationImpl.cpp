@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Execution.hpp"
 #include "ParameterValue.hpp"
 #include "InputPin.hpp"
@@ -62,6 +62,9 @@ CallActionActivationImpl::~CallActionActivationImpl()
 	
 }
 
+
+
+
 CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj):CallActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -87,13 +90,12 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Execution>> _callExecutionsList = obj.getCallExecutions();
 	for(std::shared_ptr<fUML::Execution> _callExecutions : *_callExecutionsList)
 	{
-		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(dynamic_cast<fUML::Execution*>(_callExecutions->copy())));
+		this->getCallExecutions()->add(std::shared_ptr<fUML::Execution>(std::dynamic_pointer_cast<fUML::Execution>(_callExecutions->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_callExecutions" << std::endl;
@@ -101,7 +103,7 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
@@ -109,12 +111,12 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 
 	
 	
-
 }
 
-ecore::EObject *  CallActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
 {
-	return new CallActionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new CallActionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ParameterValue.hpp"
 #include "Behavior.hpp"
 #include "Parameter.hpp"
@@ -53,6 +53,9 @@ OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
 	
 }
 
+
+
+
 OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj):OpaqueBehaviorExecutionImpl()
 {
 	//create copy of all Attributes
@@ -70,20 +73,19 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
+		m_objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
@@ -91,18 +93,18 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(std::dynamic_pointer_cast<fUML::ParameterValue>(_parameterValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  OpaqueBehaviorExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
 {
-	return new OpaqueBehaviorExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new OpaqueBehaviorExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const

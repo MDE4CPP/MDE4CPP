@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "ActivityEdgeInstance.hpp"
@@ -62,6 +62,9 @@ ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
 	
 }
 
+
+
+
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj):ConditionalNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -90,12 +93,11 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getActivationGroup()!=nullptr)
 	{
-		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
+		m_activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_activationGroup" << std::endl;
@@ -103,7 +105,7 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	std::shared_ptr<Bag<fUML::ClauseActivation>> _clauseActivationsList = obj.getClauseActivations();
 	for(std::shared_ptr<fUML::ClauseActivation> _clauseActivations : *_clauseActivationsList)
 	{
-		this->getClauseActivations()->add(std::shared_ptr<fUML::ClauseActivation>(dynamic_cast<fUML::ClauseActivation*>(_clauseActivations->copy())));
+		this->getClauseActivations()->add(std::shared_ptr<fUML::ClauseActivation>(std::dynamic_pointer_cast<fUML::ClauseActivation>(_clauseActivations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_clauseActivations" << std::endl;
@@ -111,7 +113,7 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
@@ -119,12 +121,12 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 
 	
 	
-
 }
 
-ecore::EObject *  ConditionalNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
 {
-	return new ConditionalNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ConditionalNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const

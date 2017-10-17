@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "LiteralUnlimitedNatural.hpp"
@@ -47,6 +47,9 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 	
 }
 
+
+
+
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj):UnlimitedNaturalValueImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValue
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  UnlimitedNaturalValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
 {
-	return new UnlimitedNaturalValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new UnlimitedNaturalValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
@@ -110,7 +112,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());
+	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::shared_ptr<uml::Class>());
     literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
@@ -124,7 +126,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 
     if(this->getValue() >= 0)
     {
-        IntegerValue * integerValue = FUMLFactory::eInstance()->createIntegerValue();
+        auto integerValue = FUMLFactory::eInstance()->createIntegerValue();
         integerValue->setValue(this->getValue());
         stringValue = integerValue->toString();
     }

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ExtensionalValueList:virtual public ExtensionalValue	{
+	class ExtensionalValueList:virtual public ExtensionalValue
+	{
 		public:
  			ExtensionalValueList(const ExtensionalValueList &) {}
 			ExtensionalValueList& operator=(ExtensionalValueList const&) = delete;
-	
+
 		protected:
 			ExtensionalValueList(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExtensionalValueList() {}
@@ -80,10 +80,6 @@ namespace fUML
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::ExtensionalValue> getValue()  = 0;
-			
 			/*!
 			 */ 
 			virtual bool addValue(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
@@ -94,11 +90,15 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  = 0;
+			virtual std::shared_ptr<fUML::ExtensionalValue> getValue()  = 0;
 			
 			/*!
 			 */ 
 			virtual std::string removeValue(int i)  = 0;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Value> setValue(std::shared_ptr<fUML::ExtensionalValue>  value,int i)  = 0;
 			
 			
 			//*********************************

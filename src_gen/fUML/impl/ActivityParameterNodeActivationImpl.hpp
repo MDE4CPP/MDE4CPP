@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -43,7 +41,7 @@ namespace fUML
 	{
 		public: 
 			ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityParameterNodeActivationImpl& operator=(ActivityParameterNodeActivationImpl const&) = delete;
@@ -51,6 +49,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityParameterNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -61,11 +61,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void clearTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void clearTokens()  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			
 			

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "LiteralBoolean.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralString.hpp"
@@ -56,6 +56,19 @@ ExecutionFactoryL1Impl::~ExecutionFactoryL1Impl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryL1Impl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & obj):ExecutionFactoryL1Impl()
 {
 	//create copy of all Attributes
@@ -77,16 +90,15 @@ ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & ob
 	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryL1Impl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryL1Impl::copy() const
 {
-	return new ExecutionFactoryL1Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL1Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
@@ -104,7 +116,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
-	SemanticVisitor* visitor = nullptr;
+	std::shared_ptr<fUML::SemanticVisitor> visitor;
     if(std::dynamic_pointer_cast<uml::LiteralBoolean>(element) != nullptr)
     {
         visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
@@ -134,7 +146,7 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisito
         visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
     }
 
-    return std::shared_ptr<fUML::SemanticVisitor>(visitor);
+    return visitor;
 	//end of body
 }
 

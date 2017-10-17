@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -41,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ForkedTokenImpl(const ForkedTokenImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ForkedTokenImpl& operator=(ForkedTokenImpl const&) = delete;
@@ -49,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ForkedTokenImpl();
+
+
 
 		public:
 			//destructor
@@ -63,7 +63,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual void withdraw()  ;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
 			
 			/*!
 			 */ 
@@ -71,7 +71,7 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
+			virtual void withdraw()  ;
 			
 			
 			
@@ -80,19 +80,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int getRemainingOffersCount() const ;
-			
-			/*!
-			 */ 
-			virtual void setRemainingOffersCount (int _remainingOffersCount); 
-			
-			/*!
-			 */ 
 			virtual bool isBaseTokenIsWithdrawn() const ;
 			
 			/*!
 			 */ 
 			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn); 
+			
+			/*!
+			 */ 
+			virtual int getRemainingOffersCount() const ;
+			
+			/*!
+			 */ 
+			virtual void setRemainingOffersCount (int _remainingOffersCount); 
 			
 			
 			

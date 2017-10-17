@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Class.hpp"
@@ -52,6 +52,9 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 	
 }
 
+
+
+
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj):ClassifierBehaviorExecutionImpl()
 {
 	//create copy of all Attributes
@@ -68,16 +71,15 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const Classifie
 	m_objectActivation  = obj.getObjectActivation();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ClassifierBehaviorExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 {
-	return new ClassifierBehaviorExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const

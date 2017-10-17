@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public Offer
 	{
 		public: 
 			OfferImpl(const OfferImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			OfferImpl& operator=(OfferImpl const&) = delete;
@@ -50,6 +48,8 @@ virtual public Offer
 		protected:
 			friend class FUMLFactoryImpl;
 			OfferImpl();
+
+
 
 		public:
 			//destructor
@@ -64,7 +64,7 @@ virtual public Offer
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
+			virtual bool hasTokens()  ;
 			
 			/*!
 			 */ 
@@ -76,7 +76,7 @@ virtual public Offer
 			
 			/*!
 			 */ 
-			virtual bool hasTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
 			
 			
 			

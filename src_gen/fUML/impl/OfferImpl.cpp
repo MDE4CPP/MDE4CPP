@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Token.hpp"
@@ -41,6 +41,9 @@ OfferImpl::~OfferImpl()
 	
 }
 
+
+
+
 OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 {
 	//create copy of all Attributes
@@ -54,16 +57,15 @@ OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 	m_offeredTokens.reset(new Bag<fUML::Token>(*(obj.getOfferedTokens().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  OfferImpl::copy() const
+std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
 {
-	return new OfferImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new OfferImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ActivityNode.hpp"
 
 #include "Class.hpp"
@@ -85,6 +85,9 @@ ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
 	
 }
 
+
+
+
 ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj):ActivityNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -106,13 +109,12 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
@@ -120,12 +122,12 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 
 	
 	
-
 }
 
-ecore::EObject *  ActivityNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
 {
-	return new ActivityNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
@@ -173,7 +175,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityE
 void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
-		DEBUG_MESSAGE(
+				DEBUG_MESSAGE(
 		if (this->getNode()== nullptr)
 		{
 			std::cout<<"[addToken] ..."<<std::endl;
@@ -181,17 +183,24 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 		else
 		{
 			std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
-			ACT_DEBUG(std::cout<<"SET_TOKEN;NODE:"<< this->getNode()->getName() <<";TOKEN:"<<token->getValue()<< ";CURRENT_TOKENS:"<< (this->getHeldTokens()->size()+1) << ";DIRECTION:add" << std::endl;)
+            
+            std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
+			if(nullptr != owner) {
+				ACT_DEBUG(std::cout << "SET_TOKEN;NODE:" << (owner != nullptr ? owner->getName() : "[NO_OWNER]") << "::"
+									<< this->getNode()->getName() << ";TOKEN:" << token->getValue()
+									<< ";CURRENT_TOKENS:" << (this->getHeldTokens()->size() + 1) << ";DIRECTION:add"
+									<< std::endl;)
+			}
 		}
 	)
 
-	if (token->getHolder() != nullptr)
+	if (token->getHolder().lock() != nullptr)
 	{
 		token->withdraw();
-		token = std::shared_ptr<fUML::Token>(dynamic_cast<Token*>(token->copy()));
+		token = std::dynamic_pointer_cast<Token>(token->copy());
 	}
-	struct null_deleter{void operator()(void const *) const { } };
-	token->setHolder(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
+	//struct null_deleter{void operator()(void const *) const { } };
+	token->setHolder(shared_from_this());
 
 	DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<token->getValue()<<std::endl;)
    
@@ -369,7 +378,10 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 					std::cout<<"SET_TOKEN;NODE:[ANONYMOUS_ACTIVATION]"<<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
 				} else
 				{
-					std::cout<<"SET_TOKEN;NODE:"<< this->getNode()->getQualifiedName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
+                    std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
+			if(nullptr != owner){
+					std::cout<<"SET_TOKEN;NODE:" << (owner != nullptr? owner->getName() : "[NO_OWNER]") << "::" << this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
+					}
 				}
 			)
 			this->getHeldTokens()->erase(iter);
@@ -466,15 +478,15 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens()
 void ActivityNodeActivationImpl::terminate() 
 {
 	//generated from body annotation
-	    if (this->isRunning()) {
+	/*    if (this->isRunning()) {
         if (this->getNode() != nullptr) {
             DEBUG_MESSAGE(std::cout<<"[terminate] node = " << this->getNode()->getName()<<std::endl;)
         } else {
             DEBUG_MESSAGE(std::cout<<"[terminate] Anonymous activation of type " << this->eClass()->getName()<<std::endl;)
         }
     }
-
-    this->setRunning(false);
+*/
+this->setRunning(false);
 	//end of body
 }
 

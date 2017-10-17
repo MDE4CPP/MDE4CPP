@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -155,106 +153,200 @@ namespace fUML
 
 		public:
 			virtual ~FUMLFactoryImpl();
-			virtual std::shared_ptr<ecore::EObject> create(ecore::EClass* _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions
-			virtual Locus* createLocus() const ;
-			virtual Executor* createExecutor() const ;
-			virtual ExecutionFactoryL1* createExecutionFactoryL1() const ;
-			virtual FirstChoiceStrategy* createFirstChoiceStrategy() const ;
-			virtual ExecutionFactoryL2* createExecutionFactoryL2() const ;
-			virtual ExecutionFactoryL3* createExecutionFactoryL3() const ;
-			virtual Reference* createReference() const ;
-			virtual FeatureValue* createFeatureValue() const ;
-			virtual UnlimitedNaturalValue* createUnlimitedNaturalValue() const ;
-			virtual StringValue* createStringValue() const ;
-			virtual IntegerValue* createIntegerValue() const ;
-			virtual RealValue* createRealValue() const ;
-			virtual BooleanValue* createBooleanValue() const ;
-			virtual ExtensionalValueList* createExtensionalValueList() const ;
-			virtual InstanceValueEvaluation* createInstanceValueEvaluation() const ;
-			virtual LiteralBooleanEvaluation* createLiteralBooleanEvaluation() const ;
-			virtual LiteralIntegerEvaluation* createLiteralIntegerEvaluation() const ;
-			virtual LiteralNullEvaluation* createLiteralNullEvaluation() const ;
-			virtual LiteralStringEvaluation* createLiteralStringEvaluation() const ;
-			virtual LiteralRealEvaluation* createLiteralRealEvaluation() const ;
-			virtual LiteralUnlimitedNaturalEvaluation* createLiteralUnlimitedNaturalEvaluation() const ;
-			virtual Link* createLink() const ;
-			virtual EnumerationValue* createEnumerationValue() const ;
-			virtual DataValue* createDataValue() const ;
-			virtual DispatchStrategy* createDispatchStrategy() const ;
-			virtual RedefinitionBasedDispatchStrategy* createRedefinitionBasedDispatchStrategy() const ;
-			virtual Object* createObject() const ;
-			virtual ParameterValue* createParameterValue() const ;
-			virtual ClassifierBehaviorExecutionActivity* createClassifierBehaviorExecutionActivity() const ;
-			virtual ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1* createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1() const ;
-			virtual EventDispatchLoop* createEventDispatchLoop() const ;
-			virtual SignalInstance* createSignalInstance() const ;
-			virtual ClassifierBehaviorExecution* createClassifierBehaviorExecution() const ;
-			virtual ObjectActivation* createObjectActivation() const ;
-			virtual FIFOGetNextEventStrategy* createFIFOGetNextEventStrategy() const ;
-			virtual ActivityNodeActivationGroup* createActivityNodeActivationGroup() const ;
-			virtual ActivityEdgeInstance* createActivityEdgeInstance() const ;
-			virtual Offer* createOffer() const ;
-			virtual ObjectToken* createObjectToken() const ;
-			virtual ForkedToken* createForkedToken() const ;
-			virtual ControlToken* createControlToken() const ;
-			virtual ActivityExecution* createActivityExecution() const ;
-			virtual ActivityParameterNodeActivation* createActivityParameterNodeActivation() const ;
-			virtual MergeNodeActivation* createMergeNodeActivation() const ;
-			virtual JoinNodeActivation* createJoinNodeActivation() const ;
-			virtual ForkNodeActivation* createForkNodeActivation() const ;
-			virtual InitialNodeActivation* createInitialNodeActivation() const ;
-			virtual DecisionNodeActivation* createDecisionNodeActivation() const ;
-			virtual ActivityFinalNodeActivation* createActivityFinalNodeActivation() const ;
-			virtual FlowFinalNodeActivation* createFlowFinalNodeActivation() const ;
-			virtual Values* createValues() const ;
-			virtual ClauseActivation* createClauseActivation() const ;
-			virtual StructuredActivityNodeActivation* createStructuredActivityNodeActivation() const ;
-			virtual LoopNodeActivation* createLoopNodeActivation() const ;
-			virtual ConditionalNodeActivation* createConditionalNodeActivation() const ;
-			virtual TokenSet* createTokenSet() const ;
-			virtual ExpansionActivationGroup* createExpansionActivationGroup() const ;
-			virtual ExpansionRegionActivation* createExpansionRegionActivation() const ;
-			virtual ExpansionNodeActivation* createExpansionNodeActivation() const ;
-			virtual SendSignalActionActivation* createSendSignalActionActivation() const ;
-			virtual CallBehaviorActionActivation* createCallBehaviorActionActivation() const ;
-			virtual CallOperationActionActivation* createCallOperationActionActivation() const ;
-			virtual InputPinActivation* createInputPinActivation() const ;
-			virtual OutputPinActivation* createOutputPinActivation() const ;
-			virtual ValueSpecificActionActivation* createValueSpecificActionActivation() const ;
-			virtual TestIdentityActionActivation* createTestIdentityActionActivation() const ;
-			virtual ReadSelfActionActivation* createReadSelfActionActivation() const ;
-			virtual DestroyObjectActionActivation* createDestroyObjectActionActivation() const ;
-			virtual CreateObjectActionActivation* createCreateObjectActionActivation() const ;
-			virtual ClearAssociationActionActivation* createClearAssociationActionActivation() const ;
-			virtual ReadLinkActionActivation* createReadLinkActionActivation() const ;
-			virtual DestroyLinkActionActivation* createDestroyLinkActionActivation() const ;
-			virtual CreateLinkActionActivation* createCreateLinkActionActivation() const ;
-			virtual ReadStructuralFeatureActionActivation* createReadStructuralFeatureActionActivation() const ;
-			virtual ClearStructuralFeatureActionActivation* createClearStructuralFeatureActionActivation() const ;
-			virtual RemoveStructuralFeatureValueActivation* createRemoveStructuralFeatureValueActivation() const ;
-			virtual AddStructuralFeatureValueActionActivation* createAddStructuralFeatureValueActionActivation() const ;
-			virtual StartClassifierBehaviorActionActivation* createStartClassifierBehaviorActionActivation() const ;
-			virtual ReduceActionActivation* createReduceActionActivation() const ;
-			virtual ReadIsClassifiedObjectActionActivation* createReadIsClassifiedObjectActionActivation() const ;
-			virtual ReclassifyObjectActionActivation* createReclassifyObjectActionActivation() const ;
-			virtual ReadExtentActionActivation* createReadExtentActionActivation() const ;
-			virtual AcceptEventActionActivation* createAcceptEventActionActivation() const ;
-			virtual StartObjectBehaviorActionActivation* createStartObjectBehaviorActionActivation() const ;
-			virtual AcceptEventActionEventAccepter* createAcceptEventActionEventAccepter() const ;
-			virtual CentralBufferNodeActivation* createCentralBufferNodeActivation() const ;
-			virtual DataStoreNodeActivation* createDataStoreNodeActivation() const ;
+			virtual std::shared_ptr<AcceptEventActionActivation> createAcceptEventActionActivation() const ;
+			
+			virtual std::shared_ptr<AcceptEventActionEventAccepter> createAcceptEventActionEventAccepter() const ;
+			
+			virtual std::shared_ptr<ActivityEdgeInstance> createActivityEdgeInstance() const ;
+			
+			virtual std::shared_ptr<ActivityExecution> createActivityExecution() const ;
+			
+			virtual std::shared_ptr<ActivityFinalNodeActivation> createActivityFinalNodeActivation() const ;
+			
+			virtual std::shared_ptr<ActivityNodeActivationGroup> createActivityNodeActivationGroup() const ;
+			
+			virtual std::shared_ptr<ActivityParameterNodeActivation> createActivityParameterNodeActivation() const ;
+			
+			virtual std::shared_ptr<AddStructuralFeatureValueActionActivation> createAddStructuralFeatureValueActionActivation() const ;
+			
+			virtual std::shared_ptr<BooleanValue> createBooleanValue() const ;
+			
+			virtual std::shared_ptr<CallBehaviorActionActivation> createCallBehaviorActionActivation() const ;
+			
+			virtual std::shared_ptr<CallOperationActionActivation> createCallOperationActionActivation() const ;
+			
+			virtual std::shared_ptr<CentralBufferNodeActivation> createCentralBufferNodeActivation() const ;
+			
+			virtual std::shared_ptr<ClassifierBehaviorExecution> createClassifierBehaviorExecution() const ;
+			
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> createClassifierBehaviorExecutionActivity() const ;
+			
+			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1() const ;
+			
+			virtual std::shared_ptr<ClauseActivation> createClauseActivation() const ;
+			
+			virtual std::shared_ptr<ClearAssociationActionActivation> createClearAssociationActionActivation() const ;
+			
+			virtual std::shared_ptr<ClearStructuralFeatureActionActivation> createClearStructuralFeatureActionActivation() const ;
+			
+			virtual std::shared_ptr<ConditionalNodeActivation> createConditionalNodeActivation() const ;
+			
+			virtual std::shared_ptr<ControlToken> createControlToken() const ;
+			
+			virtual std::shared_ptr<CreateLinkActionActivation> createCreateLinkActionActivation() const ;
+			
+			virtual std::shared_ptr<CreateObjectActionActivation> createCreateObjectActionActivation() const ;
+			
+			virtual std::shared_ptr<DataStoreNodeActivation> createDataStoreNodeActivation() const ;
+			
+			virtual std::shared_ptr<DataValue> createDataValue() const ;
+			
+			virtual std::shared_ptr<DecisionNodeActivation> createDecisionNodeActivation() const ;
+			
+			virtual std::shared_ptr<DestroyLinkActionActivation> createDestroyLinkActionActivation() const ;
+			
+			virtual std::shared_ptr<DestroyObjectActionActivation> createDestroyObjectActionActivation() const ;
+			
+			virtual std::shared_ptr<DispatchStrategy> createDispatchStrategy() const ;
+			
+			virtual std::shared_ptr<EnumerationValue> createEnumerationValue() const ;
+			
+			virtual std::shared_ptr<EventDispatchLoop> createEventDispatchLoop() const ;
+			
+			virtual std::shared_ptr<ExecutionFactoryL1> createExecutionFactoryL1() const ;
+			//Add containing object
+			virtual std::shared_ptr<ExecutionFactoryL1> createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const ;
+			
+			virtual std::shared_ptr<ExecutionFactoryL2> createExecutionFactoryL2() const ;
+			//Add containing object
+			virtual std::shared_ptr<ExecutionFactoryL2> createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const ;
+			
+			virtual std::shared_ptr<ExecutionFactoryL3> createExecutionFactoryL3() const ;
+			//Add containing object
+			virtual std::shared_ptr<ExecutionFactoryL3> createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const ;
+			
+			virtual std::shared_ptr<Executor> createExecutor() const ;
+			
+			virtual std::shared_ptr<ExpansionActivationGroup> createExpansionActivationGroup() const ;
+			
+			virtual std::shared_ptr<ExpansionNodeActivation> createExpansionNodeActivation() const ;
+			
+			virtual std::shared_ptr<ExpansionRegionActivation> createExpansionRegionActivation() const ;
+			
+			virtual std::shared_ptr<ExtensionalValueList> createExtensionalValueList() const ;
+			
+			virtual std::shared_ptr<FIFOGetNextEventStrategy> createFIFOGetNextEventStrategy() const ;
+			
+			virtual std::shared_ptr<FeatureValue> createFeatureValue() const ;
+			
+			virtual std::shared_ptr<FirstChoiceStrategy> createFirstChoiceStrategy() const ;
+			
+			virtual std::shared_ptr<FlowFinalNodeActivation> createFlowFinalNodeActivation() const ;
+			
+			virtual std::shared_ptr<ForkNodeActivation> createForkNodeActivation() const ;
+			
+			virtual std::shared_ptr<ForkedToken> createForkedToken() const ;
+			
+			virtual std::shared_ptr<InitialNodeActivation> createInitialNodeActivation() const ;
+			
+			virtual std::shared_ptr<InputPinActivation> createInputPinActivation() const ;
+			
+			virtual std::shared_ptr<InstanceValueEvaluation> createInstanceValueEvaluation() const ;
+			
+			virtual std::shared_ptr<IntegerValue> createIntegerValue() const ;
+			
+			virtual std::shared_ptr<JoinNodeActivation> createJoinNodeActivation() const ;
+			
+			virtual std::shared_ptr<Link> createLink() const ;
+			
+			virtual std::shared_ptr<LiteralBooleanEvaluation> createLiteralBooleanEvaluation() const ;
+			
+			virtual std::shared_ptr<LiteralIntegerEvaluation> createLiteralIntegerEvaluation() const ;
+			
+			virtual std::shared_ptr<LiteralNullEvaluation> createLiteralNullEvaluation() const ;
+			
+			virtual std::shared_ptr<LiteralRealEvaluation> createLiteralRealEvaluation() const ;
+			
+			virtual std::shared_ptr<LiteralStringEvaluation> createLiteralStringEvaluation() const ;
+			
+			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> createLiteralUnlimitedNaturalEvaluation() const ;
+			
+			virtual std::shared_ptr<Locus> createLocus() const ;
+			
+			virtual std::shared_ptr<LoopNodeActivation> createLoopNodeActivation() const ;
+			
+			virtual std::shared_ptr<MergeNodeActivation> createMergeNodeActivation() const ;
+			
+			virtual std::shared_ptr<Object> createObject() const ;
+			
+			virtual std::shared_ptr<ObjectActivation> createObjectActivation() const ;
+			
+			virtual std::shared_ptr<ObjectToken> createObjectToken() const ;
+			
+			virtual std::shared_ptr<Offer> createOffer() const ;
+			
+			virtual std::shared_ptr<OutputPinActivation> createOutputPinActivation() const ;
+			
+			virtual std::shared_ptr<ParameterValue> createParameterValue() const ;
+			
+			virtual std::shared_ptr<ReadExtentActionActivation> createReadExtentActionActivation() const ;
+			
+			virtual std::shared_ptr<ReadIsClassifiedObjectActionActivation> createReadIsClassifiedObjectActionActivation() const ;
+			
+			virtual std::shared_ptr<ReadLinkActionActivation> createReadLinkActionActivation() const ;
+			
+			virtual std::shared_ptr<ReadSelfActionActivation> createReadSelfActionActivation() const ;
+			
+			virtual std::shared_ptr<ReadStructuralFeatureActionActivation> createReadStructuralFeatureActionActivation() const ;
+			
+			virtual std::shared_ptr<RealValue> createRealValue() const ;
+			
+			virtual std::shared_ptr<ReclassifyObjectActionActivation> createReclassifyObjectActionActivation() const ;
+			
+			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy() const ;
+			
+			virtual std::shared_ptr<ReduceActionActivation> createReduceActionActivation() const ;
+			
+			virtual std::shared_ptr<Reference> createReference() const ;
+			
+			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> createRemoveStructuralFeatureValueActivation() const ;
+			
+			virtual std::shared_ptr<SendSignalActionActivation> createSendSignalActionActivation() const ;
+			
+			virtual std::shared_ptr<SignalInstance> createSignalInstance() const ;
+			
+			virtual std::shared_ptr<StartClassifierBehaviorActionActivation> createStartClassifierBehaviorActionActivation() const ;
+			
+			virtual std::shared_ptr<StartObjectBehaviorActionActivation> createStartObjectBehaviorActionActivation() const ;
+			
+			virtual std::shared_ptr<StringValue> createStringValue() const ;
+			
+			virtual std::shared_ptr<StructuredActivityNodeActivation> createStructuredActivityNodeActivation() const ;
+			
+			virtual std::shared_ptr<TestIdentityActionActivation> createTestIdentityActionActivation() const ;
+			
+			virtual std::shared_ptr<TokenSet> createTokenSet() const ;
+			
+			virtual std::shared_ptr<UnlimitedNaturalValue> createUnlimitedNaturalValue() const ;
+			
+			virtual std::shared_ptr<ValueSpecificActionActivation> createValueSpecificActionActivation() const ;
+			
+			virtual std::shared_ptr<Values> createValues() const ;
+			
 			
 
 			//Package
 			virtual std::shared_ptr<FUMLPackage> getFUMLPackage() const;
 
 		private:
-			static FUMLFactory * create();
-			std::map<std::string,std::function<ecore::EObject*()>> m_creatorMap;
-
+			static FUMLFactory* create();
+            std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 
 	};

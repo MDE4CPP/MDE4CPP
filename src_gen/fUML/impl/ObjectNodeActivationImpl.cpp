@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Token.hpp"
 #include "FUMLFactory.hpp"
 
@@ -46,6 +46,9 @@ ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
 	
 }
 
+
+
+
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj):ObjectNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -68,24 +71,23 @@ ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImp
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ObjectNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
 {
-	return new ObjectNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
@@ -193,11 +195,11 @@ void ObjectNodeActivationImpl::run()
 void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
 	//generated from body annotation
-	if (tokens->size() == 0) 
+		if (tokens->size() == 0) 
 	{
-		std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
-		struct null_deleter{void operator()(void const *) const { } };		    
-        token->setHolder(std::shared_ptr<ObjectNodeActivation>(this, null_deleter()));
+		//struct null_deleter{void operator()(void const *) const { } };
+		std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+        token->setHolder(shared_from_this());
         tokens->push_back(token);
     }
 

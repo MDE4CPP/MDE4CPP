@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "Literalinteger.hpp"
@@ -48,6 +48,9 @@ IntegerValueImpl::~IntegerValueImpl()
 	
 }
 
+
+
+
 IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImpl()
 {
 	//create copy of all Attributes
@@ -61,16 +64,15 @@ IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImp
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  IntegerValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 {
-	return new IntegerValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new IntegerValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
@@ -112,7 +114,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());
+	std::shared_ptr<uml::LiteralInteger> literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
 
     literal->setType(this->getType());
     literal->setValue(this->getValue());

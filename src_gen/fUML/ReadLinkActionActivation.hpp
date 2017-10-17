@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -73,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ReadLinkActionActivation:virtual public LinkActionActivation	{
+	class ReadLinkActionActivation:virtual public LinkActionActivation
+	{
 		public:
  			ReadLinkActionActivation(const ReadLinkActionActivation &) {}
 			ReadLinkActionActivation& operator=(ReadLinkActionActivation const&) = delete;
-	
+
 		protected:
 			ReadLinkActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ReadLinkActionActivation() {}

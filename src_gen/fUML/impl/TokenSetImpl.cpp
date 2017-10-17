@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 #include "Token.hpp"
@@ -41,6 +41,9 @@ TokenSetImpl::~TokenSetImpl()
 	
 }
 
+
+
+
 TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj):TokenSetImpl()
 {
 	//create copy of all Attributes
@@ -54,16 +57,15 @@ TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj):TokenSetImpl()
 	m_tokens.reset(new Bag<fUML::Token>(*(obj.getTokens().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  TokenSetImpl::copy() const
+std::shared_ptr<ecore::EObject>  TokenSetImpl::copy() const
 {
-	return new TokenSetImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new TokenSetImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TokenSetImpl::eStaticClass() const

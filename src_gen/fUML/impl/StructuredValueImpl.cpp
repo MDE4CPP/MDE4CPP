@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "InstanceValue.hpp"
 #include "UmlFactory.hpp"
 #include "Slot.hpp"
@@ -52,6 +52,9 @@ StructuredValueImpl::~StructuredValueImpl()
 	
 }
 
+
+
+
 StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj):StructuredValueImpl()
 {
 	//create copy of all Attributes
@@ -62,16 +65,15 @@ StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj):Struct
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  StructuredValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
 {
-	return new StructuredValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new StructuredValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
@@ -135,8 +137,8 @@ std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureVa
 std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
-	std::shared_ptr<uml::InstanceSpecification> instance(uml::UmlFactory::eInstance()->createInstanceSpecification());
+		std::shared_ptr<uml::InstanceValue> instanceValue = uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::InstanceSpecification> instance = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());
 
     instanceValue->setType(nullptr);
     instanceValue->setInstance(instance);
@@ -150,7 +152,7 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
     {
     	std::shared_ptr<FeatureValue> featureValue = featureValues->at(i);
 
-    	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot());
+    	std::shared_ptr<uml::Slot> slot = uml::UmlFactory::eInstance()->createSlot_in_OwningInstance(std::shared_ptr<uml::InstanceSpecification>());
         slot->setDefiningFeature(featureValue->getFeature());
 
         // Debug.println("[specify] feature = " + featureValue.feature.name

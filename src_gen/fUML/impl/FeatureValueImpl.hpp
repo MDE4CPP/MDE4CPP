@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -45,7 +43,7 @@ virtual public FeatureValue
 	{
 		public: 
 			FeatureValueImpl(const FeatureValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			FeatureValueImpl& operator=(FeatureValueImpl const&) = delete;
@@ -53,6 +51,8 @@ virtual public FeatureValue
 		protected:
 			friend class FUMLFactoryImpl;
 			FeatureValueImpl();
+
+
 
 		public:
 			//destructor
@@ -85,15 +85,15 @@ virtual public FeatureValue
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
-			
-			/*!
-			 */
 			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
 			
 			/*!
 			 */
 			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) ;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
+			
 							
 			
 			//*********************************

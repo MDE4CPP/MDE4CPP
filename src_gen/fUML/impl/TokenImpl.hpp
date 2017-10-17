@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -42,7 +40,7 @@ virtual public Token
 	{
 		public: 
 			TokenImpl(const TokenImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TokenImpl& operator=(TokenImpl const&) = delete;
@@ -50,6 +48,8 @@ virtual public Token
 		protected:
 			friend class FUMLFactoryImpl;
 			TokenImpl();
+
+
 
 		public:
 			//destructor
@@ -60,19 +60,11 @@ virtual public Token
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
-			
-			/*!
-			 */ 
-			virtual void withdraw()  ;
-			
-			/*!
-			 */ 
 			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
 			
 			/*!
 			 */ 
-			virtual bool isWithdrawn()  ;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
 			
 			/*!
 			 */ 
@@ -80,7 +72,15 @@ virtual public Token
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  ;
+			virtual bool isWithdrawn()  ;
+			
+			/*!
+			 */ 
+			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
+			
+			/*!
+			 */ 
+			virtual void withdraw()  ;
 			
 			
 			
@@ -94,7 +94,7 @@ virtual public Token
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation > getHolder() const ;
+			virtual std::weak_ptr<fUML::ActivityNodeActivation > getHolder() const ;
 			
 			/*!
 			 */

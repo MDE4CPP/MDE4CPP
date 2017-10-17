@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -63,16 +61,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class LiteralStringEvaluation:virtual public LiteralEvaluation	{
+	class LiteralStringEvaluation:virtual public LiteralEvaluation
+	{
 		public:
  			LiteralStringEvaluation(const LiteralStringEvaluation &) {}
 			LiteralStringEvaluation& operator=(LiteralStringEvaluation const&) = delete;
-	
+
 		protected:
 			LiteralStringEvaluation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LiteralStringEvaluation() {}

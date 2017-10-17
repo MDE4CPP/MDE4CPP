@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Action.hpp"
 #include "ActivityNode.hpp"
 #include "OutputPin.hpp"
@@ -78,6 +78,9 @@ ActionActivationImpl::~ActionActivationImpl()
 	
 }
 
+
+
+
 ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):ActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -103,24 +106,23 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
 {
-	return new ActionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const
@@ -151,7 +153,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
 
     if (this->getOutgoingEdges()->empty()) 
     {
-        forkNodeActivation.reset(fUML::FUMLFactory::eInstance()->createForkNodeActivation());
+        forkNodeActivation = fUML::FUMLFactory::eInstance()->createForkNodeActivation();
         std::shared_ptr<ActivityEdgeInstance> newEdge(fUML::FUMLFactory::eInstance()->createActivityEdgeInstance());
         ActivityNodeActivationImpl::addOutgoingEdge(newEdge);
         forkNodeActivation->addIncomingEdge(newEdge);
@@ -371,7 +373,7 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstanc
 std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool value) 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralBoolean> booleanValue(uml::UmlFactory::eInstance()->createLiteralBoolean());
+	 std::shared_ptr<uml::LiteralBoolean> booleanValue = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::shared_ptr<uml::Class>());
     booleanValue->setValue(value);
     return std::dynamic_pointer_cast<fUML::BooleanValue>(this->getExecutionLocus()->getExecutor()->evaluate(booleanValue));
 	//end of body
@@ -383,7 +385,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::sh
 	    DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
 
 
-	std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
+	std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
     token->setValue(value);
 
     std::shared_ptr<PinActivation> pinActivation = this->retrievePinActivation(pin);
@@ -436,7 +438,7 @@ void ActionActivationImpl::run()
 void ActionActivationImpl::sendOffers() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast <uml::Action>(this->getNode());
+		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast <uml::Action>(this->getNode());
 
     // *** Send offers from all output pins concurrently. ***
 	std::shared_ptr<Bag<uml::OutputPin> > outputPinList = action->getOutput();

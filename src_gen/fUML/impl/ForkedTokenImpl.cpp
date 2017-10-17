@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
  
 
 //Forward declaration includes
@@ -44,6 +44,9 @@ ForkedTokenImpl::~ForkedTokenImpl()
 	
 }
 
+
+
+
 ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ForkedTokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
 {
-	return new ForkedTokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ForkedTokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
  #include "FUMLFactory.hpp"
 
 //Forward declaration includes
@@ -66,6 +66,9 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 	
 }
 
+
+
+
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
 {
 	//create copy of all Attributes
@@ -87,16 +90,15 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImp
 	m_target  = obj.getTarget();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ActivityEdgeInstanceImpl::copy() const
+std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
 {
-	return new ActivityEdgeInstanceImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ActivityEdgeInstanceImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const

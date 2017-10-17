@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ValueSpecification.hpp"
 #include "PrimitiveType.hpp"
 #include "Type.hpp"
@@ -45,6 +45,9 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 	
 }
 
+
+
+
 LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):LiteralEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -59,16 +62,15 @@ LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralEvaluationImpl::copy() const
 {
-	return new LiteralEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -58,16 +56,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ControlToken:virtual public Token	{
+	class ControlToken:virtual public Token
+	{
 		public:
  			ControlToken(const ControlToken &) {}
 			ControlToken& operator=(ControlToken const&) = delete;
-	
+
 		protected:
 			ControlToken(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ControlToken() {}
@@ -81,11 +81,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool isControl()  = 0;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
+			virtual bool isControl()  = 0;
 			
 			
 			//*********************************

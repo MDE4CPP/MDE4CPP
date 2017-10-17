@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TestIdentityActionActivationImpl& operator=(TestIdentityActionActivationImpl const&) = delete;
@@ -48,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			TestIdentityActionActivationImpl();
+
+
 
 		public:
 			//destructor

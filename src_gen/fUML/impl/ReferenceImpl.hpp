@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -43,7 +41,7 @@ namespace fUML
 	{
 		public: 
 			ReferenceImpl(const ReferenceImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ReferenceImpl& operator=(ReferenceImpl const&) = delete;
@@ -51,6 +49,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ReferenceImpl();
+
+
 
 		public:
 			//destructor
@@ -61,15 +61,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  ;
-			
-			/*!
-			 */ 
-			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
 			
 			/*!
 			 */ 
@@ -77,11 +69,11 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> new_()  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
@@ -89,15 +81,23 @@ namespace fUML
 			
 			/*!
 			 */ 
+			virtual std::shared_ptr<fUML::Value> new_()  ;
+			
+			/*!
+			 */ 
 			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			
+			/*!
+			 */ 
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 

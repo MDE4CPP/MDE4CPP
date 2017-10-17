@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -40,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			LinkActionActivationImpl(const LinkActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LinkActionActivationImpl& operator=(LinkActionActivationImpl const&) = delete;
@@ -48,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LinkActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -58,15 +58,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  ;
-			
-			/*!
-			 */ 
 			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  ;
 			
 			/*!
 			 */ 
 			virtual std::shared_ptr<uml::Association> getAssociation()  ;
+			
+			/*!
+			 */ 
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  ;
 			
 			
 			

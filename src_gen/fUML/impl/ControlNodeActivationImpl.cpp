@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
  #include "ActivityNode.hpp"
 
 //Forward declaration includes
@@ -45,6 +45,9 @@ ControlNodeActivationImpl::~ControlNodeActivationImpl()
 	
 }
 
+
+
+
 ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivationImpl & obj):ControlNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -66,24 +69,23 @@ ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivation
 	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ControlNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ControlNodeActivationImpl::copy() const
 {
-	return new ControlNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ControlNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const

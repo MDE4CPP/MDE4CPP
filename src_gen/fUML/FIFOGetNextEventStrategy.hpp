@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -48,16 +46,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class FIFOGetNextEventStrategy:virtual public GetNextEventStrategy	{
+	class FIFOGetNextEventStrategy:virtual public GetNextEventStrategy
+	{
 		public:
  			FIFOGetNextEventStrategy(const FIFOGetNextEventStrategy &) {}
 			FIFOGetNextEventStrategy& operator=(FIFOGetNextEventStrategy const&) = delete;
-	
+
 		protected:
 			FIFOGetNextEventStrategy(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~FIFOGetNextEventStrategy() {}

@@ -13,8 +13,6 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
-#define ACTIVITY_DEBUG_ON
-
 #ifdef ACTIVITY_DEBUG_ON
     #define ACT_DEBUG(a) a
 #else
@@ -83,16 +81,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ConditionalNodeActivation:virtual public StructuredActivityNodeActivation	{
+	class ConditionalNodeActivation:virtual public StructuredActivityNodeActivation
+	{
 		public:
  			ConditionalNodeActivation(const ConditionalNodeActivation &) {}
 			ConditionalNodeActivation& operator=(ConditionalNodeActivation const&) = delete;
-	
+
 		protected:
 			ConditionalNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConditionalNodeActivation() {}

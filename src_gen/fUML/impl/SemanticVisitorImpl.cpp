@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -35,6 +35,9 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 	
 }
 
+
+
+
 SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):SemanticVisitorImpl()
 {
 	//create copy of all Attributes
@@ -45,16 +48,15 @@ SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):Semant
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  SemanticVisitorImpl::copy() const
+std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
 {
-	return new SemanticVisitorImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new SemanticVisitorImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
