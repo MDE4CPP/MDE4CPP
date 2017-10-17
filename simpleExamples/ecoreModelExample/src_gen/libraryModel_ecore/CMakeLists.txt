@@ -62,9 +62,6 @@ if(NOT UNIX)
 	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
 endif()
 
-
-
-
 if(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 	FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)

@@ -7,6 +7,8 @@
     name="libraryModel_ecore"
     nsURI="http://www.example.org/libraryModel_ecore"
     nsPrefix="libraryModel_ecore">
+  <eAnnotations
+      source="prepareApplication"/>
   <eClassifiers
       xsi:type="ecore:EClass"
       name="Book"

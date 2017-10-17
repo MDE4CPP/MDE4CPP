@@ -1,21 +1,17 @@
 description 'Example collection'
 
-task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample', 'ecoreModelExample:buildLibraryModel_ecore', 'ecoreModelExample:application:compileEcoreModelExample', 'UMLModelExample:buildLibraryModel_uml']) {
+task buildSimpleExamples(dependsOn: ['compileEcoreExample', 'compileUMLExample', 'ecoreModelExample:buildLibraryModel_ecore', 'UMLModelExample:buildLibraryModel_uml']) {
 	group 'Examples'
 	description 'build all simple example applications in debug and release'	
 }
-task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug', 'ecoreModelExample:buildLibraryModel_ecoreDebug', 'ecoreModelExample:application:compileEcoreModelExampleDebug', 'UMLModelExample:buildLibraryModel_umlDebug']) {
+task buildSimpleExamplesDebug(dependsOn: ['compileEcoreExampleDebug', 'compileUMLExampleDebug', 'ecoreModelExample:buildLibraryModel_ecoreDebug', 'UMLModelExample:buildLibraryModel_umlDebug']) {
 	group 'Examples'
 	description 'build all simple example applications in debug'	
 }
-task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease', 'ecoreModelExample:buildLibraryModel_ecoreRelease', 'ecoreModelExample:application:compileEcoreModelExampleRelease', 'UMLModelExample:buildLibraryModel_umlRelease']) {
+task buildSimpleExamplesRelease(dependsOn: ['compileEcoreExampleRelease', 'compileUMLExampleRelease', 'ecoreModelExample:buildLibraryModel_ecoreRelease', 'UMLModelExample:buildLibraryModel_umlRelease']) {
 	group 'Examples'
 	description 'build all simple example applications in release'	
 }
-
-tasks.getByPath('ecoreModelExample:application:compileEcoreModelExample').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecore')
-tasks.getByPath('ecoreModelExample:application:compileEcoreModelExampleDebug').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecoreDebug')
-tasks.getByPath('ecoreModelExample:application:compileEcoreModelExampleRelease').mustRunAfter tasks.getByPath('ecoreModelExample:buildLibraryModel_ecoreRelease')
 
 task compileEcoreExample(dependsOn: ['compileEcoreExampleDebug', 'compileEcoreExampleRelease']) {
 	group 'Examples'

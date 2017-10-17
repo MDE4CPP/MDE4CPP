@@ -1,16 +1,23 @@
 
 #include <iostream>
-using namespace std;
-
-#include "LibraryModel.hpp"
 #include "LibraryModel_ecoreFactory.hpp"
+#include "LibraryModel_ecorePackage.hpp"
 
 #include "Book.hpp"
 #include "Author.hpp"
+#include "LibraryModel.hpp"
+#include "NamedElement.hpp"
 #include "Picture.hpp"
 
+// Start of user code includes 
+// You may manually edit additional includes, won't be overwritten upon generation.
+
+// End of user code
 
 using namespace libraryModel_ecore;
+
+// Start of user code functions 
+// You may manually edit additional functions, won't be overwritten upon generation.
 
 void printLibrary(std::shared_ptr<LibraryModel> model)
 {
@@ -41,10 +48,17 @@ void printLibrary(std::shared_ptr<LibraryModel> model)
 	}
 }
 
+// End of user code
+
 int main ()
 {
-	//Create Model Factory
+	//Create Model Factory and Package
 	std::shared_ptr<LibraryModel_ecoreFactory> factory = LibraryModel_ecoreFactory::eInstance();
+	std::shared_ptr<LibraryModel_ecorePackage> package = LibraryModel_ecorePackage::eInstance();
+
+// Start of user code main
+// You may manually edit the following lines, won't be overwritten upon generation.
+
 	// Create new Library Model instance
     std::shared_ptr<LibraryModel> lm = factory->createLibraryModel();
 
@@ -56,10 +70,12 @@ int main ()
     book->getAuthors()->add(author);
 
     std::shared_ptr<Picture> picture = factory->createPicture_in_Book(book);
-    picture->setName("Der Verrat der Binder (La trahison des images), 1929: Öl, 60x82 cm");
+    picture->setName("Der Verrat der Binder (La trahison des images), 1929: ï¿½l, 60x82 cm");
     picture->setPageNumber(212);
 
     printLibrary(lm);
+
+// End of user code
 
     return 0;
 
