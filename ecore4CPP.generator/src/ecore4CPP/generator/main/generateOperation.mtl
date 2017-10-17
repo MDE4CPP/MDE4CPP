@@ -36,24 +36,23 @@
  * @param anEOperation
  */]
 [template public generateOperationDecl(aOperation : EOperation, impl: Boolean)]
-[if (((impl or (not hasImplOnly())) and (not ignore())))]
+[if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
 [aOperation.generateDokumentation()/] 
-virtual [aOperation.generateOperationType()/] [aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
-[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
+virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
 
 
 
 [/template]
 
 
-[template public generateOperationImplementation(aOperation : EOperation) ? (not ignore())]
+[template public generateOperationImplementation(aOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
 [comment[aOperation.generateDokumentation()/] 
-[aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : EParameter | aOperation.eParameters) separator (',')]
-[sParameter.generateParameterType()/] [sParameter.name/][/for]) [if (hasKey('const'))] const [/if]
+[aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([aOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
 {
 [if (hasKey('body'))]
 	//generated from body annotation
 	[valueKey('body')/]
+	//end of body
 [else]
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [query public hasSetter(aAttribute : EAttribute) : Boolean = aAttribute.changeable and (aAttribute.upperBound = 1)/]
-[query public hasGetter(aAttribute : EAttribute) : EBoolean = true or hasKey('getterbody') /]
+[query public hasGetter(aAttribute : EAttribute) : EBoolean = not hasKey('getterbody') /]
 
 [***###########################################################################################
  * Section for model and class implementation of an Attribute
@@ -69,7 +69,7 @@ virtual void [aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
-void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/] ([aAttribute.generateAttributeType()/] _[aAttribute.name/])
+void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterName()/]([aAttribute.generateAttributeType()/] _[aAttribute.name/])
 {
 	m_[aAttribute.name/] = _[aAttribute.name/];
 } 
@@ -80,7 +80,8 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
 */]
 
 [template public generateAttributeInitialization(aAttribute : EAttribute)]
-initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], nullptr, [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+
 [/template]
 
 [template public generateStaticAttributeID(aAttribute : EAttribute)]

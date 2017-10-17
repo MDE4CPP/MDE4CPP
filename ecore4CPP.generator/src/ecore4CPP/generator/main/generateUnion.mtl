@@ -23,7 +23,7 @@
  * @param anEReference
  */]
 [template public generateUnionGetterCpp(aClass : EClass)]
-[aClass.getUnionsReference().generateUnionGetterCpp(aClass)/]
+[aClass.getUnionsReference()->sortedBy(name).generateUnionGetterCpp(aClass)/]
 [/template]
 
 [template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
@@ -35,7 +35,7 @@
 [/template]
 
 [template public generateUnionGetterDeclaretaion(aClass : EClass, impl : EBoolean)]
-[aClass.getUnionsReference().generateUnionGetterDeclaretaionBag(impl)/]
+[aClass.getUnionsReference()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
 [/template]
 
 [template public generateUnionGetterDeclaretaion(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]

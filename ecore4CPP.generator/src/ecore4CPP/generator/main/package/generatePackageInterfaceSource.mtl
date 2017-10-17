@@ -17,7 +17,7 @@
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Package').toUpperFirst(); }]
+[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Package').toUpperFirst(); }]
 [file (anEPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[packageName/].hpp"
 #include "impl/[packageName.concat('Impl')/].hpp"

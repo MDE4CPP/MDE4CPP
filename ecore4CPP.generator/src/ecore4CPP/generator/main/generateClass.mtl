@@ -37,8 +37,14 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEClass)/]> get[aEClass.name/]
  * Operation to generate create operation
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
-virtual [aEClass.generateTypeClass()/]* create[aEClass.name/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() const [abstractSufix(impl)/];
+[let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
+[for(aReference:EReference | ref->sortedBy(name))]
+//Add containing object
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const [abstractSufix(impl)/];
+[/for]
 
+[/let]
 [/template]
 
 [template public generateClassGetterImpl(aEClass : EClass)]

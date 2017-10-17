@@ -14,7 +14,7 @@
  */]
 [module generateEcorePluginInterfaceSource('http://www.eclipse.org/emf/2002/Ecore')]
 
-[template public generateEcorePluginInterfaceSource(anPackage : EPackage) {packageName : String = anPackage.name.concat('Plugin').toUpperFirst(); }]
+[template public generateEcorePluginInterfaceSource(anPackage : EPackage) {packageName : String = anPackage.name.toUpperFirst().concat('Plugin').toUpperFirst(); }]
 [file  (anPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
 #include "[packageName/].hpp"
