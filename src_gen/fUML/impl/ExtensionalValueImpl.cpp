@@ -3,15 +3,15 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp";
+#include "CompoundValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
 
 using namespace fUML;
@@ -43,6 +43,9 @@ ExtensionalValueImpl::~ExtensionalValueImpl()
 	
 }
 
+
+
+
 ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj):ExtensionalValueImpl()
 {
 	//create copy of all Attributes
@@ -55,24 +58,23 @@ ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj):Ext
 	m_locus  = obj.getLocus();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ExtensionalValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExtensionalValueImpl::copy() const
 {
-	return new ExtensionalValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExtensionalValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
@@ -81,14 +83,13 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ExtensionalValueImpl::destroy() 
+void ExtensionalValueImpl::destroy() 
 {
 	//generated from body annotation
 	if(this->getLocus() != nullptr)
@@ -96,6 +97,7 @@ void
 		struct null_deleter{void operator()(void const *) const { } };
         this->getLocus()->remove(std::shared_ptr<ExtensionalValue>(this, null_deleter()));
     }
+	//end of body
 }
 
 //*********************************

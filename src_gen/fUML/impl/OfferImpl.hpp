@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public Offer
 	{
 		public: 
 			OfferImpl(const OfferImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			OfferImpl& operator=(OfferImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public Offer
 		protected:
 			friend class FUMLFactoryImpl;
 			OfferImpl();
+
+
 
 		public:
 			//destructor
@@ -52,28 +60,23 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 countOfferedVales()  ;
+			virtual int countOfferedVales()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 retrieveOfferedTokens()  ;
+			virtual bool hasTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeOfferedValues(int count)  ;
+			virtual void removeOfferedValues(int count)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeWithdrawnTokens()  ;
+			virtual void removeWithdrawnTokens()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > retrieveOfferedTokens()  ;
 			
 			
 			
@@ -87,8 +90,7 @@ virtual public Offer
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Token> >
-			 getOfferedTokens() const ;
+			virtual std::shared_ptr< Bag<fUML::Token> > getOfferedTokens() const ;
 			
 							
 			

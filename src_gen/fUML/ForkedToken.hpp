@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -50,16 +56,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ForkedToken:virtual public Token	{
+	class ForkedToken:virtual public Token
+	{
 		public:
  			ForkedToken(const ForkedToken &) {}
 			ForkedToken& operator=(ForkedToken const&) = delete;
-	
+
 		protected:
 			ForkedToken(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ForkedToken() {}
@@ -69,23 +77,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  otherToken)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  otherToken)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 withdraw()  = 0;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  = 0;
+			virtual bool isControl()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 getValue()  const  = 0;
+			virtual void withdraw()  = 0;
 			
 			
 			//*********************************
@@ -93,19 +97,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int getRemainingOffersCount() const = 0;
-			
-			/*!
-			 */ 
-			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0; 
-			
-			/*!
-			 */ 
 			virtual bool isBaseTokenIsWithdrawn() const = 0;
 			
 			/*!
 			 */ 
 			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0; 
+			
+			/*!
+			 */ 
+			virtual int getRemainingOffersCount() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0; 
 			
 			
 			//*********************************
@@ -126,10 +130,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			int m_remainingOffersCount ;
+			bool m_baseTokenIsWithdrawn ;
 			/*!
 			 */ 
-			bool m_baseTokenIsWithdrawn ;
+			int m_remainingOffersCount ;
 			
 			
 			//*********************************

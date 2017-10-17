@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -55,16 +61,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class BooleanValue:virtual public PrimitiveValue	{
+	class BooleanValue:virtual public PrimitiveValue
+	{
 		public:
  			BooleanValue(const BooleanValue &) {}
 			BooleanValue& operator=(BooleanValue const&) = delete;
-	
+
 		protected:
 			BooleanValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~BooleanValue() {}
@@ -74,18 +82,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> 
-			 specify()  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Value>  otherValue)  = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 toString()  = 0;
+			virtual std::string toString()  = 0;
 			
 			
 			//*********************************

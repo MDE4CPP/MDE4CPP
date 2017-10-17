@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "LiteralBoolean.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralString.hpp"
@@ -14,19 +14,19 @@
 #include "LiteralUnlimitedNatural.hpp"
 
 //Forward declaration includes
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExecutionFactory.hpp";
+#include "ExecutionFactory.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp";
+#include "OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
 
 using namespace fUML;
@@ -56,6 +56,19 @@ ExecutionFactoryL1Impl::~ExecutionFactoryL1Impl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryL1Impl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & obj):ExecutionFactoryL1Impl()
 {
 	//create copy of all Attributes
@@ -65,34 +78,27 @@ ExecutionFactoryL1Impl::ExecutionFactoryL1Impl(const ExecutionFactoryL1Impl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::PrimitiveType> >
-	 _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr< Bag<uml::PrimitiveType> > _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));
+	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
-		std::shared_ptr< Bag<fUML::SemanticStrategy> >
-	 _strategies = obj.getStrategies();
-	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));
+	std::shared_ptr< Bag<fUML::SemanticStrategy> > _strategies = obj.getStrategies();
+	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryL1Impl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryL1Impl::copy() const
 {
-	return new ExecutionFactoryL1Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL1Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
@@ -101,17 +107,16 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> 
- ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
-	SemanticVisitor* visitor = nullptr;
+	std::shared_ptr<fUML::SemanticVisitor> visitor;
     if(std::dynamic_pointer_cast<uml::LiteralBoolean>(element) != nullptr)
     {
         visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
@@ -141,7 +146,8 @@ std::shared_ptr<fUML::SemanticVisitor>
         visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
     }
 
-    return std::shared_ptr<fUML::SemanticVisitor>(visitor);
+    return visitor;
+	//end of body
 }
 
 //*********************************

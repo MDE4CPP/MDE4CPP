@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -38,7 +44,7 @@ namespace fUML
 	{
 		public: 
 			ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActivityNodeActivationImpl& operator=(ActivityNodeActivationImpl const&) = delete;
@@ -46,6 +52,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActivityNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -56,128 +64,103 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 run()  ;
+			virtual void addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 recieveOffer()  ;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void clearTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual void createEdgeInstances()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  ;
+			virtual void createNodeActivations()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 getRunning()  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
+			virtual std::shared_ptr<fUML::ActivityExecution> getActivityExecution()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
+			virtual std::shared_ptr<fUML::Object> getExecutionContext()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 createNodeActivations()  ;
+			virtual std::shared_ptr<fUML::Locus> getExecutionLocus()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 createEdgeInstances()  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances)  ;
+			virtual bool getRunning()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityExecution> 
-			 getActivityExecution()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > getTokens()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> 
-			 getExecutionContext()  ;
+			virtual bool isReady()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Locus> 
-			 getExecutionLocus()  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> 
-			 getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual void recieveOffer()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual int
-			 removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void resume()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
+			virtual void run()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeTokens()  ;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 clearTokens()  ;
+			virtual void suspend()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 getTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 suspend()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 resume()  ;
+			virtual void terminate()  ;
 			
 			
 			
@@ -199,21 +182,6 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-			 getOutgoingEdges() const ;
-			
-			/*!
-			 */
-			virtual 	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-			 getIncomingEdges() const ;
-			
-			/*!
-			 */
-			virtual 	std::shared_ptr< Bag<fUML::Token> >
-			 getHeldTokens() const ;
-			
-			/*!
-			 */
 			virtual std::shared_ptr<fUML::ActivityNodeActivationGroup > getGroup() const ;
 			
 			/*!
@@ -221,11 +189,23 @@ namespace fUML
 			virtual void setGroup(std::shared_ptr<fUML::ActivityNodeActivationGroup> _group_group) ;
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<fUML::Token> > getHeldTokens() const ;
+			
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getIncomingEdges() const ;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<uml::ActivityNode > getNode() const ;
 			
 			/*!
 			 */
 			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node_node) ;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > getOutgoingEdges() const ;
+			
 							
 			
 			//*********************************

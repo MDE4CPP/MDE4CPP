@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -45,12 +51,13 @@ namespace fUML
 		public:
  			Values(const Values &) {}
 			Values& operator=(Values const&) = delete;
-	
+
 		protected:
 			Values(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Values() {}
@@ -68,8 +75,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Value> >
-			 getValues() const = 0;
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const = 0;
 			
 			
 
@@ -84,8 +90,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::Value> >
-			 m_values;
+			std::shared_ptr< Bag<fUML::Value> > m_values;
 			
 
 		public:

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -60,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class JoinNodeActivation:virtual public ControlNodeActivation	{
+	class JoinNodeActivation:virtual public ControlNodeActivation
+	{
 		public:
  			JoinNodeActivation(const JoinNodeActivation &) {}
 			JoinNodeActivation& operator=(JoinNodeActivation const&) = delete;
-	
+
 		protected:
 			JoinNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~JoinNodeActivation() {}
@@ -79,8 +87,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  = 0;
+			virtual bool isReady()  = 0;
 			
 			
 			//*********************************

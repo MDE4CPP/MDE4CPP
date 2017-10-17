@@ -3,19 +3,19 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "ValueSpecification.hpp"
 #include "PrimitiveType.hpp"
 #include "Type.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp";
+#include "Evaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -45,6 +45,9 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 	
 }
 
+
+
+
 LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):LiteralEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -59,16 +62,15 @@ LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralEvaluationImpl::copy() const
 {
-	return new LiteralEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
@@ -77,14 +79,13 @@ std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::PrimitiveType> 
- LiteralEvaluationImpl::getType(std::string builtInTypeName) 
+std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName) 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::PrimitiveType> type = std::dynamic_pointer_cast<uml::PrimitiveType>(this->getSpecification()->getType());
@@ -95,6 +96,7 @@ std::shared_ptr<uml::PrimitiveType>
     }
 
     return type;
+	//end of body
 }
 
 //*********************************

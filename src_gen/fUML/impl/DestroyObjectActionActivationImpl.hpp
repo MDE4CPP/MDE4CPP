@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			DestroyObjectActionActivationImpl(const DestroyObjectActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			DestroyObjectActionActivationImpl& operator=(DestroyObjectActionActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DestroyObjectActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,13 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
+			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  ;
 			
 			
 			

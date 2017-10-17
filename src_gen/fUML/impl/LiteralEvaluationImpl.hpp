@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -35,7 +41,7 @@ namespace fUML
 	{
 		public: 
 			LiteralEvaluationImpl(const LiteralEvaluationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			LiteralEvaluationImpl& operator=(LiteralEvaluationImpl const&) = delete;
@@ -43,6 +49,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			LiteralEvaluationImpl();
+
+
 
 		public:
 			//destructor
@@ -53,8 +61,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> 
-			 getType(std::string builtInTypeName)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName)  ;
 			
 			
 			

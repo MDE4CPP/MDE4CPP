@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -41,7 +47,7 @@ virtual public ExecutionFactory
 	{
 		public: 
 			ExecutionFactoryImpl(const ExecutionFactoryImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&) = delete;
@@ -49,6 +55,12 @@ virtual public ExecutionFactory
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryImpl();
+
+			//Additional constructors for the containments back reference
+			ExecutionFactoryImpl(std::weak_ptr<fUML::Locus > par_locus);
+
+
+
 
 		public:
 			//destructor
@@ -59,53 +71,43 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Evaluation> 
-			 createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> 
-			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual void assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> 
-			 instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
+			virtual std::shared_ptr<fUML::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution)  ;
+			virtual std::shared_ptr<fUML::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)  ;
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::PrimitiveType> 
-			 getBuiltInType(std::string name)  ;
+			virtual std::shared_ptr<fUML::SemanticStrategy> getStrategy(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy)  ;
+			virtual int getStrategyIndex(std::string name)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticStrategy> 
-			 getStrategy(std::string name)  ;
+			virtual std::shared_ptr<fUML::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)  ;
 			
 			/*!
 			 */ 
-			virtual int
-			 getStrategyIndex(std::string name)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			
 			
@@ -119,25 +121,22 @@ virtual public ExecutionFactory
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
+			virtual std::shared_ptr< Bag<uml::PrimitiveType> > getBuiltInTypes() const ;
+			
+			/*!
+			 */
+			virtual std::weak_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::SemanticStrategy> >
-			 getStrategies() const ;
+			virtual std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > getPrimitiveBehaviorPrototypes() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-			 getPrimitiveBehaviorPrototypes() const ;
-			
-			/*!
-			 */
-			virtual 	std::shared_ptr< Bag<uml::PrimitiveType> >
-			 getBuiltInTypes() const ;
+			virtual std::shared_ptr< Bag<fUML::SemanticStrategy> > getStrategies() const ;
 			
 							
 			

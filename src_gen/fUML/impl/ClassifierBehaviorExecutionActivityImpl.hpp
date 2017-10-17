@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public ClassifierBehaviorExecutionActivity
 	{
 		public: 
 			ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public ClassifierBehaviorExecutionActivity
 		protected:
 			friend class FUMLFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
+
+
 
 		public:
 			//destructor

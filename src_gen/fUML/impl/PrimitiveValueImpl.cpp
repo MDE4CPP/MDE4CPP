@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "PrimitiveType.hpp"
 #include "Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -46,6 +46,9 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 	
 }
 
+
+
+
 PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):PrimitiveValueImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):Primitive
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  PrimitiveValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
 {
-	return new PrimitiveValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new PrimitiveValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
@@ -76,14 +78,13 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag<uml::Classifier> >
- PrimitiveValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
@@ -93,6 +94,7 @@ std::shared_ptr<Bag<uml::Classifier> >
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(type));
 	}
     return types;
+	//end of body
 }
 
 //*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -61,7 +67,7 @@ namespace fUML
 	{
 		public: 
 			ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExecutionFactoryL2Impl& operator=(ExecutionFactoryL2Impl const&) = delete;
@@ -69,6 +75,12 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionFactoryL2Impl();
+
+			//Additional constructors for the containments back reference
+			ExecutionFactoryL2Impl(std::weak_ptr<fUML::Locus > par_locus);
+
+
+
 
 		public:
 			//destructor
@@ -79,8 +91,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> 
-			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  ;
 			
 			
 			

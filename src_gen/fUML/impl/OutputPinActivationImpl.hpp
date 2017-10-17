@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			OutputPinActivationImpl(const OutputPinActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			OutputPinActivationImpl& operator=(OutputPinActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			OutputPinActivationImpl();
+
+
 
 		public:
 			//destructor

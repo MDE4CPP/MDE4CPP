@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralInteger.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp";
+#include "LiteralEvaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
 	
 }
 
+
+
+
 LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl(const LiteralIntegerEvaluationImpl & obj):LiteralIntegerEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl(const LiteralIntegerE
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralIntegerEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralIntegerEvaluationImpl::copy() const
 {
-	return new LiteralIntegerEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralIntegerEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() const
@@ -76,14 +78,13 @@ std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralIntegerEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralIntegerEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
@@ -92,6 +93,7 @@ std::shared_ptr<fUML::Value>
     integerValue ->setValue(literal->getValue());
 
     return integerValue ;
+	//end of body
 }
 
 //*********************************

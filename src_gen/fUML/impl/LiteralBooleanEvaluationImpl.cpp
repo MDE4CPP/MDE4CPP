@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralBoolean.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp";
+#include "LiteralEvaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 	
 }
 
+
+
+
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj):LiteralBooleanEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanE
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralBooleanEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralBooleanEvaluationImpl::copy() const
 {
-	return new LiteralBooleanEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralBooleanEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() const
@@ -76,14 +78,13 @@ std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralBooleanEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralBooleanEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralBoolean> literal = std::dynamic_pointer_cast<uml::LiteralBoolean>(getSpecification());
@@ -91,6 +92,7 @@ std::shared_ptr<fUML::Value>
     booleanValue->setType(this->getType("Boolean"));
     booleanValue->setValue(literal->getValue());
     return booleanValue;
+	//end of body
 }
 
 //*********************************

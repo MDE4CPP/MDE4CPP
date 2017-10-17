@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -38,7 +44,7 @@ virtual public ObjectActivation
 	{
 		public: 
 			ObjectActivationImpl(const ObjectActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ObjectActivationImpl& operator=(ObjectActivationImpl const&) = delete;
@@ -46,6 +52,8 @@ virtual public ObjectActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -56,48 +64,39 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 stop()  ;
+			virtual void _send(boost::any signal)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 _register(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void _startObjectBehavior()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
+			virtual void dispatchNextEvent()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual std::shared_ptr<fUML::SignalInstance> retrieveNextEvent()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 dispatchNextEvent()  ;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SignalInstance> 
-			 retrieveNextEvent()  ;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 _startObjectBehavior()  ;
+			virtual void stop()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 _send(boost::any signal)  ;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  ;
 			
 			
 			
@@ -111,13 +110,11 @@ virtual public ObjectActivation
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::EventAccepter> >
-			 getWaitingEventAccepters() const ;
+			virtual std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> > getClassifierBehaviorExecutions() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::SignalInstance> >
-			 getEventPool() const ;
+			virtual std::shared_ptr< Bag<fUML::SignalInstance> > getEventPool() const ;
 			
 			/*!
 			 */
@@ -128,8 +125,7 @@ virtual public ObjectActivation
 			virtual void setObject(std::shared_ptr<fUML::Object> _object_object) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ClassifierBehaviorExecution> >
-			 getClassifierBehaviorExecutions() const ;
+			virtual std::shared_ptr< Bag<fUML::EventAccepter> > getWaitingEventAccepters() const ;
 			
 							
 			

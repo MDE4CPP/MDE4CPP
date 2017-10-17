@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -38,7 +44,7 @@ namespace fUML
 	{
 		public: 
 			StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			StructuredActivityNodeActivationImpl& operator=(StructuredActivityNodeActivationImpl const&) = delete;
@@ -46,6 +52,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			StructuredActivityNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -56,73 +64,59 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 doStructuredActivity()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> >
-			 makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
+			virtual void createEdgeInstances()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> >
-			 getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
+			virtual void createNodeActivations()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
+			virtual void doAction()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 doAction()  ;
+			virtual void doStructuredActivity()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual std::shared_ptr<fUML::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ActivityNodeActivation> 
-			 getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 createNodeActivations()  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 createEdgeInstances()  ;
+			virtual bool isSuspended()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminateAll()  ;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isSuspended()  ;
+			virtual void resume()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 completeAction()  ;
+			virtual void terminate()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 resume()  ;
+			virtual void terminateAll()  ;
 			
 			
 			

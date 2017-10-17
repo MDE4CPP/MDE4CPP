@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "DecisionNode.hpp"
 #include "Behavior.hpp"
 #include "Parameter.hpp"
@@ -18,21 +18,21 @@
 #include "ObjectToken.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp";
+#include "ControlNodeActivation.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -64,6 +64,9 @@ DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
 	
 }
 
+
+
+
 DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj):DecisionNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -76,25 +79,20 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getDecisionInputExecution()!=nullptr)
 	{
-		m_decisionInputExecution.reset(dynamic_cast<fUML::Execution*>(obj.getDecisionInputExecution()->copy()));
+		m_decisionInputExecution = std::dynamic_pointer_cast<fUML::Execution>(obj.getDecisionInputExecution()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_decisionInputExecution" << std::endl;
@@ -102,19 +100,19 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  DecisionNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
 {
-	return new DecisionNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DecisionNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
@@ -123,14 +121,13 @@ std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
+std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
 {
 	//generated from body annotation
 		std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
@@ -193,10 +190,10 @@ std::shared_ptr<fUML::Value>
     }
 
     return decisionInputResult;
+	//end of body
 }
 
-void
- DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
@@ -231,10 +228,10 @@ void
             edgeInstance->sendOffer(offeredTokens);
         }
     }
+	//end of body
 }
 
-std::shared_ptr<fUML::ActivityEdgeInstance> 
- DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
+std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
 {
 	//generated from body annotation
 		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
@@ -255,10 +252,10 @@ std::shared_ptr<fUML::ActivityEdgeInstance>
     }
 
     return edgeInstance;
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- DecisionNodeActivationImpl::getDecisionInputFlowValue() 
+std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowValue() 
 {
 	//generated from body annotation
 	std::shared_ptr<ActivityEdgeInstance> decisionInputFlowInstance = this->getDecisionInputFlowInstance();
@@ -274,10 +271,10 @@ std::shared_ptr<fUML::Value>
     }
 
     return value;
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Value> >
- DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	std::shared_ptr<Value> decisionInputValue = this->getDecisionInputFlowValue();
@@ -302,16 +299,16 @@ std::shared_ptr<Bag<fUML::Value> >
 			}
 			else
 			{
-				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr";
+				std::cout<<"[getDecisionValues] decisionValues[" << i << "] = nullptr" << std::endl;
 			}
 		}
     )
 
     return decisionValues;
+	//end of body
 }
 
-bool
- DecisionNodeActivationImpl::hasObjectFlowInput() 
+bool DecisionNodeActivationImpl::hasObjectFlowInput() 
 {
 	//generated from body annotation
 		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
@@ -325,10 +322,10 @@ bool
         i = i + 1;
     }
     return isObjectFlow;
+	//end of body
 }
 
-bool
- DecisionNodeActivationImpl::isReady() 
+bool DecisionNodeActivationImpl::isReady() 
 {
 	//generated from body annotation
 	unsigned int i = 0;
@@ -340,10 +337,10 @@ bool
     }
     DEBUG_MESSAGE(std::cout<< "READY:"<< ready<<std::endl;)
     return ready;
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Token> > removedControlTokens(new Bag<fUML::Token>());
@@ -365,10 +362,10 @@ std::shared_ptr<Bag<fUML::Token> >
     }
 
     return removedControlTokens;
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- DecisionNodeActivationImpl::takeOfferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
@@ -389,10 +386,10 @@ std::shared_ptr<Bag<fUML::Token> >
     }
 
     return allTokens;
+	//end of body
 }
 
-void
- DecisionNodeActivationImpl::terminate() 
+void DecisionNodeActivationImpl::terminate() 
 {
 	//generated from body annotation
 	    if (this->getDecisionInputExecution() != nullptr) {
@@ -400,10 +397,10 @@ void
     }
 
     ControlNodeActivationImpl::terminate();
+	//end of body
 }
 
-bool
- DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) 
+bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) 
 {
 	//generated from body annotation
 	bool guardResult = true;
@@ -413,6 +410,7 @@ bool
         guardResult = guardValue->equals(value);
     }
     return guardResult;
+	//end of body
 }
 
 //*********************************

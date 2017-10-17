@@ -3,28 +3,28 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp";
+#include "ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ExpansionActivationGroup.hpp";
+#include "ExpansionActivationGroup.hpp"
 
-#include "ExpansionNode.hpp";
+#include "ExpansionNode.hpp"
 
-#include "ExpansionNodeActivation.hpp";
+#include "ExpansionNodeActivation.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "TokenSet.hpp";
+#include "TokenSet.hpp"
 
 
 using namespace fUML;
@@ -73,6 +73,9 @@ ExpansionRegionActivationImpl::~ExpansionRegionActivationImpl()
 	
 }
 
+
+
+
 ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj):ExpansionRegionActivationImpl()
 {
 	//create copy of all Attributes
@@ -84,59 +87,46 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegi
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<fUML::ExpansionActivationGroup> >
-	 _activationGroups = obj.getActivationGroups();
-	m_activationGroups.reset(new 	 Bag<fUML::ExpansionActivationGroup> 
-	(*(obj.getActivationGroups().get())));
+	std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > _activationGroups = obj.getActivationGroups();
+	m_activationGroups.reset(new Bag<fUML::ExpansionActivationGroup>(*(obj.getActivationGroups().get())));
 
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::TokenSet> >
-	 _inputExpansionTokens = obj.getInputExpansionTokens();
-	m_inputExpansionTokens.reset(new 	 Bag<fUML::TokenSet> 
-	(*(obj.getInputExpansionTokens().get())));
+	std::shared_ptr< Bag<fUML::TokenSet> > _inputExpansionTokens = obj.getInputExpansionTokens();
+	m_inputExpansionTokens.reset(new Bag<fUML::TokenSet>(*(obj.getInputExpansionTokens().get())));
 
-		std::shared_ptr< Bag<fUML::TokenSet> >
-	 _inputTokens = obj.getInputTokens();
-	m_inputTokens.reset(new 	 Bag<fUML::TokenSet> 
-	(*(obj.getInputTokens().get())));
+	std::shared_ptr< Bag<fUML::TokenSet> > _inputTokens = obj.getInputTokens();
+	m_inputTokens.reset(new Bag<fUML::TokenSet>(*(obj.getInputTokens().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ExpansionRegionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
 {
-	return new ExpansionRegionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExpansionRegionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const
@@ -145,35 +135,31 @@ std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() con
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ExpansionRegionActivationImpl::doStructuredActivity() 
+void ExpansionRegionActivationImpl::doStructuredActivity() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::ExpansionNodeActivation> 
- ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) 
+std::shared_ptr<fUML::ExpansionNodeActivation> ExpansionRegionActivationImpl::getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-int
- ExpansionRegionActivationImpl::numberOfValues() 
+int ExpansionRegionActivationImpl::numberOfValues() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) 
+void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::ExpansionActivationGroup>  activationGroup) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -182,24 +168,21 @@ void
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::ExpansionActivationGroup> >
- ExpansionRegionActivationImpl::getActivationGroups() const
+std::shared_ptr< Bag<fUML::ExpansionActivationGroup> > ExpansionRegionActivationImpl::getActivationGroups() const
 {
 
     return m_activationGroups;
 }
 
 
-	std::shared_ptr< Bag<fUML::TokenSet> >
- ExpansionRegionActivationImpl::getInputExpansionTokens() const
+std::shared_ptr< Bag<fUML::TokenSet> > ExpansionRegionActivationImpl::getInputExpansionTokens() const
 {
 //assert(m_inputExpansionTokens);
     return m_inputExpansionTokens;
 }
 
 
-	std::shared_ptr< Bag<fUML::TokenSet> >
- ExpansionRegionActivationImpl::getInputTokens() const
+std::shared_ptr< Bag<fUML::TokenSet> > ExpansionRegionActivationImpl::getInputTokens() const
 {
 
     return m_inputTokens;

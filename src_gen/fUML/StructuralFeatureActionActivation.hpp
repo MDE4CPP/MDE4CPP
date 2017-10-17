@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -90,16 +96,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class StructuralFeatureActionActivation:virtual public ActionActivation	{
+	class StructuralFeatureActionActivation:virtual public ActionActivation
+	{
 		public:
  			StructuralFeatureActionActivation(const StructuralFeatureActionActivation &) {}
 			StructuralFeatureActionActivation& operator=(StructuralFeatureActionActivation const&) = delete;
-	
+
 		protected:
 			StructuralFeatureActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~StructuralFeatureActionActivation() {}
@@ -109,18 +117,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> 
-			 getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  = 0;
+			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Link> >
-			 getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  = 0;
+			virtual std::shared_ptr<Bag<fUML::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Value>  oppositeValue)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Property> 
-			 getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  = 0;
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end)  = 0;
 			
 			
 			//*********************************

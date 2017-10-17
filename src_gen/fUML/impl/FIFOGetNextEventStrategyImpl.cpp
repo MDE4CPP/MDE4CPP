@@ -3,10 +3,10 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "GetNextEventStrategy.hpp";
+#include "GetNextEventStrategy.hpp"
 
 
 using namespace fUML;
@@ -36,6 +36,9 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 	
 }
 
+
+
+
 FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj):FIFOGetNextEventStrategyImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEven
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  FIFOGetNextEventStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
 {
-	return new FIFOGetNextEventStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new FIFOGetNextEventStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const
@@ -64,7 +66,7 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

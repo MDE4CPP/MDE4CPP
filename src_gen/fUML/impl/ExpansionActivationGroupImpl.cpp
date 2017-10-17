@@ -3,20 +3,20 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp";
+#include "ActivityExecution.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ExpansionRegionActivation.hpp";
+#include "ExpansionRegionActivation.hpp"
 
-#include "StructuredActivityNodeActivation.hpp";
+#include "StructuredActivityNodeActivation.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 	
 }
 
+
+
+
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj):ExpansionActivationGroupImpl()
 {
 	//create copy of all Attributes
@@ -63,19 +66,16 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 
 	m_regionActivation  = obj.getRegionActivation();
 
-		std::shared_ptr< Bag<fUML::ActivityNodeActivation> >
-	 _suspendedActivations = obj.getSuspendedActivations();
-	m_suspendedActivations.reset(new 	 Bag<fUML::ActivityNodeActivation> 
-	(*(obj.getSuspendedActivations().get())));
+	std::shared_ptr< Bag<fUML::ActivityNodeActivation> > _suspendedActivations = obj.getSuspendedActivations();
+	m_suspendedActivations.reset(new Bag<fUML::ActivityNodeActivation>(*(obj.getSuspendedActivations().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::ActivityEdgeInstance>> _edgeInstancesList = obj.getEdgeInstances();
 	for(std::shared_ptr<fUML::ActivityEdgeInstance> _edgeInstances : *_edgeInstancesList)
 	{
-		this->getEdgeInstances()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(dynamic_cast<fUML::ActivityEdgeInstance*>(_edgeInstances->copy())));
+		this->getEdgeInstances()->add(std::shared_ptr<fUML::ActivityEdgeInstance>(std::dynamic_pointer_cast<fUML::ActivityEdgeInstance>(_edgeInstances->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_edgeInstances" << std::endl;
@@ -83,18 +83,18 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 	std::shared_ptr<Bag<fUML::ActivityNodeActivation>> _nodeActivationsList = obj.getNodeActivations();
 	for(std::shared_ptr<fUML::ActivityNodeActivation> _nodeActivations : *_nodeActivationsList)
 	{
-		this->getNodeActivations()->add(std::shared_ptr<fUML::ActivityNodeActivation>(dynamic_cast<fUML::ActivityNodeActivation*>(_nodeActivations->copy())));
+		this->getNodeActivations()->add(std::shared_ptr<fUML::ActivityNodeActivation>(std::dynamic_pointer_cast<fUML::ActivityNodeActivation>(_nodeActivations->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_nodeActivations" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ExpansionActivationGroupImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
 {
-	return new ExpansionActivationGroupImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExpansionActivationGroupImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const
@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

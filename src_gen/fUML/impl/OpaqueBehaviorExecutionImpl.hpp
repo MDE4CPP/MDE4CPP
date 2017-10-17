@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -37,7 +43,7 @@ namespace fUML
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&) = delete;
@@ -45,6 +51,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			OpaqueBehaviorExecutionImpl();
+
+
 
 		public:
 			//destructor
@@ -55,13 +63,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  ;
+			virtual void doBody(std::shared_ptr<Bag<fUML::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::ParameterValue> >  outputParameters)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 execute()  ;
+			virtual void execute()  ;
 			
 			
 			

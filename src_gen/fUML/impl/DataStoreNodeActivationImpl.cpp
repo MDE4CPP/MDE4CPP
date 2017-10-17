@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "CentralBufferNodeActivation.hpp";
+#include "CentralBufferNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ DataStoreNodeActivationImpl::~DataStoreNodeActivationImpl()
 	
 }
 
+
+
+
 DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj):DataStoreNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -57,37 +60,32 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  DataStoreNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
 {
-	return new DataStoreNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new DataStoreNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
@@ -96,14 +94,13 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::Value>value = token->getValue();
@@ -121,20 +118,21 @@ void
 		if (isUnique) {
 			ObjectNodeActivationImpl::addToken(token);
 		}
+	//end of body
 }
 
-int
- DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	int i = ObjectNodeActivationImpl::removeToken(token);
 		
 		if (this->isRunning()) {
-			std::shared_ptr<Token> copied_token(dynamic_cast<Token*>(token->copy()));
+			std::shared_ptr<Token> copied_token = std::dynamic_pointer_cast<Token>(token->copy());
 			ObjectNodeActivationImpl::addToken(copied_token);
 			this->sendUnofferedTokens();
 		}
 		return i;
+	//end of body
 }
 
 //*********************************

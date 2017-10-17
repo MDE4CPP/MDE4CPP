@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -35,6 +35,9 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehav
 	
 }
 
+
+
+
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj):ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {
 	//create copy of all Attributes
@@ -45,16 +48,15 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehavi
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
 {
-	return new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
@@ -63,7 +65,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

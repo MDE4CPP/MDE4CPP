@@ -3,10 +3,10 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
 
 using namespace fUML;
@@ -36,6 +36,9 @@ ChoiceStrategyImpl::~ChoiceStrategyImpl()
 	
 }
 
+
+
+
 ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj):ChoiceStrategyImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj):ChoiceStr
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ChoiceStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  ChoiceStrategyImpl::copy() const
 {
-	return new ChoiceStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ChoiceStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
@@ -64,24 +66,23 @@ std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-int
- ChoiceStrategyImpl::choose(int size) 
+int ChoiceStrategyImpl::choose(int size) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::string
- ChoiceStrategyImpl::retrieveName() 
+std::string ChoiceStrategyImpl::retrieveName() 
 {
 	//generated from body annotation
 	return "choice";
+	//end of body
 }
 
 //*********************************

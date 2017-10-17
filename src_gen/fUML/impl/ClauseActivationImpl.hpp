@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public ClauseActivation
 	{
 		public: 
 			ClauseActivationImpl(const ClauseActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ClauseActivationImpl& operator=(ClauseActivationImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public ClauseActivation
 		protected:
 			friend class FUMLFactoryImpl;
 			ClauseActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -52,38 +60,31 @@ virtual public ClauseActivation
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 recieveControl()  ;
+			virtual std::shared_ptr<fUML::BooleanValue> getDecision()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getPredecessors()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest()  ;
+			virtual std::shared_ptr<Bag<fUML::ClauseActivation> > getSuccessors()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody()  ;
+			virtual bool isReady()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> 
-			 getDecision()  ;
+			virtual void recieveControl()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getPredecessors()  ;
+			virtual void runTest()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ClauseActivation> >
-			 getSuccessors()  ;
+			virtual void selectBody()  ;
 			
 			
 			

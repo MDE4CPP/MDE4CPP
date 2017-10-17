@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public TokenSet
 	{
 		public: 
 			TokenSetImpl(const TokenSetImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			TokenSetImpl& operator=(TokenSetImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public TokenSet
 		protected:
 			friend class FUMLFactoryImpl;
 			TokenSetImpl();
+
+
 
 		public:
 			//destructor
@@ -62,8 +70,7 @@ virtual public TokenSet
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Token> >
-			 getTokens() const ;
+			virtual std::shared_ptr< Bag<fUML::Token> > getTokens() const ;
 			
 							
 			

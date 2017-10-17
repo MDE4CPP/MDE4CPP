@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <ConditionalNode.hpp>
 #include <FUMLFactory.hpp>
 #include <LoopNode.hpp>
@@ -20,19 +20,19 @@
 #include "ExpansionNode.hpp"
 
 //Forward declaration includes
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExecutionFactoryL2.hpp";
+#include "ExecutionFactoryL2.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp";
+#include "OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
 
 using namespace fUML;
@@ -62,6 +62,19 @@ ExecutionFactoryL3Impl::~ExecutionFactoryL3Impl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryL3Impl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & obj):ExecutionFactoryL3Impl()
 {
 	//create copy of all Attributes
@@ -71,34 +84,27 @@ ExecutionFactoryL3Impl::ExecutionFactoryL3Impl(const ExecutionFactoryL3Impl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::PrimitiveType> >
-	 _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr< Bag<uml::PrimitiveType> > _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));
+	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
-		std::shared_ptr< Bag<fUML::SemanticStrategy> >
-	 _strategies = obj.getStrategies();
-	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));
+	std::shared_ptr< Bag<fUML::SemanticStrategy> > _strategies = obj.getStrategies();
+	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryL3Impl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryL3Impl::copy() const
 {
-	return new ExecutionFactoryL3Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL3Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL3Impl::eStaticClass() const
@@ -107,14 +113,13 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL3Impl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> 
- ExecutionFactoryL3Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL3Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
@@ -177,6 +182,7 @@ std::shared_ptr<fUML::SemanticVisitor>
     }
     
     return visitor;
+	//end of body
 }
 
 //*********************************

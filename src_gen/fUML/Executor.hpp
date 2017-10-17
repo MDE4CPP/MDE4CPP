@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -80,12 +86,13 @@ namespace fUML
 		public:
  			Executor(const Executor &) {}
 			Executor& operator=(Executor const&) = delete;
-	
+
 		protected:
 			Executor(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Executor() {}
@@ -95,18 +102,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
+			virtual std::shared_ptr<fUML::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Reference> 
-			 start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
-			 execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
+			virtual std::shared_ptr<fUML::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			
 			//*********************************

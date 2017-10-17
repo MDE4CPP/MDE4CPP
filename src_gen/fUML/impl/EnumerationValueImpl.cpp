@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "UmlFactory.hpp"
 #include "FUMLFactory.hpp"
 #include "InstanceValue.hpp"
@@ -13,15 +13,15 @@
 #include "Enumeration.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "Enumeration.hpp";
+#include "Enumeration.hpp"
 
-#include "EnumerationLiteral.hpp";
+#include "EnumerationLiteral.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -57,6 +57,9 @@ EnumerationValueImpl::~EnumerationValueImpl()
 	
 }
 
+
+
+
 EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):EnumerationValueImpl()
 {
 	//create copy of all Attributes
@@ -71,16 +74,15 @@ EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):Enu
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EnumerationValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
 {
-	return new EnumerationValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EnumerationValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
@@ -89,14 +91,13 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -106,43 +107,44 @@ bool
         isEqual = (value->getLiteral() == this->getLiteral());
     }
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> >
- EnumerationValueImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
     return types;
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- EnumerationValueImpl::new_() 
+std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- EnumerationValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue());
+	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>()));
     //Remark: instance is so defined in the specification, but even there is not used.
-    //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification();
+    //uml::InstanceSpecification * instance = uml::UmlFactory::eInstance()->createInstanceSpecification(std::shared_ptr<uml::Class>());
 
     instanceValue->setType(this->getType());
     instanceValue->setInstance(this->getLiteral());
 
     return instanceValue;
+	//end of body
 }
 
-std::string
- EnumerationValueImpl::toString() 
+std::string EnumerationValueImpl::toString() 
 {
 	//generated from body annotation
 	    return this->getLiteral()->getName();
+	//end of body
 }
 
 //*********************************

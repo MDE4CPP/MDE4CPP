@@ -3,20 +3,20 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Token.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;
@@ -46,6 +46,9 @@ ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
 	
 }
 
+
+
+
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj):ObjectNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -59,37 +62,32 @@ ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImp
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ObjectNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
 {
-	return new ObjectNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
@@ -98,9 +96,9 @@ std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ObjectNodeActivationImpl::setOfferedTokenCount (int _offeredTokenCount)
+void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
 {
 	m_offeredTokenCount = _offeredTokenCount;
 } 
@@ -113,8 +111,7 @@ int ObjectNodeActivationImpl::getOfferedTokenCount() const
 //*********************************
 // Operations
 //*********************************
-void
- ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
+void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	    if (token->getValue() == nullptr) {
@@ -122,18 +119,18 @@ void
     } else {
         ActivityNodeActivationImpl::addToken(token);
     }
+	//end of body
 }
 
-void
- ObjectNodeActivationImpl::clearTokens() 
+void ObjectNodeActivationImpl::clearTokens() 
 {
 	//generated from body annotation
 	    ActivityNodeActivationImpl::clearTokens();
     this->setOfferedTokenCount(0);
+	//end of body
 }
 
-int
- ObjectNodeActivationImpl::countOfferedValues() 
+int ObjectNodeActivationImpl::countOfferedValues() 
 {
 	//generated from body annotation
 		int totalValueCount = 0;
@@ -145,10 +142,10 @@ int
     }
 
     return totalValueCount;
+	//end of body
 }
 
-int
- ObjectNodeActivationImpl::countUnofferedTokens() 
+int ObjectNodeActivationImpl::countUnofferedTokens() 
 {
 	//generated from body annotation
 	    if (this->getHeldTokens()->size() == 0) {
@@ -156,10 +153,10 @@ int
     }
 
     return (this->getHeldTokens()->size() - this->getOfferedTokenCount());
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- ObjectNodeActivationImpl::getUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > tokens(new Bag<fUML::Token>());
@@ -172,10 +169,10 @@ std::shared_ptr<Bag<fUML::Token> >
     }
 
     return tokens;
+	//end of body
 }
 
-int
- ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
+int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
 	//generated from body annotation
 	    int i = ActivityNodeActivationImpl::removeToken(token);
@@ -184,42 +181,42 @@ int
     }
 
     return i;
+	//end of body
 }
 
-void
- ObjectNodeActivationImpl::run() 
+void ObjectNodeActivationImpl::run() 
 {
 	//generated from body annotation
 	    ActivityNodeActivationImpl::run();
     this->setOfferedTokenCount(0);
+	//end of body
 }
 
-void
- ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
+void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
 	//generated from body annotation
-	if (tokens->size() == 0) 
+		if (tokens->size() == 0) 
 	{
-		std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
-		struct null_deleter{void operator()(void const *) const { } };		    
-        token->setHolder(std::shared_ptr<ObjectNodeActivation>(this, null_deleter()));
+		//struct null_deleter{void operator()(void const *) const { } };
+		std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
+        token->setHolder(shared_from_this());
         tokens->push_back(token);
     }
 
     ActivityNodeActivationImpl::sendOffers(tokens);
+	//end of body
 }
 
-void
- ObjectNodeActivationImpl::sendUnofferedTokens() 
+void ObjectNodeActivationImpl::sendUnofferedTokens() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens = this->getUnofferedTokens();
     this->setOfferedTokenCount(this->getOfferedTokenCount() + tokens->size());
     this->sendOffers(tokens);
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Token> >
- ObjectNodeActivationImpl::takeUnofferedTokens() 
+std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > tokens = this->getUnofferedTokens();
@@ -229,14 +226,15 @@ std::shared_ptr<Bag<fUML::Token> >
         token->withdraw();
     }
     return tokens;
+	//end of body
 }
 
-void
- ObjectNodeActivationImpl::terminate() 
+void ObjectNodeActivationImpl::terminate() 
 {
 	//generated from body annotation
 	    this->clearTokens();
     ActivityNodeActivationImpl::terminate();
+	//end of body
 }
 
 //*********************************

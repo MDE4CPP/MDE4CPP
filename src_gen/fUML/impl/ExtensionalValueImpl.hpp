@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -33,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&) = delete;
@@ -41,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExtensionalValueImpl();
+
+
 
 		public:
 			//destructor
@@ -51,8 +59,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 destroy()  ;
+			virtual void destroy()  ;
 			
 			
 			

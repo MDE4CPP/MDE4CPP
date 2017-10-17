@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CentralBufferNodeActivationImpl& operator=(CentralBufferNodeActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CentralBufferNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,8 +58,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			
 			

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <Parameter.hpp>
 #include <ParameterDirectionKind.hpp>
 #include <ParameterValue.hpp>
@@ -15,23 +15,23 @@
 
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "Parameter.hpp";
+#include "Parameter.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -70,6 +70,9 @@ ExecutionImpl::~ExecutionImpl()
 	
 }
 
+
+
+
 ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 {
 	//create copy of all Attributes
@@ -83,26 +86,23 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _types = obj.getTypes();
-	m_types.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getTypes().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
+		m_objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
@@ -110,7 +110,7 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 	std::shared_ptr<Bag<fUML::ParameterValue>> _parameterValuesList = obj.getParameterValues();
 	for(std::shared_ptr<fUML::ParameterValue> _parameterValues : *_parameterValuesList)
 	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(dynamic_cast<fUML::ParameterValue*>(_parameterValues->copy())));
+		this->getParameterValues()->add(std::shared_ptr<fUML::ParameterValue>(std::dynamic_pointer_cast<fUML::ParameterValue>(_parameterValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
@@ -118,12 +118,12 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 	
 	
-
 }
 
-ecore::EObject *  ExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
 {
-	return new ExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
@@ -132,28 +132,27 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ExecutionImpl::execute() 
+void ExecutionImpl::execute() 
 {
 	//generated from body annotation
 	
+	//end of body
 }
 
-std::shared_ptr<uml::Behavior> 
- ExecutionImpl::getBehavior() 
+std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() 
 {
 	//generated from body annotation
 	return std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ParameterValue> >
- ExecutionImpl::getOutputParameterValues() 
+std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<ParameterValue> > outputs(new Bag<ParameterValue>());
@@ -171,10 +170,10 @@ std::shared_ptr<Bag<fUML::ParameterValue> >
     }
 
     return outputs;
+	//end of body
 }
 
-std::shared_ptr<fUML::ParameterValue> 
- ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
+std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
 {
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> parameterValue = nullptr;
@@ -186,17 +185,16 @@ std::shared_ptr<fUML::ParameterValue>
         parameterValue  = *it;
     }
     return parameterValue;
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ExecutionImpl::new_() 
+std::shared_ptr<fUML::Value> ExecutionImpl::new_() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
+void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
 {
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> existingParameterValue = this->getParameterValue(parameterValue->getParameter());
@@ -211,13 +209,14 @@ void
 		auto vec = parameterValue->getValues();
 		existingParameterValue->getValues()->insert(existingParameterValue->getValues()->end(),vec->begin(),vec->end());
 	}
+	//end of body
 }
 
-void
- ExecutionImpl::terminate() 
+void ExecutionImpl::terminate() 
 {
 	//generated from body annotation
 	return;
+	//end of body
 }
 
 //*********************************
@@ -233,8 +232,7 @@ void ExecutionImpl::setContext(std::shared_ptr<fUML::Object> _context)
     m_context = _context;
 }
 
-	std::shared_ptr< Bag<fUML::ParameterValue> >
- ExecutionImpl::getParameterValues() const
+std::shared_ptr< Bag<fUML::ParameterValue> > ExecutionImpl::getParameterValues() const
 {
 
     return m_parameterValues;

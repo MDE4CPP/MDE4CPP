@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -33,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ObjectTokenImpl& operator=(ObjectTokenImpl const&) = delete;
@@ -41,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ObjectTokenImpl();
+
+
 
 		public:
 			//destructor
@@ -51,13 +59,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  other)  ;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  ;
+			virtual bool isControl()  ;
 			
 			
 			

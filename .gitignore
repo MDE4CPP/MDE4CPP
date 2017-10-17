@@ -1,2 +1,10 @@
 .gradle/
-build/
+.cmake
+
+src_gen/\.idea/
+
+src_gen/cmake-build-debug/
+
+src_gen/fUML/\.idea/
+
+src_gen/fUML/cmake-build-debug/

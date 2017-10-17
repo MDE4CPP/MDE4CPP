@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -65,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class CreateObjectActionActivation:virtual public ActionActivation	{
+	class CreateObjectActionActivation:virtual public ActionActivation
+	{
 		public:
  			CreateObjectActionActivation(const CreateObjectActionActivation &) {}
 			CreateObjectActionActivation& operator=(CreateObjectActionActivation const&) = delete;
-	
+
 		protected:
 			CreateObjectActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~CreateObjectActionActivation() {}

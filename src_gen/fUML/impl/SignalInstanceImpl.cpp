@@ -3,14 +3,14 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp";
+#include "CompoundValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Signal.hpp";
+#include "Signal.hpp"
 
 
 using namespace fUML;
@@ -42,6 +42,9 @@ SignalInstanceImpl::~SignalInstanceImpl()
 	
 }
 
+
+
+
 SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalInstanceImpl()
 {
 	//create copy of all Attributes
@@ -54,24 +57,23 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalIns
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  SignalInstanceImpl::copy() const
+std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
 {
-	return new SignalInstanceImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new SignalInstanceImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
@@ -80,7 +82,7 @@ std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

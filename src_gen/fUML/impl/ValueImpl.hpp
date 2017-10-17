@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -33,7 +39,7 @@ namespace fUML
 	{
 		public: 
 			ValueImpl(const ValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ValueImpl& operator=(ValueImpl const&) = delete;
@@ -41,6 +47,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ValueImpl();
+
+
 
 		public:
 			//destructor
@@ -51,33 +59,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::ValueSpecification> 
-			 specify()  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  const  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getTypes()  const  ;
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 hasTypes(std::shared_ptr<uml::Classifier>  type)  ;
+			virtual std::string objectId()  ;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 toString()  ;
+			virtual std::shared_ptr<uml::ValueSpecification> specify()  ;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 objectId()  ;
+			virtual std::string toString()  ;
 			
 			
 			

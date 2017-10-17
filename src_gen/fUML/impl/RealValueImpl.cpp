@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <sstream>
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
@@ -12,13 +12,13 @@
 #include "PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp";
+#include "PrimitiveValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ RealValueImpl::~RealValueImpl()
 	
 }
 
+
+
+
 RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 {
 	//create copy of all Attributes
@@ -61,16 +64,15 @@ RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  RealValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 {
-	return new RealValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new RealValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
@@ -79,9 +81,9 @@ std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void RealValueImpl::setValue (float _value)
+void RealValueImpl::setValue(float _value)
 {
 	m_value = _value;
 } 
@@ -94,8 +96,7 @@ float RealValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -108,26 +109,27 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- RealValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal(uml::UmlFactory::eInstance()->createLiteralReal());
+	std::shared_ptr<uml::LiteralReal> literal = uml::UmlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
+	//end of body
 }
 
-std::string
- RealValueImpl::toString() 
+std::string RealValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::ostringstream o;
      if (!(o << this->getValue()))
        return "";
      return o.str();
+	//end of body
 }
 
 //*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -38,7 +44,7 @@ namespace fUML
 	{
 		public: 
 			DataValueImpl(const DataValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			DataValueImpl& operator=(DataValueImpl const&) = delete;
@@ -46,6 +52,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DataValueImpl();
+
+
 
 		public:
 			//destructor
@@ -56,13 +64,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  ;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getTypes()  ;
+			virtual std::shared_ptr<fUML::Value> new_()  ;
 			
 			
 			

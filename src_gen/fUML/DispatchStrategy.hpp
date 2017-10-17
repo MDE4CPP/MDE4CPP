@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -60,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DispatchStrategy:virtual public SemanticStrategy	{
+	class DispatchStrategy:virtual public SemanticStrategy
+	{
 		public:
  			DispatchStrategy(const DispatchStrategy &) {}
 			DispatchStrategy& operator=(DispatchStrategy const&) = delete;
-	
+
 		protected:
 			DispatchStrategy(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DispatchStrategy() {}
@@ -79,18 +87,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> 
-			 retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 retrieveName()  = 0;
+			virtual std::string retrieveName()  = 0;
 			
 			
 			//*********************************

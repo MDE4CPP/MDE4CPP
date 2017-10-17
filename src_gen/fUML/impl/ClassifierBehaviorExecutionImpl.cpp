@@ -3,16 +3,16 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
 
 using namespace fUML;
@@ -52,6 +52,9 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 	
 }
 
+
+
+
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj):ClassifierBehaviorExecutionImpl()
 {
 	//create copy of all Attributes
@@ -68,16 +71,15 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const Classifie
 	m_objectActivation  = obj.getObjectActivation();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ClassifierBehaviorExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 {
-	return new ClassifierBehaviorExecutionImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ClassifierBehaviorExecutionImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
@@ -86,28 +88,25 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() c
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ClassifierBehaviorExecutionImpl::_startObjectBehavior() 
+void ClassifierBehaviorExecutionImpl::_startObjectBehavior() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ClassifierBehaviorExecutionImpl::terminate() 
+void ClassifierBehaviorExecutionImpl::terminate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

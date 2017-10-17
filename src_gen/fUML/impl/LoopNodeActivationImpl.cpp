@@ -3,22 +3,22 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "StructuredActivityNodeActivation.hpp";
+#include "StructuredActivityNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Values.hpp";
+#include "Values.hpp"
 
 
 using namespace fUML;
@@ -53,6 +53,9 @@ LoopNodeActivationImpl::~LoopNodeActivationImpl()
 	
 }
 
+
+
+
 LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & obj):LoopNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -66,30 +69,23 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	if(obj.getActivationGroup()!=nullptr)
 	{
-		m_activationGroup.reset(dynamic_cast<fUML::ActivityNodeActivationGroup*>(obj.getActivationGroup()->copy()));
+		m_activationGroup = std::dynamic_pointer_cast<fUML::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_activationGroup" << std::endl;
@@ -97,7 +93,7 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	std::shared_ptr<Bag<fUML::Values>> _bodyOutputListsList = obj.getBodyOutputLists();
 	for(std::shared_ptr<fUML::Values> _bodyOutputLists : *_bodyOutputListsList)
 	{
-		this->getBodyOutputLists()->add(std::shared_ptr<fUML::Values>(dynamic_cast<fUML::Values*>(_bodyOutputLists->copy())));
+		this->getBodyOutputLists()->add(std::shared_ptr<fUML::Values>(std::dynamic_pointer_cast<fUML::Values>(_bodyOutputLists->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_bodyOutputLists" << std::endl;
@@ -105,7 +101,7 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
@@ -113,12 +109,12 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 
 	
 	
-
 }
 
-ecore::EObject *  LoopNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
 {
-	return new LoopNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LoopNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
@@ -127,35 +123,31 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ActivityNode> 
- LoopNodeActivationImpl::makeLoopVariableList() 
+std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- LoopNodeActivationImpl::runBody() 
+void LoopNodeActivationImpl::runBody() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- LoopNodeActivationImpl::runLoopVariables() 
+void LoopNodeActivationImpl::runLoopVariables() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- LoopNodeActivationImpl::runTest() 
+bool LoopNodeActivationImpl::runTest() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -164,8 +156,7 @@ bool
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::Values> >
- LoopNodeActivationImpl::getBodyOutputLists() const
+std::shared_ptr< Bag<fUML::Values> > LoopNodeActivationImpl::getBodyOutputLists() const
 {
 
     return m_bodyOutputLists;

@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "Literalinteger.hpp"
@@ -12,13 +12,13 @@
 #include "PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp";
+#include "PrimitiveValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ IntegerValueImpl::~IntegerValueImpl()
 	
 }
 
+
+
+
 IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImpl()
 {
 	//create copy of all Attributes
@@ -61,16 +64,15 @@ IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImp
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  IntegerValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 {
-	return new IntegerValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new IntegerValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
@@ -79,9 +81,9 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void IntegerValueImpl::setValue (int _value)
+void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -94,8 +96,7 @@ int IntegerValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -107,27 +108,28 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- IntegerValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralInteger> literal(uml::UmlFactory::eInstance()->createLiteralInteger());
+	std::shared_ptr<uml::LiteralInteger> literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
 
     literal->setType(this->getType());
     literal->setValue(this->getValue());
 
     return literal;
+	//end of body
 }
 
-std::string
- IntegerValueImpl::toString() 
+std::string IntegerValueImpl::toString() 
 {
 	//generated from body annotation
 	    char buf [11];
     std::sprintf(buf, "%d", this->getValue());
     return std::string(buf);
+	//end of body
 }
 
 //*********************************

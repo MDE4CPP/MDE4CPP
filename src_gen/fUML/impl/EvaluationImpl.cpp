@@ -3,16 +3,16 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ EvaluationImpl::~EvaluationImpl()
 	
 }
 
+
+
+
 EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 {
 	//create copy of all Attributes
@@ -62,16 +65,15 @@ EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
 {
-	return new EvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
@@ -80,14 +82,13 @@ std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- EvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> EvaluationImpl::evaluate() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -41,12 +47,13 @@ namespace fUML
 		public:
  			SemanticVisitor(const SemanticVisitor &) {}
 			SemanticVisitor& operator=(SemanticVisitor const&) = delete;
-	
+
 		protected:
 			SemanticVisitor(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~SemanticVisitor() {}
@@ -56,13 +63,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 _endIsolation()  = 0;
+			virtual void _beginIsolation()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 _beginIsolation()  = 0;
+			virtual void _endIsolation()  = 0;
 			
 			
 			//*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -75,16 +81,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ConditionalNodeActivation:virtual public StructuredActivityNodeActivation	{
+	class ConditionalNodeActivation:virtual public StructuredActivityNodeActivation
+	{
 		public:
  			ConditionalNodeActivation(const ConditionalNodeActivation &) {}
 			ConditionalNodeActivation& operator=(ConditionalNodeActivation const&) = delete;
-	
+
 		protected:
 			ConditionalNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ConditionalNodeActivation() {}
@@ -94,18 +102,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> 
-			 getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  = 0;
 			
 			
 			//*********************************
@@ -117,13 +122,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ClauseActivation> >
-			 getClauseActivations() const = 0;
+			virtual std::shared_ptr< Bag<fUML::ClauseActivation> > getClauseActivations() const = 0;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::Clause> >
-			 getSelectedClauses() const = 0;
+			virtual std::shared_ptr< Bag<uml::Clause> > getSelectedClauses() const = 0;
 			
 			
 
@@ -138,12 +141,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::ClauseActivation> >
-			 m_clauseActivations;
+			std::shared_ptr< Bag<fUML::ClauseActivation> > m_clauseActivations;
 			/*!
 			 */
-				std::shared_ptr< Bag<uml::Clause> >
-			 m_selectedClauses;
+			std::shared_ptr< Bag<uml::Clause> > m_selectedClauses;
 			
 
 		public:

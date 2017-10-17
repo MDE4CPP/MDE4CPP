@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -95,16 +101,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class Object:virtual public ExtensionalValue	{
+	class Object:virtual public ExtensionalValue
+	{
 		public:
  			Object(const Object &) {}
 			Object& operator=(Object const&) = delete;
-	
+
 		protected:
 			Object(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Object() {}
@@ -114,38 +122,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
+			virtual void _register(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 dispatch(std::shared_ptr<uml::Operation>  operation)  = 0;
+			virtual void destroy()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual std::shared_ptr<fUML::Execution> dispatch(std::shared_ptr<uml::Operation>  operation)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 _register(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
+			virtual std::shared_ptr<fUML::Value> new_()  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
+			virtual void send(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 destroy()  = 0;
+			virtual void unregister(std::shared_ptr<fUML::EventAccepter>  accepter)  = 0;
 			
 			
 			//*********************************
@@ -157,16 +158,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::Classifier> >
-			 getTypes() const = 0;
-			
-			/*!
-			 */
 			virtual std::shared_ptr<fUML::ObjectActivation > getObjectActivation() const = 0;
 			
 			/*!
 			 */
 			virtual void setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _objectActivation_objectActivation) = 0;
+			/*!
+			 */
+			virtual std::shared_ptr< Bag<uml::Classifier> > getTypes() const = 0;
+			
 			
 
 		protected:
@@ -180,11 +180,10 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-				std::shared_ptr< Bag<uml::Classifier> >
-			 m_types;
+			std::shared_ptr<fUML::ObjectActivation > m_objectActivation;
 			/*!
 			 */
-			std::shared_ptr<fUML::ObjectActivation > m_objectActivation;
+			std::shared_ptr< Bag<uml::Classifier> > m_types;
 			
 
 		public:

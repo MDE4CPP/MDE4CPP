@@ -3,12 +3,12 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventActionActivation.hpp";
+#include "AcceptEventActionActivation.hpp"
 
-#include "EventAccepter.hpp";
+#include "EventAccepter.hpp"
 
 
 using namespace fUML;
@@ -40,6 +40,9 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 	
 }
 
+
+
+
 AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj):AcceptEventActionEventAccepterImpl()
 {
 	//create copy of all Attributes
@@ -52,16 +55,15 @@ AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const Acc
 	m_actionActivation  = obj.getActionActivation();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  AcceptEventActionEventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() const
 {
-	return new AcceptEventActionEventAccepterImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new AcceptEventActionEventAccepterImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const
@@ -70,7 +72,7 @@ std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass(
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************

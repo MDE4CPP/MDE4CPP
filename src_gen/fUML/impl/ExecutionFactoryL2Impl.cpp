@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include <Activity.hpp>
 #include <FUMLFactory.hpp>
 #include <ActivityParameterNode.hpp>
@@ -35,19 +35,19 @@
 #include "FlowFinalNode.hpp"
 
 //Forward declaration includes
-#include "Element.hpp";
+#include "Element.hpp"
 
-#include "ExecutionFactoryL1.hpp";
+#include "ExecutionFactoryL1.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp";
+#include "OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp";
+#include "SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp";
+#include "SemanticVisitor.hpp"
 
 
 using namespace fUML;
@@ -77,6 +77,19 @@ ExecutionFactoryL2Impl::~ExecutionFactoryL2Impl()
 	
 }
 
+
+//Additional constructor for the containments back reference
+			ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(std::weak_ptr<fUML::Locus > par_locus)
+			:ExecutionFactoryL2Impl()
+			{
+			    m_locus = par_locus;
+			}
+
+
+
+
+
+
 ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & obj):ExecutionFactoryL2Impl()
 {
 	//create copy of all Attributes
@@ -86,34 +99,27 @@ ExecutionFactoryL2Impl::ExecutionFactoryL2Impl(const ExecutionFactoryL2Impl & ob
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<uml::PrimitiveType> >
-	 _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new 	 Bag<uml::PrimitiveType> 
-	(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr< Bag<uml::PrimitiveType> > _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> >
-	 _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new 	 Bag<fUML::OpaqueBehaviorExecution> 
-	(*(obj.getPrimitiveBehaviorPrototypes().get())));
+	std::shared_ptr< Bag<fUML::OpaqueBehaviorExecution> > _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
+	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
 
-		std::shared_ptr< Bag<fUML::SemanticStrategy> >
-	 _strategies = obj.getStrategies();
-	m_strategies.reset(new 	 Bag<fUML::SemanticStrategy> 
-	(*(obj.getStrategies().get())));
+	std::shared_ptr< Bag<fUML::SemanticStrategy> > _strategies = obj.getStrategies();
+	m_strategies.reset(new Bag<fUML::SemanticStrategy>(*(obj.getStrategies().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutionFactoryL2Impl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutionFactoryL2Impl::copy() const
 {
-	return new ExecutionFactoryL2Impl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutionFactoryL2Impl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
@@ -122,14 +128,13 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL2Impl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::SemanticVisitor> 
- ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
+std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
 	//generated from body annotation
 	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
@@ -248,6 +253,7 @@ std::shared_ptr<fUML::SemanticVisitor>
     }
 
     return visitor;
+	//end of body
 }
 
 //*********************************

@@ -3,10 +3,10 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
 
 using namespace fUML;
@@ -36,6 +36,9 @@ EventAccepterImpl::~EventAccepterImpl()
 	
 }
 
+
+
+
 EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepterImpl()
 {
 	//create copy of all Attributes
@@ -46,16 +49,15 @@ EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepte
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  EventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
 {
-	return new EventAccepterImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new EventAccepterImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
@@ -64,21 +66,19 @@ std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void EventAccepterImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

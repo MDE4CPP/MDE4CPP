@@ -3,15 +3,15 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
  
 
 //Forward declaration includes
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ ForkedTokenImpl::~ForkedTokenImpl()
 	
 }
 
+
+
+
 ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ForkedTokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
 {
-	return new ForkedTokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ForkedTokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
@@ -78,9 +80,9 @@ std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void ForkedTokenImpl::setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)
+void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 {
 	m_baseTokenIsWithdrawn = _baseTokenIsWithdrawn;
 } 
@@ -90,7 +92,7 @@ bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const
 	return m_baseTokenIsWithdrawn;
 }
 
-void ForkedTokenImpl::setRemainingOffersCount (int _remainingOffersCount)
+void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 {
 	m_remainingOffersCount = _remainingOffersCount;
 } 
@@ -103,29 +105,28 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 // Operations
 //*********************************
-bool
- ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
+bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
 {
 	//generated from body annotation
 	return (this == otherToken.get());
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ForkedTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return this->getBaseToken()->getValue();
+	//end of body
 }
 
-bool
- ForkedTokenImpl::isControl() 
+bool ForkedTokenImpl::isControl() 
 {
 	//generated from body annotation
 	return this->getBaseToken()->isControl();
+	//end of body
 }
 
-void
- ForkedTokenImpl::withdraw() 
+void ForkedTokenImpl::withdraw() 
 {
 	//generated from body annotation
 	    if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
@@ -140,6 +141,7 @@ void
     if (this->getRemainingOffersCount() == 0) {
         TokenImpl::withdraw();
     }
+	//end of body
 }
 
 //*********************************

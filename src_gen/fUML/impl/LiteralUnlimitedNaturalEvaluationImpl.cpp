@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralUnlimitedNatural.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp";
+#include "LiteralEvaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ LiteralUnlimitedNaturalEvaluationImpl::~LiteralUnlimitedNaturalEvaluationImpl()
 	
 }
 
+
+
+
 LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj):LiteralUnlimitedNaturalEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl(con
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralUnlimitedNaturalEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalEvaluationImpl::copy() const
 {
-	return new LiteralUnlimitedNaturalEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralUnlimitedNaturalEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticClass() const
@@ -76,14 +78,13 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalEvaluationImpl::eStaticCla
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(getSpecification());
@@ -91,6 +92,7 @@ std::shared_ptr<fUML::Value>
     unlimitedNaturalValue->setType(this->getType("UnlimitedNatural"));
     unlimitedNaturalValue->setValue(literal->getValue());
     return unlimitedNaturalValue;
+	//end of body
 }
 
 //*********************************

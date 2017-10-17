@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -80,16 +86,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class LinkActionActivation:virtual public ActionActivation	{
+	class LinkActionActivation:virtual public ActionActivation
+	{
 		public:
  			LinkActionActivation(const LinkActionActivation &) {}
 			LinkActionActivation& operator=(LinkActionActivation const&) = delete;
-	
+
 		protected:
 			LinkActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~LinkActionActivation() {}
@@ -99,18 +107,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  = 0;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 endMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)  = 0;
+			virtual std::shared_ptr<uml::Association> getAssociation()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Association> 
-			 getAssociation()  = 0;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)  = 0;
 			
 			
 			//*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -80,16 +86,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DestroyObjectActionActivation:virtual public ActionActivation	{
+	class DestroyObjectActionActivation:virtual public ActionActivation
+	{
 		public:
  			DestroyObjectActionActivation(const DestroyObjectActionActivation &) {}
 			DestroyObjectActionActivation& operator=(DestroyObjectActionActivation const&) = delete;
-	
+
 		protected:
 			DestroyObjectActionActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DestroyObjectActionActivation() {}
@@ -99,13 +107,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  = 0;
+			virtual void destroyObject(std::shared_ptr<fUML::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  = 0;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Reference>  reference,std::shared_ptr<fUML::Link>  link)  = 0;
 			
 			
 			//*********************************

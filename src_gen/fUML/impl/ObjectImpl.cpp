@@ -3,36 +3,36 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "Class.hpp"
 #include "Classifier.hpp"
 
 //Forward declaration includes
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "EventAccepter.hpp";
+#include "EventAccepter.hpp"
 
-#include "Execution.hpp";
+#include "Execution.hpp"
 
-#include "ExtensionalValue.hpp";
+#include "ExtensionalValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "ObjectActivation.hpp";
+#include "ObjectActivation.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -71,6 +71,9 @@ ObjectImpl::~ObjectImpl()
 	
 }
 
+
+
+
 ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 {
 	//create copy of all Attributes
@@ -82,38 +85,35 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	
 	m_locus  = obj.getLocus();
 
-		std::shared_ptr< Bag<uml::Classifier> >
-	 _types = obj.getTypes();
-	m_types.reset(new 	 Bag<uml::Classifier> 
-	(*(obj.getTypes().get())));
+	std::shared_ptr< Bag<uml::Classifier> > _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
-		m_objectActivation.reset(dynamic_cast<fUML::ObjectActivation*>(obj.getObjectActivation()->copy()));
+		m_objectActivation = std::dynamic_pointer_cast<fUML::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
 	#endif
 
 	
-
 }
 
-ecore::EObject *  ObjectImpl::copy() const
+std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 {
-	return new ObjectImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ObjectImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
@@ -122,24 +122,23 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
         this->getObjectActivation()->_register(accepter);
     }
+	//end of body
 }
 
-void
- ObjectImpl::destroy() 
+void ObjectImpl::destroy() 
 {
 	//generated from body annotation
 	    if(this->getObjectActivation() != nullptr)
@@ -150,35 +149,35 @@ void
 
     this->getTypes()->clear();
     ExtensionalValueImpl::destroy();
+	//end of body
 }
 
-std::shared_ptr<fUML::Execution> 
- ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
 	return (std::dynamic_pointer_cast<DispatchStrategy>(this->getLocus()->getFactory()->getStrategy("dispatch")))->dispatch(std::shared_ptr<Object>(this, null_deleter()), operation);
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ObjectImpl::new_() 
+std::shared_ptr<fUML::Value> ObjectImpl::new_() 
 {
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createObject());
+	//end of body
 }
 
-void
- ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
         this->getObjectActivation()->send(signalInstance);
     }
+	//end of body
 }
 
-void
- ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	if(this->getObjectActivation() == nullptr)
@@ -189,16 +188,17 @@ void
     }
 
     this->getObjectActivation()->startBehavior(classifier, inputs);
+	//end of body
 }
 
-void
- ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
+void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
         this->getObjectActivation()->unregister(accepter);
     }
+	//end of body
 }
 
 //*********************************
@@ -214,8 +214,7 @@ void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::ObjectActivation> _ob
     m_objectActivation = _objectActivation;
 }
 
-	std::shared_ptr< Bag<uml::Classifier> >
- ObjectImpl::getTypes() const
+std::shared_ptr< Bag<uml::Classifier> > ObjectImpl::getTypes() const
 {
 
     return m_types;

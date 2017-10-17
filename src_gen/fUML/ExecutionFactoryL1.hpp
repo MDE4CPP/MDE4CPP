@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -70,16 +76,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ExecutionFactoryL1:virtual public ExecutionFactory	{
+	class ExecutionFactoryL1:virtual public ExecutionFactory
+	{
 		public:
  			ExecutionFactoryL1(const ExecutionFactoryL1 &) {}
 			ExecutionFactoryL1& operator=(ExecutionFactoryL1 const&) = delete;
-	
+
 		protected:
 			ExecutionFactoryL1(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ExecutionFactoryL1() {}
@@ -89,8 +97,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::SemanticVisitor> 
-			 instantiateVisitor(std::shared_ptr<uml::Element>  element)  = 0;
+			virtual std::shared_ptr<fUML::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element)  = 0;
 			
 			
 			//*********************************

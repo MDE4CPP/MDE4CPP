@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -70,12 +76,13 @@ namespace fUML
 		public:
  			Locus(const Locus &) {}
 			Locus& operator=(Locus const&) = delete;
-	
+
 		protected:
 			Locus(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Locus() {}
@@ -85,38 +92,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual void add(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignExecutor(std::shared_ptr<fUML::Executor>  executor)  = 0;
+			virtual void assignExecutor(std::shared_ptr<fUML::Executor>  executor)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  = 0;
+			virtual void assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> >
-			 retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  = 0;
+			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 add(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
+			virtual std::shared_ptr<fUML::Object> instantiate(std::shared_ptr<uml::Class>  type)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 remove(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
+			virtual void remove(std::shared_ptr<fUML::ExtensionalValue>  value)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Object> 
-			 instantiate(std::shared_ptr<uml::Class>  type)  = 0;
+			virtual std::shared_ptr<Bag<fUML::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)  = 0;
 			
 			
 			//*********************************
@@ -135,16 +135,15 @@ namespace fUML
 			virtual void setExecutor(std::shared_ptr<fUML::Executor> _executor_executor) = 0;
 			/*!
 			 */
+			virtual std::shared_ptr< Bag<fUML::ExtensionalValue> > getExtensionalValues() const = 0;
+			
+			/*!
+			 */
 			virtual std::shared_ptr<fUML::ExecutionFactory > getFactory() const = 0;
 			
 			/*!
 			 */
 			virtual void setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory_factory) = 0;
-			/*!
-			 */
-			virtual 	std::shared_ptr< Bag<fUML::ExtensionalValue> >
-			 getExtensionalValues() const = 0;
-			
 			
 
 		protected:
@@ -161,11 +160,10 @@ namespace fUML
 			std::shared_ptr<fUML::Executor > m_executor;
 			/*!
 			 */
-			std::shared_ptr<fUML::ExecutionFactory > m_factory;
+			std::shared_ptr< Bag<fUML::ExtensionalValue> > m_extensionalValues;
 			/*!
 			 */
-				std::shared_ptr< Bag<fUML::ExtensionalValue> >
-			 m_extensionalValues;
+			std::shared_ptr<fUML::ExecutionFactory > m_factory;
 			
 
 		public:

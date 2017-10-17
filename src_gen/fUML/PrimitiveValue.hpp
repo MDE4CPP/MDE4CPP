@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -50,16 +56,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class PrimitiveValue:virtual public Value	{
+	class PrimitiveValue:virtual public Value
+	{
 		public:
  			PrimitiveValue(const PrimitiveValue &) {}
 			PrimitiveValue& operator=(PrimitiveValue const&) = delete;
-	
+
 		protected:
 			PrimitiveValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~PrimitiveValue() {}
@@ -69,8 +77,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getTypes()  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
 			
 			
 			//*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -60,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DataValue:virtual public CompoundValue	{
+	class DataValue:virtual public CompoundValue
+	{
 		public:
  			DataValue(const DataValue &) {}
 			DataValue& operator=(DataValue const&) = delete;
-	
+
 		protected:
 			DataValue(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DataValue() {}
@@ -79,13 +87,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes()  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> >
-			 getTypes()  = 0;
+			virtual std::shared_ptr<fUML::Value> new_()  = 0;
 			
 			
 			//*********************************

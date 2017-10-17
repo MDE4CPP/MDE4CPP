@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ namespace fUML
 	{
 		public: 
 			PinActivationImpl(const PinActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			PinActivationImpl& operator=(PinActivationImpl const&) = delete;
@@ -42,6 +48,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			PinActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -52,13 +60,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
 			
 			
 			

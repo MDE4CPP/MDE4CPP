@@ -3,24 +3,24 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventActionEventAccepter.hpp";
+#include "AcceptEventActionEventAccepter.hpp"
 
-#include "ActionActivation.hpp";
+#include "ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "PinActivation.hpp";
+#include "PinActivation.hpp"
 
-#include "SignalInstance.hpp";
+#include "SignalInstance.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;
@@ -52,6 +52,9 @@ AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
 	
 }
 
+
+
+
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj):AcceptEventActionActivationImpl()
 {
 	//create copy of all Attributes
@@ -68,42 +71,35 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
-		std::shared_ptr< Bag<fUML::PinActivation> >
-	 _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new 	 Bag<fUML::PinActivation> 
-	(*(obj.getPinActivation().get())));
+	std::shared_ptr< Bag<fUML::PinActivation> > _pinActivation = obj.getPinActivation();
+	m_pinActivation.reset(new Bag<fUML::PinActivation>(*(obj.getPinActivation().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  AcceptEventActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
 {
-	return new AcceptEventActionActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new AcceptEventActionActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() const
@@ -112,9 +108,9 @@ std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() c
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void AcceptEventActionActivationImpl::setWaiting (bool _waiting)
+void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 {
 	m_waiting = _waiting;
 } 
@@ -127,15 +123,13 @@ bool AcceptEventActionActivationImpl::isWaiting() const
 //*********************************
 // Operations
 //*********************************
-void
- AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
+bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

@@ -3,10 +3,10 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -41,6 +41,9 @@ ValuesImpl::~ValuesImpl()
 	
 }
 
+
+
+
 ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 {
 	//create copy of all Attributes
@@ -50,22 +53,19 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 
 	//copy references with no containment (soft copy)
 	
-		std::shared_ptr< Bag<fUML::Value> >
-	 _values = obj.getValues();
-	m_values.reset(new 	 Bag<fUML::Value> 
-	(*(obj.getValues().get())));
+	std::shared_ptr< Bag<fUML::Value> > _values = obj.getValues();
+	m_values.reset(new Bag<fUML::Value>(*(obj.getValues().get())));
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ValuesImpl::copy() const
+std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
 {
-	return new ValuesImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ValuesImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
@@ -74,7 +74,7 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -84,8 +84,7 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
-	std::shared_ptr< Bag<fUML::Value> >
- ValuesImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > ValuesImpl::getValues() const
 {
 
     return m_values;

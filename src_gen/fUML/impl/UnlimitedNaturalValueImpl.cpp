@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "LiteralUnlimitedNatural.hpp"
@@ -11,13 +11,13 @@
 #include "PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp";
+#include "PrimitiveValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -47,6 +47,9 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 	
 }
 
+
+
+
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj):UnlimitedNaturalValueImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValue
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  UnlimitedNaturalValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
 {
-	return new UnlimitedNaturalValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new UnlimitedNaturalValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
@@ -78,9 +80,9 @@ std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void UnlimitedNaturalValueImpl::setValue (int _value)
+void UnlimitedNaturalValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -93,8 +95,7 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -105,32 +106,33 @@ bool
     }
 
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- UnlimitedNaturalValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralUnlimitedNatural> literal(uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural());
+	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::shared_ptr<uml::Class>());
     literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
+	//end of body
 }
 
-std::string
- UnlimitedNaturalValueImpl::toString() 
+std::string UnlimitedNaturalValueImpl::toString() 
 {
 	//generated from body annotation
 	    std::string stringValue = "*";
 
     if(this->getValue() >= 0)
     {
-        IntegerValue * integerValue = FUMLFactory::eInstance()->createIntegerValue();
+        auto integerValue = FUMLFactory::eInstance()->createIntegerValue();
         integerValue->setValue(this->getValue());
         stringValue = integerValue->toString();
     }
 
     return stringValue;
+	//end of body
 }
 
 //*********************************

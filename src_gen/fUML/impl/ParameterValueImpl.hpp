@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -35,7 +41,7 @@ virtual public ParameterValue
 	{
 		public: 
 			ParameterValueImpl(const ParameterValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ParameterValueImpl& operator=(ParameterValueImpl const&) = delete;
@@ -43,6 +49,8 @@ virtual public ParameterValue
 		protected:
 			friend class FUMLFactoryImpl;
 			ParameterValueImpl();
+
+
 
 		public:
 			//destructor
@@ -70,8 +78,7 @@ virtual public ParameterValue
 			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Value> >
-			 getValues() const ;
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
 			
 							
 			

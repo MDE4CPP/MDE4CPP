@@ -1261,8 +1261,9 @@ void FUMLPackageImpl::initializePackageContents()
  	// Initialize classes and features; add operations and parameters
 	// Begin Class AcceptEventActionActivation
 	initEClass(acceptEventActionActivationEClass, nullptr, "AcceptEventActionActivation", false, false, true);
-	initEAttribute(getAcceptEventActionActivation_Waiting(),ecore::EcorePackage::eInstance()->getEBoolean(),"waiting","",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getAcceptEventActionActivation_EventAccepter(),getAcceptEventActionEventAccepter(),nullptr,"eventAccepter","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getAcceptEventActionActivation_Waiting(),ecore::EcorePackage::eInstance()->getEBoolean(),"waiting","",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getAcceptEventActionActivation_EventAccepter(),getAcceptEventActionEventAccepter(),nullptr,"eventAccepter","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getAcceptEventActionActivation___Accept__SignalInstance(),nullptr, "accept", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "signalInstance",0,1, true,true);
@@ -1276,15 +1277,16 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class AcceptEventActionEventAccepter
 	initEClass(acceptEventActionEventAccepterEClass, nullptr, "AcceptEventActionEventAccepter", false, false, true);
 	
-	initEReference(getAcceptEventActionEventAccepter_ActionActivation(),getAcceptEventActionActivation(),nullptr,"actionActivation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getAcceptEventActionEventAccepter_ActionActivation(),getAcceptEventActionActivation(),nullptr,"actionActivation","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class AcceptEventActionEventAccepter
 
 	// Begin Class ActionActivation
 	initEClass(actionActivationEClass, nullptr, "ActionActivation", true, false, true);
-	initEAttribute(getActionActivation_Firing(),ecore::EcorePackage::eInstance()->getEBoolean(),"firing","false",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getActionActivation_PinActivation(),getPinActivation(),nullptr,"pinActivation","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getActionActivation_Firing(),ecore::EcorePackage::eInstance()->getEBoolean(),"firing","false",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getActionActivation_PinActivation(),getPinActivation(),nullptr,"pinActivation","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActionActivation___AddOutgoingEdge__ActivityEdgeInstance(),nullptr, "addOutgoingEdge", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "edge",0,1, true,true);
@@ -1346,11 +1348,11 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ActivityEdgeInstance
 	initEClass(activityEdgeInstanceEClass, nullptr, "ActivityEdgeInstance", false, false, true);
 	
-	initEReference(getActivityEdgeInstance_Edge(),uml::UmlPackage::eInstance()->getActivityEdge(),nullptr,"edge","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdgeInstance_Group(),getActivityNodeActivationGroup(),nullptr,"group","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdgeInstance_Offers(),getOffer(),nullptr,"offers","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdgeInstance_Source(),getActivityNodeActivation(),nullptr,"source","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityEdgeInstance_Target(),getActivityNodeActivation(),nullptr,"target","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdgeInstance_Edge(),uml::UmlPackage::eInstance()->getActivityEdge(),nullptr,"edge","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdgeInstance_Group(),getActivityNodeActivationGroup(),nullptr,"group","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdgeInstance_Offers(),getOffer(),nullptr,"offers","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdgeInstance_Source(),getActivityNodeActivation(),nullptr,"source","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityEdgeInstance_Target(),getActivityNodeActivation(),nullptr,"target","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActivityEdgeInstance___CountOfferedValue(),ecore::EcorePackage::eInstance()->getEInt(), "countOfferedValue", 1, 1, true,false );
 	
@@ -1372,7 +1374,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ActivityExecution
 	initEClass(activityExecutionEClass, nullptr, "ActivityExecution", false, false, true);
 	
-	initEReference(getActivityExecution_ActivationGroup(),getActivityNodeActivationGroup(),nullptr,"activationGroup","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityExecution_ActivationGroup(),getActivityNodeActivationGroup(),nullptr,"activationGroup","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getActivityExecution___Execute(),nullptr, "execute", 1, 1, true,false );
 	
@@ -1395,12 +1397,13 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class ActivityNodeActivation
 	initEClass(activityNodeActivationEClass, nullptr, "ActivityNodeActivation", true, false, true);
-	initEAttribute(getActivityNodeActivation_Running(),ecore::EcorePackage::eInstance()->getEBoolean(),"running","",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getActivityNodeActivation_Group(),getActivityNodeActivationGroup(),nullptr,"group","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNodeActivation_HeldTokens(),getToken(),nullptr,"heldTokens","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivityNodeActivation_IncomingEdges(),getActivityEdgeInstance(),nullptr,"incomingEdges","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNodeActivation_Node(),uml::UmlPackage::eInstance()->getActivityNode(),nullptr,"node","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNodeActivation_OutgoingEdges(),getActivityEdgeInstance(),nullptr,"outgoingEdges","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getActivityNodeActivation_Running(),ecore::EcorePackage::eInstance()->getEBoolean(),"running","",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getActivityNodeActivation_Group(),getActivityNodeActivationGroup(),nullptr,"group","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNodeActivation_HeldTokens(),getToken(),getToken_Holder(),"heldTokens","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityNodeActivation_IncomingEdges(),getActivityEdgeInstance(),nullptr,"incomingEdges","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNodeActivation_Node(),uml::UmlPackage::eInstance()->getActivityNode(),nullptr,"node","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNodeActivation_OutgoingEdges(),getActivityEdgeInstance(),nullptr,"outgoingEdges","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActivityNodeActivation___AddIncomingEdge__ActivityEdgeInstance(),nullptr, "addIncomingEdge", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "edge",0,1, true,true);
@@ -1467,11 +1470,11 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ActivityNodeActivationGroup
 	initEClass(activityNodeActivationGroupEClass, nullptr, "ActivityNodeActivationGroup", false, false, true);
 	
-	initEReference(getActivityNodeActivationGroup_ActivityExecution(),getActivityExecution(),nullptr,"activityExecution","",0,1, nullptr , false,false, true, false, true, false, true, false,true);
-	initEReference(getActivityNodeActivationGroup_ContainingNodeActivation(),getStructuredActivityNodeActivation(),nullptr,"containingNodeActivation","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getActivityNodeActivationGroup_EdgeInstances(),getActivityEdgeInstance(),nullptr,"edgeInstances","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivityNodeActivationGroup_NodeActivations(),getActivityNodeActivation(),nullptr,"nodeActivations","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getActivityNodeActivationGroup_SuspendedActivations(),getActivityNodeActivation(),nullptr,"suspendedActivations","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNodeActivationGroup_ActivityExecution(),getActivityExecution(),nullptr,"activityExecution","",0,1, false,false, true, false, true, false, true, false,true);
+	initEReference(getActivityNodeActivationGroup_ContainingNodeActivation(),getStructuredActivityNodeActivation(),nullptr,"containingNodeActivation","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getActivityNodeActivationGroup_EdgeInstances(),getActivityEdgeInstance(),nullptr,"edgeInstances","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityNodeActivationGroup_NodeActivations(),getActivityNodeActivation(),nullptr,"nodeActivations","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getActivityNodeActivationGroup_SuspendedActivations(),getActivityNodeActivation(),nullptr,"suspendedActivations","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getActivityNodeActivationGroup___Activate__ActivityNode_ActivityEdge(),nullptr, "activate", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "nodes",0,1, true,true);
@@ -1546,7 +1549,8 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class BooleanValue
 	initEClass(booleanValueEClass, nullptr, "BooleanValue", false, false, true);
-	initEAttribute(getBooleanValue_Value(),ecore::EcorePackage::eInstance()->getEBoolean(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getBooleanValue_Value(),ecore::EcorePackage::eInstance()->getEBoolean(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getBooleanValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -1561,7 +1565,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class CallActionActivation
 	initEClass(callActionActivationEClass, nullptr, "CallActionActivation", true, false, true);
 	
-	initEReference(getCallActionActivation_CallExecutions(),getExecution(),nullptr,"callExecutions","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getCallActionActivation_CallExecutions(),getExecution(),nullptr,"callExecutions","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCallActionActivation___DoAction(),nullptr, "doAction", 1, 1, true,false );
 	
@@ -1618,9 +1622,9 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ClassifierBehaviorExecution
 	initEClass(classifierBehaviorExecutionEClass, nullptr, "ClassifierBehaviorExecution", false, false, true);
 	
-	initEReference(getClassifierBehaviorExecution_Classifier(),uml::UmlPackage::eInstance()->getClass(),nullptr,"classifier","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClassifierBehaviorExecution_Execution(),getExecution(),nullptr,"execution","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClassifierBehaviorExecution_ObjectActivation(),getObjectActivation(),nullptr,"objectActivation","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifierBehaviorExecution_Classifier(),uml::UmlPackage::eInstance()->getClass(),nullptr,"classifier","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifierBehaviorExecution_Execution(),getExecution(),nullptr,"execution","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClassifierBehaviorExecution_ObjectActivation(),getObjectActivation(),nullptr,"objectActivation","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getClassifierBehaviorExecution____startObjectBehavior(),nullptr, "_startObjectBehavior", 1, 1, true,false );
 	
@@ -1650,8 +1654,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ClauseActivation
 	initEClass(clauseActivationEClass, nullptr, "ClauseActivation", false, false, true);
 	
-	initEReference(getClauseActivation_Clause(),uml::UmlPackage::eInstance()->getClause(),nullptr,"clause","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getClauseActivation_ConditionalNodeActivation(),getConditionalNodeActivation(),nullptr,"conditionalNodeActivation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getClauseActivation_Clause(),uml::UmlPackage::eInstance()->getClause(),nullptr,"clause","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getClauseActivation_ConditionalNodeActivation(),getConditionalNodeActivation(),nullptr,"conditionalNodeActivation","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getClauseActivation___GetDecision(),getBooleanValue(), "getDecision", 0, 1, true,false );
 	
@@ -1687,7 +1691,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class CompoundValue
 	initEClass(compoundValueEClass, nullptr, "CompoundValue", true, false, true);
 	
-	initEReference(getCompoundValue_FeatureValues(),getFeatureValue(),nullptr,"featureValues","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getCompoundValue_FeatureValues(),getFeatureValue(),nullptr,"featureValues","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getCompoundValue___AssignFeatureValue__StructuralFeature_EInt(),nullptr, "assignFeatureValue", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "feature",0,1, true,true);
@@ -1713,8 +1717,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ConditionalNodeActivation
 	initEClass(conditionalNodeActivationEClass, nullptr, "ConditionalNodeActivation", false, false, true);
 	
-	initEReference(getConditionalNodeActivation_ClauseActivations(),getClauseActivation(),nullptr,"clauseActivations","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getConditionalNodeActivation_SelectedClauses(),uml::UmlPackage::eInstance()->getClause(),nullptr,"selectedClauses","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getConditionalNodeActivation_ClauseActivations(),getClauseActivation(),nullptr,"clauseActivations","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getConditionalNodeActivation_SelectedClauses(),uml::UmlPackage::eInstance()->getClause(),nullptr,"selectedClauses","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getConditionalNodeActivation___GetClauseActivation__Clause(),getClauseActivation(), "getClauseActivation", 1, 1, true,false );
 	addEParameter(op ,uml::UmlPackage::eInstance()->getClause()  , "clause",0,1, true,true);
@@ -1782,7 +1786,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class DataValue
 	initEClass(dataValueEClass, nullptr, "DataValue", false, false, true);
 	
-	initEReference(getDataValue_Type(),uml::UmlPackage::eInstance()->getDataType(),nullptr,"type","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getDataValue_Type(),uml::UmlPackage::eInstance()->getDataType(),nullptr,"type","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getDataValue___GetTypes(),uml::UmlPackage::eInstance()->getClassifier(), "getTypes", 0, -1, true,false );
 	
@@ -1794,7 +1798,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class DecisionNodeActivation
 	initEClass(decisionNodeActivationEClass, nullptr, "DecisionNodeActivation", false, false, true);
 	
-	initEReference(getDecisionNodeActivation_DecisionInputExecution(),getExecution(),nullptr,"decisionInputExecution","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getDecisionNodeActivation_DecisionInputExecution(),getExecution(),nullptr,"decisionInputExecution","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getDecisionNodeActivation___ExecuteDecisionInputBehavior__Value_Value(),getValue(), "executeDecisionInputBehavior", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "inputValue",0,1, true,true);
@@ -1871,8 +1875,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class EnumerationValue
 	initEClass(enumerationValueEClass, nullptr, "EnumerationValue", false, false, true);
 	
-	initEReference(getEnumerationValue_Literal(),uml::UmlPackage::eInstance()->getEnumerationLiteral(),nullptr,"literal","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getEnumerationValue_Type(),uml::UmlPackage::eInstance()->getEnumeration(),nullptr,"type","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getEnumerationValue_Literal(),uml::UmlPackage::eInstance()->getEnumerationLiteral(),nullptr,"literal","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getEnumerationValue_Type(),uml::UmlPackage::eInstance()->getEnumeration(),nullptr,"type","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getEnumerationValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -1891,8 +1895,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Evaluation
 	initEClass(evaluationEClass, nullptr, "Evaluation", true, false, true);
 	
-	initEReference(getEvaluation_Locus(),getLocus(),nullptr,"locus","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getEvaluation_Specification(),uml::UmlPackage::eInstance()->getValueSpecification(),nullptr,"specification","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getEvaluation_Locus(),getLocus(),nullptr,"locus","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getEvaluation_Specification(),uml::UmlPackage::eInstance()->getValueSpecification(),nullptr,"specification","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getEvaluation___Evaluate(),getValue(), "evaluate", 0, 1, true,false );
 	
@@ -1922,8 +1926,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Execution
 	initEClass(executionEClass, nullptr, "Execution", true, false, true);
 	
-	initEReference(getExecution_Context(),getObject(),nullptr,"context","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExecution_ParameterValues(),getParameterValue(),nullptr,"parameterValues","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getExecution_Context(),getObject(),nullptr,"context","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecution_ParameterValues(),getParameterValue(),nullptr,"parameterValues","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getExecution___Execute(),nullptr, "execute", 1, 1, true,false );
 	
@@ -1947,10 +1951,10 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ExecutionFactory
 	initEClass(executionFactoryEClass, nullptr, "ExecutionFactory", true, false, true);
 	
-	initEReference(getExecutionFactory_BuiltInTypes(),uml::UmlPackage::eInstance()->getPrimitiveType(),nullptr,"builtInTypes","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExecutionFactory_Locus(),getLocus(),getLocus_Factory(),"locus","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExecutionFactory_PrimitiveBehaviorPrototypes(),getOpaqueBehaviorExecution(),nullptr,"primitiveBehaviorPrototypes","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExecutionFactory_Strategies(),getSemanticStrategy(),nullptr,"strategies","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionFactory_BuiltInTypes(),uml::UmlPackage::eInstance()->getPrimitiveType(),nullptr,"builtInTypes","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionFactory_Locus(),getLocus(),getLocus_Factory(),"locus","",0,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionFactory_PrimitiveBehaviorPrototypes(),getOpaqueBehaviorExecution(),nullptr,"primitiveBehaviorPrototypes","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionFactory_Strategies(),getSemanticStrategy(),nullptr,"strategies","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExecutionFactory___AddBuiltInType__PrimitiveType(),nullptr, "addBuiltInType", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "type",0,1, true,true);
@@ -2019,7 +2023,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Executor
 	initEClass(executorEClass, nullptr, "Executor", false, false, true);
 	
-	initEReference(getExecutor_Locus(),getLocus(),nullptr,"locus","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutor_Locus(),getLocus(),nullptr,"locus","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExecutor___Evaluate__ValueSpecification(),getValue(), "evaluate", 1, 1, true,false );
 	addEParameter(op ,uml::UmlPackage::eInstance()->getValueSpecification()  , "specification",0,1, true,true);
@@ -2039,7 +2043,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ExpansionActivationGroup
 	initEClass(expansionActivationGroupEClass, nullptr, "ExpansionActivationGroup", false, false, true);
 	
-	initEReference(getExpansionActivationGroup_RegionActivation(),getExpansionRegionActivation(),nullptr,"regionActivation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionActivationGroup_RegionActivation(),getExpansionRegionActivation(),nullptr,"regionActivation","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ExpansionActivationGroup
@@ -2056,9 +2060,9 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ExpansionRegionActivation
 	initEClass(expansionRegionActivationEClass, nullptr, "ExpansionRegionActivation", false, false, true);
 	
-	initEReference(getExpansionRegionActivation_ActivationGroups(),getExpansionActivationGroup(),nullptr,"activationGroups","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExpansionRegionActivation_InputExpansionTokens(),getTokenSet(),nullptr,"inputExpansionTokens","",1,-1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getExpansionRegionActivation_InputTokens(),getTokenSet(),nullptr,"inputTokens","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionRegionActivation_ActivationGroups(),getExpansionActivationGroup(),nullptr,"activationGroups","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionRegionActivation_InputExpansionTokens(),getTokenSet(),nullptr,"inputExpansionTokens","",1,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExpansionRegionActivation_InputTokens(),getTokenSet(),nullptr,"inputTokens","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExpansionRegionActivation___DoStructuredActivity(),nullptr, "doStructuredActivity", 1, 1, true,false );
 	
@@ -2076,7 +2080,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ExtensionalValue
 	initEClass(extensionalValueEClass, nullptr, "ExtensionalValue", true, false, true);
 	
-	initEReference(getExtensionalValue_Locus(),getLocus(),nullptr,"locus","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getExtensionalValue_Locus(),getLocus(),nullptr,"locus","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExtensionalValue___Destroy(),nullptr, "destroy", 1, 1, true,false );
 	
@@ -2115,9 +2119,10 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class FeatureValue
 	initEClass(featureValueEClass, nullptr, "FeatureValue", false, false, true);
-	initEAttribute(getFeatureValue_Position(),ecore::EcorePackage::eInstance()->getEInt(),"position","0",0,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getFeatureValue_Feature(),uml::UmlPackage::eInstance()->getStructuralFeature(),nullptr,"feature","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getFeatureValue_Values(),getValue(),nullptr,"values","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEAttribute(getFeatureValue_Position(),ecore::EcorePackage::eInstance()->getEInt(),"position","0",0,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getFeatureValue_Feature(),uml::UmlPackage::eInstance()->getStructuralFeature(),nullptr,"feature","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getFeatureValue_Values(),getValue(),nullptr,"values","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getFeatureValue___HasEqualValues__FeatureValue(),ecore::EcorePackage::eInstance()->getEBoolean(), "hasEqualValues", 1, 1, true,false );
 	addEParameter(op ,getFeatureValue()  , "other",0,1, true,true);
@@ -2156,8 +2161,10 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class ForkedToken
 	initEClass(forkedTokenEClass, nullptr, "ForkedToken", false, false, true);
-	initEAttribute(getForkedToken_BaseTokenIsWithdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(),"baseTokenIsWithdrawn","",1,1, nullptr, false,false, true, false, false, true, false, false);initEAttribute(getForkedToken_RemainingOffersCount(),ecore::EcorePackage::eInstance()->getEInt(),"remainingOffersCount","",1,1, nullptr, false,false, true, false, false, true, false, false);
-	initEReference(getForkedToken_BaseToken(),getToken(),nullptr,"baseToken","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEAttribute(getForkedToken_BaseTokenIsWithdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(),"baseTokenIsWithdrawn","",1,1, false,false, true, false, false, true, false, false);
+	initEAttribute(getForkedToken_RemainingOffersCount(),ecore::EcorePackage::eInstance()->getEInt(),"remainingOffersCount","",1,1, false,false, true, false, false, true, false, false);
+	
+	initEReference(getForkedToken_BaseToken(),getToken(),nullptr,"baseToken","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getForkedToken___Equals__Token(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getToken()  , "otherToken",0,1, true,true);
@@ -2213,7 +2220,8 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class IntegerValue
 	initEClass(integerValueEClass, nullptr, "IntegerValue", false, false, true);
-	initEAttribute(getIntegerValue_Value(),ecore::EcorePackage::eInstance()->getEInt(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getIntegerValue_Value(),ecore::EcorePackage::eInstance()->getEInt(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getIntegerValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -2244,7 +2252,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Link
 	initEClass(linkEClass, nullptr, "Link", false, false, true);
 	
-	initEReference(getLink_Type(),uml::UmlPackage::eInstance()->getAssociation(),nullptr,"type","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getLink_Type(),uml::UmlPackage::eInstance()->getAssociation(),nullptr,"type","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getLink___AddTo__Locus(),nullptr, "addTo", 0, 1, true,true );
 	addEParameter(op ,nullptr  , "locus",0,1, true,true);
@@ -2346,9 +2354,9 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Locus
 	initEClass(locusEClass, nullptr, "Locus", false, false, true);
 	
-	initEReference(getLocus_Executor(),getExecutor(),nullptr,"executor","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getLocus_ExtensionalValues(),getExtensionalValue(),nullptr,"extensionalValues","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getLocus_Factory(),getExecutionFactory(),getExecutionFactory_Locus(),"factory","",1,1, nullptr , false,false, true, true, true, false, true, false,true);
+	initEReference(getLocus_Executor(),getExecutor(),nullptr,"executor","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getLocus_ExtensionalValues(),getExtensionalValue(),nullptr,"extensionalValues","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getLocus_Factory(),getExecutionFactory(),getExecutionFactory_Locus(),"factory","",1,1, false,false, true, true, true, false, true, false,true);
 	
 	op = initEOperation(getLocus___Add__ExtensionalValue(),nullptr, "add", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "value",0,1, true,true);
@@ -2378,7 +2386,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class LoopNodeActivation
 	initEClass(loopNodeActivationEClass, nullptr, "LoopNodeActivation", false, false, true);
 	
-	initEReference(getLoopNodeActivation_BodyOutputLists(),getValues(),nullptr,"bodyOutputLists","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getLoopNodeActivation_BodyOutputLists(),getValues(),nullptr,"bodyOutputLists","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getLoopNodeActivation___MakeLoopVariableList(),uml::UmlPackage::eInstance()->getActivityNode(), "makeLoopVariableList", 1, 1, true,false );
 	
@@ -2401,8 +2409,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Object
 	initEClass(objectEClass, nullptr, "Object", false, false, true);
 	
-	initEReference(getObject_ObjectActivation(),getObjectActivation(),nullptr,"objectActivation","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getObject_Types(),uml::UmlPackage::eInstance()->getClassifier(),nullptr,"types","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getObject_ObjectActivation(),getObjectActivation(),nullptr,"objectActivation","",0,1, false,false, true, true, true, false, true, false,false);
+	initEReference(getObject_Types(),uml::UmlPackage::eInstance()->getClassifier(),nullptr,"types","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getObject____register__EventAccepter(),nullptr, "_register", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "accepter",0,1, true,true);
@@ -2430,10 +2438,10 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ObjectActivation
 	initEClass(objectActivationEClass, nullptr, "ObjectActivation", false, false, true);
 	
-	initEReference(getObjectActivation_ClassifierBehaviorExecutions(),getClassifierBehaviorExecution(),nullptr,"classifierBehaviorExecutions","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getObjectActivation_EventPool(),getSignalInstance(),nullptr,"eventPool","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
-	initEReference(getObjectActivation_Object(),getObject(),nullptr,"object","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getObjectActivation_WaitingEventAccepters(),getEventAccepter(),nullptr,"waitingEventAccepters","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getObjectActivation_ClassifierBehaviorExecutions(),getClassifierBehaviorExecution(),nullptr,"classifierBehaviorExecutions","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getObjectActivation_EventPool(),getSignalInstance(),nullptr,"eventPool","",0,-1, false,false, true, true, true, false, true, false,false);
+	initEReference(getObjectActivation_Object(),getObject(),nullptr,"object","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getObjectActivation_WaitingEventAccepters(),getEventAccepter(),nullptr,"waitingEventAccepters","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getObjectActivation____register__EventAccepter(),nullptr, "_register", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "accepter",0,1, true,true);
@@ -2464,7 +2472,8 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class ObjectNodeActivation
 	initEClass(objectNodeActivationEClass, nullptr, "ObjectNodeActivation", true, false, true);
-	initEAttribute(getObjectNodeActivation_OfferedTokenCount(),ecore::EcorePackage::eInstance()->getEInt(),"offeredTokenCount","0",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getObjectNodeActivation_OfferedTokenCount(),ecore::EcorePackage::eInstance()->getEInt(),"offeredTokenCount","0",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getObjectNodeActivation___AddToken__Token(),nullptr, "addToken", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "token",0,1, true,true);
@@ -2497,7 +2506,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ObjectToken
 	initEClass(objectTokenEClass, nullptr, "ObjectToken", false, false, true);
 	
-	initEReference(getObjectToken_Value(),getValue(),nullptr,"value","",0,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getObjectToken_Value(),getValue(),nullptr,"value","",0,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getObjectToken___Equals__Token(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getToken()  , "other",0,1, true,true);
@@ -2510,7 +2519,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Offer
 	initEClass(offerEClass, nullptr, "Offer", false, false, true);
 	
-	initEReference(getOffer_OfferedTokens(),getToken(),nullptr,"offeredTokens","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getOffer_OfferedTokens(),getToken(),nullptr,"offeredTokens","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getOffer___CountOfferedVales(),ecore::EcorePackage::eInstance()->getEInt(), "countOfferedVales", 1, 1, true,false );
 	
@@ -2549,8 +2558,8 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ParameterValue
 	initEClass(parameterValueEClass, nullptr, "ParameterValue", false, false, true);
 	
-	initEReference(getParameterValue_Parameter(),uml::UmlPackage::eInstance()->getParameter(),nullptr,"parameter","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
-	initEReference(getParameterValue_Values(),getValue(),nullptr,"values","",0,-1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getParameterValue_Parameter(),uml::UmlPackage::eInstance()->getParameter(),nullptr,"parameter","",1,1, false,false, true, false, true, false, true, false,false);
+	initEReference(getParameterValue_Values(),getValue(),nullptr,"values","",0,-1, false,false, true, true, true, false, true, false,false);
 	
 	
 	// End Class ParameterValue
@@ -2558,7 +2567,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class PinActivation
 	initEClass(pinActivationEClass, nullptr, "PinActivation", true, false, true);
 	
-	initEReference(getPinActivation_ActionActivation(),getActionActivation(),nullptr,"actionActivation","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getPinActivation_ActionActivation(),getActionActivation(),nullptr,"actionActivation","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getPinActivation___Fire__Token(),nullptr, "fire", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "incomingTokens",0,1, true,true);
@@ -2571,7 +2580,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class PrimitiveValue
 	initEClass(primitiveValueEClass, nullptr, "PrimitiveValue", true, false, true);
 	
-	initEReference(getPrimitiveValue_Type(),uml::UmlPackage::eInstance()->getPrimitiveType(),nullptr,"type","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getPrimitiveValue_Type(),uml::UmlPackage::eInstance()->getPrimitiveType(),nullptr,"type","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getPrimitiveValue___GetTypes(),uml::UmlPackage::eInstance()->getClassifier(), "getTypes", 0, -1, true,false );
 	
@@ -2619,7 +2628,8 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class RealValue
 	initEClass(realValueEClass, nullptr, "RealValue", false, false, true);
-	initEAttribute(getRealValue_Value(),ecore::EcorePackage::eInstance()->getEFloat(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getRealValue_Value(),ecore::EcorePackage::eInstance()->getEFloat(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getRealValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -2656,7 +2666,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class ReduceActionActivation
 	initEClass(reduceActionActivationEClass, nullptr, "ReduceActionActivation", false, false, true);
 	
-	initEReference(getReduceActionActivation_CurrentExecution(),getExecution(),nullptr,"currentExecution","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getReduceActionActivation_CurrentExecution(),getExecution(),nullptr,"currentExecution","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class ReduceActionActivation
@@ -2664,7 +2674,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Reference
 	initEClass(referenceEClass, nullptr, "Reference", false, false, true);
 	
-	initEReference(getReference_Referent(),getObject(),nullptr,"referent","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getReference_Referent(),getObject(),nullptr,"referent","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getReference___AssignFeatureValue__StructuralFeature_EInt(),nullptr, "assignFeatureValue", 1, 1, true,false );
 	addEParameter(op ,nullptr  , "feature",0,1, true,true);
@@ -2739,7 +2749,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class SignalInstance
 	initEClass(signalInstanceEClass, nullptr, "SignalInstance", false, false, true);
 	
-	initEReference(getSignalInstance_Type(),uml::UmlPackage::eInstance()->getSignal(),nullptr,"type","",1,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getSignalInstance_Type(),uml::UmlPackage::eInstance()->getSignal(),nullptr,"type","",1,1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class SignalInstance
@@ -2760,7 +2770,8 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class StringValue
 	initEClass(stringValueEClass, nullptr, "StringValue", false, false, true);
-	initEAttribute(getStringValue_Value(),ecore::EcorePackage::eInstance()->getEString(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getStringValue_Value(),ecore::EcorePackage::eInstance()->getEString(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getStringValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -2794,7 +2805,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class StructuredActivityNodeActivation
 	initEClass(structuredActivityNodeActivationEClass, nullptr, "StructuredActivityNodeActivation", false, false, true);
 	
-	initEReference(getStructuredActivityNodeActivation_ActivationGroup(),getActivityNodeActivationGroup(),nullptr,"activationGroup","",1,1, nullptr , false,false, true, true, true, false, true, false,false);
+	initEReference(getStructuredActivityNodeActivation_ActivationGroup(),getActivityNodeActivationGroup(),nullptr,"activationGroup","",1,1, false,false, true, true, true, false, true, false,false);
 	
 	op = initEOperation(getStructuredActivityNodeActivation___CompleteAction(),getToken(), "completeAction", 0, -1, true,false );
 	
@@ -2864,7 +2875,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Token
 	initEClass(tokenEClass, nullptr, "Token", true, false, true);
 	
-	initEReference(getToken_Holder(),getActivityNodeActivation(),nullptr,"holder","",0,1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getToken_Holder(),getActivityNodeActivation(),getActivityNodeActivation_HeldTokens(),"holder","",0,1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getToken___Equals__Token(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getToken()  , "other",0,1, true,true);
@@ -2886,14 +2897,15 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class TokenSet
 	initEClass(tokenSetEClass, nullptr, "TokenSet", false, false, true);
 	
-	initEReference(getTokenSet_Tokens(),getToken(),nullptr,"tokens","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getTokenSet_Tokens(),getToken(),nullptr,"tokens","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class TokenSet
 
 	// Begin Class UnlimitedNaturalValue
 	initEClass(unlimitedNaturalValueEClass, nullptr, "UnlimitedNaturalValue", false, false, true);
-	initEAttribute(getUnlimitedNaturalValue_Value(),ecore::EcorePackage::eInstance()->getEInt(),"value","",1,1, nullptr, false,false, true, false, false, true, false, false);
+	initEAttribute(getUnlimitedNaturalValue_Value(),ecore::EcorePackage::eInstance()->getEInt(),"value","",1,1, false,false, true, false, false, true, false, false);
+	
 	
 	op = initEOperation(getUnlimitedNaturalValue___Equals__Value(),ecore::EcorePackage::eInstance()->getEBoolean(), "equals", 1, 1, true,false );
 	addEParameter(op ,getValue()  , "otherValue",0,1, true,true);
@@ -2936,7 +2948,7 @@ void FUMLPackageImpl::initializePackageContents()
 	// Begin Class Values
 	initEClass(valuesEClass, nullptr, "Values", false, false, true);
 	
-	initEReference(getValues_Values(),getValue(),nullptr,"values","",0,-1, nullptr , false,false, true, false, true, false, true, false,false);
+	initEReference(getValues_Values(),getValue(),nullptr,"values","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	
 	// End Class Values

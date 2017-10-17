@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ConditionalNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,18 +58,15 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ClauseActivation> 
-			 getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual std::shared_ptr<fUML::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 runTest(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void runTest(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 selectBody(std::shared_ptr<uml::Clause>  clause)  ;
+			virtual void selectBody(std::shared_ptr<uml::Clause>  clause)  ;
 			
 			
 			
@@ -75,13 +80,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ClauseActivation> >
-			 getClauseActivations() const ;
+			virtual std::shared_ptr< Bag<fUML::ClauseActivation> > getClauseActivations() const ;
 			
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<uml::Clause> >
-			 getSelectedClauses() const ;
+			virtual std::shared_ptr< Bag<uml::Clause> > getSelectedClauses() const ;
 			
 							
 			

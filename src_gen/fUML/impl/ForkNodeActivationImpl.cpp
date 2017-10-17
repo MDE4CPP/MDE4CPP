@@ -3,20 +3,20 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include"ActivityNode.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp";
+#include "ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp";
+#include "ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp";
+#include "ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp";
+#include "ControlNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
 
 using namespace fUML;
@@ -46,6 +46,9 @@ ForkNodeActivationImpl::~ForkNodeActivationImpl()
 	
 }
 
+
+
+
 ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj):ForkNodeActivationImpl()
 {
 	//create copy of all Attributes
@@ -58,37 +61,32 @@ ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & ob
 	
 	m_group  = obj.getGroup();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getIncomingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _incomingEdges = obj.getIncomingEdges();
+	m_incomingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
 
 	m_node  = obj.getNode();
 
-		std::shared_ptr< Bag<fUML::ActivityEdgeInstance> >
-	 _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new 	 Bag<fUML::ActivityEdgeInstance> 
-	(*(obj.getOutgoingEdges().get())));
+	std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > _outgoingEdges = obj.getOutgoingEdges();
+	m_outgoingEdges.reset(new Bag<fUML::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Token>> _heldTokensList = obj.getHeldTokens();
 	for(std::shared_ptr<fUML::Token> _heldTokens : *_heldTokensList)
 	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(dynamic_cast<fUML::Token*>(_heldTokens->copy())));
+		this->getHeldTokens()->add(std::shared_ptr<fUML::Token>(std::dynamic_pointer_cast<fUML::Token>(_heldTokens->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  ForkNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ForkNodeActivationImpl::copy() const
 {
-	return new ForkNodeActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ForkNodeActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
@@ -97,14 +95,13 @@ std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
+void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
 	//generated from body annotation
 	if (this->getNode() == nullptr) 
@@ -132,14 +129,15 @@ void
 
     this->addTokens(forkedTokens);
     this->sendOffers(forkedTokens);
+	//end of body
 }
 
-void
- ForkNodeActivationImpl::terminate() 
+void ForkNodeActivationImpl::terminate() 
 {
 	//generated from body annotation
 	    this->clearTokens();
     ControlNodeActivationImpl::terminate();
+	//end of body
 }
 
 //*********************************

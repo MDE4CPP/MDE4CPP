@@ -3,15 +3,15 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivation.hpp";
+#include "ActivityNodeActivation.hpp"
 
-#include "Token.hpp";
+#include "Token.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -41,6 +41,9 @@ ControlTokenImpl::~ControlTokenImpl()
 	
 }
 
+
+
+
 ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImpl()
 {
 	//create copy of all Attributes
@@ -53,16 +56,15 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 	m_holder  = obj.getHolder();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ControlTokenImpl::copy() const
+std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 {
-	return new ControlTokenImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ControlTokenImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
@@ -71,31 +73,31 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
+bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
 	//generated from body annotation
 	return (std::dynamic_pointer_cast<ControlToken>(other) != nullptr);
+	//end of body
 }
 
-std::shared_ptr<fUML::Value> 
- ControlTokenImpl::getValue()  const 
+std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const 
 {
 	//generated from body annotation
 	return nullptr;
+	//end of body
 }
 
-bool
- ControlTokenImpl::isControl() 
+bool ControlTokenImpl::isControl() 
 {
 	//generated from body annotation
 		return true;
+	//end of body
 }
 
 //*********************************

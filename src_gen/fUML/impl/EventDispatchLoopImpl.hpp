@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public EventDispatchLoop
 	{
 		public: 
 			EventDispatchLoopImpl(const EventDispatchLoopImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public EventDispatchLoop
 		protected:
 			friend class FUMLFactoryImpl;
 			EventDispatchLoopImpl();
+
+
 
 		public:
 			//destructor

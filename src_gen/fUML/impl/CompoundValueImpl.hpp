@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -37,7 +43,7 @@ namespace fUML
 	{
 		public: 
 			CompoundValueImpl(const CompoundValueImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CompoundValueImpl& operator=(CompoundValueImpl const&) = delete;
@@ -45,6 +51,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CompoundValueImpl();
+
+
 
 		public:
 			//destructor
@@ -55,33 +63,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)  ;
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Value>  otherValue)  ;
+			virtual bool equals(std::shared_ptr<fUML::Value>  otherValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::string
-			 toString()  ;
+			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::FeatureValue> 
-			 retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
+			virtual std::shared_ptr<fUML::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position)  ;
+			virtual std::shared_ptr<Bag<fUML::FeatureValue> > retrieveFeatureValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::FeatureValue> >
-			 retrieveFeatureValues()  ;
+			virtual std::string toString()  ;
 			
 			
 			
@@ -95,8 +97,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::FeatureValue> >
-			 getFeatureValues() const ;
+			virtual std::shared_ptr< Bag<fUML::FeatureValue> > getFeatureValues() const ;
 			
 							
 			

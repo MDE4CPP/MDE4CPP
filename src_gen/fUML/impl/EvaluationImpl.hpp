@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EvaluationImpl& operator=(EvaluationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			EvaluationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,8 +58,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 evaluate()  ;
+			virtual std::shared_ptr<fUML::Value> evaluate()  ;
 			
 			
 			
@@ -65,18 +72,18 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
-			
-			/*!
-			 */
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) ;
-			/*!
-			 */
 			virtual std::shared_ptr<fUML::Locus > getLocus() const ;
 			
 			/*!
 			 */
 			virtual void setLocus(std::shared_ptr<fUML::Locus> _locus_locus) ;
+			/*!
+			 */
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
+			
+			/*!
+			 */
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification_specification) ;
 							
 			
 			//*********************************

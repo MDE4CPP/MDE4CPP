@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -41,12 +47,13 @@ namespace fUML
 		public:
  			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 &) {}
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 const&) = delete;
-	
+
 		protected:
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1() {}

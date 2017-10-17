@@ -3,18 +3,18 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "LiteralString.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp";
+#include "LiteralEvaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -44,6 +44,9 @@ LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 	
 }
 
+
+
+
 LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEvaluationImpl & obj):LiteralStringEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -58,16 +61,15 @@ LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEval
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  LiteralStringEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  LiteralStringEvaluationImpl::copy() const
 {
-	return new LiteralStringEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LiteralStringEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
@@ -76,14 +78,13 @@ std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- LiteralStringEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralString> literal = std::dynamic_pointer_cast<uml::LiteralString>(getSpecification());
@@ -91,6 +92,7 @@ std::shared_ptr<fUML::Value>
     stringValue->setType(this->getType("String"));
     stringValue->setValue(literal->getValue());
     return stringValue ;
+	//end of body
 }
 
 //*********************************

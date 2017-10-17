@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -50,16 +56,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ObjectToken:virtual public Token	{
+	class ObjectToken:virtual public Token
+	{
 		public:
  			ObjectToken(const ObjectToken &) {}
 			ObjectToken& operator=(ObjectToken const&) = delete;
-	
+
 		protected:
 			ObjectToken(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ObjectToken() {}
@@ -69,13 +77,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  other)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  = 0;
+			virtual bool isControl()  = 0;
 			
 			
 			//*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -45,12 +51,13 @@ namespace fUML
 		public:
  			EventAccepter(const EventAccepter &) {}
 			EventAccepter& operator=(EventAccepter const&) = delete;
-	
+
 		protected:
 			EventAccepter(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~EventAccepter() {}
@@ -60,13 +67,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  = 0;
 			
 			
 			//*********************************

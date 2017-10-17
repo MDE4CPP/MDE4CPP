@@ -3,22 +3,22 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
 
 //Forward declaration includes
-#include "Association.hpp";
+#include "Association.hpp"
 
-#include "Classifier.hpp";
+#include "Classifier.hpp"
 
-#include "ExtensionalValue.hpp";
+#include "ExtensionalValue.hpp"
 
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Property.hpp";
+#include "Property.hpp"
 
 
 using namespace fUML;
@@ -50,6 +50,9 @@ LinkImpl::~LinkImpl()
 	
 }
 
+
+
+
 LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
 {
 	//create copy of all Attributes
@@ -64,24 +67,23 @@ LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::FeatureValue>> _featureValuesList = obj.getFeatureValues();
 	for(std::shared_ptr<fUML::FeatureValue> _featureValues : *_featureValuesList)
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(dynamic_cast<fUML::FeatureValue*>(_featureValues->copy())));
+		this->getFeatureValues()->add(std::shared_ptr<fUML::FeatureValue>(std::dynamic_pointer_cast<fUML::FeatureValue>(_featureValues->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-
 }
 
-ecore::EObject *  LinkImpl::copy() const
+std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
 {
-	return new LinkImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new LinkImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
@@ -90,28 +92,25 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-void
- LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
+void LinkImpl::addTo(std::shared_ptr<fUML::Locus>  locus) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::FeatureValue> >
- LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
+std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Classifier> >
- LinkImpl::getTypes() 
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() 
 {
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
@@ -121,10 +120,10 @@ std::shared_ptr<Bag<uml::Classifier> >
 		types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
 	}
     return types;
+	//end of body
 }
 
-bool
- LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
@@ -144,6 +143,7 @@ bool
 	}
 
 	return matches;
+	//end of body
 }
 
 //*********************************

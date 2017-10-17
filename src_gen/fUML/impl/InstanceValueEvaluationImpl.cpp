@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "InstanceSpecification.hpp"
 #include "InstanceValue.hpp"
 #include "Classifier.hpp"
@@ -20,13 +20,13 @@
 #include "Class.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp";
+#include "Evaluation.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -56,6 +56,9 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 	
 }
 
+
+
+
 InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj):InstanceValueEvaluationImpl()
 {
 	//create copy of all Attributes
@@ -70,16 +73,15 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEval
 	m_specification  = obj.getSpecification();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  InstanceValueEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
 {
-	return new InstanceValueEvaluationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new InstanceValueEvaluationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
@@ -88,14 +90,13 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- InstanceValueEvaluationImpl::evaluate() 
+std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
 {
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
@@ -136,7 +137,7 @@ std::shared_ptr<fUML::Value>
             else
             {
                 // Debug.println("[evaluate] Type is a class.");
-                object.reset(FUMLFactory::eInstance()->createObject());
+                object = FUMLFactory::eInstance()->createObject();
                 for(unsigned int i = 0; i < types->size(); i++)
                 {
                 	std::shared_ptr<uml::Classifier> type = types->at(i);
@@ -172,6 +173,7 @@ std::shared_ptr<fUML::Value>
     }
 
     return value;
+	//end of body
 }
 
 //*********************************

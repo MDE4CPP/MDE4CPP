@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -41,7 +47,7 @@ namespace fUML
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ExecutionImpl& operator=(ExecutionImpl const&) = delete;
@@ -49,6 +55,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ExecutionImpl();
+
+
 
 		public:
 			//destructor
@@ -59,38 +67,31 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 execute()  ;
+			virtual void execute()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual std::shared_ptr<uml::Behavior> getBehavior()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
+			virtual std::shared_ptr<Bag<fUML::ParameterValue> > getOutputParameterValues()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::ParameterValue> 
-			 getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
+			virtual std::shared_ptr<fUML::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::ParameterValue> >
-			 getOutputParameterValues()  ;
+			virtual std::shared_ptr<fUML::Value> new_()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> 
-			 getBehavior()  ;
+			virtual void setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 new_()  ;
+			virtual void terminate()  ;
 			
 			
 			
@@ -111,8 +112,7 @@ namespace fUML
 			virtual void setContext(std::shared_ptr<fUML::Object> _context_context) ;
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::ParameterValue> >
-			 getParameterValues() const ;
+			virtual std::shared_ptr< Bag<fUML::ParameterValue> > getParameterValues() const ;
 			
 							
 			

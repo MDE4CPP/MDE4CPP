@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			AcceptEventActionActivationImpl& operator=(AcceptEventActionActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			AcceptEventActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,13 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			
 			

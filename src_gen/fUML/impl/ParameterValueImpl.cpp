@@ -3,13 +3,13 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Parameter.hpp";
+#include "Parameter.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ ParameterValueImpl::~ParameterValueImpl()
 	
 }
 
+
+
+
 ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):ParameterValueImpl()
 {
 	//create copy of all Attributes
@@ -60,13 +63,12 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):Parameter
 	m_parameter  = obj.getParameter();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
-		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
+		this->getValues()->add(std::shared_ptr<fUML::Value>(std::dynamic_pointer_cast<fUML::Value>(_values->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_values" << std::endl;
@@ -74,12 +76,12 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):Parameter
 
 	
 	
-
 }
 
-ecore::EObject *  ParameterValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
 {
-	return new ParameterValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ParameterValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
@@ -88,7 +90,7 @@ std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
@@ -108,8 +110,7 @@ void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter
     m_parameter = _parameter;
 }
 
-	std::shared_ptr< Bag<fUML::Value> >
- ParameterValueImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > ParameterValueImpl::getValues() const
 {
 
     return m_values;

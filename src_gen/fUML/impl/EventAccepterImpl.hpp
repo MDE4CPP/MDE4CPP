@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public EventAccepter
 	{
 		public: 
 			EventAccepterImpl(const EventAccepterImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			EventAccepterImpl& operator=(EventAccepterImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public EventAccepter
 		protected:
 			friend class FUMLFactoryImpl;
 			EventAccepterImpl();
+
+
 
 		public:
 			//destructor
@@ -52,13 +60,11 @@ virtual public EventAccepter
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual void accept(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
+			virtual bool match(std::shared_ptr<fUML::SignalInstance>  signalInstance)  ;
 			
 			
 			

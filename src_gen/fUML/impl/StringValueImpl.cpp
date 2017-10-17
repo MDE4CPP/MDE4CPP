@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "UmlFactory.hpp"
 #include "LiteralString.hpp"
@@ -11,13 +11,13 @@
 #include "PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp";
+#include "PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp";
+#include "PrimitiveValue.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -47,6 +47,9 @@ StringValueImpl::~StringValueImpl()
 	
 }
 
+
+
+
 StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
 {
 	//create copy of all Attributes
@@ -60,16 +63,15 @@ StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
 	m_type  = obj.getType();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  StringValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
 {
-	return new StringValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new StringValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
@@ -78,9 +80,9 @@ std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void StringValueImpl::setValue (std::string _value)
+void StringValueImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
@@ -93,8 +95,7 @@ std::string StringValueImpl::getValue() const
 //*********************************
 // Operations
 //*********************************
-bool
- StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
+bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
 	//generated from body annotation
 	bool isEqual = false;
@@ -106,23 +107,24 @@ bool
     }
     
     return isEqual;
+	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> 
- StringValueImpl::specify() 
+std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify() 
 {
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralString> literal(uml::UmlFactory::eInstance()->createLiteralString());
+	std::shared_ptr<uml::LiteralString> literal = uml::UmlFactory::eInstance()->createLiteralString_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
+	//end of body
 }
 
-std::string
- StringValueImpl::toString() 
+std::string StringValueImpl::toString() 
 {
 	//generated from body annotation
 	return this->getValue();
+	//end of body
 }
 
 //*********************************

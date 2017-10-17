@@ -3,17 +3,17 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "FUMLFactory.hpp"
 #include "StructuralFeature.hpp"
 
 
 //Forward declaration includes
-#include "FeatureValue.hpp";
+#include "FeatureValue.hpp"
 
-#include "StructuralFeature.hpp";
+#include "StructuralFeature.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
 
 using namespace fUML;
@@ -52,6 +52,9 @@ FeatureValueImpl::~FeatureValueImpl()
 	
 }
 
+
+
+
 FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImpl()
 {
 	//create copy of all Attributes
@@ -65,13 +68,12 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImp
 	m_feature  = obj.getFeature();
 
 
-    
 	//Clone references with containment (deep copy)
 
 	std::shared_ptr<Bag<fUML::Value>> _valuesList = obj.getValues();
 	for(std::shared_ptr<fUML::Value> _values : *_valuesList)
 	{
-		this->getValues()->add(std::shared_ptr<fUML::Value>(dynamic_cast<fUML::Value*>(_values->copy())));
+		this->getValues()->add(std::shared_ptr<fUML::Value>(std::dynamic_pointer_cast<fUML::Value>(_values->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_values" << std::endl;
@@ -79,12 +81,12 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImp
 
 	
 	
-
 }
 
-ecore::EObject *  FeatureValueImpl::copy() const
+std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
 {
-	return new FeatureValueImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new FeatureValueImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
@@ -93,9 +95,9 @@ std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
-void FeatureValueImpl::setPosition (int _position)
+void FeatureValueImpl::setPosition(int _position)
 {
 	m_position = _position;
 } 
@@ -108,8 +110,7 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 // Operations
 //*********************************
-bool
- FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
+bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
 {
 	//generated from body annotation
 		bool equal = true;
@@ -164,6 +165,7 @@ bool
     }
 
     return equal;
+	//end of body
 }
 
 //*********************************
@@ -179,8 +181,7 @@ void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _featu
     m_feature = _feature;
 }
 
-	std::shared_ptr< Bag<fUML::Value> >
- FeatureValueImpl::getValues() const
+std::shared_ptr< Bag<fUML::Value> > FeatureValueImpl::getValues() const
 {
 
     return m_values;

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -60,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class DataStoreNodeActivation:virtual public CentralBufferNodeActivation	{
+	class DataStoreNodeActivation:virtual public CentralBufferNodeActivation
+	{
 		public:
  			DataStoreNodeActivation(const DataStoreNodeActivation &) {}
 			DataStoreNodeActivation& operator=(DataStoreNodeActivation const&) = delete;
-	
+
 		protected:
 			DataStoreNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~DataStoreNodeActivation() {}
@@ -79,13 +87,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 addToken(std::shared_ptr<fUML::Token>  token)  = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  = 0;
 			
 			
 			//*********************************

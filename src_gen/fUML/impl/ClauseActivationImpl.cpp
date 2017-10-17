@@ -3,16 +3,16 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "BooleanValue.hpp";
+#include "BooleanValue.hpp"
 
-#include "Clause.hpp";
+#include "Clause.hpp"
 
-#include "ClauseActivation.hpp";
+#include "ClauseActivation.hpp"
 
-#include "ConditionalNodeActivation.hpp";
+#include "ConditionalNodeActivation.hpp"
 
 
 using namespace fUML;
@@ -48,6 +48,9 @@ ClauseActivationImpl::~ClauseActivationImpl()
 	
 }
 
+
+
+
 ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):ClauseActivationImpl()
 {
 	//create copy of all Attributes
@@ -62,16 +65,15 @@ ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):Cla
 	m_conditionalNodeActivation  = obj.getConditionalNodeActivation();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ClauseActivationImpl::copy() const
+std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
 {
-	return new ClauseActivationImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ClauseActivationImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
@@ -80,56 +82,49 @@ std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::BooleanValue> 
- ClauseActivationImpl::getDecision() 
+std::shared_ptr<fUML::BooleanValue> ClauseActivationImpl::getDecision() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> >
- ClauseActivationImpl::getPredecessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getPredecessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<fUML::ClauseActivation> >
- ClauseActivationImpl::getSuccessors() 
+std::shared_ptr<Bag<fUML::ClauseActivation> > ClauseActivationImpl::getSuccessors() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool
- ClauseActivationImpl::isReady() 
+bool ClauseActivationImpl::isReady() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ClauseActivationImpl::recieveControl() 
+void ClauseActivationImpl::recieveControl() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ClauseActivationImpl::runTest() 
+void ClauseActivationImpl::runTest() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void
- ClauseActivationImpl::selectBody() 
+void ClauseActivationImpl::selectBody() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";

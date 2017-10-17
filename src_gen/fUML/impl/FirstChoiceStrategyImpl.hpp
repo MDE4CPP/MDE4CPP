@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			FirstChoiceStrategyImpl();
+
+
 
 		public:
 			//destructor
@@ -50,8 +58,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 choose(int size)  ;
+			virtual int choose(int size)  ;
 			
 			
 			

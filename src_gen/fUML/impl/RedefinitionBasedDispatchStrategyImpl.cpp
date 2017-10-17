@@ -3,20 +3,20 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "NamedElement.hpp"
 #include "Class.hpp"
 #include "Operation.hpp"
 
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "DispatchStrategy.hpp";
+#include "DispatchStrategy.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "Operation.hpp";
+#include "Operation.hpp"
 
 
 using namespace fUML;
@@ -46,6 +46,9 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 	
 }
 
+
+
+
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj):RedefinitionBasedDispatchStrategyImpl()
 {
 	//create copy of all Attributes
@@ -56,16 +59,15 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(con
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  RedefinitionBasedDispatchStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() const
 {
-	return new RedefinitionBasedDispatchStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new RedefinitionBasedDispatchStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
@@ -74,14 +76,13 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-bool
- RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) 
 {
 	//generated from body annotation
 		//#include "NamedElement.hpp"
@@ -103,10 +104,10 @@ bool
         }
     }
 	return matches;
+	//end of body
 }
 
-std::shared_ptr<uml::Behavior> 
- RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
+std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
 	//generated from body annotation
 		std::shared_ptr<uml::Behavior> method = nullptr;
@@ -133,6 +134,7 @@ std::shared_ptr<uml::Behavior>
 	}
 
 	return method;
+	//end of body
 }
 
 //*********************************

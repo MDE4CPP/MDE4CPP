@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -55,12 +61,13 @@ namespace fUML
 		public:
  			Token(const Token &) {}
 			Token& operator=(Token const&) = delete;
-	
+
 		protected:
 			Token(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~Token() {}
@@ -70,33 +77,27 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Token> 
-			 transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  = 0;
+			virtual bool equals(std::shared_ptr<fUML::Token>  other)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 withdraw()  = 0;
+			virtual std::shared_ptr<fUML::Value> getValue()  const  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 equals(std::shared_ptr<fUML::Token>  other)  = 0;
+			virtual bool isControl()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isWithdrawn()  = 0;
+			virtual bool isWithdrawn()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isControl()  = 0;
+			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  = 0;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Value> 
-			 getValue()  const  = 0;
+			virtual void withdraw()  = 0;
 			
 			
 			//*********************************
@@ -108,7 +109,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<fUML::ActivityNodeActivation > getHolder() const = 0;
+			virtual std::weak_ptr<fUML::ActivityNodeActivation > getHolder() const = 0;
 			
 			/*!
 			 */
@@ -126,7 +127,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			std::shared_ptr<fUML::ActivityNodeActivation > m_holder;
+			std::weak_ptr<fUML::ActivityNodeActivation > m_holder;
 			
 
 		public:

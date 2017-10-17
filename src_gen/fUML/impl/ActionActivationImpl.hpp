@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -47,7 +53,7 @@ namespace fUML
 	{
 		public: 
 			ActionActivationImpl(const ActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ActionActivationImpl& operator=(ActionActivationImpl const&) = delete;
@@ -55,6 +61,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			ActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -65,103 +73,83 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 isFirng()  ;
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 doAction()  ;
+			virtual void addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 sendOffers()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > completeAction()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation)  ;
+			virtual void createNodeActivations()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::PinActivation> 
-			 retrievePinActivation(std::shared_ptr<uml::Pin>  pin)  ;
+			virtual void doAction()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)  ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > getTokens(std::shared_ptr<uml::InputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> >
-			 getTokens(std::shared_ptr<uml::InputPin>  pin)  ;
+			virtual bool isFirng()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Value> >
-			 takeTokens(std::shared_ptr<uml::InputPin>  pin)  ;
+			virtual bool isReady()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)  ;
+			virtual bool isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::BooleanValue> 
-			 makeBooleanValue(bool value)  ;
+			virtual std::shared_ptr<fUML::BooleanValue> makeBooleanValue(bool value)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 run()  ;
+			virtual void putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 takeOfferedTokens()  ;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  ;
+			virtual std::shared_ptr<fUML::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual void run()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  ;
+			virtual void sendOffers()  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<Bag<fUML::Token> >
-			 completeAction()  ;
+			virtual std::shared_ptr<Bag<fUML::Token> > takeOfferedTokens()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 createNodeActivations()  ;
+			virtual std::shared_ptr<Bag<fUML::Value> > takeTokens(std::shared_ptr<uml::InputPin>  pin)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge)  ;
+			virtual void terminate()  ;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance)  ;
+			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link)  ;
 			
 			
 			
@@ -183,8 +171,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::PinActivation> >
-			 getPinActivation() const ;
+			virtual std::shared_ptr< Bag<fUML::PinActivation> > getPinActivation() const ;
 			
 							
 			

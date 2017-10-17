@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -41,12 +47,13 @@ namespace fUML
 		public:
  			SemanticStrategy(const SemanticStrategy &) {}
 			SemanticStrategy& operator=(SemanticStrategy const&) = delete;
-	
+
 		protected:
 			SemanticStrategy(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~SemanticStrategy() {}
@@ -56,8 +63,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string
-			 retrieveName()  = 0;
+			virtual std::string retrieveName()  = 0;
 			
 			
 			//*********************************

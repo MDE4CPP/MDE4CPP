@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -65,16 +71,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class InputPinActivation:virtual public PinActivation	{
+	class InputPinActivation:virtual public PinActivation
+	{
 		public:
  			InputPinActivation(const InputPinActivation &) {}
 			InputPinActivation& operator=(InputPinActivation const&) = delete;
-	
+
 		protected:
 			InputPinActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~InputPinActivation() {}
@@ -84,13 +92,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 recieveOffer()  = 0;
+			virtual bool isReady()  = 0;
 			
 			/*!
 			 */ 
-			virtual bool
-			 isReady()  = 0;
+			virtual void recieveOffer()  = 0;
 			
 			
 			//*********************************

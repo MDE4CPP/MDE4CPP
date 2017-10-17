@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			DataStoreNodeActivationImpl& operator=(DataStoreNodeActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			DataStoreNodeActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,13 +58,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 removeToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual void addToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 addToken(std::shared_ptr<fUML::Token>  token)  ;
+			virtual int removeToken(std::shared_ptr<fUML::Token>  token)  ;
 			
 			
 			

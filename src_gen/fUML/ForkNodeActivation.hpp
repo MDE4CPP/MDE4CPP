@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -60,16 +66,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class ForkNodeActivation:virtual public ControlNodeActivation	{
+	class ForkNodeActivation:virtual public ControlNodeActivation
+	{
 		public:
  			ForkNodeActivation(const ForkNodeActivation &) {}
 			ForkNodeActivation& operator=(ForkNodeActivation const&) = delete;
-	
+
 		protected:
 			ForkNodeActivation(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~ForkNodeActivation() {}
@@ -79,13 +87,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual void
-			 fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)  = 0;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  = 0;
+			virtual void terminate()  = 0;
 			
 			
 			//*********************************

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -41,7 +47,7 @@ namespace fUML
 	{
 		public: 
 			CallActionActivationImpl(const CallActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			CallActionActivationImpl& operator=(CallActionActivationImpl const&) = delete;
@@ -49,6 +55,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			CallActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -59,23 +67,19 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual std::shared_ptr<fUML::Execution> 
-			 getCallExecution()  ;
+			virtual void doAction()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
+			virtual std::shared_ptr<fUML::Execution> getCallExecution()  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 doAction()  ;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Execution>  execution)  ;
 			
 			/*!
 			 */ 
-			virtual void
-			 terminate()  ;
+			virtual void terminate()  ;
 			
 			
 			
@@ -89,8 +93,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Execution> >
-			 getCallExecutions() const ;
+			virtual std::shared_ptr< Bag<fUML::Execution> > getCallExecutions() const ;
 			
 							
 			

@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -32,7 +38,7 @@ namespace fUML
 	{
 		public: 
 			WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			WriteStructuralFeatureActionActivationImpl& operator=(WriteStructuralFeatureActionActivationImpl const&) = delete;
@@ -40,6 +46,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			WriteStructuralFeatureActionActivationImpl();
+
+
 
 		public:
 			//destructor
@@ -50,8 +58,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)  ;
+			virtual int position(std::shared_ptr<fUML::Value>  value,std::shared_ptr<Bag<fUML::Value> >  list,int startAt)  ;
 			
 			
 			

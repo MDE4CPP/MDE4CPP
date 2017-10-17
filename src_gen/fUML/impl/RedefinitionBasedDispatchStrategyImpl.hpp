@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -36,7 +42,7 @@ namespace fUML
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&) = delete;
@@ -44,6 +50,8 @@ namespace fUML
 		protected:
 			friend class FUMLFactoryImpl;
 			RedefinitionBasedDispatchStrategyImpl();
+
+
 
 		public:
 			//destructor
@@ -54,13 +62,11 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual bool
-			 operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)  ;
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<uml::Behavior> 
-			 retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation)  ;
 			
 			
 			

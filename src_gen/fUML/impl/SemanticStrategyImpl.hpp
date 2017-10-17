@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public SemanticStrategy
 	{
 		public: 
 			SemanticStrategyImpl(const SemanticStrategyImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public SemanticStrategy
 		protected:
 			friend class FUMLFactoryImpl;
 			SemanticStrategyImpl();
+
+
 
 		public:
 			//destructor
@@ -52,8 +60,7 @@ virtual public SemanticStrategy
 			//*********************************
 			/*!
 			 */ 
-			virtual std::string
-			 retrieveName()  ;
+			virtual std::string retrieveName()  ;
 			
 			
 			

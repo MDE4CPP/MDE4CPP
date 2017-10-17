@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 #include <string>
 #include <map>
 #include <vector>
@@ -40,16 +46,18 @@ namespace fUML
 {
 	/*!
 	 */
-	class FirstChoiceStrategy:virtual public ChoiceStrategy	{
+	class FirstChoiceStrategy:virtual public ChoiceStrategy
+	{
 		public:
  			FirstChoiceStrategy(const FirstChoiceStrategy &) {}
 			FirstChoiceStrategy& operator=(FirstChoiceStrategy const&) = delete;
-	
+
 		protected:
 			FirstChoiceStrategy(){}
 
+
 		public:
-			virtual ecore::EObject* copy() const = 0;
+			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
 
 			//destructor
 			virtual ~FirstChoiceStrategy() {}
@@ -59,8 +67,7 @@ namespace fUML
 			//*********************************
 			/*!
 			 */ 
-			virtual int
-			 choose(int size)  = 0;
+			virtual int choose(int size)  = 0;
 			
 			
 			//*********************************

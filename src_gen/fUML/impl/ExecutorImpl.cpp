@@ -3,26 +3,26 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 #include "Object.hpp"
 #include "FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp";
+#include "Behavior.hpp"
 
-#include "Class.hpp";
+#include "Class.hpp"
 
-#include "Locus.hpp";
+#include "Locus.hpp"
 
-#include "Object.hpp";
+#include "Object.hpp"
 
-#include "ParameterValue.hpp";
+#include "ParameterValue.hpp"
 
-#include "Reference.hpp";
+#include "Reference.hpp"
 
-#include "Value.hpp";
+#include "Value.hpp"
 
-#include "ValueSpecification.hpp";
+#include "ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -54,6 +54,9 @@ ExecutorImpl::~ExecutorImpl()
 	
 }
 
+
+
+
 ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 {
 	//create copy of all Attributes
@@ -66,16 +69,15 @@ ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
 	m_locus  = obj.getLocus();
 
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  ExecutorImpl::copy() const
+std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
 {
-	return new ExecutorImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new ExecutorImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
@@ -84,21 +86,20 @@ std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Value> 
- ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
+std::shared_ptr<fUML::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
 	//generated from body annotation
 	    return this->getLocus()->getFactory()->createEvaluation(specification)->evaluate();
+	//end of body
 }
 
-std::shared_ptr<Bag<fUML::ParameterValue> >
- ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+std::shared_ptr<Bag<fUML::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 		std::shared_ptr<Execution> execution = this->getLocus()->getFactory()->createExecution(behavior, context);
@@ -119,10 +120,10 @@ std::shared_ptr<Bag<fUML::ParameterValue> >
     execution->destroy();
 
     return outputValues;
+	//end of body
 }
 
-std::shared_ptr<fUML::Reference> 
- ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
+std::shared_ptr<fUML::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[start] Starting " << typeid(type).name() <<"..."<<std::endl;)
@@ -135,6 +136,7 @@ std::shared_ptr<fUML::Reference>
     std::shared_ptr<Reference> reference(fUML::FUMLFactory::eInstance()->createReference());
     reference->setReferent(object);
     return reference;
+	//end of body
 }
 
 //*********************************

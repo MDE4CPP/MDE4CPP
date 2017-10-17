@@ -13,6 +13,12 @@
     #define DEBUG_MESSAGE(a) a
 #endif
 
+#ifdef ACTIVITY_DEBUG_ON
+    #define ACT_DEBUG(a) a
+#else
+    #define ACT_DEBUG(a) /**/
+#endif
+
 //*********************************
 // generated Includes
 
@@ -34,7 +40,7 @@ virtual public Values
 	{
 		public: 
 			ValuesImpl(const ValuesImpl & obj);
-			virtual ecore::EObject *  copy() const;
+			virtual std::shared_ptr<ecore::EObject> copy() const;
 
 		private:    
 			ValuesImpl& operator=(ValuesImpl const&) = delete;
@@ -42,6 +48,8 @@ virtual public Values
 		protected:
 			friend class FUMLFactoryImpl;
 			ValuesImpl();
+
+
 
 		public:
 			//destructor
@@ -62,8 +70,7 @@ virtual public Values
 			//*********************************
 			/*!
 			 */
-			virtual 	std::shared_ptr< Bag<fUML::Value> >
-			 getValues() const ;
+			virtual std::shared_ptr< Bag<fUML::Value> > getValues() const ;
 			
 							
 			

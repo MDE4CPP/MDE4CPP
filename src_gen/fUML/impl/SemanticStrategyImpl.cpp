@@ -3,7 +3,7 @@
 #include <cassert>
 #include "EAnnotation.hpp"
 #include "EClass.hpp"
-#include "fUMLPackageImpl.hpp"
+#include "FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -35,6 +35,9 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 	
 }
 
+
+
+
 SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj):SemanticStrategyImpl()
 {
 	//create copy of all Attributes
@@ -45,16 +48,15 @@ SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj):Sem
 	//copy references with no containment (soft copy)
 	
 
-    
 	//Clone references with containment (deep copy)
-
 
 
 }
 
-ecore::EObject *  SemanticStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
 {
-	return new SemanticStrategyImpl(*this);
+	std::shared_ptr<ecore::EObject> element(new SemanticStrategyImpl(*this));
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
@@ -63,14 +65,13 @@ std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
 }
 
 //*********************************
-// Attribute Setter Gettter
+// Attribute Setter Getter
 //*********************************
 
 //*********************************
 // Operations
 //*********************************
-std::string
- SemanticStrategyImpl::retrieveName() 
+std::string SemanticStrategyImpl::retrieveName() 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
