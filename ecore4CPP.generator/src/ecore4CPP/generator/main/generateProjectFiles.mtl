@@ -132,11 +132,11 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
@@ -181,11 +181,11 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.985992690" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/backward&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include/c++/mingw32&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include-fixed&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/5.3.0/include&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
