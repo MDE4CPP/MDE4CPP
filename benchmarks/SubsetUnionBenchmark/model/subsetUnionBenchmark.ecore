@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="subsetUnionBenchmark" nsURI="http://www.example.org/subsetUnionBenchmark"
+    nsPrefix="subsetUnionBenchmark">
+  <eAnnotations source="prepareApplication"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Container">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="union" upperBound="-1"
+        eType="#//Element" derived="true" containment="true">
+      <eAnnotations source="union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset1" upperBound="-1"
+        eType="#//Element_Level1" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset2" upperBound="-1"
+        eType="#//Element_Level2" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset3" upperBound="-1"
+        eType="#//Element_Level3" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset4" upperBound="-1"
+        eType="#//Element_Level4" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset5" upperBound="-1"
+        eType="#//Element_Level5" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset6" upperBound="-1"
+        eType="#//Element_Level6" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset7" upperBound="-1"
+        eType="#//Element_Level7" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset8" upperBound="-1"
+        eType="#//Element_Level8" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset9" upperBound="-1"
+        eType="#//Element_Level9" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subset10" upperBound="-1"
+        eType="#//Element_Level10" containment="true">
+      <eAnnotations source="subsets" references="#//Container/union"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level1" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level2" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level3" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level4" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level5" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level6" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level7" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level8" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level9" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Element_Level10" eSuperTypes="#//Element"/>
+</ecore:EPackage>
