@@ -37,7 +37,7 @@
 [for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(myQualifiedName()))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
 
-[for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
 [aSlot.generateSlotCreation(anInstSpec)/]
 [/for]
 [/for]
