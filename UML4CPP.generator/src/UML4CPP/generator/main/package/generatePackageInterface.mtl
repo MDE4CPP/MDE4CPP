@@ -46,7 +46,7 @@ namespace [aPackage.name/]
 
 namespace uml 
 {
-[for (nE : EClass | (aPackage.allOwnedElements().eClass()->asOrderedSet()->sortedBy(myQualifiedName()))) separator ('\n')]
+[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	class [nE.name/];[/for]
 
 }

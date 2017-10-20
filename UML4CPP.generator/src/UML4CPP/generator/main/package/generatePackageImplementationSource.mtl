@@ -47,7 +47,7 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
-[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[nE.name/].hpp"[/for]
 
 //metamodel factory
