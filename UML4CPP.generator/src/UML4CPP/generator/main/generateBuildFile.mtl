@@ -100,6 +100,11 @@ INCLUDE_DIRECTORIES(
 	${MDE4CPP_HOME}/application/include/[pack.name/]
 [/for]
 [/if]
+[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
+	${MDE4CPP_HOME}/application/include/[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/]
+[/if][/if][/for]
 )
 
 FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
@@ -109,6 +114,12 @@ FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application
 FIND_LIBRARY([packName.toUpperCase()/]_DEBUG [packName/]d ${MDE4CPP_HOME}/application/lib)
 FIND_LIBRARY([packName.toUpperCase()/]_RELEASE [packName/] ${MDE4CPP_HOME}/application/lib)
 [/for]
+[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
+FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_DEBUG [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/]d ${MDE4CPP_HOME}/application/lib)
+FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_RELEASE [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/] ${MDE4CPP_HOME}/application/lib)
+[/if][/if][/for]
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
@@ -116,12 +127,22 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 	debug ${[packName.toUpperCase()/]_DEBUG}
 [/for]
+[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
+	debug ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_DEBUG}
+[/if][/if][/for]
 )
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	optimized ${PLUGINFRAMEWORK_RELEASE}
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 	optimized ${[packName.toUpperCase()/]_RELEASE}
 [/for]
+[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
+	optimized ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3).toUpperCase()/]_RELEASE}
+[/if][/if][/for]
 )
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
