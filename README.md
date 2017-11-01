@@ -5,15 +5,16 @@
 Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde4cpp)
 
 ## Installation instructions
-1. Install following software: 
+1. Install following software:
+  * Java Development Kit (JDK) version 1.8
   * Eclipse Modeling Tool
-    * add plugin Acceleo 3
+    * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
   * Gradle 4.2
 	* Go to ${user folder}/.gradle 
 	* create file gradle.properties
 		* create entry: make_parallel_jobs=number
 		* number ... count of parallel build jobs
-  * MinGW with package mingw32-gcc-g++ (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
+  * MinGW with packages mingw32-gcc-g++, mingw32-make, mingw32-libpthreadgc (If you want to use prebuilt libraries, you have to use the version MinGW.org GCC-6.3.0-1.)
   * CMake
   	
 2. checkout a repository with one of the following options:
@@ -21,7 +22,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
   * clone one or more subrepositories of MDE4CPP according to your requirements
   
 3. Open Advanced System Settings
-  * modify system environment variable PATH: add Gradle bin folder and MinGW bin folder
+  * modify system environment variable PATH: add CMake bin folder, Gradle bin folder and MinGW bin folder
     * create environment variable `MDE4CPP_ECLIPSE_HOME` with path to root folder of Eclipse modeling Tool
   * create environment variable `MDE4CPP_HOME` with path to MDE4CPP root folder
 	  (Please note, that the root folder include the subfolder "application" with 
@@ -29,7 +30,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
     * header files inside `${MDE4CPP_HOME}/application/include/{model name}`.)
 
 4. If you want to use Prebuild libraries, packages are downloadable on github. Package with all libraries and header files are available at MDE4CPP repository. All C++ libraries are avaiable in
-  * debug version (compiler flag -g)
+  * debug version (compiler flag -ggdb)
   * release version (mostly with compiler flag O3, no debug messages).
 Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
 
