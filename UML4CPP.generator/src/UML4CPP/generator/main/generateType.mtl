@@ -63,7 +63,7 @@ QVariant[else]
 void
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Boolean' )]
+[template public transformType(aType : Type) ? (name = 'Boolean' or name = 'EBoolean')]
 bool
 [/template]
 
@@ -71,15 +71,15 @@ bool
 int
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Integer')]
+[template public transformType(aType : Type) ? (name = 'Integer' or name = 'EInt')]
 int
 [/template]
 
-[template public transformType(aType : Type) ? (name = 'Real')]
+[template public transformType(aType : Type) ? (name = 'Real' or name = 'EDouble' or name = 'EFloat')]
 double
 [/template]
 
-[template public transformType(aType : Type) ? (oclIsKindOf(PrimitiveType) and name = 'String')]
+[template public transformType(aType : Type) ? (oclIsKindOf(PrimitiveType) and name = 'String' or name = 'EString')]
 std::string
 [/template]
 
