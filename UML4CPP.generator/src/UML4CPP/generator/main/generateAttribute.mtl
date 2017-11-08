@@ -102,11 +102,11 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 [aClass.memberName()/]->getOwnedAttribute()->push_back([if (aClass.getNearestPackage() = aProperty.getNearestPackage())][aProperty.memberName()/][else][aProperty.packageGetter()/][/if]);
 [/template]
 
-[template public genDefault(aProperty : Property) ? (aProperty.type.name='String')]
+[template public genDefault(aProperty : Property) ? (aProperty.type.name='String' or aProperty.type.name='EString')]
 "[aProperty.default/]" /*defined default string*/
 [/template]
 
-[template public genDefault(aProperty : Property) ? (((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural')))]
+[template public genDefault(aProperty : Property) ? ((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural') or (aProperty.type.name='EInt') or (aProperty.type.name='EDouble') or (aProperty.type.name='EBoolean') or (aProperty.type.name='EFloat'))]
 [aProperty.default/] /*defined default value*/
 [/template]
 

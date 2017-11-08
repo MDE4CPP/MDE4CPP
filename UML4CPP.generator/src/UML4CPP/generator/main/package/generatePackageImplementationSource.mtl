@@ -61,7 +61,9 @@
 [if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
 [if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
-[else] [if (not (pack.name='StandardProfile'))]
+[elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
+#include "[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
+[else][if (not (pack.name='StandardProfile'))]
 #include "[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if][/if]
 [/if]
