@@ -22,7 +22,7 @@
 
 namespace [anEEnum._package.name/] 
 {
-	enum [anEEnum.name/] 
+	enum class [anEEnum.name/] 
 	{
 [for (lit : EnumerationLiteral | anEEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n')]
 		[lit.name.toUpperCase()/] = [anEEnum.ownedLiteral->indexOf(lit).toString()/][/for]

@@ -43,7 +43,7 @@ std::shared_ptr<[aOperation.type.transformType()/]> [else]
 [/template]
 
 [template public generateCppType(aType : Type, noShared : Boolean)]
-[if (not (aType.isPrimitive() or noShared))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared))]>[/if]
+[if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]std::shared_ptr<[/if][aType.transformType()/][if (not (aType.isPrimitive() or noShared or aType.oclIsKindOf(Enumeration)))]>[/if]
 [/template]
 
 [template public generateType(aType : Type)]
