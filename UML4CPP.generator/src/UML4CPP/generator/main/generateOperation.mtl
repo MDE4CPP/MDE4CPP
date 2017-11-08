@@ -33,7 +33,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [sParameter.type.generateCppType()/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	[aOperation.generateCppType()/] [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+	[aOperation.generateCppType()/] [if(aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().name.oclIsUndefined())][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().myQualifiedName()/][else][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/][/if];
 [/if]
 
 [comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
@@ -85,7 +85,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [/if]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	return [aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/];
+	return [if(aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().name.oclIsUndefined())][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().myQualifiedName()/][else][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/][/if];
 [/if]
 }
 [/template]

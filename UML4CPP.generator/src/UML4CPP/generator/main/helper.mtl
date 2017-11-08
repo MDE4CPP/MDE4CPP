@@ -38,7 +38,7 @@
  * Generate a qualified name 
  * Chain 
 */]
-[query public myQualifiedName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then myInputPinName() else myElementQualifiedName() endif /]
+[query public myQualifiedName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then myInputPinName().substituteAll('::','_') else myElementQualifiedName().substituteAll('::','_') endif /]
 
 [query public myInputPinName (anElement : NamedElement) : String = if(oclIsKindOf(InputPin)) then 'InputPin'.concat('_').concat(anElement.myElementQualifiedName())  else myOutputPinName() endif/]
 
