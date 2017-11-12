@@ -35,6 +35,7 @@ namespace [aPackage.name/]
 		    //constructors
 		    [className/]([className/] &obj);
 		    [className/](std::shared_ptr<[pointerName/]>);
+		    [className/](std::shared_ptr<Bag<[pointerName/]>>);
 		 	[className/]();
 		    //destructor
 		    virtual ~[className/]();
@@ -42,10 +43,13 @@ namespace [aPackage.name/]
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
 			std::shared_ptr<[pointerName/]> getUmlValue() const;
+			std::shared_ptr<Bag<[pointerName/]>> getUmlValues() const;
 			void setUmlValue(std::shared_ptr<[pointerName/]>);
+			void setUmlValues(std::shared_ptr<Bag<[pointerName/]>>);;
 		
 		protected:
-			std::shared_ptr<[pointerName/]> m_umlValue;
+			std::shared_ptr<[pointerName/]> m_umlValue = nullptr;
+			std::shared_ptr<Bag<[pointerName/]>> m_umlValues = nullptr;
 	};
 }
 [endGuard(aClassifier,'Execution')/]

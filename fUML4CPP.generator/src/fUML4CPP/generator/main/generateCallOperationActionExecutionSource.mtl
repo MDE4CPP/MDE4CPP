@@ -85,13 +85,13 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     DEBUG_MESSAGE(std::cout<<"__________________________" << std::endl;)
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-   	[par.type.generateCppType()/] [par.name/];
+   	[par.generateCppType()/] [par.name/];
 	[/for]
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
     [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
-	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue();
+	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
 	assert([par.name/] != nullptr);
 	[else]
 	[par.name/] = [par.name/]Value->getValue();
@@ -115,7 +115,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
     [par.generateOutputParameter()/]
 	[if (not par.type.supportedTypes())]
-	[par.name/]UmlLinker->setUmlValue([par.name/]);
+	[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
     [par.name/]UmlLinker->setLocus(this->getLocus());
     [par.name/]Value->setReferent([par.name/]UmlLinker);
 	[else]
@@ -131,7 +131,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/if]
 	[if (not par.type.supportedTypes())]
 	//Pointer type
-	[par.name/]UmlLinker->setUmlValue([par.name/]);
+	[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
     [par.name/]UmlLinker->setLocus(this->getLocus());
     [par.name/]Value->setReferent([par.name/]UmlLinker);
 	[else]

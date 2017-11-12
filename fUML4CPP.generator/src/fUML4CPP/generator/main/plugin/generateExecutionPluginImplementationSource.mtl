@@ -83,7 +83,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 [if(par.supportedTypes())]
 [par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/] = boost::any_cast<std::shared_ptr<[par.type.generateCppType(true)/]>>(parameterList->at([par.listNumber(anActivity)/]));
+[par.generateCppType()/] [par.name.toLowerFirst()/] = boost::any_cast<[par.generateCppType()/]>(parameterList->at([par.listNumber(anActivity)/]));
 [/if]
 
 [/for]
@@ -101,7 +101,7 @@ return ret->getValue();
 [else]
 std::shared_ptr<fUML::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Reference>(resultPList->front()->getValues()->front());
 std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.name.toUpperFirst()/]Execution>([par.name/]Value->getReferent());
-return [par.name/]UmlLinker->getUmlValue();
+return [par.name/]UmlLinker->getUmlValue[if(not (par.upper = 1))]s[/if]();
 [/if]
 [/let]
 [else]

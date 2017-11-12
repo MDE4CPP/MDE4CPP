@@ -164,9 +164,9 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 [template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
 [if(par.supportedTypes())]
-[par.type.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
+[par.generateCppType()/] [par.name.toLowerFirst()/] = [par.default/];
 [else]
-std::shared_ptr<[par.type.generateCppType(true)/]> [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType()/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 
 [/for]

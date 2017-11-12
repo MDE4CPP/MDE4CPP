@@ -31,7 +31,14 @@ pointerName : String = if (aPackage.name = aClassifier.namespace.ns()) then aCla
 using namespace [aPackage.name/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
-	m_umlValue(_element)
+	m_umlValue(_element),
+	m_umlValues(nullptr)
+{
+}
+
+[className/]::[className/](std::shared_ptr<Bag<[pointerName/]>> _element):
+	m_umlValue(nullptr),
+	m_umlValues(_element)
 {
 }
 
@@ -59,9 +66,19 @@ std::shared_ptr<[pointerName/]> [className/]::getUmlValue() const
 	return m_umlValue;
 }
 
+std::shared_ptr<Bag<[pointerName/]>> [className/]::getUmlValues() const
+{
+	return m_umlValues;
+}
+
 void [className/]::setUmlValue(std::shared_ptr<[pointerName/]> _element)
 {
 	m_umlValue = _element;
+}
+
+void [className/]::setUmlValues(std::shared_ptr<Bag<[pointerName/]>> _element)
+{
+	m_umlValues = _element;
 }
 [/file]
 [/template]
