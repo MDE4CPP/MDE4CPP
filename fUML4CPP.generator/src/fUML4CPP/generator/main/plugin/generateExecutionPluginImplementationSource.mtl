@@ -24,10 +24,9 @@
 [file (aPackage.getPackageName().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[packageName/].hpp"
 [generateMainIncludes()/]
-[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first() ]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
 [generateActivityRelatedIncludes(act, aPackage)/]
-[/let][/if]
+[/for]
 
 using namespace [aPackage.name/];
 
@@ -60,16 +59,18 @@ std::string [packageName/]::eNS_PREFIX()
 
 boost::any [packageName/]::executeActivity(std::string activityName, std::shared_ptr<std::vector<boost::any>> parameterList)
 {
+
 	[generateLocusInitialization()/]
 
-[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
-[let act : Activity = aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->first()]
-	[act.generateParameterFromAny(aPackage)/]
-	[act.generateStartActivityExecution(aPackage)/]   
-	[act.generateReturnParameter(aPackage)/]
-[/let][else]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
+	if (activityName.compare("[act.name/]") == 0)
+	{
+		[act.generateParameterFromAny(aPackage)/]
+		[act.generateStartActivityExecution(aPackage)/]   
+		[act.generateReturnParameter(aPackage)/]
+	}
+[/for]
 	return nullptr;
-[/if]
 }
 
 [/file]
