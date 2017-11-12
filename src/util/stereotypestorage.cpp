@@ -40,7 +40,7 @@ void StereotypeStorage::applyStereotype(uml::Element *_element, std::shared_ptr<
 				//check type of the property
 				if(_element->eClass()->getName()==prop->getType()->getName())
 				{
-					std::cout <<"Set Base Property "<< prop->getQualifiedName() << std::endl;
+					DEBUG_MESSAGE(std::cout <<"Set Base Property "<< prop->getQualifiedName() << std::endl;)
 					//set Base
 					_stereotype->set(prop,this);
 				}
@@ -49,7 +49,7 @@ void StereotypeStorage::applyStereotype(uml::Element *_element, std::shared_ptr<
 	}
 
 	m_stereotypeApplicationMap.insert(std::pair<uml::Element *,std::shared_ptr<uml::Stereotype>>(_element,_stereotype));
-	std::cout<< "Stereotype applyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;
+	DEBUG_MESSAGE(std::cout<< "Stereotype applyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;)
 }
 
 std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(uml::Element * _element, std::string qualifiedName)
@@ -94,7 +94,7 @@ void StereotypeStorage::unapplyStereotype(uml::Element *_element, std::shared_pt
 {
     if(isStereotypeApplied(_element,_stereotype))
     {
-        std::cout << "Stereotype unapplyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;
+        DEBUG_MESSAGE(std::cout << "Stereotype unapplyed :"<<_stereotype->getMetaClass()->getQualifiedName() << std::endl;)
         m_stereotypeApplicationMap.erase(_element); // _element, _stereotype
     }
 

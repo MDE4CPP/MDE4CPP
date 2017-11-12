@@ -1,6 +1,12 @@
 #ifndef STEREOTYPESTORAGE_H
 #define STEREOTYPESTORAGE_H
 
+#ifdef NDEBUG
+  #define DEBUG_MESSAGE(a) /**/
+#else
+  #define DEBUG_MESSAGE(a) a
+#endif
+
 #include <map>
 #include <string>
 
