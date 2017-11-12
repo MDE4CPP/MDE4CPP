@@ -103,8 +103,10 @@
 
 [/template]
 
+[query public isTargetPin(pin : Pin) : Boolean = if (pin.owner.oclIsKindOf(CallOperationAction)) then pin.owner.oclAsType(CallOperationAction).target = pin else false endif/]
+
 [template public initializePin(pin : Pin)]
-[if (pin.oclIsKindOf(InputPin)) and pin.owner.oclAsType(CallOperationAction).target = pin]
+[if (pin.oclIsKindOf(InputPin) and pin.isTargetPin())]
 [memberName(pin.owner.oclAsType(NamedElement))/]->getInput()->push_back([memberName(pin)/]);
 [/if]
 [/template]
