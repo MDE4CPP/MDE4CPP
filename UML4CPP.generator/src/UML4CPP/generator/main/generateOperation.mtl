@@ -24,13 +24,13 @@
  * @param anEOperation
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
-virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.type.generateCppType()/] [sParameter.name/][/for] ) [abstractSufix(impl)/];
+virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')][sParameter.generateCppType()/] [sParameter.name/][/for] ) [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.type.generateCppType()/] [sParameter.name/][/for])
+[sParameter.generateCppType()/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 	[aOperation.generateCppType()/] [if(aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().name.oclIsUndefined())][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().myQualifiedName()/][else][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/][/if];
