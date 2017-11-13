@@ -138,7 +138,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	//Simple type
  	[par.name/]Value->setValue([par.name/]);
 	[/if]
-    //outputParameters->append(inputParameters->value([anCallOperationAction.operation.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1/]));
+    //outputParameters->append(inputParameters->value([anCallOperationAction.operation.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1/]));
 	[/for]
 }
 [/file]
