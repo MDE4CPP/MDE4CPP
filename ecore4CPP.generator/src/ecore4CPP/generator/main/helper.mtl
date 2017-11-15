@@ -136,6 +136,8 @@
 #else
     #define ACT_DEBUG(a) /**/
 #endif
+
+//#include "util/ProfileCallCount.hpp"
 [/template]
 
 [template public endGuard(namedelement : ENamedElement)]

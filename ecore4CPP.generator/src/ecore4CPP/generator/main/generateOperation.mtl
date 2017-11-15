@@ -50,6 +50,7 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.gen
 [aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([aOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
 {
 [if (hasKey('body'))]
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	[valueKey('body')/]
 	//end of body
