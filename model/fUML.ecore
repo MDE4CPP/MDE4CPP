@@ -3,6 +3,7 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="fUML" nsURI="http://www.eclipse.org/emf/2002/fUML" nsPrefix="fUML">
   <eClassifiers xsi:type="ecore:EClass" name="Locus">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="shared_from_this" value="true"/>
       <details key="includes" value="#include &quot;Classifier.hpp&quot;&#xD;&#xA;#include &quot;Behavior.hpp&quot;&#xD;&#xA;#include &quot;Class.hpp&quot;&#xD;&#xA;#include &quot;FUMLFactory.hpp&quot;&#xD;&#xA;#include &quot;ExecutionFactory.hpp&quot;&#xD;&#xA;#include &quot;ExtensionalValue.hpp&quot;&#xD;&#xA;#include &quot;Executor.hpp&quot;&#xD;&#xA;#include &quot;Object.hpp&quot;&#xD;&#xA;#include &quot;Execution.hpp&quot;&#xD;&#xA;"/>
     </eAnnotations>
     <eOperations name="conforms" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
@@ -14,13 +15,13 @@
     </eOperations>
     <eOperations name="assignExecutor" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="this->setExecutor(executor);&#xD;&#xA;&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;this->getExecutor()->setLocus(std::shared_ptr&lt;Locus>(this, null_deleter()));"/>
+        <details key="body" value="&#x9;this->setExecutor(executor);&#xD;&#xA;&#x9;this->getExecutor()->setLocus(shared_from_this());"/>
       </eAnnotations>
       <eParameters name="executor" ordered="false" lowerBound="1" eType="#//Executor"/>
     </eOperations>
     <eOperations name="assignFactory" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="this->setFactory(factory);&#xD;&#xA;&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;this->getFactory()->setLocus(std::shared_ptr&lt;Locus>(this, null_deleter()));"/>
+        <details key="body" value="&#x9;this->setFactory(factory);&#xD;&#xA;&#x9;this->getFactory()->setLocus(shared_from_this());"/>
       </eAnnotations>
       <eParameters name="factory" ordered="false" lowerBound="1" eType="#//ExecutionFactory"/>
     </eOperations>
@@ -32,7 +33,7 @@
     </eOperations>
     <eOperations name="add" ordered="false" lowerBound="1">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;value->setLocus(std::shared_ptr&lt;Locus>(this, null_deleter()));&#xD;&#xA;&#x9;this->getExtensionalValues()->push_back(value);"/>
+        <details key="body" value="&#x9;value->setLocus(shared_from_this());&#xD;&#xA;&#x9;this->getExtensionalValues()->push_back(value);"/>
       </eAnnotations>
       <eParameters name="value" ordered="false" lowerBound="1" eType="#//ExtensionalValue"/>
     </eOperations>
@@ -68,7 +69,7 @@
     </eOperations>
     <eOperations name="createEvaluation" ordered="false" lowerBound="1" eType="#//Evaluation">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;fUML::Evaluation> evaluation = std::dynamic_pointer_cast&lt;fUML::Evaluation>(this->instantiateVisitor(std::dynamic_pointer_cast&lt;uml::Element>(specification)));&#xD;&#xA;&#xD;&#xA;    evaluation->setSpecification(specification);&#xD;&#xA;    evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;&#xD;&#xA;&#xD;&#xA;    return evaluation;"/>
+        <details key="body" value="&#x9;std::shared_ptr&lt;fUML::Evaluation> evaluation = std::dynamic_pointer_cast&lt;fUML::Evaluation>(this->instantiateVisitor(specification));&#xD;&#xA;&#xD;&#xA;    evaluation->setSpecification(specification);&#xD;&#xA;    evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;&#xD;&#xA;&#xD;&#xA;    return evaluation;"/>
       </eAnnotations>
       <eParameters name="specification" ordered="false" lowerBound="1" eType="ecore:EClass ../../uml/model/uml.ecore#//ValueSpecification"/>
     </eOperations>
@@ -1192,7 +1193,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Token" abstract="true">
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="/**/"/>
       <details key="shared_from_this" value="true"/>
     </eAnnotations>
     <eOperations name="transfer" ordered="false" lowerBound="1" eType="#//Token">
