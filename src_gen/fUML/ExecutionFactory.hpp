@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -102,6 +104,7 @@ namespace fUML
 	/*!
 	 */
 	class ExecutionFactory : virtual public ecore::EObject 
+
 	{
 		public:
  			ExecutionFactory(const ExecutionFactory &) {}

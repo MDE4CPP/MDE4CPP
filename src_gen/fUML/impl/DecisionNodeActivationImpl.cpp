@@ -129,6 +129,7 @@ std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Value>  inputValue,std::shared_ptr<fUML::Value>  decisionInputValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
@@ -195,6 +196,7 @@ std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::executeDecisionInputBeh
 
 void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[fire] Decision node " << this->getNode()->getName() << "..."<<std::endl;)
 
@@ -233,6 +235,7 @@ void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomi
 
 std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecisionInputFlowInstance() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
@@ -257,6 +260,7 @@ std::shared_ptr<fUML::ActivityEdgeInstance> DecisionNodeActivationImpl::getDecis
 
 std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowValue() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ActivityEdgeInstance> decisionInputFlowInstance = this->getDecisionInputFlowInstance();
 
@@ -276,6 +280,7 @@ std::shared_ptr<fUML::Value> DecisionNodeActivationImpl::getDecisionInputFlowVal
 
 std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Value> decisionInputValue = this->getDecisionInputFlowValue();
 
@@ -310,6 +315,7 @@ std::shared_ptr<Bag<fUML::Value> > DecisionNodeActivationImpl::getDecisionValues
 
 bool DecisionNodeActivationImpl::hasObjectFlowInput() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
@@ -327,6 +333,7 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 
 bool DecisionNodeActivationImpl::isReady() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	unsigned int i = 0;
     bool ready = true;
@@ -342,6 +349,7 @@ bool DecisionNodeActivationImpl::isReady()
 
 std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Token> > removedControlTokens(new Bag<fUML::Token>());
 
@@ -367,6 +375,7 @@ std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::removeJoinedContr
 
 std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
 
@@ -391,6 +400,7 @@ std::shared_ptr<Bag<fUML::Token> > DecisionNodeActivationImpl::takeOfferedTokens
 
 void DecisionNodeActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (this->getDecisionInputExecution() != nullptr) {
         this->getDecisionInputExecution()->terminate();
@@ -402,6 +412,7 @@ void DecisionNodeActivationImpl::terminate()
 
 bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Value>  value) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool guardResult = true;
     if (gaurd != nullptr) 

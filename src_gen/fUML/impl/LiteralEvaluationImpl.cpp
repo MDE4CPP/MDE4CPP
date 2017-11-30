@@ -87,6 +87,7 @@ std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::PrimitiveType> type = std::dynamic_pointer_cast<uml::PrimitiveType>(this->getSpecification()->getType());
 

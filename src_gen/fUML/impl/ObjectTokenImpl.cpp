@@ -52,6 +52,7 @@ ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
 	
@@ -91,6 +92,7 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return (this == other.get());
 	//end of body
@@ -98,6 +100,7 @@ bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 
 bool ObjectTokenImpl::isControl() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return false;
 	//end of body
@@ -131,7 +134,9 @@ boost::any ObjectTokenImpl::eGet(int featureID,  bool resolve, bool coreType) co
 		case FUMLPackage::TOKEN_HOLDER:
 			return getHolder(); //540
 		case FUMLPackage::OBJECTTOKEN_VALUE:
-			return getValue(); //541
+			return getValue(); //542
+		case FUMLPackage::TOKEN_WITHDRAWN:
+			return isWithdrawn(); //541
 	}
 	return boost::any();
 }

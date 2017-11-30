@@ -148,6 +148,7 @@ bool ActionActivationImpl::isFiring() const
 //*********************************
 void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation> forkNodeActivation;
 
@@ -170,6 +171,7 @@ void ActionActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeIns
 
 void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>  pinActivation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getPinActivation()->push_back(pinActivation);
     struct null_deleter{void operator()(void const *) const { } };
@@ -179,6 +181,7 @@ void ActionActivationImpl::addPinActivation(std::shared_ptr<fUML::PinActivation>
 
 std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::completeAction() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[fire] Checking if " << this->getNode()->getName() << " should fire again..."<<std::endl;)
 
@@ -198,6 +201,7 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::completeAction()
 
 void ActionActivationImpl::createNodeActivations() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
 
@@ -262,6 +266,7 @@ void ActionActivationImpl::doAction()
 
 void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    do {
 
@@ -278,6 +283,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingToke
 
 std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin>  pin) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[getTokens] node = "  << this->getNode()->getName()  << ", pin = "  << pin->getName()<<std::endl;)
 
@@ -304,6 +310,7 @@ std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::getTokens(std::shared_p
 
 bool ActionActivationImpl::isFirng() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return this->isFiring();
 	//end of body
@@ -311,6 +318,7 @@ bool ActionActivationImpl::isFirng()
 
 bool ActionActivationImpl::isReady() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Action> actionNode = std::dynamic_pointer_cast<uml::Action>(this->getNode());
     bool ready = false;
@@ -360,6 +368,7 @@ bool ActionActivationImpl::isReady()
 
 bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    bool isSource = false;
     if (this->getOutgoingEdges()->size() > 0) {
@@ -372,6 +381,7 @@ bool ActionActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstanc
 
 std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool value) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	 std::shared_ptr<uml::LiteralBoolean> booleanValue = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::shared_ptr<uml::Class>());
     booleanValue->setValue(value);
@@ -381,6 +391,7 @@ std::shared_ptr<fUML::BooleanValue> ActionActivationImpl::makeBooleanValue(bool 
 
 void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<fUML::Value>  value) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<("[putToken] node = " + this->getNode()->getName())<<std::endl;)
 
@@ -396,6 +407,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin>  pin,std::sh
 
 void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Value> >  values) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	for (std::shared_ptr<Value> value : *values)
     {
@@ -406,12 +418,16 @@ void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin>  pin,std::s
 
 std::shared_ptr<fUML::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin>  pin) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<PinActivation> pinActivation = nullptr;
+	    std::shared_ptr<PinActivation> pinActivation = nullptr;
 
-	std::shared_ptr<Bag<PinActivation> > pinActivationList = this->getPinActivation();
-    for(std::shared_ptr<PinActivation> thisPinActivation: *pinActivationList)
+    Bag<PinActivation>* pinActivationListPtr = this->getPinActivation().get();
+    const int size = pinActivationListPtr->size();
+    std::shared_ptr<PinActivation>thisPinActivation;
+    for(int i=0; i< size; i++)
     {
+        thisPinActivation = (*pinActivationListPtr)[i];
         if (thisPinActivation->getNode() == pin) {
             pinActivation = thisPinActivation;
             break;
@@ -424,6 +440,7 @@ std::shared_ptr<fUML::PinActivation> ActionActivationImpl::retrievePinActivation
 
 void ActionActivationImpl::run() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    ActivityNodeActivationImpl::run();
 
@@ -437,6 +454,7 @@ void ActionActivationImpl::run()
 
 void ActionActivationImpl::sendOffers() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast <uml::Action>(this->getNode());
 
@@ -460,6 +478,7 @@ void ActionActivationImpl::sendOffers()
 
 std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action> (this->getNode());
 
@@ -506,6 +525,7 @@ std::shared_ptr<Bag<fUML::Token> > ActionActivationImpl::takeOfferedTokens()
 
 std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin>  pin) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[takeTokens] node = "  << this->getNode()->getName()  << ", pin = "  << pin->getName()<<std::endl;)
 
@@ -528,6 +548,7 @@ std::shared_ptr<Bag<fUML::Value> > ActionActivationImpl::takeTokens(std::shared_
 
 void ActionActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    ActivityNodeActivationImpl::terminate();
 
@@ -539,6 +560,7 @@ void ActionActivationImpl::terminate()
 
 bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Value>  value,std::shared_ptr<fUML::Link>  link) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool participates = false;
 

@@ -86,6 +86,7 @@ std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> LiteralStringEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralString> literal = std::dynamic_pointer_cast<uml::LiteralString>(getSpecification());
 	std::shared_ptr<StringValue> stringValue(FUMLFactory::eInstance()->createStringValue());

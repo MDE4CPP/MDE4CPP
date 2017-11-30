@@ -84,6 +84,7 @@ std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> LiteralNullEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return nullptr;
 	//end of body

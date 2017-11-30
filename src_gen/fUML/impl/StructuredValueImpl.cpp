@@ -90,6 +90,7 @@ std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 //*********************************
 void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
 	//end of body
@@ -97,6 +98,7 @@ void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeat
 
 void StructuredValueImpl::createFeatureValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
@@ -136,6 +138,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > StructuredValueImpl::retrieveFeatureVa
 
 std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::InstanceValue> instanceValue = uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
 	std::shared_ptr<uml::InstanceSpecification> instance = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());

@@ -30,11 +30,11 @@ FUMLPackageImpl::~FUMLPackageImpl()
 	locusEClass.reset();
 	executionFactoryEClass.reset();
 	executorEClass.reset();
-	executionFactoryL1EClass.reset();
 	semanticStrategyEClass.reset();
 	semanticVisitorEClass.reset();
 	choiceStrategyEClass.reset();
 	firstChoiceStrategyEClass.reset();
+	executionFactoryL1EClass.reset();
 	executionFactoryL2EClass.reset();
 	executionFactoryL3EClass.reset();
 	valueEClass.reset();
@@ -1085,13 +1085,13 @@ void FUMLPackageImpl::createPackageContents()
 	
 
 	tokenEClass = createEClass(TOKEN);
+	createEAttribute(tokenEClass, TOKEN_WITHDRAWN);
 	
 	createEReference(tokenEClass, TOKEN_HOLDER);
 	
 	createEOperation(tokenEClass, TOKEN___EQUALS__TOKEN);
 	createEOperation(tokenEClass, TOKEN___GETVALUE);
 	createEOperation(tokenEClass, TOKEN___ISCONTROL);
-	createEOperation(tokenEClass, TOKEN___ISWITHDRAWN);
 	createEOperation(tokenEClass, TOKEN___TRANSFER__ACTIVITYNODEACTIVATION);
 	createEOperation(tokenEClass, TOKEN___WITHDRAW);
 	
@@ -2874,6 +2874,7 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class Token
 	initEClass(tokenEClass, nullptr, "Token", true, false, true);
+	initEAttribute(getToken_Withdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(),"withdrawn","",0,1, false,false, true, false, false, true, false, true);
 	
 	initEReference(getToken_Holder(),getActivityNodeActivation(),getActivityNodeActivation_HeldTokens(),"holder","",0,1, false,false, true, false, true, false, true, false,false);
 	
@@ -2883,8 +2884,6 @@ void FUMLPackageImpl::initializePackageContents()
 	op = initEOperation(getToken___GetValue(),getValue(), "getValue", 0, 1, true,false );
 	
 	op = initEOperation(getToken___IsControl(),ecore::EcorePackage::eInstance()->getEBoolean(), "isControl", 1, 1, true,false );
-	
-	op = initEOperation(getToken___IsWithdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(), "isWithdrawn", 1, 1, true,false );
 	
 	op = initEOperation(getToken___Transfer__ActivityNodeActivation(),getToken(), "transfer", 1, 1, true,false );
 	addEParameter(op ,getActivityNodeActivation()  , "holder",0,1, true,true);
@@ -5564,10 +5563,14 @@ std::shared_ptr<ecore::EClass> FUMLPackageImpl::getToken() const
 {
 	return tokenEClass;
 }
+std::shared_ptr<ecore::EAttribute> FUMLPackageImpl::getToken_Withdrawn() const
+{
+	return std::dynamic_pointer_cast<ecore::EAttribute>(tokenEClass->getEStructuralFeatures()->at(0));
+}
 
 std::shared_ptr<ecore::EReference> FUMLPackageImpl::getToken_Holder() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(tokenEClass->getEStructuralFeatures()->at(0));
+	return std::dynamic_pointer_cast<ecore::EReference>(tokenEClass->getEStructuralFeatures()->at(1));
 }
 
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___Equals__Token() const
@@ -5582,17 +5585,13 @@ std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___IsControl() const
 {
 	return std::dynamic_pointer_cast<ecore::EOperation>(tokenEClass->getEOperations()->at(2));
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___IsWithdrawn() const
+std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___Transfer__ActivityNodeActivation() const
 {
 	return std::dynamic_pointer_cast<ecore::EOperation>(tokenEClass->getEOperations()->at(3));
 }
-std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___Transfer__ActivityNodeActivation() const
-{
-	return std::dynamic_pointer_cast<ecore::EOperation>(tokenEClass->getEOperations()->at(4));
-}
 std::shared_ptr<ecore::EOperation> FUMLPackageImpl::getToken___Withdraw() const
 {
-	return std::dynamic_pointer_cast<ecore::EOperation>(tokenEClass->getEOperations()->at(5));
+	return std::dynamic_pointer_cast<ecore::EOperation>(tokenEClass->getEOperations()->at(4));
 }
 
 // End Class Token

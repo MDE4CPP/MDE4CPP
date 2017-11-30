@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -57,6 +59,7 @@ namespace fUML
 	/*!
 	 */
 	class FeatureValue : virtual public ecore::EObject 
+
 	{
 		public:
  			FeatureValue(const FeatureValue &) {}

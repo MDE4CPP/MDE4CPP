@@ -55,6 +55,7 @@ ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
 	#endif
 	m_baseTokenIsWithdrawn = obj.isBaseTokenIsWithdrawn();
 	m_remainingOffersCount = obj.getRemainingOffersCount();
+	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
 	
@@ -107,6 +108,7 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 //*********************************
 bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return (this == otherToken.get());
 	//end of body
@@ -114,6 +116,7 @@ bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Token>  otherToken)
 
 std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getBaseToken()->getValue();
 	//end of body
@@ -121,6 +124,7 @@ std::shared_ptr<fUML::Value> ForkedTokenImpl::getValue()  const
 
 bool ForkedTokenImpl::isControl() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getBaseToken()->isControl();
 	//end of body
@@ -128,6 +132,7 @@ bool ForkedTokenImpl::isControl()
 
 void ForkedTokenImpl::withdraw() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
         this->getBaseToken()->withdraw();
@@ -170,13 +175,15 @@ boost::any ForkedTokenImpl::eGet(int featureID,  bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case FUMLPackage::FORKEDTOKEN_BASETOKEN:
-			return getBaseToken(); //551
+			return getBaseToken(); //552
 		case FUMLPackage::FORKEDTOKEN_BASETOKENISWITHDRAWN:
-			return isBaseTokenIsWithdrawn(); //553
+			return isBaseTokenIsWithdrawn(); //554
 		case FUMLPackage::TOKEN_HOLDER:
 			return getHolder(); //550
 		case FUMLPackage::FORKEDTOKEN_REMAININGOFFERSCOUNT:
-			return getRemainingOffersCount(); //552
+			return getRemainingOffersCount(); //553
+		case FUMLPackage::TOKEN_WITHDRAWN:
+			return isWithdrawn(); //551
 	}
 	return boost::any();
 }

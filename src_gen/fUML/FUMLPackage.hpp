@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include "EPackage.hpp"
 #include "EcoreFactory.hpp"
 
@@ -625,7 +627,7 @@ namespace fUML
 
 			// Begin Class ChoiceStrategy
 			//Class and Feature IDs 
-			static const int CHOICESTRATEGY = 6;
+			static const int CHOICESTRATEGY = 5;
 			static const int CHOICESTRATEGY_FEATURE_COUNT = 0;
 			static const int CHOICESTRATEGY_OPERATION_COUNT = 3;
 			
@@ -846,13 +848,13 @@ namespace fUML
 			// Begin Class ControlToken
 			//Class and Feature IDs 
 			static const int CONTROLTOKEN = 56;
-			static const int CONTROLTOKEN_FEATURE_COUNT = 1;
-			static const int CONTROLTOKEN_OPERATION_COUNT = 9;
+			static const int CONTROLTOKEN_FEATURE_COUNT = 2;
+			static const int CONTROLTOKEN_OPERATION_COUNT = 8;
 			
 			
-			static const int CONTROLTOKEN___EQUALS__TOKEN = 6;
-			static const int CONTROLTOKEN___GETVALUE = 8;
-			static const int CONTROLTOKEN___ISCONTROL = 7;
+			static const int CONTROLTOKEN___EQUALS__TOKEN = 5;
+			static const int CONTROLTOKEN___GETVALUE = 7;
+			static const int CONTROLTOKEN___ISCONTROL = 6;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getControlToken() const = 0;
@@ -1205,7 +1207,7 @@ namespace fUML
 
 			// Begin Class ExecutionFactoryL1
 			//Class and Feature IDs 
-			static const int EXECUTIONFACTORYL1 = 3;
+			static const int EXECUTIONFACTORYL1 = 7;
 			static const int EXECUTIONFACTORYL1_FEATURE_COUNT = 4;
 			static const int EXECUTIONFACTORYL1_OPERATION_COUNT = 11;
 			
@@ -1435,7 +1437,7 @@ namespace fUML
 
 			// Begin Class FirstChoiceStrategy
 			//Class and Feature IDs 
-			static const int FIRSTCHOICESTRATEGY = 7;
+			static const int FIRSTCHOICESTRATEGY = 6;
 			static const int FIRSTCHOICESTRATEGY_FEATURE_COUNT = 0;
 			static const int FIRSTCHOICESTRATEGY_OPERATION_COUNT = 4;
 			
@@ -1490,17 +1492,17 @@ namespace fUML
 			// Begin Class ForkedToken
 			//Class and Feature IDs 
 			static const int FORKEDTOKEN = 55;
-			static const int FORKEDTOKEN_FEATURE_COUNT = 4;
-			static const int FORKEDTOKEN_OPERATION_COUNT = 10;
-			static const int FORKEDTOKEN_BASETOKENISWITHDRAWN = 553;
-			static const int FORKEDTOKEN_REMAININGOFFERSCOUNT = 552;
+			static const int FORKEDTOKEN_FEATURE_COUNT = 5;
+			static const int FORKEDTOKEN_OPERATION_COUNT = 9;
+			static const int FORKEDTOKEN_BASETOKENISWITHDRAWN = 554;
+			static const int FORKEDTOKEN_REMAININGOFFERSCOUNT = 553;
 			
-			static const int FORKEDTOKEN_BASETOKEN = 551;
+			static const int FORKEDTOKEN_BASETOKEN = 552;
 			
-			static const int FORKEDTOKEN___EQUALS__TOKEN = 6;
-			static const int FORKEDTOKEN___GETVALUE = 9;
-			static const int FORKEDTOKEN___ISCONTROL = 8;
-			static const int FORKEDTOKEN___WITHDRAW = 7;
+			static const int FORKEDTOKEN___EQUALS__TOKEN = 5;
+			static const int FORKEDTOKEN___GETVALUE = 8;
+			static const int FORKEDTOKEN___ISCONTROL = 7;
+			static const int FORKEDTOKEN___WITHDRAW = 6;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getForkedToken() const = 0;
@@ -2020,13 +2022,13 @@ namespace fUML
 			// Begin Class ObjectToken
 			//Class and Feature IDs 
 			static const int OBJECTTOKEN = 54;
-			static const int OBJECTTOKEN_FEATURE_COUNT = 2;
-			static const int OBJECTTOKEN_OPERATION_COUNT = 8;
+			static const int OBJECTTOKEN_FEATURE_COUNT = 3;
+			static const int OBJECTTOKEN_OPERATION_COUNT = 7;
 			
-			static const int OBJECTTOKEN_VALUE = 541;
+			static const int OBJECTTOKEN_VALUE = 542;
 			
-			static const int OBJECTTOKEN___EQUALS__TOKEN = 6;
-			static const int OBJECTTOKEN___ISCONTROL = 7;
+			static const int OBJECTTOKEN___EQUALS__TOKEN = 5;
+			static const int OBJECTTOKEN___ISCONTROL = 6;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectToken() const = 0;
@@ -2383,7 +2385,7 @@ namespace fUML
 
 			// Begin Class SemanticStrategy
 			//Class and Feature IDs 
-			static const int SEMANTICSTRATEGY = 4;
+			static const int SEMANTICSTRATEGY = 3;
 			static const int SEMANTICSTRATEGY_FEATURE_COUNT = 0;
 			static const int SEMANTICSTRATEGY_OPERATION_COUNT = 1;
 			
@@ -2401,7 +2403,7 @@ namespace fUML
 
 			// Begin Class SemanticVisitor
 			//Class and Feature IDs 
-			static const int SEMANTICVISITOR = 5;
+			static const int SEMANTICVISITOR = 4;
 			static const int SEMANTICVISITOR_FEATURE_COUNT = 0;
 			static const int SEMANTICVISITOR_OPERATION_COUNT = 2;
 			
@@ -2624,27 +2626,27 @@ namespace fUML
 			// Begin Class Token
 			//Class and Feature IDs 
 			static const int TOKEN = 53;
-			static const int TOKEN_FEATURE_COUNT = 1;
-			static const int TOKEN_OPERATION_COUNT = 6;
+			static const int TOKEN_FEATURE_COUNT = 2;
+			static const int TOKEN_OPERATION_COUNT = 5;
+			static const int TOKEN_WITHDRAWN = 531;
 			
 			static const int TOKEN_HOLDER = 530;
 			
 			static const int TOKEN___EQUALS__TOKEN = 2;
-			static const int TOKEN___GETVALUE = 5;
-			static const int TOKEN___ISCONTROL = 4;
-			static const int TOKEN___ISWITHDRAWN = 3;
+			static const int TOKEN___GETVALUE = 4;
+			static const int TOKEN___ISCONTROL = 3;
 			static const int TOKEN___TRANSFER__ACTIVITYNODEACTIVATION = 0;
 			static const int TOKEN___WITHDRAW = 1;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getToken() const = 0;
+			virtual std::shared_ptr<ecore::EAttribute> getToken_Withdrawn() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getToken_Holder() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getToken___Equals__Token() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken___GetValue() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken___IsControl() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getToken___IsWithdrawn() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken___Transfer__ActivityNodeActivation() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getToken___Withdraw() const = 0;
 			

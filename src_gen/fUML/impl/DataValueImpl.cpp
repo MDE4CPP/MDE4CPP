@@ -100,6 +100,7 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
@@ -109,6 +110,7 @@ std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 
 std::shared_ptr<fUML::Value> DataValueImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createDataValue());
 	//end of body

@@ -102,6 +102,7 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() c
 //*********************************
 void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 			//DEBUG_MESSAGE(std::cout << "[fire] " << this->getNode()->getClass()->getName() << " " << this->getNode()->getName();)
 

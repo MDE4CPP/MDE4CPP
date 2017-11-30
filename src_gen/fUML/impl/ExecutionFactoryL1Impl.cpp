@@ -115,36 +115,51 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL1Impl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::SemanticVisitor> visitor;
-    if(std::dynamic_pointer_cast<uml::LiteralBoolean>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::LiteralString>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::LiteralNull>(element) != nullptr)
-    {
-        visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::InstanceValue>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::LiteralUnlimitedNatural>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::LiteralInteger>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
-    }
-    else if(std::dynamic_pointer_cast<uml::LiteralReal>(element) != nullptr)
-    {
-        visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
-    }
+		std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
+
+    switch (element->eClass()->getClassifierID()) {
+		case uml::UmlPackage::LITERALBOOLEAN:
+		{
+				visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
+				break;
+		}
+
+		case uml::UmlPackage::LITERALSTRING:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALNULL:
+		{
+			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
+			break;
+		}
+		case uml::UmlPackage::INSTANCEVALUE:
+		{
+			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALUNLIMITEDNATURAL:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALINTEGER:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
+			break;
+		}
+		case uml::UmlPackage::LITERALREAL:
+		{
+			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
+			break;
+		}
+		default:{
+            //L3 provides an error message
+        }
+	}
 
     return visitor;
 	//end of body
@@ -167,13 +182,13 @@ boost::any ExecutionFactoryL1Impl::eGet(int featureID,  bool resolve, bool coreT
 	switch(featureID)
 	{
 		case FUMLPackage::EXECUTIONFACTORY_BUILTINTYPES:
-			return getBuiltInTypes(); //33
+			return getBuiltInTypes(); //73
 		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
-			return getLocus(); //30
+			return getLocus(); //70
 		case FUMLPackage::EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES:
-			return getPrimitiveBehaviorPrototypes(); //32
+			return getPrimitiveBehaviorPrototypes(); //72
 		case FUMLPackage::EXECUTIONFACTORY_STRATEGIES:
-			return getStrategies(); //31
+			return getStrategies(); //71
 	}
 	return boost::any();
 }

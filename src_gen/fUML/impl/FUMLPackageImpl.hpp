@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <cassert>
 
 #include "AcceptEventActionActivationImpl.hpp"
@@ -1387,13 +1389,13 @@ namespace fUML
 			// Begin Class Token
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getToken() const ;
+			virtual std::shared_ptr<ecore::EAttribute> getToken_Withdrawn() const ;
 			
 			virtual std::shared_ptr<ecore::EReference> getToken_Holder() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getToken___Equals__Token() const ;
 			virtual std::shared_ptr<ecore::EOperation> getToken___GetValue() const ;
 			virtual std::shared_ptr<ecore::EOperation> getToken___IsControl() const ;
-			virtual std::shared_ptr<ecore::EOperation> getToken___IsWithdrawn() const ;
 			virtual std::shared_ptr<ecore::EOperation> getToken___Transfer__ActivityNodeActivation() const ;
 			virtual std::shared_ptr<ecore::EOperation> getToken___Withdraw() const ;
 			

@@ -98,6 +98,7 @@ std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceSpecification> instance = (std::dynamic_pointer_cast<uml::InstanceValue>(this->getSpecification()))->getInstance();
 	std::shared_ptr<Bag<uml::Classifier> > types = instance->getClassifier();

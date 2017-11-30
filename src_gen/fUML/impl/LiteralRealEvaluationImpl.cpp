@@ -86,6 +86,7 @@ std::shared_ptr<ecore::EClass> LiteralRealEvaluationImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Value> LiteralRealEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
 	std::shared_ptr<RealValue> realValue(fUML::FUMLFactory::eInstance()->createRealValue());

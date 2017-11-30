@@ -103,6 +103,7 @@ std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const
 //*********************************
 void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if (this->getNode() == nullptr) 
 	{
@@ -134,6 +135,7 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTo
 
 void ForkNodeActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->clearTokens();
     ControlNodeActivationImpl::terminate();

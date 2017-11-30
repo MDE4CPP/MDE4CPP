@@ -91,6 +91,7 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 void ExtensionalValueImpl::destroy() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if(this->getLocus() != nullptr)
     {

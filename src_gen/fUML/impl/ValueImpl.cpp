@@ -81,6 +81,7 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 bool ValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > myTypes = this->getTypes();
 	std::shared_ptr<Bag<uml::Classifier> > otherTypes = otherValue->getTypes();
@@ -122,6 +123,7 @@ std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes()  const
 
 bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Classifier> > types = this->getTypes();
 
@@ -139,6 +141,7 @@ bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
 
 std::string ValueImpl::objectId() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "SemanticVisitor";//typename(SemanticVisitor); //return super.toString();
 

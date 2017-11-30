@@ -73,6 +73,7 @@ std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 //*********************************
 void SemanticVisitorImpl::_beginIsolation() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<< "[_beginIsolation] Begin isolation."<<std::endl;)
 	//end of body
@@ -80,6 +81,7 @@ void SemanticVisitorImpl::_beginIsolation()
 
 void SemanticVisitorImpl::_endIsolation() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<< "[_endIsolation] End isolation."<<std::endl;)
 	//end of body

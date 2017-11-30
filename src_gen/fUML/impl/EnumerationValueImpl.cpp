@@ -99,6 +99,7 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool isEqual = false;
 	std::shared_ptr<fUML::EnumerationValue> value = std::dynamic_pointer_cast<fUML::EnumerationValue>(otherValue);
@@ -112,6 +113,7 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
     types->push_back(std::dynamic_pointer_cast<uml::Classifier>(this->getType()));
@@ -121,6 +123,7 @@ std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 
 std::shared_ptr<fUML::Value> EnumerationValueImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createEnumerationValue());
 	//end of body
@@ -128,6 +131,7 @@ std::shared_ptr<fUML::Value> EnumerationValueImpl::new_()
 
 std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::InstanceValue> instanceValue(uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>()));
     //Remark: instance is so defined in the specification, but even there is not used.
@@ -142,6 +146,7 @@ std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 
 std::string EnumerationValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return this->getLiteral()->getName();
 	//end of body

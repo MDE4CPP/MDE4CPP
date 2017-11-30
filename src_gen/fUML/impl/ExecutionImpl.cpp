@@ -140,6 +140,7 @@ std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const
 //*********************************
 void ExecutionImpl::execute() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
 	//end of body
@@ -147,6 +148,7 @@ void ExecutionImpl::execute()
 
 std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
 	//end of body
@@ -154,6 +156,7 @@ std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior()
 
 std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<ParameterValue> > outputs(new Bag<ParameterValue>());
 
@@ -175,6 +178,7 @@ std::shared_ptr<Bag<fUML::ParameterValue> > ExecutionImpl::getOutputParameterVal
 
 std::shared_ptr<fUML::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> parameterValue = nullptr;
 
@@ -196,6 +200,7 @@ std::shared_ptr<fUML::Value> ExecutionImpl::new_()
 
 void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  parameterValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ParameterValue> existingParameterValue = this->getParameterValue(parameterValue->getParameter());
 
@@ -214,6 +219,7 @@ void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::ParameterValue>  par
 
 void ExecutionImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return;
 	//end of body

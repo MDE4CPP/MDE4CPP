@@ -153,6 +153,7 @@ bool ActivityNodeActivationImpl::isRunning() const
 //*********************************
 void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
 	edge->setTarget(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
@@ -162,6 +163,7 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::ActivityE
 
 void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityEdgeInstance>  edge) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	 if (edge->getSource().get() != this)
     {
@@ -174,6 +176,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::ActivityE
 
 void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 				DEBUG_MESSAGE(
 		if (this->getNode()== nullptr)
@@ -185,12 +188,10 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 			std::cout<<"[addToken] node = " << this->getNode()->getName()<<std::endl;
             
             std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
-			if(nullptr != owner) {
 				ACT_DEBUG(std::cout << "SET_TOKEN;NODE:" << (owner != nullptr ? owner->getName() : "[NO_OWNER]") << "::"
 									<< this->getNode()->getName() << ";TOKEN:" << token->getValue()
 									<< ";CURRENT_TOKENS:" << (this->getHeldTokens()->size() + 1) << ";DIRECTION:add"
 									<< std::endl;)
-			}
 		}
 	)
 
@@ -201,6 +202,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 	}
 	//struct null_deleter{void operator()(void const *) const { } };
 	token->setHolder(shared_from_this());
+    token->setWithdrawn(false);
 
 	DEBUG_MESSAGE(std::cout<<"[addToken] Adding token with value = " <<token->getValue()<<std::endl;)
    
@@ -210,6 +212,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 
 void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	for(std::shared_ptr<Token> token: *tokens)
     {
@@ -220,6 +223,7 @@ void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Token> >  t
 
 void ActivityNodeActivationImpl::clearTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    while (this->getHeldTokens()->size() > 0) {
         this->getHeldTokens()->at(0)->withdraw();
@@ -229,6 +233,7 @@ void ActivityNodeActivationImpl::clearTokens()
 
 void ActivityNodeActivationImpl::createEdgeInstances() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return;
 	//end of body
@@ -236,6 +241,7 @@ void ActivityNodeActivationImpl::createEdgeInstances()
 
 void ActivityNodeActivationImpl::createNodeActivations() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return;
 	//end of body
@@ -249,6 +255,7 @@ void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomi
 
 std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivityExecution() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getGroup()->retrieveActivityExecution();
 	//end of body
@@ -256,6 +263,7 @@ std::shared_ptr<fUML::ActivityExecution> ActivityNodeActivationImpl::getActivity
 
 std::shared_ptr<fUML::Object> ActivityNodeActivationImpl::getExecutionContext() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getActivityExecution()->getContext();
 	//end of body
@@ -263,6 +271,7 @@ std::shared_ptr<fUML::Object> ActivityNodeActivationImpl::getExecutionContext()
 
 std::shared_ptr<fUML::Locus> ActivityNodeActivationImpl::getExecutionLocus() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getActivityExecution()->getLocus();
 	//end of body
@@ -270,6 +279,7 @@ std::shared_ptr<fUML::Locus> ActivityNodeActivationImpl::getExecutionLocus()
 
 std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<ActivityNodeActivation> activation = nullptr;
     if (node == this->getNode()) 
@@ -284,6 +294,7 @@ std::shared_ptr<fUML::ActivityNodeActivation> ActivityNodeActivationImpl::getNod
 
 bool ActivityNodeActivationImpl::getRunning() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->isRunning();
 	//end of body
@@ -291,6 +302,7 @@ bool ActivityNodeActivationImpl::getRunning()
 
 std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::getTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 	std::shared_ptr<Bag<Token> > heldTokens = this->getHeldTokens();
@@ -306,6 +318,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::getTokens()
 
 bool ActivityNodeActivationImpl::isReady() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getRunning();
 	//end of body
@@ -313,6 +326,7 @@ bool ActivityNodeActivationImpl::isReady()
 
 bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeInstance>  edgeInstances) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return (edgeInstances->getSource().get() ==this);
 	//end of body
@@ -320,6 +334,7 @@ bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::ActivityEdgeI
 
 void ActivityNodeActivationImpl::recieveOffer() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[receiveOffer] "
  << (this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<std::endl;)
@@ -328,7 +343,7 @@ void ActivityNodeActivationImpl::recieveOffer()
 
     bool ready = this->isReady();
 
-    std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
+    std::shared_ptr<Bag<Token> > tokens;
     if (ready) 
     {
         DEBUG_MESSAGE(std::cout<<"[receiveOffer] Firing."<<std::endl;)
@@ -351,6 +366,7 @@ void ActivityNodeActivationImpl::recieveOffer()
 
 int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Token> > heldTokenList = this->getHeldTokens();
 	std::vector<std::shared_ptr<fUML::Token>>::iterator iter = heldTokenList->begin();
@@ -379,9 +395,7 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 				} else
 				{
                     std::shared_ptr<uml::NamedElement> owner = std::dynamic_pointer_cast<uml::NamedElement>(this->getNode()->getOwner().lock());
-			if(nullptr != owner){
-					std::cout<<"SET_TOKEN;NODE:" << (owner != nullptr? owner->getName() : "[NO_OWNER]") << "::" << this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
-					}
+			std::cout<<"SET_TOKEN;NODE:" << (owner != nullptr? owner->getName() : "[NO_OWNER]") << "::" << this->getNode()->getName() <<";TOKEN:"<<token->getValue() << ";CURRENT_TOKENS:"<< (heldTokenList->size()-1) <<";DIRECTION:remove"<<std::endl;
 				}
 			)
 			this->getHeldTokens()->erase(iter);
@@ -397,6 +411,7 @@ int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 
 void ActivityNodeActivationImpl::resume() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
 	this->getGroup()->resume(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
@@ -405,6 +420,7 @@ void ActivityNodeActivationImpl::resume()
 
 void ActivityNodeActivationImpl::run() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (this->getNode() != nullptr) {
         DEBUG_MESSAGE(std::cout<<"[run] node = " << this->getNode()->getName()<<std::endl;)
@@ -418,6 +434,7 @@ void ActivityNodeActivationImpl::run()
 
 void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		if (tokens->size() > 0) 
 	{
@@ -445,6 +462,7 @@ void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  
 
 void ActivityNodeActivationImpl::suspend() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
 	this->getGroup()->suspend(std::shared_ptr<ActivityNodeActivation>(this, null_deleter()));
@@ -453,6 +471,7 @@ void ActivityNodeActivationImpl::suspend()
 
 std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > allTokens(new Bag<Token>());
 	std::shared_ptr<Bag<ActivityEdgeInstance> > incomingEdgeList = this->getIncomingEdges();
@@ -467,6 +486,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeOfferedTokens
 
 std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens = this->getTokens();
     this->clearTokens();
@@ -477,6 +497,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityNodeActivationImpl::takeTokens()
 
 void ActivityNodeActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	/*    if (this->isRunning()) {
         if (this->getNode() != nullptr) {

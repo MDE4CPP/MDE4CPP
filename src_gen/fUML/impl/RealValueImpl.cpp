@@ -98,13 +98,13 @@ float RealValueImpl::getValue() const
 //*********************************
 bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	bool isEqual = false;
+		bool isEqual = false;
 
-	std::shared_ptr<RealValue> otherRealValue = std::dynamic_pointer_cast<RealValue>(otherValue);
-
-    if(otherRealValue != nullptr)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE)
     {
+		std::shared_ptr<RealValue> otherRealValue = std::dynamic_pointer_cast<RealValue>(otherValue);
         isEqual = (otherRealValue->getValue() == this->getValue());
     }
 
@@ -114,6 +114,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralReal> literal = uml::UmlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
@@ -124,6 +125,7 @@ std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 
 std::string RealValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::ostringstream o;
      if (!(o << this->getValue()))

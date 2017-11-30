@@ -141,6 +141,7 @@ std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
 //*********************************
 void ActivityExecutionImpl::execute() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Activity> activity = std::dynamic_pointer_cast<uml::Activity> (this->getTypes()->front());
 
@@ -210,6 +211,7 @@ void ActivityExecutionImpl::execute()
 
 std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(fUML::FUMLFactory::eInstance()->createActivityExecution());
 	//end of body
@@ -217,6 +219,7 @@ std::shared_ptr<fUML::Value> ActivityExecutionImpl::new_()
 
 void ActivityExecutionImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->getActivationGroup()->terminateAll();
 	//end of body

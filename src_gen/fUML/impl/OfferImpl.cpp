@@ -82,6 +82,7 @@ std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
 //*********************************
 int OfferImpl::countOfferedVales() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
 
@@ -98,6 +99,7 @@ int OfferImpl::countOfferedVales()
 
 bool OfferImpl::hasTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->removeWithdrawnTokens();
     return (this->getOfferedTokens()->size() > 0);
@@ -106,6 +108,7 @@ bool OfferImpl::hasTokens()
 
 void OfferImpl::removeOfferedValues(int count) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    int n = count;
     unsigned int i = 0;
@@ -122,20 +125,39 @@ void OfferImpl::removeOfferedValues(int count)
 
 void OfferImpl::removeWithdrawnTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    unsigned int i = 0;
-    while (i < this->getOfferedTokens()->size()) {
-        if (this->getOfferedTokens()->at(i)->isWithdrawn()) {
-            this->getOfferedTokens()->erase(this->getOfferedTokens()->begin() + i );
-            i = i - 1;
+	 std::shared_ptr< Bag<fUML::Token> > offeredTokens= this->getOfferedTokens();
+    Bag<fUML::Token> *offeredTokensPtr=offeredTokens.get();
+
+    const unsigned int numberTokens=offeredTokensPtr->size();
+
+    if(numberTokens==1)
+    {
+        if((*offeredTokensPtr)[0]->isWithdrawn())
+        {
+            offeredTokensPtr->clear();
         }
-        i = i + 1;
+    }
+    else
+    {
+        Bag<fUML::Token> *new_OfferedTokensPtr = new Bag<fUML::Token>();
+        m_offeredTokens.reset(new_OfferedTokensPtr);
+        //	m_offeredTokens.reserve(numberTokens);
+        for(unsigned int i = 0; i < numberTokens; i++)
+        {
+            if(!((*offeredTokensPtr)[i]->isWithdrawn()))
+            {
+                new_OfferedTokensPtr->push_back((*offeredTokensPtr)[i]);
+            }
+        }
     }
 	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Token> > OfferImpl::retrieveOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->removeWithdrawnTokens();
 

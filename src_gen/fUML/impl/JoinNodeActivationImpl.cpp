@@ -101,6 +101,7 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 bool JoinNodeActivationImpl::isReady() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool ready = true;
 	unsigned int i = 0;

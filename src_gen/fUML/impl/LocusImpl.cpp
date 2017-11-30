@@ -135,33 +135,34 @@ std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 //*********************************
 void LocusImpl::add(std::shared_ptr<fUML::ExtensionalValue>  value) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	struct null_deleter{void operator()(void const *) const { } };
-	value->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
+		value->setLocus(shared_from_this());
 	this->getExtensionalValues()->push_back(value);
 	//end of body
 }
 
 void LocusImpl::assignExecutor(std::shared_ptr<fUML::Executor>  executor) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->setExecutor(executor);
-	struct null_deleter{void operator()(void const *) const { } };
-	this->getExecutor()->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
+		this->setExecutor(executor);
+	this->getExecutor()->setLocus(shared_from_this());
 	//end of body
 }
 
 void LocusImpl::assignFactory(std::shared_ptr<fUML::ExecutionFactory>  factory) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	this->setFactory(factory);
-	struct null_deleter{void operator()(void const *) const { } };
-	this->getFactory()->setLocus(std::shared_ptr<Locus>(this, null_deleter()));
+		this->setFactory(factory);
+	this->getFactory()->setLocus(shared_from_this());
 	//end of body
 }
 
 bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool doesConform = false;
     if(type == classifier)
@@ -183,6 +184,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<
 
 std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Object> object = nullptr;
 	std::shared_ptr<uml::Behavior> behavior = std::dynamic_pointer_cast<uml::Behavior>(type);
@@ -205,6 +207,7 @@ std::shared_ptr<fUML::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>
 
 void LocusImpl::remove(std::shared_ptr<fUML::ExtensionalValue>  value) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	value->setLocus(nullptr);
 std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->end(),value);
@@ -213,6 +216,7 @@ std::remove(this->getExtensionalValues()->begin(),this->getExtensionalValues()->
 
 std::shared_ptr<Bag<fUML::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::ExtensionalValue> > extent =this->getExtensionalValues();
 	std::shared_ptr<Bag<fUML::ExtensionalValue> > extensionalValues = this->getExtensionalValues();

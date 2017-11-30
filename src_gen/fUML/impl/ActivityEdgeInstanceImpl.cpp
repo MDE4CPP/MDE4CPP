@@ -115,6 +115,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const
 //*********************************
 int ActivityEdgeInstanceImpl::countOfferedValue() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int count = 0;
 	std::shared_ptr<Bag<Offer> > offerList = this->getOffers();
@@ -128,14 +129,26 @@ int ActivityEdgeInstanceImpl::countOfferedValue()
 
 std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
+		std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 
-	std::shared_ptr<Bag<Offer> > offerList = this->getOffers();
-    for(std::shared_ptr<Offer> offer : *offerList)
+	Bag<Offer>* offerList = this->getOffers().get();
+    const int size = offerList->size();
+    Bag<fUML::Token>* vec;
+    for(int i=0; i < size; i++){
     {
-    	auto vec = offer->retrieveOfferedTokens();
-        tokens->insert(tokens->end(), vec->begin(), vec->end());
+        vec = (*offerList)[i]->retrieveOfferedTokens().get();
+        if(vec->size()>0)
+        {
+            if (tokens->empty())
+            {
+                *tokens = *vec;
+            } else {
+                tokens->insert(tokens->end(), vec->begin(), vec->end());
+            }
+        }
+        }
     }
 
     return tokens;
@@ -144,6 +157,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::getOfferedTokens()
 
 bool ActivityEdgeInstanceImpl::hasOffer() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::any_of(this->getOffers()->begin(),this->getOffers()->end(),[](std::shared_ptr<Offer> offer){return offer->hasTokens();});
 
@@ -152,6 +166,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 
 void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	 std::shared_ptr<Offer> offer(fUML::FUMLFactory::eInstance()->createOffer());
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
@@ -169,6 +184,7 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Token> >  tok
 
 std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 
@@ -186,6 +202,7 @@ std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens()
 
 std::shared_ptr<Bag<fUML::Token> > ActivityEdgeInstanceImpl::takeOfferedTokens(int maxCount) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
     int remainingCount = maxCount;

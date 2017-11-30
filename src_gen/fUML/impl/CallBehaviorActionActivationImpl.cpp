@@ -119,6 +119,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionActivationImpl::eStaticClass() 
 //*********************************
 std::shared_ptr<fUML::Execution> CallBehaviorActionActivationImpl::getCallExecution() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::CallBehaviorAction> callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction> (this->getNode());
     if(callBehaviorAction != nullptr)

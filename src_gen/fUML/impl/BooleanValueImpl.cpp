@@ -97,12 +97,13 @@ bool BooleanValueImpl::isValue() const
 //*********************************
 bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	bool isEqual = false;
+		bool isEqual = false;
 
-	std::shared_ptr<BooleanValue> otherBooleanValue = std::dynamic_pointer_cast<BooleanValue>(otherValue);
-    if(otherBooleanValue != nullptr)
+	if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::BOOLEANVALUE)
     {
+		std::shared_ptr<BooleanValue> otherBooleanValue = std::dynamic_pointer_cast<BooleanValue>(otherValue);
     	isEqual = otherBooleanValue->isValue() == this->isValue();
     }
 
@@ -112,6 +113,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralBoolean> literal = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::shared_ptr<uml::Class>());    
     literal->setType(this->getType());
@@ -122,6 +124,7 @@ std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
 
 std::string BooleanValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::string stringValue = "false";
 

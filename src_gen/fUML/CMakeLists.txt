@@ -153,6 +153,7 @@ SET(SOURCE_FILES
 	impl/ValuesImpl.cpp
 	impl/WriteLinkActionActivationImpl.cpp
 	impl/WriteStructuralFeatureActionActivationImpl.cpp
+	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
 INCLUDE_DIRECTORIES(

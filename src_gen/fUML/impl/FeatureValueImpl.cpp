@@ -112,6 +112,7 @@ int FeatureValueImpl::getPosition() const
 //*********************************
 bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::FeatureValue>  other) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool equal = true;
 

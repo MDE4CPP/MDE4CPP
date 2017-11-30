@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -47,6 +49,7 @@ namespace fUML
 	/*!
 	 */
 	class TokenSet : virtual public ecore::EObject 
+
 	{
 		public:
  			TokenSet(const TokenSet &) {}

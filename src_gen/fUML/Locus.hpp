@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -72,6 +74,7 @@ namespace fUML
 	/*!
 	 */
 	class Locus : virtual public ecore::EObject 
+, public std::enable_shared_from_this<Locus>
 	{
 		public:
  			Locus(const Locus &) {}

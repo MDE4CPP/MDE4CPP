@@ -50,6 +50,7 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
 	
@@ -81,6 +82,7 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 //*********************************
 bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return (std::dynamic_pointer_cast<ControlToken>(other) != nullptr);
 	//end of body
@@ -88,6 +90,7 @@ bool ControlTokenImpl::equals(std::shared_ptr<fUML::Token>  other)
 
 std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return nullptr;
 	//end of body
@@ -95,6 +98,7 @@ std::shared_ptr<fUML::Value> ControlTokenImpl::getValue()  const
 
 bool ControlTokenImpl::isControl() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		return true;
 	//end of body
@@ -118,6 +122,8 @@ boost::any ControlTokenImpl::eGet(int featureID,  bool resolve, bool coreType) c
 	{
 		case FUMLPackage::TOKEN_HOLDER:
 			return getHolder(); //560
+		case FUMLPackage::TOKEN_WITHDRAWN:
+			return isWithdrawn(); //561
 	}
 	return boost::any();
 }

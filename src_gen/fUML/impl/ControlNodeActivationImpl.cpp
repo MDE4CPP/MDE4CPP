@@ -102,6 +102,7 @@ std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 //*********************************
 void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (this->getNode() != nullptr) {
         DEBUG_MESSAGE(std::cout<<"[fire] Control node " << this->getNode()->getName() << "..."<<std::endl;)

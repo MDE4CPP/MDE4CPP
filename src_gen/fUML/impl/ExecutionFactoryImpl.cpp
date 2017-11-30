@@ -147,6 +147,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::PrimitiveType> > builtInTypes = this->getBuiltInTypes();
     builtInTypes->push_back(type);
@@ -155,6 +156,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  t
 
 void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::OpaqueBehaviorExecution>  execution) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<OpaqueBehaviorExecution> > primBehaviorExecution = this->getPrimitiveBehaviorPrototypes();
     primBehaviorExecution->push_back(execution);
@@ -163,6 +165,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::O
 
 void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy>  strategy) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    unsigned int i = this->getStrategyIndex(strategy->retrieveName());
 
@@ -177,8 +180,9 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::SemanticStrategy
 
 std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Evaluation>(this->instantiateVisitor(std::dynamic_pointer_cast<uml::Element>(specification)));
+		std::shared_ptr<fUML::Evaluation> evaluation = std::dynamic_pointer_cast<fUML::Evaluation>(this->instantiateVisitor(specification));
 
     evaluation->setSpecification(specification);
     evaluation->setLocus(this->getLocus().lock()) /*TODO: it can be dangerous to use the weak pointer!*/;
@@ -189,6 +193,7 @@ std::shared_ptr<fUML::Evaluation> ExecutionFactoryImpl::createEvaluation(std::sh
 
 std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Object>  context) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	 std::shared_ptr <fUML::Execution> execution;
 
@@ -236,6 +241,7 @@ std::shared_ptr<fUML::Execution> ExecutionFactoryImpl::createExecution(std::shar
 
 std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<uml::PrimitiveType> type = nullptr;
     unsigned int i = 0;
@@ -255,6 +261,7 @@ std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::st
 
 std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		unsigned int i = this->getStrategyIndex(name);
 
@@ -270,14 +277,16 @@ std::shared_ptr<fUML::SemanticStrategy> ExecutionFactoryImpl::getStrategy(std::s
 
 int ExecutionFactoryImpl::getStrategyIndex(std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<Bag<SemanticStrategy> > strategies = this->getStrategies();
+		Bag<SemanticStrategy>* strategies = this->getStrategies().get();
 
     unsigned int i = 0;
     bool unmatched = true;
-    while(unmatched && (i < strategies->size()))
+    const unsigned int s_size = strategies->size();
+    while(unmatched && (i < s_size))
     {
-        if(strategies->at(i)->retrieveName()==(name))
+        if((*strategies)[i]->retrieveName()==name)
         {
             unmatched = false;
         }
@@ -286,22 +295,23 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
             i = i + 1;
         }
     }
-
     return i;
 	//end of body
 }
 
 std::shared_ptr<fUML::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> execution = nullptr;
     unsigned int i = 0;
     //DEBUG_MESSAGE(std::cout<<"SIZE PROTOTYPES "<< this->getPrimitiveBehaviorPrototypes()->size()<<std::endl;)
+    auto primitiveBehaviorPrototypes = this->getPrimitiveBehaviorPrototypes();
     while(execution == nullptr && (i < this->getPrimitiveBehaviorPrototypes()->size()))
     {
-    	std::shared_ptr<fUML::OpaqueBehaviorExecution> prototype = this->getPrimitiveBehaviorPrototypes()->at(i);
+    	std::shared_ptr<fUML::OpaqueBehaviorExecution> prototype = primitiveBehaviorPrototypes->at(i);
         //DEBUG_MESSAGE(std::cout<<"BEHAVIOUR NAME:"<<prototype->getBehavior()->getName()<<"AND"<<behavior->getName()<<std::endl;)
-        if( prototype->getBehavior() == behavior)
+        if( prototype->getTypes()->front() == behavior)
         {
             execution = std::dynamic_pointer_cast<OpaqueBehaviorExecution>(prototype->copy());
         }

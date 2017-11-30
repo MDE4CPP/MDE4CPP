@@ -102,6 +102,7 @@ std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 //*********************************
 void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<Token> > tokens(new Bag<Token>());
 	//struct null_deleter{void operator()(void const *) const { } };

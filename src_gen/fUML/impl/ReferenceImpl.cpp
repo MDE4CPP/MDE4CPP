@@ -101,6 +101,7 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Value> >  values,int position) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->assignFeatureValue(feature,values,position);
 	//end of body
@@ -108,6 +109,7 @@ void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  
 
 void ReferenceImpl::destroy() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->destroy();
 	//end of body
@@ -115,6 +117,7 @@ void ReferenceImpl::destroy()
 
 std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->dispatch(operation);
 	//end of body
@@ -122,51 +125,24 @@ std::shared_ptr<fUML::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Op
 
 bool ReferenceImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<Bag<uml::Classifier> > myTypes = nullptr;//this->getTypes();
-	std::shared_ptr<Bag<uml::Classifier> > otherTypes = nullptr;//otherValue->getTypes();
-
-    bool isEqual = true;
-
-    // Debug.println("[equals] Value...");
-    // Debug.println("[equals] this has " + myTypes.size() +
-    // "types, other has " + otherTypes.size() + ".");
-    if(myTypes->size() != otherTypes->size())
-    {
-        isEqual = false;
-    }
-    else
-    {
-        // Debug.println("[equals] " + myTypes.size() + " type(s).");
-        unsigned int i = 0;
-	const unsigned int i_size =  myTypes->size();
-        while(isEqual && i < i_size)
-        {
-            // Debug.println("[equals] this type = " +
-            // myTypes.getValue(i).name);
-
-            bool matched = false;
-            unsigned int j = 0;
-	     const unsigned int j_size = otherTypes->size();
-            while(!matched && j < j_size)
-            {
-                // Debug.println("[equals] other type = " +
-                // otherTypes.getValue(j).name);
-                matched = (otherTypes->at(j) == myTypes->at(i));
-                j = j + 1;
-            }
-
-            isEqual = matched;
-            i = i + 1;
-        }
-    }
-
-    return isEqual;
+		bool isEqual = false;
+	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE) {
+		auto other = std::dynamic_pointer_cast<Reference>(otherValue);
+		if (this->getReferent() == nullptr) {
+			isEqual = other->getReferent() == nullptr;
+		} else {
+			isEqual = this->getReferent()->equals(other->getReferent());
+		}
+	}
+	return isEqual;
 	//end of body
 }
 
 std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		return  this->getReferent()->getTypes();
 	//end of body
@@ -174,6 +150,7 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 
 std::shared_ptr<fUML::Value> ReferenceImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createReference());
 	//end of body
@@ -181,6 +158,7 @@ std::shared_ptr<fUML::Value> ReferenceImpl::new_()
 
 std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValue(feature);
 	//end of body
@@ -188,6 +166,7 @@ std::shared_ptr<fUML::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::sha
 
 std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getReferent()->retrieveFeatureValues();
 	//end of body
@@ -195,6 +174,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > ReferenceImpl::retrieveFeatureValues()
 
 void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->send(signalInstance);
 	//end of body
@@ -202,6 +182,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 
 void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getReferent()->startBehavior(classifier,inputs);
 	//end of body
@@ -209,6 +190,7 @@ void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::s
 
 std::string ReferenceImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "Reference to " + this->getReferent()->toString();
 	//end of body

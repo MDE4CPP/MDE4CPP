@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -43,6 +45,7 @@ namespace fUML
 	/*!
 	 */
 	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EObject 
+
 	{
 		public:
  			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 &) {}

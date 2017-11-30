@@ -102,6 +102,7 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 //*********************************
 void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<fUML::Value>value = token->getValue();
 		
@@ -123,6 +124,7 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 
 int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int i = ObjectNodeActivationImpl::removeToken(token);
 		

@@ -82,6 +82,7 @@ std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return object->getLocus()->getFactory()->createExecution(this->retrieveMethod(object,operation),object);
 	//end of body
@@ -89,6 +90,7 @@ std::shared_ptr<fUML::Execution> DispatchStrategyImpl::dispatch(std::shared_ptr<
 
 std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Object>  object,std::shared_ptr<uml::Operation>  operation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    return operation->getMethod()->front();
 	//end of body
@@ -96,6 +98,7 @@ std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_
 
 std::string DispatchStrategyImpl::retrieveName() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "dispatch";
 	//end of body

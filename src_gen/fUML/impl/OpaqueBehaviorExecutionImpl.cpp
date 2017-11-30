@@ -127,6 +127,7 @@ void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::ParameterValu
 
 void OpaqueBehaviorExecutionImpl::execute() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[execute] Opaque behavior " << this->getBehavior()->getName() << "..."<<std::endl;)
 

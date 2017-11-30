@@ -112,6 +112,7 @@ std::shared_ptr<Bag<fUML::FeatureValue> > LinkImpl::getOtherFeatureValues(std::s
 
 std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Classifier> > types(new Bag<uml::Classifier>());
 
@@ -125,6 +126,7 @@ std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
 
 bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Property> > ends = this->getType()->getMemberEnd();
 

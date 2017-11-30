@@ -137,6 +137,7 @@ std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const
 //*********************************
 void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[register] object = " << this->getObject()<<std::endl;)
     DEBUG_MESSAGE(std::cout<<"[register] accepter = " << accepter<<std::endl;)
@@ -147,6 +148,7 @@ void ObjectActivationImpl::_register(std::shared_ptr<fUML::EventAccepter>  accep
 
 void ObjectActivationImpl::_send(boost::any signal) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
 	//end of body
@@ -154,6 +156,7 @@ void ObjectActivationImpl::_send(boost::any signal)
 
 void ObjectActivationImpl::_startObjectBehavior() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	//this->behavior._startObjectBehavior();
 	//end of body
@@ -161,6 +164,7 @@ void ObjectActivationImpl::_startObjectBehavior()
 
 void ObjectActivationImpl::dispatchNextEvent() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	
 	//end of body
@@ -174,6 +178,7 @@ std::shared_ptr<fUML::SignalInstance> ObjectActivationImpl::retrieveNextEvent()
 
 void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	this->getEventPool()->push_back(std::dynamic_pointer_cast<fUML::SignalInstance>(signalInstance->copy()));
     //_send(new ArrivalSignal());
@@ -182,6 +187,7 @@ void ObjectActivationImpl::send(std::shared_ptr<fUML::SignalInstance>  signalIns
 
 void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		this->_startObjectBehavior();
 
@@ -228,6 +234,7 @@ void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class>  classifier
 
 void ObjectActivationImpl::stop() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<ClassifierBehaviorExecution> > classifierBehaviorExecutions = this->getClassifierBehaviorExecutions();
     for (unsigned int i = 0; i < classifierBehaviorExecutions->size(); i++) 
@@ -240,6 +247,7 @@ void ObjectActivationImpl::stop()
 
 void ObjectActivationImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		DEBUG_MESSAGE(std::cout<<"[unregister] object = " << this->getObject()<<std::endl;)
     DEBUG_MESSAGE(std::cout<<"[unregister] accepter = " << accepter<<std::endl;)

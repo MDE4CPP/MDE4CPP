@@ -113,6 +113,7 @@ int ObjectNodeActivationImpl::getOfferedTokenCount() const
 //*********************************
 void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (token->getValue() == nullptr) {
         token->withdraw();
@@ -124,6 +125,7 @@ void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 
 void ObjectNodeActivationImpl::clearTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    ActivityNodeActivationImpl::clearTokens();
     this->setOfferedTokenCount(0);
@@ -132,6 +134,7 @@ void ObjectNodeActivationImpl::clearTokens()
 
 int ObjectNodeActivationImpl::countOfferedValues() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		int totalValueCount = 0;
     unsigned int i = 0;
@@ -147,6 +150,7 @@ int ObjectNodeActivationImpl::countOfferedValues()
 
 int ObjectNodeActivationImpl::countUnofferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if (this->getHeldTokens()->size() == 0) {
         this->setOfferedTokenCount(0);
@@ -158,22 +162,30 @@ int ObjectNodeActivationImpl::countUnofferedTokens()
 
 std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::getUnofferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > tokens(new Bag<fUML::Token>());
 
-	int i = 1;
-    while (i <= this->countUnofferedTokens()) 
-    {
-    	tokens->push_back(this->getHeldTokens()->at(this->getOfferedTokenCount() + i - 1));
-        i = i + 1;
-    }
-
-    return tokens;
+  int i = 0; 
+  const int numberUnofferedTokens=this->countUnofferedTokens(); 
+  int offeredTokenCount=this->getOfferedTokenCount(); 
+ 
+  Bag<fUML::Token>* heldTokenPtr = this->getHeldTokens().get(); 
+  if(nullptr!=heldTokenPtr) 
+  { 
+    while (i < numberUnofferedTokens) 
+    { 
+      tokens->push_back((*heldTokenPtr)[offeredTokenCount + i]);
+      i++; 
+    } 
+  } 
+  return tokens; 
 	//end of body
 }
 
 int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    int i = ActivityNodeActivationImpl::removeToken(token);
     if (i > 0 && i <= this->getOfferedTokenCount()) {
@@ -186,6 +198,7 @@ int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Token>  token)
 
 void ObjectNodeActivationImpl::run() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    ActivityNodeActivationImpl::run();
     this->setOfferedTokenCount(0);
@@ -194,12 +207,14 @@ void ObjectNodeActivationImpl::run()
 
 void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  tokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		if (tokens->size() == 0) 
 	{
 		//struct null_deleter{void operator()(void const *) const { } };
 		std::shared_ptr<ObjectToken> token = fUML::FUMLFactory::eInstance()->createObjectToken();
         token->setHolder(shared_from_this());
+		token->setWithdrawn(false);
         tokens->push_back(token);
     }
 
@@ -209,6 +224,7 @@ void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Token> >  to
 
 void ObjectNodeActivationImpl::sendUnofferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<Token> > tokens = this->getUnofferedTokens();
     this->setOfferedTokenCount(this->getOfferedTokenCount() + tokens->size());
@@ -218,6 +234,7 @@ void ObjectNodeActivationImpl::sendUnofferedTokens()
 
 std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Token> > tokens = this->getUnofferedTokens();
     for (unsigned int i = 0; i < tokens->size(); i++) 
@@ -231,6 +248,7 @@ std::shared_ptr<Bag<fUML::Token> > ObjectNodeActivationImpl::takeUnofferedTokens
 
 void ObjectNodeActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->clearTokens();
     ActivityNodeActivationImpl::terminate();

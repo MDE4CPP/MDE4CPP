@@ -18,6 +18,7 @@
 #include <DataStoreNode.hpp>
 #include <DataStoreNodeActivation.hpp>
 #include "ExpansionNode.hpp"
+#include <uml/UmlPackage.hpp>
 
 //Forward declaration includes
 #include "Element.hpp"
@@ -121,64 +122,81 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryL3Impl::eStaticClass() const
 //*********************************
 std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL3Impl::instantiateVisitor(std::shared_ptr<uml::Element>  element) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::SemanticVisitor> visitor = nullptr;
-    
-    if(std::dynamic_pointer_cast<uml:: ConditionalNode>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: LoopNode>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ExpansionRegion>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: StructuredActivityNode>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ExpansionNode>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ReadExtentAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ReadIsClassifiedObjectAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ReclassifyObjectAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: StartObjectBehaviorAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: StartClassifierBehaviorAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: AcceptEventAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml:: ReduceAction>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());
-    }
-    else if(std::dynamic_pointer_cast<uml::DataStoreNode>(element) != nullptr)
-    {
-        visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());
-    }
-    else
-    {
-        visitor = ExecutionFactoryL2Impl::instantiateVisitor(element);
+	std::shared_ptr<fUML::SemanticVisitor> visitor = ExecutionFactoryL2Impl::instantiateVisitor(element);
+
+    if(!visitor) {
+
+        switch (element->eClass()->getClassifierID()) {
+            case uml::UmlPackage::CONDITIONALNODE: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createConditionalNodeActivation());
+                break;
+            }
+            case uml::UmlPackage::LOOPNODE: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
+                break;
+            }
+            case uml::UmlPackage::EXPANSIONREGION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createExpansionRegionActivation());
+                break;
+            }
+            case uml::UmlPackage::STRUCTUREDACTIVITYNODE: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
+                break;
+            }
+            case uml::UmlPackage::EXPANSIONNODE: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createExpansionNodeActivation());
+                break;
+            }
+            case uml::UmlPackage::READEXTENTACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createReadExtentActionActivation());
+                break;
+            }
+            case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
+                break;
+            }
+            case uml::UmlPackage::RECLASSIFYOBJECTACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
+                break;
+            }
+            case uml::UmlPackage::STARTOBJECTBEHAVIORACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
+                break;
+            }
+            case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
+                break;
+            }
+            case uml::UmlPackage::ACCEPTEVENTACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createAcceptEventActionActivation());
+                break;
+            }
+            case uml::UmlPackage::REDUCEACTION: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createReduceActionActivation());
+                break;
+            }
+            case uml::UmlPackage::DATASTORENODE: {
+                visitor = std::shared_ptr<fUML::SemanticVisitor>(
+                        FUMLFactory::eInstance()->createDataStoreNodeActivation());
+                break;
+            }
+            default: {
+                std::cerr << __PRETTY_FUNCTION__ << " - Unknown visitor type" << std::endl;
+            }
+        }
     }
     
     return visitor;

@@ -108,6 +108,7 @@ std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const
 //*********************************
 bool InputPinActivationImpl::isReady() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool ready = ActivityNodeActivationImpl::isReady();
 
@@ -124,6 +125,7 @@ bool InputPinActivationImpl::isReady()
 
 void InputPinActivationImpl::recieveOffer() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    this->getActionActivation()->recieveOffer();
 	//end of body

@@ -97,6 +97,7 @@ std::string StringValueImpl::getValue() const
 //*********************************
 bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	bool isEqual = false;
     
@@ -112,6 +113,7 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralString> literal = uml::UmlFactory::eInstance()->createLiteralString_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
@@ -122,6 +124,7 @@ std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 
 std::string StringValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->getValue();
 	//end of body

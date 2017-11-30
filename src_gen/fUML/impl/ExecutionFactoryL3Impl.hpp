@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 //*********************************
 // generated Includes
 
@@ -43,6 +45,7 @@
 #include <DataStoreNode.hpp>
 #include <DataStoreNodeActivation.hpp>
 #include "ExpansionNode.hpp"
+#include <uml/UmlPackage.hpp>
 
 
 //*********************************

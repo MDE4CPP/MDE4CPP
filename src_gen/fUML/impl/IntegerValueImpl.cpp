@@ -98,12 +98,14 @@ int IntegerValueImpl::getValue() const
 //*********************************
 bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	bool isEqual = false;
+		bool isEqual = false;
 
-	std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
-    if(otherIntegerValue != nullptr)
+
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE)
     {
+		std::shared_ptr<IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<IntegerValue>(otherValue);
         isEqual = (otherIntegerValue->getValue() == this->getValue());
     }
 
@@ -113,6 +115,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
 
@@ -125,6 +128,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 
 std::string IntegerValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    char buf [11];
     std::sprintf(buf, "%d", this->getValue());

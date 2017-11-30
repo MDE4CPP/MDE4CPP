@@ -130,6 +130,7 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
@@ -140,6 +141,7 @@ void ObjectImpl::_register(std::shared_ptr<fUML::EventAccepter>  accepter)
 
 void ObjectImpl::destroy() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if(this->getObjectActivation() != nullptr)
     {
@@ -154,14 +156,17 @@ void ObjectImpl::destroy()
 
 std::shared_ptr<fUML::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	struct null_deleter{void operator()(void const *) const { } };
-	return (std::dynamic_pointer_cast<DispatchStrategy>(this->getLocus()->getFactory()->getStrategy("dispatch")))->dispatch(std::shared_ptr<Object>(this, null_deleter()), operation);
+	static std::shared_ptr<DispatchStrategy> strategy = std::dynamic_pointer_cast<DispatchStrategy>(this->getLocus()->getFactory()->getStrategy("dispatch"));
+	return strategy->dispatch(std::shared_ptr<Object>(this, null_deleter()), operation);
 	//end of body
 }
 
 std::shared_ptr<fUML::Value> ObjectImpl::new_() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return std::shared_ptr<fUML::Value>(FUMLFactory::eInstance()->createObject());
 	//end of body
@@ -169,6 +174,7 @@ std::shared_ptr<fUML::Value> ObjectImpl::new_()
 
 void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {
@@ -179,6 +185,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::SignalInstance>  signalInstance)
 
 void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::ParameterValue> >  inputs) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	if(this->getObjectActivation() == nullptr)
     {
@@ -193,6 +200,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 
 void ObjectImpl::unregister(std::shared_ptr<fUML::EventAccepter>  accepter) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    if( this->getObjectActivation() != nullptr)
     {

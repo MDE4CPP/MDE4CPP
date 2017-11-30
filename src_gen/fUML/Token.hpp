@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -57,6 +59,7 @@ namespace fUML
 	/*!
 	 */
 	class Token : virtual public ecore::EObject 
+, public std::enable_shared_from_this<Token>
 	{
 		public:
  			Token(const Token &) {}
@@ -89,10 +92,6 @@ namespace fUML
 			
 			/*!
 			 */ 
-			virtual bool isWithdrawn()  = 0;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  = 0;
 			
 			/*!
@@ -103,6 +102,14 @@ namespace fUML
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			/*!
+			 */ 
+			virtual bool isWithdrawn() const = 0;
+			
+			/*!
+			 */ 
+			virtual void setWithdrawn (bool _withdrawn)= 0; 
+			
 			
 			//*********************************
 			// Reference
@@ -120,6 +127,9 @@ namespace fUML
 			//*********************************
 			// Attribute Members
 			//*********************************
+			/*!
+			 */ 
+			bool m_withdrawn ;
 			
 			
 			//*********************************

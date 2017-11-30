@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 //*********************************
 // generated Includes
 
@@ -72,10 +74,6 @@ virtual public Token
 			
 			/*!
 			 */ 
-			virtual bool isWithdrawn()  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<fUML::Token> transfer(std::shared_ptr<fUML::ActivityNodeActivation>  holder)  ;
 			
 			/*!
@@ -87,6 +85,14 @@ virtual public Token
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			/*!
+			 */ 
+			virtual bool isWithdrawn() const ;
+			
+			/*!
+			 */ 
+			virtual void setWithdrawn (bool _withdrawn); 
+			
 			
 			
 			//*********************************

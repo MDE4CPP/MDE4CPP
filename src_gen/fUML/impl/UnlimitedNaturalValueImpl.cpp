@@ -97,11 +97,14 @@ int UnlimitedNaturalValueImpl::getValue() const
 //*********************************
 bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
+		//generated from body annotation
 	bool isEqual = false;
-	std::shared_ptr<fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<UnlimitedNaturalValue>(otherValue);
-    if(unValue != nullptr)
+
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::UNLIMITEDNATURALVALUE)
     {
+		std::shared_ptr<fUML::UnlimitedNaturalValue> unValue = std::dynamic_pointer_cast<UnlimitedNaturalValue>(otherValue);
         isEqual = (unValue->getValue() == this->getValue());
     }
 
@@ -111,6 +114,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Value>  otherValue)
 
 std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralUnlimitedNatural> literal = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::shared_ptr<uml::Class>());
     literal->setType(this->getType());
@@ -121,6 +125,7 @@ std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
 
 std::string UnlimitedNaturalValueImpl::toString() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::string stringValue = "*";
 

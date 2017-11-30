@@ -110,6 +110,7 @@ std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 //*********************************
 void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    DEBUG_MESSAGE(std::cout<<"[fire] Pin " << (this->getNode() == nullptr ? "" : this->getNode()->getName() + "...")<<std::endl;)
 
@@ -119,6 +120,7 @@ void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens)
 
 std::shared_ptr<Bag<fUML::Token> > PinActivationImpl::takeOfferedTokens() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	int count = this->countUnofferedTokens();
     int upper = -1;

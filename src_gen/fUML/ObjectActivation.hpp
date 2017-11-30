@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -72,6 +74,7 @@ namespace fUML
 	/*!
 	 */
 	class ObjectActivation : virtual public ecore::EObject 
+
 	{
 		public:
  			ObjectActivation(const ObjectActivation &) {}

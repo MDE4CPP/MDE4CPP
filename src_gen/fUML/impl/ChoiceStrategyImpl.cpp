@@ -80,6 +80,7 @@ int ChoiceStrategyImpl::choose(int size)
 
 std::string ChoiceStrategyImpl::retrieveName() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "choice";
 	//end of body

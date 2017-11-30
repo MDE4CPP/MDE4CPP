@@ -103,6 +103,7 @@ std::shared_ptr<ecore::EClass> ActivityFinalNodeActivationImpl::eStaticClass() c
 //*********************************
 void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  incomingTokens) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
 

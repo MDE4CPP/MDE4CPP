@@ -86,6 +86,7 @@ std::shared_ptr<ecore::EClass> LiteralIntegerEvaluationImpl::eStaticClass() cons
 //*********************************
 std::shared_ptr<fUML::Value> LiteralIntegerEvaluationImpl::evaluate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
 	std::shared_ptr<IntegerValue> integerValue(FUMLFactory::eInstance()->createIntegerValue());

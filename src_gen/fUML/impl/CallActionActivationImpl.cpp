@@ -133,6 +133,7 @@ std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const
 //*********************************
 void CallActionActivationImpl::doAction() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Execution> callExecution = this->getCallExecution();
 
@@ -195,6 +196,7 @@ void CallActionActivationImpl::doAction()
 
 std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    //TODO verify!
     return this->m_callExecutions->front();
@@ -203,6 +205,7 @@ std::shared_ptr<fUML::Execution> CallActionActivationImpl::getCallExecution()
 
 void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Execution>  execution) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    bool notFound = true;
     unsigned int i = 0;
@@ -217,6 +220,7 @@ void CallActionActivationImpl::removeCallExecution(std::shared_ptr<fUML::Executi
 
 void CallActionActivationImpl::terminate() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<fUML::Execution> > executionList = this->getCallExecutions();
 	for (std::shared_ptr<Execution>  execution: *executionList)

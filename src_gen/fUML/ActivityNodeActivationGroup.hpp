@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -77,6 +79,7 @@ namespace fUML
 	/*!
 	 */
 	class ActivityNodeActivationGroup : virtual public ecore::EObject 
+
 	{
 		public:
  			ActivityNodeActivationGroup(const ActivityNodeActivationGroup &) {}
