@@ -6,30 +6,15 @@ task buildReflectionModels(dependsOn: ['compilePluginFramework', 'ecoreReflectio
 	group 'reflection models'
 	description 'generate and compile reflection models in debug and release'
 }
-task buildReflectionModelsDebug(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionDebug', 'primitiveTypesReflection:buildPrimitivetypesReflectionDebug', 'umlReflection:buildUmlReflectionDebug']) {
-	group 'reflection models'
-	description 'generate and compile reflection models in debug'
-}
-task buildReflectionModelsRelease(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflectionRelease', 'primitiveTypesReflection:buildPrimitivetypesReflectionRelease', 'umlReflection:buildUmlReflectionRelease']) {
-	group 'reflection models'
-	description 'generate and compile reflection models in release'
-}
 
 tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflection')
 tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflection')
-
-tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionDebug')
-tasks.getByPath('umlReflection:buildUmlReflectionDebug').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionDebug')
-
-tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflectionRelease')
-tasks.getByPath('umlReflection:buildUmlReflectionRelease').mustRunAfter tasks.getByPath('ecoreReflection:buildEcoreReflectionRelease')
 
 task compilePluginFramework(dependsOn: ['compilePluginFrameworkDebug', 'compilePluginFrameworkRelease']) {
 	group 'PluginFramework'
 	description 'compile PluginFramework in Debug and Release'
 }
 task compilePluginFrameworkDebug {
-	group 'PluginFramework'
 	description 'compile PluginFramework in Debug'
 
 	def folder = new File(file('./pluginFramework/.cmake/Debug').absolutePath)
@@ -55,8 +40,11 @@ task compilePluginFrameworkDebug {
 		}
 	}
 }
+compilePluginFrameworkDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
 task compilePluginFrameworkRelease {
-	group 'PluginFramework'
 	description 'compile PluginFramework in Release'
 
 	def folder = new File(file('./pluginFramework/.cmake/Release').absolutePath)
@@ -81,6 +69,9 @@ task compilePluginFrameworkRelease {
 			}
 		}
 	}
+}
+compilePluginFrameworkRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task deliverAbstractDataTypes(type: Copy) {
