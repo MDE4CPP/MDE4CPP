@@ -171,21 +171,13 @@ description 'Build tasks for project: [packageName/]'
 
 task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]'[/if][']'/]) {
 	group '[packageName/]'
-	description 'build [packageName/] in debug and release'
-}
-task build[packageName.toUpperFirst()/]Debug(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Debug'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Debug'[/if][']'/]) {
-	group '[packageName/]'
-	description 'build [packageName/] in debug'
-}
-task build[packageName.toUpperFirst()/]Release(dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]Release'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]Release'[/if][']'/]) {
-	group '[packageName/]'
-	description 'build [packageName/] in release'
+	description 'build [packageName/]'
 }
 
 [if(aPackage.prepareApplication())]
 task compileApplicationFor[packageName/](dependsOn: ['['/]'compileApplicationFor[packageName/]Debug', 'compileApplicationFor[packageName/]Release'[']'/]) {
 	group '[packageName/]'
-	description 'compile [packageName/] in debug and release'
+	description 'compile [packageName/]'
 }
 [generateCompileTask('ApplicationFor'.concat(packageName), 'Debug', 'application')/]
 [generateCompileTask('ApplicationFor'.concat(packageName), 'Release', 'application')/]
@@ -194,7 +186,7 @@ task compileApplicationFor[packageName/](dependsOn: ['['/]'compileApplicationFor
 
 task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.toUpperFirst()/]Debug', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
 	group '[packageName/]'
-	description 'compile [packageName/] in debug and release'
+	description 'compile [packageName/]'
 }
 [generateCompileTask(packageName, 'Debug', 'src_gen/'.concat(packageName))/]
 [generateCompileTask(packageName, 'Release', 'src_gen/'.concat(packageName))/]
@@ -247,7 +239,6 @@ clean.doFirst {
 
 [template private generateCompileTask(packageName : String, buildType : String, subfolder : String)]
 task compile[packageName.toUpperFirst()/][buildType/] {
-	group '[packageName/]'
 	description 'compile [packageName/] in [buildType/]'
 
 	def folder = new File(file('./[subfolder/]/.cmake/[buildType/]').absolutePath)
@@ -285,5 +276,8 @@ task compile[packageName.toUpperFirst()/][buildType/] {
 			}
 		}
 	}
+}
+compile[packageName.toUpperFirst()/][buildType/].onlyIf {
+	(project.hasProperty("[buildType.toUpperCase()/]") && !(project.getProperty("[buildType.toUpperCase()/]") == '0'))[if(buildType.size()>0)] || (project.hasProperty("[buildType.at(1)/]") && !(project.getProperty("[buildType.at(1)/]") == '0'))[/if] || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 [/template]
