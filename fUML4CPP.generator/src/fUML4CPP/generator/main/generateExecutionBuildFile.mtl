@@ -162,41 +162,24 @@ description 'Build tasks for project: [packageName/]'
 
 task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]All'[']'/]) {
 	group '[packageName/]'
-	description 'build [packageName/] in debug and release'
-}
-task build[packageName/]Debug(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]AllDebug'[']'/]) {
-	group '[packageName/]'
-	description 'build [packageName/] in debug'
-}
-task build[packageName/]Release(dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]AllRelease'[']'/]) {
-	group '[packageName/]'
-	description 'build [packageName/] in release'
+	description 'build [packageName/]'
 }
 
 task compile[packageName/]All(dependsOn: [ '[' /]'compile[packageName/]', 'compile[execPackageName/]'[ ']' /]) {
 	group '[packageName/]'
-	description 'compile the binaries for the fuml generated model [packageName/] in release and debug'
-}
-task compile[packageName/]AllDebug(dependsOn: [ '[' /]'compile[packageName/]Debug', 'compile[execPackageName/]Debug'[ ']' /]) {
-	group '[packageName/]'
-	description 'compile the binaries for the fuml generated model [packageName/] in release and debug'
-}
-
-task compile[packageName/]AllRelease(dependsOn: [ '[' /]'compile[packageName/]Release', 'compile[execPackageName/]Release'[ ']' /]) {
-	group '[packageName/]'
-	description 'compile the binaries for the fuml generated model [packageName/] in release and debug'
+	description 'compile the binaries for the fuml generated model [packageName/]'
 }
 
 task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.toUpperFirst()/]Debug', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
 	group '[packageName/]'
-	description 'compile [packageName/] in debug and release'
+	description 'compile [packageName/]'
 }
 [generateCompileTask(packageName, packageName, 'Debug')/]
 [generateCompileTask(packageName, packageName, 'Release')/]
 
 task compile[execPackageName.toUpperFirst()/](dependsOn: ['['/]'compile[execPackageName.toUpperFirst()/]Debug', 'compile[execPackageName.toUpperFirst()/]Release'[']'/]) {
 	group '[packageName/]'
-	description 'compile [packageName/] in debug and release'
+	description 'compile [packageName/]'
 }
 [generateCompileTask(execPackageName, packageName, 'Debug')/]
 [generateCompileTask(execPackageName, packageName, 'Release')/]
@@ -243,7 +226,6 @@ clean.doFirst {
 
 [template private generateCompileTask(packageName : String, groupName : String, buildType : String)]
 task compile[packageName.toUpperFirst()/][buildType/] {
-	group '[groupName/]'
 	description 'compile [packageName/] in [buildType/]'
 
 	def folder = new File(file('./src_gen/[packageName/]/.cmake/[buildType/]').absolutePath)
@@ -268,5 +250,8 @@ task compile[packageName.toUpperFirst()/][buildType/] {
 			}
 		}
 	}
+}
+compile[packageName.toUpperFirst()/][buildType/].onlyIf {
+	(project.hasProperty("[buildType.toUpperCase()/]") && !(project.getProperty("[buildType.toUpperCase()/]") == '0'))[if(buildType.size()>0)] || (project.hasProperty("[buildType.at(1)/]") && !(project.getProperty("[buildType.at(1)/]") == '0'))[/if] || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 [/template]
