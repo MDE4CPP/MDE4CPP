@@ -183,6 +183,7 @@ VisibilityKind NamedElementImpl::getVisibility() const
 //*********************************
 std::shared_ptr<Bag<uml::Namespace> > NamedElementImpl::allNamespaces()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Namespace> > allNS(new Bag<uml::Namespace>());
     if (getNamespace().lock() == nullptr)
@@ -245,6 +246,7 @@ std::string NamedElementImpl::getLabel(bool localize)
 
 std::string NamedElementImpl::getQualifiedName()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr< Bag<uml::Namespace> >  allNS = allNamespaces();
 
@@ -285,6 +287,7 @@ bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> 
 
 std::string NamedElementImpl::separator()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return "::";
 	//end of body

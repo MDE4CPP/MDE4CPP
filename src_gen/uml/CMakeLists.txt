@@ -287,6 +287,7 @@ SET(SOURCE_FILES
 	${MDE4CPP_HOME}/application/include/util/util.cpp
 	${MDE4CPP_HOME}/application/include/util/registry.cpp
 	${MDE4CPP_HOME}/application/include/util/stereotypestorage.cpp
+	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
 INCLUDE_DIRECTORIES(

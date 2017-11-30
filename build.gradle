@@ -4,24 +4,15 @@ description 'Build tasks for project: uml'
 
 task buildUml(dependsOn: ['generateUml', 'compileUml']) {
 	group 'uml'
-	description 'build uml in debug and release'
-}
-task buildUmlDebug(dependsOn: ['generateUml', 'compileUmlDebug']) {
-	group 'uml'
-	description 'build uml in debug'
-}
-task buildUmlRelease(dependsOn: ['generateUml', 'compileUmlRelease']) {
-	group 'uml'
-	description 'build uml in release'
+	description 'build uml'
 }
 
 
 task compileUml(dependsOn: ['compileUmlDebug', 'compileUmlRelease']) {
 	group 'uml'
-	description 'compile uml in debug and release'
+	description 'compile uml'
 }
 task compileUmlDebug {
-	group 'uml'
 	description 'compile uml in Debug'
 
 	def folder = new File(file('./src_gen/uml/.cmake/Debug').absolutePath)
@@ -60,8 +51,10 @@ task compileUmlDebug {
 		}
 	}
 }
+compileUmlDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileUmlRelease {
-	group 'uml'
 	description 'compile uml in Release'
 
 	def folder = new File(file('./src_gen/uml/.cmake/Release').absolutePath)
@@ -99,6 +92,9 @@ task compileUmlRelease {
 			}
 		}
 	}
+}
+compileUmlRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateUml(type: JavaExec) {

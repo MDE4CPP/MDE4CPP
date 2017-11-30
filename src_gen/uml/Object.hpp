@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -50,6 +52,7 @@ namespace uml
 	
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span> */
 	class Object : virtual public ecore::EObject 
+
 	{
 		public:
  			Object(const Object &) {}

@@ -17,7 +17,9 @@
     #define ACT_DEBUG(a) a
 #else
     #define ACT_DEBUG(a) /**/
-#endif 
+#endif
+
+//#include "util/ProfileCallCount.hpp" 
 
 namespace uml 
 {

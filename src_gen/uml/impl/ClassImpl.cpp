@@ -553,6 +553,7 @@ std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
 
 std::shared_ptr<Bag<uml::Class> > ClassImpl::getSuperClasses() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<uml::Class> > superClass(new Bag<uml::Class> () );	
 	

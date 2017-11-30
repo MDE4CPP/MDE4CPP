@@ -622,6 +622,7 @@ std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getAllUsedInterfaces()
 
 std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::getGenerals() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return parents();
 	//end of body
@@ -707,6 +708,7 @@ bool ClassifierImpl::non_final_parents(boost::any diagnostics,std::map <   boost
 
 std::shared_ptr<Bag<uml::Classifier> > ClassifierImpl::parents() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr< Bag<uml::Classifier> > returnList(new Bag<uml::Classifier>());
 

@@ -175,6 +175,7 @@ std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 
 std::shared_ptr<ecore::EObject> ElementImpl::applyStereotype(std::shared_ptr<uml::Stereotype>  stereotype) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	util::StereotypeStorage::eInstance()->applyStereotype(this,stereotype);
 return nullptr;
@@ -213,6 +214,7 @@ std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getApplicableStereotypes()
 
 std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string qualifiedName) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return util::StereotypeStorage::eInstance()->getAppliedStereotype(this,qualifiedName);
 	//end of body
@@ -220,6 +222,7 @@ std::shared_ptr<uml::Stereotype> ElementImpl::getAppliedStereotype(std::string q
 
 std::shared_ptr<Bag<uml::Stereotype> > ElementImpl::getAppliedStereotypes() 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return util::StereotypeStorage::eInstance()->getAppliedStereotypes(this);
 	//end of body
@@ -323,6 +326,7 @@ std::shared_ptr<Bag<uml::DirectedRelationship> > ElementImpl::getTargetDirectedR
 
 boost::any ElementImpl::getValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(this,stereotype->getQualifiedName());
 	if(stereoInstance == nullptr)
@@ -368,6 +372,7 @@ bool ElementImpl::isStereotypeApplicable(std::shared_ptr<uml::Stereotype>  stere
 
 bool ElementImpl::isStereotypeApplied(std::shared_ptr<uml::Stereotype>  stereotype) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return util::StereotypeStorage::eInstance()->isStereotypeApplied(this,stereotype);
 	//end of body
@@ -399,6 +404,7 @@ bool ElementImpl::removeKeyword(std::string keyword)
 
 void ElementImpl::setValue(std::shared_ptr<uml::Stereotype>  stereotype,std::string propertyName,boost::any newValue) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	uml::NamedElement * elem = dynamic_cast<uml::NamedElement *>(this);
 if(elem)
