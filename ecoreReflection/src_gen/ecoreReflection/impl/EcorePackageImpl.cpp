@@ -12,20 +12,20 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
-#include "RedefinableTemplateSignature.hpp"
-#include "LiteralInteger.hpp"
-#include "TemplateBinding.hpp"
 #include "Association.hpp"
-#include "TemplateParameterSubstitution.hpp"
-#include "Property.hpp"
-#include "PrimitiveType.hpp"
-#include "Operation.hpp"
+#include "Class.hpp"
 #include "ClassifierTemplateParameter.hpp"
 #include "Generalization.hpp"
-#include "Class.hpp"
-#include "ProfileApplication.hpp"
-#include "Parameter.hpp"
+#include "LiteralInteger.hpp"
 #include "LiteralUnlimitedNatural.hpp"
+#include "Operation.hpp"
+#include "Parameter.hpp"
+#include "PrimitiveType.hpp"
+#include "ProfileApplication.hpp"
+#include "Property.hpp"
+#include "RedefinableTemplateSignature.hpp"
+#include "TemplateBinding.hpp"
+#include "TemplateParameterSubstitution.hpp"
 //metamodel factory
 #include "UmlFactory.hpp"
 
@@ -259,6 +259,18 @@ void EcorePackageImpl::createPackageContents()
 	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EDataType_serializable));
 	ecore_EDataType_serializable_lowerValue_LiteralInteger_Ecore_EDataType_serializable->setValue(0);
 	
+	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_eEnum));
+	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum->setValue(0);
+	
+	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_instance));
+	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance->setValue(0);
+	
+	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_literal));
+	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal->setValue(0);
+	
+	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_value));
+	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value->setValue(0);
+	
 	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_eLiterals));
 	ecore_EEnum_eLiterals_lowerValue_LiteralInteger_Ecore_EEnum_eLiterals->setValue(0);
 	
@@ -282,18 +294,6 @@ void EcorePackageImpl::createPackageContents()
 	
 	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnum_getEEnumLiteral_EString_return));
 	ecore_EEnum_getEEnumLiteral_EString_return_lowerValue_LiteralInteger_Ecore_EEnum_getEEnumLiteral_EString_return->setValue(0);
-	
-	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_eEnum));
-	ecore_EEnumLiteral_eEnum_lowerValue_LiteralInteger_Ecore_EEnumLiteral_eEnum->setValue(0);
-	
-	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_instance));
-	ecore_EEnumLiteral_instance_lowerValue_LiteralInteger_Ecore_EEnumLiteral_instance->setValue(0);
-	
-	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_literal));
-	ecore_EEnumLiteral_literal_lowerValue_LiteralInteger_Ecore_EEnumLiteral_literal->setValue(0);
-	
-	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EEnumLiteral_value));
-	ecore_EEnumLiteral_value_lowerValue_LiteralInteger_Ecore_EEnumLiteral_value->setValue(0);
 	
 	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType));
 	ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType_lowerValue_LiteralInteger_Ecore_EFactory_convertToString_EDataType_EJavaObject_Ecore_EFactory_convertToString_eDataType->setValue(0);
@@ -2100,20 +2100,20 @@ void EcorePackageImpl::createPackageContents()
 	ecore_EBoolean->setName("EBoolean");
 	ecore_EFeatureMapEntry = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EFeatureMapEntry->setName("EFeatureMapEntry");
-	ecore_EMap = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EMap->setName("EMap");
 	ecore_EJavaObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EJavaObject->setName("EJavaObject");
+	ecore_EMap = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
+	ecore_EMap->setName("EMap");
 	ecore_EResource = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EResource->setName("EResource");
-	ecore_EShortObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EShortObject->setName("EShortObject");
 	ecore_EChar = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EChar->setName("EChar");
-	ecore_EEList = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
-	ecore_EEList->setName("EEList");
+	ecore_EShortObject = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
+	ecore_EShortObject->setName("EShortObject");
 	ecore_EBigDecimal = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EBigDecimal->setName("EBigDecimal");
+	ecore_EEList = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
+	ecore_EEList->setName("EEList");
 	ecore_EShort = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
 	ecore_EShort->setName("EShort");
 	ecore_EInt = uml::UmlFactory::eInstance()->createPrimitiveType_in_Package(ecore);
@@ -2832,6 +2832,26 @@ std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnum()
 {
 	return ecore_EEnum;
 }
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnumLiteral()
+{
+	return ecore_EEnumLiteral;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
+{
+	return ecore_EEnumLiteral_eEnum;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
+{
+	return ecore_EEnumLiteral_instance;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
+{
+	return ecore_EEnumLiteral_literal;
+}
+std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_value()
+{
+	return ecore_EEnumLiteral_value;
+}
 std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnum_eLiterals()
 {
 	return ecore_EEnum_eLiterals;
@@ -2871,26 +2891,6 @@ std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLitera
 std::shared_ptr<uml::Parameter> EcorePackageImpl::get_Ecore_EEnum_getEEnumLiteral_EString_return()
 {
 	return ecore_EEnum_getEEnumLiteral_EString_return;
-}
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EEnumLiteral()
-{
-	return ecore_EEnumLiteral;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_eEnum()
-{
-	return ecore_EEnumLiteral_eEnum;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_instance()
-{
-	return ecore_EEnumLiteral_instance;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_literal()
-{
-	return ecore_EEnumLiteral_literal;
-}
-std::shared_ptr<uml::Property> EcorePackageImpl::get_Ecore_EEnumLiteral_value()
-{
-	return ecore_EEnumLiteral_value;
 }
 std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EEnumerator()
 {
@@ -3008,13 +3008,13 @@ std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaClass()
 {
 	return ecore_EJavaClass;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EJavaClass_T()
-{
-	return ecore_EJavaClass_T;
-}
 std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EJavaClass_RedefinableTemplateSignature()
 {
 	return ecore_EJavaClass_RedefinableTemplateSignature;
+}
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EJavaClass_T()
+{
+	return ecore_EJavaClass_T;
 }
 std::shared_ptr<uml::PrimitiveType> EcorePackageImpl::get_Ecore_EJavaObject()
 {
@@ -3036,13 +3036,13 @@ std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_K()
 {
 	return ecore_EMap_K;
 }
-std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_V()
-{
-	return ecore_EMap_V;
-}
 std::shared_ptr<uml::RedefinableTemplateSignature> EcorePackageImpl::get_Ecore_EMap_RedefinableTemplateSignature()
 {
 	return ecore_EMap_RedefinableTemplateSignature;
+}
+std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EMap_V()
+{
+	return ecore_EMap_V;
 }
 std::shared_ptr<uml::Class> EcorePackageImpl::get_Ecore_EModelElement()
 {

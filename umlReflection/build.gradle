@@ -4,23 +4,14 @@ description 'Build tasks for project: UmlReflection'
 
 task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflection']) {
 	group 'UmlReflection'
-	description 'build UmlReflection in debug and release'
-}
-task buildUmlReflectionDebug(dependsOn: ['generateUmlReflection', 'compileUmlReflectionDebug']) {
-	group 'UmlReflection'
-	description 'build UmlReflection in debug'
-}
-task buildUmlReflectionRelease(dependsOn: ['generateUmlReflection', 'compileUmlReflectionRelease']) {
-	group 'UmlReflection'
-	description 'build UmlReflection in release'
+	description 'build UmlReflection'
 }
 
 task compileUmlReflection(dependsOn: ['compileUmlReflectionDebug', 'compileUmlReflectionRelease']) {
 	group 'UmlReflection'
-	description 'compile UmlReflection in debug and release'
+	description 'compile UmlReflection'
 }
 task compileUmlReflectionDebug {
-	group 'UmlReflection'
 	description 'compile UmlReflection in Debug'
 
 	def folder = new File(file('./src_gen/UmlReflection/.cmake/Debug').absolutePath)
@@ -46,8 +37,10 @@ task compileUmlReflectionDebug {
 		}
 	}
 }
+compileUmlReflectionDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileUmlReflectionRelease {
-	group 'UmlReflection'
 	description 'compile UmlReflection in Release'
 
 	def folder = new File(file('./src_gen/UmlReflection/.cmake/Release').absolutePath)
@@ -72,6 +65,9 @@ task compileUmlReflectionRelease {
 			}
 		}
 	}
+}
+compileUmlReflectionRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateUmlReflection(type: JavaExec) {

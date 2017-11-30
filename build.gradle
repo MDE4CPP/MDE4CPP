@@ -4,7 +4,7 @@ description 'Common collection'
 
 task buildReflectionModels(dependsOn: ['compilePluginFramework', 'ecoreReflection:buildEcoreReflection', 'primitiveTypesReflection:buildPrimitivetypesReflection', 'umlReflection:buildUmlReflection']) {
 	group 'reflection models'
-	description 'generate and compile reflection models in debug and release'
+	description 'generate and compile reflection models'
 }
 
 tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath('primitiveTypesReflection:buildPrimitivetypesReflection')
@@ -12,7 +12,7 @@ tasks.getByPath('umlReflection:buildUmlReflection').mustRunAfter tasks.getByPath
 
 task compilePluginFramework(dependsOn: ['compilePluginFrameworkDebug', 'compilePluginFrameworkRelease']) {
 	group 'PluginFramework'
-	description 'compile PluginFramework in Debug and Release'
+	description 'compile PluginFramework'
 }
 task compilePluginFrameworkDebug {
 	description 'compile PluginFramework in Debug'

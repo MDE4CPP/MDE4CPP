@@ -4,23 +4,14 @@ description 'Build tasks for project: EcoreReflection'
 
 task buildEcoreReflection(dependsOn: ['generateEcoreReflection', 'compileEcoreReflection']) {
 	group 'EcoreReflection'
-	description 'build EcoreReflection in debug and release'
-}
-task buildEcoreReflectionDebug(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionDebug']) {
-	group 'EcoreReflection'
-	description 'build EcoreReflection in debug'
-}
-task buildEcoreReflectionRelease(dependsOn: ['generateEcoreReflection', 'compileEcoreReflectionRelease']) {
-	group 'EcoreReflection'
-	description 'build EcoreReflection in release'
+	description 'build EcoreReflection'
 }
 
 task compileEcoreReflection(dependsOn: ['compileEcoreReflectionDebug', 'compileEcoreReflectionRelease']) {
 	group 'EcoreReflection'
-	description 'compile EcoreReflection in debug and release'
+	description 'compile EcoreReflection'
 }
 task compileEcoreReflectionDebug {
-	group 'EcoreReflection'
 	description 'compile EcoreReflection in Debug'
 
 	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Debug').absolutePath)
@@ -46,8 +37,10 @@ task compileEcoreReflectionDebug {
 		}
 	}
 }
+compileEcoreReflectionDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileEcoreReflectionRelease {
-	group 'EcoreReflection'
 	description 'compile EcoreReflection in Release'
 
 	def folder = new File(file('./src_gen/EcoreReflection/.cmake/Release').absolutePath)
@@ -72,6 +65,9 @@ task compileEcoreReflectionRelease {
 			}
 		}
 	}
+}
+compileEcoreReflectionRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateEcoreReflection(type: JavaExec) {

@@ -4,23 +4,14 @@ description 'Build tasks for project: PrimitivetypesReflection'
 
 task buildPrimitivetypesReflection(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflection']) {
 	group 'PrimitivetypesReflection'
-	description 'build PrimitivetypesReflection in debug and release'
-}
-task buildPrimitivetypesReflectionDebug(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflectionDebug']) {
-	group 'PrimitivetypesReflection'
-	description 'build PrimitivetypesReflection in debug'
-}
-task buildPrimitivetypesReflectionRelease(dependsOn: ['generatePrimitivetypesReflection', 'compilePrimitivetypesReflectionRelease']) {
-	group 'PrimitivetypesReflection'
-	description 'build PrimitivetypesReflection in release'
+	description 'build PrimitivetypesReflection'
 }
 
 task compilePrimitivetypesReflection(dependsOn: ['compilePrimitivetypesReflectionDebug', 'compilePrimitivetypesReflectionRelease']) {
 	group 'PrimitivetypesReflection'
-	description 'compile PrimitivetypesReflection in debug and release'
+	description 'compile PrimitivetypesReflection'
 }
 task compilePrimitivetypesReflectionDebug {
-	group 'PrimitivetypesReflection'
 	description 'compile PrimitivetypesReflection in Debug'
 
 	def folder = new File(file('./src_gen/PrimitivetypesReflection/.cmake/Debug').absolutePath)
@@ -46,8 +37,10 @@ task compilePrimitivetypesReflectionDebug {
 		}
 	}
 }
+compilePrimitivetypesReflectionDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compilePrimitivetypesReflectionRelease {
-	group 'PrimitivetypesReflection'
 	description 'compile PrimitivetypesReflection in Release'
 
 	def folder = new File(file('./src_gen/PrimitivetypesReflection/.cmake/Release').absolutePath)
@@ -72,6 +65,9 @@ task compilePrimitivetypesReflectionRelease {
 			}
 		}
 	}
+}
+compilePrimitivetypesReflectionRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generatePrimitivetypesReflection(type: JavaExec) {
