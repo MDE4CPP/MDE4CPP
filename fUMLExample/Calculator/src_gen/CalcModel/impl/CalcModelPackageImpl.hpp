@@ -66,8 +66,8 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::ActivityParameterNode> get_CalcModel_CheckIfPrimeprimeChecker();
 			virtual std::shared_ptr<uml::Class> get_CalcModel_PrimeChecker();
 			virtual std::shared_ptr<uml::Property> get_CalcModel_PrimeChecker_divider();
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_divides_isDivisible();
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_divides_();
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_divides_isDivisible();
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbDivides();
 			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_fbDivides_isDivisible();
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbIsNotFinished();
@@ -77,10 +77,10 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbNext();
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbPrintIsPrime();
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbPrintNotPrime();
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isNotFinished_isNotFinished();
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_isNotFinished_();
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isOdd_isOdd();
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isNotFinished_isNotFinished();
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_isOdd_();
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isOdd_isOdd();
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_next_();
 			virtual std::shared_ptr<uml::Property> get_CalcModel_PrimeChecker_number();
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_printIsPrime_();
@@ -156,9 +156,9 @@ namespace CalcModel
 			std::shared_ptr<uml::Class> calcModel_PrimeChecker = nullptr;
 			std::shared_ptr<uml::Property> calcModel_PrimeChecker_divider = nullptr;
 			std::shared_ptr<uml::LiteralInteger> calcModel_PrimeChecker_divider_defaultValue_LiteralInteger_CalcModel_PrimeChecker_divider = nullptr;
+			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_divides_ = nullptr;
 			std::shared_ptr<uml::Parameter> calcModel_PrimeChecker_divides_isDivisible = nullptr;
 			std::shared_ptr<uml::LiteralString> calcModel_PrimeChecker_divides_isDivisible_defaultValue_LiteralString_CalcModel_PrimeChecker_divides_isDivisible = nullptr;
-			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_divides_ = nullptr;
 			std::shared_ptr<uml::FunctionBehavior> calcModel_PrimeChecker_fbDivides = nullptr;
 			std::shared_ptr<uml::Parameter> calcModel_PrimeChecker_fbDivides_isDivisible = nullptr;
 			std::shared_ptr<uml::LiteralString> calcModel_PrimeChecker_fbDivides_isDivisible_defaultValue_LiteralString_CalcModel_PrimeChecker_fbDivides_isDivisible = nullptr;
@@ -170,11 +170,11 @@ namespace CalcModel
 			std::shared_ptr<uml::FunctionBehavior> calcModel_PrimeChecker_fbNext = nullptr;
 			std::shared_ptr<uml::FunctionBehavior> calcModel_PrimeChecker_fbPrintIsPrime = nullptr;
 			std::shared_ptr<uml::FunctionBehavior> calcModel_PrimeChecker_fbPrintNotPrime = nullptr;
-			std::shared_ptr<uml::Parameter> calcModel_PrimeChecker_isNotFinished_isNotFinished = nullptr;
 			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_isNotFinished_ = nullptr;
+			std::shared_ptr<uml::Parameter> calcModel_PrimeChecker_isNotFinished_isNotFinished = nullptr;
+			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_isOdd_ = nullptr;
 			std::shared_ptr<uml::Parameter> calcModel_PrimeChecker_isOdd_isOdd = nullptr;
 			std::shared_ptr<uml::LiteralString> calcModel_PrimeChecker_isOdd_isOdd_defaultValue_LiteralString_CalcModel_PrimeChecker_isOdd_isOdd = nullptr;
-			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_isOdd_ = nullptr;
 			std::shared_ptr<uml::Operation> calcModel_PrimeChecker_next_ = nullptr;
 			std::shared_ptr<uml::Property> calcModel_PrimeChecker_number = nullptr;
 			std::shared_ptr<uml::LiteralInteger> calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number = nullptr;

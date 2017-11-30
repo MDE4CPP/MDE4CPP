@@ -92,15 +92,15 @@ int main()
 	calcModel_PrimeChecker_fbPrintIsPrimeExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintIsPrimeExecution);
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbNextExecution(new CalcModel::FbNextExecution());
-	calcModel_PrimeChecker_fbNextExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbNext());
-	calcModel_PrimeChecker_fbNextExecution->setLocus(factory->getLocus().lock());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbNextExecution);
-	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsNotFinishedExecution(new CalcModel::FbIsNotFinishedExecution());
 	calcModel_PrimeChecker_fbIsNotFinishedExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsNotFinished());
 	calcModel_PrimeChecker_fbIsNotFinishedExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbIsNotFinishedExecution);
+	
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbNextExecution(new CalcModel::FbNextExecution());
+	calcModel_PrimeChecker_fbNextExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbNext());
+	calcModel_PrimeChecker_fbNextExecution->setLocus(factory->getLocus().lock());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbNextExecution);
 	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbDividesExecution(new CalcModel::FbDividesExecution());
 	calcModel_PrimeChecker_fbDividesExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbDivides());

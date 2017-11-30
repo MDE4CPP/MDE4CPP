@@ -4,23 +4,14 @@ description 'Build tasks for project: LibraryModel_uml'
 
 task buildLibraryModel_uml(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_uml', 'compileApplicationForLibraryModel_uml']) {
 	group 'LibraryModel_uml'
-	description 'build LibraryModel_uml in debug and release'
-}
-task buildLibraryModel_umlDebug(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlDebug', 'compileApplicationForLibraryModel_umlDebug']) {
-	group 'LibraryModel_uml'
-	description 'build LibraryModel_uml in debug'
-}
-task buildLibraryModel_umlRelease(dependsOn: ['generateLibraryModel_uml', 'compileLibraryModel_umlRelease', 'compileApplicationForLibraryModel_umlRelease']) {
-	group 'LibraryModel_uml'
-	description 'build LibraryModel_uml in release'
+	description 'build LibraryModel_uml'
 }
 
 task compileApplicationForLibraryModel_uml(dependsOn: ['compileApplicationForLibraryModel_umlDebug', 'compileApplicationForLibraryModel_umlRelease']) {
 	group 'LibraryModel_uml'
-	description 'compile LibraryModel_uml in debug and release'
+	description 'compile LibraryModel_uml'
 }
 task compileApplicationForLibraryModel_umlDebug {
-	group 'ApplicationForLibraryModel_uml'
 	description 'compile ApplicationForLibraryModel_uml in Debug'
 
 	def folder = new File(file('./application/.cmake/Debug').absolutePath)
@@ -46,8 +37,10 @@ task compileApplicationForLibraryModel_umlDebug {
 		}
 	}
 }
+compileApplicationForLibraryModel_umlDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileApplicationForLibraryModel_umlRelease {
-	group 'ApplicationForLibraryModel_uml'
 	description 'compile ApplicationForLibraryModel_uml in Release'
 
 	def folder = new File(file('./application/.cmake/Release').absolutePath)
@@ -73,13 +66,15 @@ task compileApplicationForLibraryModel_umlRelease {
 		}
 	}
 }
+compileApplicationForLibraryModel_umlRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 
 task compileLibraryModel_uml(dependsOn: ['compileLibraryModel_umlDebug', 'compileLibraryModel_umlRelease']) {
 	group 'LibraryModel_uml'
-	description 'compile LibraryModel_uml in debug and release'
+	description 'compile LibraryModel_uml'
 }
 task compileLibraryModel_umlDebug {
-	group 'LibraryModel_uml'
 	description 'compile LibraryModel_uml in Debug'
 
 	def folder = new File(file('./src_gen/LibraryModel_uml/.cmake/Debug').absolutePath)
@@ -105,8 +100,10 @@ task compileLibraryModel_umlDebug {
 		}
 	}
 }
+compileLibraryModel_umlDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileLibraryModel_umlRelease {
-	group 'LibraryModel_uml'
 	description 'compile LibraryModel_uml in Release'
 
 	def folder = new File(file('./src_gen/LibraryModel_uml/.cmake/Release').absolutePath)
@@ -131,6 +128,9 @@ task compileLibraryModel_umlRelease {
 			}
 		}
 	}
+}
+compileLibraryModel_umlRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateLibraryModel_uml(type: JavaExec) {

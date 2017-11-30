@@ -44,6 +44,7 @@ SET(SOURCE_FILES
 	impl/LibraryModelImpl.cpp
 	impl/NamedElementImpl.cpp
 	impl/PictureImpl.cpp
+	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
 INCLUDE_DIRECTORIES(

@@ -28,6 +28,7 @@ namespace CalcModel
 		    //constructors
 		    PrimeCheckerExecution(PrimeCheckerExecution &obj);
 		    PrimeCheckerExecution(std::shared_ptr<PrimeChecker>);
+		    PrimeCheckerExecution(std::shared_ptr<Bag<PrimeChecker>>);
 		 	PrimeCheckerExecution();
 		    //destructor
 		    virtual ~PrimeCheckerExecution();
@@ -35,10 +36,13 @@ namespace CalcModel
 		    virtual std::shared_ptr<ecore::EObject> copy();
 			
 			std::shared_ptr<PrimeChecker> getUmlValue() const;
+			std::shared_ptr<Bag<PrimeChecker>> getUmlValues() const;
 			void setUmlValue(std::shared_ptr<PrimeChecker>);
+			void setUmlValues(std::shared_ptr<Bag<PrimeChecker>>);;
 		
 		protected:
-			std::shared_ptr<PrimeChecker> m_umlValue;
+			std::shared_ptr<PrimeChecker> m_umlValue = nullptr;
+			std::shared_ptr<Bag<PrimeChecker>> m_umlValues = nullptr;
 	};
 }
 #endif /* end of include guard: CALCMODEL_PRIMECHECKER_EXECUTION_HPP */

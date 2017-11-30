@@ -12,13 +12,13 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
+#include "Association.hpp"
+#include "Class.hpp"
+#include "Generalization.hpp"
+#include "LiteralInteger.hpp"
+#include "LiteralUnlimitedNatural.hpp"
 #include "PackageImport.hpp"
 #include "Property.hpp"
-#include "LiteralInteger.hpp"
-#include "Generalization.hpp"
-#include "Class.hpp"
-#include "Association.hpp"
-#include "LiteralUnlimitedNatural.hpp"
 //metamodel factory
 #include "LibraryModel_umlFactory.hpp"
 #include "UmlFactory.hpp"
@@ -97,12 +97,6 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 	libraryModel_uml_Book_authors_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_authors = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_authors));
 	libraryModel_uml_Book_authors_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_authors->setValue(-1);
 	
-	libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_pictures));
-	libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures->setValue(0);
-	
-	libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_pictures));
-	libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures->setValue(-1);
-	
 	libraryModel_uml_Book_book_lowerValue_LiteralInteger_LibraryModel_uml_Book_book = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_book));
 	libraryModel_uml_Book_book_lowerValue_LiteralInteger_LibraryModel_uml_Book_book->setValue(0);
 	
@@ -114,6 +108,12 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 	
 	libraryModel_uml_Book_books_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_books = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_books));
 	libraryModel_uml_Book_books_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_books->setValue(-1);
+	
+	libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_pictures));
+	libraryModel_uml_Book_pictures_lowerValue_LiteralInteger_LibraryModel_uml_Book_pictures->setValue(0);
+	
+	libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures = uml::UmlFactory::eInstance()->createLiteralUnlimitedNatural_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Book_pictures));
+	libraryModel_uml_Book_pictures_upperValue_LiteralUnlimitedNatural_LibraryModel_uml_Book_pictures->setValue(-1);
 	
 	libraryModel_uml_Library_authors_lowerValue_LiteralInteger_LibraryModel_uml_Library_authors = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(libraryModel_uml_Library_authors));
 	libraryModel_uml_Library_authors_lowerValue_LiteralInteger_LibraryModel_uml_Library_authors->setValue(0);
@@ -335,10 +335,6 @@ std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml
 {
 	return libraryModel_uml_Book_authors;
 }
-std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Book_pictures()
-{
-	return libraryModel_uml_Book_pictures;
-}
 std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Book_book()
 {
 	return libraryModel_uml_Book_book;
@@ -346,6 +342,10 @@ std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml
 std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Book_books()
 {
 	return libraryModel_uml_Book_books;
+}
+std::shared_ptr<uml::Property> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Book_pictures()
+{
+	return libraryModel_uml_Book_pictures;
 }
 std::shared_ptr<uml::Class> LibraryModel_umlPackageImpl::get_LibraryModel_uml_Library()
 {

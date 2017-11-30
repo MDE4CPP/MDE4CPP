@@ -27,27 +27,27 @@ namespace CalcModel
 
 namespace uml 
 {
-	class DecisionNode;
-	class Property;
-	class CallBehaviorAction;
-	class Operation;
-	class ProfileApplication;
-	class ForkNode;
 	class Activity;
-	class FunctionBehavior;
-	class LiteralBoolean;
 	class ActivityFinalNode;
-	class LiteralString;
-	class ObjectFlow;
-	class Parameter;
-	class ControlFlow;
 	class ActivityParameterNode;
-	class Class;
-	class OutputPin;
-	class LiteralInteger;
+	class CallBehaviorAction;
 	class CallOperationAction;
+	class Class;
+	class ControlFlow;
+	class DecisionNode;
+	class ForkNode;
+	class FunctionBehavior;
 	class InputPin;
+	class LiteralBoolean;
+	class LiteralInteger;
+	class LiteralString;
 	class MergeNode;
+	class ObjectFlow;
+	class Operation;
+	class OutputPin;
+	class Parameter;
+	class ProfileApplication;
+	class Property;
 }
 
 namespace CalcModel 
@@ -103,8 +103,8 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::ActivityParameterNode> get_CalcModel_CheckIfPrimeprimeChecker() = 0;
 			virtual std::shared_ptr<uml::Class> get_CalcModel_PrimeChecker() = 0;
 			virtual std::shared_ptr<uml::Property> get_CalcModel_PrimeChecker_divider() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_divides_isDivisible() = 0;
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_divides_() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_divides_isDivisible() = 0;
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbDivides() = 0;
 			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_fbDivides_isDivisible() = 0;
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbIsNotFinished() = 0;
@@ -114,10 +114,10 @@ namespace CalcModel
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbNext() = 0;
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbPrintIsPrime() = 0;
 			virtual std::shared_ptr<uml::FunctionBehavior> get_CalcModel_PrimeChecker_fbPrintNotPrime() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isNotFinished_isNotFinished() = 0;
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_isNotFinished_() = 0;
-			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isOdd_isOdd() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isNotFinished_isNotFinished() = 0;
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_isOdd_() = 0;
+			virtual std::shared_ptr<uml::Parameter> get_CalcModel_PrimeChecker_isOdd_isOdd() = 0;
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_next_() = 0;
 			virtual std::shared_ptr<uml::Property> get_CalcModel_PrimeChecker_number() = 0;
 			virtual std::shared_ptr<uml::Operation> get_CalcModel_PrimeChecker_printIsPrime_() = 0;
