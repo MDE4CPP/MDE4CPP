@@ -89,6 +89,7 @@ std::shared_ptr<EClass> EModelElementImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<ecore::EAnnotation> EModelElementImpl::getEAnnotation(std::string source) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    for(std::shared_ptr<EAnnotation> a : *m_eAnnotations)
     {

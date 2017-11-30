@@ -4,24 +4,15 @@ description 'Build tasks for project: types'
 
 task buildTypes(dependsOn: ['generateTypes', 'compileTypes']) {
 	group 'types'
-	description 'build types in debug and release'
-}
-task buildTypesDebug(dependsOn: ['generateTypes', 'compileTypesDebug']) {
-	group 'types'
-	description 'build types in debug'
-}
-task buildTypesRelease(dependsOn: ['generateTypes', 'compileTypesRelease']) {
-	group 'types'
-	description 'build types in release'
+	description 'build types'
 }
 
 
 task compileTypes(dependsOn: ['compileTypesDebug', 'compileTypesRelease']) {
 	group 'types'
-	description 'compile types in debug and release'
+	description 'compile types'
 }
 task compileTypesDebug {
-	group 'types'
 	description 'compile types in Debug'
 
 	def folder = new File(file('./src_gen/types/.cmake/Debug').absolutePath)
@@ -60,8 +51,10 @@ task compileTypesDebug {
 		}
 	}
 }
+compileTypesDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileTypesRelease {
-	group 'types'
 	description 'compile types in Release'
 
 	def folder = new File(file('./src_gen/types/.cmake/Release').absolutePath)
@@ -99,6 +92,9 @@ task compileTypesRelease {
 			}
 		}
 	}
+}
+compileTypesRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateTypes(type: JavaExec) {

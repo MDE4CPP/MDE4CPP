@@ -132,6 +132,7 @@ std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
     {
@@ -146,6 +147,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(std::string name
 
 std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
     {
@@ -161,6 +163,7 @@ std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteral(int value)  cons
 
 std::shared_ptr<ecore::EEnumLiteral> EEnumImpl::getEEnumLiteralByLiteral(std::string literal)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    for (std::shared_ptr<EEnumLiteral> e : *getELiterals())
     {

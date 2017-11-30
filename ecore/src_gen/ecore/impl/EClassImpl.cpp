@@ -326,6 +326,7 @@ bool EClassImpl::isInterface() const
 //*********************************
 std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr< Bag<ecore::EOperation> > eAllOps = getEAllOperations();
     return operationID >=0 && operationID < (int) eAllOps->size() ? eAllOps->at(operationID): nullptr;
@@ -334,6 +335,7 @@ std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID)  c
 
 std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int featureID)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr< Bag<ecore::EStructuralFeature> >  eAllFeat = getEAllStructuralFeatures();
     return featureID >=0 && featureID < (int) eAllFeat->size() ? eAllFeat->at(featureID): nullptr;
@@ -342,6 +344,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(int
 
 std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std::string featureName)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    for(std::shared_ptr<EStructuralFeature> f: *getEAllStructuralFeatures())
     {
@@ -357,6 +360,7 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std
 
 int EClassImpl::getFeatureCount()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return getEAllStructuralFeatures()->size();
 	//end of body
@@ -364,6 +368,7 @@ int EClassImpl::getFeatureCount()  const
 
 int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr<Bag<EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();
     int index = feature->getFeatureID();
@@ -394,6 +399,7 @@ std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<
 
 int EClassImpl::getOperationCount()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return getEAllOperations()->size();
 	//end of body
@@ -401,6 +407,7 @@ int EClassImpl::getOperationCount()  const
 
 int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr< Bag<ecore::EOperation> > eAllOps = getEAllOperations();
     int index = operation->getOperationID();
@@ -431,6 +438,7 @@ std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore
 
 bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr< Bag<ecore::EClass > > list = someClass->getEAllSuperTypes();
 

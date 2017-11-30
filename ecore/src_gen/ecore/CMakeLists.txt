@@ -59,6 +59,7 @@ SET(SOURCE_FILES
 	impl/EStructuralFeatureImpl.cpp
 	impl/ETypeParameterImpl.cpp
 	impl/ETypedElementImpl.cpp
+	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
 INCLUDE_DIRECTORIES(

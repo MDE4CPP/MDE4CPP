@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -47,6 +49,7 @@ namespace ecore
 	/*!
 	 */
 	class EModelElement : virtual public ecore::EObject 
+
 	{
 		public:
  			EModelElement(const EModelElement &) {}

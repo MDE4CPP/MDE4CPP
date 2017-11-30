@@ -184,6 +184,7 @@ std::string EPackageImpl::getNsURI() const
 //*********************************
 void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	internalAddEParameter(owner, type, name);
 	//end of body
@@ -191,6 +192,7 @@ void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::
 
 void EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	auto p = internalAddEParameter(owner, type, name);
 p->setLowerBound(lower);
@@ -200,6 +202,7 @@ p->setUpperBound(upper);
 
 std::shared_ptr<ecore::EParameter> EPackageImpl::addEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lower,int upper,bool isUnique,bool isOrdered) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	auto p = internalAddEParameter(owner, type, name);
 p->setLowerBound(lower);
@@ -212,6 +215,7 @@ return p;
 
 void EPackageImpl::createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr<EAttributeImpl> a(std::dynamic_pointer_cast<EAttributeImpl>(EcoreFactory::eInstance()->create("EAttribute", owner)));
     assert(a);
@@ -221,6 +225,7 @@ void EPackageImpl::createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id
 
 std::shared_ptr<ecore::EClass> EPackageImpl::createEClass(int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<EClassImpl> c(std::dynamic_pointer_cast<EClassImpl>(EcoreFactory::eInstance()->create("EClass",std::shared_ptr<EPackage>(this, null_deleter()))));
@@ -232,6 +237,7 @@ std::shared_ptr<ecore::EClass> EPackageImpl::createEClass(int id)
 
 std::shared_ptr<ecore::EDataType> EPackageImpl::createEDataType(int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<EDataTypeImpl> d(std::dynamic_pointer_cast<EDataTypeImpl>(EcoreFactory::eInstance()->create("EDataType",std::shared_ptr<EPackage>(this, null_deleter()))));
@@ -243,6 +249,7 @@ std::shared_ptr<ecore::EDataType> EPackageImpl::createEDataType(int id)
 
 std::shared_ptr<ecore::EEnum> EPackageImpl::createEEnum(int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		struct null_deleter{void operator()(void const *) const { } };
 	std::shared_ptr<EEnumImpl> e( std::dynamic_pointer_cast<EEnumImpl>(EcoreFactory::eInstance()->create("EEnum",std::shared_ptr<EPackage>(this, null_deleter()))));
@@ -254,6 +261,7 @@ std::shared_ptr<ecore::EEnum> EPackageImpl::createEEnum(int id)
 
 void EPackageImpl::createEOperation(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<EOperationImpl> o(std::dynamic_pointer_cast<EOperationImpl>(EcoreFactory::eInstance()->create("EOperation",owner)));
 	assert(o);
@@ -263,6 +271,7 @@ void EPackageImpl::createEOperation(std::shared_ptr<ecore::EClass>  owner,int id
 
 void EPackageImpl::createEReference(std::shared_ptr<ecore::EClass>  owner,int id) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<EReferenceImpl> r (std::dynamic_pointer_cast<EReferenceImpl>(EcoreFactory::eInstance()->create("EReference", owner)));
 	assert(r);
@@ -272,6 +281,7 @@ void EPackageImpl::createEReference(std::shared_ptr<ecore::EClass>  owner,int id
 
 std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string name)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr<Bag<EClassifier> > classifierList = getEClassifiers();
     for (std::shared_ptr<EClassifier> c : *classifierList)
@@ -287,6 +297,7 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 
 std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return initEAttribute(a,type,name,defaultValue,lowerBound,upperBound,isTransient,isVolatile,isChangeable,isUnsettable,isID,isUnique,isDerived,true);
 	//end of body
@@ -294,6 +305,7 @@ std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<
 
 std::shared_ptr<ecore::EAttribute> EPackageImpl::initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEStructuralFeature
       (a, 
@@ -318,6 +330,7 @@ return a;
 
 std::shared_ptr<ecore::EClass> EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEClassifier(c,EcorePackage::eInstance()->getEClass(),instanceClass,name);
 c->setAbstract(isAbstract);
@@ -328,6 +341,7 @@ return c;
 
 std::shared_ptr<ecore::EClass> EPackageImpl::initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface,bool isGenerated) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEClassifier(c,EcorePackage::eInstance()->getEClass(),instanceClass,name,isGenerated);
 c->setAbstract(isAbstract);
@@ -338,6 +352,7 @@ return c;
 
 void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    o->setName(name);
     o->setInstanceClass(instanceClass);
@@ -348,6 +363,7 @@ void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::s
 
 void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name,bool isGenerated) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    o->setName(name);
     o->setInstanceClass(instanceClass);
@@ -362,6 +378,7 @@ void EPackageImpl::initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::s
 
 std::shared_ptr<ecore::EDataType> EPackageImpl::initEDataType(std::shared_ptr<ecore::EDataType>  d,void *  instanceClass,std::string name,bool isSerializable,bool isGenerated) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEClassifier(d,EcorePackage::eInstance()->getEClass(),instanceClass,name,isGenerated);
 d->setSerializable(isSerializable);
@@ -371,6 +388,7 @@ return d;
 
 std::shared_ptr<ecore::EEnum> EPackageImpl::initEEnum(std::shared_ptr<ecore::EEnum>  e,void *  instanceClass,std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEClassifier(e,EcorePackage::eInstance()->getEEnum(),instanceClass,name,true);
 return e;
@@ -379,6 +397,7 @@ return e;
 
 std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	o->setEType(type);
 o->setName(name);
@@ -388,6 +407,7 @@ return o;
 
 std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEOperation(o,type,name);
 o->setLowerBound(lowerBound);
@@ -398,6 +418,7 @@ return o;
 
 std::shared_ptr<ecore::EOperation> EPackageImpl::initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound,bool isUnique,bool isOrdered) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEOperation(o,type,name,lowerBound,upperBound);
 o->setUnique(isUnique);
@@ -408,6 +429,7 @@ return o;
 
 std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEReference
       (r, 
@@ -432,6 +454,7 @@ std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<
 
 std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	initEStructuralFeature
       (r, 
@@ -461,6 +484,7 @@ std::shared_ptr<ecore::EReference> EPackageImpl::initEReference(std::shared_ptr<
 
 void EPackageImpl::initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	s->setName(name);
 
@@ -483,6 +507,7 @@ if (!defaultValue.empty())
 
 std::shared_ptr<ecore::EParameter> EPackageImpl::internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	    std::shared_ptr<EParameter> p(EcoreFactory::eInstance()->createEParameter_in_EOperation(owner));
     p->setEType(type);
@@ -493,6 +518,7 @@ std::shared_ptr<ecore::EParameter> EPackageImpl::internalAddEParameter(std::shar
 
 void EPackageImpl::setGeneratedClassName(std::shared_ptr<ecore::EClassifier>  eClassifier) 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	EClassifierImpl * c = dynamic_cast<EClassifierImpl * >(eClassifier.get());
 assert(c);

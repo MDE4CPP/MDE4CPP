@@ -39,6 +39,7 @@ SET(SOURCE_FILES
 	TypesPackage.cpp
 	impl/TypesPluginImpl.cpp
 	TypesPlugin.cpp
+	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 
 INCLUDE_DIRECTORIES(

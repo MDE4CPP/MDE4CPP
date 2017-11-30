@@ -92,6 +92,7 @@ std::vector <   ecore::EObject > EObjectImpl::eAllContents()  const
 
 std::shared_ptr<ecore::EClass> EObjectImpl::eClass()  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->eStaticClass();
 	//end of body
@@ -123,6 +124,7 @@ std::vector <   ecore::EObject > EObjectImpl::eCrossReferences()  const
 
 boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->eGet(feature,false);
 	//end of body
@@ -130,6 +132,7 @@ boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature
 
 boost::any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	return this->eGet(feature->getFeatureID(),resolve,false);
 	//end of body

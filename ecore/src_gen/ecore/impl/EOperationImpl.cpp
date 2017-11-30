@@ -199,6 +199,7 @@ int EOperationImpl::getOperationID() const
 //*********************************
 bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation)  const 
 {
+	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<ecore::EClass > containingClass = someOperation->getEContainingClass().lock();
 	if(nullptr == containingClass)
