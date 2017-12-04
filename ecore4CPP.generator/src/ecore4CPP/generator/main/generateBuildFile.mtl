@@ -95,56 +95,69 @@ endif()
 [/for]
 )
 
-if(NOT UNIX)
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-endif()
+IF(NOT UNIX)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+	ENDIF()
+ENDIF()
 
-if(UNIX AND NOT APPLE)
+IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
+	ELSE()
+		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
+	ENDIF()
+ENDIF()
 [/for]
-else()
+ELSE()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d ${MDE4CPP_HOME}/application/lib)
+	ELSE()
+		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/] ${MDE4CPP_HOME}/application/lib)
+	ENDIF()
 [/for]
-endif()
+ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-if(NOT UNIX)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	#debug ${PLUGINFRAMEWORK_DEBUG}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	debug ${[pack.name.toUpperCase()/]_DEBUG}
-[/for]
-)
-endif()
 
-if(NOT UNIX) 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
+IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	IF(NOT UNIX)
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+			debug ${PLUGINFRAMEWORK_DEBUG}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	optimized ${[pack.name.toUpperCase()/]_RELEASE}
+			debug ${[pack.name.toUpperCase()/]_DEBUG}
 [/for]
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	#optimized ${PLUGINFRAMEWORK_RELEASE}
+	)
+	ELSE()
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+			#debug ${PLUGINFRAMEWORK_DEBUG}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	optimized ${[pack.name.toUpperCase()/]_RELEASE}
+			debug ${[pack.name.toUpperCase()/]_DEBUG}
 [/for]
-)
-endif()
+		)
+	ENDIF()
+ELSE()
+	IF(NOT UNIX) 
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+			optimized ${PLUGINFRAMEWORK_RELEASE}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+			optimized ${[pack.name.toUpperCase()/]_RELEASE}
+[/for]
+	)
+	ELSE()
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+			#optimized ${PLUGINFRAMEWORK_RELEASE}
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
+			optimized ${[pack.name.toUpperCase()/]_RELEASE}
+[/for]
+		)
+	ENDIF()
+ENDIF()
 
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
