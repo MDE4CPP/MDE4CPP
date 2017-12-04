@@ -57,7 +57,7 @@
 #include "UmlFactory.hpp"
 
 //depending model packages
-[for (pack : Package | aPackage.metaModelIncludes()->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
+[for (pack : Package | aPackage.metaModelIncludes()->reject(oclIsUndefined())->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
 [if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
 [if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
