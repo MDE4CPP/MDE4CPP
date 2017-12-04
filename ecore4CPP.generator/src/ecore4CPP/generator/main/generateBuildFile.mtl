@@ -105,14 +105,16 @@ ENDIF()
 
 IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 		FIND_LIBRARY([pack.name.toUpperCase()/]_DEBUG [pack.name/]d.so ${MDE4CPP_HOME}/application/bin)
+[/for]
 	ELSE()
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 		FIND_LIBRARY([pack.name.toUpperCase()/]_RELEASE [pack.name/].so ${MDE4CPP_HOME}/application/bin)
+[/for]
 	ENDIF()
 ENDIF()
-[/for]
 ELSE()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
 	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
