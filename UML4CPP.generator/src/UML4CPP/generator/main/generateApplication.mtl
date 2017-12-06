@@ -133,47 +133,58 @@ INCLUDE_DIRECTORIES(
 # [/protected]
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_DEBUG [packName/]d ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY([packName.toUpperCase()/]_RELEASE [packName/] ${MDE4CPP_HOME}/application/lib)
 
 [/for]
-
-FIND_LIBRARY([packageName.toUpperCase()/]_DEBUG [packageName/]d ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY([packageName.toUpperCase()/]_RELEASE [packageName/] ${MDE4CPP_HOME}/application/lib)
-
-# [protected ('library_finding')]
+	FIND_LIBRARY([packageName.toUpperCase()/]_DEBUG [packageName/]d ${MDE4CPP_HOME}/application/lib)
+# [protected ('library_finding_debug')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
 # [/protected]
+ELSE()
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+[for (packName : String | aPackage.metaModelLibrariesNames())]
+	FIND_LIBRARY([packName.toUpperCase()/]_RELEASE [packName/] ${MDE4CPP_HOME}/application/lib)
+
+[/for]
+	FIND_LIBRARY([packageName.toUpperCase()/]_RELEASE [packageName/] ${MDE4CPP_HOME}/application/lib)
+# [protected ('library_finding_release')]
+# You may manually edit the following lines, won't be overwritten upon generation.
+
+# [/protected]
+ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-	debug ${[packName.toUpperCase()/]_DEBUG}
-[/for]
-	debug ${[packageName.toUpperCase()/]_DEBUG}
-# [protected ('library_assigning_debug')]
-# You may manually edit the following lines, won't be overwritten upon generation.
 
-# [/protected]
-)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
-	optimized ${[packName.toUpperCase()/]_RELEASE}
-[/for]
-	optimized ${[packageName.toUpperCase()/]_RELEASE}
-# [protected ('library_assigning_release')] 
-# You may manually edit the following lines, won't be overwritten upon generation.
-
-# [/protected]
-)
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+		debug ${PLUGINFRAMEWORK_DEBUG}
+	[for (packName : String | aPackage.metaModelLibrariesNames())]
+		debug ${[packName.toUpperCase()/]_DEBUG}
+	[/for]
+		debug ${[packageName.toUpperCase()/]_DEBUG}
+	# [protected ('library_assigning_debug')]
+	# You may manually edit the following lines, won't be overwritten upon generation.
+	
+	# [/protected]
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${PLUGINFRAMEWORK_RELEASE}
+	[for (packName : String | aPackage.metaModelLibrariesNames())]
+		optimized ${[packName.toUpperCase()/]_RELEASE}
+	[/for]
+		optimized ${[packageName.toUpperCase()/]_RELEASE}
+	# [protected ('library_assigning_release')] 
+	# You may manually edit the following lines, won't be overwritten upon generation.
+	
+	# [/protected]
+	)
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}
