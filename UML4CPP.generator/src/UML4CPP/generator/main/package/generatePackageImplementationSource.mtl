@@ -168,7 +168,7 @@ void [packageName/]::createPackageContents()
 	//Node
 	[anActivity.ownedNode->sortedBy(name).generateActivityNodeCreation()/]
 	//flow
-	[anActivity.edge->asOrderedSet()->sortedBy(source.getProperty('name')).generateActivityEdgeCreation()/]
+	[anActivity.edge->sortedBy(myQualifiedName()).generateActivityEdgeCreation()/]
 [/for]
 
 //Dependency [comment]Only Dependency[/comment]
@@ -206,9 +206,9 @@ void [packageName/]::initializePackageContents()
 	[aPackage.ownedMember->filter(Class).ownedOperation.initalizeOperation()/]
 	
 	//initalize ActivityNodes and Edges
-	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-	[anActivity.node.initializeActivityNode()/]
-	[anActivity.edge.initializeEdge()/]
+	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())) separator ('\n')]
+	[anActivity.node->sortedBy(myQualifiedName()).initializeActivityNode()/]
+	[anActivity.edge->sortedBy(myQualifiedName()).initializeEdge()/]
 	[/for]
 }
 
