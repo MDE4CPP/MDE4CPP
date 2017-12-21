@@ -58,7 +58,7 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 #include "[pack.getPackageName().toUpperFirst().concat('Package')/].hpp"
 [/for]
 
-[aPackage.getOpaqueBehaviors().generateInclude()/]
+[aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateInclude()/]
 
 using namespace [aPackage.name/];
 
