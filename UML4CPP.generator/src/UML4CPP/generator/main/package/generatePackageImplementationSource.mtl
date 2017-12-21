@@ -203,7 +203,7 @@ void [packageName/]::initializePackageContents()
 	std::shared_ptr<uml::Generalization> gen = nullptr;
 	[aPackage.ownedMember->filter(Class).initSuperTypes()/]
 
-	[aPackage.ownedMember->filter(Class).ownedOperation.initalizeOperation()/]
+	[aPackage.ownedMember->filter(Class).ownedOperation->sortedBy(myQualifiedName()).initalizeOperation()/]
 	
 	//initalize ActivityNodes and Edges
 	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())) separator ('\n')]
