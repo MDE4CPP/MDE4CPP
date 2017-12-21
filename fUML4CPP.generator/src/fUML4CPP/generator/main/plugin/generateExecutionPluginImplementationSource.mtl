@@ -62,7 +62,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 
 	[generateLocusInitialization()/]
 
-[for (act : Activity | aPackage.allOwnedElements()->filter(Activity))]
+[for (act : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName()))]
 	if (activityName.compare("[act.name/]") == 0)
 	{
 		[act.generateParameterFromAny(aPackage)/]
