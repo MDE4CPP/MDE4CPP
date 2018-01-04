@@ -150,7 +150,12 @@
 [/for]
 [if (prepareApplication)]
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[packageName/]&quot;"/>
-[/if]	
+[/if]
+[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
+[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
+[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
+									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/]&quot;"/>
+[/if][/if][/for]
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1168779061" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
