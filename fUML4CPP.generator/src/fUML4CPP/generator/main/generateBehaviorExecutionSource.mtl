@@ -70,7 +70,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
-    [par.generateCppType()/] [par.name/];
+   	[par.generateCppType()/] [par.name/][if (par.direction = ParameterDirectionKind::out)](new [if (not (par.upper = 1))]Bag<[/if][par.type.generateCppType(true)/][if (not (par.upper = 1))]>[/if]())[/if];
 	[/for]
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
