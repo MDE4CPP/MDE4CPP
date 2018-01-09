@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -43,6 +45,7 @@ namespace libraryModel_ecore
 	/*!
 	 */
 	class NamedElement : virtual public ecore::EObject 
+
 	{
 		public:
  			NamedElement(const NamedElement &) {}

@@ -4,21 +4,12 @@ task buildBenchmarks(dependsOn: ['compileUMLBenchmark', 'compileEcoreBenchmark',
 	group 'Examples'
 	description 'build all benchmark applications in debug and release'	
 }
-task buildBenchmarksDebug(dependsOn: ['compileUMLBenchmarkDebug', 'compileEcoreBenchmarkDebug', 'compileMemoryBenchmarkEcoreDebug']) {
-	group 'Examples'
-	description 'build all benchmark applications in debug'	
-}
-task buildBenchmarksRelease(dependsOn: ['compileUMLBenchmarkRelease', 'compileEcoreBenchmarkRelease', 'compileMemoryBenchmarkEcoreRelease']) {
-	group 'Examples'
-	description 'build all benchmark applications in release'	
-}
 
 task compileEcoreBenchmark(dependsOn: ['compileEcoreBenchmarkDebug', 'compileEcoreBenchmarkRelease']) {
 	group 'Examples'
 	description 'compile EcoreBenchmark in debug and release'
 }
 task compileEcoreBenchmarkDebug {
-	group 'Examples'
 	description 'compile EcoreBenchmark in Debug'
 
 	def folder = new File(file('./ecoreBenchmark/.cmake/Debug').absolutePath)
@@ -44,8 +35,11 @@ task compileEcoreBenchmarkDebug {
 		}
 	}
 }
+compileEcoreBenchmarkDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
 task compileEcoreBenchmarkRelease {
-	group 'Examples'
 	description 'compile EcoreBenchmark in Release'
 
 	def folder = new File(file('./ecoreBenchmark/.cmake/Release').absolutePath)
@@ -71,13 +65,15 @@ task compileEcoreBenchmarkRelease {
 		}
 	}
 }
+compileEcoreBenchmarkRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 
 task compileMemoryBenchmarkEcore(dependsOn: ['compileMemoryBenchmarkEcoreDebug', 'compileMemoryBenchmarkEcoreRelease']) {
 	group 'Examples'
 	description 'compile memoryBenchmarkEcore in debug and release'
 }
 task compileMemoryBenchmarkEcoreDebug {
-	group 'Examples'
 	description 'compile memoryBenchmarkEcore in Debug'
 
 	def folder = new File(file('./memoryBenchmarkEcore/.cmake/Debug').absolutePath)
@@ -103,8 +99,11 @@ task compileMemoryBenchmarkEcoreDebug {
 		}
 	}
 }
+compileMemoryBenchmarkEcoreDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
 task compileMemoryBenchmarkEcoreRelease {
-	group 'Examples'
 	description 'compile memoryBenchmarkEcore in Release'
 
 	def folder = new File(file('./memoryBenchmarkEcore/.cmake/Release').absolutePath)
@@ -130,14 +129,15 @@ task compileMemoryBenchmarkEcoreRelease {
 		}
 	}
 }
-
+compileMemoryBenchmarkEcoreRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 
 task compileUMLBenchmark(dependsOn: ['compileUMLBenchmarkDebug', 'compileUMLBenchmarkRelease']) {
 	group 'Examples'
 	description 'compile UMLBenchmark in debug and release'
 }
 task compileUMLBenchmarkDebug {
-	group 'Examples'
 	description 'compile UMLBenchmark in Debug'
 
 	def folder = new File(file('./umlBenchmark/.cmake/Debug').absolutePath)
@@ -163,8 +163,11 @@ task compileUMLBenchmarkDebug {
 		}
 	}
 }
+compileUMLBenchmarkDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
 task compileUMLBenchmarkRelease {
-	group 'Examples'
 	description 'compile UMLBenchmark in Release'
 
 	def folder = new File(file('./umlBenchmark/.cmake/Release').absolutePath)
@@ -189,4 +192,7 @@ task compileUMLBenchmarkRelease {
 			}
 		}
 	}
+}
+compileUMLBenchmarkRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }

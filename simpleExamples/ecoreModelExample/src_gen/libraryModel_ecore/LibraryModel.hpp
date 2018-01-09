@@ -19,6 +19,8 @@
     #define ACT_DEBUG(a) /**/
 #endif
 
+//#include "util/ProfileCallCount.hpp"
+
 #include <string>
 #include <map>
 #include <vector>
@@ -52,6 +54,7 @@ namespace libraryModel_ecore
 	/*!
 	 */
 	class LibraryModel : virtual public ecore::EObject 
+
 	{
 		public:
  			LibraryModel(const LibraryModel &) {}

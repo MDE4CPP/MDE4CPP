@@ -31,13 +31,13 @@ namespace LibraryModel_uml
 
 namespace uml 
 {
+	class Association;
+	class Class;
+	class Generalization;
+	class LiteralInteger;
+	class LiteralUnlimitedNatural;
 	class PackageImport;
 	class Property;
-	class LiteralInteger;
-	class Generalization;
-	class Class;
-	class Association;
-	class LiteralUnlimitedNatural;
 }
 
 namespace LibraryModel_uml 
@@ -68,9 +68,9 @@ namespace LibraryModel_uml
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Author() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Book() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_authors() = 0;
-			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_book() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_books() = 0;
+			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Book_pictures() = 0;
 			virtual std::shared_ptr<uml::Class> get_LibraryModel_uml_Library() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_authors() = 0;
 			virtual std::shared_ptr<uml::Property> get_LibraryModel_uml_Library_books() = 0;

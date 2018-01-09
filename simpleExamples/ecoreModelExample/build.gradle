@@ -4,23 +4,14 @@ description 'Build tasks for project: libraryModel_ecore'
 
 task buildLibraryModel_ecore(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecore', 'compileApplicationForlibraryModel_ecore']) {
 	group 'libraryModel_ecore'
-	description 'build libraryModel_ecore in debug and release'
-}
-task buildLibraryModel_ecoreDebug(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecoreDebug', 'compileApplicationForlibraryModel_ecoreDebug']) {
-	group 'libraryModel_ecore'
-	description 'build libraryModel_ecore in debug'
-}
-task buildLibraryModel_ecoreRelease(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecoreRelease', 'compileApplicationForlibraryModel_ecoreRelease']) {
-	group 'libraryModel_ecore'
-	description 'build libraryModel_ecore in release'
+	description 'build libraryModel_ecore'
 }
 
 task compileApplicationForlibraryModel_ecore(dependsOn: ['compileApplicationForlibraryModel_ecoreDebug', 'compileApplicationForlibraryModel_ecoreRelease']) {
 	group 'libraryModel_ecore'
-	description 'compile libraryModel_ecore in debug and release'
+	description 'compile libraryModel_ecore'
 }
 task compileApplicationForlibraryModel_ecoreDebug {
-	group 'ApplicationForlibraryModel_ecore'
 	description 'compile ApplicationForlibraryModel_ecore in Debug'
 
 	def folder = new File(file('./application/.cmake/Debug').absolutePath)
@@ -59,8 +50,10 @@ task compileApplicationForlibraryModel_ecoreDebug {
 		}
 	}
 }
+compileApplicationForlibraryModel_ecoreDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileApplicationForlibraryModel_ecoreRelease {
-	group 'ApplicationForlibraryModel_ecore'
 	description 'compile ApplicationForlibraryModel_ecore in Release'
 
 	def folder = new File(file('./application/.cmake/Release').absolutePath)
@@ -99,14 +92,16 @@ task compileApplicationForlibraryModel_ecoreRelease {
 		}
 	}
 }
+compileApplicationForlibraryModel_ecoreRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 
 
 task compileLibraryModel_ecore(dependsOn: ['compileLibraryModel_ecoreDebug', 'compileLibraryModel_ecoreRelease']) {
 	group 'libraryModel_ecore'
-	description 'compile libraryModel_ecore in debug and release'
+	description 'compile libraryModel_ecore'
 }
 task compileLibraryModel_ecoreDebug {
-	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore in Debug'
 
 	def folder = new File(file('./src_gen/libraryModel_ecore/.cmake/Debug').absolutePath)
@@ -145,8 +140,10 @@ task compileLibraryModel_ecoreDebug {
 		}
 	}
 }
+compileLibraryModel_ecoreDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
 task compileLibraryModel_ecoreRelease {
-	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore in Release'
 
 	def folder = new File(file('./src_gen/libraryModel_ecore/.cmake/Release').absolutePath)
@@ -184,6 +181,9 @@ task compileLibraryModel_ecoreRelease {
 			}
 		}
 	}
+}
+compileLibraryModel_ecoreRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
 }
 
 task generateLibraryModel_ecore(type: JavaExec) {
