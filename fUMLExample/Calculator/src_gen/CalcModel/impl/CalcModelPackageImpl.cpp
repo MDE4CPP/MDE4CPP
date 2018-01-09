@@ -12,27 +12,28 @@
 #include "Operation.hpp"
 #include "Property.hpp"
 
-#include "DecisionNode.hpp"
-#include "Property.hpp"
-#include "CallBehaviorAction.hpp"
-#include "Operation.hpp"
-#include "ProfileApplication.hpp"
-#include "ForkNode.hpp"
 #include "Activity.hpp"
-#include "FunctionBehavior.hpp"
-#include "LiteralBoolean.hpp"
 #include "ActivityFinalNode.hpp"
-#include "LiteralString.hpp"
-#include "ObjectFlow.hpp"
-#include "Parameter.hpp"
-#include "ControlFlow.hpp"
 #include "ActivityParameterNode.hpp"
-#include "Class.hpp"
-#include "OutputPin.hpp"
-#include "LiteralInteger.hpp"
+#include "CallBehaviorAction.hpp"
 #include "CallOperationAction.hpp"
+#include "ChangeEvent.hpp"
+#include "Class.hpp"
+#include "ControlFlow.hpp"
+#include "DecisionNode.hpp"
+#include "ForkNode.hpp"
+#include "FunctionBehavior.hpp"
 #include "InputPin.hpp"
+#include "LiteralBoolean.hpp"
+#include "LiteralInteger.hpp"
+#include "LiteralString.hpp"
 #include "MergeNode.hpp"
+#include "ObjectFlow.hpp"
+#include "Operation.hpp"
+#include "OutputPin.hpp"
+#include "Parameter.hpp"
+#include "ProfileApplication.hpp"
+#include "Property.hpp"
 //metamodel factory
 #include "CalcModelFactory.hpp"
 #include "UmlFactory.hpp"
@@ -92,12 +93,6 @@ void CalcModelPackageImpl::createPackageContents()
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 	
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge));
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge->setValue(true);
-	
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2 = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2));
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setValue(false);
-	
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides));
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides->setValue(true);
 	
@@ -122,32 +117,38 @@ void CalcModelPackageImpl::createPackageContents()
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2_weight_LiteralInteger_CF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2 = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2));
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2_weight_LiteralInteger_CF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2->setValue(0);
 	
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime));
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setValue(true);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished));
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setValue(true);
 	
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime));
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setValue(0);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished_weight_LiteralInteger_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished));
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished_weight_LiteralInteger_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setValue(0);
 	
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call));
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setValue(false);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge));
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge->setValue(true);
 	
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call));
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setValue(0);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2 = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2));
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setValue(false);
 	
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge));
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge->setValue(true);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime));
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setValue(true);
 	
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime));
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setValue(false);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime));
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setValue(0);
 	
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime));
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setValue(0);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext));
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setValue(false);
 	
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished));
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setValue(true);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext));
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setValue(0);
 	
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished_weight_LiteralInteger_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished));
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished_weight_LiteralInteger_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setValue(0);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge));
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge->setValue(true);
+	
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createLiteralBoolean_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime));
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setValue(false);
+	
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime));
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_weight_LiteralInteger_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setValue(0);
 	
 	calcModel_CheckIfPrimeprimeChecker_upperBound_LiteralInteger_CalcModel_CheckIfPrimeprimeChecker = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(calcModel_CheckIfPrimeprimeChecker));
 	calcModel_CheckIfPrimeprimeChecker_upperBound_LiteralInteger_CalcModel_CheckIfPrimeprimeChecker->setValue(1);
@@ -168,7 +169,7 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_PrimeChecker_isOdd_isOdd_defaultValue_LiteralString_CalcModel_PrimeChecker_isOdd_isOdd->setValue("");
 	
 	calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::dynamic_pointer_cast<uml::Namespace>(calcModel_PrimeChecker_number));
-	calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number->setValue(8191);
+	calcModel_PrimeChecker_number_defaultValue_LiteralInteger_CalcModel_PrimeChecker_number->setValue(524287);
 	
 	
 
@@ -300,13 +301,13 @@ void CalcModelPackageImpl::createPackageContents()
 	
 	//parameter
 	//Activity
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode = uml::UmlFactory::eInstance()->createParameter_in_Behavior(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode = uml::UmlFactory::eInstance()->createParameter_in_Behavior(calcModel_CheckIfPrime);
 	
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode->setName("ActInputNode");
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode->setType(get_CalcModel_PrimeChecker());
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode->setLower(1);
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode->setUpper(1);
-	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode->setDirection(uml::ParameterDirectionKind::IN);
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode->setName("actInputNode");
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode->setType(get_CalcModel_PrimeChecker());
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode->setLower(1);
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode->setUpper(1);
+	calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode->setDirection(uml::ParameterDirectionKind::IN);
 	
 	
 	
@@ -319,8 +320,6 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_CheckIfPrimeActivityFinal3->setName("ActivityFinal3");
 	calcModel_CheckIfPrimeFork1 = uml::UmlFactory::eInstance()->createForkNode_in_Activity(calcModel_CheckIfPrime);
 	calcModel_CheckIfPrimeFork1->setName("Fork1");
-	calcModel_CheckIfPrimeIsOdd = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimeIsOdd->setName("IsOdd");
 	calcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createMergeNode_in_Activity(calcModel_CheckIfPrime);
 	calcModel_CheckIfPrimeMerge->setName("Merge");
 	calcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createCallBehaviorAction_in_Activity(calcModel_CheckIfPrime);
@@ -345,8 +344,8 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_CheckIfPrimecoaDivides->setName("coaDivides");
 	//CallOperationAction coaDivides
 	//Pin owner type: CallOperationAction
-	inputPin_coaDividestarget = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaDivides);
-	inputPin_coaDividestarget->setName("target");
+	inputPin_coaDividestarget_Divides = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaDivides);
+	inputPin_coaDividestarget_Divides->setName("target_Divides");
 	
 	//Pin owner type: CallOperationAction
 	outputPin_coaDividesisDivisible = uml::UmlFactory::eInstance()->createOutputPin_in_CallAction(calcModel_CheckIfPrimecoaDivides);
@@ -360,8 +359,8 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_CheckIfPrimecoaIsNotFinished->setName("coaIsNotFinished");
 	//CallOperationAction coaIsNotFinished
 	//Pin owner type: CallOperationAction
-	inputPin_coaIsNotFinishedtarget = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaIsNotFinished);
-	inputPin_coaIsNotFinishedtarget->setName("target");
+	inputPin_coaIsNotFinishedtarget_IsNotFinished = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaIsNotFinished);
+	inputPin_coaIsNotFinishedtarget_IsNotFinished->setName("target_IsNotFinished");
 	
 	//Pin owner type: CallOperationAction
 	outputPin_coaIsNotFinishedisNotFinished = uml::UmlFactory::eInstance()->createOutputPin_in_CallAction(calcModel_CheckIfPrimecoaIsNotFinished);
@@ -375,8 +374,8 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_CheckIfPrimecoaIsOdd->setName("coaIsOdd");
 	//CallOperationAction coaIsOdd
 	//Pin owner type: CallOperationAction
-	inputPin_coaIsOddtarget = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaIsOdd);
-	inputPin_coaIsOddtarget->setName("target");
+	inputPin_coaIsOddtarget_isOdd = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaIsOdd);
+	inputPin_coaIsOddtarget_isOdd->setName("target_isOdd");
 	
 	//Pin owner type: CallOperationAction
 	outputPin_coaIsOddisOdd = uml::UmlFactory::eInstance()->createOutputPin_in_CallAction(calcModel_CheckIfPrimecoaIsOdd);
@@ -386,64 +385,66 @@ void CalcModelPackageImpl::createPackageContents()
 	calcModel_PrimeChecker_isOdd_->setName("isOdd");
 	
 	
-	calcModel_CheckIfPrimedivides = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimedivides->setName("divides");
-	calcModel_CheckIfPrimeisNotFinished = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimeisNotFinished->setName("isNotFinished");
-	calcModel_CheckIfPrimenext_call = uml::UmlFactory::eInstance()->createCallOperationAction_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimenext_call->setName("next_call");
-	//CallOperationAction next_call
+	calcModel_CheckIfPrimecoaNext = uml::UmlFactory::eInstance()->createCallOperationAction_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimecoaNext->setName("coaNext");
+	//CallOperationAction coaNext
 	//Pin owner type: CallOperationAction
-	inputPin_next_calltarget = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimenext_call);
-	inputPin_next_calltarget->setName("target");
+	inputPin_coaNexttarget_Next_Call = uml::UmlFactory::eInstance()->createInputPin_in_CallOperationAction(calcModel_CheckIfPrimecoaNext);
+	inputPin_coaNexttarget_Next_Call->setName("target_Next_Call");
 	
 	
 	calcModel_PrimeChecker_next_ = uml::UmlFactory::eInstance()->createOperation_in_Class(calcModel_PrimeChecker); //TODO: check if used 
 	calcModel_PrimeChecker_next_->setName("next");
 	
 	
+	calcModel_CheckIfPrimedn_IsOdd = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimedn_IsOdd->setName("dn_IsOdd");
+	calcModel_CheckIfPrimedn_divides = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimedn_divides->setName("dn_divides");
+	calcModel_CheckIfPrimedn_isNotFinished = uml::UmlFactory::eInstance()->createDecisionNode_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimedn_isNotFinished->setName("dn_isNotFinished");
 	calcModel_CheckIfPrimeprimeChecker = uml::UmlFactory::eInstance()->createActivityParameterNode_in_Activity(calcModel_CheckIfPrime);
 	calcModel_CheckIfPrimeprimeChecker->setName("primeChecker");
 	
 	//flow
-	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1->setName("");
-	calcModel_CheckIfPrimeifIsOdd = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimeifIsOdd->setName("ifIsOdd");
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge->setName("");
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setName("");
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setName("");
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2->setName("");
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge->setName("");
+	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1->setName("");
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides->setName("");
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge->setName("");
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished->setName("");
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setName("");
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setName("");
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setName("");
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call->setName("");
 	calcModel_CheckIfPrimeifIsNotFinished = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
 	calcModel_CheckIfPrimeifIsNotFinished->setName("ifIsNotFinished");
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setName("");
-	calcModel_CheckIfPrimeifDivides = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	calcModel_CheckIfPrimeifDivides->setName("ifDivides");
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget->setName("");
 	oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1 = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
 	oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1->setName("");
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setName("");
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget->setName("");
 	cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3 = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
 	cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3->setName("");
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget->setName("");
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge->setName("");
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides->setName("");
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setName("");
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget->setName("");
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setName("");
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd->setName("");
+	calcModel_CheckIfPrimeifIsOdd = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimeifIsOdd->setName("ifIsOdd");
+	calcModel_CheckIfPrimeifDivides = uml::UmlFactory::eInstance()->createObjectFlow_in_Activity(calcModel_CheckIfPrime);
+	calcModel_CheckIfPrimeifDivides->setName("ifDivides");
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext = uml::UmlFactory::eInstance()->createControlFlow_in_Activity(calcModel_CheckIfPrime);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setName("");
 	
 
 //Dependency 
@@ -487,12 +488,12 @@ void CalcModelPackageImpl::initializePackageContents()
 	
 	
 	
-	calcModel_CheckIfPrimecbaPrintIsPrime->setBehavior(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
-	
-	
-	
 	calcModel_CheckIfPrimecoaDivides->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_divides_());
-	calcModel_CheckIfPrimecoaDivides->getInput()->push_back(inputPin_coaDividestarget);
+	calcModel_CheckIfPrimecoaDivides->getInput()->push_back(inputPin_coaDividestarget_Divides);
+	
+	
+	
+	calcModel_CheckIfPrimecbaPrintIsPrime->setBehavior(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
 	
 	
 	
@@ -500,111 +501,106 @@ void CalcModelPackageImpl::initializePackageContents()
 	
 	
 	
-	calcModel_CheckIfPrimecoaIsNotFinished->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_isNotFinished_());
-	calcModel_CheckIfPrimecoaIsNotFinished->getInput()->push_back(inputPin_coaIsNotFinishedtarget);
+	calcModel_CheckIfPrimecoaNext->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_next_());
+	calcModel_CheckIfPrimecoaNext->getInput()->push_back(inputPin_coaNexttarget_Next_Call);
 	
 	
 	
-	calcModel_CheckIfPrimecoaIsOdd->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_isOdd_());
-	calcModel_CheckIfPrimecoaIsOdd->getInput()->push_back(inputPin_coaIsOddtarget);
-	
-	
-	
-	calcModel_CheckIfPrimenext_call->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_next_());
-	calcModel_CheckIfPrimenext_call->getInput()->push_back(inputPin_next_calltarget);
-	
-	
+	calcModel_CheckIfPrimeprimeChecker->setParameter(calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode);
 	
 	calcModel_CheckIfPrimecbaPrintNotPrime2->setBehavior(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintNotPrime());
 	
 	
 	
+	calcModel_CheckIfPrimecoaIsNotFinished->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_isNotFinished_());
+	calcModel_CheckIfPrimecoaIsNotFinished->getInput()->push_back(inputPin_coaIsNotFinishedtarget_IsNotFinished);
 	
 	
 	
 	
 	
-	calcModel_CheckIfPrimeprimeChecker->setParameter(calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode);
 	
 	
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setSource(calcModel_CheckIfPrimeisNotFinished);
-	calcModel_CheckIfPrimeisNotFinished->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setTarget(calcModel_CheckIfPrimecbaPrintIsPrime);
-	calcModel_CheckIfPrimecbaPrintIsPrime->getIncoming()->push_back(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setGuard(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
+	
+	calcModel_CheckIfPrimecoaIsOdd->setOperation(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_isOdd_());
+	calcModel_CheckIfPrimecoaIsOdd->getInput()->push_back(inputPin_coaIsOddtarget_isOdd);
+	
+	
+	
+	
 	calcModel_CheckIfPrimeifIsOdd->setSource(outputPin_coaIsOddisOdd);
 	outputPin_coaIsOddisOdd->getOutgoing()->push_back(calcModel_CheckIfPrimeifIsOdd);
-	calcModel_CheckIfPrimeifIsOdd->setTarget(calcModel_CheckIfPrimeIsOdd);
-	calcModel_CheckIfPrimeIsOdd->getIncoming()->push_back(calcModel_CheckIfPrimeifIsOdd);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge->setSource(calcModel_CheckIfPrimeisNotFinished);
-	calcModel_CheckIfPrimeisNotFinished->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge->setTarget(calcModel_CheckIfPrimeMerge);
-	calcModel_CheckIfPrimeMerge->getIncoming()->push_back(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge);
-	cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge->setGuard(cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge);
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setSource(calcModel_CheckIfPrimenext_call);
-	calcModel_CheckIfPrimenext_call->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished);
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setTarget(calcModel_CheckIfPrimecoaIsNotFinished);
-	calcModel_CheckIfPrimecoaIsNotFinished->getIncoming()->push_back(cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished);
-	cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished->setGuard(cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished);
-	calcModel_CheckIfPrimeifIsNotFinished->setSource(outputPin_coaIsNotFinishedisNotFinished);
-	outputPin_coaIsNotFinishedisNotFinished->getOutgoing()->push_back(calcModel_CheckIfPrimeifIsNotFinished);
-	calcModel_CheckIfPrimeifIsNotFinished->setTarget(calcModel_CheckIfPrimeisNotFinished);
-	calcModel_CheckIfPrimeisNotFinished->getIncoming()->push_back(calcModel_CheckIfPrimeifIsNotFinished);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setSource(calcModel_CheckIfPrimedivides);
-	calcModel_CheckIfPrimedivides->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setTarget(calcModel_CheckIfPrimenext_call);
-	calcModel_CheckIfPrimenext_call->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call->setGuard(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call);
+	calcModel_CheckIfPrimeifIsOdd->setTarget(calcModel_CheckIfPrimedn_IsOdd);
+	calcModel_CheckIfPrimedn_IsOdd->getIncoming()->push_back(calcModel_CheckIfPrimeifIsOdd);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setSource(calcModel_CheckIfPrimedn_divides);
+	calcModel_CheckIfPrimedn_divides->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setTarget(calcModel_CheckIfPrimecoaNext);
+	calcModel_CheckIfPrimecoaNext->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext->setGuard(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2->setSource(calcModel_CheckIfPrimecbaPrintNotPrime);
 	calcModel_CheckIfPrimecbaPrintNotPrime->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2->setTarget(calcModel_CheckIfPrimeActivityFinal2);
 	calcModel_CheckIfPrimeActivityFinal2->getIncoming()->push_back(cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2->setGuard(cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget->setSource(calcModel_CheckIfPrimeFork1);
-	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget->setTarget(inputPin_next_calltarget);
-	inputPin_next_calltarget->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setSource(calcModel_CheckIfPrimeIsOdd);
-	calcModel_CheckIfPrimeIsOdd->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setTarget(calcModel_CheckIfPrimecbaPrintNotPrime2);
-	calcModel_CheckIfPrimecbaPrintNotPrime2->getIncoming()->push_back(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setGuard(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget->setSource(calcModel_CheckIfPrimeFork1);
-	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget->setTarget(inputPin_coaIsNotFinishedtarget);
-	inputPin_coaIsNotFinishedtarget->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget->setSource(calcModel_CheckIfPrimeFork1);
-	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget->setTarget(inputPin_coaDividestarget);
-	inputPin_coaDividestarget->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge->setSource(calcModel_CheckIfPrimeIsOdd);
-	calcModel_CheckIfPrimeIsOdd->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge->setTarget(calcModel_CheckIfPrimeMerge);
-	calcModel_CheckIfPrimeMerge->getIncoming()->push_back(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge);
-	cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge->setGuard(cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge);
 	calcModel_CheckIfPrimeifDivides->setSource(outputPin_coaDividesisDivisible);
 	outputPin_coaDividesisDivisible->getOutgoing()->push_back(calcModel_CheckIfPrimeifDivides);
-	calcModel_CheckIfPrimeifDivides->setTarget(calcModel_CheckIfPrimedivides);
-	calcModel_CheckIfPrimedivides->getIncoming()->push_back(calcModel_CheckIfPrimeifDivides);
+	calcModel_CheckIfPrimeifDivides->setTarget(calcModel_CheckIfPrimedn_divides);
+	calcModel_CheckIfPrimedn_divides->getIncoming()->push_back(calcModel_CheckIfPrimeifDivides);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setSource(calcModel_CheckIfPrimedn_isNotFinished);
+	calcModel_CheckIfPrimedn_isNotFinished->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setTarget(calcModel_CheckIfPrimecbaPrintIsPrime);
+	calcModel_CheckIfPrimecbaPrintIsPrime->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime->setGuard(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call->setSource(calcModel_CheckIfPrimeFork1);
+	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call->setTarget(inputPin_coaNexttarget_Next_Call);
+	inputPin_coaNexttarget_Next_Call->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides->setSource(calcModel_CheckIfPrimeFork1);
+	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides->setTarget(inputPin_coaDividestarget_Divides);
+	inputPin_coaDividestarget_Divides->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setSource(calcModel_CheckIfPrimedn_divides);
+	calcModel_CheckIfPrimedn_divides->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setTarget(calcModel_CheckIfPrimecbaPrintNotPrime);
+	calcModel_CheckIfPrimecbaPrintNotPrime->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime);
+	cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime->setGuard(cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setSource(calcModel_CheckIfPrimecoaNext);
+	calcModel_CheckIfPrimecoaNext->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setTarget(calcModel_CheckIfPrimecoaIsNotFinished);
+	calcModel_CheckIfPrimecoaIsNotFinished->getIncoming()->push_back(cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished);
+	cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished->setGuard(cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setSource(calcModel_CheckIfPrimedn_IsOdd);
+	calcModel_CheckIfPrimedn_IsOdd->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setTarget(calcModel_CheckIfPrimecbaPrintNotPrime2);
+	calcModel_CheckIfPrimecbaPrintNotPrime2->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2->setGuard(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge->setSource(calcModel_CheckIfPrimedn_IsOdd);
+	calcModel_CheckIfPrimedn_IsOdd->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge->setTarget(calcModel_CheckIfPrimeMerge);
+	calcModel_CheckIfPrimeMerge->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge);
+	cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge->setGuard(cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge);
+	calcModel_CheckIfPrimeifIsNotFinished->setSource(outputPin_coaIsNotFinishedisNotFinished);
+	outputPin_coaIsNotFinishedisNotFinished->getOutgoing()->push_back(calcModel_CheckIfPrimeifIsNotFinished);
+	calcModel_CheckIfPrimeifIsNotFinished->setTarget(calcModel_CheckIfPrimedn_isNotFinished);
+	calcModel_CheckIfPrimedn_isNotFinished->getIncoming()->push_back(calcModel_CheckIfPrimeifIsNotFinished);
 	cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3->setSource(calcModel_CheckIfPrimecbaPrintIsPrime);
 	calcModel_CheckIfPrimecbaPrintIsPrime->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3);
 	cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3->setTarget(calcModel_CheckIfPrimeActivityFinal3);
 	calcModel_CheckIfPrimeActivityFinal3->getIncoming()->push_back(cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3);
 	cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3->setGuard(cF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecbaPrintIsPrime_CalcModel_CheckIfPrimeActivityFinal3);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget->setSource(calcModel_CheckIfPrimeFork1);
-	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget);
-	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget->setTarget(inputPin_coaIsOddtarget);
-	inputPin_coaIsOddtarget->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setSource(calcModel_CheckIfPrimedivides);
-	calcModel_CheckIfPrimedivides->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setTarget(calcModel_CheckIfPrimecbaPrintNotPrime);
-	calcModel_CheckIfPrimecbaPrintNotPrime->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime);
-	cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime->setGuard(cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd->setSource(calcModel_CheckIfPrimeFork1);
+	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd->setTarget(inputPin_coaIsOddtarget_isOdd);
+	inputPin_coaIsOddtarget_isOdd->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1->setSource(calcModel_CheckIfPrimecbaPrintNotPrime2);
 	calcModel_CheckIfPrimecbaPrintNotPrime2->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1->setTarget(calcModel_CheckIfPrimeActivityFinal1);
 	calcModel_CheckIfPrimeActivityFinal1->getIncoming()->push_back(cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1);
 	cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1->setGuard(cF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimecbaPrintNotPrime2_CalcModel_CheckIfPrimeActivityFinal1);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished->setSource(calcModel_CheckIfPrimeFork1);
+	calcModel_CheckIfPrimeFork1->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished);
+	oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished->setTarget(inputPin_coaIsNotFinishedtarget_IsNotFinished);
+	inputPin_coaIsNotFinishedtarget_IsNotFinished->getIncoming()->push_back(oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished);
 	oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1->setSource(calcModel_CheckIfPrimeprimeChecker);
 	calcModel_CheckIfPrimeprimeChecker->getOutgoing()->push_back(oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1);
 	oF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1->setTarget(calcModel_CheckIfPrimeFork1);
@@ -614,17 +610,14 @@ void CalcModelPackageImpl::initializePackageContents()
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides->setTarget(calcModel_CheckIfPrimecoaDivides);
 	calcModel_CheckIfPrimecoaDivides->getIncoming()->push_back(cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides);
 	cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides->setGuard(cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge->setSource(calcModel_CheckIfPrimedn_isNotFinished);
+	calcModel_CheckIfPrimedn_isNotFinished->getOutgoing()->push_back(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge->setTarget(calcModel_CheckIfPrimeMerge);
+	calcModel_CheckIfPrimeMerge->getIncoming()->push_back(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge);
+	cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge->setGuard(cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge_guard_LiteralBoolean_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge);
 	
 }
 
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge()
-{
-	return cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimeMerge;
-}
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2()
-{
-	return cF_CalcModel_CheckIfPrimeIsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2;
-}
 std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides()
 {
 	return cF_CalcModel_CheckIfPrimeMerge_CalcModel_CheckIfPrimecoaDivides;
@@ -641,25 +634,37 @@ std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIf
 {
 	return cF_CalcModel_CheckIfPrimecbaPrintNotPrime_CalcModel_CheckIfPrimeActivityFinal2;
 }
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime()
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished()
 {
-	return cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimecbaPrintNotPrime;
+	return cF_CalcModel_CheckIfPrimecoaNext_CalcModel_CheckIfPrimecoaIsNotFinished;
 }
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call()
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge()
 {
-	return cF_CalcModel_CheckIfPrimedivides_CalcModel_CheckIfPrimenext_call;
+	return cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimeMerge;
 }
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge()
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2()
 {
-	return cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimeMerge;
+	return cF_CalcModel_CheckIfPrimedn_IsOdd_CalcModel_CheckIfPrimecbaPrintNotPrime2;
 }
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime()
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime()
 {
-	return cF_CalcModel_CheckIfPrimeisNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime;
+	return cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecbaPrintNotPrime;
 }
-std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished()
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext()
 {
-	return cF_CalcModel_CheckIfPrimenext_call_CalcModel_CheckIfPrimecoaIsNotFinished;
+	return cF_CalcModel_CheckIfPrimedn_divides_CalcModel_CheckIfPrimecoaNext;
+}
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge()
+{
+	return cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimeMerge;
+}
+std::shared_ptr<uml::ControlFlow> CalcModelPackageImpl::get_CF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime()
+{
+	return cF_CalcModel_CheckIfPrimedn_isNotFinished_CalcModel_CheckIfPrimecbaPrintIsPrime;
+}
+std::shared_ptr<uml::ChangeEvent> CalcModelPackageImpl::get_CalcModel_ChangeEvent1()
+{
+	return calcModel_ChangeEvent1;
 }
 std::shared_ptr<uml::Activity> CalcModelPackageImpl::get_CalcModel_CheckIfPrime()
 {
@@ -681,17 +686,13 @@ std::shared_ptr<uml::ForkNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeF
 {
 	return calcModel_CheckIfPrimeFork1;
 }
-std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeIsOdd()
-{
-	return calcModel_CheckIfPrimeIsOdd;
-}
 std::shared_ptr<uml::MergeNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeMerge()
 {
 	return calcModel_CheckIfPrimeMerge;
 }
-std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode()
+std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode()
 {
-	return calcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode;
+	return calcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode;
 }
 std::shared_ptr<uml::CallBehaviorAction> CalcModelPackageImpl::get_CalcModel_CheckIfPrimecbaPrintIsPrime()
 {
@@ -717,9 +718,21 @@ std::shared_ptr<uml::CallOperationAction> CalcModelPackageImpl::get_CalcModel_Ch
 {
 	return calcModel_CheckIfPrimecoaIsOdd;
 }
-std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimedivides()
+std::shared_ptr<uml::CallOperationAction> CalcModelPackageImpl::get_CalcModel_CheckIfPrimecoaNext()
 {
-	return calcModel_CheckIfPrimedivides;
+	return calcModel_CheckIfPrimecoaNext;
+}
+std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimedn_IsOdd()
+{
+	return calcModel_CheckIfPrimedn_IsOdd;
+}
+std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimedn_divides()
+{
+	return calcModel_CheckIfPrimedn_divides;
+}
+std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimedn_isNotFinished()
+{
+	return calcModel_CheckIfPrimedn_isNotFinished;
 }
 std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeifDivides()
 {
@@ -733,14 +746,6 @@ std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_CalcModel_CheckIfPrim
 {
 	return calcModel_CheckIfPrimeifIsOdd;
 }
-std::shared_ptr<uml::DecisionNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeisNotFinished()
-{
-	return calcModel_CheckIfPrimeisNotFinished;
-}
-std::shared_ptr<uml::CallOperationAction> CalcModelPackageImpl::get_CalcModel_CheckIfPrimenext_call()
-{
-	return calcModel_CheckIfPrimenext_call;
-}
 std::shared_ptr<uml::ActivityParameterNode> CalcModelPackageImpl::get_CalcModel_CheckIfPrimeprimeChecker()
 {
 	return calcModel_CheckIfPrimeprimeChecker;
@@ -753,13 +758,13 @@ std::shared_ptr<uml::Property> CalcModelPackageImpl::get_CalcModel_PrimeChecker_
 {
 	return calcModel_PrimeChecker_divider;
 }
-std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_divides_isDivisible()
-{
-	return calcModel_PrimeChecker_divides_isDivisible;
-}
 std::shared_ptr<uml::Operation> CalcModelPackageImpl::get_CalcModel_PrimeChecker_divides_()
 {
 	return calcModel_PrimeChecker_divides_;
+}
+std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_divides_isDivisible()
+{
+	return calcModel_PrimeChecker_divides_isDivisible;
 }
 std::shared_ptr<uml::FunctionBehavior> CalcModelPackageImpl::get_CalcModel_PrimeChecker_fbDivides()
 {
@@ -797,21 +802,21 @@ std::shared_ptr<uml::FunctionBehavior> CalcModelPackageImpl::get_CalcModel_Prime
 {
 	return calcModel_PrimeChecker_fbPrintNotPrime;
 }
-std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isNotFinished_isNotFinished()
-{
-	return calcModel_PrimeChecker_isNotFinished_isNotFinished;
-}
 std::shared_ptr<uml::Operation> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isNotFinished_()
 {
 	return calcModel_PrimeChecker_isNotFinished_;
 }
-std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isOdd_isOdd()
+std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isNotFinished_isNotFinished()
 {
-	return calcModel_PrimeChecker_isOdd_isOdd;
+	return calcModel_PrimeChecker_isNotFinished_isNotFinished;
 }
 std::shared_ptr<uml::Operation> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isOdd_()
 {
 	return calcModel_PrimeChecker_isOdd_;
+}
+std::shared_ptr<uml::Parameter> CalcModelPackageImpl::get_CalcModel_PrimeChecker_isOdd_isOdd()
+{
+	return calcModel_PrimeChecker_isOdd_isOdd;
 }
 std::shared_ptr<uml::Operation> CalcModelPackageImpl::get_CalcModel_PrimeChecker_next_()
 {
@@ -829,37 +834,37 @@ std::shared_ptr<uml::Operation> CalcModelPackageImpl::get_CalcModel_PrimeChecker
 {
 	return calcModel_PrimeChecker_printNotPrime_;
 }
-std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaDividestarget()
+std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaDividestarget_Divides()
 {
-	return inputPin_coaDividestarget;
+	return inputPin_coaDividestarget_Divides;
 }
-std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaIsNotFinishedtarget()
+std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaIsNotFinishedtarget_IsNotFinished()
 {
-	return inputPin_coaIsNotFinishedtarget;
+	return inputPin_coaIsNotFinishedtarget_IsNotFinished;
 }
-std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaIsOddtarget()
+std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaIsOddtarget_isOdd()
 {
-	return inputPin_coaIsOddtarget;
+	return inputPin_coaIsOddtarget_isOdd;
 }
-std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_next_calltarget()
+std::shared_ptr<uml::InputPin> CalcModelPackageImpl::get_InputPin_coaNexttarget_Next_Call()
 {
-	return inputPin_next_calltarget;
+	return inputPin_coaNexttarget_Next_Call;
 }
-std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget()
+std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides()
 {
-	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget;
+	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaDividestarget_Divides;
 }
-std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget()
+std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished()
 {
-	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget;
+	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsNotFinishedtarget_IsNotFinished;
 }
-std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget()
+std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd()
 {
-	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget;
+	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaIsOddtarget_isOdd;
 }
-std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget()
+std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call()
 {
-	return oF_CalcModel_CheckIfPrimeFork1_InputPin_next_calltarget;
+	return oF_CalcModel_CheckIfPrimeFork1_InputPin_coaNexttarget_Next_Call;
 }
 std::shared_ptr<uml::ObjectFlow> CalcModelPackageImpl::get_OF_CalcModel_CheckIfPrimeprimeChecker_CalcModel_CheckIfPrimeFork1()
 {

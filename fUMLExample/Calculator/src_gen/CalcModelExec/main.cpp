@@ -112,15 +112,15 @@ int main()
 	
 	
 	std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
-	//INput parameter ActInputNode 
-	std::shared_ptr<fUML::ParameterValue> ActInputNodeP(fumlFac->createParameterValue());
-	ActInputNodeP->setParameter(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_ActInputNode());
-	std::shared_ptr<fUML::Reference> ActInputNodeValue(fUML::FUMLFactory::eInstance()->createReference());
-	std::shared_ptr<PrimeCheckerExecution> ActInputNodeUmlLinker(new PrimeCheckerExecution(actInputNode));
-	ActInputNodeUmlLinker->setLocus(locus);
-	ActInputNodeValue->setReferent(ActInputNodeUmlLinker);
-	ActInputNodeP->getValues()->push_back(ActInputNodeValue);
-	pList->push_back(ActInputNodeP);
+	//INput parameter actInputNode 
+	std::shared_ptr<fUML::ParameterValue> actInputNodeP(fumlFac->createParameterValue());
+	actInputNodeP->setParameter(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime_CalcModel_CheckIfPrime_actInputNode());
+	std::shared_ptr<fUML::Reference> actInputNodeValue(fUML::FUMLFactory::eInstance()->createReference());
+	std::shared_ptr<PrimeCheckerExecution> actInputNodeUmlLinker(new PrimeCheckerExecution(actInputNode));
+	actInputNodeUmlLinker->setLocus(locus);
+	actInputNodeValue->setReferent(actInputNodeUmlLinker);
+	actInputNodeP->getValues()->push_back(actInputNodeValue);
+	pList->push_back(actInputNodeP);
 	
 	std::shared_ptr<Bag<fUML::ParameterValue> > resultPList = locus->getExecutor()->execute(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_CheckIfPrime(), nullptr, pList);
 	

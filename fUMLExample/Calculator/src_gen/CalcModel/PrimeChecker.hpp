@@ -87,7 +87,7 @@ namespace CalcModel
 			// Members
 			//*********************************
 			int m_divider= 3 /*defined default value*/;
-			int m_number= 8191 /*defined default value*/;
+			int m_number= 524287 /*defined default value*/;
 			
 	
 	};
