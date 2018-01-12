@@ -28,14 +28,14 @@
 //CallBehaviorAction [anActivityNode.name /]
 [memberName(anActivityNode)/]->setBehavior([anActivityNode.oclAsType(CallBehaviorAction).behavior.oclAsType(NamedElement).memberName()/]);
 [memberName(anActivityNode)/]->setIsSynchronous(true); //imposed by the fUML specification
-[anActivityNode.oclAsType(CallBehaviorAction).input->sortedBy(name).generatePin()/]
-[anActivityNode.oclAsType(CallBehaviorAction).output->sortedBy(name).generatePin()/]
+[anActivityNode.oclAsType(CallBehaviorAction).input.generatePin()/]
+[anActivityNode.oclAsType(CallBehaviorAction).output.generatePin()/]
 [/template]
 
 [template public generateActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(CallOperationAction) )]
 //CallOperationAction [anActivityNode.name /]
-[anActivityNode.oclAsType(CallOperationAction).input->sortedBy(name).generatePin()/]
-[anActivityNode.oclAsType(CallOperationAction).output->sortedBy(name).generatePin()/]
+[anActivityNode.oclAsType(CallOperationAction).input.generatePin()/]
+[anActivityNode.oclAsType(CallOperationAction).output.generatePin()/]
 [if (anActivityNode.getNearestPackage() = anActivityNode.oclAsType(CallOperationAction).operation.getNearestPackage())]
 [anActivityNode.oclAsType(CallOperationAction).operation.generateOperation()/]
 [/if]
