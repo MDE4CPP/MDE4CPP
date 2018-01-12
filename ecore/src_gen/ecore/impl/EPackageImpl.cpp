@@ -565,6 +565,15 @@ std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
+{
+	if(auto wp = m_eSuperPackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

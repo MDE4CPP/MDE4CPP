@@ -106,6 +106,11 @@ std::string EStringToStringMapEntryImpl::getValue() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

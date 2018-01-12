@@ -149,6 +149,15 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EEnumLiteralImpl::eContainer() const
+{
+	if(auto wp = m_eEnum.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

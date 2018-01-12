@@ -157,6 +157,15 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EAttributeImpl::eContainer() const
+{
+	if(auto wp = m_eContainingClass.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

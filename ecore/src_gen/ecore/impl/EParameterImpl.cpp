@@ -134,6 +134,15 @@ std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EParameterImpl::eContainer() const
+{
+	if(auto wp = m_eOperation.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

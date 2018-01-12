@@ -116,6 +116,11 @@ std::shared_ptr< Bag<ecore::EGenericType> > ETypeParameterImpl::getEBounds() con
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ETypeParameterImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

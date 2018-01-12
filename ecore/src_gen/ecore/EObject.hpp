@@ -150,9 +150,6 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
-			virtual std::shared_ptr<ecore::EObject > eContainer() const = 0;
 			
 			
 
@@ -174,7 +171,9 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

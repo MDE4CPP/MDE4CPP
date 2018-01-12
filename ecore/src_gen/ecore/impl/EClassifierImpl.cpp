@@ -212,6 +212,15 @@ std::shared_ptr< Bag<ecore::ETypeParameter> > EClassifierImpl::getETypeParameter
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EClassifierImpl::eContainer() const
+{
+	if(auto wp = m_ePackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

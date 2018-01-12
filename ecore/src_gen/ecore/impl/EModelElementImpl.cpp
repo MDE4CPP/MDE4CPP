@@ -117,6 +117,11 @@ std::shared_ptr< Bag<ecore::EAnnotation> > EModelElementImpl::getEAnnotations() 
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EModelElementImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

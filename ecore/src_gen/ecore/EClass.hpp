@@ -296,7 +296,9 @@ namespace ecore
 			//*********************************
 			/*!
 			 */
-			virtual std::shared_ptr<Union<ecore::EStructuralFeature> > getEStructuralFeatures() const = 0; 
+			virtual std::shared_ptr<Union<ecore::EStructuralFeature> > getEStructuralFeatures() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

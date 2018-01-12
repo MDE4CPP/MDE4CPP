@@ -191,6 +191,15 @@ std::shared_ptr< Bag<ecore::EEnumLiteral> > EEnumImpl::getELiterals() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EEnumImpl::eContainer() const
+{
+	if(auto wp = m_ePackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

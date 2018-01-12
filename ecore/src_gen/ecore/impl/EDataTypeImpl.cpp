@@ -132,6 +132,15 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
+{
+	if(auto wp = m_ePackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

@@ -177,17 +177,18 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  c
 //*********************************
 // References
 //*********************************
-std::shared_ptr<ecore::EObject > EObjectImpl::eContainer() const
-{
 
-    return m_eContainer;
-}
 
 
 //*********************************
 // Union Getter
 //*********************************
 
+
+std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
+{
+	return nullptr;
+}
 
 //*********************************
 // Structural Feature Getter/Setter

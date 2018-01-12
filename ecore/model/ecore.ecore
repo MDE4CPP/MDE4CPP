@@ -416,6 +416,7 @@
         <details key="SetterName" value="setContainer"/>
         <details key="implSetterOnly" value="true"/>
         <details key="isContainerAttribute" value="true"/>
+        <details key="noGetter" value="true"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>

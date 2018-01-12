@@ -280,6 +280,15 @@ std::shared_ptr< Bag<ecore::ETypeParameter> > EOperationImpl::getETypeParameters
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EOperationImpl::eContainer() const
+{
+	if(auto wp = m_eContainingClass.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

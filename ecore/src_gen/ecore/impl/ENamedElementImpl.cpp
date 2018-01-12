@@ -102,6 +102,11 @@ std::string ENamedElementImpl::getName() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ENamedElementImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

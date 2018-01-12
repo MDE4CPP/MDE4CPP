@@ -234,6 +234,15 @@ std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() cons
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::eContainer() const
+{
+	if(auto wp = m_eContainingClass.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

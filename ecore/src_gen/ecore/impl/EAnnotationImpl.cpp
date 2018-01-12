@@ -195,6 +195,15 @@ std::shared_ptr< Bag<ecore::EObject> > EAnnotationImpl::getReferences() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EAnnotationImpl::eContainer() const
+{
+	if(auto wp = m_eModelElement.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

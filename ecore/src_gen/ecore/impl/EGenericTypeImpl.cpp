@@ -207,6 +207,11 @@ void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpp
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EGenericTypeImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

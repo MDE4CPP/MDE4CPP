@@ -125,9 +125,6 @@ virtual public EObject
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
-			virtual std::shared_ptr<ecore::EObject > eContainer() const ;
 			
 							
 			
@@ -141,6 +138,8 @@ virtual public EObject
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<EClass> eStaticClass() const;

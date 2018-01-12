@@ -196,6 +196,11 @@ void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ETypedElementImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

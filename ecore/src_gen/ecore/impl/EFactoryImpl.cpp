@@ -130,6 +130,11 @@ void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EFactoryImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

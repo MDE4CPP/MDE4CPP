@@ -213,6 +213,15 @@ std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
+{
+	if(auto wp = m_eContainingClass.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

@@ -615,6 +615,15 @@ std::shared_ptr<Union<ecore::EStructuralFeature> > EClassImpl::getEStructuralFea
 }
 
 
+std::shared_ptr<ecore::EObject> EClassImpl::eContainer() const
+{
+	if(auto wp = m_ePackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
