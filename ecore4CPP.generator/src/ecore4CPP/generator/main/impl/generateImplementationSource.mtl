@@ -216,6 +216,8 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 //*********************************
 [aClass.generateUnionGetterCpp()/]
 
+[aClass.generateEContainerOperationCPP()/]
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************

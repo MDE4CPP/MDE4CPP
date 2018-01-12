@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [query public hasSetter(aReference : EReference) : EBoolean = (aReference.changeable and aReference.upperBound=1) or hasKey('setterbody') /]
-[query public hasGetter(aReference : EReference) : EBoolean = true or hasKey('getterbody') /]
+[query public hasGetter(aReference : EReference) : EBoolean = not hasKey('noGetter') or hasKey('getterbody') /]
 
 [template public generateReferenceDecl(aReference : EReference, impl : EBoolean) ]
 [aReference.generateReferenceGetterDeclaretaion(impl)/]

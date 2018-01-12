@@ -111,6 +111,8 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			
 			[aClass.generateeGetDel(true)/]
+
+			[aClass.generateEContainerOperation(true)/] 
 			
 		protected:
 			virtual std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> eStaticClass() const;
