@@ -76,7 +76,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 [/file]
 [/template]
 
-[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(aParameter)-1 /]
+[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
