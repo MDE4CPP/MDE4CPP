@@ -52,7 +52,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 			DEBUG_MESSAGE(std::cout << "JIHA fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
 
 			std::shared_ptr<std::vector<boost::any>> parameterList(new std::vector<boost::any>());
-[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[for (par : Parameter | aOperation.method->filter(Activity)->asOrderedSet()->first().ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 			parameterList->push_back([par.name/]);
 [/for]
 			boost::any result = executionPlugin->executeActivity("[aOperation.method->filter(Activity)->asOrderedSet()->first().name/]", parameterList);
