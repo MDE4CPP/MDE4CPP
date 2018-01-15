@@ -73,8 +73,8 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
    	[par.generateCppType()/] [par.name/][if (par.direction = ParameterDirectionKind::out)](new [if (not (par.upper = 1))]Bag<[/if][par.type.generateCppType(true)/][if (not (par.upper = 1))]>[/if]())[/if];
 	[/for]
 
-	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
-    [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
+	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
+    [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1)/]
 
 	[if (not par.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
