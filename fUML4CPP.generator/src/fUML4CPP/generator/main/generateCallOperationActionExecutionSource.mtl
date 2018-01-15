@@ -89,7 +89,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/for]
 
 	[for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-    [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1)/]
+    [par.generateInputParameter(anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 	[if (not par.type.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
 	assert([par.name/] != nullptr);
@@ -121,7 +121,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[else]
  	[par.name/]Value->setValue([par.name/]);
 	[/if]
-    outputParameters->at([anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->asSequence()->indexOf(par)-1/])->getValues()->push_back([par.name/]Value);
+    outputParameters->at([anCallOperationAction.operation.ownedParameter->asOrderedSet()->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name)->indexOf(par)-1/])->getValues()->push_back([par.name/]Value);
 	[/for]
 	
 	//set InOut parameters

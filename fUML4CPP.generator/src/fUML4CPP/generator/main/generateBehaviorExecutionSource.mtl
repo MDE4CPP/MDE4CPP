@@ -74,7 +74,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	[/for]
 
 	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
-    [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->indexOf(par)-1)/]
+    [par.generateInputParameter(anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1)/]
 
 	[if (not par.supportedTypes())]
 	[par.name/] = std::dynamic_pointer_cast<[par.type.name/]Execution>([par.name/]Value->getReferent())->getUmlValue[if(not (par.upper = 1))]s[/if]();
@@ -113,7 +113,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
     //End -----------------------------
 
 	//set return / out parameters
-	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return)))]
+	[for ( par : Parameter | anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
     [par.generateOutputParameter()/]
 	[if (not par.supportedTypes())]
 	[par.name/]UmlLinker->setUmlValue[if(not (par.upper = 1))]s[/if]([par.name/]);
@@ -139,7 +139,7 @@ void [className/]::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inputParam
 	//Simple type
  	[par.name/]Value->setValue([par.name/]);
 	[/if]
-    //outputParameters->push_back(inputParameters->at([anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->asSequence()->indexOf(par)-1/]));
+    //outputParameters->push_back(inputParameters->at([anOpaqueBehavior.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(par)-1/]));
 	[/for]
 	DEBUG_MESSAGE(std::cout<< "^^^^^ FB [anOpaqueBehavior.name/] ends its execution ^^^^^" << std::endl;)
 }

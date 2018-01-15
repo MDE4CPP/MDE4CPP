@@ -76,7 +76,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 [/file]
 [/template]
 
-[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
+[query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->sortedBy(name)->indexOf(aParameter)-1 /]
 
 [template public generateParameterFromAny(anActivity : Activity, aPackage : Package)]
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
@@ -93,7 +93,7 @@ boost::any [packageName/]::executeActivity(std::string activityName, std::shared
 [if (anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 //The activity has a return parameter
 assert(resultPList->front());
-[let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+[let par : Parameter = anActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->sortedBy(name)->first()]
 [if(par.supportedTypes())]
 std::shared_ptr<fUML::[par.type.name/]Value> ret = std::dynamic_pointer_cast<fUML::[par.type.name/]Value>(resultPList->front()->getValues()->front());
 assert(ret != nullptr);

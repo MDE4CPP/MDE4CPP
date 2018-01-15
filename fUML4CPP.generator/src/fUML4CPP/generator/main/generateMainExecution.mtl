@@ -182,7 +182,7 @@ locus->getFactory()->assignStrategy(std::shared_ptr<fUML::DispatchStrategy>(fuml
 [/if]
 
 std::shared_ptr<Bag<fUML::ParameterValue> > pList(new Bag<fUML::ParameterValue>());
-[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //INput parameter [par.name/] 
 std::shared_ptr<fUML::ParameterValue> [par.name/]P(fumlFac->createParameterValue());
 [par.name/]P->setParameter([par.packageGetter()/]);
