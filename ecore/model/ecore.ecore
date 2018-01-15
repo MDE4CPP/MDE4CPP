@@ -60,7 +60,7 @@
     </eOperations>
     <eOperations name="getEStructuralFeature" eType="#//EStructuralFeature">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    for(std::shared_ptr&lt;EStructuralFeature> f: *getEAllStructuralFeatures())&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
+        <details key="body" value="    std::shared_ptr&lt;Bag&lt;EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();&#xD;&#xA;    for(std::shared_ptr&lt;EStructuralFeature> f: *eAllFeat)&#xD;&#xA;    {&#xD;&#xA;        if(f->getName()==featureName)&#xD;&#xA;        {&#xD;&#xA;            return f;&#xD;&#xA;        }&#xD;&#xA;    }&#xD;&#xA;&#xD;&#xA;    return nullptr;"/>
         <details key="const"/>
       </eAnnotations>
       <eParameters name="featureName" eType="#//EString"/>
