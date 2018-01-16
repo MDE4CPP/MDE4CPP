@@ -276,6 +276,7 @@
         <details key="const"/>
       </eAnnotations>
       <eParameters name="eClass" eType="#//EClass"/>
+      <eParameters name="container" eType="#//EObject"/>
     </eOperations>
     <eOperations name="createFromString" eType="#//EJavaObject">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
