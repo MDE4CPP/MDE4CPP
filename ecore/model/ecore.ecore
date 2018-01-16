@@ -382,7 +382,7 @@
     </eOperations>
     <eOperations name="eSet">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="const"/>
+        <details key="body" value="this->eSet(feature->getFeatureID(), newValue);"/>
       </eAnnotations>
       <eParameters name="feature" eType="#//EStructuralFeature"/>
       <eParameters name="newValue" eType="#//EJavaObject"/>
