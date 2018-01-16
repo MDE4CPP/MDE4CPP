@@ -222,5 +222,7 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 // Structural Feature Getter/Setter
 //*********************************
 [aClass.generateeGetImpl()/]
+
+[aClass.generateeSetImpl()/]
 [/file]
 [/template]

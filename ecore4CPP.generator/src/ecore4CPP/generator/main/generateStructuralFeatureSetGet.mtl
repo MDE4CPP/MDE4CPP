@@ -15,6 +15,8 @@
 [module generateStructuralFeatureSetGet('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::generateReference /]
 
 [**
  * eGet Function
@@ -23,8 +25,12 @@
 virtual boost::any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
 [/template]
 
+[template public generateeSetDel(aClass : EClass,impl : Boolean)]
+virtual void eSet(int featureID, boost::any newValue) [abstractSufix(impl)/];
+[/template]
+
 [template public generateeGetImpl(aClass : EClass)]
-boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -34,5 +40,27 @@ boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID,  bo
 	[/for]
 	}
 	return boost::any();
+}
+[/template]
+
+[template public generateeSetImpl(aClass : EClass)]
+void [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+[for (struct : EStructuralFeature | aClass.eAllStructuralFeatures->select(upperBound = 1 and changeable)->asOrderedSet()->sortedBy(name))]
+		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.memberNameUpper()/]:
+		{
+			// BOOST CAST
+[if (not struct.eType.oclIsKindOf(EDataType))]
+			std::shared_ptr<[struct.eGenericType.generateCppType()/]> _[struct.name/] = boost::any_cast<std::shared_ptr<[struct.eGenericType.generateCppType()/]>>(newValue);
+[else]
+			[struct.eGenericType.generateCppType()/] _[struct.name/] = boost::any_cast<[struct.eGenericType.generateCppType()/]>(newValue);
+[/if]
+			[struct.SetterName()/](_[struct.name/]); //[aClass.getClassifierID()/][struct.getFeatureID()/]
+			break;
+		}
+[/for]
+	}
 }
 [/template]
