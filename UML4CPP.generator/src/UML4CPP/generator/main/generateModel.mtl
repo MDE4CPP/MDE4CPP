@@ -19,7 +19,7 @@
 [import UML4CPP::generator::main::generateType /]
 [import UML4CPP::generator::main::helper /]
 
-[query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type}->flatten() /]
+[query public includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type}->flatten() /]
 
 [template public baseClass(aClass : Class) ?(oclIsKindOf(Stereotype))]
 virtual public uml::Stereotype
@@ -52,32 +52,25 @@ virtual public uml::Class
 [for (element : Class| aClass.includes()->asOrderedSet()->filter(Class)->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
-	class [element.name/];
+	class [element.name.toUpperFirst()/];
 }
 [/for]
 
 [for (element : Interface | aClass.includes()->filter(Interface)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 namespace [element.namespace.ns()/] 
 {
-	class [element.name/];
-}
-[/for]
-
-[for (element : Type | aClass.ownedOperation.ownedParameter.type->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-namespace [element.namespace.ns()/] 
-{
-	class [element.name/];
+	class [element.name.toUpperFirst()/];
 }
 [/for]
 
 // base class includes
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"[/for]
+#include "[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[anInterfaceRealization.supplier.name/].hpp"[/for]
+#include "[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
 
 // End: Interface realization
 [/if]
@@ -90,7 +83,7 @@ namespace [element.namespace.ns()/]
 [/if]
 // enum includes
 [for (elements : Enumeration| aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.name.concat('.hpp')/]"[/for]
+#include "[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 
 [for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
