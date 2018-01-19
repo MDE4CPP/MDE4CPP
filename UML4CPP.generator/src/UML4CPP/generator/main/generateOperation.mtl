@@ -33,7 +33,9 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 [sParameter.generateCppType()/] [sParameter.name/][/for])
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-	[aOperation.generateCppType()/] [if(aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().name.oclIsUndefined())][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first().myQualifiedName()/][else][aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/][/if];
+[let parameter : Parameter = aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+	[aOperation.generateCppType()/] [if(parameter.name.oclIsUndefined())][parameter.myQualifiedName()/][else][parameter.name/][/if][if (parameter.upper > 1)](new Bag<[parameter.type.generateCppType(true)/]>())[/if];
+[/let]
 [/if]
 
 [comment TODO: the following if is somethimes undefined when the method is an activity instead of a function behaviour/] 
