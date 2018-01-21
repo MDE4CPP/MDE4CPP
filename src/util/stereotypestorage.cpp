@@ -72,6 +72,7 @@ std::shared_ptr<Bag<uml::Stereotype> > StereotypeStorage::getAppliedStereotypes(
     while (it != m_stereotypeApplicationMap.end())
     {
         vector->push_back(it->second);
+		it++;
     }
     return vector;
 }
