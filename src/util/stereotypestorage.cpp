@@ -54,7 +54,8 @@ void StereotypeStorage::applyStereotype(uml::Element *_element, std::shared_ptr<
 
 std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(uml::Element * _element, std::string qualifiedName)
 {
-    for( std::shared_ptr<uml::Stereotype> s : *getAppliedStereotypes(_element) )
+	std::shared_ptr<Bag<uml::Stereotype> > list = getAppliedStereotypes(_element);
+    for( std::shared_ptr<uml::Stereotype> s : *list)
     {
         if(s->getMetaClass()->getQualifiedName()==qualifiedName)
         {
@@ -68,10 +69,13 @@ std::shared_ptr<uml::Stereotype> StereotypeStorage::getAppliedStereotype(uml::El
 std::shared_ptr<Bag<uml::Stereotype> > StereotypeStorage::getAppliedStereotypes(uml::Element * _element)
 {
     std::shared_ptr<Bag<uml::Stereotype> > vector(new Bag<uml::Stereotype>());
-    std::map<uml::Element *, std::shared_ptr<uml::Stereotype>>::iterator it = m_stereotypeApplicationMap.find(_element);
+    std::map<uml::Element *, std::shared_ptr<uml::Stereotype>>::iterator it = m_stereotypeApplicationMap.begin();
     while (it != m_stereotypeApplicationMap.end())
     {
-        vector->push_back(it->second);
+		if (it->first == _element)
+		{
+			vector->push_back(it->second);
+		}
 		it++;
     }
     return vector;
@@ -79,7 +83,8 @@ std::shared_ptr<Bag<uml::Stereotype> > StereotypeStorage::getAppliedStereotypes(
 
 bool StereotypeStorage::isStereotypeApplied(uml::Element * _element, std::shared_ptr<uml::Stereotype> _stereotype)
 {
-    for(std::shared_ptr<uml::Stereotype> s : *getAppliedStereotypes(_element))
+	std::shared_ptr<Bag<uml::Stereotype> > list = getAppliedStereotypes(_element);
+    for( std::shared_ptr<uml::Stereotype> s : *list)
     {
         if(s->getMetaClass() == _stereotype)
         {
