@@ -29,6 +29,10 @@ virtual public uml::Element
 
 [template public generateInterfaceCreation(anInterface : Interface)]
 [memberName(anInterface)/] = uml::UmlFactory::eInstance()->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/]);
+
+[/template]
+
+[template public generateInterfaceInitialization(anInterface : Interface)]
 [memberName(anInterface)/]->setName("[anInterface.name/]");
 [memberName(anInterface)/]->setIsAbstract([anInterface.isAbstract/]);
 

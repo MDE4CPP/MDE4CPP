@@ -39,11 +39,20 @@ static const int [aClass.name.toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOpe
 
 [template public generateClassCreation(aClass : Class)]
 [memberName(aClass)/] = uml::UmlFactory::eInstance()->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/]);
+
+//constraints
+[aClass.ownedRule.generateConstraintCreation()/]
+
+[/template]
+
+[template public generateClassInitialization(aClass : Class)]
 [memberName(aClass)/]->setName("[aClass.name/]");
 [memberName(aClass)/]->setIsAbstract([aClass.isAbstract/]);
 
 //constraints
 [aClass.ownedRule.generateConstraintCreation()/]
+
+[aClass.initSuperTypes()/]
 
 [/template]
 

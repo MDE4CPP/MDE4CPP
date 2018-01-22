@@ -119,10 +119,15 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 
 [template public generateDependencyCreation(aDependency : Dependency) ]
 [memberName(aDependency)/] = uml::UmlFactory::eInstance()->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
+
+[/template]
+
+[template public generateDependencyInitialization(aDependency : Dependency) ]
 [memberName(aDependency)/]->setName("[aDependency.name/]");
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
 [aDependency.generateStereotypeApplication()/]
+
 [/template]
 
 [template public generateDependencyClientAdding(aNamedElement : NamedElement, aDependency : Dependency)]

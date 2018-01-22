@@ -33,6 +33,11 @@
 
 [template public generateInstanceSpecificationCreation(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/] = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace([anInstSpec.owner.oclAsType(NamedElement).memberName()/]); // TODO: set owner
+[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInstSpec)/]);
+
+[/template]
+
+[template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
 [for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(myQualifiedName()))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
@@ -42,6 +47,4 @@
 [/for]
 [/for]
 
-[anInstSpec.ancestors(Package)->first().memberName()/]->getPackagedElement()->push_back([memberName(anInstSpec)/]);
 [/template]
-
