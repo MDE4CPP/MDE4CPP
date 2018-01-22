@@ -41,7 +41,7 @@
 
 [template public generateInstanceSpecificationInitialization(anInstSpec : InstanceSpecification)]
 [memberName(anInstSpec)/]->setName("[anInstSpec.name/]");
-[for (aClassifer : Classifier | anInstSpec.classifier->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (aClassifer : Classifier | anInstSpec.classifier->sortedBy(myQualifiedName()))]
 [memberName(anInstSpec)/]->getClassifier()->push_back([memberName(aClassifer)/]);
 
 [for (aSlot : Slot | anInstSpec.slot->asOrderedSet()->sortedBy(definingFeature.myQualifiedName()))]
