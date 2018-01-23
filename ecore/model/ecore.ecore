@@ -390,6 +390,7 @@
     <eOperations name="eIsSet" eType="#//EBoolean">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="const"/>
+        <details key="body" value="return true;"/>
       </eAnnotations>
       <eParameters name="feature" eType="#//EStructuralFeature"/>
     </eOperations>
