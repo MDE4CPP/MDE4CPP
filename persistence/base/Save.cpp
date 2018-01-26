@@ -18,7 +18,6 @@ Save::Save ()
 
 Save::~Save ()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool Save::save ( const std::string &filename, std::shared_ptr<ecore::EObject> model, std::shared_ptr<ecore::EPackage> metaMetaPackage )

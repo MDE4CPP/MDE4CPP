@@ -18,12 +18,10 @@ namespace base
 
 Persistence::Persistence ()
 {
-
 }
 
 Persistence::~Persistence ()
 {
-	// TODO Auto-generated destructor stub
 }
 
 bool Persistence::isValidFile ( const std::string& filename )

@@ -29,25 +29,6 @@ XMLSaveHandler::~XMLSaveHandler ()
 }
 
 /**/
-void XMLSaveHandler::setDOMDocument ( DOMDocument * doc )
-{
-	//assert(doc);
-	m_doc = doc;
-	m_rootObject = nullptr;
-	m_currentElement = m_doc->getDocumentElement(); // get root element
-
-	m_rootPrefix = "ecore"; // TODO get prefix from document
-
-	if ( m_currentElement->getNodeType() == DOMNode::ELEMENT_NODE )
-	{
-		m_currentElements.push_back( m_currentElement );
-	}
-	else
-	{
-		MSG_ERROR( MSG_FLF << " Current DOMElement (root) is not a DOMNode::ELEMENT_NODE." );
-	}
-}
-
 DOMDocument *XMLSaveHandler::getDOMDocument ()
 {
 	return m_doc;
@@ -180,7 +161,7 @@ void XMLSaveHandler::release ()
 {
 	if ( m_currentElement == nullptr )
 	{
-		MSG_ERROR( MSG_FLF << "Ccurrent DOMElement m_currentElement is nullptr" );
+		MSG_ERROR( MSG_FLF << "Current DOMElement m_currentElement is nullptr" );
 	}
 	else
 	{

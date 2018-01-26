@@ -38,7 +38,6 @@ public:
 	XMLSaveHandler ();
 	~XMLSaveHandler ();
 
-	void setDOMDocument ( DOMDocument * doc );
 	DOMDocument *getDOMDocument ();
 
 	bool createRootNode ( const std::string& name, const std::string& ns_uri );

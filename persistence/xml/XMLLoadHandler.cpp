@@ -54,7 +54,7 @@ void XMLLoadHandler::setDOMDocument ( DOMDocument * doc )
 		assert( m_currentElement );
 	}
 
-	m_rootPrefix = "ecore"; // TODO get prefix from document
+	m_rootPrefix = "ecore"; // TODO get correct prefix from document
 
 	if ( m_currentElement->getNodeType() == DOMNode::ELEMENT_NODE )
 	{

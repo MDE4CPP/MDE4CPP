@@ -41,9 +41,6 @@ std::shared_ptr<ecore::EObject> Load::load ( const std::string &filename )
 	{
 		MSG_DEBUG( "Reading file successfully." );
 
-		// TODO need comment here
-		m_handler->getNextNodeName();
-
 		// Use PluginFramework to create factory and package by given prefix (eg. ecore, uml,...)
 		prefix = m_handler->getPrefix();
 
@@ -54,7 +51,7 @@ std::shared_ptr<ecore::EObject> Load::load ( const std::string &filename )
 		{
 			std::shared_ptr<EcoreModelPlugin> ecorePlugin = std::dynamic_pointer_cast<EcoreModelPlugin>( plugin );
 			std::shared_ptr<ecore::EPackage> package = ecorePlugin->getPackage();
-			//std::shared_ptr<ecore::EFactory> factory = ecorePlugin->getFactory(); // TODO not supported yet
+			//std::shared_ptr<ecore::EFactory> factory = ecorePlugin->getFactory(); // TODO get Factory of ecorePlugin
 			std::shared_ptr<ecore::EcoreFactory> factory = std::dynamic_pointer_cast<ecore::EcoreFactory>( ecorePlugin->getFactory() )->eInstance();
 
 			// Create root object of model
@@ -66,15 +63,15 @@ std::shared_ptr<ecore::EObject> Load::load ( const std::string &filename )
 			// Start loading process by calling load() on root object
 			pck_root->load( m_handler );
 
-			// Add EClassifiers of package to map if not already in.
+			// Add EClassifiers of package to map if not already in // TODO this sequence should not necessary, because Handlers should use PluginFramework to find correct objects and types
 			std::shared_ptr<Bag<ecore::EClassifier>> eClassifiers = package->getEClassifiers();
 			for ( std::shared_ptr<ecore::EClassifier> eClassifier : *eClassifiers )
 			{
-				// TODO filter EDataType
+				// Filter only EDataType objects and add to handler's internal map
 				std::shared_ptr<ecore::EClass> _metaClass = eClassifier->eClass();
 				if ( _metaClass->getName().compare( "EDataType" ) == 0 )
 				{
-					m_handler->addToMap( eClassifier ); // TODO add default parameter force=true
+					m_handler->addToMap( eClassifier ); // TODO add default parameter force=true to addToMap()
 				}
 			}
 

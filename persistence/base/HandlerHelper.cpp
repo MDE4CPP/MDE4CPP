@@ -80,9 +80,10 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 		// Remove root Package from 'to_antecessors' because it is not used in reference name
 		to_antecessors.pop_back();
 
-		if ( rootObject != rootPkg )
+		// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
+		if ( rootObject != rootPkg ) // TODO check if works correct (not tested yet)
 		{
-			ref << extractType( toObject, prefix ) << " " << rootPkg->getNsURI(); // TODO this case is not tested yet
+			ref << extractType( toObject, prefix ) << " " << rootPkg->getNsURI();
 		}
 
 		ref << "#/";
@@ -112,7 +113,7 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 	//else if ( (to_antecessors.back() == m_rootObject) || (m_rootObject == nullptr) )
 	else if ( to_antecessors.back() == rootObject )
 	{
-		// This case is used for Non-Ecore-Models
+		// This case is used for Non-Ecore-Models to extract reference
 		// TODO implement and test this case
 
 		MSG_ERROR(MSG_FLF << "else-if-case (Non-Ecore-Models) is not tested yet.");
@@ -156,9 +157,10 @@ std::string HandlerHelper::extractReference ( const std::shared_ptr<ecore::EObje
 
 			if ( auto ePck = dPck.lock() )
 			{
-				if ( rootObject != ePck ) // TODO use here other way to find equality of m_rootObject and current EPackage-Obj
+				// If meta package of clsObj is different then rootObject of model, so extract type and Namespace-Uri of meta package
+				if ( rootObject != ePck ) // TODO check if works correct (not tested yet)
 				{
-					ref << extractType( toObject, prefix ) << " " << ePck->getNsURI(); // TODO this case is not tested yet
+					ref << extractType( toObject, prefix ) << " " << ePck->getNsURI();
 				}
 			}
 			ref << "#/";

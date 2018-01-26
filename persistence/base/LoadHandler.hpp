@@ -60,11 +60,7 @@ public:
 
 	std::shared_ptr<ecore::EObject> getObjectByRef ( std::string ref );
 
-	//DOMDocument *getDOMDocument ();
-	//void setDOMDocument ( DOMDocument * doc );
-
 	std::string getLevel ();
-
 	std::string getPrefix ();
 
 	std::string extractType ( std::shared_ptr<ecore::EObject> obj ) const;

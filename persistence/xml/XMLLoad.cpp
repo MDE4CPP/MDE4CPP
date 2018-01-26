@@ -71,7 +71,7 @@ bool XMLLoad::read ( const std::string &filename )
 	//  Parse the XML file, catching any XML exceptions that might propogate
 	//  out of it.
 	//
-std	::string _filename = filename;// TODO check if _filename is necessary, because of Error-Message "Multiple errors.." in var filename
+	std	::string _filename = filename;// TODO check if _filename is necessary, because of Error-Message "Multiple errors.." in var filename
 
 	bool errorsOccured = false;
 
