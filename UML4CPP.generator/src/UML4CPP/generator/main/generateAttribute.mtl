@@ -87,10 +87,10 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.SetterName()/]([aProperty.gen
 [else][if (not aProperty.interface.oclIsUndefined())]
 [aProperty.memberName()/] = uml::UmlFactory::eInstance()->createProperty_in_Interface([aProperty.interface.memberName()/]);
 [/if][/if]
-
 [/template]
 
 [template public generateAttributeInitialization(aProperty : Property)]
+// property [aProperty.name/]
 [aProperty.memberName()/]->setName("[aProperty.name/]");
 [aProperty.memberName()/]->setType([aProperty.type.packageGetter(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);

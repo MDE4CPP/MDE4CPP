@@ -19,9 +19,13 @@
 
 [template public generateActivityCreation(anActivity : Activity)]
 [memberName(anActivity)/] = uml::UmlFactory::eInstance()->createActivity_in_Package([anActivity.ancestors(Package)->first().memberName()/]);
-[memberName(anActivity)/]->setName("[anActivity.name/]");
-
-//parameter
 [anActivity.ownedParameter.generateParameterCreation()/]
+
+[/template]
+
+[template public generateActivityInitialization(anActivity : Activity)]
+// activity [anActivity.name/]
+[memberName(anActivity)/]->setName("[anActivity.name/]");
+[anActivity.ownedParameter.generateParameterInitialization()/]
 
 [/template]

@@ -211,10 +211,11 @@ void [packageName/]::initializePackageContents()
 
 [comment]Only Classes[/comment]
 [for (aClass : Class | (aPackage.ownedMember->filter(Class)-aPackage.ownedMember->filter(Stereotype)-aPackage.ownedMember->filter(Behavior))->sortedBy(myQualifiedName())) separator ('\n')]
+//	class [aClass.name/]
 	[aClass.generateClassInitialization()/]
 	[aClass.ownedAttribute->sortedBy(myQualifiedName()).generateAttributeInitialization()/]
 	[aClass.ownedOperation->sortedBy(myQualifiedName()).initalizeOperation()/]
-	[aClass.ownedBehavior->filter(FunctionBehavior).generateFunctionBehaviorCreation()/]
+	[aClass.ownedBehavior->filter(FunctionBehavior).generateFunctionBehaviorInitialization()/]
 
 	[for (interfaceR : InterfaceRealization | aClass.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aClass.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
 	[aAttribute.addInterfaceAttribute(aClass)/]
@@ -231,14 +232,15 @@ void [packageName/]::initializePackageContents()
 	[aStereotype.ownedOperation->sortedBy(myQualifiedName()).generateOperationImplementation()/]
 [/for]
 
-//Dependency [comment]Only Dependency[/comment]
+	//Dependency [comment]Only Dependency[/comment]
 [for (aDependency : Dependency | (aPackage.allOwnedElements()->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
 	[aDependency.generateDependencyInitialization()/]
 	[aDependency.ownedElement->sortedBy(name).generateStereotypeApplication()/]
 [/for]
 
-	//initalize ActivityNodes and Edges
+	//ActivityNodes and Edges
 	[for (anActivity : Activity | aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())) separator ('\n')]
+	[anActivity.generateActivityInitialization()/]
 	[anActivity.node->sortedBy(myQualifiedName()).initializeActivityNode()/]
 	[anActivity.edge->sortedBy(myQualifiedName()).initializeEdge()/]
 	[/for]

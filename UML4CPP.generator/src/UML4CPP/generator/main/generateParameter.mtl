@@ -17,18 +17,18 @@
 [import UML4CPP::generator::main::helper /]
 
 [template public generateParameterCreation(aParameter : Parameter)]
-//[aParameter.owner.eClass().name/]
 [if(aParameter.owner.oclIsKindOf(Operation))]
 [memberName(aParameter)/] = uml::UmlFactory::eInstance()->createParameter_in_Operation([aParameter.owner.oclAsType(NamedElement).memberName()/]);
-[else]
-[memberName(aParameter)/] = uml::UmlFactory::eInstance()->createParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
+[else][memberName(aParameter)/] = uml::UmlFactory::eInstance()->createParameter_in_Behavior([aParameter.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
+[/template]
 
+[template public generateParameterInitialization(aParameter : Parameter)]
+// parameter [aParameter.name/]
 [memberName(aParameter)/]->setName("[aParameter.name/]");
 [memberName(aParameter)/]->setType([aParameter.type.packageGetter(aParameter)/]);
 [memberName(aParameter)/]->setLower([aParameter.lower/]);
 [memberName(aParameter)/]->setUpper([aParameter.upper/]);
 [memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
-
 
 [/template]

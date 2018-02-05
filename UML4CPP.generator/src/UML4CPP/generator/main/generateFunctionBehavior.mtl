@@ -23,8 +23,12 @@
  */]
 [template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
 [memberName(aFunctionBehavior)/] = uml::UmlFactory::eInstance()->createFunctionBehavior_in_BehavioredClassifier([memberName(aFunctionBehavior.owner.oclAsType(NamedElement))/]);
-[memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
-
 [aFunctionBehavior.ownedParameter.generateParameterCreation()/]
+
+[/template]
+
+[template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
+[memberName(aFunctionBehavior)/]->setName("[aFunctionBehavior.name/]");
+[aFunctionBehavior.ownedParameter.generateParameterInitialization()/]
 
 [/template]

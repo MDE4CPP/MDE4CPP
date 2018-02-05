@@ -104,16 +104,21 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]( [for (sParameter : P
 
 [template public generateOperationCreation(aOperation : Operation) ]
 [if (not aOperation.class.oclIsUndefined())]
-[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([memberName(aOperation.class)/]);[else]
-[if (not aOperation.interface.oclIsUndefined())][memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Interface([memberName(aOperation.interface)/]);[/if][/if]
-[memberName(aOperation)/]->setName("[aOperation.name/]");
+[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Class([memberName(aOperation.class)/]);
+[elseif (not aOperation.interface.oclIsUndefined())]
+[memberName(aOperation)/] = uml::UmlFactory::eInstance()->createOperation_in_Interface([memberName(aOperation.interface)/]);
+[/if]
 [aOperation.ownedParameter.generateParameterCreation()/]
 
 [/template]
 
 [template public initalizeOperation(aOperation : Operation) ]
+// operation [aOperation.name/]
+[memberName(aOperation)/]->setName("[aOperation.name/]");
 [for (beh : Behavior | aOperation.method) separator ('\n')]
 [memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
+
+[aOperation.ownedParameter.generateParameterInitialization()/]
 
 [/template]
 
