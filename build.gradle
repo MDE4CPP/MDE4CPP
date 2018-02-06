@@ -1,18 +1,18 @@
 description 'MDE4CPP root project'
 
-task generateAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModels', 'src:common:buildReflectionModels']) {
+task generateAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModels', 'src:buildReflectionModels']) {
 	group 'MDE4CPP'
 	description 'build generators and all models'
 }
 tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:createAllGenerators')
-tasks.getByPath('src:common:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
+tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('src:buildEcoreModels')
 
 //Compile All
-task compileAll(dependsOn: ['src:compileEcoreModels', 'src:common:ecoreReflection:compileEcoreReflection']) {
+task compileAll(dependsOn: ['src:compileEcoreModels', 'src:compileReflectionModels']) {
 	group 'MDE4CPP'
 	description 'compiles all models without generating the models'
 }
-tasks.getByPath('src:common:ecoreReflection:compileEcoreReflection').mustRunAfter tasks.getByPath('src:compileEcoreModels')
+tasks.getByPath('src:compileReflectionModels').mustRunAfter tasks.getByPath('src:compileEcoreModels')
 
 //Generate All
 task generateEcoreModels(dependsOn: ['generator:ecore4CPP:createEcore4CPP', 'src:buildEcoreModels']) {
@@ -21,8 +21,8 @@ task generateEcoreModels(dependsOn: ['generator:ecore4CPP:createEcore4CPP', 'src
 }
 tasks.getByPath('src:buildEcoreModels').mustRunAfter tasks.getByPath('generator:ecore4CPP:createEcore4CPP')
 
-task generateReflectionModels(dependsOn: ['generator:UML4CPP:createUML4CPP', 'src:common:buildReflectionModels']) {
+task generateReflectionModels(dependsOn: ['generator:UML4CPP:createUML4CPP', 'src:buildReflectionModels']) {
 	group 'MDE4CPP'
 	description 'build UML4CPP generator and all reflection models'
 }
-tasks.getByPath('src:common:buildReflectionModels').mustRunAfter tasks.getByPath('generator:UML4CPP:createUML4CPP')
+tasks.getByPath('src:buildReflectionModels').mustRunAfter tasks.getByPath('generator:UML4CPP:createUML4CPP')
