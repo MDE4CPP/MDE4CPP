@@ -7,10 +7,13 @@
 
 #include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
-#include <dirent.h>
 #include <iostream>
-#include <windows.h>
 
+#ifdef __linux__
+
+#elif defined(_WIN32)
+	#include <windows.h>
+#endif
 
 PluginFrameworkImpl::PluginFrameworkImpl()
 {
@@ -32,53 +35,47 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	char folderBuffer[MAX_CHAR];
 	char nameBuffer[MAX_CHAR];
 
+	m_debugMode = false;
+#ifdef __linux__
+	m_endingDebug = "d.so";
+	m_endingRelease = ".so";
+	m_endingString = "d";
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!"
+	return libraries;
+#elif defined(_WIN32)
 	GetCurrentDirectory(MAX_CHAR, folderBuffer);
-	GetModuleFileName(NULL, nameBuffer, MAX_CHAR );
+	GetModuleFileName(NULL, nameBuffer, MAX_CHAR);
+	m_endingDebug = "d.dll";
+	m_endingRelease = ".dll";
+	m_endingString = "d.exe";
+#else
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!"
+	return libraries;
+#endif
 
 	std::string fileName(nameBuffer);
 	std::string folderName(folderBuffer);
-	std::string endingDebug = "d.dll";
-	std::string endingRelease = ".dll";
-	std::string endingString("d.exe");
+
 	std::vector<std::string> libraries;
-	bool debugMode = false;
-	if (fileName.length() >= endingString.length())
+	if (fileName.length() >= m_endingString.length())
 	{
-		debugMode =  (0 == fileName.compare(fileName.length() - endingString.length(), endingString.length(), endingString));
+		m_debugMode =  (0 == fileName.compare(fileName.length() - m_endingString.length(), m_endingString.length(), m_endingString));
 	}
 
 	DIR *dir;
 	struct dirent *file;
+
+#ifdef __linux__
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for Linux systems!"
+#elif defined(_WIN32)
 	if((dir = opendir(folderBuffer)) != NULL)
 	{
 		while((file = readdir(dir)) != NULL)
 		{
-			std::string name(file->d_name);
-			if(debugMode)
+			std::string libName = checkLibrary(file, folderName);
+			if (!libName.empty())
 			{
-				if(name.length() >= endingDebug.length())
-				{
-					if((0 == name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
-					{
-						libraries.push_back(folderName + "\\" + name);
-					}
-				}
-			}
-			else
-			{
-				if(name.length() >= endingRelease.length())
-				{
-					if((0 == name.compare (name.length() - endingRelease.length(), endingRelease.length(), endingRelease)))
-					{
-						if(name.length() >= endingDebug.length())
-						{
-							if((0 != name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
-							{
-								libraries.push_back(folderName + "\\" + name);
-							}
-						}
-					}
-				}
+				libraries.push_back(libName);
 			}
 		}
 		closedir (dir);
@@ -87,8 +84,43 @@ std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 	{
 		std::cerr << "Could not open directory " << folderName << " failed" << std::endl;
 	}
+#else
+	std::cerr << "PluginFrameworkImpl::findAllAvailableLibraries is not implemented for this system!"
+#endif
 
 	return libraries;
+}
+
+std::string PluginFrameworkImpl::checkLibrary(struct dirent* file, std::string folderName)
+{
+	std::string name(file->d_name);
+	if(m_debugMode)
+	{
+		if(name.length() >= m_endingDebug.length())
+		{
+			if((0 == name.compare(name.length() - m_endingDebug.length(), m_endingDebug.length(), m_endingDebug)))
+			{
+				return folderName + "\\" + name;
+			}
+		}
+	}
+	else
+	{
+		if(name.length() >= m_endingRelease.length())
+		{
+			if((0 == name.compare(name.length() - m_endingRelease.length(), m_endingRelease.length(), m_endingRelease)))
+			{
+				if(name.length() >= m_endingDebug.length())
+				{
+					if((0 != name.compare(name.length() - m_endingDebug.length(), m_endingDebug.length(), m_endingDebug)))
+					{
+						return folderName + "\\" + name;
+					}
+				}
+			}
+		}
+	}
+	return "";
 }
 
 void PluginFrameworkImpl::initialize()
@@ -100,6 +132,8 @@ void PluginFrameworkImpl::initialize()
 		loadLibrary(libraryPath);
 	}
 }
+
+
 
 void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 {

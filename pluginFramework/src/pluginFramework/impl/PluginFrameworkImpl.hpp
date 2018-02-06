@@ -14,6 +14,7 @@
   #define DEBUG_MESSAGE(a) a
 #endif
 
+#include <dirent.h>
 #include <map>
 #include <string>
 #include <vector>
@@ -43,11 +44,15 @@ class PluginFrameworkImpl : virtual public PluginFramework
 
 		virtual void initialize();
 		virtual std::vector<std::string> findAllAvailableLibraries();
+		virtual std::string checkLibrary(struct dirent* file, std::string folderName);
 		virtual void loadLibrary(std::string libraryPath);
 
 	private:
 		std::map<std::string, std::shared_ptr<MDE4CPPPlugin>> m_pluginMap;
-
+		bool m_debugMode;
+		std::string m_endingDebug;
+		std::string m_endingRelease;
+		std::string m_endingString;
 };
 
 #endif
