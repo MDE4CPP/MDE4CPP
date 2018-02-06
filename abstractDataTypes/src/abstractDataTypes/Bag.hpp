@@ -5,8 +5,8 @@
  *      Author: frbe5612
  */
 
-#ifndef BAG_HPP_
-#define BAG_HPP_
+#ifndef ABSTRACTDATATPYES_BAG_HPP
+#define ABSTRACTDATATPYES_BAG_HPP
 
 #ifdef NDEBUG
 # define DEBUG_MESSAGE(a) /**/
@@ -20,223 +20,233 @@
 #include <stdexcept>
 #include <omp.h>
 
-
 template <class T>
 class Bag
 {
-protected:
-  std::vector<std::shared_ptr<T> > m_bag;
-public:
+	protected:
+		std::vector<std::shared_ptr<T> > m_bag;
 
-  typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
+	public:
+		typedef typename std::vector<std::shared_ptr<T> >::iterator iterator;
 
-  Bag()
-  { }
+		Bag()
+		{
+		}
 
-  Bag(const Bag<T> &b)
-  {
-    insert(b);
-  }
+		Bag(const Bag<T> &b)
+		{
+			insert(b);
+		}
 
-  virtual ~Bag()
-  {
-    clear();
-  }
+		virtual ~Bag()
+		{
+			clear();
+		}
 
-  Bag<T> * copy() const
-  {
-    return new Bag<T>(*this);
-  }
+		Bag<T> * copy() const
+		{
+			return new Bag<T>(*this);
+		}
 
-  void insert(const Bag<T> &b)
-  {
-    #ifndef NDEBUG
-    // The debug version check if an inserted element is already present in the collection.
-    for (auto i = b.cbegin(); i != b.cend(); i++) {
-      if (find(*i) > -1) {
-        DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;
-        )
-      }
-    }
-    #endif
-    m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
-  }
+		void insert(const Bag<T> &b)
+		{
+#ifndef NDEBUG
+			// The debug version check if an inserted element is already present in the collection.
+			for (auto i = b.cbegin(); i != b.cend(); i++)
+			{
+				if (find(*i) > -1)
+				{
+					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+				}
+			}
+#endif
+			m_bag.insert(m_bag.cend(), b.cbegin(), b.cend());
+		}
 
-  void insert(iterator a, iterator b, iterator c)
-  {
-    #ifndef NDEBUG
-    // The debug version check if an inserted element is already present in the collection.
-    for (auto i = b; i != c; i++) {
-      if (find(*i) > -1) {
-        DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;
-        )
-      }
-    }
-    #endif
-    m_bag.insert(a, b, c);
-  }
+		void insert(iterator a, iterator b, iterator c)
+		{
+#ifndef NDEBUG
+			// The debug version check if an inserted element is already present in the collection.
+			for (auto i = b; i != c; i++)
+			{
+				if (find(*i) > -1)
+				{
+					DEBUG_MESSAGE(std::cerr << "Element " << *i << " already present" << std::endl;)
+				}
+			}
+#endif
+			m_bag.insert(a, b, c);
+		}
 
-  void insert(iterator a, std::shared_ptr<T> b)
-  {
-    #ifndef NDEBUG
-    // The debug version check if an inserted element is already present in the collection.
-    int i = find(b);
+		void insert(iterator a, std::shared_ptr<T> b)
+		{
+#ifndef NDEBUG
+			// The debug version check if an inserted element is already present in the collection.
+			int i = find(b);
 
-    if (i > -1) {
-      DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;
-      )
-    }
-    #endif
-    m_bag.insert(a, b);
-  }
+			if (i > -1)
+			{
+				DEBUG_MESSAGE(std::cerr << "Element " << b << " already present" << std::endl;)
+			}
+#endif
+			m_bag.insert(a, b);
+		}
 
-  bool empty()
-  {
-    return m_bag.empty();
-  }
+		bool empty()
+		{
+			return m_bag.empty();
+		}
 
-  std::shared_ptr<T> front()
-  {
-    return m_bag.front();
-  }
+		std::shared_ptr<T> front()
+		{
+			return m_bag.front();
+		}
 
-  void clear()
-  {
-    const unsigned int size = m_bag.size();
+		void clear()
+		{
+			const unsigned int size = m_bag.size();
 
-    #pragma omp parallel for if(size > 39)
-    for (unsigned int i = 0; i < size; i++) {
-      m_bag[i].reset();
-    }
+			#pragma omp parallel for if(size > 39)
+			for (unsigned int i = 0; i < size; i++)
+			{
+				m_bag[i].reset();
+			}
 
-    m_bag.clear();
-  }
+			m_bag.clear();
+		}
 
-  unsigned int size() const
-  {
-    return m_bag.size();
-  }
+		unsigned int size() const
+		{
+			return m_bag.size();
+		}
 
-  unsigned int max_size() const
-  {
-    return m_bag.max_size();
-  }
+		unsigned int max_size() const
+		{
+			return m_bag.max_size();
+		}
 
-  const std::shared_ptr<T> operator [] (unsigned int n) const
-  {
-    return m_bag[n];
-  }
+		const std::shared_ptr<T> operator [] (unsigned int n) const
+		{
+			return m_bag[n];
+		}
 
-  const std::shared_ptr<T> at(unsigned int n) const
-  {
-    #ifndef NDEBUG
-    if (n < m_bag.size()) {
-    #endif
-    return m_bag[n];
+		const std::shared_ptr<T> at(unsigned int n) const
+		{
+#ifndef NDEBUG
+			if (n < m_bag.size())
+			{
+#endif
+				return m_bag[n];
+#ifndef NDEBUG
+			}
+			throw std::invalid_argument("Bag.hpp: index out of range");
+#endif
+		}
 
-    #ifndef NDEBUG
-  }
+		virtual void add(std::shared_ptr<T> el)
+		{
+#ifndef NDEBUG
+			// The debug version check if an inserted element is already present in the collection.
+			if (find(el) > -1)
+			{
+				DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;)
+			}
+#endif
+			m_bag.push_back(el);
+		}
 
-  throw std::invalid_argument("Bag.hpp: index out of range");
-    #endif
-  }
+		virtual void push_back(std::shared_ptr<T> el)
+		{
+			add(el);
+		}
 
-  virtual void add(std::shared_ptr<T> el)
-  {
-    #ifndef NDEBUG
-    // The debug version check if an inserted element is already present in the collection.
-    if (find(el) > -1) {
-      DEBUG_MESSAGE(std::cerr << "Element " << el << " already present" << std::endl;
-      )
-    }
-    #endif
-    m_bag.push_back(el);
-  }
+		virtual void erase(iterator el)
+		{
+			m_bag.erase(el);
+		}
 
-  virtual void push_back(std::shared_ptr<T> el)
-  {
-    add(el);
-  }
+		virtual void erase(std::shared_ptr<T> el)
+		{
+			int res = find(el);
 
-  virtual void erase(iterator el)
-  {
-    m_bag.erase(el);
-  }
+			if (res < 0)
+			{
+				return;
+			}
+			m_bag.erase(m_bag.begin() + res);
+		}
 
-  virtual void erase(std::shared_ptr<T> el)
-  {
-    int res = find(el);
+		int find(std::shared_ptr<T> el)
+		{
+			const int size = m_bag.size();
 
-    if (res < 0) {
-      return;
-    }
-    m_bag.erase(m_bag.begin() + res);
-  }
+			if (size == 0)
+			{
+				return -1;
+			}
+			volatile bool found = false;
+			int first_index     = -1;
+			int iteration       = 0;
 
-  int find(std::shared_ptr<T> el)
-  {
-    const int size = m_bag.size();
+			#pragma omp parallel if(size >=40)
+			{
+				int my_index = -1;
+				int i;
 
-    if (size == 0) {
-      return -1;
-    }
-    volatile bool found = false;
-    int first_index     = -1;
-    int iteration       = 0;
+				do
+				{
+        			#pragma omp critical(iteration)
+					{
+						i = iteration++;
+					}
 
-    #pragma omp parallel if(size >=40)
-    {
-      int my_index = -1;
-      int i;
+					if (i < size && m_bag[i] == el)
+					{
+						found    = true;
+						my_index = i;
+					}
+				}
+				while (!found && i < size);
 
-      do {
-        #pragma omp critical(iteration)
-        {
-          i = iteration++;
-        }
+      	  	  	#pragma omp critical(reduction)
+				if (my_index != -1)
+				{
+					if (first_index == -1 || my_index < first_index)
+					{
+						first_index = my_index;
+					}
+				}
+			}
+			return first_index;
+		} // find
 
-        if (i < size && m_bag[i] == el) {
-          found    = true;
-          my_index = i;
-        }
-      } while (!found && i < size);
+		template <class U>
+		Bag(Bag<U> const &u)
+		{
+			this->m_bag = u.m_bag;
+		}
 
-      #pragma omp critical(reduction)
-      if (my_index != -1) {
-        if (first_index == -1 || my_index < first_index)
-          first_index = my_index;
-      }
-    }
-    return first_index;
-  } // find
+		typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;
 
-  template <class U>
-  Bag(Bag<U> const &u)
-  {
-    this->m_bag = u.m_bag;
-  }
+		virtual const_iterator cbegin() const
+		{
+			return m_bag.cbegin();
+		}
 
-  typedef typename std::vector<std::shared_ptr<T> >::const_iterator const_iterator;
+		virtual const_iterator cend() const
+		{
+			return m_bag.cend();
+		}
 
-  virtual const_iterator cbegin() const
-  {
-    return m_bag.cbegin();
-  }
+		virtual iterator begin()
+		{
+			return m_bag.begin();
+		}
 
-  virtual const_iterator cend() const
-  {
-    return m_bag.cend();
-  }
-
-  virtual iterator begin()
-  {
-    return m_bag.begin();
-  }
-
-  virtual iterator end()
-  {
-    return m_bag.end();
-  }
+		virtual iterator end()
+		{
+			return m_bag.end();
+		}
 };
 
-#endif /* BAG_HPP_ */
+#endif

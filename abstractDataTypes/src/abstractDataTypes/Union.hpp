@@ -5,31 +5,30 @@
  *      Author: frbe5612
  */
 
-#ifndef UNION_HPP_
-#define UNION_HPP_
+#ifndef ABSTRACTDATATPYES_UNION_HPP
+#define ABSTRACTDATATPYES_UNION_HPP
 
 #include <memory>
 #include <vector>
-#include "Bag.hpp"
+#include "abstractDataTypes/Bag.hpp"
 
 template<class T>
 class Union : virtual public Bag<T>
 {
-public:
-  Union()
-  {
-  }
+	public:
+		Union()
+		{
+		}
 
-    template<class U>
-    Union(Union<U> const &u)
-    {
-        this->m_bag = std::dynamic_pointer_cast<std::vector<std::shared_ptr<T> > >(u.m_bag);
-    }
+		template<class U>
+		Union(Union<U> const &u)
+		{
+			this->m_bag = std::dynamic_pointer_cast<std::vector<std::shared_ptr<T> > >(u.m_bag);
+		}
 
-    virtual ~Union()
-    {
-    }
-
+		virtual ~Union()
+		{
+		}
 };
 
-#endif /* UNION_HPP_ */
+#endif
