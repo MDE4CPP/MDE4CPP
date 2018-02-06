@@ -5,12 +5,14 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef UMLEXECUTIONMODELPLUGIN_HPP_
-#define UMLEXECUTIONMODELPLUGIN_HPP_
+#ifndef PLUGINFRAMEWORK_UMLEXECUTIONMODELPLUGIN_HPP
+#define PLUGINFRAMEWORK_UMLEXECUTIONMODELPLUGIN_HPP
 
-#include "MDE4CPPPlugin.hpp"
 #include <memory>
-#include <boost/any.hpp>
+#include <vector>
+
+#include "boost/any.hpp"
+#include "pluginFramework/MDE4CPPPlugin.hpp"
 
 class UMLExecutionModelPlugin: public MDE4CPPPlugin
 {

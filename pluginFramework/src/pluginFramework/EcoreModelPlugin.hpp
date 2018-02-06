@@ -5,12 +5,12 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef ECOREMODELPLUGIN_HPP_
-#define ECOREMODELPLUGIN_HPP_
+#ifndef PLUGINFRAMEWORK_ECOREMODELPLUGIN_HPP
+#define PLUGINFRAMEWORK_ECOREMODELPLUGIN_HPP
 
-#include "MDE4CPPPlugin.hpp"
-#include "EFactory.hpp"
-#include "EPackage.hpp"
+#include "pluginFramework/MDE4CPPPlugin.hpp"
+#include "ecore/EFactory.hpp"
+#include "ecore/EPackage.hpp"
 
 class EcoreModelPlugin: public MDE4CPPPlugin
 {

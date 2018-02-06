@@ -5,40 +5,29 @@
  *      Author: alwi0251
  */
 
-#include "PluginFramework.hpp"
+#include "pluginFramework/impl/PluginFrameworkImpl.hpp"
 
 #include <dirent.h>
 #include <iostream>
 #include <windows.h>
 
-#ifdef NDEBUG
-    #define DEBUG_MESSAGE(a) /**/
-#else
-    #define DEBUG_MESSAGE(a) a
-#endif
 
-std::shared_ptr<PluginFramework> PluginFramework::instance;
-
-PluginFramework::PluginFramework()
+PluginFrameworkImpl::PluginFrameworkImpl()
 {
 	initialize();
 }
 
-PluginFramework::~PluginFramework()
+PluginFrameworkImpl::~PluginFrameworkImpl()
 {
 	m_pluginMap.clear();
 }
 
-std::shared_ptr<PluginFramework> PluginFramework::eInstance()
+PluginFramework* PluginFrameworkImpl::create()
 {
-	if (instance == nullptr)
-	{
-		instance.reset(new PluginFramework());
-	}
-	return instance;
+	return new PluginFrameworkImpl();
 }
 
-std::vector<std::string> PluginFramework::findAllAvailableLibraries()
+std::vector<std::string> PluginFrameworkImpl::findAllAvailableLibraries()
 {
 	char folderBuffer[MAX_CHAR];
 	char nameBuffer[MAX_CHAR];
@@ -55,21 +44,21 @@ std::vector<std::string> PluginFramework::findAllAvailableLibraries()
 	bool debugMode = false;
 	if (fileName.length() >= endingString.length())
 	{
-		debugMode =  (0 == fileName.compare (fileName.length() - endingString.length(), endingString.length(), endingString));
+		debugMode =  (0 == fileName.compare(fileName.length() - endingString.length(), endingString.length(), endingString));
 	}
 
 	DIR *dir;
 	struct dirent *file;
-	if ((dir = opendir (folderBuffer)) != NULL)
+	if((dir = opendir(folderBuffer)) != NULL)
 	{
-		while ((file = readdir (dir)) != NULL)
+		while((file = readdir(dir)) != NULL)
 		{
 			std::string name(file->d_name);
-			if (debugMode)
+			if(debugMode)
 			{
-				if (name.length() >= endingDebug.length())
+				if(name.length() >= endingDebug.length())
 				{
-					if ((0 == name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
+					if((0 == name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
 					{
 						libraries.push_back(folderName + "\\" + name);
 					}
@@ -77,13 +66,13 @@ std::vector<std::string> PluginFramework::findAllAvailableLibraries()
 			}
 			else
 			{
-				if (name.length() >= endingRelease.length())
+				if(name.length() >= endingRelease.length())
 				{
-					if ((0 == name.compare (name.length() - endingRelease.length(), endingRelease.length(), endingRelease)))
+					if((0 == name.compare (name.length() - endingRelease.length(), endingRelease.length(), endingRelease)))
 					{
-						if (name.length() >= endingDebug.length())
+						if(name.length() >= endingDebug.length())
 						{
-							if ((0 != name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
+							if((0 != name.compare (name.length() - endingDebug.length(), endingDebug.length(), endingDebug)))
 							{
 								libraries.push_back(folderName + "\\" + name);
 							}
@@ -102,7 +91,7 @@ std::vector<std::string> PluginFramework::findAllAvailableLibraries()
 	return libraries;
 }
 
-void PluginFramework::initialize()
+void PluginFrameworkImpl::initialize()
 {
 	std::vector<std::string> libraries = findAllAvailableLibraries();
 
@@ -112,17 +101,17 @@ void PluginFramework::initialize()
 	}
 }
 
-void PluginFramework::loadLibrary(std::string libraryPath)
+void PluginFrameworkImpl::loadLibrary(std::string libraryPath)
 {
 	HINSTANCE hGetProcIDDLL = LoadLibrary(libraryPath.c_str());
-	if (!hGetProcIDDLL)
+	if(!hGetProcIDDLL)
 	{
 		std::cerr << "could not load the dynamic library, ErrorCode: " << GetLastError() << std::endl;
 		return;
 	}
 
 	StartFunction startFunction = (StartFunction) GetProcAddress(hGetProcIDDLL, "_Z5startv");
-	if (!startFunction)
+	if(!startFunction)
 	{
 		DEBUG_MESSAGE(std::cout << "Could not locate the start function 'std::shared_ptr<MDE4CPPPlugin> start()' in library " << libraryPath << std::endl;)
 	}
@@ -135,12 +124,12 @@ void PluginFramework::loadLibrary(std::string libraryPath)
 	}
 }
 
-void PluginFramework::clear()
+void PluginFrameworkImpl::clear()
 {
 	m_pluginMap.clear();
 }
 
-std::shared_ptr<MDE4CPPPlugin> PluginFramework::findPluginByName(const std::string name) const
+std::shared_ptr<MDE4CPPPlugin> PluginFrameworkImpl::findPluginByName(const std::string name) const
 {
 	std::map<std::string, std::shared_ptr<MDE4CPPPlugin>>::const_iterator iter = m_pluginMap.find(name);
 

@@ -5,8 +5,8 @@
  *      Author: Alexander Wichmann
  */
 
-#ifndef MDE4CPPPLUGIN_HPP_
-#define MDE4CPPPLUGIN_HPP_
+#ifndef PLUGINFRAMEWORK_MDE4CPPPLUGIN_HPP
+#define PLUGINFRAMEWORK_MDE4CPPPLUGIN_HPP
 
 #include <string>
 

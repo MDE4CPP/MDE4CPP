@@ -1,0 +1,75 @@
+apply plugin: 'base' 
+
+description 'Build tasks for project: EcoreReflection'
+
+task compilePluginFramework(dependsOn: ['compilePluginFrameworkDebug', 'compilePluginFrameworkRelease']) {
+	group 'PluginFramework'
+	description 'compile PluginFramework'
+}
+task compilePluginFrameworkDebug {
+	description 'compile PluginFramework in Debug'
+
+	def folder = new File(file('./src/pluginFramework/.cmake/Debug').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src/pluginFramework/.cmake/Debug'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src/pluginFramework").absolutePath
+		}
+		exec {
+			workingDir 'src/pluginFramework/.cmake/Debug'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+compilePluginFrameworkDebug.onlyIf {
+	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
+task compilePluginFrameworkRelease {
+	description 'compile PluginFramework in Release'
+
+	def folder = new File(file('./src/pluginFramework/.cmake/Release').absolutePath)
+	if( !folder.exists() ) {
+		folder.mkdirs()
+	}
+
+	doLast {
+		exec {
+			workingDir 'src/pluginFramework/.cmake/Release'
+			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src/pluginFramework").absolutePath
+		}
+		exec {
+			workingDir 'src/pluginFramework/.cmake/Release'
+			if (make_parallel_jobs)
+			{			
+				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
+			}
+			else
+			{
+				commandLine 'cmd', '/c', 'mingw32-make install' 
+			}
+		}
+	}
+}
+compilePluginFrameworkRelease.onlyIf {
+	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+}
+
+clean.doFirst {
+	def cmakeFolder = file('./src/pluginFramework/.cmake')
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
+}
