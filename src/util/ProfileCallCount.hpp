@@ -1,41 +1,33 @@
-#ifndef __PROFILE_CALL_COUNT__
-#define __PROFILE_CALL_COUNT__
-
+#ifndef UTIL_PROFILE_CALL_COUNT_HPP
+#define UTIL_PROFILE_CALL_COUNT_HPP
 
 #include <map>
 #include <iostream>
 
 namespace callDebugCount
 {
+	class ProfileCallCount
+	{
+		public:
+			~ProfileCallCount()
+			{
+			};
 
-    class ProfileCallCount
-    {
+			static ProfileCallCount* getInstance();
 
-    public:
-        ~ProfileCallCount(){};
+			void addCount(std::string cntfunction);
+			void printMap();
 
-        static ProfileCallCount* getInstance();
+		private:
+			ProfileCallCount()
+			{
+			};
 
-        void addCount(std::string cntfunction);
-        void printMap();
-
-    private:
-        ProfileCallCount(){};
-
-        std::map<std::string,int> countmap;
-        static ProfileCallCount* instance;
-
-
-    };
-
-
-
+			std::map<std::string, int> countmap;
+			static ProfileCallCount* instance;
+	};
 }
 
-
 #define ADD_COUNT(cntfunction) callDebugCount::ProfileCallCount::getInstance()->addCount(cntfunction);
-
-
-
 
 #endif
