@@ -24,14 +24,15 @@
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 
 #include <iostream>
-#include "[packageName.toUpperFirst()/]Factory.hpp"
-#include "[packageName.toUpperFirst()/]Package.hpp"
+
+#include "[aPackage.name/]/[packageName.toUpperFirst()/]Factory.hpp"
+#include "[aPackage.name/]/[packageName.toUpperFirst()/]Package.hpp"
 
 [for (aEClass : EClass | aPackage.eAllContents(EClass))]
-#include "[aEClass.name.toUpperFirst()/].hpp"
+#include "[aPackage.name/]/[aEClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]
-#include "[anEEnum.name/].hpp"
+#include "[aPackage.name/]/[anEEnum.name/].hpp"
 [/for]
 
 // [protected ('includes')] 
@@ -107,22 +108,8 @@ SET(SOURCE_FILES
 
 
 INCLUDE_DIRECTORIES(
-	.
-[if (packageName='uml')]
 	../
-[/if]
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
-[if (packageName='uml')]
-	${MDE4CPP_HOME}/application/include/util
-[/if]
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = packageName))]
-	${MDE4CPP_HOME}/application/include/[pack.name/]
-[/for]
-	${MDE4CPP_HOME}/application/include/[packageName/]
 # [protected ('includes')]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
