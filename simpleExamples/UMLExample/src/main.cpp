@@ -26,21 +26,20 @@ SOFTWARE.
  */
 
 #include <iostream>
-using namespace std;
 
 #include "uml/UmlFactory.hpp"
-#include "UmlPackage.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/Class.hpp"
 #include "uml/Model.hpp"
 #include "uml/Operation.hpp"
 #include "uml/InstanceSpecification.hpp"
 
-#include "umlReflection/UMLPackage.hpp"
-
 #include "ecore/EClass.hpp"
 #include "ecore/EOperation.hpp"
 
 #include "UmlReflection/UMLPackage.hpp"
+
+using namespace std;
 
 int main()
 {
