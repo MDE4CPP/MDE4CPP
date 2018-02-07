@@ -79,9 +79,7 @@ SET(SOURCE_FILES
 
 INCLUDE_DIRECTORIES(
 	.
-[if (packageName='uml')]
 	../
-[/if]
 	${MDE4CPP_HOME}/application/include
 	${MDE4CPP_HOME}/application/include/abstractDataTypes
 if(NOT UNIX)
