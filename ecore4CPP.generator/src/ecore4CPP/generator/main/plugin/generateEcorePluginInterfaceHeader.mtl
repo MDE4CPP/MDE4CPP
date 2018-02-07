@@ -20,7 +20,7 @@
 [file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
-#include "EcoreModelPlugin.hpp"
+#include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {

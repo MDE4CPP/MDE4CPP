@@ -20,7 +20,7 @@
 [file (aPackage.name.concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'PluginImpl')/]
 
-#include "[aPackage.name.toUpperFirst()/]Plugin.hpp"
+#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Plugin.hpp"
 
 namespace [aPackage.name/] 
 {

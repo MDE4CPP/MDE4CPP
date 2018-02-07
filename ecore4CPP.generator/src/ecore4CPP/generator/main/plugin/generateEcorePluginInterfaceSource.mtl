@@ -17,8 +17,8 @@
 [template public generateEcorePluginInterfaceSource(anPackage : EPackage) {packageName : String = anPackage.name.toUpperFirst().concat('Plugin').toUpperFirst(); }]
 [file  (anPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[packageName/].hpp"
-#include "impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.name/]/[packageName/].hpp"
+#include "[anPackage.name/]/impl/[packageName.concat('Impl')/].hpp"
 
 using namespace [anPackage.name/];
 
