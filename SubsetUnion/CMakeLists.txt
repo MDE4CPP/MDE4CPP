@@ -14,7 +14,7 @@ set(SOURCE_FILES
 
 
 INCLUDE_DIRECTORIES(
-        ${MDE4CPP_HOME}/application/include/abstractDataTypes
+        ${MDE4CPP_HOME}/application/include
 )
 
 SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_COVERAGE_COMPILE_FLAGS}" )

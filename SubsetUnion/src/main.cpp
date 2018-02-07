@@ -24,10 +24,10 @@
 #include <iterator>
 #include <memory>
 
-#include "Bag.hpp"
-#include "Union.hpp"
-#include "Subset.hpp"
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Union.hpp"
+#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 using namespace std;
 
