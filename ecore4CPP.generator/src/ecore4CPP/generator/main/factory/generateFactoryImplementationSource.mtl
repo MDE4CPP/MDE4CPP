@@ -23,7 +23,7 @@
 #include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [if (not(anEPackage.name = 'ecore'))]
-#include "[anEPackage.name/]/EClass.hpp"
+#include "ecore/EClass.hpp"
 [/if]
 
 [if(anEPackage.name = 'uml')]

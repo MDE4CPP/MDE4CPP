@@ -21,7 +21,7 @@
 [file (anEPackage.name.concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'FactoryImpl')/]
 
-#include "[anEPackage.name/]/impl/EFactoryImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
