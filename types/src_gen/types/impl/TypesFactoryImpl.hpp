@@ -21,10 +21,10 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "impl/EFactoryImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
 
 
-#include "TypesFactory.hpp"
+#include "types/TypesFactory.hpp"
 
 namespace types 
 {
@@ -43,7 +43,8 @@ namespace types
 			virtual ~TypesFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions

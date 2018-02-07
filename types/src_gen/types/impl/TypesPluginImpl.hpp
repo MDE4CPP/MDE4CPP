@@ -21,7 +21,7 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "TypesPlugin.hpp"
+#include "types/TypesPlugin.hpp"
 
 namespace types 
 {

@@ -1,5 +1,5 @@
-#include "TypesFactory.hpp"
-#include "impl/TypesFactoryImpl.hpp"
+#include "types/TypesFactory.hpp"
+#include "types/impl/TypesFactoryImpl.hpp"
 
 using namespace types;
 

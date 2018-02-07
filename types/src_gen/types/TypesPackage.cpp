@@ -1,5 +1,5 @@
-#include "TypesPackage.hpp"
-#include "impl/TypesPackageImpl.hpp"
+#include "types/TypesPackage.hpp"
+#include "types/impl/TypesPackageImpl.hpp"
 
 using namespace types;
 

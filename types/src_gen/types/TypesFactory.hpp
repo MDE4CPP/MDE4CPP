@@ -21,8 +21,9 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "EFactory.hpp"
 #include <memory>
+
+#include "ecore/EFactory.hpp"
 
 namespace types 
 {

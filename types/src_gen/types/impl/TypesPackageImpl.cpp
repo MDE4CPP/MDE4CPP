@@ -1,15 +1,15 @@
-#include "TypesPackageImpl.hpp"
+#include "types/impl/TypesPackageImpl.hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "TypesFactory.hpp"
+#include "types/TypesFactory.hpp"
 
 //depending model packages
 

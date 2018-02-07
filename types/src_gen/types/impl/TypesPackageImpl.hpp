@@ -24,10 +24,9 @@
 #include <cassert>
 
 
-#include "TypesPackage.hpp"
-#include "TypesPackage.hpp"
-#include "EcorePackage.hpp"
-#include "impl/EPackageImpl.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
+#include "types/TypesPackage.hpp"
 
 namespace types
 {
