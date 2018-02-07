@@ -25,19 +25,20 @@
 
 [template public generateImplementationSource(aClass : EClass) { className : String = aClass.name.toUpperFirst().concat('Impl'); }]
 [file (aClass.ePackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className.concat('.hpp')/]"
+#include "[aClass.ePackage.name/]/impl/[className.concat('.hpp')/]"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "[aClass.ePackage.name/]/impl/[aClass.ePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]
 [/if]
 
 //Forward declaration includes
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[element.name.toUpperFirst()/].hpp"
+#include "[element.ePackage.name/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 

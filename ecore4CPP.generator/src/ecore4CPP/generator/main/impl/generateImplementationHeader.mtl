@@ -32,14 +32,12 @@
 //Model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
-[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "impl/[sClass.name.toUpperFirst()/]Impl.hpp"[/for]
+[for (aEClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+#include "[aEClass.ePackage.name/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 [/if]
-
-#include "SubsetUnion.hpp"
 
 [if (aClass.hasKey('includes'))]
 [aClass.valueKey('includes')/]

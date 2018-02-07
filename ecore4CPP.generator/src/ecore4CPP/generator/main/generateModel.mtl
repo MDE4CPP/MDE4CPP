@@ -27,10 +27,11 @@
 [file (aClass.ePackage.name.concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -47,16 +48,16 @@ namespace [element.ePackage.name/]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 // enum includes
 [for (elements : EEnum| aClass.includes()->selectByKind(EEnum)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.ePackage.name/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 [/if]
 
 //*********************************
