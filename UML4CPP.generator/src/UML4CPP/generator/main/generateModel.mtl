@@ -33,18 +33,19 @@ virtual public uml::Class
 [file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-#include <boost/any.hpp>
-#include "boost/shared_ptr.hpp"
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
+
+#include "boost/any.hpp"
+#include "boost/shared_ptr.hpp"
 
 [if (not aClass.owner.ownedElement->filter(Usage)->isEmpty())]
 //********************
 // usage
 [for (usages : Usage| aClass.owner.ownedElement->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not (usages.supplier.name->asOrderedSet()->first() = aClass.name.toString()))]
-   #include "[usages.supplier.name/].hpp"
+   #include "[usages.getNearestPackage().getPackageName()/]/[usages.supplier.name/].hpp"
 [/if]
 [/for]
 [/if]
@@ -65,25 +66,25 @@ namespace [element.namespace.ns()/]
 
 // base class includes
 [for (elements : Classifier| aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
+#include "[anInterfaceRealization.getNearestPackage().getPackageName()/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
 
 // End: Interface realization
 [/if]
 [if (aClass.superClass->isEmpty())]
-#include "Class.hpp"
+#include "uml/Class.hpp"
 [/if]
 
 [if (aClass.oclIsKindOf(Stereotype))]
-#include "Stereotype.hpp"
+#include "uml/Stereotype.hpp"
 [/if]
 // enum includes
 [for (elements : Enumeration| aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 
 [for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]

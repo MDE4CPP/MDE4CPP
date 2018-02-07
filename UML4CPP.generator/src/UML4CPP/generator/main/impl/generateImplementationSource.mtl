@@ -25,16 +25,16 @@
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 
-#include "[className.concat('.hpp')/]"
-#include "[aPackage.name.concat('PackageImpl')/].hpp"
-#include "[aClass.eClass().name/].hpp"
+#include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
+#include "[aPackage.getPackageName()/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
+#include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
-#include "[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().getPackageName()/]/[cl.name.toUpperFirst()/].hpp"
 [/for]
 [if (aClass.ownedOperation.method->notEmpty())]
 [if(ownedOperation.method->filter(Activity)->notEmpty())]
-#include "PluginFramework.hpp"
-#include "UMLExecutionModelPlugin.hpp"
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 [/if][/if]
 
 using namespace [aPackage.name/];
