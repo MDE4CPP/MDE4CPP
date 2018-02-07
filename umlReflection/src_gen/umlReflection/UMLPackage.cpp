@@ -1,5 +1,5 @@
-#include "UMLPackage.hpp"
-#include "impl/UMLPackageImpl.hpp"
+#include "umlReflection/UMLPackage.hpp"
+#include "umlReflection/impl/UMLPackageImpl.hpp"
 
 using namespace UML;
 

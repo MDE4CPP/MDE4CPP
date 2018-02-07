@@ -14,10 +14,11 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+
 
 #include "umlReflection/UMLPackage.hpp"
-#include "impl/PackageImpl.hpp"	
+#include "uml/impl/PackageImpl.hpp"	
 
 namespace UML
 {
