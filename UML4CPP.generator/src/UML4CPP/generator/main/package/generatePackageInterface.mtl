@@ -29,11 +29,11 @@ virtual public uml::Package
 [file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
  
-#include "Factory.hpp"
+#include "uml/Factory.hpp"
 [if (aPackage.oclIsKindOf(Profile))]
-#include "Profile.hpp"
+#include "uml/Profile.hpp"
 [else]
-#include "Package.hpp"	
+#include "uml/Package.hpp"	
 [/if]
 
 namespace [aPackage.name/] 

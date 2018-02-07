@@ -28,15 +28,11 @@ virtual public uml::PackageImpl
 [file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
-[if ((aPackage.name='UML') or (aPackage.name='Ecore') or (aPackage.name='PrimitiveType'))]
 #include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
-[else]
-#include "[aPackage.name.concat('Package').toUpperFirst()/].hpp"
-[/if]
 [if (aPackage.oclIsKindOf(Profile))]
-#include "impl/ProfileImpl.hpp"
+#include "uml/impl/ProfileImpl.hpp"
 [else]
-#include "impl/PackageImpl.hpp"	
+#include "uml/impl/PackageImpl.hpp"	
 [/if]
 
 namespace [aPackage.name/]

@@ -139,7 +139,8 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+
 [/template]
 
 [template public generateGetter(anElement : NamedElement,impl : Boolean)]

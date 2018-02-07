@@ -33,28 +33,28 @@
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
+#include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
 
 //metamodel classes
-#include "Stereotype.hpp"
-#include "Generalization.hpp"
-#include "Constraint.hpp"
-#include "OpaqueExpression.hpp"
-#include "EnumerationLiteral.hpp"
-#include "PrimitiveType.hpp"
-#include "FunctionBehavior.hpp"
-#include "Interface.hpp"
-#include "Operation.hpp"
-#include "Property.hpp"
+#include "uml/Constraint.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Generalization.hpp"
+#include "uml/Interface.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/Operation.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Property.hpp"
+#include "uml/Stereotype.hpp"
 
 [for (nE : EClass | (aPackage.allOwnedElements().eClass())->asOrderedSet()->sortedBy(name)) separator ('\n')]
-#include "[nE.name/].hpp"[/for]
+#include "[nE.ePackage.name/]/[nE.name/].hpp"[/for]
 
 //metamodel factory
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
-#include "[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 [/if]
-#include "UmlFactory.hpp"
+#include "uml/UmlFactory.hpp"
 
 //depending model packages
 [for (pack : Package | aPackage.metaModelIncludes()->reject(oclIsUndefined())->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
@@ -62,21 +62,21 @@
 [if ((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
-#include "[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
+#include "[pack.getPackageName()/]/[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
 [else][if (not (pack.name='StandardProfile'))]
-#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if][/if]
 [/if]
 [if (not((pack.name='UML') or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='StandardProfile')))]
-#include "[pack.name.concat('Factory').toUpperFirst()/].hpp"
+#include "[pack.getPackageName()/]/[pack.name.concat('Factory').toUpperFirst()/].hpp"
 [/if]
 [/for]
 
 [for (stereo : Stereotype | aPackage.member->filter(Class).attribute.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo.name/].hpp"
+#include "[stereo._package.name/]/[stereo.name/].hpp"
 [/for]
 [for (stereo : Stereotype | aPackage.member->filter(Dependency).getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo.name/].hpp"
+#include "[stereo._package.name/]/[stereo.name/].hpp"
 [/for]
 
 
