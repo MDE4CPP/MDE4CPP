@@ -29,14 +29,13 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
-#include "[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+#include "[anEPackage.name/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
-#include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
-#include "[anEPackage.name.toUpperFirst()/]Package.hpp"
-#include "EcorePackage.hpp"
+#include "ecore/EcorePackage.hpp"
 [if (not(anEPackage.name = 'ecore') )]
-#include "impl/EPackageImpl.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 [/if]
 
 namespace [anEPackage.name/]

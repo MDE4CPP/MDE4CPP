@@ -25,22 +25,22 @@
 
 [template public generatePackageImplSource(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('PackageImpl').toUpperFirst(); }]
 [file (anEPackage.name.concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[packageName/].hpp"
+#include "[anEPackage.name/]/impl/[packageName/].hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
 //depending model packages
 [for (pack : EPackage | anEPackage.metaModelIncludes()->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
-#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[anEPackage.name/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/for]
 
 using namespace [anEPackage.name/];
