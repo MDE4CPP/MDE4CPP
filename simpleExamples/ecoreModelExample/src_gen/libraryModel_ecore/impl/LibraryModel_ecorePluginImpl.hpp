@@ -21,7 +21,7 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "LibraryModel_ecorePlugin.hpp"
+#include "libraryModel_ecore/LibraryModel_ecorePlugin.hpp"
 
 namespace libraryModel_ecore 
 {

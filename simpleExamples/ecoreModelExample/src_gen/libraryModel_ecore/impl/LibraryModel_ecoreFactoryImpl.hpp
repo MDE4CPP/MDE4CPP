@@ -21,15 +21,15 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "impl/EFactoryImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
 
-#include "AuthorImpl.hpp"
-#include "BookImpl.hpp"
-#include "LibraryModelImpl.hpp"
-#include "NamedElementImpl.hpp"
-#include "PictureImpl.hpp"
+#include "libraryModel_ecore/impl/AuthorImpl.hpp"
+#include "libraryModel_ecore/impl/BookImpl.hpp"
+#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
+#include "libraryModel_ecore/impl/NamedElementImpl.hpp"
+#include "libraryModel_ecore/impl/PictureImpl.hpp"
 
-#include "LibraryModel_ecoreFactory.hpp"
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 
 namespace libraryModel_ecore 
 {
@@ -48,7 +48,8 @@ namespace libraryModel_ecore
 			virtual ~LibraryModel_ecoreFactoryImpl();
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className,  std::shared_ptr<ecore::EObject> container, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<ecore::EObject> create(const unsigned int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const unsigned int referenceID = -1) const;
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container = nullptr) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class) const;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const;
 			virtual std::shared_ptr<ecore::EObject> create(std::string _className) const;
 
 			//Creator functions

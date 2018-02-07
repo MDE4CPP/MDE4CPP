@@ -1,14 +1,15 @@
-#include "LibraryModelImpl.hpp"
+#include "libraryModel_ecore/impl/LibraryModelImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "LibraryModel_ecorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "Author.hpp"
+#include "libraryModel_ecore/Author.hpp"
 
-#include "Book.hpp"
+#include "libraryModel_ecore/Book.hpp"
 
 
 using namespace libraryModel_ecore;
@@ -130,10 +131,15 @@ std::shared_ptr< Bag<libraryModel_ecore::Book> > LibraryModelImpl::getBook() con
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LibraryModelImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LibraryModelImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LibraryModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -143,4 +149,11 @@ boost::any LibraryModelImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getBook(); //20
 	}
 	return boost::any();
+}
+
+void LibraryModelImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

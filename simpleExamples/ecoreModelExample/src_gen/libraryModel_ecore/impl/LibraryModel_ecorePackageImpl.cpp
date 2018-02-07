@@ -1,18 +1,18 @@
-#include "LibraryModel_ecorePackageImpl.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "LibraryModel_ecoreFactory.hpp"
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
 
 //depending model packages
-#include "TypesPackage.hpp"
+#include "types/TypesPackage.hpp"
 
 using namespace libraryModel_ecore;
 

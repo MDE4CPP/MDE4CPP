@@ -1,5 +1,5 @@
-#include "LibraryModel_ecorePackage.hpp"
-#include "impl/LibraryModel_ecorePackageImpl.hpp"
+#include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 using namespace libraryModel_ecore;
 

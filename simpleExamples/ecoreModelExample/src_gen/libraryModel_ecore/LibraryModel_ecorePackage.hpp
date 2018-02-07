@@ -21,8 +21,8 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EcoreFactory.hpp"
 
 namespace libraryModel_ecore 
 {	class Author;

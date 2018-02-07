@@ -37,15 +37,8 @@ SET(SOURCE_FILES
 
 
 INCLUDE_DIRECTORIES(
-	.
+	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/types
-	${MDE4CPP_HOME}/application/include/libraryModel_ecore
 # Start of user code includes
 # You may manually edit the following lines, won't be overwritten upon generation.
 

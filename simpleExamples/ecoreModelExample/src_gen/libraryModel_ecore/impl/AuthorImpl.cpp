@@ -1,12 +1,13 @@
-#include "AuthorImpl.hpp"
+#include "libraryModel_ecore/impl/AuthorImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "LibraryModel_ecorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "NamedElement.hpp"
+#include "libraryModel_ecore/NamedElement.hpp"
 
 
 using namespace libraryModel_ecore;
@@ -83,10 +84,15 @@ std::shared_ptr<ecore::EClass> AuthorImpl::eStaticClass() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> AuthorImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AuthorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any AuthorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -94,4 +100,18 @@ boost::any AuthorImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getName(); //10
 	}
 	return boost::any();
+}
+
+void AuthorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _Name = boost::any_cast<std::string>(newValue);
+			setName(_Name); //10
+			break;
+		}
+	}
 }

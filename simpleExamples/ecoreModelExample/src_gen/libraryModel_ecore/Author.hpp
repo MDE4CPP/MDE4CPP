@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -38,7 +39,7 @@ namespace libraryModel_ecore
 }
 
 // base class includes
-#include "NamedElement.hpp"
+#include "libraryModel_ecore/NamedElement.hpp"
 
 // enum includes
 
@@ -92,7 +93,9 @@ namespace libraryModel_ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			 
+			
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

@@ -1,6 +1,6 @@
-#include "LibraryModel_ecorePluginImpl.hpp"
-#include "LibraryModel_ecoreFactory.hpp"
-#include "LibraryModel_ecorePackage.hpp"
+#include "libraryModel_ecore/impl/LibraryModel_ecorePluginImpl.hpp"
+#include "libraryModel_ecore/LibraryModel_ecoreFactory.hpp"
+#include "libraryModel_ecore/LibraryModel_ecorePackage.hpp"
 
 using namespace libraryModel_ecore;
 
