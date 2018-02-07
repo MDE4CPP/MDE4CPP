@@ -14,17 +14,20 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "AuthorImpl.hpp"
-#include "BookImpl.hpp"
-#include "LibraryImpl.hpp"
-#include "NamedModelElementImpl.hpp"
-#include "PictureImpl.hpp"
 
-#include "impl/FactoryImpl.hpp"
-#include "LibraryModel_umlFactory.hpp"
 #include <functional>
+
+#include "LibraryModel_uml/impl/AuthorImpl.hpp"
+#include "LibraryModel_uml/impl/BookImpl.hpp"
+#include "LibraryModel_uml/impl/LibraryImpl.hpp"
+#include "LibraryModel_uml/impl/NamedModelElementImpl.hpp"
+#include "LibraryModel_uml/impl/PictureImpl.hpp"
+
+#include "uml/impl/FactoryImpl.hpp"
+#include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
+
 
 namespace LibraryModel_uml 
 {

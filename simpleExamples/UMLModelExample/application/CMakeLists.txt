@@ -55,63 +55,75 @@ INCLUDE_DIRECTORIES(
 # End of user code
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
 FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 
 FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 
 FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
 
 FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitiveTypesReflectiond ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitiveTypesReflection ${MDE4CPP_HOME}/application/lib)
 
 FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
 
+	FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld ${MDE4CPP_HOME}/application/lib)
+# Start of user code library_finding_debug
+# You may manually edit the following lines, won't be overwritten upon generation.
 
-FIND_LIBRARY(LIBRARYMODEL_UML_DEBUG LibraryModel_umld ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml ${MDE4CPP_HOME}/application/lib)
-
-# Start of user code library_finding
-# Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
-
-# End of Acceleo's Protected Area.
 # End of user code
+ELSE()
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+
+	FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+
+	FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
+
+	FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitiveTypesReflection ${MDE4CPP_HOME}/application/lib)
+
+	FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
+
+	FIND_LIBRARY(LIBRARYMODEL_UML_RELEASE LibraryModel_uml ${MDE4CPP_HOME}/application/lib)
+# Start of user code library_finding_release
+# You may manually edit the following lines, won't be overwritten upon generation.
+
+# End of user code
+ENDIF()
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX "d")
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${UML_DEBUG}
-	debug ${ECOREREFLECTION_DEBUG}
-	debug ${PRIMITIVETYPESREFLECTION_DEBUG}
-	debug ${UMLREFLECTION_DEBUG}
-	debug ${LIBRARYMODEL_UML_DEBUG}
-# Start of user code library_assigning_debug
+
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+		debug ${PLUGINFRAMEWORK_DEBUG}
+		debug ${ECORE_DEBUG}
+		debug ${UML_DEBUG}
+		debug ${ECOREREFLECTION_DEBUG}
+		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
+		debug ${UMLREFLECTION_DEBUG}
+		debug ${LIBRARYMODEL_UML_DEBUG}
+	# Start of user code library_assigning_debug
 #Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
 
 # End of user code
-)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${UML_RELEASE}
-	optimized ${ECOREREFLECTION_RELEASE}
-	optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
-	optimized ${UMLREFLECTION_RELEASE}
-	optimized ${LIBRARYMODEL_UML_RELEASE}
-# Start of user code library_assigning_release
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${PLUGINFRAMEWORK_RELEASE}
+		optimized ${ECORE_RELEASE}
+		optimized ${UML_RELEASE}
+		optimized ${ECOREREFLECTION_RELEASE}
+		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
+		optimized ${UMLREFLECTION_RELEASE}
+		optimized ${LIBRARYMODEL_UML_RELEASE}
+	# Start of user code library_assigning_release
 # Acceleo's Protected Area. You may manually edit the following lines, won't be overwritten upon generation.
 
 # End of Acceleo's Protected Area.
 # End of user code
-)
+	)
+ENDIF()
 
 #-----------------------------------------------------
 # DELIVERING binaries and header to ${MDE4CPP_HOME}

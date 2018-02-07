@@ -14,9 +14,10 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "UMLModelPlugin.hpp"
+
+#include "pluginFramework/UMLModelPlugin.hpp"
 
 namespace LibraryModel_uml
 {

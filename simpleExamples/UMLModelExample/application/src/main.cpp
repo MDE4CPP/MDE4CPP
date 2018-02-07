@@ -1,13 +1,13 @@
 
 #include <iostream>
-#include "LibraryModel_umlFactory.hpp"
-#include "LibraryModel_umlPackage.hpp"
+#include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
+#include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
 
-#include "Author.hpp"
-#include "Book.hpp"
-#include "Library.hpp"
-#include "NamedModelElement.hpp"
-#include "Picture.hpp"
+#include "LibraryModel_uml/Author.hpp"
+#include "LibraryModel_uml/Book.hpp"
+#include "LibraryModel_uml/Library.hpp"
+#include "LibraryModel_uml/NamedModelElement.hpp"
+#include "LibraryModel_uml/Picture.hpp"
 
 // Start of user code includes 
 // You may manually edit additional includes, won't be overwritten upon generation.

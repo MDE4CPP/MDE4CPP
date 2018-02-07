@@ -14,13 +14,15 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include <boost/any.hpp>
-#include "boost/shared_ptr.hpp"
-#include <string>
+
 #include <map>
+#include <string>
 #include <vector>
+
+#include "boost/any.hpp"
+#include "boost/shared_ptr.hpp"
 
 //Forward Declaration for used types
 namespace LibraryModel_uml 
@@ -34,10 +36,9 @@ namespace LibraryModel_uml
 }
 
 
-
 // base class includes
 
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
 // enum includes
 

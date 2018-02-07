@@ -1,27 +1,27 @@
-#include "LibraryModel_umlPackageImpl.hpp"
+#include "LibraryModel_uml/impl/LibraryModel_umlPackageImpl.hpp"
 
 //metamodel classes
-#include "Stereotype.hpp"
-#include "Generalization.hpp"
-#include "Constraint.hpp"
-#include "OpaqueExpression.hpp"
-#include "EnumerationLiteral.hpp"
-#include "PrimitiveType.hpp"
-#include "FunctionBehavior.hpp"
-#include "Interface.hpp"
-#include "Operation.hpp"
-#include "Property.hpp"
+#include "uml/Constraint.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Generalization.hpp"
+#include "uml/Interface.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/Operation.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Property.hpp"
+#include "uml/Stereotype.hpp"
 
-#include "Association.hpp"
-#include "Class.hpp"
-#include "Generalization.hpp"
-#include "LiteralInteger.hpp"
-#include "LiteralUnlimitedNatural.hpp"
-#include "PackageImport.hpp"
-#include "Property.hpp"
+#include "uml/Association.hpp"
+#include "uml/Class.hpp"
+#include "uml/Generalization.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/PackageImport.hpp"
+#include "uml/Property.hpp"
 //metamodel factory
-#include "LibraryModel_umlFactory.hpp"
-#include "UmlFactory.hpp"
+#include "LibraryModel_uml/LibraryModel_umlFactory.hpp"
+#include "uml/UmlFactory.hpp"
 
 //depending model packages
 #include "ecoreReflection/EcorePackage.hpp"
@@ -143,8 +143,6 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 
 
 	libraryModel_uml_Author = uml::UmlFactory::eInstance()->createClass_in_Package(libraryModel_uml);
-	libraryModel_uml_Author->setName("Author");
-	libraryModel_uml_Author->setIsAbstract(false);
 	
 	//constraints
 	
@@ -155,102 +153,46 @@ void LibraryModel_umlPackageImpl::createPackageContents()
 
 
 	libraryModel_uml_Book = uml::UmlFactory::eInstance()->createClass_in_Package(libraryModel_uml);
-	libraryModel_uml_Book->setName("Book");
-	libraryModel_uml_Book->setIsAbstract(false);
 	
 	//constraints
 	
 	
 	libraryModel_uml_Book_authors = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_Book);
-	
-	libraryModel_uml_Book_authors->setName("authors");
-	libraryModel_uml_Book_authors->setType(get_LibraryModel_uml_Author());
-	libraryModel_uml_Book_authors->setLower(0);
-	libraryModel_uml_Book_authors->setUpper(-1);
-	
-	
-	
 	libraryModel_uml_Book_pictures = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_Book);
-	
-	libraryModel_uml_Book_pictures->setName("pictures");
-	libraryModel_uml_Book_pictures->setType(get_LibraryModel_uml_Picture());
-	libraryModel_uml_Book_pictures->setLower(0);
-	libraryModel_uml_Book_pictures->setUpper(-1);
-	
-	
-	
 	
 	
 	
 
 
 	libraryModel_uml_Library = uml::UmlFactory::eInstance()->createClass_in_Package(libraryModel_uml);
-	libraryModel_uml_Library->setName("Library");
-	libraryModel_uml_Library->setIsAbstract(false);
 	
 	//constraints
 	
 	
 	libraryModel_uml_Library_authors = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_Library);
-	
-	libraryModel_uml_Library_authors->setName("authors");
-	libraryModel_uml_Library_authors->setType(get_LibraryModel_uml_Author());
-	libraryModel_uml_Library_authors->setLower(0);
-	libraryModel_uml_Library_authors->setUpper(-1);
-	
-	
-	
 	libraryModel_uml_Library_books = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_Library);
-	
-	libraryModel_uml_Library_books->setName("books");
-	libraryModel_uml_Library_books->setType(get_LibraryModel_uml_Book());
-	libraryModel_uml_Library_books->setLower(0);
-	libraryModel_uml_Library_books->setUpper(-1);
-	
-	
-	
 	
 	
 	
 
 
 	libraryModel_uml_NamedModelElement = uml::UmlFactory::eInstance()->createClass_in_Package(libraryModel_uml);
-	libraryModel_uml_NamedModelElement->setName("NamedModelElement");
-	libraryModel_uml_NamedModelElement->setIsAbstract(false);
 	
 	//constraints
 	
 	
 	libraryModel_uml_NamedModelElement_name = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_NamedModelElement);
 	
-	libraryModel_uml_NamedModelElement_name->setName("name");
-	libraryModel_uml_NamedModelElement_name->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
-	libraryModel_uml_NamedModelElement_name->setLower(0);
-	libraryModel_uml_NamedModelElement_name->setUpper(1);
-	
-	
-	
-	
 	
 	
 
 
 	libraryModel_uml_Picture = uml::UmlFactory::eInstance()->createClass_in_Package(libraryModel_uml);
-	libraryModel_uml_Picture->setName("Picture");
-	libraryModel_uml_Picture->setIsAbstract(false);
 	
 	//constraints
 	
 	
 	libraryModel_uml_Picture_pageNumber = uml::UmlFactory::eInstance()->createProperty_in_Class(libraryModel_uml_Picture);
-	
-	libraryModel_uml_Picture_pageNumber->setName("pageNumber");
-	libraryModel_uml_Picture_pageNumber->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
-	libraryModel_uml_Picture_pageNumber->setLower(0);
-	libraryModel_uml_Picture_pageNumber->setUpper(1);
-	
-	
-	
 	
 	
 	
@@ -281,22 +223,145 @@ void LibraryModel_umlPackageImpl::initializePackageContents()
 	struct null_deleter{void operator()(void const *) const {} };
 	std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml = std::shared_ptr<LibraryModel_umlPackageImpl>(this, null_deleter());
 	std::shared_ptr<uml::Generalization> gen = nullptr;
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
+
+	
+
+//	class Author
+	libraryModel_uml_Author->setName("Author");
+	libraryModel_uml_Author->setIsAbstract(false);
+	
+	//constraints
+	
+	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_LibraryModel_uml_Author());
 	gen->setGeneral(get_LibraryModel_uml_NamedModelElement());
 	
+	
+	
+	
+	
+	
+
+
+//	class Book
+	libraryModel_uml_Book->setName("Book");
+	libraryModel_uml_Book->setIsAbstract(false);
+	
+	//constraints
+	
+	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_LibraryModel_uml_Book());
 	gen->setGeneral(get_LibraryModel_uml_NamedModelElement());
+	
+	
+	
+	// property authors
+	libraryModel_uml_Book_authors->setName("authors");
+	libraryModel_uml_Book_authors->setType(get_LibraryModel_uml_Author());
+	libraryModel_uml_Book_authors->setLower(0);
+	libraryModel_uml_Book_authors->setUpper(-1);
+	
+	
+	
+	// property pictures
+	libraryModel_uml_Book_pictures->setName("pictures");
+	libraryModel_uml_Book_pictures->setType(get_LibraryModel_uml_Picture());
+	libraryModel_uml_Book_pictures->setLower(0);
+	libraryModel_uml_Book_pictures->setUpper(-1);
+	
+	
+	
+	
+	
+	
+
+
+//	class Library
+	libraryModel_uml_Library->setName("Library");
+	libraryModel_uml_Library->setIsAbstract(false);
+	
+	//constraints
+	
+	
+	
+	
+	
+	// property authors
+	libraryModel_uml_Library_authors->setName("authors");
+	libraryModel_uml_Library_authors->setType(get_LibraryModel_uml_Author());
+	libraryModel_uml_Library_authors->setLower(0);
+	libraryModel_uml_Library_authors->setUpper(-1);
+	
+	
+	
+	// property books
+	libraryModel_uml_Library_books->setName("books");
+	libraryModel_uml_Library_books->setType(get_LibraryModel_uml_Book());
+	libraryModel_uml_Library_books->setLower(0);
+	libraryModel_uml_Library_books->setUpper(-1);
+	
+	
+	
+	
+	
+	
+
+
+//	class NamedModelElement
+	libraryModel_uml_NamedModelElement->setName("NamedModelElement");
+	libraryModel_uml_NamedModelElement->setIsAbstract(false);
+	
+	//constraints
+	
+	
+	
+	
+	
+	// property name
+	libraryModel_uml_NamedModelElement_name->setName("name");
+	libraryModel_uml_NamedModelElement_name->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	libraryModel_uml_NamedModelElement_name->setLower(0);
+	libraryModel_uml_NamedModelElement_name->setUpper(1);
+	
+	
+	
+	
+	
+	
+
+
+//	class Picture
+	libraryModel_uml_Picture->setName("Picture");
+	libraryModel_uml_Picture->setIsAbstract(false);
+	
+	//constraints
+	
 	
 	gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific(get_LibraryModel_uml_Picture());
 	gen->setGeneral(get_LibraryModel_uml_NamedModelElement());
 	
 	
 	
+	// property pageNumber
+	libraryModel_uml_Picture_pageNumber->setName("pageNumber");
+	libraryModel_uml_Picture_pageNumber->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+	libraryModel_uml_Picture_pageNumber->setLower(0);
+	libraryModel_uml_Picture_pageNumber->setUpper(1);
+	
+	
+	
+	
+	
 	
 
-	
-	
-	//initalize ActivityNodes and Edges
+
+
+
+	//Dependency 
+
+	//ActivityNodes and Edges
 }
 
 std::shared_ptr<uml::Association> LibraryModel_umlPackageImpl::get_A_libraryModel_uml_Book_LibraryModel_uml_Book_authors()

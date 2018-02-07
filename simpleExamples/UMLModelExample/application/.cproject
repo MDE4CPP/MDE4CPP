@@ -25,21 +25,14 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ApplicatonForLibraryModel_uml_src/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/ecore&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/PluginFramework&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/uml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/util&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/types&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/LibraryModel_uml&quot;"/>
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.1168779061" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
@@ -73,21 +66,14 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.640181682" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.985992690" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ApplicatonForLibraryModel_uml_src/src}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/backward&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include/c++/mingw32&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include-fixed&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/lib/gcc/mingw32/6.3.0/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MINGW_HOME}/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/abstractDataTypes&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/ecore&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/PluginFramework&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/uml&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/util&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/types&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include/LibraryModel_uml&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${MDE4CPP_HOME}/application/include&quot;"/>	
 								</option>
 								<inputType id="org.eclipse.cdt.build.core.settings.holder.inType.2144890842" languageId="org.eclipse.cdt.core.g++" languageName="GNU C++" sourceContentType="org.eclipse.cdt.core.cxxSource,org.eclipse.cdt.core.cxxHeader" superClass="org.eclipse.cdt.build.core.settings.holder.inType"/>
 							</tool>
