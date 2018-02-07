@@ -19,15 +19,15 @@
 
 [template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
 [file (anEPackage.name.concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
-#include "[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[anEPackage.name/]/impl/[className/].hpp"
+#include "[anEPackage.name/]/[anEPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [if (not(anEPackage.name = 'ecore'))]
-#include "EClass.hpp"
+#include "[anEPackage.name/]/EClass.hpp"
 [/if]
 
 [if(anEPackage.name = 'uml')]
-#include "impl/ElementImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
 [/if]
 [comment namespace /]
 using namespace [anEPackage.name/];
