@@ -1,13 +1,14 @@
-#include "FbDividesExecution.hpp"
+#include "CalcModelExec/FbDividesExecution.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "ParameterValue.hpp"
 
-#include "PrimeChecker.hpp"
-#include "PrimeCheckerExecution.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "BooleanValue.hpp"
+#include "CalcModel/PrimeChecker.hpp"
+#include "CalcModelExec/PrimeCheckerExecution.hpp"
+
+#include "fUML/BooleanValue.hpp"
 
 using namespace CalcModel;
 
@@ -35,7 +36,7 @@ void FbDividesExecution::doBody(std::shared_ptr<Bag<fUML::ParameterValue> > inpu
     DEBUG_MESSAGE(std::cout << "Printing from "<< this->getBehavior()->getName() << std::endl;)
     DEBUG_MESSAGE(std::cout << "__________________________" << std::endl;)
 
-    bool isDivisible;
+   	bool isDivisible;
 
 
 	//Call Operation action target

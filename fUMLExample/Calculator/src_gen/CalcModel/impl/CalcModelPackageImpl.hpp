@@ -14,10 +14,11 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "CalcModelPackage.hpp"
-#include "impl/PackageImpl.hpp"	
+
+#include "CalcModel/CalcModelPackage.hpp"
+#include "uml/impl/PackageImpl.hpp"	
 
 namespace CalcModel
 {

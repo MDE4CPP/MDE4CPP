@@ -1,6 +1,6 @@
 
-#include "CalcModelFactory.hpp"
-#include "impl/CalcModelFactoryImpl.hpp"
+#include "CalcModel/CalcModelFactory.hpp"
+#include "CalcModel/impl/CalcModelFactoryImpl.hpp"
 
 using namespace CalcModel;
 

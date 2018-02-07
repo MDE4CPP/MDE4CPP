@@ -38,15 +38,8 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-    .
 	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-	${MDE4CPP_HOME}/application/include/PluginFramework
-	${MDE4CPP_HOME}/application/include/util
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/PrimitivetypesReflection
-	${MDE4CPP_HOME}/application/include/uml
 )
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")

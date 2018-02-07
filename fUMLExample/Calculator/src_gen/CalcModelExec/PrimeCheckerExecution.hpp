@@ -14,11 +14,12 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+
 
 #include "fUML/impl/ObjectImpl.hpp"
-#include "SubsetUnion.hpp"
-#include "PrimeChecker.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "CalcModel/PrimeChecker.hpp"
 
 namespace CalcModel 
 {

@@ -14,9 +14,10 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "Factory.hpp"
+
+#include "uml/Factory.hpp"
 
 namespace CalcModel 
 {

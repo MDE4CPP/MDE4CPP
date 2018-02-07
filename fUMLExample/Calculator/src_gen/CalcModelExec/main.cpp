@@ -3,49 +3,49 @@
 #include <vector>
 #include <omp.h>
 
-#include "FUMLFactory.hpp"
-#include "Locus.hpp"
-#include "Executor.hpp"
-#include "Parameter.hpp"
-#include "ExecutionFactoryL3.hpp"
-#include "FirstChoiceStrategy.hpp"
-#include "DispatchStrategy.hpp"
-#include "FunctionBehavior.hpp"
-#include "Activity.hpp"
-#include "SubsetUnion.hpp"
-#include "UmlFactory.hpp"
-#include "Operation.hpp"
-#include "Interface.hpp"
-#include "PrimitiveType.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/DispatchStrategy.hpp"
+#include "fUML/ExecutionFactoryL3.hpp"
+#include "fUML/FirstChoiceStrategy.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/Activity.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/UmlFactory.hpp"
 
-#include "ParameterValue.hpp"
 
 //include Model package
-#include "CalcModelPackage.hpp"
+#include "CalcModel/CalcModelPackage.hpp"
 
-#include "CalcModelPackage.hpp" 
-#include "PrimitiveTypesPackage.hpp"
-
-//OpaqueBehaviourExecutions
-#include "FbIsNotFinishedExecution.hpp"
-#include "FbPrintNotPrimeExecution.hpp"
-#include "FbPrintIsPrimeExecution.hpp"
-#include "FbNextExecution.hpp"
-#include "FbDividesExecution.hpp"
-#include "FbIsOddExecution.hpp"
-
+#include "CalcModel/CalcModelPackage.hpp" 
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //OpaqueBehaviourExecutions
+#include "CalcModelExec/FbDividesExecution.hpp"
+#include "CalcModelExec/FbIsNotFinishedExecution.hpp"
+#include "CalcModelExec/FbIsOddExecution.hpp"
+#include "CalcModelExec/FbNextExecution.hpp"
+#include "CalcModelExec/FbPrintIsPrimeExecution.hpp"
+#include "CalcModelExec/FbPrintNotPrimeExecution.hpp"
+
+
+//OpaqueBehaviourExecutions
 
 
 
 
 
-#include "Reference.hpp"
-#include "CalcModelFactory.hpp"
+#include "fuml/Reference.hpp"
+#include "CalcModel/CalcModelFactory.hpp"
 
-#include "PrimeChecker.hpp"
-#include "PrimeCheckerExecution.hpp"
+#include "CalcModel/PrimeChecker.hpp"
+#include "CalcModelExec/PrimeCheckerExecution.hpp"
 
 
 
@@ -77,35 +77,35 @@ int main()
 	std::shared_ptr<CalcModel::PrimeChecker> actInputNode(CalcModel::CalcModelFactory::eInstance()->createPrimeChecker());
 	
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsOddExecution(new CalcModel::FbIsOddExecution());
-	calcModel_PrimeChecker_fbIsOddExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsOdd());
-	calcModel_PrimeChecker_fbIsOddExecution->setLocus(factory->getLocus().lock());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbIsOddExecution);
-	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintNotPrimeExecution(new CalcModel::FbPrintNotPrimeExecution());
-	calcModel_PrimeChecker_fbPrintNotPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintNotPrime());
-	calcModel_PrimeChecker_fbPrintNotPrimeExecution->setLocus(factory->getLocus().lock());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintNotPrimeExecution);
-	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintIsPrimeExecution(new CalcModel::FbPrintIsPrimeExecution());
-	calcModel_PrimeChecker_fbPrintIsPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
-	calcModel_PrimeChecker_fbPrintIsPrimeExecution->setLocus(factory->getLocus().lock());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintIsPrimeExecution);
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbDividesExecution(new CalcModel::FbDividesExecution());
+	calcModel_PrimeChecker_fbDividesExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbDivides());
+	calcModel_PrimeChecker_fbDividesExecution->setLocus(factory->getLocus().lock());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbDividesExecution);
 	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsNotFinishedExecution(new CalcModel::FbIsNotFinishedExecution());
 	calcModel_PrimeChecker_fbIsNotFinishedExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsNotFinished());
 	calcModel_PrimeChecker_fbIsNotFinishedExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbIsNotFinishedExecution);
 	
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbIsOddExecution(new CalcModel::FbIsOddExecution());
+	calcModel_PrimeChecker_fbIsOddExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbIsOdd());
+	calcModel_PrimeChecker_fbIsOddExecution->setLocus(factory->getLocus().lock());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbIsOddExecution);
+	
 	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbNextExecution(new CalcModel::FbNextExecution());
 	calcModel_PrimeChecker_fbNextExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbNext());
 	calcModel_PrimeChecker_fbNextExecution->setLocus(factory->getLocus().lock());
 	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbNextExecution);
 	
-	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbDividesExecution(new CalcModel::FbDividesExecution());
-	calcModel_PrimeChecker_fbDividesExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbDivides());
-	calcModel_PrimeChecker_fbDividesExecution->setLocus(factory->getLocus().lock());
-	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbDividesExecution);
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintIsPrimeExecution(new CalcModel::FbPrintIsPrimeExecution());
+	calcModel_PrimeChecker_fbPrintIsPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintIsPrime());
+	calcModel_PrimeChecker_fbPrintIsPrimeExecution->setLocus(factory->getLocus().lock());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintIsPrimeExecution);
+	
+	std::shared_ptr<fUML::OpaqueBehaviorExecution> calcModel_PrimeChecker_fbPrintNotPrimeExecution(new CalcModel::FbPrintNotPrimeExecution());
+	calcModel_PrimeChecker_fbPrintNotPrimeExecution->getTypes()->push_back(CalcModel::CalcModelPackage::eInstance()->get_CalcModel_PrimeChecker_fbPrintNotPrime());
+	calcModel_PrimeChecker_fbPrintNotPrimeExecution->setLocus(factory->getLocus().lock());
+	factory->addPrimitiveBehaviorPrototype(calcModel_PrimeChecker_fbPrintNotPrimeExecution);
 	
 	
 	

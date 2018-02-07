@@ -1,11 +1,12 @@
-#include "FbNextExecution.hpp"
+#include "CalcModelExec/FbNextExecution.hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "ParameterValue.hpp"
 
-#include "PrimeChecker.hpp"
-#include "PrimeCheckerExecution.hpp"
+#include "fUML/ParameterValue.hpp"
+
+#include "CalcModel/PrimeChecker.hpp"
+#include "CalcModelExec/PrimeCheckerExecution.hpp"
 
 
 using namespace CalcModel;
