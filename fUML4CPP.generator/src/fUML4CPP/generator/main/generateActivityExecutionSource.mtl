@@ -24,38 +24,37 @@
 className : String = aActivity.name.toUpperFirst().concat('Execution');
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
+#include <cassert>
 #include <iostream>
 #include <memory>
-#include <cassert>
 #include <vector>
 
-#include "fUML/ParameterValue.hpp"
 #include "fUML/ActivityParameterNodeActivation.hpp"
 #include "fUML/ActivityNodeActivationGroup.hpp"
-#include "fUML/Token.hpp"
+#include "fUML/DispatchStrategy.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/ExecutionFactoryL3.hpp"
+#include "fUML/FirstChoiceStrategy.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fUML/ParameterValue.hpp"
 #include "fUML/ObjectToken.hpp"
+#include "fUML/Token.hpp"
 #include "fUML/Value.hpp"
-
 #include "uml/Activity.hpp"
 #include "uml/Classifier.hpp"
+#include "uml/FunctionBehavior.hpp"
 
-#include "DispatchStrategy.hpp"
-#include "Executor.hpp"
-#include "ExecutionFactoryL3.hpp"
-#include "FirstChoiceStrategy.hpp"
-#include "FunctionBehavior.hpp"
-#include "FUMLFactory.hpp"
-#include "Locus.hpp"
 [if (aActivity.ownedParameter->asSet()->parametersArePointers())]
-#include "Reference.hpp"
-#include "[aPackage.getPackageName()/]Factory.hpp"
+#include "fUML/Reference.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Factory.hpp"
 [/if]
 
 //include Model package
 [for (pack : Package | aPackage->asOrderedSet()->sortedBy(name))]
-#include "[pack.getPackageName().toUpperFirst().concat('Package')/].hpp"
+#include "[pack.getPackageName()/]/[pack.getPackageName().toUpperFirst().concat('Package')/].hpp"
 [/for]
 
 [aPackage.getOpaqueBehaviors()->sortedBy(myQualifiedName()).generateInclude()/]

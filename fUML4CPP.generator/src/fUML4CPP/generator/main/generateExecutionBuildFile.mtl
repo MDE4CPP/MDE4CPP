@@ -86,26 +86,8 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-    .
+    ../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-	${MDE4CPP_HOME}/application/include/PluginFramework
-	${MDE4CPP_HOME}/application/include/util
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/fuml
-	${MDE4CPP_HOME}/application/include/PrimitivetypesReflection
-	${MDE4CPP_HOME}/application/include/uml
-	${MDE4CPP_HOME}/application/include/[packageName/]
-[if (not aPackage.includeEcorePackages())]
-[for (pack : Package | aPackage.metaModelIncludesWithoutReflection()->sortedBy(name)) separator (',')]
-	${MDE4CPP_HOME}/application/include/[pack.name/]
-[/for]
-[/if]
-[for (aOperation : Operation | aPackage.allOwnedElements()->selectByType(Class).ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty() and aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior) and(aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->notEmpty()) )]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->size() = 3)]
-	${MDE4CPP_HOME}/application/include/[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/]
-[/if][/if][/for]
 )
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")

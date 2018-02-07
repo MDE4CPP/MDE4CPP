@@ -20,8 +20,8 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anOpaqueBehavior,'Execution')/]
 
-#include "impl/OpaqueBehaviorExecutionImpl.hpp"
-#include "SubsetUnion.hpp" 
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp" 
 
 [if(anOpaqueBehavior.oclIsKindOf(FunctionBehavior))] 
 [let fb : FunctionBehavior = anOpaqueBehavior.oclAsType(FunctionBehavior)]

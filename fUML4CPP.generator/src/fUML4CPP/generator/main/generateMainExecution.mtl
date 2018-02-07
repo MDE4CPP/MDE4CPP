@@ -87,34 +87,32 @@ int main()
 [/template]
 
 [template public generateMainIncludes(aPackage : Package)]
-#include "FUMLFactory.hpp"
-#include "Locus.hpp"
-#include "Executor.hpp"
-#include "Parameter.hpp"
-#include "ExecutionFactoryL3.hpp"
-#include "FirstChoiceStrategy.hpp"
-#include "DispatchStrategy.hpp"
-#include "FunctionBehavior.hpp"
-#include "Activity.hpp"
-#include "SubsetUnion.hpp"
-#include "UmlFactory.hpp"
-#include "Operation.hpp"
-#include "Interface.hpp"
-#include "PrimitiveType.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "fUML/Executor.hpp"
+#include "fUML/DispatchStrategy.hpp"
+#include "fUML/ExecutionFactoryL3.hpp"
+#include "fUML/FirstChoiceStrategy.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Locus.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/Activity.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/UmlFactory.hpp"
 
-#include "ParameterValue.hpp"
 
 //include Model package
-#include "[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
 [for (anotherPackage : Package | aPackage.getOpaqueBehaviors().getNearestPackage()->asSet())]
-#include "[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+#include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
 [for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet())]
-[if ((pack.name='UML') or (pack.name='Ecore'))]
+[if (not (pack.name='StandardProfile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
-[elseif (not (pack.name='StandardProfile'))]
-#include "[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/for]
 
@@ -133,8 +131,8 @@ int main()
 
 [template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
 [if (anActivity.ownedParameter->asSet()->parametersArePointers())]
-#include "Reference.hpp"
-#include "[aPackage.getPackageName()/]Factory.hpp"
+#include "fuml/Reference.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Factory.hpp"
 [/if]
 
 [for ( par : Parameter | anActivity->asOrderedSet()->first().ownedParameter)]

@@ -26,11 +26,11 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 [startGuard(aActivity,'Execution')/]
 
 #define [aActivity.name.toUpperCase()/] 1
-#include "impl/ActivityExecutionImpl.hpp"
+#include "fUML/impl/ActivityExecutionImpl.hpp"
 [for ( par : Parameter | aActivity.ownedParameter)]
 [par.generateParameterInclude()/]
 [/for]
-#include "SubsetUnion.hpp"
+#include "abstactDataTypes/SubsetUnion.hpp"
 
 namespace [aPackage.name/] 
 {

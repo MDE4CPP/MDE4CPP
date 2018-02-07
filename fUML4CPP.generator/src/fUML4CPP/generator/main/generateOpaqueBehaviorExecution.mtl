@@ -78,7 +78,7 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
 [if (not anOpaqueBehavior.oclIsUndefined())]
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
-#include "[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
+#include "[anOpaqueBehavior.getNearestPackage().getPackageName()/]Exec/[anOpaqueBehavior.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]
@@ -86,13 +86,13 @@ factory->addPrimitiveBehaviorPrototype([memberName(aCallOperationAction)/]Execut
 [template public generateInclude(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.oclIsUndefined())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
+#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/if]
 [/template]
 
 [template public generateInclude(anActivity : Activity)]
 [if (not anActivity.name.oclIsUndefined())]
-#include "[anActivity.name.toUpperFirst()/]Execution.hpp"
+#include "[anActivity.getNearestPackage().getPackageName()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/template]

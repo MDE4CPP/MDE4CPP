@@ -20,7 +20,7 @@
 [file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
-#include "UMLExecutionModelPlugin.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {

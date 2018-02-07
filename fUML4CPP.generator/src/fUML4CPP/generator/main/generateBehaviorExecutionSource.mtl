@@ -21,23 +21,24 @@
 [template public generateBehaviorExecutionSource(anOpaqueBehavior : OpaqueBehavior, aPackage :Package){ className : String = anOpaqueBehavior.name.toUpperFirst().concat('Execution'); }]
 
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 #include <iostream>
 #include <memory>
 #include <cassert>
-#include "ParameterValue.hpp"
+
+#include "fUML/ParameterValue.hpp"
 
 [if (aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method->asSet()->size() > 0)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->size()>0)]
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
-#include "[cOpSet.target.type.name/].hpp"
-#include "[cOpSet.target.type.name/]Execution.hpp"
+#include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name/].hpp"
+#include "[cOpSet.getNearestPackage().name/]Exec/[cOpSet.target.type.name/]Execution.hpp"
 [/if]
 [/let]
 [/if]
 
 [if (anOpaqueBehavior.ownedParameter->asSet()->parametersArePointers())]
-#include "Reference.hpp"
+#include "fUML/Reference.hpp"
 [/if]
 [for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
 [par.generateParameterInclude()/]

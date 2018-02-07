@@ -24,7 +24,7 @@ className : String = aClassifier.name.toUpperFirst().concat('Execution');
 pointerName : String = if (aPackage.name = aClassifier.namespace.ns()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.ns().concat('::').concat(aClassifier.name.toUpperFirst()) endif;
 }]
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
+#include "[aClassifier.getNearestPackage().name/]Exec/[className/].hpp"
 #include <iostream>
 #include <memory>
 
