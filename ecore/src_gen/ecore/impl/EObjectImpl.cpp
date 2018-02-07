@@ -1,20 +1,21 @@
-#include "EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
-#include "EOperation.hpp"
+#include "ecore/EOperation.hpp"
 
-#include "EReference.hpp"
+#include "ecore/EReference.hpp"
 
-#include "EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 
 using namespace ecore;
@@ -152,8 +153,10 @@ bool EObjectImpl::eIsProxy()  const
 
 bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
 }
 
 int EObjectImpl::eResource()  const 
@@ -162,10 +165,12 @@ int EObjectImpl::eResource()  const
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const 
+void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue) 
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->eSet(feature->getFeatureID(), newValue);
+	//end of body
 }
 
 void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature)  const 
@@ -193,7 +198,7 @@ std::shared_ptr<ecore::EObject> EObjectImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EObjectImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -201,4 +206,11 @@ boost::any EObjectImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return eContainer(); //100
 	}
 	return boost::any();
+}
+
+void EObjectImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -1,12 +1,13 @@
-#include "EStringToStringMapEntryImpl.hpp"
+#include "ecore/impl/EStringToStringMapEntryImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
 
 using namespace ecore;
@@ -114,7 +115,7 @@ std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EStringToStringMapEntryImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -126,4 +127,25 @@ boost::any EStringToStringMapEntryImpl::eGet(int featureID,  bool resolve, bool 
 			return getValue(); //482
 	}
 	return boost::any();
+}
+
+void EStringToStringMapEntryImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_KEY:
+		{
+			// BOOST CAST
+			std::string _key = boost::any_cast<std::string>(newValue);
+			setKey(_key); //481
+			break;
+		}
+		case EcorePackage::ESTRINGTOSTRINGMAPENTRY_VALUE:
+		{
+			// BOOST CAST
+			std::string _value = boost::any_cast<std::string>(newValue);
+			setValue(_value); //482
+			break;
+		}
+	}
 }

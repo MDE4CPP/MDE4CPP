@@ -21,8 +21,8 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "EPackage.hpp"
-#include "EcoreFactory.hpp"
+#include "ecore/EPackage.hpp"
+#include "ecore/EcoreFactory.hpp"
 
 namespace ecore 
 {	class EAnnotation;
@@ -292,7 +292,7 @@ namespace ecore
 			static const int EFACTORY_EPACKAGE = 71;
 			
 			static const int EFACTORY___CONVERTTOSTRING__EDATATYPE_EJAVAOBJECT = 3;
-			static const int EFACTORY___CREATE__ECLASS = 1;
+			static const int EFACTORY___CREATE__ECLASS_EOBJECT = 1;
 			static const int EFACTORY___CREATEFROMSTRING__EDATATYPE_ESTRING = 2;
 			
 			//Class and Feature Getter
@@ -301,7 +301,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> getEFactory_EPackage() const = 0;
 			
 			virtual std::shared_ptr<ecore::EOperation> getEFactory___ConvertToString__EDataType_EJavaObject() const = 0;
-			virtual std::shared_ptr<ecore::EOperation> getEFactory___Create__EClass() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory___Create__EClass_EObject() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getEFactory___CreateFromString__EDataType_EString() const = 0;
 			
 			// End Class EFactory

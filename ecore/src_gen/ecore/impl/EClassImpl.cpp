@@ -1,30 +1,31 @@
-#include "EClassImpl.hpp"
+#include "ecore/impl/EClassImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EAttribute.hpp"
+#include "ecore/EAttribute.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "EOperation.hpp"
+#include "ecore/EOperation.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EPackage.hpp"
 
-#include "EReference.hpp"
+#include "ecore/EReference.hpp"
 
-#include "EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
-#include "ETypeParameter.hpp"
+#include "ecore/ETypeParameter.hpp"
 
 
 using namespace ecore;
@@ -346,7 +347,8 @@ std::shared_ptr<ecore::EStructuralFeature> EClassImpl::getEStructuralFeature(std
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    for(std::shared_ptr<EStructuralFeature> f: *getEAllStructuralFeatures())
+	    std::shared_ptr<Bag<EStructuralFeature > > eAllFeat = getEAllStructuralFeatures();
+    for(std::shared_ptr<EStructuralFeature> f: *eAllFeat)
     {
         if(f->getName()==featureName)
         {
@@ -536,7 +538,7 @@ std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Ba
     std::shared_ptr<Bag<EClass> > classList = this->getESuperTypes();
     for (std::shared_ptr<EClass > c : *classList)
     {
-    	std::shared_ptr<Bag<EStructuralFeature> > featureList = c->getEStructuralFeatures();
+    	std::shared_ptr<Bag<EStructuralFeature> > featureList = c->getEAllStructuralFeatures();
         eAllStructuralFeatures->insert(eAllStructuralFeatures->end(), featureList->begin(), featureList->end());
     }
     return eAllStructuralFeatures;
@@ -553,7 +555,7 @@ std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ())
     eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
     for (std::shared_ptr<EClass > c : *classList)
     {
-    	std::shared_ptr<Bag<EClass> > classList = c->getESuperTypes();
+    	std::shared_ptr<Bag<EClass> > classList = c->getEAllSuperTypes();
         eAllSuperTypes->insert(eAllSuperTypes->end(), classList->begin(), classList->end());
     }
     return eAllSuperTypes;
@@ -627,7 +629,7 @@ std::shared_ptr<ecore::EObject> EClassImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EClassImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -683,4 +685,60 @@ boost::any EClassImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getName(); //21
 	}
 	return boost::any();
+}
+
+void EClassImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ECLASS_ABSTRACT:
+		{
+			// BOOST CAST
+			bool _abstract = boost::any_cast<bool>(newValue);
+			setAbstract(_abstract); //29
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_EPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
+			setEPackage(_ePackage); //27
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCECLASS:
+		{
+			// BOOST CAST
+			void *  _instanceClass = boost::any_cast<void * >(newValue);
+			setInstanceClass(_instanceClass); //23
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCECLASSNAME:
+		{
+			// BOOST CAST
+			std::string _instanceClassName = boost::any_cast<std::string>(newValue);
+			setInstanceClassName(_instanceClassName); //22
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCETYPENAME:
+		{
+			// BOOST CAST
+			std::string _instanceTypeName = boost::any_cast<std::string>(newValue);
+			setInstanceTypeName(_instanceTypeName); //26
+			break;
+		}
+		case EcorePackage::ECLASS_INTERFACE:
+		{
+			// BOOST CAST
+			bool _interface = boost::any_cast<bool>(newValue);
+			setInterface(_interface); //210
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //21
+			break;
+		}
+	}
 }

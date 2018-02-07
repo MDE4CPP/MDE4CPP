@@ -23,30 +23,28 @@
 
 #include <cassert>
 
-#include "EAnnotationImpl.hpp"
-#include "EAttributeImpl.hpp"
-#include "EClassImpl.hpp"
-#include "EClassifierImpl.hpp"
-#include "EDataTypeImpl.hpp"
-#include "EEnumImpl.hpp"
-#include "EEnumLiteralImpl.hpp"
-#include "EFactoryImpl.hpp"
-#include "EGenericTypeImpl.hpp"
-#include "EModelElementImpl.hpp"
-#include "ENamedElementImpl.hpp"
-#include "EObjectImpl.hpp"
-#include "EOperationImpl.hpp"
-#include "EPackageImpl.hpp"
-#include "EParameterImpl.hpp"
-#include "EReferenceImpl.hpp"
-#include "EStringToStringMapEntryImpl.hpp"
-#include "EStructuralFeatureImpl.hpp"
-#include "ETypeParameterImpl.hpp"
-#include "ETypedElementImpl.hpp"
+#include "ecore/impl/EAnnotationImpl.hpp"
+#include "ecore/impl/EAttributeImpl.hpp"
+#include "ecore/impl/EClassImpl.hpp"
+#include "ecore/impl/EClassifierImpl.hpp"
+#include "ecore/impl/EDataTypeImpl.hpp"
+#include "ecore/impl/EEnumImpl.hpp"
+#include "ecore/impl/EEnumLiteralImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
+#include "ecore/impl/EGenericTypeImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
+#include "ecore/impl/ENamedElementImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EOperationImpl.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
+#include "ecore/impl/EParameterImpl.hpp"
+#include "ecore/impl/EReferenceImpl.hpp"
+#include "ecore/impl/EStringToStringMapEntryImpl.hpp"
+#include "ecore/impl/EStructuralFeatureImpl.hpp"
+#include "ecore/impl/ETypeParameterImpl.hpp"
+#include "ecore/impl/ETypedElementImpl.hpp"
 
-#include "EcorePackage.hpp"
-#include "EcorePackage.hpp"
-#include "EcorePackage.hpp"
+#include "ecore/EcorePackage.hpp"
 
 namespace ecore
 {
@@ -175,7 +173,7 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EReference> getEFactory_EPackage() const ;
 			
 			virtual std::shared_ptr<ecore::EOperation> getEFactory___ConvertToString__EDataType_EJavaObject() const ;
-			virtual std::shared_ptr<ecore::EOperation> getEFactory___Create__EClass() const ;
+			virtual std::shared_ptr<ecore::EOperation> getEFactory___Create__EClass_EObject() const ;
 			virtual std::shared_ptr<ecore::EOperation> getEFactory___CreateFromString__EDataType_EString() const ;
 			
 			// End Class EFactory

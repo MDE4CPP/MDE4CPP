@@ -1,12 +1,13 @@
-#include "EModelElementImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
 
 using namespace ecore;
@@ -125,7 +126,7 @@ std::shared_ptr<ecore::EObject> EModelElementImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EModelElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -133,4 +134,11 @@ boost::any EModelElementImpl::eGet(int featureID,  bool resolve, bool coreType) 
 			return getEAnnotations(); //80
 	}
 	return boost::any();
+}
+
+void EModelElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

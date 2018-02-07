@@ -21,7 +21,7 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "EcorePlugin.hpp"
+#include "ecore/EcorePlugin.hpp"
 
 namespace ecore 
 {

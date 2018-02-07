@@ -1,5 +1,5 @@
-#include "EcoreFactoryImpl.hpp"
-#include "EcorePackage.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
+#include "ecore/EcorePackage.hpp"
 
 
 using namespace ecore;
@@ -205,15 +205,20 @@ std::shared_ptr<ecore::EObject> EcoreFactoryImpl::create(const unsigned int clas
 	return nullptr;
 }
 
-std::shared_ptr<EObject> EcoreFactoryImpl::create(std::shared_ptr<EClass> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<EObject> EcoreFactoryImpl::create(std::shared_ptr<EClass> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<EObject> EcoreFactoryImpl::create(std::shared_ptr<EClass> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className, _container);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<EObject> EcoreFactoryImpl::create(std::string _className) const

@@ -1,36 +1,37 @@
-#include "EPackageImpl.hpp"
+#include "ecore/impl/EPackageImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EAttribute.hpp"
+#include "ecore/EAttribute.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EDataType.hpp"
+#include "ecore/EDataType.hpp"
 
-#include "EEnum.hpp"
+#include "ecore/EEnum.hpp"
 
-#include "EFactory.hpp"
+#include "ecore/EFactory.hpp"
 
-#include "ENamedElement.hpp"
+#include "ecore/ENamedElement.hpp"
 
-#include "EOperation.hpp"
+#include "ecore/EOperation.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EPackage.hpp"
 
-#include "EParameter.hpp"
+#include "ecore/EParameter.hpp"
 
-#include "EReference.hpp"
+#include "ecore/EReference.hpp"
 
-#include "EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 
 using namespace ecore;
@@ -577,7 +578,7 @@ std::shared_ptr<ecore::EObject> EPackageImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EPackageImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -599,4 +600,39 @@ boost::any EPackageImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getNsURI(); //122
 	}
 	return boost::any();
+}
+
+void EPackageImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EPACKAGE_EFACTORYINSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EFactory> _eFactoryInstance = boost::any_cast<std::shared_ptr<ecore::EFactory>>(newValue);
+			setEFactoryInstance(_eFactoryInstance); //124
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //121
+			break;
+		}
+		case EcorePackage::EPACKAGE_NSPREFIX:
+		{
+			// BOOST CAST
+			std::string _nsPrefix = boost::any_cast<std::string>(newValue);
+			setNsPrefix(_nsPrefix); //123
+			break;
+		}
+		case EcorePackage::EPACKAGE_NSURI:
+		{
+			// BOOST CAST
+			std::string _nsURI = boost::any_cast<std::string>(newValue);
+			setNsURI(_nsURI); //122
+			break;
+		}
+	}
 }

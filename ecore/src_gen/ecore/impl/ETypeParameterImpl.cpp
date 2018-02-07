@@ -1,16 +1,17 @@
-#include "ETypeParameterImpl.hpp"
+#include "ecore/impl/ETypeParameterImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "ENamedElement.hpp"
+#include "ecore/ENamedElement.hpp"
 
 
 using namespace ecore;
@@ -124,7 +125,7 @@ std::shared_ptr<ecore::EObject> ETypeParameterImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ETypeParameterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -136,4 +137,18 @@ boost::any ETypeParameterImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getName(); //511
 	}
 	return boost::any();
+}
+
+void ETypeParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //511
+			break;
+		}
+	}
 }

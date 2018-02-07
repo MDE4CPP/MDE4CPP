@@ -1,16 +1,17 @@
-#include "EEnumLiteralImpl.hpp"
+#include "ecore/impl/EEnumLiteralImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EEnum.hpp"
+#include "ecore/EEnum.hpp"
 
-#include "ENamedElement.hpp"
+#include "ecore/ENamedElement.hpp"
 
 
 using namespace ecore;
@@ -161,7 +162,7 @@ std::shared_ptr<ecore::EObject> EEnumLiteralImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EEnumLiteralImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -179,4 +180,39 @@ boost::any EEnumLiteralImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getValue(); //62
 	}
 	return boost::any();
+}
+
+void EEnumLiteralImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EENUMLITERAL_INSTANCE:
+		{
+			// BOOST CAST
+			boost::any _instance = boost::any_cast<boost::any>(newValue);
+			setInstance(_instance); //63
+			break;
+		}
+		case EcorePackage::EENUMLITERAL_LITERAL:
+		{
+			// BOOST CAST
+			std::string _literal = boost::any_cast<std::string>(newValue);
+			setLiteral(_literal); //64
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //61
+			break;
+		}
+		case EcorePackage::EENUMLITERAL_VALUE:
+		{
+			// BOOST CAST
+			int _value = boost::any_cast<int>(newValue);
+			setValue(_value); //62
+			break;
+		}
+	}
 }

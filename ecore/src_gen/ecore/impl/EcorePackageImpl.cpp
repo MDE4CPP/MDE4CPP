@@ -1,15 +1,15 @@
-#include "EcorePackageImpl.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "EcoreFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 
 //depending model packages
 
@@ -199,7 +199,7 @@ void EcorePackageImpl::createPackageContents()
 	createEReference(eFactoryEClass, EFACTORY_EPACKAGE);
 	
 	createEOperation(eFactoryEClass, EFACTORY___CONVERTTOSTRING__EDATATYPE_EJAVAOBJECT);
-	createEOperation(eFactoryEClass, EFACTORY___CREATE__ECLASS);
+	createEOperation(eFactoryEClass, EFACTORY___CREATE__ECLASS_EOBJECT);
 	createEOperation(eFactoryEClass, EFACTORY___CREATEFROMSTRING__EDATATYPE_ESTRING);
 	
 
@@ -536,8 +536,9 @@ void EcorePackageImpl::initializePackageContents()
 	addEParameter(op ,getEDataType()  , "eDataType",0,1, true,true);
 	addEParameter(op ,getEJavaObject()  , "instanceValue",0,1, true,true);
 	
-	op = initEOperation(getEFactory___Create__EClass(),getEObject(), "create", 0, 1, true,true );
+	op = initEOperation(getEFactory___Create__EClass_EObject(),getEObject(), "create", 0, 1, true,true );
 	addEParameter(op ,getEClass()  , "eClass",0,1, true,true);
+	addEParameter(op ,getEObject()  , "container",0,1, true,true);
 	
 	op = initEOperation(getEFactory___CreateFromString__EDataType_EString(),getEJavaObject(), "createFromString", 0, 1, true,true );
 	addEParameter(op ,getEDataType()  , "eDataType",0,1, true,true);
@@ -1049,7 +1050,7 @@ std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___ConvertToStri
 {
 	return std::dynamic_pointer_cast<ecore::EOperation>(eFactoryEClass->getEOperations()->at(0));
 }
-std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___Create__EClass() const
+std::shared_ptr<ecore::EOperation> EcorePackageImpl::getEFactory___Create__EClass_EObject() const
 {
 	return std::dynamic_pointer_cast<ecore::EOperation>(eFactoryEClass->getEOperations()->at(1));
 }

@@ -29,8 +29,6 @@
 
 
 
-#include "SubsetUnion.hpp"
-
 
 
 //*********************************
@@ -109,7 +107,7 @@ virtual public EObject
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  ;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  ;
 			
 			/*!
 			 */ 
@@ -138,6 +136,7 @@ virtual public EObject
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			

@@ -27,9 +27,7 @@
 //Model includes
 #include "../EReference.hpp"
 
-#include "impl/EStructuralFeatureImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "ecore/impl/EStructuralFeatureImpl.hpp"
 
 
 
@@ -119,6 +117,7 @@ namespace ecore
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			

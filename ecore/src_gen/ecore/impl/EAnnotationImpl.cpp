@@ -1,18 +1,19 @@
-#include "EAnnotationImpl.hpp"
+#include "ecore/impl/EAnnotationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EModelElement.hpp"
+#include "ecore/EModelElement.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
-#include "EStringToStringMapEntry.hpp"
+#include "ecore/EStringToStringMapEntry.hpp"
 
 
 using namespace ecore;
@@ -207,7 +208,7 @@ std::shared_ptr<ecore::EObject> EAnnotationImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EAnnotationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -225,4 +226,25 @@ boost::any EAnnotationImpl::eGet(int featureID,  bool resolve, bool coreType) co
 			return getSource(); //11
 	}
 	return boost::any();
+}
+
+void EAnnotationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EANNOTATION_EMODELELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EModelElement> _eModelElement = boost::any_cast<std::shared_ptr<ecore::EModelElement>>(newValue);
+			setEModelElement(_eModelElement); //13
+			break;
+		}
+		case EcorePackage::EANNOTATION_SOURCE:
+		{
+			// BOOST CAST
+			std::string _source = boost::any_cast<std::string>(newValue);
+			setSource(_source); //11
+			break;
+		}
+	}
 }

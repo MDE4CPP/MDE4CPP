@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -41,7 +42,7 @@ namespace ecore
 
 // enum includes
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
 //*********************************
 namespace ecore 

@@ -1,18 +1,19 @@
-#include "EDataTypeImpl.hpp"
+#include "ecore/impl/EDataTypeImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EPackage.hpp"
 
-#include "ETypeParameter.hpp"
+#include "ecore/ETypeParameter.hpp"
 
 
 using namespace ecore;
@@ -144,7 +145,7 @@ std::shared_ptr<ecore::EObject> EDataTypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EDataTypeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -170,4 +171,53 @@ boost::any EDataTypeImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return isSerializable(); //49
 	}
 	return boost::any();
+}
+
+void EDataTypeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ECLASSIFIER_EPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
+			setEPackage(_ePackage); //47
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCECLASS:
+		{
+			// BOOST CAST
+			void *  _instanceClass = boost::any_cast<void * >(newValue);
+			setInstanceClass(_instanceClass); //43
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCECLASSNAME:
+		{
+			// BOOST CAST
+			std::string _instanceClassName = boost::any_cast<std::string>(newValue);
+			setInstanceClassName(_instanceClassName); //42
+			break;
+		}
+		case EcorePackage::ECLASSIFIER_INSTANCETYPENAME:
+		{
+			// BOOST CAST
+			std::string _instanceTypeName = boost::any_cast<std::string>(newValue);
+			setInstanceTypeName(_instanceTypeName); //46
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //41
+			break;
+		}
+		case EcorePackage::EDATATYPE_SERIALIZABLE:
+		{
+			// BOOST CAST
+			bool _serializable = boost::any_cast<bool>(newValue);
+			setSerializable(_serializable); //49
+			break;
+		}
+	}
 }

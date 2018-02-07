@@ -1,22 +1,23 @@
-#include "EFactoryImpl.hpp"
+#include "ecore/impl/EFactoryImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EDataType.hpp"
+#include "ecore/EDataType.hpp"
 
-#include "EModelElement.hpp"
+#include "ecore/EModelElement.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EPackage.hpp"
 
 
 using namespace ecore;
@@ -100,7 +101,7 @@ std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDa
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass)  const 
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const 
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -138,7 +139,7 @@ std::shared_ptr<ecore::EObject> EFactoryImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EFactoryImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -148,4 +149,18 @@ boost::any EFactoryImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getEPackage(); //71
 	}
 	return boost::any();
+}
+
+void EFactoryImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EFACTORY_EPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EPackage> _ePackage = boost::any_cast<std::shared_ptr<ecore::EPackage>>(newValue);
+			setEPackage(_ePackage); //71
+			break;
+		}
+	}
 }

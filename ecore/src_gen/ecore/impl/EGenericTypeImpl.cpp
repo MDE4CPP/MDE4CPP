@@ -1,18 +1,19 @@
-#include "EGenericTypeImpl.hpp"
+#include "ecore/impl/EGenericTypeImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
-#include "ETypeParameter.hpp"
+#include "ecore/ETypeParameter.hpp"
 
 
 using namespace ecore;
@@ -215,7 +216,7 @@ std::shared_ptr<ecore::EObject> EGenericTypeImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EGenericTypeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -235,4 +236,39 @@ boost::any EGenericTypeImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getEUpperBound(); //501
 	}
 	return boost::any();
+}
+
+void EGenericTypeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::EGENERICTYPE_ECLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EClassifier> _eClassifier = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
+			setEClassifier(_eClassifier); //506
+			break;
+		}
+		case EcorePackage::EGENERICTYPE_ELOWERBOUND:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EGenericType> _eLowerBound = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
+			setELowerBound(_eLowerBound); //504
+			break;
+		}
+		case EcorePackage::EGENERICTYPE_ETYPEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = boost::any_cast<std::shared_ptr<ecore::ETypeParameter>>(newValue);
+			setETypeParameter(_eTypeParameter); //505
+			break;
+		}
+		case EcorePackage::EGENERICTYPE_EUPPERBOUND:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EGenericType> _eUpperBound = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
+			setEUpperBound(_eUpperBound); //501
+			break;
+		}
+	}
 }

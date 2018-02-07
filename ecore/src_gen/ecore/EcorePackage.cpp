@@ -1,5 +1,5 @@
-#include "EcorePackage.hpp"
-#include "impl/EcorePackageImpl.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 using namespace ecore;
 

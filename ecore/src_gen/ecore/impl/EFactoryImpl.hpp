@@ -27,9 +27,7 @@
 //Model includes
 #include "../EFactory.hpp"
 
-#include "impl/EModelElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 
 
@@ -64,7 +62,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  ;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const  ;
 			
 			/*!
 			 */ 
@@ -99,6 +97,7 @@ namespace ecore
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			

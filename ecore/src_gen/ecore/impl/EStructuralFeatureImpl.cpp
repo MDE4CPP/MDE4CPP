@@ -1,20 +1,21 @@
-#include "EStructuralFeatureImpl.hpp"
+#include "ecore/impl/EStructuralFeatureImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "ETypedElement.hpp"
+#include "ecore/ETypedElement.hpp"
 
 
 using namespace ecore;
@@ -246,7 +247,7 @@ std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EStructuralFeatureImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -292,4 +293,102 @@ boost::any EStructuralFeatureImpl::eGet(int featureID,  bool resolve, bool coreT
 			return isVolatile(); //1511
 	}
 	return boost::any();
+}
+
+void EStructuralFeatureImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ESTRUCTURALFEATURE_CHANGEABLE:
+		{
+			// BOOST CAST
+			bool _changeable = boost::any_cast<bool>(newValue);
+			setChangeable(_changeable); //1510
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_DEFAULTVALUELITERAL:
+		{
+			// BOOST CAST
+			std::string _defaultValueLiteral = boost::any_cast<std::string>(newValue);
+			setDefaultValueLiteral(_defaultValueLiteral); //1513
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_DERIVED:
+		{
+			// BOOST CAST
+			bool _derived = boost::any_cast<bool>(newValue);
+			setDerived(_derived); //1516
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
+			setEGenericType(_eGenericType); //159
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
+			setEType(_eType); //158
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		{
+			// BOOST CAST
+			int _lowerBound = boost::any_cast<int>(newValue);
+			setLowerBound(_lowerBound); //154
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //151
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		{
+			// BOOST CAST
+			bool _ordered = boost::any_cast<bool>(newValue);
+			setOrdered(_ordered); //152
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_TRANSIENT:
+		{
+			// BOOST CAST
+			bool _transient = boost::any_cast<bool>(newValue);
+			setTransient(_transient); //1512
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		{
+			// BOOST CAST
+			bool _unique = boost::any_cast<bool>(newValue);
+			setUnique(_unique); //153
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_UNSETTABLE:
+		{
+			// BOOST CAST
+			bool _unsettable = boost::any_cast<bool>(newValue);
+			setUnsettable(_unsettable); //1515
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		{
+			// BOOST CAST
+			int _upperBound = boost::any_cast<int>(newValue);
+			setUpperBound(_upperBound); //155
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_VOLATILE:
+		{
+			// BOOST CAST
+			bool _volatile = boost::any_cast<bool>(newValue);
+			setVolatile(_volatile); //1511
+			break;
+		}
+	}
 }

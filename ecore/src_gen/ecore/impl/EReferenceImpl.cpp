@@ -1,24 +1,25 @@
-#include "EReferenceImpl.hpp"
+#include "ecore/impl/EReferenceImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "EcorePackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/impl/EcorePackageImpl.hpp"
 
 //Forward declaration includes
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EAttribute.hpp"
+#include "ecore/EAttribute.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EClassifier.hpp"
+#include "ecore/EClassifier.hpp"
 
-#include "EGenericType.hpp"
+#include "ecore/EGenericType.hpp"
 
-#include "EReference.hpp"
+#include "ecore/EReference.hpp"
 
-#include "EStructuralFeature.hpp"
+#include "ecore/EStructuralFeature.hpp"
 
 
 using namespace ecore;
@@ -225,7 +226,7 @@ std::shared_ptr<ecore::EObject> EReferenceImpl::eContainer() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EReferenceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -283,4 +284,123 @@ boost::any EReferenceImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return isVolatile(); //1411
 	}
 	return boost::any();
+}
+
+void EReferenceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case EcorePackage::ESTRUCTURALFEATURE_CHANGEABLE:
+		{
+			// BOOST CAST
+			bool _changeable = boost::any_cast<bool>(newValue);
+			setChangeable(_changeable); //1410
+			break;
+		}
+		case EcorePackage::EREFERENCE_CONTAINMENT:
+		{
+			// BOOST CAST
+			bool _containment = boost::any_cast<bool>(newValue);
+			setContainment(_containment); //1420
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_DEFAULTVALUELITERAL:
+		{
+			// BOOST CAST
+			std::string _defaultValueLiteral = boost::any_cast<std::string>(newValue);
+			setDefaultValueLiteral(_defaultValueLiteral); //1413
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_DERIVED:
+		{
+			// BOOST CAST
+			bool _derived = boost::any_cast<bool>(newValue);
+			setDerived(_derived); //1416
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_EGENERICTYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EGenericType> _eGenericType = boost::any_cast<std::shared_ptr<ecore::EGenericType>>(newValue);
+			setEGenericType(_eGenericType); //149
+			break;
+		}
+		case EcorePackage::EREFERENCE_EOPPOSITE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EReference> _eOpposite = boost::any_cast<std::shared_ptr<ecore::EReference>>(newValue);
+			setEOpposite(_eOpposite); //1423
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_ETYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EClassifier> _eType = boost::any_cast<std::shared_ptr<ecore::EClassifier>>(newValue);
+			setEType(_eType); //148
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_LOWERBOUND:
+		{
+			// BOOST CAST
+			int _lowerBound = boost::any_cast<int>(newValue);
+			setLowerBound(_lowerBound); //144
+			break;
+		}
+		case EcorePackage::ENAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //141
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_ORDERED:
+		{
+			// BOOST CAST
+			bool _ordered = boost::any_cast<bool>(newValue);
+			setOrdered(_ordered); //142
+			break;
+		}
+		case EcorePackage::EREFERENCE_RESOLVEPROXIES:
+		{
+			// BOOST CAST
+			bool _resolveProxies = boost::any_cast<bool>(newValue);
+			setResolveProxies(_resolveProxies); //1422
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_TRANSIENT:
+		{
+			// BOOST CAST
+			bool _transient = boost::any_cast<bool>(newValue);
+			setTransient(_transient); //1412
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_UNIQUE:
+		{
+			// BOOST CAST
+			bool _unique = boost::any_cast<bool>(newValue);
+			setUnique(_unique); //143
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_UNSETTABLE:
+		{
+			// BOOST CAST
+			bool _unsettable = boost::any_cast<bool>(newValue);
+			setUnsettable(_unsettable); //1415
+			break;
+		}
+		case EcorePackage::ETYPEDELEMENT_UPPERBOUND:
+		{
+			// BOOST CAST
+			int _upperBound = boost::any_cast<int>(newValue);
+			setUpperBound(_upperBound); //145
+			break;
+		}
+		case EcorePackage::ESTRUCTURALFEATURE_VOLATILE:
+		{
+			// BOOST CAST
+			bool _volatile = boost::any_cast<bool>(newValue);
+			setVolatile(_volatile); //1411
+			break;
+		}
+	}
 }

@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -63,7 +64,7 @@ namespace ecore
 }
 
 // base class includes
-#include "EModelElement.hpp"
+#include "ecore/EModelElement.hpp"
 
 // enum includes
 
@@ -98,7 +99,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass)  const  = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass,std::shared_ptr<ecore::EObject>  container)  const  = 0;
 			
 			/*!
 			 */ 

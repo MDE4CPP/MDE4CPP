@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -136,7 +137,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  const  = 0;
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,boost::any newValue)  = 0;
 			
 			/*!
 			 */ 

@@ -63,12 +63,8 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-	.
+	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
 )
 
 IF(NOT UNIX)

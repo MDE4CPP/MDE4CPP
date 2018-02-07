@@ -1,6 +1,6 @@
 
-#include "EcorePlugin.hpp"
-#include "impl/EcorePluginImpl.hpp"
+#include "ecore/EcorePlugin.hpp"
+#include "ecore/impl/EcorePluginImpl.hpp"
 
 using namespace ecore;
 

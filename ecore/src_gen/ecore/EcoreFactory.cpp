@@ -1,5 +1,5 @@
-#include "EcoreFactory.hpp"
-#include "impl/EcoreFactoryImpl.hpp"
+#include "ecore/EcoreFactory.hpp"
+#include "ecore/impl/EcoreFactoryImpl.hpp"
 
 using namespace ecore;
 
