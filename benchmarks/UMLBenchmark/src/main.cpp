@@ -1,15 +1,16 @@
-#include <iostream>
-#include "UmlFactory.hpp"
-#include "UmlPackage.hpp"
-#include "Package.hpp"
-#include "Class.hpp"
-#include "Property.hpp"
-#include <string>
 #include <chrono>
+#include <iostream>
+#include <string>
 #include <sstream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/Package.hpp"
+#include "uml/Class.hpp"
+#include "uml/Property.hpp"
 #include "UmlReflection/UMLPackage.hpp"
 
 #define SSTR( x ) static_cast< std::ostringstream & >( \
