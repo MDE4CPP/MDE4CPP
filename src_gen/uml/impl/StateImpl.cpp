@@ -1,54 +1,55 @@
-#include "StateImpl.hpp"
+#include "uml/impl/StateImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "ConnectionPointReference.hpp"
+#include "uml/ConnectionPointReference.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Pseudostate.hpp"
+#include "uml/Pseudostate.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Region.hpp"
+#include "uml/Region.hpp"
 
-#include "State.hpp"
+#include "uml/State.hpp"
 
-#include "StateMachine.hpp"
+#include "uml/StateMachine.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Transition.hpp"
+#include "uml/Transition.hpp"
 
-#include "Trigger.hpp"
+#include "uml/Trigger.hpp"
 
-#include "Vertex.hpp"
+#include "uml/Vertex.hpp"
 
 
 using namespace uml;
@@ -635,10 +636,29 @@ std::shared_ptr<Union<uml::RedefinableElement> > StateImpl::getRedefinedElement(
 }
 
 
+std::shared_ptr<ecore::EObject> StateImpl::eContainer() const
+{
+	if(auto wp = m_container.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StateImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -716,4 +736,88 @@ boost::any StateImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //639
 	}
 	return boost::any();
+}
+
+void StateImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::VERTEX_CONTAINER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			setContainer(_container); //6310
+			break;
+		}
+		case UmlPackage::STATE_DOACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _doActivity = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setDoActivity(_doActivity); //6325
+			break;
+		}
+		case UmlPackage::STATE_ENTRY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _entry = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setEntry(_entry); //6326
+			break;
+		}
+		case UmlPackage::STATE_EXIT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _exit = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setExit(_exit); //6327
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //6310
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //635
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //636
+			break;
+		}
+		case UmlPackage::STATE_REDEFINEDSTATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::State> _redefinedState = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			setRedefinedState(_redefinedState); //6332
+			break;
+		}
+		case UmlPackage::STATE_STATEINVARIANT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _stateInvariant = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setStateInvariant(_stateInvariant); //6333
+			break;
+		}
+		case UmlPackage::STATE_SUBMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StateMachine> _submachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
+			setSubmachine(_submachine); //6334
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //639
+			break;
+		}
+	}
 }

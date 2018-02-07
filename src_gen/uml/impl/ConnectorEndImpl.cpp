@@ -1,24 +1,25 @@
-#include "ConnectorEndImpl.hpp"
+#include "uml/impl/ConnectorEndImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -211,10 +212,19 @@ std::shared_ptr<Union<uml::Element> > ConnectorEndImpl::getOwnedElement() const
 }
 
 
+std::shared_ptr<ecore::EObject> ConnectorEndImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectorEndImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -246,4 +256,67 @@ boost::any ConnectorEndImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getUpperValue(); //319
 	}
 	return boost::any();
+}
+
+void ConnectorEndImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
+		{
+			// BOOST CAST
+			bool _isOrdered = boost::any_cast<bool>(newValue);
+			setIsOrdered(_isOrdered); //314
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
+		{
+			// BOOST CAST
+			bool _isUnique = boost::any_cast<bool>(newValue);
+			setIsUnique(_isUnique); //315
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
+		{
+			// BOOST CAST
+			int _lower = boost::any_cast<int>(newValue);
+			setLower(_lower); //316
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setLowerValue(_lowerValue); //317
+			break;
+		}
+		case UmlPackage::CONNECTOREND_PARTWITHPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _partWithPort = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setPartWithPort(_partWithPort); //3111
+			break;
+		}
+		case UmlPackage::CONNECTOREND_ROLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ConnectableElement> _role = boost::any_cast<std::shared_ptr<uml::ConnectableElement>>(newValue);
+			setRole(_role); //3112
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
+		{
+			// BOOST CAST
+			int _upper = boost::any_cast<int>(newValue);
+			setUpper(_upper); //318
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setUpperValue(_upperValue); //319
+			break;
+		}
+	}
 }

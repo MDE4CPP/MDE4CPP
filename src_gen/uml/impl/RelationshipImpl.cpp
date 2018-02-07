@@ -1,16 +1,17 @@
-#include "RelationshipImpl.hpp"
+#include "uml/impl/RelationshipImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 
 using namespace uml;
@@ -136,10 +137,19 @@ std::shared_ptr<Union<uml::Element> > RelationshipImpl::getRelatedElement() cons
 }
 
 
+std::shared_ptr<ecore::EObject> RelationshipImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RelationshipImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -155,4 +165,11 @@ boost::any RelationshipImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getRelatedElement(); //214
 	}
 	return boost::any();
+}
+
+void RelationshipImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -1,24 +1,25 @@
-#include "ClassifierTemplateParameterImpl.hpp"
+#include "uml/impl/ClassifierTemplateParameterImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateSignature.hpp"
 
 
 using namespace uml;
@@ -220,10 +221,24 @@ std::weak_ptr<uml::Element > ClassifierTemplateParameterImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_signature.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierTemplateParameterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -251,4 +266,53 @@ boost::any ClassifierTemplateParameterImpl::eGet(int featureID,  bool resolve, b
 			return getSignature(); //1047
 	}
 	return boost::any();
+}
+
+void ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE:
+		{
+			// BOOST CAST
+			bool _allowSubstitutable = boost::any_cast<bool>(newValue);
+			setAllowSubstitutable(_allowSubstitutable); //1049
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETER_DEFAULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _default = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setDefault(_default); //1044
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETER_OWNEDDEFAULT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _ownedDefault = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setOwnedDefault(_ownedDefault); //1045
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setOwnedParameteredElement(_ownedParameteredElement); //1048
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETER_PARAMETEREDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _parameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setParameteredElement(_parameteredElement); //1046
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETER_SIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
+			setSignature(_signature); //1047
+			break;
+		}
+	}
 }

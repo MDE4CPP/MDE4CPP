@@ -1,24 +1,25 @@
-#include "LinkEndCreationDataImpl.hpp"
+#include "uml/impl/LinkEndCreationDataImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "LinkEndData.hpp"
+#include "uml/LinkEndData.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
-#include "QualifierValue.hpp"
+#include "uml/QualifierValue.hpp"
 
 
 using namespace uml;
@@ -166,10 +167,19 @@ std::shared_ptr<Union<uml::Element> > LinkEndCreationDataImpl::getOwnedElement()
 }
 
 
+std::shared_ptr<ecore::EObject> LinkEndCreationDataImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndCreationDataImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -193,4 +203,39 @@ boost::any LinkEndCreationDataImpl::eGet(int featureID,  bool resolve, bool core
 			return getValue(); //1486
 	}
 	return boost::any();
+}
+
+void LinkEndCreationDataImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDDATA_END:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setEnd(_end); //1484
+			break;
+		}
+		case UmlPackage::LINKENDCREATIONDATA_INSERTAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _insertAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setInsertAt(_insertAt); //1487
+			break;
+		}
+		case UmlPackage::LINKENDCREATIONDATA_ISREPLACEALL:
+		{
+			// BOOST CAST
+			bool _isReplaceAll = boost::any_cast<bool>(newValue);
+			setIsReplaceAll(_isReplaceAll); //1488
+			break;
+		}
+		case UmlPackage::LINKENDDATA_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //1486
+			break;
+		}
+	}
 }

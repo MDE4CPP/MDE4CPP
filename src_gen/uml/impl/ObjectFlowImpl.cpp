@@ -1,44 +1,45 @@
-#include "ObjectFlowImpl.hpp"
+#include "uml/impl/ObjectFlowImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -354,10 +355,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > ObjectFlowImpl::getRedefinedEle
 }
 
 
+std::shared_ptr<ecore::EObject> ObjectFlowImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectFlowImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -417,4 +442,116 @@ boost::any ObjectFlowImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return getWeight(); //18821
 	}
 	return boost::any();
+}
+
+void ObjectFlowImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYEDGE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setActivity(_activity); //18813
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_GUARD:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _guard = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setGuard(_guard); //18814
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_INSTRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			setInStructuredNode(_inStructuredNode); //18817
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_INTERRUPTS:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = boost::any_cast<std::shared_ptr<uml::InterruptibleActivityRegion>>(newValue);
+			setInterrupts(_interrupts); //18816
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //18810
+			break;
+		}
+		case UmlPackage::OBJECTFLOW_ISMULTICAST:
+		{
+			// BOOST CAST
+			bool _isMulticast = boost::any_cast<bool>(newValue);
+			setIsMulticast(_isMulticast); //18823
+			break;
+		}
+		case UmlPackage::OBJECTFLOW_ISMULTIRECEIVE:
+		{
+			// BOOST CAST
+			bool _isMultireceive = boost::any_cast<bool>(newValue);
+			setIsMultireceive(_isMultireceive); //18824
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1885
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1886
+			break;
+		}
+		case UmlPackage::OBJECTFLOW_SELECTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setSelection(_selection); //18825
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_SOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _source = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setSource(_source); //18819
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _target = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setTarget(_target); //18818
+			break;
+		}
+		case UmlPackage::OBJECTFLOW_TRANSFORMATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _transformation = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setTransformation(_transformation); //18826
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1889
+			break;
+		}
+		case UmlPackage::ACTIVITYEDGE_WEIGHT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _weight = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setWeight(_weight); //18821
+			break;
+		}
+	}
 }

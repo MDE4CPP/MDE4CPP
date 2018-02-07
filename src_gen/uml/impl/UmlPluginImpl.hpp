@@ -21,7 +21,7 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "UmlPlugin.hpp"
+#include "uml/UmlPlugin.hpp"
 
 namespace uml 
 {

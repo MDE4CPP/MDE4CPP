@@ -1,48 +1,49 @@
-#include "TransitionImpl.hpp"
+#include "uml/impl/TransitionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Region.hpp"
+#include "uml/Region.hpp"
 
-#include "StateMachine.hpp"
+#include "uml/StateMachine.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Transition.hpp"
+#include "uml/Transition.hpp"
 
-#include "Trigger.hpp"
+#include "uml/Trigger.hpp"
 
-#include "Vertex.hpp"
+#include "uml/Vertex.hpp"
 
 
 using namespace uml;
@@ -472,10 +473,29 @@ std::shared_ptr<Union<uml::RedefinableElement> > TransitionImpl::getRedefinedEle
 }
 
 
+std::shared_ptr<ecore::EObject> TransitionImpl::eContainer() const
+{
+	if(auto wp = m_container.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TransitionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -535,4 +555,88 @@ boost::any TransitionImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return getVisibility(); //689
 	}
 	return boost::any();
+}
+
+void TransitionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TRANSITION_CONTAINER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			setContainer(_container); //6826
+			break;
+		}
+		case UmlPackage::TRANSITION_EFFECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _effect = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setEffect(_effect); //6819
+			break;
+		}
+		case UmlPackage::TRANSITION_GUARD:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _guard = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setGuard(_guard); //6820
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //6810
+			break;
+		}
+		case UmlPackage::TRANSITION_KIND:
+		{
+			// BOOST CAST
+			TransitionKind _kind = boost::any_cast<TransitionKind>(newValue);
+			setKind(_kind); //6821
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //685
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //686
+			break;
+		}
+		case UmlPackage::TRANSITION_REDEFINEDTRANSITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Transition> _redefinedTransition = boost::any_cast<std::shared_ptr<uml::Transition>>(newValue);
+			setRedefinedTransition(_redefinedTransition); //6822
+			break;
+		}
+		case UmlPackage::TRANSITION_SOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Vertex> _source = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
+			setSource(_source); //6823
+			break;
+		}
+		case UmlPackage::TRANSITION_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Vertex> _target = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
+			setTarget(_target); //6824
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //689
+			break;
+		}
+	}
 }

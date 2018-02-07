@@ -1,54 +1,55 @@
-#include "LinkActionImpl.hpp"
+#include "uml/impl/LinkActionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Action.hpp"
+#include "uml/Action.hpp"
 
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Association.hpp"
+#include "uml/Association.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "LinkEndData.hpp"
+#include "uml/LinkEndData.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
 
 using namespace uml;
@@ -388,10 +389,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > LinkActionImpl::getRedefinedEle
 }
 
 
+std::shared_ptr<ecore::EObject> LinkActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -457,4 +482,60 @@ boost::any LinkActionImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return getVisibility(); //1259
 	}
 	return boost::any();
+}
+
+void LinkActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setActivity(_activity); //12513
+			break;
+		}
+		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			setInStructuredNode(_inStructuredNode); //12516
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //12510
+			break;
+		}
+		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		{
+			// BOOST CAST
+			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
+			setIsLocallyReentrant(_isLocallyReentrant); //12524
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1255
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1256
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1259
+			break;
+		}
+	}
 }

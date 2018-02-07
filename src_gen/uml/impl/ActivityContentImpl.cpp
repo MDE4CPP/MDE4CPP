@@ -1,12 +1,13 @@
-#include "ActivityContentImpl.hpp"
+#include "uml/impl/ActivityContentImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
 
 using namespace uml;
@@ -87,13 +88,25 @@ std::shared_ptr<uml::Activity> ActivityContentImpl::containingActivity()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityContentImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityContentImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityContentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void ActivityContentImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

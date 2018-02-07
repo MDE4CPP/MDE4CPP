@@ -1,18 +1,19 @@
-#include "DirectedRelationshipImpl.hpp"
+#include "uml/impl/DirectedRelationshipImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Relationship.hpp"
+#include "uml/Relationship.hpp"
 
 
 using namespace uml;
@@ -170,10 +171,19 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > DirectedRelationshipI
 }
 
 
+std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DirectedRelationshipImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -193,4 +203,11 @@ boost::any DirectedRelationshipImpl::eGet(int featureID,  bool resolve, bool cor
 			return getTarget(); //206
 	}
 	return boost::any();
+}
+
+void DirectedRelationshipImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -1,16 +1,17 @@
-#include "ImageImpl.hpp"
+#include "uml/impl/ImageImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 
 using namespace uml;
@@ -152,10 +153,19 @@ std::shared_ptr<Union<uml::Element> > ImageImpl::getOwnedElement() const
 }
 
 
+std::shared_ptr<ecore::EObject> ImageImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ImageImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -175,4 +185,32 @@ boost::any ImageImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOwner(); //113
 	}
 	return boost::any();
+}
+
+void ImageImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::IMAGE_CONTENT:
+		{
+			// BOOST CAST
+			std::string _content = boost::any_cast<std::string>(newValue);
+			setContent(_content); //114
+			break;
+		}
+		case UmlPackage::IMAGE_FORMAT:
+		{
+			// BOOST CAST
+			std::string _format = boost::any_cast<std::string>(newValue);
+			setFormat(_format); //115
+			break;
+		}
+		case UmlPackage::IMAGE_LOCATION:
+		{
+			// BOOST CAST
+			std::string _location = boost::any_cast<std::string>(newValue);
+			setLocation(_location); //116
+			break;
+		}
+	}
 }

@@ -1,22 +1,23 @@
-#include "GeneralizationImpl.hpp"
+#include "uml/impl/GeneralizationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/GeneralizationSet.hpp"
 
 
 using namespace uml;
@@ -215,10 +216,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > GeneralizationImpl::g
 }
 
 
+std::shared_ptr<ecore::EObject> GeneralizationImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_specific.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GeneralizationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -246,4 +261,32 @@ boost::any GeneralizationImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getTarget(); //956
 	}
 	return boost::any();
+}
+
+void GeneralizationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::GENERALIZATION_GENERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Classifier> _general = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			setGeneral(_general); //957
+			break;
+		}
+		case UmlPackage::GENERALIZATION_ISSUBSTITUTABLE:
+		{
+			// BOOST CAST
+			bool _isSubstitutable = boost::any_cast<bool>(newValue);
+			setIsSubstitutable(_isSubstitutable); //959
+			break;
+		}
+		case UmlPackage::GENERALIZATION_SPECIFIC:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Classifier> _specific = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
+			setSpecific(_specific); //9510
+			break;
+		}
+	}
 }

@@ -1,46 +1,47 @@
-#include "RegionImpl.hpp"
+#include "uml/impl/RegionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "Region.hpp"
+#include "uml/Region.hpp"
 
-#include "State.hpp"
+#include "uml/State.hpp"
 
-#include "StateMachine.hpp"
+#include "uml/StateMachine.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "Transition.hpp"
+#include "uml/Transition.hpp"
 
-#include "Vertex.hpp"
+#include "uml/Vertex.hpp"
 
 
 using namespace uml;
@@ -426,10 +427,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > RegionImpl::getRedefinedElement
 }
 
 
+std::shared_ptr<ecore::EObject> RegionImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_state.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_stateMachine.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RegionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -483,4 +508,60 @@ boost::any RegionImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //629
 	}
 	return boost::any();
+}
+
+void RegionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::REGION_EXTENDEDREGION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Region> _extendedRegion = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
+			setExtendedRegion(_extendedRegion); //6219
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //6210
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //625
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //626
+			break;
+		}
+		case UmlPackage::REGION_STATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
+			setState(_state); //6220
+			break;
+		}
+		case UmlPackage::REGION_STATEMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StateMachine> _stateMachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
+			setStateMachine(_stateMachine); //6221
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //629
+			break;
+		}
+	}
 }

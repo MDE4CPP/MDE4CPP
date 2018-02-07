@@ -1,52 +1,53 @@
-#include "RemoveVariableValueActionImpl.hpp"
+#include "uml/impl/RemoveVariableValueActionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "Variable.hpp"
+#include "uml/Variable.hpp"
 
-#include "WriteVariableAction.hpp"
+#include "uml/WriteVariableAction.hpp"
 
 
 using namespace uml;
@@ -332,10 +333,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > RemoveVariableValueActionImpl::
 }
 
 
+std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RemoveVariableValueActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -405,4 +430,88 @@ boost::any RemoveVariableValueActionImpl::eGet(int featureID,  bool resolve, boo
 			return getVisibility(); //1709
 	}
 	return boost::any();
+}
+
+void RemoveVariableValueActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setActivity(_activity); //17013
+			break;
+		}
+		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			setInStructuredNode(_inStructuredNode); //17016
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //17010
+			break;
+		}
+		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		{
+			// BOOST CAST
+			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
+			setIsLocallyReentrant(_isLocallyReentrant); //17024
+			break;
+		}
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ISREMOVEDUPLICATES:
+		{
+			// BOOST CAST
+			bool _isRemoveDuplicates = boost::any_cast<bool>(newValue);
+			setIsRemoveDuplicates(_isRemoveDuplicates); //17030
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1705
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1706
+			break;
+		}
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_REMOVEAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _removeAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setRemoveAt(_removeAt); //17031
+			break;
+		}
+		case UmlPackage::WRITEVARIABLEACTION_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //17029
+			break;
+		}
+		case UmlPackage::VARIABLEACTION_VARIABLE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Variable> _variable = boost::any_cast<std::shared_ptr<uml::Variable>>(newValue);
+			setVariable(_variable); //17028
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1709
+			break;
+		}
+	}
 }

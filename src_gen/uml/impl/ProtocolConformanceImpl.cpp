@@ -1,20 +1,21 @@
-#include "ProtocolConformanceImpl.hpp"
+#include "uml/impl/ProtocolConformanceImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ProtocolStateMachine.hpp"
+#include "uml/ProtocolStateMachine.hpp"
 
 
 using namespace uml;
@@ -186,10 +187,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProtocolConformanceIm
 }
 
 
+std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_specificMachine.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProtocolConformanceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -213,4 +228,25 @@ boost::any ProtocolConformanceImpl::eGet(int featureID,  bool resolve, bool core
 			return getTarget(); //716
 	}
 	return boost::any();
+}
+
+void ProtocolConformanceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROTOCOLCONFORMANCE_GENERALMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			setGeneralMachine(_generalMachine); //717
+			break;
+		}
+		case UmlPackage::PROTOCOLCONFORMANCE_SPECIFICMACHINE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
+			setSpecificMachine(_specificMachine); //718
+			break;
+		}
+	}
 }

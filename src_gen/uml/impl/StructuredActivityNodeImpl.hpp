@@ -27,11 +27,9 @@
 //Model includes
 #include "../StructuredActivityNode.hpp"
 
-#include "impl/ActionImpl.hpp"
-#include "impl/ActivityGroupImpl.hpp"
-#include "impl/NamespaceImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/ActionImpl.hpp"
+#include "uml/impl/ActivityGroupImpl.hpp"
+#include "uml/impl/NamespaceImpl.hpp"
 
 
 
@@ -200,6 +198,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

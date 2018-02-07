@@ -291,64 +291,68 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-	.
 	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-if(NOT UNIX)
-	${MDE4CPP_HOME}/application/include/PluginFramework
-endif()
-	${MDE4CPP_HOME}/application/include/util
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/types
 )
 
-if(NOT UNIX)
-	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-endif()
+IF(NOT UNIX)
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	ELSE()
+		FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+	ENDIF()
+ENDIF()
 
-if(UNIX AND NOT APPLE)
+IF(UNIX AND NOT APPLE)
     # for Linux, BSD, Solaris, Minix
-	FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
-	FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
-else()
-	FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
-	FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
-endif()
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_DEBUG typesd.so ${MDE4CPP_HOME}/application/bin)
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(TYPES_RELEASE types.so ${MDE4CPP_HOME}/application/bin)
+	ENDIF()
+ELSE()
+	IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_DEBUG typesd ${MDE4CPP_HOME}/application/lib)
+	ELSE()
+		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(TYPES_RELEASE types ${MDE4CPP_HOME}/application/lib)
+	ENDIF()
+ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-if(NOT UNIX)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	#debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${TYPES_DEBUG}
-)
-endif()
 
-if(NOT UNIX) 
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-)
-else()
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	#optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${TYPES_RELEASE}
-)
-endif()
+IF(CMAKE_BUILD_TYPE STREQUAL "Debug")
+	IF(NOT UNIX)
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+			debug ${PLUGINFRAMEWORK_DEBUG}
+			debug ${ECORE_DEBUG}
+			debug ${TYPES_DEBUG}
+	)
+	ELSE()
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+			#debug ${PLUGINFRAMEWORK_DEBUG}
+			debug ${ECORE_DEBUG}
+			debug ${TYPES_DEBUG}
+		)
+	ENDIF()
+ELSE()
+	IF(NOT UNIX) 
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+			optimized ${PLUGINFRAMEWORK_RELEASE}
+			optimized ${ECORE_RELEASE}
+			optimized ${TYPES_RELEASE}
+	)
+	ELSE()
+		TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+			#optimized ${PLUGINFRAMEWORK_RELEASE}
+			optimized ${ECORE_RELEASE}
+			optimized ${TYPES_RELEASE}
+		)
+	ENDIF()
+ENDIF()
 
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 

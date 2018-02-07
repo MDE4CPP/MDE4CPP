@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -58,7 +59,7 @@ namespace uml
 }
 
 // base class includes
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 // enum includes
 
@@ -168,7 +169,9 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p> */
-			virtual std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const = 0; 
+			virtual std::shared_ptr<Union<uml::TemplateParameter> > getParameter() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

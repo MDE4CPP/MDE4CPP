@@ -1,96 +1,97 @@
-#include "ActivityImpl.hpp"
+#include "uml/impl/ActivityImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "BehavioralFeature.hpp"
+#include "uml/BehavioralFeature.hpp"
 
-#include "BehavioredClassifier.hpp"
+#include "uml/BehavioredClassifier.hpp"
 
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "CollaborationUse.hpp"
+#include "uml/CollaborationUse.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "Connector.hpp"
+#include "uml/Connector.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Extension.hpp"
+#include "uml/Extension.hpp"
 
-#include "Feature.hpp"
+#include "uml/Feature.hpp"
 
-#include "Generalization.hpp"
+#include "uml/Generalization.hpp"
 
-#include "GeneralizationSet.hpp"
+#include "uml/GeneralizationSet.hpp"
 
-#include "InterfaceRealization.hpp"
+#include "uml/InterfaceRealization.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Operation.hpp"
+#include "uml/Operation.hpp"
 
-#include "Package.hpp"
+#include "uml/Package.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Parameter.hpp"
+#include "uml/Parameter.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "Port.hpp"
+#include "uml/Port.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
-#include "Reception.hpp"
+#include "uml/Reception.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "Substitution.hpp"
+#include "uml/Substitution.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateSignature.hpp"
 
-#include "UseCase.hpp"
+#include "uml/UseCase.hpp"
 
-#include "Variable.hpp"
+#include "uml/Variable.hpp"
 
 
 using namespace uml;
@@ -891,10 +892,44 @@ std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement > > Activ
 }
 
 
+std::shared_ptr<ecore::EObject> ActivityImpl::eContainer() const
+{
+	if(auto wp = m_behavioredClassifier.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningPackage.lock())
+	{
+		return wp;
+	}
+	if(auto wp = m_package.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -1044,4 +1079,144 @@ boost::any ActivityImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //19
 	}
 	return boost::any();
+}
+
+void ActivityImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = boost::any_cast<std::shared_ptr<uml::BehavioredClassifier>>(newValue);
+			setBehavioredClassifier(_behavioredClassifier); //161
+			break;
+		}
+		case UmlPackage::BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _classifierBehavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setClassifierBehavior(_classifierBehavior); //139
+			break;
+		}
+		case UmlPackage::CLASSIFIER_ISABSTRACT:
+		{
+			// BOOST CAST
+			bool _isAbstract = boost::any_cast<bool>(newValue);
+			setIsAbstract(_isAbstract); //132
+			break;
+		}
+		case UmlPackage::CLASS_ISACTIVE:
+		{
+			// BOOST CAST
+			bool _isActive = boost::any_cast<bool>(newValue);
+			setIsActive(_isActive); //149
+			break;
+		}
+		case UmlPackage::CLASSIFIER_ISFINALSPECIALIZATION:
+		{
+			// BOOST CAST
+			bool _isFinalSpecialization = boost::any_cast<bool>(newValue);
+			setIsFinalSpecialization(_isFinalSpecialization); //133
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //110
+			break;
+		}
+		case UmlPackage::ACTIVITY_ISREADONLY:
+		{
+			// BOOST CAST
+			bool _isReadOnly = boost::any_cast<bool>(newValue);
+			setIsReadOnly(_isReadOnly); //168
+			break;
+		}
+		case UmlPackage::BEHAVIOR_ISREENTRANT:
+		{
+			// BOOST CAST
+			bool _isReentrant = boost::any_cast<bool>(newValue);
+			setIsReentrant(_isReentrant); //155
+			break;
+		}
+		case UmlPackage::ACTIVITY_ISSINGLEEXECUTION:
+		{
+			// BOOST CAST
+			bool _isSingleExecution = boost::any_cast<bool>(newValue);
+			setIsSingleExecution(_isSingleExecution); //169
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //15
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //16
+			break;
+		}
+		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
+			setOwnedTemplateSignature(_ownedTemplateSignature); //15
+			break;
+		}
+		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setOwningPackage(_owningPackage); //112
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setOwningTemplateParameter(_owningTemplateParameter); //14
+			break;
+		}
+		case UmlPackage::TYPE_PACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _package = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setPackage(_package); //113
+			break;
+		}
+		case UmlPackage::CLASSIFIER_REPRESENTATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::CollaborationUse> _representation = boost::any_cast<std::shared_ptr<uml::CollaborationUse>>(newValue);
+			setRepresentation(_representation); //137
+			break;
+		}
+		case UmlPackage::BEHAVIOR_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::BehavioralFeature> _specification = boost::any_cast<std::shared_ptr<uml::BehavioralFeature>>(newValue);
+			setSpecification(_specification); //153
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setTemplateParameter(_templateParameter); //15
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //19
+			break;
+		}
+	}
 }

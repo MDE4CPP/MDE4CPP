@@ -1,54 +1,55 @@
-#include "StartObjectBehaviorActionImpl.hpp"
+#include "uml/impl/StartObjectBehaviorActionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "CallAction.hpp"
+#include "uml/CallAction.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExceptionHandler.hpp"
+#include "uml/ExceptionHandler.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "Port.hpp"
+#include "uml/Port.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
 
 using namespace uml;
@@ -356,10 +357,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > StartObjectBehaviorActionImpl::
 }
 
 
+std::shared_ptr<ecore::EObject> StartObjectBehaviorActionImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StartObjectBehaviorActionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -431,4 +456,81 @@ boost::any StartObjectBehaviorActionImpl::eGet(int featureID,  bool resolve, boo
 			return getVisibility(); //1769
 	}
 	return boost::any();
+}
+
+void StartObjectBehaviorActionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setActivity(_activity); //17613
+			break;
+		}
+		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			setInStructuredNode(_inStructuredNode); //17616
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //17610
+			break;
+		}
+		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		{
+			// BOOST CAST
+			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
+			setIsLocallyReentrant(_isLocallyReentrant); //17624
+			break;
+		}
+		case UmlPackage::CALLACTION_ISSYNCHRONOUS:
+		{
+			// BOOST CAST
+			bool _isSynchronous = boost::any_cast<bool>(newValue);
+			setIsSynchronous(_isSynchronous); //17630
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1765
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1766
+			break;
+		}
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _object = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setObject(_object); //17632
+			break;
+		}
+		case UmlPackage::INVOCATIONACTION_ONPORT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Port> _onPort = boost::any_cast<std::shared_ptr<uml::Port>>(newValue);
+			setOnPort(_onPort); //17629
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1769
+			break;
+		}
+	}
 }

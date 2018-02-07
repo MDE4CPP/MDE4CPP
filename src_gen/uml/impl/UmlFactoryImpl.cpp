@@ -1,9 +1,9 @@
-#include "UmlFactoryImpl.hpp"
-#include "UmlPackage.hpp"
+#include "uml/impl/UmlFactoryImpl.hpp"
+#include "uml/UmlPackage.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "impl/ElementImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
 using namespace uml;
 
 //*********************************
@@ -7855,15 +7855,20 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 	return nullptr;
 }
 
-std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(std::shared_ptr<ecore::EClass> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className, _container);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(std::string _className) const

@@ -1,12 +1,13 @@
-#include "ObjectImpl.hpp"
+#include "uml/impl/ObjectImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
 
 using namespace uml;
@@ -99,13 +100,25 @@ void ObjectImpl::unset(std::shared_ptr<uml::Property>  property)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ObjectImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void ObjectImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

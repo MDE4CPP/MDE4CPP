@@ -1,24 +1,25 @@
-#include "LinkEndDestructionDataImpl.hpp"
+#include "uml/impl/LinkEndDestructionDataImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "LinkEndData.hpp"
+#include "uml/LinkEndData.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
-#include "QualifierValue.hpp"
+#include "uml/QualifierValue.hpp"
 
 
 using namespace uml;
@@ -166,10 +167,19 @@ std::shared_ptr<Union<uml::Element> > LinkEndDestructionDataImpl::getOwnedElemen
 }
 
 
+std::shared_ptr<ecore::EObject> LinkEndDestructionDataImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkEndDestructionDataImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -193,4 +203,39 @@ boost::any LinkEndDestructionDataImpl::eGet(int featureID,  bool resolve, bool c
 			return getValue(); //1526
 	}
 	return boost::any();
+}
+
+void LinkEndDestructionDataImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::LINKENDDESTRUCTIONDATA_DESTROYAT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _destroyAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setDestroyAt(_destroyAt); //1527
+			break;
+		}
+		case UmlPackage::LINKENDDATA_END:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setEnd(_end); //1524
+			break;
+		}
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES:
+		{
+			// BOOST CAST
+			bool _isDestroyDuplicates = boost::any_cast<bool>(newValue);
+			setIsDestroyDuplicates(_isDestroyDuplicates); //1528
+			break;
+		}
+		case UmlPackage::LINKENDDATA_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //1526
+			break;
+		}
+	}
 }

@@ -1,22 +1,23 @@
-#include "ExceptionHandlerImpl.hpp"
+#include "uml/impl/ExceptionHandlerImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExecutableNode.hpp"
+#include "uml/ExecutableNode.hpp"
 
-#include "ObjectNode.hpp"
+#include "uml/ObjectNode.hpp"
 
 
 using namespace uml;
@@ -236,10 +237,24 @@ std::weak_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_protectedNode.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExceptionHandlerImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -261,4 +276,32 @@ boost::any ExceptionHandlerImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getProtectedNode(); //1157
 	}
 	return boost::any();
+}
+
+void ExceptionHandlerImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXCEPTIONHANDLER_EXCEPTIONINPUT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ObjectNode> _exceptionInput = boost::any_cast<std::shared_ptr<uml::ObjectNode>>(newValue);
+			setExceptionInput(_exceptionInput); //1154
+			break;
+		}
+		case UmlPackage::EXCEPTIONHANDLER_HANDLERBODY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ExecutableNode> _handlerBody = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);
+			setHandlerBody(_handlerBody); //1156
+			break;
+		}
+		case UmlPackage::EXCEPTIONHANDLER_PROTECTEDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ExecutableNode> _protectedNode = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);
+			setProtectedNode(_protectedNode); //1157
+			break;
+		}
+	}
 }

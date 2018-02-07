@@ -1,37 +1,38 @@
-#include "ElementImpl.hpp"
+#include "uml/impl/ElementImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
-#include "stereotypestorage.h"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
+#include "util/stereotypestorage.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
-#include "EModelElement.hpp"
+#include "ecore/EModelElement.hpp"
 
-#include "EObject.hpp"
+#include "ecore/EObject.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Model.hpp"
+#include "uml/Model.hpp"
 
-#include "Object.hpp"
+#include "uml/Object.hpp"
 
-#include "Package.hpp"
+#include "uml/Package.hpp"
 
-#include "Relationship.hpp"
+#include "uml/Relationship.hpp"
 
-#include "Stereotype.hpp"
+#include "uml/Stereotype.hpp"
 
 
 using namespace uml;
@@ -451,10 +452,19 @@ std::weak_ptr<uml::Element > ElementImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> ElementImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -468,4 +478,11 @@ boost::any ElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOwner(); //83
 	}
 	return boost::any();
+}
+
+void ElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

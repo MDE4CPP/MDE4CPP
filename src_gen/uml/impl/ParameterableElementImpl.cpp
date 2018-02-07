@@ -1,20 +1,21 @@
-#include "ParameterableElementImpl.hpp"
+#include "uml/impl/ParameterableElementImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
 
 using namespace uml;
@@ -177,10 +178,24 @@ std::weak_ptr<uml::Element > ParameterableElementImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> ParameterableElementImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterableElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -198,4 +213,25 @@ boost::any ParameterableElementImpl::eGet(int featureID,  bool resolve, bool cor
 			return getTemplateParameter(); //155
 	}
 	return boost::any();
+}
+
+void ParameterableElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setOwningTemplateParameter(_owningTemplateParameter); //154
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setTemplateParameter(_templateParameter); //155
+			break;
+		}
+	}
 }

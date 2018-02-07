@@ -1,20 +1,21 @@
-#include "TemplateSignatureImpl.hpp"
+#include "uml/impl/TemplateSignatureImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
 
 using namespace uml;
@@ -220,10 +221,24 @@ std::shared_ptr<Union<uml::TemplateParameter> > TemplateSignatureImpl::getParame
 }
 
 
+std::shared_ptr<ecore::EObject> TemplateSignatureImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_template.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TemplateSignatureImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -243,4 +258,18 @@ boost::any TemplateSignatureImpl::eGet(int featureID,  bool resolve, bool coreTy
 			return getTemplate(); //175
 	}
 	return boost::any();
+}
+
+void TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATESIGNATURE_TEMPLATE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateableElement> _template = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
+			setTemplate(_template); //175
+			break;
+		}
+	}
 }

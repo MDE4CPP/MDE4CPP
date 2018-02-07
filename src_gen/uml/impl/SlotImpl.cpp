@@ -1,22 +1,23 @@
-#include "SlotImpl.hpp"
+#include "uml/impl/SlotImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InstanceSpecification.hpp"
+#include "uml/InstanceSpecification.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -206,10 +207,24 @@ std::weak_ptr<uml::Element > SlotImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> SlotImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningInstance.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SlotImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -229,4 +244,25 @@ boost::any SlotImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getValue(); //805
 	}
 	return boost::any();
+}
+
+void SlotImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::SLOT_DEFININGFEATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuralFeature> _definingFeature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
+			setDefiningFeature(_definingFeature); //804
+			break;
+		}
+		case UmlPackage::SLOT_OWNINGINSTANCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InstanceSpecification> _owningInstance = boost::any_cast<std::shared_ptr<uml::InstanceSpecification>>(newValue);
+			setOwningInstance(_owningInstance); //806
+			break;
+		}
+	}
 }

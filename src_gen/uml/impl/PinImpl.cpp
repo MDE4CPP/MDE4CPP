@@ -1,52 +1,53 @@
-#include "PinImpl.hpp"
+#include "uml/impl/PinImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Activity.hpp"
+#include "uml/Activity.hpp"
 
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityGroup.hpp"
+#include "uml/ActivityGroup.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityPartition.hpp"
+#include "uml/ActivityPartition.hpp"
 
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InterruptibleActivityRegion.hpp"
+#include "uml/InterruptibleActivityRegion.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "ObjectNode.hpp"
+#include "uml/ObjectNode.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "State.hpp"
+#include "uml/State.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "StructuredActivityNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
 
-#include "Type.hpp"
+#include "uml/Type.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -313,10 +314,34 @@ std::shared_ptr<Union<uml::RedefinableElement> > PinImpl::getRedefinedElement() 
 }
 
 
+std::shared_ptr<ecore::EObject> PinImpl::eContainer() const
+{
+	if(auto wp = m_activity.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_inStructuredNode.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PinImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -390,4 +415,137 @@ boost::any PinImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //1199
 	}
 	return boost::any();
+}
+
+void PinImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
+			setActivity(_activity); //11913
+			break;
+		}
+		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
+			setInStructuredNode(_inStructuredNode); //11916
+			break;
+		}
+		case UmlPackage::PIN_ISCONTROL:
+		{
+			// BOOST CAST
+			bool _isControl = boost::any_cast<bool>(newValue);
+			setIsControl(_isControl); //11933
+			break;
+		}
+		case UmlPackage::OBJECTNODE_ISCONTROLTYPE:
+		{
+			// BOOST CAST
+			bool _isControlType = boost::any_cast<bool>(newValue);
+			setIsControlType(_isControlType); //11923
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //11910
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
+		{
+			// BOOST CAST
+			bool _isOrdered = boost::any_cast<bool>(newValue);
+			setIsOrdered(_isOrdered); //1194
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
+		{
+			// BOOST CAST
+			bool _isUnique = boost::any_cast<bool>(newValue);
+			setIsUnique(_isUnique); //1195
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
+		{
+			// BOOST CAST
+			int _lower = boost::any_cast<int>(newValue);
+			setLower(_lower); //1196
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setLowerValue(_lowerValue); //1197
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1195
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1196
+			break;
+		}
+		case UmlPackage::OBJECTNODE_ORDERING:
+		{
+			// BOOST CAST
+			ObjectNodeOrderingKind _ordering = boost::any_cast<ObjectNodeOrderingKind>(newValue);
+			setOrdering(_ordering); //11924
+			break;
+		}
+		case UmlPackage::OBJECTNODE_SELECTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setSelection(_selection); //11925
+			break;
+		}
+		case UmlPackage::TYPEDELEMENT_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
+			setType(_type); //11910
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
+		{
+			// BOOST CAST
+			int _upper = boost::any_cast<int>(newValue);
+			setUpper(_upper); //1198
+			break;
+		}
+		case UmlPackage::OBJECTNODE_UPPERBOUND:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _upperBound = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setUpperBound(_upperBound); //11926
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setUpperValue(_upperValue); //1199
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1199
+			break;
+		}
+	}
 }

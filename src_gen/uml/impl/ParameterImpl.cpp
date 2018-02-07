@@ -1,40 +1,41 @@
-#include "ParameterImpl.hpp"
+#include "uml/impl/ParameterImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "ConnectableElement.hpp"
+#include "uml/ConnectableElement.hpp"
 
-#include "ConnectorEnd.hpp"
+#include "uml/ConnectorEnd.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Operation.hpp"
+#include "uml/Operation.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "Type.hpp"
+#include "uml/Type.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -442,10 +443,39 @@ std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> ParameterImpl::eContainer() const
+{
+	if(auto wp = m_behavior.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_operation.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -509,4 +539,144 @@ boost::any ParameterImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getVisibility(); //449
 	}
 	return boost::any();
+}
+
+void ParameterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PARAMETER_BEHAVIOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Behavior> _behavior = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
+			setBehavior(_behavior); //4428
+			break;
+		}
+		case UmlPackage::PARAMETER_DEFAULT:
+		{
+			// BOOST CAST
+			std::string _default = boost::any_cast<std::string>(newValue);
+			setDefault(_default); //4420
+			break;
+		}
+		case UmlPackage::PARAMETER_DEFAULTVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _defaultValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setDefaultValue(_defaultValue); //4421
+			break;
+		}
+		case UmlPackage::PARAMETER_DIRECTION:
+		{
+			// BOOST CAST
+			ParameterDirectionKind _direction = boost::any_cast<ParameterDirectionKind>(newValue);
+			setDirection(_direction); //4422
+			break;
+		}
+		case UmlPackage::PARAMETER_EFFECT:
+		{
+			// BOOST CAST
+			ParameterEffectKind _effect = boost::any_cast<ParameterEffectKind>(newValue);
+			setEffect(_effect); //4423
+			break;
+		}
+		case UmlPackage::PARAMETER_ISEXCEPTION:
+		{
+			// BOOST CAST
+			bool _isException = boost::any_cast<bool>(newValue);
+			setIsException(_isException); //4424
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
+		{
+			// BOOST CAST
+			bool _isOrdered = boost::any_cast<bool>(newValue);
+			setIsOrdered(_isOrdered); //444
+			break;
+		}
+		case UmlPackage::PARAMETER_ISSTREAM:
+		{
+			// BOOST CAST
+			bool _isStream = boost::any_cast<bool>(newValue);
+			setIsStream(_isStream); //4425
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
+		{
+			// BOOST CAST
+			bool _isUnique = boost::any_cast<bool>(newValue);
+			setIsUnique(_isUnique); //445
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
+		{
+			// BOOST CAST
+			int _lower = boost::any_cast<int>(newValue);
+			setLower(_lower); //446
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setLowerValue(_lowerValue); //447
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //445
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //446
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setOwningTemplateParameter(_owningTemplateParameter); //444
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setTemplateParameter(_templateParameter); //445
+			break;
+		}
+		case UmlPackage::TYPEDELEMENT_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
+			setType(_type); //4410
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
+		{
+			// BOOST CAST
+			int _upper = boost::any_cast<int>(newValue);
+			setUpper(_upper); //448
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setUpperValue(_upperValue); //449
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //449
+			break;
+		}
+	}
 }

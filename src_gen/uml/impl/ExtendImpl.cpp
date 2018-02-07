@@ -1,32 +1,33 @@
-#include "ExtendImpl.hpp"
+#include "uml/impl/ExtendImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExtensionPoint.hpp"
+#include "uml/ExtensionPoint.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "UseCase.hpp"
+#include "uml/UseCase.hpp"
 
 
 using namespace uml;
@@ -272,10 +273,29 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ExtendImpl::getTarget
 }
 
 
+std::shared_ptr<ecore::EObject> ExtendImpl::eContainer() const
+{
+	if(auto wp = m_extension.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtendImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -315,4 +335,53 @@ boost::any ExtendImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //999
 	}
 	return boost::any();
+}
+
+void ExtendImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::EXTEND_CONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _condition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setCondition(_condition); //9913
+			break;
+		}
+		case UmlPackage::EXTEND_EXTENDEDCASE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::UseCase> _extendedCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			setExtendedCase(_extendedCase); //9914
+			break;
+		}
+		case UmlPackage::EXTEND_EXTENSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::UseCase> _extension = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			setExtension(_extension); //9916
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //995
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //996
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //999
+			break;
+		}
+	}
 }

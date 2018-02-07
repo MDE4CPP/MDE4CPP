@@ -1,20 +1,21 @@
-#include "QualifierValueImpl.hpp"
+#include "uml/impl/QualifierValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
 
 using namespace uml;
@@ -168,10 +169,19 @@ std::shared_ptr<Union<uml::Element> > QualifierValueImpl::getOwnedElement() cons
 }
 
 
+std::shared_ptr<ecore::EObject> QualifierValueImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any QualifierValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -189,4 +199,25 @@ boost::any QualifierValueImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getValue(); //1275
 	}
 	return boost::any();
+}
+
+void QualifierValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::QUALIFIERVALUE_QUALIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Property> _qualifier = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
+			setQualifier(_qualifier); //1274
+			break;
+		}
+		case UmlPackage::QUALIFIERVALUE_VALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
+			setValue(_value); //1275
+			break;
+		}
+	}
 }

@@ -1,20 +1,21 @@
-#include "FactoryImpl.hpp"
+#include "uml/impl/FactoryImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 
 using namespace uml;
@@ -120,10 +121,15 @@ std::shared_ptr<Union<uml::Element> > FactoryImpl::getOwnedElement() const
 }
 
 
+std::shared_ptr<ecore::EObject> FactoryImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FactoryImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -137,4 +143,11 @@ boost::any FactoryImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOwner(); //243
 	}
 	return boost::any();
+}
+
+void FactoryImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

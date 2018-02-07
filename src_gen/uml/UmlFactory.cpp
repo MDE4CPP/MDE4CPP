@@ -1,5 +1,5 @@
-#include "UmlFactory.hpp"
-#include "impl/UmlFactoryImpl.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/impl/UmlFactoryImpl.hpp"
 
 using namespace uml;
 

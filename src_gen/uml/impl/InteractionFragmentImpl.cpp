@@ -1,32 +1,33 @@
-#include "InteractionFragmentImpl.hpp"
+#include "uml/impl/InteractionFragmentImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "GeneralOrdering.hpp"
+#include "uml/GeneralOrdering.hpp"
 
-#include "Interaction.hpp"
+#include "uml/Interaction.hpp"
 
-#include "InteractionOperand.hpp"
+#include "uml/InteractionOperand.hpp"
 
-#include "Lifeline.hpp"
+#include "uml/Lifeline.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
 
 using namespace uml;
@@ -274,10 +275,34 @@ std::weak_ptr<uml::Element > InteractionFragmentImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> InteractionFragmentImpl::eContainer() const
+{
+	if(auto wp = m_enclosingInteraction.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_enclosingOperand.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InteractionFragmentImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -311,4 +336,46 @@ boost::any InteractionFragmentImpl::eGet(int featureID,  bool resolve, bool core
 			return getVisibility(); //2129
 	}
 	return boost::any();
+}
+
+void InteractionFragmentImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
+			setEnclosingInteraction(_enclosingInteraction); //21212
+			break;
+		}
+		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
+			setEnclosingOperand(_enclosingOperand); //21211
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //2125
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //2126
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //2129
+			break;
+		}
+	}
 }

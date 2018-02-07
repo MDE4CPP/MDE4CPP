@@ -1,16 +1,17 @@
-#include "CommentImpl.hpp"
+#include "uml/impl/CommentImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
 
 using namespace uml;
@@ -142,10 +143,19 @@ std::shared_ptr<Union<uml::Element> > CommentImpl::getOwnedElement() const
 }
 
 
+std::shared_ptr<ecore::EObject> CommentImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CommentImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -163,4 +173,18 @@ boost::any CommentImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOwner(); //93
 	}
 	return boost::any();
+}
+
+void CommentImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::COMMENT_BODY:
+		{
+			// BOOST CAST
+			std::string _body = boost::any_cast<std::string>(newValue);
+			setBody(_body); //95
+			break;
+		}
+	}
 }

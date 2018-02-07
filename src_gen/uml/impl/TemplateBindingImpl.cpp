@@ -1,24 +1,25 @@
-#include "TemplateBindingImpl.hpp"
+#include "uml/impl/TemplateBindingImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "TemplateParameterSubstitution.hpp"
+#include "uml/TemplateParameterSubstitution.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateSignature.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
 
 using namespace uml;
@@ -239,10 +240,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > TemplateBindingImpl::
 }
 
 
+std::shared_ptr<ecore::EObject> TemplateBindingImpl::eContainer() const
+{
+	if(auto wp = m_boundElement.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TemplateBindingImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -268,4 +283,25 @@ boost::any TemplateBindingImpl::eGet(int featureID,  bool resolve, bool coreType
 			return getTarget(); //196
 	}
 	return boost::any();
+}
+
+void TemplateBindingImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATEBINDING_BOUNDELEMENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateableElement> _boundElement = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
+			setBoundElement(_boundElement); //199
+			break;
+		}
+		case UmlPackage::TEMPLATEBINDING_SIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
+			setSignature(_signature); //198
+			break;
+		}
+	}
 }

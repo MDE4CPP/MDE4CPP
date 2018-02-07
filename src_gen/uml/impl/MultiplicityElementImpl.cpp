@@ -1,20 +1,21 @@
-#include "MultiplicityElementImpl.hpp"
+#include "uml/impl/MultiplicityElementImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "MultiplicityElement.hpp"
+#include "uml/MultiplicityElement.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace uml;
@@ -281,10 +282,19 @@ std::shared_ptr<Union<uml::Element> > MultiplicityElementImpl::getOwnedElement()
 }
 
 
+std::shared_ptr<ecore::EObject> MultiplicityElementImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any MultiplicityElementImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -310,4 +320,53 @@ boost::any MultiplicityElementImpl::eGet(int featureID,  bool resolve, bool core
 			return getUpperValue(); //329
 	}
 	return boost::any();
+}
+
+void MultiplicityElementImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::MULTIPLICITYELEMENT_ISORDERED:
+		{
+			// BOOST CAST
+			bool _isOrdered = boost::any_cast<bool>(newValue);
+			setIsOrdered(_isOrdered); //324
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_ISUNIQUE:
+		{
+			// BOOST CAST
+			bool _isUnique = boost::any_cast<bool>(newValue);
+			setIsUnique(_isUnique); //325
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWER:
+		{
+			// BOOST CAST
+			int _lower = boost::any_cast<int>(newValue);
+			setLower(_lower); //326
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_LOWERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _lowerValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setLowerValue(_lowerValue); //327
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPER:
+		{
+			// BOOST CAST
+			int _upper = boost::any_cast<int>(newValue);
+			setUpper(_upper); //328
+			break;
+		}
+		case UmlPackage::MULTIPLICITYELEMENT_UPPERVALUE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _upperValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setUpperValue(_upperValue); //329
+			break;
+		}
+	}
 }

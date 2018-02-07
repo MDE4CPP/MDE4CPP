@@ -27,9 +27,7 @@
 //Model includes
 #include "../InteractionConstraint.hpp"
 
-#include "impl/ConstraintImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/ConstraintImpl.hpp"
 
 
 
@@ -160,6 +158,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

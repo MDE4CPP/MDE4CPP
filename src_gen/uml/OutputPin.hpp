@@ -21,10 +21,11 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include <string>
 #include <map>
+#include <string>
 #include <vector>
-#include "SubsetUnion.hpp"
+
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "boost/shared_ptr.hpp"
 #include "boost/any.hpp"
 
@@ -138,12 +139,12 @@ namespace uml
 }
 
 // base class includes
-#include "Pin.hpp"
+#include "uml/Pin.hpp"
 
 // enum includes
-#include "ObjectNodeOrderingKind.hpp"
+#include "uml/ObjectNodeOrderingKind.hpp"
 
-#include "VisibilityKind.hpp"
+#include "uml/VisibilityKind.hpp"
 
 
 //*********************************
@@ -246,7 +247,9 @@ namespace uml
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
 			 The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0; 
+			virtual std::shared_ptr<Union<uml::RedefinableElement> > getRedefinedElement() const = 0;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 	};
 
 }

@@ -1,28 +1,29 @@
-#include "IncludeImpl.hpp"
+#include "uml/impl/IncludeImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "UseCase.hpp"
+#include "uml/UseCase.hpp"
 
 
 using namespace uml;
@@ -224,10 +225,29 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > IncludeImpl::getTarge
 }
 
 
+std::shared_ptr<ecore::EObject> IncludeImpl::eContainer() const
+{
+	if(auto wp = m_includingCase.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IncludeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -263,4 +283,46 @@ boost::any IncludeImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getVisibility(); //1019
 	}
 	return boost::any();
+}
+
+void IncludeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::INCLUDE_ADDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::UseCase> _addition = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			setAddition(_addition); //10113
+			break;
+		}
+		case UmlPackage::INCLUDE_INCLUDINGCASE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::UseCase> _includingCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
+			setIncludingCase(_includingCase); //10114
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //1015
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //1016
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //1019
+			break;
+		}
+	}
 }

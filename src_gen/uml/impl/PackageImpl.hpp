@@ -27,11 +27,9 @@
 //Model includes
 #include "../Package.hpp"
 
-#include "impl/NamespaceImpl.hpp"
-#include "impl/PackageableElementImpl.hpp"
-#include "impl/TemplateableElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/NamespaceImpl.hpp"
+#include "uml/impl/PackageableElementImpl.hpp"
+#include "uml/impl/TemplateableElementImpl.hpp"
 
 
 
@@ -285,6 +283,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

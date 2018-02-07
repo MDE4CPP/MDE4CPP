@@ -27,10 +27,8 @@
 //Model includes
 #include "../Parameter.hpp"
 
-#include "impl/ConnectableElementImpl.hpp"
-#include "impl/MultiplicityElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/ConnectableElementImpl.hpp"
+#include "uml/impl/MultiplicityElementImpl.hpp"
 
 
 
@@ -250,6 +248,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

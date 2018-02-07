@@ -1,20 +1,20 @@
-#include "UmlPackageImpl.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "UmlFactory.hpp"
+#include "uml/UmlFactory.hpp"
 
 //depending model packages
-#include "EcorePackage.hpp"
-#include "TypesPackage.hpp"
-#include "UmlPackage.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "types/TypesPackage.hpp"
+#include "uml/UmlPackage.hpp"
 
 using namespace uml;
 

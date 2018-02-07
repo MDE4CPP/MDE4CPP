@@ -1,36 +1,37 @@
-#include "ConnectorImpl.hpp"
+#include "uml/impl/ConnectorImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Association.hpp"
+#include "uml/Association.hpp"
 
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Connector.hpp"
+#include "uml/Connector.hpp"
 
-#include "ConnectorEnd.hpp"
+#include "uml/ConnectorEnd.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Feature.hpp"
+#include "uml/Feature.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
 
 using namespace uml;
@@ -306,10 +307,24 @@ std::shared_ptr<Union<uml::RedefinableElement> > ConnectorImpl::getRedefinedElem
 }
 
 
+std::shared_ptr<ecore::EObject> ConnectorImpl::eContainer() const
+{
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ConnectorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -355,4 +370,53 @@ boost::any ConnectorImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getVisibility(); //939
 	}
 	return boost::any();
+}
+
+void ConnectorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //9310
+			break;
+		}
+		case UmlPackage::FEATURE_ISSTATIC:
+		{
+			// BOOST CAST
+			bool _isStatic = boost::any_cast<bool>(newValue);
+			setIsStatic(_isStatic); //9314
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //935
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //936
+			break;
+		}
+		case UmlPackage::CONNECTOR_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			setType(_type); //9319
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //939
+			break;
+		}
+	}
 }

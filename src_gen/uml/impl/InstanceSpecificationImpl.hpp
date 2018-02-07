@@ -27,11 +27,9 @@
 //Model includes
 #include "../InstanceSpecification.hpp"
 
-#include "impl/DeployedArtifactImpl.hpp"
-#include "impl/DeploymentTargetImpl.hpp"
-#include "impl/PackageableElementImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/DeployedArtifactImpl.hpp"
+#include "uml/impl/DeploymentTargetImpl.hpp"
+#include "uml/impl/PackageableElementImpl.hpp"
 
 
 
@@ -146,6 +144,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

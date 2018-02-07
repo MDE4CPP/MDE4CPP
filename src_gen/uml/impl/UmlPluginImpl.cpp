@@ -1,6 +1,6 @@
-#include "UmlPluginImpl.hpp"
-#include "UmlFactory.hpp"
-#include "UmlPackage.hpp"
+#include "uml/impl/UmlPluginImpl.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/UmlPackage.hpp"
 
 using namespace uml;
 

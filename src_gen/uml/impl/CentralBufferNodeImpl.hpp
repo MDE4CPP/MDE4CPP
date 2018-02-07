@@ -27,9 +27,7 @@
 //Model includes
 #include "../CentralBufferNode.hpp"
 
-#include "impl/ObjectNodeImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "uml/impl/ObjectNodeImpl.hpp"
 
 
 
@@ -108,6 +106,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

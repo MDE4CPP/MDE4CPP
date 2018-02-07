@@ -27,12 +27,10 @@
 //Model includes
 #include "../Element.hpp"
 
-#include "impl/EModelElementImpl.hpp"
-#include "impl/ObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
+#include "uml/impl/ObjectImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "stereotypestorage.h"
+#include "util/stereotypestorage.hpp"
 
 
 //*********************************
@@ -261,6 +259,9 @@ namespace uml
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

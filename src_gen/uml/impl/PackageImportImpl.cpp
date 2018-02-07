@@ -1,22 +1,23 @@
-#include "PackageImportImpl.hpp"
+#include "uml/impl/PackageImportImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Package.hpp"
+#include "uml/Package.hpp"
 
 
 using namespace uml;
@@ -203,10 +204,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageImportImpl::ge
 }
 
 
+std::shared_ptr<ecore::EObject> PackageImportImpl::eContainer() const
+{
+	if(auto wp = m_importingNamespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageImportImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -232,4 +247,32 @@ boost::any PackageImportImpl::eGet(int featureID,  bool resolve, bool coreType) 
 			return getVisibility(); //839
 	}
 	return boost::any();
+}
+
+void PackageImportImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PACKAGEIMPORT_IMPORTEDPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _importedPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setImportedPackage(_importedPackage); //837
+			break;
+		}
+		case UmlPackage::PACKAGEIMPORT_IMPORTINGNAMESPACE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Namespace> _importingNamespace = boost::any_cast<std::shared_ptr<uml::Namespace>>(newValue);
+			setImportingNamespace(_importingNamespace); //838
+			break;
+		}
+		case UmlPackage::PACKAGEIMPORT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //839
+			break;
+		}
+	}
 }

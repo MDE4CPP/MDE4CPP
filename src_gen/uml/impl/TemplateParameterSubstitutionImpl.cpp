@@ -1,22 +1,23 @@
-#include "TemplateParameterSubstitutionImpl.hpp"
+#include "uml/impl/TemplateParameterSubstitutionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
 
 using namespace uml;
@@ -211,10 +212,24 @@ std::weak_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
 }
 
 
+std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_templateBinding.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TemplateParameterSubstitutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -236,4 +251,39 @@ boost::any TemplateParameterSubstitutionImpl::eGet(int featureID,  bool resolve,
 			return getTemplateBinding(); //227
 	}
 	return boost::any();
+}
+
+void TemplateParameterSubstitutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ACTUAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _actual = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setActual(_actual); //224
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_FORMAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _formal = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setFormal(_formal); //225
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_OWNEDACTUAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ParameterableElement> _ownedActual = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
+			setOwnedActual(_ownedActual); //226
+			break;
+		}
+		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_TEMPLATEBINDING:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateBinding> _templateBinding = boost::any_cast<std::shared_ptr<uml::TemplateBinding>>(newValue);
+			setTemplateBinding(_templateBinding); //227
+			break;
+		}
+	}
 }

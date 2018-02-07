@@ -1,64 +1,65 @@
-#include "OperationImpl.hpp"
+#include "uml/impl/OperationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "BehavioralFeature.hpp"
+#include "uml/BehavioralFeature.hpp"
 
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "Constraint.hpp"
+#include "uml/Constraint.hpp"
 
-#include "DataType.hpp"
+#include "uml/DataType.hpp"
 
-#include "Dependency.hpp"
+#include "uml/Dependency.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ElementImport.hpp"
+#include "uml/ElementImport.hpp"
 
-#include "Interface.hpp"
+#include "uml/Interface.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Namespace.hpp"
+#include "uml/Namespace.hpp"
 
-#include "Operation.hpp"
+#include "uml/Operation.hpp"
 
-#include "PackageImport.hpp"
+#include "uml/PackageImport.hpp"
 
-#include "PackageableElement.hpp"
+#include "uml/PackageableElement.hpp"
 
-#include "Parameter.hpp"
+#include "uml/Parameter.hpp"
 
-#include "ParameterSet.hpp"
+#include "uml/ParameterSet.hpp"
 
-#include "ParameterableElement.hpp"
+#include "uml/ParameterableElement.hpp"
 
-#include "RedefinableElement.hpp"
+#include "uml/RedefinableElement.hpp"
 
-#include "StringExpression.hpp"
+#include "uml/StringExpression.hpp"
 
-#include "TemplateBinding.hpp"
+#include "uml/TemplateBinding.hpp"
 
-#include "TemplateParameter.hpp"
+#include "uml/TemplateParameter.hpp"
 
-#include "TemplateSignature.hpp"
+#include "uml/TemplateSignature.hpp"
 
-#include "TemplateableElement.hpp"
+#include "uml/TemplateableElement.hpp"
 
-#include "Type.hpp"
+#include "uml/Type.hpp"
 
 
 using namespace uml;
@@ -650,10 +651,44 @@ std::shared_ptr<Union<uml::Classifier> > OperationImpl::getRedefinitionContext()
 }
 
 
+std::shared_ptr<ecore::EObject> OperationImpl::eContainer() const
+{
+	if(auto wp = m_class.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_datatype.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_interface.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_namespace.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owningTemplateParameter.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OperationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -747,4 +782,116 @@ boost::any OperationImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getVisibility(); //479
 	}
 	return boost::any();
+}
+
+void OperationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::OPERATION_BODYCONDITION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Constraint> _bodyCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
+			setBodyCondition(_bodyCondition); //4731
+			break;
+		}
+		case UmlPackage::OPERATION_CLASS:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Class> _class = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
+			setClass(_class); //4732
+			break;
+		}
+		case UmlPackage::BEHAVIORALFEATURE_CONCURRENCY:
+		{
+			// BOOST CAST
+			CallConcurrencyKind _concurrency = boost::any_cast<CallConcurrencyKind>(newValue);
+			setConcurrency(_concurrency); //4721
+			break;
+		}
+		case UmlPackage::OPERATION_DATATYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::DataType> _datatype = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
+			setDatatype(_datatype); //4733
+			break;
+		}
+		case UmlPackage::OPERATION_INTERFACE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Interface> _interface = boost::any_cast<std::shared_ptr<uml::Interface>>(newValue);
+			setInterface(_interface); //4734
+			break;
+		}
+		case UmlPackage::BEHAVIORALFEATURE_ISABSTRACT:
+		{
+			// BOOST CAST
+			bool _isAbstract = boost::any_cast<bool>(newValue);
+			setIsAbstract(_isAbstract); //4722
+			break;
+		}
+		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		{
+			// BOOST CAST
+			bool _isLeaf = boost::any_cast<bool>(newValue);
+			setIsLeaf(_isLeaf); //4710
+			break;
+		}
+		case UmlPackage::OPERATION_ISQUERY:
+		{
+			// BOOST CAST
+			bool _isQuery = boost::any_cast<bool>(newValue);
+			setIsQuery(_isQuery); //4736
+			break;
+		}
+		case UmlPackage::FEATURE_ISSTATIC:
+		{
+			// BOOST CAST
+			bool _isStatic = boost::any_cast<bool>(newValue);
+			setIsStatic(_isStatic); //4714
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAME:
+		{
+			// BOOST CAST
+			std::string _name = boost::any_cast<std::string>(newValue);
+			setName(_name); //475
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
+			setNameExpression(_nameExpression); //476
+			break;
+		}
+		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
+			setOwnedTemplateSignature(_ownedTemplateSignature); //475
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setOwningTemplateParameter(_owningTemplateParameter); //474
+			break;
+		}
+		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
+			setTemplateParameter(_templateParameter); //475
+			break;
+		}
+		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		{
+			// BOOST CAST
+			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
+			setVisibility(_visibility); //479
+			break;
+		}
+	}
 }

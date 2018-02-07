@@ -1,28 +1,29 @@
-#include "ProfileApplicationImpl.hpp"
+#include "uml/impl/ProfileApplicationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "ENamedElement.hpp"
+#include "ecore/ENamedElement.hpp"
 
-#include "EPackage.hpp"
+#include "ecore/EPackage.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "NamedElement.hpp"
+#include "uml/NamedElement.hpp"
 
-#include "Package.hpp"
+#include "uml/Package.hpp"
 
-#include "Profile.hpp"
+#include "uml/Profile.hpp"
 
 
 using namespace uml;
@@ -215,10 +216,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > ProfileApplicationImp
 }
 
 
+std::shared_ptr<ecore::EObject> ProfileApplicationImpl::eContainer() const
+{
+	if(auto wp = m_applyingPackage.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ProfileApplicationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -244,4 +259,32 @@ boost::any ProfileApplicationImpl::eGet(int featureID,  bool resolve, bool coreT
 			return getTarget(); //766
 	}
 	return boost::any();
+}
+
+void ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PROFILEAPPLICATION_APPLIEDPROFILE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Profile> _appliedProfile = boost::any_cast<std::shared_ptr<uml::Profile>>(newValue);
+			setAppliedProfile(_appliedProfile); //767
+			break;
+		}
+		case UmlPackage::PROFILEAPPLICATION_APPLYINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _applyingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setApplyingPackage(_applyingPackage); //769
+			break;
+		}
+		case UmlPackage::PROFILEAPPLICATION_ISSTRICT:
+		{
+			// BOOST CAST
+			bool _isStrict = boost::any_cast<bool>(newValue);
+			setIsStrict(_isStrict); //768
+			break;
+		}
+	}
 }

@@ -1,20 +1,21 @@
-#include "PackageMergeImpl.hpp"
+#include "uml/impl/PackageMergeImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "UmlPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "uml/impl/UmlPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Comment.hpp"
+#include "uml/Comment.hpp"
 
-#include "DirectedRelationship.hpp"
+#include "uml/DirectedRelationship.hpp"
 
-#include "EAnnotation.hpp"
+#include "ecore/EAnnotation.hpp"
 
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "Package.hpp"
+#include "uml/Package.hpp"
 
 
 using namespace uml;
@@ -186,10 +187,24 @@ std::shared_ptr<SubsetUnion<uml::Element, uml::Element > > PackageMergeImpl::get
 }
 
 
+std::shared_ptr<ecore::EObject> PackageMergeImpl::eContainer() const
+{
+	if(auto wp = m_owner.lock())
+	{
+		return wp;
+	}
+
+	if(auto wp = m_receivingPackage.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PackageMergeImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -213,4 +228,25 @@ boost::any PackageMergeImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getTarget(); //756
 	}
 	return boost::any();
+}
+
+void PackageMergeImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case UmlPackage::PACKAGEMERGE_MERGEDPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _mergedPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setMergedPackage(_mergedPackage); //757
+			break;
+		}
+		case UmlPackage::PACKAGEMERGE_RECEIVINGPACKAGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Package> _receivingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
+			setReceivingPackage(_receivingPackage); //758
+			break;
+		}
+	}
 }
