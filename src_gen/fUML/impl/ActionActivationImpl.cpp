@@ -1,49 +1,50 @@
-#include "ActionActivationImpl.hpp"
+#include "fUML/impl/ActionActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Action.hpp"
-#include "ActivityNode.hpp"
-#include "OutputPin.hpp"
-#include "iterator"
-#include "InputPin.hpp"
-#include "PinActivation.hpp"
-#include "FeatureValue.hpp"
-#include "Link.hpp"
-#include "LiteralBoolean.hpp"
-#include "UmlFactory.hpp"
 
-#include "FUMLFactory.hpp"
-#include "Behavior.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/OutputPin.hpp"
+#include "iterator"
+#include "uml/InputPin.hpp"
+#include "fuml/PinActivation.hpp"
+#include "fuml/FeatureValue.hpp"
+#include "fuml/Link.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "uml/UmlFactory.hpp"
+
+#include "fuml/FUMLFactory.hpp"
+#include "uml/Behavior.hpp"
 
 
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "BooleanValue.hpp"
+#include "fUML/BooleanValue.hpp"
 
-#include "InputPin.hpp"
+#include "uml/InputPin.hpp"
 
-#include "Link.hpp"
+#include "fUML/Link.hpp"
 
-#include "OutputPin.hpp"
+#include "uml/OutputPin.hpp"
 
-#include "Pin.hpp"
+#include "uml/Pin.hpp"
 
-#include "PinActivation.hpp"
+#include "fUML/PinActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -593,10 +594,15 @@ std::shared_ptr< Bag<fUML::PinActivation> > ActionActivationImpl::getPinActivati
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActionActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActionActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -618,4 +624,39 @@ boost::any ActionActivationImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return isRunning(); //785
 	}
 	return boost::any();
+}
+
+void ActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		{
+			// BOOST CAST
+			bool _firing = boost::any_cast<bool>(newValue);
+			setFiring(_firing); //787
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //783
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //784
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //785
+			break;
+		}
+	}
 }

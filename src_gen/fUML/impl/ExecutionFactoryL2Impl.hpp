@@ -27,39 +27,37 @@
 //Model includes
 #include "../ExecutionFactoryL2.hpp"
 
-#include "impl/ExecutionFactoryL1Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL1Impl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include <Activity.hpp>
-#include <FUMLFactory.hpp>
-#include <ActivityParameterNode.hpp>
-#include <InitialNode.hpp>
-#include <ActivityFinalNode.hpp>
-#include <FlowFinalNode.hpp>
-#include <JoinNode.hpp>
-#include <MergeNode.hpp>
-#include <ForkNode.hpp>
-#include <DecisionNode.hpp>
-#include <InputPin.hpp>
-#include <OutputPin.hpp>
-#include <CallBehaviorAction.hpp>
-#include <CallOperationAction.hpp>
-#include <SendSignalAction.hpp>
-#include <ReadSelfAction.hpp>
-#include <TestIdentityAction.hpp>
-#include <ValueSpecificationAction.hpp>
-#include <CreateObjectAction.hpp>
-#include <DestroyObjectAction.hpp>
-#include <ReadStructuralFeatureAction.hpp>
-#include <ClearStructuralFeatureAction.hpp>
-#include <AddStructuralFeatureValueAction.hpp>
-#include <RemoveStructuralFeatureValueAction.hpp>
-#include <ReadLinkAction.hpp>
-#include <ClearAssociationAction.hpp>
-#include <CreateLinkAction.hpp>
-#include <DestroyLinkAction.hpp>
-#include "FlowFinalNode.hpp"
+#include <uml/Activity.hpp>
+#include <fuml/FUMLFactory.hpp>
+#include <uml/ActivityParameterNode.hpp>
+#include <uml/InitialNode.hpp>
+#include <uml/ActivityFinalNode.hpp>
+#include <uml/FlowFinalNode.hpp>
+#include <uml/JoinNode.hpp>
+#include <uml/MergeNode.hpp>
+#include <uml/ForkNode.hpp>
+#include <uml/DecisionNode.hpp>
+#include <uml/InputPin.hpp>
+#include <uml/OutputPin.hpp>
+#include <uml/CallBehaviorAction.hpp>
+#include <uml/CallOperationAction.hpp>
+#include <uml/SendSignalAction.hpp>
+#include <uml/ReadSelfAction.hpp>
+#include <uml/TestIdentityAction.hpp>
+#include <uml/ValueSpecificationAction.hpp>
+#include <uml/CreateObjectAction.hpp>
+#include <uml/DestroyObjectAction.hpp>
+#include <uml/ReadStructuralFeatureAction.hpp>
+#include <uml/ClearStructuralFeatureAction.hpp>
+#include <uml/AddStructuralFeatureValueAction.hpp>
+#include <uml/RemoveStructuralFeatureValueAction.hpp>
+#include <uml/ReadLinkAction.hpp>
+#include <uml/ClearAssociationAction.hpp>
+#include <uml/CreateLinkAction.hpp>
+#include <uml/DestroyLinkAction.hpp>
+#include "uml/FlowFinalNode.hpp"
 
 
 //*********************************
@@ -117,6 +115,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

@@ -1,20 +1,21 @@
-#include "JoinNodeActivationImpl.hpp"
+#include "fUML/impl/JoinNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp"
+#include "fUML/ControlNodeActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -123,10 +124,15 @@ bool JoinNodeActivationImpl::isReady()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> JoinNodeActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any JoinNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any JoinNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -144,4 +150,32 @@ boost::any JoinNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreT
 			return isRunning(); //635
 	}
 	return boost::any();
+}
+
+void JoinNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //633
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //634
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //635
+			break;
+		}
+	}
 }

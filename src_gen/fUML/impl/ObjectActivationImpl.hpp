@@ -28,14 +28,12 @@
 #include "../ObjectActivation.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "Behavior.hpp"
-#include "ClassifierBehaviorExecution.hpp"
+#include "uml/Class.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/Behavior.hpp"
+#include "fuml/ClassifierBehaviorExecution.hpp"
 
 
 //*********************************
@@ -141,6 +139,9 @@ virtual public ObjectActivation
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

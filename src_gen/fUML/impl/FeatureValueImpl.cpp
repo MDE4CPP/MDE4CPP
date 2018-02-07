@@ -1,19 +1,20 @@
-#include "FeatureValueImpl.hpp"
+#include "fUML/impl/FeatureValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "StructuralFeature.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/StructuralFeature.hpp"
 
 
 //Forward declaration includes
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -194,10 +195,15 @@ std::shared_ptr< Bag<fUML::Value> > FeatureValueImpl::getValues() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> FeatureValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FeatureValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -209,4 +215,25 @@ boost::any FeatureValueImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getValues(); //140
 	}
 	return boost::any();
+}
+
+void FeatureValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::FEATUREVALUE_FEATURE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::StructuralFeature> _feature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
+			setFeature(_feature); //142
+			break;
+		}
+		case FUMLPackage::FEATUREVALUE_POSITION:
+		{
+			// BOOST CAST
+			int _position = boost::any_cast<int>(newValue);
+			setPosition(_position); //141
+			break;
+		}
+	}
 }

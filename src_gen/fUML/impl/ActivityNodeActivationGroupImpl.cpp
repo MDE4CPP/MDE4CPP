@@ -1,36 +1,37 @@
-#include "ActivityNodeActivationGroupImpl.hpp"
+#include "fUML/impl/ActivityNodeActivationGroupImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
-#include "ActivityNodeActivation.hpp"
-#include "ActivityNodeActivationGroup.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "ControlNodeActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp"
-#include "InputPin.hpp"
-#include "Class.hpp"
-#include "ActivityEdge.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "FUMLFactory.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ActivityNode.hpp"
+#include "fuml/ActivityNodeActivation.hpp"
+#include "fuml/ActivityNodeActivationGroup.hpp"
+#include "fuml/ActivityParameterNodeActivation.hpp"
+#include "fuml/ControlNodeActivation.hpp"
+
+#include "fuml/ActivityEdgeInstance.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/Class.hpp"
+#include "uml/ActivityEdge.hpp"
+#include "fuml/ActivityParameterNodeActivation.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp"
+#include "fUML/ActivityExecution.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ActivityParameterNodeActivation.hpp"
+#include "fUML/ActivityParameterNodeActivation.hpp"
 
-#include "StructuredActivityNodeActivation.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
 
 
 using namespace fUML;
@@ -410,17 +411,15 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::ActivityNode
 
         DEBUG_MESSAGE(std::cout<<"[run] Checking node " << activation->getNode()->getName()<< "..."<<std::endl;)
 
-        std::shared_ptr<ActionActivation> actionActivation = std::dynamic_pointer_cast<ActionActivation>(activation);
-        if (actionActivation != nullptr
-                || std::dynamic_pointer_cast<ControlNodeActivation>(activation) != nullptr
-                || std::dynamic_pointer_cast<ActivityParameterNodeActivation>(activation) != nullptr)
+        const int class_id = activation->eClass()->getClassifierID();
+        if(class_id == fUML::FUMLPackage::ACTIONACTIVATION ||  class_id == fUML::FUMLPackage::CONTROLNODEACTIVATION || class_id ==fUML::FUMLPackage::ACTIVITYPARAMETERNODEACTIVATION )
         {
         	std::shared_ptr<Bag<fUML::ActivityEdgeInstance> > edges = activation->getIncomingEdges();
             bool isEnabled = this->checkIncomingEdges(edges, activations);
 
             // For an action activation, also consider incoming edges to
             // input pins
-            if (isEnabled && actionActivation != nullptr) 
+            if (isEnabled && class_id == fUML::FUMLPackage::ACTIONACTIVATION)
             {
             	std::shared_ptr<uml::Action> action = std::dynamic_pointer_cast<uml::Action>(activation->getNode());
                 if(action != nullptr)
@@ -430,6 +429,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::ActivityNode
                     while ((j < inputPins->size()) && isEnabled)
                     {
                     	std::shared_ptr<uml::InputPin> inputPin = inputPins->at(j);
+                        std::shared_ptr<ActionActivation> actionActivation = std::dynamic_pointer_cast<ActionActivation>(activation);
                     	std::shared_ptr<Bag<ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
                         isEnabled = this->checkIncomingEdges(inputEdges, activations);
                         j = j + 1;
@@ -562,10 +562,15 @@ std::shared_ptr< Bag<fUML::ActivityNodeActivation> > ActivityNodeActivationGroup
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityNodeActivationGroupImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityNodeActivationGroupImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -581,4 +586,25 @@ boost::any ActivityNodeActivationGroupImpl::eGet(int featureID,  bool resolve, b
 			return getSuspendedActivations(); //504
 	}
 	return boost::any();
+}
+
+void ActivityNodeActivationGroupImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityExecution> _activityExecution = boost::any_cast<std::shared_ptr<fUML::ActivityExecution>>(newValue);
+			setActivityExecution(_activityExecution); //502
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = boost::any_cast<std::shared_ptr<fUML::StructuredActivityNodeActivation>>(newValue);
+			setContainingNodeActivation(_containingNodeActivation); //503
+			break;
+		}
+	}
 }

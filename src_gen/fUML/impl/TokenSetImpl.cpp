@@ -1,12 +1,13 @@
-#include "TokenSetImpl.hpp"
+#include "fUML/impl/TokenSetImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -96,10 +97,15 @@ std::shared_ptr< Bag<fUML::Token> > TokenSetImpl::getTokens() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> TokenSetImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TokenSetImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -107,4 +113,11 @@ boost::any TokenSetImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getTokens(); //740
 	}
 	return boost::any();
+}
+
+void TokenSetImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -1,24 +1,25 @@
-#include "IntegerValueImpl.hpp"
+#include "fUML/impl/IntegerValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "Literalinteger.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/Literalinteger.hpp"
 #include <cstdio>
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -145,10 +146,15 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> IntegerValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any IntegerValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -158,4 +164,25 @@ boost::any IntegerValueImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return getValue(); //181
 	}
 	return boost::any();
+}
+
+void IntegerValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //180
+			break;
+		}
+		case FUMLPackage::INTEGERVALUE_VALUE:
+		{
+			// BOOST CAST
+			int _value = boost::any_cast<int>(newValue);
+			setValue(_value); //181
+			break;
+		}
+	}
 }

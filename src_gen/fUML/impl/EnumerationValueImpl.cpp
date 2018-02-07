@@ -1,27 +1,28 @@
-#include "EnumerationValueImpl.hpp"
+#include "fUML/impl/EnumerationValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "InstanceValue.hpp"
-#include "InstanceSpecification.hpp"
-#include "EnumerationValue.hpp"
-#include "EnumerationLiteral.hpp"
-#include "Enumeration.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "fuml/EnumerationValue.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/Enumeration.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Enumeration.hpp"
+#include "uml/Enumeration.hpp"
 
-#include "EnumerationLiteral.hpp"
+#include "uml/EnumerationLiteral.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -180,10 +181,15 @@ void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EnumerationValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EnumerationValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -193,4 +199,25 @@ boost::any EnumerationValueImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getType(); //331
 	}
 	return boost::any();
+}
+
+void EnumerationValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ENUMERATIONVALUE_LITERAL:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::EnumerationLiteral> _literal = boost::any_cast<std::shared_ptr<uml::EnumerationLiteral>>(newValue);
+			setLiteral(_literal); //330
+			break;
+		}
+		case FUMLPackage::ENUMERATIONVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Enumeration> _type = boost::any_cast<std::shared_ptr<uml::Enumeration>>(newValue);
+			setType(_type); //331
+			break;
+		}
+	}
 }

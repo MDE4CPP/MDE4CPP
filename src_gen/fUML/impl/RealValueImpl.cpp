@@ -1,24 +1,25 @@
-#include "RealValueImpl.hpp"
+#include "fUML/impl/RealValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 #include <sstream>
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "LiteralReal.hpp"
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/LiteralReal.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -143,10 +144,15 @@ std::string RealValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> RealValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any RealValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -156,4 +162,25 @@ boost::any RealValueImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getValue(); //191
 	}
 	return boost::any();
+}
+
+void RealValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //190
+			break;
+		}
+		case FUMLPackage::REALVALUE_VALUE:
+		{
+			// BOOST CAST
+			float _value = boost::any_cast<float>(newValue);
+			setValue(_value); //191
+			break;
+		}
+	}
 }

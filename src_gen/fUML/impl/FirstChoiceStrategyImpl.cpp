@@ -1,12 +1,13 @@
-#include "FirstChoiceStrategyImpl.hpp"
+#include "fUML/impl/FirstChoiceStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ChoiceStrategy.hpp"
+#include "fUML/ChoiceStrategy.hpp"
 
 
 using namespace fUML;
@@ -89,13 +90,25 @@ int FirstChoiceStrategyImpl::choose(int size)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FirstChoiceStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FirstChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void FirstChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -1,26 +1,27 @@
-#include "DataValueImpl.hpp"
+#include "fUML/impl/DataValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "DataValue.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "CompoundValue.hpp"
-#include "DataType.hpp"
-#include "Classifier.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/DataValue.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/CompoundValue.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "CompoundValue.hpp"
+#include "fUML/CompoundValue.hpp"
 
-#include "DataType.hpp"
+#include "uml/DataType.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -134,10 +135,15 @@ void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> DataValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DataValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -147,4 +153,18 @@ boost::any DataValueImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getType(); //341
 	}
 	return boost::any();
+}
+
+void DataValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::DATAVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::DataType> _type = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
+			setType(_type); //341
+			break;
+		}
+	}
 }

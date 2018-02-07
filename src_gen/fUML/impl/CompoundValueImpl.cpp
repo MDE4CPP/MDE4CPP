@@ -1,25 +1,26 @@
-#include "CompoundValueImpl.hpp"
+#include "fUML/impl/CompoundValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Classifier.hpp"
-#include <FUMLFactory.hpp>
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Classifier.hpp"
+#include <fuml/FUMLFactory.hpp>
 #include <cstdio>
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "StructuredValue.hpp"
+#include "fUML/StructuredValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -243,10 +244,15 @@ std::shared_ptr< Bag<fUML::FeatureValue> > CompoundValueImpl::getFeatureValues()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> CompoundValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CompoundValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -254,4 +260,11 @@ boost::any CompoundValueImpl::eGet(int featureID,  bool resolve, bool coreType) 
 			return getFeatureValues(); //130
 	}
 	return boost::any();
+}
+
+void CompoundValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

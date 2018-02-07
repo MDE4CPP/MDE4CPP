@@ -27,12 +27,10 @@
 //Model includes
 #include "../InputPinActivation.hpp"
 
-#include "impl/PinActivationImpl.hpp"
+#include "fUML/impl/PinActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "ActionActivation.hpp"
-#include "Pin.hpp"
+#include "fuml/ActionActivation.hpp"
+#include "uml/Pin.hpp"
 
 
 //*********************************
@@ -90,6 +88,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

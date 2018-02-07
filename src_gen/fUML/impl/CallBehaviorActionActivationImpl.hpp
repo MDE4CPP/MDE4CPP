@@ -27,12 +27,10 @@
 //Model includes
 #include "../CallBehaviorActionActivation.hpp"
 
-#include "impl/CallActionActivationImpl.hpp"
+#include "fUML/impl/CallActionActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "CallBehaviorAction.hpp"
-#include "Behavior.hpp"
+#include "uml/CallBehaviorAction.hpp"
+#include "uml/Behavior.hpp"
 
 
 //*********************************
@@ -86,6 +84,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

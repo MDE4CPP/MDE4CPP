@@ -1,38 +1,39 @@
-#include "DecisionNodeActivationImpl.hpp"
+#include "fUML/impl/DecisionNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "DecisionNode.hpp"
-#include "Behavior.hpp"
-#include "Parameter.hpp"
-#include "ParameterDirectionKind.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "ParameterValue.hpp"
-#include "Token.hpp"
-#include "ObjectFlow.hpp"
-#include "ActivityEdge.hpp"
-#include "ValueSpecification.hpp"
-#include "ObjectToken.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/DecisionNode.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "fuml/Token.hpp"
+#include "uml/ObjectFlow.hpp"
+#include "uml/ActivityEdge.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "fuml/ObjectToken.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp"
+#include "fUML/ControlNodeActivation.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -442,10 +443,15 @@ void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML:
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DecisionNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -465,4 +471,39 @@ boost::any DecisionNodeActivationImpl::eGet(int featureID,  bool resolve, bool c
 			return isRunning(); //665
 	}
 	return boost::any();
+}
+
+void DecisionNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::DECISIONNODEACTIVATION_DECISIONINPUTEXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Execution> _decisionInputExecution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
+			setDecisionInputExecution(_decisionInputExecution); //666
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //663
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //664
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //665
+			break;
+		}
+	}
 }

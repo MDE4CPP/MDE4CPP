@@ -1,23 +1,24 @@
-#include "ActivityParameterNodeActivationImpl.hpp"
+#include "fUML/impl/ActivityParameterNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
-#include "ActivityParameterNode.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/ActivityParameterNode.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "ObjectNodeActivation.hpp"
+#include "fUML/ObjectNodeActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -126,11 +127,14 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		if (parameterValue != nullptr) 
 		{
 			DEBUG_MESSAGE(std::cout<< "[fire] Parameter has "<< parameterValue->getValues()->size() << " value(s)."<<std::endl;)
-			std::shared_ptr<Bag<Value> > valueList = parameterValue->getValues();
-			for (std::shared_ptr<Value> value : *valueList)
+			Bag<Value>* valueList = parameterValue->getValues().get();
+			auto factory = fUML::FUMLFactory::eInstance();
+            const auto size = valueList->size();
+            std::shared_ptr<Value> value;
+			for (int i = 0; i< size; i++)
 			{
-                //struct null_deleter{void operator()(void const *) const { } };
-				std::shared_ptr<ObjectToken> token(fUML::FUMLFactory::eInstance()->createObjectToken());
+                value = (*valueList)[i];
+				std::shared_ptr<ObjectToken> token = factory->createObjectToken();
 				token->setValue(value);
 				this->addToken(token);
 			}
@@ -143,10 +147,9 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 		DEBUG_MESSAGE(std::cout<< "[fire] Output activity parameter node "
 				<< this->getNode()->getName() + "..."<<std::endl;)
 		this->addTokens(incomingTokens);
-		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>(incomingTokens->at(0));
+		std::shared_ptr<fUML::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::ForkedToken>((*incomingTokens)[0]);
 		if (forkToken != nullptr) 
 		{
-			//struct null_deleter{void operator()(void const *) const { } };
 			forkToken->getBaseToken()->setHolder(shared_from_this());
 		}
 	}
@@ -162,10 +165,15 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> 
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityParameterNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityParameterNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -185,4 +193,39 @@ boost::any ActivityParameterNodeActivationImpl::eGet(int featureID,  bool resolv
 			return isRunning(); //605
 	}
 	return boost::any();
+}
+
+void ActivityParameterNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //603
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //604
+			break;
+		}
+		case FUMLPackage::OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT:
+		{
+			// BOOST CAST
+			int _offeredTokenCount = boost::any_cast<int>(newValue);
+			setOfferedTokenCount(_offeredTokenCount); //606
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //605
+			break;
+		}
+	}
 }

@@ -1,16 +1,17 @@
-#include "GetNextEventStrategyImpl.hpp"
+#include "fUML/impl/GetNextEventStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ObjectActivation.hpp"
+#include "fUML/ObjectActivation.hpp"
 
-#include "SemanticStrategy.hpp"
+#include "fUML/SemanticStrategy.hpp"
 
-#include "SignalInstance.hpp"
+#include "fUML/SignalInstance.hpp"
 
 
 using namespace fUML;
@@ -91,13 +92,25 @@ std::shared_ptr<fUML::SignalInstance> GetNextEventStrategyImpl::retrieveNextEven
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any GetNextEventStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any GetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void GetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

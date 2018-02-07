@@ -27,15 +27,13 @@
 //Model includes
 #include "../OpaqueBehaviorExecution.hpp"
 
-#include "impl/ExecutionImpl.hpp"
+#include "fUML/impl/ExecutionImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "ParameterValue.hpp"
-#include "Behavior.hpp"
-#include "Parameter.hpp"
-#include "ParameterDirectionKind.hpp"
-#include "FUMLFactory.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************
@@ -93,6 +91,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

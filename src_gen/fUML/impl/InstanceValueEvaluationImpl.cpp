@@ -1,32 +1,33 @@
-#include "InstanceValueEvaluationImpl.hpp"
+#include "fUML/impl/InstanceValueEvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "InstanceSpecification.hpp"
-#include "InstanceValue.hpp"
-#include "Classifier.hpp"
-#include "EnumerationLiteral.hpp"
-#include "FUMLFactory.hpp"
-#include "EnumerationLiteral.hpp"
-#include "DataType.hpp"
-#include "Object.hpp"
-#include "Slot.hpp"
-#include "Value.hpp"
-#include "StructuralFeature.hpp"
-#include "Enumeration.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/DataType.hpp"
+#include "fuml/Object.hpp"
+#include "uml/Slot.hpp"
+#include "fuml/Value.hpp"
+#include "uml/StructuralFeature.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp"
+#include "fUML/Evaluation.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -186,10 +187,15 @@ std::shared_ptr<fUML::Value> InstanceValueEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any InstanceValueEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any InstanceValueEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -199,4 +205,25 @@ boost::any InstanceValueEvaluationImpl::eGet(int featureID,  bool resolve, bool 
 			return getSpecification(); //250
 	}
 	return boost::any();
+}
+
+void InstanceValueEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //251
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //250
+			break;
+		}
+	}
 }

@@ -28,22 +28,20 @@
 #include "../ActivityNodeActivationGroup.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 
-#include "SubsetUnion.hpp"
+#include "uml/ActivityNode.hpp"
+#include "fuml/ActivityNodeActivation.hpp"
+#include "fuml/ActivityNodeActivationGroup.hpp"
+#include "fuml/ActivityParameterNodeActivation.hpp"
+#include "fuml/ControlNodeActivation.hpp"
 
-#include "ActivityNode.hpp"
-#include "ActivityNodeActivation.hpp"
-#include "ActivityNodeActivationGroup.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "ControlNodeActivation.hpp"
-
-#include "ActivityEdgeInstance.hpp"
-#include "InputPin.hpp"
-#include "Class.hpp"
-#include "ActivityEdge.hpp"
-#include "ActivityParameterNodeActivation.hpp"
-#include "FUMLFactory.hpp"
+#include "fuml/ActivityEdgeInstance.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/Class.hpp"
+#include "uml/ActivityEdge.hpp"
+#include "fuml/ActivityParameterNodeActivation.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************
@@ -188,6 +186,9 @@ virtual public ActivityNodeActivationGroup
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

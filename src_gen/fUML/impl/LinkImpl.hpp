@@ -27,9 +27,7 @@
 //Model includes
 #include "../Link.hpp"
 
-#include "impl/ExtensionalValueImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "fUML/impl/ExtensionalValueImpl.hpp"
 
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
@@ -105,6 +103,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

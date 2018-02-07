@@ -1,20 +1,21 @@
-#include "LiteralIntegerEvaluationImpl.hpp"
+#include "fUML/impl/LiteralIntegerEvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "LiteralInteger.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/LiteralInteger.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp"
+#include "fUML/LiteralEvaluation.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -106,10 +107,15 @@ std::shared_ptr<fUML::Value> LiteralIntegerEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LiteralIntegerEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralIntegerEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LiteralIntegerEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -119,4 +125,25 @@ boost::any LiteralIntegerEvaluationImpl::eGet(int featureID,  bool resolve, bool
 			return getSpecification(); //270
 	}
 	return boost::any();
+}
+
+void LiteralIntegerEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //271
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //270
+			break;
+		}
+	}
 }

@@ -1,18 +1,19 @@
-#include "ClassifierBehaviorExecutionImpl.hpp"
+#include "fUML/impl/ClassifierBehaviorExecutionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "ObjectActivation.hpp"
+#include "fUML/ObjectActivation.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
 
 using namespace fUML;
@@ -150,10 +151,15 @@ void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierBehaviorExecutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -165,4 +171,32 @@ boost::any ClassifierBehaviorExecutionImpl::eGet(int featureID,  bool resolve, b
 			return getObjectActivation(); //462
 	}
 	return boost::any();
+}
+
+void ClassifierBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Class> _classifier = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
+			setClassifier(_classifier); //461
+			break;
+		}
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_EXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Execution> _execution = boost::any_cast<std::shared_ptr<fUML::Execution>>(newValue);
+			setExecution(_execution); //460
+			break;
+		}
+		case FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			setObjectActivation(_objectActivation); //462
+			break;
+		}
+	}
 }

@@ -1,9 +1,10 @@
-#include "SemanticVisitorImpl.hpp"
+#include "fUML/impl/SemanticVisitorImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -96,13 +97,25 @@ void SemanticVisitorImpl::_endIsolation()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> SemanticVisitorImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SemanticVisitorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SemanticVisitorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void SemanticVisitorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

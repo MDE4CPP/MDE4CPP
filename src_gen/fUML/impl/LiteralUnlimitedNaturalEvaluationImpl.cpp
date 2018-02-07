@@ -1,20 +1,21 @@
-#include "LiteralUnlimitedNaturalEvaluationImpl.hpp"
+#include "fUML/impl/LiteralUnlimitedNaturalEvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "LiteralUnlimitedNatural.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp"
+#include "fUML/LiteralEvaluation.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -105,10 +106,15 @@ std::shared_ptr<fUML::Value> LiteralUnlimitedNaturalEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -118,4 +124,25 @@ boost::any LiteralUnlimitedNaturalEvaluationImpl::eGet(int featureID,  bool reso
 			return getSpecification(); //310
 	}
 	return boost::any();
+}
+
+void LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //311
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //310
+			break;
+		}
+	}
 }

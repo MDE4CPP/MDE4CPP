@@ -1,16 +1,17 @@
-#include "SignalInstanceImpl.hpp"
+#include "fUML/impl/SignalInstanceImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp"
+#include "fUML/CompoundValue.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Signal.hpp"
+#include "uml/Signal.hpp"
 
 
 using namespace fUML;
@@ -107,10 +108,15 @@ void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> SignalInstanceImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SignalInstanceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -120,4 +126,18 @@ boost::any SignalInstanceImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getType(); //451
 	}
 	return boost::any();
+}
+
+void SignalInstanceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::SIGNALINSTANCE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Signal> _type = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
+			setType(_type); //451
+			break;
+		}
+	}
 }

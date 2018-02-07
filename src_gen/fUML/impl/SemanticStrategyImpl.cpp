@@ -1,9 +1,10 @@
-#include "SemanticStrategyImpl.hpp"
+#include "fUML/impl/SemanticStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -86,13 +87,25 @@ std::string SemanticStrategyImpl::retrieveName()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> SemanticStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any SemanticStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any SemanticStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void SemanticStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

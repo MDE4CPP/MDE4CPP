@@ -1,17 +1,18 @@
-#include "ExtensionalValueImpl.hpp"
+#include "fUML/impl/ExtensionalValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "CompoundValue.hpp"
+#include "fUML/CompoundValue.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
 
 using namespace fUML;
@@ -119,10 +120,15 @@ void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExtensionalValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExtensionalValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -132,4 +138,18 @@ boost::any ExtensionalValueImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getLocus(); //211
 	}
 	return boost::any();
+}
+
+void ExtensionalValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //211
+			break;
+		}
+	}
 }

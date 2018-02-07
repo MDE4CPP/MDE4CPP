@@ -1,20 +1,21 @@
-#include "DispatchStrategyImpl.hpp"
+#include "fUML/impl/DispatchStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "Operation.hpp"
+#include "uml/Operation.hpp"
 
-#include "SemanticStrategy.hpp"
+#include "fUML/SemanticStrategy.hpp"
 
 
 using namespace fUML;
@@ -113,13 +114,25 @@ std::string DispatchStrategyImpl::retrieveName()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> DispatchStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any DispatchStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any DispatchStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void DispatchStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

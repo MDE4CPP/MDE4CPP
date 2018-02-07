@@ -1,5 +1,5 @@
-#include "FUMLPackage.hpp"
-#include "impl/FUMLPackageImpl.hpp"
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 using namespace fUML;
 

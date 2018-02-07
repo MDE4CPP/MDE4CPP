@@ -1,21 +1,22 @@
-#include "ActivityEdgeInstanceImpl.hpp"
+#include "fUML/impl/ActivityEdgeInstanceImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
- #include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+ #include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdge.hpp"
+#include "uml/ActivityEdge.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Offer.hpp"
+#include "fUML/Offer.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -288,10 +289,15 @@ void ActivityEdgeInstanceImpl::setTarget(std::shared_ptr<fUML::ActivityNodeActiv
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityEdgeInstanceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -307,4 +313,39 @@ boost::any ActivityEdgeInstanceImpl::eGet(int featureID,  bool resolve, bool cor
 			return getTarget(); //512
 	}
 	return boost::any();
+}
+
+void ActivityEdgeInstanceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_EDGE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityEdge> _edge = boost::any_cast<std::shared_ptr<uml::ActivityEdge>>(newValue);
+			setEdge(_edge); //510
+			break;
+		}
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //514
+			break;
+		}
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_SOURCE:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivation> _source = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			setSource(_source); //511
+			break;
+		}
+		case FUMLPackage::ACTIVITYEDGEINSTANCE_TARGET:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivation> _target = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			setTarget(_target); //512
+			break;
+		}
+	}
 }

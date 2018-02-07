@@ -27,9 +27,7 @@
 //Model includes
 #include "../Evaluation.hpp"
 
-#include "impl/SemanticVisitorImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "fUML/impl/SemanticVisitorImpl.hpp"
 
 
 
@@ -98,6 +96,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

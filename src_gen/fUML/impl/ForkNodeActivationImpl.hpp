@@ -27,12 +27,10 @@
 //Model includes
 #include "../ForkNodeActivation.hpp"
 
-#include "impl/ControlNodeActivationImpl.hpp"
+#include "fUML/impl/ControlNodeActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include"ActivityNode.hpp"
-#include "FUMLFactory.hpp"
+#include"uml/ActivityNode.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************
@@ -90,6 +88,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

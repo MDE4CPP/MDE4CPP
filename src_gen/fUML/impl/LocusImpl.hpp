@@ -28,19 +28,17 @@
 #include "../Locus.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "Classifier.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "ExecutionFactory.hpp"
-#include "ExtensionalValue.hpp"
-#include "Executor.hpp"
-#include "Object.hpp"
-#include "Execution.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/ExecutionFactory.hpp"
+#include "fuml/ExtensionalValue.hpp"
+#include "fuml/Executor.hpp"
+#include "fuml/Object.hpp"
+#include "fuml/Execution.hpp"
 
 
 
@@ -138,6 +136,9 @@ virtual public Locus
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

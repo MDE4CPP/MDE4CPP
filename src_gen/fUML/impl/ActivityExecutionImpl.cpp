@@ -1,39 +1,40 @@
-#include "ActivityExecutionImpl.hpp"
+#include "fUML/impl/ActivityExecutionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
 
-#include "Parameter.hpp"
-#include <ParameterDirectionKind.hpp>
-#include <ParameterValue.hpp>
-#include "ForkedToken.hpp"
-#include <Execution.hpp>
-#include "FUMLFactory.hpp"
-#include "Object.hpp"
-#include "Execution.hpp"
-#include "Activity.hpp"
-#include "ActivityParameterNode.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+
+#include "uml/Parameter.hpp"
+#include <uml/ParameterDirectionKind.hpp>
+#include <fuml/ParameterValue.hpp>
+#include "fuml/ForkedToken.hpp"
+#include <fuml/Execution.hpp>
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/Object.hpp"
+#include "fuml/Execution.hpp"
+#include "uml/Activity.hpp"
+#include "uml/ActivityParameterNode.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "ObjectActivation.hpp"
+#include "fUML/ObjectActivation.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -243,10 +244,15 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::ActivityNod
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityExecutionImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityExecutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -266,4 +272,39 @@ boost::any ActivityExecutionImpl::eGet(int featureID,  bool resolve, bool coreTy
 			return getTypes(); //572
 	}
 	return boost::any();
+}
+
+void ActivityExecutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYEXECUTION_ACTIVATIONGROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _activationGroup = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setActivationGroup(_activationGroup); //576
+			break;
+		}
+		case FUMLPackage::EXECUTION_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setContext(_context); //574
+			break;
+		}
+		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //571
+			break;
+		}
+		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			setObjectActivation(_objectActivation); //573
+			break;
+		}
+	}
 }

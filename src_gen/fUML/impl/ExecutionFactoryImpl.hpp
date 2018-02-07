@@ -28,17 +28,15 @@
 #include "../ExecutionFactory.hpp"
 
 
-#include "impl/EObjectImpl.hpp"
+#include "ecore/impl/EObjectImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "fUMLPackage.hpp"
-#include "OpaqueBehavior.hpp"
-#include "OpaqueBehaviorExecution.hpp"
-#include "Value.hpp"
-#include "Evaluation.hpp"
-#include "Element.hpp"
-#include "ValueSpecification.hpp"
+#include "fuml/fUMLPackage.hpp"
+#include "uml/OpaqueBehavior.hpp"
+#include "fuml/OpaqueBehaviorExecution.hpp"
+#include "fuml/Value.hpp"
+#include "fuml/Evaluation.hpp"
+#include "uml/Element.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 //*********************************
@@ -152,6 +150,9 @@ virtual public ExecutionFactory
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

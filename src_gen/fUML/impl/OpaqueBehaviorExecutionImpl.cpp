@@ -1,29 +1,30 @@
-#include "OpaqueBehaviorExecutionImpl.hpp"
+#include "fUML/impl/OpaqueBehaviorExecutionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ParameterValue.hpp"
-#include "Behavior.hpp"
-#include "Parameter.hpp"
-#include "ParameterDirectionKind.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "ObjectActivation.hpp"
+#include "fUML/ObjectActivation.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
 
 using namespace fUML;
@@ -174,10 +175,15 @@ void OpaqueBehaviorExecutionImpl::execute()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -195,4 +201,32 @@ boost::any OpaqueBehaviorExecutionImpl::eGet(int featureID,  bool resolve, bool 
 			return getTypes(); //402
 	}
 	return boost::any();
+}
+
+void OpaqueBehaviorExecutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTION_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setContext(_context); //404
+			break;
+		}
+		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //401
+			break;
+		}
+		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			setObjectActivation(_objectActivation); //403
+			break;
+		}
+	}
 }

@@ -1,16 +1,17 @@
-#include "TokenImpl.hpp"
+#include "fUML/impl/TokenImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -162,10 +163,15 @@ void TokenImpl::setHolder(std::shared_ptr<fUML::ActivityNodeActivation> _holder)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> TokenImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any TokenImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -175,4 +181,25 @@ boost::any TokenImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return isWithdrawn(); //531
 	}
 	return boost::any();
+}
+
+void TokenImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::TOKEN_HOLDER:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivation> _holder = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivation>>(newValue);
+			setHolder(_holder); //530
+			break;
+		}
+		case FUMLPackage::TOKEN_WITHDRAWN:
+		{
+			// BOOST CAST
+			bool _withdrawn = boost::any_cast<bool>(newValue);
+			setWithdrawn(_withdrawn); //531
+			break;
+		}
+	}
 }

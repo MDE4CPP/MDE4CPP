@@ -1,12 +1,13 @@
-#include "FIFOGetNextEventStrategyImpl.hpp"
+#include "fUML/impl/FIFOGetNextEventStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "GetNextEventStrategy.hpp"
+#include "fUML/GetNextEventStrategy.hpp"
 
 
 using namespace fUML;
@@ -82,13 +83,25 @@ std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() cons
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any FIFOGetNextEventStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any FIFOGetNextEventStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void FIFOGetNextEventStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

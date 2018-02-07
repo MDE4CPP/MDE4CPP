@@ -1,9 +1,10 @@
-#include "EventDispatchLoopImpl.hpp"
+#include "fUML/impl/EventDispatchLoopImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -81,13 +82,25 @@ std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EventDispatchLoopImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EventDispatchLoopImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EventDispatchLoopImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void EventDispatchLoopImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

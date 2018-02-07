@@ -1,20 +1,21 @@
-#include "LiteralRealEvaluationImpl.hpp"
+#include "fUML/impl/LiteralRealEvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "LiteralReal.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/LiteralReal.hpp"
 
 //Forward declaration includes
-#include "LiteralEvaluation.hpp"
+#include "fUML/LiteralEvaluation.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -105,10 +106,15 @@ std::shared_ptr<fUML::Value> LiteralRealEvaluationImpl::evaluate()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LiteralRealEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralRealEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LiteralRealEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -118,4 +124,25 @@ boost::any LiteralRealEvaluationImpl::eGet(int featureID,  bool resolve, bool co
 			return getSpecification(); //300
 	}
 	return boost::any();
+}
+
+void LiteralRealEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //301
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //300
+			break;
+		}
+	}
 }

@@ -1,7 +1,7 @@
-#include "FUMLFactoryImpl.hpp"
-#include "FUMLPackage.hpp"
+#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/FUMLPackage.hpp"
 
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
 using namespace fUML;
 
@@ -582,15 +582,20 @@ std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(const unsigned int class
 	return nullptr;
 }
 
-std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container /* = nullptr*/) const
+std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(std::shared_ptr<ecore::EClass> _class) const
+{
+	return create(_class, nullptr);
+}
+
+std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container) const
 {
 	if(_class->isAbstract())
     {
     	return nullptr;
    	}
 
-	std::string _className = _class->eClass()->getName();
-	return create(_className, _container);
+	int _classID = _class->eClass()->getClassifierID();
+	return create(_classID, _container);
 }
 
 std::shared_ptr<ecore::EObject> FUMLFactoryImpl::create(std::string _className) const

@@ -1,12 +1,13 @@
-#include "EventAccepterImpl.hpp"
+#include "fUML/impl/EventAccepterImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SignalInstance.hpp"
+#include "fUML/SignalInstance.hpp"
 
 
 using namespace fUML;
@@ -93,13 +94,25 @@ bool EventAccepterImpl::match(std::shared_ptr<fUML::SignalInstance>  signalInsta
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EventAccepterImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EventAccepterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void EventAccepterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

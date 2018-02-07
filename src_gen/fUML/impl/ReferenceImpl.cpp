@@ -1,35 +1,36 @@
-#include "ReferenceImpl.hpp"
+#include "fUML/impl/ReferenceImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include <Classifier.hpp>
-    #include "FUMLFactory.hpp"
-    #include "Class.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include <uml/Classifier.hpp>
+    #include "fuml/FUMLFactory.hpp"
+    #include "uml/Class.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "Operation.hpp"
+#include "uml/Operation.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "SignalInstance.hpp"
+#include "fUML/SignalInstance.hpp"
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
-#include "StructuredValue.hpp"
+#include "fUML/StructuredValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -214,10 +215,15 @@ void ReferenceImpl::setReferent(std::shared_ptr<fUML::Object> _referent)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ReferenceImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ReferenceImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -225,4 +231,18 @@ boost::any ReferenceImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getReferent(); //120
 	}
 	return boost::any();
+}
+
+void ReferenceImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::REFERENCE_REFERENT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _referent = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setReferent(_referent); //120
+			break;
+		}
+	}
 }

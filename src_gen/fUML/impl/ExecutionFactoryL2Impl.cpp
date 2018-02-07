@@ -1,53 +1,54 @@
-#include "ExecutionFactoryL2Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL2Impl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include <Activity.hpp>
-#include <FUMLFactory.hpp>
-#include <ActivityParameterNode.hpp>
-#include <InitialNode.hpp>
-#include <ActivityFinalNode.hpp>
-#include <FlowFinalNode.hpp>
-#include <JoinNode.hpp>
-#include <MergeNode.hpp>
-#include <ForkNode.hpp>
-#include <DecisionNode.hpp>
-#include <InputPin.hpp>
-#include <OutputPin.hpp>
-#include <CallBehaviorAction.hpp>
-#include <CallOperationAction.hpp>
-#include <SendSignalAction.hpp>
-#include <ReadSelfAction.hpp>
-#include <TestIdentityAction.hpp>
-#include <ValueSpecificationAction.hpp>
-#include <CreateObjectAction.hpp>
-#include <DestroyObjectAction.hpp>
-#include <ReadStructuralFeatureAction.hpp>
-#include <ClearStructuralFeatureAction.hpp>
-#include <AddStructuralFeatureValueAction.hpp>
-#include <RemoveStructuralFeatureValueAction.hpp>
-#include <ReadLinkAction.hpp>
-#include <ClearAssociationAction.hpp>
-#include <CreateLinkAction.hpp>
-#include <DestroyLinkAction.hpp>
-#include "FlowFinalNode.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include <uml/Activity.hpp>
+#include <fuml/FUMLFactory.hpp>
+#include <uml/ActivityParameterNode.hpp>
+#include <uml/InitialNode.hpp>
+#include <uml/ActivityFinalNode.hpp>
+#include <uml/FlowFinalNode.hpp>
+#include <uml/JoinNode.hpp>
+#include <uml/MergeNode.hpp>
+#include <uml/ForkNode.hpp>
+#include <uml/DecisionNode.hpp>
+#include <uml/InputPin.hpp>
+#include <uml/OutputPin.hpp>
+#include <uml/CallBehaviorAction.hpp>
+#include <uml/CallOperationAction.hpp>
+#include <uml/SendSignalAction.hpp>
+#include <uml/ReadSelfAction.hpp>
+#include <uml/TestIdentityAction.hpp>
+#include <uml/ValueSpecificationAction.hpp>
+#include <uml/CreateObjectAction.hpp>
+#include <uml/DestroyObjectAction.hpp>
+#include <uml/ReadStructuralFeatureAction.hpp>
+#include <uml/ClearStructuralFeatureAction.hpp>
+#include <uml/AddStructuralFeatureValueAction.hpp>
+#include <uml/RemoveStructuralFeatureValueAction.hpp>
+#include <uml/ReadLinkAction.hpp>
+#include <uml/ClearAssociationAction.hpp>
+#include <uml/CreateLinkAction.hpp>
+#include <uml/DestroyLinkAction.hpp>
+#include "uml/FlowFinalNode.hpp"
 
 //Forward declaration includes
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExecutionFactoryL1.hpp"
+#include "fUML/ExecutionFactoryL1.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp"
+#include "fUML/OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp"
+#include "fUML/SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
 
 using namespace fUML;
@@ -298,10 +299,19 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL2Impl::instantiateVisito
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExecutionFactoryL2Impl::eContainer() const
+{
+	if(auto wp = m_locus.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionFactoryL2Impl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutionFactoryL2Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -315,4 +325,18 @@ boost::any ExecutionFactoryL2Impl::eGet(int featureID,  bool resolve, bool coreT
 			return getStrategies(); //81
 	}
 	return boost::any();
+}
+
+void ExecutionFactoryL2Impl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //80
+			break;
+		}
+	}
 }

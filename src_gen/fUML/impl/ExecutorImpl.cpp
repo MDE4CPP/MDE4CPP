@@ -1,28 +1,29 @@
-#include "ExecutorImpl.hpp"
+#include "fUML/impl/ExecutorImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Object.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/Object.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "Reference.hpp"
+#include "fUML/Reference.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -160,10 +161,15 @@ void ExecutorImpl::setLocus(std::shared_ptr<fUML::Locus> _locus)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExecutorImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutorImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -171,4 +177,18 @@ boost::any ExecutorImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getLocus(); //20
 	}
 	return boost::any();
+}
+
+void ExecutorImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTOR_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //20
+			break;
+		}
+	}
 }

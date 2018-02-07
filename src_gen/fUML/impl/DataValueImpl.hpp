@@ -27,16 +27,14 @@
 //Model includes
 #include "../DataValue.hpp"
 
-#include "impl/CompoundValueImpl.hpp"
+#include "fUML/impl/CompoundValueImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "DataValue.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "CompoundValue.hpp"
-#include "DataType.hpp"
-#include "Classifier.hpp"
+#include "fuml/DataValue.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/CompoundValue.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Classifier.hpp"
 
 
 //*********************************
@@ -101,6 +99,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

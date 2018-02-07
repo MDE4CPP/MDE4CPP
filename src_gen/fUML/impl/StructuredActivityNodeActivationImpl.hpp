@@ -27,16 +27,14 @@
 //Model includes
 #include "../StructuredActivityNodeActivation.hpp"
 
-#include "impl/ActionActivationImpl.hpp"
+#include "fUML/impl/ActionActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "FUMLFactory.hpp"
-#include "StructuredActivityNode.hpp"
-#include "Action.hpp"
-#include "ActivityNode.hpp"
-#include "InputPin.hpp"
-#include "OutputPin.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
 
 
 //*********************************
@@ -149,6 +147,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

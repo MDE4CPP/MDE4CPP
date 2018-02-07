@@ -27,21 +27,19 @@
 //Model includes
 #include "../ActivityExecution.hpp"
 
-#include "impl/ExecutionImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "fUML/impl/ExecutionImpl.hpp"
 
 
-#include "Parameter.hpp"
-#include <ParameterDirectionKind.hpp>
-#include <ParameterValue.hpp>
-#include "ForkedToken.hpp"
-#include <Execution.hpp>
-#include "FUMLFactory.hpp"
-#include "Object.hpp"
-#include "Execution.hpp"
-#include "Activity.hpp"
-#include "ActivityParameterNode.hpp"
+#include "uml/Parameter.hpp"
+#include <uml/ParameterDirectionKind.hpp>
+#include <fuml/ParameterValue.hpp>
+#include "fuml/ForkedToken.hpp"
+#include <fuml/Execution.hpp>
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/Object.hpp"
+#include "fuml/Execution.hpp"
+#include "uml/Activity.hpp"
+#include "uml/ActivityParameterNode.hpp"
 
 
 //*********************************
@@ -110,6 +108,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

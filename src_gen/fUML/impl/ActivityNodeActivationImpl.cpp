@@ -1,34 +1,35 @@
-#include "ActivityNodeActivationImpl.hpp"
+#include "fUML/impl/ActivityNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
 
-#include "Class.hpp"
-#include "ActivityNodeActivation.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "EClass.hpp"
+#include "uml/Class.hpp"
+#include "fuml/ActivityNodeActivation.hpp"
+
+#include "ecore/EClass.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp"
+#include "fUML/ActivityExecution.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "SemanticVisitor.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -195,7 +196,7 @@ void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Token>  token)
 		}
 	)
 
-	if (token->getHolder().lock() != nullptr)
+	if (!token->isWithdrawn())
 	{
 		token->withdraw();
 		token = std::dynamic_pointer_cast<Token>(token->copy());
@@ -560,10 +561,15 @@ std::shared_ptr< Bag<fUML::ActivityEdgeInstance> > ActivityNodeActivationImpl::g
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -581,4 +587,32 @@ boost::any ActivityNodeActivationImpl::eGet(int featureID,  bool resolve, bool c
 			return isRunning(); //585
 	}
 	return boost::any();
+}
+
+void ActivityNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //583
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //584
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //585
+			break;
+		}
+	}
 }

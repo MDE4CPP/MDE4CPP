@@ -27,12 +27,10 @@
 //Model includes
 #include "../LiteralIntegerEvaluation.hpp"
 
-#include "impl/LiteralEvaluationImpl.hpp"
+#include "fUML/impl/LiteralEvaluationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "FUMLFactory.hpp"
-#include "LiteralInteger.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/LiteralInteger.hpp"
 
 
 //*********************************
@@ -86,6 +84,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

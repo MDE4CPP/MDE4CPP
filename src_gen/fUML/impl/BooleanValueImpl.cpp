@@ -1,23 +1,24 @@
-#include "BooleanValueImpl.hpp"
+#include "fUML/impl/BooleanValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "LiteralBoolean.hpp"
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -146,10 +147,15 @@ std::string BooleanValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> BooleanValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any BooleanValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any BooleanValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -159,4 +165,25 @@ boost::any BooleanValueImpl::eGet(int featureID,  bool resolve, bool coreType) c
 			return isValue(); //201
 	}
 	return boost::any();
+}
+
+void BooleanValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //200
+			break;
+		}
+		case FUMLPackage::BOOLEANVALUE_VALUE:
+		{
+			// BOOST CAST
+			bool _value = boost::any_cast<bool>(newValue);
+			setValue(_value); //201
+			break;
+		}
+	}
 }

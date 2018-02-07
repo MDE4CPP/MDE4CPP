@@ -1,33 +1,34 @@
-#include "CallActionActivationImpl.hpp"
+#include "fUML/impl/CallActionActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Execution.hpp"
-#include "ParameterValue.hpp"
-#include "InputPin.hpp"
-#include "OutputPin.hpp"
-#include "Parameter.hpp"
-#include "CallAction.hpp"
-#include "Behavior.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/Execution.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/CallAction.hpp"
+#include "uml/Behavior.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "Execution.hpp"
+#include "fUML/Execution.hpp"
 
-#include "InvocationActionActivation.hpp"
+#include "fUML/InvocationActionActivation.hpp"
 
-#include "PinActivation.hpp"
+#include "fUML/PinActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -247,10 +248,15 @@ std::shared_ptr< Bag<fUML::Execution> > CallActionActivationImpl::getCallExecuti
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> CallActionActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any CallActionActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -274,4 +280,39 @@ boost::any CallActionActivationImpl::eGet(int featureID,  bool resolve, bool cor
 			return isRunning(); //815
 	}
 	return boost::any();
+}
+
+void CallActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		{
+			// BOOST CAST
+			bool _firing = boost::any_cast<bool>(newValue);
+			setFiring(_firing); //817
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //813
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //814
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //815
+			break;
+		}
+	}
 }

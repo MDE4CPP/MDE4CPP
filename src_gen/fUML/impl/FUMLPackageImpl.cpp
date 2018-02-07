@@ -1,20 +1,20 @@
-#include "FUMLPackageImpl.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //metametamodel classes
-#include "EAttribute.hpp"
-#include "EClass.hpp"
-#include "EDataType.hpp"
-#include "EEnum.hpp"
-#include "EOperation.hpp"
-#include "EReference.hpp"
+#include "ecore/EAttribute.hpp"
+#include "ecore/EClass.hpp"
+#include "ecore/EDataType.hpp"
+#include "ecore/EEnum.hpp"
+#include "ecore/EOperation.hpp"
+#include "ecore/EReference.hpp"
 
 //metamodel factory
-#include "FUMLFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //depending model packages
-#include "EcorePackage.hpp"
-#include "UmlPackage.hpp"
-#include "UmlPackage.hpp"
+#include "ecore/EcorePackage.hpp"
+#include "uml/UmlPackage.hpp"
+#include "uml/UmlPackage.hpp"
 
 using namespace fUML;
 
@@ -1953,7 +1953,7 @@ void FUMLPackageImpl::initializePackageContents()
 	
 	initEReference(getExecutionFactory_BuiltInTypes(),uml::UmlPackage::eInstance()->getPrimitiveType(),nullptr,"builtInTypes","",0,-1, false,false, true, false, true, false, true, false,false);
 	initEReference(getExecutionFactory_Locus(),getLocus(),getLocus_Factory(),"locus","",0,1, false,false, true, false, true, false, true, false,false);
-	initEReference(getExecutionFactory_PrimitiveBehaviorPrototypes(),getOpaqueBehaviorExecution(),nullptr,"primitiveBehaviorPrototypes","",0,-1, false,false, true, false, true, false, true, false,false);
+	initEReference(getExecutionFactory_PrimitiveBehaviorPrototypes(),getOpaqueBehaviorExecution(),nullptr,"primitiveBehaviorPrototypes","",0,-1, false,false, true, false, true, false, true, false,true);
 	initEReference(getExecutionFactory_Strategies(),getSemanticStrategy(),nullptr,"strategies","",0,-1, false,false, true, false, true, false, true, false,false);
 	
 	op = initEOperation(getExecutionFactory___AddBuiltInType__PrimitiveType(),nullptr, "addBuiltInType", 1, 1, true,false );
@@ -2874,7 +2874,7 @@ void FUMLPackageImpl::initializePackageContents()
 
 	// Begin Class Token
 	initEClass(tokenEClass, nullptr, "Token", true, false, true);
-	initEAttribute(getToken_Withdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(),"withdrawn","",0,1, false,false, true, false, false, true, false, true);
+	initEAttribute(getToken_Withdrawn(),ecore::EcorePackage::eInstance()->getEBoolean(),"withdrawn","true",0,1, false,false, true, false, false, true, false, true);
 	
 	initEReference(getToken_Holder(),getActivityNodeActivation(),getActivityNodeActivation_HeldTokens(),"holder","",0,1, false,false, true, false, true, false, true, false,false);
 	

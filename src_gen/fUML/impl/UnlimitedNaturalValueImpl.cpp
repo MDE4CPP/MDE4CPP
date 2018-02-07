@@ -1,23 +1,24 @@
-#include "UnlimitedNaturalValueImpl.hpp"
+#include "fUML/impl/UnlimitedNaturalValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "LiteralUnlimitedNatural.hpp"
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -149,10 +150,15 @@ std::string UnlimitedNaturalValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any UnlimitedNaturalValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any UnlimitedNaturalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -162,4 +168,25 @@ boost::any UnlimitedNaturalValueImpl::eGet(int featureID,  bool resolve, bool co
 			return getValue(); //161
 	}
 	return boost::any();
+}
+
+void UnlimitedNaturalValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //160
+			break;
+		}
+		case FUMLPackage::UNLIMITEDNATURALVALUE_VALUE:
+		{
+			// BOOST CAST
+			int _value = boost::any_cast<int>(newValue);
+			setValue(_value); //161
+			break;
+		}
+	}
 }

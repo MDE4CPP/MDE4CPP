@@ -1,22 +1,23 @@
-#include "ActivityFinalNodeActivationImpl.hpp"
+#include "fUML/impl/ActivityFinalNodeActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ActivityNode.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ActivityNode.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "ControlNodeActivation.hpp"
+#include "fUML/ControlNodeActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -105,21 +106,23 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
+		DEBUG_MESSAGE(std::cout<<"[fire] Activity final node " << this->getNode()->getName()<< "..."<<std::endl;)
 
     if (incomingTokens->size() > 0 || this->getIncomingEdges()->size() == 0) 
     {
-        if (this->getGroup()->getActivityExecution() != nullptr) 
+		auto this_group = this->getGroup();
+		auto activityExecution = this_group->getActivityExecution();
+		if (activityExecution != nullptr) 
         {
-            this->getGroup()->getActivityExecution()->terminate();
+            activityExecution->terminate();
         }
-        else if (this->getGroup()->getContainingNodeActivation() != nullptr) 
+        else if (this_group->getContainingNodeActivation() != nullptr)
         {
-            this->getGroup()->getContainingNodeActivation()->terminateAll();
+            this_group->getContainingNodeActivation()->terminateAll();
         }
         else 
         {
-        	std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this->getGroup());
+        	std::shared_ptr<ExpansionActivationGroup> group = std::dynamic_pointer_cast<ExpansionActivationGroup>(this_group);
         	if (group != nullptr) 
         	{
         		group->getRegionActivation()->terminate();
@@ -139,10 +142,15 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Token> >  i
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ActivityFinalNodeActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ActivityFinalNodeActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ActivityFinalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -160,4 +168,32 @@ boost::any ActivityFinalNodeActivationImpl::eGet(int featureID,  bool resolve, b
 			return isRunning(); //675
 	}
 	return boost::any();
+}
+
+void ActivityFinalNodeActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //673
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //674
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //675
+			break;
+		}
+	}
 }

@@ -1,26 +1,27 @@
-#include "ObjectActivationImpl.hpp"
+#include "fUML/impl/ObjectActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "Behavior.hpp"
-#include "ClassifierBehaviorExecution.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Class.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/Behavior.hpp"
+#include "fuml/ClassifierBehaviorExecution.hpp"
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "ClassifierBehaviorExecution.hpp"
+#include "fUML/ClassifierBehaviorExecution.hpp"
 
-#include "EventAccepter.hpp"
+#include "fUML/EventAccepter.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "SignalInstance.hpp"
+#include "fUML/SignalInstance.hpp"
 
 
 using namespace fUML;
@@ -303,10 +304,15 @@ std::shared_ptr< Bag<fUML::EventAccepter> > ObjectActivationImpl::getWaitingEven
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ObjectActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ObjectActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -320,4 +326,18 @@ boost::any ObjectActivationImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getWaitingEventAccepters(); //470
 	}
 	return boost::any();
+}
+
+void ObjectActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::OBJECTACTIVATION_OBJECT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _object = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setObject(_object); //472
+			break;
+		}
+	}
 }

@@ -27,24 +27,22 @@
 //Model includes
 #include "../InstanceValueEvaluation.hpp"
 
-#include "impl/EvaluationImpl.hpp"
+#include "fUML/impl/EvaluationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "InstanceSpecification.hpp"
-#include "InstanceValue.hpp"
-#include "Classifier.hpp"
-#include "EnumerationLiteral.hpp"
-#include "FUMLFactory.hpp"
-#include "EnumerationLiteral.hpp"
-#include "DataType.hpp"
-#include "Object.hpp"
-#include "Slot.hpp"
-#include "Value.hpp"
-#include "StructuralFeature.hpp"
-#include "Enumeration.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/DataType.hpp"
+#include "fuml/Object.hpp"
+#include "uml/Slot.hpp"
+#include "fuml/Value.hpp"
+#include "uml/StructuralFeature.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
 
 
 //*********************************
@@ -98,6 +96,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

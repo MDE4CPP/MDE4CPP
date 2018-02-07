@@ -27,19 +27,17 @@
 //Model includes
 #include "../StructuredValue.hpp"
 
-#include "impl/ValueImpl.hpp"
+#include "fUML/impl/ValueImpl.hpp"
 
-#include "SubsetUnion.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/Slot.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/InstanceSpecification.hpp"
 
-#include "InstanceValue.hpp"
-#include "UmlFactory.hpp"
-#include "Slot.hpp"
-#include "Classifier.hpp"
-#include "NamedElement.hpp"
-#include "InstanceSpecification.hpp"
-
-#include "FUMLFactory.hpp"
-#include "StructuralFeature.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/StructuralFeature.hpp"
 
 
 
@@ -110,6 +108,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

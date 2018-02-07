@@ -1,32 +1,33 @@
-#include "ExecutionFactoryL1Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL1Impl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "LiteralBoolean.hpp"
-#include "FUMLFactory.hpp"
-#include "LiteralString.hpp"
-#include "LiteralInteger.hpp"
-#include "LiteralReal.hpp"
-#include "LiteralNull.hpp"
-#include "InstanceValue.hpp"
-#include "LiteralUnlimitedNatural.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/LiteralString.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/LiteralReal.hpp"
+#include "uml/LiteralNull.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
 
 //Forward declaration includes
-#include "Element.hpp"
+#include "uml/Element.hpp"
 
-#include "ExecutionFactory.hpp"
+#include "fUML/ExecutionFactory.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "OpaqueBehaviorExecution.hpp"
+#include "fUML/OpaqueBehaviorExecution.hpp"
 
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "SemanticStrategy.hpp"
+#include "fUML/SemanticStrategy.hpp"
 
-#include "SemanticVisitor.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
 
 using namespace fUML;
@@ -174,10 +175,19 @@ std::shared_ptr<fUML::SemanticVisitor> ExecutionFactoryL1Impl::instantiateVisito
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExecutionFactoryL1Impl::eContainer() const
+{
+	if(auto wp = m_locus.lock())
+	{
+		return wp;
+	}
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionFactoryL1Impl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutionFactoryL1Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -191,4 +201,18 @@ boost::any ExecutionFactoryL1Impl::eGet(int featureID,  bool resolve, bool coreT
 			return getStrategies(); //71
 	}
 	return boost::any();
+}
+
+void ExecutionFactoryL1Impl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTIONFACTORY_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //70
+			break;
+		}
+	}
 }

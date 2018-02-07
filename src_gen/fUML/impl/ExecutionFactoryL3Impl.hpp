@@ -27,24 +27,22 @@
 //Model includes
 #include "../ExecutionFactoryL3.hpp"
 
-#include "impl/ExecutionFactoryL2Impl.hpp"
+#include "fUML/impl/ExecutionFactoryL2Impl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include <ConditionalNode.hpp>
-#include <FUMLFactory.hpp>
-#include <LoopNode.hpp>
-#include <ExpansionRegion.hpp>
-#include <ReadExtentAction.hpp>
-#include <ReadIsClassifiedObjectAction.hpp>
-#include <ReclassifyObjectAction.hpp>
-#include <StartObjectBehaviorAction.hpp>
-#include <StartClassifierBehaviorAction.hpp>
-#include <AcceptEventAction.hpp>
-#include <ReduceAction.hpp>
-#include <DataStoreNode.hpp>
-#include <DataStoreNodeActivation.hpp>
-#include "ExpansionNode.hpp"
+#include <uml/ConditionalNode.hpp>
+#include <fuml/FUMLFactory.hpp>
+#include <uml/LoopNode.hpp>
+#include <uml/ExpansionRegion.hpp>
+#include <uml/ReadExtentAction.hpp>
+#include <uml/ReadIsClassifiedObjectAction.hpp>
+#include <uml/ReclassifyObjectAction.hpp>
+#include <uml/StartObjectBehaviorAction.hpp>
+#include <uml/StartClassifierBehaviorAction.hpp>
+#include <uml/AcceptEventAction.hpp>
+#include <uml/ReduceAction.hpp>
+#include <uml/DataStoreNode.hpp>
+#include <fuml/DataStoreNodeActivation.hpp>
+#include "uml/ExpansionNode.hpp"
 #include <uml/UmlPackage.hpp>
 
 
@@ -103,6 +101,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

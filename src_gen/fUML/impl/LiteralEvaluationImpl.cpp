@@ -1,21 +1,22 @@
-#include "LiteralEvaluationImpl.hpp"
+#include "fUML/impl/LiteralEvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "ValueSpecification.hpp"
-#include "PrimitiveType.hpp"
-#include "Type.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
 
 //Forward declaration includes
-#include "Evaluation.hpp"
+#include "fUML/Evaluation.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -109,10 +110,15 @@ std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string b
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LiteralEvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LiteralEvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LiteralEvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -122,4 +128,25 @@ boost::any LiteralEvaluationImpl::eGet(int featureID,  bool resolve, bool coreTy
 			return getSpecification(); //240
 	}
 	return boost::any();
+}
+
+void LiteralEvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //241
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //240
+			break;
+		}
+	}
 }

@@ -27,16 +27,14 @@
 //Model includes
 #include "../ActivityNodeActivation.hpp"
 
-#include "impl/SemanticVisitorImpl.hpp"
+#include "fUML/impl/SemanticVisitorImpl.hpp"
 
-#include "SubsetUnion.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/Class.hpp"
+#include "fuml/ActivityNodeActivation.hpp"
 
-#include "Class.hpp"
-#include "ActivityNodeActivation.hpp"
-
-#include "EClass.hpp"
+#include "ecore/EClass.hpp"
 
 
 //*********************************
@@ -220,6 +218,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

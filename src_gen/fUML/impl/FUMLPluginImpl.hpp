@@ -21,7 +21,7 @@
 
 //#include "util/ProfileCallCount.hpp"
 
-#include "FUMLPlugin.hpp"
+#include "fUML/FUMLPlugin.hpp"
 
 namespace fUML 
 {

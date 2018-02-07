@@ -27,22 +27,20 @@
 //Model includes
 #include "../DecisionNodeActivation.hpp"
 
-#include "impl/ControlNodeActivationImpl.hpp"
+#include "fUML/impl/ControlNodeActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "DecisionNode.hpp"
-#include "Behavior.hpp"
-#include "Parameter.hpp"
-#include "ParameterDirectionKind.hpp"
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "ParameterValue.hpp"
-#include "Token.hpp"
-#include "ObjectFlow.hpp"
-#include "ActivityEdge.hpp"
-#include "ValueSpecification.hpp"
-#include "ObjectToken.hpp"
+#include "uml/DecisionNode.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "fuml/Token.hpp"
+#include "uml/ObjectFlow.hpp"
+#include "uml/ActivityEdge.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "fuml/ObjectToken.hpp"
 
 
 //*********************************
@@ -143,6 +141,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

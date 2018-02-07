@@ -1,12 +1,13 @@
-#include "ValuesImpl.hpp"
+#include "fUML/impl/ValuesImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -96,10 +97,15 @@ std::shared_ptr< Bag<fUML::Value> > ValuesImpl::getValues() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ValuesImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ValuesImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -107,4 +113,11 @@ boost::any ValuesImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getValues(); //690
 	}
 	return boost::any();
+}
+
+void ValuesImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

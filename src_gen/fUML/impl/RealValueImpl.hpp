@@ -27,16 +27,14 @@
 //Model includes
 #include "../RealValue.hpp"
 
-#include "impl/PrimitiveValueImpl.hpp"
-
-#include "SubsetUnion.hpp"
+#include "fUML/impl/PrimitiveValueImpl.hpp"
 
 #include <sstream>
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "LiteralReal.hpp"
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/LiteralReal.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 
 //*********************************
@@ -106,6 +104,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

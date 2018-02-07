@@ -1,14 +1,15 @@
-#include "AcceptEventActionEventAccepterImpl.hpp"
+#include "fUML/impl/AcceptEventActionEventAccepterImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventActionActivation.hpp"
+#include "fUML/AcceptEventActionActivation.hpp"
 
-#include "EventAccepter.hpp"
+#include "fUML/EventAccepter.hpp"
 
 
 using namespace fUML;
@@ -97,10 +98,15 @@ void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUM
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptEventActionEventAccepterImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -108,4 +114,18 @@ boost::any AcceptEventActionEventAccepterImpl::eGet(int featureID,  bool resolve
 			return getActionActivation(); //1110
 	}
 	return boost::any();
+}
+
+void AcceptEventActionEventAccepterImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::AcceptEventActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionActivation>>(newValue);
+			setActionActivation(_actionActivation); //1110
+			break;
+		}
+	}
 }

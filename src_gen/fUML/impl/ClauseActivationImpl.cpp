@@ -1,18 +1,19 @@
-#include "ClauseActivationImpl.hpp"
+#include "fUML/impl/ClauseActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "BooleanValue.hpp"
+#include "fUML/BooleanValue.hpp"
 
-#include "Clause.hpp"
+#include "uml/Clause.hpp"
 
-#include "ClauseActivation.hpp"
+#include "fUML/ClauseActivation.hpp"
 
-#include "ConditionalNodeActivation.hpp"
+#include "fUML/ConditionalNodeActivation.hpp"
 
 
 using namespace fUML;
@@ -158,10 +159,15 @@ void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Co
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ClauseActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClauseActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -171,4 +177,25 @@ boost::any ClauseActivationImpl::eGet(int featureID,  bool resolve, bool coreTyp
 			return getConditionalNodeActivation(); //701
 	}
 	return boost::any();
+}
+
+void ClauseActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::CLAUSEACTIVATION_CLAUSE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Clause> _clause = boost::any_cast<std::shared_ptr<uml::Clause>>(newValue);
+			setClause(_clause); //700
+			break;
+		}
+		case FUMLPackage::CLAUSEACTIVATION_CONDITIONALNODEACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ConditionalNodeActivation> _conditionalNodeActivation = boost::any_cast<std::shared_ptr<fUML::ConditionalNodeActivation>>(newValue);
+			setConditionalNodeActivation(_conditionalNodeActivation); //701
+			break;
+		}
+	}
 }

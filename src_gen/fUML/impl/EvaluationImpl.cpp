@@ -1,18 +1,19 @@
-#include "EvaluationImpl.hpp"
+#include "fUML/impl/EvaluationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "SemanticVisitor.hpp"
+#include "fUML/SemanticVisitor.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -122,10 +123,15 @@ void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> EvaluationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any EvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -135,4 +141,25 @@ boost::any EvaluationImpl::eGet(int featureID,  bool resolve, bool coreType) con
 			return getSpecification(); //230
 	}
 	return boost::any();
+}
+
+void EvaluationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EVALUATION_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //231
+			break;
+		}
+		case FUMLPackage::EVALUATION_SPECIFICATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
+			setSpecification(_specification); //230
+			break;
+		}
+	}
 }

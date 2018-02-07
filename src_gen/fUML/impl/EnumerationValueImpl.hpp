@@ -27,17 +27,15 @@
 //Model includes
 #include "../EnumerationValue.hpp"
 
-#include "impl/ValueImpl.hpp"
+#include "fUML/impl/ValueImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "UmlFactory.hpp"
-#include "FUMLFactory.hpp"
-#include "InstanceValue.hpp"
-#include "InstanceSpecification.hpp"
-#include "EnumerationValue.hpp"
-#include "EnumerationLiteral.hpp"
-#include "Enumeration.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "fuml/EnumerationValue.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/Enumeration.hpp"
 
 
 //*********************************
@@ -121,6 +119,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

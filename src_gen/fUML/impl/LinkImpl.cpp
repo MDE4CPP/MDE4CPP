@@ -1,24 +1,25 @@
-#include "LinkImpl.hpp"
+#include "fUML/impl/LinkImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
 
 //Forward declaration includes
-#include "Association.hpp"
+#include "uml/Association.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "ExtensionalValue.hpp"
+#include "fUML/ExtensionalValue.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Property.hpp"
+#include "uml/Property.hpp"
 
 
 using namespace fUML;
@@ -166,10 +167,15 @@ void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LinkImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LinkImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -181,4 +187,25 @@ boost::any LinkImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getType(); //322
 	}
 	return boost::any();
+}
+
+void LinkImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //321
+			break;
+		}
+		case FUMLPackage::LINK_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Association> _type = boost::any_cast<std::shared_ptr<uml::Association>>(newValue);
+			setType(_type); //322
+			break;
+		}
+	}
 }

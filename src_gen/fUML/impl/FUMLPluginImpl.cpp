@@ -1,6 +1,6 @@
-#include "FUMLPluginImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "FUMLPackage.hpp"
+#include "fUML/impl/FUMLPluginImpl.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 using namespace fUML;
 

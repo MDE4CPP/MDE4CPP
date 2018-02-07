@@ -1,20 +1,21 @@
-#include "PrimitiveValueImpl.hpp"
+#include "fUML/impl/PrimitiveValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "PrimitiveType.hpp"
-#include "Classifier.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Classifier.hpp"
 
 //Forward declaration includes
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -116,10 +117,15 @@ void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> PrimitiveValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any PrimitiveValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -127,4 +133,18 @@ boost::any PrimitiveValueImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getType(); //150
 	}
 	return boost::any();
+}
+
+void PrimitiveValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //150
+			break;
+		}
+	}
 }

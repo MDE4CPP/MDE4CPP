@@ -1,23 +1,24 @@
-#include "StringValueImpl.hpp"
+#include "fUML/impl/StringValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
-#include "UmlFactory.hpp"
-#include "LiteralString.hpp"
-#include "Type.hpp"
-#include "PrimitiveType.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "uml/LiteralString.hpp"
+#include "uml/Type.hpp"
+#include "uml/PrimitiveType.hpp"
 
 //Forward declaration includes
-#include "PrimitiveType.hpp"
+#include "uml/PrimitiveType.hpp"
 
-#include "PrimitiveValue.hpp"
+#include "fUML/PrimitiveValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
-#include "ValueSpecification.hpp"
+#include "uml/ValueSpecification.hpp"
 
 
 using namespace fUML;
@@ -139,10 +140,15 @@ std::string StringValueImpl::toString()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> StringValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any StringValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -152,4 +158,25 @@ boost::any StringValueImpl::eGet(int featureID,  bool resolve, bool coreType) co
 			return getValue(); //171
 	}
 	return boost::any();
+}
+
+void StringValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PRIMITIVEVALUE_TYPE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::PrimitiveType> _type = boost::any_cast<std::shared_ptr<uml::PrimitiveType>>(newValue);
+			setType(_type); //170
+			break;
+		}
+		case FUMLPackage::STRINGVALUE_VALUE:
+		{
+			// BOOST CAST
+			std::string _value = boost::any_cast<std::string>(newValue);
+			setValue(_value); //171
+			break;
+		}
+	}
 }

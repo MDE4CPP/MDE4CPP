@@ -1,15 +1,16 @@
-#include "ParameterValueImpl.hpp"
+#include "fUML/impl/ParameterValueImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "FUMLFactory.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 //Forward declaration includes
-#include "Parameter.hpp"
+#include "uml/Parameter.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -122,10 +123,15 @@ std::shared_ptr< Bag<fUML::Value> > ParameterValueImpl::getValues() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ParameterValueImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ParameterValueImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -135,4 +141,18 @@ boost::any ParameterValueImpl::eGet(int featureID,  bool resolve, bool coreType)
 			return getValues(); //391
 	}
 	return boost::any();
+}
+
+void ParameterValueImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PARAMETERVALUE_PARAMETER:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::Parameter> _parameter = boost::any_cast<std::shared_ptr<uml::Parameter>>(newValue);
+			setParameter(_parameter); //390
+			break;
+		}
+	}
 }

@@ -1,22 +1,23 @@
-#include "ExpansionActivationGroupImpl.hpp"
+#include "fUML/impl/ExpansionActivationGroupImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityExecution.hpp"
+#include "fUML/ActivityExecution.hpp"
 
-#include "ActivityNodeActivation.hpp"
+#include "fUML/ActivityNodeActivation.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "ExpansionRegionActivation.hpp"
+#include "fUML/ExpansionRegionActivation.hpp"
 
-#include "StructuredActivityNodeActivation.hpp"
+#include "fUML/StructuredActivityNodeActivation.hpp"
 
 
 using namespace fUML;
@@ -128,10 +129,15 @@ void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Exp
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExpansionActivationGroupImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -149,4 +155,32 @@ boost::any ExpansionActivationGroupImpl::eGet(int featureID,  bool resolve, bool
 			return getSuspendedActivations(); //754
 	}
 	return boost::any();
+}
+
+void ExpansionActivationGroupImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityExecution> _activityExecution = boost::any_cast<std::shared_ptr<fUML::ActivityExecution>>(newValue);
+			setActivityExecution(_activityExecution); //752
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::StructuredActivityNodeActivation> _containingNodeActivation = boost::any_cast<std::shared_ptr<fUML::StructuredActivityNodeActivation>>(newValue);
+			setContainingNodeActivation(_containingNodeActivation); //753
+			break;
+		}
+		case FUMLPackage::EXPANSIONACTIVATIONGROUP_REGIONACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ExpansionRegionActivation> _regionActivation = boost::any_cast<std::shared_ptr<fUML::ExpansionRegionActivation>>(newValue);
+			setRegionActivation(_regionActivation); //755
+			break;
+		}
+	}
 }

@@ -1,12 +1,13 @@
-#include "OfferImpl.hpp"
+#include "fUML/impl/OfferImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -188,10 +189,15 @@ std::shared_ptr< Bag<fUML::Token> > OfferImpl::getOfferedTokens() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> OfferImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OfferImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -199,4 +205,11 @@ boost::any OfferImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getOfferedTokens(); //520
 	}
 	return boost::any();
+}
+
+void OfferImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

@@ -27,11 +27,9 @@
 //Model includes
 #include "../ControlToken.hpp"
 
-#include "impl/TokenImpl.hpp"
+#include "fUML/impl/TokenImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "FUMLFactory.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 //*********************************
@@ -93,6 +91,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

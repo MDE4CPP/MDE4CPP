@@ -27,15 +27,13 @@
 //Model includes
 #include "../CompoundValue.hpp"
 
-#include "impl/StructuredValueImpl.hpp"
+#include "fUML/impl/StructuredValueImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "Classifier.hpp"
-#include <FUMLFactory.hpp>
+#include "uml/Classifier.hpp"
+#include <fuml/FUMLFactory.hpp>
 #include <cstdio>
 
-#include "StructuralFeature.hpp"
+#include "uml/StructuralFeature.hpp"
 
 
 //*********************************
@@ -113,6 +111,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;

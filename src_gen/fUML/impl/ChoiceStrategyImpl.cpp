@@ -1,12 +1,13 @@
-#include "ChoiceStrategyImpl.hpp"
+#include "fUML/impl/ChoiceStrategyImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "SemanticStrategy.hpp"
+#include "fUML/SemanticStrategy.hpp"
 
 
 using namespace fUML;
@@ -95,13 +96,25 @@ std::string ChoiceStrategyImpl::retrieveName()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ChoiceStrategyImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ChoiceStrategyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void ChoiceStrategyImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

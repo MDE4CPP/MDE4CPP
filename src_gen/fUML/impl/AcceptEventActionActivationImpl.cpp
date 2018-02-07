@@ -1,26 +1,27 @@
-#include "AcceptEventActionActivationImpl.hpp"
+#include "fUML/impl/AcceptEventActionActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "AcceptEventActionEventAccepter.hpp"
+#include "fUML/AcceptEventActionEventAccepter.hpp"
 
-#include "ActionActivation.hpp"
+#include "fUML/ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "PinActivation.hpp"
+#include "fUML/PinActivation.hpp"
 
-#include "SignalInstance.hpp"
+#include "fUML/SignalInstance.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -153,10 +154,15 @@ void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Acc
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any AcceptEventActionActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -182,4 +188,53 @@ boost::any AcceptEventActionActivationImpl::eGet(int featureID,  bool resolve, b
 			return isWaiting(); //1099
 	}
 	return boost::any();
+}
+
+void AcceptEventActionActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_EVENTACCEPTER:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::AcceptEventActionEventAccepter> _eventAccepter = boost::any_cast<std::shared_ptr<fUML::AcceptEventActionEventAccepter>>(newValue);
+			setEventAccepter(_eventAccepter); //1098
+			break;
+		}
+		case FUMLPackage::ACTIONACTIVATION_FIRING:
+		{
+			// BOOST CAST
+			bool _firing = boost::any_cast<bool>(newValue);
+			setFiring(_firing); //1097
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //1093
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //1094
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //1095
+			break;
+		}
+		case FUMLPackage::ACCEPTEVENTACTIONACTIVATION_WAITING:
+		{
+			// BOOST CAST
+			bool _waiting = boost::any_cast<bool>(newValue);
+			setWaiting(_waiting); //1099
+			break;
+		}
+	}
 }

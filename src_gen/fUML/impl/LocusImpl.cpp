@@ -1,32 +1,33 @@
-#include "LocusImpl.hpp"
+#include "fUML/impl/LocusImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include "Classifier.hpp"
-#include "Behavior.hpp"
-#include "Class.hpp"
-#include "FUMLFactory.hpp"
-#include "ExecutionFactory.hpp"
-#include "ExtensionalValue.hpp"
-#include "Executor.hpp"
-#include "Object.hpp"
-#include "Execution.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
+#include "fuml/FUMLFactory.hpp"
+#include "fuml/ExecutionFactory.hpp"
+#include "fuml/ExtensionalValue.hpp"
+#include "fuml/Executor.hpp"
+#include "fuml/Object.hpp"
+#include "fuml/Execution.hpp"
 
 
 //Forward declaration includes
-#include "Class.hpp"
+#include "uml/Class.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "ExecutionFactory.hpp"
+#include "fUML/ExecutionFactory.hpp"
 
-#include "Executor.hpp"
+#include "fUML/Executor.hpp"
 
-#include "ExtensionalValue.hpp"
+#include "fUML/ExtensionalValue.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
 
 using namespace fUML;
@@ -276,10 +277,15 @@ void LocusImpl::setFactory(std::shared_ptr<fUML::ExecutionFactory> _factory)
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> LocusImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any LocusImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -291,4 +297,25 @@ boost::any LocusImpl::eGet(int featureID,  bool resolve, bool coreType) const
 			return getFactory(); //01
 	}
 	return boost::any();
+}
+
+void LocusImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::LOCUS_EXECUTOR:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Executor> _executor = boost::any_cast<std::shared_ptr<fUML::Executor>>(newValue);
+			setExecutor(_executor); //00
+			break;
+		}
+		case FUMLPackage::LOCUS_FACTORY:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ExecutionFactory> _factory = boost::any_cast<std::shared_ptr<fUML::ExecutionFactory>>(newValue);
+			setFactory(_factory); //01
+			break;
+		}
+	}
 }

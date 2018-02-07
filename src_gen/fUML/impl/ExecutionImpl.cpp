@@ -1,37 +1,38 @@
-#include "ExecutionImpl.hpp"
+#include "fUML/impl/ExecutionImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
-#include <Parameter.hpp>
-#include <ParameterDirectionKind.hpp>
-#include <ParameterValue.hpp>
-#include "Behavior.hpp"
-#include "Classifier.hpp"
-#include "FUMLFactory.hpp"
 
-#include "../fUML/impl/ObjectImpl.hpp"
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
+#include <uml/Parameter.hpp>
+#include <uml/ParameterDirectionKind.hpp>
+#include <fuml/ParameterValue.hpp>
+#include "uml/Behavior.hpp"
+#include "uml/Classifier.hpp"
+#include "fuml/FUMLFactory.hpp"
+
+#include "fuml/impl/ObjectImpl.hpp"
 
 
 //Forward declaration includes
-#include "Behavior.hpp"
+#include "uml/Behavior.hpp"
 
-#include "Classifier.hpp"
+#include "uml/Classifier.hpp"
 
-#include "FeatureValue.hpp"
+#include "fUML/FeatureValue.hpp"
 
-#include "Locus.hpp"
+#include "fUML/Locus.hpp"
 
-#include "Object.hpp"
+#include "fUML/Object.hpp"
 
-#include "ObjectActivation.hpp"
+#include "fUML/ObjectActivation.hpp"
 
-#include "Parameter.hpp"
+#include "uml/Parameter.hpp"
 
-#include "ParameterValue.hpp"
+#include "fUML/ParameterValue.hpp"
 
-#include "Value.hpp"
+#include "fUML/Value.hpp"
 
 
 using namespace fUML;
@@ -250,10 +251,15 @@ std::shared_ptr< Bag<fUML::ParameterValue> > ExecutionImpl::getParameterValues()
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ExecutionImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ExecutionImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -271,4 +277,32 @@ boost::any ExecutionImpl::eGet(int featureID,  bool resolve, bool coreType) cons
 			return getTypes(); //382
 	}
 	return boost::any();
+}
+
+void ExecutionImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::EXECUTION_CONTEXT:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Object> _context = boost::any_cast<std::shared_ptr<fUML::Object>>(newValue);
+			setContext(_context); //384
+			break;
+		}
+		case FUMLPackage::EXTENSIONALVALUE_LOCUS:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::Locus> _locus = boost::any_cast<std::shared_ptr<fUML::Locus>>(newValue);
+			setLocus(_locus); //381
+			break;
+		}
+		case FUMLPackage::OBJECT_OBJECTACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ObjectActivation> _objectActivation = boost::any_cast<std::shared_ptr<fUML::ObjectActivation>>(newValue);
+			setObjectActivation(_objectActivation); //383
+			break;
+		}
+	}
 }

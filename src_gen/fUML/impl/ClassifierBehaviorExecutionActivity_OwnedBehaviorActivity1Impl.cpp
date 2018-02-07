@@ -1,9 +1,10 @@
-#include "ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.hpp"
+#include "fUML/impl/ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
 
@@ -81,13 +82,25 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	}
 	return boost::any();
+}
+
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+	}
 }

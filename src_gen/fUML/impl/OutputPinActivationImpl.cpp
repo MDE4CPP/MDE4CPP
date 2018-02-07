@@ -1,22 +1,23 @@
-#include "OutputPinActivationImpl.hpp"
+#include "fUML/impl/OutputPinActivationImpl.hpp"
 #include <iostream>
 #include <cassert>
-#include "EAnnotation.hpp"
-#include "EClass.hpp"
-#include "FUMLPackageImpl.hpp"
+
+#include "ecore/EAnnotation.hpp"
+#include "ecore/EClass.hpp"
+#include "fUML/impl/FUMLPackageImpl.hpp"
 
 //Forward declaration includes
-#include "ActionActivation.hpp"
+#include "fUML/ActionActivation.hpp"
 
-#include "ActivityEdgeInstance.hpp"
+#include "fUML/ActivityEdgeInstance.hpp"
 
-#include "ActivityNode.hpp"
+#include "uml/ActivityNode.hpp"
 
-#include "ActivityNodeActivationGroup.hpp"
+#include "fUML/ActivityNodeActivationGroup.hpp"
 
-#include "PinActivation.hpp"
+#include "fUML/PinActivation.hpp"
 
-#include "Token.hpp"
+#include "fUML/Token.hpp"
 
 
 using namespace fUML;
@@ -114,10 +115,15 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 //*********************************
 
 
+std::shared_ptr<ecore::EObject> OutputPinActivationImpl::eContainer() const
+{
+	return nullptr;
+}
+
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
-boost::any OutputPinActivationImpl::eGet(int featureID,  bool resolve, bool coreType) const
+boost::any OutputPinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
@@ -139,4 +145,46 @@ boost::any OutputPinActivationImpl::eGet(int featureID,  bool resolve, bool core
 			return isRunning(); //865
 	}
 	return boost::any();
+}
+
+void OutputPinActivationImpl::eSet(int featureID, boost::any newValue)
+{
+	switch(featureID)
+	{
+		case FUMLPackage::PINACTIVATION_ACTIONACTIVATION:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActionActivation> _actionActivation = boost::any_cast<std::shared_ptr<fUML::ActionActivation>>(newValue);
+			setActionActivation(_actionActivation); //867
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_GROUP:
+		{
+			// BOOST CAST
+			std::shared_ptr<fUML::ActivityNodeActivationGroup> _group = boost::any_cast<std::shared_ptr<fUML::ActivityNodeActivationGroup>>(newValue);
+			setGroup(_group); //863
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_NODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<uml::ActivityNode> _node = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
+			setNode(_node); //864
+			break;
+		}
+		case FUMLPackage::OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT:
+		{
+			// BOOST CAST
+			int _offeredTokenCount = boost::any_cast<int>(newValue);
+			setOfferedTokenCount(_offeredTokenCount); //866
+			break;
+		}
+		case FUMLPackage::ACTIVITYNODEACTIVATION_RUNNING:
+		{
+			// BOOST CAST
+			bool _running = boost::any_cast<bool>(newValue);
+			setRunning(_running); //865
+			break;
+		}
+	}
 }

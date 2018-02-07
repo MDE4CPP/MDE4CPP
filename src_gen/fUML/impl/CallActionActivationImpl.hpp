@@ -27,18 +27,16 @@
 //Model includes
 #include "../CallActionActivation.hpp"
 
-#include "impl/InvocationActionActivationImpl.hpp"
+#include "fUML/impl/InvocationActionActivationImpl.hpp"
 
-#include "SubsetUnion.hpp"
-
-#include "Execution.hpp"
-#include "ParameterValue.hpp"
-#include "InputPin.hpp"
-#include "OutputPin.hpp"
-#include "Parameter.hpp"
-#include "CallAction.hpp"
-#include "Behavior.hpp"
-#include "FUMLFactory.hpp"
+#include "fuml/Execution.hpp"
+#include "fuml/ParameterValue.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/CallAction.hpp"
+#include "uml/Behavior.hpp"
+#include "fuml/FUMLFactory.hpp"
 
 
 
@@ -109,6 +107,9 @@ namespace fUML
 			//*********************************
 			
 			virtual boost::any eGet(int featureID, bool resolve, bool coreType) const ;
+			virtual void eSet(int featureID, boost::any newValue) ;
+
+			virtual std::shared_ptr<ecore::EObject> eContainer() const ; 
 			
 		protected:
 			virtual std::shared_ptr<ecore::EClass> eStaticClass() const;
