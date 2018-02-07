@@ -22,7 +22,7 @@
 [file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Factory')/]
 
-#include "Factory.hpp"
+#include "uml/Factory.hpp"
 
 [comment  Generate Includes for the Factory/]
 namespace [aPackage.name/] 

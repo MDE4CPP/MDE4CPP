@@ -20,9 +20,9 @@
 
 [template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.toUpperFirst().concat('FactoryImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[className/].hpp"
-#include "[aPackage.name.toUpperFirst().concat('Package')/].hpp"
-#include "Class.hpp"
+#include "[aPackage.getPackageName()/]/impl/[className/].hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "uml/Class.hpp"
 
 using namespace [aPackage.name/];
 
