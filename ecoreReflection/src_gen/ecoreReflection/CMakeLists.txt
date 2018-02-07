@@ -35,36 +35,36 @@ SET(SOURCE_FILES
 )
 
 INCLUDE_DIRECTORIES(
-    .
 	../
 	${MDE4CPP_HOME}/application/include
-	${MDE4CPP_HOME}/application/include/abstractDataTypes
-	${MDE4CPP_HOME}/application/include/PluginFramework
-	${MDE4CPP_HOME}/application/include/util
-	${MDE4CPP_HOME}/application/include/ecore
-	${MDE4CPP_HOME}/application/include/PrimitivetypesReflection
-	${MDE4CPP_HOME}/application/include/uml
 )
 
-FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
-
-FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
-FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	FIND_LIBRARY(PLUGINFRAMEWORK_DEBUG PluginFrameworkd ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
+ELSE()
+	FIND_LIBRARY(PLUGINFRAMEWORK_RELEASE PluginFramework ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
+	FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
+ENDIF()
 
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
-	debug ${PLUGINFRAMEWORK_DEBUG}
-	debug ${ECORE_DEBUG}
-	debug ${UML_DEBUG}
-)
-TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-	optimized ${PLUGINFRAMEWORK_RELEASE}
-	optimized ${ECORE_RELEASE}
-	optimized ${UML_RELEASE}
-)
+
+IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME} 
+		debug ${PLUGINFRAMEWORK_DEBUG}
+		debug ${ECORE_DEBUG}
+		debug ${UML_DEBUG}
+	)
+ELSE()
+	TARGET_LINK_LIBRARIES(${PROJECT_NAME}
+		optimized ${PLUGINFRAMEWORK_RELEASE}
+		optimized ${ECORE_RELEASE}
+		optimized ${UML_RELEASE}
+	)
+ENDIF()
+
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
 
 #-----------------------------------------------------
