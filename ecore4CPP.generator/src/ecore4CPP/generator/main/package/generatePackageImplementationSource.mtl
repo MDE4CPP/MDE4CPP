@@ -40,7 +40,7 @@
 
 //depending model packages
 [for (pack : EPackage | anEPackage.metaModelIncludes()->asOrderedSet()->sortedBy(name)) ? (not ( pack=anEPackage))]
-#include "[anEPackage.name/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[pack.name/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/for]
 
 using namespace [anEPackage.name/];
