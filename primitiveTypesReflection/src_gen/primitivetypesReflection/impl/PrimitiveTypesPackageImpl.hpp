@@ -14,10 +14,11 @@
 #endif
 #include <iostream>
 #include <memory>
-#include "SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
-#include "PrimitiveTypesPackage.hpp"
-#include "impl/PackageImpl.hpp"	
+
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+#include "uml/impl/PackageImpl.hpp"	
 
 namespace PrimitiveTypes
 {

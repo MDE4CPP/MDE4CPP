@@ -1,22 +1,22 @@
-#include "PrimitiveTypesPackageImpl.hpp"
+#include "primitivetypesReflection/impl/PrimitiveTypesPackageImpl.hpp"
 
 //metamodel classes
-#include "Stereotype.hpp"
-#include "Generalization.hpp"
-#include "Constraint.hpp"
-#include "OpaqueExpression.hpp"
-#include "EnumerationLiteral.hpp"
-#include "PrimitiveType.hpp"
-#include "FunctionBehavior.hpp"
-#include "Interface.hpp"
-#include "Operation.hpp"
-#include "Property.hpp"
+#include "uml/Constraint.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/FunctionBehavior.hpp"
+#include "uml/Generalization.hpp"
+#include "uml/Interface.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/Operation.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Property.hpp"
+#include "uml/Stereotype.hpp"
 
-#include "Comment.hpp"
-#include "PrimitiveType.hpp"
-#include "ProfileApplication.hpp"
+#include "uml/Comment.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/ProfileApplication.hpp"
 //metamodel factory
-#include "UmlFactory.hpp"
+#include "uml/UmlFactory.hpp"
 
 //depending model packages
 
@@ -111,11 +111,17 @@ void PrimitiveTypesPackageImpl::initializePackageContents()
 	struct null_deleter{void operator()(void const *) const {} };
 	std::shared_ptr<PrimitiveTypesPackageImpl> primitiveTypes = std::shared_ptr<PrimitiveTypesPackageImpl>(this, null_deleter());
 	std::shared_ptr<uml::Generalization> gen = nullptr;
-	
+	std::shared_ptr<uml::Constraint> con = nullptr;
+	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
 	
-	
-	//initalize ActivityNodes and Edges
+
+
+
+
+	//Dependency 
+
+	//ActivityNodes and Edges
 }
 
 std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveTypes_Boolean()

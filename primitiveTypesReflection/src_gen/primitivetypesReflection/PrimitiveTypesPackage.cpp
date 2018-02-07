@@ -1,5 +1,5 @@
-#include "PrimitiveTypesPackage.hpp"
-#include "impl/PrimitiveTypesPackageImpl.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
+#include "primitivetypesReflection/impl/PrimitiveTypesPackageImpl.hpp"
 
 using namespace PrimitiveTypes;
 
