@@ -1,198 +1,52 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
+apply plugin: "base"
+
 description 'Example collection'
 
 task buildBenchmarks(dependsOn: ['compileUMLBenchmark', 'compileEcoreBenchmark', 'compileMemoryBenchmarkEcore']) {
 	group 'Examples'
-	description 'build all benchmark applications in debug and release'	
+	description 'build all benchmark applications'	
 }
 
-task compileEcoreBenchmark(dependsOn: ['compileEcoreBenchmarkDebug', 'compileEcoreBenchmarkRelease']) {
+task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Examples'
-	description 'compile EcoreBenchmark in debug and release'
-}
-task compileEcoreBenchmarkDebug {
-	description 'compile EcoreBenchmark in Debug'
-
-	def folder = new File(file('./ecoreBenchmark/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'ecoreBenchmark/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./ecoreBenchmark").absolutePath
-		}
-		exec {
-			workingDir 'ecoreBenchmark/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileEcoreBenchmarkDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	description 'compile ecoreBenchmark'
+	
+	pathToCMakeList = file("./ecoreBenchmark")
 }
 
-task compileEcoreBenchmarkRelease {
-	description 'compile EcoreBenchmark in Release'
-
-	def folder = new File(file('./ecoreBenchmark/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'ecoreBenchmark/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./ecoreBenchmark").absolutePath
-		}
-		exec {
-			workingDir 'ecoreBenchmark/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileEcoreBenchmarkRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-
-task compileMemoryBenchmarkEcore(dependsOn: ['compileMemoryBenchmarkEcoreDebug', 'compileMemoryBenchmarkEcoreRelease']) {
+task compileMemoryBenchmarkEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Examples'
-	description 'compile memoryBenchmarkEcore in debug and release'
-}
-task compileMemoryBenchmarkEcoreDebug {
-	description 'compile memoryBenchmarkEcore in Debug'
-
-	def folder = new File(file('./memoryBenchmarkEcore/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'memoryBenchmarkEcore/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./memoryBenchmarkEcore").absolutePath
-		}
-		exec {
-			workingDir 'memoryBenchmarkEcore/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileMemoryBenchmarkEcoreDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	description 'compile memoryBenchmarkEcore'
+	
+	pathToCMakeList = file("./memoryBenchmarkEcore")
 }
 
-task compileMemoryBenchmarkEcoreRelease {
-	description 'compile memoryBenchmarkEcore in Release'
-
-	def folder = new File(file('./memoryBenchmarkEcore/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'memoryBenchmarkEcore/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./memoryBenchmarkEcore").absolutePath
-		}
-		exec {
-			workingDir 'memoryBenchmarkEcore/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileMemoryBenchmarkEcoreRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-
-task compileUMLBenchmark(dependsOn: ['compileUMLBenchmarkDebug', 'compileUMLBenchmarkRelease']) {
+task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'Examples'
-	description 'compile UMLBenchmark in debug and release'
-}
-task compileUMLBenchmarkDebug {
-	description 'compile UMLBenchmark in Debug'
-
-	def folder = new File(file('./umlBenchmark/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'umlBenchmark/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./umlBenchmark").absolutePath
-		}
-		exec {
-			workingDir 'umlBenchmark/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileUMLBenchmarkDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	description 'compile UMLBenchmark'
+	
+	pathToCMakeList = file("./UMLBenchmark")
 }
 
-task compileUMLBenchmarkRelease {
-	description 'compile UMLBenchmark in Release'
-
-	def folder = new File(file('./umlBenchmark/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
+clean.doFirst {
+	def cmakeFolder = file("./ecoreBenchmark")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
 	}
-
-	doLast {
-		exec {
-			workingDir 'umlBenchmark/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./umlBenchmark").absolutePath
-		}
-		exec {
-			workingDir 'umlBenchmark/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
+	
+	cmakeFolder = file("./memoryBenchmarkEcore")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
 	}
-}
-compileUMLBenchmarkRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	
+	cmakeFolder = file("./UMLBenchmark")
+	if(cmakeFolder.exists()) {
+    	delete cmakeFolder.absolutePath
+   		println "deleting folder " + cmakeFolder.absolutePath
+	}
 }
