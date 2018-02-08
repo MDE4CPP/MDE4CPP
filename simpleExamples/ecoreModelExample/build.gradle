@@ -1,189 +1,27 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: libraryModel_ecore'
 
-task buildLibraryModel_ecore(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecore', 'compileApplicationForlibraryModel_ecore']) {
+task buildLibraryModel_ecore(dependsOn: ['generateLibraryModel_ecore', 'compileLibraryModel_ecore', 'compileApplicationForLibraryModel_ecore']) {
 	group 'libraryModel_ecore'
 	description 'build libraryModel_ecore'
 }
 
-task compileApplicationForlibraryModel_ecore(dependsOn: ['compileApplicationForlibraryModel_ecoreDebug', 'compileApplicationForlibraryModel_ecoreRelease']) {
+task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'libraryModel_ecore'
+	description 'compile ApplicationForlibraryModel_ecore'
+
+	pathToCMakeList = file("./application")
+}
+
+task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore'
-}
-task compileApplicationForlibraryModel_ecoreDebug {
-	description 'compile ApplicationForlibraryModel_ecore in Debug'
 
-	def folder = new File(file('./application/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'application/.cmake/Debug'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./application").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./application").absolutePath
-			}
-		}
-		exec {
-			workingDir 'application/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-compileApplicationForlibraryModel_ecoreDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-task compileApplicationForlibraryModel_ecoreRelease {
-	description 'compile ApplicationForlibraryModel_ecore in Release'
-
-	def folder = new File(file('./application/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'application/.cmake/Release'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./application").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./application").absolutePath
-			}
-		}
-		exec {
-			workingDir 'application/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-compileApplicationForlibraryModel_ecoreRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-
-
-task compileLibraryModel_ecore(dependsOn: ['compileLibraryModel_ecoreDebug', 'compileLibraryModel_ecoreRelease']) {
-	group 'libraryModel_ecore'
-	description 'compile libraryModel_ecore'
-}
-task compileLibraryModel_ecoreDebug {
-	description 'compile libraryModel_ecore in Debug'
-
-	def folder = new File(file('./src_gen/libraryModel_ecore/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/libraryModel_ecore/.cmake/Debug'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/libraryModel_ecore").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/libraryModel_ecore").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/libraryModel_ecore/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-compileLibraryModel_ecoreDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-task compileLibraryModel_ecoreRelease {
-	description 'compile libraryModel_ecore in Release'
-
-	def folder = new File(file('./src_gen/libraryModel_ecore/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/libraryModel_ecore/.cmake/Release'
-			if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/libraryModel_ecore").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/libraryModel_ecore").absolutePath
-			}
-		}
-		exec {
-			workingDir 'src_gen/libraryModel_ecore/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['os.name'].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-compileLibraryModel_ecoreRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	pathToCMakeList = file("./src_gen/libraryModel_ecore")
 }
 
 task generateLibraryModel_ecore(type: JavaExec) {
@@ -206,12 +44,7 @@ task generateLibraryModel_ecore(type: JavaExec) {
 }
 
 compileLibraryModel_ecore.mustRunAfter generateLibraryModel_ecore
-compileLibraryModel_ecoreDebug.mustRunAfter generateLibraryModel_ecore
-compileLibraryModel_ecoreRelease.mustRunAfter generateLibraryModel_ecore
-
-compileApplicationForlibraryModel_ecore.mustRunAfter compileLibraryModel_ecore
-compileApplicationForlibraryModel_ecoreDebug.mustRunAfter compileLibraryModel_ecoreDebug
-compileApplicationForlibraryModel_ecoreRelease.mustRunAfter compileLibraryModel_ecoreRelease
+compileApplicationForLibraryModel_ecore.mustRunAfter compileLibraryModel_ecore
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/libraryModel_ecore/.cmake/')
