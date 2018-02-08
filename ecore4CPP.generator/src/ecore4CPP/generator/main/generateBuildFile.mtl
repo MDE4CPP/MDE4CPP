@@ -168,31 +168,33 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/file]
 
 [file ('../build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName/]'[/if][']'/]) {
+task build[packageName.toUpperFirst()/](dependsOn: ['['/]'generate[packageName.toUpperFirst()/]', 'compile[packageName.toUpperFirst()/]'[if(aPackage.prepareApplication())], 'compileApplicationFor[packageName.toUpperFirst()/]'[/if][']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/]'
 }
 
 [if(aPackage.prepareApplication())]
-task compileApplicationFor[packageName/](dependsOn: ['['/]'compileApplicationFor[packageName/]Debug', 'compileApplicationFor[packageName/]Release'[']'/]) {
+task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
-	description 'compile [packageName/]'
+	description 'compile ['ApplicationFor'.concat(packageName)/]'
+
+	pathToCMakeList = file("./application")
 }
-[generateCompileTask('ApplicationFor'.concat(packageName), 'Debug', 'application')/]
-[generateCompileTask('ApplicationFor'.concat(packageName), 'Release', 'application')/]
 
 [/if]
-
-task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.toUpperFirst()/]Debug', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
+task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
+
+	pathToCMakeList = file("./src_gen/[packageName/]")
 }
-[generateCompileTask(packageName, 'Debug', 'src_gen/'.concat(packageName))/]
-[generateCompileTask(packageName, 'Release', 'src_gen/'.concat(packageName))/]
 
 task generate[packageName.toUpperFirst()/](type: JavaExec) {
 	group '[packageName/]'
@@ -214,13 +216,8 @@ task generate[packageName.toUpperFirst()/](type: JavaExec) {
 }
 
 compile[packageName.toUpperFirst()/].mustRunAfter generate[packageName.toUpperFirst()/]
-compile[packageName.toUpperFirst()/]Debug.mustRunAfter generate[packageName.toUpperFirst()/]
-compile[packageName.toUpperFirst()/]Release.mustRunAfter generate[packageName.toUpperFirst()/]
-
 [if(aPackage.prepareApplication())] 
-compileApplicationFor[packageName/].mustRunAfter compile[packageName.toUpperFirst()/]
-compileApplicationFor[packageName/]Debug.mustRunAfter compile[packageName.toUpperFirst()/]Debug
-compileApplicationFor[packageName/]Release.mustRunAfter compile[packageName.toUpperFirst()/]Release
+compileApplicationFor[packageName.toUpperFirst()/].mustRunAfter compile[packageName.toUpperFirst()/]
 [/if]
 
 clean.doFirst {
@@ -238,49 +235,4 @@ clean.doFirst {
 [/if]
 }
 [/file]
-[/template]
-
-[template private generateCompileTask(packageName : String, buildType : String, subfolder : String)]
-task compile[packageName.toUpperFirst()/][buildType/] {
-	description 'compile [packageName/] in [buildType/]'
-
-	def folder = new File(file('./[subfolder/]/.cmake/[buildType/]').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir '[subfolder/]/.cmake/[buildType/]'
-			if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
-			   commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./[subfolder/]").absolutePath
-			} else {
-			   commandLine 'cmake -G "Unix Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./[subfolder/]").absolutePath
-			}
-		}
-		exec {
-			workingDir '[subfolder/]/.cmake/[buildType/]'
-			if (make_parallel_jobs)
-			{			
-				if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
-				   commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-				} else {
-				   commandLine 'make install -j' + make_parallel_jobs
-				}
-				
-			}
-			else
-			{
-				if (System.properties['['/]'os.name'[']'/].toLowerCase().contains('windows')) {
-					commandLine 'cmd', '/c', 'mingw32-make install' 
-				} else {
-					commandLine 'make install' 
-				}
-			}
-		}
-	}
-}
-compile[packageName.toUpperFirst()/][buildType/].onlyIf {
-	(project.hasProperty("[buildType.toUpperCase()/]") && !(project.getProperty("[buildType.toUpperCase()/]") == '0'))[if(buildType.size()>0)] || (project.hasProperty("[buildType.at(1)/]") && !(project.getProperty("[buildType.at(1)/]") == '0'))[/if] || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
 [/template]
