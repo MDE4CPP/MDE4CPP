@@ -145,6 +145,9 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 [/file]
 
 [file ('../build.gradle', false, 'UTF-8')]
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: [packageName/]'
@@ -159,19 +162,19 @@ task compile[packageName/]All(dependsOn: [ '[' /]'compile[packageName/]', 'compi
 	description 'compile the binaries for the fuml generated model [packageName/]'
 }
 
-task compile[packageName.toUpperFirst()/](dependsOn: ['['/]'compile[packageName.toUpperFirst()/]Debug', 'compile[packageName.toUpperFirst()/]Release'[']'/]) {
+task compile[packageName/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
-}
-[generateCompileTask(packageName, packageName, 'Debug')/]
-[generateCompileTask(packageName, packageName, 'Release')/]
 
-task compile[execPackageName.toUpperFirst()/](dependsOn: ['['/]'compile[execPackageName.toUpperFirst()/]Debug', 'compile[execPackageName.toUpperFirst()/]Release'[']'/]) {
-	group '[packageName/]'
-	description 'compile [packageName/]'
+	pathToCMakeList = file("./src_gen/[packageName/]")
 }
-[generateCompileTask(execPackageName, packageName, 'Debug')/]
-[generateCompileTask(execPackageName, packageName, 'Release')/]
+
+task compile[execPackageName/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group '[packageName/]'
+	description 'compile [execPackageName/]'
+
+	pathToCMakeList = file("./src_gen/[execPackageName/]")
+}
 
 task generate[packageName/](type: JavaExec) {
 	group '[packageName/]'
@@ -192,10 +195,8 @@ task generate[packageName/](type: JavaExec) {
 	}
 }
 
-compile[packageName/]Debug.mustRunAfter generate[packageName/]
-compile[packageName/]Release.mustRunAfter generate[packageName/]
-compile[execPackageName/]Debug.mustRunAfter compile[packageName/]Debug
-compile[execPackageName/]Release.mustRunAfter compile[packageName/]Release
+compile[packageName/].mustRunAfter generate[packageName/]
+compile[execPackageName/].mustRunAfter compile[packageName/]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
@@ -211,36 +212,4 @@ clean.doFirst {
 	}
 }
 [/file]
-[/template]
-
-[template private generateCompileTask(packageName : String, groupName : String, buildType : String)]
-task compile[packageName.toUpperFirst()/][buildType/] {
-	description 'compile [packageName/] in [buildType/]'
-
-	def folder = new File(file('./src_gen/[packageName/]/.cmake/[buildType/]').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=[buildType/] ' + file("./src_gen/[packageName/]").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/[packageName/]/.cmake/[buildType/]'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compile[packageName.toUpperFirst()/][buildType/].onlyIf {
-	(project.hasProperty("[buildType.toUpperCase()/]") && !(project.getProperty("[buildType.toUpperCase()/]") == '0'))[if(buildType.size()>0)] || (project.hasProperty("[buildType.at(1)/]") && !(project.getProperty("[buildType.at(1)/]") == '0'))[/if] || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
 [/template]
