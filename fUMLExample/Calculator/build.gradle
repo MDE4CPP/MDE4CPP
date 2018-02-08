@@ -1,3 +1,6 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: CalcModel'
@@ -12,130 +15,18 @@ task compileCalcModelAll(dependsOn: ['compileCalcModel', 'compileCalcModelExec']
 	description 'compile the binaries for the fuml generated model CalcModel'
 }
 
-task compileCalcModel(dependsOn: ['compileCalcModelDebug', 'compileCalcModelRelease']) {
+task compileCalcModel(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'CalcModel'
 	description 'compile CalcModel'
-}
-task compileCalcModelDebug {
-	description 'compile CalcModel in Debug'
 
-	def folder = new File(file('./src_gen/CalcModel/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/CalcModel/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/CalcModel").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/CalcModel/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileCalcModelDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-task compileCalcModelRelease {
-	description 'compile CalcModel in Release'
-
-	def folder = new File(file('./src_gen/CalcModel/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/CalcModel/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/CalcModel").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/CalcModel/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileCalcModelRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	pathToCMakeList = file("./src_gen/CalcModel")
 }
 
-task compileCalcModelExec(dependsOn: ['compileCalcModelExecDebug', 'compileCalcModelExecRelease']) {
+task compileCalcModelExec(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'CalcModel'
-	description 'compile CalcModel'
-}
-task compileCalcModelExecDebug {
-	description 'compile CalcModelExec in Debug'
+	description 'compile CalcModelExec'
 
-	def folder = new File(file('./src_gen/CalcModelExec/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/CalcModelExec/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/CalcModelExec").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/CalcModelExec/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileCalcModelExecDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-task compileCalcModelExecRelease {
-	description 'compile CalcModelExec in Release'
-
-	def folder = new File(file('./src_gen/CalcModelExec/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/CalcModelExec/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/CalcModelExec").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/CalcModelExec/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileCalcModelExecRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	pathToCMakeList = file("./src_gen/CalcModelExec")
 }
 
 task generateCalcModel(type: JavaExec) {
@@ -157,10 +48,8 @@ task generateCalcModel(type: JavaExec) {
 	}
 }
 
-compileCalcModelDebug.mustRunAfter generateCalcModel
-compileCalcModelRelease.mustRunAfter generateCalcModel
-compileCalcModelExecDebug.mustRunAfter compileCalcModelDebug
-compileCalcModelExecRelease.mustRunAfter compileCalcModelRelease
+compileCalcModel.mustRunAfter generateCalcModel
+compileCalcModelExec.mustRunAfter compileCalcModel
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/CalcModel/.cmake/')
