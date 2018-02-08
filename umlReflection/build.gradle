@@ -1,3 +1,6 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+}
 apply plugin: 'base' 
 
 description 'Build tasks for project: UmlReflection'
@@ -7,67 +10,11 @@ task buildUmlReflection(dependsOn: ['generateUmlReflection', 'compileUmlReflecti
 	description 'build UmlReflection'
 }
 
-task compileUmlReflection(dependsOn: ['compileUmlReflectionDebug', 'compileUmlReflectionRelease']) {
+task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'UmlReflection'
 	description 'compile UmlReflection'
-}
-task compileUmlReflectionDebug {
-	description 'compile UmlReflection in Debug'
 
-	def folder = new File(file('./src_gen/UmlReflection/.cmake/Debug').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/UmlReflection/.cmake/Debug'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Debug ' + file("./src_gen/UmlReflection").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/UmlReflection/.cmake/Debug'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileUmlReflectionDebug.onlyIf {
-	(project.hasProperty("DEBUG") && !(project.getProperty("DEBUG") == '0')) || (project.hasProperty("D") && !(project.getProperty("D") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
-}
-task compileUmlReflectionRelease {
-	description 'compile UmlReflection in Release'
-
-	def folder = new File(file('./src_gen/UmlReflection/.cmake/Release').absolutePath)
-	if( !folder.exists() ) {
-		folder.mkdirs()
-	}
-
-	doLast {
-		exec {
-			workingDir 'src_gen/UmlReflection/.cmake/Release'
-			commandLine 'cmd', '/c', 'cmake -G "MinGW Makefiles" -D CMAKE_BUILD_TYPE=Release ' + file("./src_gen/UmlReflection").absolutePath
-		}
-		exec {
-			workingDir 'src_gen/UmlReflection/.cmake/Release'
-			if (make_parallel_jobs)
-			{			
-				commandLine 'cmd', '/c', 'mingw32-make install -j' + make_parallel_jobs
-			}
-			else
-			{
-				commandLine 'cmd', '/c', 'mingw32-make install' 
-			}
-		}
-	}
-}
-compileUmlReflectionRelease.onlyIf {
-	(project.hasProperty("RELEASE") && !(project.getProperty("RELEASE") == '0')) || (project.hasProperty("R") && !(project.getProperty("R") == '0')) || (!project.hasProperty("RELEASE") && !project.hasProperty("R") && !project.hasProperty("DEBUG") && !project.hasProperty("D"))
+	pathToCMakeList = file("./src_gen/UmlReflection")
 }
 
 task generateUmlReflection(type: JavaExec) {
@@ -90,9 +37,6 @@ task generateUmlReflection(type: JavaExec) {
 }
 
 compileUmlReflection.mustRunAfter generateUmlReflection
-compileUmlReflectionDebug.mustRunAfter generateUmlReflection
-compileUmlReflectionRelease.mustRunAfter generateUmlReflection
-
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/UmlReflection/.cmake/')
