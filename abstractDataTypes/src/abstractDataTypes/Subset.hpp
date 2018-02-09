@@ -13,7 +13,7 @@
 #include <utility>
 
 #include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
+#include "abstractDataTypes/Union.hpp"
 
 template<class T, class ... U>
 class Subset : virtual public Bag<T>
