@@ -1,6 +1,6 @@
 description 'Models and generated source code collection'
 
-task buildEcoreModels(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:PluginFramework:compilePluginFramework', 'ecore:ecore:buildEcore', 'ecore:types:buildTypes', 'uml:buildUml', 'fuml:buildFUML', 'util:deliverUtil']) {
+task buildEcoreModels(dependsOn: ['common:abstractDataTypes:deliverAbstractDataTypes', 'common:pluginFramework:compilePluginFramework', 'ecore:ecore:buildEcore', 'ecore:types:buildTypes', 'uml:buildUml', 'fuml:buildFUML', 'util:deliverUtil']) {
 	group 'Source'
 	description 'generate and compile all ecore models'
 }
