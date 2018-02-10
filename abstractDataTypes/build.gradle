@@ -5,6 +5,6 @@ task deliverAbstractDataTypes(type: Copy) {
 	into System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes"
 	include "**/*.hpp"
 	exclude "build", ".gradle"
-	inputs.dir file("abstractDataTypes/.")
-	outputs.file file(System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes")
+	inputs.dir file("src")
+	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/abstractDataTypes")
 }
