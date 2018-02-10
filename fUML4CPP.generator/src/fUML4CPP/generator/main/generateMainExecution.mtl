@@ -136,7 +136,7 @@ int main()
 [/if]
 
 [for ( par : Parameter | anActivity->asOrderedSet()->first().ownedParameter)]
-[par.generateParameterInclude()/]
+[par.generateParameterInclude(aPackage)/]
 [/for]
 
 [/template]

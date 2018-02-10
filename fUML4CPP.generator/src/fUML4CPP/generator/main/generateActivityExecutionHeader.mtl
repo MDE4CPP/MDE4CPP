@@ -28,9 +28,9 @@ className : String = aActivity.name.toUpperFirst().concat('Execution');
 #define [aActivity.name.toUpperCase()/] 1
 #include "fUML/impl/ActivityExecutionImpl.hpp"
 [for ( par : Parameter | aActivity.ownedParameter)]
-[par.generateParameterInclude()/]
+[par.generateParameterInclude(aPackage)/]
 [/for]
-#include "abstactDataTypes/SubsetUnion.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
 
 namespace [aPackage.name/] 
 {

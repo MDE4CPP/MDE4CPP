@@ -32,7 +32,7 @@
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anOpaqueBehavior.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 #include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.target.type.name/].hpp"
-#include "[cOpSet.getNearestPackage().name/]Exec/[cOpSet.target.type.name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[cOpSet.target.type.name/]Execution.hpp"
 [/if]
 [/let]
 [/if]
@@ -41,7 +41,7 @@
 #include "fUML/Reference.hpp"
 [/if]
 [for ( par : Parameter | anOpaqueBehavior.ownedParameter)]
-[par.generateParameterInclude()/]
+[par.generateParameterInclude(aPackage)/]
 [/for]
 
 using namespace [aPackage.name/];

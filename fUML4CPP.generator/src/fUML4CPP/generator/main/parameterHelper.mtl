@@ -70,11 +70,11 @@ std::shared_ptr<[par.type.name.toUpperFirst()/]Execution> [par.name/]UmlLinker(n
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
-[template public generateParameterInclude(par : Parameter) ? (not par.supportedTypes())]
-#include "[par.type.getNearestPackage().getPackageName()/]/[par.type.name/].hpp"
-#include "[par.getNearestPackage().getPackageName()/]Exec/[par.type.name/]Execution.hpp"
+[template public generateParameterInclude(par : Parameter, aPackage : Package) ? (not par.supportedTypes())]
+#include "[par.type.getNearestPackage().name/]/[par.type.name/].hpp"
+#include "[aPackage.getPackageName()/]Exec/[par.type.name/]Execution.hpp"
 [/template]
 
-[template public generateParameterInclude(par : Parameter) ? (par.supportedTypes())]
+[template public generateParameterInclude(par : Parameter, aPackage : Package) ? (par.supportedTypes())]
 #include "fUML/[par.type.name/]Value.hpp"
 [/template]

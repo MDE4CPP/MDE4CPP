@@ -34,7 +34,7 @@
 [let cOpSet : CallOperationAction = aPackage.allOwnedElements()->filter(CallOperationAction)->select(operation.method.name->asOrderedSet()->first() = anCallOperationAction.name)->asOrderedSet()->first()]
 [if (not cOpSet.oclIsUndefined())]
 #include "[cOpSet.target.type.getNearestPackage().name/]/[cOpSet.operation.owner.oclAsType(Class).name/].hpp"
-#include "[cOpSet.getNearestPackage().name/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]/Exec/[cOpSet.operation.owner.oclAsType(Class).name/]Execution.hpp"
 [/if]
 [/let]
 [/if][/if]
@@ -52,11 +52,11 @@
 // [anCallOperationAction.operation.ownedParameter->first().type.name/] is not a pointer
 [/if]
 [for ( par : Parameter | anCallOperationAction.operation.ownedParameter->asOrderedSet()->sortedBy(name))]
-[par.generateParameterInclude()/]
+[par.generateParameterInclude(aPackage)/]
 [/for]
 
 #include "[anCallOperationAction.target.type.getNearestPackage().name/]/[anCallOperationAction.target.type.name/].hpp"
-#include "[anCallOperationAction.getNearestPackage().name/]Exec/[anCallOperationAction.target.type.name/]Execution.hpp"
+#include "[aPackage.getPackageName()/]Exec/[anCallOperationAction.target.type.name/]Execution.hpp"
  
 using namespace [aPackage.name/];
 
