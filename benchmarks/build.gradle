@@ -32,19 +32,19 @@ task compileUMLBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 }
 
 clean.doFirst {
-	def cmakeFolder = file("./ecoreBenchmark")
+	def cmakeFolder = file("./ecoreBenchmark/.cmake")
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
 	
-	cmakeFolder = file("./memoryBenchmarkEcore")
+	cmakeFolder = file("./memoryBenchmarkEcore/.cmake")
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
 	}
 	
-	cmakeFolder = file("./UMLBenchmark")
+	cmakeFolder = file("./UMLBenchmark/.cmake")
 	if(cmakeFolder.exists()) {
     	delete cmakeFolder.absolutePath
    		println "deleting folder " + cmakeFolder.absolutePath
