@@ -1,5 +1,5 @@
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -14,14 +14,14 @@ task compileApplicationForLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompil
 	group 'libraryModel_ecore'
 	description 'compile ApplicationForlibraryModel_ecore'
 
-	pathToCMakeList = file("./application")
+	projectFolder = file("./application")
 }
 
 task compileLibraryModel_ecore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'libraryModel_ecore'
 	description 'compile libraryModel_ecore'
 
-	pathToCMakeList = file("./src_gen/libraryModel_ecore")
+	projectFolder = file("./src_gen/libraryModel_ecore")
 }
 
 task generateLibraryModel_ecore(type: JavaExec) {

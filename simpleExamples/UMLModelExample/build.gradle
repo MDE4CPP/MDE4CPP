@@ -1,5 +1,5 @@
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -14,14 +14,14 @@ task compileApplicationForLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile)
 	group 'LibraryModel_uml'
 	description 'compile ApplicationForLibraryModel_uml'
 
-	pathToCMakeList = file("./application")
+	projectFolder = file("./application")
 }
 
 task compileLibraryModel_uml(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'LibraryModel_uml'
 	description 'compile LibraryModel_uml'
 
-	pathToCMakeList = file("./src_gen/LibraryModel_uml")
+	projectFolder = file("./src_gen/LibraryModel_uml")
 }
 
 task generateLibraryModel_uml(type: JavaExec) {
