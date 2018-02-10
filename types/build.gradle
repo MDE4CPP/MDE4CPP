@@ -1,5 +1,5 @@
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -14,7 +14,7 @@ task compileTypes(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group 'types'
 	description 'compile types'
 
-	pathToCMakeList = file("./src_gen/types")
+	projectFolder = file("./src_gen/types")
 }
 
 task generateTypes(type: JavaExec) {
