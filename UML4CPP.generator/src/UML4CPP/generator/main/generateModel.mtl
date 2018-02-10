@@ -71,7 +71,7 @@ namespace [element.namespace.ns()/]
 [if (not aClass.interfaceRealization->isEmpty())]
 // Interface realization
 [for (anInterfaceRealization : InterfaceRealization | aClass.interfaceRealization->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[anInterfaceRealization.getNearestPackage().getPackageName()/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
+#include "[anInterfaceRealization.supplier.getNearestPackage().name/]/[anInterfaceRealization.supplier.name.toUpperFirst()/].hpp"[/for]
 
 // End: Interface realization
 [/if]
