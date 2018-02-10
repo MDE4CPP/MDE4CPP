@@ -455,7 +455,7 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int EPACKAGE = 12;
 			static const int EPACKAGE_FEATURE_COUNT = 8;
-			static const int EPACKAGE_OPERATION_COUNT = 29;
+			static const int EPACKAGE_OPERATION_COUNT = 23;
 			static const int EPACKAGE_NSPREFIX = 123;
 			static const int EPACKAGE_NSURI = 122;
 			

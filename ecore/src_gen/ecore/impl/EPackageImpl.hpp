@@ -74,30 +74,6 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual void createEAttribute(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> createEClass(int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EDataType> createEDataType(int id)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EEnum> createEEnum(int id)  ;
-			
-			/*!
-			 */ 
-			virtual void createEOperation(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
-			virtual void createEReference(std::shared_ptr<ecore::EClass>  owner,int id)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  ;
 			
 			/*!

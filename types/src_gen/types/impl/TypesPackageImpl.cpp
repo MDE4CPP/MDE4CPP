@@ -60,13 +60,16 @@ void TypesPackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
+
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
 
-	booleanEDataType = createEDataType(BOOLEAN);
-	integerEDataType = createEDataType(INTEGER);
-	realEDataType = createEDataType(REAL);
-	stringEDataType = createEDataType(STRING);
-	unlimitedNaturalEDataType = createEDataType(UNLIMITEDNATURAL);
+	booleanEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BOOLEAN);
+	integerEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTEGER);
+	realEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REAL);
+	stringEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRING);
+	unlimitedNaturalEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), UNLIMITEDNATURAL);
 	
 }
 

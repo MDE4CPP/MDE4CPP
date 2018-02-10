@@ -108,261 +108,284 @@ void EcorePackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
 
-	eAnnotationEClass = createEClass(EANNOTATION);
-	createEAttribute(eAnnotationEClass, EANNOTATION_SOURCE);
-	
-	createEReference(eAnnotationEClass, EANNOTATION_CONTENTS);
-	createEReference(eAnnotationEClass, EANNOTATION_DETAILS);
-	createEReference(eAnnotationEClass, EANNOTATION_EMODELELEMENT);
-	createEReference(eAnnotationEClass, EANNOTATION_REFERENCES);
-	
-	
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
-	eAttributeEClass = createEClass(EATTRIBUTE);
-	createEAttribute(eAttributeEClass, EATTRIBUTE_ID);
+	eAnnotationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EANNOTATION);
 	
-	createEReference(eAttributeEClass, EATTRIBUTE_EATTRIBUTETYPE);
+	factory->createEAttribute_in_EContainingClass(eAnnotationEClass, EANNOTATION_SOURCE);
+	
+	factory->createEReference_in_EContainingClass(eAnnotationEClass, EANNOTATION_CONTENTS);
+	factory->createEReference_in_EContainingClass(eAnnotationEClass, EANNOTATION_DETAILS);
+	factory->createEReference_in_EContainingClass(eAnnotationEClass, EANNOTATION_EMODELELEMENT);
+	factory->createEReference_in_EContainingClass(eAnnotationEClass, EANNOTATION_REFERENCES);
 	
 	
 
-	eClassEClass = createEClass(ECLASS);
-	createEAttribute(eClassEClass, ECLASS_ABSTRACT);
-	createEAttribute(eClassEClass, ECLASS_INTERFACE);
+	eAttributeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EATTRIBUTE);
 	
-	createEReference(eClassEClass, ECLASS_EALLATTRIBUTES);
-	createEReference(eClassEClass, ECLASS_EALLCONTAINMENTS);
-	createEReference(eClassEClass, ECLASS_EALLGENERICSUPERTYPES);
-	createEReference(eClassEClass, ECLASS_EALLOPERATIONS);
-	createEReference(eClassEClass, ECLASS_EALLREFERENCES);
-	createEReference(eClassEClass, ECLASS_EALLSTRUCTURALFEATURES);
-	createEReference(eClassEClass, ECLASS_EALLSUPERTYPES);
-	createEReference(eClassEClass, ECLASS_EATTRIBUTES);
-	createEReference(eClassEClass, ECLASS_EGENERICSUPERTYPES);
-	createEReference(eClassEClass, ECLASS_EIDATTRIBUTE);
-	createEReference(eClassEClass, ECLASS_EOPERATIONS);
-	createEReference(eClassEClass, ECLASS_EREFERENCES);
-	createEReference(eClassEClass, ECLASS_ESTRUCTURALFEATURES);
-	createEReference(eClassEClass, ECLASS_ESUPERTYPES);
+	factory->createEAttribute_in_EContainingClass(eAttributeEClass, EATTRIBUTE_ID);
 	
-	createEOperation(eClassEClass, ECLASS___GETEOPERATION__EINT);
-	createEOperation(eClassEClass, ECLASS___GETESTRUCTURALFEATURE__EINT);
-	createEOperation(eClassEClass, ECLASS___GETESTRUCTURALFEATURE__ESTRING);
-	createEOperation(eClassEClass, ECLASS___GETFEATURECOUNT);
-	createEOperation(eClassEClass, ECLASS___GETFEATUREID__ESTRUCTURALFEATURE);
-	createEOperation(eClassEClass, ECLASS___GETFEATURETYPE__ESTRUCTURALFEATURE);
-	createEOperation(eClassEClass, ECLASS___GETOPERATIONCOUNT);
-	createEOperation(eClassEClass, ECLASS___GETOPERATIONID__EOPERATION);
-	createEOperation(eClassEClass, ECLASS___GETOVERRIDE__EOPERATION);
-	createEOperation(eClassEClass, ECLASS___ISSUPERTYPEOF__ECLASS);
-	
-
-	eClassifierEClass = createEClass(ECLASSIFIER);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_CLASSIFIERID);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_DEFAULTVALUE);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASS);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCECLASSNAME);
-	createEAttribute(eClassifierEClass, ECLASSIFIER_INSTANCETYPENAME);
-	
-	createEReference(eClassifierEClass, ECLASSIFIER_EPACKAGE);
-	createEReference(eClassifierEClass, ECLASSIFIER_ETYPEPARAMETERS);
-	
-	createEOperation(eClassifierEClass, ECLASSIFIER___ISINSTANCE__EJAVAOBJECT);
-	
-
-	eDataTypeEClass = createEClass(EDATATYPE);
-	createEAttribute(eDataTypeEClass, EDATATYPE_SERIALIZABLE);
-	
+	factory->createEReference_in_EContainingClass(eAttributeEClass, EATTRIBUTE_EATTRIBUTETYPE);
 	
 	
 
-	eEnumEClass = createEClass(EENUM);
+	eClassEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ECLASS);
 	
-	createEReference(eEnumEClass, EENUM_ELITERALS);
+	factory->createEAttribute_in_EContainingClass(eClassEClass, ECLASS_ABSTRACT);
+	factory->createEAttribute_in_EContainingClass(eClassEClass, ECLASS_INTERFACE);
 	
-	createEOperation(eEnumEClass, EENUM___GETEENUMLITERAL__ESTRING);
-	createEOperation(eEnumEClass, EENUM___GETEENUMLITERAL__EINT);
-	createEOperation(eEnumEClass, EENUM___GETEENUMLITERALBYLITERAL__ESTRING);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLATTRIBUTES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLCONTAINMENTS);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLGENERICSUPERTYPES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLOPERATIONS);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLREFERENCES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLSTRUCTURALFEATURES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EALLSUPERTYPES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EATTRIBUTES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EGENERICSUPERTYPES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EIDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EOPERATIONS);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_EREFERENCES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_ESTRUCTURALFEATURES);
+	factory->createEReference_in_EContainingClass(eClassEClass, ECLASS_ESUPERTYPES);
 	
-
-	eEnumLiteralEClass = createEClass(EENUMLITERAL);
-	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_INSTANCE);
-	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_LITERAL);
-	createEAttribute(eEnumLiteralEClass, EENUMLITERAL_VALUE);
-	
-	createEReference(eEnumLiteralEClass, EENUMLITERAL_EENUM);
-	
-	
-
-	eFactoryEClass = createEClass(EFACTORY);
-	
-	createEReference(eFactoryEClass, EFACTORY_EPACKAGE);
-	
-	createEOperation(eFactoryEClass, EFACTORY___CONVERTTOSTRING__EDATATYPE_EJAVAOBJECT);
-	createEOperation(eFactoryEClass, EFACTORY___CREATE__ECLASS_EOBJECT);
-	createEOperation(eFactoryEClass, EFACTORY___CREATEFROMSTRING__EDATATYPE_ESTRING);
-	
-
-	eGenericTypeEClass = createEClass(EGENERICTYPE);
-	
-	createEReference(eGenericTypeEClass, EGENERICTYPE_ECLASSIFIER);
-	createEReference(eGenericTypeEClass, EGENERICTYPE_ELOWERBOUND);
-	createEReference(eGenericTypeEClass, EGENERICTYPE_ERAWTYPE);
-	createEReference(eGenericTypeEClass, EGENERICTYPE_ETYPEARGUMENTS);
-	createEReference(eGenericTypeEClass, EGENERICTYPE_ETYPEPARAMETER);
-	createEReference(eGenericTypeEClass, EGENERICTYPE_EUPPERBOUND);
-	
-	createEOperation(eGenericTypeEClass, EGENERICTYPE___ISINSTANCE__EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETEOPERATION__EINT);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETESTRUCTURALFEATURE__EINT);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETESTRUCTURALFEATURE__ESTRING);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETFEATURECOUNT);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETFEATUREID__ESTRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETFEATURETYPE__ESTRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETOPERATIONCOUNT);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETOPERATIONID__EOPERATION);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___GETOVERRIDE__EOPERATION);
+	factory->createEOperation_in_EContainingClass(eClassEClass, ECLASS___ISSUPERTYPEOF__ECLASS);
 	
 
-	eModelElementEClass = createEClass(EMODELELEMENT);
+	eClassifierEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ECLASSIFIER);
 	
-	createEReference(eModelElementEClass, EMODELELEMENT_EANNOTATIONS);
+	factory->createEAttribute_in_EContainingClass(eClassifierEClass, ECLASSIFIER_CLASSIFIERID);
+	factory->createEAttribute_in_EContainingClass(eClassifierEClass, ECLASSIFIER_DEFAULTVALUE);
+	factory->createEAttribute_in_EContainingClass(eClassifierEClass, ECLASSIFIER_INSTANCECLASS);
+	factory->createEAttribute_in_EContainingClass(eClassifierEClass, ECLASSIFIER_INSTANCECLASSNAME);
+	factory->createEAttribute_in_EContainingClass(eClassifierEClass, ECLASSIFIER_INSTANCETYPENAME);
 	
-	createEOperation(eModelElementEClass, EMODELELEMENT___GETEANNOTATION__ESTRING);
+	factory->createEReference_in_EContainingClass(eClassifierEClass, ECLASSIFIER_EPACKAGE);
+	factory->createEReference_in_EContainingClass(eClassifierEClass, ECLASSIFIER_ETYPEPARAMETERS);
+	
+	factory->createEOperation_in_EContainingClass(eClassifierEClass, ECLASSIFIER___ISINSTANCE__EJAVAOBJECT);
 	
 
-	eNamedElementEClass = createEClass(ENAMEDELEMENT);
-	createEAttribute(eNamedElementEClass, ENAMEDELEMENT_NAME);
+	eDataTypeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EDATATYPE);
+	
+	factory->createEAttribute_in_EContainingClass(eDataTypeEClass, EDATATYPE_SERIALIZABLE);
 	
 	
 	
 
-	eObjectEClass = createEClass(EOBJECT);
+	eEnumEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EENUM);
 	
-	createEReference(eObjectEClass, EOBJECT_ECONTAINER);
 	
-	createEOperation(eObjectEClass, EOBJECT___EALLCONTENTS);
-	createEOperation(eObjectEClass, EOBJECT___ECLASS);
-	createEOperation(eObjectEClass, EOBJECT___ECONTAININGFEATURE);
-	createEOperation(eObjectEClass, EOBJECT___ECONTAINMENTFEATURE);
-	createEOperation(eObjectEClass, EOBJECT___ECONTENTS);
-	createEOperation(eObjectEClass, EOBJECT___ECROSSREFERENCES);
-	createEOperation(eObjectEClass, EOBJECT___EGET__ESTRUCTURALFEATURE);
-	createEOperation(eObjectEClass, EOBJECT___EGET__ESTRUCTURALFEATURE_EBOOLEAN);
-	createEOperation(eObjectEClass, EOBJECT___EINVOKE__EOPERATION_EELIST);
-	createEOperation(eObjectEClass, EOBJECT___EISPROXY);
-	createEOperation(eObjectEClass, EOBJECT___EISSET__ESTRUCTURALFEATURE);
-	createEOperation(eObjectEClass, EOBJECT___ERESOURCE);
-	createEOperation(eObjectEClass, EOBJECT___ESET__ESTRUCTURALFEATURE_EJAVAOBJECT);
-	createEOperation(eObjectEClass, EOBJECT___EUNSET__ESTRUCTURALFEATURE);
+	factory->createEReference_in_EContainingClass(eEnumEClass, EENUM_ELITERALS);
+	
+	factory->createEOperation_in_EContainingClass(eEnumEClass, EENUM___GETEENUMLITERAL__ESTRING);
+	factory->createEOperation_in_EContainingClass(eEnumEClass, EENUM___GETEENUMLITERAL__EINT);
+	factory->createEOperation_in_EContainingClass(eEnumEClass, EENUM___GETEENUMLITERALBYLITERAL__ESTRING);
 	
 
-	eOperationEClass = createEClass(EOPERATION);
-	createEAttribute(eOperationEClass, EOPERATION_OPERATIONID);
+	eEnumLiteralEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EENUMLITERAL);
 	
-	createEReference(eOperationEClass, EOPERATION_ECONTAININGCLASS);
-	createEReference(eOperationEClass, EOPERATION_EEXCEPTIONS);
-	createEReference(eOperationEClass, EOPERATION_EGENERICEXCEPTIONS);
-	createEReference(eOperationEClass, EOPERATION_EPARAMETERS);
-	createEReference(eOperationEClass, EOPERATION_ETYPEPARAMETERS);
+	factory->createEAttribute_in_EContainingClass(eEnumLiteralEClass, EENUMLITERAL_INSTANCE);
+	factory->createEAttribute_in_EContainingClass(eEnumLiteralEClass, EENUMLITERAL_LITERAL);
+	factory->createEAttribute_in_EContainingClass(eEnumLiteralEClass, EENUMLITERAL_VALUE);
 	
-	createEOperation(eOperationEClass, EOPERATION___ISOVERRIDEOF__EOPERATION);
-	
-
-	ePackageEClass = createEClass(EPACKAGE);
-	createEAttribute(ePackageEClass, EPACKAGE_NSPREFIX);
-	createEAttribute(ePackageEClass, EPACKAGE_NSURI);
-	
-	createEReference(ePackageEClass, EPACKAGE_ECLASSIFIERS);
-	createEReference(ePackageEClass, EPACKAGE_EFACTORYINSTANCE);
-	createEReference(ePackageEClass, EPACKAGE_ESUBPACKAGES);
-	createEReference(ePackageEClass, EPACKAGE_ESUPERPACKAGE);
-	
-	createEOperation(ePackageEClass, EPACKAGE___GETECLASSIFIER__ESTRING);
-	
-
-	eParameterEClass = createEClass(EPARAMETER);
-	
-	createEReference(eParameterEClass, EPARAMETER_EOPERATION);
+	factory->createEReference_in_EContainingClass(eEnumLiteralEClass, EENUMLITERAL_EENUM);
 	
 	
 
-	eReferenceEClass = createEClass(EREFERENCE);
-	createEAttribute(eReferenceEClass, EREFERENCE_CONTAINER);
-	createEAttribute(eReferenceEClass, EREFERENCE_CONTAINMENT);
-	createEAttribute(eReferenceEClass, EREFERENCE_RESOLVEPROXIES);
+	eFactoryEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EFACTORY);
 	
-	createEReference(eReferenceEClass, EREFERENCE_EKEYS);
-	createEReference(eReferenceEClass, EREFERENCE_EOPPOSITE);
-	createEReference(eReferenceEClass, EREFERENCE_EREFERENCETYPE);
 	
+	factory->createEReference_in_EContainingClass(eFactoryEClass, EFACTORY_EPACKAGE);
+	
+	factory->createEOperation_in_EContainingClass(eFactoryEClass, EFACTORY___CONVERTTOSTRING__EDATATYPE_EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(eFactoryEClass, EFACTORY___CREATE__ECLASS_EOBJECT);
+	factory->createEOperation_in_EContainingClass(eFactoryEClass, EFACTORY___CREATEFROMSTRING__EDATATYPE_ESTRING);
 	
 
-	eStringToStringMapEntryEClass = createEClass(ESTRINGTOSTRINGMAPENTRY);
-	createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_KEY);
-	createEAttribute(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_VALUE);
+	eGenericTypeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EGENERICTYPE);
+	
+	
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_ECLASSIFIER);
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_ELOWERBOUND);
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_ERAWTYPE);
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_ETYPEARGUMENTS);
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_ETYPEPARAMETER);
+	factory->createEReference_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE_EUPPERBOUND);
+	
+	factory->createEOperation_in_EContainingClass(eGenericTypeEClass, EGENERICTYPE___ISINSTANCE__EJAVAOBJECT);
+	
+
+	eModelElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EMODELELEMENT);
+	
+	
+	factory->createEReference_in_EContainingClass(eModelElementEClass, EMODELELEMENT_EANNOTATIONS);
+	
+	factory->createEOperation_in_EContainingClass(eModelElementEClass, EMODELELEMENT___GETEANNOTATION__ESTRING);
+	
+
+	eNamedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ENAMEDELEMENT);
+	
+	factory->createEAttribute_in_EContainingClass(eNamedElementEClass, ENAMEDELEMENT_NAME);
 	
 	
 	
 
-	eStructuralFeatureEClass = createEClass(ESTRUCTURALFEATURE);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CHANGEABLE);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CONTAINERCLASS);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUE);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUELITERAL);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DERIVED);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_FEATUREID);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_TRANSIENT);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_UNSETTABLE);
-	createEAttribute(eStructuralFeatureEClass, ESTRUCTURALFEATURE_VOLATILE);
+	eObjectEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EOBJECT);
 	
-	createEReference(eStructuralFeatureEClass, ESTRUCTURALFEATURE_ECONTAININGCLASS);
+	
+	factory->createEReference_in_EContainingClass(eObjectEClass, EOBJECT_ECONTAINER);
+	
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EALLCONTENTS);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ECLASS);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ECONTAININGFEATURE);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ECONTAINMENTFEATURE);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ECONTENTS);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ECROSSREFERENCES);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EGET__ESTRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EGET__ESTRUCTURALFEATURE_EBOOLEAN);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EINVOKE__EOPERATION_EELIST);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EISPROXY);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EISSET__ESTRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ERESOURCE);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___ESET__ESTRUCTURALFEATURE_EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(eObjectEClass, EOBJECT___EUNSET__ESTRUCTURALFEATURE);
+	
+
+	eOperationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EOPERATION);
+	
+	factory->createEAttribute_in_EContainingClass(eOperationEClass, EOPERATION_OPERATIONID);
+	
+	factory->createEReference_in_EContainingClass(eOperationEClass, EOPERATION_ECONTAININGCLASS);
+	factory->createEReference_in_EContainingClass(eOperationEClass, EOPERATION_EEXCEPTIONS);
+	factory->createEReference_in_EContainingClass(eOperationEClass, EOPERATION_EGENERICEXCEPTIONS);
+	factory->createEReference_in_EContainingClass(eOperationEClass, EOPERATION_EPARAMETERS);
+	factory->createEReference_in_EContainingClass(eOperationEClass, EOPERATION_ETYPEPARAMETERS);
+	
+	factory->createEOperation_in_EContainingClass(eOperationEClass, EOPERATION___ISOVERRIDEOF__EOPERATION);
+	
+
+	ePackageEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EPACKAGE);
+	
+	factory->createEAttribute_in_EContainingClass(ePackageEClass, EPACKAGE_NSPREFIX);
+	factory->createEAttribute_in_EContainingClass(ePackageEClass, EPACKAGE_NSURI);
+	
+	factory->createEReference_in_EContainingClass(ePackageEClass, EPACKAGE_ECLASSIFIERS);
+	factory->createEReference_in_EContainingClass(ePackageEClass, EPACKAGE_EFACTORYINSTANCE);
+	factory->createEReference_in_EContainingClass(ePackageEClass, EPACKAGE_ESUBPACKAGES);
+	factory->createEReference_in_EContainingClass(ePackageEClass, EPACKAGE_ESUPERPACKAGE);
+	
+	factory->createEOperation_in_EContainingClass(ePackageEClass, EPACKAGE___GETECLASSIFIER__ESTRING);
+	
+
+	eParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EPARAMETER);
+	
+	
+	factory->createEReference_in_EContainingClass(eParameterEClass, EPARAMETER_EOPERATION);
 	
 	
 
-	eTypeParameterEClass = createEClass(ETYPEPARAMETER);
+	eReferenceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EREFERENCE);
 	
-	createEReference(eTypeParameterEClass, ETYPEPARAMETER_EBOUNDS);
+	factory->createEAttribute_in_EContainingClass(eReferenceEClass, EREFERENCE_CONTAINER);
+	factory->createEAttribute_in_EContainingClass(eReferenceEClass, EREFERENCE_CONTAINMENT);
+	factory->createEAttribute_in_EContainingClass(eReferenceEClass, EREFERENCE_RESOLVEPROXIES);
 	
-	
-
-	eTypedElementEClass = createEClass(ETYPEDELEMENT);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_LOWERBOUND);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_MANY);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_ORDERED);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_REQUIRED);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UNIQUE);
-	createEAttribute(eTypedElementEClass, ETYPEDELEMENT_UPPERBOUND);
-	
-	createEReference(eTypedElementEClass, ETYPEDELEMENT_EGENERICTYPE);
-	createEReference(eTypedElementEClass, ETYPEDELEMENT_ETYPE);
+	factory->createEReference_in_EContainingClass(eReferenceEClass, EREFERENCE_EKEYS);
+	factory->createEReference_in_EContainingClass(eReferenceEClass, EREFERENCE_EOPPOSITE);
+	factory->createEReference_in_EContainingClass(eReferenceEClass, EREFERENCE_EREFERENCETYPE);
 	
 	
 
-	eBigDecimalEDataType = createEDataType(EBIGDECIMAL);
-	eBigIntegerEDataType = createEDataType(EBIGINTEGER);
-	eBooleanEDataType = createEDataType(EBOOLEAN);
-	eBooleanObjectEDataType = createEDataType(EBOOLEANOBJECT);
-	eByteEDataType = createEDataType(EBYTE);
-	eByteArrayEDataType = createEDataType(EBYTEARRAY);
-	eByteObjectEDataType = createEDataType(EBYTEOBJECT);
-	eCharEDataType = createEDataType(ECHAR);
-	eCharacterObjectEDataType = createEDataType(ECHARACTEROBJECT);
-	eDateEDataType = createEDataType(EDATE);
-	eDiagnosticChainEDataType = createEDataType(EDIAGNOSTICCHAIN);
-	eDoubleEDataType = createEDataType(EDOUBLE);
-	eDoubleObjectEDataType = createEDataType(EDOUBLEOBJECT);
-	eEListEDataType = createEDataType(EELIST);
-	eEnumeratorEDataType = createEDataType(EENUMERATOR);
-	eFeatureMapEDataType = createEDataType(EFEATUREMAP);
-	eFeatureMapEntryEDataType = createEDataType(EFEATUREMAPENTRY);
-	eFloatEDataType = createEDataType(EFLOAT);
-	eFloatObjectEDataType = createEDataType(EFLOATOBJECT);
-	eIntEDataType = createEDataType(EINT);
-	eIntegerObjectEDataType = createEDataType(EINTEGEROBJECT);
-	eInvocationTargetExceptionEDataType = createEDataType(EINVOCATIONTARGETEXCEPTION);
-	eJavaClassEDataType = createEDataType(EJAVACLASS);
-	eJavaObjectEDataType = createEDataType(EJAVAOBJECT);
-	eLongEDataType = createEDataType(ELONG);
-	eLongObjectEDataType = createEDataType(ELONGOBJECT);
-	eMapEDataType = createEDataType(EMAP);
-	eResourceEDataType = createEDataType(ERESOURCE);
-	eResourceSetEDataType = createEDataType(ERESOURCESET);
-	eShortEDataType = createEDataType(ESHORT);
-	eShortObjectEDataType = createEDataType(ESHORTOBJECT);
-	eStringEDataType = createEDataType(ESTRING);
-	eTreeIteratorEDataType = createEDataType(ETREEITERATOR);
+	eStringToStringMapEntryEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ESTRINGTOSTRINGMAPENTRY);
+	
+	factory->createEAttribute_in_EContainingClass(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_KEY);
+	factory->createEAttribute_in_EContainingClass(eStringToStringMapEntryEClass, ESTRINGTOSTRINGMAPENTRY_VALUE);
+	
+	
+	
+
+	eStructuralFeatureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ESTRUCTURALFEATURE);
+	
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CHANGEABLE);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_CONTAINERCLASS);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUE);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DEFAULTVALUELITERAL);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_DERIVED);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_FEATUREID);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_TRANSIENT);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_UNSETTABLE);
+	factory->createEAttribute_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_VOLATILE);
+	
+	factory->createEReference_in_EContainingClass(eStructuralFeatureEClass, ESTRUCTURALFEATURE_ECONTAININGCLASS);
+	
+	
+
+	eTypeParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ETYPEPARAMETER);
+	
+	
+	factory->createEReference_in_EContainingClass(eTypeParameterEClass, ETYPEPARAMETER_EBOUNDS);
+	
+	
+
+	eTypedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ETYPEDELEMENT);
+	
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_LOWERBOUND);
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_MANY);
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_ORDERED);
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_REQUIRED);
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_UNIQUE);
+	factory->createEAttribute_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_UPPERBOUND);
+	
+	factory->createEReference_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_EGENERICTYPE);
+	factory->createEReference_in_EContainingClass(eTypedElementEClass, ETYPEDELEMENT_ETYPE);
+	
+	
+
+	eBigDecimalEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBIGDECIMAL);
+	eBigIntegerEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBIGINTEGER);
+	eBooleanEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBOOLEAN);
+	eBooleanObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBOOLEANOBJECT);
+	eByteEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBYTE);
+	eByteArrayEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBYTEARRAY);
+	eByteObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EBYTEOBJECT);
+	eCharEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ECHAR);
+	eCharacterObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ECHARACTEROBJECT);
+	eDateEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EDATE);
+	eDiagnosticChainEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EDIAGNOSTICCHAIN);
+	eDoubleEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EDOUBLE);
+	eDoubleObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EDOUBLEOBJECT);
+	eEListEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EELIST);
+	eEnumeratorEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EENUMERATOR);
+	eFeatureMapEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EFEATUREMAP);
+	eFeatureMapEntryEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EFEATUREMAPENTRY);
+	eFloatEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EFLOAT);
+	eFloatObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EFLOATOBJECT);
+	eIntEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EINT);
+	eIntegerObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EINTEGEROBJECT);
+	eInvocationTargetExceptionEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EINVOCATIONTARGETEXCEPTION);
+	eJavaClassEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EJAVACLASS);
+	eJavaObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EJAVAOBJECT);
+	eLongEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ELONG);
+	eLongObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ELONGOBJECT);
+	eMapEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EMAP);
+	eResourceEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ERESOURCE);
+	eResourceSetEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ERESOURCESET);
+	eShortEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ESHORT);
+	eShortObjectEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ESHORTOBJECT);
+	eStringEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ESTRING);
+	eTreeIteratorEDataType = factory->createEDataType_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ETREEITERATOR);
 	
 }
 
