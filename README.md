@@ -9,7 +9,7 @@ Further information can be found on [project site] (http://sse.tu-ilmenau.de/mde
   * Java Development Kit (JDK) version 1.8
   * Eclipse Modeling Tool
     * add plugin Acceleo 3.7 for Eclipse Oxygen (use Acceleo 3.6 for older Eclipse versions)
-  * Gradle 4.2
+  * Gradle 4.5.1 or older
 	* Go to ${user folder}/.gradle 
 	* create file gradle.properties
 		* create entry: make_parallel_jobs=number
@@ -41,11 +41,12 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   * `gradle <task name>` ... run task <task name>
 
 6. List of top level tasks (MDE4CPP tasks):
-  * `generateAll` ... create executables of all generators and build all models
+  * `buildAll` ... create executables of all generators and build all base models
   * use `gradle tasks` to find all top level commands under `MDE4CPP tasks`
   * generator tasks:
     * `createAllGenerators` ... create executables of all generators
     * `create<Generator project name>` ... creates executable of corresponding generator, e.g. createUML4CPP
+  * examples can be found in [example](https://github.com/MDE4CPP/examples) or after cloning the repositories in src/examples. Collection of examples can be build with task *buildAllExamples* (most projects are includes).
 
 7. Model tasks are names using following schema: `<command><modelName> <buildMode>`
   * commands:
@@ -62,6 +63,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
 		* RELEASE or R ... build release version
 		* This build mode is always used when compiling.
 	* A build mode can be disabled by setting the value `0`. For instance, the debug version is not built if `-PDEBUG=0` is defined in a gradle command.
+	* Further information for configuration and execution of compile tasks can be found on [MDE4CPPCompile-Plugin](https://github.com/MDE4CPP/MDE4CPPGradlePlugins).
   * examples:
 	* no preconfigured build mode inside gradle.properies: 
 		* `buildEcore` - generate and compile ecore.ecore in debug and release
