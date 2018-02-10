@@ -1,6 +1,6 @@
 description 'ecore4CPP project'
 
-task createEcore4CPP(dependsOn: ['checkDependencies', 'executeCompiler', 'ecore4CPP.generator:jar']) {
+task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:jar']) {
 	group 'Generators'
 	description 'create executable jar for ecore4CPP generator'
 }
@@ -11,6 +11,7 @@ task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP
 	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
 }
 tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter executeCompiler
+executeCompiler.mustRunAfter tasks.getByPath('ecore4CPP.generator:compileJava')
 
 task checkDependencies {
 	if (System.getenv('MDE4CPP_HOME') == null) {
