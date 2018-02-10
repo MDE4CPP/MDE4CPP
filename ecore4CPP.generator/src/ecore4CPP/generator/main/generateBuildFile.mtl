@@ -169,7 +169,7 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 
 [file ('../build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
@@ -185,7 +185,7 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	group '[packageName/]'
 	description 'compile ['ApplicationFor'.concat(packageName)/]'
 
-	pathToCMakeList = file("./application")
+	projectFolder = file("./application")
 }
 
 [/if]
@@ -193,7 +193,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	pathToCMakeList = file("./src_gen/[packageName/]")
+	projectFolder = file("./src_gen/[packageName/]")
 }
 
 task generate[packageName.toUpperFirst()/](type: JavaExec) {
