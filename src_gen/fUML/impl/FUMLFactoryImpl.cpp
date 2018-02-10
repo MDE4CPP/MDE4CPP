@@ -782,12 +782,13 @@ std::shared_ptr<ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1() 
 }
 std::shared_ptr<ExecutionFactoryL1> FUMLFactoryImpl::createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const
 {
-	std::shared_ptr<ExecutionFactoryL1> element(new ExecutionFactoryL1Impl(par_locus));
+	std::shared_ptr<ExecutionFactoryL1Impl> element(new ExecutionFactoryL1Impl(par_locus));
 	if(auto wp = par_locus.lock())
 	{
 			wp->setFactory(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2() const
@@ -797,12 +798,13 @@ std::shared_ptr<ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2() 
 }
 std::shared_ptr<ExecutionFactoryL2> FUMLFactoryImpl::createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const
 {
-	std::shared_ptr<ExecutionFactoryL2> element(new ExecutionFactoryL2Impl(par_locus));
+	std::shared_ptr<ExecutionFactoryL2Impl> element(new ExecutionFactoryL2Impl(par_locus));
 	if(auto wp = par_locus.lock())
 	{
 			wp->setFactory(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3() const
@@ -812,12 +814,13 @@ std::shared_ptr<ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3() 
 }
 std::shared_ptr<ExecutionFactoryL3> FUMLFactoryImpl::createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const
 {
-	std::shared_ptr<ExecutionFactoryL3> element(new ExecutionFactoryL3Impl(par_locus));
+	std::shared_ptr<ExecutionFactoryL3Impl> element(new ExecutionFactoryL3Impl(par_locus));
 	if(auto wp = par_locus.lock())
 	{
 			wp->setFactory(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Executor> FUMLFactoryImpl::createExecutor() const

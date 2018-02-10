@@ -172,976 +172,1093 @@ void FUMLPackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
 
-	acceptEventActionActivationEClass = createEClass(ACCEPTEVENTACTIONACTIVATION);
-	createEAttribute(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION_WAITING);
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+
+	acceptEventActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACCEPTEVENTACTIONACTIVATION);
 	
-	createEReference(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION_EVENTACCEPTER);
+	factory->createEAttribute_in_EContainingClass(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION_WAITING);
 	
-	createEOperation(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION___ACCEPT__SIGNALINSTANCE);
-	createEOperation(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION___MATCH__SIGNALINSTANCE);
+	factory->createEReference_in_EContainingClass(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION_EVENTACCEPTER);
 	
+	factory->createEOperation_in_EContainingClass(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION___ACCEPT__SIGNALINSTANCE);
+	factory->createEOperation_in_EContainingClass(acceptEventActionActivationEClass, ACCEPTEVENTACTIONACTIVATION___MATCH__SIGNALINSTANCE);
+	
 
-	acceptEventActionEventAccepterEClass = createEClass(ACCEPTEVENTACTIONEVENTACCEPTER);
+	acceptEventActionEventAccepterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACCEPTEVENTACTIONEVENTACCEPTER);
+	
 	
-	createEReference(acceptEventActionEventAccepterEClass, ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION);
+	factory->createEReference_in_EContainingClass(acceptEventActionEventAccepterEClass, ACCEPTEVENTACTIONEVENTACCEPTER_ACTIONACTIVATION);
 	
 	
 
-	actionActivationEClass = createEClass(ACTIONACTIVATION);
-	createEAttribute(actionActivationEClass, ACTIONACTIVATION_FIRING);
+	actionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIONACTIVATION);
 	
-	createEReference(actionActivationEClass, ACTIONACTIVATION_PINACTIVATION);
+	factory->createEAttribute_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION_FIRING);
+	
+	factory->createEReference_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION_PINACTIVATION);
+	
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___ADDPINACTIVATION__PINACTIVATION);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___COMPLETEACTION);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___CREATENODEACTIVATIONS);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___DOACTION);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___GETTOKENS__INPUTPIN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___ISFIRNG);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___MAKEBOOLEANVALUE__EBOOLEAN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___PUTTOKEN__OUTPUTPIN_VALUE);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___PUTTOKENS__OUTPUTPIN_VALUE);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___RETRIEVEPINACTIVATION__PIN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___RUN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___SENDOFFERS);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___TAKEOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___TAKETOKENS__INPUTPIN);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___TERMINATE);
+	factory->createEOperation_in_EContainingClass(actionActivationEClass, ACTIONACTIVATION___VALUEPARTICIPATESINLINK__VALUE_LINK);
+	
+
+	activityEdgeInstanceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYEDGEINSTANCE);
 	
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___ADDPINACTIVATION__PINACTIVATION);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___COMPLETEACTION);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___CREATENODEACTIVATIONS);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___DOACTION);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___FIRE__TOKEN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___GETTOKENS__INPUTPIN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___ISFIRNG);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___ISREADY);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___MAKEBOOLEANVALUE__EBOOLEAN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___PUTTOKEN__OUTPUTPIN_VALUE);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___PUTTOKENS__OUTPUTPIN_VALUE);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___RETRIEVEPINACTIVATION__PIN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___RUN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___SENDOFFERS);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___TAKEOFFEREDTOKENS);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___TAKETOKENS__INPUTPIN);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___TERMINATE);
-	createEOperation(actionActivationEClass, ACTIONACTIVATION___VALUEPARTICIPATESINLINK__VALUE_LINK);
-	
-
-	activityEdgeInstanceEClass = createEClass(ACTIVITYEDGEINSTANCE);
 	
-	createEReference(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_EDGE);
-	createEReference(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_GROUP);
-	createEReference(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_OFFERS);
-	createEReference(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_SOURCE);
-	createEReference(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_TARGET);
+	factory->createEReference_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_EDGE);
+	factory->createEReference_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_GROUP);
+	factory->createEReference_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_OFFERS);
+	factory->createEReference_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_SOURCE);
+	factory->createEReference_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE_TARGET);
 	
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___COUNTOFFEREDVALUE);
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___GETOFFEREDTOKENS);
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___HASOFFER);
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___SENDOFFER__TOKEN);
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS);
-	createEOperation(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS__EINT);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___COUNTOFFEREDVALUE);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___GETOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___HASOFFER);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___SENDOFFER__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(activityEdgeInstanceEClass, ACTIVITYEDGEINSTANCE___TAKEOFFEREDTOKENS__EINT);
 	
 
-	activityExecutionEClass = createEClass(ACTIVITYEXECUTION);
+	activityExecutionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYEXECUTION);
 	
-	createEReference(activityExecutionEClass, ACTIVITYEXECUTION_ACTIVATIONGROUP);
 	
-	createEOperation(activityExecutionEClass, ACTIVITYEXECUTION___EXECUTE);
-	createEOperation(activityExecutionEClass, ACTIVITYEXECUTION___NEW_);
-	createEOperation(activityExecutionEClass, ACTIVITYEXECUTION___TERMINATE);
+	factory->createEReference_in_EContainingClass(activityExecutionEClass, ACTIVITYEXECUTION_ACTIVATIONGROUP);
 	
+	factory->createEOperation_in_EContainingClass(activityExecutionEClass, ACTIVITYEXECUTION___EXECUTE);
+	factory->createEOperation_in_EContainingClass(activityExecutionEClass, ACTIVITYEXECUTION___NEW_);
+	factory->createEOperation_in_EContainingClass(activityExecutionEClass, ACTIVITYEXECUTION___TERMINATE);
+	
 
-	activityFinalNodeActivationEClass = createEClass(ACTIVITYFINALNODEACTIVATION);
+	activityFinalNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYFINALNODEACTIVATION);
 	
 	
-	createEOperation(activityFinalNodeActivationEClass, ACTIVITYFINALNODEACTIVATION___FIRE__TOKEN);
 	
+	factory->createEOperation_in_EContainingClass(activityFinalNodeActivationEClass, ACTIVITYFINALNODEACTIVATION___FIRE__TOKEN);
+	
 
-	activityNodeActivationEClass = createEClass(ACTIVITYNODEACTIVATION);
-	createEAttribute(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_RUNNING);
+	activityNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYNODEACTIVATION);
+	
+	factory->createEAttribute_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_RUNNING);
 	
-	createEReference(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_GROUP);
-	createEReference(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_HELDTOKENS);
-	createEReference(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_INCOMINGEDGES);
-	createEReference(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_NODE);
-	createEReference(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_OUTGOINGEDGES);
+	factory->createEReference_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_GROUP);
+	factory->createEReference_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_HELDTOKENS);
+	factory->createEReference_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_INCOMINGEDGES);
+	factory->createEReference_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_NODE);
+	factory->createEReference_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION_OUTGOINGEDGES);
 	
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDINCOMINGEDGE__ACTIVITYEDGEINSTANCE);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDTOKEN__TOKEN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDTOKENS__TOKEN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CLEARTOKENS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___FIRE__TOKEN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETACTIVITYEXECUTION);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETEXECUTIONCONTEXT);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETEXECUTIONLOCUS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETRUNNING);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETTOKENS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ISREADY);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RECIEVEOFFER);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___REMOVETOKEN__TOKEN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RESUME);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RUN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___SENDOFFERS__TOKEN);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___SUSPEND);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TAKEOFFEREDTOKENS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TAKETOKENS);
-	createEOperation(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TERMINATE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDINCOMINGEDGE__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDOUTGOINGEDGE__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDTOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ADDTOKENS__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CLEARTOKENS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETACTIVITYEXECUTION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETEXECUTIONCONTEXT);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETEXECUTIONLOCUS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETRUNNING);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___GETTOKENS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RECIEVEOFFER);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___REMOVETOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RESUME);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___RUN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___SENDOFFERS__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___SUSPEND);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TAKEOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TAKETOKENS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationEClass, ACTIVITYNODEACTIVATION___TERMINATE);
 	
 
-	activityNodeActivationGroupEClass = createEClass(ACTIVITYNODEACTIVATIONGROUP);
+	activityNodeActivationGroupEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYNODEACTIVATIONGROUP);
 	
-	createEReference(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION);
-	createEReference(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION);
-	createEReference(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_EDGEINSTANCES);
-	createEReference(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_NODEACTIVATIONS);
-	createEReference(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_SUSPENDEDACTIVATIONS);
 	
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ACTIVATE__ACTIVITYNODE_ACTIVITYEDGE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ADDEDGEINSTANCE__ACTIVITYEDGEINSTANCE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ADDNODEACTIVATION__ACTIVITYNODEACTIVATION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CHECKINCOMINGEDGES__ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATEEDGEINSTANCE__ACTIVITYEDGE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATION__ACTIVITYNODE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATIONS__ACTIVITYNODE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___GETNODEACTIVATION__ACTIVITYNODE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___GETOUTPUTPARAMETERNODEACTIVATIONS);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___HASSOURCEFOR__ACTIVITYEDGEINSTANCE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ISSUSPENDED);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RESUME__ACTIVITYNODEACTIVATION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RETRIEVEACTIVITYEXECUTION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RUN__ACTIVITYNODEACTIVATION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RUNNODES__ACTIVITYNODE);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___SUSPEND__ACTIVITYNODEACTIVATION);
-	createEOperation(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___TERMINATEALL);
+	factory->createEReference_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_ACTIVITYEXECUTION);
+	factory->createEReference_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_CONTAININGNODEACTIVATION);
+	factory->createEReference_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_EDGEINSTANCES);
+	factory->createEReference_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_NODEACTIVATIONS);
+	factory->createEReference_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP_SUSPENDEDACTIVATIONS);
 	
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ACTIVATE__ACTIVITYNODE_ACTIVITYEDGE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ADDEDGEINSTANCE__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ADDNODEACTIVATION__ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CHECKINCOMINGEDGES__ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATEEDGEINSTANCE__ACTIVITYEDGE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATION__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___CREATENODEACTIVATIONS__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___GETNODEACTIVATION__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___GETOUTPUTPARAMETERNODEACTIVATIONS);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___HASSOURCEFOR__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___ISSUSPENDED);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RESUME__ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RETRIEVEACTIVITYEXECUTION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RUN__ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___RUNNODES__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___SUSPEND__ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(activityNodeActivationGroupEClass, ACTIVITYNODEACTIVATIONGROUP___TERMINATEALL);
+	
 
-	activityParameterNodeActivationEClass = createEClass(ACTIVITYPARAMETERNODEACTIVATION);
+	activityParameterNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYPARAMETERNODEACTIVATION);
+	
 	
 	
-	createEOperation(activityParameterNodeActivationEClass, ACTIVITYPARAMETERNODEACTIVATION___CLEARTOKENS);
-	createEOperation(activityParameterNodeActivationEClass, ACTIVITYPARAMETERNODEACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeActivationEClass, ACTIVITYPARAMETERNODEACTIVATION___CLEARTOKENS);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeActivationEClass, ACTIVITYPARAMETERNODEACTIVATION___FIRE__TOKEN);
 	
 
-	addStructuralFeatureValueActionActivationEClass = createEClass(ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION);
+	addStructuralFeatureValueActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION);
 	
 	
 	
+	
 
-	booleanValueEClass = createEClass(BOOLEANVALUE);
-	createEAttribute(booleanValueEClass, BOOLEANVALUE_VALUE);
+	booleanValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BOOLEANVALUE);
+	
+	factory->createEAttribute_in_EContainingClass(booleanValueEClass, BOOLEANVALUE_VALUE);
 	
 	
-	createEOperation(booleanValueEClass, BOOLEANVALUE___EQUALS__VALUE);
-	createEOperation(booleanValueEClass, BOOLEANVALUE___SPECIFY);
-	createEOperation(booleanValueEClass, BOOLEANVALUE___TOSTRING);
+	factory->createEOperation_in_EContainingClass(booleanValueEClass, BOOLEANVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(booleanValueEClass, BOOLEANVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(booleanValueEClass, BOOLEANVALUE___TOSTRING);
 	
 
-	callActionActivationEClass = createEClass(CALLACTIONACTIVATION);
+	callActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLACTIONACTIVATION);
 	
-	createEReference(callActionActivationEClass, CALLACTIONACTIVATION_CALLEXECUTIONS);
 	
-	createEOperation(callActionActivationEClass, CALLACTIONACTIVATION___DOACTION);
-	createEOperation(callActionActivationEClass, CALLACTIONACTIVATION___GETCALLEXECUTION);
-	createEOperation(callActionActivationEClass, CALLACTIONACTIVATION___REMOVECALLEXECUTION__EXECUTION);
-	createEOperation(callActionActivationEClass, CALLACTIONACTIVATION___TERMINATE);
+	factory->createEReference_in_EContainingClass(callActionActivationEClass, CALLACTIONACTIVATION_CALLEXECUTIONS);
 	
+	factory->createEOperation_in_EContainingClass(callActionActivationEClass, CALLACTIONACTIVATION___DOACTION);
+	factory->createEOperation_in_EContainingClass(callActionActivationEClass, CALLACTIONACTIVATION___GETCALLEXECUTION);
+	factory->createEOperation_in_EContainingClass(callActionActivationEClass, CALLACTIONACTIVATION___REMOVECALLEXECUTION__EXECUTION);
+	factory->createEOperation_in_EContainingClass(callActionActivationEClass, CALLACTIONACTIVATION___TERMINATE);
+	
 
-	callBehaviorActionActivationEClass = createEClass(CALLBEHAVIORACTIONACTIVATION);
+	callBehaviorActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLBEHAVIORACTIONACTIVATION);
 	
 	
-	createEOperation(callBehaviorActionActivationEClass, CALLBEHAVIORACTIONACTIVATION___GETCALLEXECUTION);
 	
+	factory->createEOperation_in_EContainingClass(callBehaviorActionActivationEClass, CALLBEHAVIORACTIONACTIVATION___GETCALLEXECUTION);
+	
 
-	callOperationActionActivationEClass = createEClass(CALLOPERATIONACTIONACTIVATION);
+	callOperationActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLOPERATIONACTIONACTIVATION);
+	
 	
 	
-	createEOperation(callOperationActionActivationEClass, CALLOPERATIONACTIONACTIVATION___GETCALLEXECUTION);
+	factory->createEOperation_in_EContainingClass(callOperationActionActivationEClass, CALLOPERATIONACTIONACTIVATION___GETCALLEXECUTION);
 	
 
-	centralBufferNodeActivationEClass = createEClass(CENTRALBUFFERNODEACTIVATION);
+	centralBufferNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CENTRALBUFFERNODEACTIVATION);
 	
 	
-	createEOperation(centralBufferNodeActivationEClass, CENTRALBUFFERNODEACTIVATION___FIRE__TOKEN);
 	
+	factory->createEOperation_in_EContainingClass(centralBufferNodeActivationEClass, CENTRALBUFFERNODEACTIVATION___FIRE__TOKEN);
+	
 
-	choiceStrategyEClass = createEClass(CHOICESTRATEGY);
+	choiceStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CHOICESTRATEGY);
+	
 	
 	
-	createEOperation(choiceStrategyEClass, CHOICESTRATEGY___CHOOSE__EINT);
-	createEOperation(choiceStrategyEClass, CHOICESTRATEGY___RETRIEVENAME);
+	factory->createEOperation_in_EContainingClass(choiceStrategyEClass, CHOICESTRATEGY___CHOOSE__EINT);
+	factory->createEOperation_in_EContainingClass(choiceStrategyEClass, CHOICESTRATEGY___RETRIEVENAME);
 	
 
-	classifierBehaviorExecutionEClass = createEClass(CLASSIFIERBEHAVIOREXECUTION);
+	classifierBehaviorExecutionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASSIFIERBEHAVIOREXECUTION);
 	
-	createEReference(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER);
-	createEReference(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_EXECUTION);
-	createEReference(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION);
 	
-	createEOperation(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION____STARTOBJECTBEHAVIOR);
-	createEOperation(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION___EXECUTE__CLASS_PARAMETERVALUE);
-	createEOperation(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION___TERMINATE);
+	factory->createEReference_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_EXECUTION);
+	factory->createEReference_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION_OBJECTACTIVATION);
 	
+	factory->createEOperation_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION____STARTOBJECTBEHAVIOR);
+	factory->createEOperation_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION___EXECUTE__CLASS_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(classifierBehaviorExecutionEClass, CLASSIFIERBEHAVIOREXECUTION___TERMINATE);
+	
 
-	classifierBehaviorExecutionActivityEClass = createEClass(CLASSIFIERBEHAVIOREXECUTIONACTIVITY);
+	classifierBehaviorExecutionActivityEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASSIFIERBEHAVIOREXECUTIONACTIVITY);
+	
 	
 	
 	
 
-	classifierBehaviorExecutionActivity_OwnedBehaviorActivity1EClass = createEClass(CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1);
+	classifierBehaviorExecutionActivity_OwnedBehaviorActivity1EClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1);
 	
 	
 	
+	
 
-	clauseActivationEClass = createEClass(CLAUSEACTIVATION);
+	clauseActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLAUSEACTIVATION);
+	
 	
-	createEReference(clauseActivationEClass, CLAUSEACTIVATION_CLAUSE);
-	createEReference(clauseActivationEClass, CLAUSEACTIVATION_CONDITIONALNODEACTIVATION);
+	factory->createEReference_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION_CLAUSE);
+	factory->createEReference_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION_CONDITIONALNODEACTIVATION);
 	
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___GETDECISION);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___GETPREDECESSORS);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___GETSUCCESSORS);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___ISREADY);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___RECIEVECONTROL);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___RUNTEST);
-	createEOperation(clauseActivationEClass, CLAUSEACTIVATION___SELECTBODY);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___GETDECISION);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___GETPREDECESSORS);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___GETSUCCESSORS);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___RECIEVECONTROL);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___RUNTEST);
+	factory->createEOperation_in_EContainingClass(clauseActivationEClass, CLAUSEACTIVATION___SELECTBODY);
 	
 
-	clearAssociationActionActivationEClass = createEClass(CLEARASSOCIATIONACTIONACTIVATION);
+	clearAssociationActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLEARASSOCIATIONACTIONACTIVATION);
 	
 	
 	
+	
 
-	clearStructuralFeatureActionActivationEClass = createEClass(CLEARSTRUCTURALFEATUREACTIONACTIVATION);
+	clearStructuralFeatureActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLEARSTRUCTURALFEATUREACTIONACTIVATION);
+	
 	
 	
 	
 
-	compoundValueEClass = createEClass(COMPOUNDVALUE);
+	compoundValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMPOUNDVALUE);
 	
-	createEReference(compoundValueEClass, COMPOUNDVALUE_FEATUREVALUES);
 	
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___EQUALS__VALUE);
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___REMOVEFEATUREVALUES__CLASSIFIER);
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___RETRIEVEFEATUREVALUES);
-	createEOperation(compoundValueEClass, COMPOUNDVALUE___TOSTRING);
+	factory->createEReference_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE_FEATUREVALUES);
 	
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___REMOVEFEATUREVALUES__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___RETRIEVEFEATUREVALUES);
+	factory->createEOperation_in_EContainingClass(compoundValueEClass, COMPOUNDVALUE___TOSTRING);
+	
 
-	conditionalNodeActivationEClass = createEClass(CONDITIONALNODEACTIVATION);
+	conditionalNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONDITIONALNODEACTIVATION);
+	
 	
-	createEReference(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION_CLAUSEACTIVATIONS);
-	createEReference(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION_SELECTEDCLAUSES);
+	factory->createEReference_in_EContainingClass(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION_CLAUSEACTIVATIONS);
+	factory->createEReference_in_EContainingClass(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION_SELECTEDCLAUSES);
 	
-	createEOperation(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___GETCLAUSEACTIVATION__CLAUSE);
-	createEOperation(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___RUNTEST__CLAUSE);
-	createEOperation(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___SELECTBODY__CLAUSE);
+	factory->createEOperation_in_EContainingClass(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___GETCLAUSEACTIVATION__CLAUSE);
+	factory->createEOperation_in_EContainingClass(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___RUNTEST__CLAUSE);
+	factory->createEOperation_in_EContainingClass(conditionalNodeActivationEClass, CONDITIONALNODEACTIVATION___SELECTBODY__CLAUSE);
 	
 
-	controlNodeActivationEClass = createEClass(CONTROLNODEACTIVATION);
+	controlNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONTROLNODEACTIVATION);
 	
 	
-	createEOperation(controlNodeActivationEClass, CONTROLNODEACTIVATION___FIRE__TOKEN);
 	
+	factory->createEOperation_in_EContainingClass(controlNodeActivationEClass, CONTROLNODEACTIVATION___FIRE__TOKEN);
+	
 
-	controlTokenEClass = createEClass(CONTROLTOKEN);
+	controlTokenEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONTROLTOKEN);
+	
 	
 	
-	createEOperation(controlTokenEClass, CONTROLTOKEN___EQUALS__TOKEN);
-	createEOperation(controlTokenEClass, CONTROLTOKEN___GETVALUE);
-	createEOperation(controlTokenEClass, CONTROLTOKEN___ISCONTROL);
+	factory->createEOperation_in_EContainingClass(controlTokenEClass, CONTROLTOKEN___EQUALS__TOKEN);
+	factory->createEOperation_in_EContainingClass(controlTokenEClass, CONTROLTOKEN___GETVALUE);
+	factory->createEOperation_in_EContainingClass(controlTokenEClass, CONTROLTOKEN___ISCONTROL);
 	
 
-	createLinkActionActivationEClass = createEClass(CREATELINKACTIONACTIVATION);
+	createLinkActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CREATELINKACTIONACTIVATION);
 	
 	
 	
+	
 
-	createObjectActionActivationEClass = createEClass(CREATEOBJECTACTIONACTIVATION);
+	createObjectActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CREATEOBJECTACTIONACTIVATION);
 	
 	
 	
+	
 
-	dataStoreNodeActivationEClass = createEClass(DATASTORENODEACTIVATION);
+	dataStoreNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DATASTORENODEACTIVATION);
+	
 	
 	
-	createEOperation(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___ADDTOKEN__TOKEN);
-	createEOperation(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___REMOVETOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___ADDTOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(dataStoreNodeActivationEClass, DATASTORENODEACTIVATION___REMOVETOKEN__TOKEN);
 	
 
-	dataValueEClass = createEClass(DATAVALUE);
+	dataValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DATAVALUE);
 	
-	createEReference(dataValueEClass, DATAVALUE_TYPE);
 	
-	createEOperation(dataValueEClass, DATAVALUE___GETTYPES);
-	createEOperation(dataValueEClass, DATAVALUE___NEW_);
+	factory->createEReference_in_EContainingClass(dataValueEClass, DATAVALUE_TYPE);
 	
+	factory->createEOperation_in_EContainingClass(dataValueEClass, DATAVALUE___GETTYPES);
+	factory->createEOperation_in_EContainingClass(dataValueEClass, DATAVALUE___NEW_);
+	
 
-	decisionNodeActivationEClass = createEClass(DECISIONNODEACTIVATION);
+	decisionNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DECISIONNODEACTIVATION);
+	
 	
-	createEReference(decisionNodeActivationEClass, DECISIONNODEACTIVATION_DECISIONINPUTEXECUTION);
+	factory->createEReference_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION_DECISIONINPUTEXECUTION);
 	
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___EXECUTEDECISIONINPUTBEHAVIOR__VALUE_VALUE);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___FIRE__TOKEN);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWINSTANCE);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWVALUE);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONVALUES__TOKEN);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___HASOBJECTFLOWINPUT);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___ISREADY);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___REMOVEJOINEDCONTROLTOKENS__TOKEN);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TAKEOFFEREDTOKENS);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TERMINATE);
-	createEOperation(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TEST__VALUESPECIFICATION_VALUE);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___EXECUTEDECISIONINPUTBEHAVIOR__VALUE_VALUE);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWINSTANCE);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONINPUTFLOWVALUE);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___GETDECISIONVALUES__TOKEN);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___HASOBJECTFLOWINPUT);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___REMOVEJOINEDCONTROLTOKENS__TOKEN);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TAKEOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TERMINATE);
+	factory->createEOperation_in_EContainingClass(decisionNodeActivationEClass, DECISIONNODEACTIVATION___TEST__VALUESPECIFICATION_VALUE);
 	
 
-	destroyLinkActionActivationEClass = createEClass(DESTROYLINKACTIONACTIVATION);
+	destroyLinkActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DESTROYLINKACTIONACTIVATION);
 	
 	
 	
+	
 
-	destroyObjectActionActivationEClass = createEClass(DESTROYOBJECTACTIONACTIVATION);
+	destroyObjectActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DESTROYOBJECTACTIONACTIVATION);
+	
 	
 	
-	createEOperation(destroyObjectActionActivationEClass, DESTROYOBJECTACTIONACTIVATION___DESTROYOBJECT__VALUE_EBOOLEAN);
-	createEOperation(destroyObjectActionActivationEClass, DESTROYOBJECTACTIONACTIVATION___OBJECTISCOMPOSITE__REFERENCE_LINK);
+	factory->createEOperation_in_EContainingClass(destroyObjectActionActivationEClass, DESTROYOBJECTACTIONACTIVATION___DESTROYOBJECT__VALUE_EBOOLEAN);
+	factory->createEOperation_in_EContainingClass(destroyObjectActionActivationEClass, DESTROYOBJECTACTIONACTIVATION___OBJECTISCOMPOSITE__REFERENCE_LINK);
 	
 
-	dispatchStrategyEClass = createEClass(DISPATCHSTRATEGY);
+	dispatchStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DISPATCHSTRATEGY);
 	
 	
-	createEOperation(dispatchStrategyEClass, DISPATCHSTRATEGY___DISPATCH__OBJECT_OPERATION);
-	createEOperation(dispatchStrategyEClass, DISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION);
-	createEOperation(dispatchStrategyEClass, DISPATCHSTRATEGY___RETRIEVENAME);
 	
+	factory->createEOperation_in_EContainingClass(dispatchStrategyEClass, DISPATCHSTRATEGY___DISPATCH__OBJECT_OPERATION);
+	factory->createEOperation_in_EContainingClass(dispatchStrategyEClass, DISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION);
+	factory->createEOperation_in_EContainingClass(dispatchStrategyEClass, DISPATCHSTRATEGY___RETRIEVENAME);
+	
 
-	enumerationValueEClass = createEClass(ENUMERATIONVALUE);
+	enumerationValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ENUMERATIONVALUE);
 	
-	createEReference(enumerationValueEClass, ENUMERATIONVALUE_LITERAL);
-	createEReference(enumerationValueEClass, ENUMERATIONVALUE_TYPE);
 	
-	createEOperation(enumerationValueEClass, ENUMERATIONVALUE___EQUALS__VALUE);
-	createEOperation(enumerationValueEClass, ENUMERATIONVALUE___GETTYPES);
-	createEOperation(enumerationValueEClass, ENUMERATIONVALUE___NEW_);
-	createEOperation(enumerationValueEClass, ENUMERATIONVALUE___SPECIFY);
-	createEOperation(enumerationValueEClass, ENUMERATIONVALUE___TOSTRING);
+	factory->createEReference_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE_LITERAL);
+	factory->createEReference_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE_TYPE);
 	
+	factory->createEOperation_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE___GETTYPES);
+	factory->createEOperation_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE___NEW_);
+	factory->createEOperation_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(enumerationValueEClass, ENUMERATIONVALUE___TOSTRING);
+	
 
-	evaluationEClass = createEClass(EVALUATION);
+	evaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EVALUATION);
+	
 	
-	createEReference(evaluationEClass, EVALUATION_LOCUS);
-	createEReference(evaluationEClass, EVALUATION_SPECIFICATION);
+	factory->createEReference_in_EContainingClass(evaluationEClass, EVALUATION_LOCUS);
+	factory->createEReference_in_EContainingClass(evaluationEClass, EVALUATION_SPECIFICATION);
 	
-	createEOperation(evaluationEClass, EVALUATION___EVALUATE);
+	factory->createEOperation_in_EContainingClass(evaluationEClass, EVALUATION___EVALUATE);
 	
 
-	eventAccepterEClass = createEClass(EVENTACCEPTER);
+	eventAccepterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EVENTACCEPTER);
 	
 	
-	createEOperation(eventAccepterEClass, EVENTACCEPTER___ACCEPT__SIGNALINSTANCE);
-	createEOperation(eventAccepterEClass, EVENTACCEPTER___MATCH__SIGNALINSTANCE);
 	
+	factory->createEOperation_in_EContainingClass(eventAccepterEClass, EVENTACCEPTER___ACCEPT__SIGNALINSTANCE);
+	factory->createEOperation_in_EContainingClass(eventAccepterEClass, EVENTACCEPTER___MATCH__SIGNALINSTANCE);
+	
 
-	eventDispatchLoopEClass = createEClass(EVENTDISPATCHLOOP);
+	eventDispatchLoopEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EVENTDISPATCHLOOP);
+	
 	
 	
 	
 
-	executionEClass = createEClass(EXECUTION);
+	executionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTION);
 	
-	createEReference(executionEClass, EXECUTION_CONTEXT);
-	createEReference(executionEClass, EXECUTION_PARAMETERVALUES);
 	
-	createEOperation(executionEClass, EXECUTION___EXECUTE);
-	createEOperation(executionEClass, EXECUTION___GETBEHAVIOR);
-	createEOperation(executionEClass, EXECUTION___GETOUTPUTPARAMETERVALUES);
-	createEOperation(executionEClass, EXECUTION___GETPARAMETERVALUE__PARAMETER);
-	createEOperation(executionEClass, EXECUTION___NEW_);
-	createEOperation(executionEClass, EXECUTION___SETPARAMETERVALUE__PARAMETERVALUE);
-	createEOperation(executionEClass, EXECUTION___TERMINATE);
+	factory->createEReference_in_EContainingClass(executionEClass, EXECUTION_CONTEXT);
+	factory->createEReference_in_EContainingClass(executionEClass, EXECUTION_PARAMETERVALUES);
 	
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___EXECUTE);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___GETBEHAVIOR);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___GETOUTPUTPARAMETERVALUES);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___GETPARAMETERVALUE__PARAMETER);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___NEW_);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___SETPARAMETERVALUE__PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(executionEClass, EXECUTION___TERMINATE);
+	
 
-	executionFactoryEClass = createEClass(EXECUTIONFACTORY);
+	executionFactoryEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONFACTORY);
+	
 	
-	createEReference(executionFactoryEClass, EXECUTIONFACTORY_BUILTINTYPES);
-	createEReference(executionFactoryEClass, EXECUTIONFACTORY_LOCUS);
-	createEReference(executionFactoryEClass, EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES);
-	createEReference(executionFactoryEClass, EXECUTIONFACTORY_STRATEGIES);
+	factory->createEReference_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY_BUILTINTYPES);
+	factory->createEReference_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY_LOCUS);
+	factory->createEReference_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY_PRIMITIVEBEHAVIORPROTOTYPES);
+	factory->createEReference_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY_STRATEGIES);
 	
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___ADDBUILTINTYPE__PRIMITIVETYPE);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___ADDPRIMITIVEBEHAVIORPROTOTYPE__OPAQUEBEHAVIOREXECUTION);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___ASSIGNSTRATEGY__SEMANTICSTRATEGY);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___CREATEEVALUATION__VALUESPECIFICATION);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___CREATEEXECUTION__BEHAVIOR_OBJECT);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___GETBUILTINTYPE__ESTRING);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___GETSTRATEGY__ESTRING);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___GETSTRATEGYINDEX__ESTRING);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___INSTANTIATEOPAQUEBEHAVIOREXECUTION__OPAQUEBEHAVIOR);
-	createEOperation(executionFactoryEClass, EXECUTIONFACTORY___INSTANTIATEVISITOR__ELEMENT);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___ADDBUILTINTYPE__PRIMITIVETYPE);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___ADDPRIMITIVEBEHAVIORPROTOTYPE__OPAQUEBEHAVIOREXECUTION);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___ASSIGNSTRATEGY__SEMANTICSTRATEGY);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___CREATEEVALUATION__VALUESPECIFICATION);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___CREATEEXECUTION__BEHAVIOR_OBJECT);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___GETBUILTINTYPE__ESTRING);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___GETSTRATEGY__ESTRING);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___GETSTRATEGYINDEX__ESTRING);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___INSTANTIATEOPAQUEBEHAVIOREXECUTION__OPAQUEBEHAVIOR);
+	factory->createEOperation_in_EContainingClass(executionFactoryEClass, EXECUTIONFACTORY___INSTANTIATEVISITOR__ELEMENT);
 	
 
-	executionFactoryL1EClass = createEClass(EXECUTIONFACTORYL1);
+	executionFactoryL1EClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONFACTORYL1);
 	
 	
-	createEOperation(executionFactoryL1EClass, EXECUTIONFACTORYL1___INSTANTIATEVISITOR__ELEMENT);
 	
+	factory->createEOperation_in_EContainingClass(executionFactoryL1EClass, EXECUTIONFACTORYL1___INSTANTIATEVISITOR__ELEMENT);
+	
 
-	executionFactoryL2EClass = createEClass(EXECUTIONFACTORYL2);
+	executionFactoryL2EClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONFACTORYL2);
 	
 	
-	createEOperation(executionFactoryL2EClass, EXECUTIONFACTORYL2___INSTANTIATEVISITOR__ELEMENT);
 	
+	factory->createEOperation_in_EContainingClass(executionFactoryL2EClass, EXECUTIONFACTORYL2___INSTANTIATEVISITOR__ELEMENT);
+	
 
-	executionFactoryL3EClass = createEClass(EXECUTIONFACTORYL3);
+	executionFactoryL3EClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONFACTORYL3);
+	
 	
 	
-	createEOperation(executionFactoryL3EClass, EXECUTIONFACTORYL3___INSTANTIATEVISITOR__ELEMENT);
+	factory->createEOperation_in_EContainingClass(executionFactoryL3EClass, EXECUTIONFACTORYL3___INSTANTIATEVISITOR__ELEMENT);
 	
 
-	executorEClass = createEClass(EXECUTOR);
+	executorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTOR);
 	
-	createEReference(executorEClass, EXECUTOR_LOCUS);
 	
-	createEOperation(executorEClass, EXECUTOR___EVALUATE__VALUESPECIFICATION);
-	createEOperation(executorEClass, EXECUTOR___EXECUTE__BEHAVIOR_PARAMETERVALUE);
-	createEOperation(executorEClass, EXECUTOR___START__CLASS_PARAMETERVALUE);
+	factory->createEReference_in_EContainingClass(executorEClass, EXECUTOR_LOCUS);
 	
+	factory->createEOperation_in_EContainingClass(executorEClass, EXECUTOR___EVALUATE__VALUESPECIFICATION);
+	factory->createEOperation_in_EContainingClass(executorEClass, EXECUTOR___EXECUTE__BEHAVIOR_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(executorEClass, EXECUTOR___START__CLASS_PARAMETERVALUE);
+	
 
-	expansionActivationGroupEClass = createEClass(EXPANSIONACTIVATIONGROUP);
+	expansionActivationGroupEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONACTIVATIONGROUP);
+	
 	
-	createEReference(expansionActivationGroupEClass, EXPANSIONACTIVATIONGROUP_REGIONACTIVATION);
+	factory->createEReference_in_EContainingClass(expansionActivationGroupEClass, EXPANSIONACTIVATIONGROUP_REGIONACTIVATION);
 	
 	
 
-	expansionNodeActivationEClass = createEClass(EXPANSIONNODEACTIVATION);
+	expansionNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONNODEACTIVATION);
 	
 	
-	createEOperation(expansionNodeActivationEClass, EXPANSIONNODEACTIVATION___GETEXPANSIONREGIONACTIVATION);
 	
+	factory->createEOperation_in_EContainingClass(expansionNodeActivationEClass, EXPANSIONNODEACTIVATION___GETEXPANSIONREGIONACTIVATION);
+	
 
-	expansionRegionActivationEClass = createEClass(EXPANSIONREGIONACTIVATION);
+	expansionRegionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONREGIONACTIVATION);
+	
 	
-	createEReference(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_ACTIVATIONGROUPS);
-	createEReference(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_INPUTEXPANSIONTOKENS);
-	createEReference(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_INPUTTOKENS);
+	factory->createEReference_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_ACTIVATIONGROUPS);
+	factory->createEReference_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_INPUTEXPANSIONTOKENS);
+	factory->createEReference_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION_INPUTTOKENS);
 	
-	createEOperation(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___DOSTRUCTUREDACTIVITY);
-	createEOperation(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___GETEXPANSIONNODEACTIVATION__EXPANSIONNODE);
-	createEOperation(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___NUMBEROFVALUES);
-	createEOperation(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___RUNGROUP__EXPANSIONACTIVATIONGROUP);
+	factory->createEOperation_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___DOSTRUCTUREDACTIVITY);
+	factory->createEOperation_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___GETEXPANSIONNODEACTIVATION__EXPANSIONNODE);
+	factory->createEOperation_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___NUMBEROFVALUES);
+	factory->createEOperation_in_EContainingClass(expansionRegionActivationEClass, EXPANSIONREGIONACTIVATION___RUNGROUP__EXPANSIONACTIVATIONGROUP);
 	
 
-	extensionalValueEClass = createEClass(EXTENSIONALVALUE);
+	extensionalValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTENSIONALVALUE);
 	
-	createEReference(extensionalValueEClass, EXTENSIONALVALUE_LOCUS);
 	
-	createEOperation(extensionalValueEClass, EXTENSIONALVALUE___DESTROY);
+	factory->createEReference_in_EContainingClass(extensionalValueEClass, EXTENSIONALVALUE_LOCUS);
 	
+	factory->createEOperation_in_EContainingClass(extensionalValueEClass, EXTENSIONALVALUE___DESTROY);
+	
 
-	extensionalValueListEClass = createEClass(EXTENSIONALVALUELIST);
+	extensionalValueListEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTENSIONALVALUELIST);
+	
 	
 	
-	createEOperation(extensionalValueListEClass, EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE);
-	createEOperation(extensionalValueListEClass, EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE_EINT);
-	createEOperation(extensionalValueListEClass, EXTENSIONALVALUELIST___GETVALUE);
-	createEOperation(extensionalValueListEClass, EXTENSIONALVALUELIST___REMOVEVALUE__EINT);
-	createEOperation(extensionalValueListEClass, EXTENSIONALVALUELIST___SETVALUE__EXTENSIONALVALUE_EINT);
+	factory->createEOperation_in_EContainingClass(extensionalValueListEClass, EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE);
+	factory->createEOperation_in_EContainingClass(extensionalValueListEClass, EXTENSIONALVALUELIST___ADDVALUE__EXTENSIONALVALUE_EINT);
+	factory->createEOperation_in_EContainingClass(extensionalValueListEClass, EXTENSIONALVALUELIST___GETVALUE);
+	factory->createEOperation_in_EContainingClass(extensionalValueListEClass, EXTENSIONALVALUELIST___REMOVEVALUE__EINT);
+	factory->createEOperation_in_EContainingClass(extensionalValueListEClass, EXTENSIONALVALUELIST___SETVALUE__EXTENSIONALVALUE_EINT);
 	
 
-	fIFOGetNextEventStrategyEClass = createEClass(FIFOGETNEXTEVENTSTRATEGY);
+	fIFOGetNextEventStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FIFOGETNEXTEVENTSTRATEGY);
 	
 	
 	
+	
 
-	featureValueEClass = createEClass(FEATUREVALUE);
-	createEAttribute(featureValueEClass, FEATUREVALUE_POSITION);
+	featureValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FEATUREVALUE);
+	
+	factory->createEAttribute_in_EContainingClass(featureValueEClass, FEATUREVALUE_POSITION);
 	
-	createEReference(featureValueEClass, FEATUREVALUE_FEATURE);
-	createEReference(featureValueEClass, FEATUREVALUE_VALUES);
+	factory->createEReference_in_EContainingClass(featureValueEClass, FEATUREVALUE_FEATURE);
+	factory->createEReference_in_EContainingClass(featureValueEClass, FEATUREVALUE_VALUES);
 	
-	createEOperation(featureValueEClass, FEATUREVALUE___HASEQUALVALUES__FEATUREVALUE);
+	factory->createEOperation_in_EContainingClass(featureValueEClass, FEATUREVALUE___HASEQUALVALUES__FEATUREVALUE);
 	
 
-	firstChoiceStrategyEClass = createEClass(FIRSTCHOICESTRATEGY);
+	firstChoiceStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FIRSTCHOICESTRATEGY);
 	
 	
-	createEOperation(firstChoiceStrategyEClass, FIRSTCHOICESTRATEGY___CHOOSE__EINT);
 	
+	factory->createEOperation_in_EContainingClass(firstChoiceStrategyEClass, FIRSTCHOICESTRATEGY___CHOOSE__EINT);
+	
 
-	flowFinalNodeActivationEClass = createEClass(FLOWFINALNODEACTIVATION);
+	flowFinalNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FLOWFINALNODEACTIVATION);
+	
 	
 	
 	
 
-	forkNodeActivationEClass = createEClass(FORKNODEACTIVATION);
+	forkNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FORKNODEACTIVATION);
 	
 	
-	createEOperation(forkNodeActivationEClass, FORKNODEACTIVATION___FIRE__TOKEN);
-	createEOperation(forkNodeActivationEClass, FORKNODEACTIVATION___TERMINATE);
 	
+	factory->createEOperation_in_EContainingClass(forkNodeActivationEClass, FORKNODEACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(forkNodeActivationEClass, FORKNODEACTIVATION___TERMINATE);
+	
 
-	forkedTokenEClass = createEClass(FORKEDTOKEN);
-	createEAttribute(forkedTokenEClass, FORKEDTOKEN_BASETOKENISWITHDRAWN);
-	createEAttribute(forkedTokenEClass, FORKEDTOKEN_REMAININGOFFERSCOUNT);
+	forkedTokenEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FORKEDTOKEN);
+	
+	factory->createEAttribute_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN_BASETOKENISWITHDRAWN);
+	factory->createEAttribute_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN_REMAININGOFFERSCOUNT);
 	
-	createEReference(forkedTokenEClass, FORKEDTOKEN_BASETOKEN);
+	factory->createEReference_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN_BASETOKEN);
 	
-	createEOperation(forkedTokenEClass, FORKEDTOKEN___EQUALS__TOKEN);
-	createEOperation(forkedTokenEClass, FORKEDTOKEN___GETVALUE);
-	createEOperation(forkedTokenEClass, FORKEDTOKEN___ISCONTROL);
-	createEOperation(forkedTokenEClass, FORKEDTOKEN___WITHDRAW);
+	factory->createEOperation_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN___EQUALS__TOKEN);
+	factory->createEOperation_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN___GETVALUE);
+	factory->createEOperation_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN___ISCONTROL);
+	factory->createEOperation_in_EContainingClass(forkedTokenEClass, FORKEDTOKEN___WITHDRAW);
 	
 
-	getNextEventStrategyEClass = createEClass(GETNEXTEVENTSTRATEGY);
+	getNextEventStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), GETNEXTEVENTSTRATEGY);
 	
 	
-	createEOperation(getNextEventStrategyEClass, GETNEXTEVENTSTRATEGY___RETRIEVENEXTEVENT__OBJECTACTIVATION);
 	
+	factory->createEOperation_in_EContainingClass(getNextEventStrategyEClass, GETNEXTEVENTSTRATEGY___RETRIEVENEXTEVENT__OBJECTACTIVATION);
+	
 
-	initialNodeActivationEClass = createEClass(INITIALNODEACTIVATION);
+	initialNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INITIALNODEACTIVATION);
 	
 	
-	createEOperation(initialNodeActivationEClass, INITIALNODEACTIVATION___FIRE__TOKEN);
 	
+	factory->createEOperation_in_EContainingClass(initialNodeActivationEClass, INITIALNODEACTIVATION___FIRE__TOKEN);
+	
 
-	inputPinActivationEClass = createEClass(INPUTPINACTIVATION);
+	inputPinActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INPUTPINACTIVATION);
+	
 	
 	
-	createEOperation(inputPinActivationEClass, INPUTPINACTIVATION___ISREADY);
-	createEOperation(inputPinActivationEClass, INPUTPINACTIVATION___RECIEVEOFFER);
+	factory->createEOperation_in_EContainingClass(inputPinActivationEClass, INPUTPINACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(inputPinActivationEClass, INPUTPINACTIVATION___RECIEVEOFFER);
 	
 
-	instanceValueEvaluationEClass = createEClass(INSTANCEVALUEEVALUATION);
+	instanceValueEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INSTANCEVALUEEVALUATION);
 	
 	
-	createEOperation(instanceValueEvaluationEClass, INSTANCEVALUEEVALUATION___EVALUATE);
 	
+	factory->createEOperation_in_EContainingClass(instanceValueEvaluationEClass, INSTANCEVALUEEVALUATION___EVALUATE);
+	
 
-	integerValueEClass = createEClass(INTEGERVALUE);
-	createEAttribute(integerValueEClass, INTEGERVALUE_VALUE);
+	integerValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTEGERVALUE);
+	
+	factory->createEAttribute_in_EContainingClass(integerValueEClass, INTEGERVALUE_VALUE);
 	
 	
-	createEOperation(integerValueEClass, INTEGERVALUE___EQUALS__VALUE);
-	createEOperation(integerValueEClass, INTEGERVALUE___SPECIFY);
-	createEOperation(integerValueEClass, INTEGERVALUE___TOSTRING);
+	factory->createEOperation_in_EContainingClass(integerValueEClass, INTEGERVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(integerValueEClass, INTEGERVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(integerValueEClass, INTEGERVALUE___TOSTRING);
 	
 
-	invocationActionActivationEClass = createEClass(INVOCATIONACTIONACTIVATION);
+	invocationActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INVOCATIONACTIONACTIVATION);
 	
 	
 	
+	
 
-	joinNodeActivationEClass = createEClass(JOINNODEACTIVATION);
+	joinNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), JOINNODEACTIVATION);
+	
 	
 	
-	createEOperation(joinNodeActivationEClass, JOINNODEACTIVATION___ISREADY);
+	factory->createEOperation_in_EContainingClass(joinNodeActivationEClass, JOINNODEACTIVATION___ISREADY);
 	
 
-	linkEClass = createEClass(LINK);
+	linkEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINK);
 	
-	createEReference(linkEClass, LINK_TYPE);
 	
-	createEOperation(linkEClass, LINK___ADDTO__LOCUS);
-	createEOperation(linkEClass, LINK___GETOTHERFEATUREVALUES__EXTENSIONALVALUE_PROPERTY);
-	createEOperation(linkEClass, LINK___GETTYPES);
-	createEOperation(linkEClass, LINK___ISMATCHINGLINK__EXTENSIONALVALUE_PROPERTY);
+	factory->createEReference_in_EContainingClass(linkEClass, LINK_TYPE);
 	
+	factory->createEOperation_in_EContainingClass(linkEClass, LINK___ADDTO__LOCUS);
+	factory->createEOperation_in_EContainingClass(linkEClass, LINK___GETOTHERFEATUREVALUES__EXTENSIONALVALUE_PROPERTY);
+	factory->createEOperation_in_EContainingClass(linkEClass, LINK___GETTYPES);
+	factory->createEOperation_in_EContainingClass(linkEClass, LINK___ISMATCHINGLINK__EXTENSIONALVALUE_PROPERTY);
+	
 
-	linkActionActivationEClass = createEClass(LINKACTIONACTIVATION);
+	linkActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINKACTIONACTIVATION);
 	
 	
-	createEOperation(linkActionActivationEClass, LINKACTIONACTIVATION___ENDMATCHESENDDATA__LINK_LINKENDDATA);
-	createEOperation(linkActionActivationEClass, LINKACTIONACTIVATION___GETASSOCIATION);
-	createEOperation(linkActionActivationEClass, LINKACTIONACTIVATION___LINKMATCHESENDDATA__LINK_LINKENDDATA);
 	
+	factory->createEOperation_in_EContainingClass(linkActionActivationEClass, LINKACTIONACTIVATION___ENDMATCHESENDDATA__LINK_LINKENDDATA);
+	factory->createEOperation_in_EContainingClass(linkActionActivationEClass, LINKACTIONACTIVATION___GETASSOCIATION);
+	factory->createEOperation_in_EContainingClass(linkActionActivationEClass, LINKACTIONACTIVATION___LINKMATCHESENDDATA__LINK_LINKENDDATA);
+	
 
-	literalBooleanEvaluationEClass = createEClass(LITERALBOOLEANEVALUATION);
+	literalBooleanEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALBOOLEANEVALUATION);
+	
 	
 	
-	createEOperation(literalBooleanEvaluationEClass, LITERALBOOLEANEVALUATION___EVALUATE);
+	factory->createEOperation_in_EContainingClass(literalBooleanEvaluationEClass, LITERALBOOLEANEVALUATION___EVALUATE);
 	
 
-	literalEvaluationEClass = createEClass(LITERALEVALUATION);
+	literalEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALEVALUATION);
 	
 	
-	createEOperation(literalEvaluationEClass, LITERALEVALUATION___GETTYPE__ESTRING);
 	
+	factory->createEOperation_in_EContainingClass(literalEvaluationEClass, LITERALEVALUATION___GETTYPE__ESTRING);
+	
 
-	literalIntegerEvaluationEClass = createEClass(LITERALINTEGEREVALUATION);
+	literalIntegerEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALINTEGEREVALUATION);
+	
 	
 	
-	createEOperation(literalIntegerEvaluationEClass, LITERALINTEGEREVALUATION___EVALUATE);
+	factory->createEOperation_in_EContainingClass(literalIntegerEvaluationEClass, LITERALINTEGEREVALUATION___EVALUATE);
 	
 
-	literalNullEvaluationEClass = createEClass(LITERALNULLEVALUATION);
+	literalNullEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALNULLEVALUATION);
 	
 	
-	createEOperation(literalNullEvaluationEClass, LITERALNULLEVALUATION___EVALUATE);
 	
+	factory->createEOperation_in_EContainingClass(literalNullEvaluationEClass, LITERALNULLEVALUATION___EVALUATE);
+	
 
-	literalRealEvaluationEClass = createEClass(LITERALREALEVALUATION);
+	literalRealEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALREALEVALUATION);
+	
 	
 	
-	createEOperation(literalRealEvaluationEClass, LITERALREALEVALUATION___EVALUATE);
+	factory->createEOperation_in_EContainingClass(literalRealEvaluationEClass, LITERALREALEVALUATION___EVALUATE);
 	
 
-	literalStringEvaluationEClass = createEClass(LITERALSTRINGEVALUATION);
+	literalStringEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALSTRINGEVALUATION);
 	
 	
-	createEOperation(literalStringEvaluationEClass, LITERALSTRINGEVALUATION___EVALUATE);
 	
+	factory->createEOperation_in_EContainingClass(literalStringEvaluationEClass, LITERALSTRINGEVALUATION___EVALUATE);
+	
 
-	literalUnlimitedNaturalEvaluationEClass = createEClass(LITERALUNLIMITEDNATURALEVALUATION);
+	literalUnlimitedNaturalEvaluationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALUNLIMITEDNATURALEVALUATION);
 	
 	
-	createEOperation(literalUnlimitedNaturalEvaluationEClass, LITERALUNLIMITEDNATURALEVALUATION___EVALUATE);
 	
+	factory->createEOperation_in_EContainingClass(literalUnlimitedNaturalEvaluationEClass, LITERALUNLIMITEDNATURALEVALUATION___EVALUATE);
+	
 
-	locusEClass = createEClass(LOCUS);
+	locusEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LOCUS);
+	
 	
-	createEReference(locusEClass, LOCUS_EXECUTOR);
-	createEReference(locusEClass, LOCUS_EXTENSIONALVALUES);
-	createEReference(locusEClass, LOCUS_FACTORY);
+	factory->createEReference_in_EContainingClass(locusEClass, LOCUS_EXECUTOR);
+	factory->createEReference_in_EContainingClass(locusEClass, LOCUS_EXTENSIONALVALUES);
+	factory->createEReference_in_EContainingClass(locusEClass, LOCUS_FACTORY);
 	
-	createEOperation(locusEClass, LOCUS___ADD__EXTENSIONALVALUE);
-	createEOperation(locusEClass, LOCUS___ASSIGNEXECUTOR__EXECUTOR);
-	createEOperation(locusEClass, LOCUS___ASSIGNFACTORY__EXECUTIONFACTORY);
-	createEOperation(locusEClass, LOCUS___CONFORMS__CLASSIFIER_CLASSIFIER);
-	createEOperation(locusEClass, LOCUS___INSTANTIATE__CLASS);
-	createEOperation(locusEClass, LOCUS___REMOVE__EXTENSIONALVALUE);
-	createEOperation(locusEClass, LOCUS___RETRIEVEEXTENT__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___ADD__EXTENSIONALVALUE);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___ASSIGNEXECUTOR__EXECUTOR);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___ASSIGNFACTORY__EXECUTIONFACTORY);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___CONFORMS__CLASSIFIER_CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___INSTANTIATE__CLASS);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___REMOVE__EXTENSIONALVALUE);
+	factory->createEOperation_in_EContainingClass(locusEClass, LOCUS___RETRIEVEEXTENT__CLASSIFIER);
 	
 
-	loopNodeActivationEClass = createEClass(LOOPNODEACTIVATION);
+	loopNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LOOPNODEACTIVATION);
 	
-	createEReference(loopNodeActivationEClass, LOOPNODEACTIVATION_BODYOUTPUTLISTS);
 	
-	createEOperation(loopNodeActivationEClass, LOOPNODEACTIVATION___MAKELOOPVARIABLELIST);
-	createEOperation(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNBODY);
-	createEOperation(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNLOOPVARIABLES);
-	createEOperation(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNTEST);
+	factory->createEReference_in_EContainingClass(loopNodeActivationEClass, LOOPNODEACTIVATION_BODYOUTPUTLISTS);
 	
+	factory->createEOperation_in_EContainingClass(loopNodeActivationEClass, LOOPNODEACTIVATION___MAKELOOPVARIABLELIST);
+	factory->createEOperation_in_EContainingClass(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNBODY);
+	factory->createEOperation_in_EContainingClass(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNLOOPVARIABLES);
+	factory->createEOperation_in_EContainingClass(loopNodeActivationEClass, LOOPNODEACTIVATION___RUNTEST);
+	
 
-	mergeNodeActivationEClass = createEClass(MERGENODEACTIVATION);
+	mergeNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MERGENODEACTIVATION);
+	
 	
 	
 	
 
-	objectEClass = createEClass(OBJECT);
+	objectEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECT);
 	
-	createEReference(objectEClass, OBJECT_OBJECTACTIVATION);
-	createEReference(objectEClass, OBJECT_TYPES);
 	
-	createEOperation(objectEClass, OBJECT____REGISTER__EVENTACCEPTER);
-	createEOperation(objectEClass, OBJECT___DESTROY);
-	createEOperation(objectEClass, OBJECT___DISPATCH__OPERATION);
-	createEOperation(objectEClass, OBJECT___NEW_);
-	createEOperation(objectEClass, OBJECT___SEND__SIGNALINSTANCE);
-	createEOperation(objectEClass, OBJECT___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
-	createEOperation(objectEClass, OBJECT___UNREGISTER__EVENTACCEPTER);
+	factory->createEReference_in_EContainingClass(objectEClass, OBJECT_OBJECTACTIVATION);
+	factory->createEReference_in_EContainingClass(objectEClass, OBJECT_TYPES);
 	
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT____REGISTER__EVENTACCEPTER);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___DESTROY);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___DISPATCH__OPERATION);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___NEW_);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___SEND__SIGNALINSTANCE);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___UNREGISTER__EVENTACCEPTER);
+	
 
-	objectActivationEClass = createEClass(OBJECTACTIVATION);
+	objectActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTACTIVATION);
+	
 	
-	createEReference(objectActivationEClass, OBJECTACTIVATION_CLASSIFIERBEHAVIOREXECUTIONS);
-	createEReference(objectActivationEClass, OBJECTACTIVATION_EVENTPOOL);
-	createEReference(objectActivationEClass, OBJECTACTIVATION_OBJECT);
-	createEReference(objectActivationEClass, OBJECTACTIVATION_WAITINGEVENTACCEPTERS);
+	factory->createEReference_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION_CLASSIFIERBEHAVIOREXECUTIONS);
+	factory->createEReference_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION_EVENTPOOL);
+	factory->createEReference_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION_OBJECT);
+	factory->createEReference_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION_WAITINGEVENTACCEPTERS);
 	
-	createEOperation(objectActivationEClass, OBJECTACTIVATION____REGISTER__EVENTACCEPTER);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION____SEND__EJAVAOBJECT);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION____STARTOBJECTBEHAVIOR);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___DISPATCHNEXTEVENT);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___RETRIEVENEXTEVENT);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___SEND__SIGNALINSTANCE);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___STOP);
-	createEOperation(objectActivationEClass, OBJECTACTIVATION___UNREGISTER__EVENTACCEPTER);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION____REGISTER__EVENTACCEPTER);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION____SEND__EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION____STARTOBJECTBEHAVIOR);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___DISPATCHNEXTEVENT);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___RETRIEVENEXTEVENT);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___SEND__SIGNALINSTANCE);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___STOP);
+	factory->createEOperation_in_EContainingClass(objectActivationEClass, OBJECTACTIVATION___UNREGISTER__EVENTACCEPTER);
 	
 
-	objectNodeActivationEClass = createEClass(OBJECTNODEACTIVATION);
-	createEAttribute(objectNodeActivationEClass, OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT);
+	objectNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTNODEACTIVATION);
 	
+	factory->createEAttribute_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION_OFFEREDTOKENCOUNT);
 	
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___ADDTOKEN__TOKEN);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___CLEARTOKENS);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___COUNTOFFEREDVALUES);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___COUNTUNOFFEREDTOKENS);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___GETUNOFFEREDTOKENS);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___REMOVETOKEN__TOKEN);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___RUN);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___SENDOFFERS__TOKEN);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___SENDUNOFFEREDTOKENS);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___TAKEUNOFFEREDTOKENS);
-	createEOperation(objectNodeActivationEClass, OBJECTNODEACTIVATION___TERMINATE);
 	
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___ADDTOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___CLEARTOKENS);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___COUNTOFFEREDVALUES);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___COUNTUNOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___GETUNOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___REMOVETOKEN__TOKEN);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___RUN);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___SENDOFFERS__TOKEN);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___SENDUNOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___TAKEUNOFFEREDTOKENS);
+	factory->createEOperation_in_EContainingClass(objectNodeActivationEClass, OBJECTNODEACTIVATION___TERMINATE);
+	
 
-	objectTokenEClass = createEClass(OBJECTTOKEN);
+	objectTokenEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTTOKEN);
+	
 	
-	createEReference(objectTokenEClass, OBJECTTOKEN_VALUE);
+	factory->createEReference_in_EContainingClass(objectTokenEClass, OBJECTTOKEN_VALUE);
 	
-	createEOperation(objectTokenEClass, OBJECTTOKEN___EQUALS__TOKEN);
-	createEOperation(objectTokenEClass, OBJECTTOKEN___ISCONTROL);
+	factory->createEOperation_in_EContainingClass(objectTokenEClass, OBJECTTOKEN___EQUALS__TOKEN);
+	factory->createEOperation_in_EContainingClass(objectTokenEClass, OBJECTTOKEN___ISCONTROL);
 	
 
-	offerEClass = createEClass(OFFER);
+	offerEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OFFER);
 	
-	createEReference(offerEClass, OFFER_OFFEREDTOKENS);
 	
-	createEOperation(offerEClass, OFFER___COUNTOFFEREDVALES);
-	createEOperation(offerEClass, OFFER___HASTOKENS);
-	createEOperation(offerEClass, OFFER___REMOVEOFFEREDVALUES__EINT);
-	createEOperation(offerEClass, OFFER___REMOVEWITHDRAWNTOKENS);
-	createEOperation(offerEClass, OFFER___RETRIEVEOFFEREDTOKENS);
+	factory->createEReference_in_EContainingClass(offerEClass, OFFER_OFFEREDTOKENS);
 	
+	factory->createEOperation_in_EContainingClass(offerEClass, OFFER___COUNTOFFEREDVALES);
+	factory->createEOperation_in_EContainingClass(offerEClass, OFFER___HASTOKENS);
+	factory->createEOperation_in_EContainingClass(offerEClass, OFFER___REMOVEOFFEREDVALUES__EINT);
+	factory->createEOperation_in_EContainingClass(offerEClass, OFFER___REMOVEWITHDRAWNTOKENS);
+	factory->createEOperation_in_EContainingClass(offerEClass, OFFER___RETRIEVEOFFEREDTOKENS);
+	
 
-	opaqueBehaviorExecutionEClass = createEClass(OPAQUEBEHAVIOREXECUTION);
+	opaqueBehaviorExecutionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPAQUEBEHAVIOREXECUTION);
+	
 	
 	
-	createEOperation(opaqueBehaviorExecutionEClass, OPAQUEBEHAVIOREXECUTION___DOBODY__PARAMETERVALUE_PARAMETERVALUE);
-	createEOperation(opaqueBehaviorExecutionEClass, OPAQUEBEHAVIOREXECUTION___EXECUTE);
+	factory->createEOperation_in_EContainingClass(opaqueBehaviorExecutionEClass, OPAQUEBEHAVIOREXECUTION___DOBODY__PARAMETERVALUE_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(opaqueBehaviorExecutionEClass, OPAQUEBEHAVIOREXECUTION___EXECUTE);
 	
 
-	outputPinActivationEClass = createEClass(OUTPUTPINACTIVATION);
+	outputPinActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OUTPUTPINACTIVATION);
 	
 	
 	
+	
 
-	parameterValueEClass = createEClass(PARAMETERVALUE);
+	parameterValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETERVALUE);
+	
 	
-	createEReference(parameterValueEClass, PARAMETERVALUE_PARAMETER);
-	createEReference(parameterValueEClass, PARAMETERVALUE_VALUES);
+	factory->createEReference_in_EContainingClass(parameterValueEClass, PARAMETERVALUE_PARAMETER);
+	factory->createEReference_in_EContainingClass(parameterValueEClass, PARAMETERVALUE_VALUES);
 	
 	
 
-	pinActivationEClass = createEClass(PINACTIVATION);
+	pinActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PINACTIVATION);
 	
-	createEReference(pinActivationEClass, PINACTIVATION_ACTIONACTIVATION);
 	
-	createEOperation(pinActivationEClass, PINACTIVATION___FIRE__TOKEN);
-	createEOperation(pinActivationEClass, PINACTIVATION___TAKEOFFEREDTOKENS);
+	factory->createEReference_in_EContainingClass(pinActivationEClass, PINACTIVATION_ACTIONACTIVATION);
 	
+	factory->createEOperation_in_EContainingClass(pinActivationEClass, PINACTIVATION___FIRE__TOKEN);
+	factory->createEOperation_in_EContainingClass(pinActivationEClass, PINACTIVATION___TAKEOFFEREDTOKENS);
+	
 
-	primitiveValueEClass = createEClass(PRIMITIVEVALUE);
+	primitiveValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PRIMITIVEVALUE);
+	
 	
-	createEReference(primitiveValueEClass, PRIMITIVEVALUE_TYPE);
+	factory->createEReference_in_EContainingClass(primitiveValueEClass, PRIMITIVEVALUE_TYPE);
 	
-	createEOperation(primitiveValueEClass, PRIMITIVEVALUE___GETTYPES);
+	factory->createEOperation_in_EContainingClass(primitiveValueEClass, PRIMITIVEVALUE___GETTYPES);
 	
 
-	readExtentActionActivationEClass = createEClass(READEXTENTACTIONACTIVATION);
+	readExtentActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READEXTENTACTIONACTIVATION);
 	
 	
 	
+	
 
-	readIsClassifiedObjectActionActivationEClass = createEClass(READISCLASSIFIEDOBJECTACTIONACTIVATION);
+	readIsClassifiedObjectActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READISCLASSIFIEDOBJECTACTIONACTIVATION);
 	
 	
-	createEOperation(readIsClassifiedObjectActionActivationEClass, READISCLASSIFIEDOBJECTACTIONACTIVATION___CHECKALLPARENTS__CLASSIFIER_CLASSIFIER);
 	
+	factory->createEOperation_in_EContainingClass(readIsClassifiedObjectActionActivationEClass, READISCLASSIFIEDOBJECTACTIONACTIVATION___CHECKALLPARENTS__CLASSIFIER_CLASSIFIER);
+	
 
-	readLinkActionActivationEClass = createEClass(READLINKACTIONACTIVATION);
+	readLinkActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READLINKACTIONACTIVATION);
+	
 	
 	
 	
 
-	readSelfActionActivationEClass = createEClass(READSELFACTIONACTIVATION);
+	readSelfActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READSELFACTIONACTIVATION);
 	
 	
 	
+	
 
-	readStructuralFeatureActionActivationEClass = createEClass(READSTRUCTURALFEATUREACTIONACTIVATION);
+	readStructuralFeatureActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READSTRUCTURALFEATUREACTIONACTIVATION);
+	
 	
 	
 	
 
-	realValueEClass = createEClass(REALVALUE);
-	createEAttribute(realValueEClass, REALVALUE_VALUE);
+	realValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REALVALUE);
 	
+	factory->createEAttribute_in_EContainingClass(realValueEClass, REALVALUE_VALUE);
 	
-	createEOperation(realValueEClass, REALVALUE___EQUALS__VALUE);
-	createEOperation(realValueEClass, REALVALUE___SPECIFY);
-	createEOperation(realValueEClass, REALVALUE___TOSTRING);
 	
+	factory->createEOperation_in_EContainingClass(realValueEClass, REALVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(realValueEClass, REALVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(realValueEClass, REALVALUE___TOSTRING);
+	
 
-	reclassifyObjectActionActivationEClass = createEClass(RECLASSIFYOBJECTACTIONACTIVATION);
+	reclassifyObjectActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), RECLASSIFYOBJECTACTIONACTIVATION);
+	
 	
 	
 	
 
-	redefinitionBasedDispatchStrategyEClass = createEClass(REDEFINITIONBASEDDISPATCHSTRATEGY);
+	redefinitionBasedDispatchStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REDEFINITIONBASEDDISPATCHSTRATEGY);
 	
 	
-	createEOperation(redefinitionBasedDispatchStrategyEClass, REDEFINITIONBASEDDISPATCHSTRATEGY___OPERATIONSMATCH__OPERATION_OPERATION);
-	createEOperation(redefinitionBasedDispatchStrategyEClass, REDEFINITIONBASEDDISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION);
 	
+	factory->createEOperation_in_EContainingClass(redefinitionBasedDispatchStrategyEClass, REDEFINITIONBASEDDISPATCHSTRATEGY___OPERATIONSMATCH__OPERATION_OPERATION);
+	factory->createEOperation_in_EContainingClass(redefinitionBasedDispatchStrategyEClass, REDEFINITIONBASEDDISPATCHSTRATEGY___RETRIEVEMETHOD__OBJECT_OPERATION);
+	
 
-	reduceActionActivationEClass = createEClass(REDUCEACTIONACTIVATION);
+	reduceActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REDUCEACTIONACTIVATION);
+	
 	
-	createEReference(reduceActionActivationEClass, REDUCEACTIONACTIVATION_CURRENTEXECUTION);
+	factory->createEReference_in_EContainingClass(reduceActionActivationEClass, REDUCEACTIONACTIVATION_CURRENTEXECUTION);
 	
 	
 
-	referenceEClass = createEClass(REFERENCE);
+	referenceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REFERENCE);
 	
-	createEReference(referenceEClass, REFERENCE_REFERENT);
 	
-	createEOperation(referenceEClass, REFERENCE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
-	createEOperation(referenceEClass, REFERENCE___DESTROY);
-	createEOperation(referenceEClass, REFERENCE___DISPATCH__OPERATION);
-	createEOperation(referenceEClass, REFERENCE___EQUALS__VALUE);
-	createEOperation(referenceEClass, REFERENCE___GETTYPES);
-	createEOperation(referenceEClass, REFERENCE___NEW_);
-	createEOperation(referenceEClass, REFERENCE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
-	createEOperation(referenceEClass, REFERENCE___RETRIEVEFEATUREVALUES);
-	createEOperation(referenceEClass, REFERENCE___SEND__SIGNALINSTANCE);
-	createEOperation(referenceEClass, REFERENCE___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
-	createEOperation(referenceEClass, REFERENCE___TOSTRING);
+	factory->createEReference_in_EContainingClass(referenceEClass, REFERENCE_REFERENT);
 	
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___DESTROY);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___DISPATCH__OPERATION);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___GETTYPES);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___NEW_);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___RETRIEVEFEATUREVALUES);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___SEND__SIGNALINSTANCE);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___STARTBEHAVIOR__CLASS_PARAMETERVALUE);
+	factory->createEOperation_in_EContainingClass(referenceEClass, REFERENCE___TOSTRING);
+	
 
-	removeStructuralFeatureValueActivationEClass = createEClass(REMOVESTRUCTURALFEATUREVALUEACTIVATION);
+	removeStructuralFeatureValueActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REMOVESTRUCTURALFEATUREVALUEACTIVATION);
+	
 	
 	
 	
 
-	semanticStrategyEClass = createEClass(SEMANTICSTRATEGY);
+	semanticStrategyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SEMANTICSTRATEGY);
 	
 	
-	createEOperation(semanticStrategyEClass, SEMANTICSTRATEGY___RETRIEVENAME);
 	
+	factory->createEOperation_in_EContainingClass(semanticStrategyEClass, SEMANTICSTRATEGY___RETRIEVENAME);
+	
 
-	semanticVisitorEClass = createEClass(SEMANTICVISITOR);
+	semanticVisitorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SEMANTICVISITOR);
+	
 	
 	
-	createEOperation(semanticVisitorEClass, SEMANTICVISITOR____BEGINISOLATION);
-	createEOperation(semanticVisitorEClass, SEMANTICVISITOR____ENDISOLATION);
+	factory->createEOperation_in_EContainingClass(semanticVisitorEClass, SEMANTICVISITOR____BEGINISOLATION);
+	factory->createEOperation_in_EContainingClass(semanticVisitorEClass, SEMANTICVISITOR____ENDISOLATION);
 	
 
-	sendSignalActionActivationEClass = createEClass(SENDSIGNALACTIONACTIVATION);
+	sendSignalActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SENDSIGNALACTIONACTIVATION);
 	
 	
-	createEOperation(sendSignalActionActivationEClass, SENDSIGNALACTIONACTIVATION___DOACTION);
 	
+	factory->createEOperation_in_EContainingClass(sendSignalActionActivationEClass, SENDSIGNALACTIONACTIVATION___DOACTION);
+	
 
-	signalInstanceEClass = createEClass(SIGNALINSTANCE);
+	signalInstanceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SIGNALINSTANCE);
+	
 	
-	createEReference(signalInstanceEClass, SIGNALINSTANCE_TYPE);
+	factory->createEReference_in_EContainingClass(signalInstanceEClass, SIGNALINSTANCE_TYPE);
 	
 	
 
-	startClassifierBehaviorActionActivationEClass = createEClass(STARTCLASSIFIERBEHAVIORACTIONACTIVATION);
+	startClassifierBehaviorActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STARTCLASSIFIERBEHAVIORACTIONACTIVATION);
 	
 	
 	
+	
 
-	startObjectBehaviorActionActivationEClass = createEClass(STARTOBJECTBEHAVIORACTIONACTIVATION);
+	startObjectBehaviorActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STARTOBJECTBEHAVIORACTIONACTIVATION);
 	
 	
 	
+	
 
-	stringValueEClass = createEClass(STRINGVALUE);
-	createEAttribute(stringValueEClass, STRINGVALUE_VALUE);
+	stringValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRINGVALUE);
+	
+	factory->createEAttribute_in_EContainingClass(stringValueEClass, STRINGVALUE_VALUE);
 	
 	
-	createEOperation(stringValueEClass, STRINGVALUE___EQUALS__VALUE);
-	createEOperation(stringValueEClass, STRINGVALUE___SPECIFY);
-	createEOperation(stringValueEClass, STRINGVALUE___TOSTRING);
+	factory->createEOperation_in_EContainingClass(stringValueEClass, STRINGVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(stringValueEClass, STRINGVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(stringValueEClass, STRINGVALUE___TOSTRING);
 	
 
-	structuralFeatureActionActivationEClass = createEClass(STRUCTURALFEATUREACTIONACTIVATION);
+	structuralFeatureActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTURALFEATUREACTIONACTIVATION);
 	
 	
-	createEOperation(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETASSOCIATION__STRUCTURALFEATURE);
-	createEOperation(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETMATCHINGLINKS__ASSOCIATION_VALUE);
-	createEOperation(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETOPPOSITEEND__ASSOCIATION_STRUCTURALFEATURE);
 	
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETASSOCIATION__STRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETMATCHINGLINKS__ASSOCIATION_VALUE);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionActivationEClass, STRUCTURALFEATUREACTIONACTIVATION___GETOPPOSITEEND__ASSOCIATION_STRUCTURALFEATURE);
+	
 
-	structuredActivityNodeActivationEClass = createEClass(STRUCTUREDACTIVITYNODEACTIVATION);
+	structuredActivityNodeActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTUREDACTIVITYNODEACTIVATION);
+	
 	
-	createEReference(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION_ACTIVATIONGROUP);
 	
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___COMPLETEACTION);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___DOACTION);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___DOSTRUCTUREDACTIVITY);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___GETPINVALUES__OUTPUTPIN);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___ISSUSPENDED);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___MAKEACTIVITYNODELIST__EXECUTABLENODE);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___PUTPINVALUES__OUTPUTPIN_VALUE);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___RESUME);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___TERMINATE);
-	createEOperation(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___TERMINATEALL);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___COMPLETEACTION);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___CREATEEDGEINSTANCES);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___CREATENODEACTIVATIONS);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___DOACTION);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___DOSTRUCTUREDACTIVITY);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___GETNODEACTIVATION__ACTIVITYNODE);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___GETPINVALUES__OUTPUTPIN);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___ISSOURCEFOR__ACTIVITYEDGEINSTANCE);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___ISSUSPENDED);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___MAKEACTIVITYNODELIST__EXECUTABLENODE);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___PUTPINVALUES__OUTPUTPIN_VALUE);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___RESUME);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___TERMINATE);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeActivationEClass, STRUCTUREDACTIVITYNODEACTIVATION___TERMINATEALL);
 	
 
-	structuredValueEClass = createEClass(STRUCTUREDVALUE);
+	structuredValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTUREDVALUE);
 	
 	
-	createEOperation(structuredValueEClass, STRUCTUREDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
-	createEOperation(structuredValueEClass, STRUCTUREDVALUE___CREATEFEATUREVALUES);
-	createEOperation(structuredValueEClass, STRUCTUREDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
-	createEOperation(structuredValueEClass, STRUCTUREDVALUE___RETRIEVEFEATUREVALUES);
-	createEOperation(structuredValueEClass, STRUCTUREDVALUE___SPECIFY);
 	
+	factory->createEOperation_in_EContainingClass(structuredValueEClass, STRUCTUREDVALUE___ASSIGNFEATUREVALUE__STRUCTURALFEATURE_EINT);
+	factory->createEOperation_in_EContainingClass(structuredValueEClass, STRUCTUREDVALUE___CREATEFEATUREVALUES);
+	factory->createEOperation_in_EContainingClass(structuredValueEClass, STRUCTUREDVALUE___RETRIEVEFEATUREVALUE__STRUCTURALFEATURE);
+	factory->createEOperation_in_EContainingClass(structuredValueEClass, STRUCTUREDVALUE___RETRIEVEFEATUREVALUES);
+	factory->createEOperation_in_EContainingClass(structuredValueEClass, STRUCTUREDVALUE___SPECIFY);
+	
 
-	testIdentityActionActivationEClass = createEClass(TESTIDENTITYACTIONACTIVATION);
+	testIdentityActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TESTIDENTITYACTIONACTIVATION);
+	
 	
 	
 	
 
-	tokenEClass = createEClass(TOKEN);
-	createEAttribute(tokenEClass, TOKEN_WITHDRAWN);
+	tokenEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TOKEN);
 	
-	createEReference(tokenEClass, TOKEN_HOLDER);
+	factory->createEAttribute_in_EContainingClass(tokenEClass, TOKEN_WITHDRAWN);
 	
-	createEOperation(tokenEClass, TOKEN___EQUALS__TOKEN);
-	createEOperation(tokenEClass, TOKEN___GETVALUE);
-	createEOperation(tokenEClass, TOKEN___ISCONTROL);
-	createEOperation(tokenEClass, TOKEN___TRANSFER__ACTIVITYNODEACTIVATION);
-	createEOperation(tokenEClass, TOKEN___WITHDRAW);
+	factory->createEReference_in_EContainingClass(tokenEClass, TOKEN_HOLDER);
 	
+	factory->createEOperation_in_EContainingClass(tokenEClass, TOKEN___EQUALS__TOKEN);
+	factory->createEOperation_in_EContainingClass(tokenEClass, TOKEN___GETVALUE);
+	factory->createEOperation_in_EContainingClass(tokenEClass, TOKEN___ISCONTROL);
+	factory->createEOperation_in_EContainingClass(tokenEClass, TOKEN___TRANSFER__ACTIVITYNODEACTIVATION);
+	factory->createEOperation_in_EContainingClass(tokenEClass, TOKEN___WITHDRAW);
+	
 
-	tokenSetEClass = createEClass(TOKENSET);
+	tokenSetEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TOKENSET);
+	
 	
-	createEReference(tokenSetEClass, TOKENSET_TOKENS);
+	factory->createEReference_in_EContainingClass(tokenSetEClass, TOKENSET_TOKENS);
 	
 	
 
-	unlimitedNaturalValueEClass = createEClass(UNLIMITEDNATURALVALUE);
-	createEAttribute(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE_VALUE);
+	unlimitedNaturalValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), UNLIMITEDNATURALVALUE);
 	
+	factory->createEAttribute_in_EContainingClass(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE_VALUE);
 	
-	createEOperation(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___EQUALS__VALUE);
-	createEOperation(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___SPECIFY);
-	createEOperation(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___TOSTRING);
 	
+	factory->createEOperation_in_EContainingClass(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(unlimitedNaturalValueEClass, UNLIMITEDNATURALVALUE___TOSTRING);
+	
 
-	valueEClass = createEClass(VALUE);
+	valueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUE);
+	
 	
 	
-	createEOperation(valueEClass, VALUE___EQUALS__VALUE);
-	createEOperation(valueEClass, VALUE___GETTYPES);
-	createEOperation(valueEClass, VALUE___HASTYPES__CLASSIFIER);
-	createEOperation(valueEClass, VALUE___OBJECTID);
-	createEOperation(valueEClass, VALUE___SPECIFY);
-	createEOperation(valueEClass, VALUE___TOSTRING);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___EQUALS__VALUE);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___GETTYPES);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___HASTYPES__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___OBJECTID);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___SPECIFY);
+	factory->createEOperation_in_EContainingClass(valueEClass, VALUE___TOSTRING);
 	
 
-	valueSpecificActionActivationEClass = createEClass(VALUESPECIFICACTIONACTIVATION);
+	valueSpecificActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUESPECIFICACTIONACTIVATION);
 	
 	
 	
+	
 
-	valuesEClass = createEClass(VALUES);
+	valuesEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUES);
+	
 	
-	createEReference(valuesEClass, VALUES_VALUES);
+	factory->createEReference_in_EContainingClass(valuesEClass, VALUES_VALUES);
 	
 	
 
-	writeLinkActionActivationEClass = createEClass(WRITELINKACTIONACTIVATION);
+	writeLinkActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), WRITELINKACTIONACTIVATION);
 	
 	
 	
+	
 
-	writeStructuralFeatureActionActivationEClass = createEClass(WRITESTRUCTURALFEATUREACTIONACTIVATION);
+	writeStructuralFeatureActionActivationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), WRITESTRUCTURALFEATUREACTIONACTIVATION);
+	
 	
 	
-	createEOperation(writeStructuralFeatureActionActivationEClass, WRITESTRUCTURALFEATUREACTIONACTIVATION___POSITION__VALUE_EINT);
+	factory->createEOperation_in_EContainingClass(writeStructuralFeatureActionActivationEClass, WRITESTRUCTURALFEATUREACTIONACTIVATION___POSITION__VALUE_EINT);
 	
 
 	

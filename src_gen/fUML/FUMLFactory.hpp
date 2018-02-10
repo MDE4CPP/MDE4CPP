@@ -229,13 +229,16 @@ namespace fUML
 			//Add containing object
 			virtual std::shared_ptr<ExecutionFactoryL1> createExecutionFactoryL1_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const = 0;
 			
+			
 			virtual std::shared_ptr<ExecutionFactoryL2> createExecutionFactoryL2() const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ExecutionFactoryL2> createExecutionFactoryL2_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const = 0;
 			
+			
 			virtual std::shared_ptr<ExecutionFactoryL3> createExecutionFactoryL3() const = 0;
 			//Add containing object
 			virtual std::shared_ptr<ExecutionFactoryL3> createExecutionFactoryL3_in_Locus(std::weak_ptr<fUML::Locus > par_locus) const = 0;
+			
 			
 			virtual std::shared_ptr<Executor> createExecutor() const = 0;
 			
