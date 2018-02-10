@@ -148,8 +148,8 @@ static const int [aReference.memberNameUpper()/] = [aReference.eContainingClass.
 
 [/template]
 
-[template public generateReferenceCreation(aReference : EReference)]
-createEReference([aReference.eContainingClass.classNameMember()/], [aReference.memberNameUpper()/]);
+[template public generateReferenceCreation(anEReference : EReference)]
+factory->createEReference_in_EContainingClass([anEReference.eContainingClass.classNameMember()/], [anEReference.memberNameUpper()/]);
 
 [/template] 
  

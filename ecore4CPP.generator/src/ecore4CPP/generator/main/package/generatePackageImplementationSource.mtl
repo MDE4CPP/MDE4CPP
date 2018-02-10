@@ -85,6 +85,9 @@ void [packageName/]::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
+
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aClass.generateClassCreation()/]

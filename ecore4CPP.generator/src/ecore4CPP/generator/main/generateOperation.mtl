@@ -66,8 +66,8 @@ static const int [aOperation.operationNumberNameUpper()/] = [aOperation.getOpera
 
 [/template]
 
-[template public generateOperationCreation(aOperation : EOperation) ? ( not hasImplOnly()) ]
-createEOperation([aOperation.eContainingClass.classNameMember()/], [operationNumberNameUpper(aOperation)/]);
+[template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
+factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.classNameMember()/], [operationNumberNameUpper(anEOperation)/]);
 
 [/template]
 

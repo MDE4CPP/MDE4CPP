@@ -29,12 +29,9 @@ std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.datatypeNam
 
 [/template]
 
-[template public generateEDatatypeCreation(adatatype : EDataType)]
-[if (adatatype.oclIsKindOf(EEnum))]
-[adatatype.datatypeNameMember()/] = createEEnum([adatatype.datatypeNumberName()/]);
-[else]
-[adatatype.datatypeNameMember()/] = createEDataType([adatatype.datatypeNumberName()/]);
-[/if]
+[template public generateEDatatypeCreation(anEDatatype : EDataType)]
+[anEDatatype.datatypeNameMember()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
+
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]

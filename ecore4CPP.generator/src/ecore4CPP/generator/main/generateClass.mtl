@@ -42,6 +42,7 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() 
 [for(aReference:EReference | ref->sortedBy(name))]
 //Add containing object
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const [abstractSufix(impl)/];
+[if(aEClass.getClassifierIDName().size() > 0)]virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID) const [abstractSufix(impl)/];[/if]
 [/for]
 
 [/let]
@@ -61,7 +62,8 @@ std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toU
 [/template]
 
 [template public generateClassCreation(aEClass : EClass)]
-[classNameMember(aEClass)/] = createEClass([classNumberName(aEClass)/]);
+[classNameMember(aEClass)/] = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [classNumberName(aEClass)/]);
+
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]

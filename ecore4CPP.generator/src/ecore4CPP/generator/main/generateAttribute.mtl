@@ -103,6 +103,6 @@ std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> [aAttribute.eContai
 [/template]
 
 [template public generateAttributeCreation(aAttribute : EAttribute)]
-createEAttribute([aAttribute.eContainingClass.classNameMember()/], [aAttribute.memberNameUpper()/]);
+factory->createEAttribute_in_EContainingClass([aAttribute.eContainingClass.classNameMember()/], [aAttribute.memberNameUpper()/]);
 
 [/template]

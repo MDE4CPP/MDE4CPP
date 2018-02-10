@@ -155,30 +155,13 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [for(aReference:EReference | ref->sortedBy(name))]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/]) const
 {
-	[if(ref->select(eType = aReference.eType)->size()>1)]
-	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.memberNameUpper()/]));
-	[else]
-	std::shared_ptr<[aClass.name.toUpperFirst()/]> element(new [aClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
-	[/if]
-	[if(not aReference.eOpposite.name.oclIsUndefined())]
-	[let r : EReference = findLowerSubset(aReference.eType.oclAsType(EClass), aClass, aReference.eOpposite)]
-	[if(aReference.isBackReference())]
-	if(auto wp = par_[aReference.name/].lock())
-	{
-	[else]
-	if(nullptr != par_[aReference.name/])
-	{
-	[/if]
-	[if(r.upperBound <> 1)]
-    		[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->get[r.name.toUpperFirst()/]()->push_back(element);
-	[else]
-			[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->set[r.name.toUpperFirst()/](element);
-	[/if]
-	}
-	[/let]
-	[/if]    
-	return element;
+	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, false)/]
 }
+[if(aClass.getClassifierIDName().size() > 0)]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const unsigned int classID) const
+{
+	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage, true)/]
+}[/if]
 
 [/for]
 [/let]
@@ -189,4 +172,34 @@ std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/
 	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
 }
 [/file]
+[/template]
+
+[template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage, addID : Boolean)]
+[if(ref->select(eType = aReference.eType)->size()>1)]
+std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.memberNameUpper()/]));
+[else]
+std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
+[/if]
+[if(addID)]
+element->set[anEClass.getClassifierIDName()/]ID(classID);
+[/if]
+[if(not aReference.eOpposite.name.oclIsUndefined())]
+[let r : EReference = findLowerSubset(aReference.eType.oclAsType(EClass), anEClass, aReference.eOpposite)]
+[if(aReference.isBackReference())]
+if(auto wp = par_[aReference.name/].lock())
+{
+[else]
+if(nullptr != par_[aReference.name/])
+{
+[/if]
+[if(r.upperBound <> 1)]
+		[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->get[r.name.toUpperFirst()/]()->push_back(element);
+[else]
+		[if(aReference.isBackReference())]wp[else]par_[aReference.name/][/if]->set[r.name.toUpperFirst()/](element);
+[/if]
+}
+[/let]
+[/if]    
+return element;
+
 [/template]
