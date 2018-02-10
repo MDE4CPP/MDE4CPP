@@ -1,6 +1,6 @@
 description 'MDE4CPP root project'
 
-task generateAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModels', 'src:buildReflectionModels']) {
+task buildAll(dependsOn: ['generator:createAllGenerators', 'src:buildEcoreModels', 'src:buildReflectionModels']) {
 	group 'MDE4CPP'
 	description 'build generators and all models'
 }
