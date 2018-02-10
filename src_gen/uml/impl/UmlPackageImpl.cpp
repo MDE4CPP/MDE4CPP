@@ -316,2583 +316,2831 @@ void UmlPackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
 
-	abstractionEClass = createEClass(ABSTRACTION);
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+
+	abstractionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ABSTRACTION);
 	
-	createEReference(abstractionEClass, ABSTRACTION_MAPPING);
 	
+	factory->createEReference_in_EContainingClass(abstractionEClass, ABSTRACTION_MAPPING);
 	
+	
 
-	acceptCallActionEClass = createEClass(ACCEPTCALLACTION);
+	acceptCallActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACCEPTCALLACTION);
+	
 	
-	createEReference(acceptCallActionEClass, ACCEPTCALLACTION_RETURNINFORMATION);
+	factory->createEReference_in_EContainingClass(acceptCallActionEClass, ACCEPTCALLACTION_RETURNINFORMATION);
 	
-	createEOperation(acceptCallActionEClass, ACCEPTCALLACTION___RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptCallActionEClass, ACCEPTCALLACTION___TRIGGER_CALL_EVENT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptCallActionEClass, ACCEPTCALLACTION___UNMARSHALL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptCallActionEClass, ACCEPTCALLACTION___RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptCallActionEClass, ACCEPTCALLACTION___TRIGGER_CALL_EVENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptCallActionEClass, ACCEPTCALLACTION___UNMARSHALL__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	acceptEventActionEClass = createEClass(ACCEPTEVENTACTION);
-	createEAttribute(acceptEventActionEClass, ACCEPTEVENTACTION_ISUNMARSHALL);
+	acceptEventActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACCEPTEVENTACTION);
 	
-	createEReference(acceptEventActionEClass, ACCEPTEVENTACTION_RESULT);
-	createEReference(acceptEventActionEClass, ACCEPTEVENTACTION_TRIGGER);
+	factory->createEAttribute_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION_ISUNMARSHALL);
 	
-	createEOperation(acceptEventActionEClass, ACCEPTEVENTACTION___CONFORMING_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptEventActionEClass, ACCEPTEVENTACTION___NO_INPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptEventActionEClass, ACCEPTEVENTACTION___NO_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptEventActionEClass, ACCEPTEVENTACTION___ONE_OUTPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(acceptEventActionEClass, ACCEPTEVENTACTION___UNMARSHALL_SIGNAL_EVENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION_RESULT);
+	factory->createEReference_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION_TRIGGER);
 	
+	factory->createEOperation_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION___CONFORMING_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION___NO_INPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION___NO_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION___ONE_OUTPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(acceptEventActionEClass, ACCEPTEVENTACTION___UNMARSHALL_SIGNAL_EVENTS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	actionEClass = createEClass(ACTION);
-	createEAttribute(actionEClass, ACTION_ISLOCALLYREENTRANT);
+	actionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTION);
+	
+	factory->createEAttribute_in_EContainingClass(actionEClass, ACTION_ISLOCALLYREENTRANT);
 	
-	createEReference(actionEClass, ACTION_CONTEXT);
-	createEReference(actionEClass, ACTION_INPUT);
-	createEReference(actionEClass, ACTION_LOCALPOSTCONDITION);
-	createEReference(actionEClass, ACTION_LOCALPRECONDITION);
-	createEReference(actionEClass, ACTION_OUTPUT);
+	factory->createEReference_in_EContainingClass(actionEClass, ACTION_CONTEXT);
+	factory->createEReference_in_EContainingClass(actionEClass, ACTION_INPUT);
+	factory->createEReference_in_EContainingClass(actionEClass, ACTION_LOCALPOSTCONDITION);
+	factory->createEReference_in_EContainingClass(actionEClass, ACTION_LOCALPRECONDITION);
+	factory->createEReference_in_EContainingClass(actionEClass, ACTION_OUTPUT);
 	
-	createEOperation(actionEClass, ACTION___ALLACTIONS);
-	createEOperation(actionEClass, ACTION___ALLOWNEDNODES);
-	createEOperation(actionEClass, ACTION___CONTAININGBEHAVIOR);
-	createEOperation(actionEClass, ACTION___GETCONTEXT);
+	factory->createEOperation_in_EContainingClass(actionEClass, ACTION___ALLACTIONS);
+	factory->createEOperation_in_EContainingClass(actionEClass, ACTION___ALLOWNEDNODES);
+	factory->createEOperation_in_EContainingClass(actionEClass, ACTION___CONTAININGBEHAVIOR);
+	factory->createEOperation_in_EContainingClass(actionEClass, ACTION___GETCONTEXT);
 	
 
-	actionExecutionSpecificationEClass = createEClass(ACTIONEXECUTIONSPECIFICATION);
+	actionExecutionSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIONEXECUTIONSPECIFICATION);
 	
-	createEReference(actionExecutionSpecificationEClass, ACTIONEXECUTIONSPECIFICATION_ACTION);
 	
-	createEOperation(actionExecutionSpecificationEClass, ACTIONEXECUTIONSPECIFICATION___ACTION_REFERENCED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(actionExecutionSpecificationEClass, ACTIONEXECUTIONSPECIFICATION_ACTION);
 	
+	factory->createEOperation_in_EContainingClass(actionExecutionSpecificationEClass, ACTIONEXECUTIONSPECIFICATION___ACTION_REFERENCED__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	actionInputPinEClass = createEClass(ACTIONINPUTPIN);
+	actionInputPinEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIONINPUTPIN);
+	
 	
-	createEReference(actionInputPinEClass, ACTIONINPUTPIN_FROMACTION);
+	factory->createEReference_in_EContainingClass(actionInputPinEClass, ACTIONINPUTPIN_FROMACTION);
 	
-	createEOperation(actionInputPinEClass, ACTIONINPUTPIN___INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(actionInputPinEClass, ACTIONINPUTPIN___NO_CONTROL_OR_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(actionInputPinEClass, ACTIONINPUTPIN___ONE_OUTPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(actionInputPinEClass, ACTIONINPUTPIN___INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(actionInputPinEClass, ACTIONINPUTPIN___NO_CONTROL_OR_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(actionInputPinEClass, ACTIONINPUTPIN___ONE_OUTPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	activityEClass = createEClass(ACTIVITY);
-	createEAttribute(activityEClass, ACTIVITY_ISREADONLY);
-	createEAttribute(activityEClass, ACTIVITY_ISSINGLEEXECUTION);
+	activityEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITY);
 	
-	createEReference(activityEClass, ACTIVITY_EDGE);
-	createEReference(activityEClass, ACTIVITY_GROUP);
-	createEReference(activityEClass, ACTIVITY_NODE);
-	createEReference(activityEClass, ACTIVITY_OWNEDGROUP);
-	createEReference(activityEClass, ACTIVITY_OWNEDNODE);
-	createEReference(activityEClass, ACTIVITY_PARTITION);
-	createEReference(activityEClass, ACTIVITY_STRUCTUREDNODE);
-	createEReference(activityEClass, ACTIVITY_VARIABLE);
+	factory->createEAttribute_in_EContainingClass(activityEClass, ACTIVITY_ISREADONLY);
+	factory->createEAttribute_in_EContainingClass(activityEClass, ACTIVITY_ISSINGLEEXECUTION);
 	
-	createEOperation(activityEClass, ACTIVITY___MAXIMUM_ONE_PARAMETER_NODE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityEClass, ACTIVITY___MAXIMUM_TWO_PARAMETER_NODES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_EDGE);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_GROUP);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_NODE);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_OWNEDGROUP);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_OWNEDNODE);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_PARTITION);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_STRUCTUREDNODE);
+	factory->createEReference_in_EContainingClass(activityEClass, ACTIVITY_VARIABLE);
 	
+	factory->createEOperation_in_EContainingClass(activityEClass, ACTIVITY___MAXIMUM_ONE_PARAMETER_NODE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityEClass, ACTIVITY___MAXIMUM_TWO_PARAMETER_NODES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	activityContentEClass = createEClass(ACTIVITYCONTENT);
+	activityContentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYCONTENT);
+	
 	
 	
-	createEOperation(activityContentEClass, ACTIVITYCONTENT___CONTAININGACTIVITY);
+	factory->createEOperation_in_EContainingClass(activityContentEClass, ACTIVITYCONTENT___CONTAININGACTIVITY);
 	
 
-	activityEdgeEClass = createEClass(ACTIVITYEDGE);
+	activityEdgeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYEDGE);
 	
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_ACTIVITY);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_GUARD);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_INGROUP);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_INPARTITION);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_INSTRUCTUREDNODE);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_INTERRUPTS);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_REDEFINEDEDGE);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_SOURCE);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_TARGET);
-	createEReference(activityEdgeEClass, ACTIVITYEDGE_WEIGHT);
 	
-	createEOperation(activityEdgeEClass, ACTIVITYEDGE___SOURCE_AND_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_ACTIVITY);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_GUARD);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_INGROUP);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_INPARTITION);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_INSTRUCTUREDNODE);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_INTERRUPTS);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_REDEFINEDEDGE);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_SOURCE);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_TARGET);
+	factory->createEReference_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE_WEIGHT);
 	
+	factory->createEOperation_in_EContainingClass(activityEdgeEClass, ACTIVITYEDGE___SOURCE_AND_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	activityFinalNodeEClass = createEClass(ACTIVITYFINALNODE);
+	activityFinalNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYFINALNODE);
+	
 	
 	
 	
 
-	activityGroupEClass = createEClass(ACTIVITYGROUP);
+	activityGroupEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYGROUP);
 	
-	createEReference(activityGroupEClass, ACTIVITYGROUP_CONTAINEDEDGE);
-	createEReference(activityGroupEClass, ACTIVITYGROUP_CONTAINEDNODE);
-	createEReference(activityGroupEClass, ACTIVITYGROUP_INACTIVITY);
-	createEReference(activityGroupEClass, ACTIVITYGROUP_SUBGROUP);
-	createEReference(activityGroupEClass, ACTIVITYGROUP_SUPERGROUP);
 	
-	createEOperation(activityGroupEClass, ACTIVITYGROUP___NODES_AND_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityGroupEClass, ACTIVITYGROUP___NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP_CONTAINEDEDGE);
+	factory->createEReference_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP_CONTAINEDNODE);
+	factory->createEReference_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP_INACTIVITY);
+	factory->createEReference_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP_SUBGROUP);
+	factory->createEReference_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP_SUPERGROUP);
 	
+	factory->createEOperation_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP___NODES_AND_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityGroupEClass, ACTIVITYGROUP___NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	activityNodeEClass = createEClass(ACTIVITYNODE);
+	activityNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYNODE);
+	
 	
-	createEReference(activityNodeEClass, ACTIVITYNODE_ACTIVITY);
-	createEReference(activityNodeEClass, ACTIVITYNODE_INGROUP);
-	createEReference(activityNodeEClass, ACTIVITYNODE_ININTERRUPTIBLEREGION);
-	createEReference(activityNodeEClass, ACTIVITYNODE_INPARTITION);
-	createEReference(activityNodeEClass, ACTIVITYNODE_INSTRUCTUREDNODE);
-	createEReference(activityNodeEClass, ACTIVITYNODE_INCOMING);
-	createEReference(activityNodeEClass, ACTIVITYNODE_OUTGOING);
-	createEReference(activityNodeEClass, ACTIVITYNODE_REDEFINEDNODE);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_ACTIVITY);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_INGROUP);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_ININTERRUPTIBLEREGION);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_INPARTITION);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_INSTRUCTUREDNODE);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_INCOMING);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_OUTGOING);
+	factory->createEReference_in_EContainingClass(activityNodeEClass, ACTIVITYNODE_REDEFINEDNODE);
 	
 	
 
-	activityParameterNodeEClass = createEClass(ACTIVITYPARAMETERNODE);
+	activityParameterNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYPARAMETERNODE);
 	
-	createEReference(activityParameterNodeEClass, ACTIVITYPARAMETERNODE_PARAMETER);
 	
-	createEOperation(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___HAS_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE_PARAMETER);
 	
+	factory->createEOperation_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___HAS_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___NO_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityParameterNodeEClass, ACTIVITYPARAMETERNODE___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	activityPartitionEClass = createEClass(ACTIVITYPARTITION);
-	createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISDIMENSION);
-	createEAttribute(activityPartitionEClass, ACTIVITYPARTITION_ISEXTERNAL);
+	activityPartitionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTIVITYPARTITION);
+	
+	factory->createEAttribute_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_ISDIMENSION);
+	factory->createEAttribute_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_ISEXTERNAL);
 	
-	createEReference(activityPartitionEClass, ACTIVITYPARTITION_EDGE);
-	createEReference(activityPartitionEClass, ACTIVITYPARTITION_NODE);
-	createEReference(activityPartitionEClass, ACTIVITYPARTITION_REPRESENTS);
-	createEReference(activityPartitionEClass, ACTIVITYPARTITION_SUBPARTITION);
-	createEReference(activityPartitionEClass, ACTIVITYPARTITION_SUPERPARTITION);
+	factory->createEReference_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_EDGE);
+	factory->createEReference_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_NODE);
+	factory->createEReference_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_REPRESENTS);
+	factory->createEReference_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_SUBPARTITION);
+	factory->createEReference_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION_SUPERPARTITION);
 	
-	createEOperation(activityPartitionEClass, ACTIVITYPARTITION___DIMENSION_NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_PROPERTY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_PROPERTY_AND_IS_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION___DIMENSION_NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_PROPERTY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(activityPartitionEClass, ACTIVITYPARTITION___REPRESENTS_PROPERTY_AND_IS_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	actorEClass = createEClass(ACTOR);
+	actorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ACTOR);
 	
 	
-	createEOperation(actorEClass, ACTOR___ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(actorEClass, ACTOR___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(actorEClass, ACTOR___ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(actorEClass, ACTOR___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	addStructuralFeatureValueActionEClass = createEClass(ADDSTRUCTURALFEATUREVALUEACTION);
-	createEAttribute(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_ISREPLACEALL);
+	addStructuralFeatureValueActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ADDSTRUCTURALFEATUREVALUEACTION);
 	
-	createEReference(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_INSERTAT);
+	factory->createEAttribute_in_EContainingClass(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_ISREPLACEALL);
 	
-	createEOperation(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION___REQUIRED_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION_INSERTAT);
 	
+	factory->createEOperation_in_EContainingClass(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(addStructuralFeatureValueActionEClass, ADDSTRUCTURALFEATUREVALUEACTION___REQUIRED_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	addVariableValueActionEClass = createEClass(ADDVARIABLEVALUEACTION);
-	createEAttribute(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_ISREPLACEALL);
+	addVariableValueActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ADDVARIABLEVALUEACTION);
+	
+	factory->createEAttribute_in_EContainingClass(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_ISREPLACEALL);
 	
-	createEReference(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_INSERTAT);
+	factory->createEReference_in_EContainingClass(addVariableValueActionEClass, ADDVARIABLEVALUEACTION_INSERTAT);
 	
-	createEOperation(addVariableValueActionEClass, ADDVARIABLEVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(addVariableValueActionEClass, ADDVARIABLEVALUEACTION___REQUIRED_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(addVariableValueActionEClass, ADDVARIABLEVALUEACTION___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(addVariableValueActionEClass, ADDVARIABLEVALUEACTION___REQUIRED_VALUE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	anyReceiveEventEClass = createEClass(ANYRECEIVEEVENT);
+	anyReceiveEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ANYRECEIVEEVENT);
 	
 	
 	
+	
 
-	artifactEClass = createEClass(ARTIFACT);
-	createEAttribute(artifactEClass, ARTIFACT_FILENAME);
+	artifactEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ARTIFACT);
+	
+	factory->createEAttribute_in_EContainingClass(artifactEClass, ARTIFACT_FILENAME);
 	
-	createEReference(artifactEClass, ARTIFACT_MANIFESTATION);
-	createEReference(artifactEClass, ARTIFACT_NESTEDARTIFACT);
-	createEReference(artifactEClass, ARTIFACT_OWNEDATTRIBUTE);
-	createEReference(artifactEClass, ARTIFACT_OWNEDOPERATION);
+	factory->createEReference_in_EContainingClass(artifactEClass, ARTIFACT_MANIFESTATION);
+	factory->createEReference_in_EContainingClass(artifactEClass, ARTIFACT_NESTEDARTIFACT);
+	factory->createEReference_in_EContainingClass(artifactEClass, ARTIFACT_OWNEDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(artifactEClass, ARTIFACT_OWNEDOPERATION);
 	
-	createEOperation(artifactEClass, ARTIFACT___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
-	createEOperation(artifactEClass, ARTIFACT___CREATEOWNEDOPERATION__STRING_TYPE);
+	factory->createEOperation_in_EContainingClass(artifactEClass, ARTIFACT___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(artifactEClass, ARTIFACT___CREATEOWNEDOPERATION__STRING_TYPE);
 	
 
-	associationEClass = createEClass(ASSOCIATION);
-	createEAttribute(associationEClass, ASSOCIATION_ISDERIVED);
+	associationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ASSOCIATION);
 	
-	createEReference(associationEClass, ASSOCIATION_ENDTYPE);
-	createEReference(associationEClass, ASSOCIATION_MEMBEREND);
-	createEReference(associationEClass, ASSOCIATION_NAVIGABLEOWNEDEND);
-	createEReference(associationEClass, ASSOCIATION_OWNEDEND);
+	factory->createEAttribute_in_EContainingClass(associationEClass, ASSOCIATION_ISDERIVED);
 	
-	createEOperation(associationEClass, ASSOCIATION___ASSOCIATION_ENDS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(associationEClass, ASSOCIATION___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(associationEClass, ASSOCIATION___ENDS_MUST_BE_TYPED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(associationEClass, ASSOCIATION___GETENDTYPES);
-	createEOperation(associationEClass, ASSOCIATION___ISBINARY);
-	createEOperation(associationEClass, ASSOCIATION___SPECIALIZED_END_NUMBER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(associationEClass, ASSOCIATION___SPECIALIZED_END_TYPES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(associationEClass, ASSOCIATION_ENDTYPE);
+	factory->createEReference_in_EContainingClass(associationEClass, ASSOCIATION_MEMBEREND);
+	factory->createEReference_in_EContainingClass(associationEClass, ASSOCIATION_NAVIGABLEOWNEDEND);
+	factory->createEReference_in_EContainingClass(associationEClass, ASSOCIATION_OWNEDEND);
 	
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___ASSOCIATION_ENDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___ENDS_MUST_BE_TYPED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___GETENDTYPES);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___ISBINARY);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___SPECIALIZED_END_NUMBER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationEClass, ASSOCIATION___SPECIALIZED_END_TYPES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	associationClassEClass = createEClass(ASSOCIATIONCLASS);
+	associationClassEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ASSOCIATIONCLASS);
+	
 	
 	
-	createEOperation(associationClassEClass, ASSOCIATIONCLASS___CANNOT_BE_DEFINED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(associationClassEClass, ASSOCIATIONCLASS___DISJOINT_ATTRIBUTES_ENDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationClassEClass, ASSOCIATIONCLASS___CANNOT_BE_DEFINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(associationClassEClass, ASSOCIATIONCLASS___DISJOINT_ATTRIBUTES_ENDS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	behaviorEClass = createEClass(BEHAVIOR);
-	createEAttribute(behaviorEClass, BEHAVIOR_ISREENTRANT);
+	behaviorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BEHAVIOR);
 	
-	createEReference(behaviorEClass, BEHAVIOR_BEHAVIOREDCLASSIFIER);
-	createEReference(behaviorEClass, BEHAVIOR_CONTEXT);
-	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETER);
-	createEReference(behaviorEClass, BEHAVIOR_OWNEDPARAMETERSET);
-	createEReference(behaviorEClass, BEHAVIOR_POSTCONDITION);
-	createEReference(behaviorEClass, BEHAVIOR_PRECONDITION);
-	createEReference(behaviorEClass, BEHAVIOR_REDEFINEDBEHAVIOR);
-	createEReference(behaviorEClass, BEHAVIOR_SPECIFICATION);
+	factory->createEAttribute_in_EContainingClass(behaviorEClass, BEHAVIOR_ISREENTRANT);
 	
-	createEOperation(behaviorEClass, BEHAVIOR___BEHAVIOREDCLASSIFIER__ELEMENT);
-	createEOperation(behaviorEClass, BEHAVIOR___FEATURE_OF_CONTEXT_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(behaviorEClass, BEHAVIOR___GETCONTEXT);
-	createEOperation(behaviorEClass, BEHAVIOR___INPUTPARAMETERS);
-	createEOperation(behaviorEClass, BEHAVIOR___MOST_ONE_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(behaviorEClass, BEHAVIOR___OUTPUTPARAMETERS);
-	createEOperation(behaviorEClass, BEHAVIOR___PARAMETERS_MATCH__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_BEHAVIOREDCLASSIFIER);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_CONTEXT);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_OWNEDPARAMETER);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_OWNEDPARAMETERSET);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_POSTCONDITION);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_PRECONDITION);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_REDEFINEDBEHAVIOR);
+	factory->createEReference_in_EContainingClass(behaviorEClass, BEHAVIOR_SPECIFICATION);
 	
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___BEHAVIOREDCLASSIFIER__ELEMENT);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___FEATURE_OF_CONTEXT_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___GETCONTEXT);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___INPUTPARAMETERS);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___MOST_ONE_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___OUTPUTPARAMETERS);
+	factory->createEOperation_in_EContainingClass(behaviorEClass, BEHAVIOR___PARAMETERS_MATCH__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	behaviorExecutionSpecificationEClass = createEClass(BEHAVIOREXECUTIONSPECIFICATION);
+	behaviorExecutionSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BEHAVIOREXECUTIONSPECIFICATION);
+	
 	
-	createEReference(behaviorExecutionSpecificationEClass, BEHAVIOREXECUTIONSPECIFICATION_BEHAVIOR);
+	factory->createEReference_in_EContainingClass(behaviorExecutionSpecificationEClass, BEHAVIOREXECUTIONSPECIFICATION_BEHAVIOR);
 	
 	
 
-	behavioralFeatureEClass = createEClass(BEHAVIORALFEATURE);
-	createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_CONCURRENCY);
-	createEAttribute(behavioralFeatureEClass, BEHAVIORALFEATURE_ISABSTRACT);
+	behavioralFeatureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BEHAVIORALFEATURE);
 	
-	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_METHOD);
-	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETER);
-	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETERSET);
-	createEReference(behavioralFeatureEClass, BEHAVIORALFEATURE_RAISEDEXCEPTION);
+	factory->createEAttribute_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_CONCURRENCY);
+	factory->createEAttribute_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_ISABSTRACT);
 	
-	createEOperation(behavioralFeatureEClass, BEHAVIORALFEATURE___ABSTRACT_NO_METHOD__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(behavioralFeatureEClass, BEHAVIORALFEATURE___CREATERETURNRESULT__STRING_TYPE);
-	createEOperation(behavioralFeatureEClass, BEHAVIORALFEATURE___INPUTPARAMETERS);
-	createEOperation(behavioralFeatureEClass, BEHAVIORALFEATURE___OUTPUTPARAMETERS);
+	factory->createEReference_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_METHOD);
+	factory->createEReference_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETER);
+	factory->createEReference_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_OWNEDPARAMETERSET);
+	factory->createEReference_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE_RAISEDEXCEPTION);
 	
+	factory->createEOperation_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE___ABSTRACT_NO_METHOD__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE___CREATERETURNRESULT__STRING_TYPE);
+	factory->createEOperation_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE___INPUTPARAMETERS);
+	factory->createEOperation_in_EContainingClass(behavioralFeatureEClass, BEHAVIORALFEATURE___OUTPUTPARAMETERS);
+	
 
-	behavioredClassifierEClass = createEClass(BEHAVIOREDCLASSIFIER);
+	behavioredClassifierEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BEHAVIOREDCLASSIFIER);
+	
 	
-	createEReference(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR);
-	createEReference(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION);
-	createEReference(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR);
+	factory->createEReference_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_CLASSIFIERBEHAVIOR);
+	factory->createEReference_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_INTERFACEREALIZATION);
+	factory->createEReference_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER_OWNEDBEHAVIOR);
 	
-	createEOperation(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___CLASS_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___GETALLIMPLEMENTEDINTERFACES);
-	createEOperation(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___GETIMPLEMENTEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___CLASS_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___GETALLIMPLEMENTEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(behavioredClassifierEClass, BEHAVIOREDCLASSIFIER___GETIMPLEMENTEDINTERFACES);
 	
 
-	broadcastSignalActionEClass = createEClass(BROADCASTSIGNALACTION);
+	broadcastSignalActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BROADCASTSIGNALACTION);
 	
-	createEReference(broadcastSignalActionEClass, BROADCASTSIGNALACTION_SIGNAL);
 	
-	createEOperation(broadcastSignalActionEClass, BROADCASTSIGNALACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(broadcastSignalActionEClass, BROADCASTSIGNALACTION___NUMBER_OF_ARGUMENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(broadcastSignalActionEClass, BROADCASTSIGNALACTION___TYPE_ORDERING_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(broadcastSignalActionEClass, BROADCASTSIGNALACTION_SIGNAL);
 	
+	factory->createEOperation_in_EContainingClass(broadcastSignalActionEClass, BROADCASTSIGNALACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(broadcastSignalActionEClass, BROADCASTSIGNALACTION___NUMBER_OF_ARGUMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(broadcastSignalActionEClass, BROADCASTSIGNALACTION___TYPE_ORDERING_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	callActionEClass = createEClass(CALLACTION);
-	createEAttribute(callActionEClass, CALLACTION_ISSYNCHRONOUS);
+	callActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLACTION);
+	
+	factory->createEAttribute_in_EContainingClass(callActionEClass, CALLACTION_ISSYNCHRONOUS);
 	
-	createEReference(callActionEClass, CALLACTION_RESULT);
+	factory->createEReference_in_EContainingClass(callActionEClass, CALLACTION_RESULT);
 	
-	createEOperation(callActionEClass, CALLACTION___ARGUMENT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(callActionEClass, CALLACTION___INPUTPARAMETERS);
-	createEOperation(callActionEClass, CALLACTION___OUTPUTPARAMETERS);
-	createEOperation(callActionEClass, CALLACTION___RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(callActionEClass, CALLACTION___SYNCHRONOUS_CALL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(callActionEClass, CALLACTION___ARGUMENT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(callActionEClass, CALLACTION___INPUTPARAMETERS);
+	factory->createEOperation_in_EContainingClass(callActionEClass, CALLACTION___OUTPUTPARAMETERS);
+	factory->createEOperation_in_EContainingClass(callActionEClass, CALLACTION___RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(callActionEClass, CALLACTION___SYNCHRONOUS_CALL__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	callBehaviorActionEClass = createEClass(CALLBEHAVIORACTION);
+	callBehaviorActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLBEHAVIORACTION);
 	
-	createEReference(callBehaviorActionEClass, CALLBEHAVIORACTION_BEHAVIOR);
 	
-	createEOperation(callBehaviorActionEClass, CALLBEHAVIORACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(callBehaviorActionEClass, CALLBEHAVIORACTION_BEHAVIOR);
 	
+	factory->createEOperation_in_EContainingClass(callBehaviorActionEClass, CALLBEHAVIORACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	callEventEClass = createEClass(CALLEVENT);
+	callEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLEVENT);
+	
 	
-	createEReference(callEventEClass, CALLEVENT_OPERATION);
+	factory->createEReference_in_EContainingClass(callEventEClass, CALLEVENT_OPERATION);
 	
 	
 
-	callOperationActionEClass = createEClass(CALLOPERATIONACTION);
+	callOperationActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLOPERATIONACTION);
 	
-	createEReference(callOperationActionEClass, CALLOPERATIONACTION_OPERATION);
-	createEReference(callOperationActionEClass, CALLOPERATIONACTION_TARGET);
 	
-	createEOperation(callOperationActionEClass, CALLOPERATIONACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(callOperationActionEClass, CALLOPERATIONACTION_OPERATION);
+	factory->createEReference_in_EContainingClass(callOperationActionEClass, CALLOPERATIONACTION_TARGET);
 	
+	factory->createEOperation_in_EContainingClass(callOperationActionEClass, CALLOPERATIONACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	centralBufferNodeEClass = createEClass(CENTRALBUFFERNODE);
+	centralBufferNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CENTRALBUFFERNODE);
 	
 	
 	
+	
 
-	changeEventEClass = createEClass(CHANGEEVENT);
+	changeEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CHANGEEVENT);
+	
 	
-	createEReference(changeEventEClass, CHANGEEVENT_CHANGEEXPRESSION);
+	factory->createEReference_in_EContainingClass(changeEventEClass, CHANGEEVENT_CHANGEEXPRESSION);
 	
 	
 
-	classEClass = createEClass(CLASS);
-	createEAttribute(classEClass, CLASS_ISACTIVE);
+	classEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASS);
 	
-	createEReference(classEClass, CLASS_EXTENSION);
-	createEReference(classEClass, CLASS_NESTEDCLASSIFIER);
-	createEReference(classEClass, CLASS_OWNEDOPERATION);
-	createEReference(classEClass, CLASS_OWNEDRECEPTION);
-	createEReference(classEClass, CLASS_SUPERCLASS);
+	factory->createEAttribute_in_EContainingClass(classEClass, CLASS_ISACTIVE);
 	
-	createEOperation(classEClass, CLASS___CREATEOWNEDOPERATION__STRING_TYPE);
-	createEOperation(classEClass, CLASS___GETEXTENSIONS);
-	createEOperation(classEClass, CLASS___GETSUPERCLASSES);
-	createEOperation(classEClass, CLASS___ISMETACLASS);
-	createEOperation(classEClass, CLASS___PASSIVE_CLASS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(classEClass, CLASS_EXTENSION);
+	factory->createEReference_in_EContainingClass(classEClass, CLASS_NESTEDCLASSIFIER);
+	factory->createEReference_in_EContainingClass(classEClass, CLASS_OWNEDOPERATION);
+	factory->createEReference_in_EContainingClass(classEClass, CLASS_OWNEDRECEPTION);
+	factory->createEReference_in_EContainingClass(classEClass, CLASS_SUPERCLASS);
 	
+	factory->createEOperation_in_EContainingClass(classEClass, CLASS___CREATEOWNEDOPERATION__STRING_TYPE);
+	factory->createEOperation_in_EContainingClass(classEClass, CLASS___GETEXTENSIONS);
+	factory->createEOperation_in_EContainingClass(classEClass, CLASS___GETSUPERCLASSES);
+	factory->createEOperation_in_EContainingClass(classEClass, CLASS___ISMETACLASS);
+	factory->createEOperation_in_EContainingClass(classEClass, CLASS___PASSIVE_CLASS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	classifierEClass = createEClass(CLASSIFIER);
-	createEAttribute(classifierEClass, CLASSIFIER_ISABSTRACT);
-	createEAttribute(classifierEClass, CLASSIFIER_ISFINALSPECIALIZATION);
+	classifierEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASSIFIER);
+	
+	factory->createEAttribute_in_EContainingClass(classifierEClass, CLASSIFIER_ISABSTRACT);
+	factory->createEAttribute_in_EContainingClass(classifierEClass, CLASSIFIER_ISFINALSPECIALIZATION);
 	
-	createEReference(classifierEClass, CLASSIFIER_ATTRIBUTE);
-	createEReference(classifierEClass, CLASSIFIER_COLLABORATIONUSE);
-	createEReference(classifierEClass, CLASSIFIER_FEATURE);
-	createEReference(classifierEClass, CLASSIFIER_GENERAL);
-	createEReference(classifierEClass, CLASSIFIER_GENERALIZATION);
-	createEReference(classifierEClass, CLASSIFIER_INHERITEDMEMBER);
-	createEReference(classifierEClass, CLASSIFIER_OWNEDUSECASE);
-	createEReference(classifierEClass, CLASSIFIER_POWERTYPEEXTENT);
-	createEReference(classifierEClass, CLASSIFIER_REDEFINEDCLASSIFIER);
-	createEReference(classifierEClass, CLASSIFIER_REPRESENTATION);
-	createEReference(classifierEClass, CLASSIFIER_SUBSTITUTION);
-	createEReference(classifierEClass, CLASSIFIER_USECASE);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_ATTRIBUTE);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_COLLABORATIONUSE);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_FEATURE);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_GENERAL);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_GENERALIZATION);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_INHERITEDMEMBER);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_OWNEDUSECASE);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_POWERTYPEEXTENT);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_REDEFINEDCLASSIFIER);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_REPRESENTATION);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_SUBSTITUTION);
+	factory->createEReference_in_EContainingClass(classifierEClass, CLASSIFIER_USECASE);
 	
-	createEOperation(classifierEClass, CLASSIFIER___ALLATTRIBUTES);
-	createEOperation(classifierEClass, CLASSIFIER___ALLFEATURES);
-	createEOperation(classifierEClass, CLASSIFIER___ALLPARENTS);
-	createEOperation(classifierEClass, CLASSIFIER___ALLREALIZEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___ALLSLOTTABLEFEATURES);
-	createEOperation(classifierEClass, CLASSIFIER___ALLUSEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___DIRECTLYREALIZEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___DIRECTLYUSEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___GETALLATTRIBUTES);
-	createEOperation(classifierEClass, CLASSIFIER___GETALLOPERATIONS);
-	createEOperation(classifierEClass, CLASSIFIER___GETALLUSEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___GETGENERALS);
-	createEOperation(classifierEClass, CLASSIFIER___GETINHERITEDMEMBERS);
-	createEOperation(classifierEClass, CLASSIFIER___GETOPERATION__STRING_TYPE);
-	createEOperation(classifierEClass, CLASSIFIER___GETOPERATION__STRING_BOOLEAN);
-	createEOperation(classifierEClass, CLASSIFIER___GETOPERATIONS);
-	createEOperation(classifierEClass, CLASSIFIER___GETUSEDINTERFACES);
-	createEOperation(classifierEClass, CLASSIFIER___HASVISIBILITYOF__NAMEDELEMENT);
-	createEOperation(classifierEClass, CLASSIFIER___INHERIT__NAMEDELEMENT);
-	createEOperation(classifierEClass, CLASSIFIER___INHERITABLEMEMBERS__CLASSIFIER);
-	createEOperation(classifierEClass, CLASSIFIER___ISSUBSTITUTABLEFOR__CLASSIFIER);
-	createEOperation(classifierEClass, CLASSIFIER___MAPS_TO_GENERALIZATION_SET__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierEClass, CLASSIFIER___MAYSPECIALIZETYPE__CLASSIFIER);
-	createEOperation(classifierEClass, CLASSIFIER___NO_CYCLES_IN_GENERALIZATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierEClass, CLASSIFIER___NON_FINAL_PARENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierEClass, CLASSIFIER___PARENTS);
-	createEOperation(classifierEClass, CLASSIFIER___SPECIALIZE_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLATTRIBUTES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLFEATURES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLPARENTS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLREALIZEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLSLOTTABLEFEATURES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ALLUSEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___DIRECTLYREALIZEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___DIRECTLYUSEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETALLATTRIBUTES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETALLOPERATIONS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETALLUSEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETGENERALS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETINHERITEDMEMBERS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETOPERATION__STRING_TYPE);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETOPERATION__STRING_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETOPERATIONS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___GETUSEDINTERFACES);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___HASVISIBILITYOF__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___INHERIT__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___INHERITABLEMEMBERS__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___ISSUBSTITUTABLEFOR__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___MAPS_TO_GENERALIZATION_SET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___MAYSPECIALIZETYPE__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___NO_CYCLES_IN_GENERALIZATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___NON_FINAL_PARENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___PARENTS);
+	factory->createEOperation_in_EContainingClass(classifierEClass, CLASSIFIER___SPECIALIZE_TYPE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	classifierTemplateParameterEClass = createEClass(CLASSIFIERTEMPLATEPARAMETER);
-	createEAttribute(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE);
+	classifierTemplateParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLASSIFIERTEMPLATEPARAMETER);
 	
-	createEReference(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_CONSTRAININGCLASSIFIER);
+	factory->createEAttribute_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE);
 	
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___ACTUAL_IS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___HAS_CONSTRAINING_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___MATCHING_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___PARAMETERED_ELEMENT_NO_FEATURES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER_CONSTRAININGCLASSIFIER);
 	
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___ACTUAL_IS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___CONSTRAINING_CLASSIFIERS_CONSTRAIN_ARGS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___CONSTRAINING_CLASSIFIERS_CONSTRAIN_PARAMETERED_ELEMENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___HAS_CONSTRAINING_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___MATCHING_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(classifierTemplateParameterEClass, CLASSIFIERTEMPLATEPARAMETER___PARAMETERED_ELEMENT_NO_FEATURES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	clauseEClass = createEClass(CLAUSE);
+	clauseEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLAUSE);
+	
 	
-	createEReference(clauseEClass, CLAUSE_BODY);
-	createEReference(clauseEClass, CLAUSE_BODYOUTPUT);
-	createEReference(clauseEClass, CLAUSE_DECIDER);
-	createEReference(clauseEClass, CLAUSE_PREDECESSORCLAUSE);
-	createEReference(clauseEClass, CLAUSE_SUCCESSORCLAUSE);
-	createEReference(clauseEClass, CLAUSE_TEST);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_BODY);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_BODYOUTPUT);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_DECIDER);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_PREDECESSORCLAUSE);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_SUCCESSORCLAUSE);
+	factory->createEReference_in_EContainingClass(clauseEClass, CLAUSE_TEST);
 	
-	createEOperation(clauseEClass, CLAUSE___BODY_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(clauseEClass, CLAUSE___DECIDER_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(clauseEClass, CLAUSE___TEST_AND_BODY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clauseEClass, CLAUSE___BODY_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clauseEClass, CLAUSE___DECIDER_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clauseEClass, CLAUSE___TEST_AND_BODY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	clearAssociationActionEClass = createEClass(CLEARASSOCIATIONACTION);
+	clearAssociationActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLEARASSOCIATIONACTION);
 	
-	createEReference(clearAssociationActionEClass, CLEARASSOCIATIONACTION_ASSOCIATION);
-	createEReference(clearAssociationActionEClass, CLEARASSOCIATIONACTION_OBJECT);
 	
-	createEOperation(clearAssociationActionEClass, CLEARASSOCIATIONACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(clearAssociationActionEClass, CLEARASSOCIATIONACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(clearAssociationActionEClass, CLEARASSOCIATIONACTION_ASSOCIATION);
+	factory->createEReference_in_EContainingClass(clearAssociationActionEClass, CLEARASSOCIATIONACTION_OBJECT);
 	
+	factory->createEOperation_in_EContainingClass(clearAssociationActionEClass, CLEARASSOCIATIONACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clearAssociationActionEClass, CLEARASSOCIATIONACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	clearStructuralFeatureActionEClass = createEClass(CLEARSTRUCTURALFEATUREACTION);
+	clearStructuralFeatureActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLEARSTRUCTURALFEATUREACTION);
+	
 	
-	createEReference(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION_RESULT);
+	factory->createEReference_in_EContainingClass(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION_RESULT);
 	
-	createEOperation(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(clearStructuralFeatureActionEClass, CLEARSTRUCTURALFEATUREACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	clearVariableActionEClass = createEClass(CLEARVARIABLEACTION);
+	clearVariableActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CLEARVARIABLEACTION);
 	
 	
 	
+	
 
-	collaborationEClass = createEClass(COLLABORATION);
+	collaborationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COLLABORATION);
+	
 	
-	createEReference(collaborationEClass, COLLABORATION_COLLABORATIONROLE);
+	factory->createEReference_in_EContainingClass(collaborationEClass, COLLABORATION_COLLABORATIONROLE);
 	
 	
 
-	collaborationUseEClass = createEClass(COLLABORATIONUSE);
+	collaborationUseEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COLLABORATIONUSE);
 	
-	createEReference(collaborationUseEClass, COLLABORATIONUSE_ROLEBINDING);
-	createEReference(collaborationUseEClass, COLLABORATIONUSE_TYPE);
 	
-	createEOperation(collaborationUseEClass, COLLABORATIONUSE___CLIENT_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(collaborationUseEClass, COLLABORATIONUSE___CONNECTORS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(collaborationUseEClass, COLLABORATIONUSE___EVERY_ROLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(collaborationUseEClass, COLLABORATIONUSE_ROLEBINDING);
+	factory->createEReference_in_EContainingClass(collaborationUseEClass, COLLABORATIONUSE_TYPE);
 	
+	factory->createEOperation_in_EContainingClass(collaborationUseEClass, COLLABORATIONUSE___CLIENT_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(collaborationUseEClass, COLLABORATIONUSE___CONNECTORS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(collaborationUseEClass, COLLABORATIONUSE___EVERY_ROLE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	combinedFragmentEClass = createEClass(COMBINEDFRAGMENT);
-	createEAttribute(combinedFragmentEClass, COMBINEDFRAGMENT_INTERACTIONOPERATOR);
+	combinedFragmentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMBINEDFRAGMENT);
+	
+	factory->createEAttribute_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT_INTERACTIONOPERATOR);
 	
-	createEReference(combinedFragmentEClass, COMBINEDFRAGMENT_CFRAGMENTGATE);
-	createEReference(combinedFragmentEClass, COMBINEDFRAGMENT_OPERAND);
+	factory->createEReference_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT_CFRAGMENTGATE);
+	factory->createEReference_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT_OPERAND);
 	
-	createEOperation(combinedFragmentEClass, COMBINEDFRAGMENT___BREAK___EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(combinedFragmentEClass, COMBINEDFRAGMENT___CONSIDER_AND_IGNORE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(combinedFragmentEClass, COMBINEDFRAGMENT___OPT_LOOP_BREAK_NEG__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT___BREAK___EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT___CONSIDER_AND_IGNORE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(combinedFragmentEClass, COMBINEDFRAGMENT___OPT_LOOP_BREAK_NEG__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	commentEClass = createEClass(COMMENT);
-	createEAttribute(commentEClass, COMMENT_BODY);
+	commentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMMENT);
 	
-	createEReference(commentEClass, COMMENT_ANNOTATEDELEMENT);
+	factory->createEAttribute_in_EContainingClass(commentEClass, COMMENT_BODY);
 	
+	factory->createEReference_in_EContainingClass(commentEClass, COMMENT_ANNOTATEDELEMENT);
 	
+	
 
-	communicationPathEClass = createEClass(COMMUNICATIONPATH);
+	communicationPathEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMMUNICATIONPATH);
+	
 	
 	
 	
 
-	componentEClass = createEClass(COMPONENT);
-	createEAttribute(componentEClass, COMPONENT_ISINDIRECTLYINSTANTIATED);
+	componentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMPONENT);
 	
-	createEReference(componentEClass, COMPONENT_PACKAGEDELEMENT);
-	createEReference(componentEClass, COMPONENT_PROVIDED);
-	createEReference(componentEClass, COMPONENT_REALIZATION);
-	createEReference(componentEClass, COMPONENT_REQUIRED);
+	factory->createEAttribute_in_EContainingClass(componentEClass, COMPONENT_ISINDIRECTLYINSTANTIATED);
 	
-	createEOperation(componentEClass, COMPONENT___CREATEOWNEDCLASS__STRING_BOOLEAN);
-	createEOperation(componentEClass, COMPONENT___CREATEOWNEDENUMERATION__STRING);
-	createEOperation(componentEClass, COMPONENT___CREATEOWNEDINTERFACE__STRING);
-	createEOperation(componentEClass, COMPONENT___CREATEOWNEDPRIMITIVETYPE__STRING);
-	createEOperation(componentEClass, COMPONENT___GETPROVIDEDS);
-	createEOperation(componentEClass, COMPONENT___GETREQUIREDS);
-	createEOperation(componentEClass, COMPONENT___NO_NESTED_CLASSIFIERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(componentEClass, COMPONENT___NO_PACKAGED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(componentEClass, COMPONENT_PACKAGEDELEMENT);
+	factory->createEReference_in_EContainingClass(componentEClass, COMPONENT_PROVIDED);
+	factory->createEReference_in_EContainingClass(componentEClass, COMPONENT_REALIZATION);
+	factory->createEReference_in_EContainingClass(componentEClass, COMPONENT_REQUIRED);
 	
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___CREATEOWNEDCLASS__STRING_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___CREATEOWNEDENUMERATION__STRING);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___CREATEOWNEDINTERFACE__STRING);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___CREATEOWNEDPRIMITIVETYPE__STRING);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___GETPROVIDEDS);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___GETREQUIREDS);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___NO_NESTED_CLASSIFIERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(componentEClass, COMPONENT___NO_PACKAGED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	componentRealizationEClass = createEClass(COMPONENTREALIZATION);
+	componentRealizationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), COMPONENTREALIZATION);
+	
 	
-	createEReference(componentRealizationEClass, COMPONENTREALIZATION_ABSTRACTION);
-	createEReference(componentRealizationEClass, COMPONENTREALIZATION_REALIZINGCLASSIFIER);
+	factory->createEReference_in_EContainingClass(componentRealizationEClass, COMPONENTREALIZATION_ABSTRACTION);
+	factory->createEReference_in_EContainingClass(componentRealizationEClass, COMPONENTREALIZATION_REALIZINGCLASSIFIER);
 	
 	
 
-	conditionalNodeEClass = createEClass(CONDITIONALNODE);
-	createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISASSURED);
-	createEAttribute(conditionalNodeEClass, CONDITIONALNODE_ISDETERMINATE);
+	conditionalNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONDITIONALNODE);
 	
-	createEReference(conditionalNodeEClass, CONDITIONALNODE_CLAUSE);
-	createEReference(conditionalNodeEClass, CONDITIONALNODE_RESULT);
+	factory->createEAttribute_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE_ISASSURED);
+	factory->createEAttribute_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE_ISDETERMINATE);
 	
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___CLAUSE_NO_PREDECESSOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___MATCHING_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___NO_INPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___ONE_CLAUSE_WITH_EXECUTABLE_NODE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(conditionalNodeEClass, CONDITIONALNODE___RESULT_NO_INCOMING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE_CLAUSE);
+	factory->createEReference_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___CLAUSE_NO_PREDECESSOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___MATCHING_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___NO_INPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___ONE_CLAUSE_WITH_EXECUTABLE_NODE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(conditionalNodeEClass, CONDITIONALNODE___RESULT_NO_INCOMING__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	connectableElementEClass = createEClass(CONNECTABLEELEMENT);
+	connectableElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTABLEELEMENT);
+	
 	
-	createEReference(connectableElementEClass, CONNECTABLEELEMENT_END);
+	factory->createEReference_in_EContainingClass(connectableElementEClass, CONNECTABLEELEMENT_END);
 	
-	createEOperation(connectableElementEClass, CONNECTABLEELEMENT___GETENDS);
+	factory->createEOperation_in_EContainingClass(connectableElementEClass, CONNECTABLEELEMENT___GETENDS);
 	
 
-	connectableElementTemplateParameterEClass = createEClass(CONNECTABLEELEMENTTEMPLATEPARAMETER);
+	connectableElementTemplateParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTABLEELEMENTTEMPLATEPARAMETER);
 	
 	
 	
+	
 
-	connectionPointReferenceEClass = createEClass(CONNECTIONPOINTREFERENCE);
+	connectionPointReferenceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTIONPOINTREFERENCE);
+	
 	
-	createEReference(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_ENTRY);
-	createEReference(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_EXIT);
-	createEReference(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_STATE);
+	factory->createEReference_in_EContainingClass(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_ENTRY);
+	factory->createEReference_in_EContainingClass(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_EXIT);
+	factory->createEReference_in_EContainingClass(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE_STATE);
 	
-	createEOperation(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE___ENTRY_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE___EXIT_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE___ENTRY_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectionPointReferenceEClass, CONNECTIONPOINTREFERENCE___EXIT_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	connectorEClass = createEClass(CONNECTOR);
-	createEAttribute(connectorEClass, CONNECTOR_KIND);
+	connectorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTOR);
 	
-	createEReference(connectorEClass, CONNECTOR_CONTRACT);
-	createEReference(connectorEClass, CONNECTOR_END);
-	createEReference(connectorEClass, CONNECTOR_REDEFINEDCONNECTOR);
-	createEReference(connectorEClass, CONNECTOR_TYPE);
+	factory->createEAttribute_in_EContainingClass(connectorEClass, CONNECTOR_KIND);
 	
-	createEOperation(connectorEClass, CONNECTOR___GETKIND);
-	createEOperation(connectorEClass, CONNECTOR___ROLES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(connectorEClass, CONNECTOR___TYPES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(connectorEClass, CONNECTOR_CONTRACT);
+	factory->createEReference_in_EContainingClass(connectorEClass, CONNECTOR_END);
+	factory->createEReference_in_EContainingClass(connectorEClass, CONNECTOR_REDEFINEDCONNECTOR);
+	factory->createEReference_in_EContainingClass(connectorEClass, CONNECTOR_TYPE);
 	
+	factory->createEOperation_in_EContainingClass(connectorEClass, CONNECTOR___GETKIND);
+	factory->createEOperation_in_EContainingClass(connectorEClass, CONNECTOR___ROLES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectorEClass, CONNECTOR___TYPES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	connectorEndEClass = createEClass(CONNECTOREND);
+	connectorEndEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTOREND);
+	
 	
-	createEReference(connectorEndEClass, CONNECTOREND_DEFININGEND);
-	createEReference(connectorEndEClass, CONNECTOREND_PARTWITHPORT);
-	createEReference(connectorEndEClass, CONNECTOREND_ROLE);
+	factory->createEReference_in_EContainingClass(connectorEndEClass, CONNECTOREND_DEFININGEND);
+	factory->createEReference_in_EContainingClass(connectorEndEClass, CONNECTOREND_PARTWITHPORT);
+	factory->createEReference_in_EContainingClass(connectorEndEClass, CONNECTOREND_ROLE);
 	
-	createEOperation(connectorEndEClass, CONNECTOREND___GETDEFININGEND);
-	createEOperation(connectorEndEClass, CONNECTOREND___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(connectorEndEClass, CONNECTOREND___PART_WITH_PORT_EMPTY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(connectorEndEClass, CONNECTOREND___ROLE_AND_PART_WITH_PORT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(connectorEndEClass, CONNECTOREND___SELF_PART_WITH_PORT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectorEndEClass, CONNECTOREND___GETDEFININGEND);
+	factory->createEOperation_in_EContainingClass(connectorEndEClass, CONNECTOREND___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectorEndEClass, CONNECTOREND___PART_WITH_PORT_EMPTY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectorEndEClass, CONNECTOREND___ROLE_AND_PART_WITH_PORT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(connectorEndEClass, CONNECTOREND___SELF_PART_WITH_PORT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	considerIgnoreFragmentEClass = createEClass(CONSIDERIGNOREFRAGMENT);
+	considerIgnoreFragmentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONSIDERIGNOREFRAGMENT);
 	
-	createEReference(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT_MESSAGE);
 	
-	createEOperation(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT___CONSIDER_OR_IGNORE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT___TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT_MESSAGE);
 	
+	factory->createEOperation_in_EContainingClass(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT___CONSIDER_OR_IGNORE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(considerIgnoreFragmentEClass, CONSIDERIGNOREFRAGMENT___TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	constraintEClass = createEClass(CONSTRAINT);
+	constraintEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONSTRAINT);
+	
 	
-	createEReference(constraintEClass, CONSTRAINT_CONSTRAINEDELEMENT);
-	createEReference(constraintEClass, CONSTRAINT_CONTEXT);
-	createEReference(constraintEClass, CONSTRAINT_SPECIFICATION);
+	factory->createEReference_in_EContainingClass(constraintEClass, CONSTRAINT_CONSTRAINEDELEMENT);
+	factory->createEReference_in_EContainingClass(constraintEClass, CONSTRAINT_CONTEXT);
+	factory->createEReference_in_EContainingClass(constraintEClass, CONSTRAINT_SPECIFICATION);
 	
-	createEOperation(constraintEClass, CONSTRAINT___BOOLEAN_VALUE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(constraintEClass, CONSTRAINT___NO_SIDE_EFFECTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(constraintEClass, CONSTRAINT___NOT_APPLY_TO_SELF__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(constraintEClass, CONSTRAINT___BOOLEAN_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(constraintEClass, CONSTRAINT___NO_SIDE_EFFECTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(constraintEClass, CONSTRAINT___NOT_APPLY_TO_SELF__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	continuationEClass = createEClass(CONTINUATION);
-	createEAttribute(continuationEClass, CONTINUATION_SETTING);
+	continuationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONTINUATION);
 	
+	factory->createEAttribute_in_EContainingClass(continuationEClass, CONTINUATION_SETTING);
 	
-	createEOperation(continuationEClass, CONTINUATION___FIRST_OR_LAST_INTERACTION_FRAGMENT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(continuationEClass, CONTINUATION___GLOBAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(continuationEClass, CONTINUATION___SAME_NAME__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(continuationEClass, CONTINUATION___FIRST_OR_LAST_INTERACTION_FRAGMENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(continuationEClass, CONTINUATION___GLOBAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(continuationEClass, CONTINUATION___SAME_NAME__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	controlFlowEClass = createEClass(CONTROLFLOW);
+	controlFlowEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONTROLFLOW);
+	
 	
 	
-	createEOperation(controlFlowEClass, CONTROLFLOW___OBJECT_NODES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(controlFlowEClass, CONTROLFLOW___OBJECT_NODES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	controlNodeEClass = createEClass(CONTROLNODE);
+	controlNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONTROLNODE);
 	
 	
 	
+	
 
-	createLinkActionEClass = createEClass(CREATELINKACTION);
+	createLinkActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CREATELINKACTION);
+	
 	
 	
-	createEOperation(createLinkActionEClass, CREATELINKACTION___ASSOCIATION_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createLinkActionEClass, CREATELINKACTION___ASSOCIATION_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	createLinkObjectActionEClass = createEClass(CREATELINKOBJECTACTION);
+	createLinkObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CREATELINKOBJECTACTION);
 	
-	createEReference(createLinkObjectActionEClass, CREATELINKOBJECTACTION_RESULT);
 	
-	createEOperation(createLinkObjectActionEClass, CREATELINKOBJECTACTION___ASSOCIATION_CLASS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(createLinkObjectActionEClass, CREATELINKOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(createLinkObjectActionEClass, CREATELINKOBJECTACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(createLinkObjectActionEClass, CREATELINKOBJECTACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(createLinkObjectActionEClass, CREATELINKOBJECTACTION___ASSOCIATION_CLASS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createLinkObjectActionEClass, CREATELINKOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createLinkObjectActionEClass, CREATELINKOBJECTACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	createObjectActionEClass = createEClass(CREATEOBJECTACTION);
+	createObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CREATEOBJECTACTION);
+	
 	
-	createEReference(createObjectActionEClass, CREATEOBJECTACTION_CLASSIFIER);
-	createEReference(createObjectActionEClass, CREATEOBJECTACTION_RESULT);
+	factory->createEReference_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION_RESULT);
 	
-	createEOperation(createObjectActionEClass, CREATEOBJECTACTION___CLASSIFIER_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(createObjectActionEClass, CREATEOBJECTACTION___CLASSIFIER_NOT_ASSOCIATION_CLASS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(createObjectActionEClass, CREATEOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(createObjectActionEClass, CREATEOBJECTACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION___CLASSIFIER_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION___CLASSIFIER_NOT_ASSOCIATION_CLASS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(createObjectActionEClass, CREATEOBJECTACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	dataStoreNodeEClass = createEClass(DATASTORENODE);
+	dataStoreNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DATASTORENODE);
 	
 	
 	
+	
 
-	dataTypeEClass = createEClass(DATATYPE);
+	dataTypeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DATATYPE);
 	
-	createEReference(dataTypeEClass, DATATYPE_OWNEDATTRIBUTE);
-	createEReference(dataTypeEClass, DATATYPE_OWNEDOPERATION);
 	
-	createEOperation(dataTypeEClass, DATATYPE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
-	createEOperation(dataTypeEClass, DATATYPE___CREATEOWNEDOPERATION__STRING_TYPE);
+	factory->createEReference_in_EContainingClass(dataTypeEClass, DATATYPE_OWNEDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(dataTypeEClass, DATATYPE_OWNEDOPERATION);
 	
+	factory->createEOperation_in_EContainingClass(dataTypeEClass, DATATYPE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(dataTypeEClass, DATATYPE___CREATEOWNEDOPERATION__STRING_TYPE);
+	
 
-	decisionNodeEClass = createEClass(DECISIONNODE);
+	decisionNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DECISIONNODE);
+	
 	
-	createEReference(decisionNodeEClass, DECISIONNODE_DECISIONINPUT);
-	createEReference(decisionNodeEClass, DECISIONNODE_DECISIONINPUTFLOW);
+	factory->createEReference_in_EContainingClass(decisionNodeEClass, DECISIONNODE_DECISIONINPUT);
+	factory->createEReference_in_EContainingClass(decisionNodeEClass, DECISIONNODE_DECISIONINPUTFLOW);
 	
-	createEOperation(decisionNodeEClass, DECISIONNODE___DECISION_INPUT_FLOW_INCOMING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___INCOMING_CONTROL_ONE_INPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___INCOMING_OBJECT_ONE_INPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___INCOMING_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___TWO_INPUT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(decisionNodeEClass, DECISIONNODE___ZERO_INPUT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___DECISION_INPUT_FLOW_INCOMING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___INCOMING_CONTROL_ONE_INPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___INCOMING_OBJECT_ONE_INPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___INCOMING_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___TWO_INPUT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(decisionNodeEClass, DECISIONNODE___ZERO_INPUT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	dependencyEClass = createEClass(DEPENDENCY);
+	dependencyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEPENDENCY);
 	
-	createEReference(dependencyEClass, DEPENDENCY_CLIENT);
-	createEReference(dependencyEClass, DEPENDENCY_SUPPLIER);
 	
+	factory->createEReference_in_EContainingClass(dependencyEClass, DEPENDENCY_CLIENT);
+	factory->createEReference_in_EContainingClass(dependencyEClass, DEPENDENCY_SUPPLIER);
 	
+	
 
-	deployedArtifactEClass = createEClass(DEPLOYEDARTIFACT);
+	deployedArtifactEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEPLOYEDARTIFACT);
+	
 	
 	
 	
 
-	deploymentEClass = createEClass(DEPLOYMENT);
+	deploymentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEPLOYMENT);
 	
-	createEReference(deploymentEClass, DEPLOYMENT_CONFIGURATION);
-	createEReference(deploymentEClass, DEPLOYMENT_DEPLOYEDARTIFACT);
-	createEReference(deploymentEClass, DEPLOYMENT_LOCATION);
 	
+	factory->createEReference_in_EContainingClass(deploymentEClass, DEPLOYMENT_CONFIGURATION);
+	factory->createEReference_in_EContainingClass(deploymentEClass, DEPLOYMENT_DEPLOYEDARTIFACT);
+	factory->createEReference_in_EContainingClass(deploymentEClass, DEPLOYMENT_LOCATION);
 	
+	
 
-	deploymentSpecificationEClass = createEClass(DEPLOYMENTSPECIFICATION);
-	createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION);
-	createEAttribute(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION);
+	deploymentSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEPLOYMENTSPECIFICATION);
+	
+	factory->createEAttribute_in_EContainingClass(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENTLOCATION);
+	factory->createEAttribute_in_EContainingClass(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_EXECUTIONLOCATION);
 	
-	createEReference(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENT);
+	factory->createEReference_in_EContainingClass(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION_DEPLOYMENT);
 	
-	createEOperation(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION___DEPLOYED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION___DEPLOYED_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(deploymentSpecificationEClass, DEPLOYMENTSPECIFICATION___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	deploymentTargetEClass = createEClass(DEPLOYMENTTARGET);
+	deploymentTargetEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEPLOYMENTTARGET);
 	
-	createEReference(deploymentTargetEClass, DEPLOYMENTTARGET_DEPLOYEDELEMENT);
-	createEReference(deploymentTargetEClass, DEPLOYMENTTARGET_DEPLOYMENT);
 	
-	createEOperation(deploymentTargetEClass, DEPLOYMENTTARGET___GETDEPLOYEDELEMENTS);
+	factory->createEReference_in_EContainingClass(deploymentTargetEClass, DEPLOYMENTTARGET_DEPLOYEDELEMENT);
+	factory->createEReference_in_EContainingClass(deploymentTargetEClass, DEPLOYMENTTARGET_DEPLOYMENT);
 	
+	factory->createEOperation_in_EContainingClass(deploymentTargetEClass, DEPLOYMENTTARGET___GETDEPLOYEDELEMENTS);
+	
 
-	destroyLinkActionEClass = createEClass(DESTROYLINKACTION);
+	destroyLinkActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DESTROYLINKACTION);
+	
 	
 	
 	
 
-	destroyObjectActionEClass = createEClass(DESTROYOBJECTACTION);
-	createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYLINKS);
-	createEAttribute(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS);
+	destroyObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DESTROYOBJECTACTION);
 	
-	createEReference(destroyObjectActionEClass, DESTROYOBJECTACTION_TARGET);
+	factory->createEAttribute_in_EContainingClass(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYLINKS);
+	factory->createEAttribute_in_EContainingClass(destroyObjectActionEClass, DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS);
 	
-	createEOperation(destroyObjectActionEClass, DESTROYOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(destroyObjectActionEClass, DESTROYOBJECTACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(destroyObjectActionEClass, DESTROYOBJECTACTION_TARGET);
 	
+	factory->createEOperation_in_EContainingClass(destroyObjectActionEClass, DESTROYOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(destroyObjectActionEClass, DESTROYOBJECTACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	destructionOccurrenceSpecificationEClass = createEClass(DESTRUCTIONOCCURRENCESPECIFICATION);
+	destructionOccurrenceSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DESTRUCTIONOCCURRENCESPECIFICATION);
+	
 	
 	
-	createEOperation(destructionOccurrenceSpecificationEClass, DESTRUCTIONOCCURRENCESPECIFICATION___NO_OCCURRENCE_SPECIFICATIONS_BELOW__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(destructionOccurrenceSpecificationEClass, DESTRUCTIONOCCURRENCESPECIFICATION___NO_OCCURRENCE_SPECIFICATIONS_BELOW__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	deviceEClass = createEClass(DEVICE);
+	deviceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DEVICE);
 	
 	
 	
+	
 
-	directedRelationshipEClass = createEClass(DIRECTEDRELATIONSHIP);
+	directedRelationshipEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DIRECTEDRELATIONSHIP);
+	
 	
-	createEReference(directedRelationshipEClass, DIRECTEDRELATIONSHIP_SOURCE);
-	createEReference(directedRelationshipEClass, DIRECTEDRELATIONSHIP_TARGET);
+	factory->createEReference_in_EContainingClass(directedRelationshipEClass, DIRECTEDRELATIONSHIP_SOURCE);
+	factory->createEReference_in_EContainingClass(directedRelationshipEClass, DIRECTEDRELATIONSHIP_TARGET);
 	
 	
 
-	durationEClass = createEClass(DURATION);
+	durationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DURATION);
 	
-	createEReference(durationEClass, DURATION_EXPR);
-	createEReference(durationEClass, DURATION_OBSERVATION);
 	
-	createEOperation(durationEClass, DURATION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(durationEClass, DURATION_EXPR);
+	factory->createEReference_in_EContainingClass(durationEClass, DURATION_OBSERVATION);
 	
+	factory->createEOperation_in_EContainingClass(durationEClass, DURATION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	durationConstraintEClass = createEClass(DURATIONCONSTRAINT);
-	createEAttribute(durationConstraintEClass, DURATIONCONSTRAINT_FIRSTEVENT);
+	durationConstraintEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DURATIONCONSTRAINT);
+	
+	factory->createEAttribute_in_EContainingClass(durationConstraintEClass, DURATIONCONSTRAINT_FIRSTEVENT);
 	
 	
-	createEOperation(durationConstraintEClass, DURATIONCONSTRAINT___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(durationConstraintEClass, DURATIONCONSTRAINT___HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(durationConstraintEClass, DURATIONCONSTRAINT___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(durationConstraintEClass, DURATIONCONSTRAINT___HAS_ONE_OR_TWO_CONSTRAINEDELEMENTS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	durationIntervalEClass = createEClass(DURATIONINTERVAL);
+	durationIntervalEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DURATIONINTERVAL);
 	
 	
 	
+	
 
-	durationObservationEClass = createEClass(DURATIONOBSERVATION);
-	createEAttribute(durationObservationEClass, DURATIONOBSERVATION_FIRSTEVENT);
+	durationObservationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), DURATIONOBSERVATION);
+	
+	factory->createEAttribute_in_EContainingClass(durationObservationEClass, DURATIONOBSERVATION_FIRSTEVENT);
 	
-	createEReference(durationObservationEClass, DURATIONOBSERVATION_EVENT);
+	factory->createEReference_in_EContainingClass(durationObservationEClass, DURATIONOBSERVATION_EVENT);
 	
-	createEOperation(durationObservationEClass, DURATIONOBSERVATION___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(durationObservationEClass, DURATIONOBSERVATION___FIRST_EVENT_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	elementEClass = createEClass(ELEMENT);
+	elementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ELEMENT);
 	
-	createEReference(elementEClass, ELEMENT_OWNEDCOMMENT);
-	createEReference(elementEClass, ELEMENT_OWNEDELEMENT);
-	createEReference(elementEClass, ELEMENT_OWNER);
 	
-	createEOperation(elementEClass, ELEMENT___ADDKEYWORD__STRING);
-	createEOperation(elementEClass, ELEMENT___ALLOWNEDELEMENTS);
-	createEOperation(elementEClass, ELEMENT___APPLYSTEREOTYPE__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___CONTAINER);
-	createEOperation(elementEClass, ELEMENT___CREATEEANNOTATION__STRING);
-	createEOperation(elementEClass, ELEMENT___DESTROY);
-	createEOperation(elementEClass, ELEMENT___GETAPPLICABLESTEREOTYPE__STRING);
-	createEOperation(elementEClass, ELEMENT___GETAPPLICABLESTEREOTYPES);
-	createEOperation(elementEClass, ELEMENT___GETAPPLIEDSTEREOTYPE__STRING);
-	createEOperation(elementEClass, ELEMENT___GETAPPLIEDSTEREOTYPES);
-	createEOperation(elementEClass, ELEMENT___GETAPPLIEDSUBSTEREOTYPE__STEREOTYPE_STRING);
-	createEOperation(elementEClass, ELEMENT___GETAPPLIEDSUBSTEREOTYPES__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___GETKEYWORDS);
-	createEOperation(elementEClass, ELEMENT___GETMETACLASS);
-	createEOperation(elementEClass, ELEMENT___GETMODEL);
-	createEOperation(elementEClass, ELEMENT___GETNEARESTPACKAGE);
-	createEOperation(elementEClass, ELEMENT___GETRELATIONSHIPS);
-	createEOperation(elementEClass, ELEMENT___GETRELATIONSHIPS__ECLASS);
-	createEOperation(elementEClass, ELEMENT___GETREQUIREDSTEREOTYPE__STRING);
-	createEOperation(elementEClass, ELEMENT___GETREQUIREDSTEREOTYPES);
-	createEOperation(elementEClass, ELEMENT___GETSOURCEDIRECTEDRELATIONSHIPS);
-	createEOperation(elementEClass, ELEMENT___GETSOURCEDIRECTEDRELATIONSHIPS__ECLASS);
-	createEOperation(elementEClass, ELEMENT___GETSTEREOTYPEAPPLICATION__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___GETSTEREOTYPEAPPLICATIONS);
-	createEOperation(elementEClass, ELEMENT___GETTARGETDIRECTEDRELATIONSHIPS);
-	createEOperation(elementEClass, ELEMENT___GETTARGETDIRECTEDRELATIONSHIPS__ECLASS);
-	createEOperation(elementEClass, ELEMENT___GETVALUE__STEREOTYPE_STRING);
-	createEOperation(elementEClass, ELEMENT___HASKEYWORD__STRING);
-	createEOperation(elementEClass, ELEMENT___HASVALUE__STEREOTYPE_STRING);
-	createEOperation(elementEClass, ELEMENT___HAS_OWNER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(elementEClass, ELEMENT___ISSTEREOTYPEAPPLICABLE__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___ISSTEREOTYPEAPPLIED__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___ISSTEREOTYPEREQUIRED__STEREOTYPE);
-	createEOperation(elementEClass, ELEMENT___MUSTBEOWNED);
-	createEOperation(elementEClass, ELEMENT___NOT_OWN_SELF__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(elementEClass, ELEMENT___REMOVEKEYWORD__STRING);
-	createEOperation(elementEClass, ELEMENT___SETVALUE__STEREOTYPE_EJAVAOBJECT);
-	createEOperation(elementEClass, ELEMENT___UNAPPLYSTEREOTYPE__STEREOTYPE);
+	factory->createEReference_in_EContainingClass(elementEClass, ELEMENT_OWNEDCOMMENT);
+	factory->createEReference_in_EContainingClass(elementEClass, ELEMENT_OWNEDELEMENT);
+	factory->createEReference_in_EContainingClass(elementEClass, ELEMENT_OWNER);
 	
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___ADDKEYWORD__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___ALLOWNEDELEMENTS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___APPLYSTEREOTYPE__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___CONTAINER);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___CREATEEANNOTATION__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___DESTROY);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLICABLESTEREOTYPE__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLICABLESTEREOTYPES);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLIEDSTEREOTYPE__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLIEDSTEREOTYPES);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLIEDSUBSTEREOTYPE__STEREOTYPE_STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETAPPLIEDSUBSTEREOTYPES__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETKEYWORDS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETMETACLASS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETMODEL);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETNEARESTPACKAGE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETRELATIONSHIPS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETRELATIONSHIPS__ECLASS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETREQUIREDSTEREOTYPE__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETREQUIREDSTEREOTYPES);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETSOURCEDIRECTEDRELATIONSHIPS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETSOURCEDIRECTEDRELATIONSHIPS__ECLASS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETSTEREOTYPEAPPLICATION__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETSTEREOTYPEAPPLICATIONS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETTARGETDIRECTEDRELATIONSHIPS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETTARGETDIRECTEDRELATIONSHIPS__ECLASS);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___GETVALUE__STEREOTYPE_STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___HASKEYWORD__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___HASVALUE__STEREOTYPE_STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___HAS_OWNER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___ISSTEREOTYPEAPPLICABLE__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___ISSTEREOTYPEAPPLIED__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___ISSTEREOTYPEREQUIRED__STEREOTYPE);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___MUSTBEOWNED);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___NOT_OWN_SELF__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___REMOVEKEYWORD__STRING);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___SETVALUE__STEREOTYPE_EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(elementEClass, ELEMENT___UNAPPLYSTEREOTYPE__STEREOTYPE);
+	
 
-	elementImportEClass = createEClass(ELEMENTIMPORT);
-	createEAttribute(elementImportEClass, ELEMENTIMPORT_ALIAS);
-	createEAttribute(elementImportEClass, ELEMENTIMPORT_VISIBILITY);
+	elementImportEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ELEMENTIMPORT);
+	
+	factory->createEAttribute_in_EContainingClass(elementImportEClass, ELEMENTIMPORT_ALIAS);
+	factory->createEAttribute_in_EContainingClass(elementImportEClass, ELEMENTIMPORT_VISIBILITY);
 	
-	createEReference(elementImportEClass, ELEMENTIMPORT_IMPORTEDELEMENT);
-	createEReference(elementImportEClass, ELEMENTIMPORT_IMPORTINGNAMESPACE);
+	factory->createEReference_in_EContainingClass(elementImportEClass, ELEMENTIMPORT_IMPORTEDELEMENT);
+	factory->createEReference_in_EContainingClass(elementImportEClass, ELEMENTIMPORT_IMPORTINGNAMESPACE);
 	
-	createEOperation(elementImportEClass, ELEMENTIMPORT___GETNAME);
-	createEOperation(elementImportEClass, ELEMENTIMPORT___IMPORTED_ELEMENT_IS_PUBLIC__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(elementImportEClass, ELEMENTIMPORT___VISIBILITY_PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(elementImportEClass, ELEMENTIMPORT___GETNAME);
+	factory->createEOperation_in_EContainingClass(elementImportEClass, ELEMENTIMPORT___IMPORTED_ELEMENT_IS_PUBLIC__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(elementImportEClass, ELEMENTIMPORT___VISIBILITY_PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	encapsulatedClassifierEClass = createEClass(ENCAPSULATEDCLASSIFIER);
+	encapsulatedClassifierEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ENCAPSULATEDCLASSIFIER);
 	
-	createEReference(encapsulatedClassifierEClass, ENCAPSULATEDCLASSIFIER_OWNEDPORT);
 	
-	createEOperation(encapsulatedClassifierEClass, ENCAPSULATEDCLASSIFIER___GETOWNEDPORTS);
+	factory->createEReference_in_EContainingClass(encapsulatedClassifierEClass, ENCAPSULATEDCLASSIFIER_OWNEDPORT);
 	
+	factory->createEOperation_in_EContainingClass(encapsulatedClassifierEClass, ENCAPSULATEDCLASSIFIER___GETOWNEDPORTS);
+	
 
-	enumerationEClass = createEClass(ENUMERATION);
+	enumerationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ENUMERATION);
+	
 	
-	createEReference(enumerationEClass, ENUMERATION_OWNEDLITERAL);
+	factory->createEReference_in_EContainingClass(enumerationEClass, ENUMERATION_OWNEDLITERAL);
 	
-	createEOperation(enumerationEClass, ENUMERATION___IMMUTABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(enumerationEClass, ENUMERATION___IMMUTABLE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	enumerationLiteralEClass = createEClass(ENUMERATIONLITERAL);
+	enumerationLiteralEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), ENUMERATIONLITERAL);
 	
-	createEReference(enumerationLiteralEClass, ENUMERATIONLITERAL_ENUMERATION);
 	
-	createEOperation(enumerationLiteralEClass, ENUMERATIONLITERAL___GETCLASSIFIER);
-	createEOperation(enumerationLiteralEClass, ENUMERATIONLITERAL___GETCLASSIFIERS);
+	factory->createEReference_in_EContainingClass(enumerationLiteralEClass, ENUMERATIONLITERAL_ENUMERATION);
 	
+	factory->createEOperation_in_EContainingClass(enumerationLiteralEClass, ENUMERATIONLITERAL___GETCLASSIFIER);
+	factory->createEOperation_in_EContainingClass(enumerationLiteralEClass, ENUMERATIONLITERAL___GETCLASSIFIERS);
+	
 
-	eventEClass = createEClass(EVENT);
+	eventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EVENT);
+	
 	
 	
 	
 
-	exceptionHandlerEClass = createEClass(EXCEPTIONHANDLER);
+	exceptionHandlerEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXCEPTIONHANDLER);
 	
-	createEReference(exceptionHandlerEClass, EXCEPTIONHANDLER_EXCEPTIONINPUT);
-	createEReference(exceptionHandlerEClass, EXCEPTIONHANDLER_EXCEPTIONTYPE);
-	createEReference(exceptionHandlerEClass, EXCEPTIONHANDLER_HANDLERBODY);
-	createEReference(exceptionHandlerEClass, EXCEPTIONHANDLER_PROTECTEDNODE);
 	
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___EDGE_SOURCE_TARGET__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___EXCEPTION_INPUT_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___HANDLER_BODY_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___HANDLER_BODY_OWNER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___ONE_INPUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(exceptionHandlerEClass, EXCEPTIONHANDLER___OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER_EXCEPTIONINPUT);
+	factory->createEReference_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER_EXCEPTIONTYPE);
+	factory->createEReference_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER_HANDLERBODY);
+	factory->createEReference_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER_PROTECTEDNODE);
 	
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___EDGE_SOURCE_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___EXCEPTION_INPUT_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___HANDLER_BODY_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___HANDLER_BODY_OWNER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___ONE_INPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(exceptionHandlerEClass, EXCEPTIONHANDLER___OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	executableNodeEClass = createEClass(EXECUTABLENODE);
+	executableNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTABLENODE);
+	
 	
-	createEReference(executableNodeEClass, EXECUTABLENODE_HANDLER);
+	factory->createEReference_in_EContainingClass(executableNodeEClass, EXECUTABLENODE_HANDLER);
 	
 	
 
-	executionEnvironmentEClass = createEClass(EXECUTIONENVIRONMENT);
+	executionEnvironmentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONENVIRONMENT);
 	
 	
 	
+	
 
-	executionOccurrenceSpecificationEClass = createEClass(EXECUTIONOCCURRENCESPECIFICATION);
+	executionOccurrenceSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONOCCURRENCESPECIFICATION);
+	
 	
-	createEReference(executionOccurrenceSpecificationEClass, EXECUTIONOCCURRENCESPECIFICATION_EXECUTION);
+	factory->createEReference_in_EContainingClass(executionOccurrenceSpecificationEClass, EXECUTIONOCCURRENCESPECIFICATION_EXECUTION);
 	
 	
 
-	executionSpecificationEClass = createEClass(EXECUTIONSPECIFICATION);
+	executionSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXECUTIONSPECIFICATION);
 	
-	createEReference(executionSpecificationEClass, EXECUTIONSPECIFICATION_FINISH);
-	createEReference(executionSpecificationEClass, EXECUTIONSPECIFICATION_START);
 	
-	createEOperation(executionSpecificationEClass, EXECUTIONSPECIFICATION___SAME_LIFELINE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(executionSpecificationEClass, EXECUTIONSPECIFICATION_FINISH);
+	factory->createEReference_in_EContainingClass(executionSpecificationEClass, EXECUTIONSPECIFICATION_START);
 	
+	factory->createEOperation_in_EContainingClass(executionSpecificationEClass, EXECUTIONSPECIFICATION___SAME_LIFELINE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	expansionNodeEClass = createEClass(EXPANSIONNODE);
+	expansionNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONNODE);
+	
 	
-	createEReference(expansionNodeEClass, EXPANSIONNODE_REGIONASINPUT);
-	createEReference(expansionNodeEClass, EXPANSIONNODE_REGIONASOUTPUT);
+	factory->createEReference_in_EContainingClass(expansionNodeEClass, EXPANSIONNODE_REGIONASINPUT);
+	factory->createEReference_in_EContainingClass(expansionNodeEClass, EXPANSIONNODE_REGIONASOUTPUT);
 	
-	createEOperation(expansionNodeEClass, EXPANSIONNODE___REGION_AS_INPUT_OR_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(expansionNodeEClass, EXPANSIONNODE___REGION_AS_INPUT_OR_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	expansionRegionEClass = createEClass(EXPANSIONREGION);
-	createEAttribute(expansionRegionEClass, EXPANSIONREGION_MODE);
+	expansionRegionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONREGION);
 	
-	createEReference(expansionRegionEClass, EXPANSIONREGION_INPUTELEMENT);
-	createEReference(expansionRegionEClass, EXPANSIONREGION_OUTPUTELEMENT);
+	factory->createEAttribute_in_EContainingClass(expansionRegionEClass, EXPANSIONREGION_MODE);
 	
+	factory->createEReference_in_EContainingClass(expansionRegionEClass, EXPANSIONREGION_INPUTELEMENT);
+	factory->createEReference_in_EContainingClass(expansionRegionEClass, EXPANSIONREGION_OUTPUTELEMENT);
 	
+	
 
-	expressionEClass = createEClass(EXPRESSION);
-	createEAttribute(expressionEClass, EXPRESSION_SYMBOL);
+	expressionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPRESSION);
+	
+	factory->createEAttribute_in_EContainingClass(expressionEClass, EXPRESSION_SYMBOL);
 	
-	createEReference(expressionEClass, EXPRESSION_OPERAND);
+	factory->createEReference_in_EContainingClass(expressionEClass, EXPRESSION_OPERAND);
 	
 	
 
-	extendEClass = createEClass(EXTEND);
+	extendEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTEND);
 	
-	createEReference(extendEClass, EXTEND_CONDITION);
-	createEReference(extendEClass, EXTEND_EXTENDEDCASE);
-	createEReference(extendEClass, EXTEND_EXTENSION);
-	createEReference(extendEClass, EXTEND_EXTENSIONLOCATION);
 	
-	createEOperation(extendEClass, EXTEND___EXTENSION_POINTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(extendEClass, EXTEND_CONDITION);
+	factory->createEReference_in_EContainingClass(extendEClass, EXTEND_EXTENDEDCASE);
+	factory->createEReference_in_EContainingClass(extendEClass, EXTEND_EXTENSION);
+	factory->createEReference_in_EContainingClass(extendEClass, EXTEND_EXTENSIONLOCATION);
 	
+	factory->createEOperation_in_EContainingClass(extendEClass, EXTEND___EXTENSION_POINTS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	extensionEClass = createEClass(EXTENSION);
-	createEAttribute(extensionEClass, EXTENSION_ISREQUIRED);
+	extensionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTENSION);
 	
-	createEReference(extensionEClass, EXTENSION_METACLASS);
+	factory->createEAttribute_in_EContainingClass(extensionEClass, EXTENSION_ISREQUIRED);
 	
-	createEOperation(extensionEClass, EXTENSION___GETMETACLASS);
-	createEOperation(extensionEClass, EXTENSION___GETSTEREOTYPE);
-	createEOperation(extensionEClass, EXTENSION___GETSTEREOTYPEEND);
-	createEOperation(extensionEClass, EXTENSION___ISREQUIRED);
-	createEOperation(extensionEClass, EXTENSION___IS_BINARY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(extensionEClass, EXTENSION___METACLASSEND);
-	createEOperation(extensionEClass, EXTENSION___NON_OWNED_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(extensionEClass, EXTENSION_METACLASS);
 	
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___GETMETACLASS);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___GETSTEREOTYPE);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___GETSTEREOTYPEEND);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___ISREQUIRED);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___IS_BINARY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___METACLASSEND);
+	factory->createEOperation_in_EContainingClass(extensionEClass, EXTENSION___NON_OWNED_END__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	extensionEndEClass = createEClass(EXTENSIONEND);
+	extensionEndEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTENSIONEND);
+	
 	
 	
-	createEOperation(extensionEndEClass, EXTENSIONEND___AGGREGATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(extensionEndEClass, EXTENSIONEND___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(extensionEndEClass, EXTENSIONEND___AGGREGATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(extensionEndEClass, EXTENSIONEND___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	extensionPointEClass = createEClass(EXTENSIONPOINT);
+	extensionPointEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXTENSIONPOINT);
 	
-	createEReference(extensionPointEClass, EXTENSIONPOINT_USECASE);
 	
-	createEOperation(extensionPointEClass, EXTENSIONPOINT___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(extensionPointEClass, EXTENSIONPOINT_USECASE);
 	
+	factory->createEOperation_in_EContainingClass(extensionPointEClass, EXTENSIONPOINT___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	factoryEClass = createEClass(FACTORY);
+	factoryEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FACTORY);
+	
 	
 	
-	createEOperation(factoryEClass, FACTORY___CREATE__CLASS);
+	factory->createEOperation_in_EContainingClass(factoryEClass, FACTORY___CREATE__CLASS);
 	
 
-	featureEClass = createEClass(FEATURE);
-	createEAttribute(featureEClass, FEATURE_ISSTATIC);
+	featureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FEATURE);
 	
-	createEReference(featureEClass, FEATURE_FEATURINGCLASSIFIER);
+	factory->createEAttribute_in_EContainingClass(featureEClass, FEATURE_ISSTATIC);
 	
+	factory->createEReference_in_EContainingClass(featureEClass, FEATURE_FEATURINGCLASSIFIER);
 	
+	
 
-	finalNodeEClass = createEClass(FINALNODE);
+	finalNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FINALNODE);
+	
 	
 	
-	createEOperation(finalNodeEClass, FINALNODE___NO_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalNodeEClass, FINALNODE___NO_OUTGOING_EDGES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	finalStateEClass = createEClass(FINALSTATE);
+	finalStateEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FINALSTATE);
 	
 	
-	createEOperation(finalStateEClass, FINALSTATE___CANNOT_REFERENCE_SUBMACHINE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(finalStateEClass, FINALSTATE___NO_ENTRY_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(finalStateEClass, FINALSTATE___NO_EXIT_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(finalStateEClass, FINALSTATE___NO_OUTGOING_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(finalStateEClass, FINALSTATE___NO_REGIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(finalStateEClass, FINALSTATE___NO_STATE_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___CANNOT_REFERENCE_SUBMACHINE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___NO_ENTRY_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___NO_EXIT_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___NO_OUTGOING_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___NO_REGIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(finalStateEClass, FINALSTATE___NO_STATE_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	flowFinalNodeEClass = createEClass(FLOWFINALNODE);
+	flowFinalNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FLOWFINALNODE);
+	
 	
 	
 	
 
-	forkNodeEClass = createEClass(FORKNODE);
+	forkNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FORKNODE);
 	
 	
-	createEOperation(forkNodeEClass, FORKNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(forkNodeEClass, FORKNODE___ONE_INCOMING_EDGE__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(forkNodeEClass, FORKNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(forkNodeEClass, FORKNODE___ONE_INCOMING_EDGE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	functionBehaviorEClass = createEClass(FUNCTIONBEHAVIOR);
+	functionBehaviorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), FUNCTIONBEHAVIOR);
+	
 	
 	
-	createEOperation(functionBehaviorEClass, FUNCTIONBEHAVIOR___HASALLDATATYPEATTRIBUTES__DATATYPE);
-	createEOperation(functionBehaviorEClass, FUNCTIONBEHAVIOR___ONE_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(functionBehaviorEClass, FUNCTIONBEHAVIOR___TYPES_OF_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(functionBehaviorEClass, FUNCTIONBEHAVIOR___HASALLDATATYPEATTRIBUTES__DATATYPE);
+	factory->createEOperation_in_EContainingClass(functionBehaviorEClass, FUNCTIONBEHAVIOR___ONE_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(functionBehaviorEClass, FUNCTIONBEHAVIOR___TYPES_OF_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	gateEClass = createEClass(GATE);
+	gateEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), GATE);
 	
 	
-	createEOperation(gateEClass, GATE___ACTUAL_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___ACTUAL_GATE_MATCHED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___FORMAL_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___GETNAME);
-	createEOperation(gateEClass, GATE___GETOPERAND);
-	createEOperation(gateEClass, GATE___INSIDE_CF_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___INSIDE_CF_MATCHED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___ISACTUAL);
-	createEOperation(gateEClass, GATE___ISFORMAL);
-	createEOperation(gateEClass, GATE___ISINSIDECF);
-	createEOperation(gateEClass, GATE___ISOUTSIDECF);
-	createEOperation(gateEClass, GATE___MATCHES__GATE);
-	createEOperation(gateEClass, GATE___OUTSIDE_CF_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(gateEClass, GATE___OUTSIDE_CF_MATCHED__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ACTUAL_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ACTUAL_GATE_MATCHED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___FORMAL_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___GETNAME);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___GETOPERAND);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___INSIDE_CF_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___INSIDE_CF_MATCHED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ISACTUAL);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ISFORMAL);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ISINSIDECF);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___ISOUTSIDECF);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___MATCHES__GATE);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___OUTSIDE_CF_GATE_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(gateEClass, GATE___OUTSIDE_CF_MATCHED__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	generalOrderingEClass = createEClass(GENERALORDERING);
+	generalOrderingEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), GENERALORDERING);
+	
 	
-	createEReference(generalOrderingEClass, GENERALORDERING_AFTER);
-	createEReference(generalOrderingEClass, GENERALORDERING_BEFORE);
+	factory->createEReference_in_EContainingClass(generalOrderingEClass, GENERALORDERING_AFTER);
+	factory->createEReference_in_EContainingClass(generalOrderingEClass, GENERALORDERING_BEFORE);
 	
-	createEOperation(generalOrderingEClass, GENERALORDERING___IRREFLEXIVE_TRANSITIVE_CLOSURE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(generalOrderingEClass, GENERALORDERING___IRREFLEXIVE_TRANSITIVE_CLOSURE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	generalizationEClass = createEClass(GENERALIZATION);
-	createEAttribute(generalizationEClass, GENERALIZATION_ISSUBSTITUTABLE);
+	generalizationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), GENERALIZATION);
 	
-	createEReference(generalizationEClass, GENERALIZATION_GENERAL);
-	createEReference(generalizationEClass, GENERALIZATION_GENERALIZATIONSET);
-	createEReference(generalizationEClass, GENERALIZATION_SPECIFIC);
+	factory->createEAttribute_in_EContainingClass(generalizationEClass, GENERALIZATION_ISSUBSTITUTABLE);
 	
+	factory->createEReference_in_EContainingClass(generalizationEClass, GENERALIZATION_GENERAL);
+	factory->createEReference_in_EContainingClass(generalizationEClass, GENERALIZATION_GENERALIZATIONSET);
+	factory->createEReference_in_EContainingClass(generalizationEClass, GENERALIZATION_SPECIFIC);
 	
+	
 
-	generalizationSetEClass = createEClass(GENERALIZATIONSET);
-	createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISCOVERING);
-	createEAttribute(generalizationSetEClass, GENERALIZATIONSET_ISDISJOINT);
+	generalizationSetEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), GENERALIZATIONSET);
+	
+	factory->createEAttribute_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET_ISCOVERING);
+	factory->createEAttribute_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET_ISDISJOINT);
 	
-	createEReference(generalizationSetEClass, GENERALIZATIONSET_GENERALIZATION);
-	createEReference(generalizationSetEClass, GENERALIZATIONSET_POWERTYPE);
+	factory->createEReference_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET_GENERALIZATION);
+	factory->createEReference_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET_POWERTYPE);
 	
-	createEOperation(generalizationSetEClass, GENERALIZATIONSET___GENERALIZATION_SAME_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(generalizationSetEClass, GENERALIZATIONSET___MAPS_TO_GENERALIZATION_SET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET___GENERALIZATION_SAME_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(generalizationSetEClass, GENERALIZATIONSET___MAPS_TO_GENERALIZATION_SET__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	imageEClass = createEClass(IMAGE);
-	createEAttribute(imageEClass, IMAGE_CONTENT);
-	createEAttribute(imageEClass, IMAGE_FORMAT);
-	createEAttribute(imageEClass, IMAGE_LOCATION);
+	imageEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), IMAGE);
 	
+	factory->createEAttribute_in_EContainingClass(imageEClass, IMAGE_CONTENT);
+	factory->createEAttribute_in_EContainingClass(imageEClass, IMAGE_FORMAT);
+	factory->createEAttribute_in_EContainingClass(imageEClass, IMAGE_LOCATION);
 	
 	
+	
 
-	includeEClass = createEClass(INCLUDE);
+	includeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INCLUDE);
+	
 	
-	createEReference(includeEClass, INCLUDE_ADDITION);
-	createEReference(includeEClass, INCLUDE_INCLUDINGCASE);
+	factory->createEReference_in_EContainingClass(includeEClass, INCLUDE_ADDITION);
+	factory->createEReference_in_EContainingClass(includeEClass, INCLUDE_INCLUDINGCASE);
 	
 	
 
-	informationFlowEClass = createEClass(INFORMATIONFLOW);
+	informationFlowEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INFORMATIONFLOW);
 	
-	createEReference(informationFlowEClass, INFORMATIONFLOW_CONVEYED);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_INFORMATIONSOURCE);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_INFORMATIONTARGET);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_REALIZATION);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_REALIZINGACTIVITYEDGE);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_REALIZINGCONNECTOR);
-	createEReference(informationFlowEClass, INFORMATIONFLOW_REALIZINGMESSAGE);
 	
-	createEOperation(informationFlowEClass, INFORMATIONFLOW___CONVEY_CLASSIFIERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(informationFlowEClass, INFORMATIONFLOW___MUST_CONFORM__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(informationFlowEClass, INFORMATIONFLOW___SOURCES_AND_TARGETS_KIND__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_CONVEYED);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_INFORMATIONSOURCE);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_INFORMATIONTARGET);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_REALIZATION);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_REALIZINGACTIVITYEDGE);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_REALIZINGCONNECTOR);
+	factory->createEReference_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW_REALIZINGMESSAGE);
 	
+	factory->createEOperation_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW___CONVEY_CLASSIFIERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW___MUST_CONFORM__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(informationFlowEClass, INFORMATIONFLOW___SOURCES_AND_TARGETS_KIND__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	informationItemEClass = createEClass(INFORMATIONITEM);
+	informationItemEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INFORMATIONITEM);
+	
 	
-	createEReference(informationItemEClass, INFORMATIONITEM_REPRESENTED);
+	factory->createEReference_in_EContainingClass(informationItemEClass, INFORMATIONITEM_REPRESENTED);
 	
-	createEOperation(informationItemEClass, INFORMATIONITEM___HAS_NO__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(informationItemEClass, INFORMATIONITEM___NOT_INSTANTIABLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(informationItemEClass, INFORMATIONITEM___SOURCES_AND_TARGETS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(informationItemEClass, INFORMATIONITEM___HAS_NO__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(informationItemEClass, INFORMATIONITEM___NOT_INSTANTIABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(informationItemEClass, INFORMATIONITEM___SOURCES_AND_TARGETS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	initialNodeEClass = createEClass(INITIALNODE);
+	initialNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INITIALNODE);
 	
 	
-	createEOperation(initialNodeEClass, INITIALNODE___CONTROL_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(initialNodeEClass, INITIALNODE___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(initialNodeEClass, INITIALNODE___CONTROL_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(initialNodeEClass, INITIALNODE___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	inputPinEClass = createEClass(INPUTPIN);
+	inputPinEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INPUTPIN);
+	
 	
-	createEReference(inputPinEClass, INPUTPIN_CALLOPERATIONACTION);
-	createEReference(inputPinEClass, INPUTPIN_INVOCATIONACTION);
-	createEReference(inputPinEClass, INPUTPIN_STRUCTURALFEATUREACTION);
+	factory->createEReference_in_EContainingClass(inputPinEClass, INPUTPIN_CALLOPERATIONACTION);
+	factory->createEReference_in_EContainingClass(inputPinEClass, INPUTPIN_INVOCATIONACTION);
+	factory->createEReference_in_EContainingClass(inputPinEClass, INPUTPIN_STRUCTURALFEATUREACTION);
 	
-	createEOperation(inputPinEClass, INPUTPIN___OUTGOING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(inputPinEClass, INPUTPIN___OUTGOING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	instanceSpecificationEClass = createEClass(INSTANCESPECIFICATION);
+	instanceSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INSTANCESPECIFICATION);
 	
-	createEReference(instanceSpecificationEClass, INSTANCESPECIFICATION_CLASSIFIER);
-	createEReference(instanceSpecificationEClass, INSTANCESPECIFICATION_SLOT);
-	createEReference(instanceSpecificationEClass, INSTANCESPECIFICATION_SPECIFICATION);
 	
-	createEOperation(instanceSpecificationEClass, INSTANCESPECIFICATION___DEFINING_FEATURE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(instanceSpecificationEClass, INSTANCESPECIFICATION___DEPLOYMENT_ARTIFACT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(instanceSpecificationEClass, INSTANCESPECIFICATION___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(instanceSpecificationEClass, INSTANCESPECIFICATION___STRUCTURAL_FEATURE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION_SLOT);
+	factory->createEReference_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION_SPECIFICATION);
 	
+	factory->createEOperation_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION___DEFINING_FEATURE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION___DEPLOYMENT_ARTIFACT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(instanceSpecificationEClass, INSTANCESPECIFICATION___STRUCTURAL_FEATURE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	instanceValueEClass = createEClass(INSTANCEVALUE);
+	instanceValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INSTANCEVALUE);
+	
 	
-	createEReference(instanceValueEClass, INSTANCEVALUE_INSTANCE);
+	factory->createEReference_in_EContainingClass(instanceValueEClass, INSTANCEVALUE_INSTANCE);
 	
 	
 
-	interactionEClass = createEClass(INTERACTION);
+	interactionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTION);
 	
-	createEReference(interactionEClass, INTERACTION_ACTION);
-	createEReference(interactionEClass, INTERACTION_FORMALGATE);
-	createEReference(interactionEClass, INTERACTION_FRAGMENT);
-	createEReference(interactionEClass, INTERACTION_LIFELINE);
-	createEReference(interactionEClass, INTERACTION_MESSAGE);
 	
-	createEOperation(interactionEClass, INTERACTION___NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(interactionEClass, INTERACTION_ACTION);
+	factory->createEReference_in_EContainingClass(interactionEClass, INTERACTION_FORMALGATE);
+	factory->createEReference_in_EContainingClass(interactionEClass, INTERACTION_FRAGMENT);
+	factory->createEReference_in_EContainingClass(interactionEClass, INTERACTION_LIFELINE);
+	factory->createEReference_in_EContainingClass(interactionEClass, INTERACTION_MESSAGE);
 	
+	factory->createEOperation_in_EContainingClass(interactionEClass, INTERACTION___NOT_CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	interactionConstraintEClass = createEClass(INTERACTIONCONSTRAINT);
+	interactionConstraintEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTIONCONSTRAINT);
+	
 	
-	createEReference(interactionConstraintEClass, INTERACTIONCONSTRAINT_MAXINT);
-	createEReference(interactionConstraintEClass, INTERACTIONCONSTRAINT_MININT);
+	factory->createEReference_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT_MAXINT);
+	factory->createEReference_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT_MININT);
 	
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___DYNAMIC_VARIABLES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___GLOBAL_DATA__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___MAXINT_GREATER_EQUAL_MININT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___MAXINT_POSITIVE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___MININT_MAXINT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionConstraintEClass, INTERACTIONCONSTRAINT___MININT_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___DYNAMIC_VARIABLES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___GLOBAL_DATA__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___MAXINT_GREATER_EQUAL_MININT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___MAXINT_POSITIVE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___MININT_MAXINT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionConstraintEClass, INTERACTIONCONSTRAINT___MININT_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	interactionFragmentEClass = createEClass(INTERACTIONFRAGMENT);
+	interactionFragmentEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTIONFRAGMENT);
 	
-	createEReference(interactionFragmentEClass, INTERACTIONFRAGMENT_COVERED);
-	createEReference(interactionFragmentEClass, INTERACTIONFRAGMENT_ENCLOSINGINTERACTION);
-	createEReference(interactionFragmentEClass, INTERACTIONFRAGMENT_ENCLOSINGOPERAND);
-	createEReference(interactionFragmentEClass, INTERACTIONFRAGMENT_GENERALORDERING);
 	
+	factory->createEReference_in_EContainingClass(interactionFragmentEClass, INTERACTIONFRAGMENT_COVERED);
+	factory->createEReference_in_EContainingClass(interactionFragmentEClass, INTERACTIONFRAGMENT_ENCLOSINGINTERACTION);
+	factory->createEReference_in_EContainingClass(interactionFragmentEClass, INTERACTIONFRAGMENT_ENCLOSINGOPERAND);
+	factory->createEReference_in_EContainingClass(interactionFragmentEClass, INTERACTIONFRAGMENT_GENERALORDERING);
 	
+	
 
-	interactionOperandEClass = createEClass(INTERACTIONOPERAND);
+	interactionOperandEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTIONOPERAND);
+	
 	
-	createEReference(interactionOperandEClass, INTERACTIONOPERAND_FRAGMENT);
-	createEReference(interactionOperandEClass, INTERACTIONOPERAND_GUARD);
+	factory->createEReference_in_EContainingClass(interactionOperandEClass, INTERACTIONOPERAND_FRAGMENT);
+	factory->createEReference_in_EContainingClass(interactionOperandEClass, INTERACTIONOPERAND_GUARD);
 	
-	createEOperation(interactionOperandEClass, INTERACTIONOPERAND___GUARD_CONTAIN_REFERENCES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionOperandEClass, INTERACTIONOPERAND___GUARD_DIRECTLY_PRIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionOperandEClass, INTERACTIONOPERAND___GUARD_CONTAIN_REFERENCES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionOperandEClass, INTERACTIONOPERAND___GUARD_DIRECTLY_PRIOR__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	interactionUseEClass = createEClass(INTERACTIONUSE);
+	interactionUseEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTIONUSE);
 	
-	createEReference(interactionUseEClass, INTERACTIONUSE_ACTUALGATE);
-	createEReference(interactionUseEClass, INTERACTIONUSE_ARGUMENT);
-	createEReference(interactionUseEClass, INTERACTIONUSE_REFERSTO);
-	createEReference(interactionUseEClass, INTERACTIONUSE_RETURNVALUE);
-	createEReference(interactionUseEClass, INTERACTIONUSE_RETURNVALUERECIPIENT);
 	
-	createEOperation(interactionUseEClass, INTERACTIONUSE___ALL_LIFELINES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionUseEClass, INTERACTIONUSE___ARGUMENTS_ARE_CONSTANTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionUseEClass, INTERACTIONUSE___ARGUMENTS_CORRESPOND_TO_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionUseEClass, INTERACTIONUSE___GATES_MATCH__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionUseEClass, INTERACTIONUSE___RETURNVALUERECIPIENT_COVERAGE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(interactionUseEClass, INTERACTIONUSE___RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(interactionUseEClass, INTERACTIONUSE_ACTUALGATE);
+	factory->createEReference_in_EContainingClass(interactionUseEClass, INTERACTIONUSE_ARGUMENT);
+	factory->createEReference_in_EContainingClass(interactionUseEClass, INTERACTIONUSE_REFERSTO);
+	factory->createEReference_in_EContainingClass(interactionUseEClass, INTERACTIONUSE_RETURNVALUE);
+	factory->createEReference_in_EContainingClass(interactionUseEClass, INTERACTIONUSE_RETURNVALUERECIPIENT);
 	
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___ALL_LIFELINES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___ARGUMENTS_ARE_CONSTANTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___ARGUMENTS_CORRESPOND_TO_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___GATES_MATCH__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___RETURNVALUERECIPIENT_COVERAGE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interactionUseEClass, INTERACTIONUSE___RETURNVALUE_TYPE_RECIPIENT_CORRESPONDENCE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	interfaceEClass = createEClass(INTERFACE);
+	interfaceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERFACE);
+	
 	
-	createEReference(interfaceEClass, INTERFACE_NESTEDCLASSIFIER);
-	createEReference(interfaceEClass, INTERFACE_OWNEDATTRIBUTE);
-	createEReference(interfaceEClass, INTERFACE_OWNEDOPERATION);
-	createEReference(interfaceEClass, INTERFACE_OWNEDRECEPTION);
-	createEReference(interfaceEClass, INTERFACE_PROTOCOL);
-	createEReference(interfaceEClass, INTERFACE_REDEFINEDINTERFACE);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_NESTEDCLASSIFIER);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_OWNEDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_OWNEDOPERATION);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_OWNEDRECEPTION);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_PROTOCOL);
+	factory->createEReference_in_EContainingClass(interfaceEClass, INTERFACE_REDEFINEDINTERFACE);
 	
-	createEOperation(interfaceEClass, INTERFACE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
-	createEOperation(interfaceEClass, INTERFACE___CREATEOWNEDOPERATION__STRING_TYPE);
-	createEOperation(interfaceEClass, INTERFACE___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interfaceEClass, INTERFACE___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(interfaceEClass, INTERFACE___CREATEOWNEDOPERATION__STRING_TYPE);
+	factory->createEOperation_in_EContainingClass(interfaceEClass, INTERFACE___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	interfaceRealizationEClass = createEClass(INTERFACEREALIZATION);
+	interfaceRealizationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERFACEREALIZATION);
 	
-	createEReference(interfaceRealizationEClass, INTERFACEREALIZATION_CONTRACT);
-	createEReference(interfaceRealizationEClass, INTERFACEREALIZATION_IMPLEMENTINGCLASSIFIER);
 	
+	factory->createEReference_in_EContainingClass(interfaceRealizationEClass, INTERFACEREALIZATION_CONTRACT);
+	factory->createEReference_in_EContainingClass(interfaceRealizationEClass, INTERFACEREALIZATION_IMPLEMENTINGCLASSIFIER);
 	
+	
 
-	interruptibleActivityRegionEClass = createEClass(INTERRUPTIBLEACTIVITYREGION);
+	interruptibleActivityRegionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERRUPTIBLEACTIVITYREGION);
+	
 	
-	createEReference(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION_INTERRUPTINGEDGE);
-	createEReference(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION_NODE);
+	factory->createEReference_in_EContainingClass(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION_INTERRUPTINGEDGE);
+	factory->createEReference_in_EContainingClass(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION_NODE);
 	
-	createEOperation(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION___INTERRUPTING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(interruptibleActivityRegionEClass, INTERRUPTIBLEACTIVITYREGION___INTERRUPTING_EDGES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	intervalEClass = createEClass(INTERVAL);
+	intervalEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERVAL);
 	
-	createEReference(intervalEClass, INTERVAL_MAX);
-	createEReference(intervalEClass, INTERVAL_MIN);
 	
+	factory->createEReference_in_EContainingClass(intervalEClass, INTERVAL_MAX);
+	factory->createEReference_in_EContainingClass(intervalEClass, INTERVAL_MIN);
 	
+	
 
-	intervalConstraintEClass = createEClass(INTERVALCONSTRAINT);
+	intervalConstraintEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERVALCONSTRAINT);
 	
 	
 	
+	
 
-	invocationActionEClass = createEClass(INVOCATIONACTION);
+	invocationActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INVOCATIONACTION);
+	
 	
-	createEReference(invocationActionEClass, INVOCATIONACTION_ARGUMENT);
-	createEReference(invocationActionEClass, INVOCATIONACTION_ONPORT);
+	factory->createEReference_in_EContainingClass(invocationActionEClass, INVOCATIONACTION_ARGUMENT);
+	factory->createEReference_in_EContainingClass(invocationActionEClass, INVOCATIONACTION_ONPORT);
 	
 	
 
-	joinNodeEClass = createEClass(JOINNODE);
-	createEAttribute(joinNodeEClass, JOINNODE_ISCOMBINEDUPLICATE);
+	joinNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), JOINNODE);
 	
-	createEReference(joinNodeEClass, JOINNODE_JOINSPEC);
+	factory->createEAttribute_in_EContainingClass(joinNodeEClass, JOINNODE_ISCOMBINEDUPLICATE);
 	
-	createEOperation(joinNodeEClass, JOINNODE___INCOMING_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(joinNodeEClass, JOINNODE___ONE_OUTGOING_EDGE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(joinNodeEClass, JOINNODE_JOINSPEC);
 	
+	factory->createEOperation_in_EContainingClass(joinNodeEClass, JOINNODE___INCOMING_OBJECT_FLOW__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(joinNodeEClass, JOINNODE___ONE_OUTGOING_EDGE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	lifelineEClass = createEClass(LIFELINE);
+	lifelineEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LIFELINE);
+	
 	
-	createEReference(lifelineEClass, LIFELINE_COVEREDBY);
-	createEReference(lifelineEClass, LIFELINE_DECOMPOSEDAS);
-	createEReference(lifelineEClass, LIFELINE_INTERACTION);
-	createEReference(lifelineEClass, LIFELINE_REPRESENTS);
-	createEReference(lifelineEClass, LIFELINE_SELECTOR);
+	factory->createEReference_in_EContainingClass(lifelineEClass, LIFELINE_COVEREDBY);
+	factory->createEReference_in_EContainingClass(lifelineEClass, LIFELINE_DECOMPOSEDAS);
+	factory->createEReference_in_EContainingClass(lifelineEClass, LIFELINE_INTERACTION);
+	factory->createEReference_in_EContainingClass(lifelineEClass, LIFELINE_REPRESENTS);
+	factory->createEReference_in_EContainingClass(lifelineEClass, LIFELINE_SELECTOR);
 	
-	createEOperation(lifelineEClass, LIFELINE___INTERACTION_USES_SHARE_LIFELINE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(lifelineEClass, LIFELINE___SAME_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(lifelineEClass, LIFELINE___SELECTOR_INT_OR_STRING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(lifelineEClass, LIFELINE___SELECTOR_SPECIFIED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(lifelineEClass, LIFELINE___INTERACTION_USES_SHARE_LIFELINE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(lifelineEClass, LIFELINE___SAME_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(lifelineEClass, LIFELINE___SELECTOR_INT_OR_STRING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(lifelineEClass, LIFELINE___SELECTOR_SPECIFIED__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	linkActionEClass = createEClass(LINKACTION);
+	linkActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINKACTION);
 	
-	createEReference(linkActionEClass, LINKACTION_ENDDATA);
-	createEReference(linkActionEClass, LINKACTION_INPUTVALUE);
 	
-	createEOperation(linkActionEClass, LINKACTION___ASSOCIATION);
-	createEOperation(linkActionEClass, LINKACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkActionEClass, LINKACTION___SAME_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkActionEClass, LINKACTION___SAME_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(linkActionEClass, LINKACTION_ENDDATA);
+	factory->createEReference_in_EContainingClass(linkActionEClass, LINKACTION_INPUTVALUE);
 	
+	factory->createEOperation_in_EContainingClass(linkActionEClass, LINKACTION___ASSOCIATION);
+	factory->createEOperation_in_EContainingClass(linkActionEClass, LINKACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkActionEClass, LINKACTION___SAME_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkActionEClass, LINKACTION___SAME_PINS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	linkEndCreationDataEClass = createEClass(LINKENDCREATIONDATA);
-	createEAttribute(linkEndCreationDataEClass, LINKENDCREATIONDATA_ISREPLACEALL);
+	linkEndCreationDataEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINKENDCREATIONDATA);
+	
+	factory->createEAttribute_in_EContainingClass(linkEndCreationDataEClass, LINKENDCREATIONDATA_ISREPLACEALL);
 	
-	createEReference(linkEndCreationDataEClass, LINKENDCREATIONDATA_INSERTAT);
+	factory->createEReference_in_EContainingClass(linkEndCreationDataEClass, LINKENDCREATIONDATA_INSERTAT);
 	
-	createEOperation(linkEndCreationDataEClass, LINKENDCREATIONDATA___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndCreationDataEClass, LINKENDCREATIONDATA___INSERTAT_PIN__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	linkEndDataEClass = createEClass(LINKENDDATA);
+	linkEndDataEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINKENDDATA);
 	
-	createEReference(linkEndDataEClass, LINKENDDATA_END);
-	createEReference(linkEndDataEClass, LINKENDDATA_QUALIFIER);
-	createEReference(linkEndDataEClass, LINKENDDATA_VALUE);
 	
-	createEOperation(linkEndDataEClass, LINKENDDATA___ALLPINS);
-	createEOperation(linkEndDataEClass, LINKENDDATA___END_OBJECT_INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkEndDataEClass, LINKENDDATA___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkEndDataEClass, LINKENDDATA___PROPERTY_IS_ASSOCIATION_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkEndDataEClass, LINKENDDATA___QUALIFIERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(linkEndDataEClass, LINKENDDATA___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(linkEndDataEClass, LINKENDDATA_END);
+	factory->createEReference_in_EContainingClass(linkEndDataEClass, LINKENDDATA_QUALIFIER);
+	factory->createEReference_in_EContainingClass(linkEndDataEClass, LINKENDDATA_VALUE);
 	
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___ALLPINS);
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___END_OBJECT_INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___PROPERTY_IS_ASSOCIATION_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___QUALIFIERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndDataEClass, LINKENDDATA___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	linkEndDestructionDataEClass = createEClass(LINKENDDESTRUCTIONDATA);
-	createEAttribute(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES);
+	linkEndDestructionDataEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LINKENDDESTRUCTIONDATA);
+	
+	factory->createEAttribute_in_EContainingClass(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES);
 	
-	createEReference(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_DESTROYAT);
+	factory->createEReference_in_EContainingClass(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA_DESTROYAT);
 	
-	createEOperation(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA___DESTROYAT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(linkEndDestructionDataEClass, LINKENDDESTRUCTIONDATA___DESTROYAT_PIN__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	literalBooleanEClass = createEClass(LITERALBOOLEAN);
-	createEAttribute(literalBooleanEClass, LITERALBOOLEAN_VALUE);
+	literalBooleanEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALBOOLEAN);
 	
+	factory->createEAttribute_in_EContainingClass(literalBooleanEClass, LITERALBOOLEAN_VALUE);
 	
 	
+	
 
-	literalIntegerEClass = createEClass(LITERALINTEGER);
-	createEAttribute(literalIntegerEClass, LITERALINTEGER_VALUE);
+	literalIntegerEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALINTEGER);
+	
+	factory->createEAttribute_in_EContainingClass(literalIntegerEClass, LITERALINTEGER_VALUE);
 	
 	
 	
 
-	literalNullEClass = createEClass(LITERALNULL);
+	literalNullEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALNULL);
 	
 	
 	
+	
 
-	literalRealEClass = createEClass(LITERALREAL);
-	createEAttribute(literalRealEClass, LITERALREAL_VALUE);
+	literalRealEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALREAL);
+	
+	factory->createEAttribute_in_EContainingClass(literalRealEClass, LITERALREAL_VALUE);
 	
 	
 	
 
-	literalSpecificationEClass = createEClass(LITERALSPECIFICATION);
+	literalSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALSPECIFICATION);
 	
 	
 	
+	
 
-	literalStringEClass = createEClass(LITERALSTRING);
-	createEAttribute(literalStringEClass, LITERALSTRING_VALUE);
+	literalStringEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALSTRING);
+	
+	factory->createEAttribute_in_EContainingClass(literalStringEClass, LITERALSTRING_VALUE);
 	
 	
 	
 
-	literalUnlimitedNaturalEClass = createEClass(LITERALUNLIMITEDNATURAL);
-	createEAttribute(literalUnlimitedNaturalEClass, LITERALUNLIMITEDNATURAL_VALUE);
+	literalUnlimitedNaturalEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LITERALUNLIMITEDNATURAL);
 	
+	factory->createEAttribute_in_EContainingClass(literalUnlimitedNaturalEClass, LITERALUNLIMITEDNATURAL_VALUE);
 	
 	
+	
 
-	loopNodeEClass = createEClass(LOOPNODE);
-	createEAttribute(loopNodeEClass, LOOPNODE_ISTESTEDFIRST);
+	loopNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LOOPNODE);
 	
-	createEReference(loopNodeEClass, LOOPNODE_BODYOUTPUT);
-	createEReference(loopNodeEClass, LOOPNODE_BODYPART);
-	createEReference(loopNodeEClass, LOOPNODE_DECIDER);
-	createEReference(loopNodeEClass, LOOPNODE_LOOPVARIABLE);
-	createEReference(loopNodeEClass, LOOPNODE_LOOPVARIABLEINPUT);
-	createEReference(loopNodeEClass, LOOPNODE_RESULT);
-	createEReference(loopNodeEClass, LOOPNODE_SETUPPART);
-	createEReference(loopNodeEClass, LOOPNODE_TEST);
+	factory->createEAttribute_in_EContainingClass(loopNodeEClass, LOOPNODE_ISTESTEDFIRST);
 	
-	createEOperation(loopNodeEClass, LOOPNODE___BODY_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___INPUT_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___LOOP_VARIABLE_OUTGOING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___MATCHING_LOOP_VARIABLES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___MATCHING_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___MATCHING_RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___RESULT_NO_INCOMING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(loopNodeEClass, LOOPNODE___SETUP_TEST_AND_BODY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_BODYOUTPUT);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_BODYPART);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_DECIDER);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_LOOPVARIABLE);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_LOOPVARIABLEINPUT);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_RESULT);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_SETUPPART);
+	factory->createEReference_in_EContainingClass(loopNodeEClass, LOOPNODE_TEST);
 	
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___BODY_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___INPUT_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___LOOP_VARIABLE_OUTGOING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___MATCHING_LOOP_VARIABLES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___MATCHING_OUTPUT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___MATCHING_RESULT_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___RESULT_NO_INCOMING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(loopNodeEClass, LOOPNODE___SETUP_TEST_AND_BODY__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	manifestationEClass = createEClass(MANIFESTATION);
+	manifestationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MANIFESTATION);
+	
 	
-	createEReference(manifestationEClass, MANIFESTATION_UTILIZEDELEMENT);
+	factory->createEReference_in_EContainingClass(manifestationEClass, MANIFESTATION_UTILIZEDELEMENT);
 	
 	
 
-	mergeNodeEClass = createEClass(MERGENODE);
+	mergeNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MERGENODE);
 	
 	
-	createEOperation(mergeNodeEClass, MERGENODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(mergeNodeEClass, MERGENODE___ONE_OUTGOING_EDGE__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(mergeNodeEClass, MERGENODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(mergeNodeEClass, MERGENODE___ONE_OUTGOING_EDGE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	messageEClass = createEClass(MESSAGE);
-	createEAttribute(messageEClass, MESSAGE_MESSAGEKIND);
-	createEAttribute(messageEClass, MESSAGE_MESSAGESORT);
+	messageEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGE);
+	
+	factory->createEAttribute_in_EContainingClass(messageEClass, MESSAGE_MESSAGEKIND);
+	factory->createEAttribute_in_EContainingClass(messageEClass, MESSAGE_MESSAGESORT);
 	
-	createEReference(messageEClass, MESSAGE_ARGUMENT);
-	createEReference(messageEClass, MESSAGE_CONNECTOR);
-	createEReference(messageEClass, MESSAGE_INTERACTION);
-	createEReference(messageEClass, MESSAGE_RECEIVEEVENT);
-	createEReference(messageEClass, MESSAGE_SENDEVENT);
-	createEReference(messageEClass, MESSAGE_SIGNATURE);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_ARGUMENT);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_CONNECTOR);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_INTERACTION);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_RECEIVEEVENT);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_SENDEVENT);
+	factory->createEReference_in_EContainingClass(messageEClass, MESSAGE_SIGNATURE);
 	
-	createEOperation(messageEClass, MESSAGE___ARGUMENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___CANNOT_CROSS_BOUNDARIES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___GETMESSAGEKIND);
-	createEOperation(messageEClass, MESSAGE___OCCURRENCE_SPECIFICATIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___SENDING_RECEIVING_MESSAGE_EVENT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___SIGNATURE_IS_OPERATION_REPLY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___SIGNATURE_IS_OPERATION_REQUEST__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___SIGNATURE_IS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(messageEClass, MESSAGE___SIGNATURE_REFER_TO__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___ARGUMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___CANNOT_CROSS_BOUNDARIES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___GETMESSAGEKIND);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___OCCURRENCE_SPECIFICATIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___SENDING_RECEIVING_MESSAGE_EVENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___SIGNATURE_IS_OPERATION_REPLY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___SIGNATURE_IS_OPERATION_REQUEST__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___SIGNATURE_IS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(messageEClass, MESSAGE___SIGNATURE_REFER_TO__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	messageEndEClass = createEClass(MESSAGEEND);
+	messageEndEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGEEND);
 	
-	createEReference(messageEndEClass, MESSAGEEND_MESSAGE);
 	
-	createEOperation(messageEndEClass, MESSAGEEND___ENCLOSINGFRAGMENT);
-	createEOperation(messageEndEClass, MESSAGEEND___ISRECEIVE);
-	createEOperation(messageEndEClass, MESSAGEEND___ISSEND);
-	createEOperation(messageEndEClass, MESSAGEEND___OPPOSITEEND);
+	factory->createEReference_in_EContainingClass(messageEndEClass, MESSAGEEND_MESSAGE);
 	
+	factory->createEOperation_in_EContainingClass(messageEndEClass, MESSAGEEND___ENCLOSINGFRAGMENT);
+	factory->createEOperation_in_EContainingClass(messageEndEClass, MESSAGEEND___ISRECEIVE);
+	factory->createEOperation_in_EContainingClass(messageEndEClass, MESSAGEEND___ISSEND);
+	factory->createEOperation_in_EContainingClass(messageEndEClass, MESSAGEEND___OPPOSITEEND);
+	
 
-	messageEventEClass = createEClass(MESSAGEEVENT);
+	messageEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGEEVENT);
+	
 	
 	
 	
 
-	messageOccurrenceSpecificationEClass = createEClass(MESSAGEOCCURRENCESPECIFICATION);
+	messageOccurrenceSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGEOCCURRENCESPECIFICATION);
 	
 	
 	
+	
 
-	modelEClass = createEClass(MODEL);
-	createEAttribute(modelEClass, MODEL_VIEWPOINT);
+	modelEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MODEL);
+	
+	factory->createEAttribute_in_EContainingClass(modelEClass, MODEL_VIEWPOINT);
 	
 	
-	createEOperation(modelEClass, MODEL___ISMETAMODEL);
+	factory->createEOperation_in_EContainingClass(modelEClass, MODEL___ISMETAMODEL);
 	
 
-	multiplicityElementEClass = createEClass(MULTIPLICITYELEMENT);
-	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISORDERED);
-	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_ISUNIQUE);
-	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWER);
-	createEAttribute(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPER);
+	multiplicityElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MULTIPLICITYELEMENT);
 	
-	createEReference(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWERVALUE);
-	createEReference(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPERVALUE);
+	factory->createEAttribute_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_ISORDERED);
+	factory->createEAttribute_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_ISUNIQUE);
+	factory->createEAttribute_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWER);
+	factory->createEAttribute_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPER);
 	
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___COMPATIBLEWITH__MULTIPLICITYELEMENT);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___INCLUDESMULTIPLICITY__MULTIPLICITYELEMENT);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___IS__INTEGER_UNLIMITEDNATURAL);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___ISMULTIVALUED);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWERBOUND);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWER_GE_0__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWER_IS_INTEGER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPERBOUND);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPER_GE_LOWER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPER_IS_UNLIMITEDNATURAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___VALUE_SPECIFICATION_CONSTANT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(multiplicityElementEClass, MULTIPLICITYELEMENT___VALUE_SPECIFICATION_NO_SIDE_EFFECTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_LOWERVALUE);
+	factory->createEReference_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT_UPPERVALUE);
 	
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___COMPATIBLEWITH__MULTIPLICITYELEMENT);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___INCLUDESMULTIPLICITY__MULTIPLICITYELEMENT);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___IS__INTEGER_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___ISMULTIVALUED);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWERBOUND);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWER_GE_0__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___LOWER_IS_INTEGER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPERBOUND);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPER_GE_LOWER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___UPPER_IS_UNLIMITEDNATURAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___VALUE_SPECIFICATION_CONSTANT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(multiplicityElementEClass, MULTIPLICITYELEMENT___VALUE_SPECIFICATION_NO_SIDE_EFFECTS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	namedElementEClass = createEClass(NAMEDELEMENT);
-	createEAttribute(namedElementEClass, NAMEDELEMENT_NAME);
-	createEAttribute(namedElementEClass, NAMEDELEMENT_QUALIFIEDNAME);
-	createEAttribute(namedElementEClass, NAMEDELEMENT_VISIBILITY);
+	namedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), NAMEDELEMENT);
+	
+	factory->createEAttribute_in_EContainingClass(namedElementEClass, NAMEDELEMENT_NAME);
+	factory->createEAttribute_in_EContainingClass(namedElementEClass, NAMEDELEMENT_QUALIFIEDNAME);
+	factory->createEAttribute_in_EContainingClass(namedElementEClass, NAMEDELEMENT_VISIBILITY);
 	
-	createEReference(namedElementEClass, NAMEDELEMENT_CLIENTDEPENDENCY);
-	createEReference(namedElementEClass, NAMEDELEMENT_NAMEEXPRESSION);
-	createEReference(namedElementEClass, NAMEDELEMENT_NAMESPACE);
+	factory->createEReference_in_EContainingClass(namedElementEClass, NAMEDELEMENT_CLIENTDEPENDENCY);
+	factory->createEReference_in_EContainingClass(namedElementEClass, NAMEDELEMENT_NAMEEXPRESSION);
+	factory->createEReference_in_EContainingClass(namedElementEClass, NAMEDELEMENT_NAMESPACE);
 	
-	createEOperation(namedElementEClass, NAMEDELEMENT___ALLNAMESPACES);
-	createEOperation(namedElementEClass, NAMEDELEMENT___ALLOWNINGPACKAGES);
-	createEOperation(namedElementEClass, NAMEDELEMENT___CREATEDEPENDENCY__NAMEDELEMENT);
-	createEOperation(namedElementEClass, NAMEDELEMENT___CREATEUSAGE__NAMEDELEMENT);
-	createEOperation(namedElementEClass, NAMEDELEMENT___GETCLIENTDEPENDENCIES);
-	createEOperation(namedElementEClass, NAMEDELEMENT___GETLABEL);
-	createEOperation(namedElementEClass, NAMEDELEMENT___GETLABEL__BOOLEAN);
-	createEOperation(namedElementEClass, NAMEDELEMENT___GETNAMESPACE);
-	createEOperation(namedElementEClass, NAMEDELEMENT___GETQUALIFIEDNAME);
-	createEOperation(namedElementEClass, NAMEDELEMENT___HAS_NO_QUALIFIED_NAME__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(namedElementEClass, NAMEDELEMENT___HAS_QUALIFIED_NAME__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(namedElementEClass, NAMEDELEMENT___ISDISTINGUISHABLEFROM__NAMEDELEMENT_NAMESPACE);
-	createEOperation(namedElementEClass, NAMEDELEMENT___SEPARATOR);
-	createEOperation(namedElementEClass, NAMEDELEMENT___VISIBILITY_NEEDS_OWNERSHIP__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___ALLNAMESPACES);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___ALLOWNINGPACKAGES);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___CREATEDEPENDENCY__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___CREATEUSAGE__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___GETCLIENTDEPENDENCIES);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___GETLABEL);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___GETLABEL__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___GETNAMESPACE);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___GETQUALIFIEDNAME);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___HAS_NO_QUALIFIED_NAME__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___HAS_QUALIFIED_NAME__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___ISDISTINGUISHABLEFROM__NAMEDELEMENT_NAMESPACE);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___SEPARATOR);
+	factory->createEOperation_in_EContainingClass(namedElementEClass, NAMEDELEMENT___VISIBILITY_NEEDS_OWNERSHIP__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	namespaceEClass = createEClass(NAMESPACE);
+	namespaceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), NAMESPACE);
 	
-	createEReference(namespaceEClass, NAMESPACE_ELEMENTIMPORT);
-	createEReference(namespaceEClass, NAMESPACE_IMPORTEDMEMBER);
-	createEReference(namespaceEClass, NAMESPACE_MEMBER);
-	createEReference(namespaceEClass, NAMESPACE_OWNEDMEMBER);
-	createEReference(namespaceEClass, NAMESPACE_OWNEDRULE);
-	createEReference(namespaceEClass, NAMESPACE_PACKAGEIMPORT);
 	
-	createEOperation(namespaceEClass, NAMESPACE___CANNOT_IMPORT_OWNEDMEMBERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(namespaceEClass, NAMESPACE___CANNOT_IMPORT_SELF__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(namespaceEClass, NAMESPACE___CREATEELEMENTIMPORT__PACKAGEABLEELEMENT_VISIBILITYKIND);
-	createEOperation(namespaceEClass, NAMESPACE___CREATEPACKAGEIMPORT__PACKAGE_VISIBILITYKIND);
-	createEOperation(namespaceEClass, NAMESPACE___EXCLUDECOLLISIONS__PACKAGEABLEELEMENT);
-	createEOperation(namespaceEClass, NAMESPACE___GETIMPORTEDELEMENTS);
-	createEOperation(namespaceEClass, NAMESPACE___GETIMPORTEDMEMBERS);
-	createEOperation(namespaceEClass, NAMESPACE___GETIMPORTEDPACKAGES);
-	createEOperation(namespaceEClass, NAMESPACE___GETNAMESOFMEMBER__NAMEDELEMENT);
-	createEOperation(namespaceEClass, NAMESPACE___GETOWNEDMEMBERS);
-	createEOperation(namespaceEClass, NAMESPACE___IMPORTMEMBERS__PACKAGEABLEELEMENT);
-	createEOperation(namespaceEClass, NAMESPACE___MEMBERSAREDISTINGUISHABLE);
-	createEOperation(namespaceEClass, NAMESPACE___MEMBERS_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_ELEMENTIMPORT);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_IMPORTEDMEMBER);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_MEMBER);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_OWNEDMEMBER);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_OWNEDRULE);
+	factory->createEReference_in_EContainingClass(namespaceEClass, NAMESPACE_PACKAGEIMPORT);
 	
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___CANNOT_IMPORT_OWNEDMEMBERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___CANNOT_IMPORT_SELF__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___CREATEELEMENTIMPORT__PACKAGEABLEELEMENT_VISIBILITYKIND);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___CREATEPACKAGEIMPORT__PACKAGE_VISIBILITYKIND);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___EXCLUDECOLLISIONS__PACKAGEABLEELEMENT);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___GETIMPORTEDELEMENTS);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___GETIMPORTEDMEMBERS);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___GETIMPORTEDPACKAGES);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___GETNAMESOFMEMBER__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___GETOWNEDMEMBERS);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___IMPORTMEMBERS__PACKAGEABLEELEMENT);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___MEMBERSAREDISTINGUISHABLE);
+	factory->createEOperation_in_EContainingClass(namespaceEClass, NAMESPACE___MEMBERS_DISTINGUISHABLE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	nodeEClass = createEClass(NODE);
+	nodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), NODE);
+	
 	
-	createEReference(nodeEClass, NODE_NESTEDNODE);
+	factory->createEReference_in_EContainingClass(nodeEClass, NODE_NESTEDNODE);
 	
-	createEOperation(nodeEClass, NODE___CREATECOMMUNICATIONPATH__BOOLEAN_UNLIMITEDNATURAL);
-	createEOperation(nodeEClass, NODE___GETCOMMUNICATIONPATHS);
-	createEOperation(nodeEClass, NODE___INTERNAL_STRUCTURE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(nodeEClass, NODE___CREATECOMMUNICATIONPATH__BOOLEAN_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(nodeEClass, NODE___GETCOMMUNICATIONPATHS);
+	factory->createEOperation_in_EContainingClass(nodeEClass, NODE___INTERNAL_STRUCTURE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	objectEClass = createEClass(OBJECT);
+	objectEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECT);
 	
 	
-	createEOperation(objectEClass, OBJECT___GET__PROPERTY);
-	createEOperation(objectEClass, OBJECT___SET__PROPERTY_EJAVAOBJECT);
-	createEOperation(objectEClass, OBJECT___UNSET__PROPERTY);
 	
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___GET__PROPERTY);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___SET__PROPERTY_EJAVAOBJECT);
+	factory->createEOperation_in_EContainingClass(objectEClass, OBJECT___UNSET__PROPERTY);
+	
 
-	objectFlowEClass = createEClass(OBJECTFLOW);
-	createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTICAST);
-	createEAttribute(objectFlowEClass, OBJECTFLOW_ISMULTIRECEIVE);
+	objectFlowEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTFLOW);
+	
+	factory->createEAttribute_in_EContainingClass(objectFlowEClass, OBJECTFLOW_ISMULTICAST);
+	factory->createEAttribute_in_EContainingClass(objectFlowEClass, OBJECTFLOW_ISMULTIRECEIVE);
 	
-	createEReference(objectFlowEClass, OBJECTFLOW_SELECTION);
-	createEReference(objectFlowEClass, OBJECTFLOW_TRANSFORMATION);
+	factory->createEReference_in_EContainingClass(objectFlowEClass, OBJECTFLOW_SELECTION);
+	factory->createEReference_in_EContainingClass(objectFlowEClass, OBJECTFLOW_TRANSFORMATION);
 	
-	createEOperation(objectFlowEClass, OBJECTFLOW___COMPATIBLE_TYPES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___INPUT_AND_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___IS_MULTICAST_OR_IS_MULTIRECEIVE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___NO_EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___SAME_UPPER_BOUNDS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___SELECTION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___TARGET__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectFlowEClass, OBJECTFLOW___TRANSFORMATION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___COMPATIBLE_TYPES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___INPUT_AND_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___IS_MULTICAST_OR_IS_MULTIRECEIVE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___NO_EXECUTABLE_NODES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___SAME_UPPER_BOUNDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___SELECTION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectFlowEClass, OBJECTFLOW___TRANSFORMATION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	objectNodeEClass = createEClass(OBJECTNODE);
-	createEAttribute(objectNodeEClass, OBJECTNODE_ISCONTROLTYPE);
-	createEAttribute(objectNodeEClass, OBJECTNODE_ORDERING);
+	objectNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTNODE);
 	
-	createEReference(objectNodeEClass, OBJECTNODE_INSTATE);
-	createEReference(objectNodeEClass, OBJECTNODE_SELECTION);
-	createEReference(objectNodeEClass, OBJECTNODE_UPPERBOUND);
+	factory->createEAttribute_in_EContainingClass(objectNodeEClass, OBJECTNODE_ISCONTROLTYPE);
+	factory->createEAttribute_in_EContainingClass(objectNodeEClass, OBJECTNODE_ORDERING);
 	
-	createEOperation(objectNodeEClass, OBJECTNODE___INPUT_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectNodeEClass, OBJECTNODE___OBJECT_FLOW_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(objectNodeEClass, OBJECTNODE___SELECTION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(objectNodeEClass, OBJECTNODE_INSTATE);
+	factory->createEReference_in_EContainingClass(objectNodeEClass, OBJECTNODE_SELECTION);
+	factory->createEReference_in_EContainingClass(objectNodeEClass, OBJECTNODE_UPPERBOUND);
 	
+	factory->createEOperation_in_EContainingClass(objectNodeEClass, OBJECTNODE___INPUT_OUTPUT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectNodeEClass, OBJECTNODE___OBJECT_FLOW_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(objectNodeEClass, OBJECTNODE___SELECTION_BEHAVIOR__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	observationEClass = createEClass(OBSERVATION);
+	observationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBSERVATION);
 	
 	
 	
+	
 
-	occurrenceSpecificationEClass = createEClass(OCCURRENCESPECIFICATION);
+	occurrenceSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OCCURRENCESPECIFICATION);
+	
 	
-	createEReference(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION_TOAFTER);
-	createEReference(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION_TOBEFORE);
+	factory->createEReference_in_EContainingClass(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION_TOAFTER);
+	factory->createEReference_in_EContainingClass(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION_TOBEFORE);
 	
-	createEOperation(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION___GETCOVERED);
-	createEOperation(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION___SETCOVERED__LIFELINE);
+	factory->createEOperation_in_EContainingClass(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION___GETCOVERED);
+	factory->createEOperation_in_EContainingClass(occurrenceSpecificationEClass, OCCURRENCESPECIFICATION___SETCOVERED__LIFELINE);
 	
 
-	opaqueActionEClass = createEClass(OPAQUEACTION);
-	createEAttribute(opaqueActionEClass, OPAQUEACTION_BODY);
-	createEAttribute(opaqueActionEClass, OPAQUEACTION_LANGUAGE);
+	opaqueActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPAQUEACTION);
 	
-	createEReference(opaqueActionEClass, OPAQUEACTION_INPUTVALUE);
-	createEReference(opaqueActionEClass, OPAQUEACTION_OUTPUTVALUE);
+	factory->createEAttribute_in_EContainingClass(opaqueActionEClass, OPAQUEACTION_BODY);
+	factory->createEAttribute_in_EContainingClass(opaqueActionEClass, OPAQUEACTION_LANGUAGE);
 	
-	createEOperation(opaqueActionEClass, OPAQUEACTION___LANGUAGE_BODY_SIZE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(opaqueActionEClass, OPAQUEACTION_INPUTVALUE);
+	factory->createEReference_in_EContainingClass(opaqueActionEClass, OPAQUEACTION_OUTPUTVALUE);
 	
+	factory->createEOperation_in_EContainingClass(opaqueActionEClass, OPAQUEACTION___LANGUAGE_BODY_SIZE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	opaqueBehaviorEClass = createEClass(OPAQUEBEHAVIOR);
-	createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_BODY);
-	createEAttribute(opaqueBehaviorEClass, OPAQUEBEHAVIOR_LANGUAGE);
+	opaqueBehaviorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPAQUEBEHAVIOR);
+	
+	factory->createEAttribute_in_EContainingClass(opaqueBehaviorEClass, OPAQUEBEHAVIOR_BODY);
+	factory->createEAttribute_in_EContainingClass(opaqueBehaviorEClass, OPAQUEBEHAVIOR_LANGUAGE);
 	
 	
 	
 
-	opaqueExpressionEClass = createEClass(OPAQUEEXPRESSION);
-	createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_BODY);
-	createEAttribute(opaqueExpressionEClass, OPAQUEEXPRESSION_LANGUAGE);
+	opaqueExpressionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPAQUEEXPRESSION);
 	
-	createEReference(opaqueExpressionEClass, OPAQUEEXPRESSION_BEHAVIOR);
-	createEReference(opaqueExpressionEClass, OPAQUEEXPRESSION_RESULT);
+	factory->createEAttribute_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION_BODY);
+	factory->createEAttribute_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION_LANGUAGE);
 	
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___GETRESULT);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___ISINTEGRAL);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___ISNONNEGATIVE);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___ISPOSITIVE);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___LANGUAGE_BODY_SIZE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___ONE_RETURN_RESULT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___ONLY_RETURN_RESULT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(opaqueExpressionEClass, OPAQUEEXPRESSION___VALUE);
+	factory->createEReference_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION_BEHAVIOR);
+	factory->createEReference_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___GETRESULT);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___ISINTEGRAL);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___ISNONNEGATIVE);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___ISPOSITIVE);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___LANGUAGE_BODY_SIZE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___ONE_RETURN_RESULT_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___ONLY_RETURN_RESULT_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(opaqueExpressionEClass, OPAQUEEXPRESSION___VALUE);
+	
 
-	operationEClass = createEClass(OPERATION);
-	createEAttribute(operationEClass, OPERATION_ISORDERED);
-	createEAttribute(operationEClass, OPERATION_ISQUERY);
-	createEAttribute(operationEClass, OPERATION_ISUNIQUE);
-	createEAttribute(operationEClass, OPERATION_LOWER);
-	createEAttribute(operationEClass, OPERATION_UPPER);
+	operationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPERATION);
+	
+	factory->createEAttribute_in_EContainingClass(operationEClass, OPERATION_ISORDERED);
+	factory->createEAttribute_in_EContainingClass(operationEClass, OPERATION_ISQUERY);
+	factory->createEAttribute_in_EContainingClass(operationEClass, OPERATION_ISUNIQUE);
+	factory->createEAttribute_in_EContainingClass(operationEClass, OPERATION_LOWER);
+	factory->createEAttribute_in_EContainingClass(operationEClass, OPERATION_UPPER);
 	
-	createEReference(operationEClass, OPERATION_BODYCONDITION);
-	createEReference(operationEClass, OPERATION_CLASS);
-	createEReference(operationEClass, OPERATION_DATATYPE);
-	createEReference(operationEClass, OPERATION_INTERFACE);
-	createEReference(operationEClass, OPERATION_POSTCONDITION);
-	createEReference(operationEClass, OPERATION_PRECONDITION);
-	createEReference(operationEClass, OPERATION_REDEFINEDOPERATION);
-	createEReference(operationEClass, OPERATION_TYPE);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_BODYCONDITION);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_CLASS);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_DATATYPE);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_INTERFACE);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_POSTCONDITION);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_PRECONDITION);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_REDEFINEDOPERATION);
+	factory->createEReference_in_EContainingClass(operationEClass, OPERATION_TYPE);
 	
-	createEOperation(operationEClass, OPERATION___AT_MOST_ONE_RETURN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(operationEClass, OPERATION___GETLOWER);
-	createEOperation(operationEClass, OPERATION___GETRETURNRESULT);
-	createEOperation(operationEClass, OPERATION___GETTYPE);
-	createEOperation(operationEClass, OPERATION___GETUPPER);
-	createEOperation(operationEClass, OPERATION___ISORDERED);
-	createEOperation(operationEClass, OPERATION___ISUNIQUE);
-	createEOperation(operationEClass, OPERATION___ONLY_BODY_FOR_QUERY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(operationEClass, OPERATION___RETURNRESULT);
-	createEOperation(operationEClass, OPERATION___SETISORDERED__BOOLEAN);
-	createEOperation(operationEClass, OPERATION___SETISUNIQUE__BOOLEAN);
-	createEOperation(operationEClass, OPERATION___SETLOWER__INTEGER);
-	createEOperation(operationEClass, OPERATION___SETTYPE__TYPE);
-	createEOperation(operationEClass, OPERATION___SETUPPER__UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___AT_MOST_ONE_RETURN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___GETLOWER);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___GETRETURNRESULT);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___GETTYPE);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___GETUPPER);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___ISORDERED);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___ISUNIQUE);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___ONLY_BODY_FOR_QUERY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___RETURNRESULT);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___SETISORDERED__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___SETISUNIQUE__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___SETLOWER__INTEGER);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___SETTYPE__TYPE);
+	factory->createEOperation_in_EContainingClass(operationEClass, OPERATION___SETUPPER__UNLIMITEDNATURAL);
 	
 
-	operationTemplateParameterEClass = createEClass(OPERATIONTEMPLATEPARAMETER);
+	operationTemplateParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OPERATIONTEMPLATEPARAMETER);
 	
 	
-	createEOperation(operationTemplateParameterEClass, OPERATIONTEMPLATEPARAMETER___MATCH_DEFAULT_SIGNATURE__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(operationTemplateParameterEClass, OPERATIONTEMPLATEPARAMETER___MATCH_DEFAULT_SIGNATURE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	outputPinEClass = createEClass(OUTPUTPIN);
+	outputPinEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OUTPUTPIN);
+	
 	
-	createEReference(outputPinEClass, OUTPUTPIN_CALLACTION);
+	factory->createEReference_in_EContainingClass(outputPinEClass, OUTPUTPIN_CALLACTION);
 	
-	createEOperation(outputPinEClass, OUTPUTPIN___INCOMING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(outputPinEClass, OUTPUTPIN___INCOMING_EDGES_STRUCTURED_ONLY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	packageEClass = createEClass(PACKAGE);
-	createEAttribute(packageEClass, PACKAGE_URI);
+	packageEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PACKAGE);
 	
-	createEReference(packageEClass, PACKAGE_NESTEDPACKAGE);
-	createEReference(packageEClass, PACKAGE_NESTINGPACKAGE);
-	createEReference(packageEClass, PACKAGE_OWNEDSTEREOTYPE);
-	createEReference(packageEClass, PACKAGE_OWNEDTYPE);
-	createEReference(packageEClass, PACKAGE_PACKAGEMERGE);
-	createEReference(packageEClass, PACKAGE_PACKAGEDELEMENT);
-	createEReference(packageEClass, PACKAGE_PROFILEAPPLICATION);
+	factory->createEAttribute_in_EContainingClass(packageEClass, PACKAGE_URI);
 	
-	createEOperation(packageEClass, PACKAGE___ALLAPPLICABLESTEREOTYPES);
-	createEOperation(packageEClass, PACKAGE___APPLYPROFILE__PROFILE);
-	createEOperation(packageEClass, PACKAGE___CONTAININGPROFILE);
-	createEOperation(packageEClass, PACKAGE___CREATEOWNEDCLASS__STRING_BOOLEAN);
-	createEOperation(packageEClass, PACKAGE___CREATEOWNEDENUMERATION__STRING);
-	createEOperation(packageEClass, PACKAGE___CREATEOWNEDINTERFACE__STRING);
-	createEOperation(packageEClass, PACKAGE___CREATEOWNEDPRIMITIVETYPE__STRING);
-	createEOperation(packageEClass, PACKAGE___CREATEOWNEDSTEREOTYPE__STRING_BOOLEAN);
-	createEOperation(packageEClass, PACKAGE___ELEMENTS_PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(packageEClass, PACKAGE___GETALLAPPLIEDPROFILES);
-	createEOperation(packageEClass, PACKAGE___GETALLPROFILEAPPLICATIONS);
-	createEOperation(packageEClass, PACKAGE___GETAPPLIEDPROFILE__STRING);
-	createEOperation(packageEClass, PACKAGE___GETAPPLIEDPROFILE__STRING_BOOLEAN);
-	createEOperation(packageEClass, PACKAGE___GETAPPLIEDPROFILES);
-	createEOperation(packageEClass, PACKAGE___GETNESTEDPACKAGES);
-	createEOperation(packageEClass, PACKAGE___GETOWNEDSTEREOTYPES);
-	createEOperation(packageEClass, PACKAGE___GETOWNEDTYPES);
-	createEOperation(packageEClass, PACKAGE___GETPROFILEAPPLICATION__PROFILE);
-	createEOperation(packageEClass, PACKAGE___GETPROFILEAPPLICATION__PROFILE_BOOLEAN);
-	createEOperation(packageEClass, PACKAGE___ISMODELLIBRARY);
-	createEOperation(packageEClass, PACKAGE___ISPROFILEAPPLIED__PROFILE);
-	createEOperation(packageEClass, PACKAGE___MAKESVISIBLE__NAMEDELEMENT);
-	createEOperation(packageEClass, PACKAGE___UNAPPLYPROFILE__PROFILE);
-	createEOperation(packageEClass, PACKAGE___VISIBLEMEMBERS);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_NESTEDPACKAGE);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_NESTINGPACKAGE);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_OWNEDSTEREOTYPE);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_OWNEDTYPE);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_PACKAGEMERGE);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_PACKAGEDELEMENT);
+	factory->createEReference_in_EContainingClass(packageEClass, PACKAGE_PROFILEAPPLICATION);
 	
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___ALLAPPLICABLESTEREOTYPES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___APPLYPROFILE__PROFILE);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CONTAININGPROFILE);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CREATEOWNEDCLASS__STRING_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CREATEOWNEDENUMERATION__STRING);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CREATEOWNEDINTERFACE__STRING);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CREATEOWNEDPRIMITIVETYPE__STRING);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___CREATEOWNEDSTEREOTYPE__STRING_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___ELEMENTS_PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETALLAPPLIEDPROFILES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETALLPROFILEAPPLICATIONS);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETAPPLIEDPROFILE__STRING);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETAPPLIEDPROFILE__STRING_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETAPPLIEDPROFILES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETNESTEDPACKAGES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETOWNEDSTEREOTYPES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETOWNEDTYPES);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETPROFILEAPPLICATION__PROFILE);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___GETPROFILEAPPLICATION__PROFILE_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___ISMODELLIBRARY);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___ISPROFILEAPPLIED__PROFILE);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___MAKESVISIBLE__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___UNAPPLYPROFILE__PROFILE);
+	factory->createEOperation_in_EContainingClass(packageEClass, PACKAGE___VISIBLEMEMBERS);
+	
 
-	packageImportEClass = createEClass(PACKAGEIMPORT);
-	createEAttribute(packageImportEClass, PACKAGEIMPORT_VISIBILITY);
+	packageImportEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PACKAGEIMPORT);
+	
+	factory->createEAttribute_in_EContainingClass(packageImportEClass, PACKAGEIMPORT_VISIBILITY);
 	
-	createEReference(packageImportEClass, PACKAGEIMPORT_IMPORTEDPACKAGE);
-	createEReference(packageImportEClass, PACKAGEIMPORT_IMPORTINGNAMESPACE);
+	factory->createEReference_in_EContainingClass(packageImportEClass, PACKAGEIMPORT_IMPORTEDPACKAGE);
+	factory->createEReference_in_EContainingClass(packageImportEClass, PACKAGEIMPORT_IMPORTINGNAMESPACE);
 	
-	createEOperation(packageImportEClass, PACKAGEIMPORT___PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(packageImportEClass, PACKAGEIMPORT___PUBLIC_OR_PRIVATE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	packageMergeEClass = createEClass(PACKAGEMERGE);
+	packageMergeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PACKAGEMERGE);
 	
-	createEReference(packageMergeEClass, PACKAGEMERGE_MERGEDPACKAGE);
-	createEReference(packageMergeEClass, PACKAGEMERGE_RECEIVINGPACKAGE);
 	
+	factory->createEReference_in_EContainingClass(packageMergeEClass, PACKAGEMERGE_MERGEDPACKAGE);
+	factory->createEReference_in_EContainingClass(packageMergeEClass, PACKAGEMERGE_RECEIVINGPACKAGE);
 	
+	
 
-	packageableElementEClass = createEClass(PACKAGEABLEELEMENT);
+	packageableElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PACKAGEABLEELEMENT);
+	
 	
-	createEReference(packageableElementEClass, PACKAGEABLEELEMENT_OWNINGPACKAGE);
+	factory->createEReference_in_EContainingClass(packageableElementEClass, PACKAGEABLEELEMENT_OWNINGPACKAGE);
 	
-	createEOperation(packageableElementEClass, PACKAGEABLEELEMENT___NAMESPACE_NEEDS_VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(packageableElementEClass, PACKAGEABLEELEMENT___NAMESPACE_NEEDS_VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	parameterEClass = createEClass(PARAMETER);
-	createEAttribute(parameterEClass, PARAMETER_DEFAULT);
-	createEAttribute(parameterEClass, PARAMETER_DIRECTION);
-	createEAttribute(parameterEClass, PARAMETER_EFFECT);
-	createEAttribute(parameterEClass, PARAMETER_ISEXCEPTION);
-	createEAttribute(parameterEClass, PARAMETER_ISSTREAM);
+	parameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETER);
 	
-	createEReference(parameterEClass, PARAMETER_BEHAVIOR);
-	createEReference(parameterEClass, PARAMETER_DEFAULTVALUE);
-	createEReference(parameterEClass, PARAMETER_OPERATION);
-	createEReference(parameterEClass, PARAMETER_PARAMETERSET);
+	factory->createEAttribute_in_EContainingClass(parameterEClass, PARAMETER_DEFAULT);
+	factory->createEAttribute_in_EContainingClass(parameterEClass, PARAMETER_DIRECTION);
+	factory->createEAttribute_in_EContainingClass(parameterEClass, PARAMETER_EFFECT);
+	factory->createEAttribute_in_EContainingClass(parameterEClass, PARAMETER_ISEXCEPTION);
+	factory->createEAttribute_in_EContainingClass(parameterEClass, PARAMETER_ISSTREAM);
 	
-	createEOperation(parameterEClass, PARAMETER___CONNECTOR_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___IN_AND_OUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___ISSETDEFAULT);
-	createEOperation(parameterEClass, PARAMETER___NOT_EXCEPTION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___OBJECT_EFFECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___REENTRANT_BEHAVIORS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___SETBOOLEANDEFAULTVALUE__BOOLEAN);
-	createEOperation(parameterEClass, PARAMETER___SETINTEGERDEFAULTVALUE__INTEGER);
-	createEOperation(parameterEClass, PARAMETER___SETNULLDEFAULTVALUE);
-	createEOperation(parameterEClass, PARAMETER___SETREALDEFAULTVALUE__REAL);
-	createEOperation(parameterEClass, PARAMETER___SETSTRINGDEFAULTVALUE__STRING);
-	createEOperation(parameterEClass, PARAMETER___SETUNLIMITEDNATURALDEFAULTVALUE__UNLIMITEDNATURAL);
-	createEOperation(parameterEClass, PARAMETER___STREAM_AND_EXCEPTION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterEClass, PARAMETER___UNSETDEFAULT);
+	factory->createEReference_in_EContainingClass(parameterEClass, PARAMETER_BEHAVIOR);
+	factory->createEReference_in_EContainingClass(parameterEClass, PARAMETER_DEFAULTVALUE);
+	factory->createEReference_in_EContainingClass(parameterEClass, PARAMETER_OPERATION);
+	factory->createEReference_in_EContainingClass(parameterEClass, PARAMETER_PARAMETERSET);
 	
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___CONNECTOR_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___IN_AND_OUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___ISSETDEFAULT);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___NOT_EXCEPTION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___OBJECT_EFFECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___REENTRANT_BEHAVIORS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETBOOLEANDEFAULTVALUE__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETINTEGERDEFAULTVALUE__INTEGER);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETNULLDEFAULTVALUE);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETREALDEFAULTVALUE__REAL);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETSTRINGDEFAULTVALUE__STRING);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___SETUNLIMITEDNATURALDEFAULTVALUE__UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___STREAM_AND_EXCEPTION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterEClass, PARAMETER___UNSETDEFAULT);
+	
 
-	parameterSetEClass = createEClass(PARAMETERSET);
+	parameterSetEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETERSET);
+	
 	
-	createEReference(parameterSetEClass, PARAMETERSET_CONDITION);
-	createEReference(parameterSetEClass, PARAMETERSET_PARAMETER);
+	factory->createEReference_in_EContainingClass(parameterSetEClass, PARAMETERSET_CONDITION);
+	factory->createEReference_in_EContainingClass(parameterSetEClass, PARAMETERSET_PARAMETER);
 	
-	createEOperation(parameterSetEClass, PARAMETERSET___INPUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterSetEClass, PARAMETERSET___SAME_PARAMETERIZED_ENTITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(parameterSetEClass, PARAMETERSET___TWO_PARAMETER_SETS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterSetEClass, PARAMETERSET___INPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterSetEClass, PARAMETERSET___SAME_PARAMETERIZED_ENTITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(parameterSetEClass, PARAMETERSET___TWO_PARAMETER_SETS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	parameterableElementEClass = createEClass(PARAMETERABLEELEMENT);
+	parameterableElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETERABLEELEMENT);
 	
-	createEReference(parameterableElementEClass, PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER);
-	createEReference(parameterableElementEClass, PARAMETERABLEELEMENT_TEMPLATEPARAMETER);
 	
-	createEOperation(parameterableElementEClass, PARAMETERABLEELEMENT___ISCOMPATIBLEWITH__PARAMETERABLEELEMENT);
-	createEOperation(parameterableElementEClass, PARAMETERABLEELEMENT___ISTEMPLATEPARAMETER);
+	factory->createEReference_in_EContainingClass(parameterableElementEClass, PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER);
+	factory->createEReference_in_EContainingClass(parameterableElementEClass, PARAMETERABLEELEMENT_TEMPLATEPARAMETER);
 	
+	factory->createEOperation_in_EContainingClass(parameterableElementEClass, PARAMETERABLEELEMENT___ISCOMPATIBLEWITH__PARAMETERABLEELEMENT);
+	factory->createEOperation_in_EContainingClass(parameterableElementEClass, PARAMETERABLEELEMENT___ISTEMPLATEPARAMETER);
+	
 
-	partDecompositionEClass = createEClass(PARTDECOMPOSITION);
+	partDecompositionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARTDECOMPOSITION);
+	
 	
 	
-	createEOperation(partDecompositionEClass, PARTDECOMPOSITION___ASSUME__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(partDecompositionEClass, PARTDECOMPOSITION___COMMUTATIVITY_OF_DECOMPOSITION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(partDecompositionEClass, PARTDECOMPOSITION___PARTS_OF_INTERNAL_STRUCTURES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(partDecompositionEClass, PARTDECOMPOSITION___ASSUME__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(partDecompositionEClass, PARTDECOMPOSITION___COMMUTATIVITY_OF_DECOMPOSITION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(partDecompositionEClass, PARTDECOMPOSITION___PARTS_OF_INTERNAL_STRUCTURES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	pinEClass = createEClass(PIN);
-	createEAttribute(pinEClass, PIN_ISCONTROL);
+	pinEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PIN);
 	
+	factory->createEAttribute_in_EContainingClass(pinEClass, PIN_ISCONTROL);
 	
-	createEOperation(pinEClass, PIN___CONTROL_PINS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pinEClass, PIN___NOT_UNIQUE__EDIAGNOSTICCHAIN_EMAP);
 	
+	factory->createEOperation_in_EContainingClass(pinEClass, PIN___CONTROL_PINS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pinEClass, PIN___NOT_UNIQUE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	portEClass = createEClass(PORT);
-	createEAttribute(portEClass, PORT_ISBEHAVIOR);
-	createEAttribute(portEClass, PORT_ISCONJUGATED);
-	createEAttribute(portEClass, PORT_ISSERVICE);
+	portEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PORT);
+	
+	factory->createEAttribute_in_EContainingClass(portEClass, PORT_ISBEHAVIOR);
+	factory->createEAttribute_in_EContainingClass(portEClass, PORT_ISCONJUGATED);
+	factory->createEAttribute_in_EContainingClass(portEClass, PORT_ISSERVICE);
 	
-	createEReference(portEClass, PORT_PROTOCOL);
-	createEReference(portEClass, PORT_PROVIDED);
-	createEReference(portEClass, PORT_REDEFINEDPORT);
-	createEReference(portEClass, PORT_REQUIRED);
+	factory->createEReference_in_EContainingClass(portEClass, PORT_PROTOCOL);
+	factory->createEReference_in_EContainingClass(portEClass, PORT_PROVIDED);
+	factory->createEReference_in_EContainingClass(portEClass, PORT_REDEFINEDPORT);
+	factory->createEReference_in_EContainingClass(portEClass, PORT_REQUIRED);
 	
-	createEOperation(portEClass, PORT___BASICPROVIDED);
-	createEOperation(portEClass, PORT___BASICREQUIRED);
-	createEOperation(portEClass, PORT___DEFAULT_VALUE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(portEClass, PORT___ENCAPSULATED_OWNER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(portEClass, PORT___GETPROVIDEDS);
-	createEOperation(portEClass, PORT___GETREQUIREDS);
-	createEOperation(portEClass, PORT___PORT_AGGREGATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___BASICPROVIDED);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___BASICREQUIRED);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___DEFAULT_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___ENCAPSULATED_OWNER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___GETPROVIDEDS);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___GETREQUIREDS);
+	factory->createEOperation_in_EContainingClass(portEClass, PORT___PORT_AGGREGATION__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	primitiveTypeEClass = createEClass(PRIMITIVETYPE);
+	primitiveTypeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PRIMITIVETYPE);
 	
 	
 	
+	
 
-	profileEClass = createEClass(PROFILE);
+	profileEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROFILE);
+	
 	
-	createEReference(profileEClass, PROFILE_METACLASSREFERENCE);
-	createEReference(profileEClass, PROFILE_METAMODELREFERENCE);
+	factory->createEReference_in_EContainingClass(profileEClass, PROFILE_METACLASSREFERENCE);
+	factory->createEReference_in_EContainingClass(profileEClass, PROFILE_METAMODELREFERENCE);
 	
-	createEOperation(profileEClass, PROFILE___CREATE__CLASSIFIER);
-	createEOperation(profileEClass, PROFILE___DEFINE);
-	createEOperation(profileEClass, PROFILE___DEFINE__EMAP_EMAP);
-	createEOperation(profileEClass, PROFILE___GETDEFINITION);
-	createEOperation(profileEClass, PROFILE___GETDEFINITION__NAMEDELEMENT);
-	createEOperation(profileEClass, PROFILE___GETOWNEDEXTENSIONS__BOOLEAN);
-	createEOperation(profileEClass, PROFILE___GETREFERENCEDMETACLASSES);
-	createEOperation(profileEClass, PROFILE___GETREFERENCEDMETAMODELS);
-	createEOperation(profileEClass, PROFILE___ISDEFINED);
-	createEOperation(profileEClass, PROFILE___METACLASS_REFERENCE_NOT_SPECIALIZED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(profileEClass, PROFILE___REFERENCES_SAME_METAMODEL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___CREATE__CLASSIFIER);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___DEFINE);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___DEFINE__EMAP_EMAP);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___GETDEFINITION);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___GETDEFINITION__NAMEDELEMENT);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___GETOWNEDEXTENSIONS__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___GETREFERENCEDMETACLASSES);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___GETREFERENCEDMETAMODELS);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___ISDEFINED);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___METACLASS_REFERENCE_NOT_SPECIALIZED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(profileEClass, PROFILE___REFERENCES_SAME_METAMODEL__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	profileApplicationEClass = createEClass(PROFILEAPPLICATION);
-	createEAttribute(profileApplicationEClass, PROFILEAPPLICATION_ISSTRICT);
+	profileApplicationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROFILEAPPLICATION);
 	
-	createEReference(profileApplicationEClass, PROFILEAPPLICATION_APPLIEDPROFILE);
-	createEReference(profileApplicationEClass, PROFILEAPPLICATION_APPLYINGPACKAGE);
+	factory->createEAttribute_in_EContainingClass(profileApplicationEClass, PROFILEAPPLICATION_ISSTRICT);
 	
-	createEOperation(profileApplicationEClass, PROFILEAPPLICATION___GETAPPLIEDDEFINITION);
-	createEOperation(profileApplicationEClass, PROFILEAPPLICATION___GETAPPLIEDDEFINITION__NAMEDELEMENT);
+	factory->createEReference_in_EContainingClass(profileApplicationEClass, PROFILEAPPLICATION_APPLIEDPROFILE);
+	factory->createEReference_in_EContainingClass(profileApplicationEClass, PROFILEAPPLICATION_APPLYINGPACKAGE);
 	
+	factory->createEOperation_in_EContainingClass(profileApplicationEClass, PROFILEAPPLICATION___GETAPPLIEDDEFINITION);
+	factory->createEOperation_in_EContainingClass(profileApplicationEClass, PROFILEAPPLICATION___GETAPPLIEDDEFINITION__NAMEDELEMENT);
+	
 
-	propertyEClass = createEClass(PROPERTY);
-	createEAttribute(propertyEClass, PROPERTY_AGGREGATION);
-	createEAttribute(propertyEClass, PROPERTY_DEFAULT);
-	createEAttribute(propertyEClass, PROPERTY_ISCOMPOSITE);
-	createEAttribute(propertyEClass, PROPERTY_ISDERIVED);
-	createEAttribute(propertyEClass, PROPERTY_ISDERIVEDUNION);
-	createEAttribute(propertyEClass, PROPERTY_ISID);
+	propertyEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROPERTY);
+	
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_AGGREGATION);
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_DEFAULT);
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_ISCOMPOSITE);
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_ISDERIVED);
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_ISDERIVEDUNION);
+	factory->createEAttribute_in_EContainingClass(propertyEClass, PROPERTY_ISID);
 	
-	createEReference(propertyEClass, PROPERTY_ASSOCIATION);
-	createEReference(propertyEClass, PROPERTY_ASSOCIATIONEND);
-	createEReference(propertyEClass, PROPERTY_CLASS);
-	createEReference(propertyEClass, PROPERTY_DATATYPE);
-	createEReference(propertyEClass, PROPERTY_DEFAULTVALUE);
-	createEReference(propertyEClass, PROPERTY_INTERFACE);
-	createEReference(propertyEClass, PROPERTY_OPPOSITE);
-	createEReference(propertyEClass, PROPERTY_OWNINGASSOCIATION);
-	createEReference(propertyEClass, PROPERTY_QUALIFIER);
-	createEReference(propertyEClass, PROPERTY_REDEFINEDPROPERTY);
-	createEReference(propertyEClass, PROPERTY_SUBSETTEDPROPERTY);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_ASSOCIATION);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_ASSOCIATIONEND);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_CLASS);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_DATATYPE);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_DEFAULTVALUE);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_INTERFACE);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_OPPOSITE);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_OWNINGASSOCIATION);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_QUALIFIER);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_REDEFINEDPROPERTY);
+	factory->createEReference_in_EContainingClass(propertyEClass, PROPERTY_SUBSETTEDPROPERTY);
 	
-	createEOperation(propertyEClass, PROPERTY___BINDING_TO_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___DERIVED_UNION_IS_DERIVED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___DERIVED_UNION_IS_READ_ONLY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___GETOPPOSITE);
-	createEOperation(propertyEClass, PROPERTY___GETOTHEREND);
-	createEOperation(propertyEClass, PROPERTY___ISATTRIBUTE);
-	createEOperation(propertyEClass, PROPERTY___ISCOMPOSITE);
-	createEOperation(propertyEClass, PROPERTY___ISNAVIGABLE);
-	createEOperation(propertyEClass, PROPERTY___ISSETDEFAULT);
-	createEOperation(propertyEClass, PROPERTY___MULTIPLICITY_OF_COMPOSITE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___QUALIFIED_IS_ASSOCIATION_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___REDEFINED_PROPERTY_INHERITED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___SETBOOLEANDEFAULTVALUE__BOOLEAN);
-	createEOperation(propertyEClass, PROPERTY___SETINTEGERDEFAULTVALUE__INTEGER);
-	createEOperation(propertyEClass, PROPERTY___SETISNAVIGABLE__BOOLEAN);
-	createEOperation(propertyEClass, PROPERTY___SETNULLDEFAULTVALUE);
-	createEOperation(propertyEClass, PROPERTY___SETREALDEFAULTVALUE__REAL);
-	createEOperation(propertyEClass, PROPERTY___SETSTRINGDEFAULTVALUE__STRING);
-	createEOperation(propertyEClass, PROPERTY___SETUNLIMITEDNATURALDEFAULTVALUE__UNLIMITEDNATURAL);
-	createEOperation(propertyEClass, PROPERTY___SUBSETTED_PROPERTY_NAMES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___SUBSETTINGCONTEXT);
-	createEOperation(propertyEClass, PROPERTY___SUBSETTING_CONTEXT_CONFORMS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___SUBSETTING_RULES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___TYPE_OF_OPPOSITE_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(propertyEClass, PROPERTY___UNSETDEFAULT);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___BINDING_TO_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___DEPLOYMENT_TARGET__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___DERIVED_UNION_IS_DERIVED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___DERIVED_UNION_IS_READ_ONLY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___GETOPPOSITE);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___GETOTHEREND);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___ISATTRIBUTE);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___ISCOMPOSITE);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___ISNAVIGABLE);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___ISSETDEFAULT);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___MULTIPLICITY_OF_COMPOSITE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___QUALIFIED_IS_ASSOCIATION_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___REDEFINED_PROPERTY_INHERITED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETBOOLEANDEFAULTVALUE__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETINTEGERDEFAULTVALUE__INTEGER);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETISNAVIGABLE__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETNULLDEFAULTVALUE);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETREALDEFAULTVALUE__REAL);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETSTRINGDEFAULTVALUE__STRING);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SETUNLIMITEDNATURALDEFAULTVALUE__UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SUBSETTED_PROPERTY_NAMES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SUBSETTINGCONTEXT);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SUBSETTING_CONTEXT_CONFORMS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___SUBSETTING_RULES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___TYPE_OF_OPPOSITE_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(propertyEClass, PROPERTY___UNSETDEFAULT);
 	
 
-	protocolConformanceEClass = createEClass(PROTOCOLCONFORMANCE);
+	protocolConformanceEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROTOCOLCONFORMANCE);
 	
-	createEReference(protocolConformanceEClass, PROTOCOLCONFORMANCE_GENERALMACHINE);
-	createEReference(protocolConformanceEClass, PROTOCOLCONFORMANCE_SPECIFICMACHINE);
 	
+	factory->createEReference_in_EContainingClass(protocolConformanceEClass, PROTOCOLCONFORMANCE_GENERALMACHINE);
+	factory->createEReference_in_EContainingClass(protocolConformanceEClass, PROTOCOLCONFORMANCE_SPECIFICMACHINE);
 	
+	
 
-	protocolStateMachineEClass = createEClass(PROTOCOLSTATEMACHINE);
+	protocolStateMachineEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROTOCOLSTATEMACHINE);
+	
 	
-	createEReference(protocolStateMachineEClass, PROTOCOLSTATEMACHINE_CONFORMANCE);
+	factory->createEReference_in_EContainingClass(protocolStateMachineEClass, PROTOCOLSTATEMACHINE_CONFORMANCE);
 	
-	createEOperation(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___DEEP_OR_SHALLOW_HISTORY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___ENTRY_EXIT_DO__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___PROTOCOL_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___DEEP_OR_SHALLOW_HISTORY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___ENTRY_EXIT_DO__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(protocolStateMachineEClass, PROTOCOLSTATEMACHINE___PROTOCOL_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	protocolTransitionEClass = createEClass(PROTOCOLTRANSITION);
+	protocolTransitionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PROTOCOLTRANSITION);
 	
-	createEReference(protocolTransitionEClass, PROTOCOLTRANSITION_POSTCONDITION);
-	createEReference(protocolTransitionEClass, PROTOCOLTRANSITION_PRECONDITION);
-	createEReference(protocolTransitionEClass, PROTOCOLTRANSITION_REFERRED);
 	
-	createEOperation(protocolTransitionEClass, PROTOCOLTRANSITION___ASSOCIATED_ACTIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(protocolTransitionEClass, PROTOCOLTRANSITION___BELONGS_TO_PSM__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(protocolTransitionEClass, PROTOCOLTRANSITION___GETREFERREDS);
-	createEOperation(protocolTransitionEClass, PROTOCOLTRANSITION___REFERS_TO_OPERATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION_POSTCONDITION);
+	factory->createEReference_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION_PRECONDITION);
+	factory->createEReference_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION_REFERRED);
 	
+	factory->createEOperation_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION___ASSOCIATED_ACTIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION___BELONGS_TO_PSM__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION___GETREFERREDS);
+	factory->createEOperation_in_EContainingClass(protocolTransitionEClass, PROTOCOLTRANSITION___REFERS_TO_OPERATION__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	pseudostateEClass = createEClass(PSEUDOSTATE);
-	createEAttribute(pseudostateEClass, PSEUDOSTATE_KIND);
+	pseudostateEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PSEUDOSTATE);
+	
+	factory->createEAttribute_in_EContainingClass(pseudostateEClass, PSEUDOSTATE_KIND);
 	
-	createEReference(pseudostateEClass, PSEUDOSTATE_STATE);
-	createEReference(pseudostateEClass, PSEUDOSTATE_STATEMACHINE);
+	factory->createEReference_in_EContainingClass(pseudostateEClass, PSEUDOSTATE_STATE);
+	factory->createEReference_in_EContainingClass(pseudostateEClass, PSEUDOSTATE_STATEMACHINE);
 	
-	createEOperation(pseudostateEClass, PSEUDOSTATE___CHOICE_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___FORK_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___HISTORY_VERTICES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___INITIAL_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___JOIN_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___JUNCTION_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___OUTGOING_FROM_INITIAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___TRANSITIONS_INCOMING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(pseudostateEClass, PSEUDOSTATE___TRANSITIONS_OUTGOING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___CHOICE_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___FORK_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___HISTORY_VERTICES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___INITIAL_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___JOIN_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___JUNCTION_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___OUTGOING_FROM_INITIAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___TRANSITIONS_INCOMING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(pseudostateEClass, PSEUDOSTATE___TRANSITIONS_OUTGOING__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	qualifierValueEClass = createEClass(QUALIFIERVALUE);
+	qualifierValueEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), QUALIFIERVALUE);
 	
-	createEReference(qualifierValueEClass, QUALIFIERVALUE_QUALIFIER);
-	createEReference(qualifierValueEClass, QUALIFIERVALUE_VALUE);
 	
-	createEOperation(qualifierValueEClass, QUALIFIERVALUE___MULTIPLICITY_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(qualifierValueEClass, QUALIFIERVALUE___QUALIFIER_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(qualifierValueEClass, QUALIFIERVALUE___TYPE_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(qualifierValueEClass, QUALIFIERVALUE_QUALIFIER);
+	factory->createEReference_in_EContainingClass(qualifierValueEClass, QUALIFIERVALUE_VALUE);
 	
+	factory->createEOperation_in_EContainingClass(qualifierValueEClass, QUALIFIERVALUE___MULTIPLICITY_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(qualifierValueEClass, QUALIFIERVALUE___QUALIFIER_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(qualifierValueEClass, QUALIFIERVALUE___TYPE_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	raiseExceptionActionEClass = createEClass(RAISEEXCEPTIONACTION);
+	raiseExceptionActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), RAISEEXCEPTIONACTION);
+	
 	
-	createEReference(raiseExceptionActionEClass, RAISEEXCEPTIONACTION_EXCEPTION);
+	factory->createEReference_in_EContainingClass(raiseExceptionActionEClass, RAISEEXCEPTIONACTION_EXCEPTION);
 	
 	
 
-	readExtentActionEClass = createEClass(READEXTENTACTION);
+	readExtentActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READEXTENTACTION);
 	
-	createEReference(readExtentActionEClass, READEXTENTACTION_CLASSIFIER);
-	createEReference(readExtentActionEClass, READEXTENTACTION_RESULT);
 	
-	createEOperation(readExtentActionEClass, READEXTENTACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readExtentActionEClass, READEXTENTACTION___TYPE_IS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(readExtentActionEClass, READEXTENTACTION_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(readExtentActionEClass, READEXTENTACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(readExtentActionEClass, READEXTENTACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readExtentActionEClass, READEXTENTACTION___TYPE_IS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	readIsClassifiedObjectActionEClass = createEClass(READISCLASSIFIEDOBJECTACTION);
-	createEAttribute(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_ISDIRECT);
+	readIsClassifiedObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READISCLASSIFIEDOBJECTACTION);
+	
+	factory->createEAttribute_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_ISDIRECT);
 	
-	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_CLASSIFIER);
-	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_OBJECT);
-	createEReference(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_RESULT);
+	factory->createEReference_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION_RESULT);
 	
-	createEOperation(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___BOOLEAN_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___MULTIPLICITY_OF_INPUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___MULTIPLICITY_OF_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___BOOLEAN_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___MULTIPLICITY_OF_INPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___MULTIPLICITY_OF_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readIsClassifiedObjectActionEClass, READISCLASSIFIEDOBJECTACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	readLinkActionEClass = createEClass(READLINKACTION);
+	readLinkActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READLINKACTION);
 	
-	createEReference(readLinkActionEClass, READLINKACTION_RESULT);
 	
-	createEOperation(readLinkActionEClass, READLINKACTION___COMPATIBLE_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkActionEClass, READLINKACTION___NAVIGABLE_OPEN_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkActionEClass, READLINKACTION___ONE_OPEN_END__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkActionEClass, READLINKACTION___OPENEND);
-	createEOperation(readLinkActionEClass, READLINKACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkActionEClass, READLINKACTION___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(readLinkActionEClass, READLINKACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___COMPATIBLE_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___NAVIGABLE_OPEN_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___ONE_OPEN_END__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___OPENEND);
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkActionEClass, READLINKACTION___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	readLinkObjectEndActionEClass = createEClass(READLINKOBJECTENDACTION);
+	readLinkObjectEndActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READLINKOBJECTENDACTION);
 	
-	createEReference(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_END);
-	createEReference(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_OBJECT);
-	createEReference(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_RESULT);
 	
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___ASSOCIATION_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___ENDS_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___PROPERTY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_END);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___ASSOCIATION_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___ENDS_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___PROPERTY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndActionEClass, READLINKOBJECTENDACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	readLinkObjectEndQualifierActionEClass = createEClass(READLINKOBJECTENDQUALIFIERACTION);
+	readLinkObjectEndQualifierActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READLINKOBJECTENDQUALIFIERACTION);
+	
 	
-	createEReference(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_OBJECT);
-	createEReference(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_QUALIFIER);
-	createEReference(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_RESULT);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_QUALIFIER);
+	factory->createEReference_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION_RESULT);
 	
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___ASSOCIATION_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___ENDS_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___QUALIFIER_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___ASSOCIATION_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___ENDS_OF_ASSOCIATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_QUALIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___QUALIFIER_ATTRIBUTE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___SAME_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readLinkObjectEndQualifierActionEClass, READLINKOBJECTENDQUALIFIERACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	readSelfActionEClass = createEClass(READSELFACTION);
+	readSelfActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READSELFACTION);
 	
-	createEReference(readSelfActionEClass, READSELFACTION_RESULT);
 	
-	createEOperation(readSelfActionEClass, READSELFACTION___CONTAINED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readSelfActionEClass, READSELFACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readSelfActionEClass, READSELFACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readSelfActionEClass, READSELFACTION___TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(readSelfActionEClass, READSELFACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(readSelfActionEClass, READSELFACTION___CONTAINED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readSelfActionEClass, READSELFACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readSelfActionEClass, READSELFACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readSelfActionEClass, READSELFACTION___TYPE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	readStructuralFeatureActionEClass = createEClass(READSTRUCTURALFEATUREACTION);
+	readStructuralFeatureActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READSTRUCTURALFEATUREACTION);
+	
 	
-	createEReference(readStructuralFeatureActionEClass, READSTRUCTURALFEATUREACTION_RESULT);
+	factory->createEReference_in_EContainingClass(readStructuralFeatureActionEClass, READSTRUCTURALFEATUREACTION_RESULT);
 	
-	createEOperation(readStructuralFeatureActionEClass, READSTRUCTURALFEATUREACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readStructuralFeatureActionEClass, READSTRUCTURALFEATUREACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	readVariableActionEClass = createEClass(READVARIABLEACTION);
+	readVariableActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), READVARIABLEACTION);
 	
-	createEReference(readVariableActionEClass, READVARIABLEACTION_RESULT);
 	
-	createEOperation(readVariableActionEClass, READVARIABLEACTION___COMPATIBLE_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(readVariableActionEClass, READVARIABLEACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(readVariableActionEClass, READVARIABLEACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(readVariableActionEClass, READVARIABLEACTION___COMPATIBLE_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(readVariableActionEClass, READVARIABLEACTION___TYPE_AND_ORDERING__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	realizationEClass = createEClass(REALIZATION);
+	realizationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REALIZATION);
+	
 	
 	
 	
 
-	receptionEClass = createEClass(RECEPTION);
+	receptionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), RECEPTION);
 	
-	createEReference(receptionEClass, RECEPTION_SIGNAL);
 	
-	createEOperation(receptionEClass, RECEPTION___SAME_NAME_AS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(receptionEClass, RECEPTION___SAME_STRUCTURE_AS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(receptionEClass, RECEPTION_SIGNAL);
 	
+	factory->createEOperation_in_EContainingClass(receptionEClass, RECEPTION___SAME_NAME_AS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(receptionEClass, RECEPTION___SAME_STRUCTURE_AS_SIGNAL__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	reclassifyObjectActionEClass = createEClass(RECLASSIFYOBJECTACTION);
-	createEAttribute(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_ISREPLACEALL);
+	reclassifyObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), RECLASSIFYOBJECTACTION);
+	
+	factory->createEAttribute_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_ISREPLACEALL);
 	
-	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_NEWCLASSIFIER);
-	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OBJECT);
-	createEReference(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OLDCLASSIFIER);
+	factory->createEReference_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_NEWCLASSIFIER);
+	factory->createEReference_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION_OLDCLASSIFIER);
 	
-	createEOperation(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___CLASSIFIER_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___CLASSIFIER_NOT_ABSTRACT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___INPUT_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(reclassifyObjectActionEClass, RECLASSIFYOBJECTACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	redefinableElementEClass = createEClass(REDEFINABLEELEMENT);
-	createEAttribute(redefinableElementEClass, REDEFINABLEELEMENT_ISLEAF);
+	redefinableElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REDEFINABLEELEMENT);
 	
-	createEReference(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINEDELEMENT);
-	createEReference(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINITIONCONTEXT);
+	factory->createEAttribute_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT_ISLEAF);
 	
-	createEOperation(redefinableElementEClass, REDEFINABLEELEMENT___ISCONSISTENTWITH__REDEFINABLEELEMENT);
-	createEOperation(redefinableElementEClass, REDEFINABLEELEMENT___ISREDEFINITIONCONTEXTVALID__REDEFINABLEELEMENT);
-	createEOperation(redefinableElementEClass, REDEFINABLEELEMENT___NON_LEAF_REDEFINITION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(redefinableElementEClass, REDEFINABLEELEMENT___REDEFINITION_CONSISTENT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(redefinableElementEClass, REDEFINABLEELEMENT___REDEFINITION_CONTEXT_VALID__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINEDELEMENT);
+	factory->createEReference_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT_REDEFINITIONCONTEXT);
 	
+	factory->createEOperation_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT___ISCONSISTENTWITH__REDEFINABLEELEMENT);
+	factory->createEOperation_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT___ISREDEFINITIONCONTEXTVALID__REDEFINABLEELEMENT);
+	factory->createEOperation_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT___NON_LEAF_REDEFINITION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT___REDEFINITION_CONSISTENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(redefinableElementEClass, REDEFINABLEELEMENT___REDEFINITION_CONTEXT_VALID__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	redefinableTemplateSignatureEClass = createEClass(REDEFINABLETEMPLATESIGNATURE);
+	redefinableTemplateSignatureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REDEFINABLETEMPLATESIGNATURE);
+	
 	
-	createEReference(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_CLASSIFIER);
-	createEReference(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_EXTENDEDSIGNATURE);
-	createEReference(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_INHERITEDPARAMETER);
+	factory->createEReference_in_EContainingClass(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_CLASSIFIER);
+	factory->createEReference_in_EContainingClass(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_EXTENDEDSIGNATURE);
+	factory->createEReference_in_EContainingClass(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE_INHERITEDPARAMETER);
 	
-	createEOperation(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE___GETINHERITEDPARAMETERS);
-	createEOperation(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE___REDEFINES_PARENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE___GETINHERITEDPARAMETERS);
+	factory->createEOperation_in_EContainingClass(redefinableTemplateSignatureEClass, REDEFINABLETEMPLATESIGNATURE___REDEFINES_PARENTS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	reduceActionEClass = createEClass(REDUCEACTION);
-	createEAttribute(reduceActionEClass, REDUCEACTION_ISORDERED);
+	reduceActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REDUCEACTION);
 	
-	createEReference(reduceActionEClass, REDUCEACTION_COLLECTION);
-	createEReference(reduceActionEClass, REDUCEACTION_REDUCER);
-	createEReference(reduceActionEClass, REDUCEACTION_RESULT);
+	factory->createEAttribute_in_EContainingClass(reduceActionEClass, REDUCEACTION_ISORDERED);
 	
-	createEOperation(reduceActionEClass, REDUCEACTION___INPUT_TYPE_IS_COLLECTION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(reduceActionEClass, REDUCEACTION___OUTPUT_TYPES_ARE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(reduceActionEClass, REDUCEACTION___REDUCER_INPUTS_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(reduceActionEClass, REDUCEACTION_COLLECTION);
+	factory->createEReference_in_EContainingClass(reduceActionEClass, REDUCEACTION_REDUCER);
+	factory->createEReference_in_EContainingClass(reduceActionEClass, REDUCEACTION_RESULT);
 	
+	factory->createEOperation_in_EContainingClass(reduceActionEClass, REDUCEACTION___INPUT_TYPE_IS_COLLECTION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(reduceActionEClass, REDUCEACTION___OUTPUT_TYPES_ARE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(reduceActionEClass, REDUCEACTION___REDUCER_INPUTS_OUTPUT__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	regionEClass = createEClass(REGION);
+	regionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REGION);
+	
 	
-	createEReference(regionEClass, REGION_EXTENDEDREGION);
-	createEReference(regionEClass, REGION_STATE);
-	createEReference(regionEClass, REGION_STATEMACHINE);
-	createEReference(regionEClass, REGION_SUBVERTEX);
-	createEReference(regionEClass, REGION_TRANSITION);
+	factory->createEReference_in_EContainingClass(regionEClass, REGION_EXTENDEDREGION);
+	factory->createEReference_in_EContainingClass(regionEClass, REGION_STATE);
+	factory->createEReference_in_EContainingClass(regionEClass, REGION_STATEMACHINE);
+	factory->createEReference_in_EContainingClass(regionEClass, REGION_SUBVERTEX);
+	factory->createEReference_in_EContainingClass(regionEClass, REGION_TRANSITION);
 	
-	createEOperation(regionEClass, REGION___BELONGSTOPSM);
-	createEOperation(regionEClass, REGION___CONTAININGSTATEMACHINE);
-	createEOperation(regionEClass, REGION___DEEP_HISTORY_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(regionEClass, REGION___INITIAL_VERTEX__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(regionEClass, REGION___OWNED__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(regionEClass, REGION___REDEFINITIONCONTEXT);
-	createEOperation(regionEClass, REGION___SHALLOW_HISTORY_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___BELONGSTOPSM);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___CONTAININGSTATEMACHINE);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___DEEP_HISTORY_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___INITIAL_VERTEX__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___OWNED__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___REDEFINITIONCONTEXT);
+	factory->createEOperation_in_EContainingClass(regionEClass, REGION___SHALLOW_HISTORY_VERTEX__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	relationshipEClass = createEClass(RELATIONSHIP);
+	relationshipEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), RELATIONSHIP);
 	
-	createEReference(relationshipEClass, RELATIONSHIP_RELATEDELEMENT);
 	
+	factory->createEReference_in_EContainingClass(relationshipEClass, RELATIONSHIP_RELATEDELEMENT);
 	
+	
 
-	removeStructuralFeatureValueActionEClass = createEClass(REMOVESTRUCTURALFEATUREVALUEACTION);
-	createEAttribute(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_ISREMOVEDUPLICATES);
+	removeStructuralFeatureValueActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REMOVESTRUCTURALFEATUREVALUEACTION);
+	
+	factory->createEAttribute_in_EContainingClass(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_ISREMOVEDUPLICATES);
 	
-	createEReference(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_REMOVEAT);
+	factory->createEReference_in_EContainingClass(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION_REMOVEAT);
 	
-	createEOperation(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(removeStructuralFeatureValueActionEClass, REMOVESTRUCTURALFEATUREVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	removeVariableValueActionEClass = createEClass(REMOVEVARIABLEVALUEACTION);
-	createEAttribute(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_ISREMOVEDUPLICATES);
+	removeVariableValueActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REMOVEVARIABLEVALUEACTION);
 	
-	createEReference(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_REMOVEAT);
+	factory->createEAttribute_in_EContainingClass(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_ISREMOVEDUPLICATES);
 	
-	createEOperation(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION_REMOVEAT);
 	
+	factory->createEOperation_in_EContainingClass(removeVariableValueActionEClass, REMOVEVARIABLEVALUEACTION___REMOVEAT_AND_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	replyActionEClass = createEClass(REPLYACTION);
+	replyActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), REPLYACTION);
+	
 	
-	createEReference(replyActionEClass, REPLYACTION_REPLYTOCALL);
-	createEReference(replyActionEClass, REPLYACTION_REPLYVALUE);
-	createEReference(replyActionEClass, REPLYACTION_RETURNINFORMATION);
+	factory->createEReference_in_EContainingClass(replyActionEClass, REPLYACTION_REPLYTOCALL);
+	factory->createEReference_in_EContainingClass(replyActionEClass, REPLYACTION_REPLYVALUE);
+	factory->createEReference_in_EContainingClass(replyActionEClass, REPLYACTION_RETURNINFORMATION);
 	
-	createEOperation(replyActionEClass, REPLYACTION___EVENT_ON_REPLY_TO_CALL_TRIGGER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(replyActionEClass, REPLYACTION___PINS_MATCH_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(replyActionEClass, REPLYACTION___EVENT_ON_REPLY_TO_CALL_TRIGGER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(replyActionEClass, REPLYACTION___PINS_MATCH_PARAMETER__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	sendObjectActionEClass = createEClass(SENDOBJECTACTION);
+	sendObjectActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SENDOBJECTACTION);
 	
-	createEReference(sendObjectActionEClass, SENDOBJECTACTION_REQUEST);
-	createEReference(sendObjectActionEClass, SENDOBJECTACTION_TARGET);
 	
-	createEOperation(sendObjectActionEClass, SENDOBJECTACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(sendObjectActionEClass, SENDOBJECTACTION_REQUEST);
+	factory->createEReference_in_EContainingClass(sendObjectActionEClass, SENDOBJECTACTION_TARGET);
 	
+	factory->createEOperation_in_EContainingClass(sendObjectActionEClass, SENDOBJECTACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	sendSignalActionEClass = createEClass(SENDSIGNALACTION);
+	sendSignalActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SENDSIGNALACTION);
+	
 	
-	createEReference(sendSignalActionEClass, SENDSIGNALACTION_SIGNAL);
-	createEReference(sendSignalActionEClass, SENDSIGNALACTION_TARGET);
+	factory->createEReference_in_EContainingClass(sendSignalActionEClass, SENDSIGNALACTION_SIGNAL);
+	factory->createEReference_in_EContainingClass(sendSignalActionEClass, SENDSIGNALACTION_TARGET);
 	
-	createEOperation(sendSignalActionEClass, SENDSIGNALACTION___NUMBER_ORDER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(sendSignalActionEClass, SENDSIGNALACTION___TYPE_ORDERING_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(sendSignalActionEClass, SENDSIGNALACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(sendSignalActionEClass, SENDSIGNALACTION___NUMBER_ORDER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(sendSignalActionEClass, SENDSIGNALACTION___TYPE_ORDERING_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(sendSignalActionEClass, SENDSIGNALACTION___TYPE_TARGET_PIN__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	sequenceNodeEClass = createEClass(SEQUENCENODE);
+	sequenceNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SEQUENCENODE);
 	
-	createEReference(sequenceNodeEClass, SEQUENCENODE_EXECUTABLENODE);
 	
+	factory->createEReference_in_EContainingClass(sequenceNodeEClass, SEQUENCENODE_EXECUTABLENODE);
 	
+	
 
-	signalEClass = createEClass(SIGNAL);
+	signalEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SIGNAL);
+	
 	
-	createEReference(signalEClass, SIGNAL_OWNEDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(signalEClass, SIGNAL_OWNEDATTRIBUTE);
 	
-	createEOperation(signalEClass, SIGNAL___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(signalEClass, SIGNAL___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
 	
 
-	signalEventEClass = createEClass(SIGNALEVENT);
+	signalEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SIGNALEVENT);
 	
-	createEReference(signalEventEClass, SIGNALEVENT_SIGNAL);
 	
+	factory->createEReference_in_EContainingClass(signalEventEClass, SIGNALEVENT_SIGNAL);
 	
+	
 
-	slotEClass = createEClass(SLOT);
+	slotEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SLOT);
+	
 	
-	createEReference(slotEClass, SLOT_DEFININGFEATURE);
-	createEReference(slotEClass, SLOT_OWNINGINSTANCE);
-	createEReference(slotEClass, SLOT_VALUE);
+	factory->createEReference_in_EContainingClass(slotEClass, SLOT_DEFININGFEATURE);
+	factory->createEReference_in_EContainingClass(slotEClass, SLOT_OWNINGINSTANCE);
+	factory->createEReference_in_EContainingClass(slotEClass, SLOT_VALUE);
 	
 	
 
-	startClassifierBehaviorActionEClass = createEClass(STARTCLASSIFIERBEHAVIORACTION);
+	startClassifierBehaviorActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STARTCLASSIFIERBEHAVIORACTION);
 	
-	createEReference(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION_OBJECT);
 	
-	createEOperation(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION___TYPE_HAS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION_OBJECT);
 	
+	factory->createEOperation_in_EContainingClass(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(startClassifierBehaviorActionEClass, STARTCLASSIFIERBEHAVIORACTION___TYPE_HAS_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	startObjectBehaviorActionEClass = createEClass(STARTOBJECTBEHAVIORACTION);
+	startObjectBehaviorActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STARTOBJECTBEHAVIORACTION);
+	
 	
-	createEReference(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION_OBJECT);
 	
-	createEOperation(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___BEHAVIOR);
-	createEOperation(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___BEHAVIOR);
+	factory->createEOperation_in_EContainingClass(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___NO_ONPORT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(startObjectBehaviorActionEClass, STARTOBJECTBEHAVIORACTION___TYPE_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	stateEClass = createEClass(STATE);
-	createEAttribute(stateEClass, STATE_ISCOMPOSITE);
-	createEAttribute(stateEClass, STATE_ISORTHOGONAL);
-	createEAttribute(stateEClass, STATE_ISSIMPLE);
-	createEAttribute(stateEClass, STATE_ISSUBMACHINESTATE);
+	stateEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STATE);
 	
-	createEReference(stateEClass, STATE_CONNECTION);
-	createEReference(stateEClass, STATE_CONNECTIONPOINT);
-	createEReference(stateEClass, STATE_DEFERRABLETRIGGER);
-	createEReference(stateEClass, STATE_DOACTIVITY);
-	createEReference(stateEClass, STATE_ENTRY);
-	createEReference(stateEClass, STATE_EXIT);
-	createEReference(stateEClass, STATE_REDEFINEDSTATE);
-	createEReference(stateEClass, STATE_REGION);
-	createEReference(stateEClass, STATE_STATEINVARIANT);
-	createEReference(stateEClass, STATE_SUBMACHINE);
+	factory->createEAttribute_in_EContainingClass(stateEClass, STATE_ISCOMPOSITE);
+	factory->createEAttribute_in_EContainingClass(stateEClass, STATE_ISORTHOGONAL);
+	factory->createEAttribute_in_EContainingClass(stateEClass, STATE_ISSIMPLE);
+	factory->createEAttribute_in_EContainingClass(stateEClass, STATE_ISSUBMACHINESTATE);
 	
-	createEOperation(stateEClass, STATE___COMPOSITE_STATES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateEClass, STATE___DESTINATIONS_OR_SOURCES_OF_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateEClass, STATE___ENTRY_OR_EXIT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateEClass, STATE___ISCOMPOSITE);
-	createEOperation(stateEClass, STATE___ISORTHOGONAL);
-	createEOperation(stateEClass, STATE___ISSIMPLE);
-	createEOperation(stateEClass, STATE___ISSUBMACHINESTATE);
-	createEOperation(stateEClass, STATE___REDEFINITIONCONTEXT);
-	createEOperation(stateEClass, STATE___SUBMACHINE_OR_REGIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateEClass, STATE___SUBMACHINE_STATES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_CONNECTION);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_CONNECTIONPOINT);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_DEFERRABLETRIGGER);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_DOACTIVITY);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_ENTRY);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_EXIT);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_REDEFINEDSTATE);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_REGION);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_STATEINVARIANT);
+	factory->createEReference_in_EContainingClass(stateEClass, STATE_SUBMACHINE);
 	
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___COMPOSITE_STATES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___DESTINATIONS_OR_SOURCES_OF_TRANSITIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___ENTRY_OR_EXIT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___ISCOMPOSITE);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___ISORTHOGONAL);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___ISSIMPLE);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___ISSUBMACHINESTATE);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___REDEFINITIONCONTEXT);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___SUBMACHINE_OR_REGIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateEClass, STATE___SUBMACHINE_STATES__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	stateInvariantEClass = createEClass(STATEINVARIANT);
+	stateInvariantEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STATEINVARIANT);
+	
 	
-	createEReference(stateInvariantEClass, STATEINVARIANT_INVARIANT);
+	factory->createEReference_in_EContainingClass(stateInvariantEClass, STATEINVARIANT_INVARIANT);
 	
 	
 
-	stateMachineEClass = createEClass(STATEMACHINE);
+	stateMachineEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STATEMACHINE);
 	
-	createEReference(stateMachineEClass, STATEMACHINE_CONNECTIONPOINT);
-	createEReference(stateMachineEClass, STATEMACHINE_EXTENDEDSTATEMACHINE);
-	createEReference(stateMachineEClass, STATEMACHINE_REGION);
-	createEReference(stateMachineEClass, STATEMACHINE_SUBMACHINESTATE);
 	
-	createEOperation(stateMachineEClass, STATEMACHINE___LCA__VERTEX_VERTEX);
-	createEOperation(stateMachineEClass, STATEMACHINE___LCASTATE__VERTEX_VERTEX);
-	createEOperation(stateMachineEClass, STATEMACHINE___ANCESTOR__VERTEX_VERTEX);
-	createEOperation(stateMachineEClass, STATEMACHINE___CLASSIFIER_CONTEXT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateMachineEClass, STATEMACHINE___CONNECTION_POINTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateMachineEClass, STATEMACHINE___CONTEXT_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stateMachineEClass, STATEMACHINE___METHOD__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(stateMachineEClass, STATEMACHINE_CONNECTIONPOINT);
+	factory->createEReference_in_EContainingClass(stateMachineEClass, STATEMACHINE_EXTENDEDSTATEMACHINE);
+	factory->createEReference_in_EContainingClass(stateMachineEClass, STATEMACHINE_REGION);
+	factory->createEReference_in_EContainingClass(stateMachineEClass, STATEMACHINE_SUBMACHINESTATE);
 	
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___LCA__VERTEX_VERTEX);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___LCASTATE__VERTEX_VERTEX);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___ANCESTOR__VERTEX_VERTEX);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___CLASSIFIER_CONTEXT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___CONNECTION_POINTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___CONTEXT_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stateMachineEClass, STATEMACHINE___METHOD__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	stereotypeEClass = createEClass(STEREOTYPE);
+	stereotypeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STEREOTYPE);
+	
 	
-	createEReference(stereotypeEClass, STEREOTYPE_ICON);
-	createEReference(stereotypeEClass, STEREOTYPE_PROFILE);
+	factory->createEReference_in_EContainingClass(stereotypeEClass, STEREOTYPE_ICON);
+	factory->createEReference_in_EContainingClass(stereotypeEClass, STEREOTYPE_PROFILE);
 	
-	createEOperation(stereotypeEClass, STEREOTYPE___ASSOCIATIONENDOWNERSHIP__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_UPPER_BOUND__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___BINARYASSOCIATIONSONLY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___CONTAININGPROFILE);
-	createEOperation(stereotypeEClass, STEREOTYPE___CREATEEXTENSION__CLASS_BOOLEAN);
-	createEOperation(stereotypeEClass, STEREOTYPE___CREATEICON__STRING);
-	createEOperation(stereotypeEClass, STEREOTYPE___CREATEICON__STRING_STRING);
-	createEOperation(stereotypeEClass, STEREOTYPE___GENERALIZE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETALLEXTENDEDMETACLASSES);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETDEFINITION);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETEXTENDEDMETACLASSES);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETKEYWORD);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETKEYWORD__BOOLEAN);
-	createEOperation(stereotypeEClass, STEREOTYPE___GETPROFILE);
-	createEOperation(stereotypeEClass, STEREOTYPE___NAME_NOT_CLASH__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___ASSOCIATIONENDOWNERSHIP__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_MULTIPLICITY_MULTIPLE_EXTENSION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_MULTIPLICITY_SINGLE_EXTENSION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___BASE_PROPERTY_UPPER_BOUND__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___BINARYASSOCIATIONSONLY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___CONTAININGPROFILE);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___CREATEEXTENSION__CLASS_BOOLEAN);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___CREATEICON__STRING);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___CREATEICON__STRING_STRING);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GENERALIZE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETALLEXTENDEDMETACLASSES);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETDEFINITION);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETEXTENDEDMETACLASSES);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETKEYWORD);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETKEYWORD__BOOLEAN);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___GETPROFILE);
+	factory->createEOperation_in_EContainingClass(stereotypeEClass, STEREOTYPE___NAME_NOT_CLASH__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	stringExpressionEClass = createEClass(STRINGEXPRESSION);
+	stringExpressionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRINGEXPRESSION);
 	
-	createEReference(stringExpressionEClass, STRINGEXPRESSION_OWNINGEXPRESSION);
-	createEReference(stringExpressionEClass, STRINGEXPRESSION_SUBEXPRESSION);
 	
-	createEOperation(stringExpressionEClass, STRINGEXPRESSION___OPERANDS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(stringExpressionEClass, STRINGEXPRESSION___SUBEXPRESSIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(stringExpressionEClass, STRINGEXPRESSION_OWNINGEXPRESSION);
+	factory->createEReference_in_EContainingClass(stringExpressionEClass, STRINGEXPRESSION_SUBEXPRESSION);
 	
+	factory->createEOperation_in_EContainingClass(stringExpressionEClass, STRINGEXPRESSION___OPERANDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(stringExpressionEClass, STRINGEXPRESSION___SUBEXPRESSIONS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	structuralFeatureEClass = createEClass(STRUCTURALFEATURE);
-	createEAttribute(structuralFeatureEClass, STRUCTURALFEATURE_ISREADONLY);
+	structuralFeatureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTURALFEATURE);
+	
+	factory->createEAttribute_in_EContainingClass(structuralFeatureEClass, STRUCTURALFEATURE_ISREADONLY);
 	
 	
 	
 
-	structuralFeatureActionEClass = createEClass(STRUCTURALFEATUREACTION);
+	structuralFeatureActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTURALFEATUREACTION);
 	
-	createEReference(structuralFeatureActionEClass, STRUCTURALFEATUREACTION_OBJECT);
-	createEReference(structuralFeatureActionEClass, STRUCTURALFEATUREACTION_STRUCTURALFEATURE);
 	
-	createEOperation(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___OBJECT_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___ONE_FEATURING_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION_STRUCTURALFEATURE);
 	
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___NOT_STATIC__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___OBJECT_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___ONE_FEATURING_CLASSIFIER__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuralFeatureActionEClass, STRUCTURALFEATUREACTION___VISIBILITY__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	structuredActivityNodeEClass = createEClass(STRUCTUREDACTIVITYNODE);
-	createEAttribute(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_MUSTISOLATE);
+	structuredActivityNodeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTUREDACTIVITYNODE);
 	
-	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_EDGE);
-	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_NODE);
-	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT);
-	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_STRUCTUREDNODEOUTPUT);
-	createEReference(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_VARIABLE);
+	factory->createEAttribute_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_MUSTISOLATE);
 	
-	createEOperation(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___INPUT_PIN_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___OUTPUT_PIN_EDGES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___SOURCENODES);
-	createEOperation(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___TARGETNODES);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_EDGE);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_NODE);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_STRUCTUREDNODEOUTPUT);
+	factory->createEReference_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE_VARIABLE);
 	
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___INPUT_PIN_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___OUTPUT_PIN_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___SOURCENODES);
+	factory->createEOperation_in_EContainingClass(structuredActivityNodeEClass, STRUCTUREDACTIVITYNODE___TARGETNODES);
+	
 
-	structuredClassifierEClass = createEClass(STRUCTUREDCLASSIFIER);
+	structuredClassifierEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), STRUCTUREDCLASSIFIER);
+	
 	
-	createEReference(structuredClassifierEClass, STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE);
-	createEReference(structuredClassifierEClass, STRUCTUREDCLASSIFIER_OWNEDCONNECTOR);
-	createEReference(structuredClassifierEClass, STRUCTUREDCLASSIFIER_PART);
-	createEReference(structuredClassifierEClass, STRUCTUREDCLASSIFIER_ROLE);
+	factory->createEReference_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER_OWNEDATTRIBUTE);
+	factory->createEReference_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER_OWNEDCONNECTOR);
+	factory->createEReference_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER_PART);
+	factory->createEReference_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER_ROLE);
 	
-	createEOperation(structuredClassifierEClass, STRUCTUREDCLASSIFIER___ALLROLES);
-	createEOperation(structuredClassifierEClass, STRUCTUREDCLASSIFIER___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
-	createEOperation(structuredClassifierEClass, STRUCTUREDCLASSIFIER___GETPARTS);
+	factory->createEOperation_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER___ALLROLES);
+	factory->createEOperation_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER___CREATEOWNEDATTRIBUTE__STRING_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(structuredClassifierEClass, STRUCTUREDCLASSIFIER___GETPARTS);
 	
 
-	substitutionEClass = createEClass(SUBSTITUTION);
+	substitutionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), SUBSTITUTION);
 	
-	createEReference(substitutionEClass, SUBSTITUTION_CONTRACT);
-	createEReference(substitutionEClass, SUBSTITUTION_SUBSTITUTINGCLASSIFIER);
 	
+	factory->createEReference_in_EContainingClass(substitutionEClass, SUBSTITUTION_CONTRACT);
+	factory->createEReference_in_EContainingClass(substitutionEClass, SUBSTITUTION_SUBSTITUTINGCLASSIFIER);
 	
+	
 
-	templateBindingEClass = createEClass(TEMPLATEBINDING);
+	templateBindingEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TEMPLATEBINDING);
+	
 	
-	createEReference(templateBindingEClass, TEMPLATEBINDING_BOUNDELEMENT);
-	createEReference(templateBindingEClass, TEMPLATEBINDING_PARAMETERSUBSTITUTION);
-	createEReference(templateBindingEClass, TEMPLATEBINDING_SIGNATURE);
+	factory->createEReference_in_EContainingClass(templateBindingEClass, TEMPLATEBINDING_BOUNDELEMENT);
+	factory->createEReference_in_EContainingClass(templateBindingEClass, TEMPLATEBINDING_PARAMETERSUBSTITUTION);
+	factory->createEReference_in_EContainingClass(templateBindingEClass, TEMPLATEBINDING_SIGNATURE);
 	
-	createEOperation(templateBindingEClass, TEMPLATEBINDING___ONE_PARAMETER_SUBSTITUTION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(templateBindingEClass, TEMPLATEBINDING___PARAMETER_SUBSTITUTION_FORMAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(templateBindingEClass, TEMPLATEBINDING___ONE_PARAMETER_SUBSTITUTION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(templateBindingEClass, TEMPLATEBINDING___PARAMETER_SUBSTITUTION_FORMAL__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	templateParameterEClass = createEClass(TEMPLATEPARAMETER);
+	templateParameterEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TEMPLATEPARAMETER);
 	
-	createEReference(templateParameterEClass, TEMPLATEPARAMETER_DEFAULT);
-	createEReference(templateParameterEClass, TEMPLATEPARAMETER_OWNEDDEFAULT);
-	createEReference(templateParameterEClass, TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT);
-	createEReference(templateParameterEClass, TEMPLATEPARAMETER_PARAMETEREDELEMENT);
-	createEReference(templateParameterEClass, TEMPLATEPARAMETER_SIGNATURE);
 	
-	createEOperation(templateParameterEClass, TEMPLATEPARAMETER___MUST_BE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER_DEFAULT);
+	factory->createEReference_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER_OWNEDDEFAULT);
+	factory->createEReference_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT);
+	factory->createEReference_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER_PARAMETEREDELEMENT);
+	factory->createEReference_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER_SIGNATURE);
 	
+	factory->createEOperation_in_EContainingClass(templateParameterEClass, TEMPLATEPARAMETER___MUST_BE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	templateParameterSubstitutionEClass = createEClass(TEMPLATEPARAMETERSUBSTITUTION);
+	templateParameterSubstitutionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TEMPLATEPARAMETERSUBSTITUTION);
+	
 	
-	createEReference(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_ACTUAL);
-	createEReference(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_FORMAL);
-	createEReference(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_OWNEDACTUAL);
-	createEReference(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_TEMPLATEBINDING);
+	factory->createEReference_in_EContainingClass(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_ACTUAL);
+	factory->createEReference_in_EContainingClass(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_FORMAL);
+	factory->createEReference_in_EContainingClass(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_OWNEDACTUAL);
+	factory->createEReference_in_EContainingClass(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION_TEMPLATEBINDING);
 	
-	createEOperation(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION___MUST_BE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(templateParameterSubstitutionEClass, TEMPLATEPARAMETERSUBSTITUTION___MUST_BE_COMPATIBLE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	templateSignatureEClass = createEClass(TEMPLATESIGNATURE);
+	templateSignatureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TEMPLATESIGNATURE);
 	
-	createEReference(templateSignatureEClass, TEMPLATESIGNATURE_OWNEDPARAMETER);
-	createEReference(templateSignatureEClass, TEMPLATESIGNATURE_PARAMETER);
-	createEReference(templateSignatureEClass, TEMPLATESIGNATURE_TEMPLATE);
 	
-	createEOperation(templateSignatureEClass, TEMPLATESIGNATURE___OWN_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(templateSignatureEClass, TEMPLATESIGNATURE___UNIQUE_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(templateSignatureEClass, TEMPLATESIGNATURE_OWNEDPARAMETER);
+	factory->createEReference_in_EContainingClass(templateSignatureEClass, TEMPLATESIGNATURE_PARAMETER);
+	factory->createEReference_in_EContainingClass(templateSignatureEClass, TEMPLATESIGNATURE_TEMPLATE);
 	
+	factory->createEOperation_in_EContainingClass(templateSignatureEClass, TEMPLATESIGNATURE___OWN_ELEMENTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(templateSignatureEClass, TEMPLATESIGNATURE___UNIQUE_PARAMETERS__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	templateableElementEClass = createEClass(TEMPLATEABLEELEMENT);
+	templateableElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TEMPLATEABLEELEMENT);
+	
 	
-	createEReference(templateableElementEClass, TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE);
-	createEReference(templateableElementEClass, TEMPLATEABLEELEMENT_TEMPLATEBINDING);
+	factory->createEReference_in_EContainingClass(templateableElementEClass, TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE);
+	factory->createEReference_in_EContainingClass(templateableElementEClass, TEMPLATEABLEELEMENT_TEMPLATEBINDING);
 	
-	createEOperation(templateableElementEClass, TEMPLATEABLEELEMENT___ISTEMPLATE);
-	createEOperation(templateableElementEClass, TEMPLATEABLEELEMENT___PARAMETERABLEELEMENTS);
+	factory->createEOperation_in_EContainingClass(templateableElementEClass, TEMPLATEABLEELEMENT___ISTEMPLATE);
+	factory->createEOperation_in_EContainingClass(templateableElementEClass, TEMPLATEABLEELEMENT___PARAMETERABLEELEMENTS);
 	
 
-	testIdentityActionEClass = createEClass(TESTIDENTITYACTION);
+	testIdentityActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TESTIDENTITYACTION);
 	
-	createEReference(testIdentityActionEClass, TESTIDENTITYACTION_FIRST);
-	createEReference(testIdentityActionEClass, TESTIDENTITYACTION_RESULT);
-	createEReference(testIdentityActionEClass, TESTIDENTITYACTION_SECOND);
 	
-	createEOperation(testIdentityActionEClass, TESTIDENTITYACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(testIdentityActionEClass, TESTIDENTITYACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(testIdentityActionEClass, TESTIDENTITYACTION___RESULT_IS_BOOLEAN__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION_FIRST);
+	factory->createEReference_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION_RESULT);
+	factory->createEReference_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION_SECOND);
 	
+	factory->createEOperation_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION___NO_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(testIdentityActionEClass, TESTIDENTITYACTION___RESULT_IS_BOOLEAN__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	timeConstraintEClass = createEClass(TIMECONSTRAINT);
-	createEAttribute(timeConstraintEClass, TIMECONSTRAINT_FIRSTEVENT);
+	timeConstraintEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TIMECONSTRAINT);
+	
+	factory->createEAttribute_in_EContainingClass(timeConstraintEClass, TIMECONSTRAINT_FIRSTEVENT);
 	
 	
-	createEOperation(timeConstraintEClass, TIMECONSTRAINT___HAS_ONE_CONSTRAINEDELEMENT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(timeConstraintEClass, TIMECONSTRAINT___HAS_ONE_CONSTRAINEDELEMENT__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	timeEventEClass = createEClass(TIMEEVENT);
-	createEAttribute(timeEventEClass, TIMEEVENT_ISRELATIVE);
+	timeEventEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TIMEEVENT);
 	
-	createEReference(timeEventEClass, TIMEEVENT_WHEN);
+	factory->createEAttribute_in_EContainingClass(timeEventEClass, TIMEEVENT_ISRELATIVE);
 	
-	createEOperation(timeEventEClass, TIMEEVENT___WHEN_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(timeEventEClass, TIMEEVENT_WHEN);
 	
+	factory->createEOperation_in_EContainingClass(timeEventEClass, TIMEEVENT___WHEN_NON_NEGATIVE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	timeExpressionEClass = createEClass(TIMEEXPRESSION);
+	timeExpressionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TIMEEXPRESSION);
+	
 	
-	createEReference(timeExpressionEClass, TIMEEXPRESSION_EXPR);
-	createEReference(timeExpressionEClass, TIMEEXPRESSION_OBSERVATION);
+	factory->createEReference_in_EContainingClass(timeExpressionEClass, TIMEEXPRESSION_EXPR);
+	factory->createEReference_in_EContainingClass(timeExpressionEClass, TIMEEXPRESSION_OBSERVATION);
 	
-	createEOperation(timeExpressionEClass, TIMEEXPRESSION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(timeExpressionEClass, TIMEEXPRESSION___NO_EXPR_REQUIRES_OBSERVATION__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	timeIntervalEClass = createEClass(TIMEINTERVAL);
+	timeIntervalEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TIMEINTERVAL);
 	
 	
 	
+	
 
-	timeObservationEClass = createEClass(TIMEOBSERVATION);
-	createEAttribute(timeObservationEClass, TIMEOBSERVATION_FIRSTEVENT);
+	timeObservationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TIMEOBSERVATION);
+	
+	factory->createEAttribute_in_EContainingClass(timeObservationEClass, TIMEOBSERVATION_FIRSTEVENT);
 	
-	createEReference(timeObservationEClass, TIMEOBSERVATION_EVENT);
+	factory->createEReference_in_EContainingClass(timeObservationEClass, TIMEOBSERVATION_EVENT);
 	
 	
 
-	transitionEClass = createEClass(TRANSITION);
-	createEAttribute(transitionEClass, TRANSITION_KIND);
+	transitionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TRANSITION);
 	
-	createEReference(transitionEClass, TRANSITION_CONTAINER);
-	createEReference(transitionEClass, TRANSITION_EFFECT);
-	createEReference(transitionEClass, TRANSITION_GUARD);
-	createEReference(transitionEClass, TRANSITION_REDEFINEDTRANSITION);
-	createEReference(transitionEClass, TRANSITION_SOURCE);
-	createEReference(transitionEClass, TRANSITION_TARGET);
-	createEReference(transitionEClass, TRANSITION_TRIGGER);
+	factory->createEAttribute_in_EContainingClass(transitionEClass, TRANSITION_KIND);
 	
-	createEOperation(transitionEClass, TRANSITION___CONTAININGSTATEMACHINE);
-	createEOperation(transitionEClass, TRANSITION___FORK_SEGMENT_GUARDS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___FORK_SEGMENT_STATE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___INITIAL_TRANSITION__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___JOIN_SEGMENT_GUARDS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___JOIN_SEGMENT_STATE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___OUTGOING_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___REDEFINITIONCONTEXT);
-	createEOperation(transitionEClass, TRANSITION___STATE_IS_EXTERNAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___STATE_IS_INTERNAL__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(transitionEClass, TRANSITION___STATE_IS_LOCAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_CONTAINER);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_EFFECT);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_GUARD);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_REDEFINEDTRANSITION);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_SOURCE);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_TARGET);
+	factory->createEReference_in_EContainingClass(transitionEClass, TRANSITION_TRIGGER);
 	
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___CONTAININGSTATEMACHINE);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___FORK_SEGMENT_GUARDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___FORK_SEGMENT_STATE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___INITIAL_TRANSITION__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___JOIN_SEGMENT_GUARDS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___JOIN_SEGMENT_STATE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___OUTGOING_PSEUDOSTATES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___REDEFINITIONCONTEXT);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___STATE_IS_EXTERNAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___STATE_IS_INTERNAL__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(transitionEClass, TRANSITION___STATE_IS_LOCAL__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	triggerEClass = createEClass(TRIGGER);
+	triggerEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TRIGGER);
+	
 	
-	createEReference(triggerEClass, TRIGGER_EVENT);
-	createEReference(triggerEClass, TRIGGER_PORT);
+	factory->createEReference_in_EContainingClass(triggerEClass, TRIGGER_EVENT);
+	factory->createEReference_in_EContainingClass(triggerEClass, TRIGGER_PORT);
 	
-	createEOperation(triggerEClass, TRIGGER___TRIGGER_WITH_PORTS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(triggerEClass, TRIGGER___TRIGGER_WITH_PORTS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	typeEClass = createEClass(TYPE);
+	typeEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TYPE);
 	
-	createEReference(typeEClass, TYPE_PACKAGE);
 	
-	createEOperation(typeEClass, TYPE___CONFORMSTO__TYPE);
-	createEOperation(typeEClass, TYPE___CREATEASSOCIATION__BOOLEAN_UNLIMITEDNATURAL);
-	createEOperation(typeEClass, TYPE___GETASSOCIATIONS);
+	factory->createEReference_in_EContainingClass(typeEClass, TYPE_PACKAGE);
 	
+	factory->createEOperation_in_EContainingClass(typeEClass, TYPE___CONFORMSTO__TYPE);
+	factory->createEOperation_in_EContainingClass(typeEClass, TYPE___CREATEASSOCIATION__BOOLEAN_UNLIMITEDNATURAL);
+	factory->createEOperation_in_EContainingClass(typeEClass, TYPE___GETASSOCIATIONS);
+	
 
-	typedElementEClass = createEClass(TYPEDELEMENT);
+	typedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TYPEDELEMENT);
+	
 	
-	createEReference(typedElementEClass, TYPEDELEMENT_TYPE);
+	factory->createEReference_in_EContainingClass(typedElementEClass, TYPEDELEMENT_TYPE);
 	
 	
 
-	unmarshallActionEClass = createEClass(UNMARSHALLACTION);
+	unmarshallActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), UNMARSHALLACTION);
 	
-	createEReference(unmarshallActionEClass, UNMARSHALLACTION_OBJECT);
-	createEReference(unmarshallActionEClass, UNMARSHALLACTION_RESULT);
-	createEReference(unmarshallActionEClass, UNMARSHALLACTION_UNMARSHALLTYPE);
 	
-	createEOperation(unmarshallActionEClass, UNMARSHALLACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(unmarshallActionEClass, UNMARSHALLACTION___NUMBER_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(unmarshallActionEClass, UNMARSHALLACTION___OBJECT_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(unmarshallActionEClass, UNMARSHALLACTION___STRUCTURAL_FEATURE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(unmarshallActionEClass, UNMARSHALLACTION___TYPE_ORDERING_AND_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION_OBJECT);
+	factory->createEReference_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION_RESULT);
+	factory->createEReference_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION_UNMARSHALLTYPE);
 	
+	factory->createEOperation_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION___MULTIPLICITY_OF_OBJECT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION___NUMBER_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION___OBJECT_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION___STRUCTURAL_FEATURE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(unmarshallActionEClass, UNMARSHALLACTION___TYPE_ORDERING_AND_MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	usageEClass = createEClass(USAGE);
+	usageEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), USAGE);
+	
 	
 	
 	
 
-	useCaseEClass = createEClass(USECASE);
+	useCaseEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), USECASE);
 	
-	createEReference(useCaseEClass, USECASE_EXTEND);
-	createEReference(useCaseEClass, USECASE_EXTENSIONPOINT);
-	createEReference(useCaseEClass, USECASE_INCLUDE);
-	createEReference(useCaseEClass, USECASE_SUBJECT);
 	
-	createEOperation(useCaseEClass, USECASE___ALLINCLUDEDUSECASES);
-	createEOperation(useCaseEClass, USECASE___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(useCaseEClass, USECASE___CANNOT_INCLUDE_SELF__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(useCaseEClass, USECASE___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(useCaseEClass, USECASE___NO_ASSOCIATION_TO_USE_CASE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(useCaseEClass, USECASE_EXTEND);
+	factory->createEReference_in_EContainingClass(useCaseEClass, USECASE_EXTENSIONPOINT);
+	factory->createEReference_in_EContainingClass(useCaseEClass, USECASE_INCLUDE);
+	factory->createEReference_in_EContainingClass(useCaseEClass, USECASE_SUBJECT);
 	
+	factory->createEOperation_in_EContainingClass(useCaseEClass, USECASE___ALLINCLUDEDUSECASES);
+	factory->createEOperation_in_EContainingClass(useCaseEClass, USECASE___BINARY_ASSOCIATIONS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(useCaseEClass, USECASE___CANNOT_INCLUDE_SELF__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(useCaseEClass, USECASE___MUST_HAVE_NAME__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(useCaseEClass, USECASE___NO_ASSOCIATION_TO_USE_CASE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	valuePinEClass = createEClass(VALUEPIN);
+	valuePinEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUEPIN);
+	
 	
-	createEReference(valuePinEClass, VALUEPIN_VALUE);
+	factory->createEReference_in_EContainingClass(valuePinEClass, VALUEPIN_VALUE);
 	
-	createEOperation(valuePinEClass, VALUEPIN___COMPATIBLE_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(valuePinEClass, VALUEPIN___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(valuePinEClass, VALUEPIN___COMPATIBLE_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(valuePinEClass, VALUEPIN___NO_INCOMING_EDGES__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	valueSpecificationEClass = createEClass(VALUESPECIFICATION);
+	valueSpecificationEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUESPECIFICATION);
 	
-	createEReference(valueSpecificationEClass, VALUESPECIFICATION_OWNINGSLOT);
 	
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___BOOLEANVALUE);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___INTEGERVALUE);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___ISCOMPUTABLE);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___ISNULL);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___REALVALUE);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___STRINGVALUE);
-	createEOperation(valueSpecificationEClass, VALUESPECIFICATION___UNLIMITEDVALUE);
+	factory->createEReference_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION_OWNINGSLOT);
 	
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___BOOLEANVALUE);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___INTEGERVALUE);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___ISCOMPUTABLE);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___ISNULL);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___REALVALUE);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___STRINGVALUE);
+	factory->createEOperation_in_EContainingClass(valueSpecificationEClass, VALUESPECIFICATION___UNLIMITEDVALUE);
+	
 
-	valueSpecificationActionEClass = createEClass(VALUESPECIFICATIONACTION);
+	valueSpecificationActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VALUESPECIFICATIONACTION);
+	
 	
-	createEReference(valueSpecificationActionEClass, VALUESPECIFICATIONACTION_RESULT);
-	createEReference(valueSpecificationActionEClass, VALUESPECIFICATIONACTION_VALUE);
+	factory->createEReference_in_EContainingClass(valueSpecificationActionEClass, VALUESPECIFICATIONACTION_RESULT);
+	factory->createEReference_in_EContainingClass(valueSpecificationActionEClass, VALUESPECIFICATIONACTION_VALUE);
 	
-	createEOperation(valueSpecificationActionEClass, VALUESPECIFICATIONACTION___COMPATIBLE_TYPE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(valueSpecificationActionEClass, VALUESPECIFICATIONACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(valueSpecificationActionEClass, VALUESPECIFICATIONACTION___COMPATIBLE_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(valueSpecificationActionEClass, VALUESPECIFICATIONACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	variableEClass = createEClass(VARIABLE);
+	variableEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VARIABLE);
 	
-	createEReference(variableEClass, VARIABLE_ACTIVITYSCOPE);
-	createEReference(variableEClass, VARIABLE_SCOPE);
 	
-	createEOperation(variableEClass, VARIABLE___ISACCESSIBLEBY__ACTION);
+	factory->createEReference_in_EContainingClass(variableEClass, VARIABLE_ACTIVITYSCOPE);
+	factory->createEReference_in_EContainingClass(variableEClass, VARIABLE_SCOPE);
 	
+	factory->createEOperation_in_EContainingClass(variableEClass, VARIABLE___ISACCESSIBLEBY__ACTION);
+	
 
-	variableActionEClass = createEClass(VARIABLEACTION);
+	variableActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VARIABLEACTION);
+	
 	
-	createEReference(variableActionEClass, VARIABLEACTION_VARIABLE);
+	factory->createEReference_in_EContainingClass(variableActionEClass, VARIABLEACTION_VARIABLE);
 	
-	createEOperation(variableActionEClass, VARIABLEACTION___SCOPE_OF_VARIABLE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(variableActionEClass, VARIABLEACTION___SCOPE_OF_VARIABLE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	vertexEClass = createEClass(VERTEX);
+	vertexEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VERTEX);
 	
-	createEReference(vertexEClass, VERTEX_CONTAINER);
-	createEReference(vertexEClass, VERTEX_INCOMING);
-	createEReference(vertexEClass, VERTEX_OUTGOING);
 	
-	createEOperation(vertexEClass, VERTEX___CONTAININGSTATEMACHINE);
-	createEOperation(vertexEClass, VERTEX___GETINCOMINGS);
-	createEOperation(vertexEClass, VERTEX___GETOUTGOINGS);
-	createEOperation(vertexEClass, VERTEX___ISCONTAINEDINREGION__REGION);
-	createEOperation(vertexEClass, VERTEX___ISCONTAINEDINSTATE__STATE);
+	factory->createEReference_in_EContainingClass(vertexEClass, VERTEX_CONTAINER);
+	factory->createEReference_in_EContainingClass(vertexEClass, VERTEX_INCOMING);
+	factory->createEReference_in_EContainingClass(vertexEClass, VERTEX_OUTGOING);
 	
+	factory->createEOperation_in_EContainingClass(vertexEClass, VERTEX___CONTAININGSTATEMACHINE);
+	factory->createEOperation_in_EContainingClass(vertexEClass, VERTEX___GETINCOMINGS);
+	factory->createEOperation_in_EContainingClass(vertexEClass, VERTEX___GETOUTGOINGS);
+	factory->createEOperation_in_EContainingClass(vertexEClass, VERTEX___ISCONTAINEDINREGION__REGION);
+	factory->createEOperation_in_EContainingClass(vertexEClass, VERTEX___ISCONTAINEDINSTATE__STATE);
+	
 
-	writeLinkActionEClass = createEClass(WRITELINKACTION);
+	writeLinkActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), WRITELINKACTION);
+	
 	
 	
-	createEOperation(writeLinkActionEClass, WRITELINKACTION___ALLOW_ACCESS__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeLinkActionEClass, WRITELINKACTION___ALLOW_ACCESS__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	writeStructuralFeatureActionEClass = createEClass(WRITESTRUCTURALFEATUREACTION);
+	writeStructuralFeatureActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), WRITESTRUCTURALFEATUREACTION);
 	
-	createEReference(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION_RESULT);
-	createEReference(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION_VALUE);
 	
-	createEOperation(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___MULTIPLICITY_OF_VALUE__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___TYPE_OF_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEReference_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION_RESULT);
+	factory->createEReference_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION_VALUE);
 	
+	factory->createEOperation_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___MULTIPLICITY_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___MULTIPLICITY_OF_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___TYPE_OF_RESULT__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeStructuralFeatureActionEClass, WRITESTRUCTURALFEATUREACTION___TYPE_OF_VALUE__EDIAGNOSTICCHAIN_EMAP);
+	
 
-	writeVariableActionEClass = createEClass(WRITEVARIABLEACTION);
+	writeVariableActionEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), WRITEVARIABLEACTION);
+	
 	
-	createEReference(writeVariableActionEClass, WRITEVARIABLEACTION_VALUE);
+	factory->createEReference_in_EContainingClass(writeVariableActionEClass, WRITEVARIABLEACTION_VALUE);
 	
-	createEOperation(writeVariableActionEClass, WRITEVARIABLEACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
-	createEOperation(writeVariableActionEClass, WRITEVARIABLEACTION___VALUE_TYPE__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeVariableActionEClass, WRITEVARIABLEACTION___MULTIPLICITY__EDIAGNOSTICCHAIN_EMAP);
+	factory->createEOperation_in_EContainingClass(writeVariableActionEClass, WRITEVARIABLEACTION___VALUE_TYPE__EDIAGNOSTICCHAIN_EMAP);
 	
 
-	aggregationKindEEnum = createEEnum(AGGREGATIONKIND);
-	callConcurrencyKindEEnum = createEEnum(CALLCONCURRENCYKIND);
-	connectorKindEEnum = createEEnum(CONNECTORKIND);
-	expansionKindEEnum = createEEnum(EXPANSIONKIND);
-	interactionOperatorKindEEnum = createEEnum(INTERACTIONOPERATORKIND);
-	messageKindEEnum = createEEnum(MESSAGEKIND);
-	messageSortEEnum = createEEnum(MESSAGESORT);
-	objectNodeOrderingKindEEnum = createEEnum(OBJECTNODEORDERINGKIND);
-	parameterDirectionKindEEnum = createEEnum(PARAMETERDIRECTIONKIND);
-	parameterEffectKindEEnum = createEEnum(PARAMETEREFFECTKIND);
-	pseudostateKindEEnum = createEEnum(PSEUDOSTATEKIND);
-	transitionKindEEnum = createEEnum(TRANSITIONKIND);
-	visibilityKindEEnum = createEEnum(VISIBILITYKIND);
+	aggregationKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), AGGREGATIONKIND);
+	callConcurrencyKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CALLCONCURRENCYKIND);
+	connectorKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), CONNECTORKIND);
+	expansionKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), EXPANSIONKIND);
+	interactionOperatorKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), INTERACTIONOPERATORKIND);
+	messageKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGEKIND);
+	messageSortEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), MESSAGESORT);
+	objectNodeOrderingKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), OBJECTNODEORDERINGKIND);
+	parameterDirectionKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETERDIRECTIONKIND);
+	parameterEffectKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PARAMETEREFFECTKIND);
+	pseudostateKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PSEUDOSTATEKIND);
+	transitionKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), TRANSITIONKIND);
+	visibilityKindEEnum = factory->createEEnum_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), VISIBILITYKIND);
 	
 }
 

@@ -7905,42 +7905,46 @@ std::shared_ptr<Abstraction> UmlFactoryImpl::createAbstraction() const
 }
 std::shared_ptr<Abstraction> UmlFactoryImpl::createAbstraction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Abstraction> element(new AbstractionImpl(par_namespace));
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Abstraction> UmlFactoryImpl::createAbstraction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Abstraction> element(new AbstractionImpl(par_owner));
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Abstraction> UmlFactoryImpl::createAbstraction_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Abstraction> element(new AbstractionImpl(par_owningPackage));
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Abstraction> UmlFactoryImpl::createAbstraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Abstraction> element(new AbstractionImpl(par_owningTemplateParameter));
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction() const
@@ -7950,42 +7954,46 @@ std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction() const
 }
 std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<AcceptCallAction> element(new AcceptCallActionImpl(par_activity));
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<AcceptCallAction> element(new AcceptCallActionImpl(par_inStructuredNode));
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AcceptCallAction> element(new AcceptCallActionImpl(par_namespace));
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptCallAction> UmlFactoryImpl::createAcceptCallAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AcceptCallAction> element(new AcceptCallActionImpl(par_owner));
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction() const
@@ -7995,42 +8003,46 @@ std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction() con
 }
 std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<AcceptEventAction> element(new AcceptEventActionImpl(par_activity));
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<AcceptEventAction> element(new AcceptEventActionImpl(par_inStructuredNode));
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AcceptEventAction> element(new AcceptEventActionImpl(par_namespace));
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AcceptEventAction> UmlFactoryImpl::createAcceptEventAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AcceptEventAction> element(new AcceptEventActionImpl(par_owner));
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecutionSpecification() const
@@ -8040,42 +8052,46 @@ std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecut
 }
 std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<ActionExecutionSpecification> element(new ActionExecutionSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<ActionExecutionSpecification> element(new ActionExecutionSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ActionExecutionSpecification> element(new ActionExecutionSpecificationImpl(par_namespace));
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionExecutionSpecification> UmlFactoryImpl::createActionExecutionSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ActionExecutionSpecification> element(new ActionExecutionSpecificationImpl(par_owner));
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin() const
@@ -8085,72 +8101,79 @@ std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin() const
 }
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_activity));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_callOperationAction));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_callOperationAction));
 	if(auto wp = par_callOperationAction.lock())
 	{
 			wp->setTarget(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_inStructuredNode));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_invocationAction));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_invocationAction));
 	if(auto wp = par_invocationAction.lock())
 	{
-    		wp->getArgument()->push_back(element);
+			wp->getArgument()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_namespace));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_owner));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActionInputPin> UmlFactoryImpl::createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction) const
 {
-	std::shared_ptr<ActionInputPin> element(new ActionInputPinImpl(par_structuralFeatureAction));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_structuralFeatureAction));
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity() const
@@ -8160,62 +8183,68 @@ std::shared_ptr<Activity> UmlFactoryImpl::createActivity() const
 }
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_behavioredClassifier));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_namespace));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_owner));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_owningTemplateParameter));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Activity> element(new ActivityImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode() const
@@ -8225,42 +8254,46 @@ std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode() con
 }
 std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ActivityFinalNode> element(new ActivityFinalNodeImpl(par_activity));
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ActivityFinalNode> element(new ActivityFinalNodeImpl(par_inStructuredNode));
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ActivityFinalNode> element(new ActivityFinalNodeImpl(par_namespace));
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityFinalNode> UmlFactoryImpl::createActivityFinalNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ActivityFinalNode> element(new ActivityFinalNodeImpl(par_owner));
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNode() const
@@ -8270,42 +8303,46 @@ std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNo
 }
 std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ActivityParameterNode> element(new ActivityParameterNodeImpl(par_activity));
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ActivityParameterNode> element(new ActivityParameterNodeImpl(par_inStructuredNode));
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ActivityParameterNode> element(new ActivityParameterNodeImpl(par_namespace));
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityParameterNode> UmlFactoryImpl::createActivityParameterNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ActivityParameterNode> element(new ActivityParameterNodeImpl(par_owner));
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition() const
@@ -8315,52 +8352,57 @@ std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition() con
 }
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<ActivityPartition> element(new ActivityPartitionImpl(par_inActivity));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_inActivity));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getPartition()->push_back(element);
+			wp->getPartition()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ActivityPartition> element(new ActivityPartitionImpl(par_namespace));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ActivityPartition> element(new ActivityPartitionImpl(par_owner));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<ActivityPartition> element(new ActivityPartitionImpl(par_superGroup));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ActivityPartition> UmlFactoryImpl::createActivityPartition_in_SuperPartition(std::weak_ptr<uml::ActivityPartition > par_superPartition) const
 {
-	std::shared_ptr<ActivityPartition> element(new ActivityPartitionImpl(par_superPartition));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_superPartition));
 	if(auto wp = par_superPartition.lock())
 	{
-    		wp->getSubpartition()->push_back(element);
+			wp->getSubpartition()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor() const
@@ -8370,52 +8412,57 @@ std::shared_ptr<Actor> UmlFactoryImpl::createActor() const
 }
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Actor> element(new ActorImpl(par_namespace));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Actor> element(new ActorImpl(par_owner));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Actor> element(new ActorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Actor> element(new ActorImpl(par_owningTemplateParameter));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Actor> element(new ActorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStructuralFeatureValueAction() const
@@ -8425,42 +8472,46 @@ std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStruct
 }
 std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<AddStructuralFeatureValueAction> element(new AddStructuralFeatureValueActionImpl(par_activity));
+	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<AddStructuralFeatureValueAction> element(new AddStructuralFeatureValueActionImpl(par_inStructuredNode));
+	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AddStructuralFeatureValueAction> element(new AddStructuralFeatureValueActionImpl(par_namespace));
+	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddStructuralFeatureValueAction> UmlFactoryImpl::createAddStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AddStructuralFeatureValueAction> element(new AddStructuralFeatureValueActionImpl(par_owner));
+	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAction() const
@@ -8470,42 +8521,46 @@ std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAc
 }
 std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<AddVariableValueAction> element(new AddVariableValueActionImpl(par_activity));
+	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<AddVariableValueAction> element(new AddVariableValueActionImpl(par_inStructuredNode));
+	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AddVariableValueAction> element(new AddVariableValueActionImpl(par_namespace));
+	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AddVariableValueAction> UmlFactoryImpl::createAddVariableValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AddVariableValueAction> element(new AddVariableValueActionImpl(par_owner));
+	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent() const
@@ -8515,42 +8570,46 @@ std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent() const
 }
 std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AnyReceiveEvent> element(new AnyReceiveEventImpl(par_namespace));
+	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AnyReceiveEvent> element(new AnyReceiveEventImpl(par_owner));
+	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<AnyReceiveEvent> element(new AnyReceiveEventImpl(par_owningPackage));
+	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AnyReceiveEvent> UmlFactoryImpl::createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<AnyReceiveEvent> element(new AnyReceiveEventImpl(par_owningTemplateParameter));
+	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact() const
@@ -8560,52 +8619,57 @@ std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact() const
 }
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Artifact> element(new ArtifactImpl(par_namespace));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Artifact> element(new ArtifactImpl(par_owner));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Artifact> element(new ArtifactImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Artifact> element(new ArtifactImpl(par_owningTemplateParameter));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Artifact> element(new ArtifactImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation() const
@@ -8615,52 +8679,57 @@ std::shared_ptr<Association> UmlFactoryImpl::createAssociation() const
 }
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Association> element(new AssociationImpl(par_namespace));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Association> element(new AssociationImpl(par_owner));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Association> element(new AssociationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Association> element(new AssociationImpl(par_owningTemplateParameter));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Association> element(new AssociationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass() const
@@ -8670,52 +8739,57 @@ std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass() const
 }
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<AssociationClass> element(new AssociationClassImpl(par_namespace));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<AssociationClass> element(new AssociationClassImpl(par_owner));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<AssociationClass> element(new AssociationClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<AssociationClass> element(new AssociationClassImpl(par_owningTemplateParameter));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<AssociationClass> element(new AssociationClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorExecutionSpecification() const
@@ -8725,42 +8799,46 @@ std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorEx
 }
 std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<BehaviorExecutionSpecification> element(new BehaviorExecutionSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<BehaviorExecutionSpecification> element(new BehaviorExecutionSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<BehaviorExecutionSpecification> element(new BehaviorExecutionSpecificationImpl(par_namespace));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BehaviorExecutionSpecification> UmlFactoryImpl::createBehaviorExecutionSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<BehaviorExecutionSpecification> element(new BehaviorExecutionSpecificationImpl(par_owner));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalAction() const
@@ -8770,42 +8848,46 @@ std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalActi
 }
 std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<BroadcastSignalAction> element(new BroadcastSignalActionImpl(par_activity));
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<BroadcastSignalAction> element(new BroadcastSignalActionImpl(par_inStructuredNode));
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<BroadcastSignalAction> element(new BroadcastSignalActionImpl(par_namespace));
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<BroadcastSignalAction> UmlFactoryImpl::createBroadcastSignalAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<BroadcastSignalAction> element(new BroadcastSignalActionImpl(par_owner));
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction() const
@@ -8815,42 +8897,46 @@ std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction() c
 }
 std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CallBehaviorAction> element(new CallBehaviorActionImpl(par_activity));
+	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CallBehaviorAction> element(new CallBehaviorActionImpl(par_inStructuredNode));
+	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CallBehaviorAction> element(new CallBehaviorActionImpl(par_namespace));
+	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallBehaviorAction> UmlFactoryImpl::createCallBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CallBehaviorAction> element(new CallBehaviorActionImpl(par_owner));
+	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent() const
@@ -8860,42 +8946,46 @@ std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent() const
 }
 std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CallEvent> element(new CallEventImpl(par_namespace));
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CallEvent> element(new CallEventImpl(par_owner));
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<CallEvent> element(new CallEventImpl(par_owningPackage));
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallEvent> UmlFactoryImpl::createCallEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<CallEvent> element(new CallEventImpl(par_owningTemplateParameter));
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction() const
@@ -8905,42 +8995,46 @@ std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction()
 }
 std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CallOperationAction> element(new CallOperationActionImpl(par_activity));
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CallOperationAction> element(new CallOperationActionImpl(par_inStructuredNode));
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CallOperationAction> element(new CallOperationActionImpl(par_namespace));
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CallOperationAction> UmlFactoryImpl::createCallOperationAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CallOperationAction> element(new CallOperationActionImpl(par_owner));
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode() const
@@ -8950,42 +9044,46 @@ std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode() con
 }
 std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CentralBufferNode> element(new CentralBufferNodeImpl(par_activity));
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CentralBufferNode> element(new CentralBufferNodeImpl(par_inStructuredNode));
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CentralBufferNode> element(new CentralBufferNodeImpl(par_namespace));
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CentralBufferNode> UmlFactoryImpl::createCentralBufferNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CentralBufferNode> element(new CentralBufferNodeImpl(par_owner));
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent() const
@@ -8995,42 +9093,46 @@ std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent() const
 }
 std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ChangeEvent> element(new ChangeEventImpl(par_namespace));
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ChangeEvent> element(new ChangeEventImpl(par_owner));
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ChangeEvent> element(new ChangeEventImpl(par_owningPackage));
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ChangeEvent> UmlFactoryImpl::createChangeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<ChangeEvent> element(new ChangeEventImpl(par_owningTemplateParameter));
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass() const
@@ -9040,52 +9142,57 @@ std::shared_ptr<Class> UmlFactoryImpl::createClass() const
 }
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Class> element(new ClassImpl(par_namespace));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Class> element(new ClassImpl(par_owner));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Class> element(new ClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Class> element(new ClassImpl(par_owningTemplateParameter));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Class> element(new ClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClassifierTemplateParameter> UmlFactoryImpl::createClassifierTemplateParameter() const
@@ -9095,22 +9202,24 @@ std::shared_ptr<ClassifierTemplateParameter> UmlFactoryImpl::createClassifierTem
 }
 std::shared_ptr<ClassifierTemplateParameter> UmlFactoryImpl::createClassifierTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ClassifierTemplateParameter> element(new ClassifierTemplateParameterImpl(par_owner));
+	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClassifierTemplateParameter> UmlFactoryImpl::createClassifierTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature) const
 {
-	std::shared_ptr<ClassifierTemplateParameter> element(new ClassifierTemplateParameterImpl(par_signature));
+	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(par_signature));
 	if(auto wp = par_signature.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Clause> UmlFactoryImpl::createClause() const
@@ -9120,12 +9229,13 @@ std::shared_ptr<Clause> UmlFactoryImpl::createClause() const
 }
 std::shared_ptr<Clause> UmlFactoryImpl::createClause_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Clause> element(new ClauseImpl(par_owner));
+	std::shared_ptr<ClauseImpl> element(new ClauseImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAction() const
@@ -9135,42 +9245,46 @@ std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAc
 }
 std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ClearAssociationAction> element(new ClearAssociationActionImpl(par_activity));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ClearAssociationAction> element(new ClearAssociationActionImpl(par_inStructuredNode));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ClearAssociationAction> element(new ClearAssociationActionImpl(par_namespace));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearAssociationAction> UmlFactoryImpl::createClearAssociationAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ClearAssociationAction> element(new ClearAssociationActionImpl(par_owner));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructuralFeatureAction() const
@@ -9180,42 +9294,46 @@ std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructu
 }
 std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ClearStructuralFeatureAction> element(new ClearStructuralFeatureActionImpl(par_activity));
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ClearStructuralFeatureAction> element(new ClearStructuralFeatureActionImpl(par_inStructuredNode));
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ClearStructuralFeatureAction> element(new ClearStructuralFeatureActionImpl(par_namespace));
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearStructuralFeatureAction> UmlFactoryImpl::createClearStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ClearStructuralFeatureAction> element(new ClearStructuralFeatureActionImpl(par_owner));
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction() const
@@ -9225,42 +9343,46 @@ std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction()
 }
 std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ClearVariableAction> element(new ClearVariableActionImpl(par_activity));
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ClearVariableAction> element(new ClearVariableActionImpl(par_inStructuredNode));
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ClearVariableAction> element(new ClearVariableActionImpl(par_namespace));
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ClearVariableAction> UmlFactoryImpl::createClearVariableAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ClearVariableAction> element(new ClearVariableActionImpl(par_owner));
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration() const
@@ -9270,52 +9392,57 @@ std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration() const
 }
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Collaboration> element(new CollaborationImpl(par_namespace));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Collaboration> element(new CollaborationImpl(par_owner));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Collaboration> element(new CollaborationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Collaboration> element(new CollaborationImpl(par_owningTemplateParameter));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Collaboration> element(new CollaborationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CollaborationUse> UmlFactoryImpl::createCollaborationUse() const
@@ -9325,22 +9452,24 @@ std::shared_ptr<CollaborationUse> UmlFactoryImpl::createCollaborationUse() const
 }
 std::shared_ptr<CollaborationUse> UmlFactoryImpl::createCollaborationUse_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CollaborationUse> element(new CollaborationUseImpl(par_namespace));
+	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CollaborationUse> UmlFactoryImpl::createCollaborationUse_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CollaborationUse> element(new CollaborationUseImpl(par_owner));
+	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment() const
@@ -9350,42 +9479,46 @@ std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment() const
 }
 std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<CombinedFragment> element(new CombinedFragmentImpl(par_enclosingInteraction));
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<CombinedFragment> element(new CombinedFragmentImpl(par_enclosingOperand));
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CombinedFragment> element(new CombinedFragmentImpl(par_namespace));
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CombinedFragment> UmlFactoryImpl::createCombinedFragment_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CombinedFragment> element(new CombinedFragmentImpl(par_owner));
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Comment> UmlFactoryImpl::createComment() const
@@ -9395,12 +9528,13 @@ std::shared_ptr<Comment> UmlFactoryImpl::createComment() const
 }
 std::shared_ptr<Comment> UmlFactoryImpl::createComment_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Comment> element(new CommentImpl(par_owner));
+	std::shared_ptr<CommentImpl> element(new CommentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedComment()->push_back(element);
+			wp->getOwnedComment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath() const
@@ -9410,52 +9544,57 @@ std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath() con
 }
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CommunicationPath> element(new CommunicationPathImpl(par_namespace));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CommunicationPath> element(new CommunicationPathImpl(par_owner));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<CommunicationPath> element(new CommunicationPathImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<CommunicationPath> element(new CommunicationPathImpl(par_owningTemplateParameter));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<CommunicationPath> element(new CommunicationPathImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent() const
@@ -9465,52 +9604,57 @@ std::shared_ptr<Component> UmlFactoryImpl::createComponent() const
 }
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Component> element(new ComponentImpl(par_namespace));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Component> element(new ComponentImpl(par_owner));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Component> element(new ComponentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Component> element(new ComponentImpl(par_owningTemplateParameter));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Component> element(new ComponentImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization() const
@@ -9520,52 +9664,57 @@ std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization
 }
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization_in_Abstraction(std::weak_ptr<uml::Component > par_abstraction) const
 {
-	std::shared_ptr<ComponentRealization> element(new ComponentRealizationImpl(par_abstraction));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_abstraction));
 	if(auto wp = par_abstraction.lock())
 	{
-    		wp->getRealization()->push_back(element);
+			wp->getRealization()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ComponentRealization> element(new ComponentRealizationImpl(par_namespace));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ComponentRealization> element(new ComponentRealizationImpl(par_owner));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ComponentRealization> element(new ComponentRealizationImpl(par_owningPackage));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ComponentRealization> UmlFactoryImpl::createComponentRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<ComponentRealization> element(new ComponentRealizationImpl(par_owningTemplateParameter));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode() const
@@ -9575,62 +9724,68 @@ std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode() const
 }
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getGroup()->push_back(element);
+			wp->getGroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_inStructuredNode));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_namespace));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_owner));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<ConditionalNode> element(new ConditionalNodeImpl(par_superGroup));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectableElementTemplateParameter> UmlFactoryImpl::createConnectableElementTemplateParameter() const
@@ -9640,22 +9795,24 @@ std::shared_ptr<ConnectableElementTemplateParameter> UmlFactoryImpl::createConne
 }
 std::shared_ptr<ConnectableElementTemplateParameter> UmlFactoryImpl::createConnectableElementTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ConnectableElementTemplateParameter> element(new ConnectableElementTemplateParameterImpl(par_owner));
+	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectableElementTemplateParameter> UmlFactoryImpl::createConnectableElementTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature) const
 {
-	std::shared_ptr<ConnectableElementTemplateParameter> element(new ConnectableElementTemplateParameterImpl(par_signature));
+	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(par_signature));
 	if(auto wp = par_signature.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointReference() const
@@ -9665,42 +9822,46 @@ std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointR
 }
 std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointReference_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<ConnectionPointReference> element(new ConnectionPointReferenceImpl(par_container));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getSubvertex()->push_back(element);
+			wp->getSubvertex()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointReference_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ConnectionPointReference> element(new ConnectionPointReferenceImpl(par_namespace));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointReference_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ConnectionPointReference> element(new ConnectionPointReferenceImpl(par_owner));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectionPointReference> UmlFactoryImpl::createConnectionPointReference_in_State(std::weak_ptr<uml::State > par_state) const
 {
-	std::shared_ptr<ConnectionPointReference> element(new ConnectionPointReferenceImpl(par_state));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_state));
 	if(auto wp = par_state.lock())
 	{
-    		wp->getConnection()->push_back(element);
+			wp->getConnection()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Connector> UmlFactoryImpl::createConnector() const
@@ -9710,22 +9871,24 @@ std::shared_ptr<Connector> UmlFactoryImpl::createConnector() const
 }
 std::shared_ptr<Connector> UmlFactoryImpl::createConnector_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Connector> element(new ConnectorImpl(par_namespace));
+	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Connector> UmlFactoryImpl::createConnector_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Connector> element(new ConnectorImpl(par_owner));
+	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd() const
@@ -9735,12 +9898,13 @@ std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd() const
 }
 std::shared_ptr<ConnectorEnd> UmlFactoryImpl::createConnectorEnd_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ConnectorEnd> element(new ConnectorEndImpl(par_owner));
+	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFragment() const
@@ -9750,42 +9914,46 @@ std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFrag
 }
 std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<ConsiderIgnoreFragment> element(new ConsiderIgnoreFragmentImpl(par_enclosingInteraction));
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<ConsiderIgnoreFragment> element(new ConsiderIgnoreFragmentImpl(par_enclosingOperand));
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFragment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ConsiderIgnoreFragment> element(new ConsiderIgnoreFragmentImpl(par_namespace));
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ConsiderIgnoreFragment> UmlFactoryImpl::createConsiderIgnoreFragment_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ConsiderIgnoreFragment> element(new ConsiderIgnoreFragmentImpl(par_owner));
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint() const
@@ -9795,52 +9963,57 @@ std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint() const
 }
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<Constraint> element(new ConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Constraint> element(new ConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Constraint> element(new ConstraintImpl(par_owner));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Constraint> element(new ConstraintImpl(par_owningPackage));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Constraint> element(new ConstraintImpl(par_owningTemplateParameter));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation() const
@@ -9850,42 +10023,46 @@ std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation() const
 }
 std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<Continuation> element(new ContinuationImpl(par_enclosingInteraction));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<Continuation> element(new ContinuationImpl(par_enclosingOperand));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Continuation> element(new ContinuationImpl(par_namespace));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Continuation> UmlFactoryImpl::createContinuation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Continuation> element(new ContinuationImpl(par_owner));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow() const
@@ -9895,42 +10072,46 @@ std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow() const
 }
 std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ControlFlow> element(new ControlFlowImpl(par_activity));
+	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getEdge()->push_back(element);
+			wp->getEdge()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ControlFlow> element(new ControlFlowImpl(par_inStructuredNode));
+	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getEdge()->push_back(element);
+			wp->getEdge()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ControlFlow> element(new ControlFlowImpl(par_namespace));
+	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ControlFlow> UmlFactoryImpl::createControlFlow_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ControlFlow> element(new ControlFlowImpl(par_owner));
+	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction() const
@@ -9940,42 +10121,46 @@ std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction() const
 }
 std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CreateLinkAction> element(new CreateLinkActionImpl(par_activity));
+	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CreateLinkAction> element(new CreateLinkActionImpl(par_inStructuredNode));
+	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CreateLinkAction> element(new CreateLinkActionImpl(par_namespace));
+	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkAction> UmlFactoryImpl::createCreateLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CreateLinkAction> element(new CreateLinkActionImpl(par_owner));
+	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAction() const
@@ -9985,42 +10170,46 @@ std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAc
 }
 std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CreateLinkObjectAction> element(new CreateLinkObjectActionImpl(par_activity));
+	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CreateLinkObjectAction> element(new CreateLinkObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CreateLinkObjectAction> element(new CreateLinkObjectActionImpl(par_namespace));
+	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateLinkObjectAction> UmlFactoryImpl::createCreateLinkObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CreateLinkObjectAction> element(new CreateLinkObjectActionImpl(par_owner));
+	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction() const
@@ -10030,42 +10219,46 @@ std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction() c
 }
 std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<CreateObjectAction> element(new CreateObjectActionImpl(par_activity));
+	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<CreateObjectAction> element(new CreateObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<CreateObjectAction> element(new CreateObjectActionImpl(par_namespace));
+	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<CreateObjectAction> UmlFactoryImpl::createCreateObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<CreateObjectAction> element(new CreateObjectActionImpl(par_owner));
+	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode() const
@@ -10075,42 +10268,46 @@ std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode() const
 }
 std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<DataStoreNode> element(new DataStoreNodeImpl(par_activity));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<DataStoreNode> element(new DataStoreNodeImpl(par_inStructuredNode));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DataStoreNode> element(new DataStoreNodeImpl(par_namespace));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataStoreNode> UmlFactoryImpl::createDataStoreNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DataStoreNode> element(new DataStoreNodeImpl(par_owner));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType() const
@@ -10120,52 +10317,57 @@ std::shared_ptr<DataType> UmlFactoryImpl::createDataType() const
 }
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DataType> element(new DataTypeImpl(par_namespace));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DataType> element(new DataTypeImpl(par_owner));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DataType> element(new DataTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<DataType> element(new DataTypeImpl(par_owningTemplateParameter));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<DataType> element(new DataTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode() const
@@ -10175,42 +10377,46 @@ std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode() const
 }
 std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<DecisionNode> element(new DecisionNodeImpl(par_activity));
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<DecisionNode> element(new DecisionNodeImpl(par_inStructuredNode));
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DecisionNode> element(new DecisionNodeImpl(par_namespace));
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DecisionNode> UmlFactoryImpl::createDecisionNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DecisionNode> element(new DecisionNodeImpl(par_owner));
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Dependency> UmlFactoryImpl::createDependency() const
@@ -10220,42 +10426,46 @@ std::shared_ptr<Dependency> UmlFactoryImpl::createDependency() const
 }
 std::shared_ptr<Dependency> UmlFactoryImpl::createDependency_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Dependency> element(new DependencyImpl(par_namespace));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Dependency> UmlFactoryImpl::createDependency_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Dependency> element(new DependencyImpl(par_owner));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Dependency> UmlFactoryImpl::createDependency_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Dependency> element(new DependencyImpl(par_owningPackage));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Dependency> UmlFactoryImpl::createDependency_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Dependency> element(new DependencyImpl(par_owningTemplateParameter));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment() const
@@ -10265,52 +10475,57 @@ std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment() const
 }
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment_in_Location(std::weak_ptr<uml::DeploymentTarget > par_location) const
 {
-	std::shared_ptr<Deployment> element(new DeploymentImpl(par_location));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_location));
 	if(auto wp = par_location.lock())
 	{
-    		wp->getDeployment()->push_back(element);
+			wp->getDeployment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Deployment> element(new DeploymentImpl(par_namespace));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Deployment> element(new DeploymentImpl(par_owner));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Deployment> element(new DeploymentImpl(par_owningPackage));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Deployment> UmlFactoryImpl::createDeployment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Deployment> element(new DeploymentImpl(par_owningTemplateParameter));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification() const
@@ -10320,62 +10535,68 @@ std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecifi
 }
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_Deployment(std::weak_ptr<uml::Deployment > par_deployment) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_deployment));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_deployment));
 	if(auto wp = par_deployment.lock())
 	{
-    		wp->getConfiguration()->push_back(element);
+			wp->getConfiguration()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_namespace));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_owner));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_owningTemplateParameter));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<DeploymentSpecification> element(new DeploymentSpecificationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction() const
@@ -10385,42 +10606,46 @@ std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction() con
 }
 std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<DestroyLinkAction> element(new DestroyLinkActionImpl(par_activity));
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<DestroyLinkAction> element(new DestroyLinkActionImpl(par_inStructuredNode));
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DestroyLinkAction> element(new DestroyLinkActionImpl(par_namespace));
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyLinkAction> UmlFactoryImpl::createDestroyLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DestroyLinkAction> element(new DestroyLinkActionImpl(par_owner));
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction() const
@@ -10430,42 +10655,46 @@ std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction()
 }
 std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<DestroyObjectAction> element(new DestroyObjectActionImpl(par_activity));
+	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<DestroyObjectAction> element(new DestroyObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DestroyObjectAction> element(new DestroyObjectActionImpl(par_namespace));
+	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestroyObjectAction> UmlFactoryImpl::createDestroyObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DestroyObjectAction> element(new DestroyObjectActionImpl(par_owner));
+	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestructionOccurrenceSpecification() const
@@ -10475,42 +10704,46 @@ std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestru
 }
 std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<DestructionOccurrenceSpecification> element(new DestructionOccurrenceSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<DestructionOccurrenceSpecification> element(new DestructionOccurrenceSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestructionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DestructionOccurrenceSpecification> element(new DestructionOccurrenceSpecificationImpl(par_namespace));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DestructionOccurrenceSpecification> UmlFactoryImpl::createDestructionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DestructionOccurrenceSpecification> element(new DestructionOccurrenceSpecificationImpl(par_owner));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice() const
@@ -10520,52 +10753,57 @@ std::shared_ptr<Device> UmlFactoryImpl::createDevice() const
 }
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Device> element(new DeviceImpl(par_namespace));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Device> element(new DeviceImpl(par_owner));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Device> element(new DeviceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Device> element(new DeviceImpl(par_owningTemplateParameter));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Device> element(new DeviceImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration() const
@@ -10575,52 +10813,57 @@ std::shared_ptr<Duration> UmlFactoryImpl::createDuration() const
 }
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Duration> element(new DurationImpl(par_namespace));
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Duration> element(new DurationImpl(par_owner));
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Duration> element(new DurationImpl(par_owningPackage));
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<Duration> element(new DurationImpl(par_owningSlot));
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Duration> UmlFactoryImpl::createDuration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Duration> element(new DurationImpl(par_owningTemplateParameter));
+	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint() const
@@ -10630,52 +10873,57 @@ std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint() c
 }
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<DurationConstraint> element(new DurationConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DurationConstraint> element(new DurationConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DurationConstraint> element(new DurationConstraintImpl(par_owner));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DurationConstraint> element(new DurationConstraintImpl(par_owningPackage));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<DurationConstraint> element(new DurationConstraintImpl(par_owningTemplateParameter));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval() const
@@ -10685,52 +10933,57 @@ std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval() const
 }
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DurationInterval> element(new DurationIntervalImpl(par_namespace));
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DurationInterval> element(new DurationIntervalImpl(par_owner));
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DurationInterval> element(new DurationIntervalImpl(par_owningPackage));
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<DurationInterval> element(new DurationIntervalImpl(par_owningSlot));
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationInterval> UmlFactoryImpl::createDurationInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<DurationInterval> element(new DurationIntervalImpl(par_owningTemplateParameter));
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation() const
@@ -10740,42 +10993,46 @@ std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation()
 }
 std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DurationObservation> element(new DurationObservationImpl(par_namespace));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<DurationObservation> element(new DurationObservationImpl(par_owner));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DurationObservation> element(new DurationObservationImpl(par_owningPackage));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<DurationObservation> UmlFactoryImpl::createDurationObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<DurationObservation> element(new DurationObservationImpl(par_owningTemplateParameter));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ElementImport> UmlFactoryImpl::createElementImport() const
@@ -10785,22 +11042,24 @@ std::shared_ptr<ElementImport> UmlFactoryImpl::createElementImport() const
 }
 std::shared_ptr<ElementImport> UmlFactoryImpl::createElementImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace > par_importingNamespace) const
 {
-	std::shared_ptr<ElementImport> element(new ElementImportImpl(par_importingNamespace));
+	std::shared_ptr<ElementImportImpl> element(new ElementImportImpl(par_importingNamespace));
 	if(auto wp = par_importingNamespace.lock())
 	{
-    		wp->getElementImport()->push_back(element);
+			wp->getElementImport()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ElementImport> UmlFactoryImpl::createElementImport_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ElementImport> element(new ElementImportImpl(par_owner));
+	std::shared_ptr<ElementImportImpl> element(new ElementImportImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration() const
@@ -10810,52 +11069,57 @@ std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration() const
 }
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Enumeration> element(new EnumerationImpl(par_namespace));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Enumeration> element(new EnumerationImpl(par_owner));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Enumeration> element(new EnumerationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Enumeration> element(new EnumerationImpl(par_owningTemplateParameter));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Enumeration> element(new EnumerationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral() const
@@ -10865,52 +11129,57 @@ std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral() c
 }
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral_in_Enumeration(std::weak_ptr<uml::Enumeration > par_enumeration) const
 {
-	std::shared_ptr<EnumerationLiteral> element(new EnumerationLiteralImpl(par_enumeration));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_enumeration));
 	if(auto wp = par_enumeration.lock())
 	{
-    		wp->getOwnedLiteral()->push_back(element);
+			wp->getOwnedLiteral()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<EnumerationLiteral> element(new EnumerationLiteralImpl(par_namespace));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<EnumerationLiteral> element(new EnumerationLiteralImpl(par_owner));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<EnumerationLiteral> element(new EnumerationLiteralImpl(par_owningPackage));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<EnumerationLiteral> UmlFactoryImpl::createEnumerationLiteral_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<EnumerationLiteral> element(new EnumerationLiteralImpl(par_owningTemplateParameter));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExceptionHandler> UmlFactoryImpl::createExceptionHandler() const
@@ -10920,22 +11189,24 @@ std::shared_ptr<ExceptionHandler> UmlFactoryImpl::createExceptionHandler() const
 }
 std::shared_ptr<ExceptionHandler> UmlFactoryImpl::createExceptionHandler_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExceptionHandler> element(new ExceptionHandlerImpl(par_owner));
+	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExceptionHandler> UmlFactoryImpl::createExceptionHandler_in_ProtectedNode(std::weak_ptr<uml::ExecutableNode > par_protectedNode) const
 {
-	std::shared_ptr<ExceptionHandler> element(new ExceptionHandlerImpl(par_protectedNode));
+	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(par_protectedNode));
 	if(auto wp = par_protectedNode.lock())
 	{
-    		wp->getHandler()->push_back(element);
+			wp->getHandler()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment() const
@@ -10945,52 +11216,57 @@ std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment
 }
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExecutionEnvironment> element(new ExecutionEnvironmentImpl(par_namespace));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExecutionEnvironment> element(new ExecutionEnvironmentImpl(par_owner));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ExecutionEnvironment> element(new ExecutionEnvironmentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<ExecutionEnvironment> element(new ExecutionEnvironmentImpl(par_owningTemplateParameter));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ExecutionEnvironment> element(new ExecutionEnvironmentImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutionOccurrenceSpecification() const
@@ -11000,42 +11276,46 @@ std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutio
 }
 std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<ExecutionOccurrenceSpecification> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<ExecutionOccurrenceSpecification> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExecutionOccurrenceSpecification> element(new ExecutionOccurrenceSpecificationImpl(par_namespace));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExecutionOccurrenceSpecification> UmlFactoryImpl::createExecutionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExecutionOccurrenceSpecification> element(new ExecutionOccurrenceSpecificationImpl(par_owner));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode() const
@@ -11045,42 +11325,46 @@ std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode() const
 }
 std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ExpansionNode> element(new ExpansionNodeImpl(par_activity));
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ExpansionNode> element(new ExpansionNodeImpl(par_inStructuredNode));
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExpansionNode> element(new ExpansionNodeImpl(par_namespace));
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionNode> UmlFactoryImpl::createExpansionNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExpansionNode> element(new ExpansionNodeImpl(par_owner));
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion() const
@@ -11090,62 +11374,68 @@ std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion() const
 }
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getGroup()->push_back(element);
+			wp->getGroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_inStructuredNode));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_namespace));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_owner));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<ExpansionRegion> element(new ExpansionRegionImpl(par_superGroup));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression() const
@@ -11155,52 +11445,57 @@ std::shared_ptr<Expression> UmlFactoryImpl::createExpression() const
 }
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Expression> element(new ExpressionImpl(par_namespace));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Expression> element(new ExpressionImpl(par_owner));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Expression> element(new ExpressionImpl(par_owningPackage));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<Expression> element(new ExpressionImpl(par_owningSlot));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Expression> UmlFactoryImpl::createExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Expression> element(new ExpressionImpl(par_owningTemplateParameter));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extend> UmlFactoryImpl::createExtend() const
@@ -11210,32 +11505,35 @@ std::shared_ptr<Extend> UmlFactoryImpl::createExtend() const
 }
 std::shared_ptr<Extend> UmlFactoryImpl::createExtend_in_Extension(std::weak_ptr<uml::UseCase > par_extension) const
 {
-	std::shared_ptr<Extend> element(new ExtendImpl(par_extension));
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_extension));
 	if(auto wp = par_extension.lock())
 	{
-    		wp->getExtend()->push_back(element);
+			wp->getExtend()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extend> UmlFactoryImpl::createExtend_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Extend> element(new ExtendImpl(par_namespace));
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extend> UmlFactoryImpl::createExtend_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Extend> element(new ExtendImpl(par_owner));
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension() const
@@ -11245,52 +11543,57 @@ std::shared_ptr<Extension> UmlFactoryImpl::createExtension() const
 }
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Extension> element(new ExtensionImpl(par_namespace));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Extension> element(new ExtensionImpl(par_owner));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Extension> element(new ExtensionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Extension> element(new ExtensionImpl(par_owningTemplateParameter));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Extension> element(new ExtensionImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd() const
@@ -11300,82 +11603,90 @@ std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd() const
 }
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_associationEnd));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_associationEnd));
 	if(auto wp = par_associationEnd.lock())
 	{
-    		wp->getQualifier()->push_back(element);
+			wp->getQualifier()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_Class(std::weak_ptr<uml::Class > par_class) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_class));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_class));
 	if(auto wp = par_class.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_Datatype(std::weak_ptr<uml::DataType > par_datatype) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_datatype));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_datatype));
 	if(auto wp = par_datatype.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_Interface(std::weak_ptr<uml::Interface > par_interface) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_interface));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_interface));
 	if(auto wp = par_interface.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_namespace));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_owner));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_owningAssociation));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owningAssociation));
 	if(auto wp = par_owningAssociation.lock())
 	{
-    		wp->getOwnedEnd()->push_back(element);
+			wp->getOwnedEnd()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionEnd> UmlFactoryImpl::createExtensionEnd_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<ExtensionEnd> element(new ExtensionEndImpl(par_owningTemplateParameter));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionPoint> UmlFactoryImpl::createExtensionPoint() const
@@ -11385,32 +11696,35 @@ std::shared_ptr<ExtensionPoint> UmlFactoryImpl::createExtensionPoint() const
 }
 std::shared_ptr<ExtensionPoint> UmlFactoryImpl::createExtensionPoint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ExtensionPoint> element(new ExtensionPointImpl(par_namespace));
+	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionPoint> UmlFactoryImpl::createExtensionPoint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ExtensionPoint> element(new ExtensionPointImpl(par_owner));
+	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ExtensionPoint> UmlFactoryImpl::createExtensionPoint_in_UseCase(std::weak_ptr<uml::UseCase > par_useCase) const
 {
-	std::shared_ptr<ExtensionPoint> element(new ExtensionPointImpl(par_useCase));
+	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_useCase));
 	if(auto wp = par_useCase.lock())
 	{
-    		wp->getExtensionPoint()->push_back(element);
+			wp->getExtensionPoint()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Factory> UmlFactoryImpl::createFactory() const
@@ -11425,32 +11739,35 @@ std::shared_ptr<FinalState> UmlFactoryImpl::createFinalState() const
 }
 std::shared_ptr<FinalState> UmlFactoryImpl::createFinalState_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<FinalState> element(new FinalStateImpl(par_container));
+	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getSubvertex()->push_back(element);
+			wp->getSubvertex()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FinalState> UmlFactoryImpl::createFinalState_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<FinalState> element(new FinalStateImpl(par_namespace));
+	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FinalState> UmlFactoryImpl::createFinalState_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<FinalState> element(new FinalStateImpl(par_owner));
+	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode() const
@@ -11460,42 +11777,46 @@ std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode() const
 }
 std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<FlowFinalNode> element(new FlowFinalNodeImpl(par_activity));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<FlowFinalNode> element(new FlowFinalNodeImpl(par_inStructuredNode));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<FlowFinalNode> element(new FlowFinalNodeImpl(par_namespace));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FlowFinalNode> UmlFactoryImpl::createFlowFinalNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<FlowFinalNode> element(new FlowFinalNodeImpl(par_owner));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode() const
@@ -11505,42 +11826,46 @@ std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode() const
 }
 std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ForkNode> element(new ForkNodeImpl(par_activity));
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ForkNode> element(new ForkNodeImpl(par_inStructuredNode));
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ForkNode> element(new ForkNodeImpl(par_namespace));
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ForkNode> UmlFactoryImpl::createForkNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ForkNode> element(new ForkNodeImpl(par_owner));
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior() const
@@ -11550,62 +11875,68 @@ std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior() const
 }
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_behavioredClassifier));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_namespace));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_owner));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_owningTemplateParameter));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<FunctionBehavior> element(new FunctionBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Gate> UmlFactoryImpl::createGate() const
@@ -11615,22 +11946,24 @@ std::shared_ptr<Gate> UmlFactoryImpl::createGate() const
 }
 std::shared_ptr<Gate> UmlFactoryImpl::createGate_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Gate> element(new GateImpl(par_namespace));
+	std::shared_ptr<GateImpl> element(new GateImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Gate> UmlFactoryImpl::createGate_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Gate> element(new GateImpl(par_owner));
+	std::shared_ptr<GateImpl> element(new GateImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralOrdering> UmlFactoryImpl::createGeneralOrdering() const
@@ -11640,22 +11973,24 @@ std::shared_ptr<GeneralOrdering> UmlFactoryImpl::createGeneralOrdering() const
 }
 std::shared_ptr<GeneralOrdering> UmlFactoryImpl::createGeneralOrdering_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<GeneralOrdering> element(new GeneralOrderingImpl(par_namespace));
+	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralOrdering> UmlFactoryImpl::createGeneralOrdering_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<GeneralOrdering> element(new GeneralOrderingImpl(par_owner));
+	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Generalization> UmlFactoryImpl::createGeneralization() const
@@ -11665,22 +12000,24 @@ std::shared_ptr<Generalization> UmlFactoryImpl::createGeneralization() const
 }
 std::shared_ptr<Generalization> UmlFactoryImpl::createGeneralization_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Generalization> element(new GeneralizationImpl(par_owner));
+	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Generalization> UmlFactoryImpl::createGeneralization_in_Specific(std::weak_ptr<uml::Classifier > par_specific) const
 {
-	std::shared_ptr<Generalization> element(new GeneralizationImpl(par_specific));
+	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(par_specific));
 	if(auto wp = par_specific.lock())
 	{
-    		wp->getGeneralization()->push_back(element);
+			wp->getGeneralization()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet() const
@@ -11690,42 +12027,46 @@ std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet() con
 }
 std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<GeneralizationSet> element(new GeneralizationSetImpl(par_namespace));
+	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<GeneralizationSet> element(new GeneralizationSetImpl(par_owner));
+	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<GeneralizationSet> element(new GeneralizationSetImpl(par_owningPackage));
+	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<GeneralizationSet> UmlFactoryImpl::createGeneralizationSet_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<GeneralizationSet> element(new GeneralizationSetImpl(par_owningTemplateParameter));
+	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Image> UmlFactoryImpl::createImage() const
@@ -11735,12 +12076,13 @@ std::shared_ptr<Image> UmlFactoryImpl::createImage() const
 }
 std::shared_ptr<Image> UmlFactoryImpl::createImage_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Image> element(new ImageImpl(par_owner));
+	std::shared_ptr<ImageImpl> element(new ImageImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Include> UmlFactoryImpl::createInclude() const
@@ -11750,32 +12092,35 @@ std::shared_ptr<Include> UmlFactoryImpl::createInclude() const
 }
 std::shared_ptr<Include> UmlFactoryImpl::createInclude_in_IncludingCase(std::weak_ptr<uml::UseCase > par_includingCase) const
 {
-	std::shared_ptr<Include> element(new IncludeImpl(par_includingCase));
+	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_includingCase));
 	if(auto wp = par_includingCase.lock())
 	{
-    		wp->getInclude()->push_back(element);
+			wp->getInclude()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Include> UmlFactoryImpl::createInclude_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Include> element(new IncludeImpl(par_namespace));
+	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Include> UmlFactoryImpl::createInclude_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Include> element(new IncludeImpl(par_owner));
+	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow() const
@@ -11785,42 +12130,46 @@ std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow() const
 }
 std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InformationFlow> element(new InformationFlowImpl(par_namespace));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InformationFlow> element(new InformationFlowImpl(par_owner));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InformationFlow> element(new InformationFlowImpl(par_owningPackage));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationFlow> UmlFactoryImpl::createInformationFlow_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InformationFlow> element(new InformationFlowImpl(par_owningTemplateParameter));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem() const
@@ -11830,52 +12179,57 @@ std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem() const
 }
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InformationItem> element(new InformationItemImpl(par_namespace));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InformationItem> element(new InformationItemImpl(par_owner));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InformationItem> element(new InformationItemImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InformationItem> element(new InformationItemImpl(par_owningTemplateParameter));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<InformationItem> element(new InformationItemImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode() const
@@ -11885,42 +12239,46 @@ std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode() const
 }
 std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<InitialNode> element(new InitialNodeImpl(par_activity));
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<InitialNode> element(new InitialNodeImpl(par_inStructuredNode));
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InitialNode> element(new InitialNodeImpl(par_namespace));
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InitialNode> UmlFactoryImpl::createInitialNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InitialNode> element(new InitialNodeImpl(par_owner));
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin() const
@@ -11930,72 +12288,79 @@ std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin() const
 }
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_activity));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_callOperationAction));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_callOperationAction));
 	if(auto wp = par_callOperationAction.lock())
 	{
 			wp->setTarget(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_inStructuredNode));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_invocationAction));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_invocationAction));
 	if(auto wp = par_invocationAction.lock())
 	{
-    		wp->getArgument()->push_back(element);
+			wp->getArgument()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_namespace));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_owner));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InputPin> UmlFactoryImpl::createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction) const
 {
-	std::shared_ptr<InputPin> element(new InputPinImpl(par_structuralFeatureAction));
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_structuralFeatureAction));
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecification() const
@@ -12005,42 +12370,46 @@ std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecificati
 }
 std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InstanceSpecification> element(new InstanceSpecificationImpl(par_namespace));
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InstanceSpecification> element(new InstanceSpecificationImpl(par_owner));
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecification_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InstanceSpecification> element(new InstanceSpecificationImpl(par_owningPackage));
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceSpecification> UmlFactoryImpl::createInstanceSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InstanceSpecification> element(new InstanceSpecificationImpl(par_owningTemplateParameter));
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue() const
@@ -12050,52 +12419,57 @@ std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue() const
 }
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InstanceValue> element(new InstanceValueImpl(par_namespace));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InstanceValue> element(new InstanceValueImpl(par_owner));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InstanceValue> element(new InstanceValueImpl(par_owningPackage));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<InstanceValue> element(new InstanceValueImpl(par_owningSlot));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InstanceValue> UmlFactoryImpl::createInstanceValue_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InstanceValue> element(new InstanceValueImpl(par_owningTemplateParameter));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction() const
@@ -12105,82 +12479,90 @@ std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction() const
 }
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_behavioredClassifier));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_enclosingInteraction));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_enclosingOperand));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_namespace));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_owner));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_owningTemplateParameter));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Interaction> element(new InteractionImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint() const
@@ -12190,52 +12572,57 @@ std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstrai
 }
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<InteractionConstraint> element(new InteractionConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InteractionConstraint> element(new InteractionConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InteractionConstraint> element(new InteractionConstraintImpl(par_owner));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InteractionConstraint> element(new InteractionConstraintImpl(par_owningPackage));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InteractionConstraint> element(new InteractionConstraintImpl(par_owningTemplateParameter));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand() const
@@ -12245,42 +12632,46 @@ std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand() c
 }
 std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<InteractionOperand> element(new InteractionOperandImpl(par_enclosingInteraction));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<InteractionOperand> element(new InteractionOperandImpl(par_enclosingOperand));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InteractionOperand> element(new InteractionOperandImpl(par_namespace));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionOperand> UmlFactoryImpl::createInteractionOperand_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InteractionOperand> element(new InteractionOperandImpl(par_owner));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse() const
@@ -12290,42 +12681,46 @@ std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse() const
 }
 std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<InteractionUse> element(new InteractionUseImpl(par_enclosingInteraction));
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<InteractionUse> element(new InteractionUseImpl(par_enclosingOperand));
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InteractionUse> element(new InteractionUseImpl(par_namespace));
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InteractionUse> UmlFactoryImpl::createInteractionUse_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InteractionUse> element(new InteractionUseImpl(par_owner));
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface() const
@@ -12335,52 +12730,57 @@ std::shared_ptr<Interface> UmlFactoryImpl::createInterface() const
 }
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Interface> element(new InterfaceImpl(par_namespace));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Interface> element(new InterfaceImpl(par_owner));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Interface> element(new InterfaceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Interface> element(new InterfaceImpl(par_owningTemplateParameter));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Interface> element(new InterfaceImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization() const
@@ -12390,52 +12790,57 @@ std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization
 }
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization_in_ImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier > par_implementingClassifier) const
 {
-	std::shared_ptr<InterfaceRealization> element(new InterfaceRealizationImpl(par_implementingClassifier));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_implementingClassifier));
 	if(auto wp = par_implementingClassifier.lock())
 	{
-    		wp->getInterfaceRealization()->push_back(element);
+			wp->getInterfaceRealization()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InterfaceRealization> element(new InterfaceRealizationImpl(par_namespace));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InterfaceRealization> element(new InterfaceRealizationImpl(par_owner));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InterfaceRealization> element(new InterfaceRealizationImpl(par_owningPackage));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterfaceRealization> UmlFactoryImpl::createInterfaceRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<InterfaceRealization> element(new InterfaceRealizationImpl(par_owningTemplateParameter));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptibleActivityRegion() const
@@ -12445,42 +12850,46 @@ std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptible
 }
 std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptibleActivityRegion_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<InterruptibleActivityRegion> element(new InterruptibleActivityRegionImpl(par_inActivity));
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_inActivity));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getGroup()->push_back(element);
+			wp->getGroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptibleActivityRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InterruptibleActivityRegion> element(new InterruptibleActivityRegionImpl(par_namespace));
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptibleActivityRegion_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<InterruptibleActivityRegion> element(new InterruptibleActivityRegionImpl(par_owner));
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<InterruptibleActivityRegion> UmlFactoryImpl::createInterruptibleActivityRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<InterruptibleActivityRegion> element(new InterruptibleActivityRegionImpl(par_superGroup));
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval() const
@@ -12490,52 +12899,57 @@ std::shared_ptr<Interval> UmlFactoryImpl::createInterval() const
 }
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Interval> element(new IntervalImpl(par_namespace));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Interval> element(new IntervalImpl(par_owner));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Interval> element(new IntervalImpl(par_owningPackage));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<Interval> element(new IntervalImpl(par_owningSlot));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Interval> UmlFactoryImpl::createInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Interval> element(new IntervalImpl(par_owningTemplateParameter));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint() const
@@ -12545,52 +12959,57 @@ std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint() c
 }
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<IntervalConstraint> element(new IntervalConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<IntervalConstraint> element(new IntervalConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<IntervalConstraint> element(new IntervalConstraintImpl(par_owner));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<IntervalConstraint> element(new IntervalConstraintImpl(par_owningPackage));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<IntervalConstraint> element(new IntervalConstraintImpl(par_owningTemplateParameter));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode() const
@@ -12600,42 +13019,46 @@ std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode() const
 }
 std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<JoinNode> element(new JoinNodeImpl(par_activity));
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<JoinNode> element(new JoinNodeImpl(par_inStructuredNode));
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<JoinNode> element(new JoinNodeImpl(par_namespace));
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<JoinNode> UmlFactoryImpl::createJoinNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<JoinNode> element(new JoinNodeImpl(par_owner));
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Lifeline> UmlFactoryImpl::createLifeline() const
@@ -12645,32 +13068,35 @@ std::shared_ptr<Lifeline> UmlFactoryImpl::createLifeline() const
 }
 std::shared_ptr<Lifeline> UmlFactoryImpl::createLifeline_in_Interaction(std::weak_ptr<uml::Interaction > par_interaction) const
 {
-	std::shared_ptr<Lifeline> element(new LifelineImpl(par_interaction));
+	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_interaction));
 	if(auto wp = par_interaction.lock())
 	{
-    		wp->getLifeline()->push_back(element);
+			wp->getLifeline()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Lifeline> UmlFactoryImpl::createLifeline_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Lifeline> element(new LifelineImpl(par_namespace));
+	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Lifeline> UmlFactoryImpl::createLifeline_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Lifeline> element(new LifelineImpl(par_owner));
+	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LinkEndCreationData> UmlFactoryImpl::createLinkEndCreationData() const
@@ -12680,12 +13106,13 @@ std::shared_ptr<LinkEndCreationData> UmlFactoryImpl::createLinkEndCreationData()
 }
 std::shared_ptr<LinkEndCreationData> UmlFactoryImpl::createLinkEndCreationData_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LinkEndCreationData> element(new LinkEndCreationDataImpl(par_owner));
+	std::shared_ptr<LinkEndCreationDataImpl> element(new LinkEndCreationDataImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LinkEndData> UmlFactoryImpl::createLinkEndData() const
@@ -12695,12 +13122,13 @@ std::shared_ptr<LinkEndData> UmlFactoryImpl::createLinkEndData() const
 }
 std::shared_ptr<LinkEndData> UmlFactoryImpl::createLinkEndData_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LinkEndData> element(new LinkEndDataImpl(par_owner));
+	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LinkEndDestructionData> UmlFactoryImpl::createLinkEndDestructionData() const
@@ -12710,12 +13138,13 @@ std::shared_ptr<LinkEndDestructionData> UmlFactoryImpl::createLinkEndDestruction
 }
 std::shared_ptr<LinkEndDestructionData> UmlFactoryImpl::createLinkEndDestructionData_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LinkEndDestructionData> element(new LinkEndDestructionDataImpl(par_owner));
+	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean() const
@@ -12725,52 +13154,57 @@ std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean() const
 }
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralBoolean> element(new LiteralBooleanImpl(par_namespace));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralBoolean> element(new LiteralBooleanImpl(par_owner));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralBoolean> element(new LiteralBooleanImpl(par_owningPackage));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralBoolean> element(new LiteralBooleanImpl(par_owningSlot));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralBoolean> UmlFactoryImpl::createLiteralBoolean_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralBoolean> element(new LiteralBooleanImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger() const
@@ -12780,52 +13214,57 @@ std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger() const
 }
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralInteger> element(new LiteralIntegerImpl(par_namespace));
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralInteger> element(new LiteralIntegerImpl(par_owner));
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralInteger> element(new LiteralIntegerImpl(par_owningPackage));
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralInteger> element(new LiteralIntegerImpl(par_owningSlot));
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralInteger> UmlFactoryImpl::createLiteralInteger_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralInteger> element(new LiteralIntegerImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull() const
@@ -12835,52 +13274,57 @@ std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull() const
 }
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralNull> element(new LiteralNullImpl(par_namespace));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralNull> element(new LiteralNullImpl(par_owner));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralNull> element(new LiteralNullImpl(par_owningPackage));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralNull> element(new LiteralNullImpl(par_owningSlot));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralNull> UmlFactoryImpl::createLiteralNull_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralNull> element(new LiteralNullImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal() const
@@ -12890,52 +13334,57 @@ std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal() const
 }
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralReal> element(new LiteralRealImpl(par_namespace));
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralReal> element(new LiteralRealImpl(par_owner));
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralReal> element(new LiteralRealImpl(par_owningPackage));
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralReal> element(new LiteralRealImpl(par_owningSlot));
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralReal> UmlFactoryImpl::createLiteralReal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralReal> element(new LiteralRealImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString() const
@@ -12945,52 +13394,57 @@ std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString() const
 }
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralString> element(new LiteralStringImpl(par_namespace));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralString> element(new LiteralStringImpl(par_owner));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralString> element(new LiteralStringImpl(par_owningPackage));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralString> element(new LiteralStringImpl(par_owningSlot));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralString> UmlFactoryImpl::createLiteralString_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralString> element(new LiteralStringImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural() const
@@ -13000,52 +13454,57 @@ std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedN
 }
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LiteralUnlimitedNatural> element(new LiteralUnlimitedNaturalImpl(par_namespace));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LiteralUnlimitedNatural> element(new LiteralUnlimitedNaturalImpl(par_owner));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<LiteralUnlimitedNatural> element(new LiteralUnlimitedNaturalImpl(par_owningPackage));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<LiteralUnlimitedNatural> element(new LiteralUnlimitedNaturalImpl(par_owningSlot));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LiteralUnlimitedNatural> UmlFactoryImpl::createLiteralUnlimitedNatural_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<LiteralUnlimitedNatural> element(new LiteralUnlimitedNaturalImpl(par_owningTemplateParameter));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode() const
@@ -13055,62 +13514,68 @@ std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode() const
 }
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getGroup()->push_back(element);
+			wp->getGroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_inStructuredNode));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_namespace));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_owner));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<LoopNode> element(new LoopNodeImpl(par_superGroup));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation() const
@@ -13120,42 +13585,46 @@ std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation() const
 }
 std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Manifestation> element(new ManifestationImpl(par_namespace));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Manifestation> element(new ManifestationImpl(par_owner));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Manifestation> element(new ManifestationImpl(par_owningPackage));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Manifestation> UmlFactoryImpl::createManifestation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Manifestation> element(new ManifestationImpl(par_owningTemplateParameter));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode() const
@@ -13165,42 +13634,46 @@ std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode() const
 }
 std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<MergeNode> element(new MergeNodeImpl(par_activity));
+	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<MergeNode> element(new MergeNodeImpl(par_inStructuredNode));
+	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<MergeNode> element(new MergeNodeImpl(par_namespace));
+	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MergeNode> UmlFactoryImpl::createMergeNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<MergeNode> element(new MergeNodeImpl(par_owner));
+	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Message> UmlFactoryImpl::createMessage() const
@@ -13210,32 +13683,35 @@ std::shared_ptr<Message> UmlFactoryImpl::createMessage() const
 }
 std::shared_ptr<Message> UmlFactoryImpl::createMessage_in_Interaction(std::weak_ptr<uml::Interaction > par_interaction) const
 {
-	std::shared_ptr<Message> element(new MessageImpl(par_interaction));
+	std::shared_ptr<MessageImpl> element(new MessageImpl(par_interaction));
 	if(auto wp = par_interaction.lock())
 	{
-    		wp->getMessage()->push_back(element);
+			wp->getMessage()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Message> UmlFactoryImpl::createMessage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Message> element(new MessageImpl(par_namespace));
+	std::shared_ptr<MessageImpl> element(new MessageImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Message> UmlFactoryImpl::createMessage_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Message> element(new MessageImpl(par_owner));
+	std::shared_ptr<MessageImpl> element(new MessageImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOccurrenceSpecification() const
@@ -13245,42 +13721,46 @@ std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOcc
 }
 std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<MessageOccurrenceSpecification> element(new MessageOccurrenceSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<MessageOccurrenceSpecification> element(new MessageOccurrenceSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<MessageOccurrenceSpecification> element(new MessageOccurrenceSpecificationImpl(par_namespace));
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<MessageOccurrenceSpecification> UmlFactoryImpl::createMessageOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<MessageOccurrenceSpecification> element(new MessageOccurrenceSpecificationImpl(par_owner));
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel() const
@@ -13290,52 +13770,57 @@ std::shared_ptr<Model> UmlFactoryImpl::createModel() const
 }
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Model> element(new ModelImpl(par_namespace));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<Model> element(new ModelImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
-    		wp->getNestedPackage()->push_back(element);
+			wp->getNestedPackage()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Model> element(new ModelImpl(par_owner));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Model> element(new ModelImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Model> element(new ModelImpl(par_owningTemplateParameter));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode() const
@@ -13345,52 +13830,57 @@ std::shared_ptr<Node> UmlFactoryImpl::createNode() const
 }
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Node> element(new NodeImpl(par_namespace));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Node> element(new NodeImpl(par_owner));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Node> element(new NodeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Node> element(new NodeImpl(par_owningTemplateParameter));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Node> element(new NodeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Object> UmlFactoryImpl::createObject() const
@@ -13405,42 +13895,46 @@ std::shared_ptr<ObjectFlow> UmlFactoryImpl::createObjectFlow() const
 }
 std::shared_ptr<ObjectFlow> UmlFactoryImpl::createObjectFlow_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ObjectFlow> element(new ObjectFlowImpl(par_activity));
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getEdge()->push_back(element);
+			wp->getEdge()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ObjectFlow> UmlFactoryImpl::createObjectFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ObjectFlow> element(new ObjectFlowImpl(par_inStructuredNode));
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getEdge()->push_back(element);
+			wp->getEdge()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ObjectFlow> UmlFactoryImpl::createObjectFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ObjectFlow> element(new ObjectFlowImpl(par_namespace));
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ObjectFlow> UmlFactoryImpl::createObjectFlow_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ObjectFlow> element(new ObjectFlowImpl(par_owner));
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecification() const
@@ -13450,42 +13944,46 @@ std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecifi
 }
 std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<OccurrenceSpecification> element(new OccurrenceSpecificationImpl(par_enclosingInteraction));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<OccurrenceSpecification> element(new OccurrenceSpecificationImpl(par_enclosingOperand));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<OccurrenceSpecification> element(new OccurrenceSpecificationImpl(par_namespace));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OccurrenceSpecification> UmlFactoryImpl::createOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OccurrenceSpecification> element(new OccurrenceSpecificationImpl(par_owner));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction() const
@@ -13495,42 +13993,46 @@ std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction() const
 }
 std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<OpaqueAction> element(new OpaqueActionImpl(par_activity));
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<OpaqueAction> element(new OpaqueActionImpl(par_inStructuredNode));
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<OpaqueAction> element(new OpaqueActionImpl(par_namespace));
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueAction> UmlFactoryImpl::createOpaqueAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OpaqueAction> element(new OpaqueActionImpl(par_owner));
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior() const
@@ -13540,62 +14042,68 @@ std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior() const
 }
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_behavioredClassifier));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_namespace));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_owner));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_owningTemplateParameter));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<OpaqueBehavior> element(new OpaqueBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression() const
@@ -13605,52 +14113,57 @@ std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression() const
 }
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<OpaqueExpression> element(new OpaqueExpressionImpl(par_namespace));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OpaqueExpression> element(new OpaqueExpressionImpl(par_owner));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<OpaqueExpression> element(new OpaqueExpressionImpl(par_owningPackage));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<OpaqueExpression> element(new OpaqueExpressionImpl(par_owningSlot));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OpaqueExpression> UmlFactoryImpl::createOpaqueExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<OpaqueExpression> element(new OpaqueExpressionImpl(par_owningTemplateParameter));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation() const
@@ -13660,62 +14173,68 @@ std::shared_ptr<Operation> UmlFactoryImpl::createOperation() const
 }
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_Class(std::weak_ptr<uml::Class > par_class) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_class));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_class));
 	if(auto wp = par_class.lock())
 	{
-    		wp->getOwnedOperation()->push_back(element);
+			wp->getOwnedOperation()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_Datatype(std::weak_ptr<uml::DataType > par_datatype) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_datatype));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_datatype));
 	if(auto wp = par_datatype.lock())
 	{
-    		wp->getOwnedOperation()->push_back(element);
+			wp->getOwnedOperation()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_Interface(std::weak_ptr<uml::Interface > par_interface) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_interface));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_interface));
 	if(auto wp = par_interface.lock())
 	{
-    		wp->getOwnedOperation()->push_back(element);
+			wp->getOwnedOperation()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_namespace));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_owner));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Operation> UmlFactoryImpl::createOperation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Operation> element(new OperationImpl(par_owningTemplateParameter));
+	std::shared_ptr<OperationImpl> element(new OperationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OperationTemplateParameter> UmlFactoryImpl::createOperationTemplateParameter() const
@@ -13725,22 +14244,24 @@ std::shared_ptr<OperationTemplateParameter> UmlFactoryImpl::createOperationTempl
 }
 std::shared_ptr<OperationTemplateParameter> UmlFactoryImpl::createOperationTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OperationTemplateParameter> element(new OperationTemplateParameterImpl(par_owner));
+	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OperationTemplateParameter> UmlFactoryImpl::createOperationTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature) const
 {
-	std::shared_ptr<OperationTemplateParameter> element(new OperationTemplateParameterImpl(par_signature));
+	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(par_signature));
 	if(auto wp = par_signature.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin() const
@@ -13750,52 +14271,57 @@ std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin() const
 }
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<OutputPin> element(new OutputPinImpl(par_activity));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_CallAction(std::weak_ptr<uml::CallAction > par_callAction) const
 {
-	std::shared_ptr<OutputPin> element(new OutputPinImpl(par_callAction));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_callAction));
 	if(auto wp = par_callAction.lock())
 	{
-    		wp->getResult()->push_back(element);
+			wp->getResult()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<OutputPin> element(new OutputPinImpl(par_inStructuredNode));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<OutputPin> element(new OutputPinImpl(par_namespace));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<OutputPin> UmlFactoryImpl::createOutputPin_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<OutputPin> element(new OutputPinImpl(par_owner));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage() const
@@ -13805,52 +14331,57 @@ std::shared_ptr<Package> UmlFactoryImpl::createPackage() const
 }
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Package> element(new PackageImpl(par_namespace));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<Package> element(new PackageImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
-    		wp->getNestedPackage()->push_back(element);
+			wp->getNestedPackage()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Package> element(new PackageImpl(par_owner));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Package> element(new PackageImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getNestedPackage()->push_back(element);
+			wp->getNestedPackage()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Package> element(new PackageImpl(par_owningTemplateParameter));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PackageImport> UmlFactoryImpl::createPackageImport() const
@@ -13860,22 +14391,24 @@ std::shared_ptr<PackageImport> UmlFactoryImpl::createPackageImport() const
 }
 std::shared_ptr<PackageImport> UmlFactoryImpl::createPackageImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace > par_importingNamespace) const
 {
-	std::shared_ptr<PackageImport> element(new PackageImportImpl(par_importingNamespace));
+	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(par_importingNamespace));
 	if(auto wp = par_importingNamespace.lock())
 	{
-    		wp->getPackageImport()->push_back(element);
+			wp->getPackageImport()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PackageImport> UmlFactoryImpl::createPackageImport_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<PackageImport> element(new PackageImportImpl(par_owner));
+	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PackageMerge> UmlFactoryImpl::createPackageMerge() const
@@ -13885,22 +14418,24 @@ std::shared_ptr<PackageMerge> UmlFactoryImpl::createPackageMerge() const
 }
 std::shared_ptr<PackageMerge> UmlFactoryImpl::createPackageMerge_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<PackageMerge> element(new PackageMergeImpl(par_owner));
+	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PackageMerge> UmlFactoryImpl::createPackageMerge_in_ReceivingPackage(std::weak_ptr<uml::Package > par_receivingPackage) const
 {
-	std::shared_ptr<PackageMerge> element(new PackageMergeImpl(par_receivingPackage));
+	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(par_receivingPackage));
 	if(auto wp = par_receivingPackage.lock())
 	{
-    		wp->getPackageMerge()->push_back(element);
+			wp->getPackageMerge()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter() const
@@ -13910,52 +14445,57 @@ std::shared_ptr<Parameter> UmlFactoryImpl::createParameter() const
 }
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter_in_Behavior(std::weak_ptr<uml::Behavior > par_behavior) const
 {
-	std::shared_ptr<Parameter> element(new ParameterImpl(par_behavior));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_behavior));
 	if(auto wp = par_behavior.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Parameter> element(new ParameterImpl(par_namespace));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter_in_Operation(std::weak_ptr<uml::Operation > par_operation) const
 {
-	std::shared_ptr<Parameter> element(new ParameterImpl(par_operation));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_operation));
 	if(auto wp = par_operation.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Parameter> element(new ParameterImpl(par_owner));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Parameter> UmlFactoryImpl::createParameter_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Parameter> element(new ParameterImpl(par_owningTemplateParameter));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ParameterSet> UmlFactoryImpl::createParameterSet() const
@@ -13965,22 +14505,24 @@ std::shared_ptr<ParameterSet> UmlFactoryImpl::createParameterSet() const
 }
 std::shared_ptr<ParameterSet> UmlFactoryImpl::createParameterSet_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ParameterSet> element(new ParameterSetImpl(par_namespace));
+	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ParameterSet> UmlFactoryImpl::createParameterSet_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ParameterSet> element(new ParameterSetImpl(par_owner));
+	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition() const
@@ -13990,42 +14532,46 @@ std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition() con
 }
 std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<PartDecomposition> element(new PartDecompositionImpl(par_enclosingInteraction));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<PartDecomposition> element(new PartDecompositionImpl(par_enclosingOperand));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<PartDecomposition> element(new PartDecompositionImpl(par_namespace));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PartDecomposition> UmlFactoryImpl::createPartDecomposition_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<PartDecomposition> element(new PartDecompositionImpl(par_owner));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort() const
@@ -14035,82 +14581,90 @@ std::shared_ptr<Port> UmlFactoryImpl::createPort() const
 }
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_associationEnd));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_associationEnd));
 	if(auto wp = par_associationEnd.lock())
 	{
-    		wp->getQualifier()->push_back(element);
+			wp->getQualifier()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_Class(std::weak_ptr<uml::Class > par_class) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_class));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_class));
 	if(auto wp = par_class.lock())
 	{
-    		wp->getOwnedPort()->push_back(element);
+			wp->getOwnedPort()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_Datatype(std::weak_ptr<uml::DataType > par_datatype) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_datatype));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_datatype));
 	if(auto wp = par_datatype.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_Interface(std::weak_ptr<uml::Interface > par_interface) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_interface));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_interface));
 	if(auto wp = par_interface.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_namespace));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_owner));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_owningAssociation));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_owningAssociation));
 	if(auto wp = par_owningAssociation.lock())
 	{
-    		wp->getOwnedEnd()->push_back(element);
+			wp->getOwnedEnd()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Port> UmlFactoryImpl::createPort_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Port> element(new PortImpl(par_owningTemplateParameter));
+	std::shared_ptr<PortImpl> element(new PortImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType() const
@@ -14120,52 +14674,57 @@ std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType() const
 }
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<PrimitiveType> element(new PrimitiveTypeImpl(par_namespace));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<PrimitiveType> element(new PrimitiveTypeImpl(par_owner));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<PrimitiveType> element(new PrimitiveTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<PrimitiveType> element(new PrimitiveTypeImpl(par_owningTemplateParameter));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<PrimitiveType> element(new PrimitiveTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile() const
@@ -14175,52 +14734,57 @@ std::shared_ptr<Profile> UmlFactoryImpl::createProfile() const
 }
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Profile> element(new ProfileImpl(par_namespace));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<Profile> element(new ProfileImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
-    		wp->getNestedPackage()->push_back(element);
+			wp->getNestedPackage()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Profile> element(new ProfileImpl(par_owner));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Profile> element(new ProfileImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Profile> element(new ProfileImpl(par_owningTemplateParameter));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProfileApplication> UmlFactoryImpl::createProfileApplication() const
@@ -14230,22 +14794,24 @@ std::shared_ptr<ProfileApplication> UmlFactoryImpl::createProfileApplication() c
 }
 std::shared_ptr<ProfileApplication> UmlFactoryImpl::createProfileApplication_in_ApplyingPackage(std::weak_ptr<uml::Package > par_applyingPackage) const
 {
-	std::shared_ptr<ProfileApplication> element(new ProfileApplicationImpl(par_applyingPackage));
+	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(par_applyingPackage));
 	if(auto wp = par_applyingPackage.lock())
 	{
-    		wp->getProfileApplication()->push_back(element);
+			wp->getProfileApplication()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProfileApplication> UmlFactoryImpl::createProfileApplication_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ProfileApplication> element(new ProfileApplicationImpl(par_owner));
+	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty() const
@@ -14255,82 +14821,90 @@ std::shared_ptr<Property> UmlFactoryImpl::createProperty() const
 }
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_associationEnd));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_associationEnd));
 	if(auto wp = par_associationEnd.lock())
 	{
-    		wp->getQualifier()->push_back(element);
+			wp->getQualifier()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_Class(std::weak_ptr<uml::Class > par_class) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_class));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_class));
 	if(auto wp = par_class.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_Datatype(std::weak_ptr<uml::DataType > par_datatype) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_datatype));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_datatype));
 	if(auto wp = par_datatype.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_Interface(std::weak_ptr<uml::Interface > par_interface) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_interface));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_interface));
 	if(auto wp = par_interface.lock())
 	{
-    		wp->getOwnedAttribute()->push_back(element);
+			wp->getOwnedAttribute()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_namespace));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_owner));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_owningAssociation));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owningAssociation));
 	if(auto wp = par_owningAssociation.lock())
 	{
-    		wp->getNavigableOwnedEnd()->push_back(element);
+			wp->getNavigableOwnedEnd()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Property> UmlFactoryImpl::createProperty_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Property> element(new PropertyImpl(par_owningTemplateParameter));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolConformance> UmlFactoryImpl::createProtocolConformance() const
@@ -14340,22 +14914,24 @@ std::shared_ptr<ProtocolConformance> UmlFactoryImpl::createProtocolConformance()
 }
 std::shared_ptr<ProtocolConformance> UmlFactoryImpl::createProtocolConformance_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ProtocolConformance> element(new ProtocolConformanceImpl(par_owner));
+	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolConformance> UmlFactoryImpl::createProtocolConformance_in_SpecificMachine(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine) const
 {
-	std::shared_ptr<ProtocolConformance> element(new ProtocolConformanceImpl(par_specificMachine));
+	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(par_specificMachine));
 	if(auto wp = par_specificMachine.lock())
 	{
-    		wp->getConformance()->push_back(element);
+			wp->getConformance()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine() const
@@ -14365,62 +14941,68 @@ std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine
 }
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_behavioredClassifier));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_namespace));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_owner));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_owningTemplateParameter));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ProtocolStateMachine> element(new ProtocolStateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolTransition> UmlFactoryImpl::createProtocolTransition() const
@@ -14430,32 +15012,35 @@ std::shared_ptr<ProtocolTransition> UmlFactoryImpl::createProtocolTransition() c
 }
 std::shared_ptr<ProtocolTransition> UmlFactoryImpl::createProtocolTransition_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<ProtocolTransition> element(new ProtocolTransitionImpl(par_container));
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getTransition()->push_back(element);
+			wp->getTransition()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolTransition> UmlFactoryImpl::createProtocolTransition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ProtocolTransition> element(new ProtocolTransitionImpl(par_namespace));
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ProtocolTransition> UmlFactoryImpl::createProtocolTransition_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ProtocolTransition> element(new ProtocolTransitionImpl(par_owner));
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate() const
@@ -14465,52 +15050,57 @@ std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate() const
 }
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<Pseudostate> element(new PseudostateImpl(par_container));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getSubvertex()->push_back(element);
+			wp->getSubvertex()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Pseudostate> element(new PseudostateImpl(par_namespace));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Pseudostate> element(new PseudostateImpl(par_owner));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate_in_State(std::weak_ptr<uml::State > par_state) const
 {
-	std::shared_ptr<Pseudostate> element(new PseudostateImpl(par_state));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_state));
 	if(auto wp = par_state.lock())
 	{
-    		wp->getConnectionPoint()->push_back(element);
+			wp->getConnectionPoint()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Pseudostate> UmlFactoryImpl::createPseudostate_in_StateMachine(std::weak_ptr<uml::StateMachine > par_stateMachine) const
 {
-	std::shared_ptr<Pseudostate> element(new PseudostateImpl(par_stateMachine));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_stateMachine));
 	if(auto wp = par_stateMachine.lock())
 	{
-    		wp->getConnectionPoint()->push_back(element);
+			wp->getConnectionPoint()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<QualifierValue> UmlFactoryImpl::createQualifierValue() const
@@ -14520,12 +15110,13 @@ std::shared_ptr<QualifierValue> UmlFactoryImpl::createQualifierValue() const
 }
 std::shared_ptr<QualifierValue> UmlFactoryImpl::createQualifierValue_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<QualifierValue> element(new QualifierValueImpl(par_owner));
+	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction() const
@@ -14535,42 +15126,46 @@ std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction
 }
 std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<RaiseExceptionAction> element(new RaiseExceptionActionImpl(par_activity));
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<RaiseExceptionAction> element(new RaiseExceptionActionImpl(par_inStructuredNode));
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<RaiseExceptionAction> element(new RaiseExceptionActionImpl(par_namespace));
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RaiseExceptionAction> UmlFactoryImpl::createRaiseExceptionAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<RaiseExceptionAction> element(new RaiseExceptionActionImpl(par_owner));
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction() const
@@ -14580,42 +15175,46 @@ std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction() const
 }
 std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadExtentAction> element(new ReadExtentActionImpl(par_activity));
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadExtentAction> element(new ReadExtentActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadExtentAction> element(new ReadExtentActionImpl(par_namespace));
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadExtentAction> UmlFactoryImpl::createReadExtentAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadExtentAction> element(new ReadExtentActionImpl(par_owner));
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassifiedObjectAction() const
@@ -14625,42 +15224,46 @@ std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassi
 }
 std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassifiedObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadIsClassifiedObjectAction> element(new ReadIsClassifiedObjectActionImpl(par_activity));
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassifiedObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadIsClassifiedObjectAction> element(new ReadIsClassifiedObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassifiedObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadIsClassifiedObjectAction> element(new ReadIsClassifiedObjectActionImpl(par_namespace));
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadIsClassifiedObjectAction> UmlFactoryImpl::createReadIsClassifiedObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadIsClassifiedObjectAction> element(new ReadIsClassifiedObjectActionImpl(par_owner));
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction() const
@@ -14670,42 +15273,46 @@ std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction() const
 }
 std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadLinkAction> element(new ReadLinkActionImpl(par_activity));
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadLinkAction> element(new ReadLinkActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadLinkAction> element(new ReadLinkActionImpl(par_namespace));
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkAction> UmlFactoryImpl::createReadLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadLinkAction> element(new ReadLinkActionImpl(par_owner));
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEndAction() const
@@ -14715,42 +15322,46 @@ std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEnd
 }
 std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEndAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadLinkObjectEndAction> element(new ReadLinkObjectEndActionImpl(par_activity));
+	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEndAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadLinkObjectEndAction> element(new ReadLinkObjectEndActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEndAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadLinkObjectEndAction> element(new ReadLinkObjectEndActionImpl(par_namespace));
+	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndAction> UmlFactoryImpl::createReadLinkObjectEndAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadLinkObjectEndAction> element(new ReadLinkObjectEndActionImpl(par_owner));
+	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLinkObjectEndQualifierAction() const
@@ -14760,42 +15371,46 @@ std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLink
 }
 std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierAction> element(new ReadLinkObjectEndQualifierActionImpl(par_activity));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLinkObjectEndQualifierAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierAction> element(new ReadLinkObjectEndQualifierActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierAction> element(new ReadLinkObjectEndQualifierActionImpl(par_namespace));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadLinkObjectEndQualifierAction> UmlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierAction> element(new ReadLinkObjectEndQualifierActionImpl(par_owner));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction() const
@@ -14805,42 +15420,46 @@ std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction() const
 }
 std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadSelfAction> element(new ReadSelfActionImpl(par_activity));
+	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadSelfAction> element(new ReadSelfActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadSelfAction> element(new ReadSelfActionImpl(par_namespace));
+	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadSelfAction> UmlFactoryImpl::createReadSelfAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadSelfAction> element(new ReadSelfActionImpl(par_owner));
+	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructuralFeatureAction() const
@@ -14850,42 +15469,46 @@ std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructura
 }
 std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadStructuralFeatureAction> element(new ReadStructuralFeatureActionImpl(par_activity));
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadStructuralFeatureAction> element(new ReadStructuralFeatureActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadStructuralFeatureAction> element(new ReadStructuralFeatureActionImpl(par_namespace));
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadStructuralFeatureAction> UmlFactoryImpl::createReadStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadStructuralFeatureAction> element(new ReadStructuralFeatureActionImpl(par_owner));
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction() const
@@ -14895,42 +15518,46 @@ std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction() c
 }
 std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReadVariableAction> element(new ReadVariableActionImpl(par_activity));
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReadVariableAction> element(new ReadVariableActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReadVariableAction> element(new ReadVariableActionImpl(par_namespace));
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReadVariableAction> UmlFactoryImpl::createReadVariableAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReadVariableAction> element(new ReadVariableActionImpl(par_owner));
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Realization> UmlFactoryImpl::createRealization() const
@@ -14940,42 +15567,46 @@ std::shared_ptr<Realization> UmlFactoryImpl::createRealization() const
 }
 std::shared_ptr<Realization> UmlFactoryImpl::createRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Realization> element(new RealizationImpl(par_namespace));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Realization> UmlFactoryImpl::createRealization_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Realization> element(new RealizationImpl(par_owner));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Realization> UmlFactoryImpl::createRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Realization> element(new RealizationImpl(par_owningPackage));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Realization> UmlFactoryImpl::createRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Realization> element(new RealizationImpl(par_owningTemplateParameter));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Reception> UmlFactoryImpl::createReception() const
@@ -14985,22 +15616,24 @@ std::shared_ptr<Reception> UmlFactoryImpl::createReception() const
 }
 std::shared_ptr<Reception> UmlFactoryImpl::createReception_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Reception> element(new ReceptionImpl(par_namespace));
+	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Reception> UmlFactoryImpl::createReception_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Reception> element(new ReceptionImpl(par_owner));
+	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAction() const
@@ -15010,42 +15643,46 @@ std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAc
 }
 std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReclassifyObjectAction> element(new ReclassifyObjectActionImpl(par_activity));
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReclassifyObjectAction> element(new ReclassifyObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReclassifyObjectAction> element(new ReclassifyObjectActionImpl(par_namespace));
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReclassifyObjectAction> UmlFactoryImpl::createReclassifyObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReclassifyObjectAction> element(new ReclassifyObjectActionImpl(par_owner));
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RedefinableTemplateSignature> UmlFactoryImpl::createRedefinableTemplateSignature() const
@@ -15055,32 +15692,35 @@ std::shared_ptr<RedefinableTemplateSignature> UmlFactoryImpl::createRedefinableT
 }
 std::shared_ptr<RedefinableTemplateSignature> UmlFactoryImpl::createRedefinableTemplateSignature_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<RedefinableTemplateSignature> element(new RedefinableTemplateSignatureImpl(par_namespace));
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RedefinableTemplateSignature> UmlFactoryImpl::createRedefinableTemplateSignature_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<RedefinableTemplateSignature> element(new RedefinableTemplateSignatureImpl(par_owner));
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RedefinableTemplateSignature> UmlFactoryImpl::createRedefinableTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement > par_template) const
 {
-	std::shared_ptr<RedefinableTemplateSignature> element(new RedefinableTemplateSignatureImpl(par_template));
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_template));
 	if(auto wp = par_template.lock())
 	{
 			wp->setOwnedTemplateSignature(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction() const
@@ -15090,42 +15730,46 @@ std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction() const
 }
 std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReduceAction> element(new ReduceActionImpl(par_activity));
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReduceAction> element(new ReduceActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReduceAction> element(new ReduceActionImpl(par_namespace));
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReduceAction> UmlFactoryImpl::createReduceAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReduceAction> element(new ReduceActionImpl(par_owner));
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Region> UmlFactoryImpl::createRegion() const
@@ -15135,42 +15779,46 @@ std::shared_ptr<Region> UmlFactoryImpl::createRegion() const
 }
 std::shared_ptr<Region> UmlFactoryImpl::createRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Region> element(new RegionImpl(par_namespace));
+	std::shared_ptr<RegionImpl> element(new RegionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Region> UmlFactoryImpl::createRegion_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Region> element(new RegionImpl(par_owner));
+	std::shared_ptr<RegionImpl> element(new RegionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Region> UmlFactoryImpl::createRegion_in_State(std::weak_ptr<uml::State > par_state) const
 {
-	std::shared_ptr<Region> element(new RegionImpl(par_state));
+	std::shared_ptr<RegionImpl> element(new RegionImpl(par_state));
 	if(auto wp = par_state.lock())
 	{
-    		wp->getRegion()->push_back(element);
+			wp->getRegion()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Region> UmlFactoryImpl::createRegion_in_StateMachine(std::weak_ptr<uml::StateMachine > par_stateMachine) const
 {
-	std::shared_ptr<Region> element(new RegionImpl(par_stateMachine));
+	std::shared_ptr<RegionImpl> element(new RegionImpl(par_stateMachine));
 	if(auto wp = par_stateMachine.lock())
 	{
-    		wp->getRegion()->push_back(element);
+			wp->getRegion()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemoveStructuralFeatureValueAction() const
@@ -15180,42 +15828,46 @@ std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemove
 }
 std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueAction> element(new RemoveStructuralFeatureValueActionImpl(par_activity));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemoveStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueAction> element(new RemoveStructuralFeatureValueActionImpl(par_inStructuredNode));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueAction> element(new RemoveStructuralFeatureValueActionImpl(par_namespace));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveStructuralFeatureValueAction> UmlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueAction> element(new RemoveStructuralFeatureValueActionImpl(par_owner));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableValueAction() const
@@ -15225,42 +15877,46 @@ std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableV
 }
 std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<RemoveVariableValueAction> element(new RemoveVariableValueActionImpl(par_activity));
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<RemoveVariableValueAction> element(new RemoveVariableValueActionImpl(par_inStructuredNode));
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<RemoveVariableValueAction> element(new RemoveVariableValueActionImpl(par_namespace));
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<RemoveVariableValueAction> UmlFactoryImpl::createRemoveVariableValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<RemoveVariableValueAction> element(new RemoveVariableValueActionImpl(par_owner));
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction() const
@@ -15270,42 +15926,46 @@ std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction() const
 }
 std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ReplyAction> element(new ReplyActionImpl(par_activity));
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ReplyAction> element(new ReplyActionImpl(par_inStructuredNode));
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ReplyAction> element(new ReplyActionImpl(par_namespace));
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ReplyAction> UmlFactoryImpl::createReplyAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ReplyAction> element(new ReplyActionImpl(par_owner));
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction() const
@@ -15315,42 +15975,46 @@ std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction() const
 }
 std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<SendObjectAction> element(new SendObjectActionImpl(par_activity));
+	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<SendObjectAction> element(new SendObjectActionImpl(par_inStructuredNode));
+	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<SendObjectAction> element(new SendObjectActionImpl(par_namespace));
+	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendObjectAction> UmlFactoryImpl::createSendObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<SendObjectAction> element(new SendObjectActionImpl(par_owner));
+	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction() const
@@ -15360,42 +16024,46 @@ std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction() const
 }
 std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<SendSignalAction> element(new SendSignalActionImpl(par_activity));
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<SendSignalAction> element(new SendSignalActionImpl(par_inStructuredNode));
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<SendSignalAction> element(new SendSignalActionImpl(par_namespace));
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SendSignalAction> UmlFactoryImpl::createSendSignalAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<SendSignalAction> element(new SendSignalActionImpl(par_owner));
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode() const
@@ -15405,62 +16073,68 @@ std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode() const
 }
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getGroup()->push_back(element);
+			wp->getGroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_inStructuredNode));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_namespace));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_owner));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<SequenceNode> element(new SequenceNodeImpl(par_superGroup));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal() const
@@ -15470,52 +16144,57 @@ std::shared_ptr<Signal> UmlFactoryImpl::createSignal() const
 }
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Signal> element(new SignalImpl(par_namespace));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Signal> element(new SignalImpl(par_owner));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Signal> element(new SignalImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Signal> element(new SignalImpl(par_owningTemplateParameter));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Signal> element(new SignalImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent() const
@@ -15525,42 +16204,46 @@ std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent() const
 }
 std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<SignalEvent> element(new SignalEventImpl(par_namespace));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<SignalEvent> element(new SignalEventImpl(par_owner));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<SignalEvent> element(new SignalEventImpl(par_owningPackage));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<SignalEvent> UmlFactoryImpl::createSignalEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<SignalEvent> element(new SignalEventImpl(par_owningTemplateParameter));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Slot> UmlFactoryImpl::createSlot() const
@@ -15570,22 +16253,24 @@ std::shared_ptr<Slot> UmlFactoryImpl::createSlot() const
 }
 std::shared_ptr<Slot> UmlFactoryImpl::createSlot_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Slot> element(new SlotImpl(par_owner));
+	std::shared_ptr<SlotImpl> element(new SlotImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Slot> UmlFactoryImpl::createSlot_in_OwningInstance(std::weak_ptr<uml::InstanceSpecification > par_owningInstance) const
 {
-	std::shared_ptr<Slot> element(new SlotImpl(par_owningInstance));
+	std::shared_ptr<SlotImpl> element(new SlotImpl(par_owningInstance));
 	if(auto wp = par_owningInstance.lock())
 	{
-    		wp->getSlot()->push_back(element);
+			wp->getSlot()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassifierBehaviorAction() const
@@ -15595,42 +16280,46 @@ std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassi
 }
 std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassifierBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<StartClassifierBehaviorAction> element(new StartClassifierBehaviorActionImpl(par_activity));
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassifierBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<StartClassifierBehaviorAction> element(new StartClassifierBehaviorActionImpl(par_inStructuredNode));
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassifierBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StartClassifierBehaviorAction> element(new StartClassifierBehaviorActionImpl(par_namespace));
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartClassifierBehaviorAction> UmlFactoryImpl::createStartClassifierBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StartClassifierBehaviorAction> element(new StartClassifierBehaviorActionImpl(par_owner));
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBehaviorAction() const
@@ -15640,42 +16329,46 @@ std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBeha
 }
 std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<StartObjectBehaviorAction> element(new StartObjectBehaviorActionImpl(par_activity));
+	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<StartObjectBehaviorAction> element(new StartObjectBehaviorActionImpl(par_inStructuredNode));
+	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StartObjectBehaviorAction> element(new StartObjectBehaviorActionImpl(par_namespace));
+	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StartObjectBehaviorAction> UmlFactoryImpl::createStartObjectBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StartObjectBehaviorAction> element(new StartObjectBehaviorActionImpl(par_owner));
+	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<State> UmlFactoryImpl::createState() const
@@ -15685,32 +16378,35 @@ std::shared_ptr<State> UmlFactoryImpl::createState() const
 }
 std::shared_ptr<State> UmlFactoryImpl::createState_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<State> element(new StateImpl(par_container));
+	std::shared_ptr<StateImpl> element(new StateImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getSubvertex()->push_back(element);
+			wp->getSubvertex()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<State> UmlFactoryImpl::createState_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<State> element(new StateImpl(par_namespace));
+	std::shared_ptr<StateImpl> element(new StateImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<State> UmlFactoryImpl::createState_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<State> element(new StateImpl(par_owner));
+	std::shared_ptr<StateImpl> element(new StateImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant() const
@@ -15720,42 +16416,46 @@ std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant() const
 }
 std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction) const
 {
-	std::shared_ptr<StateInvariant> element(new StateInvariantImpl(par_enclosingInteraction));
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_enclosingInteraction));
 	if(auto wp = par_enclosingInteraction.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand) const
 {
-	std::shared_ptr<StateInvariant> element(new StateInvariantImpl(par_enclosingOperand));
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_enclosingOperand));
 	if(auto wp = par_enclosingOperand.lock())
 	{
-    		wp->getFragment()->push_back(element);
+			wp->getFragment()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StateInvariant> element(new StateInvariantImpl(par_namespace));
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateInvariant> UmlFactoryImpl::createStateInvariant_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StateInvariant> element(new StateInvariantImpl(par_owner));
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine() const
@@ -15765,62 +16465,68 @@ std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine() const
 }
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_behavioredClassifier));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_behavioredClassifier));
 	if(auto wp = par_behavioredClassifier.lock())
 	{
-    		wp->getOwnedBehavior()->push_back(element);
+			wp->getOwnedBehavior()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_namespace));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_owner));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_owningTemplateParameter));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<StateMachine> element(new StateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype() const
@@ -15830,52 +16536,57 @@ std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype() const
 }
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Stereotype> element(new StereotypeImpl(par_namespace));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Stereotype> element(new StereotypeImpl(par_owner));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Stereotype> element(new StereotypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getOwnedStereotype()->push_back(element);
+			wp->getOwnedStereotype()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Stereotype> element(new StereotypeImpl(par_owningTemplateParameter));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<Stereotype> element(new StereotypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression() const
@@ -15885,62 +16596,68 @@ std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression() const
 }
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_namespace));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_owner));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_OwningExpression(std::weak_ptr<uml::StringExpression > par_owningExpression) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_owningExpression));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningExpression));
 	if(auto wp = par_owningExpression.lock())
 	{
-    		wp->getSubExpression()->push_back(element);
+			wp->getSubExpression()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_owningPackage));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_owningSlot));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StringExpression> UmlFactoryImpl::createStringExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<StringExpression> element(new StringExpressionImpl(par_owningTemplateParameter));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode() const
@@ -15950,62 +16667,68 @@ std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivity
 }
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getStructuredNode()->push_back(element);
+			wp->getStructuredNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
-    		wp->getStructuredNode()->push_back(element);
+			wp->getStructuredNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_inStructuredNode));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_namespace));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_owner));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup) const
 {
-	std::shared_ptr<StructuredActivityNode> element(new StructuredActivityNodeImpl(par_superGroup));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_superGroup));
 	if(auto wp = par_superGroup.lock())
 	{
-    		wp->getSubgroup()->push_back(element);
+			wp->getSubgroup()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution() const
@@ -16015,52 +16738,57 @@ std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution() const
 }
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Substitution> element(new SubstitutionImpl(par_namespace));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Substitution> element(new SubstitutionImpl(par_owner));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Substitution> element(new SubstitutionImpl(par_owningPackage));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Substitution> element(new SubstitutionImpl(par_owningTemplateParameter));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Substitution> UmlFactoryImpl::createSubstitution_in_SubstitutingClassifier(std::weak_ptr<uml::Classifier > par_substitutingClassifier) const
 {
-	std::shared_ptr<Substitution> element(new SubstitutionImpl(par_substitutingClassifier));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_substitutingClassifier));
 	if(auto wp = par_substitutingClassifier.lock())
 	{
-    		wp->getSubstitution()->push_back(element);
+			wp->getSubstitution()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateBinding> UmlFactoryImpl::createTemplateBinding() const
@@ -16070,22 +16798,24 @@ std::shared_ptr<TemplateBinding> UmlFactoryImpl::createTemplateBinding() const
 }
 std::shared_ptr<TemplateBinding> UmlFactoryImpl::createTemplateBinding_in_BoundElement(std::weak_ptr<uml::TemplateableElement > par_boundElement) const
 {
-	std::shared_ptr<TemplateBinding> element(new TemplateBindingImpl(par_boundElement));
+	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(par_boundElement));
 	if(auto wp = par_boundElement.lock())
 	{
-    		wp->getTemplateBinding()->push_back(element);
+			wp->getTemplateBinding()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateBinding> UmlFactoryImpl::createTemplateBinding_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TemplateBinding> element(new TemplateBindingImpl(par_owner));
+	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateParameter> UmlFactoryImpl::createTemplateParameter() const
@@ -16095,22 +16825,24 @@ std::shared_ptr<TemplateParameter> UmlFactoryImpl::createTemplateParameter() con
 }
 std::shared_ptr<TemplateParameter> UmlFactoryImpl::createTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TemplateParameter> element(new TemplateParameterImpl(par_owner));
+	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateParameter> UmlFactoryImpl::createTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature) const
 {
-	std::shared_ptr<TemplateParameter> element(new TemplateParameterImpl(par_signature));
+	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(par_signature));
 	if(auto wp = par_signature.lock())
 	{
-    		wp->getOwnedParameter()->push_back(element);
+			wp->getOwnedParameter()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateParameterSubstitution> UmlFactoryImpl::createTemplateParameterSubstitution() const
@@ -16120,22 +16852,24 @@ std::shared_ptr<TemplateParameterSubstitution> UmlFactoryImpl::createTemplatePar
 }
 std::shared_ptr<TemplateParameterSubstitution> UmlFactoryImpl::createTemplateParameterSubstitution_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TemplateParameterSubstitution> element(new TemplateParameterSubstitutionImpl(par_owner));
+	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateParameterSubstitution> UmlFactoryImpl::createTemplateParameterSubstitution_in_TemplateBinding(std::weak_ptr<uml::TemplateBinding > par_templateBinding) const
 {
-	std::shared_ptr<TemplateParameterSubstitution> element(new TemplateParameterSubstitutionImpl(par_templateBinding));
+	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(par_templateBinding));
 	if(auto wp = par_templateBinding.lock())
 	{
-    		wp->getParameterSubstitution()->push_back(element);
+			wp->getParameterSubstitution()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateSignature> UmlFactoryImpl::createTemplateSignature() const
@@ -16145,22 +16879,24 @@ std::shared_ptr<TemplateSignature> UmlFactoryImpl::createTemplateSignature() con
 }
 std::shared_ptr<TemplateSignature> UmlFactoryImpl::createTemplateSignature_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TemplateSignature> element(new TemplateSignatureImpl(par_owner));
+	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TemplateSignature> UmlFactoryImpl::createTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement > par_template) const
 {
-	std::shared_ptr<TemplateSignature> element(new TemplateSignatureImpl(par_template));
+	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(par_template));
 	if(auto wp = par_template.lock())
 	{
 			wp->setOwnedTemplateSignature(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction() const
@@ -16170,42 +16906,46 @@ std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction() c
 }
 std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<TestIdentityAction> element(new TestIdentityActionImpl(par_activity));
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<TestIdentityAction> element(new TestIdentityActionImpl(par_inStructuredNode));
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TestIdentityAction> element(new TestIdentityActionImpl(par_namespace));
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TestIdentityAction> UmlFactoryImpl::createTestIdentityAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TestIdentityAction> element(new TestIdentityActionImpl(par_owner));
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint() const
@@ -16215,52 +16955,57 @@ std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint() const
 }
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<TimeConstraint> element(new TimeConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
-    		wp->getOwnedRule()->push_back(element);
+			wp->getOwnedRule()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeConstraint> element(new TimeConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TimeConstraint> element(new TimeConstraintImpl(par_owner));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<TimeConstraint> element(new TimeConstraintImpl(par_owningPackage));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<TimeConstraint> element(new TimeConstraintImpl(par_owningTemplateParameter));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent() const
@@ -16270,42 +17015,46 @@ std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent() const
 }
 std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeEvent> element(new TimeEventImpl(par_namespace));
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TimeEvent> element(new TimeEventImpl(par_owner));
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<TimeEvent> element(new TimeEventImpl(par_owningPackage));
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeEvent> UmlFactoryImpl::createTimeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<TimeEvent> element(new TimeEventImpl(par_owningTemplateParameter));
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression() const
@@ -16315,52 +17064,57 @@ std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression() const
 }
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeExpression> element(new TimeExpressionImpl(par_namespace));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TimeExpression> element(new TimeExpressionImpl(par_owner));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<TimeExpression> element(new TimeExpressionImpl(par_owningPackage));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<TimeExpression> element(new TimeExpressionImpl(par_owningSlot));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeExpression> UmlFactoryImpl::createTimeExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<TimeExpression> element(new TimeExpressionImpl(par_owningTemplateParameter));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval() const
@@ -16370,52 +17124,57 @@ std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval() const
 }
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeInterval> element(new TimeIntervalImpl(par_namespace));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TimeInterval> element(new TimeIntervalImpl(par_owner));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<TimeInterval> element(new TimeIntervalImpl(par_owningPackage));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot) const
 {
-	std::shared_ptr<TimeInterval> element(new TimeIntervalImpl(par_owningSlot));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningSlot));
 	if(auto wp = par_owningSlot.lock())
 	{
-    		wp->getValue()->push_back(element);
+			wp->getValue()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeInterval> UmlFactoryImpl::createTimeInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<TimeInterval> element(new TimeIntervalImpl(par_owningTemplateParameter));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation() const
@@ -16425,42 +17184,46 @@ std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation() const
 }
 std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeObservation> element(new TimeObservationImpl(par_namespace));
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<TimeObservation> element(new TimeObservationImpl(par_owner));
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<TimeObservation> element(new TimeObservationImpl(par_owningPackage));
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<TimeObservation> UmlFactoryImpl::createTimeObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<TimeObservation> element(new TimeObservationImpl(par_owningTemplateParameter));
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Transition> UmlFactoryImpl::createTransition() const
@@ -16470,32 +17233,35 @@ std::shared_ptr<Transition> UmlFactoryImpl::createTransition() const
 }
 std::shared_ptr<Transition> UmlFactoryImpl::createTransition_in_Container(std::weak_ptr<uml::Region > par_container) const
 {
-	std::shared_ptr<Transition> element(new TransitionImpl(par_container));
+	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_container));
 	if(auto wp = par_container.lock())
 	{
-    		wp->getTransition()->push_back(element);
+			wp->getTransition()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Transition> UmlFactoryImpl::createTransition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Transition> element(new TransitionImpl(par_namespace));
+	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Transition> UmlFactoryImpl::createTransition_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Transition> element(new TransitionImpl(par_owner));
+	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Trigger> UmlFactoryImpl::createTrigger() const
@@ -16505,22 +17271,24 @@ std::shared_ptr<Trigger> UmlFactoryImpl::createTrigger() const
 }
 std::shared_ptr<Trigger> UmlFactoryImpl::createTrigger_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Trigger> element(new TriggerImpl(par_namespace));
+	std::shared_ptr<TriggerImpl> element(new TriggerImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Trigger> UmlFactoryImpl::createTrigger_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Trigger> element(new TriggerImpl(par_owner));
+	std::shared_ptr<TriggerImpl> element(new TriggerImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction() const
@@ -16530,42 +17298,46 @@ std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction() const
 }
 std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<UnmarshallAction> element(new UnmarshallActionImpl(par_activity));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<UnmarshallAction> element(new UnmarshallActionImpl(par_inStructuredNode));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<UnmarshallAction> element(new UnmarshallActionImpl(par_namespace));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UnmarshallAction> UmlFactoryImpl::createUnmarshallAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<UnmarshallAction> element(new UnmarshallActionImpl(par_owner));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Usage> UmlFactoryImpl::createUsage() const
@@ -16575,42 +17347,46 @@ std::shared_ptr<Usage> UmlFactoryImpl::createUsage() const
 }
 std::shared_ptr<Usage> UmlFactoryImpl::createUsage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Usage> element(new UsageImpl(par_namespace));
+	std::shared_ptr<UsageImpl> element(new UsageImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Usage> UmlFactoryImpl::createUsage_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Usage> element(new UsageImpl(par_owner));
+	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Usage> UmlFactoryImpl::createUsage_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<Usage> element(new UsageImpl(par_owningPackage));
+	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owningPackage));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Usage> UmlFactoryImpl::createUsage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Usage> element(new UsageImpl(par_owningTemplateParameter));
+	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase() const
@@ -16620,52 +17396,57 @@ std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase() const
 }
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<UseCase> element(new UseCaseImpl(par_namespace));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<UseCase> element(new UseCaseImpl(par_owner));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<UseCase> element(new UseCaseImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
-    		wp->getPackagedElement()->push_back(element);
+			wp->getPackagedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<UseCase> element(new UseCaseImpl(par_owningTemplateParameter));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<UseCase> element(new UseCaseImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_package, UmlPackage::TYPE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
-    		wp->getOwnedType()->push_back(element);
+			wp->getOwnedType()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin() const
@@ -16675,72 +17456,79 @@ std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin() const
 }
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_activity));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_callOperationAction));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_callOperationAction));
 	if(auto wp = par_callOperationAction.lock())
 	{
 			wp->setTarget(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_inStructuredNode));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_invocationAction));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_invocationAction));
 	if(auto wp = par_invocationAction.lock())
 	{
-    		wp->getArgument()->push_back(element);
+			wp->getArgument()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_namespace));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_owner));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValuePin> UmlFactoryImpl::createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction) const
 {
-	std::shared_ptr<ValuePin> element(new ValuePinImpl(par_structuralFeatureAction));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_structuralFeatureAction));
 	if(auto wp = par_structuralFeatureAction.lock())
 	{
 			wp->setObject(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificationAction() const
@@ -16750,42 +17538,46 @@ std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificati
 }
 std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ValueSpecificationAction> element(new ValueSpecificationActionImpl(par_activity));
+	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_activity));
 	if(auto wp = par_activity.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode) const
 {
-	std::shared_ptr<ValueSpecificationAction> element(new ValueSpecificationActionImpl(par_inStructuredNode));
+	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_inStructuredNode));
 	if(auto wp = par_inStructuredNode.lock())
 	{
-    		wp->getNode()->push_back(element);
+			wp->getNode()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ValueSpecificationAction> element(new ValueSpecificationActionImpl(par_namespace));
+	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<ValueSpecificationAction> UmlFactoryImpl::createValueSpecificationAction_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<ValueSpecificationAction> element(new ValueSpecificationActionImpl(par_owner));
+	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable() const
@@ -16795,52 +17587,57 @@ std::shared_ptr<Variable> UmlFactoryImpl::createVariable() const
 }
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_ActivityScope(std::weak_ptr<uml::Activity > par_activityScope) const
 {
-	std::shared_ptr<Variable> element(new VariableImpl(par_activityScope));
+	std::shared_ptr<VariableImpl> element(new VariableImpl(par_activityScope));
 	if(auto wp = par_activityScope.lock())
 	{
-    		wp->getVariable()->push_back(element);
+			wp->getVariable()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<Variable> element(new VariableImpl(par_namespace));
+	std::shared_ptr<VariableImpl> element(new VariableImpl(par_namespace));
 	if(auto wp = par_namespace.lock())
 	{
-    		wp->getOwnedMember()->push_back(element);
+			wp->getOwnedMember()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_Owner(std::weak_ptr<uml::Element > par_owner) const
 {
-	std::shared_ptr<Variable> element(new VariableImpl(par_owner));
+	std::shared_ptr<VariableImpl> element(new VariableImpl(par_owner));
 	if(auto wp = par_owner.lock())
 	{
-    		wp->getOwnedElement()->push_back(element);
+			wp->getOwnedElement()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter) const
 {
-	std::shared_ptr<Variable> element(new VariableImpl(par_owningTemplateParameter));
+	std::shared_ptr<VariableImpl> element(new VariableImpl(par_owningTemplateParameter));
 	if(auto wp = par_owningTemplateParameter.lock())
 	{
 			wp->setOwnedParameteredElement(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<Variable> UmlFactoryImpl::createVariable_in_Scope(std::weak_ptr<uml::StructuredActivityNode > par_scope) const
 {
-	std::shared_ptr<Variable> element(new VariableImpl(par_scope));
+	std::shared_ptr<VariableImpl> element(new VariableImpl(par_scope));
 	if(auto wp = par_scope.lock())
 	{
-    		wp->getVariable()->push_back(element);
+			wp->getVariable()->push_back(element);
 	}
 	return element;
+	
 }
 
 
