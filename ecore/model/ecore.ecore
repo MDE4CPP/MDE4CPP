@@ -479,51 +479,6 @@
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>
     </eOperations>
-    <eOperations name="createEClass" eType="#//EClass">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EClassImpl> c(std::dynamic_pointer_cast&lt;EClassImpl>(EcoreFactory::eInstance()->create(&quot;EClass&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(c);&#xD;&#xA;&#x9;c->setClassifierID(id);&#xD;&#xA;&#x9;return c;"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="createEEnum" eType="#//EEnum">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EEnumImpl> e( std::dynamic_pointer_cast&lt;EEnumImpl>(EcoreFactory::eInstance()->create(&quot;EEnum&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(e);&#xD;&#xA;&#x9;e->setClassifierID(id);&#xD;&#xA;&#x9;return e;"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="createEAttribute">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::shared_ptr&lt;EAttributeImpl> a(std::dynamic_pointer_cast&lt;EAttributeImpl>(EcoreFactory::eInstance()->create(&quot;EAttribute&quot;, owner)));&#xD;&#xA;    assert(a);&#xD;&#xA;    a->setFeatureID(id);"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EClass"/>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="createEReference">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="implOnly" value="true"/>
-        <details key="body" value="&#x9;std::shared_ptr&lt;EReferenceImpl> r (std::dynamic_pointer_cast&lt;EReferenceImpl>(EcoreFactory::eInstance()->create(&quot;EReference&quot;, owner)));&#xD;&#xA;&#x9;assert(r);&#xD;&#xA;&#x9;r->setFeatureID(id);"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EClass"/>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="createEOperation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;std::shared_ptr&lt;EOperationImpl> o(std::dynamic_pointer_cast&lt;EOperationImpl>(EcoreFactory::eInstance()->create(&quot;EOperation&quot;,owner)));&#xD;&#xA;&#x9;assert(o);&#xD;&#xA;&#x9;o->setOperationID(id);"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EClass"/>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="createEDataType" eType="#//EDataType">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;struct null_deleter{void operator()(void const *) const { } };&#xD;&#xA;&#x9;std::shared_ptr&lt;EDataTypeImpl> d(std::dynamic_pointer_cast&lt;EDataTypeImpl>(EcoreFactory::eInstance()->create(&quot;EDataType&quot;,std::shared_ptr&lt;EPackage>(this, null_deleter()))));&#xD;&#xA;&#x9;assert(d);&#xD;&#xA;&#x9;d->setClassifierID(id);&#xD;&#xA;&#x9;return d;"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="id" eType="#//EInt"/>
-    </eOperations>
     <eOperations name="initEClass" eType="#//EClass">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
         <details key="body" value="initEClassifier(c,EcorePackage::eInstance()->getEClass(),instanceClass,name);&#xD;&#xA;c->setAbstract(isAbstract);&#xD;&#xA;c->setInterface(isInterface);&#xD;&#xA;return c;"/>
