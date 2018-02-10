@@ -137,12 +137,13 @@ std::shared_ptr<Book> LibraryModel_ecoreFactoryImpl::createBook() const
 }
 std::shared_ptr<Book> LibraryModel_ecoreFactoryImpl::createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const
 {
-	std::shared_ptr<Book> element(new BookImpl(par_library));
+	std::shared_ptr<BookImpl> element(new BookImpl(par_library));
 	if(auto wp = par_library.lock())
 	{
-    		wp->getBook()->push_back(element);
+			wp->getBook()->push_back(element);
 	}
 	return element;
+	
 }
 
 std::shared_ptr<LibraryModel> LibraryModel_ecoreFactoryImpl::createLibraryModel() const
@@ -162,12 +163,13 @@ std::shared_ptr<Picture> LibraryModel_ecoreFactoryImpl::createPicture() const
 }
 std::shared_ptr<Picture> LibraryModel_ecoreFactoryImpl::createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const
 {
-	std::shared_ptr<Picture> element(new PictureImpl(par_book));
+	std::shared_ptr<PictureImpl> element(new PictureImpl(par_book));
 	if(auto wp = par_book.lock())
 	{
-    		wp->getPictures()->push_back(element);
+			wp->getPictures()->push_back(element);
 	}
 	return element;
+	
 }
 
 

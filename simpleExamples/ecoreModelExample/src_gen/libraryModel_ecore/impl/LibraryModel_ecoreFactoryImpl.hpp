@@ -59,6 +59,7 @@ namespace libraryModel_ecore
 			//Add containing object
 			virtual std::shared_ptr<Book> createBook_in_Library(std::weak_ptr<libraryModel_ecore::LibraryModel > par_library) const ;
 			
+			
 			virtual std::shared_ptr<LibraryModel> createLibraryModel() const ;
 			
 			virtual std::shared_ptr<NamedElement> createNamedElement() const ;
@@ -66,6 +67,7 @@ namespace libraryModel_ecore
 			virtual std::shared_ptr<Picture> createPicture() const ;
 			//Add containing object
 			virtual std::shared_ptr<Picture> createPicture_in_Book(std::weak_ptr<libraryModel_ecore::Book > par_book) const ;
+			
 			
 			
 

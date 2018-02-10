@@ -61,37 +61,45 @@ void LibraryModel_ecorePackageImpl::createPackageContents()
 		return;
 	}
 	isCreated = true;
+	struct null_deleter{void operator()(void const *) const { } };
 
-	authorEClass = createEClass(AUTHOR);
-	
-	
-	
+	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
-	bookEClass = createEClass(BOOK);
+	authorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), AUTHOR);
 	
-	createEReference(bookEClass, BOOK_AUTHORS);
-	createEReference(bookEClass, BOOK_LIBRARY);
-	createEReference(bookEClass, BOOK_PICTURES);
-	
-	
-
-	libraryModelEClass = createEClass(LIBRARYMODEL);
-	
-	createEReference(libraryModelEClass, LIBRARYMODEL_AUTHORS);
-	createEReference(libraryModelEClass, LIBRARYMODEL_BOOK);
-	
-	
-
-	namedElementEClass = createEClass(NAMEDELEMENT);
-	createEAttribute(namedElementEClass, NAMEDELEMENT_NAME);
 	
 	
 	
 
-	pictureEClass = createEClass(PICTURE);
-	createEAttribute(pictureEClass, PICTURE_PAGENUMBER);
+	bookEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BOOK);
 	
-	createEReference(pictureEClass, PICTURE_BOOK);
+	
+	factory->createEReference_in_EContainingClass(bookEClass, BOOK_AUTHORS);
+	factory->createEReference_in_EContainingClass(bookEClass, BOOK_LIBRARY);
+	factory->createEReference_in_EContainingClass(bookEClass, BOOK_PICTURES);
+	
+	
+
+	libraryModelEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LIBRARYMODEL);
+	
+	
+	factory->createEReference_in_EContainingClass(libraryModelEClass, LIBRARYMODEL_AUTHORS);
+	factory->createEReference_in_EContainingClass(libraryModelEClass, LIBRARYMODEL_BOOK);
+	
+	
+
+	namedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), NAMEDELEMENT);
+	
+	factory->createEAttribute_in_EContainingClass(namedElementEClass, NAMEDELEMENT_NAME);
+	
+	
+	
+
+	pictureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PICTURE);
+	
+	factory->createEAttribute_in_EContainingClass(pictureEClass, PICTURE_PAGENUMBER);
+	
+	factory->createEReference_in_EContainingClass(pictureEClass, PICTURE_BOOK);
 	
 	
 
