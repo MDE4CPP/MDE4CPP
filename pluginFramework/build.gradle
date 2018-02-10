@@ -1,5 +1,5 @@
 plugins {
-  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: "base"
 
@@ -9,7 +9,7 @@ task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "pluginFramework"
 	description "compile pluginFramework"
 
-	pathToCMakeList = file("./src/pluginFramework")
+	projectFolder = file("./src/pluginFramework")
 }
 
 clean.doFirst {
