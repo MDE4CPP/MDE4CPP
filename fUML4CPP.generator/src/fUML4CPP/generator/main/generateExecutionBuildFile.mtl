@@ -146,34 +146,22 @@ INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NA
 
 [file ('../build.gradle', false, 'UTF-8')]
 plugins {
-	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.1"
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.2"
 }
 apply plugin: 'base' 
 
 description 'Build tasks for project: [packageName/]'
 
-task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]All'[']'/]) {
+task build[packageName/](dependsOn: ['['/]'generate[packageName/]', 'compile[packageName/]'[']'/]) {
 	group '[packageName/]'
 	description 'build [packageName/]'
-}
-
-task compile[packageName/]All(dependsOn: [ '[' /]'compile[packageName/]', 'compile[execPackageName/]'[ ']' /]) {
-	group '[packageName/]'
-	description 'compile the binaries for the fuml generated model [packageName/]'
 }
 
 task compile[packageName/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group '[packageName/]'
 	description 'compile [packageName/]'
 
-	pathToCMakeList = file("./src_gen/[packageName/]")
-}
-
-task compile[execPackageName/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group '[packageName/]'
-	description 'compile [execPackageName/]'
-
-	pathToCMakeList = file("./src_gen/[execPackageName/]")
+	projectFolder = file("./src_gen/[packageName/]")
 }
 
 task generate[packageName/](type: JavaExec) {
@@ -196,7 +184,6 @@ task generate[packageName/](type: JavaExec) {
 }
 
 compile[packageName/].mustRunAfter generate[packageName/]
-compile[execPackageName/].mustRunAfter compile[packageName/]
 
 clean.doFirst {
 	def cmakeFolder = file('./src_gen/[packageName/]/.cmake/')
