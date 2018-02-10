@@ -29,7 +29,7 @@
 #include "[aPackage.getPackageName()/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class))]
-#include "[cl.getNearestPackage().getPackageName()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().name/]/[cl.name.toUpperFirst()/].hpp"
 [/for]
 [if (aClass.ownedOperation.method->notEmpty())]
 [if(ownedOperation.method->filter(Activity)->notEmpty())]
