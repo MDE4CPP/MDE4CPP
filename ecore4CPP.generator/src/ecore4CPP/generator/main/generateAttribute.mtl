@@ -80,24 +80,24 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
 */]
 
 [template public generateAttributeInitialization(anEAttribute : EAttribute)]
-[anEAttribute.getMemberName()/] = [anEAttribute.packageGetter()/];
-[anEAttribute.getMemberName()/]->setName("[anEAttribute.name/]");
-[anEAttribute.getMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
-[anEAttribute.getMemberName()/]->setLowerBound([anEAttribute.lowerBound/]);
-[anEAttribute.getMemberName()/]->setUpperBound([anEAttribute.upperBound/]);
-[anEAttribute.getMemberName()/]->setTransient([anEAttribute.transient.toString()/]);
-[anEAttribute.getMemberName()/]->setVolatile([anEAttribute.volatile.toString()/]);
-[anEAttribute.getMemberName()/]->setChangeable([anEAttribute.changeable.toString()/]);
-[anEAttribute.getMemberName()/]->setUnsettable([anEAttribute.unsettable.toString()/]);
-[anEAttribute.getMemberName()/]->setUnique([anEAttribute.unique.toString()/]);
-[anEAttribute.getMemberName()/]->setDerived([anEAttribute.derived.toString()/]);
-[anEAttribute.getMemberName()/]->setOrdered([anEAttribute.ordered.toString()/]);
-[anEAttribute.getMemberName()/]->setID([anEAttribute.iD.toString()/]);
+[anEAttribute.getClassMemberName()/] = [anEAttribute.packageGetter()/];
+[anEAttribute.getClassMemberName()/]->setName("[anEAttribute.name/]");
+[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+[anEAttribute.getClassMemberName()/]->setLowerBound([anEAttribute.lowerBound/]);
+[anEAttribute.getClassMemberName()/]->setUpperBound([anEAttribute.upperBound/]);
+[anEAttribute.getClassMemberName()/]->setTransient([anEAttribute.transient.toString()/]);
+[anEAttribute.getClassMemberName()/]->setVolatile([anEAttribute.volatile.toString()/]);
+[anEAttribute.getClassMemberName()/]->setChangeable([anEAttribute.changeable.toString()/]);
+[anEAttribute.getClassMemberName()/]->setUnsettable([anEAttribute.unsettable.toString()/]);
+[anEAttribute.getClassMemberName()/]->setUnique([anEAttribute.unique.toString()/]);
+[anEAttribute.getClassMemberName()/]->setDerived([anEAttribute.derived.toString()/]);
+[anEAttribute.getClassMemberName()/]->setOrdered([anEAttribute.ordered.toString()/]);
+[anEAttribute.getClassMemberName()/]->setID([anEAttribute.iD.toString()/]);
 {
 	std::string defaultValue = "[anEAttribute.defaultValueLiteral/]";
 	if (!defaultValue.empty())
 	{
-	   [anEAttribute.getMemberName()/]->setDefaultValueLiteral(defaultValue);
+	   [anEAttribute.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
 	}
 }
 
@@ -116,12 +116,12 @@ virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttrib
 [template public generateAttributeGetterImpl(anEAttribute : EAttribute)]
 std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEAttribute.getMemberName().toUpperFirst()/]() const
 {
-	return [anEAttribute.getMemberName()/];
+	return [anEAttribute.getClassMemberName()/];
 }
 
 [/template]
 
 [template public generateAttributeCreation(anEAttribute : EAttribute)]
-[anEAttribute.getMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getMemberName()/], [anEAttribute.memberNameUpper()/]);
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.memberNameUpper()/]);
 
 [/template]

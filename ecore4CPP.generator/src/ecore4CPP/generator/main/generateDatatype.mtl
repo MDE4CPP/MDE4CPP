@@ -24,20 +24,20 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.
 [/template]
 
 [template public generatePrivatePackageMember(aEDatatype : EDataType)]
-std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.getMemberName()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.getClassMemberName()/] = nullptr;
 
 [/template]
 
 [template public generateEDatatypeCreation(anEDatatype : EDataType)]
-[anEDatatype.getMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
+[anEDatatype.getClassMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
 
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]
-[adatatype.getMemberName()/]->setInstanceClass(nullptr);
-[adatatype.getMemberName()/]->setName("[adatatype.name/]");
+[adatatype.getClassMemberName()/]->setInstanceClass(nullptr);
+[adatatype.getClassMemberName()/]->setName("[adatatype.name/]");
 [if (not adatatype.oclIsKindOf(EEnum))]
-[adatatype.getMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
+[adatatype.getClassMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
 [/if]
 [/template]
 
@@ -49,13 +49,13 @@ static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierI
 [template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
 std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
 {
-	assert([aEDatatype.getMemberName()/]);
-	return [aEDatatype.getMemberName()/];
+	assert([aEDatatype.getClassMemberName()/]);
+	return [aEDatatype.getClassMemberName()/];
 }
 
 [/template]
 
 [template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
-[aEDatatype.getMemberName()/].reset();
+[aEDatatype.getClassMemberName()/].reset();
 
 [/template]

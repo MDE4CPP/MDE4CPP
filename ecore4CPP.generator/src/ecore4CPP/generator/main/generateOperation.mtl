@@ -67,7 +67,7 @@ static const int [aOperation.operationNumberNameUpper()/] = [aOperation.getOpera
 [/template]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
-factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getMemberName()/], [operationNumberNameUpper(anEOperation)/]);
+factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [operationNumberNameUpper(anEOperation)/]);
 
 [/template]
 
@@ -81,7 +81,7 @@ virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperat
 [template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
 std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
 {
-	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.getMemberName()/]->getEOperations()->at([aOperation.listNumber()/]));
+	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.getClassMemberName()/]->getEOperations()->at([aOperation.listNumber()/]));
 }
 
 [/template]

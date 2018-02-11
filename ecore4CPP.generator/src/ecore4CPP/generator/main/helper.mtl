@@ -182,7 +182,7 @@
  *
  *
  */]
-
+[query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
 
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberName1() endif/]
 [query private getMemberName1(anENamedElement : ENamedElement) : String = if (EStructuralFeature.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
@@ -197,6 +197,6 @@
 [/template]
 
 [template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)]
-std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getMemberName()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getClassMemberName()/] = nullptr;
 
 [/template]
