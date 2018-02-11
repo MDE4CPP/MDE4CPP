@@ -64,10 +64,6 @@ namespace ecore
 			 */ 
 			virtual bool isInstance(boost::any object)  const  ;
 			
-			/*!
-			 */ 
-			virtual void setGeneratedInstance(bool isGenerated)  ;
-			
 			
 			
 			//*********************************

@@ -92,8 +92,6 @@ namespace ecore
 			virtual bool isInstance(boost::any object)  const  = 0;
 			
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

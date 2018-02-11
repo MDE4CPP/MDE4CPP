@@ -180,14 +180,6 @@ bool EClassifierImpl::isInstance(boost::any object)  const
 	throw "UnsupportedOperationException";
 }
 
-void EClassifierImpl::setGeneratedInstance(bool isGenerated) 
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	
-	//end of body
-}
-
 //*********************************
 // References
 //*********************************

@@ -121,7 +121,7 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int ECLASS = 2;
 			static const int ECLASS_FEATURE_COUNT = 25;
-			static const int ECLASS_OPERATION_COUNT = 13;
+			static const int ECLASS_OPERATION_COUNT = 12;
 			static const int ECLASS_ABSTRACT = 29;
 			static const int ECLASS_INTERFACE = 210;
 			
@@ -140,16 +140,16 @@ namespace ecore
 			static const int ECLASS_ESTRUCTURALFEATURES = 222;
 			static const int ECLASS_ESUPERTYPES = 211;
 			
-			static const int ECLASS___GETEOPERATION__EINT = 9;
-			static const int ECLASS___GETESTRUCTURALFEATURE__EINT = 5;
-			static const int ECLASS___GETESTRUCTURALFEATURE__ESTRING = 7;
-			static const int ECLASS___GETFEATURECOUNT = 4;
-			static const int ECLASS___GETFEATUREID__ESTRUCTURALFEATURE = 6;
-			static const int ECLASS___GETFEATURETYPE__ESTRUCTURALFEATURE = 12;
-			static const int ECLASS___GETOPERATIONCOUNT = 8;
-			static const int ECLASS___GETOPERATIONID__EOPERATION = 10;
-			static const int ECLASS___GETOVERRIDE__EOPERATION = 11;
-			static const int ECLASS___ISSUPERTYPEOF__ECLASS = 3;
+			static const int ECLASS___GETEOPERATION__EINT = 8;
+			static const int ECLASS___GETESTRUCTURALFEATURE__EINT = 4;
+			static const int ECLASS___GETESTRUCTURALFEATURE__ESTRING = 6;
+			static const int ECLASS___GETFEATURECOUNT = 3;
+			static const int ECLASS___GETFEATUREID__ESTRUCTURALFEATURE = 5;
+			static const int ECLASS___GETFEATURETYPE__ESTRUCTURALFEATURE = 11;
+			static const int ECLASS___GETOPERATIONCOUNT = 7;
+			static const int ECLASS___GETOPERATIONID__EOPERATION = 9;
+			static const int ECLASS___GETOVERRIDE__EOPERATION = 10;
+			static const int ECLASS___ISSUPERTYPEOF__ECLASS = 2;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEClass() const = 0;
@@ -189,7 +189,7 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int ECLASSIFIER = 3;
 			static const int ECLASSIFIER_FEATURE_COUNT = 9;
-			static const int ECLASSIFIER_OPERATION_COUNT = 3;
+			static const int ECLASSIFIER_OPERATION_COUNT = 2;
 			static const int ECLASSIFIER_CLASSIFIERID = 35;
 			static const int ECLASSIFIER_DEFAULTVALUE = 34;
 			static const int ECLASSIFIER_INSTANCECLASS = 33;
@@ -221,7 +221,7 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int EDATATYPE = 4;
 			static const int EDATATYPE_FEATURE_COUNT = 10;
-			static const int EDATATYPE_OPERATION_COUNT = 3;
+			static const int EDATATYPE_OPERATION_COUNT = 2;
 			static const int EDATATYPE_SERIALIZABLE = 49;
 			
 			
@@ -239,13 +239,13 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int EENUM = 5;
 			static const int EENUM_FEATURE_COUNT = 11;
-			static const int EENUM_OPERATION_COUNT = 6;
+			static const int EENUM_OPERATION_COUNT = 5;
 			
 			static const int EENUM_ELITERALS = 510;
 			
-			static const int EENUM___GETEENUMLITERAL__ESTRING = 3;
-			static const int EENUM___GETEENUMLITERAL__EINT = 4;
-			static const int EENUM___GETEENUMLITERALBYLITERAL__ESTRING = 5;
+			static const int EENUM___GETEENUMLITERAL__ESTRING = 2;
+			static const int EENUM___GETEENUMLITERAL__EINT = 3;
+			static const int EENUM___GETEENUMLITERALBYLITERAL__ESTRING = 4;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEEnum() const = 0;
@@ -455,7 +455,7 @@ namespace ecore
 			//Class and Feature IDs 
 			static const int EPACKAGE = 12;
 			static const int EPACKAGE_FEATURE_COUNT = 8;
-			static const int EPACKAGE_OPERATION_COUNT = 23;
+			static const int EPACKAGE_OPERATION_COUNT = 6;
 			static const int EPACKAGE_NSPREFIX = 123;
 			static const int EPACKAGE_NSURI = 122;
 			

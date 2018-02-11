@@ -423,147 +423,1130 @@ void EcorePackageImpl::initializePackageContents()
 	eTypedElementEClass->getESuperTypes()->push_back(getENamedElement());
 	
 	std::shared_ptr<EOperation> op;
+	std::shared_ptr<EAttribute> attr;
+	std::shared_ptr<EReference> ref;
 
  	// Initialize classes and features; add operations and parameters
 	// Begin Class EAnnotation
-	initEClass(eAnnotationEClass, nullptr, "EAnnotation", false, false, true);
-	initEAttribute(getEAnnotation_Source(),getEString(),"source","",0,1, false,false, true, false, false, true, false, true);
+	eAnnotationEClass->setInstanceClass(nullptr);
+	eAnnotationEClass->setName("EAnnotation");
+	eAnnotationEClass->setAbstract(false);
+	eAnnotationEClass->setInterface(false);
 	
-	initEReference(getEAnnotation_Contents(),getEObject(),nullptr,"contents","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEAnnotation_Details(),getEStringToStringMapEntry(),nullptr,"details","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEAnnotation_EModelElement(),getEModelElement(),getEModelElement_EAnnotations(),"eModelElement","",0,1, true,false, true, false, false, false, true, false,true);
-	initEReference(getEAnnotation_References(),getEObject(),nullptr,"references","",0,-1, false,false, true, false, true, false, true, false,true);
+	attr = getEAnnotation_Source();
+	attr->setName("source");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getEAnnotation_Contents();
+	ref->setName("contents");
+	ref->setEType(getEObject());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEAnnotation_Details();
+	ref->setName("details");
+	ref->setEType(getEStringToStringMapEntry());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEAnnotation_EModelElement();
+	ref->setName("eModelElement");
+	ref->setEType(getEModelElement());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEModelElement_EAnnotations();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEAnnotation_References();
+	ref->setName("references");
+	ref->setEType(getEObject());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EAnnotation
 
 	// Begin Class EAttribute
-	initEClass(eAttributeEClass, nullptr, "EAttribute", false, false, true);
-	initEAttribute(getEAttribute_ID(),getEBoolean(),"iD","",0,1, false,false, true, false, false, true, false, true);
+	eAttributeEClass->setInstanceClass(nullptr);
+	eAttributeEClass->setName("EAttribute");
+	eAttributeEClass->setAbstract(false);
+	eAttributeEClass->setInterface(false);
 	
-	initEReference(getEAttribute_EAttributeType(),getEDataType(),nullptr,"eAttributeType","",1,1, true,true, false, false, true, false, true, true,true);
+	attr = getEAttribute_ID();
+	attr->setName("iD");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getEAttribute_EAttributeType();
+	ref->setName("eAttributeType");
+	ref->setEType(getEDataType());
+	ref->setLowerBound(1);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EAttribute
 
 	// Begin Class EClass
-	initEClass(eClassEClass, nullptr, "EClass", false, false, true);
-	initEAttribute(getEClass_Abstract(),getEBoolean(),"abstract","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEClass_Interface(),getEBoolean(),"interface","",0,1, false,false, true, false, false, true, false, true);
+	eClassEClass->setInstanceClass(nullptr);
+	eClassEClass->setName("EClass");
+	eClassEClass->setAbstract(false);
+	eClassEClass->setInterface(false);
 	
-	initEReference(getEClass_EAllAttributes(),getEAttribute(),nullptr,"eAllAttributes","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllContainments(),getEReference(),nullptr,"eAllContainments","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllGenericSuperTypes(),getEGenericType(),nullptr,"eAllGenericSuperTypes","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllOperations(),getEOperation(),nullptr,"eAllOperations","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllReferences(),getEReference(),nullptr,"eAllReferences","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllStructuralFeatures(),getEStructuralFeature(),nullptr,"eAllStructuralFeatures","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAllSuperTypes(),getEClass(),nullptr,"eAllSuperTypes","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EAttributes(),getEAttribute(),nullptr,"eAttributes","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EGenericSuperTypes(),getEGenericType(),nullptr,"eGenericSuperTypes","",0,-1, false,false, true, true, false, true, true, false,true);
-	initEReference(getEClass_EIDAttribute(),getEAttribute(),nullptr,"eIDAttribute","",0,1, true,true, false, false, false, false, true, true,true);
-	initEReference(getEClass_EOperations(),getEOperation(),getEOperation_EContainingClass(),"eOperations","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEClass_EReferences(),getEReference(),nullptr,"eReferences","",0,-1, true,true, false, false, true, false, true, true,true);
-	initEReference(getEClass_EStructuralFeatures(),getEStructuralFeature(),getEStructuralFeature_EContainingClass(),"eStructuralFeatures","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEClass_ESuperTypes(),getEClass(),nullptr,"eSuperTypes","",0,-1, false,false, true, false, true, true, true, false,true);
+	attr = getEClass_Abstract();
+	attr->setName("abstract");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEClass_Interface();
+	attr->setName("interface");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
-	op = initEOperation(getEClass___GetEOperation__EInt(),getEOperation(), "getEOperation", 0, 1, true,true );
+	ref = getEClass_EAllAttributes();
+	ref->setName("eAllAttributes");
+	ref->setEType(getEAttribute());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllContainments();
+	ref->setName("eAllContainments");
+	ref->setEType(getEReference());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllGenericSuperTypes();
+	ref->setName("eAllGenericSuperTypes");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllOperations();
+	ref->setName("eAllOperations");
+	ref->setEType(getEOperation());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllReferences();
+	ref->setName("eAllReferences");
+	ref->setEType(getEReference());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllStructuralFeatures();
+	ref->setName("eAllStructuralFeatures");
+	ref->setEType(getEStructuralFeature());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAllSuperTypes();
+	ref->setName("eAllSuperTypes");
+	ref->setEType(getEClass());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EAttributes();
+	ref->setName("eAttributes");
+	ref->setEType(getEAttribute());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EGenericSuperTypes();
+	ref->setName("eGenericSuperTypes");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EIDAttribute();
+	ref->setName("eIDAttribute");
+	ref->setEType(getEAttribute());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EOperations();
+	ref->setName("eOperations");
+	ref->setEType(getEOperation());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEOperation_EContainingClass();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EReferences();
+	ref->setName("eReferences");
+	ref->setEType(getEReference());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_EStructuralFeatures();
+	ref->setName("eStructuralFeatures");
+	ref->setEType(getEStructuralFeature());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEStructuralFeature_EContainingClass();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClass_ESuperTypes();
+	ref->setName("eSuperTypes");
+	ref->setEType(getEClass());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEClass___GetEOperation__EInt();
+	op->setEType(getEOperation());
+	op->setName("getEOperation");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEInt()  , "operationID",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetEStructuralFeature__EInt(),getEStructuralFeature(), "getEStructuralFeature", 0, 1, true,true );
+	op = getEClass___GetEStructuralFeature__EInt();
+	op->setEType(getEStructuralFeature());
+	op->setName("getEStructuralFeature");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEInt()  , "featureID",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetEStructuralFeature__EString(),getEStructuralFeature(), "getEStructuralFeature", 0, 1, true,true );
+	op = getEClass___GetEStructuralFeature__EString();
+	op->setEType(getEStructuralFeature());
+	op->setName("getEStructuralFeature");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEString()  , "featureName",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetFeatureCount(),getEInt(), "getFeatureCount", 0, 1, true,true );
+	op = getEClass___GetFeatureCount();
+	op->setEType(getEInt());
+	op->setName("getFeatureCount");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEClass___GetFeatureID__EStructuralFeature(),getEInt(), "getFeatureID", 0, 1, true,true );
+	op = getEClass___GetFeatureID__EStructuralFeature();
+	op->setEType(getEInt());
+	op->setName("getFeatureID");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEStructuralFeature()  , "feature",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetFeatureType__EStructuralFeature(),getEGenericType(), "getFeatureType", 0, 1, true,true );
+	op = getEClass___GetFeatureType__EStructuralFeature();
+	op->setEType(getEGenericType());
+	op->setName("getFeatureType");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEStructuralFeature()  , "feature",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetOperationCount(),getEInt(), "getOperationCount", 0, 1, true,true );
+	op = getEClass___GetOperationCount();
+	op->setEType(getEInt());
+	op->setName("getOperationCount");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEClass___GetOperationID__EOperation(),getEInt(), "getOperationID", 0, 1, true,true );
+	op = getEClass___GetOperationID__EOperation();
+	op->setEType(getEInt());
+	op->setName("getOperationID");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEOperation()  , "operation",0,1, true,true);
 	
-	op = initEOperation(getEClass___GetOverride__EOperation(),getEOperation(), "getOverride", 0, 1, true,true );
+	op = getEClass___GetOverride__EOperation();
+	op->setEType(getEOperation());
+	op->setName("getOverride");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEOperation()  , "operation",0,1, true,true);
 	
-	op = initEOperation(getEClass___IsSuperTypeOf__EClass(),getEBoolean(), "isSuperTypeOf", 0, 1, true,true );
+	op = getEClass___IsSuperTypeOf__EClass();
+	op->setEType(getEBoolean());
+	op->setName("isSuperTypeOf");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEClass()  , "someClass",0,1, true,true);
 	
 	
 	// End Class EClass
 
 	// Begin Class EClassifier
-	initEClass(eClassifierEClass, nullptr, "EClassifier", true, false, true);
-	initEAttribute(getEClassifier_ClassifierID(),getEInt(),"classifierID","-1",0,1, false,false, false, false, false, true, false, true);
-	initEAttribute(getEClassifier_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, true,true, false, false, false, true, true, true);
-	initEAttribute(getEClassifier_InstanceClass(),getEJavaClass(),"instanceClass","",0,1, true,true, true, false, false, true, false, true);
-	initEAttribute(getEClassifier_InstanceClassName(),getEString(),"instanceClassName","",0,1, false,true, true, true, false, true, false, true);
-	initEAttribute(getEClassifier_InstanceTypeName(),getEString(),"instanceTypeName","",0,1, false,true, true, true, false, true, false, true);
+	eClassifierEClass->setInstanceClass(nullptr);
+	eClassifierEClass->setName("EClassifier");
+	eClassifierEClass->setAbstract(true);
+	eClassifierEClass->setInterface(false);
 	
-	initEReference(getEClassifier_EPackage(),getEPackage(),getEPackage_EClassifiers(),"ePackage","",0,1, true,false, true, false, true, false, true, false,true);
-	initEReference(getEClassifier_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, false,false, true, true, true, false, true, false,true);
+	attr = getEClassifier_ClassifierID();
+	attr->setName("classifierID");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "-1";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEClassifier_DefaultValue();
+	attr->setName("defaultValue");
+	attr->setEType(getEJavaObject());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(true);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEClassifier_InstanceClass();
+	attr->setName("instanceClass");
+	attr->setEType(getEJavaClass());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEClassifier_InstanceClassName();
+	attr->setName("instanceClassName");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(true);
+	attr->setChangeable(true);
+	attr->setUnsettable(true);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEClassifier_InstanceTypeName();
+	attr->setName("instanceTypeName");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(true);
+	attr->setChangeable(true);
+	attr->setUnsettable(true);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
-	op = initEOperation(getEClassifier___IsInstance__EJavaObject(),getEBoolean(), "isInstance", 0, 1, true,true );
+	ref = getEClassifier_EPackage();
+	ref->setName("ePackage");
+	ref->setEType(getEPackage());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_EClassifiers();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEClassifier_ETypeParameters();
+	ref->setName("eTypeParameters");
+	ref->setEType(getETypeParameter());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEClassifier___IsInstance__EJavaObject();
+	op->setEType(getEBoolean());
+	op->setName("isInstance");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEJavaObject()  , "object",0,1, true,true);
 	
 	
 	// End Class EClassifier
 
 	// Begin Class EDataType
-	initEClass(eDataTypeEClass, nullptr, "EDataType", false, false, true);
-	initEAttribute(getEDataType_Serializable(),getEBoolean(),"serializable","true",0,1, false,false, true, false, false, true, false, true);
+	eDataTypeEClass->setInstanceClass(nullptr);
+	eDataTypeEClass->setName("EDataType");
+	eDataTypeEClass->setAbstract(false);
+	eDataTypeEClass->setInterface(false);
+	
+	attr = getEDataType_Serializable();
+	attr->setName("serializable");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "true";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
 	
 	
 	// End Class EDataType
 
 	// Begin Class EEnum
-	initEClass(eEnumEClass, nullptr, "EEnum", false, false, true);
+	eEnumEClass->setInstanceClass(nullptr);
+	eEnumEClass->setName("EEnum");
+	eEnumEClass->setAbstract(false);
+	eEnumEClass->setInterface(false);
 	
-	initEReference(getEEnum_ELiterals(),getEEnumLiteral(),getEEnumLiteral_EEnum(),"eLiterals","",0,-1, false,false, true, true, false, false, true, false,true);
 	
-	op = initEOperation(getEEnum___GetEEnumLiteral__EString(),getEEnumLiteral(), "getEEnumLiteral", 0, 1, true,true );
+	ref = getEEnum_ELiterals();
+	ref->setName("eLiterals");
+	ref->setEType(getEEnumLiteral());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEEnumLiteral_EEnum();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEEnum___GetEEnumLiteral__EString();
+	op->setEType(getEEnumLiteral());
+	op->setName("getEEnumLiteral");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEString()  , "name",0,1, true,true);
 	
-	op = initEOperation(getEEnum___GetEEnumLiteral__EInt(),getEEnumLiteral(), "getEEnumLiteral", 0, 1, true,true );
+	op = getEEnum___GetEEnumLiteral__EInt();
+	op->setEType(getEEnumLiteral());
+	op->setName("getEEnumLiteral");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEInt()  , "value",0,1, true,true);
 	
-	op = initEOperation(getEEnum___GetEEnumLiteralByLiteral__EString(),getEEnumLiteral(), "getEEnumLiteralByLiteral", 0, 1, true,true );
+	op = getEEnum___GetEEnumLiteralByLiteral__EString();
+	op->setEType(getEEnumLiteral());
+	op->setName("getEEnumLiteralByLiteral");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEString()  , "literal",0,1, true,true);
 	
 	
 	// End Class EEnum
 
 	// Begin Class EEnumLiteral
-	initEClass(eEnumLiteralEClass, nullptr, "EEnumLiteral", false, false, true);
-	initEAttribute(getEEnumLiteral_Instance(),getEEnumerator(),"instance","",0,1, true,false, true, false, false, true, false, true);
-	initEAttribute(getEEnumLiteral_Literal(),getEString(),"literal","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEEnumLiteral_Value(),getEInt(),"value","",0,1, false,false, true, false, false, true, false, true);
+	eEnumLiteralEClass->setInstanceClass(nullptr);
+	eEnumLiteralEClass->setName("EEnumLiteral");
+	eEnumLiteralEClass->setAbstract(false);
+	eEnumLiteralEClass->setInterface(false);
 	
-	initEReference(getEEnumLiteral_EEnum(),getEEnum(),getEEnum_ELiterals(),"eEnum","",0,1, true,false, false, false, false, false, true, false,true);
+	attr = getEEnumLiteral_Instance();
+	attr->setName("instance");
+	attr->setEType(getEEnumerator());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEEnumLiteral_Literal();
+	attr->setName("literal");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEEnumLiteral_Value();
+	attr->setName("value");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getEEnumLiteral_EEnum();
+	ref->setName("eEnum");
+	ref->setEType(getEEnum());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEEnum_ELiterals();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EEnumLiteral
 
 	// Begin Class EFactory
-	initEClass(eFactoryEClass, nullptr, "EFactory", false, false, true);
+	eFactoryEClass->setInstanceClass(nullptr);
+	eFactoryEClass->setName("EFactory");
+	eFactoryEClass->setAbstract(false);
+	eFactoryEClass->setInterface(false);
 	
-	initEReference(getEFactory_EPackage(),getEPackage(),getEPackage_EFactoryInstance(),"ePackage","",1,1, true,false, true, false, false, false, true, false,true);
 	
-	op = initEOperation(getEFactory___ConvertToString__EDataType_EJavaObject(),getEString(), "convertToString", 0, 1, true,true );
+	ref = getEFactory_EPackage();
+	ref->setName("ePackage");
+	ref->setEType(getEPackage());
+	ref->setLowerBound(1);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_EFactoryInstance();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEFactory___ConvertToString__EDataType_EJavaObject();
+	op->setEType(getEString());
+	op->setName("convertToString");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEDataType()  , "eDataType",0,1, true,true);
 	addEParameter(op ,getEJavaObject()  , "instanceValue",0,1, true,true);
 	
-	op = initEOperation(getEFactory___Create__EClass_EObject(),getEObject(), "create", 0, 1, true,true );
+	op = getEFactory___Create__EClass_EObject();
+	op->setEType(getEObject());
+	op->setName("create");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEClass()  , "eClass",0,1, true,true);
 	addEParameter(op ,getEObject()  , "container",0,1, true,true);
 	
-	op = initEOperation(getEFactory___CreateFromString__EDataType_EString(),getEJavaObject(), "createFromString", 0, 1, true,true );
+	op = getEFactory___CreateFromString__EDataType_EString();
+	op->setEType(getEJavaObject());
+	op->setName("createFromString");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEDataType()  , "eDataType",0,1, true,true);
 	addEParameter(op ,getEString()  , "literalValue",0,1, true,true);
 	
@@ -571,220 +1554,1523 @@ void EcorePackageImpl::initializePackageContents()
 	// End Class EFactory
 
 	// Begin Class EGenericType
-	initEClass(eGenericTypeEClass, nullptr, "EGenericType", false, false, true);
+	eGenericTypeEClass->setInstanceClass(nullptr);
+	eGenericTypeEClass->setName("EGenericType");
+	eGenericTypeEClass->setAbstract(false);
+	eGenericTypeEClass->setInterface(false);
 	
-	initEReference(getEGenericType_EClassifier(),getEClassifier(),nullptr,"eClassifier","",0,1, false,false, true, false, true, false, true, false,true);
-	initEReference(getEGenericType_ELowerBound(),getEGenericType(),nullptr,"eLowerBound","",0,1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEGenericType_ERawType(),getEClassifier(),nullptr,"eRawType","",1,1, true,false, false, false, true, false, true, true,true);
-	initEReference(getEGenericType_ETypeArguments(),getEGenericType(),nullptr,"eTypeArguments","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEGenericType_ETypeParameter(),getETypeParameter(),nullptr,"eTypeParameter","",0,1, false,false, true, false, false, false, true, false,true);
-	initEReference(getEGenericType_EUpperBound(),getEGenericType(),nullptr,"eUpperBound","",0,1, false,false, true, true, false, false, true, false,true);
 	
-	op = initEOperation(getEGenericType___IsInstance__EJavaObject(),getEBoolean(), "isInstance", 0, 1, true,true );
+	ref = getEGenericType_EClassifier();
+	ref->setName("eClassifier");
+	ref->setEType(getEClassifier());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEGenericType_ELowerBound();
+	ref->setName("eLowerBound");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEGenericType_ERawType();
+	ref->setName("eRawType");
+	ref->setEType(getEClassifier());
+	ref->setLowerBound(1);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEGenericType_ETypeArguments();
+	ref->setName("eTypeArguments");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEGenericType_ETypeParameter();
+	ref->setName("eTypeParameter");
+	ref->setEType(getETypeParameter());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEGenericType_EUpperBound();
+	ref->setName("eUpperBound");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEGenericType___IsInstance__EJavaObject();
+	op->setEType(getEBoolean());
+	op->setName("isInstance");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEJavaObject()  , "object",0,1, true,true);
 	
 	
 	// End Class EGenericType
 
 	// Begin Class EModelElement
-	initEClass(eModelElementEClass, nullptr, "EModelElement", true, false, true);
+	eModelElementEClass->setInstanceClass(nullptr);
+	eModelElementEClass->setName("EModelElement");
+	eModelElementEClass->setAbstract(true);
+	eModelElementEClass->setInterface(false);
 	
-	initEReference(getEModelElement_EAnnotations(),getEAnnotation(),getEAnnotation_EModelElement(),"eAnnotations","",0,-1, false,false, true, true, false, false, true, false,true);
 	
-	op = initEOperation(getEModelElement___GetEAnnotation__EString(),getEAnnotation(), "getEAnnotation", 0, 1, true,true );
+	ref = getEModelElement_EAnnotations();
+	ref->setName("eAnnotations");
+	ref->setEType(getEAnnotation());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEAnnotation_EModelElement();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEModelElement___GetEAnnotation__EString();
+	op->setEType(getEAnnotation());
+	op->setName("getEAnnotation");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEString()  , "source",0,1, true,true);
 	
 	
 	// End Class EModelElement
 
 	// Begin Class ENamedElement
-	initEClass(eNamedElementEClass, nullptr, "ENamedElement", true, false, true);
-	initEAttribute(getENamedElement_Name(),getEString(),"name","",0,1, false,false, true, false, false, true, false, true);
+	eNamedElementEClass->setInstanceClass(nullptr);
+	eNamedElementEClass->setName("ENamedElement");
+	eNamedElementEClass->setAbstract(true);
+	eNamedElementEClass->setInterface(false);
+	
+	attr = getENamedElement_Name();
+	attr->setName("name");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
 	
 	
 	// End Class ENamedElement
 
 	// Begin Class EObject
-	initEClass(eObjectEClass, nullptr, "EObject", false, false, true);
+	eObjectEClass->setInstanceClass(nullptr);
+	eObjectEClass->setName("EObject");
+	eObjectEClass->setAbstract(false);
+	eObjectEClass->setInterface(false);
 	
-	initEReference(getEObject_EContainer(),getEObject(),nullptr,"eContainer","",0,1, false,false, false, false, true, false, true, false,true);
 	
-	op = initEOperation(getEObject___EAllContents(),getETreeIterator(), "eAllContents", 0, 1, true,true );
+	ref = getEObject_EContainer();
+	ref->setName("eContainer");
+	ref->setEType(getEObject());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
-	op = initEOperation(getEObject___EClass(),getEClass(), "eClass", 0, 1, true,true );
+	op = getEObject___EAllContents();
+	op->setEType(getETreeIterator());
+	op->setName("eAllContents");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___EContainingFeature(),getEStructuralFeature(), "eContainingFeature", 0, 1, true,true );
+	op = getEObject___EClass();
+	op->setEType(getEClass());
+	op->setName("eClass");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___EContainmentFeature(),getEReference(), "eContainmentFeature", 0, 1, true,true );
+	op = getEObject___EContainingFeature();
+	op->setEType(getEStructuralFeature());
+	op->setName("eContainingFeature");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___EContents(),getEEList(), "eContents", 0, 1, true,true );
+	op = getEObject___EContainmentFeature();
+	op->setEType(getEReference());
+	op->setName("eContainmentFeature");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___ECrossReferences(),getEEList(), "eCrossReferences", 0, 1, true,true );
+	op = getEObject___EContents();
+	op->setEType(getEEList());
+	op->setName("eContents");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___EGet__EStructuralFeature(),getEJavaObject(), "eGet", 0, 1, true,true );
+	op = getEObject___ECrossReferences();
+	op->setEType(getEEList());
+	op->setName("eCrossReferences");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
+	
+	op = getEObject___EGet__EStructuralFeature();
+	op->setEType(getEJavaObject());
+	op->setName("eGet");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEStructuralFeature()  , "feature",0,1, true,true);
 	
-	op = initEOperation(getEObject___EGet__EStructuralFeature_EBoolean(),getEJavaObject(), "eGet", 0, 1, true,true );
+	op = getEObject___EGet__EStructuralFeature_EBoolean();
+	op->setEType(getEJavaObject());
+	op->setName("eGet");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEStructuralFeature()  , "feature",0,1, true,true);
 	addEParameter(op ,getEBoolean()  , "resolve",0,1, true,true);
 	
-	op = initEOperation(getEObject___EInvoke__EOperation_EEList(),getEJavaObject(), "eInvoke", 0, 1, true,true );
+	op = getEObject___EInvoke__EOperation_EEList();
+	op->setEType(getEJavaObject());
+	op->setName("eInvoke");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEOperation()  , "operation",0,1, true,true);
 	addEParameter(op ,getEEList()  , "arguments",0,1, true,true);
 	
-	op = initEOperation(getEObject___EIsProxy(),getEBoolean(), "eIsProxy", 0, 1, true,true );
+	op = getEObject___EIsProxy();
+	op->setEType(getEBoolean());
+	op->setName("eIsProxy");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___EIsSet__EStructuralFeature(),getEBoolean(), "eIsSet", 0, 1, true,true );
+	op = getEObject___EIsSet__EStructuralFeature();
+	op->setEType(getEBoolean());
+	op->setName("eIsSet");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEStructuralFeature()  , "feature",0,1, true,true);
 	
-	op = initEOperation(getEObject___EResource(),getEResource(), "eResource", 0, 1, true,true );
+	op = getEObject___EResource();
+	op->setEType(getEResource());
+	op->setName("eResource");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	
-	op = initEOperation(getEObject___ESet__EStructuralFeature_EJavaObject(),nullptr, "eSet", 0, 1, true,true );
+	op = getEObject___ESet__EStructuralFeature_EJavaObject();
+	op->setEType(nullptr);
+	op->setName("eSet");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,nullptr  , "feature",0,1, true,true);
 	addEParameter(op ,nullptr  , "newValue",0,1, true,true);
 	
-	op = initEOperation(getEObject___EUnset__EStructuralFeature(),nullptr, "eUnset", 0, 1, true,true );
+	op = getEObject___EUnset__EStructuralFeature();
+	op->setEType(nullptr);
+	op->setName("eUnset");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,nullptr  , "feature",0,1, true,true);
 	
 	
 	// End Class EObject
 
 	// Begin Class EOperation
-	initEClass(eOperationEClass, nullptr, "EOperation", false, false, true);
-	initEAttribute(getEOperation_OperationID(),getEInt(),"operationID","-1",0,1, false,false, false, false, false, true, false, true);
+	eOperationEClass->setInstanceClass(nullptr);
+	eOperationEClass->setName("EOperation");
+	eOperationEClass->setAbstract(false);
+	eOperationEClass->setInterface(false);
 	
-	initEReference(getEOperation_EContainingClass(),getEClass(),getEClass_EOperations(),"eContainingClass","",0,1, true,false, false, false, false, false, true, false,true);
-	initEReference(getEOperation_EExceptions(),getEClassifier(),nullptr,"eExceptions","",0,-1, false,false, true, false, true, true, true, false,true);
-	initEReference(getEOperation_EGenericExceptions(),getEGenericType(),nullptr,"eGenericExceptions","",0,-1, false,false, true, true, false, true, true, false,true);
-	initEReference(getEOperation_EParameters(),getEParameter(),getEParameter_EOperation(),"eParameters","",0,-1, false,false, true, true, false, false, true, false,true);
-	initEReference(getEOperation_ETypeParameters(),getETypeParameter(),nullptr,"eTypeParameters","",0,-1, false,false, true, true, true, false, true, false,true);
+	attr = getEOperation_OperationID();
+	attr->setName("operationID");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "-1";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
-	op = initEOperation(getEOperation___IsOverrideOf__EOperation(),getEBoolean(), "isOverrideOf", 0, 1, true,true );
+	ref = getEOperation_EContainingClass();
+	ref->setName("eContainingClass");
+	ref->setEType(getEClass());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEClass_EOperations();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEOperation_EExceptions();
+	ref->setName("eExceptions");
+	ref->setEType(getEClassifier());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEOperation_EGenericExceptions();
+	ref->setName("eGenericExceptions");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEOperation_EParameters();
+	ref->setName("eParameters");
+	ref->setEType(getEParameter());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEParameter_EOperation();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEOperation_ETypeParameters();
+	ref->setName("eTypeParameters");
+	ref->setEType(getETypeParameter());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEOperation___IsOverrideOf__EOperation();
+	op->setEType(getEBoolean());
+	op->setName("isOverrideOf");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEOperation()  , "someOperation",0,1, true,true);
 	
 	
 	// End Class EOperation
 
 	// Begin Class EPackage
-	initEClass(ePackageEClass, nullptr, "EPackage", false, false, true);
-	initEAttribute(getEPackage_NsPrefix(),getEString(),"nsPrefix","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEPackage_NsURI(),getEString(),"nsURI","",0,1, false,false, true, false, false, true, false, true);
+	ePackageEClass->setInstanceClass(nullptr);
+	ePackageEClass->setName("EPackage");
+	ePackageEClass->setAbstract(false);
+	ePackageEClass->setInterface(false);
 	
-	initEReference(getEPackage_EClassifiers(),getEClassifier(),getEClassifier_EPackage(),"eClassifiers","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getEPackage_EFactoryInstance(),getEFactory(),getEFactory_EPackage(),"eFactoryInstance","",1,1, true,false, true, false, false, false, true, false,true);
-	initEReference(getEPackage_ESubpackages(),getEPackage(),getEPackage_ESuperPackage(),"eSubpackages","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getEPackage_ESuperPackage(),getEPackage(),getEPackage_ESubpackages(),"eSuperPackage","",0,1, true,false, false, false, true, false, true, false,true);
+	attr = getEPackage_NsPrefix();
+	attr->setName("nsPrefix");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEPackage_NsURI();
+	attr->setName("nsURI");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
-	op = initEOperation(getEPackage___GetEClassifier__EString(),getEClassifier(), "getEClassifier", 0, 1, true,true );
+	ref = getEPackage_EClassifiers();
+	ref->setName("eClassifiers");
+	ref->setEType(getEClassifier());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEClassifier_EPackage();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEPackage_EFactoryInstance();
+	ref->setName("eFactoryInstance");
+	ref->setEType(getEFactory());
+	ref->setLowerBound(1);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEFactory_EPackage();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEPackage_ESubpackages();
+	ref->setName("eSubpackages");
+	ref->setEType(getEPackage());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_ESuperPackage();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEPackage_ESuperPackage();
+	ref->setName("eSuperPackage");
+	ref->setEType(getEPackage());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEPackage_ESubpackages();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	
+	op = getEPackage___GetEClassifier__EString();
+	op->setEType(getEClassifier());
+	op->setName("getEClassifier");
+	op->setLowerBound(0);
+	op->setUpperBound(1);
+	op->setUnique(true);
+	op->setOrdered(true);
 	addEParameter(op ,getEString()  , "name",0,1, true,true);
 	
 	
 	// End Class EPackage
 
 	// Begin Class EParameter
-	initEClass(eParameterEClass, nullptr, "EParameter", false, false, true);
+	eParameterEClass->setInstanceClass(nullptr);
+	eParameterEClass->setName("EParameter");
+	eParameterEClass->setAbstract(false);
+	eParameterEClass->setInterface(false);
 	
-	initEReference(getEParameter_EOperation(),getEOperation(),getEOperation_EParameters(),"eOperation","",0,1, true,false, false, false, false, false, true, false,true);
+	
+	ref = getEParameter_EOperation();
+	ref->setName("eOperation");
+	ref->setEType(getEOperation());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEOperation_EParameters();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EParameter
 
 	// Begin Class EReference
-	initEClass(eReferenceEClass, nullptr, "EReference", false, false, true);
-	initEAttribute(getEReference_Container(),getEBoolean(),"container","",0,1, true,true, false, false, false, true, true, true);
-	initEAttribute(getEReference_Containment(),getEBoolean(),"containment","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEReference_ResolveProxies(),getEBoolean(),"resolveProxies","true",0,1, false,false, true, false, false, true, false, true);
+	eReferenceEClass->setInstanceClass(nullptr);
+	eReferenceEClass->setName("EReference");
+	eReferenceEClass->setAbstract(false);
+	eReferenceEClass->setInterface(false);
 	
-	initEReference(getEReference_EKeys(),getEAttribute(),nullptr,"eKeys","",0,-1, false,false, true, false, true, false, true, false,true);
-	initEReference(getEReference_EOpposite(),getEReference(),nullptr,"eOpposite","",0,1, false,false, true, false, true, false, true, false,true);
-	initEReference(getEReference_EReferenceType(),getEClass(),nullptr,"eReferenceType","",1,1, true,true, false, false, true, false, true, true,true);
+	attr = getEReference_Container();
+	attr->setName("container");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(true);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEReference_Containment();
+	attr->setName("containment");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEReference_ResolveProxies();
+	attr->setName("resolveProxies");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "true";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getEReference_EKeys();
+	ref->setName("eKeys");
+	ref->setEType(getEAttribute());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEReference_EOpposite();
+	ref->setName("eOpposite");
+	ref->setEType(getEReference());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getEReference_EReferenceType();
+	ref->setName("eReferenceType");
+	ref->setEType(getEClass());
+	ref->setLowerBound(1);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(true);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(true);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EReference
 
 	// Begin Class EStringToStringMapEntry
-	initEClass(eStringToStringMapEntryEClass, nullptr, "EStringToStringMapEntry", false, false, true);
-	initEAttribute(getEStringToStringMapEntry_Key(),getEString(),"key","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStringToStringMapEntry_Value(),getEString(),"value","",0,1, false,false, true, false, false, true, false, true);
+	eStringToStringMapEntryEClass->setInstanceClass(nullptr);
+	eStringToStringMapEntryEClass->setName("EStringToStringMapEntry");
+	eStringToStringMapEntryEClass->setAbstract(false);
+	eStringToStringMapEntryEClass->setInterface(false);
+	
+	attr = getEStringToStringMapEntry_Key();
+	attr->setName("key");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStringToStringMapEntry_Value();
+	attr->setName("value");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	
 	
 	
 	// End Class EStringToStringMapEntry
 
 	// Begin Class EStructuralFeature
-	initEClass(eStructuralFeatureEClass, nullptr, "EStructuralFeature", true, false, true);
-	initEAttribute(getEStructuralFeature_Changeable(),getEBoolean(),"changeable","true",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_ContainerClass(),getEJavaClass(),"containerClass","",0,1, false,false, false, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_DefaultValue(),getEJavaObject(),"defaultValue","",0,1, true,true, false, false, false, true, true, true);
-	initEAttribute(getEStructuralFeature_DefaultValueLiteral(),getEString(),"defaultValueLiteral","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_Derived(),getEBoolean(),"derived","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_FeatureID(),getEInt(),"featureID","-1",0,1, false,false, false, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_Transient(),getEBoolean(),"transient","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_Unsettable(),getEBoolean(),"unsettable","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getEStructuralFeature_Volatile(),getEBoolean(),"volatile","",0,1, false,false, true, false, false, true, false, true);
+	eStructuralFeatureEClass->setInstanceClass(nullptr);
+	eStructuralFeatureEClass->setName("EStructuralFeature");
+	eStructuralFeatureEClass->setAbstract(true);
+	eStructuralFeatureEClass->setInterface(false);
 	
-	initEReference(getEStructuralFeature_EContainingClass(),getEClass(),getEClass_EStructuralFeatures(),"eContainingClass","",0,1, true,false, false, false, false, false, true, false,true);
+	attr = getEStructuralFeature_Changeable();
+	attr->setName("changeable");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "true";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_ContainerClass();
+	attr->setName("containerClass");
+	attr->setEType(getEJavaClass());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_DefaultValue();
+	attr->setName("defaultValue");
+	attr->setEType(getEJavaObject());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(true);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_DefaultValueLiteral();
+	attr->setName("defaultValueLiteral");
+	attr->setEType(getEString());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_Derived();
+	attr->setName("derived");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_FeatureID();
+	attr->setName("featureID");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "-1";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_Transient();
+	attr->setName("transient");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_Unsettable();
+	attr->setName("unsettable");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getEStructuralFeature_Volatile();
+	attr->setName("volatile");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getEStructuralFeature_EContainingClass();
+	ref->setName("eContainingClass");
+	ref->setEType(getEClass());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(true);
+	ref->setVolatile(false);
+	ref->setChangeable(false);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getEClass_EStructuralFeatures();
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class EStructuralFeature
 
 	// Begin Class ETypeParameter
-	initEClass(eTypeParameterEClass, nullptr, "ETypeParameter", false, false, true);
+	eTypeParameterEClass->setInstanceClass(nullptr);
+	eTypeParameterEClass->setName("ETypeParameter");
+	eTypeParameterEClass->setAbstract(false);
+	eTypeParameterEClass->setInterface(false);
 	
-	initEReference(getETypeParameter_EBounds(),getEGenericType(),nullptr,"eBounds","",0,-1, false,false, true, true, false, false, true, false,true);
+	
+	ref = getETypeParameter_EBounds();
+	ref->setName("eBounds");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(-1);
+	ref->setTransient(false);
+	ref->setVolatile(false);
+	ref->setChangeable(true);
+	ref->setUnsettable(false);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class ETypeParameter
 
 	// Begin Class ETypedElement
-	initEClass(eTypedElementEClass, nullptr, "ETypedElement", true, false, true);
-	initEAttribute(getETypedElement_LowerBound(),getEInt(),"lowerBound","",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getETypedElement_Many(),getEBoolean(),"many","",0,1, true,true, false, false, false, true, true, true);
-	initEAttribute(getETypedElement_Ordered(),getEBoolean(),"ordered","true",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getETypedElement_Required(),getEBoolean(),"required","",0,1, true,true, false, false, false, true, true, true);
-	initEAttribute(getETypedElement_Unique(),getEBoolean(),"unique","true",0,1, false,false, true, false, false, true, false, true);
-	initEAttribute(getETypedElement_UpperBound(),getEInt(),"upperBound","1",0,1, false,false, true, false, false, true, false, true);
+	eTypedElementEClass->setInstanceClass(nullptr);
+	eTypedElementEClass->setName("ETypedElement");
+	eTypedElementEClass->setAbstract(true);
+	eTypedElementEClass->setInterface(false);
 	
-	initEReference(getETypedElement_EGenericType(),getEGenericType(),nullptr,"eGenericType","",0,1, false,true, true, true, false, true, true, false,true);
-	initEReference(getETypedElement_EType(),getEClassifier(),nullptr,"eType","",0,1, false,true, true, false, true, true, true, false,true);
+	attr = getETypedElement_LowerBound();
+	attr->setName("lowerBound");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getETypedElement_Many();
+	attr->setName("many");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(true);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getETypedElement_Ordered();
+	attr->setName("ordered");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "true";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getETypedElement_Required();
+	attr->setName("required");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(true);
+	attr->setVolatile(true);
+	attr->setChangeable(false);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(true);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getETypedElement_Unique();
+	attr->setName("unique");
+	attr->setEType(getEBoolean());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "true";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	attr = getETypedElement_UpperBound();
+	attr->setName("upperBound");
+	attr->setEType(getEInt());
+	attr->setLowerBound(0);
+	attr->setUpperBound(1);
+	attr->setTransient(false);
+	attr->setVolatile(false);
+	attr->setChangeable(true);
+	attr->setUnsettable(false);
+	attr->setUnique(true);
+	attr->setDerived(false);
+	attr->setOrdered(true);
+	attr->setID(false);
+	{
+		std::string defaultValue = "1";
+		if (!defaultValue.empty())
+		{
+		   attr->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	ref = getETypedElement_EGenericType();
+	ref->setName("eGenericType");
+	ref->setEType(getEGenericType());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(true);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(true);
+	ref->setResolveProxies(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
+	ref = getETypedElement_EType();
+	ref->setName("eType");
+	ref->setEType(getEClassifier());
+	ref->setLowerBound(0);
+	ref->setUpperBound(1);
+	ref->setTransient(false);
+	ref->setVolatile(true);
+	ref->setChangeable(true);
+	ref->setUnsettable(true);
+	ref->setUnique(true);
+	ref->setDerived(false);
+	ref->setOrdered(true);
+	ref->setContainment(false);
+	ref->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			ref->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		ref->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
 	// End Class ETypedElement
 
-	initEDataType(eBigDecimalEDataType, nullptr, "EBigDecimal", true, true);
-	initEDataType(eBigIntegerEDataType, nullptr, "EBigInteger", true, true);
-	initEDataType(eBooleanEDataType, nullptr, "EBoolean", true, true);
-	initEDataType(eBooleanObjectEDataType, nullptr, "EBooleanObject", true, true);
-	initEDataType(eByteEDataType, nullptr, "EByte", true, true);
-	initEDataType(eByteArrayEDataType, nullptr, "EByteArray", true, true);
-	initEDataType(eByteObjectEDataType, nullptr, "EByteObject", true, true);
-	initEDataType(eCharEDataType, nullptr, "EChar", true, true);
-	initEDataType(eCharacterObjectEDataType, nullptr, "ECharacterObject", true, true);
-	initEDataType(eDateEDataType, nullptr, "EDate", true, true);
-	initEDataType(eDiagnosticChainEDataType, nullptr, "EDiagnosticChain", false, true);
-	initEDataType(eDoubleEDataType, nullptr, "EDouble", true, true);
-	initEDataType(eDoubleObjectEDataType, nullptr, "EDoubleObject", true, true);
-	initEDataType(eEListEDataType, nullptr, "EEList", false, true);
-	initEDataType(eEnumeratorEDataType, nullptr, "EEnumerator", false, true);
-	initEDataType(eFeatureMapEDataType, nullptr, "EFeatureMap", false, true);
-	initEDataType(eFeatureMapEntryEDataType, nullptr, "EFeatureMapEntry", false, true);
-	initEDataType(eFloatEDataType, nullptr, "EFloat", true, true);
-	initEDataType(eFloatObjectEDataType, nullptr, "EFloatObject", true, true);
-	initEDataType(eIntEDataType, nullptr, "EInt", true, true);
-	initEDataType(eIntegerObjectEDataType, nullptr, "EIntegerObject", true, true);
-	initEDataType(eInvocationTargetExceptionEDataType, nullptr, "EInvocationTargetException", false, true);
-	initEDataType(eJavaClassEDataType, nullptr, "EJavaClass", true, true);
-	initEDataType(eJavaObjectEDataType, nullptr, "EJavaObject", true, true);
-	initEDataType(eLongEDataType, nullptr, "ELong", true, true);
-	initEDataType(eLongObjectEDataType, nullptr, "ELongObject", true, true);
-	initEDataType(eMapEDataType, nullptr, "EMap", false, true);
-	initEDataType(eResourceEDataType, nullptr, "EResource", false, true);
-	initEDataType(eResourceSetEDataType, nullptr, "EResourceSet", false, true);
-	initEDataType(eShortEDataType, nullptr, "EShort", true, true);
-	initEDataType(eShortObjectEDataType, nullptr, "EShortObject", true, true);
-	initEDataType(eStringEDataType, nullptr, "EString", true, true);
-	initEDataType(eTreeIteratorEDataType, nullptr, "ETreeIterator", false, true);
+	eBigDecimalEDataType->setInstanceClass(nullptr);
+	eBigDecimalEDataType->setName("EBigDecimal");
+	eBigDecimalEDataType->setSerializable(true);
+	eBigIntegerEDataType->setInstanceClass(nullptr);
+	eBigIntegerEDataType->setName("EBigInteger");
+	eBigIntegerEDataType->setSerializable(true);
+	eBooleanEDataType->setInstanceClass(nullptr);
+	eBooleanEDataType->setName("EBoolean");
+	eBooleanEDataType->setSerializable(true);
+	eBooleanObjectEDataType->setInstanceClass(nullptr);
+	eBooleanObjectEDataType->setName("EBooleanObject");
+	eBooleanObjectEDataType->setSerializable(true);
+	eByteEDataType->setInstanceClass(nullptr);
+	eByteEDataType->setName("EByte");
+	eByteEDataType->setSerializable(true);
+	eByteArrayEDataType->setInstanceClass(nullptr);
+	eByteArrayEDataType->setName("EByteArray");
+	eByteArrayEDataType->setSerializable(true);
+	eByteObjectEDataType->setInstanceClass(nullptr);
+	eByteObjectEDataType->setName("EByteObject");
+	eByteObjectEDataType->setSerializable(true);
+	eCharEDataType->setInstanceClass(nullptr);
+	eCharEDataType->setName("EChar");
+	eCharEDataType->setSerializable(true);
+	eCharacterObjectEDataType->setInstanceClass(nullptr);
+	eCharacterObjectEDataType->setName("ECharacterObject");
+	eCharacterObjectEDataType->setSerializable(true);
+	eDateEDataType->setInstanceClass(nullptr);
+	eDateEDataType->setName("EDate");
+	eDateEDataType->setSerializable(true);
+	eDiagnosticChainEDataType->setInstanceClass(nullptr);
+	eDiagnosticChainEDataType->setName("EDiagnosticChain");
+	eDiagnosticChainEDataType->setSerializable(false);
+	eDoubleEDataType->setInstanceClass(nullptr);
+	eDoubleEDataType->setName("EDouble");
+	eDoubleEDataType->setSerializable(true);
+	eDoubleObjectEDataType->setInstanceClass(nullptr);
+	eDoubleObjectEDataType->setName("EDoubleObject");
+	eDoubleObjectEDataType->setSerializable(true);
+	eEListEDataType->setInstanceClass(nullptr);
+	eEListEDataType->setName("EEList");
+	eEListEDataType->setSerializable(false);
+	eEnumeratorEDataType->setInstanceClass(nullptr);
+	eEnumeratorEDataType->setName("EEnumerator");
+	eEnumeratorEDataType->setSerializable(false);
+	eFeatureMapEDataType->setInstanceClass(nullptr);
+	eFeatureMapEDataType->setName("EFeatureMap");
+	eFeatureMapEDataType->setSerializable(false);
+	eFeatureMapEntryEDataType->setInstanceClass(nullptr);
+	eFeatureMapEntryEDataType->setName("EFeatureMapEntry");
+	eFeatureMapEntryEDataType->setSerializable(false);
+	eFloatEDataType->setInstanceClass(nullptr);
+	eFloatEDataType->setName("EFloat");
+	eFloatEDataType->setSerializable(true);
+	eFloatObjectEDataType->setInstanceClass(nullptr);
+	eFloatObjectEDataType->setName("EFloatObject");
+	eFloatObjectEDataType->setSerializable(true);
+	eIntEDataType->setInstanceClass(nullptr);
+	eIntEDataType->setName("EInt");
+	eIntEDataType->setSerializable(true);
+	eIntegerObjectEDataType->setInstanceClass(nullptr);
+	eIntegerObjectEDataType->setName("EIntegerObject");
+	eIntegerObjectEDataType->setSerializable(true);
+	eInvocationTargetExceptionEDataType->setInstanceClass(nullptr);
+	eInvocationTargetExceptionEDataType->setName("EInvocationTargetException");
+	eInvocationTargetExceptionEDataType->setSerializable(false);
+	eJavaClassEDataType->setInstanceClass(nullptr);
+	eJavaClassEDataType->setName("EJavaClass");
+	eJavaClassEDataType->setSerializable(true);
+	eJavaObjectEDataType->setInstanceClass(nullptr);
+	eJavaObjectEDataType->setName("EJavaObject");
+	eJavaObjectEDataType->setSerializable(true);
+	eLongEDataType->setInstanceClass(nullptr);
+	eLongEDataType->setName("ELong");
+	eLongEDataType->setSerializable(true);
+	eLongObjectEDataType->setInstanceClass(nullptr);
+	eLongObjectEDataType->setName("ELongObject");
+	eLongObjectEDataType->setSerializable(true);
+	eMapEDataType->setInstanceClass(nullptr);
+	eMapEDataType->setName("EMap");
+	eMapEDataType->setSerializable(false);
+	eResourceEDataType->setInstanceClass(nullptr);
+	eResourceEDataType->setName("EResource");
+	eResourceEDataType->setSerializable(false);
+	eResourceSetEDataType->setInstanceClass(nullptr);
+	eResourceSetEDataType->setName("EResourceSet");
+	eResourceSetEDataType->setSerializable(false);
+	eShortEDataType->setInstanceClass(nullptr);
+	eShortEDataType->setName("EShort");
+	eShortEDataType->setSerializable(true);
+	eShortObjectEDataType->setInstanceClass(nullptr);
+	eShortObjectEDataType->setName("EShortObject");
+	eShortObjectEDataType->setSerializable(true);
+	eStringEDataType->setInstanceClass(nullptr);
+	eStringEDataType->setName("EString");
+	eStringEDataType->setSerializable(true);
+	eTreeIteratorEDataType->setInstanceClass(nullptr);
+	eTreeIteratorEDataType->setName("ETreeIterator");
+	eTreeIteratorEDataType->setSerializable(false);
 	
 }
 

@@ -89,14 +89,26 @@ void TypesPackageImpl::initializePackageContents()
 	// Add supertypes to classes
 	
 	std::shared_ptr<ecore::EOperation> op;
+	std::shared_ptr<ecore::EAttribute> attr;
+	std::shared_ptr<ecore::EReference> ref;
 
  	// Initialize classes and features; add operations and parameters
 
-	initEDataType(booleanEDataType, nullptr, "Boolean", true, true);
-	initEDataType(integerEDataType, nullptr, "Integer", true, true);
-	initEDataType(realEDataType, nullptr, "Real", true, true);
-	initEDataType(stringEDataType, nullptr, "String", true, true);
-	initEDataType(unlimitedNaturalEDataType, nullptr, "UnlimitedNatural", true, true);
+	booleanEDataType->setInstanceClass(nullptr);
+	booleanEDataType->setName("Boolean");
+	booleanEDataType->setSerializable(true);
+	integerEDataType->setInstanceClass(nullptr);
+	integerEDataType->setName("Integer");
+	integerEDataType->setSerializable(true);
+	realEDataType->setInstanceClass(nullptr);
+	realEDataType->setName("Real");
+	realEDataType->setSerializable(true);
+	stringEDataType->setInstanceClass(nullptr);
+	stringEDataType->setName("String");
+	stringEDataType->setSerializable(true);
+	unlimitedNaturalEDataType->setInstanceClass(nullptr);
+	unlimitedNaturalEDataType->setName("UnlimitedNatural");
+	unlimitedNaturalEDataType->setSerializable(true);
 	
 }
 

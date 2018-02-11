@@ -78,71 +78,7 @@ namespace ecore
 			
 			/*!
 			 */ 
-			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EAttribute> initEAttribute(std::shared_ptr<ecore::EAttribute>  a,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isID,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EClass> initEClass(std::shared_ptr<ecore::EClass>  c,void *  instanceClass,std::string name,bool isAbstract,bool isInterface,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual void initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void initEClassifier(std::shared_ptr<ecore::EClassifier>  o,std::shared_ptr<ecore::EClass>  metaObject,void *  instanceClass,std::string name,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EDataType> initEDataType(std::shared_ptr<ecore::EDataType>  d,void *  instanceClass,std::string name,bool isSerializable,bool isGenerated)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EEnum> initEEnum(std::shared_ptr<ecore::EEnum>  e,void *  instanceClass,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EOperation> initEOperation(std::shared_ptr<ecore::EOperation>  o,std::shared_ptr<ecore::EClassifier>  type,std::string name,int lowerBound,int upperBound,bool isUnique,bool isOrdered)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived)  ;
-			
-			/*!
-			 */ 
-			virtual std::shared_ptr<ecore::EReference> initEReference(std::shared_ptr<ecore::EReference>  r,std::shared_ptr<ecore::EClassifier>  type,std::shared_ptr<ecore::EReference>  otherEnd,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isContainment,bool isResolveProxies,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			
-			
-			/*!
-			 */ 
-			virtual void initEStructuralFeature(std::shared_ptr<ecore::EStructuralFeature>  s,std::shared_ptr<ecore::EClassifier>  type,std::string name,std::string defaultValue,int lowerBound,int upperBound,bool isTransient,bool isVolatile,bool isChangeable,bool isUnsettable,bool isUnique,bool isDerived,bool isOrdered)  ;
-			
-			/*!
-			 */ 
 			virtual std::shared_ptr<ecore::EParameter> internalAddEParameter(std::shared_ptr<ecore::EOperation>  owner,std::shared_ptr<ecore::EClassifier>  type,std::string name)  ;
-			
-			/*!
-			 */ 
-			virtual void setGeneratedClassName(std::shared_ptr<ecore::EClassifier>  eClassifier)  ;
 			
 			
 			

@@ -40,27 +40,7 @@ namespace ecore
 
 namespace ecore 
 {
-	class EAttribute;
-}
-
-namespace ecore 
-{
-	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
-	class EDataType;
-}
-
-namespace ecore 
-{
-	class EEnum;
 }
 
 namespace ecore 
@@ -86,16 +66,6 @@ namespace ecore
 namespace ecore 
 {
 	class EParameter;
-}
-
-namespace ecore 
-{
-	class EReference;
-}
-
-namespace ecore 
-{
-	class EStructuralFeature;
 }
 
 // base class includes
@@ -141,40 +111,6 @@ namespace ecore
 			/*!
 			 */ 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name)  const  = 0;
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
