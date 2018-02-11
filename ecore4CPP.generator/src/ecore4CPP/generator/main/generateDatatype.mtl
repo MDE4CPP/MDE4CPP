@@ -19,7 +19,7 @@
 [query public datatypeNumberName(aEDatatype : EDataType) : String = aEDatatype.name.toUpperCase() /]
 
 [template public generateEDatatype(aEDatatype : EDataType, impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.name/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metaModelTypeString(aEDatatype)/]> get[aEDatatype.name/]() const [abstractSufix(impl)/];
 
 [/template]
 

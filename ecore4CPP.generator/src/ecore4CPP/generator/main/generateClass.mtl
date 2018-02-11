@@ -27,7 +27,7 @@ static const int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClas
  * Class getter for EPackage
 */]
 [template public generateClassGetter(aEClass : EClass,impl : Boolean)]
-virtual std::shared_ptr<[metamodelClassTypeString(aEClass)/]> get[aEClass.name/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metaModelTypeString(aEClass)/]> get[aEClass.name/]() const [abstractSufix(impl)/];
 [/template]
 
 [**

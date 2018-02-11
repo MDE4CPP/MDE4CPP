@@ -94,8 +94,8 @@
 [query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().ePackage.name.concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
 [query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().ePackage.name.concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
 
-[query public metamodelClassTypeString(aClass : EClassifier) : String = metamodelClassTypeString(aClass, aClass.ePackage) /]
-[query public metamodelClassTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().ePackage.name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
+[query public metaModelTypeString(aClass : EClassifier) : String = metaModelTypeString(aClass, aClass.ePackage) /]
+[query public metaModelTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().ePackage.name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
