@@ -104,17 +104,17 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
 [/template]
 
 [template public generateStaticAttributeID(aAttribute : EAttribute)]
-static const int [aAttribute.memberNameUpper()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
+static const int [aAttribute.getMemberNameUpperCase()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
 
 [/template]
 
 [template public generateAttributeGetter(aAttribute : EAttribute,impl : Boolean) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttribute.getMemberName().toUpperFirst()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttribute.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateAttributeGetterImpl(anEAttribute : EAttribute)]
-std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEAttribute.getMemberName().toUpperFirst()/]() const
+std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEAttribute.getMemberNameUpperFirst()/]() const
 {
 	return [anEAttribute.getClassMemberName()/];
 }
@@ -122,6 +122,6 @@ std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eCo
 [/template]
 
 [template public generateAttributeCreation(anEAttribute : EAttribute)]
-[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.memberNameUpper()/]);
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getMemberNameUpperCase()/]);
 
 [/template]

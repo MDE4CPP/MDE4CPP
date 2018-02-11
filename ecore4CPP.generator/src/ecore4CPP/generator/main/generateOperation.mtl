@@ -62,24 +62,24 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.gen
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.memberNameUpper()/] = [aOperation.getOperationID()/];
+static const int [aOperation.getMemberNameUpperCase()/] = [aOperation.getOperationID()/];
 
 [/template]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
-[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [memberNameUpper(anEOperation)/]);
+[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getMemberNameUpperCase()/]);
 
 [/template]
 
 [template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.getMemberName().toUpperFirst()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
 [template public generateOperationGetterImpl(anEOperation : EOperation)? ( not hasImplOnly() )]
-std::shared_ptr<[metamodelaTypedElementString(anEOperation)/]> [anEOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEOperation.getMemberName().toUpperFirst()/]() const
+std::shared_ptr<[metamodelaTypedElementString(anEOperation)/]> [anEOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEOperation.getMemberNameUpperFirst()/]() const
 {
 	return [anEOperation.getClassMemberName()/];
 }
@@ -104,7 +104,7 @@ addEParameter([anEOperation.getClassMemberName()/] ,[anEParameter.eType.simpleDa
 [query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.name).concat('()') endif/]
 
  
-[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(getMemberName().toUpperFirst()).concat('()') /]
+[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
 
 

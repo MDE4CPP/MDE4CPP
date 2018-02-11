@@ -131,12 +131,12 @@ void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterN
 [/template]
 
 [template public generateReferenceGetter(aReference : EReference,impl : Boolean) ]
-virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aReference.getMemberName().toUpperFirst()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aReference.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateReferenceGetterImpl(anEReference : EReference)]
-std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEReference.getMemberName().toUpperFirst()/]() const
+std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEReference.getMemberNameUpperFirst()/]() const
 {
 	return [anEReference.getClassMemberName()/];
 }
@@ -144,12 +144,12 @@ std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eC
 [/template]
 
 [template public generateStaticReferenceID(aReference : EReference)]
-static const int [aReference.memberNameUpper()/] = [aReference.eContainingClass.getClassifierID()/][aReference.getFeatureID()/];
+static const int [aReference.getMemberNameUpperCase()/] = [aReference.eContainingClass.getClassifierID()/][aReference.getFeatureID()/];
 
 [/template]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.memberNameUpper()/]);
+[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getMemberNameUpperCase()/]);
 
 [/template] 
  
