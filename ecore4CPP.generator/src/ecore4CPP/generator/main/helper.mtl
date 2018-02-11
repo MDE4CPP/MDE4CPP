@@ -184,10 +184,16 @@
  */]
 [query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
 
-[query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberName1() endif/]
-[query private getMemberName1(anENamedElement : ENamedElement) : String = if (EStructuralFeature.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
+[query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif/]
+[query private getMemberNameStructFeat(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EStructuralFeature)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.getMemberNameOperation() endif/]
+[query private getMemberNameOperation(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EOperation)) then anENamedElement.oclAsType(EOperation).getMemberName() else anENamedElement.getMemberNameGeneral() endif/]
+[query private getMemberNameGeneral(anENamedElement : ENamedElement) : String = anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) /]
 
 [query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst() /]
 [query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_').concat(aStructural.name.toUpperFirst()) /]
+[query public getMemberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toLowerFirst().concat('_'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
 
 [query public memberNameUpper(anENamedElement : ENamedElement) : String = getMemberName().toUpperCase() /]
+[query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '_'.concat(aOperation.singlemultipleParameter()) else '' endif /]
+[query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
+

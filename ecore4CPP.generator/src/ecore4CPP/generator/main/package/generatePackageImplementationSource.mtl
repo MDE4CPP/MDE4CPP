@@ -114,8 +114,6 @@ void [packageName/]::initializePackageContents()
 	
 	// Add supertypes to classes
 	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
-	std::shared_ptr<[anEPackage.needNamespace('EOperation')/]> op;
-	std::shared_ptr<[anEPackage.needNamespace('EReference')/]> ref;
 
  	// Initialize classes and features; add operations and parameters
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]

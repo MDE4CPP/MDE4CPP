@@ -62,60 +62,50 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.gen
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.operationNumberNameUpper()/] = [aOperation.getOperationID()/];
+static const int [aOperation.memberNameUpper()/] = [aOperation.getOperationID()/];
 
 [/template]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
-factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [operationNumberNameUpper(anEOperation)/]);
+[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [memberNameUpper(anEOperation)/]);
 
 [/template]
 
 [template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.operationNumberName()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.getMemberName().toUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
-[template public generateOperationGetterImpl(aOperation : EOperation)? ( not hasImplOnly() )]
-std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aOperation.operationNumberName()/]() const
+[template public generateOperationGetterImpl(anEOperation : EOperation)? ( not hasImplOnly() )]
+std::shared_ptr<[metamodelaTypedElementString(anEOperation)/]> [anEOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEOperation.getMemberName().toUpperFirst()/]() const
 {
-	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aOperation)/]>([aOperation.eContainingClass.getClassMemberName()/]->getEOperations()->at([aOperation.listNumber()/]));
+	return [anEOperation.getClassMemberName()/];
 }
 
 [/template]
 
-[template public generateOperationInitialization(aOperation : EOperation)? ( not hasImplOnly() )]
-op = [aOperation.packageGetter()/];
-op->setEType([aOperation.eType.simpleDatatypeGetter(aOperation)/]);
-op->setName("[aOperation.name.toString()/]");
-op->setLowerBound([aOperation.lowerBound/]);
-op->setUpperBound([aOperation.upperBound/]);
-op->setUnique([aOperation.unique.toString()/]);
-op->setOrdered([aOperation.ordered.toString()/]);
-[aOperation.eParameters.generateAddParemeter()/]
+[template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
+[anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
+[anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
+[anEOperation.getClassMemberName()/]->setLowerBound([anEOperation.lowerBound/]);
+[anEOperation.getClassMemberName()/]->setUpperBound([anEOperation.upperBound/]);
+[anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
+[anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
 
-[/template]
+[for (anEParameter : EParameter | anEOperation.eParameters)]
+addEParameter([anEOperation.getClassMemberName()/] ,[anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]  , "[anEParameter.name/]",0,1, true,true);
 
-
-[template public generateAddParemeter(aParameter : EParameter)]
-addEParameter(op ,[aParameter.eType.simpleDatatypeGetter(aParameter.eOperation)/]  , "[aParameter.name/]",0,1, true,true);
+[/for]
 
 [/template]
 
 [query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.name).concat('()') endif/]
 
  
-[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(operationNumberName()).concat('()') /]
+[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(getMemberName().toUpperFirst()).concat('()') /]
 
-
-[query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
-
-[query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '__'.concat(aOperation.singlemultipleParameter()) else '' endif /]
-
-[query public operationNumberName(aOperation : EOperation) : String = aOperation.eContainingClass.name.toUpperFirst().concat('___'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
-[query public operationNumberNameUpper(aOperation : EOperation) : String = aOperation.operationNumberName().toUpperCase() /]
 
 
 
