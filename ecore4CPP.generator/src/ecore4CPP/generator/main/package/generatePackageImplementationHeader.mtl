@@ -67,6 +67,7 @@ namespace [anEPackage.name/]
 		private:
 			[anEPackage.eAllContents(EClass)->sortedBy(name).generatePrivatePackageMember()/]
 			[anEPackage.eAllContents(EDataType)->sortedBy(name).generatePrivatePackageMember()/]
+			[anEPackage.eAllContents(EAttribute)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 
 			friend class [anEPackage.name.concat('Package').toUpperFirst()/];
 

@@ -55,14 +55,11 @@
 [query public SetterName(feature : EStructuralFeature) : String = if hasKey('SetterName') then valueKey('SetterName') else 'set'.concat(name.toUpperFirst()) endif/]
 [query public GetterName(feature : EStructuralFeature) : String = if hasKey('GetterName') then valueKey('GetterName') else getterPrefix().concat(name.toUpperFirst()) endif/]
 
-[query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(memberName()).concat('()') endif/]
-[query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(memberName()).concat('()') /]
+[query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberName().toUpperFirst()).concat('()') endif/]
+[query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberName().toUpperFirst()).concat('()') /]
 
 [query public listNumber(aAttribute : EAttribute) : Integer = eContainingClass.eAttributes->sortedBy(name)->indexOf(aAttribute)-1 /]
 [query public listNumber(aReference : EReference) : Integer = eContainingClass.eReferences->sortedBy(name)->indexOf(aReference) +eContainingClass.eAttributes->size()-1/]
-
-[query public memberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toUpperFirst().concat('_'.concat(aStructural.name.toUpperFirst())) /]
-[query public memberNameUpper(aStructural : EStructuralFeature) : String = memberName().toUpperCase() /]
 
 [query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.ePackage  ) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.ePackage.name.concat('::').concat(aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst()) endif/]
 
@@ -187,16 +184,19 @@
  */]
 
 
-[query public getPackageMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getPackageMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
-[query public getPackageMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_').concat(anEClassifier.eClass().name)/]
+[query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberName1() endif/]
+[query private getMemberName1(anENamedElement : ENamedElement) : String = if (EStructuralFeature.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
 
+[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_').concat(anEClassifier.eClass().name)/]
+[query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_').concat(aStructural.name.toUpperFirst())/]
 
+[query public memberNameUpper(aStructural : EStructuralFeature) : String = getMemberName().toUpperCase() /]
 
 [template public generatePrivatePackageMember(anEClass : EClass)]
 [generatePrivatePackageMember(anEClass, anEClass.ePackage)/]
 [/template]
 
 [template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)]
-std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getPackageMemberName()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getMemberName()/] = nullptr;
 
 [/template]

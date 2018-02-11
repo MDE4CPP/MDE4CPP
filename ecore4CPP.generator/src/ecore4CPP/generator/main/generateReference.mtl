@@ -131,14 +131,14 @@ void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterN
 [/template]
 
 [template public generateReferenceGetter(aReference : EReference,impl : Boolean) ]
-virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aReference.memberName()/]() const [abstractSufix(impl)/];
+virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aReference.getMemberName().toUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateReferenceGetterImpl(aReference : EReference)]
-std::shared_ptr<[aReference.metamodelaTypedElementString()/]> [aReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aReference.memberName()/]() const
+std::shared_ptr<[aReference.metamodelaTypedElementString()/]> [aReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aReference.getMemberName().toUpperFirst()/]() const
 {
-	return std::dynamic_pointer_cast<[aReference.metamodelaTypedElementString()/]>([aReference.eContainingClass.getPackageMemberName()/]->getEStructuralFeatures()->at([aReference.listNumber()/]));
+	return std::dynamic_pointer_cast<[aReference.metamodelaTypedElementString()/]>([aReference.eContainingClass.getMemberName()/]->getEStructuralFeatures()->at([aReference.listNumber()/]));
 }
 
 [/template]
@@ -149,7 +149,7 @@ static const int [aReference.memberNameUpper()/] = [aReference.eContainingClass.
 [/template]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getPackageMemberName()/], [anEReference.memberNameUpper()/]);
+factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getMemberName()/], [anEReference.memberNameUpper()/]);
 
 [/template] 
  

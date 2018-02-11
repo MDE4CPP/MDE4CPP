@@ -24,20 +24,20 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.
 [/template]
 
 [template public generatePrivatePackageMember(aEDatatype : EDataType)]
-std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.getPackageMemberName()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.getMemberName()/] = nullptr;
 
 [/template]
 
 [template public generateEDatatypeCreation(anEDatatype : EDataType)]
-[anEDatatype.getPackageMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
+[anEDatatype.getMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
 
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]
-[adatatype.getPackageMemberName()/]->setInstanceClass(nullptr);
-[adatatype.getPackageMemberName()/]->setName("[adatatype.name/]");
+[adatatype.getMemberName()/]->setInstanceClass(nullptr);
+[adatatype.getMemberName()/]->setName("[adatatype.name/]");
 [if (not adatatype.oclIsKindOf(EEnum))]
-[adatatype.getPackageMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
+[adatatype.getMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
 [/if]
 [/template]
 
@@ -49,13 +49,13 @@ static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierI
 [template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
 std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
 {
-	assert([aEDatatype.getPackageMemberName()/]);
-	return [aEDatatype.getPackageMemberName()/];
+	assert([aEDatatype.getMemberName()/]);
+	return [aEDatatype.getMemberName()/];
 }
 
 [/template]
 
 [template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
-[aEDatatype.getPackageMemberName()/].reset();
+[aEDatatype.getMemberName()/].reset();
 
 [/template]

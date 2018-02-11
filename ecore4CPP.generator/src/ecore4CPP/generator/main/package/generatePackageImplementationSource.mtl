@@ -115,7 +115,6 @@ void [packageName/]::initializePackageContents()
 	// Add supertypes to classes
 	[anEPackage.eAllContents(EClass)->sortedBy(name).initSuperTypes()/]
 	std::shared_ptr<[anEPackage.needNamespace('EOperation')/]> op;
-	std::shared_ptr<[anEPackage.needNamespace('EAttribute')/]> attr;
 	std::shared_ptr<[anEPackage.needNamespace('EReference')/]> ref;
 
  	// Initialize classes and features; add operations and parameters
