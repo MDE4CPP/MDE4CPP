@@ -56,9 +56,9 @@ bool [packageName/]::isInited = false;
 {
 	[anEPackage.eAllContents(EClass)->sortedBy(name).generateDeletePrivatePackageMember()/]
 	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EAttribute)->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EReference)->sortedBy(name).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EOperation)->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EClass).eAttributes->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EClass).eReferences->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EClass).eOperations->sortedBy(name).generateDeletePrivatePackageMember()/]
 }
 
 [anEPackage.name.concat('Package').toUpperFirst()/]* [packageName/]::create()
