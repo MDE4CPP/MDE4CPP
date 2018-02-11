@@ -113,10 +113,10 @@ virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttrib
 
 [/template]
 
-[template public generateAttributeGetterImpl(aAttribute : EAttribute)]
-std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> [aAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aAttribute.getMemberName().toUpperFirst()/]() const
+[template public generateAttributeGetterImpl(anEAttribute : EAttribute)]
+std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEAttribute.getMemberName().toUpperFirst()/]() const
 {
-	return std::dynamic_pointer_cast<[metamodelaTypedElementString(aAttribute)/]>([aAttribute.eContainingClass.getMemberName()/]->getEStructuralFeatures()->at([aAttribute.listNumber()/]));
+	return [anEAttribute.getMemberName()/];
 }
 
 [/template]
