@@ -12,25 +12,22 @@
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
  * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */]
-[module generatePackageInterfaceSource('http://www.eclipse.org/emf/2002/Ecore')]
+[module generatePackageHelper('http://www.eclipse.org/emf/2002/Ecore')]
 
-[import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::package::generatePackageHelper /]
 
-[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Package').toUpperFirst(); }]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[anEPackage.name/]/[packageName/].hpp"
-#include "[anEPackage.name/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anEPackage.name/];
+[template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
+[anENamedElement.getClassMemberName()/].reset();
 
-//static initialisation
-const std::string [packageName/]::eNAME ="[anEPackage.name/]";
-const std::string [packageName/]::eNS_URI ="[anEPackage.nsURI/]";
-const std::string [packageName/]::eNS_PREFIX ="[anEPackage.nsPrefix/]";
+[/template]
 
-//Singleton 
-[generateSingletonImpl(packageName)/]
-[/file]
+[template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
+virtual std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
+
+[/template]
+
+[template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)] 
+std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getClassMemberName()/] = nullptr;
+
 [/template]

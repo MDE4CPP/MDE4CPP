@@ -21,7 +21,7 @@
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::package::generatePackageImplementationHeader /]
+[import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
 [file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]

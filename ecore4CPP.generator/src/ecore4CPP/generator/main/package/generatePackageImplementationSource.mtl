@@ -20,6 +20,7 @@
 [import ecore4CPP::generator::main::generateOperation /]
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [query public metaModelIncludes(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents(EClass).eAllSuperTypes.ePackage,anEPackage.eAllContents(EStructuralFeature).eType.ePackage,anEPackage.eAllContents(EParameter).eType.ePackage}->flatten() /]
 
@@ -142,9 +143,4 @@ void [packageName/]::initializePackageContents()
 [/for]
 [anEPackage.eAllContents(EDataType)->sortedBy(name).generateDatatypeGetterImpl()/]
 [/file]
-[/template]
-
-[template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
-[anENamedElement.getClassMemberName()/].reset();
-
 [/template]
