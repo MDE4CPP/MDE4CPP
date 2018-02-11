@@ -472,48 +472,6 @@
       </eAnnotations>
       <eParameters name="name" eType="#//EString"/>
     </eOperations>
-    <eOperations name="addEParameter">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="internalAddEParameter(owner, type, name);"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EOperation"/>
-      <eParameters name="type" eType="#//EClassifier"/>
-      <eParameters name="name" eType="#//EString"/>
-    </eOperations>
-    <eOperations name="addEParameter">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto p = internalAddEParameter(owner, type, name);&#xD;&#xA;p->setLowerBound(lower);&#xD;&#xA;p->setUpperBound(upper);"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EOperation"/>
-      <eParameters name="type" eType="#//EClassifier"/>
-      <eParameters name="name" eType="#//EString"/>
-      <eParameters name="lower" eType="#//EInt"/>
-      <eParameters name="upper" eType="#//EInt"/>
-    </eOperations>
-    <eOperations name="addEParameter" eType="#//EParameter">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="auto p = internalAddEParameter(owner, type, name);&#xD;&#xA;p->setLowerBound(lower);&#xD;&#xA;p->setUpperBound(upper);&#xD;&#xA;p->setUnique(isUnique);&#xD;&#xA;p->setOrdered(isOrdered);&#xD;&#xA;return p;"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EOperation"/>
-      <eParameters name="type" eType="#//EClassifier"/>
-      <eParameters name="name" eType="#//EString"/>
-      <eParameters name="lower" eType="#//EInt"/>
-      <eParameters name="upper" eType="#//EInt"/>
-      <eParameters name="isUnique" eType="#//EBoolean"/>
-      <eParameters name="isOrdered" eType="#//EBoolean"/>
-    </eOperations>
-    <eOperations name="internalAddEParameter" eType="#//EParameter">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="    std::shared_ptr&lt;EParameter> p(EcoreFactory::eInstance()->createEParameter_in_EOperation(owner));&#xD;&#xA;    p->setEType(type);&#xD;&#xA;    p->setName(name);&#xD;&#xA;    return p;"/>
-        <details key="implOnly" value="true"/>
-      </eAnnotations>
-      <eParameters name="owner" eType="#//EOperation"/>
-      <eParameters name="type" eType="#//EClassifier"/>
-      <eParameters name="name" eType="#//EString"/>
-    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsURI" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="nsPrefix" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eFactoryInstance" lowerBound="1"
