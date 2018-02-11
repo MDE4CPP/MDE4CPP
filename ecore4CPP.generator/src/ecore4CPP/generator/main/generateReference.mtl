@@ -144,12 +144,12 @@ std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eC
 [/template]
 
 [template public generateStaticReferenceID(aReference : EReference)]
-static const int [aReference.getMemberNameUpperCase()/] = [aReference.eContainingClass.getClassifierID()/][aReference.getFeatureID()/];
+static const int [aReference.getStaticAttributeIDName()/] = [aReference.eContainingClass.getClassifierID()/][aReference.getFeatureID()/];
 
 [/template]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getMemberNameUpperCase()/]);
+[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getStaticAttributeIDName()/]);
 
 [/template] 
  

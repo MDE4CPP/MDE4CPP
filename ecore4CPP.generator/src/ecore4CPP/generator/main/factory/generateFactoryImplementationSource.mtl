@@ -39,7 +39,7 @@ using namespace [anEPackage.name/];
 [className/]::[className/]()
 {
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	m_idMap.insert(std::pair<std::string,unsigned int>("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.name.toUpperCase()/]));
+	m_idMap.insert(std::pair<std::string,unsigned int>("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 }
 
@@ -62,7 +62,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 	{
 	[for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-		case [anEPackage.name.toUpperFirst()/]Package::[aClass.name.toUpperCase()/]:
+		case [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
 			if (nullptr == container)
@@ -78,7 +78,7 @@ std::shared_ptr<ecore::EObject> [className/]::create(const unsigned int classID,
 				{
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
-					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getMemberNameUpperCase()/]: 
+					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
 						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer);
@@ -176,7 +176,7 @@ std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/
 
 [template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage, addID : Boolean)]
 [if(ref->select(eType = aReference.eType)->size()>1)]
-std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getMemberNameUpperCase()/]));
+std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]));
 [else]
 std::shared_ptr<[anEClass.name.toUpperFirst()/]Impl> element(new [anEClass.name.toUpperFirst()/]Impl(par_[aReference.name/]));
 [/if]

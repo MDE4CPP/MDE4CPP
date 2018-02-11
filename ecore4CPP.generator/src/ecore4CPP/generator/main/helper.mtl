@@ -183,7 +183,7 @@
  *
  */]
 [query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
-[query public getMemberNameUpperCase(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperCase() /]
+[query public getStaticAttributeIDName(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperCase() /]
 [query public getMemberNameUpperFirst(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperFirst() /]
 
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif/]

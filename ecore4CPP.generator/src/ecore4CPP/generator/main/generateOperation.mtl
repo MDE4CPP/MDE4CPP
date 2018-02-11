@@ -62,12 +62,12 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.gen
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.getMemberNameUpperCase()/] = [aOperation.getOperationID()/];
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOperationID()/];
 
 [/template]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
-[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getMemberNameUpperCase()/]);
+[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
 
 [/template]
 

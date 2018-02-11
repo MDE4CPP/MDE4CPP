@@ -35,7 +35,7 @@ boost::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, boo
 	switch(featureID)
 	{
 	[for (struct : EStructuralFeature | aClass.eAllStructuralFeatures->asOrderedSet()->sortedBy(name))]
-		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getMemberNameUpperCase()/]:
+		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 			return [struct.GetterName()/](); //[aClass.getClassifierID()/][struct.getFeatureID()/]
 	[/for]
 	}
@@ -49,7 +49,7 @@ void [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, boost::an
 	switch(featureID)
 	{
 [for (struct : EStructuralFeature | aClass.eAllStructuralFeatures->select(upperBound = 1 and changeable)->asOrderedSet()->sortedBy(name))]
-		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getMemberNameUpperCase()/]:
+		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
 			// BOOST CAST
 [if (not struct.eType.oclIsKindOf(EDataType))]

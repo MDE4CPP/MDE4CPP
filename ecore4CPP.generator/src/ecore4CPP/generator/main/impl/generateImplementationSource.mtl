@@ -96,7 +96,7 @@ using namespace [aClass.ePackage.name/];
 				switch(reference_id)
 				{	
 				[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.getMemberNameUpperCase()/]:
+				case [aClass.ePackage.name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
 					 m_[multipleRef.name/] = par_[aReference.eType.name/];
 					 return;
 				[/for]

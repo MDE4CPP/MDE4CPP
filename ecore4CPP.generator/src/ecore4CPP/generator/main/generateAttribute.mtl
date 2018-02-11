@@ -104,7 +104,7 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
 [/template]
 
 [template public generateStaticAttributeID(aAttribute : EAttribute)]
-static const int [aAttribute.getMemberNameUpperCase()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
+static const int [aAttribute.getStaticAttributeIDName()/] = [aAttribute.eContainingClass.getClassifierID()/][aAttribute.getFeatureID()/];
 
 [/template]
 
@@ -122,6 +122,6 @@ std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eCo
 [/template]
 
 [template public generateAttributeCreation(anEAttribute : EAttribute)]
-[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getMemberNameUpperCase()/]);
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
 
 [/template]
