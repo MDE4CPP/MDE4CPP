@@ -49,8 +49,3 @@ std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.na
 }
 
 [/template]
-
-[template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
-[aEDatatype.getClassMemberName()/].reset();
-
-[/template]

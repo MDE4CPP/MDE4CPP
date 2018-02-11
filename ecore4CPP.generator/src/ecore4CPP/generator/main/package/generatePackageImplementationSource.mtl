@@ -54,8 +54,11 @@ bool [packageName/]::isInited = false;
 
 [packageName/]::~[packageName/]()
 {
-	[anEPackage.eAllContents(EClass).generateDeletePrivatePackageMember()/]
-	[anEPackage.eAllContents(EDataType).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EClass)->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EDataType)->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EAttribute)->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EReference)->sortedBy(name).generateDeletePrivatePackageMember()/]
+	[anEPackage.eAllContents(EOperation)->sortedBy(name).generateDeletePrivatePackageMember()/]
 }
 
 [anEPackage.name.concat('Package').toUpperFirst()/]* [packageName/]::create()
@@ -138,4 +141,9 @@ void [packageName/]::initializePackageContents()
 [/for]
 [anEPackage.eAllContents(EDataType)->sortedBy(name).generateDatatypeGetterImpl()/]
 [/file]
+[/template]
+
+[template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
+[anENamedElement.getClassMemberName()/].reset();
+
 [/template]
