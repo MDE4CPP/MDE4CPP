@@ -97,7 +97,8 @@
 [query public metamodelaTypedElementString(aStructuralFeature : EStructuralFeature) : String = if aStructuralFeature.eContainingClass.ePackage = aStructuralFeature.eClass().ePackage then aStructuralFeature.eClass().generateTypeClass() else aStructuralFeature.eClass().ePackage.name.concat('::').concat(aStructuralFeature.eClass().generateTypeClass()) endif /]
 [query public metamodelaTypedElementString(aOperation : EOperation) : String = if aOperation.eContainingClass.ePackage = aOperation.eClass().ePackage then aOperation.eClass().generateTypeClass() else aOperation.eClass().ePackage.name.concat('::').concat(aOperation.eClass().generateTypeClass()) endif /]
 
-[query public metamodelClassTypeString(aClass : EClassifier) : String = if aClass.ePackage = aClass.eClass().ePackage then aClass.eClass().generateTypeClass() else aClass.eClass().ePackage.name.concat('::').concat(aClass.eClass().generateTypeClass()) endif /]
+[query public metamodelClassTypeString(aClass : EClassifier) : String = metamodelClassTypeString(aClass, aClass.ePackage) /]
+[query public metamodelClassTypeString(anENamedElement : ENamedElement, anEPackage : EPackage) : String = if anEPackage = anENamedElement.eClass().ePackage then anENamedElement.eClass().generateTypeClass() else anENamedElement.eClass().ePackage.name.concat('::').concat(anENamedElement.eClass().generateTypeClass()) endif /]
 
 [query public needNamespace(anPackage : EPackage,str :String) : String = if not( anPackage.name = 'ecore') then 'ecore::'.concat(str) else str endif /]
 
@@ -175,8 +176,27 @@
 [query public getSubsetedUnionsReference(aClass : EClass): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not e.oclAsType(EModelElement).isUnion()) else false endif ).Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 [query public getSubsetsForUnion(aClass : EClass,union : EReference): Set(EReference) =  aClass.eAllReferences->select(if hasSubset() then not Subset()->forAll(e| not (e.oclAsType(EReference) = union)) else false endif ).oclAsType(EReference)->asOrderedSet()->sortedBy(name)/]
 
-
-
 [query public getClassifierIDName(anEClass : EClass) : String = if(name = 'EClass' or name = 'EDataType' or name = 'EEnum') then 'Classifier' else getFeatureIDName(anEClass) endif/]
 [query public getFeatureIDName(anEClass : EClass) : String = if(name = 'EAttribute' or name = 'EReference') then 'Feature' else getOperationIDName(anEClass) endif/]
 [query public getOperationIDName(anEClass : EClass) : String = if(name = 'EOperation') then 'Operation' else '' endif/]
+
+[**
+ * generate member names for package generation
+ *
+ *
+ */]
+
+
+[query public getPackageMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getPackageMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
+[query public getPackageMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_').concat(anEClassifier.eClass().name)/]
+
+
+
+[template public generatePrivatePackageMember(anEClass : EClass)]
+[generatePrivatePackageMember(anEClass, anEClass.ePackage)/]
+[/template]
+
+[template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)]
+std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getPackageMemberName()/] = nullptr;
+
+[/template]

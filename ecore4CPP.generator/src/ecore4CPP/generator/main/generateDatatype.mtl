@@ -16,7 +16,6 @@
 
 [import ecore4CPP::generator::main::helper /]
 
-[query public datatypeNameMember(aEDatatype : EDataType) : String = aEDatatype.name.toLowerFirst().concat(aEDatatype.eClass().name) /]
 [query public datatypeNumberName(aEDatatype : EDataType) : String = aEDatatype.name.toUpperCase() /]
 
 [template public generateEDatatype(aEDatatype : EDataType, impl : Boolean)]
@@ -25,20 +24,20 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.
 [/template]
 
 [template public generatePrivatePackageMember(aEDatatype : EDataType)]
-std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.datatypeNameMember()/] = nullptr;
+std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.getPackageMemberName()/] = nullptr;
 
 [/template]
 
 [template public generateEDatatypeCreation(anEDatatype : EDataType)]
-[anEDatatype.datatypeNameMember()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
+[anEDatatype.getPackageMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
 
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]
-[adatatype.datatypeNameMember()/]->setInstanceClass(nullptr);
-[adatatype.datatypeNameMember()/]->setName("[adatatype.name/]");
+[adatatype.getPackageMemberName()/]->setInstanceClass(nullptr);
+[adatatype.getPackageMemberName()/]->setName("[adatatype.name/]");
 [if (not adatatype.oclIsKindOf(EEnum))]
-[adatatype.datatypeNameMember()/]->setSerializable([adatatype.serializable.toString()/]);
+[adatatype.getPackageMemberName()/]->setSerializable([adatatype.serializable.toString()/]);
 [/if]
 [/template]
 
@@ -50,13 +49,13 @@ static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierI
 [template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
 std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
 {
-	assert([aEDatatype.datatypeNameMember()/]);
-	return [aEDatatype.datatypeNameMember()/];
+	assert([aEDatatype.getPackageMemberName()/]);
+	return [aEDatatype.getPackageMemberName()/];
 }
 
 [/template]
 
 [template public generateDeletePrivatePackageMember(aEDatatype : EDataType)]
-[aEDatatype.datatypeNameMember()/].reset();
+[aEDatatype.getPackageMemberName()/].reset();
 
 [/template]

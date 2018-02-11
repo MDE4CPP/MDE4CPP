@@ -17,7 +17,6 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[query public classNameMember(aEClass : EClass) : String = aEClass.name.toLowerFirst().concat(aEClass.eClass().name) /]
 [query public classNumberName(aEClass : EClass) : String = aEClass.name.toUpperCase() /]
 
 [template public generateStaticClassID(aEClass : EClass)]
@@ -51,36 +50,30 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 [template public generateClassGetterImpl(aEClass : EClass)]
 std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
 {
-	return [aEClass.classNameMember()/];
+	return [aEClass.getPackageMemberName()/];
 }
 [/template]
 
 [template public initSuperTypes(aEClass : EClass)]
 [for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-[aEClass.classNameMember()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
+[aEClass.getPackageMemberName()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
 [/for]
 [/template]
 
 [template public generateClassCreation(aEClass : EClass)]
-[classNameMember(aEClass)/] = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [classNumberName(aEClass)/]);
+[getPackageMemberName(aEClass)/] = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [classNumberName(aEClass)/]);
 
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]
-[aEClass.classNameMember()/]->setInstanceClass(nullptr);
-[aEClass.classNameMember()/]->setName("[aEClass.name/]");
-[aEClass.classNameMember()/]->setAbstract([aEClass.abstract.toString()/]);
-[aEClass.classNameMember()/]->setInterface([aEClass.interface.toString()/]);
+[aEClass.getPackageMemberName()/]->setInstanceClass(nullptr);
+[aEClass.getPackageMemberName()/]->setName("[aEClass.name/]");
+[aEClass.getPackageMemberName()/]->setAbstract([aEClass.abstract.toString()/]);
+[aEClass.getPackageMemberName()/]->setInterface([aEClass.interface.toString()/]);
 
 [/template]
-
-[template public generatePrivatePackageMember(aEClass : EClass)]
-std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.classNameMember()/] = nullptr;
-
-[/template]
-
 
 [template public generateDeletePrivatePackageMember(aEClass : EClass)]
-[aEClass.classNameMember()/].reset();
+[aEClass.getPackageMemberName()/].reset();
 
 [/template]
