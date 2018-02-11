@@ -56,9 +56,9 @@ namespace [anEPackage.name/]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature Getter
 			[aClass.generateClassGetter(true)/]
-			[aClass.eAttributes->sortedBy(name).generateAttributeGetter(true)/]
-			[aClass.eReferences->sortedBy(name).generateReferenceGetter(true)/]
-			[aClass.eOperations->sortedBy(name).generateOperationGetter(true)/]
+			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
+			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
+			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
 			// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
@@ -97,5 +97,10 @@ namespace [anEPackage.name/]
 
 [template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)] 
 std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getClassMemberName()/] = nullptr;
+
+[/template]
+
+[template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
+virtual std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
 [/template]

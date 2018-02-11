@@ -21,6 +21,7 @@
 [import ecore4CPP::generator::main::generateReference /]
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::package::generatePackageImplementationHeader /]
 
 [template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
 [file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
@@ -68,9 +69,9 @@ namespace [anEPackage.name/]
 			[aClass.eOperations->sortedBy(name).generateStaticOperationID()/]
 			//Class and Feature Getter
 			[aClass.generateClassGetter(false)/]
-			[aClass.eAttributes->sortedBy(name).generateAttributeGetter(false)/]
-			[aClass.eReferences->sortedBy(name).generateReferenceGetter(false)/]
-			[aClass.eOperations->sortedBy(name).generateOperationGetter(false)/]
+			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
+			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			// End Class [aClass.name.toUpperFirst()/]
 
 [/for]

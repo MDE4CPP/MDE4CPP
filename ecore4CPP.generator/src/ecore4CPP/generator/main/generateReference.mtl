@@ -130,11 +130,6 @@ void [aReference.eContainingClass.name.toUpperFirst()/]Impl::[aReference.SetterN
 }
 [/template]
 
-[template public generateReferenceGetter(aReference : EReference,impl : Boolean) ]
-virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aReference.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
-
-[/template]
-
 [template public generateReferenceGetterImpl(anEReference : EReference)]
 std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEReference.getMemberNameUpperFirst()/]() const
 {

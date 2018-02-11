@@ -108,11 +108,6 @@ static const int [aAttribute.getStaticAttributeIDName()/] = [aAttribute.eContain
 
 [/template]
 
-[template public generateAttributeGetter(aAttribute : EAttribute,impl : Boolean) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aAttribute)/]> get[aAttribute.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
-
-[/template]
-
 [template public generateAttributeGetterImpl(anEAttribute : EAttribute)]
 std::shared_ptr<[metamodelaTypedElementString(anEAttribute)/]> [anEAttribute.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEAttribute.getMemberNameUpperFirst()/]() const
 {

@@ -71,11 +71,6 @@ static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOpera
 
 [/template]
 
-[template public generateOperationGetter(aOperation : EOperation,impl : Boolean) ? ( not hasImplOnly()) ]
-virtual std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> get[aOperation.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
-
-[/template]
-
 [query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
 [template public generateOperationGetterImpl(anEOperation : EOperation)? ( not hasImplOnly() )]
