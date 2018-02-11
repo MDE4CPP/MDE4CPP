@@ -16,15 +16,12 @@
 
 [import ecore4CPP::generator::main::helper /]
 
-[query public datatypeNumberName(aEDatatype : EDataType) : String = aEDatatype.name.toUpperCase() /]
-
-[template public generateEDatatype(aEDatatype : EDataType, impl : Boolean)]
-virtual std::shared_ptr<[metaModelTypeString(aEDatatype)/]> get[aEDatatype.name/]() const [abstractSufix(impl)/];
-
-[/template]
+[***###########################################################################################
+ * Section for creating the Attribute elements in the metamodel package
+*/]
 
 [template public generateEDatatypeCreation(anEDatatype : EDataType)]
-[anEDatatype.getClassMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.datatypeNumberName()/]);
+[anEDatatype.getClassMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [anEDatatype.getStaticAttributeIDName()/]);
 
 [/template]
 
@@ -37,6 +34,6 @@ virtual std::shared_ptr<[metaModelTypeString(aEDatatype)/]> get[aEDatatype.name/
 [/template]
 
 [template public generateStaticDatatypeID(aEDatatype : EDataType)]
-static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierID()/];
+static const int [aEDatatype.getStaticAttributeIDName()/] = [aEDatatype.getClassifierID()/];
 
 [/template]

@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [**
- * Helper for finding hidden functions
+ * Helper for finding hidden functions (currently unused)
 */]
 [query public getSuperClassOperations(aOperation : EOperation) : Set(EOperation) = aOperation.eContainingClass.eAllOperations->select(not (aOperation.eContainingClass = eContainingClass))->flatten() /]
 [query public hasOverrideInClass(aOperation : EOperation, aClass: EClass) : Boolean = aClass.eOperations->forAll(op | op.isOverrideOf(aOperation) ) /]
@@ -31,23 +31,22 @@
 [query public getOverideSuffix(aOperation : EOperation) : String = if aOperation.isOverride() then 'override' else '' endif  /]
 
 
-[**
- * The documentation of the template generateOperation.
- * @param anEOperation
- */]
-[template public generateOperationDecl(aOperation : EOperation, impl: Boolean)]
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the model factory
+*/]
+
+[template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
 [if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
-[aOperation.generateDokumentation()/] 
-virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
+[anEOperation.generateDokumentation()/] 
+virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if] [abstractSufix(impl)/];[/if]
 
 
 
 [/template]
 
-
-[template public generateOperationImplementation(aOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
+[template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
 [comment[aOperation.generateDokumentation()/] 
-[aOperation.generateOperationType()/] [aOperation.eContainingClass.name.toUpperFirst()/]Impl::[aOperation.name/]([aOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
+[anEOperation.generateOperationType()/] [anEOperation.eContainingClass.name.toUpperFirst()/]Impl::[anEOperation.name/]([anEOperation.generateParameterList()/]) [if (hasKey('const'))] const [/if]
 {
 [if (hasKey('body'))]
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -61,17 +60,17 @@ virtual [aOperation.generateOperationType()/] [aOperation.name/]([aOperation.gen
 }
 [/template]
 
-[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOperationID()/];
 
-[/template]
+[***###########################################################################################
+ * Section for creating the EAttribute elements in the metamodel package
+*/]
+
+[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.getMemberNameUpperFirst()).concat('()') endif/]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
 [anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
 
 [/template]
-
-[query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
 [template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
 [anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
@@ -95,12 +94,7 @@ static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOpera
 
 [/template]
 
-[query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.name).concat('()') endif/]
+[template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOperationID()/];
 
- 
-[query public packageGetter(aOperation : EOperation) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
-
-
-
-
-
+[/template]

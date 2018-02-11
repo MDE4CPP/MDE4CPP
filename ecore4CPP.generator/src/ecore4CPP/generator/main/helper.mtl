@@ -58,9 +58,6 @@
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]
 [query public packageGetter(aAttribute : EAttribute) : String = 'get'.concat(getMemberNameUpperFirst()).concat('()') /]
 
-[query public listNumber(aAttribute : EAttribute) : Integer = eContainingClass.eAttributes->sortedBy(name)->indexOf(aAttribute)-1 /]
-[query public listNumber(aReference : EReference) : Integer = eContainingClass.eReferences->sortedBy(name)->indexOf(aReference) +eContainingClass.eAttributes->size()-1/]
-
 [query public metamodelPackageNameForEstructuralFeture(aStructural : EStructuralFeature,aClass: EClass) : String = if( aStructural.eContainingClass.ePackage = aClass.ePackage  ) then aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst() else aStructural.eContainingClass.ePackage.name.concat('::').concat(aStructural.eContainingClass.ePackage.name.concat('Package').toUpperFirst()) endif/]
 
 [**

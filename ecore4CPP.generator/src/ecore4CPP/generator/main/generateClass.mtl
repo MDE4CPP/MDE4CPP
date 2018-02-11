@@ -17,21 +17,8 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateStaticClassID(aEClass : EClass)]
-static const int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
-static const int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
-static const int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
-[/template]
-
 [**
- * Class getter for EPackage
-*/]
-[template public generateClassGetter(aEClass : EClass,impl : Boolean)]
-virtual std::shared_ptr<[metaModelTypeString(aEClass)/]> get[aEClass.name/]() const [abstractSufix(impl)/];
-[/template]
-
-[**
- * Operation to generate create operation
+ * Operation to generate create operation in model factory
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]() const [abstractSufix(impl)/];
@@ -45,11 +32,10 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 [/let]
 [/template]
 
-[template public initSuperTypes(aEClass : EClass)]
-[for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
-[aEClass.getClassMemberName()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
-[/for]
-[/template]
+
+[***###########################################################################################
+ * Section for creating the Attribute elements in the metamodel package
+*/]
 
 [template public generateClassCreation(aEClass : EClass)]
 [aEClass.getClassMemberName()/] = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), [aEClass.getStaticAttributeIDName()/]);
@@ -62,4 +48,16 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 [aEClass.getClassMemberName()/]->setAbstract([aEClass.abstract.toString()/]);
 [aEClass.getClassMemberName()/]->setInterface([aEClass.interface.toString()/]);
 
+[/template]
+
+[template public generateStaticClassID(aEClass : EClass)]
+static const int [aEClass.getStaticAttributeIDName()/] = [aEClass.getClassifierID()/];
+static const int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
+static const int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
+[/template]
+
+[template public initSuperTypes(aEClass : EClass)]
+[for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
+[aEClass.getClassMemberName()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
+[/for]
 [/template]
