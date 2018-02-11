@@ -65,8 +65,8 @@ namespace [anEPackage.name/]
 			[anEPackage.eAllContents(EDataType).generateEDatatype(true)/]
 
 		private:
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generatePrivatePackageMember()/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generatePrivatePackageMember()/]
+			[anEPackage.eAllContents(EClass)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
+			[anEPackage.eAllContents(EDataType)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 			[anEPackage.eAllContents(EAttribute)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 
 			friend class [anEPackage.name.concat('Package').toUpperFirst()/];
@@ -91,4 +91,9 @@ namespace [anEPackage.name/]
 }
 [endGuard(anEPackage,'PackageImpl')/]
 [/file]
+[/template]
+
+[template public generatePrivatePackageMember(anENamedElement : ENamedElement, anEPackage : EPackage)]
+std::shared_ptr<[metamodelClassTypeString(anENamedElement, anEPackage)/]> [anENamedElement.getClassMemberName()/] = nullptr;
+
 [/template]
