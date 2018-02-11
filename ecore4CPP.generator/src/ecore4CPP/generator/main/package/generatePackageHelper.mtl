@@ -28,7 +28,7 @@ virtual std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> get
 [/template]
 
 [template public generateModelElementGetterImpl(anENamedElement : ENamedElement, anEPackage : EPackage)]
-std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.name.toUpperFirst()/]PackageImpl::get[anEPackage.getMemberNameUpperFirst()/]() const
+std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> [anEPackage.name.toUpperFirst()/]PackageImpl::get[anENamedElement.getMemberNameUpperFirst()/]() const
 {
 	return [anENamedElement.getClassMemberName()/];
 }
