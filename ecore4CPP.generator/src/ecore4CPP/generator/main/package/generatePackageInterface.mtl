@@ -68,7 +68,7 @@ namespace [anEPackage.name/]
 			[aClass.eReferences->sortedBy(name).generateStaticReferenceID()/]
 			[aClass.eOperations->sortedBy(name).generateStaticOperationID()/]
 			//Class and Feature Getter
-			[aClass.generateClassGetter(false)/]
+			[aClass.generateModelElementGetter(anEPackage, false)/]
 			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
@@ -76,7 +76,7 @@ namespace [anEPackage.name/]
 
 [/for]
 			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateStaticDatatypeID()/]
-			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateEDatatype(false)/]
+			[anEPackage.eAllContents(EDataType)->sortedBy(name).generateModelElementGetter(anEPackage, false)/]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

@@ -56,14 +56,14 @@ namespace [anEPackage.name/]
 [for (aClass : EClass | anEPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
 			//Class and Feature Getter
-			[aClass.generateClassGetter(true)/]
+			[aClass.generateModelElementGetter(anEPackage, true)/]
 			[aClass.eAttributes->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
 			[aClass.eReferences->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
 			[aClass.eOperations->sortedBy(name).generateModelElementGetter(anEPackage, true)/]
 			// End Class [aClass.name.toUpperFirst()/]
 [/for]
 
-			[anEPackage.eAllContents(EDataType).generateEDatatype(true)/]
+			[anEPackage.eAllContents(EDataType).generateModelElementGetter(anEPackage, true)/]
 
 		private:
 			[anEPackage.eAllContents(EClass)->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
