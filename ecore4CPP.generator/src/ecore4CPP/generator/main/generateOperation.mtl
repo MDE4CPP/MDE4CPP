@@ -87,7 +87,13 @@ std::shared_ptr<[metamodelaTypedElementString(aOperation)/]> [aOperation.eContai
 [/template]
 
 [template public generateOperationInitialization(aOperation : EOperation)? ( not hasImplOnly() )]
-op = initEOperation([aOperation.packageGetter()/],[aOperation.eType.simpleDatatypeGetter(aOperation)/], "[aOperation.name.toString()/]", [aOperation.lowerBound/], [aOperation.upperBound/], [aOperation.unique.toString()/],[aOperation.ordered.toString()/] );
+op = [aOperation.packageGetter()/];
+op->setEType([aOperation.eType.simpleDatatypeGetter(aOperation)/]);
+op->setName("[aOperation.name.toString()/]");
+op->setLowerBound([aOperation.lowerBound/]);
+op->setUpperBound([aOperation.upperBound/]);
+op->setUnique([aOperation.unique.toString()/]);
+op->setOrdered([aOperation.ordered.toString()/]);
 [aOperation.eParameters.generateAddParemeter()/]
 
 [/template]

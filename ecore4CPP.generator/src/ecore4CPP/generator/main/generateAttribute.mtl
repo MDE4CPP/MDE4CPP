@@ -79,8 +79,27 @@ void [aAttribute.eContainingClass.name.toUpperFirst()/]Impl::[aAttribute.SetterN
  * Section for creating the Attribute elements in the metamodel package
 */]
 
-[template public generateAttributeInitialization(aAttribute : EAttribute)]
-initEAttribute([aAttribute.packageGetter()/],[aAttribute.eType.oclAsType(EDataType).packageGetter(aAttribute)/],"[aAttribute.name/]","[aAttribute.defaultValueLiteral/]",[aAttribute.lowerBound/],[aAttribute.upperBound/], [aAttribute.transient.toString()/],[aAttribute.volatile.toString()/], [aAttribute.changeable.toString()/], [aAttribute.unsettable.toString()/], [aAttribute.iD.toString()/], [aAttribute.unique.toString()/], [aAttribute.derived.toString()/], [aAttribute.ordered.toString()/]);
+[template public generateAttributeInitialization(anEAttribute : EAttribute)]
+attr = [anEAttribute.packageGetter()/];
+attr->setName("[anEAttribute.name/]");
+attr->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+attr->setLowerBound([anEAttribute.lowerBound/]);
+attr->setUpperBound([anEAttribute.upperBound/]);
+attr->setTransient([anEAttribute.transient.toString()/]);
+attr->setVolatile([anEAttribute.volatile.toString()/]);
+attr->setChangeable([anEAttribute.changeable.toString()/]);
+attr->setUnsettable([anEAttribute.unsettable.toString()/]);
+attr->setUnique([anEAttribute.unique.toString()/]);
+attr->setDerived([anEAttribute.derived.toString()/]);
+attr->setOrdered([anEAttribute.ordered.toString()/]);
+attr->setID([anEAttribute.iD.toString()/]);
+{
+	std::string defaultValue = "[anEAttribute.defaultValueLiteral/]";
+	if (!defaultValue.empty())
+	{
+	   attr->setDefaultValueLiteral(defaultValue);
+	}
+}
 
 [/template]
 

@@ -35,10 +35,10 @@ std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.datatypeNam
 [/template]
 
 [template public generateEDatatypeInitialization(adatatype : EDataType)]
-[if (adatatype.oclIsKindOf(EEnum))]
-initEEnum([adatatype.datatypeNameMember()/], nullptr, "[adatatype.name/]");
-[else]
-initEDataType([adatatype.datatypeNameMember()/], nullptr, "[adatatype.name/]", [adatatype.serializable.toString()/], true);
+[adatatype.datatypeNameMember()/]->setInstanceClass(nullptr);
+[adatatype.datatypeNameMember()/]->setName("[adatatype.name/]");
+[if (not adatatype.oclIsKindOf(EEnum))]
+[adatatype.datatypeNameMember()/]->setSerializable([adatatype.serializable.toString()/]);
 [/if]
 [/template]
 

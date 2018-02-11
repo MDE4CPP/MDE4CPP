@@ -67,7 +67,11 @@ std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toU
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]
-initEClass([aEClass.classNameMember()/], nullptr, "[aEClass.name/]", [aEClass.abstract.toString()/], [aEClass.interface.toString()/], true);
+[aEClass.classNameMember()/]->setInstanceClass(nullptr);
+[aEClass.classNameMember()/]->setName("[aEClass.name/]");
+[aEClass.classNameMember()/]->setAbstract([aEClass.abstract.toString()/]);
+[aEClass.classNameMember()/]->setInterface([aEClass.interface.toString()/]);
+
 [/template]
 
 [template public generatePrivatePackageMember(aEClass : EClass)]

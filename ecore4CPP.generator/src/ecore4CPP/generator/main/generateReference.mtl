@@ -154,10 +154,31 @@ factory->createEReference_in_EContainingClass([anEReference.eContainingClass.cla
 [/template] 
  
 [template public generateReferenceInitialization(aReference : EReference)]
-initEReference([aReference.packageGetter()/],[aReference.eGenericType.eClassifier.packageGetter(aReference)/],[aReference.eOpposite.packageGetter()/],"[aReference.name/]","[aReference.defaultValueLiteral/]",[aReference.lowerBound/],[aReference.upperBound/], [aReference.transient.toString()/],[aReference.volatile.toString()/], [aReference.changeable.toString()/], [aReference.containment.toString()/], [aReference.resolveProxies.toString()/], [aReference.unsettable.toString()/], [aReference.unique.toString()/], [aReference.derived.toString()/],[aReference.ordered.toString()/]);
+ref = [aReference.packageGetter()/];
+ref->setName("[aReference.name/]");
+ref->setEType([aReference.eGenericType.eClassifier.packageGetter(aReference)/]);
+ref->setLowerBound([aReference.lowerBound/]);
+ref->setUpperBound([aReference.upperBound/]);
+ref->setTransient([aReference.transient.toString()/]);
+ref->setVolatile([aReference.volatile.toString()/]);
+ref->setChangeable([aReference.changeable.toString()/]);
+ref->setUnsettable([aReference.unsettable.toString()/]);
+ref->setUnique([aReference.unique.toString()/]);
+ref->setDerived([aReference.derived.toString()/]);
+ref->setOrdered([aReference.ordered.toString()/]);
+ref->setContainment([aReference.containment.toString()/]);
+ref->setResolveProxies([aReference.resolveProxies.toString()/]);
+{
+	std::string defaultValue = "[aReference.defaultValueLiteral/]";
+	if (!defaultValue.empty())
+	{
+		ref->setDefaultValueLiteral(defaultValue);
+	}
+	std::shared_ptr<ecore::EReference>  otherEnd = [aReference.eOpposite.packageGetter()/];
+	if (otherEnd != nullptr)
+    {
+   		ref->setEOpposite(otherEnd);
+    }
+}
 
 [/template]
-
-
-
-
