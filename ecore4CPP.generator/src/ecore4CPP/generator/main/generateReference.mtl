@@ -135,10 +135,10 @@ virtual std::shared_ptr<[aReference.metamodelaTypedElementString()/]> get[aRefer
 
 [/template]
 
-[template public generateReferenceGetterImpl(aReference : EReference)]
-std::shared_ptr<[aReference.metamodelaTypedElementString()/]> [aReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aReference.getMemberName().toUpperFirst()/]() const
+[template public generateReferenceGetterImpl(anEReference : EReference)]
+std::shared_ptr<[anEReference.metamodelaTypedElementString()/]> [anEReference.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEReference.getMemberName().toUpperFirst()/]() const
 {
-	return std::dynamic_pointer_cast<[aReference.metamodelaTypedElementString()/]>([aReference.eContainingClass.getClassMemberName()/]->getEStructuralFeatures()->at([aReference.listNumber()/]));
+	return [anEReference.getClassMemberName()/];
 }
 
 [/template]
@@ -149,35 +149,34 @@ static const int [aReference.memberNameUpper()/] = [aReference.eContainingClass.
 [/template]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.memberNameUpper()/]);
+[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.memberNameUpper()/]);
 
 [/template] 
  
-[template public generateReferenceInitialization(aReference : EReference)]
-ref = [aReference.packageGetter()/];
-ref->setName("[aReference.name/]");
-ref->setEType([aReference.eGenericType.eClassifier.packageGetter(aReference)/]);
-ref->setLowerBound([aReference.lowerBound/]);
-ref->setUpperBound([aReference.upperBound/]);
-ref->setTransient([aReference.transient.toString()/]);
-ref->setVolatile([aReference.volatile.toString()/]);
-ref->setChangeable([aReference.changeable.toString()/]);
-ref->setUnsettable([aReference.unsettable.toString()/]);
-ref->setUnique([aReference.unique.toString()/]);
-ref->setDerived([aReference.derived.toString()/]);
-ref->setOrdered([aReference.ordered.toString()/]);
-ref->setContainment([aReference.containment.toString()/]);
-ref->setResolveProxies([aReference.resolveProxies.toString()/]);
+[template public generateReferenceInitialization(anEReference : EReference)]
+[anEReference.getClassMemberName()/]->setName("[anEReference.name/]");
+[anEReference.getClassMemberName()/]->setEType([anEReference.eGenericType.eClassifier.packageGetter(anEReference)/]);
+[anEReference.getClassMemberName()/]->setLowerBound([anEReference.lowerBound/]);
+[anEReference.getClassMemberName()/]->setUpperBound([anEReference.upperBound/]);
+[anEReference.getClassMemberName()/]->setTransient([anEReference.transient.toString()/]);
+[anEReference.getClassMemberName()/]->setVolatile([anEReference.volatile.toString()/]);
+[anEReference.getClassMemberName()/]->setChangeable([anEReference.changeable.toString()/]);
+[anEReference.getClassMemberName()/]->setUnsettable([anEReference.unsettable.toString()/]);
+[anEReference.getClassMemberName()/]->setUnique([anEReference.unique.toString()/]);
+[anEReference.getClassMemberName()/]->setDerived([anEReference.derived.toString()/]);
+[anEReference.getClassMemberName()/]->setOrdered([anEReference.ordered.toString()/]);
+[anEReference.getClassMemberName()/]->setContainment([anEReference.containment.toString()/]);
+[anEReference.getClassMemberName()/]->setResolveProxies([anEReference.resolveProxies.toString()/]);
 {
-	std::string defaultValue = "[aReference.defaultValueLiteral/]";
+	std::string defaultValue = "[anEReference.defaultValueLiteral/]";
 	if (!defaultValue.empty())
 	{
-		ref->setDefaultValueLiteral(defaultValue);
+		[anEReference.getClassMemberName()/]->setDefaultValueLiteral(defaultValue);
 	}
-	std::shared_ptr<ecore::EReference>  otherEnd = [aReference.eOpposite.packageGetter()/];
+	std::shared_ptr<ecore::EReference>  otherEnd = [anEReference.eOpposite.packageGetter()/];
 	if (otherEnd != nullptr)
     {
-   		ref->setEOpposite(otherEnd);
+   		[anEReference.getClassMemberName()/]->setEOpposite(otherEnd);
     }
 }
 
