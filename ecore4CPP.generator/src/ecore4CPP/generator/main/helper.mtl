@@ -187,7 +187,7 @@
 [query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberName1() endif/]
 [query private getMemberName1(anENamedElement : ENamedElement) : String = if (EStructuralFeature.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) endif/]
 
-[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst().concat('_').concat(anEClassifier.eClass().name)/]
-[query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_').concat(aStructural.name.toUpperFirst())/]
+[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.name.toLowerFirst() /]
+[query public getMemberName(aStructural : EStructuralFeature) : String = eContainingClass.name.toLowerFirst().concat('_').concat(aStructural.name.toUpperFirst()) /]
 
-[query public memberNameUpper(aStructural : EStructuralFeature) : String = getMemberName().toUpperCase() /]
+[query public memberNameUpper(anENamedElement : ENamedElement) : String = getMemberName().toUpperCase() /]
