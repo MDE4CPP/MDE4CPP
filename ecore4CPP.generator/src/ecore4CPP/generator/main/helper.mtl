@@ -68,7 +68,7 @@
 */] 
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
 [query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
-[query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.name).concat('()') /]
+[query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
 [query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.ePackage.name = aClassifier2.ePackage.name )then '' else  aClassifier1.ePackage.nsPrefix.concat('::').concat(aClassifier1.ePackage.name.toUpperFirst()).concat('Package').concat('::eInstance()->')  endif /]
 
 [**
@@ -191,9 +191,9 @@
 [query private getMemberNameOperation(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EOperation)) then anENamedElement.oclAsType(EOperation).getMemberName() else anENamedElement.getMemberNameGeneral() endif/]
 [query private getMemberNameGeneral(anENamedElement : ENamedElement) : String = anENamedElement.name.toLowerFirst().concat('_').concat(anENamedElement.eClass().name) /]
 
-[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.eClass().name.toLowerFirst().concat('_').concat(anEClassifier.name.toLowerFirst()) /]
-[query public getMemberName(aStructural : EStructuralFeature) : String = aStructural.eClass().name.toLowerFirst().concat('_').concat(eContainingClass.name.toLowerFirst()).concat('_').concat(aStructural.name.toUpperFirst()) /]
-[query public getMemberName(aOperation : EOperation) : String = aOperation.eClass().name.toLowerFirst().concat('_').concat(aOperation.eContainingClass.name.toLowerFirst()).concat('_'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName().toUpperFirst())) /]
+[query public getMemberName(anEClassifier : EClassifier) : String = anEClassifier.eClass().name.toLowerFirst().concat('_').concat(anEClassifier.name) /]
+[query public getMemberName(aStructural : EStructuralFeature) : String = aStructural.eClass().name.toLowerFirst().concat('_').concat(eContainingClass.name).concat('_').concat(aStructural.name.toUpperFirst()) /]
+[query public getMemberName(aOperation : EOperation) : String = aOperation.eClass().name.toLowerFirst().concat('_').concat(aOperation.eContainingClass.name).concat('_'.concat(aOperation.name.toUpperFirst()).concat(aOperation.parameterListName())) /]
 
 [query public parameterListName( aOperation : EOperation) : String = if aOperation.eParameters->notEmpty() then '_'.concat(aOperation.singlemultipleParameter()) else '' endif /]
 [query public singlemultipleParameter(aOperation : EOperation) : String = if aOperation.eParameters->size()>1 then aOperation.eParameters->first().eType.name.concat('_').concat(aOperation.eParameters->last().eType.name) else aOperation.eParameters->first().eType.name endif /]
