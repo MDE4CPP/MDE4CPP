@@ -94,9 +94,16 @@ std::shared_ptr<[metamodelaTypedElementString(anEOperation)/]> [anEOperation.eCo
 [anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
 [anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
 
-[for (anEParameter : EParameter | anEOperation.eParameters)]
-addEParameter([anEOperation.getClassMemberName()/] ,[anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]  , "[anEParameter.name/]",0,1, true,true);
-
+[for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
+{
+	std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
+	parameter->setName("[anEParameter.name/]");
+	parameter->setEType([anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]);
+	parameter->setLowerBound(0);
+	parameter->setUpperBound(1);
+	parameter->setUnique(true);
+	parameter->setOrdered(true);
+}
 [/for]
 
 [/template]
