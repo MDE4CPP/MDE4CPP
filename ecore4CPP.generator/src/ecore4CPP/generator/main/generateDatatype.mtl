@@ -40,12 +40,3 @@ virtual std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> get[aEDatatype.
 static const int [aEDatatype.datatypeNumberName()/] = [aEDatatype.getClassifierID()/];
 
 [/template]
-
-[template public generateDatatypeGetterImpl(aEDatatype : EDataType)]
-std::shared_ptr<[metamodelClassTypeString(aEDatatype)/]> [aEDatatype.ePackage.name.toUpperFirst()/]PackageImpl::get[aEDatatype.name/]() const
-{
-	assert([aEDatatype.getClassMemberName()/]);
-	return [aEDatatype.getClassMemberName()/];
-}
-
-[/template]

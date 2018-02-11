@@ -73,14 +73,6 @@ static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.getOpera
 
 [query public listNumber(aOperation : EOperation) : Integer = aOperation.eContainingClass.eOperations->select(not hasImplOnly())->sortedBy(name)->indexOf(aOperation)-1 /]
 
-[template public generateOperationGetterImpl(anEOperation : EOperation)? ( not hasImplOnly() )]
-std::shared_ptr<[metamodelaTypedElementString(anEOperation)/]> [anEOperation.eContainingClass.ePackage.name.toUpperFirst()/]PackageImpl::get[anEOperation.getMemberNameUpperFirst()/]() const
-{
-	return [anEOperation.getClassMemberName()/];
-}
-
-[/template]
-
 [template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
 [anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
 [anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");

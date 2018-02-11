@@ -45,13 +45,6 @@ virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in
 [/let]
 [/template]
 
-[template public generateClassGetterImpl(aEClass : EClass)]
-std::shared_ptr<[metamodelClassTypeString(aEClass)/]> [aEClass.ePackage.name.toUpperFirst()/]PackageImpl::get[aEClass.name/]() const
-{
-	return [aEClass.getClassMemberName()/];
-}
-[/template]
-
 [template public initSuperTypes(aEClass : EClass)]
 [for (superClass : EClass | aEClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
 [aEClass.getClassMemberName()/]->getESuperTypes()->push_back([aEClass.packageGetter(superClass)/]);
