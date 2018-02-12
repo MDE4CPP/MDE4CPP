@@ -12,201 +12,201 @@ using namespace uml;
 
 UmlFactoryImpl::UmlFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("Abstraction", UmlPackage::ABSTRACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptCallAction", UmlPackage::ACCEPTCALLACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventAction", UmlPackage::ACCEPTEVENTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActionExecutionSpecification", UmlPackage::ACTIONEXECUTIONSPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActionInputPin", UmlPackage::ACTIONINPUTPIN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Activity", UmlPackage::ACTIVITY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNode", UmlPackage::ACTIVITYFINALNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNode", UmlPackage::ACTIVITYPARAMETERNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityPartition", UmlPackage::ACTIVITYPARTITION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Actor", UmlPackage::ACTOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Artifact", UmlPackage::ARTIFACT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Association", UmlPackage::ASSOCIATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("AssociationClass", UmlPackage::ASSOCIATIONCLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BehaviorExecutionSpecification", UmlPackage::BEHAVIOREXECUTIONSPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("BroadcastSignalAction", UmlPackage::BROADCASTSIGNALACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorAction", UmlPackage::CALLBEHAVIORACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallEvent", UmlPackage::CALLEVENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationAction", UmlPackage::CALLOPERATIONACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNode", UmlPackage::CENTRALBUFFERNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ChangeEvent", UmlPackage::CHANGEEVENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Class", UmlPackage::CLASS));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierTemplateParameter", UmlPackage::CLASSIFIERTEMPLATEPARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Clause", UmlPackage::CLAUSE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationAction", UmlPackage::CLEARASSOCIATIONACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureAction", UmlPackage::CLEARSTRUCTURALFEATUREACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ClearVariableAction", UmlPackage::CLEARVARIABLEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Collaboration", UmlPackage::COLLABORATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CollaborationUse", UmlPackage::COLLABORATIONUSE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CombinedFragment", UmlPackage::COMBINEDFRAGMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Comment", UmlPackage::COMMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CommunicationPath", UmlPackage::COMMUNICATIONPATH));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Component", UmlPackage::COMPONENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ComponentRealization", UmlPackage::COMPONENTREALIZATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNode", UmlPackage::CONDITIONALNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectableElementTemplateParameter", UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectionPointReference", UmlPackage::CONNECTIONPOINTREFERENCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Connector", UmlPackage::CONNECTOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectorEnd", UmlPackage::CONNECTOREND));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ConsiderIgnoreFragment", UmlPackage::CONSIDERIGNOREFRAGMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Constraint", UmlPackage::CONSTRAINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Continuation", UmlPackage::CONTINUATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ControlFlow", UmlPackage::CONTROLFLOW));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkAction", UmlPackage::CREATELINKACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkObjectAction", UmlPackage::CREATELINKOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectAction", UmlPackage::CREATEOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNode", UmlPackage::DATASTORENODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DataType", UmlPackage::DATATYPE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNode", UmlPackage::DECISIONNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Dependency", UmlPackage::DEPENDENCY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Deployment", UmlPackage::DEPLOYMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DeploymentSpecification", UmlPackage::DEPLOYMENTSPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkAction", UmlPackage::DESTROYLINKACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectAction", UmlPackage::DESTROYOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DestructionOccurrenceSpecification", UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Device", UmlPackage::DEVICE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Duration", UmlPackage::DURATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationConstraint", UmlPackage::DURATIONCONSTRAINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationInterval", UmlPackage::DURATIONINTERVAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("DurationObservation", UmlPackage::DURATIONOBSERVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ElementImport", UmlPackage::ELEMENTIMPORT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Enumeration", UmlPackage::ENUMERATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationLiteral", UmlPackage::ENUMERATIONLITERAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExceptionHandler", UmlPackage::EXCEPTIONHANDLER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionEnvironment", UmlPackage::EXECUTIONENVIRONMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionOccurrenceSpecification", UmlPackage::EXECUTIONOCCURRENCESPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNode", UmlPackage::EXPANSIONNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegion", UmlPackage::EXPANSIONREGION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Expression", UmlPackage::EXPRESSION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Extend", UmlPackage::EXTEND));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Extension", UmlPackage::EXTENSION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionEnd", UmlPackage::EXTENSIONEND));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionPoint", UmlPackage::EXTENSIONPOINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Factory", UmlPackage::FACTORY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FinalState", UmlPackage::FINALSTATE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNode", UmlPackage::FLOWFINALNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNode", UmlPackage::FORKNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("FunctionBehavior", UmlPackage::FUNCTIONBEHAVIOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Gate", UmlPackage::GATE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralOrdering", UmlPackage::GENERALORDERING));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Generalization", UmlPackage::GENERALIZATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralizationSet", UmlPackage::GENERALIZATIONSET));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Image", UmlPackage::IMAGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Include", UmlPackage::INCLUDE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InformationFlow", UmlPackage::INFORMATIONFLOW));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InformationItem", UmlPackage::INFORMATIONITEM));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNode", UmlPackage::INITIALNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InputPin", UmlPackage::INPUTPIN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceSpecification", UmlPackage::INSTANCESPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValue", UmlPackage::INSTANCEVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interaction", UmlPackage::INTERACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionConstraint", UmlPackage::INTERACTIONCONSTRAINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionOperand", UmlPackage::INTERACTIONOPERAND));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionUse", UmlPackage::INTERACTIONUSE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interface", UmlPackage::INTERFACE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InterfaceRealization", UmlPackage::INTERFACEREALIZATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("InterruptibleActivityRegion", UmlPackage::INTERRUPTIBLEACTIVITYREGION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Interval", UmlPackage::INTERVAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("IntervalConstraint", UmlPackage::INTERVALCONSTRAINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNode", UmlPackage::JOINNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Lifeline", UmlPackage::LIFELINE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndCreationData", UmlPackage::LINKENDCREATIONDATA));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndData", UmlPackage::LINKENDDATA));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndDestructionData", UmlPackage::LINKENDDESTRUCTIONDATA));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBoolean", UmlPackage::LITERALBOOLEAN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralInteger", UmlPackage::LITERALINTEGER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNull", UmlPackage::LITERALNULL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralReal", UmlPackage::LITERALREAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralString", UmlPackage::LITERALSTRING));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNatural", UmlPackage::LITERALUNLIMITEDNATURAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNode", UmlPackage::LOOPNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Manifestation", UmlPackage::MANIFESTATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNode", UmlPackage::MERGENODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Message", UmlPackage::MESSAGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("MessageOccurrenceSpecification", UmlPackage::MESSAGEOCCURRENCESPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Model", UmlPackage::MODEL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Node", UmlPackage::NODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Object", UmlPackage::OBJECT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectFlow", UmlPackage::OBJECTFLOW));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OccurrenceSpecification", UmlPackage::OCCURRENCESPECIFICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueAction", UmlPackage::OPAQUEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueBehavior", UmlPackage::OPAQUEBEHAVIOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueExpression", UmlPackage::OPAQUEEXPRESSION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Operation", UmlPackage::OPERATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OperationTemplateParameter", UmlPackage::OPERATIONTEMPLATEPARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPin", UmlPackage::OUTPUTPIN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Package", UmlPackage::PACKAGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PackageImport", UmlPackage::PACKAGEIMPORT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PackageMerge", UmlPackage::PACKAGEMERGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Parameter", UmlPackage::PARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterSet", UmlPackage::PARAMETERSET));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PartDecomposition", UmlPackage::PARTDECOMPOSITION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Port", UmlPackage::PORT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("PrimitiveType", UmlPackage::PRIMITIVETYPE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Profile", UmlPackage::PROFILE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProfileApplication", UmlPackage::PROFILEAPPLICATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Property", UmlPackage::PROPERTY));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolConformance", UmlPackage::PROTOCOLCONFORMANCE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolStateMachine", UmlPackage::PROTOCOLSTATEMACHINE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolTransition", UmlPackage::PROTOCOLTRANSITION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Pseudostate", UmlPackage::PSEUDOSTATE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("QualifierValue", UmlPackage::QUALIFIERVALUE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RaiseExceptionAction", UmlPackage::RAISEEXCEPTIONACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentAction", UmlPackage::READEXTENTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectAction", UmlPackage::READISCLASSIFIEDOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkAction", UmlPackage::READLINKACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndAction", UmlPackage::READLINKOBJECTENDACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndQualifierAction", UmlPackage::READLINKOBJECTENDQUALIFIERACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfAction", UmlPackage::READSELFACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureAction", UmlPackage::READSTRUCTURALFEATUREACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReadVariableAction", UmlPackage::READVARIABLEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Realization", UmlPackage::REALIZATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Reception", UmlPackage::RECEPTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectAction", UmlPackage::RECLASSIFYOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinableTemplateSignature", UmlPackage::REDEFINABLETEMPLATESIGNATURE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceAction", UmlPackage::REDUCEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Region", UmlPackage::REGION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueAction", UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveVariableValueAction", UmlPackage::REMOVEVARIABLEVALUEACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ReplyAction", UmlPackage::REPLYACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendObjectAction", UmlPackage::SENDOBJECTACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalAction", UmlPackage::SENDSIGNALACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SequenceNode", UmlPackage::SEQUENCENODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Signal", UmlPackage::SIGNAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("SignalEvent", UmlPackage::SIGNALEVENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Slot", UmlPackage::SLOT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorAction", UmlPackage::STARTCLASSIFIERBEHAVIORACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorAction", UmlPackage::STARTOBJECTBEHAVIORACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("State", UmlPackage::STATE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StateInvariant", UmlPackage::STATEINVARIANT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StateMachine", UmlPackage::STATEMACHINE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Stereotype", UmlPackage::STEREOTYPE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StringExpression", UmlPackage::STRINGEXPRESSION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNode", UmlPackage::STRUCTUREDACTIVITYNODE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Substitution", UmlPackage::SUBSTITUTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateBinding", UmlPackage::TEMPLATEBINDING));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameter", UmlPackage::TEMPLATEPARAMETER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameterSubstitution", UmlPackage::TEMPLATEPARAMETERSUBSTITUTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateSignature", UmlPackage::TEMPLATESIGNATURE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityAction", UmlPackage::TESTIDENTITYACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeConstraint", UmlPackage::TIMECONSTRAINT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeEvent", UmlPackage::TIMEEVENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeExpression", UmlPackage::TIMEEXPRESSION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeInterval", UmlPackage::TIMEINTERVAL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("TimeObservation", UmlPackage::TIMEOBSERVATION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Transition", UmlPackage::TRANSITION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Trigger", UmlPackage::TRIGGER));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UnmarshallAction", UmlPackage::UNMARSHALLACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Usage", UmlPackage::USAGE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("UseCase", UmlPackage::USECASE));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValuePin", UmlPackage::VALUEPIN));
-	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificationAction", UmlPackage::VALUESPECIFICATIONACTION));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Variable", UmlPackage::VARIABLE));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Abstraction", UmlPackage::ABSTRACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptCallAction", UmlPackage::ACCEPTCALLACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AcceptEventAction", UmlPackage::ACCEPTEVENTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActionExecutionSpecification", UmlPackage::ACTIONEXECUTIONSPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActionInputPin", UmlPackage::ACTIONINPUTPIN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Activity", UmlPackage::ACTIVITY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityFinalNode", UmlPackage::ACTIVITYFINALNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityParameterNode", UmlPackage::ACTIVITYPARAMETERNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ActivityPartition", UmlPackage::ACTIVITYPARTITION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Actor", UmlPackage::ACTOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AddStructuralFeatureValueAction", UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AddVariableValueAction", UmlPackage::ADDVARIABLEVALUEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AnyReceiveEvent", UmlPackage::ANYRECEIVEEVENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Artifact", UmlPackage::ARTIFACT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Association", UmlPackage::ASSOCIATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("AssociationClass", UmlPackage::ASSOCIATIONCLASS_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("BehaviorExecutionSpecification", UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("BroadcastSignalAction", UmlPackage::BROADCASTSIGNALACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CallBehaviorAction", UmlPackage::CALLBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CallEvent", UmlPackage::CALLEVENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CallOperationAction", UmlPackage::CALLOPERATIONACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CentralBufferNode", UmlPackage::CENTRALBUFFERNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ChangeEvent", UmlPackage::CHANGEEVENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Class", UmlPackage::CLASS_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClassifierTemplateParameter", UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Clause", UmlPackage::CLAUSE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClearAssociationAction", UmlPackage::CLEARASSOCIATIONACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClearStructuralFeatureAction", UmlPackage::CLEARSTRUCTURALFEATUREACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ClearVariableAction", UmlPackage::CLEARVARIABLEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Collaboration", UmlPackage::COLLABORATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CollaborationUse", UmlPackage::COLLABORATIONUSE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CombinedFragment", UmlPackage::COMBINEDFRAGMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Comment", UmlPackage::COMMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CommunicationPath", UmlPackage::COMMUNICATIONPATH_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Component", UmlPackage::COMPONENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ComponentRealization", UmlPackage::COMPONENTREALIZATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConditionalNode", UmlPackage::CONDITIONALNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectableElementTemplateParameter", UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectionPointReference", UmlPackage::CONNECTIONPOINTREFERENCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Connector", UmlPackage::CONNECTOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConnectorEnd", UmlPackage::CONNECTOREND_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ConsiderIgnoreFragment", UmlPackage::CONSIDERIGNOREFRAGMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Constraint", UmlPackage::CONSTRAINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Continuation", UmlPackage::CONTINUATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ControlFlow", UmlPackage::CONTROLFLOW_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkAction", UmlPackage::CREATELINKACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CreateLinkObjectAction", UmlPackage::CREATELINKOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("CreateObjectAction", UmlPackage::CREATEOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DataStoreNode", UmlPackage::DATASTORENODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DataType", UmlPackage::DATATYPE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DecisionNode", UmlPackage::DECISIONNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Dependency", UmlPackage::DEPENDENCY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Deployment", UmlPackage::DEPLOYMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DeploymentSpecification", UmlPackage::DEPLOYMENTSPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyLinkAction", UmlPackage::DESTROYLINKACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DestroyObjectAction", UmlPackage::DESTROYOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DestructionOccurrenceSpecification", UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Device", UmlPackage::DEVICE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Duration", UmlPackage::DURATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DurationConstraint", UmlPackage::DURATIONCONSTRAINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DurationInterval", UmlPackage::DURATIONINTERVAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("DurationObservation", UmlPackage::DURATIONOBSERVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ElementImport", UmlPackage::ELEMENTIMPORT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Enumeration", UmlPackage::ENUMERATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("EnumerationLiteral", UmlPackage::ENUMERATIONLITERAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExceptionHandler", UmlPackage::EXCEPTIONHANDLER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionEnvironment", UmlPackage::EXECUTIONENVIRONMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExecutionOccurrenceSpecification", UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionNode", UmlPackage::EXPANSIONNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExpansionRegion", UmlPackage::EXPANSIONREGION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Expression", UmlPackage::EXPRESSION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Extend", UmlPackage::EXTEND_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Extension", UmlPackage::EXTENSION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionEnd", UmlPackage::EXTENSIONEND_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ExtensionPoint", UmlPackage::EXTENSIONPOINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Factory", UmlPackage::FACTORY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FinalState", UmlPackage::FINALSTATE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FlowFinalNode", UmlPackage::FLOWFINALNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ForkNode", UmlPackage::FORKNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("FunctionBehavior", UmlPackage::FUNCTIONBEHAVIOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Gate", UmlPackage::GATE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralOrdering", UmlPackage::GENERALORDERING_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Generalization", UmlPackage::GENERALIZATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("GeneralizationSet", UmlPackage::GENERALIZATIONSET_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Image", UmlPackage::IMAGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Include", UmlPackage::INCLUDE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InformationFlow", UmlPackage::INFORMATIONFLOW_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InformationItem", UmlPackage::INFORMATIONITEM_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InitialNode", UmlPackage::INITIALNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InputPin", UmlPackage::INPUTPIN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceSpecification", UmlPackage::INSTANCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InstanceValue", UmlPackage::INSTANCEVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Interaction", UmlPackage::INTERACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionConstraint", UmlPackage::INTERACTIONCONSTRAINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionOperand", UmlPackage::INTERACTIONOPERAND_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InteractionUse", UmlPackage::INTERACTIONUSE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Interface", UmlPackage::INTERFACE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InterfaceRealization", UmlPackage::INTERFACEREALIZATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("InterruptibleActivityRegion", UmlPackage::INTERRUPTIBLEACTIVITYREGION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Interval", UmlPackage::INTERVAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("IntervalConstraint", UmlPackage::INTERVALCONSTRAINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("JoinNode", UmlPackage::JOINNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Lifeline", UmlPackage::LIFELINE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndCreationData", UmlPackage::LINKENDCREATIONDATA_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndData", UmlPackage::LINKENDDATA_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LinkEndDestructionData", UmlPackage::LINKENDDESTRUCTIONDATA_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralBoolean", UmlPackage::LITERALBOOLEAN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralInteger", UmlPackage::LITERALINTEGER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralNull", UmlPackage::LITERALNULL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralReal", UmlPackage::LITERALREAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralString", UmlPackage::LITERALSTRING_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LiteralUnlimitedNatural", UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LoopNode", UmlPackage::LOOPNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Manifestation", UmlPackage::MANIFESTATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("MergeNode", UmlPackage::MERGENODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Message", UmlPackage::MESSAGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("MessageOccurrenceSpecification", UmlPackage::MESSAGEOCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Model", UmlPackage::MODEL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Node", UmlPackage::NODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Object", UmlPackage::OBJECT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ObjectFlow", UmlPackage::OBJECTFLOW_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OccurrenceSpecification", UmlPackage::OCCURRENCESPECIFICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueAction", UmlPackage::OPAQUEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueBehavior", UmlPackage::OPAQUEBEHAVIOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OpaqueExpression", UmlPackage::OPAQUEEXPRESSION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Operation", UmlPackage::OPERATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OperationTemplateParameter", UmlPackage::OPERATIONTEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("OutputPin", UmlPackage::OUTPUTPIN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Package", UmlPackage::PACKAGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("PackageImport", UmlPackage::PACKAGEIMPORT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("PackageMerge", UmlPackage::PACKAGEMERGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Parameter", UmlPackage::PARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ParameterSet", UmlPackage::PARAMETERSET_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("PartDecomposition", UmlPackage::PARTDECOMPOSITION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Port", UmlPackage::PORT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("PrimitiveType", UmlPackage::PRIMITIVETYPE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Profile", UmlPackage::PROFILE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ProfileApplication", UmlPackage::PROFILEAPPLICATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Property", UmlPackage::PROPERTY_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolConformance", UmlPackage::PROTOCOLCONFORMANCE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolStateMachine", UmlPackage::PROTOCOLSTATEMACHINE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ProtocolTransition", UmlPackage::PROTOCOLTRANSITION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Pseudostate", UmlPackage::PSEUDOSTATE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("QualifierValue", UmlPackage::QUALIFIERVALUE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RaiseExceptionAction", UmlPackage::RAISEEXCEPTIONACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadExtentAction", UmlPackage::READEXTENTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadIsClassifiedObjectAction", UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkAction", UmlPackage::READLINKACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndAction", UmlPackage::READLINKOBJECTENDACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadLinkObjectEndQualifierAction", UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadSelfAction", UmlPackage::READSELFACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadStructuralFeatureAction", UmlPackage::READSTRUCTURALFEATUREACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReadVariableAction", UmlPackage::READVARIABLEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Realization", UmlPackage::REALIZATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Reception", UmlPackage::RECEPTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReclassifyObjectAction", UmlPackage::RECLASSIFYOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RedefinableTemplateSignature", UmlPackage::REDEFINABLETEMPLATESIGNATURE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReduceAction", UmlPackage::REDUCEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Region", UmlPackage::REGION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveStructuralFeatureValueAction", UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("RemoveVariableValueAction", UmlPackage::REMOVEVARIABLEVALUEACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ReplyAction", UmlPackage::REPLYACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SendObjectAction", UmlPackage::SENDOBJECTACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SendSignalAction", UmlPackage::SENDSIGNALACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SequenceNode", UmlPackage::SEQUENCENODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Signal", UmlPackage::SIGNAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("SignalEvent", UmlPackage::SIGNALEVENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Slot", UmlPackage::SLOT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StartClassifierBehaviorAction", UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StartObjectBehaviorAction", UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("State", UmlPackage::STATE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StateInvariant", UmlPackage::STATEINVARIANT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StateMachine", UmlPackage::STATEMACHINE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Stereotype", UmlPackage::STEREOTYPE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StringExpression", UmlPackage::STRINGEXPRESSION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("StructuredActivityNode", UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Substitution", UmlPackage::SUBSTITUTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateBinding", UmlPackage::TEMPLATEBINDING_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameter", UmlPackage::TEMPLATEPARAMETER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateParameterSubstitution", UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TemplateSignature", UmlPackage::TEMPLATESIGNATURE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TestIdentityAction", UmlPackage::TESTIDENTITYACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TimeConstraint", UmlPackage::TIMECONSTRAINT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TimeEvent", UmlPackage::TIMEEVENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TimeExpression", UmlPackage::TIMEEXPRESSION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TimeInterval", UmlPackage::TIMEINTERVAL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("TimeObservation", UmlPackage::TIMEOBSERVATION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Transition", UmlPackage::TRANSITION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Trigger", UmlPackage::TRIGGER_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("UnmarshallAction", UmlPackage::UNMARSHALLACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Usage", UmlPackage::USAGE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("UseCase", UmlPackage::USECASE_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ValuePin", UmlPackage::VALUEPIN_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("ValueSpecificationAction", UmlPackage::VALUESPECIFICATIONACTION_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Variable", UmlPackage::VARIABLE_ECLASS));
 }
 
 UmlFactoryImpl::~UmlFactoryImpl()
@@ -226,7 +226,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 {
 	switch(classID)
 	{
-		case UmlPackage::ABSTRACTION:
+		case UmlPackage::ABSTRACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -237,25 +237,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Abstraction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAbstraction_in_Namespace(castedContainer);
 					}
 					//Abstraction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAbstraction_in_Owner(castedContainer);
 					}
 					//Abstraction has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAbstraction_in_OwningPackage(castedContainer);
 					}
 					//Abstraction has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createAbstraction_in_OwningTemplateParameter(castedContainer);
@@ -265,7 +265,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACCEPTCALLACTION:
+		case UmlPackage::ACCEPTCALLACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -276,25 +276,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AcceptCallAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createAcceptCallAction_in_Activity(castedContainer);
 					}
 					//AcceptCallAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createAcceptCallAction_in_InStructuredNode(castedContainer);
 					}
 					//AcceptCallAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAcceptCallAction_in_Namespace(castedContainer);
 					}
 					//AcceptCallAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAcceptCallAction_in_Owner(castedContainer);
@@ -304,7 +304,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACCEPTEVENTACTION:
+		case UmlPackage::ACCEPTEVENTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -315,25 +315,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AcceptEventAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createAcceptEventAction_in_Activity(castedContainer);
 					}
 					//AcceptEventAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createAcceptEventAction_in_InStructuredNode(castedContainer);
 					}
 					//AcceptEventAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAcceptEventAction_in_Namespace(castedContainer);
 					}
 					//AcceptEventAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAcceptEventAction_in_Owner(castedContainer);
@@ -343,7 +343,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIONEXECUTIONSPECIFICATION:
+		case UmlPackage::ACTIONEXECUTIONSPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -354,25 +354,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ActionExecutionSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createActionExecutionSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//ActionExecutionSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createActionExecutionSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//ActionExecutionSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActionExecutionSpecification_in_Namespace(castedContainer);
 					}
 					//ActionExecutionSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActionExecutionSpecification_in_Owner(castedContainer);
@@ -382,7 +382,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIONINPUTPIN:
+		case UmlPackage::ACTIONINPUTPIN_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -393,43 +393,43 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ActionInputPin has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createActionInputPin_in_Activity(castedContainer);
 					}
 					//ActionInputPin has callOperationAction as a containment
-					case  UmlPackage::INPUTPIN_CALLOPERATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createActionInputPin_in_CallOperationAction(castedContainer);
 					}
 					//ActionInputPin has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createActionInputPin_in_InStructuredNode(castedContainer);
 					}
 					//ActionInputPin has invocationAction as a containment
-					case  UmlPackage::INPUTPIN_INVOCATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InvocationAction>(container);
 						return this->createActionInputPin_in_InvocationAction(castedContainer);
 					}
 					//ActionInputPin has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActionInputPin_in_Namespace(castedContainer);
 					}
 					//ActionInputPin has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActionInputPin_in_Owner(castedContainer);
 					}
 					//ActionInputPin has structuralFeatureAction as a containment
-					case  UmlPackage::INPUTPIN_STRUCTURALFEATUREACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createActionInputPin_in_StructuralFeatureAction(castedContainer);
@@ -439,7 +439,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIVITY:
+		case UmlPackage::ACTIVITY_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -450,37 +450,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Activity has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createActivity_in_BehavioredClassifier(castedContainer);
 					}
 					//Activity has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActivity_in_Namespace(castedContainer);
 					}
 					//Activity has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActivity_in_Owner(castedContainer);
 					}
 					//Activity has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createActivity_in_OwningPackage(castedContainer);
 					}
 					//Activity has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createActivity_in_OwningTemplateParameter(castedContainer);
 					}
 					//Activity has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createActivity_in_Package(castedContainer);
@@ -490,7 +490,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIVITYFINALNODE:
+		case UmlPackage::ACTIVITYFINALNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -501,25 +501,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ActivityFinalNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createActivityFinalNode_in_Activity(castedContainer);
 					}
 					//ActivityFinalNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createActivityFinalNode_in_InStructuredNode(castedContainer);
 					}
 					//ActivityFinalNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActivityFinalNode_in_Namespace(castedContainer);
 					}
 					//ActivityFinalNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActivityFinalNode_in_Owner(castedContainer);
@@ -529,7 +529,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIVITYPARAMETERNODE:
+		case UmlPackage::ACTIVITYPARAMETERNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -540,25 +540,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ActivityParameterNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createActivityParameterNode_in_Activity(castedContainer);
 					}
 					//ActivityParameterNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createActivityParameterNode_in_InStructuredNode(castedContainer);
 					}
 					//ActivityParameterNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActivityParameterNode_in_Namespace(castedContainer);
 					}
 					//ActivityParameterNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActivityParameterNode_in_Owner(castedContainer);
@@ -568,7 +568,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTIVITYPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -579,31 +579,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ActivityPartition has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createActivityPartition_in_InActivity(castedContainer);
 					}
 					//ActivityPartition has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActivityPartition_in_Namespace(castedContainer);
 					}
 					//ActivityPartition has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActivityPartition_in_Owner(castedContainer);
 					}
 					//ActivityPartition has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createActivityPartition_in_SuperGroup(castedContainer);
 					}
 					//ActivityPartition has superPartition as a containment
-					case  UmlPackage::ACTIVITYPARTITION_SUPERPARTITION: 
+					case  UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityPartition>(container);
 						return this->createActivityPartition_in_SuperPartition(castedContainer);
@@ -613,7 +613,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ACTOR:
+		case UmlPackage::ACTOR_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -624,31 +624,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Actor has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createActor_in_Namespace(castedContainer);
 					}
 					//Actor has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createActor_in_Owner(castedContainer);
 					}
 					//Actor has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createActor_in_OwningPackage(castedContainer);
 					}
 					//Actor has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createActor_in_OwningTemplateParameter(castedContainer);
 					}
 					//Actor has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createActor_in_Package(castedContainer);
@@ -658,7 +658,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION:
+		case UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -669,25 +669,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AddStructuralFeatureValueAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createAddStructuralFeatureValueAction_in_Activity(castedContainer);
 					}
 					//AddStructuralFeatureValueAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createAddStructuralFeatureValueAction_in_InStructuredNode(castedContainer);
 					}
 					//AddStructuralFeatureValueAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAddStructuralFeatureValueAction_in_Namespace(castedContainer);
 					}
 					//AddStructuralFeatureValueAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAddStructuralFeatureValueAction_in_Owner(castedContainer);
@@ -697,7 +697,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ADDVARIABLEVALUEACTION:
+		case UmlPackage::ADDVARIABLEVALUEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -708,25 +708,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AddVariableValueAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createAddVariableValueAction_in_Activity(castedContainer);
 					}
 					//AddVariableValueAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createAddVariableValueAction_in_InStructuredNode(castedContainer);
 					}
 					//AddVariableValueAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAddVariableValueAction_in_Namespace(castedContainer);
 					}
 					//AddVariableValueAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAddVariableValueAction_in_Owner(castedContainer);
@@ -736,7 +736,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ANYRECEIVEEVENT:
+		case UmlPackage::ANYRECEIVEEVENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -747,25 +747,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AnyReceiveEvent has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAnyReceiveEvent_in_Namespace(castedContainer);
 					}
 					//AnyReceiveEvent has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAnyReceiveEvent_in_Owner(castedContainer);
 					}
 					//AnyReceiveEvent has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAnyReceiveEvent_in_OwningPackage(castedContainer);
 					}
 					//AnyReceiveEvent has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createAnyReceiveEvent_in_OwningTemplateParameter(castedContainer);
@@ -775,7 +775,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ARTIFACT:
+		case UmlPackage::ARTIFACT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -786,31 +786,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Artifact has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createArtifact_in_Namespace(castedContainer);
 					}
 					//Artifact has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createArtifact_in_Owner(castedContainer);
 					}
 					//Artifact has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createArtifact_in_OwningPackage(castedContainer);
 					}
 					//Artifact has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createArtifact_in_OwningTemplateParameter(castedContainer);
 					}
 					//Artifact has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createArtifact_in_Package(castedContainer);
@@ -820,7 +820,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ASSOCIATION:
+		case UmlPackage::ASSOCIATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -831,31 +831,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Association has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAssociation_in_Namespace(castedContainer);
 					}
 					//Association has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAssociation_in_Owner(castedContainer);
 					}
 					//Association has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAssociation_in_OwningPackage(castedContainer);
 					}
 					//Association has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createAssociation_in_OwningTemplateParameter(castedContainer);
 					}
 					//Association has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAssociation_in_Package(castedContainer);
@@ -865,7 +865,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ASSOCIATIONCLASS:
+		case UmlPackage::ASSOCIATIONCLASS_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -876,31 +876,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//AssociationClass has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createAssociationClass_in_Namespace(castedContainer);
 					}
 					//AssociationClass has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createAssociationClass_in_Owner(castedContainer);
 					}
 					//AssociationClass has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAssociationClass_in_OwningPackage(castedContainer);
 					}
 					//AssociationClass has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createAssociationClass_in_OwningTemplateParameter(castedContainer);
 					}
 					//AssociationClass has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createAssociationClass_in_Package(castedContainer);
@@ -910,7 +910,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION:
+		case UmlPackage::BEHAVIOREXECUTIONSPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -921,25 +921,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//BehaviorExecutionSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createBehaviorExecutionSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//BehaviorExecutionSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createBehaviorExecutionSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//BehaviorExecutionSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createBehaviorExecutionSpecification_in_Namespace(castedContainer);
 					}
 					//BehaviorExecutionSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createBehaviorExecutionSpecification_in_Owner(castedContainer);
@@ -949,7 +949,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::BROADCASTSIGNALACTION:
+		case UmlPackage::BROADCASTSIGNALACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -960,25 +960,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//BroadcastSignalAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createBroadcastSignalAction_in_Activity(castedContainer);
 					}
 					//BroadcastSignalAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createBroadcastSignalAction_in_InStructuredNode(castedContainer);
 					}
 					//BroadcastSignalAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createBroadcastSignalAction_in_Namespace(castedContainer);
 					}
 					//BroadcastSignalAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createBroadcastSignalAction_in_Owner(castedContainer);
@@ -988,7 +988,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CALLBEHAVIORACTION:
+		case UmlPackage::CALLBEHAVIORACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -999,25 +999,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CallBehaviorAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCallBehaviorAction_in_Activity(castedContainer);
 					}
 					//CallBehaviorAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCallBehaviorAction_in_InStructuredNode(castedContainer);
 					}
 					//CallBehaviorAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCallBehaviorAction_in_Namespace(castedContainer);
 					}
 					//CallBehaviorAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCallBehaviorAction_in_Owner(castedContainer);
@@ -1027,7 +1027,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CALLEVENT:
+		case UmlPackage::CALLEVENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1038,25 +1038,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CallEvent has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCallEvent_in_Namespace(castedContainer);
 					}
 					//CallEvent has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCallEvent_in_Owner(castedContainer);
 					}
 					//CallEvent has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createCallEvent_in_OwningPackage(castedContainer);
 					}
 					//CallEvent has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createCallEvent_in_OwningTemplateParameter(castedContainer);
@@ -1066,7 +1066,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CALLOPERATIONACTION:
+		case UmlPackage::CALLOPERATIONACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1077,25 +1077,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CallOperationAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCallOperationAction_in_Activity(castedContainer);
 					}
 					//CallOperationAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCallOperationAction_in_InStructuredNode(castedContainer);
 					}
 					//CallOperationAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCallOperationAction_in_Namespace(castedContainer);
 					}
 					//CallOperationAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCallOperationAction_in_Owner(castedContainer);
@@ -1105,7 +1105,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CENTRALBUFFERNODE:
+		case UmlPackage::CENTRALBUFFERNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1116,25 +1116,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CentralBufferNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCentralBufferNode_in_Activity(castedContainer);
 					}
 					//CentralBufferNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCentralBufferNode_in_InStructuredNode(castedContainer);
 					}
 					//CentralBufferNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCentralBufferNode_in_Namespace(castedContainer);
 					}
 					//CentralBufferNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCentralBufferNode_in_Owner(castedContainer);
@@ -1144,7 +1144,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CHANGEEVENT:
+		case UmlPackage::CHANGEEVENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1155,25 +1155,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ChangeEvent has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createChangeEvent_in_Namespace(castedContainer);
 					}
 					//ChangeEvent has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createChangeEvent_in_Owner(castedContainer);
 					}
 					//ChangeEvent has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createChangeEvent_in_OwningPackage(castedContainer);
 					}
 					//ChangeEvent has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createChangeEvent_in_OwningTemplateParameter(castedContainer);
@@ -1183,7 +1183,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CLASS:
+		case UmlPackage::CLASS_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1194,31 +1194,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Class has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createClass_in_Namespace(castedContainer);
 					}
 					//Class has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createClass_in_Owner(castedContainer);
 					}
 					//Class has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createClass_in_OwningPackage(castedContainer);
 					}
 					//Class has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createClass_in_OwningTemplateParameter(castedContainer);
 					}
 					//Class has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createClass_in_Package(castedContainer);
@@ -1228,7 +1228,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1239,13 +1239,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ClassifierTemplateParameter has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createClassifierTemplateParameter_in_Owner(castedContainer);
 					}
 					//ClassifierTemplateParameter has signature as a containment
-					case  UmlPackage::TEMPLATEPARAMETER_SIGNATURE: 
+					case  UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateSignature>(container);
 						return this->createClassifierTemplateParameter_in_Signature(castedContainer);
@@ -1255,7 +1255,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CLAUSE:
+		case UmlPackage::CLAUSE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1268,7 +1268,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<Clause>(this->createClause_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::CLEARASSOCIATIONACTION:
+		case UmlPackage::CLEARASSOCIATIONACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1279,25 +1279,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ClearAssociationAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createClearAssociationAction_in_Activity(castedContainer);
 					}
 					//ClearAssociationAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createClearAssociationAction_in_InStructuredNode(castedContainer);
 					}
 					//ClearAssociationAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createClearAssociationAction_in_Namespace(castedContainer);
 					}
 					//ClearAssociationAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createClearAssociationAction_in_Owner(castedContainer);
@@ -1307,7 +1307,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CLEARSTRUCTURALFEATUREACTION:
+		case UmlPackage::CLEARSTRUCTURALFEATUREACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1318,25 +1318,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ClearStructuralFeatureAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createClearStructuralFeatureAction_in_Activity(castedContainer);
 					}
 					//ClearStructuralFeatureAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createClearStructuralFeatureAction_in_InStructuredNode(castedContainer);
 					}
 					//ClearStructuralFeatureAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createClearStructuralFeatureAction_in_Namespace(castedContainer);
 					}
 					//ClearStructuralFeatureAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createClearStructuralFeatureAction_in_Owner(castedContainer);
@@ -1346,7 +1346,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CLEARVARIABLEACTION:
+		case UmlPackage::CLEARVARIABLEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1357,25 +1357,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ClearVariableAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createClearVariableAction_in_Activity(castedContainer);
 					}
 					//ClearVariableAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createClearVariableAction_in_InStructuredNode(castedContainer);
 					}
 					//ClearVariableAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createClearVariableAction_in_Namespace(castedContainer);
 					}
 					//ClearVariableAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createClearVariableAction_in_Owner(castedContainer);
@@ -1385,7 +1385,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COLLABORATION:
+		case UmlPackage::COLLABORATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1396,31 +1396,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Collaboration has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCollaboration_in_Namespace(castedContainer);
 					}
 					//Collaboration has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCollaboration_in_Owner(castedContainer);
 					}
 					//Collaboration has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createCollaboration_in_OwningPackage(castedContainer);
 					}
 					//Collaboration has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createCollaboration_in_OwningTemplateParameter(castedContainer);
 					}
 					//Collaboration has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createCollaboration_in_Package(castedContainer);
@@ -1430,7 +1430,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COLLABORATIONUSE:
+		case UmlPackage::COLLABORATIONUSE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1441,13 +1441,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CollaborationUse has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCollaborationUse_in_Namespace(castedContainer);
 					}
 					//CollaborationUse has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCollaborationUse_in_Owner(castedContainer);
@@ -1457,7 +1457,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COMBINEDFRAGMENT:
+		case UmlPackage::COMBINEDFRAGMENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1468,25 +1468,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CombinedFragment has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createCombinedFragment_in_EnclosingInteraction(castedContainer);
 					}
 					//CombinedFragment has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createCombinedFragment_in_EnclosingOperand(castedContainer);
 					}
 					//CombinedFragment has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCombinedFragment_in_Namespace(castedContainer);
 					}
 					//CombinedFragment has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCombinedFragment_in_Owner(castedContainer);
@@ -1496,7 +1496,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COMMENT:
+		case UmlPackage::COMMENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1509,7 +1509,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<Comment>(this->createComment_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::COMMUNICATIONPATH:
+		case UmlPackage::COMMUNICATIONPATH_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1520,31 +1520,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CommunicationPath has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCommunicationPath_in_Namespace(castedContainer);
 					}
 					//CommunicationPath has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCommunicationPath_in_Owner(castedContainer);
 					}
 					//CommunicationPath has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createCommunicationPath_in_OwningPackage(castedContainer);
 					}
 					//CommunicationPath has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createCommunicationPath_in_OwningTemplateParameter(castedContainer);
 					}
 					//CommunicationPath has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createCommunicationPath_in_Package(castedContainer);
@@ -1554,7 +1554,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COMPONENT:
+		case UmlPackage::COMPONENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1565,31 +1565,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Component has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createComponent_in_Namespace(castedContainer);
 					}
 					//Component has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createComponent_in_Owner(castedContainer);
 					}
 					//Component has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createComponent_in_OwningPackage(castedContainer);
 					}
 					//Component has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createComponent_in_OwningTemplateParameter(castedContainer);
 					}
 					//Component has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createComponent_in_Package(castedContainer);
@@ -1599,7 +1599,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::COMPONENTREALIZATION:
+		case UmlPackage::COMPONENTREALIZATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1610,31 +1610,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ComponentRealization has abstraction as a containment
-					case  UmlPackage::COMPONENTREALIZATION_ABSTRACTION: 
+					case  UmlPackage::COMPONENTREALIZATION_EREFERENCE_ABSTRACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Component>(container);
 						return this->createComponentRealization_in_Abstraction(castedContainer);
 					}
 					//ComponentRealization has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createComponentRealization_in_Namespace(castedContainer);
 					}
 					//ComponentRealization has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createComponentRealization_in_Owner(castedContainer);
 					}
 					//ComponentRealization has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createComponentRealization_in_OwningPackage(castedContainer);
 					}
 					//ComponentRealization has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createComponentRealization_in_OwningTemplateParameter(castedContainer);
@@ -1644,7 +1644,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONDITIONALNODE:
+		case UmlPackage::CONDITIONALNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1655,37 +1655,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ConditionalNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createConditionalNode_in_Activity(castedContainer);
 					}
 					//ConditionalNode has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createConditionalNode_in_InActivity(castedContainer);
 					}
 					//ConditionalNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createConditionalNode_in_InStructuredNode(castedContainer);
 					}
 					//ConditionalNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConditionalNode_in_Namespace(castedContainer);
 					}
 					//ConditionalNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConditionalNode_in_Owner(castedContainer);
 					}
 					//ConditionalNode has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createConditionalNode_in_SuperGroup(castedContainer);
@@ -1695,7 +1695,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER:
+		case UmlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1706,13 +1706,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ConnectableElementTemplateParameter has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConnectableElementTemplateParameter_in_Owner(castedContainer);
 					}
 					//ConnectableElementTemplateParameter has signature as a containment
-					case  UmlPackage::TEMPLATEPARAMETER_SIGNATURE: 
+					case  UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateSignature>(container);
 						return this->createConnectableElementTemplateParameter_in_Signature(castedContainer);
@@ -1722,7 +1722,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONNECTIONPOINTREFERENCE:
+		case UmlPackage::CONNECTIONPOINTREFERENCE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1733,25 +1733,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ConnectionPointReference has container as a containment
-					case  UmlPackage::VERTEX_CONTAINER: 
+					case  UmlPackage::VERTEX_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createConnectionPointReference_in_Container(castedContainer);
 					}
 					//ConnectionPointReference has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConnectionPointReference_in_Namespace(castedContainer);
 					}
 					//ConnectionPointReference has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConnectionPointReference_in_Owner(castedContainer);
 					}
 					//ConnectionPointReference has state as a containment
-					case  UmlPackage::CONNECTIONPOINTREFERENCE_STATE: 
+					case  UmlPackage::CONNECTIONPOINTREFERENCE_EREFERENCE_STATE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::State>(container);
 						return this->createConnectionPointReference_in_State(castedContainer);
@@ -1761,7 +1761,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONNECTOR:
+		case UmlPackage::CONNECTOR_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1772,13 +1772,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Connector has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConnector_in_Namespace(castedContainer);
 					}
 					//Connector has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConnector_in_Owner(castedContainer);
@@ -1788,7 +1788,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONNECTOREND:
+		case UmlPackage::CONNECTOREND_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1801,7 +1801,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<ConnectorEnd>(this->createConnectorEnd_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::CONSIDERIGNOREFRAGMENT:
+		case UmlPackage::CONSIDERIGNOREFRAGMENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1812,25 +1812,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ConsiderIgnoreFragment has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createConsiderIgnoreFragment_in_EnclosingInteraction(castedContainer);
 					}
 					//ConsiderIgnoreFragment has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createConsiderIgnoreFragment_in_EnclosingOperand(castedContainer);
 					}
 					//ConsiderIgnoreFragment has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConsiderIgnoreFragment_in_Namespace(castedContainer);
 					}
 					//ConsiderIgnoreFragment has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConsiderIgnoreFragment_in_Owner(castedContainer);
@@ -1840,7 +1840,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONSTRAINT:
+		case UmlPackage::CONSTRAINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1851,31 +1851,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Constraint has context as a containment
-					case  UmlPackage::CONSTRAINT_CONTEXT: 
+					case  UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConstraint_in_Context(castedContainer);
 					}
 					//Constraint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createConstraint_in_Namespace(castedContainer);
 					}
 					//Constraint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createConstraint_in_Owner(castedContainer);
 					}
 					//Constraint has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createConstraint_in_OwningPackage(castedContainer);
 					}
 					//Constraint has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createConstraint_in_OwningTemplateParameter(castedContainer);
@@ -1885,7 +1885,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONTINUATION:
+		case UmlPackage::CONTINUATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1896,25 +1896,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Continuation has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createContinuation_in_EnclosingInteraction(castedContainer);
 					}
 					//Continuation has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createContinuation_in_EnclosingOperand(castedContainer);
 					}
 					//Continuation has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createContinuation_in_Namespace(castedContainer);
 					}
 					//Continuation has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createContinuation_in_Owner(castedContainer);
@@ -1924,7 +1924,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CONTROLFLOW:
+		case UmlPackage::CONTROLFLOW_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1935,25 +1935,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ControlFlow has activity as a containment
-					case  UmlPackage::ACTIVITYEDGE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createControlFlow_in_Activity(castedContainer);
 					}
 					//ControlFlow has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYEDGE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createControlFlow_in_InStructuredNode(castedContainer);
 					}
 					//ControlFlow has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createControlFlow_in_Namespace(castedContainer);
 					}
 					//ControlFlow has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createControlFlow_in_Owner(castedContainer);
@@ -1963,7 +1963,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CREATELINKACTION:
+		case UmlPackage::CREATELINKACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -1974,25 +1974,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CreateLinkAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCreateLinkAction_in_Activity(castedContainer);
 					}
 					//CreateLinkAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCreateLinkAction_in_InStructuredNode(castedContainer);
 					}
 					//CreateLinkAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCreateLinkAction_in_Namespace(castedContainer);
 					}
 					//CreateLinkAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCreateLinkAction_in_Owner(castedContainer);
@@ -2002,7 +2002,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CREATELINKOBJECTACTION:
+		case UmlPackage::CREATELINKOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2013,25 +2013,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CreateLinkObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCreateLinkObjectAction_in_Activity(castedContainer);
 					}
 					//CreateLinkObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCreateLinkObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//CreateLinkObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCreateLinkObjectAction_in_Namespace(castedContainer);
 					}
 					//CreateLinkObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCreateLinkObjectAction_in_Owner(castedContainer);
@@ -2041,7 +2041,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::CREATEOBJECTACTION:
+		case UmlPackage::CREATEOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2052,25 +2052,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//CreateObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createCreateObjectAction_in_Activity(castedContainer);
 					}
 					//CreateObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createCreateObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//CreateObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createCreateObjectAction_in_Namespace(castedContainer);
 					}
 					//CreateObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createCreateObjectAction_in_Owner(castedContainer);
@@ -2080,7 +2080,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DATASTORENODE:
+		case UmlPackage::DATASTORENODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2091,25 +2091,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DataStoreNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createDataStoreNode_in_Activity(castedContainer);
 					}
 					//DataStoreNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createDataStoreNode_in_InStructuredNode(castedContainer);
 					}
 					//DataStoreNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDataStoreNode_in_Namespace(castedContainer);
 					}
 					//DataStoreNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDataStoreNode_in_Owner(castedContainer);
@@ -2119,7 +2119,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DATATYPE:
+		case UmlPackage::DATATYPE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2130,31 +2130,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DataType has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDataType_in_Namespace(castedContainer);
 					}
 					//DataType has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDataType_in_Owner(castedContainer);
 					}
 					//DataType has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDataType_in_OwningPackage(castedContainer);
 					}
 					//DataType has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDataType_in_OwningTemplateParameter(castedContainer);
 					}
 					//DataType has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDataType_in_Package(castedContainer);
@@ -2164,7 +2164,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DECISIONNODE:
+		case UmlPackage::DECISIONNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2175,25 +2175,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DecisionNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createDecisionNode_in_Activity(castedContainer);
 					}
 					//DecisionNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createDecisionNode_in_InStructuredNode(castedContainer);
 					}
 					//DecisionNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDecisionNode_in_Namespace(castedContainer);
 					}
 					//DecisionNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDecisionNode_in_Owner(castedContainer);
@@ -2203,7 +2203,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DEPENDENCY:
+		case UmlPackage::DEPENDENCY_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2214,25 +2214,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Dependency has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDependency_in_Namespace(castedContainer);
 					}
 					//Dependency has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDependency_in_Owner(castedContainer);
 					}
 					//Dependency has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDependency_in_OwningPackage(castedContainer);
 					}
 					//Dependency has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDependency_in_OwningTemplateParameter(castedContainer);
@@ -2242,7 +2242,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DEPLOYMENT:
+		case UmlPackage::DEPLOYMENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2253,31 +2253,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Deployment has location as a containment
-					case  UmlPackage::DEPLOYMENT_LOCATION: 
+					case  UmlPackage::DEPLOYMENT_EREFERENCE_LOCATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::DeploymentTarget>(container);
 						return this->createDeployment_in_Location(castedContainer);
 					}
 					//Deployment has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDeployment_in_Namespace(castedContainer);
 					}
 					//Deployment has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDeployment_in_Owner(castedContainer);
 					}
 					//Deployment has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDeployment_in_OwningPackage(castedContainer);
 					}
 					//Deployment has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDeployment_in_OwningTemplateParameter(castedContainer);
@@ -2287,7 +2287,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DEPLOYMENTSPECIFICATION:
+		case UmlPackage::DEPLOYMENTSPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2298,37 +2298,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DeploymentSpecification has deployment as a containment
-					case  UmlPackage::DEPLOYMENTSPECIFICATION_DEPLOYMENT: 
+					case  UmlPackage::DEPLOYMENTSPECIFICATION_EREFERENCE_DEPLOYMENT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Deployment>(container);
 						return this->createDeploymentSpecification_in_Deployment(castedContainer);
 					}
 					//DeploymentSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDeploymentSpecification_in_Namespace(castedContainer);
 					}
 					//DeploymentSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDeploymentSpecification_in_Owner(castedContainer);
 					}
 					//DeploymentSpecification has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDeploymentSpecification_in_OwningPackage(castedContainer);
 					}
 					//DeploymentSpecification has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDeploymentSpecification_in_OwningTemplateParameter(castedContainer);
 					}
 					//DeploymentSpecification has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDeploymentSpecification_in_Package(castedContainer);
@@ -2338,7 +2338,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DESTROYLINKACTION:
+		case UmlPackage::DESTROYLINKACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2349,25 +2349,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DestroyLinkAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createDestroyLinkAction_in_Activity(castedContainer);
 					}
 					//DestroyLinkAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createDestroyLinkAction_in_InStructuredNode(castedContainer);
 					}
 					//DestroyLinkAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDestroyLinkAction_in_Namespace(castedContainer);
 					}
 					//DestroyLinkAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDestroyLinkAction_in_Owner(castedContainer);
@@ -2377,7 +2377,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DESTROYOBJECTACTION:
+		case UmlPackage::DESTROYOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2388,25 +2388,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DestroyObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createDestroyObjectAction_in_Activity(castedContainer);
 					}
 					//DestroyObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createDestroyObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//DestroyObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDestroyObjectAction_in_Namespace(castedContainer);
 					}
 					//DestroyObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDestroyObjectAction_in_Owner(castedContainer);
@@ -2416,7 +2416,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION:
+		case UmlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2427,25 +2427,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DestructionOccurrenceSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createDestructionOccurrenceSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//DestructionOccurrenceSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createDestructionOccurrenceSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//DestructionOccurrenceSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDestructionOccurrenceSpecification_in_Namespace(castedContainer);
 					}
 					//DestructionOccurrenceSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDestructionOccurrenceSpecification_in_Owner(castedContainer);
@@ -2455,7 +2455,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DEVICE:
+		case UmlPackage::DEVICE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2466,31 +2466,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Device has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDevice_in_Namespace(castedContainer);
 					}
 					//Device has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDevice_in_Owner(castedContainer);
 					}
 					//Device has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDevice_in_OwningPackage(castedContainer);
 					}
 					//Device has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDevice_in_OwningTemplateParameter(castedContainer);
 					}
 					//Device has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDevice_in_Package(castedContainer);
@@ -2500,7 +2500,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DURATION:
+		case UmlPackage::DURATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2511,31 +2511,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Duration has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDuration_in_Namespace(castedContainer);
 					}
 					//Duration has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDuration_in_Owner(castedContainer);
 					}
 					//Duration has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDuration_in_OwningPackage(castedContainer);
 					}
 					//Duration has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createDuration_in_OwningSlot(castedContainer);
 					}
 					//Duration has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDuration_in_OwningTemplateParameter(castedContainer);
@@ -2545,7 +2545,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DURATIONCONSTRAINT:
+		case UmlPackage::DURATIONCONSTRAINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2556,31 +2556,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DurationConstraint has context as a containment
-					case  UmlPackage::CONSTRAINT_CONTEXT: 
+					case  UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDurationConstraint_in_Context(castedContainer);
 					}
 					//DurationConstraint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDurationConstraint_in_Namespace(castedContainer);
 					}
 					//DurationConstraint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDurationConstraint_in_Owner(castedContainer);
 					}
 					//DurationConstraint has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDurationConstraint_in_OwningPackage(castedContainer);
 					}
 					//DurationConstraint has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDurationConstraint_in_OwningTemplateParameter(castedContainer);
@@ -2590,7 +2590,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DURATIONINTERVAL:
+		case UmlPackage::DURATIONINTERVAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2601,31 +2601,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DurationInterval has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDurationInterval_in_Namespace(castedContainer);
 					}
 					//DurationInterval has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDurationInterval_in_Owner(castedContainer);
 					}
 					//DurationInterval has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDurationInterval_in_OwningPackage(castedContainer);
 					}
 					//DurationInterval has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createDurationInterval_in_OwningSlot(castedContainer);
 					}
 					//DurationInterval has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDurationInterval_in_OwningTemplateParameter(castedContainer);
@@ -2635,7 +2635,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::DURATIONOBSERVATION:
+		case UmlPackage::DURATIONOBSERVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2646,25 +2646,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//DurationObservation has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createDurationObservation_in_Namespace(castedContainer);
 					}
 					//DurationObservation has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createDurationObservation_in_Owner(castedContainer);
 					}
 					//DurationObservation has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createDurationObservation_in_OwningPackage(castedContainer);
 					}
 					//DurationObservation has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createDurationObservation_in_OwningTemplateParameter(castedContainer);
@@ -2674,7 +2674,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ELEMENTIMPORT:
+		case UmlPackage::ELEMENTIMPORT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2685,13 +2685,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ElementImport has importingNamespace as a containment
-					case  UmlPackage::ELEMENTIMPORT_IMPORTINGNAMESPACE: 
+					case  UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createElementImport_in_ImportingNamespace(castedContainer);
 					}
 					//ElementImport has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createElementImport_in_Owner(castedContainer);
@@ -2701,7 +2701,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ENUMERATION:
+		case UmlPackage::ENUMERATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2712,31 +2712,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Enumeration has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createEnumeration_in_Namespace(castedContainer);
 					}
 					//Enumeration has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createEnumeration_in_Owner(castedContainer);
 					}
 					//Enumeration has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createEnumeration_in_OwningPackage(castedContainer);
 					}
 					//Enumeration has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createEnumeration_in_OwningTemplateParameter(castedContainer);
 					}
 					//Enumeration has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createEnumeration_in_Package(castedContainer);
@@ -2746,7 +2746,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::ENUMERATIONLITERAL:
+		case UmlPackage::ENUMERATIONLITERAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2757,31 +2757,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//EnumerationLiteral has enumeration as a containment
-					case  UmlPackage::ENUMERATIONLITERAL_ENUMERATION: 
+					case  UmlPackage::ENUMERATIONLITERAL_EREFERENCE_ENUMERATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Enumeration>(container);
 						return this->createEnumerationLiteral_in_Enumeration(castedContainer);
 					}
 					//EnumerationLiteral has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createEnumerationLiteral_in_Namespace(castedContainer);
 					}
 					//EnumerationLiteral has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createEnumerationLiteral_in_Owner(castedContainer);
 					}
 					//EnumerationLiteral has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createEnumerationLiteral_in_OwningPackage(castedContainer);
 					}
 					//EnumerationLiteral has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createEnumerationLiteral_in_OwningTemplateParameter(castedContainer);
@@ -2791,7 +2791,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXCEPTIONHANDLER:
+		case UmlPackage::EXCEPTIONHANDLER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2802,13 +2802,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExceptionHandler has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExceptionHandler_in_Owner(castedContainer);
 					}
 					//ExceptionHandler has protectedNode as a containment
-					case  UmlPackage::EXCEPTIONHANDLER_PROTECTEDNODE: 
+					case  UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ExecutableNode>(container);
 						return this->createExceptionHandler_in_ProtectedNode(castedContainer);
@@ -2818,7 +2818,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXECUTIONENVIRONMENT:
+		case UmlPackage::EXECUTIONENVIRONMENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2829,31 +2829,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExecutionEnvironment has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExecutionEnvironment_in_Namespace(castedContainer);
 					}
 					//ExecutionEnvironment has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExecutionEnvironment_in_Owner(castedContainer);
 					}
 					//ExecutionEnvironment has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createExecutionEnvironment_in_OwningPackage(castedContainer);
 					}
 					//ExecutionEnvironment has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createExecutionEnvironment_in_OwningTemplateParameter(castedContainer);
 					}
 					//ExecutionEnvironment has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createExecutionEnvironment_in_Package(castedContainer);
@@ -2863,7 +2863,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION:
+		case UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2874,25 +2874,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExecutionOccurrenceSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createExecutionOccurrenceSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//ExecutionOccurrenceSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createExecutionOccurrenceSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//ExecutionOccurrenceSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExecutionOccurrenceSpecification_in_Namespace(castedContainer);
 					}
 					//ExecutionOccurrenceSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExecutionOccurrenceSpecification_in_Owner(castedContainer);
@@ -2902,7 +2902,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXPANSIONNODE:
+		case UmlPackage::EXPANSIONNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2913,25 +2913,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExpansionNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createExpansionNode_in_Activity(castedContainer);
 					}
 					//ExpansionNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createExpansionNode_in_InStructuredNode(castedContainer);
 					}
 					//ExpansionNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExpansionNode_in_Namespace(castedContainer);
 					}
 					//ExpansionNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExpansionNode_in_Owner(castedContainer);
@@ -2941,7 +2941,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXPANSIONREGION:
+		case UmlPackage::EXPANSIONREGION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -2952,37 +2952,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExpansionRegion has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createExpansionRegion_in_Activity(castedContainer);
 					}
 					//ExpansionRegion has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createExpansionRegion_in_InActivity(castedContainer);
 					}
 					//ExpansionRegion has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createExpansionRegion_in_InStructuredNode(castedContainer);
 					}
 					//ExpansionRegion has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExpansionRegion_in_Namespace(castedContainer);
 					}
 					//ExpansionRegion has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExpansionRegion_in_Owner(castedContainer);
 					}
 					//ExpansionRegion has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createExpansionRegion_in_SuperGroup(castedContainer);
@@ -2992,7 +2992,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXPRESSION:
+		case UmlPackage::EXPRESSION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3003,31 +3003,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Expression has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExpression_in_Namespace(castedContainer);
 					}
 					//Expression has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExpression_in_Owner(castedContainer);
 					}
 					//Expression has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createExpression_in_OwningPackage(castedContainer);
 					}
 					//Expression has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createExpression_in_OwningSlot(castedContainer);
 					}
 					//Expression has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createExpression_in_OwningTemplateParameter(castedContainer);
@@ -3037,7 +3037,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXTEND:
+		case UmlPackage::EXTEND_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3048,19 +3048,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Extend has extension as a containment
-					case  UmlPackage::EXTEND_EXTENSION: 
+					case  UmlPackage::EXTEND_EREFERENCE_EXTENSION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::UseCase>(container);
 						return this->createExtend_in_Extension(castedContainer);
 					}
 					//Extend has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExtend_in_Namespace(castedContainer);
 					}
 					//Extend has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExtend_in_Owner(castedContainer);
@@ -3070,7 +3070,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXTENSION:
+		case UmlPackage::EXTENSION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3081,31 +3081,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Extension has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExtension_in_Namespace(castedContainer);
 					}
 					//Extension has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExtension_in_Owner(castedContainer);
 					}
 					//Extension has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createExtension_in_OwningPackage(castedContainer);
 					}
 					//Extension has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createExtension_in_OwningTemplateParameter(castedContainer);
 					}
 					//Extension has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createExtension_in_Package(castedContainer);
@@ -3115,7 +3115,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXTENSIONEND:
+		case UmlPackage::EXTENSIONEND_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3126,49 +3126,49 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExtensionEnd has associationEnd as a containment
-					case  UmlPackage::PROPERTY_ASSOCIATIONEND: 
+					case  UmlPackage::PROPERTY_EREFERENCE_ASSOCIATIONEND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Property>(container);
 						return this->createExtensionEnd_in_AssociationEnd(castedContainer);
 					}
 					//ExtensionEnd has class as a containment
-					case  UmlPackage::PROPERTY_CLASS: 
+					case  UmlPackage::PROPERTY_EREFERENCE_CLASS: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Class>(container);
 						return this->createExtensionEnd_in_Class(castedContainer);
 					}
 					//ExtensionEnd has datatype as a containment
-					case  UmlPackage::PROPERTY_DATATYPE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_DATATYPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::DataType>(container);
 						return this->createExtensionEnd_in_Datatype(castedContainer);
 					}
 					//ExtensionEnd has interface as a containment
-					case  UmlPackage::PROPERTY_INTERFACE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_INTERFACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interface>(container);
 						return this->createExtensionEnd_in_Interface(castedContainer);
 					}
 					//ExtensionEnd has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExtensionEnd_in_Namespace(castedContainer);
 					}
 					//ExtensionEnd has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExtensionEnd_in_Owner(castedContainer);
 					}
 					//ExtensionEnd has owningAssociation as a containment
-					case  UmlPackage::PROPERTY_OWNINGASSOCIATION: 
+					case  UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Association>(container);
 						return this->createExtensionEnd_in_OwningAssociation(castedContainer);
 					}
 					//ExtensionEnd has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createExtensionEnd_in_OwningTemplateParameter(castedContainer);
@@ -3178,7 +3178,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::EXTENSIONPOINT:
+		case UmlPackage::EXTENSIONPOINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3189,19 +3189,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ExtensionPoint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createExtensionPoint_in_Namespace(castedContainer);
 					}
 					//ExtensionPoint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createExtensionPoint_in_Owner(castedContainer);
 					}
 					//ExtensionPoint has useCase as a containment
-					case  UmlPackage::EXTENSIONPOINT_USECASE: 
+					case  UmlPackage::EXTENSIONPOINT_EREFERENCE_USECASE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::UseCase>(container);
 						return this->createExtensionPoint_in_UseCase(castedContainer);
@@ -3211,12 +3211,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::FACTORY:
+		case UmlPackage::FACTORY_ECLASS:
 		{
 				return std::shared_ptr<Factory>(this->createFactory());
 			
 		}
-		case UmlPackage::FINALSTATE:
+		case UmlPackage::FINALSTATE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3227,19 +3227,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//FinalState has container as a containment
-					case  UmlPackage::VERTEX_CONTAINER: 
+					case  UmlPackage::VERTEX_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createFinalState_in_Container(castedContainer);
 					}
 					//FinalState has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createFinalState_in_Namespace(castedContainer);
 					}
 					//FinalState has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createFinalState_in_Owner(castedContainer);
@@ -3249,7 +3249,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::FLOWFINALNODE:
+		case UmlPackage::FLOWFINALNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3260,25 +3260,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//FlowFinalNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createFlowFinalNode_in_Activity(castedContainer);
 					}
 					//FlowFinalNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createFlowFinalNode_in_InStructuredNode(castedContainer);
 					}
 					//FlowFinalNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createFlowFinalNode_in_Namespace(castedContainer);
 					}
 					//FlowFinalNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createFlowFinalNode_in_Owner(castedContainer);
@@ -3288,7 +3288,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::FORKNODE:
+		case UmlPackage::FORKNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3299,25 +3299,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ForkNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createForkNode_in_Activity(castedContainer);
 					}
 					//ForkNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createForkNode_in_InStructuredNode(castedContainer);
 					}
 					//ForkNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createForkNode_in_Namespace(castedContainer);
 					}
 					//ForkNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createForkNode_in_Owner(castedContainer);
@@ -3327,7 +3327,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::FUNCTIONBEHAVIOR:
+		case UmlPackage::FUNCTIONBEHAVIOR_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3338,37 +3338,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//FunctionBehavior has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createFunctionBehavior_in_BehavioredClassifier(castedContainer);
 					}
 					//FunctionBehavior has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createFunctionBehavior_in_Namespace(castedContainer);
 					}
 					//FunctionBehavior has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createFunctionBehavior_in_Owner(castedContainer);
 					}
 					//FunctionBehavior has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createFunctionBehavior_in_OwningPackage(castedContainer);
 					}
 					//FunctionBehavior has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createFunctionBehavior_in_OwningTemplateParameter(castedContainer);
 					}
 					//FunctionBehavior has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createFunctionBehavior_in_Package(castedContainer);
@@ -3378,7 +3378,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::GATE:
+		case UmlPackage::GATE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3389,13 +3389,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Gate has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createGate_in_Namespace(castedContainer);
 					}
 					//Gate has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createGate_in_Owner(castedContainer);
@@ -3405,7 +3405,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::GENERALORDERING:
+		case UmlPackage::GENERALORDERING_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3416,13 +3416,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//GeneralOrdering has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createGeneralOrdering_in_Namespace(castedContainer);
 					}
 					//GeneralOrdering has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createGeneralOrdering_in_Owner(castedContainer);
@@ -3432,7 +3432,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::GENERALIZATION:
+		case UmlPackage::GENERALIZATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3443,13 +3443,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Generalization has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createGeneralization_in_Owner(castedContainer);
 					}
 					//Generalization has specific as a containment
-					case  UmlPackage::GENERALIZATION_SPECIFIC: 
+					case  UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Classifier>(container);
 						return this->createGeneralization_in_Specific(castedContainer);
@@ -3459,7 +3459,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::GENERALIZATIONSET:
+		case UmlPackage::GENERALIZATIONSET_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3470,25 +3470,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//GeneralizationSet has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createGeneralizationSet_in_Namespace(castedContainer);
 					}
 					//GeneralizationSet has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createGeneralizationSet_in_Owner(castedContainer);
 					}
 					//GeneralizationSet has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createGeneralizationSet_in_OwningPackage(castedContainer);
 					}
 					//GeneralizationSet has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createGeneralizationSet_in_OwningTemplateParameter(castedContainer);
@@ -3498,7 +3498,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::IMAGE:
+		case UmlPackage::IMAGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3511,7 +3511,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<Image>(this->createImage_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::INCLUDE:
+		case UmlPackage::INCLUDE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3522,19 +3522,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Include has includingCase as a containment
-					case  UmlPackage::INCLUDE_INCLUDINGCASE: 
+					case  UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::UseCase>(container);
 						return this->createInclude_in_IncludingCase(castedContainer);
 					}
 					//Include has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInclude_in_Namespace(castedContainer);
 					}
 					//Include has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInclude_in_Owner(castedContainer);
@@ -3544,7 +3544,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INFORMATIONFLOW:
+		case UmlPackage::INFORMATIONFLOW_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3555,25 +3555,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InformationFlow has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInformationFlow_in_Namespace(castedContainer);
 					}
 					//InformationFlow has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInformationFlow_in_Owner(castedContainer);
 					}
 					//InformationFlow has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInformationFlow_in_OwningPackage(castedContainer);
 					}
 					//InformationFlow has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInformationFlow_in_OwningTemplateParameter(castedContainer);
@@ -3583,7 +3583,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INFORMATIONITEM:
+		case UmlPackage::INFORMATIONITEM_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3594,31 +3594,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InformationItem has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInformationItem_in_Namespace(castedContainer);
 					}
 					//InformationItem has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInformationItem_in_Owner(castedContainer);
 					}
 					//InformationItem has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInformationItem_in_OwningPackage(castedContainer);
 					}
 					//InformationItem has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInformationItem_in_OwningTemplateParameter(castedContainer);
 					}
 					//InformationItem has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInformationItem_in_Package(castedContainer);
@@ -3628,7 +3628,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INITIALNODE:
+		case UmlPackage::INITIALNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3639,25 +3639,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InitialNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createInitialNode_in_Activity(castedContainer);
 					}
 					//InitialNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createInitialNode_in_InStructuredNode(castedContainer);
 					}
 					//InitialNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInitialNode_in_Namespace(castedContainer);
 					}
 					//InitialNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInitialNode_in_Owner(castedContainer);
@@ -3667,7 +3667,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INPUTPIN:
+		case UmlPackage::INPUTPIN_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3678,43 +3678,43 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InputPin has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createInputPin_in_Activity(castedContainer);
 					}
 					//InputPin has callOperationAction as a containment
-					case  UmlPackage::INPUTPIN_CALLOPERATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createInputPin_in_CallOperationAction(castedContainer);
 					}
 					//InputPin has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createInputPin_in_InStructuredNode(castedContainer);
 					}
 					//InputPin has invocationAction as a containment
-					case  UmlPackage::INPUTPIN_INVOCATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InvocationAction>(container);
 						return this->createInputPin_in_InvocationAction(castedContainer);
 					}
 					//InputPin has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInputPin_in_Namespace(castedContainer);
 					}
 					//InputPin has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInputPin_in_Owner(castedContainer);
 					}
 					//InputPin has structuralFeatureAction as a containment
-					case  UmlPackage::INPUTPIN_STRUCTURALFEATUREACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createInputPin_in_StructuralFeatureAction(castedContainer);
@@ -3724,7 +3724,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INSTANCESPECIFICATION:
+		case UmlPackage::INSTANCESPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3735,25 +3735,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InstanceSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInstanceSpecification_in_Namespace(castedContainer);
 					}
 					//InstanceSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInstanceSpecification_in_Owner(castedContainer);
 					}
 					//InstanceSpecification has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInstanceSpecification_in_OwningPackage(castedContainer);
 					}
 					//InstanceSpecification has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInstanceSpecification_in_OwningTemplateParameter(castedContainer);
@@ -3763,7 +3763,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INSTANCEVALUE:
+		case UmlPackage::INSTANCEVALUE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3774,31 +3774,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InstanceValue has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInstanceValue_in_Namespace(castedContainer);
 					}
 					//InstanceValue has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInstanceValue_in_Owner(castedContainer);
 					}
 					//InstanceValue has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInstanceValue_in_OwningPackage(castedContainer);
 					}
 					//InstanceValue has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createInstanceValue_in_OwningSlot(castedContainer);
 					}
 					//InstanceValue has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInstanceValue_in_OwningTemplateParameter(castedContainer);
@@ -3808,7 +3808,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERACTION:
+		case UmlPackage::INTERACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3819,49 +3819,49 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Interaction has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createInteraction_in_BehavioredClassifier(castedContainer);
 					}
 					//Interaction has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createInteraction_in_EnclosingInteraction(castedContainer);
 					}
 					//Interaction has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createInteraction_in_EnclosingOperand(castedContainer);
 					}
 					//Interaction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInteraction_in_Namespace(castedContainer);
 					}
 					//Interaction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInteraction_in_Owner(castedContainer);
 					}
 					//Interaction has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInteraction_in_OwningPackage(castedContainer);
 					}
 					//Interaction has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInteraction_in_OwningTemplateParameter(castedContainer);
 					}
 					//Interaction has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInteraction_in_Package(castedContainer);
@@ -3871,7 +3871,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3882,31 +3882,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InteractionConstraint has context as a containment
-					case  UmlPackage::CONSTRAINT_CONTEXT: 
+					case  UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInteractionConstraint_in_Context(castedContainer);
 					}
 					//InteractionConstraint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInteractionConstraint_in_Namespace(castedContainer);
 					}
 					//InteractionConstraint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInteractionConstraint_in_Owner(castedContainer);
 					}
 					//InteractionConstraint has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInteractionConstraint_in_OwningPackage(castedContainer);
 					}
 					//InteractionConstraint has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInteractionConstraint_in_OwningTemplateParameter(castedContainer);
@@ -3916,7 +3916,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERACTIONOPERAND:
+		case UmlPackage::INTERACTIONOPERAND_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3927,25 +3927,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InteractionOperand has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createInteractionOperand_in_EnclosingInteraction(castedContainer);
 					}
 					//InteractionOperand has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createInteractionOperand_in_EnclosingOperand(castedContainer);
 					}
 					//InteractionOperand has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInteractionOperand_in_Namespace(castedContainer);
 					}
 					//InteractionOperand has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInteractionOperand_in_Owner(castedContainer);
@@ -3955,7 +3955,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERACTIONUSE:
+		case UmlPackage::INTERACTIONUSE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -3966,25 +3966,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InteractionUse has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createInteractionUse_in_EnclosingInteraction(castedContainer);
 					}
 					//InteractionUse has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createInteractionUse_in_EnclosingOperand(castedContainer);
 					}
 					//InteractionUse has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInteractionUse_in_Namespace(castedContainer);
 					}
 					//InteractionUse has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInteractionUse_in_Owner(castedContainer);
@@ -3994,7 +3994,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERFACE:
+		case UmlPackage::INTERFACE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4005,31 +4005,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Interface has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInterface_in_Namespace(castedContainer);
 					}
 					//Interface has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInterface_in_Owner(castedContainer);
 					}
 					//Interface has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInterface_in_OwningPackage(castedContainer);
 					}
 					//Interface has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInterface_in_OwningTemplateParameter(castedContainer);
 					}
 					//Interface has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInterface_in_Package(castedContainer);
@@ -4039,7 +4039,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERFACEREALIZATION:
+		case UmlPackage::INTERFACEREALIZATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4050,31 +4050,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InterfaceRealization has implementingClassifier as a containment
-					case  UmlPackage::INTERFACEREALIZATION_IMPLEMENTINGCLASSIFIER: 
+					case  UmlPackage::INTERFACEREALIZATION_EREFERENCE_IMPLEMENTINGCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createInterfaceRealization_in_ImplementingClassifier(castedContainer);
 					}
 					//InterfaceRealization has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInterfaceRealization_in_Namespace(castedContainer);
 					}
 					//InterfaceRealization has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInterfaceRealization_in_Owner(castedContainer);
 					}
 					//InterfaceRealization has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInterfaceRealization_in_OwningPackage(castedContainer);
 					}
 					//InterfaceRealization has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInterfaceRealization_in_OwningTemplateParameter(castedContainer);
@@ -4084,7 +4084,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4095,25 +4095,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//InterruptibleActivityRegion has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createInterruptibleActivityRegion_in_InActivity(castedContainer);
 					}
 					//InterruptibleActivityRegion has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInterruptibleActivityRegion_in_Namespace(castedContainer);
 					}
 					//InterruptibleActivityRegion has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInterruptibleActivityRegion_in_Owner(castedContainer);
 					}
 					//InterruptibleActivityRegion has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createInterruptibleActivityRegion_in_SuperGroup(castedContainer);
@@ -4123,7 +4123,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERVAL:
+		case UmlPackage::INTERVAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4134,31 +4134,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Interval has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createInterval_in_Namespace(castedContainer);
 					}
 					//Interval has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createInterval_in_Owner(castedContainer);
 					}
 					//Interval has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createInterval_in_OwningPackage(castedContainer);
 					}
 					//Interval has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createInterval_in_OwningSlot(castedContainer);
 					}
 					//Interval has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createInterval_in_OwningTemplateParameter(castedContainer);
@@ -4168,7 +4168,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::INTERVALCONSTRAINT:
+		case UmlPackage::INTERVALCONSTRAINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4179,31 +4179,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//IntervalConstraint has context as a containment
-					case  UmlPackage::CONSTRAINT_CONTEXT: 
+					case  UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createIntervalConstraint_in_Context(castedContainer);
 					}
 					//IntervalConstraint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createIntervalConstraint_in_Namespace(castedContainer);
 					}
 					//IntervalConstraint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createIntervalConstraint_in_Owner(castedContainer);
 					}
 					//IntervalConstraint has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createIntervalConstraint_in_OwningPackage(castedContainer);
 					}
 					//IntervalConstraint has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createIntervalConstraint_in_OwningTemplateParameter(castedContainer);
@@ -4213,7 +4213,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::JOINNODE:
+		case UmlPackage::JOINNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4224,25 +4224,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//JoinNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createJoinNode_in_Activity(castedContainer);
 					}
 					//JoinNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createJoinNode_in_InStructuredNode(castedContainer);
 					}
 					//JoinNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createJoinNode_in_Namespace(castedContainer);
 					}
 					//JoinNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createJoinNode_in_Owner(castedContainer);
@@ -4252,7 +4252,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LIFELINE:
+		case UmlPackage::LIFELINE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4263,19 +4263,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Lifeline has interaction as a containment
-					case  UmlPackage::LIFELINE_INTERACTION: 
+					case  UmlPackage::LIFELINE_EREFERENCE_INTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createLifeline_in_Interaction(castedContainer);
 					}
 					//Lifeline has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLifeline_in_Namespace(castedContainer);
 					}
 					//Lifeline has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLifeline_in_Owner(castedContainer);
@@ -4285,7 +4285,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LINKENDCREATIONDATA:
+		case UmlPackage::LINKENDCREATIONDATA_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4298,7 +4298,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<LinkEndCreationData>(this->createLinkEndCreationData_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::LINKENDDATA:
+		case UmlPackage::LINKENDDATA_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4311,7 +4311,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<LinkEndData>(this->createLinkEndData_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::LINKENDDESTRUCTIONDATA:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4324,7 +4324,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<LinkEndDestructionData>(this->createLinkEndDestructionData_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::LITERALBOOLEAN:
+		case UmlPackage::LITERALBOOLEAN_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4335,31 +4335,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralBoolean has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralBoolean_in_Namespace(castedContainer);
 					}
 					//LiteralBoolean has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralBoolean_in_Owner(castedContainer);
 					}
 					//LiteralBoolean has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralBoolean_in_OwningPackage(castedContainer);
 					}
 					//LiteralBoolean has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralBoolean_in_OwningSlot(castedContainer);
 					}
 					//LiteralBoolean has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralBoolean_in_OwningTemplateParameter(castedContainer);
@@ -4369,7 +4369,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LITERALINTEGER:
+		case UmlPackage::LITERALINTEGER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4380,31 +4380,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralInteger has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralInteger_in_Namespace(castedContainer);
 					}
 					//LiteralInteger has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralInteger_in_Owner(castedContainer);
 					}
 					//LiteralInteger has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralInteger_in_OwningPackage(castedContainer);
 					}
 					//LiteralInteger has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralInteger_in_OwningSlot(castedContainer);
 					}
 					//LiteralInteger has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralInteger_in_OwningTemplateParameter(castedContainer);
@@ -4414,7 +4414,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LITERALNULL:
+		case UmlPackage::LITERALNULL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4425,31 +4425,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralNull has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralNull_in_Namespace(castedContainer);
 					}
 					//LiteralNull has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralNull_in_Owner(castedContainer);
 					}
 					//LiteralNull has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralNull_in_OwningPackage(castedContainer);
 					}
 					//LiteralNull has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralNull_in_OwningSlot(castedContainer);
 					}
 					//LiteralNull has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralNull_in_OwningTemplateParameter(castedContainer);
@@ -4459,7 +4459,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LITERALREAL:
+		case UmlPackage::LITERALREAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4470,31 +4470,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralReal has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralReal_in_Namespace(castedContainer);
 					}
 					//LiteralReal has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralReal_in_Owner(castedContainer);
 					}
 					//LiteralReal has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralReal_in_OwningPackage(castedContainer);
 					}
 					//LiteralReal has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralReal_in_OwningSlot(castedContainer);
 					}
 					//LiteralReal has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralReal_in_OwningTemplateParameter(castedContainer);
@@ -4504,7 +4504,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LITERALSTRING:
+		case UmlPackage::LITERALSTRING_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4515,31 +4515,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralString has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralString_in_Namespace(castedContainer);
 					}
 					//LiteralString has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralString_in_Owner(castedContainer);
 					}
 					//LiteralString has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralString_in_OwningPackage(castedContainer);
 					}
 					//LiteralString has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralString_in_OwningSlot(castedContainer);
 					}
 					//LiteralString has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralString_in_OwningTemplateParameter(castedContainer);
@@ -4549,7 +4549,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LITERALUNLIMITEDNATURAL:
+		case UmlPackage::LITERALUNLIMITEDNATURAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4560,31 +4560,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LiteralUnlimitedNatural has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLiteralUnlimitedNatural_in_Namespace(castedContainer);
 					}
 					//LiteralUnlimitedNatural has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLiteralUnlimitedNatural_in_Owner(castedContainer);
 					}
 					//LiteralUnlimitedNatural has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createLiteralUnlimitedNatural_in_OwningPackage(castedContainer);
 					}
 					//LiteralUnlimitedNatural has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createLiteralUnlimitedNatural_in_OwningSlot(castedContainer);
 					}
 					//LiteralUnlimitedNatural has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createLiteralUnlimitedNatural_in_OwningTemplateParameter(castedContainer);
@@ -4594,7 +4594,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::LOOPNODE:
+		case UmlPackage::LOOPNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4605,37 +4605,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//LoopNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createLoopNode_in_Activity(castedContainer);
 					}
 					//LoopNode has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createLoopNode_in_InActivity(castedContainer);
 					}
 					//LoopNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createLoopNode_in_InStructuredNode(castedContainer);
 					}
 					//LoopNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createLoopNode_in_Namespace(castedContainer);
 					}
 					//LoopNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createLoopNode_in_Owner(castedContainer);
 					}
 					//LoopNode has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createLoopNode_in_SuperGroup(castedContainer);
@@ -4645,7 +4645,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::MANIFESTATION:
+		case UmlPackage::MANIFESTATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4656,25 +4656,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Manifestation has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createManifestation_in_Namespace(castedContainer);
 					}
 					//Manifestation has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createManifestation_in_Owner(castedContainer);
 					}
 					//Manifestation has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createManifestation_in_OwningPackage(castedContainer);
 					}
 					//Manifestation has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createManifestation_in_OwningTemplateParameter(castedContainer);
@@ -4684,7 +4684,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::MERGENODE:
+		case UmlPackage::MERGENODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4695,25 +4695,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//MergeNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createMergeNode_in_Activity(castedContainer);
 					}
 					//MergeNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createMergeNode_in_InStructuredNode(castedContainer);
 					}
 					//MergeNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createMergeNode_in_Namespace(castedContainer);
 					}
 					//MergeNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createMergeNode_in_Owner(castedContainer);
@@ -4723,7 +4723,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::MESSAGE:
+		case UmlPackage::MESSAGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4734,19 +4734,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Message has interaction as a containment
-					case  UmlPackage::MESSAGE_INTERACTION: 
+					case  UmlPackage::MESSAGE_EREFERENCE_INTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createMessage_in_Interaction(castedContainer);
 					}
 					//Message has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createMessage_in_Namespace(castedContainer);
 					}
 					//Message has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createMessage_in_Owner(castedContainer);
@@ -4756,7 +4756,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::MESSAGEOCCURRENCESPECIFICATION:
+		case UmlPackage::MESSAGEOCCURRENCESPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4767,25 +4767,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//MessageOccurrenceSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createMessageOccurrenceSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//MessageOccurrenceSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createMessageOccurrenceSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//MessageOccurrenceSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createMessageOccurrenceSpecification_in_Namespace(castedContainer);
 					}
 					//MessageOccurrenceSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createMessageOccurrenceSpecification_in_Owner(castedContainer);
@@ -4795,7 +4795,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::MODEL:
+		case UmlPackage::MODEL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4806,31 +4806,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Model has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createModel_in_Namespace(castedContainer);
 					}
 					//Model has nestingPackage as a containment
-					case  UmlPackage::PACKAGE_NESTINGPACKAGE: 
+					case  UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createModel_in_NestingPackage(castedContainer);
 					}
 					//Model has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createModel_in_Owner(castedContainer);
 					}
 					//Model has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createModel_in_OwningPackage(castedContainer);
 					}
 					//Model has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createModel_in_OwningTemplateParameter(castedContainer);
@@ -4840,7 +4840,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::NODE:
+		case UmlPackage::NODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4851,31 +4851,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Node has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createNode_in_Namespace(castedContainer);
 					}
 					//Node has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createNode_in_Owner(castedContainer);
 					}
 					//Node has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createNode_in_OwningPackage(castedContainer);
 					}
 					//Node has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createNode_in_OwningTemplateParameter(castedContainer);
 					}
 					//Node has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createNode_in_Package(castedContainer);
@@ -4885,12 +4885,12 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OBJECT:
+		case UmlPackage::OBJECT_ECLASS:
 		{
 				return std::shared_ptr<Object>(this->createObject());
 			
 		}
-		case UmlPackage::OBJECTFLOW:
+		case UmlPackage::OBJECTFLOW_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4901,25 +4901,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ObjectFlow has activity as a containment
-					case  UmlPackage::ACTIVITYEDGE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createObjectFlow_in_Activity(castedContainer);
 					}
 					//ObjectFlow has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYEDGE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createObjectFlow_in_InStructuredNode(castedContainer);
 					}
 					//ObjectFlow has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createObjectFlow_in_Namespace(castedContainer);
 					}
 					//ObjectFlow has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createObjectFlow_in_Owner(castedContainer);
@@ -4929,7 +4929,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OCCURRENCESPECIFICATION:
+		case UmlPackage::OCCURRENCESPECIFICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4940,25 +4940,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OccurrenceSpecification has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createOccurrenceSpecification_in_EnclosingInteraction(castedContainer);
 					}
 					//OccurrenceSpecification has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createOccurrenceSpecification_in_EnclosingOperand(castedContainer);
 					}
 					//OccurrenceSpecification has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOccurrenceSpecification_in_Namespace(castedContainer);
 					}
 					//OccurrenceSpecification has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOccurrenceSpecification_in_Owner(castedContainer);
@@ -4968,7 +4968,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OPAQUEACTION:
+		case UmlPackage::OPAQUEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -4979,25 +4979,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OpaqueAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createOpaqueAction_in_Activity(castedContainer);
 					}
 					//OpaqueAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createOpaqueAction_in_InStructuredNode(castedContainer);
 					}
 					//OpaqueAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOpaqueAction_in_Namespace(castedContainer);
 					}
 					//OpaqueAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOpaqueAction_in_Owner(castedContainer);
@@ -5007,7 +5007,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OPAQUEBEHAVIOR:
+		case UmlPackage::OPAQUEBEHAVIOR_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5018,37 +5018,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OpaqueBehavior has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createOpaqueBehavior_in_BehavioredClassifier(castedContainer);
 					}
 					//OpaqueBehavior has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOpaqueBehavior_in_Namespace(castedContainer);
 					}
 					//OpaqueBehavior has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOpaqueBehavior_in_Owner(castedContainer);
 					}
 					//OpaqueBehavior has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createOpaqueBehavior_in_OwningPackage(castedContainer);
 					}
 					//OpaqueBehavior has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createOpaqueBehavior_in_OwningTemplateParameter(castedContainer);
 					}
 					//OpaqueBehavior has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createOpaqueBehavior_in_Package(castedContainer);
@@ -5058,7 +5058,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OPAQUEEXPRESSION:
+		case UmlPackage::OPAQUEEXPRESSION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5069,31 +5069,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OpaqueExpression has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOpaqueExpression_in_Namespace(castedContainer);
 					}
 					//OpaqueExpression has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOpaqueExpression_in_Owner(castedContainer);
 					}
 					//OpaqueExpression has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createOpaqueExpression_in_OwningPackage(castedContainer);
 					}
 					//OpaqueExpression has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createOpaqueExpression_in_OwningSlot(castedContainer);
 					}
 					//OpaqueExpression has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createOpaqueExpression_in_OwningTemplateParameter(castedContainer);
@@ -5103,7 +5103,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OPERATION:
+		case UmlPackage::OPERATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5114,37 +5114,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Operation has class as a containment
-					case  UmlPackage::OPERATION_CLASS: 
+					case  UmlPackage::OPERATION_EREFERENCE_CLASS: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Class>(container);
 						return this->createOperation_in_Class(castedContainer);
 					}
 					//Operation has datatype as a containment
-					case  UmlPackage::OPERATION_DATATYPE: 
+					case  UmlPackage::OPERATION_EREFERENCE_DATATYPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::DataType>(container);
 						return this->createOperation_in_Datatype(castedContainer);
 					}
 					//Operation has interface as a containment
-					case  UmlPackage::OPERATION_INTERFACE: 
+					case  UmlPackage::OPERATION_EREFERENCE_INTERFACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interface>(container);
 						return this->createOperation_in_Interface(castedContainer);
 					}
 					//Operation has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOperation_in_Namespace(castedContainer);
 					}
 					//Operation has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOperation_in_Owner(castedContainer);
 					}
 					//Operation has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createOperation_in_OwningTemplateParameter(castedContainer);
@@ -5154,7 +5154,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OPERATIONTEMPLATEPARAMETER:
+		case UmlPackage::OPERATIONTEMPLATEPARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5165,13 +5165,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OperationTemplateParameter has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOperationTemplateParameter_in_Owner(castedContainer);
 					}
 					//OperationTemplateParameter has signature as a containment
-					case  UmlPackage::TEMPLATEPARAMETER_SIGNATURE: 
+					case  UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateSignature>(container);
 						return this->createOperationTemplateParameter_in_Signature(castedContainer);
@@ -5181,7 +5181,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::OUTPUTPIN:
+		case UmlPackage::OUTPUTPIN_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5192,31 +5192,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//OutputPin has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createOutputPin_in_Activity(castedContainer);
 					}
 					//OutputPin has callAction as a containment
-					case  UmlPackage::OUTPUTPIN_CALLACTION: 
+					case  UmlPackage::OUTPUTPIN_EREFERENCE_CALLACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallAction>(container);
 						return this->createOutputPin_in_CallAction(castedContainer);
 					}
 					//OutputPin has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createOutputPin_in_InStructuredNode(castedContainer);
 					}
 					//OutputPin has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createOutputPin_in_Namespace(castedContainer);
 					}
 					//OutputPin has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createOutputPin_in_Owner(castedContainer);
@@ -5226,7 +5226,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PACKAGE:
+		case UmlPackage::PACKAGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5237,31 +5237,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Package has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPackage_in_Namespace(castedContainer);
 					}
 					//Package has nestingPackage as a containment
-					case  UmlPackage::PACKAGE_NESTINGPACKAGE: 
+					case  UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createPackage_in_NestingPackage(castedContainer);
 					}
 					//Package has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPackage_in_Owner(castedContainer);
 					}
 					//Package has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createPackage_in_OwningPackage(castedContainer);
 					}
 					//Package has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createPackage_in_OwningTemplateParameter(castedContainer);
@@ -5271,7 +5271,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PACKAGEIMPORT:
+		case UmlPackage::PACKAGEIMPORT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5282,13 +5282,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//PackageImport has importingNamespace as a containment
-					case  UmlPackage::PACKAGEIMPORT_IMPORTINGNAMESPACE: 
+					case  UmlPackage::PACKAGEIMPORT_EREFERENCE_IMPORTINGNAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPackageImport_in_ImportingNamespace(castedContainer);
 					}
 					//PackageImport has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPackageImport_in_Owner(castedContainer);
@@ -5298,7 +5298,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PACKAGEMERGE:
+		case UmlPackage::PACKAGEMERGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5309,13 +5309,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//PackageMerge has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPackageMerge_in_Owner(castedContainer);
 					}
 					//PackageMerge has receivingPackage as a containment
-					case  UmlPackage::PACKAGEMERGE_RECEIVINGPACKAGE: 
+					case  UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createPackageMerge_in_ReceivingPackage(castedContainer);
@@ -5325,7 +5325,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PARAMETER:
+		case UmlPackage::PARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5336,31 +5336,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Parameter has behavior as a containment
-					case  UmlPackage::PARAMETER_BEHAVIOR: 
+					case  UmlPackage::PARAMETER_EREFERENCE_BEHAVIOR: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Behavior>(container);
 						return this->createParameter_in_Behavior(castedContainer);
 					}
 					//Parameter has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createParameter_in_Namespace(castedContainer);
 					}
 					//Parameter has operation as a containment
-					case  UmlPackage::PARAMETER_OPERATION: 
+					case  UmlPackage::PARAMETER_EREFERENCE_OPERATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Operation>(container);
 						return this->createParameter_in_Operation(castedContainer);
 					}
 					//Parameter has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createParameter_in_Owner(castedContainer);
 					}
 					//Parameter has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createParameter_in_OwningTemplateParameter(castedContainer);
@@ -5370,7 +5370,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PARAMETERSET:
+		case UmlPackage::PARAMETERSET_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5381,13 +5381,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ParameterSet has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createParameterSet_in_Namespace(castedContainer);
 					}
 					//ParameterSet has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createParameterSet_in_Owner(castedContainer);
@@ -5397,7 +5397,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PARTDECOMPOSITION:
+		case UmlPackage::PARTDECOMPOSITION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5408,25 +5408,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//PartDecomposition has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createPartDecomposition_in_EnclosingInteraction(castedContainer);
 					}
 					//PartDecomposition has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createPartDecomposition_in_EnclosingOperand(castedContainer);
 					}
 					//PartDecomposition has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPartDecomposition_in_Namespace(castedContainer);
 					}
 					//PartDecomposition has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPartDecomposition_in_Owner(castedContainer);
@@ -5436,7 +5436,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PORT:
+		case UmlPackage::PORT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5447,49 +5447,49 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Port has associationEnd as a containment
-					case  UmlPackage::PROPERTY_ASSOCIATIONEND: 
+					case  UmlPackage::PROPERTY_EREFERENCE_ASSOCIATIONEND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Property>(container);
 						return this->createPort_in_AssociationEnd(castedContainer);
 					}
 					//Port has class as a containment
-					case  UmlPackage::PROPERTY_CLASS: 
+					case  UmlPackage::PROPERTY_EREFERENCE_CLASS: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Class>(container);
 						return this->createPort_in_Class(castedContainer);
 					}
 					//Port has datatype as a containment
-					case  UmlPackage::PROPERTY_DATATYPE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_DATATYPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::DataType>(container);
 						return this->createPort_in_Datatype(castedContainer);
 					}
 					//Port has interface as a containment
-					case  UmlPackage::PROPERTY_INTERFACE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_INTERFACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interface>(container);
 						return this->createPort_in_Interface(castedContainer);
 					}
 					//Port has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPort_in_Namespace(castedContainer);
 					}
 					//Port has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPort_in_Owner(castedContainer);
 					}
 					//Port has owningAssociation as a containment
-					case  UmlPackage::PROPERTY_OWNINGASSOCIATION: 
+					case  UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Association>(container);
 						return this->createPort_in_OwningAssociation(castedContainer);
 					}
 					//Port has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createPort_in_OwningTemplateParameter(castedContainer);
@@ -5499,7 +5499,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PRIMITIVETYPE:
+		case UmlPackage::PRIMITIVETYPE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5510,31 +5510,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//PrimitiveType has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPrimitiveType_in_Namespace(castedContainer);
 					}
 					//PrimitiveType has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPrimitiveType_in_Owner(castedContainer);
 					}
 					//PrimitiveType has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createPrimitiveType_in_OwningPackage(castedContainer);
 					}
 					//PrimitiveType has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createPrimitiveType_in_OwningTemplateParameter(castedContainer);
 					}
 					//PrimitiveType has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createPrimitiveType_in_Package(castedContainer);
@@ -5544,7 +5544,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROFILE:
+		case UmlPackage::PROFILE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5555,31 +5555,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Profile has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createProfile_in_Namespace(castedContainer);
 					}
 					//Profile has nestingPackage as a containment
-					case  UmlPackage::PACKAGE_NESTINGPACKAGE: 
+					case  UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createProfile_in_NestingPackage(castedContainer);
 					}
 					//Profile has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProfile_in_Owner(castedContainer);
 					}
 					//Profile has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createProfile_in_OwningPackage(castedContainer);
 					}
 					//Profile has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createProfile_in_OwningTemplateParameter(castedContainer);
@@ -5589,7 +5589,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROFILEAPPLICATION:
+		case UmlPackage::PROFILEAPPLICATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5600,13 +5600,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ProfileApplication has applyingPackage as a containment
-					case  UmlPackage::PROFILEAPPLICATION_APPLYINGPACKAGE: 
+					case  UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createProfileApplication_in_ApplyingPackage(castedContainer);
 					}
 					//ProfileApplication has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProfileApplication_in_Owner(castedContainer);
@@ -5616,7 +5616,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROPERTY:
+		case UmlPackage::PROPERTY_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5627,49 +5627,49 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Property has associationEnd as a containment
-					case  UmlPackage::PROPERTY_ASSOCIATIONEND: 
+					case  UmlPackage::PROPERTY_EREFERENCE_ASSOCIATIONEND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Property>(container);
 						return this->createProperty_in_AssociationEnd(castedContainer);
 					}
 					//Property has class as a containment
-					case  UmlPackage::PROPERTY_CLASS: 
+					case  UmlPackage::PROPERTY_EREFERENCE_CLASS: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Class>(container);
 						return this->createProperty_in_Class(castedContainer);
 					}
 					//Property has datatype as a containment
-					case  UmlPackage::PROPERTY_DATATYPE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_DATATYPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::DataType>(container);
 						return this->createProperty_in_Datatype(castedContainer);
 					}
 					//Property has interface as a containment
-					case  UmlPackage::PROPERTY_INTERFACE: 
+					case  UmlPackage::PROPERTY_EREFERENCE_INTERFACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interface>(container);
 						return this->createProperty_in_Interface(castedContainer);
 					}
 					//Property has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createProperty_in_Namespace(castedContainer);
 					}
 					//Property has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProperty_in_Owner(castedContainer);
 					}
 					//Property has owningAssociation as a containment
-					case  UmlPackage::PROPERTY_OWNINGASSOCIATION: 
+					case  UmlPackage::PROPERTY_EREFERENCE_OWNINGASSOCIATION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Association>(container);
 						return this->createProperty_in_OwningAssociation(castedContainer);
 					}
 					//Property has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createProperty_in_OwningTemplateParameter(castedContainer);
@@ -5679,7 +5679,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROTOCOLCONFORMANCE:
+		case UmlPackage::PROTOCOLCONFORMANCE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5690,13 +5690,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ProtocolConformance has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProtocolConformance_in_Owner(castedContainer);
 					}
 					//ProtocolConformance has specificMachine as a containment
-					case  UmlPackage::PROTOCOLCONFORMANCE_SPECIFICMACHINE: 
+					case  UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(container);
 						return this->createProtocolConformance_in_SpecificMachine(castedContainer);
@@ -5706,7 +5706,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROTOCOLSTATEMACHINE:
+		case UmlPackage::PROTOCOLSTATEMACHINE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5717,37 +5717,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ProtocolStateMachine has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createProtocolStateMachine_in_BehavioredClassifier(castedContainer);
 					}
 					//ProtocolStateMachine has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createProtocolStateMachine_in_Namespace(castedContainer);
 					}
 					//ProtocolStateMachine has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProtocolStateMachine_in_Owner(castedContainer);
 					}
 					//ProtocolStateMachine has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createProtocolStateMachine_in_OwningPackage(castedContainer);
 					}
 					//ProtocolStateMachine has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createProtocolStateMachine_in_OwningTemplateParameter(castedContainer);
 					}
 					//ProtocolStateMachine has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createProtocolStateMachine_in_Package(castedContainer);
@@ -5757,7 +5757,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PROTOCOLTRANSITION:
+		case UmlPackage::PROTOCOLTRANSITION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5768,19 +5768,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ProtocolTransition has container as a containment
-					case  UmlPackage::TRANSITION_CONTAINER: 
+					case  UmlPackage::TRANSITION_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createProtocolTransition_in_Container(castedContainer);
 					}
 					//ProtocolTransition has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createProtocolTransition_in_Namespace(castedContainer);
 					}
 					//ProtocolTransition has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createProtocolTransition_in_Owner(castedContainer);
@@ -5790,7 +5790,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::PSEUDOSTATE:
+		case UmlPackage::PSEUDOSTATE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5801,31 +5801,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Pseudostate has container as a containment
-					case  UmlPackage::VERTEX_CONTAINER: 
+					case  UmlPackage::VERTEX_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createPseudostate_in_Container(castedContainer);
 					}
 					//Pseudostate has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createPseudostate_in_Namespace(castedContainer);
 					}
 					//Pseudostate has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createPseudostate_in_Owner(castedContainer);
 					}
 					//Pseudostate has state as a containment
-					case  UmlPackage::PSEUDOSTATE_STATE: 
+					case  UmlPackage::PSEUDOSTATE_EREFERENCE_STATE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::State>(container);
 						return this->createPseudostate_in_State(castedContainer);
 					}
 					//Pseudostate has stateMachine as a containment
-					case  UmlPackage::PSEUDOSTATE_STATEMACHINE: 
+					case  UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StateMachine>(container);
 						return this->createPseudostate_in_StateMachine(castedContainer);
@@ -5835,7 +5835,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::QUALIFIERVALUE:
+		case UmlPackage::QUALIFIERVALUE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5848,7 +5848,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				return std::shared_ptr<QualifierValue>(this->createQualifierValue_in_Owner(castedContainer));
 			}
 		}
-		case UmlPackage::RAISEEXCEPTIONACTION:
+		case UmlPackage::RAISEEXCEPTIONACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5859,25 +5859,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//RaiseExceptionAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createRaiseExceptionAction_in_Activity(castedContainer);
 					}
 					//RaiseExceptionAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createRaiseExceptionAction_in_InStructuredNode(castedContainer);
 					}
 					//RaiseExceptionAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRaiseExceptionAction_in_Namespace(castedContainer);
 					}
 					//RaiseExceptionAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRaiseExceptionAction_in_Owner(castedContainer);
@@ -5887,7 +5887,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READEXTENTACTION:
+		case UmlPackage::READEXTENTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5898,25 +5898,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadExtentAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadExtentAction_in_Activity(castedContainer);
 					}
 					//ReadExtentAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadExtentAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadExtentAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadExtentAction_in_Namespace(castedContainer);
 					}
 					//ReadExtentAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadExtentAction_in_Owner(castedContainer);
@@ -5926,7 +5926,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READISCLASSIFIEDOBJECTACTION:
+		case UmlPackage::READISCLASSIFIEDOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5937,25 +5937,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadIsClassifiedObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadIsClassifiedObjectAction_in_Activity(castedContainer);
 					}
 					//ReadIsClassifiedObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadIsClassifiedObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadIsClassifiedObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadIsClassifiedObjectAction_in_Namespace(castedContainer);
 					}
 					//ReadIsClassifiedObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadIsClassifiedObjectAction_in_Owner(castedContainer);
@@ -5965,7 +5965,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READLINKACTION:
+		case UmlPackage::READLINKACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -5976,25 +5976,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadLinkAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadLinkAction_in_Activity(castedContainer);
 					}
 					//ReadLinkAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadLinkAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadLinkAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadLinkAction_in_Namespace(castedContainer);
 					}
 					//ReadLinkAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadLinkAction_in_Owner(castedContainer);
@@ -6004,7 +6004,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READLINKOBJECTENDACTION:
+		case UmlPackage::READLINKOBJECTENDACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6015,25 +6015,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadLinkObjectEndAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadLinkObjectEndAction_in_Activity(castedContainer);
 					}
 					//ReadLinkObjectEndAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadLinkObjectEndAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadLinkObjectEndAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadLinkObjectEndAction_in_Namespace(castedContainer);
 					}
 					//ReadLinkObjectEndAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadLinkObjectEndAction_in_Owner(castedContainer);
@@ -6043,7 +6043,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION:
+		case UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6054,25 +6054,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadLinkObjectEndQualifierAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadLinkObjectEndQualifierAction_in_Activity(castedContainer);
 					}
 					//ReadLinkObjectEndQualifierAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadLinkObjectEndQualifierAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadLinkObjectEndQualifierAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadLinkObjectEndQualifierAction_in_Namespace(castedContainer);
 					}
 					//ReadLinkObjectEndQualifierAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadLinkObjectEndQualifierAction_in_Owner(castedContainer);
@@ -6082,7 +6082,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READSELFACTION:
+		case UmlPackage::READSELFACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6093,25 +6093,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadSelfAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadSelfAction_in_Activity(castedContainer);
 					}
 					//ReadSelfAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadSelfAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadSelfAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadSelfAction_in_Namespace(castedContainer);
 					}
 					//ReadSelfAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadSelfAction_in_Owner(castedContainer);
@@ -6121,7 +6121,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READSTRUCTURALFEATUREACTION:
+		case UmlPackage::READSTRUCTURALFEATUREACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6132,25 +6132,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadStructuralFeatureAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadStructuralFeatureAction_in_Activity(castedContainer);
 					}
 					//ReadStructuralFeatureAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadStructuralFeatureAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadStructuralFeatureAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadStructuralFeatureAction_in_Namespace(castedContainer);
 					}
 					//ReadStructuralFeatureAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadStructuralFeatureAction_in_Owner(castedContainer);
@@ -6160,7 +6160,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::READVARIABLEACTION:
+		case UmlPackage::READVARIABLEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6171,25 +6171,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReadVariableAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReadVariableAction_in_Activity(castedContainer);
 					}
 					//ReadVariableAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReadVariableAction_in_InStructuredNode(castedContainer);
 					}
 					//ReadVariableAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReadVariableAction_in_Namespace(castedContainer);
 					}
 					//ReadVariableAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReadVariableAction_in_Owner(castedContainer);
@@ -6199,7 +6199,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REALIZATION:
+		case UmlPackage::REALIZATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6210,25 +6210,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Realization has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRealization_in_Namespace(castedContainer);
 					}
 					//Realization has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRealization_in_Owner(castedContainer);
 					}
 					//Realization has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createRealization_in_OwningPackage(castedContainer);
 					}
 					//Realization has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createRealization_in_OwningTemplateParameter(castedContainer);
@@ -6238,7 +6238,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::RECEPTION:
+		case UmlPackage::RECEPTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6249,13 +6249,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Reception has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReception_in_Namespace(castedContainer);
 					}
 					//Reception has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReception_in_Owner(castedContainer);
@@ -6265,7 +6265,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::RECLASSIFYOBJECTACTION:
+		case UmlPackage::RECLASSIFYOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6276,25 +6276,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReclassifyObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReclassifyObjectAction_in_Activity(castedContainer);
 					}
 					//ReclassifyObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReclassifyObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//ReclassifyObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReclassifyObjectAction_in_Namespace(castedContainer);
 					}
 					//ReclassifyObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReclassifyObjectAction_in_Owner(castedContainer);
@@ -6304,7 +6304,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE:
+		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6315,19 +6315,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//RedefinableTemplateSignature has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRedefinableTemplateSignature_in_Namespace(castedContainer);
 					}
 					//RedefinableTemplateSignature has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRedefinableTemplateSignature_in_Owner(castedContainer);
 					}
 					//RedefinableTemplateSignature has template as a containment
-					case  UmlPackage::TEMPLATESIGNATURE_TEMPLATE: 
+					case  UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateableElement>(container);
 						return this->createRedefinableTemplateSignature_in_Template(castedContainer);
@@ -6337,7 +6337,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REDUCEACTION:
+		case UmlPackage::REDUCEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6348,25 +6348,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReduceAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReduceAction_in_Activity(castedContainer);
 					}
 					//ReduceAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReduceAction_in_InStructuredNode(castedContainer);
 					}
 					//ReduceAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReduceAction_in_Namespace(castedContainer);
 					}
 					//ReduceAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReduceAction_in_Owner(castedContainer);
@@ -6376,7 +6376,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REGION:
+		case UmlPackage::REGION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6387,25 +6387,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Region has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRegion_in_Namespace(castedContainer);
 					}
 					//Region has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRegion_in_Owner(castedContainer);
 					}
 					//Region has state as a containment
-					case  UmlPackage::REGION_STATE: 
+					case  UmlPackage::REGION_EREFERENCE_STATE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::State>(container);
 						return this->createRegion_in_State(castedContainer);
 					}
 					//Region has stateMachine as a containment
-					case  UmlPackage::REGION_STATEMACHINE: 
+					case  UmlPackage::REGION_EREFERENCE_STATEMACHINE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StateMachine>(container);
 						return this->createRegion_in_StateMachine(castedContainer);
@@ -6415,7 +6415,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION:
+		case UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6426,25 +6426,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//RemoveStructuralFeatureValueAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createRemoveStructuralFeatureValueAction_in_Activity(castedContainer);
 					}
 					//RemoveStructuralFeatureValueAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createRemoveStructuralFeatureValueAction_in_InStructuredNode(castedContainer);
 					}
 					//RemoveStructuralFeatureValueAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRemoveStructuralFeatureValueAction_in_Namespace(castedContainer);
 					}
 					//RemoveStructuralFeatureValueAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRemoveStructuralFeatureValueAction_in_Owner(castedContainer);
@@ -6454,7 +6454,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REMOVEVARIABLEVALUEACTION:
+		case UmlPackage::REMOVEVARIABLEVALUEACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6465,25 +6465,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//RemoveVariableValueAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createRemoveVariableValueAction_in_Activity(castedContainer);
 					}
 					//RemoveVariableValueAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createRemoveVariableValueAction_in_InStructuredNode(castedContainer);
 					}
 					//RemoveVariableValueAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createRemoveVariableValueAction_in_Namespace(castedContainer);
 					}
 					//RemoveVariableValueAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createRemoveVariableValueAction_in_Owner(castedContainer);
@@ -6493,7 +6493,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::REPLYACTION:
+		case UmlPackage::REPLYACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6504,25 +6504,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ReplyAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createReplyAction_in_Activity(castedContainer);
 					}
 					//ReplyAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createReplyAction_in_InStructuredNode(castedContainer);
 					}
 					//ReplyAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createReplyAction_in_Namespace(castedContainer);
 					}
 					//ReplyAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createReplyAction_in_Owner(castedContainer);
@@ -6532,7 +6532,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SENDOBJECTACTION:
+		case UmlPackage::SENDOBJECTACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6543,25 +6543,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//SendObjectAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createSendObjectAction_in_Activity(castedContainer);
 					}
 					//SendObjectAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createSendObjectAction_in_InStructuredNode(castedContainer);
 					}
 					//SendObjectAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSendObjectAction_in_Namespace(castedContainer);
 					}
 					//SendObjectAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSendObjectAction_in_Owner(castedContainer);
@@ -6571,7 +6571,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SENDSIGNALACTION:
+		case UmlPackage::SENDSIGNALACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6582,25 +6582,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//SendSignalAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createSendSignalAction_in_Activity(castedContainer);
 					}
 					//SendSignalAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createSendSignalAction_in_InStructuredNode(castedContainer);
 					}
 					//SendSignalAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSendSignalAction_in_Namespace(castedContainer);
 					}
 					//SendSignalAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSendSignalAction_in_Owner(castedContainer);
@@ -6610,7 +6610,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SEQUENCENODE:
+		case UmlPackage::SEQUENCENODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6621,37 +6621,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//SequenceNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createSequenceNode_in_Activity(castedContainer);
 					}
 					//SequenceNode has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createSequenceNode_in_InActivity(castedContainer);
 					}
 					//SequenceNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createSequenceNode_in_InStructuredNode(castedContainer);
 					}
 					//SequenceNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSequenceNode_in_Namespace(castedContainer);
 					}
 					//SequenceNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSequenceNode_in_Owner(castedContainer);
 					}
 					//SequenceNode has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createSequenceNode_in_SuperGroup(castedContainer);
@@ -6661,7 +6661,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SIGNAL:
+		case UmlPackage::SIGNAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6672,31 +6672,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Signal has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSignal_in_Namespace(castedContainer);
 					}
 					//Signal has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSignal_in_Owner(castedContainer);
 					}
 					//Signal has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createSignal_in_OwningPackage(castedContainer);
 					}
 					//Signal has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createSignal_in_OwningTemplateParameter(castedContainer);
 					}
 					//Signal has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createSignal_in_Package(castedContainer);
@@ -6706,7 +6706,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SIGNALEVENT:
+		case UmlPackage::SIGNALEVENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6717,25 +6717,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//SignalEvent has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSignalEvent_in_Namespace(castedContainer);
 					}
 					//SignalEvent has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSignalEvent_in_Owner(castedContainer);
 					}
 					//SignalEvent has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createSignalEvent_in_OwningPackage(castedContainer);
 					}
 					//SignalEvent has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createSignalEvent_in_OwningTemplateParameter(castedContainer);
@@ -6745,7 +6745,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SLOT:
+		case UmlPackage::SLOT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6756,13 +6756,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Slot has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSlot_in_Owner(castedContainer);
 					}
 					//Slot has owningInstance as a containment
-					case  UmlPackage::SLOT_OWNINGINSTANCE: 
+					case  UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InstanceSpecification>(container);
 						return this->createSlot_in_OwningInstance(castedContainer);
@@ -6772,7 +6772,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION:
+		case UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6783,25 +6783,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StartClassifierBehaviorAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createStartClassifierBehaviorAction_in_Activity(castedContainer);
 					}
 					//StartClassifierBehaviorAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createStartClassifierBehaviorAction_in_InStructuredNode(castedContainer);
 					}
 					//StartClassifierBehaviorAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStartClassifierBehaviorAction_in_Namespace(castedContainer);
 					}
 					//StartClassifierBehaviorAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStartClassifierBehaviorAction_in_Owner(castedContainer);
@@ -6811,7 +6811,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STARTOBJECTBEHAVIORACTION:
+		case UmlPackage::STARTOBJECTBEHAVIORACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6822,25 +6822,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StartObjectBehaviorAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createStartObjectBehaviorAction_in_Activity(castedContainer);
 					}
 					//StartObjectBehaviorAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createStartObjectBehaviorAction_in_InStructuredNode(castedContainer);
 					}
 					//StartObjectBehaviorAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStartObjectBehaviorAction_in_Namespace(castedContainer);
 					}
 					//StartObjectBehaviorAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStartObjectBehaviorAction_in_Owner(castedContainer);
@@ -6850,7 +6850,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STATE:
+		case UmlPackage::STATE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6861,19 +6861,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//State has container as a containment
-					case  UmlPackage::VERTEX_CONTAINER: 
+					case  UmlPackage::VERTEX_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createState_in_Container(castedContainer);
 					}
 					//State has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createState_in_Namespace(castedContainer);
 					}
 					//State has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createState_in_Owner(castedContainer);
@@ -6883,7 +6883,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STATEINVARIANT:
+		case UmlPackage::STATEINVARIANT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6894,25 +6894,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StateInvariant has enclosingInteraction as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Interaction>(container);
 						return this->createStateInvariant_in_EnclosingInteraction(castedContainer);
 					}
 					//StateInvariant has enclosingOperand as a containment
-					case  UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND: 
+					case  UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InteractionOperand>(container);
 						return this->createStateInvariant_in_EnclosingOperand(castedContainer);
 					}
 					//StateInvariant has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStateInvariant_in_Namespace(castedContainer);
 					}
 					//StateInvariant has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStateInvariant_in_Owner(castedContainer);
@@ -6922,7 +6922,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STATEMACHINE:
+		case UmlPackage::STATEMACHINE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6933,37 +6933,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StateMachine has behavioredClassifier as a containment
-					case  UmlPackage::BEHAVIOR_BEHAVIOREDCLASSIFIER: 
+					case  UmlPackage::BEHAVIOR_EREFERENCE_BEHAVIOREDCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::BehavioredClassifier>(container);
 						return this->createStateMachine_in_BehavioredClassifier(castedContainer);
 					}
 					//StateMachine has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStateMachine_in_Namespace(castedContainer);
 					}
 					//StateMachine has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStateMachine_in_Owner(castedContainer);
 					}
 					//StateMachine has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createStateMachine_in_OwningPackage(castedContainer);
 					}
 					//StateMachine has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createStateMachine_in_OwningTemplateParameter(castedContainer);
 					}
 					//StateMachine has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createStateMachine_in_Package(castedContainer);
@@ -6973,7 +6973,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STEREOTYPE:
+		case UmlPackage::STEREOTYPE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -6984,31 +6984,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Stereotype has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStereotype_in_Namespace(castedContainer);
 					}
 					//Stereotype has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStereotype_in_Owner(castedContainer);
 					}
 					//Stereotype has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createStereotype_in_OwningPackage(castedContainer);
 					}
 					//Stereotype has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createStereotype_in_OwningTemplateParameter(castedContainer);
 					}
 					//Stereotype has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createStereotype_in_Package(castedContainer);
@@ -7018,7 +7018,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STRINGEXPRESSION:
+		case UmlPackage::STRINGEXPRESSION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7029,37 +7029,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StringExpression has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStringExpression_in_Namespace(castedContainer);
 					}
 					//StringExpression has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStringExpression_in_Owner(castedContainer);
 					}
 					//StringExpression has owningExpression as a containment
-					case  UmlPackage::STRINGEXPRESSION_OWNINGEXPRESSION: 
+					case  UmlPackage::STRINGEXPRESSION_EREFERENCE_OWNINGEXPRESSION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StringExpression>(container);
 						return this->createStringExpression_in_OwningExpression(castedContainer);
 					}
 					//StringExpression has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createStringExpression_in_OwningPackage(castedContainer);
 					}
 					//StringExpression has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createStringExpression_in_OwningSlot(castedContainer);
 					}
 					//StringExpression has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createStringExpression_in_OwningTemplateParameter(castedContainer);
@@ -7069,7 +7069,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7080,37 +7080,37 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//StructuredActivityNode has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createStructuredActivityNode_in_Activity(castedContainer);
 					}
 					//StructuredActivityNode has inActivity as a containment
-					case  UmlPackage::ACTIVITYGROUP_INACTIVITY: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createStructuredActivityNode_in_InActivity(castedContainer);
 					}
 					//StructuredActivityNode has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createStructuredActivityNode_in_InStructuredNode(castedContainer);
 					}
 					//StructuredActivityNode has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createStructuredActivityNode_in_Namespace(castedContainer);
 					}
 					//StructuredActivityNode has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createStructuredActivityNode_in_Owner(castedContainer);
 					}
 					//StructuredActivityNode has superGroup as a containment
-					case  UmlPackage::ACTIVITYGROUP_SUPERGROUP: 
+					case  UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::ActivityGroup>(container);
 						return this->createStructuredActivityNode_in_SuperGroup(castedContainer);
@@ -7120,7 +7120,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::SUBSTITUTION:
+		case UmlPackage::SUBSTITUTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7131,31 +7131,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Substitution has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createSubstitution_in_Namespace(castedContainer);
 					}
 					//Substitution has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createSubstitution_in_Owner(castedContainer);
 					}
 					//Substitution has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createSubstitution_in_OwningPackage(castedContainer);
 					}
 					//Substitution has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createSubstitution_in_OwningTemplateParameter(castedContainer);
 					}
 					//Substitution has substitutingClassifier as a containment
-					case  UmlPackage::SUBSTITUTION_SUBSTITUTINGCLASSIFIER: 
+					case  UmlPackage::SUBSTITUTION_EREFERENCE_SUBSTITUTINGCLASSIFIER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Classifier>(container);
 						return this->createSubstitution_in_SubstitutingClassifier(castedContainer);
@@ -7165,7 +7165,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TEMPLATEBINDING:
+		case UmlPackage::TEMPLATEBINDING_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7176,13 +7176,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TemplateBinding has boundElement as a containment
-					case  UmlPackage::TEMPLATEBINDING_BOUNDELEMENT: 
+					case  UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateableElement>(container);
 						return this->createTemplateBinding_in_BoundElement(castedContainer);
 					}
 					//TemplateBinding has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTemplateBinding_in_Owner(castedContainer);
@@ -7192,7 +7192,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TEMPLATEPARAMETER:
+		case UmlPackage::TEMPLATEPARAMETER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7203,13 +7203,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TemplateParameter has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTemplateParameter_in_Owner(castedContainer);
 					}
 					//TemplateParameter has signature as a containment
-					case  UmlPackage::TEMPLATEPARAMETER_SIGNATURE: 
+					case  UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateSignature>(container);
 						return this->createTemplateParameter_in_Signature(castedContainer);
@@ -7219,7 +7219,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION:
+		case UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7230,13 +7230,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TemplateParameterSubstitution has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTemplateParameterSubstitution_in_Owner(castedContainer);
 					}
 					//TemplateParameterSubstitution has templateBinding as a containment
-					case  UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_TEMPLATEBINDING: 
+					case  UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_EREFERENCE_TEMPLATEBINDING: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateBinding>(container);
 						return this->createTemplateParameterSubstitution_in_TemplateBinding(castedContainer);
@@ -7246,7 +7246,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TEMPLATESIGNATURE:
+		case UmlPackage::TEMPLATESIGNATURE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7257,13 +7257,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TemplateSignature has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTemplateSignature_in_Owner(castedContainer);
 					}
 					//TemplateSignature has template as a containment
-					case  UmlPackage::TEMPLATESIGNATURE_TEMPLATE: 
+					case  UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateableElement>(container);
 						return this->createTemplateSignature_in_Template(castedContainer);
@@ -7273,7 +7273,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TESTIDENTITYACTION:
+		case UmlPackage::TESTIDENTITYACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7284,25 +7284,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TestIdentityAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createTestIdentityAction_in_Activity(castedContainer);
 					}
 					//TestIdentityAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createTestIdentityAction_in_InStructuredNode(castedContainer);
 					}
 					//TestIdentityAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTestIdentityAction_in_Namespace(castedContainer);
 					}
 					//TestIdentityAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTestIdentityAction_in_Owner(castedContainer);
@@ -7312,7 +7312,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TIMECONSTRAINT:
+		case UmlPackage::TIMECONSTRAINT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7323,31 +7323,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TimeConstraint has context as a containment
-					case  UmlPackage::CONSTRAINT_CONTEXT: 
+					case  UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeConstraint_in_Context(castedContainer);
 					}
 					//TimeConstraint has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeConstraint_in_Namespace(castedContainer);
 					}
 					//TimeConstraint has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTimeConstraint_in_Owner(castedContainer);
 					}
 					//TimeConstraint has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createTimeConstraint_in_OwningPackage(castedContainer);
 					}
 					//TimeConstraint has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeConstraint_in_OwningTemplateParameter(castedContainer);
@@ -7357,7 +7357,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TIMEEVENT:
+		case UmlPackage::TIMEEVENT_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7368,25 +7368,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TimeEvent has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeEvent_in_Namespace(castedContainer);
 					}
 					//TimeEvent has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTimeEvent_in_Owner(castedContainer);
 					}
 					//TimeEvent has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createTimeEvent_in_OwningPackage(castedContainer);
 					}
 					//TimeEvent has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeEvent_in_OwningTemplateParameter(castedContainer);
@@ -7396,7 +7396,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TIMEEXPRESSION:
+		case UmlPackage::TIMEEXPRESSION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7407,31 +7407,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TimeExpression has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeExpression_in_Namespace(castedContainer);
 					}
 					//TimeExpression has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTimeExpression_in_Owner(castedContainer);
 					}
 					//TimeExpression has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createTimeExpression_in_OwningPackage(castedContainer);
 					}
 					//TimeExpression has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createTimeExpression_in_OwningSlot(castedContainer);
 					}
 					//TimeExpression has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeExpression_in_OwningTemplateParameter(castedContainer);
@@ -7441,7 +7441,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TIMEINTERVAL:
+		case UmlPackage::TIMEINTERVAL_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7452,31 +7452,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TimeInterval has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeInterval_in_Namespace(castedContainer);
 					}
 					//TimeInterval has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTimeInterval_in_Owner(castedContainer);
 					}
 					//TimeInterval has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createTimeInterval_in_OwningPackage(castedContainer);
 					}
 					//TimeInterval has owningSlot as a containment
-					case  UmlPackage::VALUESPECIFICATION_OWNINGSLOT: 
+					case  UmlPackage::VALUESPECIFICATION_EREFERENCE_OWNINGSLOT: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Slot>(container);
 						return this->createTimeInterval_in_OwningSlot(castedContainer);
 					}
 					//TimeInterval has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeInterval_in_OwningTemplateParameter(castedContainer);
@@ -7486,7 +7486,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TIMEOBSERVATION:
+		case UmlPackage::TIMEOBSERVATION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7497,25 +7497,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//TimeObservation has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTimeObservation_in_Namespace(castedContainer);
 					}
 					//TimeObservation has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTimeObservation_in_Owner(castedContainer);
 					}
 					//TimeObservation has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createTimeObservation_in_OwningPackage(castedContainer);
 					}
 					//TimeObservation has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createTimeObservation_in_OwningTemplateParameter(castedContainer);
@@ -7525,7 +7525,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TRANSITION:
+		case UmlPackage::TRANSITION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7536,19 +7536,19 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Transition has container as a containment
-					case  UmlPackage::TRANSITION_CONTAINER: 
+					case  UmlPackage::TRANSITION_EREFERENCE_CONTAINER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Region>(container);
 						return this->createTransition_in_Container(castedContainer);
 					}
 					//Transition has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTransition_in_Namespace(castedContainer);
 					}
 					//Transition has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTransition_in_Owner(castedContainer);
@@ -7558,7 +7558,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::TRIGGER:
+		case UmlPackage::TRIGGER_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7569,13 +7569,13 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Trigger has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createTrigger_in_Namespace(castedContainer);
 					}
 					//Trigger has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createTrigger_in_Owner(castedContainer);
@@ -7585,7 +7585,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::UNMARSHALLACTION:
+		case UmlPackage::UNMARSHALLACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7596,25 +7596,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//UnmarshallAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createUnmarshallAction_in_Activity(castedContainer);
 					}
 					//UnmarshallAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createUnmarshallAction_in_InStructuredNode(castedContainer);
 					}
 					//UnmarshallAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createUnmarshallAction_in_Namespace(castedContainer);
 					}
 					//UnmarshallAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createUnmarshallAction_in_Owner(castedContainer);
@@ -7624,7 +7624,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::USAGE:
+		case UmlPackage::USAGE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7635,25 +7635,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Usage has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createUsage_in_Namespace(castedContainer);
 					}
 					//Usage has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createUsage_in_Owner(castedContainer);
 					}
 					//Usage has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createUsage_in_OwningPackage(castedContainer);
 					}
 					//Usage has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createUsage_in_OwningTemplateParameter(castedContainer);
@@ -7663,7 +7663,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::USECASE:
+		case UmlPackage::USECASE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7674,31 +7674,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//UseCase has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createUseCase_in_Namespace(castedContainer);
 					}
 					//UseCase has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createUseCase_in_Owner(castedContainer);
 					}
 					//UseCase has owningPackage as a containment
-					case  UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE: 
+					case  UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createUseCase_in_OwningPackage(castedContainer);
 					}
 					//UseCase has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createUseCase_in_OwningTemplateParameter(castedContainer);
 					}
 					//UseCase has package as a containment
-					case  UmlPackage::TYPE_PACKAGE: 
+					case  UmlPackage::TYPE_EREFERENCE_PACKAGE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Package>(container);
 						return this->createUseCase_in_Package(castedContainer);
@@ -7708,7 +7708,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::VALUEPIN:
+		case UmlPackage::VALUEPIN_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7719,43 +7719,43 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ValuePin has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createValuePin_in_Activity(castedContainer);
 					}
 					//ValuePin has callOperationAction as a containment
-					case  UmlPackage::INPUTPIN_CALLOPERATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_CALLOPERATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::CallOperationAction>(container);
 						return this->createValuePin_in_CallOperationAction(castedContainer);
 					}
 					//ValuePin has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createValuePin_in_InStructuredNode(castedContainer);
 					}
 					//ValuePin has invocationAction as a containment
-					case  UmlPackage::INPUTPIN_INVOCATIONACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_INVOCATIONACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::InvocationAction>(container);
 						return this->createValuePin_in_InvocationAction(castedContainer);
 					}
 					//ValuePin has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createValuePin_in_Namespace(castedContainer);
 					}
 					//ValuePin has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createValuePin_in_Owner(castedContainer);
 					}
 					//ValuePin has structuralFeatureAction as a containment
-					case  UmlPackage::INPUTPIN_STRUCTURALFEATUREACTION: 
+					case  UmlPackage::INPUTPIN_EREFERENCE_STRUCTURALFEATUREACTION: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(container);
 						return this->createValuePin_in_StructuralFeatureAction(castedContainer);
@@ -7765,7 +7765,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::VALUESPECIFICATIONACTION:
+		case UmlPackage::VALUESPECIFICATIONACTION_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7776,25 +7776,25 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//ValueSpecificationAction has activity as a containment
-					case  UmlPackage::ACTIVITYNODE_ACTIVITY: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createValueSpecificationAction_in_Activity(castedContainer);
 					}
 					//ValueSpecificationAction has inStructuredNode as a containment
-					case  UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE: 
+					case  UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createValueSpecificationAction_in_InStructuredNode(castedContainer);
 					}
 					//ValueSpecificationAction has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createValueSpecificationAction_in_Namespace(castedContainer);
 					}
 					//ValueSpecificationAction has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createValueSpecificationAction_in_Owner(castedContainer);
@@ -7804,7 +7804,7 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				}
 			}
 		}
-		case UmlPackage::VARIABLE:
+		case UmlPackage::VARIABLE_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -7815,31 +7815,31 @@ std::shared_ptr<ecore::EObject> UmlFactoryImpl::create(const unsigned int classI
 				switch(referenceID)
 				{
 					//Variable has activityScope as a containment
-					case  UmlPackage::VARIABLE_ACTIVITYSCOPE: 
+					case  UmlPackage::VARIABLE_EREFERENCE_ACTIVITYSCOPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Activity>(container);
 						return this->createVariable_in_ActivityScope(castedContainer);
 					}
 					//Variable has namespace as a containment
-					case  UmlPackage::NAMEDELEMENT_NAMESPACE: 
+					case  UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Namespace>(container);
 						return this->createVariable_in_Namespace(castedContainer);
 					}
 					//Variable has owner as a containment
-					case  UmlPackage::ELEMENT_OWNER: 
+					case  UmlPackage::ELEMENT_EREFERENCE_OWNER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::Element>(container);
 						return this->createVariable_in_Owner(castedContainer);
 					}
 					//Variable has owningTemplateParameter as a containment
-					case  UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER: 
+					case  UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::TemplateParameter>(container);
 						return this->createVariable_in_OwningTemplateParameter(castedContainer);
 					}
 					//Variable has scope as a containment
-					case  UmlPackage::VARIABLE_SCOPE: 
+					case  UmlPackage::VARIABLE_EREFERENCE_SCOPE: 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<uml::StructuredActivityNode>(container);
 						return this->createVariable_in_Scope(castedContainer);
@@ -8216,7 +8216,7 @@ std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_Owner(std::weak_ptr<
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -8238,7 +8238,7 @@ std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_OwningTemplateParame
 
 std::shared_ptr<Activity> UmlFactoryImpl::createActivity_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -8434,7 +8434,7 @@ std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_Owner(std::weak_ptr<uml::E
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -8456,7 +8456,7 @@ std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_OwningTemplateParameter(st
 
 std::shared_ptr<Actor> UmlFactoryImpl::createActor_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ActorImpl> element(new ActorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ActorImpl> element(new ActorImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -8641,7 +8641,7 @@ std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_Owner(std::weak_ptr<
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -8663,7 +8663,7 @@ std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_OwningTemplateParame
 
 std::shared_ptr<Artifact> UmlFactoryImpl::createArtifact_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -8701,7 +8701,7 @@ std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_Owner(std::wea
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -8723,7 +8723,7 @@ std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_OwningTemplate
 
 std::shared_ptr<Association> UmlFactoryImpl::createAssociation_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -8761,7 +8761,7 @@ std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Owne
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -8783,7 +8783,7 @@ std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Owni
 
 std::shared_ptr<AssociationClass> UmlFactoryImpl::createAssociationClass_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -9164,7 +9164,7 @@ std::shared_ptr<Class> UmlFactoryImpl::createClass_in_Owner(std::weak_ptr<uml::E
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -9186,7 +9186,7 @@ std::shared_ptr<Class> UmlFactoryImpl::createClass_in_OwningTemplateParameter(st
 
 std::shared_ptr<Class> UmlFactoryImpl::createClass_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ClassImpl> element(new ClassImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ClassImpl> element(new ClassImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -9414,7 +9414,7 @@ std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_Owner(std:
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -9436,7 +9436,7 @@ std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_OwningTemp
 
 std::shared_ptr<Collaboration> UmlFactoryImpl::createCollaboration_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -9566,7 +9566,7 @@ std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Ow
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -9588,7 +9588,7 @@ std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Ow
 
 std::shared_ptr<CommunicationPath> UmlFactoryImpl::createCommunicationPath_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -9626,7 +9626,7 @@ std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_Owner(std::weak_pt
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -9648,7 +9648,7 @@ std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_OwningTemplatePara
 
 std::shared_ptr<Component> UmlFactoryImpl::createComponent_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -9724,7 +9724,7 @@ std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode() const
 }
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
 			wp->getNode()->push_back(element);
@@ -9735,7 +9735,7 @@ std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_Activi
 
 std::shared_ptr<ConditionalNode> UmlFactoryImpl::createConditionalNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
 			wp->getGroup()->push_back(element);
@@ -9963,7 +9963,7 @@ std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint() const
 }
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_context, UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -9974,7 +9974,7 @@ std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Context(std::wea
 
 std::shared_ptr<Constraint> UmlFactoryImpl::createConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -10339,7 +10339,7 @@ std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_Owner(std::weak_ptr<
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -10361,7 +10361,7 @@ std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_OwningTemplateParame
 
 std::shared_ptr<DataType> UmlFactoryImpl::createDataType_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -10568,7 +10568,7 @@ std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecifi
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -10590,7 +10590,7 @@ std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecifi
 
 std::shared_ptr<DeploymentSpecification> UmlFactoryImpl::createDeploymentSpecification_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -10775,7 +10775,7 @@ std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_Owner(std::weak_ptr<uml:
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -10797,7 +10797,7 @@ std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_OwningTemplateParameter(
 
 std::shared_ptr<Device> UmlFactoryImpl::createDevice_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -10873,7 +10873,7 @@ std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint() c
 }
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_context, UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -10884,7 +10884,7 @@ std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_
 
 std::shared_ptr<DurationConstraint> UmlFactoryImpl::createDurationConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
 			wp->getOwnedMember()->push_back(element);
@@ -11091,7 +11091,7 @@ std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_Owner(std::wea
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -11113,7 +11113,7 @@ std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_OwningTemplate
 
 std::shared_ptr<Enumeration> UmlFactoryImpl::createEnumeration_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -11238,7 +11238,7 @@ std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -11260,7 +11260,7 @@ std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment
 
 std::shared_ptr<ExecutionEnvironment> UmlFactoryImpl::createExecutionEnvironment_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -11374,7 +11374,7 @@ std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion() const
 }
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_activity, UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
 			wp->getNode()->push_back(element);
@@ -11385,7 +11385,7 @@ std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_Activi
 
 std::shared_ptr<ExpansionRegion> UmlFactoryImpl::createExpansionRegion_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
 			wp->getGroup()->push_back(element);
@@ -11565,7 +11565,7 @@ std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_Owner(std::weak_pt
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -11587,7 +11587,7 @@ std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_OwningTemplatePara
 
 std::shared_ptr<Extension> UmlFactoryImpl::createExtension_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -11908,7 +11908,7 @@ std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Owne
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -11930,7 +11930,7 @@ std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Owni
 
 std::shared_ptr<FunctionBehavior> UmlFactoryImpl::createFunctionBehavior_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -12201,7 +12201,7 @@ std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Owner(
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -12223,7 +12223,7 @@ std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Owning
 
 std::shared_ptr<InformationItem> UmlFactoryImpl::createInformationItem_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -12534,7 +12534,7 @@ std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_Owner(std::wea
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -12556,7 +12556,7 @@ std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_OwningTemplate
 
 std::shared_ptr<Interaction> UmlFactoryImpl::createInteraction_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -12572,7 +12572,7 @@ std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstrai
 }
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_context, UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -12583,7 +12583,7 @@ std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstrai
 
 std::shared_ptr<InteractionConstraint> UmlFactoryImpl::createInteractionConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
 			wp->getOwnedMember()->push_back(element);
@@ -12752,7 +12752,7 @@ std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_Owner(std::weak_pt
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -12774,7 +12774,7 @@ std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_OwningTemplatePara
 
 std::shared_ptr<Interface> UmlFactoryImpl::createInterface_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -12959,7 +12959,7 @@ std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint() c
 }
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_context, UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -12970,7 +12970,7 @@ std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_
 
 std::shared_ptr<IntervalConstraint> UmlFactoryImpl::createIntervalConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
 			wp->getOwnedMember()->push_back(element);
@@ -13514,7 +13514,7 @@ std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode() const
 }
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
 			wp->getNode()->push_back(element);
@@ -13525,7 +13525,7 @@ std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_Activity(std::weak_p
 
 std::shared_ptr<LoopNode> UmlFactoryImpl::createLoopNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
 			wp->getGroup()->push_back(element);
@@ -13781,7 +13781,7 @@ std::shared_ptr<Model> UmlFactoryImpl::createModel_in_Namespace(std::weak_ptr<um
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<ModelImpl> element(new ModelImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_nestingPackage, UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
 			wp->getNestedPackage()->push_back(element);
@@ -13803,7 +13803,7 @@ std::shared_ptr<Model> UmlFactoryImpl::createModel_in_Owner(std::weak_ptr<uml::E
 
 std::shared_ptr<Model> UmlFactoryImpl::createModel_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -13852,7 +13852,7 @@ std::shared_ptr<Node> UmlFactoryImpl::createNode_in_Owner(std::weak_ptr<uml::Ele
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -13874,7 +13874,7 @@ std::shared_ptr<Node> UmlFactoryImpl::createNode_in_OwningTemplateParameter(std:
 
 std::shared_ptr<Node> UmlFactoryImpl::createNode_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<NodeImpl> element(new NodeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<NodeImpl> element(new NodeImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -14075,7 +14075,7 @@ std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_Owner(st
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -14097,7 +14097,7 @@ std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_OwningTe
 
 std::shared_ptr<OpaqueBehavior> UmlFactoryImpl::createOpaqueBehavior_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -14342,7 +14342,7 @@ std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_Namespace(std::weak_pt
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<PackageImpl> element(new PackageImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_nestingPackage, UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
 			wp->getNestedPackage()->push_back(element);
@@ -14364,7 +14364,7 @@ std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_Owner(std::weak_ptr<um
 
 std::shared_ptr<Package> UmlFactoryImpl::createPackage_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getNestedPackage()->push_back(element);
@@ -14696,7 +14696,7 @@ std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_Owner(std:
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -14718,7 +14718,7 @@ std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_OwningTemp
 
 std::shared_ptr<PrimitiveType> UmlFactoryImpl::createPrimitiveType_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -14745,7 +14745,7 @@ std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_Namespace(std::weak_pt
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage) const
 {
-	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_nestingPackage, UmlPackage::PACKAGE_NESTINGPACKAGE));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_nestingPackage, UmlPackage::PACKAGE_EREFERENCE_NESTINGPACKAGE));
 	if(auto wp = par_nestingPackage.lock())
 	{
 			wp->getNestedPackage()->push_back(element);
@@ -14767,7 +14767,7 @@ std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_Owner(std::weak_ptr<um
 
 std::shared_ptr<Profile> UmlFactoryImpl::createProfile_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -14974,7 +14974,7 @@ std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -14996,7 +14996,7 @@ std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine
 
 std::shared_ptr<ProtocolStateMachine> UmlFactoryImpl::createProtocolStateMachine_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -16073,7 +16073,7 @@ std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode() const
 }
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
 			wp->getNode()->push_back(element);
@@ -16084,7 +16084,7 @@ std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_Activity(std
 
 std::shared_ptr<SequenceNode> UmlFactoryImpl::createSequenceNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
 			wp->getGroup()->push_back(element);
@@ -16166,7 +16166,7 @@ std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_Owner(std::weak_ptr<uml:
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -16188,7 +16188,7 @@ std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_OwningTemplateParameter(
 
 std::shared_ptr<Signal> UmlFactoryImpl::createSignal_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<SignalImpl> element(new SignalImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<SignalImpl> element(new SignalImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -16498,7 +16498,7 @@ std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_Owner(std::w
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -16520,7 +16520,7 @@ std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_OwningTempla
 
 std::shared_ptr<StateMachine> UmlFactoryImpl::createStateMachine_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -16558,7 +16558,7 @@ std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_Owner(std::weak_
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getOwnedStereotype()->push_back(element);
@@ -16580,7 +16580,7 @@ std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_OwningTemplatePa
 
 std::shared_ptr<Stereotype> UmlFactoryImpl::createStereotype_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);
@@ -16667,7 +16667,7 @@ std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivity
 }
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_Activity(std::weak_ptr<uml::Activity > par_activity) const
 {
-	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_ACTIVITY));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_activity, UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY));
 	if(auto wp = par_activity.lock())
 	{
 			wp->getStructuredNode()->push_back(element);
@@ -16678,7 +16678,7 @@ std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivity
 
 std::shared_ptr<StructuredActivityNode> UmlFactoryImpl::createStructuredActivityNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity) const
 {
-	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_INACTIVITY));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inActivity, UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY));
 	if(auto wp = par_inActivity.lock())
 	{
 			wp->getStructuredNode()->push_back(element);
@@ -16955,7 +16955,7 @@ std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint() const
 }
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context) const
 {
-	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_context, UmlPackage::CONSTRAINT_CONTEXT));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_context, UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT));
 	if(auto wp = par_context.lock())
 	{
 			wp->getOwnedRule()->push_back(element);
@@ -16966,7 +16966,7 @@ std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Context(
 
 std::shared_ptr<TimeConstraint> UmlFactoryImpl::createTimeConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace) const
 {
-	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_NAMESPACE));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_namespace, UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE));
 	if(auto wp = par_namespace.lock())
 	{
 			wp->getOwnedMember()->push_back(element);
@@ -17418,7 +17418,7 @@ std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_Owner(std::weak_ptr<um
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage) const
 {
-	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningPackage, UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE));
 	if(auto wp = par_owningPackage.lock())
 	{
 			wp->getPackagedElement()->push_back(element);
@@ -17440,7 +17440,7 @@ std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_OwningTemplateParamete
 
 std::shared_ptr<UseCase> UmlFactoryImpl::createUseCase_in_Package(std::weak_ptr<uml::Package > par_package) const
 {
-	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_package, UmlPackage::TYPE_PACKAGE));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_package, UmlPackage::TYPE_EREFERENCE_PACKAGE));
 	if(auto wp = par_package.lock())
 	{
 			wp->getOwnedType()->push_back(element);

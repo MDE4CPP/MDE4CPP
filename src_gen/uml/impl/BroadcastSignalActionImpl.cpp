@@ -78,7 +78,6 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BroadcastSignalAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -266,7 +265,7 @@ std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBroadcastSignalAction();
+	return UmlPackageImpl::eInstance()->getBroadcastSignalAction_EClass();
 }
 
 //*********************************
@@ -363,67 +362,67 @@ boost::any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 			return getActivity(); //13713
-		case UmlPackage::INVOCATIONACTION_ARGUMENT:
+		case UmlPackage::INVOCATIONACTION_EREFERENCE_ARGUMENT:
 			return getArgument(); //13728
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1374
-		case UmlPackage::ACTION_CONTEXT:
+		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
 			return getContext(); //13722
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1370
-		case UmlPackage::EXECUTABLENODE_HANDLER:
+		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
 			return getHandler(); //13721
-		case UmlPackage::ACTIVITYNODE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
 			return getInGroup(); //13714
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
 			return getInInterruptibleRegion(); //13715
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
 			return getInPartition(); //13720
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 			return getInStructuredNode(); //13716
-		case UmlPackage::ACTIVITYNODE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
 			return getIncoming(); //13717
-		case UmlPackage::ACTION_INPUT:
+		case UmlPackage::ACTION_EREFERENCE_INPUT:
 			return getInput(); //13723
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //13710
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 			return getIsLocallyReentrant(); //13724
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
 			return getLocalPostcondition(); //13725
-		case UmlPackage::ACTION_LOCALPRECONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
 			return getLocalPrecondition(); //13726
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1375
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1376
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1377
-		case UmlPackage::INVOCATIONACTION_ONPORT:
+		case UmlPackage::INVOCATIONACTION_EREFERENCE_ONPORT:
 			return getOnPort(); //13729
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
 			return getOutgoing(); //13718
-		case UmlPackage::ACTION_OUTPUT:
+		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
 			return getOutput(); //13727
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1371
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1372
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1373
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1378
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //13711
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
 			return getRedefinedNode(); //13719
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //13712
-		case UmlPackage::BROADCASTSIGNALACTION_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
 			return getSignal(); //13730
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1379
 	}
 	return boost::any();
@@ -433,63 +432,63 @@ void BroadcastSignalActionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setActivity(_activity); //13713
 			break;
 		}
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
 			setInStructuredNode(_inStructuredNode); //13716
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //13710
 			break;
 		}
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
 			setIsLocallyReentrant(_isLocallyReentrant); //13724
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1375
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1376
 			break;
 		}
-		case UmlPackage::INVOCATIONACTION_ONPORT:
+		case UmlPackage::INVOCATIONACTION_EREFERENCE_ONPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Port> _onPort = boost::any_cast<std::shared_ptr<uml::Port>>(newValue);
 			setOnPort(_onPort); //13729
 			break;
 		}
-		case UmlPackage::BROADCASTSIGNALACTION_SIGNAL:
+		case UmlPackage::BROADCASTSIGNALACTION_EREFERENCE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Signal> _signal = boost::any_cast<std::shared_ptr<uml::Signal>>(newValue);
 			setSignal(_signal); //13730
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

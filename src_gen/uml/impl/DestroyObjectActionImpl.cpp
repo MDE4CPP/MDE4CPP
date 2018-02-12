@@ -75,7 +75,6 @@ DestroyObjectActionImpl::~DestroyObjectActionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DestroyObjectAction "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -261,7 +260,7 @@ std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDestroyObjectAction();
+	return UmlPackageImpl::eInstance()->getDestroyObjectAction_EClass();
 }
 
 //*********************************
@@ -371,67 +370,67 @@ boost::any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 			return getActivity(); //15313
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1534
-		case UmlPackage::ACTION_CONTEXT:
+		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
 			return getContext(); //15322
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1530
-		case UmlPackage::EXECUTABLENODE_HANDLER:
+		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
 			return getHandler(); //15321
-		case UmlPackage::ACTIVITYNODE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
 			return getInGroup(); //15314
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
 			return getInInterruptibleRegion(); //15315
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
 			return getInPartition(); //15320
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 			return getInStructuredNode(); //15316
-		case UmlPackage::ACTIVITYNODE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
 			return getIncoming(); //15317
-		case UmlPackage::ACTION_INPUT:
+		case UmlPackage::ACTION_EREFERENCE_INPUT:
 			return getInput(); //15323
-		case UmlPackage::DESTROYOBJECTACTION_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
 			return getIsDestroyLinks(); //15328
-		case UmlPackage::DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return getIsDestroyOwnedObjects(); //15329
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //15310
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 			return getIsLocallyReentrant(); //15324
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
 			return getLocalPostcondition(); //15325
-		case UmlPackage::ACTION_LOCALPRECONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
 			return getLocalPrecondition(); //15326
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1535
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1536
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1537
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
 			return getOutgoing(); //15318
-		case UmlPackage::ACTION_OUTPUT:
+		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
 			return getOutput(); //15327
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1531
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1532
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1533
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1538
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //15311
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
 			return getRedefinedNode(); //15319
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //15312
-		case UmlPackage::DESTROYOBJECTACTION_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
 			return getTarget(); //15330
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1539
 	}
 	return boost::any();
@@ -441,70 +440,70 @@ void DestroyObjectActionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setActivity(_activity); //15313
 			break;
 		}
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
 			setInStructuredNode(_inStructuredNode); //15316
 			break;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_ISDESTROYLINKS:
+		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYLINKS:
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = boost::any_cast<bool>(newValue);
 			setIsDestroyLinks(_isDestroyLinks); //15328
 			break;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_ISDESTROYOWNEDOBJECTS:
+		case UmlPackage::DESTROYOBJECTACTION_EATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = boost::any_cast<bool>(newValue);
 			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //15329
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //15310
 			break;
 		}
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
 			setIsLocallyReentrant(_isLocallyReentrant); //15324
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1535
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1536
 			break;
 		}
-		case UmlPackage::DESTROYOBJECTACTION_TARGET:
+		case UmlPackage::DESTROYOBJECTACTION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _target = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
 			setTarget(_target); //15330
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

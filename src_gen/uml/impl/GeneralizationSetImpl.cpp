@@ -64,7 +64,6 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GeneralizationSet "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -182,7 +181,7 @@ std::shared_ptr<ecore::EObject>  GeneralizationSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralizationSet();
+	return UmlPackageImpl::eInstance()->getGeneralizationSet_EClass();
 }
 
 //*********************************
@@ -291,39 +290,39 @@ boost::any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //964
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //960
-		case UmlPackage::GENERALIZATIONSET_GENERALIZATION:
+		case UmlPackage::GENERALIZATIONSET_EREFERENCE_GENERALIZATION:
 			return getGeneralization(); //9616
-		case UmlPackage::GENERALIZATIONSET_ISCOVERING:
+		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
 			return getIsCovering(); //9613
-		case UmlPackage::GENERALIZATIONSET_ISDISJOINT:
+		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
 			return getIsDisjoint(); //9614
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //965
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //966
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //967
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //961
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //962
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //963
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 			return getOwningPackage(); //9612
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //964
-		case UmlPackage::GENERALIZATIONSET_POWERTYPE:
+		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
 			return getPowertype(); //9615
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //968
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //965
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //969
 	}
 	return boost::any();
@@ -333,63 +332,63 @@ void GeneralizationSetImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_ISCOVERING:
+		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISCOVERING:
 		{
 			// BOOST CAST
 			bool _isCovering = boost::any_cast<bool>(newValue);
 			setIsCovering(_isCovering); //9613
 			break;
 		}
-		case UmlPackage::GENERALIZATIONSET_ISDISJOINT:
+		case UmlPackage::GENERALIZATIONSET_EATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = boost::any_cast<bool>(newValue);
 			setIsDisjoint(_isDisjoint); //9614
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //965
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //966
 			break;
 		}
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
 			setOwningPackage(_owningPackage); //9612
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setOwningTemplateParameter(_owningTemplateParameter); //964
 			break;
 		}
-		case UmlPackage::GENERALIZATIONSET_POWERTYPE:
+		case UmlPackage::GENERALIZATIONSET_EREFERENCE_POWERTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _powertype = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
 			setPowertype(_powertype); //9615
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setTemplateParameter(_templateParameter); //965
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

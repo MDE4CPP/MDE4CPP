@@ -109,7 +109,6 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityPartition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -272,7 +271,7 @@ std::shared_ptr<ecore::EObject>  ActivityPartitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityPartition();
+	return UmlPackageImpl::eInstance()->getActivityPartition_EClass();
 }
 
 //*********************************
@@ -434,49 +433,49 @@ boost::any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1094
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
 			return getContainedEdge(); //10910
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
 			return getContainedNode(); //10911
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1090
-		case UmlPackage::ACTIVITYPARTITION_EDGE:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_EDGE:
 			return getEdge(); //10921
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 			return getInActivity(); //10912
-		case UmlPackage::ACTIVITYPARTITION_ISDIMENSION:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
 			return getIsDimension(); //10915
-		case UmlPackage::ACTIVITYPARTITION_ISEXTERNAL:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 			return getIsExternal(); //10916
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1095
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1096
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1097
-		case UmlPackage::ACTIVITYPARTITION_NODE:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_NODE:
 			return getNode(); //10917
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1091
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1092
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1093
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1098
-		case UmlPackage::ACTIVITYPARTITION_REPRESENTS:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 			return getRepresents(); //10918
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
 			return getSubgroup(); //10913
-		case UmlPackage::ACTIVITYPARTITION_SUBPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUBPARTITION:
 			return getSubpartition(); //10919
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
 			return getSuperGroup(); //10914
-		case UmlPackage::ACTIVITYPARTITION_SUPERPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 			return getSuperPartition(); //10920
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1099
 	}
 	return boost::any();
@@ -486,56 +485,56 @@ void ActivityPartitionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _inActivity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setInActivity(_inActivity); //10912
 			break;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ISDIMENSION:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISDIMENSION:
 		{
 			// BOOST CAST
 			bool _isDimension = boost::any_cast<bool>(newValue);
 			setIsDimension(_isDimension); //10915
 			break;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ISEXTERNAL:
+		case UmlPackage::ACTIVITYPARTITION_EATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
 			bool _isExternal = boost::any_cast<bool>(newValue);
 			setIsExternal(_isExternal); //10916
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1095
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1096
 			break;
 		}
-		case UmlPackage::ACTIVITYPARTITION_REPRESENTS:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Element> _represents = boost::any_cast<std::shared_ptr<uml::Element>>(newValue);
 			setRepresents(_represents); //10918
 			break;
 		}
-		case UmlPackage::ACTIVITYPARTITION_SUPERPARTITION:
+		case UmlPackage::ACTIVITYPARTITION_EREFERENCE_SUPERPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityPartition> _superPartition = boost::any_cast<std::shared_ptr<uml::ActivityPartition>>(newValue);
 			setSuperPartition(_superPartition); //10920
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

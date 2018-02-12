@@ -54,7 +54,6 @@ GeneralOrderingImpl::~GeneralOrderingImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GeneralOrdering "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -141,7 +140,7 @@ std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralOrdering();
+	return UmlPackageImpl::eInstance()->getGeneralOrdering_EClass();
 }
 
 //*********************************
@@ -214,29 +213,29 @@ boost::any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALORDERING_AFTER:
+		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
 			return getAfter(); //22010
-		case UmlPackage::GENERALORDERING_BEFORE:
+		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
 			return getBefore(); //22011
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //2204
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //2200
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //2205
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //2206
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //2207
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //2201
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //2202
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //2203
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //2208
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //2209
 	}
 	return boost::any();
@@ -246,35 +245,35 @@ void GeneralOrderingImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALORDERING_AFTER:
+		case UmlPackage::GENERALORDERING_EREFERENCE_AFTER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _after = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
 			setAfter(_after); //22010
 			break;
 		}
-		case UmlPackage::GENERALORDERING_BEFORE:
+		case UmlPackage::GENERALORDERING_EREFERENCE_BEFORE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OccurrenceSpecification> _before = boost::any_cast<std::shared_ptr<uml::OccurrenceSpecification>>(newValue);
 			setBefore(_before); //22011
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //2205
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //2206
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

@@ -165,7 +165,6 @@ StateImpl::~StateImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete State "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -419,7 +418,7 @@ std::shared_ptr<ecore::EObject>  StateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getState();
+	return UmlPackageImpl::eInstance()->getState_EClass();
 }
 
 //*********************************
@@ -662,77 +661,77 @@ boost::any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //634
-		case UmlPackage::STATE_CONNECTION:
+		case UmlPackage::STATE_EREFERENCE_CONNECTION:
 			return getConnection(); //6322
-		case UmlPackage::STATE_CONNECTIONPOINT:
+		case UmlPackage::STATE_EREFERENCE_CONNECTIONPOINT:
 			return getConnectionPoint(); //6323
-		case UmlPackage::VERTEX_CONTAINER:
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 			return getContainer(); //6310
-		case UmlPackage::STATE_DEFERRABLETRIGGER:
+		case UmlPackage::STATE_EREFERENCE_DEFERRABLETRIGGER:
 			return getDeferrableTrigger(); //6324
-		case UmlPackage::STATE_DOACTIVITY:
+		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
 			return getDoActivity(); //6325
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //630
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
 			return getElementImport(); //6311
-		case UmlPackage::STATE_ENTRY:
+		case UmlPackage::STATE_EREFERENCE_ENTRY:
 			return getEntry(); //6326
-		case UmlPackage::STATE_EXIT:
+		case UmlPackage::STATE_EREFERENCE_EXIT:
 			return getExit(); //6327
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
 			return getImportedMember(); //6314
-		case UmlPackage::VERTEX_INCOMING:
+		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
 			return getIncoming(); //6311
-		case UmlPackage::STATE_ISCOMPOSITE:
+		case UmlPackage::STATE_EATTRIBUTE_ISCOMPOSITE:
 			return getIsComposite(); //6328
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //6310
-		case UmlPackage::STATE_ISORTHOGONAL:
+		case UmlPackage::STATE_EATTRIBUTE_ISORTHOGONAL:
 			return getIsOrthogonal(); //6329
-		case UmlPackage::STATE_ISSIMPLE:
+		case UmlPackage::STATE_EATTRIBUTE_ISSIMPLE:
 			return getIsSimple(); //6330
-		case UmlPackage::STATE_ISSUBMACHINESTATE:
+		case UmlPackage::STATE_EATTRIBUTE_ISSUBMACHINESTATE:
 			return getIsSubmachineState(); //6331
-		case UmlPackage::NAMESPACE_MEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
 			return getMember(); //6315
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //635
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //636
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //637
-		case UmlPackage::VERTEX_OUTGOING:
+		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
 			return getOutgoing(); //6312
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //631
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //632
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
 			return getOwnedMember(); //6313
-		case UmlPackage::NAMESPACE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
 			return getOwnedRule(); //6310
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //633
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
 			return getPackageImport(); //6312
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //638
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //6311
-		case UmlPackage::STATE_REDEFINEDSTATE:
+		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
 			return getRedefinedState(); //6332
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //6312
-		case UmlPackage::STATE_REGION:
+		case UmlPackage::STATE_EREFERENCE_REGION:
 			return getRegion(); //6335
-		case UmlPackage::STATE_STATEINVARIANT:
+		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
 			return getStateInvariant(); //6333
-		case UmlPackage::STATE_SUBMACHINE:
+		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
 			return getSubmachine(); //6334
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //639
 	}
 	return boost::any();
@@ -742,77 +741,77 @@ void StateImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_CONTAINER:
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
 			setContainer(_container); //6310
 			break;
 		}
-		case UmlPackage::STATE_DOACTIVITY:
+		case UmlPackage::STATE_EREFERENCE_DOACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _doActivity = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
 			setDoActivity(_doActivity); //6325
 			break;
 		}
-		case UmlPackage::STATE_ENTRY:
+		case UmlPackage::STATE_EREFERENCE_ENTRY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _entry = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
 			setEntry(_entry); //6326
 			break;
 		}
-		case UmlPackage::STATE_EXIT:
+		case UmlPackage::STATE_EREFERENCE_EXIT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _exit = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
 			setExit(_exit); //6327
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //6310
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //635
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //636
 			break;
 		}
-		case UmlPackage::STATE_REDEFINEDSTATE:
+		case UmlPackage::STATE_EREFERENCE_REDEFINEDSTATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _redefinedState = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
 			setRedefinedState(_redefinedState); //6332
 			break;
 		}
-		case UmlPackage::STATE_STATEINVARIANT:
+		case UmlPackage::STATE_EREFERENCE_STATEINVARIANT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _stateInvariant = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setStateInvariant(_stateInvariant); //6333
 			break;
 		}
-		case UmlPackage::STATE_SUBMACHINE:
+		case UmlPackage::STATE_EREFERENCE_SUBMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _submachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
 			setSubmachine(_submachine); //6334
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

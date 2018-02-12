@@ -56,7 +56,6 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProfileApplication "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -137,7 +136,7 @@ std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfileApplication();
+	return UmlPackageImpl::eInstance()->getProfileApplication_EClass();
 }
 
 //*********************************
@@ -237,25 +236,25 @@ boost::any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
 			return getAppliedProfile(); //767
-		case UmlPackage::PROFILEAPPLICATION_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 			return getApplyingPackage(); //769
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //760
-		case UmlPackage::PROFILEAPPLICATION_ISSTRICT:
+		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 			return getIsStrict(); //768
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //761
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //762
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //763
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //764
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //765
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //766
 	}
 	return boost::any();
@@ -265,21 +264,21 @@ void ProfileApplicationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILEAPPLICATION_APPLIEDPROFILE:
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLIEDPROFILE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Profile> _appliedProfile = boost::any_cast<std::shared_ptr<uml::Profile>>(newValue);
 			setAppliedProfile(_appliedProfile); //767
 			break;
 		}
-		case UmlPackage::PROFILEAPPLICATION_APPLYINGPACKAGE:
+		case UmlPackage::PROFILEAPPLICATION_EREFERENCE_APPLYINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _applyingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
 			setApplyingPackage(_applyingPackage); //769
 			break;
 		}
-		case UmlPackage::PROFILEAPPLICATION_ISSTRICT:
+		case UmlPackage::PROFILEAPPLICATION_EATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = boost::any_cast<bool>(newValue);

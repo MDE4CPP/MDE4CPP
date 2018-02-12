@@ -60,7 +60,6 @@ TemplateParameterImpl::~TemplateParameterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TemplateParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -151,7 +150,7 @@ std::shared_ptr<ecore::EObject>  TemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateParameter();
+	return UmlPackageImpl::eInstance()->getTemplateParameter_EClass();
 }
 
 //*********************************
@@ -254,23 +253,23 @@ boost::any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
 			return getDefault(); //164
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //160
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //161
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDDEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
 			return getOwnedDefault(); //165
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //162
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
 			return getOwnedParameteredElement(); //168
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //163
-		case UmlPackage::TEMPLATEPARAMETER_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
 			return getParameteredElement(); //166
-		case UmlPackage::TEMPLATEPARAMETER_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
 			return getSignature(); //167
 	}
 	return boost::any();
@@ -280,35 +279,35 @@ void TemplateParameterImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEPARAMETER_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _default = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setDefault(_default); //164
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDDEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedDefault = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setOwnedDefault(_ownedDefault); //165
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setOwnedParameteredElement(_ownedParameteredElement); //168
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _parameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setParameteredElement(_parameteredElement); //166
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);

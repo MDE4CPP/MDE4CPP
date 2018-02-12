@@ -71,7 +71,6 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TemplateSignature "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -159,7 +158,7 @@ std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateSignature();
+	return UmlPackageImpl::eInstance()->getTemplateSignature_EClass();
 }
 
 //*********************************
@@ -242,19 +241,19 @@ boost::any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //170
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //171
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //172
-		case UmlPackage::TEMPLATESIGNATURE_OWNEDPARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_OWNEDPARAMETER:
 			return getOwnedParameter(); //176
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //173
-		case UmlPackage::TEMPLATESIGNATURE_PARAMETER:
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_PARAMETER:
 			return getParameter(); //174
-		case UmlPackage::TEMPLATESIGNATURE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
 			return getTemplate(); //175
 	}
 	return boost::any();
@@ -264,7 +263,7 @@ void TemplateSignatureImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATESIGNATURE_TEMPLATE:
+		case UmlPackage::TEMPLATESIGNATURE_EREFERENCE_TEMPLATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _template = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);

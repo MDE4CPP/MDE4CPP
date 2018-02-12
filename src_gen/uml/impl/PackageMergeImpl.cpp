@@ -48,7 +48,6 @@ PackageMergeImpl::~PackageMergeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PackageMerge "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -128,7 +127,7 @@ std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageMerge();
+	return UmlPackageImpl::eInstance()->getPackageMerge_EClass();
 }
 
 //*********************************
@@ -208,23 +207,23 @@ boost::any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //750
-		case UmlPackage::PACKAGEMERGE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
 			return getMergedPackage(); //757
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //751
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //752
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //753
-		case UmlPackage::PACKAGEMERGE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
 			return getReceivingPackage(); //758
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //754
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //755
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //756
 	}
 	return boost::any();
@@ -234,14 +233,14 @@ void PackageMergeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEMERGE_MERGEDPACKAGE:
+		case UmlPackage::PACKAGEMERGE_EREFERENCE_MERGEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _mergedPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
 			setMergedPackage(_mergedPackage); //757
 			break;
 		}
-		case UmlPackage::PACKAGEMERGE_RECEIVINGPACKAGE:
+		case UmlPackage::PACKAGEMERGE_EREFERENCE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _receivingPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);

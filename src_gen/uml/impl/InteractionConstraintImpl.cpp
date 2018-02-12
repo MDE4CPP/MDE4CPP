@@ -58,7 +58,6 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InteractionConstraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -68,10 +67,10 @@ InteractionConstraintImpl::~InteractionConstraintImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::CONSTRAINT_CONTEXT:
+				case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
 					 m_context = par_Namespace;
 					 return;
-				case UmlPackage::NAMEDELEMENT_NAMESPACE:
+				case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 					 m_namespace = par_Namespace;
 					 return;
 				default:
@@ -215,7 +214,7 @@ std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionConstraint();
+	return UmlPackageImpl::eInstance()->getInteractionConstraint_EClass();
 }
 
 //*********************************
@@ -337,41 +336,41 @@ boost::any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //2194
-		case UmlPackage::CONSTRAINT_CONSTRAINEDELEMENT:
+		case UmlPackage::CONSTRAINT_EREFERENCE_CONSTRAINEDELEMENT:
 			return getConstrainedElement(); //21913
-		case UmlPackage::CONSTRAINT_CONTEXT:
+		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
 			return getContext(); //21914
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //2190
-		case UmlPackage::INTERACTIONCONSTRAINT_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
 			return getMaxint(); //21916
-		case UmlPackage::INTERACTIONCONSTRAINT_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
 			return getMinint(); //21917
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //2195
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //2196
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //2197
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //2191
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //2192
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //2193
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 			return getOwningPackage(); //21912
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //2194
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //2198
-		case UmlPackage::CONSTRAINT_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
 			return getSpecification(); //21915
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //2195
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //2199
 	}
 	return boost::any();
@@ -381,70 +380,70 @@ void InteractionConstraintImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONSTRAINT_CONTEXT:
+		case UmlPackage::CONSTRAINT_EREFERENCE_CONTEXT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _context = boost::any_cast<std::shared_ptr<uml::Namespace>>(newValue);
 			setContext(_context); //21914
 			break;
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT_MAXINT:
+		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MAXINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _maxint = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setMaxint(_maxint); //21916
 			break;
 		}
-		case UmlPackage::INTERACTIONCONSTRAINT_MININT:
+		case UmlPackage::INTERACTIONCONSTRAINT_EREFERENCE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _minint = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setMinint(_minint); //21917
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //2195
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //2196
 			break;
 		}
-		case UmlPackage::PACKAGEABLEELEMENT_OWNINGPACKAGE:
+		case UmlPackage::PACKAGEABLEELEMENT_EREFERENCE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Package> _owningPackage = boost::any_cast<std::shared_ptr<uml::Package>>(newValue);
 			setOwningPackage(_owningPackage); //21912
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setOwningTemplateParameter(_owningTemplateParameter); //2194
 			break;
 		}
-		case UmlPackage::CONSTRAINT_SPECIFICATION:
+		case UmlPackage::CONSTRAINT_EREFERENCE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _specification = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setSpecification(_specification); //21915
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setTemplateParameter(_templateParameter); //2195
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

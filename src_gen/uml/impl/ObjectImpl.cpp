@@ -34,7 +34,6 @@ ObjectImpl::~ObjectImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -63,7 +62,7 @@ std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getObject();
+	return UmlPackageImpl::eInstance()->getObject_EClass();
 }
 
 //*********************************

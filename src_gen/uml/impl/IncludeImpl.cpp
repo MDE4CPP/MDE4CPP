@@ -56,7 +56,6 @@ IncludeImpl::~IncludeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Include "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -162,7 +161,7 @@ std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInclude();
+	return UmlPackageImpl::eInstance()->getInclude_EClass();
 }
 
 //*********************************
@@ -251,35 +250,35 @@ boost::any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_ADDITION:
+		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
 			return getAddition(); //10113
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1014
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1010
-		case UmlPackage::INCLUDE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
 			return getIncludingCase(); //10114
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1015
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1016
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1017
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1011
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1012
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1013
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1018
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //1014
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //1015
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //1016
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1019
 	}
 	return boost::any();
@@ -289,35 +288,35 @@ void IncludeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INCLUDE_ADDITION:
+		case UmlPackage::INCLUDE_EREFERENCE_ADDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _addition = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
 			setAddition(_addition); //10113
 			break;
 		}
-		case UmlPackage::INCLUDE_INCLUDINGCASE:
+		case UmlPackage::INCLUDE_EREFERENCE_INCLUDINGCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _includingCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
 			setIncludingCase(_includingCase); //10114
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1015
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1016
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

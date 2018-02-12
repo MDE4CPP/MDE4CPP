@@ -60,7 +60,6 @@ PseudostateImpl::~PseudostateImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Pseudostate "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -189,7 +188,7 @@ std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPseudostate();
+	return UmlPackageImpl::eInstance()->getPseudostate_EClass();
 }
 
 //*********************************
@@ -338,37 +337,37 @@ boost::any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //604
-		case UmlPackage::VERTEX_CONTAINER:
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 			return getContainer(); //6010
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //600
-		case UmlPackage::VERTEX_INCOMING:
+		case UmlPackage::VERTEX_EREFERENCE_INCOMING:
 			return getIncoming(); //6011
-		case UmlPackage::PSEUDOSTATE_KIND:
+		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
 			return getKind(); //6014
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //605
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //606
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //607
-		case UmlPackage::VERTEX_OUTGOING:
+		case UmlPackage::VERTEX_EREFERENCE_OUTGOING:
 			return getOutgoing(); //6012
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //601
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //602
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //603
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //608
-		case UmlPackage::PSEUDOSTATE_STATE:
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 			return getState(); //6013
-		case UmlPackage::PSEUDOSTATE_STATEMACHINE:
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 			return getStateMachine(); //6015
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //609
 	}
 	return boost::any();
@@ -378,49 +377,49 @@ void PseudostateImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VERTEX_CONTAINER:
+		case UmlPackage::VERTEX_EREFERENCE_CONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
 			setContainer(_container); //6010
 			break;
 		}
-		case UmlPackage::PSEUDOSTATE_KIND:
+		case UmlPackage::PSEUDOSTATE_EATTRIBUTE_KIND:
 		{
 			// BOOST CAST
 			PseudostateKind _kind = boost::any_cast<PseudostateKind>(newValue);
 			setKind(_kind); //6014
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //605
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //606
 			break;
 		}
-		case UmlPackage::PSEUDOSTATE_STATE:
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::State> _state = boost::any_cast<std::shared_ptr<uml::State>>(newValue);
 			setState(_state); //6013
 			break;
 		}
-		case UmlPackage::PSEUDOSTATE_STATEMACHINE:
+		case UmlPackage::PSEUDOSTATE_EREFERENCE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StateMachine> _stateMachine = boost::any_cast<std::shared_ptr<uml::StateMachine>>(newValue);
 			setStateMachine(_stateMachine); //6015
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

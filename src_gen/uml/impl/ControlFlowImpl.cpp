@@ -64,7 +64,6 @@ ControlFlowImpl::~ControlFlowImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlFlow "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -219,7 +218,7 @@ std::shared_ptr<ecore::EObject>  ControlFlowImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getControlFlow();
+	return UmlPackageImpl::eInstance()->getControlFlow_EClass();
 }
 
 //*********************************
@@ -291,51 +290,51 @@ boost::any ControlFlowImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ACTIVITY:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
 			return getActivity(); //18513
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1854
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1850
-		case UmlPackage::ACTIVITYEDGE_GUARD:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
 			return getGuard(); //18514
-		case UmlPackage::ACTIVITYEDGE_INGROUP:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INGROUP:
 			return getInGroup(); //18522
-		case UmlPackage::ACTIVITYEDGE_INPARTITION:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INPARTITION:
 			return getInPartition(); //18515
-		case UmlPackage::ACTIVITYEDGE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
 			return getInStructuredNode(); //18517
-		case UmlPackage::ACTIVITYEDGE_INTERRUPTS:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
 			return getInterrupts(); //18516
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //18510
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1855
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1856
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1857
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1851
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1852
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1853
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1858
-		case UmlPackage::ACTIVITYEDGE_REDEFINEDEDGE:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_REDEFINEDEDGE:
 			return getRedefinedEdge(); //18520
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //18511
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //18512
-		case UmlPackage::ACTIVITYEDGE_SOURCE:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
 			return getSource(); //18519
-		case UmlPackage::ACTIVITYEDGE_TARGET:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
 			return getTarget(); //18518
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1859
-		case UmlPackage::ACTIVITYEDGE_WEIGHT:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
 			return getWeight(); //18521
 	}
 	return boost::any();
@@ -345,77 +344,77 @@ void ControlFlowImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ACTIVITY:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setActivity(_activity); //18513
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_GUARD:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _guard = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setGuard(_guard); //18514
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
 			setInStructuredNode(_inStructuredNode); //18517
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_INTERRUPTS:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_INTERRUPTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = boost::any_cast<std::shared_ptr<uml::InterruptibleActivityRegion>>(newValue);
 			setInterrupts(_interrupts); //18516
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //18510
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1855
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1856
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_SOURCE:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _source = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setSource(_source); //18519
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_TARGET:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ActivityNode> _target = boost::any_cast<std::shared_ptr<uml::ActivityNode>>(newValue);
 			setTarget(_target); //18518
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);
 			setVisibility(_visibility); //1859
 			break;
 		}
-		case UmlPackage::ACTIVITYEDGE_WEIGHT:
+		case UmlPackage::ACTIVITYEDGE_EREFERENCE_WEIGHT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _weight = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);

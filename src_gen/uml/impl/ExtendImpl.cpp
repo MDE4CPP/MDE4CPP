@@ -71,7 +71,6 @@ ExtendImpl::~ExtendImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Extend "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -188,7 +187,7 @@ std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtend();
+	return UmlPackageImpl::eInstance()->getExtend_EClass();
 }
 
 //*********************************
@@ -299,39 +298,39 @@ boost::any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //994
-		case UmlPackage::EXTEND_CONDITION:
+		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
 			return getCondition(); //9913
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //990
-		case UmlPackage::EXTEND_EXTENDEDCASE:
+		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
 			return getExtendedCase(); //9914
-		case UmlPackage::EXTEND_EXTENSION:
+		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
 			return getExtension(); //9916
-		case UmlPackage::EXTEND_EXTENSIONLOCATION:
+		case UmlPackage::EXTEND_EREFERENCE_EXTENSIONLOCATION:
 			return getExtensionLocation(); //9915
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //995
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //996
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //997
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //991
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //992
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //993
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //998
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //994
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //995
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //996
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //999
 	}
 	return boost::any();
@@ -341,42 +340,42 @@ void ExtendImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXTEND_CONDITION:
+		case UmlPackage::EXTEND_EREFERENCE_CONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _condition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setCondition(_condition); //9913
 			break;
 		}
-		case UmlPackage::EXTEND_EXTENDEDCASE:
+		case UmlPackage::EXTEND_EREFERENCE_EXTENDEDCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extendedCase = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
 			setExtendedCase(_extendedCase); //9914
 			break;
 		}
-		case UmlPackage::EXTEND_EXTENSION:
+		case UmlPackage::EXTEND_EREFERENCE_EXTENSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::UseCase> _extension = boost::any_cast<std::shared_ptr<uml::UseCase>>(newValue);
 			setExtension(_extension); //9916
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //995
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //996
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

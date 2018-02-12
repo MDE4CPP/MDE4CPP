@@ -81,7 +81,6 @@ ClauseImpl::~ClauseImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Clause "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -155,7 +154,7 @@ std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClause();
+	return UmlPackageImpl::eInstance()->getClause_EClass();
 }
 
 //*********************************
@@ -256,25 +255,25 @@ boost::any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_BODY:
+		case UmlPackage::CLAUSE_EREFERENCE_BODY:
 			return getBody(); //1424
-		case UmlPackage::CLAUSE_BODYOUTPUT:
+		case UmlPackage::CLAUSE_EREFERENCE_BODYOUTPUT:
 			return getBodyOutput(); //1425
-		case UmlPackage::CLAUSE_DECIDER:
+		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
 			return getDecider(); //1426
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1420
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1421
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1422
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1423
-		case UmlPackage::CLAUSE_PREDECESSORCLAUSE:
+		case UmlPackage::CLAUSE_EREFERENCE_PREDECESSORCLAUSE:
 			return getPredecessorClause(); //1427
-		case UmlPackage::CLAUSE_SUCCESSORCLAUSE:
+		case UmlPackage::CLAUSE_EREFERENCE_SUCCESSORCLAUSE:
 			return getSuccessorClause(); //1428
-		case UmlPackage::CLAUSE_TEST:
+		case UmlPackage::CLAUSE_EREFERENCE_TEST:
 			return getTest(); //1429
 	}
 	return boost::any();
@@ -284,7 +283,7 @@ void ClauseImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLAUSE_DECIDER:
+		case UmlPackage::CLAUSE_EREFERENCE_DECIDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);

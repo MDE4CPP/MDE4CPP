@@ -48,7 +48,6 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndCreationData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -120,7 +119,7 @@ std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndCreationData();
+	return UmlPackageImpl::eInstance()->getLinkEndCreationData_EClass();
 }
 
 //*********************************
@@ -183,23 +182,23 @@ boost::any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1480
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 			return getEnd(); //1484
-		case UmlPackage::LINKENDCREATIONDATA_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
 			return getInsertAt(); //1487
-		case UmlPackage::LINKENDCREATIONDATA_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 			return getIsReplaceAll(); //1488
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1481
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1482
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1483
-		case UmlPackage::LINKENDDATA_QUALIFIER:
+		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1485
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 			return getValue(); //1486
 	}
 	return boost::any();
@@ -209,28 +208,28 @@ void LinkEndCreationDataImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setEnd(_end); //1484
 			break;
 		}
-		case UmlPackage::LINKENDCREATIONDATA_INSERTAT:
+		case UmlPackage::LINKENDCREATIONDATA_EREFERENCE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _insertAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
 			setInsertAt(_insertAt); //1487
 			break;
 		}
-		case UmlPackage::LINKENDCREATIONDATA_ISREPLACEALL:
+		case UmlPackage::LINKENDCREATIONDATA_EATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = boost::any_cast<bool>(newValue);
 			setIsReplaceAll(_isReplaceAll); //1488
 			break;
 		}
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);

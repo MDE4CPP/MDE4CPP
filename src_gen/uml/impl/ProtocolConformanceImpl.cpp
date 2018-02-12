@@ -48,7 +48,6 @@ ProtocolConformanceImpl::~ProtocolConformanceImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProtocolConformance "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -128,7 +127,7 @@ std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolConformance();
+	return UmlPackageImpl::eInstance()->getProtocolConformance_EClass();
 }
 
 //*********************************
@@ -208,23 +207,23 @@ boost::any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreT
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //710
-		case UmlPackage::PROTOCOLCONFORMANCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
 			return getGeneralMachine(); //717
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //711
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //712
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //713
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //714
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //715
-		case UmlPackage::PROTOCOLCONFORMANCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
 			return getSpecificMachine(); //718
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //716
 	}
 	return boost::any();
@@ -234,14 +233,14 @@ void ProtocolConformanceImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROTOCOLCONFORMANCE_GENERALMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_GENERALMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);
 			setGeneralMachine(_generalMachine); //717
 			break;
 		}
-		case UmlPackage::PROTOCOLCONFORMANCE_SPECIFICMACHINE:
+		case UmlPackage::PROTOCOLCONFORMANCE_EREFERENCE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = boost::any_cast<std::shared_ptr<uml::ProtocolStateMachine>>(newValue);

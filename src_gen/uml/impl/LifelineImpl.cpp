@@ -77,7 +77,6 @@ LifelineImpl::~LifelineImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Lifeline "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -188,7 +187,7 @@ std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLifeline();
+	return UmlPackageImpl::eInstance()->getLifeline_EClass();
 }
 
 //*********************************
@@ -315,35 +314,35 @@ boost::any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //2134
-		case UmlPackage::LIFELINE_COVEREDBY:
+		case UmlPackage::LIFELINE_EREFERENCE_COVEREDBY:
 			return getCoveredBy(); //21314
-		case UmlPackage::LIFELINE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
 			return getDecomposedAs(); //21310
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //2130
-		case UmlPackage::LIFELINE_INTERACTION:
+		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
 			return getInteraction(); //21311
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //2135
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //2136
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //2137
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //2131
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //2132
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //2133
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //2138
-		case UmlPackage::LIFELINE_REPRESENTS:
+		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
 			return getRepresents(); //21312
-		case UmlPackage::LIFELINE_SELECTOR:
+		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
 			return getSelector(); //21313
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //2139
 	}
 	return boost::any();
@@ -353,49 +352,49 @@ void LifelineImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LIFELINE_DECOMPOSEDAS:
+		case UmlPackage::LIFELINE_EREFERENCE_DECOMPOSEDAS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = boost::any_cast<std::shared_ptr<uml::PartDecomposition>>(newValue);
 			setDecomposedAs(_decomposedAs); //21310
 			break;
 		}
-		case UmlPackage::LIFELINE_INTERACTION:
+		case UmlPackage::LIFELINE_EREFERENCE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _interaction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
 			setInteraction(_interaction); //21311
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //2135
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //2136
 			break;
 		}
-		case UmlPackage::LIFELINE_REPRESENTS:
+		case UmlPackage::LIFELINE_EREFERENCE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ConnectableElement> _represents = boost::any_cast<std::shared_ptr<uml::ConnectableElement>>(newValue);
 			setRepresents(_represents); //21312
 			break;
 		}
-		case UmlPackage::LIFELINE_SELECTOR:
+		case UmlPackage::LIFELINE_EREFERENCE_SELECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _selector = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setSelector(_selector); //21313
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

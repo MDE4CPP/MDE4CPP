@@ -51,7 +51,6 @@ ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierTemplateParameter "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -143,7 +142,7 @@ std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClassifierTemplateParameter();
+	return UmlPackageImpl::eInstance()->getClassifierTemplateParameter_EClass();
 }
 
 //*********************************
@@ -242,27 +241,27 @@ boost::any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
 			return getAllowSubstitutable(); //1049
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_CONSTRAININGCLASSIFIER:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EREFERENCE_CONSTRAININGCLASSIFIER:
 			return getConstrainingClassifier(); //10410
-		case UmlPackage::TEMPLATEPARAMETER_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
 			return getDefault(); //1044
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1040
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1041
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDDEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
 			return getOwnedDefault(); //1045
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1042
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
 			return getOwnedParameteredElement(); //1048
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1043
-		case UmlPackage::TEMPLATEPARAMETER_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
 			return getParameteredElement(); //1046
-		case UmlPackage::TEMPLATEPARAMETER_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
 			return getSignature(); //1047
 	}
 	return boost::any();
@@ -272,42 +271,42 @@ void ClassifierTemplateParameterImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_ALLOWSUBSTITUTABLE:
+		case UmlPackage::CLASSIFIERTEMPLATEPARAMETER_EATTRIBUTE_ALLOWSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _allowSubstitutable = boost::any_cast<bool>(newValue);
 			setAllowSubstitutable(_allowSubstitutable); //1049
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_DEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_DEFAULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _default = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setDefault(_default); //1044
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDDEFAULT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDDEFAULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedDefault = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setOwnedDefault(_ownedDefault); //1045
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_OWNEDPARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_OWNEDPARAMETEREDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setOwnedParameteredElement(_ownedParameteredElement); //1048
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_PARAMETEREDELEMENT:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_PARAMETEREDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ParameterableElement> _parameteredElement = boost::any_cast<std::shared_ptr<uml::ParameterableElement>>(newValue);
 			setParameteredElement(_parameteredElement); //1046
 			break;
 		}
-		case UmlPackage::TEMPLATEPARAMETER_SIGNATURE:
+		case UmlPackage::TEMPLATEPARAMETER_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);

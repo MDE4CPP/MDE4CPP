@@ -40,7 +40,6 @@ ImageImpl::~ImageImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Image "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -100,7 +99,7 @@ std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getImage();
+	return UmlPackageImpl::eInstance()->getImage_EClass();
 }
 
 //*********************************
@@ -169,19 +168,19 @@ boost::any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_CONTENT:
+		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
 			return getContent(); //114
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //110
-		case UmlPackage::IMAGE_FORMAT:
+		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
 			return getFormat(); //115
-		case UmlPackage::IMAGE_LOCATION:
+		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
 			return getLocation(); //116
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //111
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //112
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //113
 	}
 	return boost::any();
@@ -191,21 +190,21 @@ void ImageImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::IMAGE_CONTENT:
+		case UmlPackage::IMAGE_EATTRIBUTE_CONTENT:
 		{
 			// BOOST CAST
 			std::string _content = boost::any_cast<std::string>(newValue);
 			setContent(_content); //114
 			break;
 		}
-		case UmlPackage::IMAGE_FORMAT:
+		case UmlPackage::IMAGE_EATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = boost::any_cast<std::string>(newValue);
 			setFormat(_format); //115
 			break;
 		}
-		case UmlPackage::IMAGE_LOCATION:
+		case UmlPackage::IMAGE_EATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = boost::any_cast<std::string>(newValue);

@@ -48,7 +48,6 @@ QualifierValueImpl::~QualifierValueImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete QualifierValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -109,7 +108,7 @@ std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getQualifierValue();
+	return UmlPackageImpl::eInstance()->getQualifierValue_EClass();
 }
 
 //*********************************
@@ -185,17 +184,17 @@ boost::any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1270
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1271
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1272
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1273
-		case UmlPackage::QUALIFIERVALUE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1274
-		case UmlPackage::QUALIFIERVALUE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 			return getValue(); //1275
 	}
 	return boost::any();
@@ -205,14 +204,14 @@ void QualifierValueImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_QUALIFIER:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _qualifier = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setQualifier(_qualifier); //1274
 			break;
 		}
-		case UmlPackage::QUALIFIERVALUE_VALUE:
+		case UmlPackage::QUALIFIERVALUE_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);

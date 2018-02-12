@@ -102,7 +102,6 @@ InteractionUseImpl::~InteractionUseImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InteractionUse "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -266,7 +265,7 @@ std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInteractionUse();
+	return UmlPackageImpl::eInstance()->getInteractionUse_EClass();
 }
 
 //*********************************
@@ -407,43 +406,43 @@ boost::any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONUSE_ACTUALGATE:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_ACTUALGATE:
 			return getActualGate(); //21514
-		case UmlPackage::INTERACTIONUSE_ARGUMENT:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_ARGUMENT:
 			return getArgument(); //21515
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //2154
-		case UmlPackage::INTERACTIONFRAGMENT_COVERED:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_COVERED:
 			return getCovered(); //21510
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //2150
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
 			return getEnclosingInteraction(); //21512
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
 			return getEnclosingOperand(); //21511
-		case UmlPackage::INTERACTIONFRAGMENT_GENERALORDERING:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_GENERALORDERING:
 			return getGeneralOrdering(); //21513
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //2155
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //2156
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //2157
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //2151
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //2152
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //2153
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //2158
-		case UmlPackage::INTERACTIONUSE_REFERSTO:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
 			return getRefersTo(); //21516
-		case UmlPackage::INTERACTIONUSE_RETURNVALUE:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 			return getReturnValue(); //21517
-		case UmlPackage::INTERACTIONUSE_RETURNVALUERECIPIENT:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 			return getReturnValueRecipient(); //21518
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //2159
 	}
 	return boost::any();
@@ -453,56 +452,56 @@ void InteractionUseImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGINTERACTION:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGINTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _enclosingInteraction = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
 			setEnclosingInteraction(_enclosingInteraction); //21512
 			break;
 		}
-		case UmlPackage::INTERACTIONFRAGMENT_ENCLOSINGOPERAND:
+		case UmlPackage::INTERACTIONFRAGMENT_EREFERENCE_ENCLOSINGOPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InteractionOperand> _enclosingOperand = boost::any_cast<std::shared_ptr<uml::InteractionOperand>>(newValue);
 			setEnclosingOperand(_enclosingOperand); //21511
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //2155
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //2156
 			break;
 		}
-		case UmlPackage::INTERACTIONUSE_REFERSTO:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_REFERSTO:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interaction> _refersTo = boost::any_cast<std::shared_ptr<uml::Interaction>>(newValue);
 			setRefersTo(_refersTo); //21516
 			break;
 		}
-		case UmlPackage::INTERACTIONUSE_RETURNVALUE:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _returnValue = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setReturnValue(_returnValue); //21517
 			break;
 		}
-		case UmlPackage::INTERACTIONUSE_RETURNVALUERECIPIENT:
+		case UmlPackage::INTERACTIONUSE_EREFERENCE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _returnValueRecipient = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setReturnValueRecipient(_returnValueRecipient); //21518
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

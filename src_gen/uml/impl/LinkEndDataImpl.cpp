@@ -66,7 +66,6 @@ LinkEndDataImpl::~LinkEndDataImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -142,7 +141,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndData();
+	return UmlPackageImpl::eInstance()->getLinkEndData_EClass();
 }
 
 //*********************************
@@ -243,19 +242,19 @@ boost::any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1260
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 			return getEnd(); //1264
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1261
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1262
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1263
-		case UmlPackage::LINKENDDATA_QUALIFIER:
+		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1265
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 			return getValue(); //1266
 	}
 	return boost::any();
@@ -265,14 +264,14 @@ void LinkEndDataImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setEnd(_end); //1264
 			break;
 		}
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);

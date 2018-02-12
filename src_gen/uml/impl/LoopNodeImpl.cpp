@@ -142,7 +142,6 @@ LoopNodeImpl::~LoopNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LoopNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -152,10 +151,10 @@ LoopNodeImpl::~LoopNodeImpl()
 			{
 				switch(reference_id)
 				{	
-				case UmlPackage::ACTIVITYNODE_ACTIVITY:
+				case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 					 m_activity = par_Activity;
 					 return;
-				case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+				case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 					 m_inActivity = par_Activity;
 					 return;
 				default:
@@ -484,7 +483,7 @@ std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLoopNode();
+	return UmlPackageImpl::eInstance()->getLoopNode_EClass();
 }
 
 //*********************************
@@ -705,113 +704,113 @@ boost::any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 			return getActivity(); //15613
-		case UmlPackage::LOOPNODE_BODYOUTPUT:
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYOUTPUT:
 			return getBodyOutput(); //15645
-		case UmlPackage::LOOPNODE_BODYPART:
+		case UmlPackage::LOOPNODE_EREFERENCE_BODYPART:
 			return getBodyPart(); //15646
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1564
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
 			return getContainedEdge(); //15610
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
 			return getContainedNode(); //15611
-		case UmlPackage::ACTION_CONTEXT:
+		case UmlPackage::ACTION_EREFERENCE_CONTEXT:
 			return getContext(); //15622
-		case UmlPackage::LOOPNODE_DECIDER:
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
 			return getDecider(); //15647
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1560
-		case UmlPackage::STRUCTUREDACTIVITYNODE_EDGE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_EDGE:
 			return getEdge(); //15639
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
 			return getElementImport(); //15611
-		case UmlPackage::EXECUTABLENODE_HANDLER:
+		case UmlPackage::EXECUTABLENODE_EREFERENCE_HANDLER:
 			return getHandler(); //15621
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
 			return getImportedMember(); //15614
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 			return getInActivity(); //15612
-		case UmlPackage::ACTIVITYNODE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
 			return getInGroup(); //15614
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
 			return getInInterruptibleRegion(); //15615
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
 			return getInPartition(); //15620
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 			return getInStructuredNode(); //15616
-		case UmlPackage::ACTIVITYNODE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
 			return getIncoming(); //15617
-		case UmlPackage::ACTION_INPUT:
+		case UmlPackage::ACTION_EREFERENCE_INPUT:
 			return getInput(); //15623
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //15610
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 			return getIsLocallyReentrant(); //15624
-		case UmlPackage::LOOPNODE_ISTESTEDFIRST:
+		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
 			return getIsTestedFirst(); //15648
-		case UmlPackage::ACTION_LOCALPOSTCONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPOSTCONDITION:
 			return getLocalPostcondition(); //15625
-		case UmlPackage::ACTION_LOCALPRECONDITION:
+		case UmlPackage::ACTION_EREFERENCE_LOCALPRECONDITION:
 			return getLocalPrecondition(); //15626
-		case UmlPackage::LOOPNODE_LOOPVARIABLE:
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLE:
 			return getLoopVariable(); //15649
-		case UmlPackage::LOOPNODE_LOOPVARIABLEINPUT:
+		case UmlPackage::LOOPNODE_EREFERENCE_LOOPVARIABLEINPUT:
 			return getLoopVariableInput(); //15650
-		case UmlPackage::NAMESPACE_MEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
 			return getMember(); //15615
-		case UmlPackage::STRUCTUREDACTIVITYNODE_MUSTISOLATE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
 			return getMustIsolate(); //15640
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1565
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1566
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1567
-		case UmlPackage::STRUCTUREDACTIVITYNODE_NODE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_NODE:
 			return getNode(); //15644
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
 			return getOutgoing(); //15618
-		case UmlPackage::ACTION_OUTPUT:
+		case UmlPackage::ACTION_EREFERENCE_OUTPUT:
 			return getOutput(); //15627
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1561
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1562
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
 			return getOwnedMember(); //15613
-		case UmlPackage::NAMESPACE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
 			return getOwnedRule(); //15610
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1563
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
 			return getPackageImport(); //15612
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1568
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //15611
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
 			return getRedefinedNode(); //15619
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //15612
-		case UmlPackage::LOOPNODE_RESULT:
+		case UmlPackage::LOOPNODE_EREFERENCE_RESULT:
 			return getResult(); //15651
-		case UmlPackage::LOOPNODE_SETUPPART:
+		case UmlPackage::LOOPNODE_EREFERENCE_SETUPPART:
 			return getSetupPart(); //15652
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEINPUT:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEINPUT:
 			return getStructuredNodeInput(); //15641
-		case UmlPackage::STRUCTUREDACTIVITYNODE_STRUCTUREDNODEOUTPUT:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_STRUCTUREDNODEOUTPUT:
 			return getStructuredNodeOutput(); //15642
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
 			return getSubgroup(); //15613
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
 			return getSuperGroup(); //15614
-		case UmlPackage::LOOPNODE_TEST:
+		case UmlPackage::LOOPNODE_EREFERENCE_TEST:
 			return getTest(); //15653
-		case UmlPackage::STRUCTUREDACTIVITYNODE_VARIABLE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EREFERENCE_VARIABLE:
 			return getVariable(); //15643
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1569
 	}
 	return boost::any();
@@ -821,77 +820,77 @@ void LoopNodeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setActivity(_activity); //15613
 			break;
 		}
-		case UmlPackage::LOOPNODE_DECIDER:
+		case UmlPackage::LOOPNODE_EREFERENCE_DECIDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::OutputPin> _decider = boost::any_cast<std::shared_ptr<uml::OutputPin>>(newValue);
 			setDecider(_decider); //15647
 			break;
 		}
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _inActivity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setInActivity(_inActivity); //15612
 			break;
 		}
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
 			setInStructuredNode(_inStructuredNode); //15616
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //15610
 			break;
 		}
-		case UmlPackage::ACTION_ISLOCALLYREENTRANT:
+		case UmlPackage::ACTION_EATTRIBUTE_ISLOCALLYREENTRANT:
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = boost::any_cast<bool>(newValue);
 			setIsLocallyReentrant(_isLocallyReentrant); //15624
 			break;
 		}
-		case UmlPackage::LOOPNODE_ISTESTEDFIRST:
+		case UmlPackage::LOOPNODE_EATTRIBUTE_ISTESTEDFIRST:
 		{
 			// BOOST CAST
 			bool _isTestedFirst = boost::any_cast<bool>(newValue);
 			setIsTestedFirst(_isTestedFirst); //15648
 			break;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_MUSTISOLATE:
+		case UmlPackage::STRUCTUREDACTIVITYNODE_EATTRIBUTE_MUSTISOLATE:
 		{
 			// BOOST CAST
 			bool _mustIsolate = boost::any_cast<bool>(newValue);
 			setMustIsolate(_mustIsolate); //15640
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1565
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1566
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

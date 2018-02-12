@@ -42,7 +42,6 @@ FactoryImpl::~FactoryImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Factory "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -92,7 +91,7 @@ std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFactory();
+	return UmlPackageImpl::eInstance()->getFactory_EClass();
 }
 
 //*********************************
@@ -133,13 +132,13 @@ boost::any FactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //240
-		case uml::UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case uml::UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //241
-		case uml::UmlPackage::ELEMENT_OWNEDELEMENT:
+		case uml::UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //242
-		case uml::UmlPackage::ELEMENT_OWNER:
+		case uml::UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //243
 	}
 	return boost::any();

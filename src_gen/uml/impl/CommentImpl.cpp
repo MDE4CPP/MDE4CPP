@@ -43,7 +43,6 @@ CommentImpl::~CommentImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Comment "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -104,7 +103,7 @@ std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getComment();
+	return UmlPackageImpl::eInstance()->getComment_EClass();
 }
 
 //*********************************
@@ -159,17 +158,17 @@ boost::any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_ANNOTATEDELEMENT:
+		case UmlPackage::COMMENT_EREFERENCE_ANNOTATEDELEMENT:
 			return getAnnotatedElement(); //94
-		case UmlPackage::COMMENT_BODY:
+		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
 			return getBody(); //95
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //90
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //91
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //92
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //93
 	}
 	return boost::any();
@@ -179,7 +178,7 @@ void CommentImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::COMMENT_BODY:
+		case UmlPackage::COMMENT_EATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			std::string _body = boost::any_cast<std::string>(newValue);

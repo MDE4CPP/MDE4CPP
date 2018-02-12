@@ -73,7 +73,6 @@ InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete InterruptibleActivityRegion "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -199,7 +198,7 @@ std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getInterruptibleActivityRegion();
+	return UmlPackageImpl::eInstance()->getInterruptibleActivityRegion_EClass();
 }
 
 //*********************************
@@ -280,39 +279,39 @@ boost::any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bo
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1114
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDEDGE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDEDGE:
 			return getContainedEdge(); //11110
-		case UmlPackage::ACTIVITYGROUP_CONTAINEDNODE:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_CONTAINEDNODE:
 			return getContainedNode(); //11111
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1110
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 			return getInActivity(); //11112
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_INTERRUPTINGEDGE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_INTERRUPTINGEDGE:
 			return getInterruptingEdge(); //11115
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1115
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1116
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1117
-		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_NODE:
+		case UmlPackage::INTERRUPTIBLEACTIVITYREGION_EREFERENCE_NODE:
 			return getNode(); //11116
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1111
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1112
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1113
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1118
-		case UmlPackage::ACTIVITYGROUP_SUBGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUBGROUP:
 			return getSubgroup(); //11113
-		case UmlPackage::ACTIVITYGROUP_SUPERGROUP:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_SUPERGROUP:
 			return getSuperGroup(); //11114
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1119
 	}
 	return boost::any();
@@ -322,28 +321,28 @@ void InterruptibleActivityRegionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYGROUP_INACTIVITY:
+		case UmlPackage::ACTIVITYGROUP_EREFERENCE_INACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _inActivity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setInActivity(_inActivity); //11112
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1115
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1116
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

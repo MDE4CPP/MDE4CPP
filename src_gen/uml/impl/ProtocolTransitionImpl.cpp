@@ -83,7 +83,6 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ProtocolTransition "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -272,7 +271,7 @@ std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProtocolTransition();
+	return UmlPackageImpl::eInstance()->getProtocolTransition_EClass();
 }
 
 //*********************************
@@ -391,65 +390,65 @@ boost::any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //2374
-		case UmlPackage::TRANSITION_CONTAINER:
+		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
 			return getContainer(); //23726
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //2370
-		case UmlPackage::TRANSITION_EFFECT:
+		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
 			return getEffect(); //23719
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
 			return getElementImport(); //23711
-		case UmlPackage::TRANSITION_GUARD:
+		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
 			return getGuard(); //23720
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
 			return getImportedMember(); //23714
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //23710
-		case UmlPackage::TRANSITION_KIND:
+		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
 			return getKind(); //23721
-		case UmlPackage::NAMESPACE_MEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
 			return getMember(); //23715
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //2375
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //2376
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //2377
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //2371
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //2372
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
 			return getOwnedMember(); //23713
-		case UmlPackage::NAMESPACE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
 			return getOwnedRule(); //23710
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //2373
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
 			return getPackageImport(); //23712
-		case UmlPackage::PROTOCOLTRANSITION_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
 			return getPostCondition(); //23727
-		case UmlPackage::PROTOCOLTRANSITION_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 			return getPreCondition(); //23728
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //2378
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //23711
-		case UmlPackage::TRANSITION_REDEFINEDTRANSITION:
+		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
 			return getRedefinedTransition(); //23722
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //23712
-		case UmlPackage::PROTOCOLTRANSITION_REFERRED:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_REFERRED:
 			return getReferred(); //23729
-		case UmlPackage::TRANSITION_SOURCE:
+		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
 			return getSource(); //23723
-		case UmlPackage::TRANSITION_TARGET:
+		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
 			return getTarget(); //23724
-		case UmlPackage::TRANSITION_TRIGGER:
+		case UmlPackage::TRANSITION_EREFERENCE_TRIGGER:
 			return getTrigger(); //23725
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //2379
 	}
 	return boost::any();
@@ -459,91 +458,91 @@ void ProtocolTransitionImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TRANSITION_CONTAINER:
+		case UmlPackage::TRANSITION_EREFERENCE_CONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Region> _container = boost::any_cast<std::shared_ptr<uml::Region>>(newValue);
 			setContainer(_container); //23726
 			break;
 		}
-		case UmlPackage::TRANSITION_EFFECT:
+		case UmlPackage::TRANSITION_EREFERENCE_EFFECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _effect = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
 			setEffect(_effect); //23719
 			break;
 		}
-		case UmlPackage::TRANSITION_GUARD:
+		case UmlPackage::TRANSITION_EREFERENCE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _guard = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setGuard(_guard); //23720
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //23710
 			break;
 		}
-		case UmlPackage::TRANSITION_KIND:
+		case UmlPackage::TRANSITION_EATTRIBUTE_KIND:
 		{
 			// BOOST CAST
 			TransitionKind _kind = boost::any_cast<TransitionKind>(newValue);
 			setKind(_kind); //23721
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //2375
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //2376
 			break;
 		}
-		case UmlPackage::PROTOCOLTRANSITION_POSTCONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_POSTCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _postCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setPostCondition(_postCondition); //23727
 			break;
 		}
-		case UmlPackage::PROTOCOLTRANSITION_PRECONDITION:
+		case UmlPackage::PROTOCOLTRANSITION_EREFERENCE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _preCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setPreCondition(_preCondition); //23728
 			break;
 		}
-		case UmlPackage::TRANSITION_REDEFINEDTRANSITION:
+		case UmlPackage::TRANSITION_EREFERENCE_REDEFINEDTRANSITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Transition> _redefinedTransition = boost::any_cast<std::shared_ptr<uml::Transition>>(newValue);
 			setRedefinedTransition(_redefinedTransition); //23722
 			break;
 		}
-		case UmlPackage::TRANSITION_SOURCE:
+		case UmlPackage::TRANSITION_EREFERENCE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Vertex> _source = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
 			setSource(_source); //23723
 			break;
 		}
-		case UmlPackage::TRANSITION_TARGET:
+		case UmlPackage::TRANSITION_EREFERENCE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Vertex> _target = boost::any_cast<std::shared_ptr<uml::Vertex>>(newValue);
 			setTarget(_target); //23724
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

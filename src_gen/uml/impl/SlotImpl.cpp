@@ -66,7 +66,6 @@ SlotImpl::~SlotImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Slot "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -153,7 +152,7 @@ std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSlot();
+	return UmlPackageImpl::eInstance()->getSlot_EClass();
 }
 
 //*********************************
@@ -228,19 +227,19 @@ boost::any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_DEFININGFEATURE:
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
 			return getDefiningFeature(); //804
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //800
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //801
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //802
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //803
-		case UmlPackage::SLOT_OWNINGINSTANCE:
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
 			return getOwningInstance(); //806
-		case UmlPackage::SLOT_VALUE:
+		case UmlPackage::SLOT_EREFERENCE_VALUE:
 			return getValue(); //805
 	}
 	return boost::any();
@@ -250,14 +249,14 @@ void SlotImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_DEFININGFEATURE:
+		case UmlPackage::SLOT_EREFERENCE_DEFININGFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = boost::any_cast<std::shared_ptr<uml::StructuralFeature>>(newValue);
 			setDefiningFeature(_definingFeature); //804
 			break;
 		}
-		case UmlPackage::SLOT_OWNINGINSTANCE:
+		case UmlPackage::SLOT_EREFERENCE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = boost::any_cast<std::shared_ptr<uml::InstanceSpecification>>(newValue);

@@ -80,7 +80,6 @@ ExpansionNodeImpl::~ExpansionNodeImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExpansionNode "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -249,7 +248,7 @@ std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExpansionNode();
+	return UmlPackageImpl::eInstance()->getExpansionNode_EClass();
 }
 
 //*********************************
@@ -340,63 +339,63 @@ boost::any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 			return getActivity(); //15413
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //1544
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1540
-		case UmlPackage::ACTIVITYNODE_INGROUP:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INGROUP:
 			return getInGroup(); //15414
-		case UmlPackage::ACTIVITYNODE_ININTERRUPTIBLEREGION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ININTERRUPTIBLEREGION:
 			return getInInterruptibleRegion(); //15415
-		case UmlPackage::ACTIVITYNODE_INPARTITION:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INPARTITION:
 			return getInPartition(); //15420
-		case UmlPackage::OBJECTNODE_INSTATE:
+		case UmlPackage::OBJECTNODE_EREFERENCE_INSTATE:
 			return getInState(); //15422
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 			return getInStructuredNode(); //15416
-		case UmlPackage::ACTIVITYNODE_INCOMING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INCOMING:
 			return getIncoming(); //15417
-		case UmlPackage::OBJECTNODE_ISCONTROLTYPE:
+		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
 			return getIsControlType(); //15423
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //15410
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //1545
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //1546
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //1547
-		case UmlPackage::OBJECTNODE_ORDERING:
+		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
 			return getOrdering(); //15424
-		case UmlPackage::ACTIVITYNODE_OUTGOING:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_OUTGOING:
 			return getOutgoing(); //15418
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1541
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1542
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1543
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //1548
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //15411
-		case UmlPackage::ACTIVITYNODE_REDEFINEDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_REDEFINEDNODE:
 			return getRedefinedNode(); //15419
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //15412
-		case UmlPackage::EXPANSIONNODE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
 			return getRegionAsInput(); //15427
-		case UmlPackage::EXPANSIONNODE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
 			return getRegionAsOutput(); //15428
-		case UmlPackage::OBJECTNODE_SELECTION:
+		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
 			return getSelection(); //15425
-		case UmlPackage::TYPEDELEMENT_TYPE:
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
 			return getType(); //15410
-		case UmlPackage::OBJECTNODE_UPPERBOUND:
+		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
 			return getUpperBound(); //15426
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //1549
 	}
 	return boost::any();
@@ -406,91 +405,91 @@ void ExpansionNodeImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYNODE_ACTIVITY:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Activity> _activity = boost::any_cast<std::shared_ptr<uml::Activity>>(newValue);
 			setActivity(_activity); //15413
 			break;
 		}
-		case UmlPackage::ACTIVITYNODE_INSTRUCTUREDNODE:
+		case UmlPackage::ACTIVITYNODE_EREFERENCE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = boost::any_cast<std::shared_ptr<uml::StructuredActivityNode>>(newValue);
 			setInStructuredNode(_inStructuredNode); //15416
 			break;
 		}
-		case UmlPackage::OBJECTNODE_ISCONTROLTYPE:
+		case UmlPackage::OBJECTNODE_EATTRIBUTE_ISCONTROLTYPE:
 		{
 			// BOOST CAST
 			bool _isControlType = boost::any_cast<bool>(newValue);
 			setIsControlType(_isControlType); //15423
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //15410
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //1545
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //1546
 			break;
 		}
-		case UmlPackage::OBJECTNODE_ORDERING:
+		case UmlPackage::OBJECTNODE_EATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			ObjectNodeOrderingKind _ordering = boost::any_cast<ObjectNodeOrderingKind>(newValue);
 			setOrdering(_ordering); //15424
 			break;
 		}
-		case UmlPackage::EXPANSIONNODE_REGIONASINPUT:
+		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = boost::any_cast<std::shared_ptr<uml::ExpansionRegion>>(newValue);
 			setRegionAsInput(_regionAsInput); //15427
 			break;
 		}
-		case UmlPackage::EXPANSIONNODE_REGIONASOUTPUT:
+		case UmlPackage::EXPANSIONNODE_EREFERENCE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = boost::any_cast<std::shared_ptr<uml::ExpansionRegion>>(newValue);
 			setRegionAsOutput(_regionAsOutput); //15428
 			break;
 		}
-		case UmlPackage::OBJECTNODE_SELECTION:
+		case UmlPackage::OBJECTNODE_EREFERENCE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Behavior> _selection = boost::any_cast<std::shared_ptr<uml::Behavior>>(newValue);
 			setSelection(_selection); //15425
 			break;
 		}
-		case UmlPackage::TYPEDELEMENT_TYPE:
+		case UmlPackage::TYPEDELEMENT_EREFERENCE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Type> _type = boost::any_cast<std::shared_ptr<uml::Type>>(newValue);
 			setType(_type); //15410
 			break;
 		}
-		case UmlPackage::OBJECTNODE_UPPERBOUND:
+		case UmlPackage::OBJECTNODE_EREFERENCE_UPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ValueSpecification> _upperBound = boost::any_cast<std::shared_ptr<uml::ValueSpecification>>(newValue);
 			setUpperBound(_upperBound); //15426
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

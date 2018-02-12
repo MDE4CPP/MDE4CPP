@@ -48,7 +48,6 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LinkEndDestructionData "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -120,7 +119,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndDestructionData();
+	return UmlPackageImpl::eInstance()->getLinkEndDestructionData_EClass();
 }
 
 //*********************************
@@ -183,23 +182,23 @@ boost::any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool co
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
 			return getDestroyAt(); //1527
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1520
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 			return getEnd(); //1524
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
 			return getIsDestroyDuplicates(); //1528
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1521
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1522
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1523
-		case UmlPackage::LINKENDDATA_QUALIFIER:
+		case UmlPackage::LINKENDDATA_EREFERENCE_QUALIFIER:
 			return getQualifier(); //1525
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 			return getValue(); //1526
 	}
 	return boost::any();
@@ -209,28 +208,28 @@ void LinkEndDestructionDataImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_DESTROYAT:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_EREFERENCE_DESTROYAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _destroyAt = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);
 			setDestroyAt(_destroyAt); //1527
 			break;
 		}
-		case UmlPackage::LINKENDDATA_END:
+		case UmlPackage::LINKENDDATA_EREFERENCE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Property> _end = boost::any_cast<std::shared_ptr<uml::Property>>(newValue);
 			setEnd(_end); //1524
 			break;
 		}
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ISDESTROYDUPLICATES:
+		case UmlPackage::LINKENDDESTRUCTIONDATA_EATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isDestroyDuplicates = boost::any_cast<bool>(newValue);
 			setIsDestroyDuplicates(_isDestroyDuplicates); //1528
 			break;
 		}
-		case UmlPackage::LINKENDDATA_VALUE:
+		case UmlPackage::LINKENDDATA_EREFERENCE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::InputPin> _value = boost::any_cast<std::shared_ptr<uml::InputPin>>(newValue);

@@ -68,7 +68,6 @@ TemplateBindingImpl::~TemplateBindingImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TemplateBinding "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -163,7 +162,7 @@ std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTemplateBinding();
+	return UmlPackageImpl::eInstance()->getTemplateBinding_EClass();
 }
 
 //*********************************
@@ -261,25 +260,25 @@ boost::any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
 			return getBoundElement(); //199
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //190
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //191
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //192
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //193
-		case UmlPackage::TEMPLATEBINDING_PARAMETERSUBSTITUTION:
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_PARAMETERSUBSTITUTION:
 			return getParameterSubstitution(); //197
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //194
-		case UmlPackage::TEMPLATEBINDING_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 			return getSignature(); //198
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //195
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //196
 	}
 	return boost::any();
@@ -289,14 +288,14 @@ void TemplateBindingImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TEMPLATEBINDING_BOUNDELEMENT:
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_BOUNDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateableElement> _boundElement = boost::any_cast<std::shared_ptr<uml::TemplateableElement>>(newValue);
 			setBoundElement(_boundElement); //199
 			break;
 		}
-		case UmlPackage::TEMPLATEBINDING_SIGNATURE:
+		case UmlPackage::TEMPLATEBINDING_EREFERENCE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _signature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);

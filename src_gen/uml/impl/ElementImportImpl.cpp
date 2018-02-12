@@ -51,7 +51,6 @@ ElementImportImpl::~ElementImportImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ElementImport "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -133,7 +132,7 @@ std::shared_ptr<ecore::EObject>  ElementImportImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getElementImport();
+	return UmlPackageImpl::eInstance()->getElementImport_EClass();
 }
 
 //*********************************
@@ -249,27 +248,27 @@ boost::any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_ALIAS:
+		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
 			return getAlias(); //827
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //820
-		case UmlPackage::ELEMENTIMPORT_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
 			return getImportedElement(); //828
-		case UmlPackage::ELEMENTIMPORT_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 			return getImportingNamespace(); //829
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //821
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //822
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //823
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //824
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //825
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //826
-		case UmlPackage::ELEMENTIMPORT_VISIBILITY:
+		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //8210
 	}
 	return boost::any();
@@ -279,28 +278,28 @@ void ElementImportImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENTIMPORT_ALIAS:
+		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_ALIAS:
 		{
 			// BOOST CAST
 			std::string _alias = boost::any_cast<std::string>(newValue);
 			setAlias(_alias); //827
 			break;
 		}
-		case UmlPackage::ELEMENTIMPORT_IMPORTEDELEMENT:
+		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::PackageableElement> _importedElement = boost::any_cast<std::shared_ptr<uml::PackageableElement>>(newValue);
 			setImportedElement(_importedElement); //828
 			break;
 		}
-		case UmlPackage::ELEMENTIMPORT_IMPORTINGNAMESPACE:
+		case UmlPackage::ELEMENTIMPORT_EREFERENCE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Namespace> _importingNamespace = boost::any_cast<std::shared_ptr<uml::Namespace>>(newValue);
 			setImportingNamespace(_importingNamespace); //829
 			break;
 		}
-		case UmlPackage::ELEMENTIMPORT_VISIBILITY:
+		case UmlPackage::ELEMENTIMPORT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

@@ -61,7 +61,6 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExceptionHandler "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -138,7 +137,7 @@ std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExceptionHandler();
+	return UmlPackageImpl::eInstance()->getExceptionHandler_EClass();
 }
 
 //*********************************
@@ -258,21 +257,21 @@ boost::any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //1150
-		case UmlPackage::EXCEPTIONHANDLER_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
 			return getExceptionInput(); //1154
-		case UmlPackage::EXCEPTIONHANDLER_EXCEPTIONTYPE:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONTYPE:
 			return getExceptionType(); //1155
-		case UmlPackage::EXCEPTIONHANDLER_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
 			return getHandlerBody(); //1156
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //1151
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //1152
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //1153
-		case UmlPackage::EXCEPTIONHANDLER_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
 			return getProtectedNode(); //1157
 	}
 	return boost::any();
@@ -282,21 +281,21 @@ void ExceptionHandlerImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXCEPTIONHANDLER_EXCEPTIONINPUT:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_EXCEPTIONINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = boost::any_cast<std::shared_ptr<uml::ObjectNode>>(newValue);
 			setExceptionInput(_exceptionInput); //1154
 			break;
 		}
-		case UmlPackage::EXCEPTIONHANDLER_HANDLERBODY:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_HANDLERBODY:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);
 			setHandlerBody(_handlerBody); //1156
 			break;
 		}
-		case UmlPackage::EXCEPTIONHANDLER_PROTECTEDNODE:
+		case UmlPackage::EXCEPTIONHANDLER_EREFERENCE_PROTECTEDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = boost::any_cast<std::shared_ptr<uml::ExecutableNode>>(newValue);

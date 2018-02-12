@@ -156,7 +156,6 @@ OperationImpl::~OperationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Operation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -416,7 +415,7 @@ std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOperation();
+	return UmlPackageImpl::eInstance()->getOperation_EClass();
 }
 
 //*********************************
@@ -692,93 +691,93 @@ boost::any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPERATION_BODYCONDITION:
+		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
 			return getBodyCondition(); //4731
-		case UmlPackage::OPERATION_CLASS:
+		case UmlPackage::OPERATION_EREFERENCE_CLASS:
 			return getClass(); //4732
-		case UmlPackage::NAMEDELEMENT_CLIENTDEPENDENCY:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_CLIENTDEPENDENCY:
 			return getClientDependency(); //474
-		case UmlPackage::BEHAVIORALFEATURE_CONCURRENCY:
+		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
 			return getConcurrency(); //4721
-		case UmlPackage::OPERATION_DATATYPE:
+		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
 			return getDatatype(); //4733
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //470
-		case UmlPackage::NAMESPACE_ELEMENTIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_ELEMENTIMPORT:
 			return getElementImport(); //4711
-		case UmlPackage::FEATURE_FEATURINGCLASSIFIER:
+		case UmlPackage::FEATURE_EREFERENCE_FEATURINGCLASSIFIER:
 			return getFeaturingClassifier(); //4713
-		case UmlPackage::NAMESPACE_IMPORTEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_IMPORTEDMEMBER:
 			return getImportedMember(); //4714
-		case UmlPackage::OPERATION_INTERFACE:
+		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
 			return getInterface(); //4734
-		case UmlPackage::BEHAVIORALFEATURE_ISABSTRACT:
+		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
 			return getIsAbstract(); //4722
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 			return getIsLeaf(); //4710
-		case UmlPackage::OPERATION_ISORDERED:
+		case UmlPackage::OPERATION_EATTRIBUTE_ISORDERED:
 			return getIsOrdered(); //4735
-		case UmlPackage::OPERATION_ISQUERY:
+		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
 			return getIsQuery(); //4736
-		case UmlPackage::FEATURE_ISSTATIC:
+		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
 			return getIsStatic(); //4714
-		case UmlPackage::OPERATION_ISUNIQUE:
+		case UmlPackage::OPERATION_EATTRIBUTE_ISUNIQUE:
 			return getIsUnique(); //4737
-		case UmlPackage::OPERATION_LOWER:
+		case UmlPackage::OPERATION_EATTRIBUTE_LOWER:
 			return getLower(); //4738
-		case UmlPackage::NAMESPACE_MEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_MEMBER:
 			return getMember(); //4715
-		case UmlPackage::BEHAVIORALFEATURE_METHOD:
+		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_METHOD:
 			return getMethod(); //4723
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //475
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 			return getNameExpression(); //476
-		case UmlPackage::NAMEDELEMENT_NAMESPACE:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMESPACE:
 			return getNamespace(); //477
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //471
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //472
-		case UmlPackage::NAMESPACE_OWNEDMEMBER:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDMEMBER:
 			return getOwnedMember(); //4713
-		case UmlPackage::BEHAVIORALFEATURE_OWNEDPARAMETER:
+		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETER:
 			return getOwnedParameter(); //4724
-		case UmlPackage::BEHAVIORALFEATURE_OWNEDPARAMETERSET:
+		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_OWNEDPARAMETERSET:
 			return getOwnedParameterSet(); //4725
-		case UmlPackage::NAMESPACE_OWNEDRULE:
+		case UmlPackage::NAMESPACE_EREFERENCE_OWNEDRULE:
 			return getOwnedRule(); //4710
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
+		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
 			return getOwnedTemplateSignature(); //475
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //473
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 			return getOwningTemplateParameter(); //474
-		case UmlPackage::NAMESPACE_PACKAGEIMPORT:
+		case UmlPackage::NAMESPACE_EREFERENCE_PACKAGEIMPORT:
 			return getPackageImport(); //4712
-		case UmlPackage::OPERATION_POSTCONDITION:
+		case UmlPackage::OPERATION_EREFERENCE_POSTCONDITION:
 			return getPostcondition(); //4739
-		case UmlPackage::OPERATION_PRECONDITION:
+		case UmlPackage::OPERATION_EREFERENCE_PRECONDITION:
 			return getPrecondition(); //4740
-		case UmlPackage::NAMEDELEMENT_QUALIFIEDNAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_QUALIFIEDNAME:
 			return getQualifiedName(); //478
-		case UmlPackage::BEHAVIORALFEATURE_RAISEDEXCEPTION:
+		case UmlPackage::BEHAVIORALFEATURE_EREFERENCE_RAISEDEXCEPTION:
 			return getRaisedException(); //4726
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINEDELEMENT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINEDELEMENT:
 			return getRedefinedElement(); //4711
-		case UmlPackage::OPERATION_REDEFINEDOPERATION:
+		case UmlPackage::OPERATION_EREFERENCE_REDEFINEDOPERATION:
 			return getRedefinedOperation(); //4741
-		case UmlPackage::REDEFINABLEELEMENT_REDEFINITIONCONTEXT:
+		case UmlPackage::REDEFINABLEELEMENT_EREFERENCE_REDEFINITIONCONTEXT:
 			return getRedefinitionContext(); //4712
-		case UmlPackage::TEMPLATEABLEELEMENT_TEMPLATEBINDING:
+		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_TEMPLATEBINDING:
 			return getTemplateBinding(); //474
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 			return getTemplateParameter(); //475
-		case UmlPackage::OPERATION_TYPE:
+		case UmlPackage::OPERATION_EREFERENCE_TYPE:
 			return getType(); //4742
-		case UmlPackage::OPERATION_UPPER:
+		case UmlPackage::OPERATION_EATTRIBUTE_UPPER:
 			return getUpper(); //4743
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 			return getVisibility(); //479
 	}
 	return boost::any();
@@ -788,105 +787,105 @@ void OperationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPERATION_BODYCONDITION:
+		case UmlPackage::OPERATION_EREFERENCE_BODYCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Constraint> _bodyCondition = boost::any_cast<std::shared_ptr<uml::Constraint>>(newValue);
 			setBodyCondition(_bodyCondition); //4731
 			break;
 		}
-		case UmlPackage::OPERATION_CLASS:
+		case UmlPackage::OPERATION_EREFERENCE_CLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Class> _class = boost::any_cast<std::shared_ptr<uml::Class>>(newValue);
 			setClass(_class); //4732
 			break;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_CONCURRENCY:
+		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_CONCURRENCY:
 		{
 			// BOOST CAST
 			CallConcurrencyKind _concurrency = boost::any_cast<CallConcurrencyKind>(newValue);
 			setConcurrency(_concurrency); //4721
 			break;
 		}
-		case UmlPackage::OPERATION_DATATYPE:
+		case UmlPackage::OPERATION_EREFERENCE_DATATYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::DataType> _datatype = boost::any_cast<std::shared_ptr<uml::DataType>>(newValue);
 			setDatatype(_datatype); //4733
 			break;
 		}
-		case UmlPackage::OPERATION_INTERFACE:
+		case UmlPackage::OPERATION_EREFERENCE_INTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Interface> _interface = boost::any_cast<std::shared_ptr<uml::Interface>>(newValue);
 			setInterface(_interface); //4734
 			break;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ISABSTRACT:
+		case UmlPackage::BEHAVIORALFEATURE_EATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
 			bool _isAbstract = boost::any_cast<bool>(newValue);
 			setIsAbstract(_isAbstract); //4722
 			break;
 		}
-		case UmlPackage::REDEFINABLEELEMENT_ISLEAF:
+		case UmlPackage::REDEFINABLEELEMENT_EATTRIBUTE_ISLEAF:
 		{
 			// BOOST CAST
 			bool _isLeaf = boost::any_cast<bool>(newValue);
 			setIsLeaf(_isLeaf); //4710
 			break;
 		}
-		case UmlPackage::OPERATION_ISQUERY:
+		case UmlPackage::OPERATION_EATTRIBUTE_ISQUERY:
 		{
 			// BOOST CAST
 			bool _isQuery = boost::any_cast<bool>(newValue);
 			setIsQuery(_isQuery); //4736
 			break;
 		}
-		case UmlPackage::FEATURE_ISSTATIC:
+		case UmlPackage::FEATURE_EATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
 			bool _isStatic = boost::any_cast<bool>(newValue);
 			setIsStatic(_isStatic); //4714
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAME:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = boost::any_cast<std::string>(newValue);
 			setName(_name); //475
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_NAMEEXPRESSION:
+		case UmlPackage::NAMEDELEMENT_EREFERENCE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::StringExpression> _nameExpression = boost::any_cast<std::shared_ptr<uml::StringExpression>>(newValue);
 			setNameExpression(_nameExpression); //476
 			break;
 		}
-		case UmlPackage::TEMPLATEABLEELEMENT_OWNEDTEMPLATESIGNATURE:
+		case UmlPackage::TEMPLATEABLEELEMENT_EREFERENCE_OWNEDTEMPLATESIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = boost::any_cast<std::shared_ptr<uml::TemplateSignature>>(newValue);
 			setOwnedTemplateSignature(_ownedTemplateSignature); //475
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_OWNINGTEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setOwningTemplateParameter(_owningTemplateParameter); //474
 			break;
 		}
-		case UmlPackage::PARAMETERABLEELEMENT_TEMPLATEPARAMETER:
+		case UmlPackage::PARAMETERABLEELEMENT_EREFERENCE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = boost::any_cast<std::shared_ptr<uml::TemplateParameter>>(newValue);
 			setTemplateParameter(_templateParameter); //475
 			break;
 		}
-		case UmlPackage::NAMEDELEMENT_VISIBILITY:
+		case UmlPackage::NAMEDELEMENT_EATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			VisibilityKind _visibility = boost::any_cast<VisibilityKind>(newValue);

@@ -57,7 +57,6 @@ GeneralizationImpl::~GeneralizationImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Generalization "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -141,7 +140,7 @@ std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralization();
+	return UmlPackageImpl::eInstance()->getGeneralization_EClass();
 }
 
 //*********************************
@@ -237,27 +236,27 @@ boost::any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EMODELELEMENT_EANNOTATIONS:
+		case ecore::EcorePackage::EMODELELEMENT_EREFERENCE_EANNOTATIONS:
 			return getEAnnotations(); //950
-		case UmlPackage::GENERALIZATION_GENERAL:
+		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
 			return getGeneral(); //957
-		case UmlPackage::GENERALIZATION_GENERALIZATIONSET:
+		case UmlPackage::GENERALIZATION_EREFERENCE_GENERALIZATIONSET:
 			return getGeneralizationSet(); //958
-		case UmlPackage::GENERALIZATION_ISSUBSTITUTABLE:
+		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
 			return getIsSubstitutable(); //959
-		case UmlPackage::ELEMENT_OWNEDCOMMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDCOMMENT:
 			return getOwnedComment(); //951
-		case UmlPackage::ELEMENT_OWNEDELEMENT:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNEDELEMENT:
 			return getOwnedElement(); //952
-		case UmlPackage::ELEMENT_OWNER:
+		case UmlPackage::ELEMENT_EREFERENCE_OWNER:
 			return getOwner(); //953
-		case UmlPackage::RELATIONSHIP_RELATEDELEMENT:
+		case UmlPackage::RELATIONSHIP_EREFERENCE_RELATEDELEMENT:
 			return getRelatedElement(); //954
-		case UmlPackage::DIRECTEDRELATIONSHIP_SOURCE:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_SOURCE:
 			return getSource(); //955
-		case UmlPackage::GENERALIZATION_SPECIFIC:
+		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
 			return getSpecific(); //9510
-		case UmlPackage::DIRECTEDRELATIONSHIP_TARGET:
+		case UmlPackage::DIRECTEDRELATIONSHIP_EREFERENCE_TARGET:
 			return getTarget(); //956
 	}
 	return boost::any();
@@ -267,21 +266,21 @@ void GeneralizationImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATION_GENERAL:
+		case UmlPackage::GENERALIZATION_EREFERENCE_GENERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _general = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
 			setGeneral(_general); //957
 			break;
 		}
-		case UmlPackage::GENERALIZATION_ISSUBSTITUTABLE:
+		case UmlPackage::GENERALIZATION_EATTRIBUTE_ISSUBSTITUTABLE:
 		{
 			// BOOST CAST
 			bool _isSubstitutable = boost::any_cast<bool>(newValue);
 			setIsSubstitutable(_isSubstitutable); //959
 			break;
 		}
-		case UmlPackage::GENERALIZATION_SPECIFIC:
+		case UmlPackage::GENERALIZATION_EREFERENCE_SPECIFIC:
 		{
 			// BOOST CAST
 			std::shared_ptr<uml::Classifier> _specific = boost::any_cast<std::shared_ptr<uml::Classifier>>(newValue);
