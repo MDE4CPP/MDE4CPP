@@ -38,7 +38,6 @@ PictureImpl::~PictureImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Picture "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -81,7 +80,7 @@ std::shared_ptr<ecore::EObject>  PictureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PictureImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getPicture();
+	return LibraryModel_ecorePackageImpl::eInstance()->getPicture_EClass();
 }
 
 //*********************************
@@ -135,11 +134,11 @@ boost::any PictureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //40
-		case LibraryModel_ecorePackage::PICTURE_BOOK:
+		case LibraryModel_ecorePackage::PICTURE_EREFERENCE_BOOK:
 			return getBook(); //41
-		case LibraryModel_ecorePackage::PICTURE_PAGENUMBER:
+		case LibraryModel_ecorePackage::PICTURE_EATTRIBUTE_PAGENUMBER:
 			return getPageNumber(); //42
 	}
 	return boost::any();
@@ -149,21 +148,21 @@ void PictureImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _Name = boost::any_cast<std::string>(newValue);
 			setName(_Name); //40
 			break;
 		}
-		case LibraryModel_ecorePackage::PICTURE_BOOK:
+		case LibraryModel_ecorePackage::PICTURE_EREFERENCE_BOOK:
 		{
 			// BOOST CAST
 			std::shared_ptr<libraryModel_ecore::Book> _book = boost::any_cast<std::shared_ptr<libraryModel_ecore::Book>>(newValue);
 			setBook(_book); //41
 			break;
 		}
-		case LibraryModel_ecorePackage::PICTURE_PAGENUMBER:
+		case LibraryModel_ecorePackage::PICTURE_EATTRIBUTE_PAGENUMBER:
 		{
 			// BOOST CAST
 			int _pageNumber = boost::any_cast<int>(newValue);

@@ -56,7 +56,7 @@ int main()
     c->setName("Class1");
 //
     //use Metamodel to create a Class
-    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass()->getName(), p, package->TYPE_PACKAGE);
+    std::shared_ptr<ecore::EObject> a = factory->create(package->getClass_EClass()->getName(), p, package->TYPE_EREFERENCE_PACKAGE);
 //
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class2");
@@ -79,7 +79,7 @@ int main()
     for(std::shared_ptr<uml::PackageableElement>it : *elements)
     {
         // optional type check using UML Metamodel
-        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass();
+        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass_EClass();
         if(it->eClass() == uc->eClass())
         {
             cout << it->getName() << " is a Class"<< endl;

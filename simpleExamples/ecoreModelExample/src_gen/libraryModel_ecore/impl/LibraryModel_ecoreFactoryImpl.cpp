@@ -11,11 +11,11 @@ using namespace libraryModel_ecore;
 
 LibraryModel_ecoreFactoryImpl::LibraryModel_ecoreFactoryImpl()
 {
-	m_idMap.insert(std::pair<std::string,unsigned int>("Author", LibraryModel_ecorePackage::AUTHOR));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Book", LibraryModel_ecorePackage::BOOK));
-	m_idMap.insert(std::pair<std::string,unsigned int>("LibraryModel", LibraryModel_ecorePackage::LIBRARYMODEL));
-	m_idMap.insert(std::pair<std::string,unsigned int>("NamedElement", LibraryModel_ecorePackage::NAMEDELEMENT));
-	m_idMap.insert(std::pair<std::string,unsigned int>("Picture", LibraryModel_ecorePackage::PICTURE));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Author", LibraryModel_ecorePackage::AUTHOR_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Book", LibraryModel_ecorePackage::BOOK_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("LibraryModel", LibraryModel_ecorePackage::LIBRARYMODEL_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("NamedElement", LibraryModel_ecorePackage::NAMEDELEMENT_ECLASS));
+	m_idMap.insert(std::pair<std::string,unsigned int>("Picture", LibraryModel_ecorePackage::PICTURE_ECLASS));
 }
 
 LibraryModel_ecoreFactoryImpl::~LibraryModel_ecoreFactoryImpl()
@@ -35,12 +35,12 @@ std::shared_ptr<ecore::EObject> LibraryModel_ecoreFactoryImpl::create(const unsi
 {
 	switch(classID)
 	{
-		case LibraryModel_ecorePackage::AUTHOR:
+		case LibraryModel_ecorePackage::AUTHOR_ECLASS:
 		{
 				return std::shared_ptr<Author>(this->createAuthor());
 			
 		}
-		case LibraryModel_ecorePackage::BOOK:
+		case LibraryModel_ecorePackage::BOOK_ECLASS:
 		{
 			if (nullptr == container)
 			{
@@ -53,17 +53,17 @@ std::shared_ptr<ecore::EObject> LibraryModel_ecoreFactoryImpl::create(const unsi
 				return std::shared_ptr<Book>(this->createBook_in_Library(castedContainer));
 			}
 		}
-		case LibraryModel_ecorePackage::LIBRARYMODEL:
+		case LibraryModel_ecorePackage::LIBRARYMODEL_ECLASS:
 		{
 				return std::shared_ptr<LibraryModel>(this->createLibraryModel());
 			
 		}
-		case LibraryModel_ecorePackage::NAMEDELEMENT:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_ECLASS:
 		{
 				return std::shared_ptr<NamedElement>(this->createNamedElement());
 			
 		}
-		case LibraryModel_ecorePackage::PICTURE:
+		case LibraryModel_ecorePackage::PICTURE_ECLASS:
 		{
 			if (nullptr == container)
 			{

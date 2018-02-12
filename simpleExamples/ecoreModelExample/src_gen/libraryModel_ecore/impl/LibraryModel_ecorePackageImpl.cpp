@@ -6,6 +6,7 @@
 #include "ecore/EDataType.hpp"
 #include "ecore/EEnum.hpp"
 #include "ecore/EOperation.hpp"
+#include "ecore/EParameter.hpp"
 #include "ecore/EReference.hpp"
 
 //metamodel factory
@@ -25,13 +26,6 @@ LibraryModel_ecorePackageImpl::LibraryModel_ecorePackageImpl()
 
 LibraryModel_ecorePackageImpl::~LibraryModel_ecorePackageImpl()
 {
-	bookEClass.reset();
-	authorEClass.reset();
-	libraryModelEClass.reset();
-	namedElementEClass.reset();
-	pictureEClass.reset();
-	
-	
 }
 
 LibraryModel_ecorePackage* LibraryModel_ecorePackageImpl::create()
@@ -65,44 +59,65 @@ void LibraryModel_ecorePackageImpl::createPackageContents()
 
 	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
 
-	authorEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), AUTHOR);
-	
-	
-	
-	
+	createAuthorContent(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	createBookContent(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	createLibraryModelContent(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	createNamedElementContent(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+	createPictureContent(std::shared_ptr<EPackage>(this, null_deleter()), factory);
 
-	bookEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), BOOK);
-	
-	
-	factory->createEReference_in_EContainingClass(bookEClass, BOOK_AUTHORS);
-	factory->createEReference_in_EContainingClass(bookEClass, BOOK_LIBRARY);
-	factory->createEReference_in_EContainingClass(bookEClass, BOOK_PICTURES);
-	
-	
+	createPackageEDataTypes(std::shared_ptr<EPackage>(this, null_deleter()), factory);
+}
 
-	libraryModelEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), LIBRARYMODEL);
+void LibraryModel_ecorePackageImpl::createAuthorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_author_EClass = factory->createEClass_in_EPackage(package, AUTHOR_ECLASS);
 	
 	
-	factory->createEReference_in_EContainingClass(libraryModelEClass, LIBRARYMODEL_AUTHORS);
-	factory->createEReference_in_EContainingClass(libraryModelEClass, LIBRARYMODEL_BOOK);
 	
-	
+}
 
-	namedElementEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), NAMEDELEMENT);
+void LibraryModel_ecorePackageImpl::createBookContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_book_EClass = factory->createEClass_in_EPackage(package, BOOK_ECLASS);
 	
-	factory->createEAttribute_in_EContainingClass(namedElementEClass, NAMEDELEMENT_NAME);
+	m_book_EReference_authors = factory->createEReference_in_EContainingClass(m_book_EClass, BOOK_EREFERENCE_AUTHORS);
+	m_book_EReference_library = factory->createEReference_in_EContainingClass(m_book_EClass, BOOK_EREFERENCE_LIBRARY);
+	m_book_EReference_pictures = factory->createEReference_in_EContainingClass(m_book_EClass, BOOK_EREFERENCE_PICTURES);
 	
 	
-	
+}
 
-	pictureEClass = factory->createEClass_in_EPackage(std::shared_ptr<EPackage>(this, null_deleter()), PICTURE);
+void LibraryModel_ecorePackageImpl::createLibraryModelContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_libraryModel_EClass = factory->createEClass_in_EPackage(package, LIBRARYMODEL_ECLASS);
 	
-	factory->createEAttribute_in_EContainingClass(pictureEClass, PICTURE_PAGENUMBER);
+	m_libraryModel_EReference_authors = factory->createEReference_in_EContainingClass(m_libraryModel_EClass, LIBRARYMODEL_EREFERENCE_AUTHORS);
+	m_libraryModel_EReference_book = factory->createEReference_in_EContainingClass(m_libraryModel_EClass, LIBRARYMODEL_EREFERENCE_BOOK);
 	
-	factory->createEReference_in_EContainingClass(pictureEClass, PICTURE_BOOK);
 	
-	
+}
 
+void LibraryModel_ecorePackageImpl::createNamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_namedElement_EClass = factory->createEClass_in_EPackage(package, NAMEDELEMENT_ECLASS);
+	m_namedElement_EAttribute_name = factory->createEAttribute_in_EContainingClass(m_namedElement_EClass, NAMEDELEMENT_EATTRIBUTE_NAME);
+	
+	
+	
+}
+
+void LibraryModel_ecorePackageImpl::createPictureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
+	m_picture_EClass = factory->createEClass_in_EPackage(package, PICTURE_ECLASS);
+	m_picture_EAttribute_pageNumber = factory->createEAttribute_in_EContainingClass(m_picture_EClass, PICTURE_EATTRIBUTE_PAGENUMBER);
+	
+	m_picture_EReference_book = factory->createEReference_in_EContainingClass(m_picture_EClass, PICTURE_EREFERENCE_BOOK);
+	
+	
+}
+
+void LibraryModel_ecorePackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+{
 	
 }
 
@@ -120,117 +135,338 @@ void LibraryModel_ecorePackageImpl::initializePackageContents()
 	setNsURI(eNS_URI);
 	
 	// Add supertypes to classes
-	authorEClass->getESuperTypes()->push_back(getNamedElement());
-	bookEClass->getESuperTypes()->push_back(getNamedElement());
-	pictureEClass->getESuperTypes()->push_back(getNamedElement());
+	m_author_EClass->getESuperTypes()->push_back(getNamedElement_EClass());
+	m_book_EClass->getESuperTypes()->push_back(getNamedElement_EClass());
+	m_picture_EClass->getESuperTypes()->push_back(getNamedElement_EClass());
 	
-	std::shared_ptr<ecore::EOperation> op;
 
  	// Initialize classes and features; add operations and parameters
-	// Begin Class Author
-	initEClass(authorEClass, nullptr, "Author", false, false, true);
-	
-	
-	
-	// End Class Author
+	initializeAuthorContent();
+	initializeBookContent();
+	initializeLibraryModelContent();
+	initializeNamedElementContent();
+	initializePictureContent();
 
-	// Begin Class Book
-	initEClass(bookEClass, nullptr, "Book", false, false, true);
-	
-	initEReference(getBook_Authors(),getAuthor(),nullptr,"authors","",0,-1, false,false, true, false, true, false, true, false,true);
-	initEReference(getBook_Library(),getLibraryModel(),getLibraryModel_Book(),"library","",0,1, false,false, true, false, true, false, true, false,true);
-	initEReference(getBook_Pictures(),getPicture(),getPicture_Book(),"pictures","",0,-1, false,false, true, true, true, false, true, false,true);
-	
-	
-	// End Class Book
+	initializePackageEDataTypes();
+}
 
-	// Begin Class LibraryModel
-	initEClass(libraryModelEClass, nullptr, "LibraryModel", false, false, true);
+void LibraryModel_ecorePackageImpl::initializeAuthorContent()
+{
+	m_author_EClass->setInstanceClass(nullptr);
+	m_author_EClass->setName("Author");
+	m_author_EClass->setAbstract(false);
+	m_author_EClass->setInterface(false);
 	
-	initEReference(getLibraryModel_Authors(),getAuthor(),nullptr,"authors","",0,-1, false,false, true, true, true, false, true, false,true);
-	initEReference(getLibraryModel_Book(),getBook(),getBook_Library(),"book","",0,-1, false,false, true, true, true, false, true, false,true);
 	
 	
-	// End Class LibraryModel
+	
+}
 
-	// Begin Class NamedElement
-	initEClass(namedElementEClass, nullptr, "NamedElement", false, false, true);
-	initEAttribute(getNamedElement_Name(),types::TypesPackage::eInstance()->getString(),"Name","",0,1, false,false, true, false, false, true, false, true);
+void LibraryModel_ecorePackageImpl::initializeBookContent()
+{
+	m_book_EClass->setInstanceClass(nullptr);
+	m_book_EClass->setName("Book");
+	m_book_EClass->setAbstract(false);
+	m_book_EClass->setInterface(false);
 	
 	
+	m_book_EReference_authors->setName("authors");
+	m_book_EReference_authors->setEType(getAuthor_EClass());
+	m_book_EReference_authors->setLowerBound(0);
+	m_book_EReference_authors->setUpperBound(-1);
+	m_book_EReference_authors->setTransient(false);
+	m_book_EReference_authors->setVolatile(false);
+	m_book_EReference_authors->setChangeable(true);
+	m_book_EReference_authors->setUnsettable(false);
+	m_book_EReference_authors->setUnique(true);
+	m_book_EReference_authors->setDerived(false);
+	m_book_EReference_authors->setOrdered(true);
+	m_book_EReference_authors->setContainment(false);
+	m_book_EReference_authors->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_book_EReference_authors->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_book_EReference_authors->setEOpposite(otherEnd);
+	    }
+	}
+	m_book_EReference_library->setName("library");
+	m_book_EReference_library->setEType(getLibraryModel_EClass());
+	m_book_EReference_library->setLowerBound(0);
+	m_book_EReference_library->setUpperBound(1);
+	m_book_EReference_library->setTransient(false);
+	m_book_EReference_library->setVolatile(false);
+	m_book_EReference_library->setChangeable(true);
+	m_book_EReference_library->setUnsettable(false);
+	m_book_EReference_library->setUnique(true);
+	m_book_EReference_library->setDerived(false);
+	m_book_EReference_library->setOrdered(true);
+	m_book_EReference_library->setContainment(false);
+	m_book_EReference_library->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_book_EReference_library->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getLibraryModel_EReference_book();
+		if (otherEnd != nullptr)
+	    {
+	   		m_book_EReference_library->setEOpposite(otherEnd);
+	    }
+	}
+	m_book_EReference_pictures->setName("pictures");
+	m_book_EReference_pictures->setEType(getPicture_EClass());
+	m_book_EReference_pictures->setLowerBound(0);
+	m_book_EReference_pictures->setUpperBound(-1);
+	m_book_EReference_pictures->setTransient(false);
+	m_book_EReference_pictures->setVolatile(false);
+	m_book_EReference_pictures->setChangeable(true);
+	m_book_EReference_pictures->setUnsettable(false);
+	m_book_EReference_pictures->setUnique(true);
+	m_book_EReference_pictures->setDerived(false);
+	m_book_EReference_pictures->setOrdered(true);
+	m_book_EReference_pictures->setContainment(true);
+	m_book_EReference_pictures->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_book_EReference_pictures->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getPicture_EReference_book();
+		if (otherEnd != nullptr)
+	    {
+	   		m_book_EReference_pictures->setEOpposite(otherEnd);
+	    }
+	}
 	
-	// End Class NamedElement
+	
+}
 
-	// Begin Class Picture
-	initEClass(pictureEClass, nullptr, "Picture", false, false, true);
-	initEAttribute(getPicture_PageNumber(),types::TypesPackage::eInstance()->getInteger(),"pageNumber","",0,1, false,false, true, false, false, true, false, true);
+void LibraryModel_ecorePackageImpl::initializeLibraryModelContent()
+{
+	m_libraryModel_EClass->setInstanceClass(nullptr);
+	m_libraryModel_EClass->setName("LibraryModel");
+	m_libraryModel_EClass->setAbstract(false);
+	m_libraryModel_EClass->setInterface(false);
 	
-	initEReference(getPicture_Book(),getBook(),getBook_Pictures(),"book","",0,1, false,false, true, false, true, false, true, false,true);
+	
+	m_libraryModel_EReference_authors->setName("authors");
+	m_libraryModel_EReference_authors->setEType(getAuthor_EClass());
+	m_libraryModel_EReference_authors->setLowerBound(0);
+	m_libraryModel_EReference_authors->setUpperBound(-1);
+	m_libraryModel_EReference_authors->setTransient(false);
+	m_libraryModel_EReference_authors->setVolatile(false);
+	m_libraryModel_EReference_authors->setChangeable(true);
+	m_libraryModel_EReference_authors->setUnsettable(false);
+	m_libraryModel_EReference_authors->setUnique(true);
+	m_libraryModel_EReference_authors->setDerived(false);
+	m_libraryModel_EReference_authors->setOrdered(true);
+	m_libraryModel_EReference_authors->setContainment(true);
+	m_libraryModel_EReference_authors->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_libraryModel_EReference_authors->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = nullptr;
+		if (otherEnd != nullptr)
+	    {
+	   		m_libraryModel_EReference_authors->setEOpposite(otherEnd);
+	    }
+	}
+	m_libraryModel_EReference_book->setName("book");
+	m_libraryModel_EReference_book->setEType(getBook_EClass());
+	m_libraryModel_EReference_book->setLowerBound(0);
+	m_libraryModel_EReference_book->setUpperBound(-1);
+	m_libraryModel_EReference_book->setTransient(false);
+	m_libraryModel_EReference_book->setVolatile(false);
+	m_libraryModel_EReference_book->setChangeable(true);
+	m_libraryModel_EReference_book->setUnsettable(false);
+	m_libraryModel_EReference_book->setUnique(true);
+	m_libraryModel_EReference_book->setDerived(false);
+	m_libraryModel_EReference_book->setOrdered(true);
+	m_libraryModel_EReference_book->setContainment(true);
+	m_libraryModel_EReference_book->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_libraryModel_EReference_book->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getBook_EReference_library();
+		if (otherEnd != nullptr)
+	    {
+	   		m_libraryModel_EReference_book->setEOpposite(otherEnd);
+	    }
+	}
 	
 	
-	// End Class Picture
+}
 
+void LibraryModel_ecorePackageImpl::initializeNamedElementContent()
+{
+	m_namedElement_EClass->setInstanceClass(nullptr);
+	m_namedElement_EClass->setName("NamedElement");
+	m_namedElement_EClass->setAbstract(false);
+	m_namedElement_EClass->setInterface(false);
+	
+	m_namedElement_EAttribute_name = getNamedElement_EAttribute_name();
+	m_namedElement_EAttribute_name->setName("Name");
+	m_namedElement_EAttribute_name->setEType(types::TypesPackage::eInstance()->getString_EDataType());
+	m_namedElement_EAttribute_name->setLowerBound(0);
+	m_namedElement_EAttribute_name->setUpperBound(1);
+	m_namedElement_EAttribute_name->setTransient(false);
+	m_namedElement_EAttribute_name->setVolatile(false);
+	m_namedElement_EAttribute_name->setChangeable(true);
+	m_namedElement_EAttribute_name->setUnsettable(false);
+	m_namedElement_EAttribute_name->setUnique(true);
+	m_namedElement_EAttribute_name->setDerived(false);
+	m_namedElement_EAttribute_name->setOrdered(true);
+	m_namedElement_EAttribute_name->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_namedElement_EAttribute_name->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	
+	
+}
+
+void LibraryModel_ecorePackageImpl::initializePictureContent()
+{
+	m_picture_EClass->setInstanceClass(nullptr);
+	m_picture_EClass->setName("Picture");
+	m_picture_EClass->setAbstract(false);
+	m_picture_EClass->setInterface(false);
+	
+	m_picture_EAttribute_pageNumber = getPicture_EAttribute_pageNumber();
+	m_picture_EAttribute_pageNumber->setName("pageNumber");
+	m_picture_EAttribute_pageNumber->setEType(types::TypesPackage::eInstance()->getInteger_EDataType());
+	m_picture_EAttribute_pageNumber->setLowerBound(0);
+	m_picture_EAttribute_pageNumber->setUpperBound(1);
+	m_picture_EAttribute_pageNumber->setTransient(false);
+	m_picture_EAttribute_pageNumber->setVolatile(false);
+	m_picture_EAttribute_pageNumber->setChangeable(true);
+	m_picture_EAttribute_pageNumber->setUnsettable(false);
+	m_picture_EAttribute_pageNumber->setUnique(true);
+	m_picture_EAttribute_pageNumber->setDerived(false);
+	m_picture_EAttribute_pageNumber->setOrdered(true);
+	m_picture_EAttribute_pageNumber->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_picture_EAttribute_pageNumber->setDefaultValueLiteral(defaultValue);
+		}
+	}
+	
+	m_picture_EReference_book->setName("book");
+	m_picture_EReference_book->setEType(getBook_EClass());
+	m_picture_EReference_book->setLowerBound(0);
+	m_picture_EReference_book->setUpperBound(1);
+	m_picture_EReference_book->setTransient(false);
+	m_picture_EReference_book->setVolatile(false);
+	m_picture_EReference_book->setChangeable(true);
+	m_picture_EReference_book->setUnsettable(false);
+	m_picture_EReference_book->setUnique(true);
+	m_picture_EReference_book->setDerived(false);
+	m_picture_EReference_book->setOrdered(true);
+	m_picture_EReference_book->setContainment(false);
+	m_picture_EReference_book->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_picture_EReference_book->setDefaultValueLiteral(defaultValue);
+		}
+		std::shared_ptr<ecore::EReference>  otherEnd = getBook_EReference_pictures();
+		if (otherEnd != nullptr)
+	    {
+	   		m_picture_EReference_book->setEOpposite(otherEnd);
+	    }
+	}
+	
+	
+}
+
+void LibraryModel_ecorePackageImpl::initializePackageEDataTypes()
+{
 	
 }
 
 // Begin Class Author
-std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getAuthor() const
+std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getAuthor_EClass() const
 {
-	return authorEClass;
+	return m_author_EClass;
 }
+
 
 
 
 // End Class Author
 
 // Begin Class Book
-std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getBook() const
+std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getBook_EClass() const
 {
-	return bookEClass;
+	return m_book_EClass;
 }
 
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_Authors() const
+
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_EReference_authors() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(bookEClass->getEStructuralFeatures()->at(0));
+	return m_book_EReference_authors;
 }
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_Library() const
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_EReference_library() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(bookEClass->getEStructuralFeatures()->at(1));
+	return m_book_EReference_library;
 }
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_Pictures() const
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getBook_EReference_pictures() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(bookEClass->getEStructuralFeatures()->at(2));
+	return m_book_EReference_pictures;
 }
 
 
 // End Class Book
 
 // Begin Class LibraryModel
-std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getLibraryModel() const
+std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getLibraryModel_EClass() const
 {
-	return libraryModelEClass;
+	return m_libraryModel_EClass;
 }
 
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getLibraryModel_Authors() const
+
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getLibraryModel_EReference_authors() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(libraryModelEClass->getEStructuralFeatures()->at(0));
+	return m_libraryModel_EReference_authors;
 }
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getLibraryModel_Book() const
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getLibraryModel_EReference_book() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(libraryModelEClass->getEStructuralFeatures()->at(1));
+	return m_libraryModel_EReference_book;
 }
 
 
 // End Class LibraryModel
 
 // Begin Class NamedElement
-std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getNamedElement() const
+std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getNamedElement_EClass() const
 {
-	return namedElementEClass;
+	return m_namedElement_EClass;
 }
-std::shared_ptr<ecore::EAttribute> LibraryModel_ecorePackageImpl::getNamedElement_Name() const
+
+std::shared_ptr<ecore::EAttribute> LibraryModel_ecorePackageImpl::getNamedElement_EAttribute_name() const
 {
-	return std::dynamic_pointer_cast<ecore::EAttribute>(namedElementEClass->getEStructuralFeatures()->at(0));
+	return m_namedElement_EAttribute_name;
 }
 
 
@@ -238,18 +474,19 @@ std::shared_ptr<ecore::EAttribute> LibraryModel_ecorePackageImpl::getNamedElemen
 // End Class NamedElement
 
 // Begin Class Picture
-std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getPicture() const
+std::shared_ptr<ecore::EClass> LibraryModel_ecorePackageImpl::getPicture_EClass() const
 {
-	return pictureEClass;
-}
-std::shared_ptr<ecore::EAttribute> LibraryModel_ecorePackageImpl::getPicture_PageNumber() const
-{
-	return std::dynamic_pointer_cast<ecore::EAttribute>(pictureEClass->getEStructuralFeatures()->at(0));
+	return m_picture_EClass;
 }
 
-std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getPicture_Book() const
+std::shared_ptr<ecore::EAttribute> LibraryModel_ecorePackageImpl::getPicture_EAttribute_pageNumber() const
 {
-	return std::dynamic_pointer_cast<ecore::EReference>(pictureEClass->getEStructuralFeatures()->at(1));
+	return m_picture_EAttribute_pageNumber;
+}
+
+std::shared_ptr<ecore::EReference> LibraryModel_ecorePackageImpl::getPicture_EReference_book() const
+{
+	return m_picture_EReference_book;
 }
 
 

@@ -33,7 +33,6 @@ NamedElementImpl::~NamedElementImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete NamedElement "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -63,7 +62,7 @@ std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getNamedElement();
+	return LibraryModel_ecorePackageImpl::eInstance()->getNamedElement_EClass();
 }
 
 //*********************************
@@ -104,7 +103,7 @@ boost::any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //30
 	}
 	return boost::any();
@@ -114,7 +113,7 @@ void NamedElementImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _Name = boost::any_cast<std::string>(newValue);

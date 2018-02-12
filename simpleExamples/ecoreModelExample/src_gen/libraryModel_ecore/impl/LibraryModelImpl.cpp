@@ -48,7 +48,6 @@ LibraryModelImpl::~LibraryModelImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LibraryModel "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -98,7 +97,7 @@ std::shared_ptr<ecore::EObject>  LibraryModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LibraryModelImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getLibraryModel();
+	return LibraryModel_ecorePackageImpl::eInstance()->getLibraryModel_EClass();
 }
 
 //*********************************
@@ -143,9 +142,9 @@ boost::any LibraryModelImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::LIBRARYMODEL_AUTHORS:
+		case LibraryModel_ecorePackage::LIBRARYMODEL_EREFERENCE_AUTHORS:
 			return getAuthors(); //21
-		case LibraryModel_ecorePackage::LIBRARYMODEL_BOOK:
+		case LibraryModel_ecorePackage::LIBRARYMODEL_EREFERENCE_BOOK:
 			return getBook(); //20
 	}
 	return boost::any();

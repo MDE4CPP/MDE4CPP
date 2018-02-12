@@ -56,7 +56,6 @@ BookImpl::~BookImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Book "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -111,7 +110,7 @@ std::shared_ptr<ecore::EObject>  BookImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BookImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getBook();
+	return LibraryModel_ecorePackageImpl::eInstance()->getBook_EClass();
 }
 
 //*********************************
@@ -170,13 +169,13 @@ boost::any BookImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //00
-		case LibraryModel_ecorePackage::BOOK_AUTHORS:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_AUTHORS:
 			return getAuthors(); //01
-		case LibraryModel_ecorePackage::BOOK_LIBRARY:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
 			return getLibrary(); //02
-		case LibraryModel_ecorePackage::BOOK_PICTURES:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_PICTURES:
 			return getPictures(); //03
 	}
 	return boost::any();
@@ -186,14 +185,14 @@ void BookImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _Name = boost::any_cast<std::string>(newValue);
 			setName(_Name); //00
 			break;
 		}
-		case LibraryModel_ecorePackage::BOOK_LIBRARY:
+		case LibraryModel_ecorePackage::BOOK_EREFERENCE_LIBRARY:
 		{
 			// BOOST CAST
 			std::shared_ptr<libraryModel_ecore::LibraryModel> _library = boost::any_cast<std::shared_ptr<libraryModel_ecore::LibraryModel>>(newValue);

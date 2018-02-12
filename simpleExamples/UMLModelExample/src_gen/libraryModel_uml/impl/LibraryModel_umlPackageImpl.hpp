@@ -19,6 +19,7 @@
 
 #include "LibraryModel_uml/LibraryModel_umlPackage.hpp"
 #include "uml/impl/PackageImpl.hpp"	
+#include "uml/UmlFactory.hpp"
 
 namespace LibraryModel_uml
 {
@@ -108,6 +109,24 @@ namespace LibraryModel_uml
 		public:
  			void initializePackageContents();
 			void createPackageContents();
+
+		private:
+			void createPackageActivities(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<LibraryModel_umlPackageImpl> libraryModel_uml, std::shared_ptr<uml::UmlFactory> factory);
+
+			void initializePackageActivities();
+			void initializePackageClasses();
+			void initializePackageDependencies();
+			void initializePackageInstanceSpecifications();
+			void initializePackageInterfaces();
+			void initializePackageStereotypes();
 	};
 } 
 #endif /* end of include guard: LIBRARYMODEL_UML_METAMODELPACKAGEIMPL_HPP */

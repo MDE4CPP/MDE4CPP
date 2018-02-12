@@ -34,7 +34,6 @@ AuthorImpl::~AuthorImpl()
 #ifdef SHOW_DELETION
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Author "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
-	
 }
 
 
@@ -64,7 +63,7 @@ std::shared_ptr<ecore::EObject>  AuthorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AuthorImpl::eStaticClass() const
 {
-	return LibraryModel_ecorePackageImpl::eInstance()->getAuthor();
+	return LibraryModel_ecorePackageImpl::eInstance()->getAuthor_EClass();
 }
 
 //*********************************
@@ -96,7 +95,7 @@ boost::any AuthorImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 			return getName(); //10
 	}
 	return boost::any();
@@ -106,7 +105,7 @@ void AuthorImpl::eSet(int featureID, boost::any newValue)
 {
 	switch(featureID)
 	{
-		case LibraryModel_ecorePackage::NAMEDELEMENT_NAME:
+		case LibraryModel_ecorePackage::NAMEDELEMENT_EATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _Name = boost::any_cast<std::string>(newValue);
